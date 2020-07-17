@@ -1,0 +1,186 @@
+/*----------- Theme design ----------*/
+/* References:
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar 
+https://doc.qt.io/qt-5/stylesheet-syntax.html 
+https://doc.qt.io/qt-5/stylesheet-reference.html 
+*/
+
+/*----------- Common ------------------*/
+
+* { 
+background-color: #4d4d4d;
+color: white;
+font-size: 18px;
+}
+
+/*
+MainWindow {
+    border: 1px solid #6f6f6f;
+}*/
+
+EditorModules {
+    border: 1px solid #6f6f6f;
+}
+
+EditorModules > QToolBar {
+    border-color: transparent;
+}
+
+EditorModule  > QWidget {
+    border: 1px solid #6f6f6f;
+}
+
+/*----------- Menu ------------------*/
+/* Top menu */
+QMenuBar {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #3d3d3d, stop:1 #3d3d3d);
+    spacing: 3px; /* spacing between menu bar items */
+    border: 1px solid #6f6f6f;
+
+}
+
+QMenuBar::item {
+    padding: 1px 8px;
+    background: transparent;
+    border-radius: 2px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: #888888;
+}
+
+QMenuBar::item:pressed {
+    background: #737373;
+}
+
+
+/* Menu items*/
+QMenu {
+    background-color: #4d4d4d; /* sets background of the menu */
+    border: 1px solid #9f9f9f;
+}
+
+QMenu::item {
+    /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+    background-color: transparent;
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+    background-color: #737373;
+}
+
+/*----------- Tool bar ------------------*/
+QToolBar {
+    border: 1px solid #9f9f9f;
+}
+
+
+/*----------- List ------------------*/
+QListView {
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+}
+
+QListWidget {
+    background-color: #454545;
+    color: white;
+}
+
+QListView::item:alternate {
+    background: #4d4d4d;
+    color: white;
+}
+
+QListView::item:selected {
+    border: 1px solid #555555;
+    color: white;
+}
+
+QListView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #666666, stop: 1 #4d4d4d);
+    color: white;
+}
+
+QListView::item:selected:active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #888888, stop: 1 #666666);
+    border-color: #555555;
+}
+
+QListView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #999999, stop: 1 #777777);
+}
+
+/*----------- Table ------------------*/
+QTableView {
+    selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #888888, stop: 1 #666666);
+    selection-border-color: white;
+    
+    background-color: #4d4d4d;
+    alternate-background-color: #555555;
+    
+    color: white;    
+}
+
+/*QTableView::item:focus{border: 1px solid yellow;}*/
+/*QTableView::item {
+    color: white; 
+    border-color: white;
+}*/
+
+
+
+/*----------- Tabs ------------------*/
+QTabWidget::pane { /* The tab widget frame */
+    /*border: 1px solid #6f6f6f;*/
+}
+
+QTabWidget::tab-bar {
+    /*left: 5px; move to the right by 5px */
+    /* background-color: #000000;*/
+}
+
+QTabWidget > QWidget {
+    /*background-color: #000000;
+    font-size: 18px;*/
+}    
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                            stop: 0 #5d5d5d, stop: 1 #4d4d4d);
+                                /*stop: 0 #444444, stop: 0.4 #555555,
+                                stop: 0.5 #555555, stop: 1.0 #333333);*/
+    border: 1px solid #6f6f6f;
+    border-bottom-color: #6f6f6f; /* same as the pane color */
+    /*border-top-left-radius: 4px;
+    border-top-right-radius: 4px;*/
+    /*min-width: 8ex;*/
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #888888, stop: 1 #666666);
+                                /*stop: 0 #555555, stop: 0.4 #666666,
+                                stop: 0.5 #666666, stop: 1.0 #444444);*/
+}
+
+QTabBar::tab:selected {
+    border-color: #6f6f6f;
+    border-bottom-color: #C2C7CB; /* same as pane color */
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px; /* make non-selected tabs look smaller */
+}
+
+

@@ -1,0 +1,11 @@
+#Module YOLOTrain
+#------------------------------------------
+#module_class=YOLOTrain
+#module_category=ML_CV
+module_description=Train custom YOLO detector.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+

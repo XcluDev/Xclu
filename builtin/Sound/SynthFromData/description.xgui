@@ -1,0 +1,20 @@
+#Module SynthFromData
+#------------------------------------------
+#module_class=SynthFromData
+module_id_hint=synthfromdata
+
+#module_category=Sound
+module_description=Sonification by sound synthesis from text and binary data. This module should be called by callback from SoundOutput.
+module_version=1.01
+module_type=core
+module_default_run_mode=Callback
+#-------------------------------------------
+page Main
+
+#image 
+
+#text,image,video,CSV,binary
+#с изображения берем 1,2,3 области и их панорамируем, задаем тон (частоту окна), наложение окон, и панораму.
+#а также режим - PCM или спектрограмма, и какой канал (R,G,B)
+#rectangular/circular
+#start frequency/end frequency

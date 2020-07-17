@@ -1,0 +1,13 @@
+#Module OpticalFlow
+#------------------------------------------
+#module_class=OpticalFlow
+#module_category=Images
+module_description=Compute Optical Flow.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+    

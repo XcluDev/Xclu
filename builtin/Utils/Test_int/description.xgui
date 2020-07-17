@@ -1,0 +1,15 @@
+#Module Test_int
+#------------------------------------------
+#module_class=Test_int
+#module_category=Utils
+module_description=Test module for integer value.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+
+page Main
+
+in int In_Int int1=1 0:10 1,10
+//Input value
+

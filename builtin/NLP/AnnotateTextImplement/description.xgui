@@ -1,0 +1,14 @@
+#Module AnnotateTextImplement
+#------------------------------------------
+#module_class=AnnotateTextImplement
+#module_category=ML_Text
+module_description=Extract text annotation, using one of available online services.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+

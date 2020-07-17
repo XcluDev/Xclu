@@ -1,0 +1,16 @@
+#Module FileDownload
+#------------------------------------------
+#module_class=FileDownload
+#module_category=System
+module_description=Download file from web and save as file or keep in memory.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+
+    
+

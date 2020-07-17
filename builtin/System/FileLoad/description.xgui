@@ -1,0 +1,17 @@
+#Module FileLoad
+#------------------------------------------
+#module_class=FileLoad
+#module_category=System
+module_description=Load file from disk.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+#text,binary,JSON,CSV (указать название объекта, куда вставлять)
+
+
+    
+

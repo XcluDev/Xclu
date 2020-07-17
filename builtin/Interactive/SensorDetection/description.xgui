@@ -1,0 +1,11 @@
+#Module SensorDetection
+#------------------------------------------
+module_description=Detecting motion using Arduino sensors (ultrasonic rangefinder, IR sensors).
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+

@@ -1,0 +1,14 @@
+#Module DB_OWL
+#------------------------------------------
+#module_class=DB_OWL
+#module_category=Database
+module_description=OWL-supporting database
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

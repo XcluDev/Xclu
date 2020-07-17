@@ -1,0 +1,126 @@
+#Module SoundOut
+#------------------------------------------
+#module_class=SoundOut
+#module_category=Sound
+module_description=Send sound stream to output sound device (speakers), and optionally save to disk. It works using callbacks.
+module_version=1.01
+module_type=core
+
+module_send_calls=sound_buffer_add
+
+#-------------------------------------------
+page Main
+    //General settings
+
+#in text Sound_Callback_To callback_modules 5 6
+#    //List of modules which will be called after sound request callback event
+#    //#id of modules to execute
+    
+in text Play_Sounds_From modules_list 5 6
+    //List of modules to which will be sent callback for sound buffer
+    //#id of modules to play and optional volumes
+    //#for example: synthfromimage1 0.5
+
+in float(slider) Volume volume=0.8 0:1 100,10
+    //Output sound volume
+    //%
+    
+#-------- Sound device  --------------
+separator
+const stringlist Sound_Device select_device=Default [Default,By_Index,By_Name]
+	//Choose the way for selecting sound output device
+    
+if select_device By_Index
+const int Device_Index device_index=0 0:100 1,10
+    //Sound device index in Operating System.
+endif
+
+if select_device By_Name
+const string Device_Name device_name=""
+	//Name of the sound output device to connect (or part of the name), press 'Show Devices' to see the list
+endif	
+
+        
+#-----------------------------
+separator
+in checkbox(group) Settings settings=0
+	//Setting sound output parameters
+    
+if settings 1
+const stringlist Sample_Rate sample_rate=Default [Default,Custom,8000,11025,22050,32000,44100,48000,96000]
+    //Frame rate
+    //Hz
+
+#----------------	
+if sample_rate Custom
+const int Custom_Sample_Rate custom_sample_rate=44100 1:200000 1,10
+    //Custom sample rate
+    //Hz
+endif
+#----------------
+
+if settings 1
+
+const int Channels channels=2 1:16 1,10
+    //Number of output channels 
+    
+const stringlist Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,1024,2048,4096,8192,16384,32768]
+    //Desired buffer size for sound generation. Larger values increase stability but decrease response time.
+#    Numberofbuffers 
+ 
+#TODO choose format
+#in stringlist Sound_Data_Type sound_data_type=int16 [int16,float]
+#    //Output sound format, int16=-32768..32767, float=[-1,1]
+
+#TODO: automatic restart in autorestart_sec seconds
+	
+endif
+
+#-----------------------------
+separator
+in checkbox(group) Runtime runtime=0
+	//Runtime variables
+
+if runtime 1
+
+out string Connected_Device_Name connected_device_name=""
+	//Name of the connected camera
+
+out checkbox Is_Started is_started=0
+    //Does capture started
+	    
+out object(sound_format) Sound_Format sound_format
+    //Used sound format
+
+out int Buffer_Size buffer_size=0 0:100000 1,10
+    //Buffer size
+    //samples
+    
+endif
+
+#-----------------------
+#TODO page Record_File
+#   //record output sound to a file
+
+#--------------------
+page Devices
+    //Print list of output audio devices and supported formats of the selected device
+
+in checkbox Print_Devices print_devices=1
+	//Print list of all connected output audio devices
+
+const checkbox Print_Formats print_formats=1
+	//Print once list of supported formats of connected audio device
+
+out text Local_Console local_console 10 15
+    //Console output
+
+#-----------------------
+page Test_Sound
+    //Output test sound
+    
+in checkbox Generate_Test_Sound gen_test=0
+    //Enable generating the test sinewave sound. Note, other sounds will be muted.
+    
+#-----------------------
+

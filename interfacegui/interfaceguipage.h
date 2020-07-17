@@ -1,0 +1,30 @@
+#ifndef INTERFACEGUIPAGE_H
+#define INTERFACEGUIPAGE_H
+
+#include "interfacegui.h"
+
+class InterfaceItemPage;
+class XcluScroollArea;
+
+class InterfaceGuiPage : public InterfaceGui
+{
+    Q_OBJECT
+public:
+    InterfaceGuiPage(InterfaceGuiPageCreator &input, InterfaceItemPage *item);
+    ~InterfaceGuiPage();
+
+    //закончить страницу
+    static void finalize_page(InterfaceGuiPageCreator &input);
+
+    int get_vscroll();
+    void set_vscroll(int v);
+protected:
+    //скролл-область, которая восстановит свое положение после создания
+    XcluScroollArea *scrollarea_ = nullptr;
+
+protected slots:
+    //будет посылать сигнал изменения, только если это произошло уже после загрузки
+    void on_vscroll_changed();
+};
+
+#endif // INTERFACEGUIPAGE_H

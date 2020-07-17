@@ -1,0 +1,32 @@
+#Module Figure
+#------------------------------------------
+#module_class=Figure
+#module_category=Drawing
+module_description=Creating a figure on the screen - lines, rectangles, with repetitions, in Window or OpenGL View/Window.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Figure
+    //General settings
+
+
+in checkbox Visible visible=1
+    //Is module enabled
+
+in stringlist Type type=Rectangle [Point,Line,Triangle,Rectangle]
+    //Figure type
+    
+
+page Repeater
+checkbox Repeat repeat=0
+    //Repeater enabled
+    
+checkbox UseArray use_array=0 
+    //Use data from array
+    
+int RepeatCount count=0 0:1000 1,10
+    //Number of repeats
+
+
+    

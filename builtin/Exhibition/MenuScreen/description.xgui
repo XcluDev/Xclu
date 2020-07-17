@@ -1,0 +1,17 @@
+#Module MenuScreen
+#------------------------------------------
+module_description=Menu over the window/screen useful for mouse/keyboard control at exposition.
+module_version=1.01
+module_type=core
+
+module_accept_calls=get_widget_pointer
+
+
+#TODO slider representation
+
+#-------------------------------------------
+page Main
+    
+    #Меню из напольных игр, с настройкой шрифта (цвет, тип, размер) и цвета фона.
+    #Также чтобы можно было задавать логотип.
+    #Выводить - как виджет поверх всех, либо рендерить в OpenGL

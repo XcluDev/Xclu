@@ -1,0 +1,14 @@
+#Module SharedMemory
+#------------------------------------------
+#module_class=SharedMemory
+#module_category=Communication
+module_description=Send and receive data via shared memory.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+

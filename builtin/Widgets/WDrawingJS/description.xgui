@@ -1,0 +1,15 @@
+#Module WDrawingJS
+#------------------------------------------
+#module_class=WDrawingJS
+#module_name_hint=DrawingJS
+#module_id_hint=drawingjs
+#module_category=Window
+module_description=Widget for drawing using JS.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Primitive1
+    //General settings
+    
+

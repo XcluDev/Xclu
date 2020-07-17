@@ -1,0 +1,14 @@
+#Module PlaySound
+#------------------------------------------
+#module_class=PlaySound
+#module_category=Sound
+module_description=Play sound from a memory or a WAV file.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+

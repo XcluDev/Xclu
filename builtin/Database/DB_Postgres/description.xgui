@@ -1,0 +1,14 @@
+#Module DB_Postgres
+#------------------------------------------
+#module_class=DB_Postgres
+#module_category=Database
+module_description=Postgres database
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

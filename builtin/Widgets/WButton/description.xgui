@@ -1,0 +1,73 @@
+#Module WButton
+#------------------------------------------
+#module_class=WButton
+#module_name_hint=Button
+#module_id_hint=button
+#module_category=Window
+module_description=Button widget placed in Window.
+module_version=1.01
+module_type=core
+
+module_accept_calls=get_widget_pointer
+
+#-------------------------------------------
+page Value
+    //Settings of value.
+
+out int Resulted_Value value=0 -1000000:1000000 1,10
+    //Resulted value
+    
+out string Belongs_To belongs_to=""
+    //Window/layout this element is placed - specified by window.
+
+#-------------------------------------------
+page Visual
+    //Settings of visual representation.    
+    
+in checkbox Visible visible=1
+    //Is visible
+
+#const stringlist Font_Size font_size=Parent [Parent,Custom]
+
+#---------    
+in string Title title_text="Int"
+    //Button title
+
+const stringlist Width button_width=Default [Default,Custom_Range]
+    //Width of button.
+
+    
+if button_width Custom_Range
+const int Min button_width_min=200 0:100000 1,10
+    //Minimal button width.
+    //pixels
+const int Max button_width_max=200 0:100000 1,10
+    //Maximal button width.
+    //pixels
+
+endif
+
+#-------------------------------------------
+page On_Change
+    //Detection of changes and action on changing.
+    
+out checkbox Was_Clicked was_clicked=0
+    //This checkbox is set to true when button was clicked, after the module's "update" and until next module's "update".
+    
+    
+separator
+in stringlist On_Click on_click=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
+    //What to do on button click. The event occured after the module's "update".
+    #TODO add option to fire event right after change
+    
+if on_click Call_Module
+in string Module_Call_Link on_change_module_call_link="module1->execute"
+    //Call other module on value change.
+    
+if on_click Execute_Script on_change_script 8 10
+in text Script on_change_script 8 10
+    //Script to execute on value change.
+endif
+    
+
+#-------------------------------------------

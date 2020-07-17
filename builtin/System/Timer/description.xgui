@@ -1,0 +1,28 @@
+#Module Timer
+#------------------------------------------
+#module_class=Timer
+#module_category=System
+module_description=Fires checkbox 'Bang' in specified periods, can be used for execute other modules.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+
+out checkbox Bang bang=0 
+//Fact that timer works shown in this checkbox
+
+separator
+
+in stringlist Period_Mode period_mode=Period [Period,Random_Period]
+
+
+
+#stringlist show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
+#    //Show message box
+
+#string message_box_text=Stopping
+#    //Text in message box
+
+#Stop if frame>...
+#Stop if time>...
+

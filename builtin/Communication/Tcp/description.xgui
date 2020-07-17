@@ -1,0 +1,15 @@
+#Module Tcp
+#------------------------------------------
+#module_class=Tcp
+#module_category=Communication
+module_description=Send and receive data via TCP protocol.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+#send string, array, image, sound
+

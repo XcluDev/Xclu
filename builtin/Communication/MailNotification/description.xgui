@@ -1,0 +1,197 @@
+#Module MailNotification
+#------------------------------------------
+#module_class=MailNotification
+#module_name_hint=Int
+#module_id_hint=int
+#module_category=Remote_Access
+module_description=Send notification using Mail using your own SMTP server or Xclu service.
+module_version=1.01
+module_type=core
+
+#module_accept_calls=get_widget_pointer
+
+#отправка через пользователя или через сервера Xclu.
+#важно, что адреса не могут меняться - чтобы не было рассылки спама. 
+#то есть, Xclu-сервер сам это контролирует и не дает больше чем на 100 разных адресов за час отправить.
+
+#-------------------------------------------
+page Value
+    //Settings of value.
+
+out int Resulted_Value value=0 -1000000:1000000 1,10
+    //Resulted value
+    
+out string Parent parent_id=""
+    //Parent module name (Window or WLayout) at which this element is placed.
+
+in checkbox Visible visible=1
+    //Is visible.
+
+#const stringlist Font_Size font_size=Parent [Parent,Custom]
+
+separator
+
+in stringlist Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
+    //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
+    
+in stringlist Type type=int [int,float]
+    //Type of value.
+ 
+#-------------
+if source Fixed_Value
+in int Value fixed_value=0 -1000000:1000000 1,10
+
+#if source GUI
+#in int Default_Value default_value=0 -1000000:1000000 1,10
+
+if source Other_Module_Value
+in string(choose:int) Int_Link int_link="module1->value"
+    //Link to other module's variable.
+    
+#in checkbox Use_Value_Properties use_value_properties=0
+#    //If checked, then range, label and units will be used from module's value settings
+
+if source Expression
+in text Expression expression 15 17
+    //JS expression for value.
+endif
+
+#-------------------------------------------
+page Properties
+    //Range and visual settings.    
+
+#-------------
+#separator
+#const checkbox Change_After_Start is_const=0
+#    //If true, value will be read only once at project start.
+
+separator
+#-------------
+in checkbox(group) Use_Min use_range_min=0
+    //Clamp value to specified minimal value.
+
+
+if use_range_min 1
+in int Min min_value=0 -1000000:1000000 1,10
+endif
+
+#-------------
+separator
+in checkbox(group) Use_Max use_range_max=0
+    //Clamp value to specified maxinal value.
+    
+if use_range_max 1
+in int Max max_value=100 -1000000:1000000 1,10
+endif    
+
+    
+#---------    
+#Title
+separator
+const checkbox(group) Title title=1
+    //Title, placed at the left of the value.
+    
+if title 1
+in string Title title_text="Int"
+    //Text of title.
+
+const stringlist Placement title_placement=Default [Left,Right,Top,Bottom]
+    //Title placement position.
+
+const stringlist Alignment title_alignment=Default [Default,Left,Center,Right]
+    //Title alignment mode.
+    
+const stringlist Width title_width=Default [Default,Custom_Range]
+    //Width of title.
+endif
+if title_width Custom_Range
+const int Min title_width_min=200 0:100000 1,10
+    //Minimal title width.
+    //pixels
+const int Max title_width_max=200 0:100000 1,10
+    //Maximal title width.
+    //pixels
+
+endif
+
+#---------    
+#Units
+separator
+const checkbox(group) Units units=0
+    //Units, placed at the right of the value.
+
+if units 1
+in string Units units_text="pixels"
+    //Text of units.
+
+const stringlist Alignment units_alignment=Default [Default,Left,Center,Right]
+    //Units alignment mode.
+    
+const stringlist Width units_width=Default [Default,Custom_Range]
+    //Width of units.
+endif
+if units_width Custom_Range
+const int Min units_width_min=200 0:100000 1,10
+    //Minimal units width.
+    //pixels
+const int Max units_width_max=200 0:100000 1,10
+    //Maximal units width.
+    //pixels
+
+endif
+#---------    
+
+#-------------------------------------------
+page Actions
+    //Detection of changes and action on changing.
+    
+out checkbox Was_Changed was_changed=0
+    //This checkbox is set to true when value was changed, after the module's "update" and until next module's "update".
+    
+    
+separator
+in stringlist On_Change on_change=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
+    //What to do on value change. The event occured after the module's "update".
+    #TODO add option to fire event right after change
+    
+if on_change Call_Module
+in string Module_Call_Link on_change_module_call_link="module1->execute"
+    //Call other module on value change.
+    
+if on_change Execute_Script on_change_script 8 10
+in text Script on_change_script 8 10
+    //Script to execute on value change.
+endif
+    
+
+#-------------------------------------------
+
+    
+#modes: disable, get from element, set to element
+#get from element  (string - если поддерживает supports_string, то ставит/пишет)
+#set to element
+
+#position - screen (coords), layout
+
+#элемент layout + margin + stretch   
+    
+#type: 
+#Text label, 
+#vert slider int/float, 
+#horiz slider int/float, 
+#int/float editor, 
+#string editor
+#text editor
+#checkbox
+#button
+#stringlist
+#array view
+#image view
+#Все параметры внешнего видео - const, чтобы не менялись при выполнении - для оптимизации.
+ 
+#in checkbox Readonly readonly=1
+#    //Can user write text here
+
+    #in string Send_Channel addr="localhost:12345"
+#    //Address with port: localhost:12345
+

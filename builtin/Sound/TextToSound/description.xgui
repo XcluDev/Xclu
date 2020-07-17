@@ -1,0 +1,13 @@
+#Module TextToSound
+#------------------------------------------
+#module_class=TextToSound
+#module_category=Sound
+module_description=Convert text to sound.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+

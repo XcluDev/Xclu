@@ -1,0 +1,109 @@
+#Module WImage
+#------------------------------------------
+#module_class=WImage
+#module_name_hint=Image
+#module_id_hint=image
+#module_category=Window
+module_description=Widget for output image to the window.
+module_version=1.01
+module_type=core
+
+module_accept_calls=get_widget_pointer
+
+
+#TODO slider representation
+
+#-------------------------------------------
+page Value
+    //Settings of value.
+
+    
+out object(image) Image image
+    //Resulted image.
+
+out checkbox Is_New_Frame is_new_frame=0
+    //Flag is true when new frame is arrived.
+    
+    
+out string Parent parent_id=""
+    //Parent module name (Window or WLayout) at which this element is placed.
+
+in checkbox Visible visible=1
+    //Is visible.
+
+#-------------------------------------------
+separator
+
+in stringlist Value_Source source=Other_Module_Value [Fixed_Value,Other_Module_Value,Expression]
+    //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
+    
+#in stringlist Type type=int [int,float]
+#    //Type of value.
+ 
+#-------------
+if source Fixed_Value
+#in int Value fixed_value=0 -1000000:1000000 1,10
+
+#if source GUI
+#in int Default_Value default_value=0 -1000000:1000000 1,10
+
+if source Other_Module_Value
+in string(choose:int) Image_Link image_link="webcam1->image"
+    //Link to other module's image.
+
+in string(choose:checkbox) Is_New_Frame_Link is_new_frame_link="webcam1->is_new_frame"
+    //Link to flag that image was changed.
+
+    
+#in checkbox Use_Value_Properties use_value_properties=0
+#    //If checked, then range, label and units will be used from module's value settings
+
+if source Expression
+in text Expression expression 15 17
+    //JS expression for image source.
+endif
+
+#-------------------------------------------
+page Properties
+    //Visual settings.    
+
+separator
+    
+
+const int W w=640 1:10000 1,10
+    //Width of image.
+    //px
+
+const int H h=480 1:10000 1,10
+    //Height of image.
+    //px
+    
+#---------    
+#Title
+separator
+const checkbox(group) Title title=1
+    //Title, placed at the left of the value.
+    
+if title 1
+in string Title title_text="Image"
+    //Text of title.
+    
+const stringlist Placement title_placement=Default [Left,Right,Top,Bottom]
+    //Title placement position.
+
+const stringlist Alignment title_alignment=Default [Default,Left,Center,Right]
+    //Title alignment mode.
+    
+const stringlist Width title_width=Default [Default,Custom_Range]
+    //Width of title.
+endif
+if title_width Custom_Range
+const int Min title_width_min=200 0:100000 1,10
+    //Minimal title width.
+    //pixels
+const int Max title_width_max=200 0:100000 1,10
+    //Maximal title width.
+    //pixels
+
+endif
+#-------------

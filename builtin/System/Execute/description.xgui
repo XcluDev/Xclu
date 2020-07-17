@@ -1,0 +1,116 @@
+#Module Execute
+#------------------------------------------
+#module_class=Execute
+#module_category=System
+module_description=Execute external file.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+
+in string(choose:folder) Working_Folder folder_name=""
+    //Folder for running the file.
+    
+in string(choose:file) File_Name file_name=""
+    //File to execute.
+    //Choose File to execute
+    //Executables (*.exe *.bat *.sh);; All files (*.*)
+
+in string Arguments args=""
+    //Optional command line arguments
+
+line
+    
+in stringlist Work_Mode work_mode=On_Bang [Each_Frame,On_Bang]
+    //Should we execute file at each frame or on Bang signal
+        
+in checkbox Bang bang_signal=0
+    //Start execution
+
+in button Bang bang_button
+	//Start execution
+
+line
+
+
+#--------------------
+separator
+in checkbox(group) Settings settings=0
+    //Settings for timeout
+#    and running in a separate thread
+#if settings 1
+#TODO параллельный поток
+#in checkbox Wait_While_Finished wait_finish=1
+#    //Wait while program finished, if unckecked, then run in a separate thread and not wait for finishing
+#endif
+   
+if settings 1
+in checkbox Set_Timeout set_timeout=1
+    //Use timeout for stopping execution or wait infinitely
+endif
+if set_timeout 1
+in float Timeout timeout_sec=30 0:1000 10000,100
+    //Timeout duration
+    //seconds
+endif
+
+#-----------------------------
+separator
+in checkbox(group) Runtime runtime=0
+	//Runtime variables
+
+if runtime 1
+
+out checkbox Success success=0
+    //Momentary value which is set to 1 if executiion was successful in the current frame
+
+out int Exit_Code exit_code=0 -10000:10000 1,10
+    //The code returned by program, '0' means no error
+    
+#TODO можно выдать тип ошибки - enum QProcess::ProcessError
+
+out checkbox Last_Success last_success=0
+    //Success of last execution, stored here until next execution
+    
+out float Last_Execute_Time last_time=0 0:10000 1,10
+    //Last time of the execution start measured from the project start
+    //seconds
+    
+out float Last_Duration last_duration=0 0:10000 1,10
+    //Last duration of the execution
+    //seconds
+endif    
+
+   
+#--------------------
+separator
+in checkbox(group) Show_Absolute_Paths show_abs_paths=0
+    //Show full path for working folder and file used for execution    
+if show_abs_paths 1
+out text Folder_Path folder_path 4 5
+    //Absolute path to the working folder
+    
+out text File_Path file_path 4 5
+    //Absolute path to the executable file
+endif
+#--------------------
+
+
+#--------------------
+separator
+
+in checkbox(group) Show_Local_Console show_console=0
+    //Show local console for printing there output of executed program
+
+if show_console 1
+out text Local_Console local_console 10 15
+    //Console output
+
+endif
+
+#--------------------
+
+
+
+

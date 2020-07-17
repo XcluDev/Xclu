@@ -1,0 +1,12 @@
+#Module BlobsTracking
+#------------------------------------------
+#module_class=BlobsTracking
+#module_category=Images
+module_description=Extract, detect and track blobs on an image.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+

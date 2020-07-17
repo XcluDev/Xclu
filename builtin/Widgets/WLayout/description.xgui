@@ -1,0 +1,65 @@
+#Module WLayout
+#------------------------------------------
+#module_class=WLayout
+#module_category=Window
+module_description=Layouts which can be used inside Window. They which can be decorated as a frame or group box.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+                
+const stringlist Layout type=Horizontal_Layout [Horizontal_Layout,Vertical_Layout,Grid_Layout]
+    //Layout type
+
+const stringlist Decorate decorate=No [No,Frame,Group_Box]
+    //Type of decoration - no, frame or group box
+
+#---------------
+#Group_Box
+if type Group_Box
+const string Title group_box_title="Group"
+    //Group box title.
+endif
+
+#---------------
+#Layouts,Grid
+if type Horizontal_Layout,Grid_Layout
+const int Num_X layout_num_x=2 1:100 1,10
+    //Number of horizontal items.
+    //items
+if type Vertical_Layout,Grid_Layout
+const int Num_Y layout_num_y=2 1:100 1,10
+    //Number of vertical items.
+    //items
+endif
+
+separator
+
+#---------------
+#Spacing
+if type Horizontal_Layout,Vertical_Layout,Grid_Layout
+const stringlist Spacing layout_spacing=Default [Default,Custom]
+    //Spacing of layout in pixels. 
+    //pixels
+if layout_spacing Custom
+const int Spacing layout_spacing_pixels=0 0:10000 1,10
+    //Margin of layout in pixels.
+    //pixels
+endif
+    
+#---------------
+#Margin
+if content Horizontal_Layout,Vertical_Layout,Grid_Layout
+const stringlist Margin layout_margin=Default [Default,Custom]
+    //Margin of layout. 
+    //pixels
+if layout_margin Custom
+const int Margin layout_margin_pixels=0 0:10000 1,10
+    //Margin of layout. 
+    //pixels
+endif
+
+#---------------------------------------------------
+
+    

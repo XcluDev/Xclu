@@ -1,0 +1,15 @@
+#Module RealsenseCamera
+#------------------------------------------
+#module_class=RealsenseCamera
+#module_category=Images
+module_description=Capture depth, IR and color frames from a Intel Realsense camera and convert to point cloud.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+#in string Send_Channel addr="localhost:12345"
+#    //Address with port: localhost:12345
+

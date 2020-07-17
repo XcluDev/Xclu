@@ -1,0 +1,17 @@
+#Module FileSave
+#------------------------------------------
+#module_class=FileSave
+#module_category=System
+module_description=Save file to disk.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+
+
+    
+

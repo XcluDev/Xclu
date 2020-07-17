@@ -1,0 +1,11 @@
+#Module HandControlPointCloud
+#------------------------------------------
+module_description=Detecting hand motion using point cloud (from Realsense). Can be used for controlling panorama.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+

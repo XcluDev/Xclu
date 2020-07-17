@@ -1,0 +1,14 @@
+#Module DB_RDF
+#------------------------------------------
+#module_class=DB_RDF
+#module_category=Database
+module_description=RDF-supporting database
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

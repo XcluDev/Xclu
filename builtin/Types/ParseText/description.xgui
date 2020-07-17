@@ -1,0 +1,18 @@
+#Module ParseText
+#------------------------------------------
+#module_class=ParseText
+#module_category=Types
+module_description=Load file or URL and parse.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+#file/url/from other element
+
+#treat txt/html/json
+#search pattern
+#text: skip lines, before/after data
+#html,json: path to data
+

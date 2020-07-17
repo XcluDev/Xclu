@@ -1,0 +1,16 @@
+#Module Radio
+#------------------------------------------
+#module_class=Radio
+#module_category=Web
+module_description=Getting sound from an Internet-radio stream.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+
+    
+

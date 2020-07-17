@@ -1,0 +1,14 @@
+#Module RecordSound
+#------------------------------------------
+#module_class=RecordSound
+#module_category=Sound
+module_description=Record sound to memory or to a WAV file.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+

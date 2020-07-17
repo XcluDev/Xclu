@@ -1,0 +1,14 @@
+#Module Notes
+#------------------------------------------
+#module_class=Notes
+#module_category=Utils
+module_description=Text field for writing some notes.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+
+in text Notes text_value 3 20
+//Text area for some notes
+    

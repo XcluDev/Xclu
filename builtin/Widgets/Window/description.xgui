@@ -1,0 +1,126 @@
+#Module Window
+#------------------------------------------
+#module_class=Window
+#module_category=Window
+module_description=Window for placing GUI components and OpenGL view.
+module_version=1.01
+module_type=core
+
+module_send_calls=get_widget_pointer
+
+#------------------------------------------
+page Structure
+    //Window contents consisting of layouts and widgets, such as IntGui.
+    
+const text Struct. structure 25 30
+    //Description of layouts and widgets.
+//HorizontalLayout
+//  #wnumber1
+
+#TODO margins, spacing
+
+#------------------------------------------
+page Properties
+    
+in string Title title="Window"
+    //Title of the window.
+    
+#-------------
+#const stringlist Screen screen=Default [Default,Custom]
+#    //If you have several screens, you can select the screen for placing window there.
+#
+#if screen Custom
+#const int Screen_Index screen_index=0 0:100 1,10
+#    //Index of screen.
+#endif    
+    
+#-------------
+in stringlist Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+    //Size of the window.
+
+if size Custom
+in int Size_X size_x=1280 1:20000 1,10
+    //Width of window.
+    //pixels
+in int Size_Y size_y=720 1:20000 1,10
+    //Height of window.
+    //pixels
+    
+endif
+#-------------
+
+in stringlist Position position=Automatic [Default,Custom,Screen_Center]
+    //Position of the window.
+
+#-------------
+if position Custom
+in int Pos_X pos_x=50 -20000:20000 1,10
+    //X position of window.
+    //pixels
+in int Pos_Y pos_y=50 -20000:20000 1,10
+    //Y position of window.
+    //pixels
+    
+endif
+#-------------
+separator
+
+in checkbox Visible visible=1
+    //Is window visible.
+
+in stringlist Mode mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
+    //Full screen, minimized and maximized settings.
+    
+    
+separator
+
+const stringlist Theme theme=Standard [Standard,Dark]
+    //Theme of design.
+
+#--------
+const stringlist Font_Size font_size=Custom [Default,Custom]
+    //Font size for elements.
+
+if font_size Custom
+const int Font_Size font_size_pix=18 1:1000 1,10
+    //Custom font size.
+    //pixels
+endif
+
+
+
+#---------------------------------------------------
+#TODO Menu
+#page Menu
+#    //Here is optional window menu
+   
+#const checkbox Menu_Enabled menu_enabled=0
+#    //Is menu enabled.
+    
+#--------------
+#if menu_enabled 1
+#const text Menu_Items menu_items 10 15
+#    //Menu items list, with "--" space for indent for creating submenu
+#    //#Use "--" spaces to mark submenu
+#    //File
+#    //--Open
+#    //--Save
+#    //--Exit
+#    //Help
+#    //--About
+#endif
+
+
+#---------------------------------------------------
+#Actions
+page Actions
+    //Action on closing window
+
+in stringlist On_Close on_close=Stop [Ignore,Stop]
+   //What to do when user closes the window.
+#,Custom_Action]
+
+
+#---------------------------------------------------
+
+    

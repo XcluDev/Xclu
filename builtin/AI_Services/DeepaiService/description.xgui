@@ -1,0 +1,14 @@
+#Module DeepaiService
+#------------------------------------------
+#module_class=DeepaiService
+#module_category=AIServices
+module_description=Call to Deepai.org service such as ...
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

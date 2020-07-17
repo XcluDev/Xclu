@@ -1,0 +1,114 @@
+#Module Arduino
+#------------------------------------------
+#module_class=Arduino
+#module_category=Communication
+module_description=Send and receive data from Arduino.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+
+group Device_Selection
+
+const stringlist Choose_Method choose_method=By_Id [By_Id,By_Name]
+    //Method of choosing the device
+
+#--------------------
+if choose_method By_Id
+
+const int Search_Device_From deviceid0=2 0:100 1,10
+    //Start of id range, will search to first successful 
+
+const int To deviceid1=10 0:100 1,10
+    //End of id range 
+
+if choose_method By_Name
+
+const string Device_Name devicename="..."
+    //Name of the device (may be specified only part, will be search for the first successful match)
+endif
+#--------------------
+
+separator
+
+const stringlist Speed_Baud baud=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
+
+separator
+
+out checkbox Connected connected=0
+    //Is device connected
+
+out checkbox Data_Received data_received=0
+    //Is data received on the latest update
+    
+separator
+out int Total_Sent_bytes total_sent=0 0:10000000 1,10
+out int Total_Received_bytes total_received=0 0:10000000 1,10
+
+#------------------------------------------
+page Console
+
+in stringlist Send_Type send_type=String [String,Byte]
+    //Choose what to send manually
+
+#----------------
+if send_type String
+
+in string Send_String send_string=""
+    //Send string
+
+in stringlist Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
+
+in button Send send_string_btn
+endif
+#----------------
+if send_type Byte
+
+in int Send_Byte send_byte=0 0:255 1,10
+    //Send byte
+in button Send send_byte_btn
+endif
+#----------------
+
+
+separator
+
+in stringlist Show_Received show_received=Text [None,Text,Bytes]
+    //Show received data as text or bytes.
+
+#----------------
+if show_received Text 
+out text Received_Text received_text 10 25
+    //Received data as text
+
+endif
+#----------------
+if show_received Bytes
+out text Received_Bytes received_bytes 10 25
+    //Received data as bytes
+
+endif
+#------------------------------------------
+
+in button Clear clear
+    //Clear received data
+
+in stringlist Auto_Clear auto_clear=On [Off,On]
+    //Automatically clear received data before each update
+
+
+in stringlist Limit_Show limit_show=On [Off,On]
+#----------------
+if limit_show On
+in int Limit_Show_Count limit_show_count=100 0:10000 1,100 
+    //Limit show by prevent slow down.
+endif
+#----------------
+
+#------------------------------------------
+page Devices
+
+in button Print_Devices print_devices
+
+out text Device_List device_list 7 20

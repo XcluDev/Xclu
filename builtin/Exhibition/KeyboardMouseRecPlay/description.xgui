@@ -1,0 +1,13 @@
+#Module KeyboardMouseRecPlay
+#------------------------------------------
+module_description=Record and replay keyboard and mouse events.
+module_version=1.01
+module_type=core
+
+#module_accept_calls=get_widget_pointer
+
+
+#-------------------------------------------
+page Main
+
+

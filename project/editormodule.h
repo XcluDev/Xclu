@@ -1,0 +1,81 @@
+#ifndef EDITORMODULE_H
+#define EDITORMODULE_H
+
+//Редактор параметров
+//Он используется в основном окне приложения,
+//а также в диалоге теста GUI модуля DialogTestModuleInterface
+#include <QWidget>
+#include "incl_qt.h"
+#include "module.h"
+#include "interfacegui.h"
+
+QT_BEGIN_NAMESPACE
+class QAction;
+class QDialogButtonBox;
+class QGroupBox;
+class QLabel;
+class QLineEdit;
+class QPushButton;
+class QTextEdit;
+class QVBoxLayout;
+class QHBoxLayout;
+class QListWidget;
+class QTabWidget;
+class QCheckBox;
+class QGridLayout;
+QT_END_NAMESPACE
+
+
+class EditorModule : public QWidget
+{
+    Q_OBJECT
+
+public:
+    EditorModule(QWidget *parent);
+
+    EditorModuleState state();
+    void set_state(EditorModuleState state);
+
+    void before_close_project();
+    void after_close_project();
+
+public slots:
+    //сигнал, что модуль сменился и нужно загрузить новый модуль
+    void changed_module_selection(int i);
+
+    //сброс модуля
+    void detach();
+
+    //сигнал, что модуль был переименован
+    void renamed_module();
+
+protected:
+    void createParams();
+    QGroupBox *editor_frame_;
+    QLabel *editor_label_;
+    QTabWidget *tabs;
+    //QGroupBox *paramEditor;
+
+    //модуль, который в данный момент показываем в редакторе
+    Module *module_ = 0;
+
+    friend class DialogTestModuleInterface;   //этот класс дружественный!
+    //загрузить GUI модуля
+    void load_module(Module *module);
+    //создать GUI только для интерфейса - например, для отладки интерфейсов
+    void load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name);
+
+    QVector<InterfaceGui *> items_; //элементы GUI
+    QMap<QString, InterfaceGui *> items_by_name_;   //элементы по имени, для установки связей видимости
+
+    void reload_name(); //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
+
+protected slots:
+    //Отслеживание изменений, чтобы пометить, что проект был изменен
+    //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
+    void on_value_changed();
+
+};
+
+
+#endif // EDITORMODULE_H

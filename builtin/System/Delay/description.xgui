@@ -1,0 +1,22 @@
+#Module Delay
+#------------------------------------------
+#module_class=Delay
+#module_category=System
+module_description=Delay execution for a specified amount of time.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+in int Hours hours=0 0:1000 1,10
+    //Delay time in hours
+
+    
+in int Minutes minutes=0 0:1000 1,10
+    //Delay time in minutes
+
+in float Seconds seconds=0 0:120 1200,120
+    //Delay time in seconds
+
+

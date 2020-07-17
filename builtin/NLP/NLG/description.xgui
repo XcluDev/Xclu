@@ -1,0 +1,13 @@
+#Module NLG
+#------------------------------------------
+module_description=Natural Language Generator.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+
+

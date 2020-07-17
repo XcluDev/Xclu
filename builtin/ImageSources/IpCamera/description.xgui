@@ -1,0 +1,214 @@
+#Module IpCamera
+#------------------------------------------
+#module_class=IpCamera
+#module_id_hint=webcam
+
+#module_category=Images
+module_description=Capture frames from IP camera.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+#-----------------------------
+in stringlist Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
+    //Source of frames - capture frames from real camera of load images from a disk.
+
+
+#-------- Camera --------------
+const stringlist Device select_device=Default [Default,By_Index,By_Name]
+	//Choose the way for selecting webcamera.
+    
+if select_device By_Index
+const int Device_Index device_index=0 0:100 1,10
+    //Camera index in Operating System.
+endif
+
+if select_device By_Name
+const string Device_Name device_name=""
+	//Name of the camera to connect (or part of the name), press 'Show Devices' to see the list.
+endif	
+
+out object(image) Image image
+    //Resulted webcamera image.
+
+out checkbox Is_New_Frame is_new_frame=0
+    //Flag is true when new frame is arrived.
+    
+#-----------------------------
+separator
+in checkbox(group) Settings settings=0
+	//Setting webcamera parameters.
+    
+if settings 1
+const stringlist Frame_Rate frame_rate=Camera_Default [Camera_Default,Custom,5,10,15,30,60]
+    //Frame rate.
+    //fps
+
+#----------------	
+if frame_rate Custom
+const int Custom_Frame_Rate custom_frame_rate=30 1:1000 1,10
+    //Custom frame rate.
+    //fps
+endif
+#----------------
+
+if settings 1    
+const stringlist Resolution resolution=Camera_Default [Camera_Default,Custom,160_x_120,320_x_240,640_x_480,1024_x_768,1280_x_720,1920_x_1080]
+    //Capture resolution.
+
+    
+#----------------
+if resolution Custom
+const int Resolution_X res_x=1024 1:10000 1,20
+	//Custom resolution X.
+    //pixels
+
+const int Resolution_Y res_y=768 1:10000 1,20
+	//Custom resolution Y.
+    //pixels
+endif
+#----------------
+
+if settings 1
+
+in stringlist Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
+#TODO не поддерживаются каналы HSL,H,S,L
+    //Desired channels of the output image.
+in stringlist Data_Type image_data_type=u8bit [u8bit,float]
+    //Desired data type of the output image, u8bit=0..255, float=[0,1].
+
+#TODO wait_frame
+#in checkbox Wait_New_Frames wait_frame=0
+#    //Wait while new frame arrived
+#TODO: wait timeout
+#TODO: automatic restart in autorestart_sec seconds
+	
+#TODO update mode: use consistent frame during whole update event, or update as fast as possible (not consistent, but more responsible)
+#TODO callback on new frame   - as 'text' for modules list
+
+    
+endif
+
+#-----------------------------
+separator
+in checkbox(group) Runtime_Details runtime=0
+	//Runtime variables.
+
+if runtime 1
+
+out string Device_Name connected_device_name=""
+	//Name of the connected camera.
+
+out checkbox Is_Started is_started=0
+    //Does capture started.
+	
+out string Frames_Captured frames_captured=""
+    //How much frames were captured and processed after last start.
+    
+
+endif
+
+
+#-----------------------------
+#TODO resize & crop
+#separator
+#in checkbox(group) Resize_and_Crop resize_crop=0
+#	//Resizing and cropping options
+
+#if resize_crop 1
+#in stringlist Resize resize=No [No,Percent,Pixels]
+#    //Resize image
+#    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
+#------------------
+#if resize Percent
+#in float Resize_Percent resize_percent=100 0:1000 10000,100
+#if resize Pixels
+#in int Resize_X resize_x=1024 0:10000 1,20
+#in int Resize_Y resize_y=768 0:10000 1,20
+#------------------
+#if resize_crop 1
+#in stringlist Crop crop=No [No,Percent,Pixels]
+#    //Crop...
+#    
+#endif
+
+#--------------------
+page Devices
+    //Print list of cameras and supported formats
+
+in checkbox Print_Devices print_devices=1
+	//Print list of all connected webcams
+
+in checkbox Print_Formats print_formats=1
+	//Print once list of supported formats of connected camera
+
+
+out text Local_Console local_console 10 15
+    //Console output
+
+
+#--------------------
+#TODO Load frames
+#Load Frames --------------------------------------
+#page Load_Frames
+#    //Load frames from disk - simulation of camera
+#    
+#in stringlist Load_Source load_source=Folder [Folder,Single_Image]
+#    //Load images from a folder or use a single image
+#
+#if load_source Single_Image
+#in string(choose:file) Image_File load_image_file=""
+#    //Image file to load.
+#    //Choose an Image
+#    //Images (*.jpg *.png *.bmp *.tif);; All files (*.*)
+#
+#if load_source Folder
+#in string(choose:folder) Folder load_folder=""
+#    //Folder for loading images.
+#endif
+    
+    
+#fps, original size or fixed as in web camera settings
+    
+#stringlist load_mode=off [off,each_frame]
+#    //Load frames
+
+#string load_folder=data/webcam [folder_select]
+#    //Folder for loading frames
+
+#in stringlist frame_method=autoincrease [autoincrease,fixed]
+#    //Scan all images in folder or use fixed frame
+
+#int frame=0 0:100000 1,10
+#    //Frame number for loading frames
+
+    
+#TODO Save frames
+#Save Frames --------------------------------------
+#page Save_Frames
+#    //Saving grabbed frames to disk - for working without camera by using "Load Frames" mode.
+#    
+#    
+#in checkbox Save_Frames save_frames=0
+#    //Save frames
+
+#limit number of frames
+#stop/write in cycle
+
+
+#format for the string
+
+#group Save
+#	//Save frames
+
+
+
+#string save_folder=data/webcam [folder_select]
+#    //Folder for saving frames
+
+#button save_btn=Save_frame
+#    //Button for saving current frame
+

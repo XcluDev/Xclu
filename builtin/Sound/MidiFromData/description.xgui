@@ -1,0 +1,14 @@
+#Module MidiFromData
+#------------------------------------------
+#module_class=MidiFromData
+#module_category=Sound
+module_description=Sonification by MIDI from image, text and binary data. The module can play sound samples directly and send OSC and MIDI events.
+module_version=1.01
+module_type=core
+#module_run_mode=Callback
+#-------------------------------------------
+page Main
+
+#image 
+
+#text,image,video,CSV,binary

@@ -1,0 +1,11 @@
+#Module Word2Vec
+#------------------------------------------
+#module_class=Word2Vec
+#module_category=ML_Text
+module_description=Word embeddings.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings

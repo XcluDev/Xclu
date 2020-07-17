@@ -1,0 +1,47 @@
+#Module Fbo
+#------------------------------------------
+#module_class=Fbo
+#module_category=Drawing
+module_description=FBO - fragment buffer object used for drawing into.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+    
+
+#-------------
+const stringlist Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+    //Size of the FBO.
+
+if size Custom
+const int Size_X size_x=1280 1:20000 1,10
+    //Width of FBO.
+    //pixels
+const int Size_Y size_y=720 1:20000 1,10
+    //Height of FBO.
+    //pixels
+    
+endif
+
+#---------------------------------- 
+separator
+in stringlist Channels image_channels=RGB [Grayscale,RGB,RGBA]
+    //Desired channels of the output image.
+    
+in stringlist Data_Type image_data_type=u8bit [u8bit,float]
+    //Desired data type of the output texture, u8bit=0..255, float=[0,1].
+
+
+#---------------------------------- 
+separator
+out object(fbo) Fbo fbo
+    //output FBO, can be used in Window to draw
+
+    
+#---------------------------------- 
+    
+
+    
+

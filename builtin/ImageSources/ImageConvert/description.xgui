@@ -1,0 +1,46 @@
+#Module ImageConvert
+#------------------------------------------
+#module_class=ImageConvert
+#module_category=Images
+module_description=Convert images between format, resize, split and join channels.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+    //General settings
+
+#Channels - split, join
+#Mode
+in stringlist Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
+#data format
+in stringlist Output_Format output_format=u8bit [u8bit,float]
+
+
+#-----------------------------
+separator
+in checkbox(group) Resize_and_Crop resize_crop=0
+	//Resizing and cropping options
+
+if resize_crop 1
+in stringlist Resize resize=No [No,Percent,Pixels]
+    //Resize image
+    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
+#------------------
+if resize Percent
+in float Resize_Percent resize_percent=100 0:1000 10000,100
+if resize Pixels
+in int Resize_X resize_x=1024 0:10000 1,20
+in int Resize_Y resize_y=768 0:10000 1,20
+
+#------------------
+
+if resize_crop 1
+in stringlist Crop crop=No [No,Percent,Pixels]
+    //Crop...
+
+    
+endif
+
+
+#------------------------------------------

@@ -1,0 +1,126 @@
+#Module Test
+#------------------------------------------
+#module_class=Test
+#module_category=Utils
+module_description=Test module.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+
+page Main
+#group Device_Selection
+
+in button Test button1
+    //Test button.
+
+separator
+const checkbox Const_Checkbox const_check=1
+    //Constant value.
+in checkbox In_Checkbox in_check=0
+    //Input value.
+out checkbox Out_Checkbox out_check=1
+    //Output value.
+
+separator
+const float Const_Float float1=1.1 0:10 100,10
+    //Constant value.
+    //mm
+in float In_Float float2=2.2 -2:2 100,10
+    //Input value.
+    //pixels
+out float Out_Float float3=3.3 0:10 100,10
+    //Output value.
+    //meters
+
+separator
+const int Const_Int int1=1 -10:10 1,10
+    //Constant value.
+    //mm
+in int In_Int int2=2 0:10 1,10
+    //Input value.
+    //pixels
+out int Out_Int int3=3 0:10 1,10
+    //Output value.
+    //meters
+
+separator
+const string Const_String string1="Abc"
+    //Constant value.
+in string In_String string2="Abc"
+    //Input value.
+out string Out_String string3="Abc"
+    //Output value.
+
+separator
+const stringlist Const_List list1=By_Id [By_Name,By_Id]
+    //Constant value.
+in stringlist In_List list2=By_Name [By_Name,By_Id]
+    //Input value.
+out stringlist Out_List list3=By_Id [By_Name,By_Id]
+    //Output value.
+
+separator
+const text Const_Text text1 3 3
+    //Constant value.
+    //"This is a text example"
+    //"Continued..."
+
+in text In_Text text2 3 3
+    //Input value.
+out text Out_Text text3 3 3
+    //Output value.
+
+page Choose_Files
+
+#Строка с кнопкой для выбора файла, затем описание, диалог и фильтр 
+in string(choose:file) Choose_File choose:file="aa"
+    //Description
+    //Choose File to load
+    //All files (*.*);;Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)
+
+
+#Строка с кнопкой для выбора папки 
+in string(choose:folder) Choose_Folder choose_Folder="aa"  
+    //Description.
+    //Choose Floder to scan
+
+page Conditional_GUI
+
+in stringlist Type type=Int [Int,Float,String]
+    //Choose different types to see changed interface.
+
+separator
+
+#----------------
+if type Int,Float
+in string Numbered numbered="1"
+separator
+in text Number_Text number_text 3 3
+    //
+    //111
+    //222
+    //333
+
+#----------------
+if type String
+in string Stringed stringed="abcde"
+separator
+in text String_Text string_text 3 3
+    //
+    //aaa
+    //bbb
+    //ccc
+
+endif
+#----------------
+
+page Callback
+    //Testing Callback mechanism. Create other instance of Test, set it Run mode Callback and put its id here and press button. 
+    
+in button Callback callback
+    //Press button to start callback of selected modules.
+
+in text Callback_Modules callback_modules 5 10
+    //List of modules which will be called by callback.
+    //#id of modules to execute

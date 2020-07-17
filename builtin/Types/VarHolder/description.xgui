@@ -1,0 +1,16 @@
+#Module VarHolder
+#------------------------------------------
+#module_class=VarHolder
+#module_category=Types
+module_description=Storage for variables.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+#var1
+#type
+#name (id)
+#value
+#if empty - message box
+
+# - use when required Google API, IBM API.

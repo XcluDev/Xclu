@@ -1,0 +1,14 @@
+#Module MQTT
+#------------------------------------------
+#module_class=MQTT
+#module_category=Communication
+module_description=Send and receive data using MQTT protocol.
+module_version=1.01
+module_type=core
+
+#------------------------------------------
+page Main
+
+#http://mqtt.org/
+
+#------------------------------------------

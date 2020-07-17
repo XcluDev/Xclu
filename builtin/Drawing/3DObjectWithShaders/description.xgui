@@ -1,0 +1,64 @@
+#Module 3DObjectWithShaders
+#------------------------------------------
+#module_class=3DObjectWithShaders
+#module_category=Drawing
+module_description=Load 3D model from OBJ file and process it with shaders.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+    
+
+#-------------
+const stringlist Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+    //Size of the FBO.
+
+if size Custom
+const int Size_X size_x=1280 1:20000 1,10
+    //Width of FBO.
+    //pixels
+const int Size_Y size_y=720 1:20000 1,10
+    //Height of FBO.
+    //pixels
+    
+endif
+
+#---------------------------------- 
+page Inputs
+const checkbox(group) Texture1 texture1=0
+    //Use texture 1
+    
+if texture1 1
+in stringlist Source tex1_source=Image_File [Image_File,Other_Module_Image]
+    //Image source - file or image from other module.
+
+if tex1_source Image_File
+in string(choose:file) Image_File_Name image1_file=""
+    //Image File.
+    //Choose Image File
+    //Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)
+
+if tex1_source Other_Module_Image
+in string Image_Link image1_link="webcam1->image"
+    //Reference to image in another module.
+endif
+
+#---------------------------------- 
+page Shader
+out object Fbo fbo
+    //output FBO, can be used in Screen to draw
+
+    
+    
+separator
+    
+in text Code fragment_code 30 35
+    //Shader's code. 
+    //#Variables:....
+    
+
+#загружать опционально из внешнего файла, и опционально обновлять по размеру файла и дате. 
+#Получается Live coding, и подсветка в редакторе. 
+#ошибки - по умолчанию, печатать в консоль. Дополнительная настройка для этого, чтобы не менять главные настройки модуля.

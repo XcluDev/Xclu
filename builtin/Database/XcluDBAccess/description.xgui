@@ -1,0 +1,14 @@
+#Module DB_XcluAccess
+#------------------------------------------
+#module_class=DB_XcluAccess
+#module_category=Remote_Access
+module_description=Access to remote Xclu-based database.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

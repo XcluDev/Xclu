@@ -1,0 +1,14 @@
+#Module DB_MySQL
+#------------------------------------------
+#module_class=DB_MySQL
+#module_category=Database
+module_description=MySQL database
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

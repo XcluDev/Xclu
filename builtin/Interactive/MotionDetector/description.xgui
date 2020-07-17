@@ -1,0 +1,11 @@
+#Module MotionDetector
+#------------------------------------------
+module_description=Detecting motion in areas of videoframes.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+

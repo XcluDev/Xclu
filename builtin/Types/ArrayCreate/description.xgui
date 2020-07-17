@@ -1,0 +1,14 @@
+#Module ArrayCreate
+#------------------------------------------
+#module_class=ArrayCreate
+#module_category=Types
+module_description=Create an array.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+

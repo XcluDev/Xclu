@@ -1,0 +1,13 @@
+#Module LogConsole
+#------------------------------------------
+#module_class=LogConsole
+#module_category=System
+module_description=Show system warnings and errors.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+

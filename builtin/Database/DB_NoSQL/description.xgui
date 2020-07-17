@@ -1,0 +1,14 @@
+#Module DB_NoSQL
+#------------------------------------------
+#module_class=DB_NoSQL
+#module_category=Database
+module_description=NoSQL no-relational database
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+

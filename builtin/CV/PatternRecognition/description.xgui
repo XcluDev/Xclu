@@ -1,0 +1,11 @@
+#Module PatternRecognition
+#------------------------------------------
+#module_class=PatternRecognition
+#module_category=ML_CV
+module_description=Learn and recognize images using VGG16 features.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+#see ML5.js

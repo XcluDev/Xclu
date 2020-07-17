@@ -1,0 +1,20 @@
+#Module MicrosoftService
+#------------------------------------------
+#module_class=MicrosoftService
+#module_category=AIServices
+module_description=Call to Microsoft service such as.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+#set update time period
+
+
+#choose categories - several pages with categories
+#https://www.worldometers.info/
+
+#Tip - for special data, use Parsing.
+    
+

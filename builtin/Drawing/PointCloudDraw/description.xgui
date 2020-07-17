@@ -1,0 +1,15 @@
+#Module PointCloudView
+#------------------------------------------
+#module_class=PointCloudView
+#module_category=Drawing
+module_description=Show pointcloud in one or three projections.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+    
+
+
+    
