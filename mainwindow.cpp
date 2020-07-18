@@ -210,7 +210,7 @@ void MainWindow::createMenu() {
 
     //Modules
     //будут заполнены в EditorModules
-    modulesMenu = menuBar()->addMenu(tr("&Modules"));
+    modulesMenu = menuBar()->addMenu(tr("&Project"));
 
 
     //Run

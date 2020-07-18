@@ -27,9 +27,12 @@ public:
 //Константы и вспомогательные функции
 namespace xclu {
 
-//папка со встроенными модулями :/builtinmodules
-//это файлы ресурсов, поэтому путь начинается с ":/"
-QString buildin_folder();
+//папка со встроенными ресурсами - темы, общие XGUI
+QString buildin_resources_folder();
+
+//папка с описанием встроенных модулей
+QString buildin_modules_folder();
+
 
 //Файл с описанием интерфейса страницы General - добавляется во все модули
 QString general_page_file();

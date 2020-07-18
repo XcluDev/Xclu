@@ -1,5 +1,5 @@
 #include <QtWidgets>
-#include "rtmodulewimage.h"
+#include "rtmoduleguiimage.h"
 
 #include "incl_qtcpp.h"
 #include "rtmoduleregistrar.h"
@@ -11,28 +11,28 @@
 
 
 //заполнение имени класса и регистрация класса
-REGISTRAR(WImage)
+REGISTRAR(GuiImage)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleWImage *RtModuleWImage::new_module() {
-    return new RtModuleWImage();
+/*static*/ RtModuleGuiImage *RtModuleGuiImage::new_module() {
+    return new RtModuleGuiImage();
 }
 
 //---------------------------------------------------------------------
-RtModuleWImage::RtModuleWImage()
+RtModuleGuiImage::RtModuleGuiImage()
     :RtModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleWImage::~RtModuleWImage()
+RtModuleGuiImage::~RtModuleGuiImage()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_start_internal() {
+void RtModuleGuiImage::execute_start_internal() {
     //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -48,7 +48,7 @@ void RtModuleWImage::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_update_internal() {
+void RtModuleGuiImage::execute_update_internal() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -56,7 +56,7 @@ void RtModuleWImage::execute_update_internal() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_stop_internal() {
+void RtModuleGuiImage::execute_stop_internal() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -65,7 +65,7 @@ void RtModuleWImage::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObject *output) {
+void RtModuleGuiImage::call_internal(QString function, XcluObject *input, XcluObject *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -104,7 +104,7 @@ void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObje
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::create_widget() {
+void RtModuleGuiImage::create_widget() {
     //insert_label(input);
 
     image_ = new QLabel();
@@ -127,7 +127,7 @@ void RtModuleWImage::create_widget() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::update_all(bool force) {
+void RtModuleGuiImage::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -145,7 +145,7 @@ void RtModuleWImage::update_all(bool force) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::update_value() {
+void RtModuleGuiImage::update_value() {
     int new_frame = RUNTIME.get_int_by_link(get_string("is_new_frame_link"));
     set_int("is_new_frame",new_frame);
 
@@ -176,7 +176,7 @@ void RtModuleWImage::update_value() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::set_image(const QImage &image) {
+void RtModuleGuiImage::set_image(const QImage &image) {
     if (image_) {
         QPixmap pix = QPixmap::fromImage(image);
         image_->setPixmap(pix);
@@ -185,7 +185,7 @@ void RtModuleWImage::set_image(const QImage &image) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::clear_image() {
+void RtModuleGuiImage::clear_image() {
     if (image_) {
         image_->setText("");
         image_->setVisible(false);

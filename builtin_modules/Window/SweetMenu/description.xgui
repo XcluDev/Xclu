@@ -1,6 +1,6 @@
-#Module MenuScreen
+#Module SweetMenu
 #------------------------------------------
-module_description=Menu over the window/screen useful for mouse/keyboard control at exposition.
+module_description=Menu which draws over SweetWindow, and controlling by mouse/keyboard.
 module_version=1.01
 module_type=core
 

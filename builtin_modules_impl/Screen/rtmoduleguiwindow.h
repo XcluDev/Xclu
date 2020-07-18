@@ -21,14 +21,14 @@ class QSpacerItem;
 
 
 //Структура для создания layouts
-struct RtModuleWindowStructureItem {
-    RtModuleWindowStructureItem();
-    RtModuleWindowStructureItem(QWidget* widget, int stretch = 0);
-    RtModuleWindowStructureItem(QLayout *layout, int stretch = 0);
-    RtModuleWindowStructureItem(QWidget* widget, QString tab_title);
-    RtModuleWindowStructureItem(int stretch);
+struct RtModuleGuiWindowStructureItem {
+    RtModuleGuiWindowStructureItem();
+    RtModuleGuiWindowStructureItem(QWidget* widget, int stretch = 0);
+    RtModuleGuiWindowStructureItem(QLayout *layout, int stretch = 0);
+    RtModuleGuiWindowStructureItem(QWidget* widget, QString tab_title);
+    RtModuleGuiWindowStructureItem(int stretch);
 
-    ~RtModuleWindowStructureItem();
+    ~RtModuleGuiWindowStructureItem();
 
     QWidget *take_widget();         //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
 
@@ -46,15 +46,15 @@ struct RtModuleWindowStructureItem {
 
 
 //Модуль
-class RtModuleWindow: public RtModule
+class RtModuleGuiWindow: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleWindow();
-    ~RtModuleWindow();
+    RtModuleGuiWindow();
+    ~RtModuleGuiWindow();
 
     static QString *static_class_name_ptr; //"Window", эта переменная используется для создания новых объектов
-    static RtModuleWindow *new_module();
+    static RtModuleGuiWindow *new_module();
 
 protected:
     //Выполнение
@@ -141,7 +141,7 @@ protected:
     //Рекурсивное создание структуры окна
     //При реализации я старался сделать здесь безопасным при exceptions и исключить утечки памяти
     //для этого старался использовать QScopedPointer и забирать его указатели с помощью take в безопасные моменты
-    RtModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
+    RtModuleGuiWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
 
     //парсить число, если оно есть, иначе - выдать default_value
     int parse_int(QStringList list, int index, int default_value, QString line);

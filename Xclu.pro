@@ -31,23 +31,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += core modules builtin_impl/System/ interface interfacegui 
+INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
 INCLUDEPATH += project objects
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
+    builtin_modules_impl/Screen/rtmoduleguiimage.cpp \
+    builtin_modules_impl/Screen/rtmoduleguinumber.cpp \
+    builtin_modules_impl/Screen/rtmoduleguiwindow.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
-    builtin_impl/Screen/rtmodulefbo.cpp \
-    builtin_impl/Screen/rtmodulefragmentshader.cpp \
-    builtin_impl/Screen/rtmodulewimage.cpp \
-    builtin_impl/Screen/rtmodulewindow.cpp \
-    builtin_impl/Screen/rtmodulewnumber.cpp \
-    builtin_impl/Sound/rtmodulesynthfromimage.cpp \
+    builtin_modules_impl/Screen/rtmodulefbo.cpp \
+    builtin_modules_impl/Screen/rtmodulefragmentshader.cpp \
+    builtin_modules_impl/Sound/rtmodulesynthfromimage.cpp \
     modules/moduledescription.cpp \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
@@ -58,9 +58,9 @@ SOURCES += \
     interfacegui/xcludoublespinbox.cpp \
     interfacegui/xcluscrollarea.cpp \
     interfacegui/xcluspinbox.cpp \
-    builtin_impl/Images/rtmodulewebcamera.cpp \
-    builtin_impl/Sound/rtmodulesoundout.cpp \
-    builtin_impl/System/rtmoduleexecute.cpp \
+    builtin_modules_impl/Images/rtmodulewebcamera.cpp \
+    builtin_modules_impl/Sound/rtmodulesoundout.cpp \
+    builtin_modules_impl/System/rtmoduleexecute.cpp \
     core/incl_qt.cpp \
     core/incl_qtcpp.cpp \
     core/incl_std.cpp \
@@ -85,7 +85,7 @@ SOURCES += \
     interfacegui/interfaceguipage.cpp \
     interface/interfaceitemstringlist.cpp \
     interfacegui/interfaceguitext.cpp \
-    builtin_impl/Utils/rtmoduletest.cpp \
+    builtin_modules_impl/Utils/rtmoduletest.cpp \
     modules/module.cpp \
     modules/moduleinfo.cpp \
     modules/moduleinterface.cpp \
@@ -100,6 +100,7 @@ SOURCES += \
     objects/xcluobjectwrapper.cpp \
     objects/xcluprotecteddata.cpp \
     project/consoleview.cpp \
+    project/dialogpreferences.cpp \
     project/dialogrenamemodule.cpp \
     project/dialogtestmoduleinterface.cpp \
     project/editormodule.cpp \
@@ -113,16 +114,16 @@ SOURCES += \
     project/settingskeys.cpp
 
 HEADERS += \
+    builtin_modules_impl/Screen/rtmoduleguiimage.h \
+    builtin_modules_impl/Screen/rtmoduleguinumber.h \
+    builtin_modules_impl/Screen/rtmoduleguiwindow.h \
     core/xclu_parse_tree.h \
     core/xclu_theme.h \
     core/xclu_types.h \
     core/xclu_utils.h \
-    builtin_impl/Screen/rtmodulefbo.h \
-    builtin_impl/Screen/rtmodulefragmentshader.h \
-    builtin_impl/Screen/rtmodulewimage.h \
-    builtin_impl/Screen/rtmodulewindow.h \
-    builtin_impl/Screen/rtmodulewnumber.h \
-    builtin_impl/Sound/rtmodulesynthfromimage.h \
+    builtin_modules_impl/Screen/rtmodulefbo.h \
+    builtin_modules_impl/Screen/rtmodulefragmentshader.h \
+    builtin_modules_impl/Sound/rtmodulesynthfromimage.h \
     modules/moduledescription.h \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
@@ -133,9 +134,9 @@ HEADERS += \
     interfacegui/xcludoublespinbox.h \
     interfacegui/xcluscrollarea.h \
     interfacegui/xcluspinbox.h \
-    builtin_impl/Images/rtmodulewebcamera.h \
-    builtin_impl/Sound/rtmodulesoundout.h \
-    builtin_impl/System/rtmoduleexecute.h \
+    builtin_modules_impl/Images/rtmodulewebcamera.h \
+    builtin_modules_impl/Sound/rtmodulesoundout.h \
+    builtin_modules_impl/System/rtmoduleexecute.h \
     core/incl_qt.h \
     core/incl_qtcpp.h \
     core/incl_std.h \
@@ -160,7 +161,7 @@ HEADERS += \
    interfacegui/interfaceguipage.h \
     interface/interfaceitemstringlist.h \
     interfacegui/interfaceguitext.h \
-    builtin_impl/Utils/rtmoduletest.h \
+    builtin_modules_impl/Utils/rtmoduletest.h \
     modules/module.h \
     modules/moduleinfo.h \
     modules/moduleinterface.h \
@@ -174,6 +175,7 @@ HEADERS += \
     objects/xcluobjectwrapper.h \
     objects/xcluprotecteddata.h \
     project/consoleview.h \
+    project/dialogpreferences.h \
     project/dialogrenamemodule.h \
     project/dialogtestmoduleinterface.h \
     project/editormodule.h \
@@ -198,4 +200,6 @@ RESOURCES += \
 RC_ICONS = images/logo/appicon.ico
 
 FORMS += \
-    project/dialog.ui
+    project/DialogPreferences1.ui \
+    project/dialog.ui \
+    project/dialogpreferences.ui

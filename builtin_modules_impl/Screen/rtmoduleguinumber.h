@@ -19,7 +19,7 @@ class XcluSpinBox;
 
 
 //Данные, которые защищаются с помощью mutex
-struct RtModuleWIntData: public XcluProtectedData
+struct RtModuleGuiNumberData: public XcluProtectedData
 {
     int gui_changed = 0;
 
@@ -30,15 +30,15 @@ struct RtModuleWIntData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleWNumber: public RtModule
+class RtModuleGuiNumber: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleWNumber();
-    ~RtModuleWNumber();
+    RtModuleGuiNumber();
+    ~RtModuleGuiNumber();
 
     static QString *static_class_name_ptr; //"WNumber", эта переменная используется для создания новых объектов
-    static RtModuleWNumber *new_module();
+    static RtModuleGuiNumber *new_module();
 
 protected:
     //Выполнение
@@ -68,7 +68,7 @@ protected:
     };
     Source get_source();
 
-    RtModuleWIntData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
+    RtModuleGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 
     void spin_changed();    //вызывается, если значение изменилось
 

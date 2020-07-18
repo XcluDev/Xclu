@@ -1,5 +1,5 @@
 #include <QtWidgets>
-#include "rtmodulewnumber.h"
+#include "rtmoduleguinumber.h"
 
 #include "incl_qtcpp.h"
 #include "rtmoduleregistrar.h"
@@ -11,28 +11,28 @@
 
 
 //заполнение имени класса и регистрация класса
-REGISTRAR(WNumber)
+REGISTRAR(GuiNumber)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleWNumber *RtModuleWNumber::new_module() {
-    return new RtModuleWNumber();
+/*static*/ RtModuleGuiNumber *RtModuleGuiNumber::new_module() {
+    return new RtModuleGuiNumber();
 }
 
 //---------------------------------------------------------------------
-RtModuleWNumber::RtModuleWNumber()
+RtModuleGuiNumber::RtModuleGuiNumber()
     :RtModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleWNumber::~RtModuleWNumber()
+RtModuleGuiNumber::~RtModuleGuiNumber()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::execute_start_internal() {
+void RtModuleGuiNumber::execute_start_internal() {
     //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -44,7 +44,7 @@ void RtModuleWNumber::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::execute_update_internal() {
+void RtModuleGuiNumber::execute_update_internal() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -52,7 +52,7 @@ void RtModuleWNumber::execute_update_internal() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::execute_stop_internal() {
+void RtModuleGuiNumber::execute_stop_internal() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -61,7 +61,7 @@ void RtModuleWNumber::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObject *output) {
+void RtModuleGuiNumber::call_internal(QString function, XcluObject *input, XcluObject *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -100,7 +100,7 @@ void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObj
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::create_widget() {
+void RtModuleGuiNumber::create_widget() {
     //insert_label(input);
 
     spin_ = new XcluSpinBox();
@@ -141,7 +141,7 @@ void RtModuleWNumber::create_widget() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::spin_changed() {    //вызывается, если значение изменилось
+void RtModuleGuiNumber::spin_changed() {    //вызывается, если значение изменилось
     //это может вызваться не в основном потоке
     DataAccess access(data_);
     data_.gui_changed = 1;
@@ -149,7 +149,7 @@ void RtModuleWNumber::spin_changed() {    //вызывается, если зн�
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::update_all(bool force) {
+void RtModuleGuiNumber::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -168,12 +168,12 @@ void RtModuleWNumber::update_all(bool force) {
 
 
 //---------------------------------------------------------------------
-RtModuleWNumber::Source RtModuleWNumber::get_source() {
+RtModuleGuiNumber::Source RtModuleGuiNumber::get_source() {
     return Source(get_int("source"));
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::update_value(bool force) {
+void RtModuleGuiNumber::update_value(bool force) {
     //stringlist source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     Source source = get_source();
     switch (source) {
@@ -217,7 +217,7 @@ void RtModuleWNumber::update_value(bool force) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWNumber::set_value(int v) {
+void RtModuleGuiNumber::set_value(int v) {
     set_int("value", v);
     if (get_source() != Source_GUI) {
         spin_->setValue(v);

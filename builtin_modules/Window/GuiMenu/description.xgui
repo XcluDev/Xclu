@@ -1,0 +1,15 @@
+#Module WMenu
+#------------------------------------------
+module_description=Window menu.
+module_version=1.01
+module_type=core
+
+module_accept_calls=get_widget_pointer
+
+
+#TODO slider representation
+
+#-------------------------------------------
+page Main
+    
+    #Стандартное меню для окна

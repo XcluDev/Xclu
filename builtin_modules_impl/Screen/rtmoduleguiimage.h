@@ -19,7 +19,7 @@ class QLabel;
 
 
 //Данные, которые защищаются с помощью mutex
-struct RtModuleWImageData: public XcluProtectedData
+struct RtModuleGuiImageData: public XcluProtectedData
 {
     //int gui_changed = 0;
 
@@ -30,15 +30,15 @@ struct RtModuleWImageData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleWImage: public RtModule
+class RtModuleGuiImage: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleWImage();
-    ~RtModuleWImage();
+    RtModuleGuiImage();
+    ~RtModuleGuiImage();
 
     static QString *static_class_name_ptr; //"IntGui", эта переменная используется для создания новых объектов
-    static RtModuleWImage *new_module();
+    static RtModuleGuiImage *new_module();
 
 protected:
     //Выполнение
@@ -56,7 +56,7 @@ protected:
     QWidget *widget_ = nullptr; //весь виджет
     QLabel *image_ = nullptr;   //изображение
 
-    RtModuleWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
+    RtModuleGuiImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 
     void create_widget();
 

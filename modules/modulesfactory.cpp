@@ -28,7 +28,7 @@ void ModulesFactory::setup() {
     //qDebug("Listing modules:");
 
     //собираем встроенные модули
-    QDirIterator categories(xclu::buildin_folder()); //, QDirIterator::Subdirectories);
+    QDirIterator categories(xclu::buildin_modules_folder()); //, QDirIterator::Subdirectories);
     while (categories.hasNext()) {
         QString category_folder = categories.next();
         QString category_name = categories.fileName();
