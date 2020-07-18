@@ -1,4 +1,4 @@
-#Module DB_Postgres
+#Module DB_Postgres.
 #------------------------------------------
 #module_class=DB_Postgres
 #module_category=Database

@@ -29,16 +29,6 @@
         <file>builtin_resources/general_page.xgui</file>
         <file>builtin_resources/object_types.xgui</file>
         <file>builtin_resources/theme.css</file>
-        <file>builtin_modules/AI_Services/DeepaiService/description.xgui</file>
-        <file>builtin_modules/AI_Services/GoogleService/description.xgui</file>
-        <file>builtin_modules/AI_Services/IBMService/description.xgui</file>
-        <file>builtin_modules/AI_Services/MicrosoftService/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/DialogFlow/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/FacebookBot/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/Gpt2/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/OpenNMT/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/Rasa/description.xgui</file>
-        <file>builtin_modules/Bots_Assistants/TelegramBot/description.xgui</file>
         <file>builtin_modules/Code/ComputeShaderCode/description.xgui</file>
         <file>builtin_modules/Code/JsCode/description.xgui</file>
         <file>builtin_modules/Code/PythonCode/description.xgui</file>
@@ -52,21 +42,12 @@
         <file>builtin_modules/Communication/SMSNotification/description.xgui</file>
         <file>builtin_modules/Communication/Spout/description.xgui</file>
         <file>builtin_modules/Communication/Tcp/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/BlobsTracking/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/ImageToText/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/OpticalFlow/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/PatternRecognition/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/SemanticSegmentation/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/TextToImage/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/YOLO/description.xgui</file>
-        <file>builtin_modules/Computer_Vision/YOLOTrain/description.xgui</file>
         <file>builtin_modules/Databases/DB_MySQL/description.xgui</file>
         <file>builtin_modules/Databases/DB_NoSQL/description.xgui</file>
         <file>builtin_modules/Databases/DB_OWL/description.xgui</file>
         <file>builtin_modules/Databases/DB_Postgres/description.xgui</file>
         <file>builtin_modules/Databases/DB_RDF/description.xgui</file>
         <file>builtin_modules/Databases/XcluDBAccess/description.xgui</file>
-        <file>builtin_modules/Deep_Learning/UpAIRunner/description.xgui</file>
         <file>builtin_modules/Drawing/3DObjectWithShaders/description.xgui</file>
         <file>builtin_modules/Drawing/Fbo/description.xgui</file>
         <file>builtin_modules/Drawing/Figure/description.xgui</file>
@@ -91,9 +72,6 @@
         <file>builtin_modules/Interactive/HandControlPointCloud/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetector/description.xgui</file>
         <file>builtin_modules/Interactive/SensorDetection/description.xgui</file>
-        <file>builtin_modules/Knowledge_Graphs/CYC/description.xgui</file>
-        <file>builtin_modules/Knowledge_Graphs/GoogleKnowledgeGraph/description.xgui</file>
-        <file>builtin_modules/Knowledge_Graphs/WikiData/description.xgui</file>
         <file>builtin_modules/Multimedia/PlaySound/description.xgui</file>
         <file>builtin_modules/Multimedia/RecordSound/description.xgui</file>
         <file>builtin_modules/Multimedia/VideoPlayer/description.xgui</file>
@@ -105,8 +83,6 @@
         <file>builtin_modules/NLP/NLU/description.xgui</file>
         <file>builtin_modules/NLP/TextTonalityImplement/description.xgui</file>
         <file>builtin_modules/NLP/Word2Vec/description.xgui</file>
-        <file>builtin_modules/Point_Cloud/PointCloudDetectCube/description.xgui</file>
-        <file>builtin_modules/Point_Cloud/PointCloudProject/description.xgui</file>
         <file>builtin_modules/Project/Project/description.xgui</file>
         <file>builtin_modules/Sound/MidiFromData/description.xgui</file>
         <file>builtin_modules/Sound/SoundOut/description.xgui</file>
@@ -137,8 +113,6 @@
         <file>builtin_modules/Web/Radio/description.xgui</file>
         <file>builtin_modules/Web/ServerNodeJS/description.xgui</file>
         <file>builtin_modules/Web/Worldometers/description.xgui</file>
-        <file>builtin_modules/Web_Social/Instagram/description.xgui</file>
-        <file>builtin_modules/Web_Social/Twitter/description.xgui</file>
         <file>builtin_modules/Window/GuiButton/description.xgui</file>
         <file>builtin_modules/Window/GuiDialog/description.xgui</file>
         <file>builtin_modules/Window/GuiDrawingJS/description.xgui</file>
