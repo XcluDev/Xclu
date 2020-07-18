@@ -9,7 +9,7 @@ Xclu is made to help media artists (and scientists and creative coders) to do th
 ## Supported platforms
 Windows, Mac OS, Linux.
 
-Edge Computing Ready: NVidia Jetson Nano support. 
+(TODO: Edge Computing Ready: NVidia Jetson Nano support.)
 
 Xclu is written using Qt C++.
 
