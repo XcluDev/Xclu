@@ -11,7 +11,31 @@
 #При сборке "с нуля" - нужно создать этот режим, нажав слева "Проекты",
 #Скопировать из Release,
 #и добавить в строку вызова qmake: DEFINES+=XCLU_DEPLOY
+#ВАЖНО: Установить каталог сборки D:\perevalovds.com\_2020\Xclu\temp
+#тогда все промежуточные файлы будут в temp, а результат в Xclu-bin
 #---------------------------------------------------
+
+#---------------------------------------------------
+
+Release:TARGET=Xclu
+Release:DESTDIR = ../Xclu-bin
+Release:OBJECTS_DIR = release/.obj
+Release:MOC_DIR = release/.moc
+Release:RCC_DIR = release/.rcc
+Release:UI_DIR = release/.ui
+
+Debug:TARGET=Xclu_debug
+Debug:DESTDIR = ../Xclu-bin
+Debug:OBJECTS_DIR = debug/.obj
+Debug:MOC_DIR = debug/.moc
+Debug:RCC_DIR = debug/.rcc
+Debug:UI_DIR = debug/.ui
+
+# Default rules for deployment.
+#qnx: target.path = /tmp/$${TARGET}/bin
+#else: unix:!android: target.path = /opt/$${TARGET}/bin
+#!isEmpty(target.path): INSTALLS += target
+
 
 QT       += core gui
 QT       += multimedia multimediawidgets
@@ -19,6 +43,7 @@ QT       += multimedia multimediawidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -30,6 +55,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+RESOURCES += \
+    xclu.qrc
+
+# Про иконки: https://doc.qt.io/qt-5/appicon.html
+RC_ICONS = images/logo/appicon.ico
+
+FORMS += \
+    project/DialogPreferences1.ui \
+    project/dialog.ui \
+    project/dialogpreferences.ui
 
 INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
 INCLUDEPATH += project objects
@@ -188,18 +224,4 @@ HEADERS += \
     project/projectruntime.h \
     project/settingskeys.h
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    xclu.qrc
-
-# Про иконки: https://doc.qt.io/qt-5/appicon.html
-RC_ICONS = images/logo/appicon.ico
-
-FORMS += \
-    project/DialogPreferences1.ui \
-    project/dialog.ui \
-    project/dialogpreferences.ui
