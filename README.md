@@ -1,5 +1,4 @@
-# Paypal donate button 
-[![Paypal Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WFX7JADLFTC6N)
+
 
 
 # Xclu
@@ -22,3 +21,7 @@ Windows, Mac OS, Linux.
 
 Xclu is written using Qt C++.
 
+
+## Support the project!
+
+[![Paypal Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SBCQHSGY3EEN)
