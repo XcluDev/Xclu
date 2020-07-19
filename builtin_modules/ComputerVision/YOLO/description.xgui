@@ -1,0 +1,10 @@
+#Module YOLO
+#------------------------------------------
+#module_class=YOLO
+#module_category=ML_CV
+module_description=Searching objects in image using YOLO.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main

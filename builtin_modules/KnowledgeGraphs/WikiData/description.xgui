@@ -1,0 +1,20 @@
+#Module WikiData
+#------------------------------------------
+#module_class=Wikidata
+#module_category=Knowledge
+module_description=Request to WikiData knowledge database.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+    
+#Запрос к Wikidata из браузера 
+#https://query.wikidata.org/    - там есть примеры. 
+#(Программно: GET или POST запросы в https://query.wikidata.org/sparql ) 
+#https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+# руководство по запросам. 
+

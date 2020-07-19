@@ -1,0 +1,15 @@
+#Module TelegramBot
+#------------------------------------------
+#module_class=TelegramBot
+#module_category=BotsAssistants
+module_description=Create Chatbot.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+#Создание бота telegram
+#    https://tproger.ru/translations/telegram-bot-create-and-deploy/
+

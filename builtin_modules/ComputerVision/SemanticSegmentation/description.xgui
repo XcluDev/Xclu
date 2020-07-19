@@ -1,0 +1,13 @@
+#Module TextToImage
+#------------------------------------------
+#module_class=ImageSegmentation
+#module_category=ML_CV
+module_description=Generating image segmentation.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+#https://medium.com/@olafenwaayoola/image-segmentation-with-six-lines-0f-code-acb870a462e8
+#pixellib

@@ -1,0 +1,12 @@
+#Module DB_MongoDB
+#------------------------------------------
+module_description=MongoDB database.
+module_version=1.01
+module_type=core
+
+#-------------------------------------------
+page Main
+
+
+    
+
