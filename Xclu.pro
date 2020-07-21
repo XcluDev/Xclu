@@ -70,6 +70,22 @@ FORMS += \
 INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
 INCLUDEPATH += project objects
 
+# Python
+INCLUDEPATH += python
+
+#windows64
+windows {
+    INCLUDEPATH += ../Xclu-bin/Python38/include
+    release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
+    debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
+}
+
+unix {
+#    INCLUDEPATH += ~/librealsense/include
+#    LIBS += -lrealsense2
+}
+
+
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
@@ -141,13 +157,15 @@ SOURCES += \
     project/dialogtestmoduleinterface.cpp \
     project/editormodule.cpp \
     project/editormodules.cpp \
+    project/engines.cpp \
     project/project.cpp \
     project/dialogaddmodule.cpp \
     mainwindow.cpp  \
     project/projectgui.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
-    project/settingskeys.cpp
+    project/settingskeys.cpp \
+    python/pythoncore.cpp
 
 HEADERS += \
     builtin_modules_impl/Screen/rtmoduleguiimage.h \
@@ -216,12 +234,14 @@ HEADERS += \
     project/dialogtestmoduleinterface.h \
     project/editormodule.h \
     project/editormodules.h \
+    project/engines.h \
     project/project.h \
     project/dialogaddmodule.h \
     mainwindow.h   \
     project/projectgui.h \
     project/projectproperties.h \
     project/projectruntime.h \
-    project/settingskeys.h
+    project/settingskeys.h \
+    python/pythoncore.h
 
 

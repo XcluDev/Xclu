@@ -14,8 +14,13 @@
 
 int main(int argc, char *argv[])
 {
+
     //Создание приложения
     QApplication app(argc, argv);
+
+    //Пути для запуска питона
+    app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38");
+    app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38\\DLLs");
 
     //Запуск приложения с отловом исключений
     //Про отлов исключений:
@@ -44,15 +49,6 @@ int main(int argc, char *argv[])
         //parser.addVersionOption();
         //parser.addPositionalArgument("file", "The file(s) to open.");
         //parser.process(app);
-
-        //const QStringList posArgs = parser.positionalArguments();
-        //for (const QString &file : posArgs) {
-        //    MainWindow *newWin = new MainWindow(file);
-        //    newWin->tile(mainWin);
-        //    newWin->show();
-        //    mainWin = newWin;
-        //}
-
 
         //Антиалиасинг
         //QSurfaceFormat fmt;

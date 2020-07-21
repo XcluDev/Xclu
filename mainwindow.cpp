@@ -8,6 +8,7 @@
 #include "xcluobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
+#include "engines.h"
 
 MainWindow *MAIN_WINDOW = nullptr;
 
@@ -35,7 +36,6 @@ MainWindow::~MainWindow()
 
 
 //---------------------------------------------------------------------
-//see BasicLayouts example
 void MainWindow::init() {
     setAttribute(Qt::WA_DeleteOnClose);
     setUnifiedTitleAndToolBarOnMac(true);
@@ -48,7 +48,6 @@ void MainWindow::init() {
     //setFont(font_);
     //Установка темы
     //XcluTheme::set_theme(this);
-
 
     isUntitled = true;
     run_state_ = ProjectRunStateLoading;
@@ -69,6 +68,9 @@ void MainWindow::init() {
 
 //---------------------------------------------------------------------
 void MainWindow::setup() {   //запуск всех процессов
+    //запуск движков - Python
+    ENGINES.setup();
+
     //помечаем, что готовы к запуску
     set_state(ProjectRunStateStopped);
 
