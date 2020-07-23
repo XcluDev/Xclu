@@ -7,6 +7,8 @@ class Engines
 {
 public:
     void setup();
+    void free();
+
 
 };
 
