@@ -131,10 +131,10 @@ public:
 
     //работа с GUI
     void gui_to_var(bool evaluate_expr); //вычисление expression и получение значения из gui
-    void var_to_gui(); //установка значения в gui
+    void var_to_gui(); //установка значения в gui, также отправляет сигнал о видимости
     void block_gui_editing();       //запретить редактирование - всегда для out и после запуска для const
     void unblock_gui_editing();     //разрешить редактирование
-
+    void propagate_visibility();    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
 
 protected:
     QString title_;

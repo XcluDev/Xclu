@@ -57,8 +57,8 @@ in checkbox Extract_Lexems get_lexems=1
 
 separator
 
-in stringlist Result result=JSON [JSON,Python_Generator]
-//Output type, Python Generator useful for huge data.
+in stringlist Result result=JSON [JSON_Text,JSON_Object,Python_Generator]
+//Output type - JSON Text is good for small data, JSON Object works faster, Python Generator is useful for further processing with Python.
 
 #JSON - можно определять типы названия?
 

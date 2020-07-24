@@ -15,10 +15,14 @@ https://code.qt.io/cgit/pyside/pyside-setup.git/tree/examples/scriptableapplicat
 
 Добавить путь для запуска в BAT, на один раз:
 set PYTHONHOME="D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38"
-set PYTHONPATH="%PYTHONHOME%;%PYTHONHOME%\DLLs;%PYTHONHOME%\Lib;%PYTHONHOME%\site-packages"
-//set PATH=%PATH%;%PYTHONHOME%;%PYTHONPATH%
-D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38;D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38\DLLs;D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38\Lib;D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38\site-packages
-
+set PYTHONPATH="...Python38;...Python38\DLLs;...Python38\Lib;...Python38\site-packages"
+(вместо многоточий - полный путь)
+В PATH добавить
+...Python38
+...Python38\DLLs
+...Python38\Lib
+...Python38\site-packages
+...Python38\Scripts
 
 Для разработки - добавил в глобальный Path пути к питону.
 А для запуска на других компьютерах - нужно будет добавлять при запуске, сделать отложенный запуск DLL.

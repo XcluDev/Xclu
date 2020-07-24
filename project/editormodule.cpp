@@ -120,7 +120,9 @@ void EditorModule::load_module(Module *module) {
 
     //Создание GUI-элементов
     //внимание - тут делается detach, поэтому module_ ставится в nullptr, и поэтому его надо ставить после
-    load_module(module->info(), module->interf(), module->name());
+    //force_propagate_visibility тут false, так как обновление видимости сделает module->gui_attached(this);
+    bool force_propagate_visibility = false;
+    load_module(module->info(), module->interf(), module->name(), force_propagate_visibility);
 
     //Информируем модуль, что подключились
     module->gui_attached(this);
@@ -137,7 +139,11 @@ void EditorModule::load_module(Module *module) {
 
 //---------------------------------------------------------------------
 //создать GUI только для интерфейса - например, для отладки интерфейсов
-void EditorModule::load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name) {
+//force_propagate_visibility - нужно ли сделать обновление видимости.
+//для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
+//но для кастомного применения, например, тестирования интерфейса - это нужно
+
+void EditorModule::load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
     detach();   //внимание - тут делается detach, поэтому module_ ставится в nullptr
 
     //ModuleDescription &descr = interf->description();
@@ -192,6 +198,12 @@ void EditorModule::load_module(ModuleInfo *info, ModuleInterface *interf, QStrin
     }
 
 
+    //Обновление видимости, если требуется.
+    //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
+    //но для кастомного применения, например, тестирования интерфейса - это нужно
+    if (force_propagate_visibility) {
+        interf->propagate_visibility();
+    }
 
 }
 

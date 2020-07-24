@@ -337,14 +337,19 @@ void InterfaceItem::gui_to_var(bool evaluate_expr) { //вычисление expr
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::var_to_gui() { //установка значения в gui
+void InterfaceItem::var_to_gui() { //установка значения в gui, также отправляет сигнал о видимости
     //if (!use_expression()) {
     if (is_gui_attached()) {
         var_to_gui_internal();
         //отправляем сигнал о видимости
-        if (gui__) {
-            gui__->propagate_visibility();
-        }
+        propagate_visibility();
+    }
+}
+
+//---------------------------------------------------------------------
+void InterfaceItem::propagate_visibility() {    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
+    if (gui__) {
+        gui__->propagate_visibility();
     }
 }
 

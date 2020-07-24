@@ -147,9 +147,9 @@ void DialogTestModuleInterface::reload(int tab_index) {
         interf_.reset(new ModuleInterface(*module_info_.data()));
         if (!interf_.data()) return;
 
-        //загружаем GUI
-        editor_->load_module(module_info_.data(), interf_.data(), "Name...");
-        //interf_.data()->gui_attached(editor_);
+        //загружаем GUI и устанавливаем видимость
+        bool force_propagate_visibility = true;
+        editor_->load_module(module_info_.data(), interf_.data(), "Name...", force_propagate_visibility);
     }
     catch (XCluException &e) {
         xclu_message_box(e.whatQt());
