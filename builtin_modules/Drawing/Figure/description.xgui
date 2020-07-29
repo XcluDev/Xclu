@@ -4,7 +4,7 @@
 #module_category=Drawing
 module_description=Creating a figure on the screen - lines, rectangles, with repetitions, in Window or OpenGL View/Window.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Figure

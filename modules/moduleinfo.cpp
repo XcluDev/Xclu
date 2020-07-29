@@ -13,8 +13,10 @@ QStringList ModuleInfo_general_page_;
         module->load_module_from_folder(folder, category_name, module_name);
     }
     catch (XCluException &e) {
-        xclu_message_box(QString("Error reading description for module from folder '%1':\n%2")
-                         .arg(folder).arg(e.whatQt()));
+        xclu_console_warning(QString("Error reading description for module from folder '%1':\n%2")
+                                              .arg(folder).arg(e.whatQt()));
+        //xclu_message_box(QString("Error reading description for module from folder '%1':\n%2")
+        //                 .arg(folder).arg(e.whatQt()));
         delete module;
         return nullptr;
     }

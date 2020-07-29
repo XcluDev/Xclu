@@ -2,7 +2,7 @@
 #------------------------------------------
 module_description=OpenGL Window for rendering. It's without widgets, but can be placed on specified screen device.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 module_send_calls=get_widget_pointer
 

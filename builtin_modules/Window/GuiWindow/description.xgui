@@ -4,7 +4,7 @@
 #module_category=Window
 module_description=Window for placing GUI components and OpenGL view.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 module_send_calls=get_widget_pointer
 

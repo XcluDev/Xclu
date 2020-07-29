@@ -2,7 +2,7 @@
 #------------------------------------------
 module_description=Project settings and variables.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

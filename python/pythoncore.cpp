@@ -7,6 +7,13 @@
 PythonCore PYTHON;
 
 /*
+О выборе версии Питон:
+https://docs.python.org/3/using/windows.html
+Nuget - для встроенной версии
+Embedded - в составе приложения - то, что нам нужно. Но, он не содержал include...
+
+
+  
 про отложенный запуск DLL
 https://stackoverflow.com/questions/39112148/deploy-a-qt-c-shared-librarys-dll-in-subfolder-of-the-main-executable
 
@@ -24,10 +31,15 @@ set PYTHONPATH="...Python38;...Python38\DLLs;...Python38\Lib;...Python38\site-pa
 ...Python38\site-packages
 ...Python38\Scripts
 
+
+
 Для разработки - добавил в глобальный Path пути к питону.
 А для запуска на других компьютерах - нужно будет добавлять при запуске, сделать отложенный запуск DLL.
 Сделать программу-запускатель,
 которая ставит PATH и затем запускает нашу программу.
+
+ВНИМАНИЕ: при этом, может отключиться отладка GDB - так как DLL в питоне могут повредить Xclu.
+Поэтому, vcruntime140.dll и vcruntime140_1.dll - переименовал в vcruntime140.dll_, vcruntime140_1.dll_
 
 Примеры работы C++->Python:
 https://docs.python.org/3/extending/embedding.html

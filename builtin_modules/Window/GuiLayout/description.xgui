@@ -4,7 +4,7 @@
 #module_category=Window
 module_description=Layouts which can be used inside Window. They which can be decorated as a frame or group box.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #------------------------------------------
 page Main

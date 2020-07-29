@@ -92,8 +92,8 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
     if (name == field_version()) {
         version = value; return true;
     }
-    if (name == field_type()) {
-        type = string_to_moduletype(value); return true;
+    if (name == field_impl()) {
+        impl = string_to_moduleimpltype(value); return true;
     }
     if (name == field_default_run_mode()) {
         default_run_mode = string_to_ModuleRunMode(value); return true;

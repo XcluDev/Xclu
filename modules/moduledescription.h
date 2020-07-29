@@ -40,18 +40,18 @@ struct ModuleDescription {
     static QString field_class_name() { return "module_class"; }
 
     //после запятой пусто - значит будет создана переменная id_hint, а поле - module_id_hint
-    //если не пусто - то это суфикс, например type_ - чтобы хранить строку
+    //если не пусто - то это суфикс, например impl_ - чтобы хранить строку
     MOD_DESCR_FIELD(id_hint, );
     MOD_DESCR_FIELD(name_hint,);
     MOD_DESCR_FIELD(category,);
     MOD_DESCR_FIELD(description,);
     MOD_DESCR_FIELD(version,);
-    MOD_DESCR_FIELD(type, _);
+    MOD_DESCR_FIELD(impl, _);
     MOD_DESCR_FIELD(default_run_mode, _);
     MOD_DESCR_FIELD(accept_calls, _);
     MOD_DESCR_FIELD(send_calls, _);
 
-    ModuleType type=ModuleTypeNone;
+    ModuleImplType impl=ModuleImplTypeNone;
     ModuleRunMode default_run_mode = ModuleRunMode_Main_Loop; //режим работы, который выставлять по умолчанию
     ModuleRegisteredCalls accept_calls;   //список через запятую названий функций, которые модуль может обработать. "*" - значит все функции.
     ModuleRegisteredCalls send_calls;  //список через запятую названий функций, которые модуль может послать. "*" - значит все функции.
@@ -70,7 +70,7 @@ struct ModuleDescription {
                 && !category.isEmpty()
                 && !description.isEmpty()
                 && !version.isEmpty()
-                && (type != ModuleTypeNone);
+                && (impl != ModuleImplTypeNone);
     }
 };
 

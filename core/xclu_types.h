@@ -12,17 +12,17 @@ QString Type_to_string(int i, int N, const QString array[]);
 int string_to_Type(const QString &str, int N, const QString array[]);
 
 
-//Типы модулей
-enum ModuleType : int {
-    ModuleTypeNone = 0,
-    ModuleTypeCore = 1,
-    ModuleTypeDinlib = 2,
-    ModuleTypePython = 3,
-    ModuleTypeN = 4
+//Типы реализации модулей
+enum ModuleImplType : int {
+    ModuleImplTypeNone = 0,
+    ModuleImplTypeCPP = 1,
+    ModuleImplTypeDynlib = 2,
+    ModuleImplTypePython = 3,
+    ModuleImplTypeN = 4
 };
 
-QString moduletype_to_string(ModuleType moduletype);
-ModuleType string_to_moduletype(const QString &moduletypestr);
+QString moduleimpltype_to_string(ModuleImplType moduleimpltype);
+ModuleImplType string_to_moduleimpltype(const QString &moduleimpltypestr);
 
 //структура для хранения имени и id модуля
 struct ModuleNameAndId {

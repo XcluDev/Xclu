@@ -4,7 +4,7 @@
 #module_category=AIServices
 module_description=Call to IBM Watson Service such as.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

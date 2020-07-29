@@ -4,7 +4,7 @@
 #module_category=Point_Cloud
 module_description=Detect cuboid in the point cloud touching the specified point.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #------------------------------------------
 page Main

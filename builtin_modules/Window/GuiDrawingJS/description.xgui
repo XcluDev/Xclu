@@ -6,7 +6,7 @@
 #module_category=Window
 module_description=Widget for drawing using JS.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Primitive1

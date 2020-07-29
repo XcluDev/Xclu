@@ -6,7 +6,7 @@ module_id_hint=webcam
 #module_category=Images
 module_description=Capture frames from a webcamera.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

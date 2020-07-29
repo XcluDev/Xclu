@@ -4,7 +4,7 @@
 #module_category=ML_CV
 module_description=Searching objects in image using YOLO.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

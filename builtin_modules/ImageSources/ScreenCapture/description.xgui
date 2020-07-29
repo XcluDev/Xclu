@@ -6,7 +6,7 @@
 #module_category=Images
 module_description=Capture the screen.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

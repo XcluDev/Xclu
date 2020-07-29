@@ -4,7 +4,7 @@
 #module_category=Communication
 module_description=Send and receive sound using VST plugin to Ableton Live and other devices.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 

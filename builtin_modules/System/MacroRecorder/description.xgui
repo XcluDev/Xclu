@@ -4,7 +4,7 @@
 #module_category=System
 module_description=Record and replay mouse clicks and keyboard pressings - useful for automate starting actions.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 

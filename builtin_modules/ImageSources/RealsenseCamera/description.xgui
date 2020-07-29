@@ -4,7 +4,7 @@
 #module_category=Images
 module_description=Capture depth, IR and color frames from a Intel Realsense camera and convert to point cloud.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

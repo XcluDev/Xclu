@@ -4,7 +4,7 @@
 #module_category=Drawing
 module_description=SweetRender compute shader implementation, deferred renderer.
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

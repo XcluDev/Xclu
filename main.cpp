@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     //Пути для запуска питона
     app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38");
-    app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38\\DLLs");
+    //app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38\\DLLs");
 
     //Запуск приложения с отловом исключений
     //Про отлов исключений:

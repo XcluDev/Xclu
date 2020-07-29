@@ -2,7 +2,7 @@
 #------------------------------------------
 module_description=Getting information about fingers and hands using Leap Motion (Windows and Mac only).
 module_version=1.01
-module_type=core
+module_impl=C++
 
 #-------------------------------------------
 page Main

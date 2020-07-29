@@ -30,14 +30,14 @@ int string_to_Type(const QString &str, int N, const QString array[]) {
 }
 
 //---------------------------------------------------------------------
-const QString ModuleTypeNames[ModuleTypeN] = {"?", "core", "dynlib", "python"};
+const QString ModuleImplTypeNames[ModuleImplTypeN] = {"?", "C++", "dynlib", "python"};
 
-QString moduletype_to_string(ModuleType moduletype) {
-    return Type_to_string(int(moduletype), ModuleTypeN, ModuleTypeNames);
+QString moduleimpltype_to_string(ModuleImplType moduleimpltype) {
+    return Type_to_string(int(moduleimpltype), ModuleImplTypeN, ModuleImplTypeNames);
 }
 
-ModuleType string_to_moduletype(const QString &moduletypestr) {
-    return ModuleType(string_to_Type(moduletypestr, ModuleTypeN, ModuleTypeNames));
+ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
+    return ModuleImplType(string_to_Type(moduletypestr, ModuleImplTypeN, ModuleImplTypeNames));
 }
 
 
