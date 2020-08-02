@@ -134,7 +134,7 @@ QTableWidget *DialogAddModule::create_table_for_category(int i) {
     int n = FACTORY.category_size(i);
     QTableWidget *table = new QTableWidget(n, 2);
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
-    table->setAlternatingRowColors(true);
+    //table->setAlternatingRowColors(true);
     table->verticalHeader()->hide();
     table->horizontalHeader()->hide();
     table->horizontalScrollBar()->hide();

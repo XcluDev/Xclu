@@ -111,7 +111,7 @@ enum GuiStage : int {
 
 
 //Варианты работы модуля
-enum ModuleRunMode : int {
+/*enum ModuleRunMode : int {
     ModuleRunMode_Main_Loop = 0,
     ModuleRunMode_Callback = 1,
     ModuleRunMode_One_Shot_After_Start = 2,
@@ -122,6 +122,7 @@ enum ModuleRunMode : int {
 };
 ModuleRunMode string_to_ModuleRunMode(QString mode_string);
 QString ModuleRunMode_to_string(ModuleRunMode mode);
+*/
 
 
 //Режимы запуска модуля
@@ -131,8 +132,8 @@ enum ModuleExecuteStage :int {
     ModuleExecuteStageUpdate = 2,
     ModuleExecuteStageBeforeStop = 3,
     ModuleExecuteStageStop = 4,
-    ModuleExecuteStageCallback = 5,
-    ModuleExecuteStageN = 6
+    //ModuleExecuteStageCallback = 5,
+    ModuleExecuteStageN = 5
 };
 QString ModuleExecuteStage_to_string(ModuleExecuteStage stage);
 

@@ -30,7 +30,7 @@ ModuleInterface::ModuleInterface(const ModuleInfo &info)
 //установка параметров по-умолчанию из описания модуля на страницу general
 void ModuleInterface::set_general_values() {
     //установка "пожеланий" из настроек
-    var("run_mode")->set_value_int(description_.default_run_mode); //режим запуска
+    //var("run_mode")->set_value_int(description_.default_run_mode); //режим запуска
 
     //установка списков calls
     var("send_calls")->set_value_string(description_.send_calls.to_string_gui());

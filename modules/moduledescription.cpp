@@ -95,9 +95,9 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
     if (name == field_impl()) {
         impl = string_to_moduleimpltype(value); return true;
     }
-    if (name == field_default_run_mode()) {
-        default_run_mode = string_to_ModuleRunMode(value); return true;
-    }
+    //if (name == field_default_run_mode()) {
+    //    default_run_mode = string_to_ModuleRunMode(value); return true;
+    //}
     if (name == field_accept_calls()) {
         accept_calls = value;   //вызовется конструктор из QString
         return true;

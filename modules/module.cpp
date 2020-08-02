@@ -222,9 +222,9 @@ void Module::execute(ModuleExecuteStage stage) {
         //- чтобы они запомнились в параметрах модуля при записи на диск.
         break;
 
-    case ModuleExecuteStageCallback:
-        rtmodule_->execute(stage);
-        break;
+    //case ModuleExecuteStageCallback:
+    //    rtmodule_->execute(stage);
+    //    break;
 
     default:
         xclu_exception(QString("Unknown execute stage %1").arg(stage));

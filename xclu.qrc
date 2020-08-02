@@ -28,7 +28,6 @@
         <file>builtin_examples/Modules/Web/Twitter/description.ini</file>
         <file>builtin_resources/general_page.xgui</file>
         <file>builtin_resources/object_types.xgui</file>
-        <file>builtin_resources/theme.css</file>
         <file>builtin_modules/Code/ComputeShaderCode/description.xgui</file>
         <file>builtin_modules/Code/JsCode/description.xgui</file>
         <file>builtin_modules/Code/PythonCode/description.xgui</file>
@@ -125,5 +124,24 @@
         <file>builtin_modules/Window/GuiWindow/help.md</file>
         <file>builtin_modules/Window/SweetMenu/description.xgui</file>
         <file>builtin_modules/Window/SweetWindow/description.xgui</file>
+        <file>builtin_resources/themes/Combinear/Combinear.png</file>
+        <file>builtin_resources/themes/Combinear/Combinear.qss</file>
+        <file>builtin_resources/themes/Combinear/License.txt</file>
+        <file>builtin_resources/themes/EasyCode/EasyCode.png</file>
+        <file>builtin_resources/themes/EasyCode/EasyCode.qss</file>
+        <file>builtin_resources/themes/EasyCode/License.txt</file>
+        <file>builtin_resources/themes/Geoo/Geoo.png</file>
+        <file>builtin_resources/themes/Geoo/Geoo.qss</file>
+        <file>builtin_resources/themes/Geoo/License.txt</file>
+        <file>builtin_resources/themes/Integrid/Integrid.png</file>
+        <file>builtin_resources/themes/Integrid/Integrid.qss</file>
+        <file>builtin_resources/themes/Integrid/License.txt</file>
+        <file>builtin_resources/themes/Medize/License.txt</file>
+        <file>builtin_resources/themes/Medize/Medize.png</file>
+        <file>builtin_resources/themes/Medize/Medize.qss</file>
+        <file>builtin_resources/themes/VisualScript/License.txt</file>
+        <file>builtin_resources/themes/VisualScript/VisualScript.png</file>
+        <file>builtin_resources/themes/VisualScript/VisualScript.qss</file>
+        <file>builtin_resources/themes/Default/Default.qss</file>
     </qresource>
 </RCC>

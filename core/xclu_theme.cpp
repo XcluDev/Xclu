@@ -11,7 +11,16 @@
     //включаем распространение стиля на все виджеты
     QCoreApplication::setAttribute(Qt::AA_UseStyleSheetPropagationInWidgetStyles, true);
 
-    QString style_file_name = xclu::buildin_resources_folder() + "/theme.css";
+
+    QString theme = //"Default";
+    //"Combinear"; //темно-оранжевый, похож на исходный Default
+    //"EasyCode";     //серый, простоват "детское"
+    //"Geoo";    //темный, похож на исходный Default
+    "Integrid"; //элегантный кремовый, только сделать основной шрифт черным (сейчас белый), и потолще scrollbar
+    //"Medize"; //светло-голубой тон
+    //"VisualScript"; //темно-морковный
+
+    QString style_file_name = xclu::builtin_themes_folder() + "/" + theme + "/" + theme + ".qss";
     QFile file(style_file_name);
     xclu_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
     QString style_sheet = QLatin1String(file.readAll());
@@ -31,7 +40,7 @@
     //qApp->setStyleSheet("QGroupBox, QGroupBox * { color: red; }");
     //widget->setStyleSheet("background-color:#444444;");
 
-  /*  QString style_file_name = xclu::buildin_folder() + "/theme.css";
+  /*  QString style_file_name = xclu::builtin_folder() + "/theme.css";
     QFile file(style_file_name);
     xclu_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
     QString style_sheet = QLatin1String(file.readAll());
@@ -108,14 +117,19 @@ void print_fonts() {
 //---------------------------------------------------------------------
 //папка со встроенными ресурсами - темы, общие XGUI
 //это файлы ресурсов, поэтому путь начинается с ":/"
-QString buildin_resources_folder() {
+QString builtin_resources_folder() {
     return  ":/builtin_resources";
+}
+
+//папка со встроенными ресурсами - темы
+QString builtin_themes_folder() {
+    return builtin_resources_folder() + "/themes";
 }
 
 //---------------------------------------------------------------------
 //папка с описанием встроенных модулей
 //это файлы ресурсов, поэтому путь начинается с ":/"
-QString buildin_modules_folder() {
+QString builtin_modules_folder() {
 #ifdef XCLU_DEPLOY
     //в режиме сборки Release-Deploy - это встроенные папки, и требуется добавить все в QRC
     //в в остальных режимах - это путь на диске
@@ -129,7 +143,7 @@ QString buildin_modules_folder() {
 
 //---------------------------------------------------------------------
 //Файл с описанием интерфейса страницы General - добавляется во все модули
-QString general_page_file() { return buildin_resources_folder() + "/general_page" + XGUI_ext(); }
+QString general_page_file() { return builtin_resources_folder() + "/general_page" + XGUI_ext(); }
 
 //---------------------------------------------------------------------
 //Расширение файлов для описания интерфейса

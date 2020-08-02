@@ -1,0 +1,15 @@
+#Module Executor
+#------------------------------------------
+module_description=Execute modules selectively, and allows to execute at special times: right after start, befor stop.
+module_version=1.01
+module_impl=C++
+
+#------------------------------------------
+page Main
+
+
+#--------------------
+
+
+
+

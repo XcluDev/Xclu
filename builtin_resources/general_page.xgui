@@ -11,25 +11,6 @@ const string Id id=""
     
 separator
 
-const stringlist Run_Mode run_mode=Main_Loop [Main_Loop,Callback,One_Shot_After_Start,One_Shot_Before_Stop,One_Shot_Callback]
-//Main Loop - normal mode, Callback - call from other module.
-#TODO ,Callback_One_Shot_in_Separate_Thread]
-
-
-in checkbox Execute_Next_If_Disabled execute_next_if_disabled=1
-    //Should execute next module if this module is disabled.
-
-in stringlist Execute_Next execute_next=Next_Module [Next_Module,Selected_Module,Decide_Using_Script]
-    //Which module execute next.
-    
-if execute_next Selected_Module
-in string Next_Module_Id next_module_id="module1"
-    //Id of module to execute next
-if execute_next Decide_Using_Script
-in text Next_Script next_script 8 10
-    //Script for deciding what execute next.
-endif    
-
 #--------------------
 separator
 in checkbox(group) Error_Handling error_handling=0

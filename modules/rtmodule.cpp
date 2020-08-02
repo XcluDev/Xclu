@@ -90,23 +90,28 @@ void RtModule::execute(ModuleExecuteStage stage) {
         reset_stop_out();
         reset_error_values();
 
-        auto mode = run_mode();
+        //auto mode = run_mode();
         bool enabled = is_enabled();
         switch (stage) {
         case ModuleExecuteStageStart:
-            if (enabled && mode == ModuleRunMode_Main_Loop) internal_update();
+            //if (enabled && mode == ModuleRunMode_Main_Loop)
+            internal_update();
             break;
 
         case ModuleExecuteStageAfterStart:
-            if (enabled && mode == ModuleRunMode_One_Shot_After_Start) internal_one_shot();
+            //Сразу после старта - TODO Executor
+            //if (enabled && mode == ModuleRunMode_One_Shot_After_Start) internal_one_shot();
+
             break;
 
         case ModuleExecuteStageUpdate:
-            if (enabled && mode == ModuleRunMode_Main_Loop)internal_update();
+            //if (enabled && mode == ModuleRunMode_Main_Loop)
+            internal_update();
             break;
 
         case ModuleExecuteStageBeforeStop:
-            if (enabled && mode == ModuleRunMode_One_Shot_Before_Stop) internal_one_shot();
+             //Прямо перед остановкой - TODO Executor
+            //if (enabled && mode == ModuleRunMode_One_Shot_Before_Stop) internal_one_shot();
             break;
 
         case ModuleExecuteStageStop:
@@ -114,12 +119,12 @@ void RtModule::execute(ModuleExecuteStage stage) {
             internal_stop();
             break;
 
-        case ModuleExecuteStageCallback:
+        /*case ModuleExecuteStageCallback:
             if (enabled) {
                 xclu_assert(mode == ModuleRunMode_Callback, "Module is called by callback, but it's Run Mode is not Callback!");
                 internal_update();
             }
-            break;
+            break;*/
 
         default:
             xclu_exception(QString("Unknown execute stage %1").arg(stage));

@@ -28,10 +28,14 @@ public:
 namespace xclu {
 
 //папка со встроенными ресурсами - темы, общие XGUI
-QString buildin_resources_folder();
+QString builtin_resources_folder();
+
+//папка со встроенными ресурсами - темы
+QString builtin_themes_folder();
+
 
 //папка с описанием встроенных модулей
-QString buildin_modules_folder();
+QString builtin_modules_folder();
 
 
 //Файл с описанием интерфейса страницы General - добавляется во все модули

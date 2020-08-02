@@ -99,7 +99,7 @@ VarQualifier string_to_varqualifier(const QString &varqualifierstr) {
 }
 
 //---------------------------------------------------------------------
-const QString ModuleRunModeNames[ModuleRunModeN] =
+/*const QString ModuleRunModeNames[ModuleRunModeN] =
 {
     "Main_Loop",
     "Callback",
@@ -112,7 +112,7 @@ ModuleRunMode string_to_ModuleRunMode(QString mode_string) {
 }
 QString ModuleRunMode_to_string(ModuleRunMode mode) {
     return Type_to_string(int(mode), ModuleRunModeN, ModuleRunModeNames);
-}
+}*/
 
 //---------------------------------------------------------------------
 const QString ModuleExecuteStageNames[ModuleExecuteStageN] =
@@ -121,8 +121,8 @@ const QString ModuleExecuteStageNames[ModuleExecuteStageN] =
     "After Start",
     "Update",
     "Before Stop",
-    "Stopping",
-    "Callback"
+    "Stopping"
+    //"Callback"
 };
 
 QString ModuleExecuteStage_to_string(ModuleExecuteStage stage) {

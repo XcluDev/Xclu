@@ -93,7 +93,7 @@ public:
     //модуль включен
     bool is_enabled();
     //режим работы модуля - каждый кадр, только в начале или только в конце, callback
-    ModuleRunMode run_mode() { return ModuleRunMode(get_int("run_mode")); }
+    //ModuleRunMode run_mode() { return ModuleRunMode(get_int("run_mode")); }
 
     //статус - например, был ли выполнен старт
     RtModuleStatus status() const { return status_; };

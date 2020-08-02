@@ -47,12 +47,12 @@ struct ModuleDescription {
     MOD_DESCR_FIELD(description,);
     MOD_DESCR_FIELD(version,);
     MOD_DESCR_FIELD(impl, _);
-    MOD_DESCR_FIELD(default_run_mode, _);
+    //MOD_DESCR_FIELD(default_run_mode, _);
     MOD_DESCR_FIELD(accept_calls, _);
     MOD_DESCR_FIELD(send_calls, _);
 
     ModuleImplType impl=ModuleImplTypeNone;
-    ModuleRunMode default_run_mode = ModuleRunMode_Main_Loop; //режим работы, который выставлять по умолчанию
+    //ModuleRunMode default_run_mode = ModuleRunMode_Main_Loop; //режим работы, который выставлять по умолчанию
     ModuleRegisteredCalls accept_calls;   //список через запятую названий функций, которые модуль может обработать. "*" - значит все функции.
     ModuleRegisteredCalls send_calls;  //список через запятую названий функций, которые модуль может послать. "*" - значит все функции.
 
