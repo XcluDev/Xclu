@@ -65,7 +65,7 @@ QMenuBar::item
 QMenuBar::item:selected 
 {
 	background-color: rgba(70,162,218,50%);
-	border: 1px solid #46a2da;
+	/*border: 1px solid #46a2da;*/
 	color: #000;
 
 }
@@ -74,7 +74,7 @@ QMenuBar::item:selected
 QMenuBar::item:pressed 
 {
 	background-color: #46a2da;
-	border: 1px solid #46a2da;
+	/*border: 1px solid #46a2da;*/
 	color: #fff;
 
 }
@@ -118,8 +118,8 @@ QMenu::item:disabled
 
 QMenu::item:selected
 {
-	background-color: rgba(70,162,218,50%);
-	border: 1px solid #46a2da;
+	background-color: rgba(70,162,218,60%);
+	/*border: 1px solid #46a2da;*/
 	color: #000;
 
 }
@@ -648,7 +648,7 @@ QListView::item
 
 QListView::item:alternate 
 {
-    background-color: #c6c6c6;
+    background-color: #ebebeb;
 
 }
 
@@ -688,7 +688,7 @@ QListView::item:selected:active
 
 
 QListView::item:hover {
-    background-color: #5e5e5e;
+    background-color: rgba(70,162,218,38%);
     border: none;
     color: #000;
 
@@ -847,7 +847,7 @@ QScrollBar:horizontal
 {
     border: 1px solid #222222;
     background-color: #9d9d9d;
-    height: 13px;
+    height: 15px;
     margin: 0px 16px 0 16px;
 
 }
@@ -912,7 +912,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
 QScrollBar:vertical
 {
     background-color: #9d9d9d;
-    width: 13px;
+    width: 15px;
 	border: 1px solid #2d2d2d;
     margin: 16px 0px 16px 0px;
 

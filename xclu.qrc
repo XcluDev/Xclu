@@ -1,13 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/run.png</file>
-        <file>images/stop.png</file>
-        <file>images/module_add.png</file>
-        <file>images/module_delete.png</file>
-        <file>images/module_down.png</file>
-        <file>images/module_duplicate.png</file>
-        <file>images/module_rename.png</file>
-        <file>images/module_up.png</file>
         <file>builtin_examples/Modules/Screen/OpenGLWindow/description.ini</file>
         <file>builtin_examples/Modules/Screen/PointCloudDraw/description.ini</file>
         <file>builtin_examples/Modules/Screen/PythonDraw/description.ini</file>
@@ -143,5 +135,53 @@
         <file>builtin_resources/themes/VisualScript/VisualScript.png</file>
         <file>builtin_resources/themes/VisualScript/VisualScript.qss</file>
         <file>builtin_resources/themes/Default/Default.qss</file>
+        <file>builtin_resources/themes/Combinear/icons/module_add.png</file>
+        <file>builtin_resources/themes/Combinear/icons/module_delete.png</file>
+        <file>builtin_resources/themes/Combinear/icons/module_down.png</file>
+        <file>builtin_resources/themes/Combinear/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/Combinear/icons/module_rename.png</file>
+        <file>builtin_resources/themes/Combinear/icons/module_up.png</file>
+        <file>builtin_resources/themes/Combinear/icons/run.png</file>
+        <file>builtin_resources/themes/Combinear/icons/stop.png</file>
+        <file>builtin_resources/themes/Default/icons/module_add.png</file>
+        <file>builtin_resources/themes/Default/icons/module_delete.png</file>
+        <file>builtin_resources/themes/Default/icons/module_down.png</file>
+        <file>builtin_resources/themes/Default/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/Default/icons/module_rename.png</file>
+        <file>builtin_resources/themes/Default/icons/module_up.png</file>
+        <file>builtin_resources/themes/Default/icons/run.png</file>
+        <file>builtin_resources/themes/Default/icons/stop.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_add.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_delete.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_down.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_rename.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/module_up.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/run.png</file>
+        <file>builtin_resources/themes/EasyCode/icons/stop.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_add.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_delete.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_down.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_rename.png</file>
+        <file>builtin_resources/themes/Geoo/icons/module_up.png</file>
+        <file>builtin_resources/themes/Geoo/icons/run.png</file>
+        <file>builtin_resources/themes/Geoo/icons/stop.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_add.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_delete.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_down.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_rename.png</file>
+        <file>builtin_resources/themes/Integrid/icons/module_up.png</file>
+        <file>builtin_resources/themes/Integrid/icons/run.png</file>
+        <file>builtin_resources/themes/Integrid/icons/stop.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_add.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_delete.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_down.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_duplicate.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_rename.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/module_up.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/run.png</file>
+        <file>builtin_resources/themes/VisualScript/icons/stop.png</file>
     </qresource>
 </RCC>

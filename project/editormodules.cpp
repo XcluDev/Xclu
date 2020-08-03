@@ -51,7 +51,7 @@ EditorModules::EditorModules(QWidget *parent, QMenu *modulesMenu)
 
 //---------------------------------------------------------------------
 void EditorModules::new_action(QAction *&action, QString title, QString icon_file, QMenu *modulesMenu) {
-    icon_file = ":/images/" + icon_file;
+    icon_file = xclu::builtin_icons_folder() + icon_file;
     action = new QAction(QIcon(icon_file), title, nullptr);
     toolBar->addAction(action);
     modulesMenu->addAction(action);

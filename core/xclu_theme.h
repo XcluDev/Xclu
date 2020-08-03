@@ -30,9 +30,14 @@ namespace xclu {
 //папка со встроенными ресурсами - темы, общие XGUI
 QString builtin_resources_folder();
 
-//папка со встроенными ресурсами - темы
-QString builtin_themes_folder();
+//тема
+QString builtin_themes_folder();    //папка с темами
+QString builtin_theme_folder();     //выбранная тема
+QString builtin_theme_name();       //имя выбранной темы
 
+
+//папка с иконками
+QString builtin_icons_folder();
 
 //папка с описанием встроенных модулей
 QString builtin_modules_folder();

@@ -155,7 +155,7 @@ void MainWindow::update_window_title() {
     //Заголовок окна
 
     //XCLU - proj.xclu* - Running
-    QString title = "XCLU";
+    QString title = "Xclu";
     if (!projectFile.isEmpty()) {
         title.append(" - ");
         title.append(strippedName(projectFile));
@@ -219,7 +219,7 @@ void MainWindow::createMenu() {
     QToolBar *toolBar = addToolBar(tr("Run"));
     QMenu *runMenu = menuBar()->addMenu(tr("&Run"));
 
-    const QIcon runIcon = QIcon::fromTheme("run", QIcon(":/images/run.png"));
+    const QIcon runIcon = QIcon::fromTheme("run", QIcon(xclu::builtin_icons_folder() + "run.png"));
     QAction *runAct = new QAction(runIcon, tr("&Run"), this);
     runAct->setStatusTip(tr("Run"));
     connect(runAct, SIGNAL (triggered()), this, SLOT (execute_run()));
@@ -227,7 +227,7 @@ void MainWindow::createMenu() {
     toolBar->addAction(runAct);
 
     //Stop
-    const QIcon stopIcon = QIcon::fromTheme("stop", QIcon(":/images/stop.png"));
+    const QIcon stopIcon = QIcon::fromTheme("stop", QIcon(xclu::builtin_icons_folder() + "stop.png"));
     QAction *stopAct = new QAction(stopIcon, tr("&Stop"), this);
     stopAct->setStatusTip(tr("Stop"));
     connect(stopAct, SIGNAL (triggered()), this, SLOT (execute_stop()));
@@ -348,7 +348,7 @@ bool MainWindow::maybeSave() {
     }
 
     QMessageBox msgBox;
-    //msgBox.setText(tr("XCLU"));//setInformativeText
+    //msgBox.setText(tr("Xclu"));//setInformativeText
     msgBox.setText(tr("The project has been modified.\n"
                       "Do you want to save your changes?"));
     msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);

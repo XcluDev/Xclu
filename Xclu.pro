@@ -60,7 +60,7 @@ RESOURCES += \
     xclu.qrc
 
 # Про иконки: https://doc.qt.io/qt-5/appicon.html
-RC_ICONS = images/logo/appicon.ico
+RC_ICONS = builtin_resources/images/appicon.ico
 
 FORMS += \
     project/DialogPreferences1.ui \

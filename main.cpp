@@ -39,10 +39,10 @@ int main(int argc, char *argv[])
 
 
         //Описание - используется для записи настроек QSettings
-        QCoreApplication::setApplicationName("XCLU");
-        QCoreApplication::setOrganizationName("XCLU");
-        QCoreApplication::setOrganizationDomain("xclu.shop");
-        QCoreApplication::setApplicationVersion("1.111");
+        QCoreApplication::setApplicationName("Xclu");
+        QCoreApplication::setOrganizationName("Xclu");
+        QCoreApplication::setOrganizationDomain("xclu.dev");
+        QCoreApplication::setApplicationVersion("1.150");
         //QCommandLineParser parser;
         //parser.setApplicationDescription(QCoreApplication::applicationName());
         //parser.addHelpOption();
