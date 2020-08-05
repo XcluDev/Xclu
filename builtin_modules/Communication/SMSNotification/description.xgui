@@ -2,7 +2,7 @@
 #------------------------------------------
 #module_class=SmsNotification
 #module_name_hint=Int
-#module_id_hint=int
+#module_name_hint=int
 #module_category=Remote_Access
 module_description=Send SMS/push notification to a mobile device using Xclu service.
 module_version=1.01

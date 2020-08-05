@@ -1,0 +1,16 @@
+#Module OscStudio
+#------------------------------------------
+module_description=Recorder and player of OSC data with optional sound file in wav format (ported KuStudio).
+module_version=1.01
+module_impl=C++
+
+#------------------------------------------
+page Main
+//Общие настройки KuStudio - например, частота дискретизации, и параметры OSC-порта.
+
+#А так, выдает Widget для рисования студии.
+
+
+    
+#-----------------------------
+

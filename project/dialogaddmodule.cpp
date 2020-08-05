@@ -88,7 +88,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
                                        new QLabel("Search:"), 0,
                                        search_line_ = new QLineEdit(), 0,
                                        new QLabel(""),10,
-                                       add_button = new QPushButton(tr("Add")), 0,
+                                       add_button = new QPushButton(tr("Add...")), 0,
                                        cancel_button = new QPushButton(tr("Cancel")),0
                                        );
     xclu::set_font_size(buttonBox, xclu::main_font_size);

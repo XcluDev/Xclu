@@ -85,9 +85,8 @@ public:
     void set_module(Module *module);
     Module *module();
 
-    //Имя и id модуля - берется из module
+    //Имя модуля - берется из module
     QString name();
-    QString id();
 
     //обязательные переменные
     //модуль включен

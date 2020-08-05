@@ -69,6 +69,7 @@ RC_ICONS = builtin_resources/images/appicon.ico
 FORMS += \
     project/DialogPreferences1.ui \
     project/dialog.ui \
+    project/dialogmodulename.ui \
     project/dialogpreferences.ui
 
 INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
@@ -94,9 +95,9 @@ unix {
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
-    builtin_modules_impl/Screen/rtmoduleguiimage.cpp \
-    builtin_modules_impl/Screen/rtmoduleguinumber.cpp \
-    builtin_modules_impl/Screen/rtmoduleguiwindow.cpp \
+    builtin_modules_impl/Screen/rtmodulewimage.cpp \
+    builtin_modules_impl/Screen/rtmodulewnumber.cpp \
+    builtin_modules_impl/Screen/rtmodulewwindow.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
@@ -156,6 +157,7 @@ SOURCES += \
     objects/xcluobjectwrapper.cpp \
     objects/xcluprotecteddata.cpp \
     project/consoleview.cpp \
+    project/dialogmodulename.cpp \
     project/dialogpreferences.cpp \
     project/dialogrenamemodule.cpp \
     project/dialogtestmoduleinterface.cpp \
@@ -172,9 +174,9 @@ SOURCES += \
     python/pythoncore.cpp
 
 HEADERS += \
-    builtin_modules_impl/Screen/rtmoduleguiimage.h \
-    builtin_modules_impl/Screen/rtmoduleguinumber.h \
-    builtin_modules_impl/Screen/rtmoduleguiwindow.h \
+    builtin_modules_impl/Screen/rtmodulewimage.h \
+    builtin_modules_impl/Screen/rtmodulewnumber.h \
+    builtin_modules_impl/Screen/rtmodulewwindow.h \
     core/xclu_parse_tree.h \
     core/xclu_theme.h \
     core/xclu_types.h \
@@ -233,6 +235,7 @@ HEADERS += \
     objects/xcluobjectwrapper.h \
     objects/xcluprotecteddata.h \
     project/consoleview.h \
+    project/dialogmodulename.h \
     project/dialogpreferences.h \
     project/dialogrenamemodule.h \
     project/dialogtestmoduleinterface.h \

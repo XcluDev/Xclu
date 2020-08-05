@@ -299,9 +299,9 @@ void RtModuleWebcamera::start_camera() {
             break;
         }
         case SelectDeviceByIndex: {
-                int id = get_int("device_index");
-                xclu_assert(id >= 0 && id < cameras.size(), "Bad device index " + QString::number(id));
-                start_camera(cameras[id]);
+                int name = get_int("device_index");
+                xclu_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
+                start_camera(cameras[name]);
                 break;
         }
         case SelectDeviceByName: {

@@ -100,7 +100,7 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
 //---------------------------------------------------------------------
 //Построение списка модулей по строке, в которой модули разделены \n,
 //а также могут быть пустые строки и комментарии, начинающиеся с #, например:
-//    #id of modules to play sound
+//    #name of modules to play sound
 //    Synth1
 //    Synth2
 //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
@@ -110,9 +110,9 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
     QVector<Module *> out_list;
 
     for (int i=0; i<list.size(); i++) {
-        QString id = list.at(i).trimmed();
-        if (!id.isEmpty() && !id.startsWith("#")) {
-            out_list.push_back(PROJ.module_by_id(id));
+        QString name = list.at(i).trimmed();
+        if (!name.isEmpty() && !name.startsWith("#")) {
+            out_list.push_back(PROJ.module_by_id(name));
         }
     }
     return out_list;
@@ -120,7 +120,7 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
 
 //---------------------------------------------------------------------
 //Выполнение Callbacks
-//список id модулей может быть разделен \n, TAB, пробелами
+//список name модулей может быть разделен \n, TAB, пробелами
 //то есть идти из text или string
 /*static*/ /*void ProjectRuntime::execute_callbacks(QVector<Module *> modules_list) {
     for (int i=0; i<modules_list.size(); i++) {

@@ -1,0 +1,17 @@
+#Module Vecsigrafo
+#------------------------------------------
+module_description=Combine neural networks with Knowledge graphs.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings
+
+#A Practical Guide to Hybrid Natural Language Processing: Combining Neural Models and Knowledge Graphs for NLP 
+#- книга про Vecsigrafo. 
+
+#Статья про Vecsigrafo: Corpus-based Word-Concept Embeddings - Bridging the Statistic/Symbolic Representational Gap 
+
+
+

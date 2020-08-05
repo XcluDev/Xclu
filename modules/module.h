@@ -23,17 +23,14 @@ public:
     ModuleDescription &description();
     ModuleInfo *info() { return info_external_; } //хранится не тут, а в ModulesFactory - нужен для Help
 
-    //Имя и id
+    //Имя и name
     QString name();
     void set_name(QString name);
-    QString id();
-    void set_id(QString id);
-
-    //ставим и то, и то - обычно при создании нового модуля с автосгенерированным именем
-    void set_name_and_id(ModuleNameAndId nameid);
+    //QString name();
+    //void set_id(QString name);
 
     //Дублирование модуля, без имени
-    Module *duplicate(ModuleNameAndId new_nameid);
+    Module *duplicate(QString new_nameid);
 
     //Невизуальный интерфейс
     ModuleInterface *interf();

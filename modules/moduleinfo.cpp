@@ -46,7 +46,7 @@ void ModuleInfo::load_module_from_folder(QString folder, QString category_name, 
         xclu_exception(file.errorString());
     }
     //ставим класс и категорию, если они не пустые
-    //нельзя их просто установить - так как при парсинге они еще выставляют подсказки для id
+    //нельзя их просто установить - так как при парсинге они еще выставляют подсказки для name
     if (!category_name.isEmpty()) {
         description.parse_module_header_line(description.field_category(), category_name);
     }

@@ -5,9 +5,6 @@ page Control
     
 in checkbox Enabled enabled=1
     //Is module working.
-
-const string Id id=""
-    //Identifier of module used for referencing it in programming.
     
 separator
 

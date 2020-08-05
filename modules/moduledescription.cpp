@@ -39,6 +39,20 @@ QString ModuleRegisteredCalls::to_string_gui() {        //конвертация
 }
 
 //---------------------------------------------------------------------
+QString ModuleDescription::generate_name_hint(QString class_name) { //GuiWindow -> gui_window
+    //поиск больших букв
+    QString lower = class_name.toLower();
+    QString name;
+    for (int i=0; i<class_name.length(); i++) {
+        if (i > 0 && class_name.at(i) != lower.at(i)) {
+            name += "_";
+        }
+        name += lower.at(i);
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------
 //парсинг описания модуля
 bool ModuleDescription::parse_module_header_line(QString line) {
     QStringList list = line.split("=");
@@ -50,6 +64,7 @@ bool ModuleDescription::parse_module_header_line(QString line) {
     return false;
 }
 
+//---------------------------------------------------------------------
 bool ModuleDescription::parse_module_header_line(QString name, QString value) {
 
     if (name == field_class_name()) {
@@ -60,19 +75,19 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
                     .arg(field_class_name()).arg(class_name).arg(value));
 
         class_name = value;
-        //подсказка для id по умолчанию - это class_name в нижнем регистре
-        if (id_hint.isEmpty()) {        //проверяем, что непуст - а вдруг его определенме было до module_class
-            id_hint = value.toLower();
-        }
+        //подсказка для name по умолчанию - это class_name в нижнем регистре
+        //if (id_hint.isEmpty()) {        //проверяем, что непуст - а вдруг его определенме было до module_class
+        //    id_hint = value.toLower();
+        //}
         //подсказка для name по умолчанию - это class_name
         if (name_hint.isEmpty()) {     //проверяем, что непуст - а вдруг его определенме было до module_class
-            name_hint = value;
+            name_hint = generate_name_hint(value);
         }
         return true;
     }
-    if (name == field_id_hint()) {
-        id_hint = value; return true;
-    }
+    //if (name == field_id_hint()) {
+    //    id_hint = value; return true;
+    //}
     if (name == field_name_hint()) {
         name_hint = value; return true;
     }

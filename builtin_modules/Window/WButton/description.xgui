@@ -2,7 +2,7 @@
 #------------------------------------------
 #module_class=WButton
 #module_name_hint=Button
-#module_id_hint=button
+#module_name_hint=button
 #module_category=Window
 module_description=Button widget placed in Window.
 module_version=1.01

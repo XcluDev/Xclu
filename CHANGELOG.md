@@ -1,5 +1,7 @@
 Xclu: Changelog 
 
+2020-08-05
+Избавились от id(), теперь у модуля только name().
 
 2020-08-02
 Removed run_mode - its functionality will be implemented with Executor module.

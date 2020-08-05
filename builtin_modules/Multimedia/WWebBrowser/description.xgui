@@ -2,7 +2,7 @@
 #------------------------------------------
 #module_class=WWebBrowser
 #module_name_hint=Int
-#module_id_hint=int
+#module_name_hint=int
 #module_category=Window
 module_description=Show web broswer with possibility to expose various web-pages.
 module_version=1.01

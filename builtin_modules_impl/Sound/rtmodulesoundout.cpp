@@ -324,9 +324,9 @@ void RtModuleSoundOut::start_audio() {
             break;
         }
         case SelectDeviceByIndex: {
-                int id = get_int("device_index");
-                xclu_assert(id >= 0 && id < devices.size(), "Bad device index " + QString::number(id));
-                start_audio(devices[id]);
+                int name = get_int("device_index");
+                xclu_assert(name >= 0 && name < devices.size(), "Bad device index " + QString::number(name));
+                start_audio(devices[name]);
                 break;
         }
         case SelectDeviceByName: {
@@ -385,7 +385,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
 
     if (!deviceInfo.isFormatSupported(format)) {
         xclu_message_box(QString("Sound output module '%1': format not supported, trying to use nearest")
-                         .arg(id()));
+                         .arg(name()));
         format = deviceInfo.nearestFormat(format);
     }
 

@@ -47,35 +47,28 @@ void Module::set_name(QString name) {
 }
 
 //---------------------------------------------------------------------
-QString Module::id() {
-    //id нужно не просто считать, а сделать gui_to_var,
-    //так как это значение используется в Project::update_ids(),
+/*QString Module::name() {
+    //name нужно не просто считать, а сделать gui_to_var,
+    //так как это значение используется в Project::update_names(),
     //а оно вызывается до BeforeStarting,
-    //так как id могут понадобиться в вычислении expression
-    auto *var = interf_->var("id");
+    //так как name могут понадобиться в вычислении expression
+    auto *var = interf_->var("name");
 
     //считываем из gui - если attached, он сам это проверит
     var->gui_to_var(false);
 
     return var->value_string();
-}
+}*/
 
 //---------------------------------------------------------------------
-void Module::set_id(QString id) {
-    auto *varid = interf_->var("id");
-    varid->set_value_string(id);
+/*void Module::set_id(QString name) {
+    auto *varid = interf_->var("name");
+    varid->set_value_string(name);
     varid->var_to_gui();
-}
+}*/
 
 //---------------------------------------------------------------------
-//ставим и то, и то - обычно при создании нового модуля с автосгенерированным именем
-void Module::set_name_and_id(ModuleNameAndId nameid) {
-    set_name(nameid.name);
-    set_id(nameid.id);
-}
-
-//---------------------------------------------------------------------
-Module *Module::duplicate(ModuleNameAndId new_nameid) {
+Module *Module::duplicate(QString new_nameid) {
     //сохраняем данные из GUI
     gui_action(GuiStageBeforeGuiDetached);
 
@@ -85,7 +78,7 @@ Module *Module::duplicate(ModuleNameAndId new_nameid) {
     //копируем данные и ставим имя
     if (module) {
         interf()->copy_data_to(module->interf());
-        module->set_name_and_id(new_nameid);
+        module->set_name(new_nameid);
     }
     return module;
 }
@@ -243,7 +236,7 @@ void Module::access_call_no_exception(QString function, ErrorInfo &err, XcluObje
     if (!description().accept_calls.accepts(function)) {
         err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
                                 "because it's unregistered in its accepted calls")
-                        .arg(function).arg(id()));
+                        .arg(function).arg(name()));
         return;
     }
     rtmodule()->call(function, err, input, output);
@@ -318,7 +311,7 @@ void Module::write_json(QJsonObject &json) {
 
     //Уникальные свойства, которые нужно считывать:
     descrObject["name"] = name();
-    descrObject["id"] = id();
+    descrObject["name"] = name();
 
     json["description"] = descrObject;
 
@@ -335,9 +328,9 @@ void Module::read_json(const QJsonObject &json) {
 
     //Уникальные свойства, которые нужно считывать
     QString name = json_string(descrObject, "name");
-    QString id = json_string(descrObject, "id");
+    //QString name = json_string(descrObject, "name");
     set_name(name);
-    set_id(id);
+    //set_id(name);
 
     //Переменные
     QJsonObject interfObject = json_object(json, "interface");

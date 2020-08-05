@@ -1,7 +1,6 @@
 #Module Window
 #------------------------------------------
-#module_class=Window
-#module_category=Window
+module_name_hint=wwindow
 module_description=Window for placing GUI components and OpenGL view.
 module_version=1.01
 module_impl=C++

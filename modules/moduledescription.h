@@ -41,7 +41,7 @@ struct ModuleDescription {
 
     //после запятой пусто - значит будет создана переменная id_hint, а поле - module_id_hint
     //если не пусто - то это суфикс, например impl_ - чтобы хранить строку
-    MOD_DESCR_FIELD(id_hint, );
+    //MOD_DESCR_FIELD(id_hint, );
     MOD_DESCR_FIELD(name_hint,);
     MOD_DESCR_FIELD(category,);
     MOD_DESCR_FIELD(description,);
@@ -63,10 +63,12 @@ struct ModuleDescription {
 
     bool is_implemented();  //реализован ли уже модуль
 
+    QString generate_name_hint(QString class_name); //GuiWindow -> gui_window
+
     //полное ли описание
     bool is_complete() {
         return !class_name.isEmpty()
-                && !id_hint.isEmpty()
+                //&& !id_hint.isEmpty()
                 && !category.isEmpty()
                 && !description.isEmpty()
                 && !version.isEmpty()

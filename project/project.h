@@ -44,8 +44,13 @@ public:
     //Runtime-состояние проекта - см. RUNTIME
 
     //Модули
-    //Сгенерировать модуль данного типа и сгенерировать ему уникальное имя type1, type2,...
-    Module *new_module(int i, QString class_name);
+    //Выбор уникального имени - webcam1, webcam2,...
+    QString generate_unique_name(QString name_hint, bool dont_change_if_ok = false);
+    QString generate_unique_name_by_class_name(QString class_name);
+
+    //Сгенерировать модуль данного типа с заданным именем, если оно уже есть - добавить 1,2,3...
+    Module *new_module(int i, QString class_name, QString name_hint);
+
 
     void duplicate_module(int i);
     void delete_module(int i);
@@ -57,18 +62,18 @@ public:
     //проверка, есть ли запрашиваемый модуль
     bool has_module_with_index(int i);
     bool has_module_with_name(QString name);
-    bool has_module_with_id(QString id);
+    bool has_module_with_id(QString name);
     //получение модуля
     Module *module_by_index(int i, bool can_return_null = false);
     Module *module_by_name(QString name);
-    Module *module_by_id(QString id);
+    Module *module_by_id(QString name);
 
     bool can_rename_module(QString old_name, QString new_name);
 
-    //работа с id модулей
-    //обновить все id - вызывается перед стартом проекта и при переименовании,
-    //выдает message_box при ошибке (пустое id или повторяющееся id). Возвращает true - если без ошибок
-    bool update_ids();
+    //работа с name модулей
+    //обновить все name - вызывается перед стартом проекта и при переименовании,
+    //выдает message_box при ошибке (пустое name или повторяющееся name). Возвращает true - если без ошибок
+    bool update_names();
 
 private:
     //Свойства проекта
@@ -86,17 +91,10 @@ private:
     void write_json(QJsonObject &json);
     void read_json(const QJsonObject &json);
 
-    //Выбор уникального имени, начинающегося с id_hint - id_hint1, id_hint2,...
-
-
-    ModuleNameAndId generate_unique_name_and_id(const ModuleDescription &descr);
 
 
     //обновить имена - следует делать после загрузки проекта и добавления/удаления/переименования/изменения порядка модулей
-    void update_names();
-    QMap<QString, int> names;
-    //id, см. update_ids()
-    QMap<QString, int> ids_;
+    QMap<QString, int> names_;
 
     //вычисление expressions и работа с GUI, см. определение GuiStage
     //тут можно вызывать только GuiStageProjectAfterLoading и GuiStageProjectBeforeSaving

@@ -104,16 +104,6 @@
         <file>builtin_modules/Web/Radio/description.xgui</file>
         <file>builtin_modules/Web/ServerNodeJS/description.xgui</file>
         <file>builtin_modules/Web/Worldometers/description.xgui</file>
-        <file>builtin_modules/Window/GuiButton/description.xgui</file>
-        <file>builtin_modules/Window/GuiDialog/description.xgui</file>
-        <file>builtin_modules/Window/GuiDrawingJS/description.xgui</file>
-        <file>builtin_modules/Window/GuiImage/description.xgui</file>
-        <file>builtin_modules/Window/GuiLayout/description.xgui</file>
-        <file>builtin_modules/Window/GuiMenu/description.xgui</file>
-        <file>builtin_modules/Window/GuiNumber/description.xgui</file>
-        <file>builtin_modules/Window/GuiSweetArea/description.xgui</file>
-        <file>builtin_modules/Window/GuiWindow/description.xgui</file>
-        <file>builtin_modules/Window/GuiWindow/help.md</file>
         <file>builtin_modules/Window/SweetMenu/description.xgui</file>
         <file>builtin_modules/Window/SweetWindow/description.xgui</file>
         <file>builtin_resources/themes/Combinear/Combinear.png</file>

@@ -63,7 +63,7 @@ public slots:
     void selected_module_updated();
 
     //сигнал от списка модулей, что добавился новый модуль
-    void new_module(int i, QString type);
+    void new_module(int i, QString class_name, QString name_hint);
 
     //сигнал, что модуль переименован
     void rename_module(int i, QString new_name);

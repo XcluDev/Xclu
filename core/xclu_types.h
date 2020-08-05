@@ -24,13 +24,6 @@ enum ModuleImplType : int {
 QString moduleimpltype_to_string(ModuleImplType moduleimpltype);
 ModuleImplType string_to_moduleimpltype(const QString &moduleimpltypestr);
 
-//структура для хранения имени и id модуля
-struct ModuleNameAndId {
-    QString name;
-    QString id;
-};
-
-
 //Состояние редактора модуля - номер страницы
 class EditorModuleState {
 public:

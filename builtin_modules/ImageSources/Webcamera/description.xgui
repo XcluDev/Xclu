@@ -1,7 +1,7 @@
 #Module Webcamera
 #------------------------------------------
 #module_class=Webcamera
-module_id_hint=webcam
+module_name_hint=webcam
 
 #module_category=Images
 module_description=Capture frames from a webcamera.

@@ -44,12 +44,6 @@ Module *RtModule::module() {
 QString RtModule::name() {
     return module()->name();
 }
-
-//---------------------------------------------------------------------
-QString RtModule::id() {
-    return module()->id();
-}
-
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
 void RtModule::internal_update() {
@@ -148,7 +142,7 @@ void RtModule::call(QString function, ErrorInfo &err, XcluObject *input, XcluObj
     }
     catch (XCluException &e) {
         err.prepend(QString("Error during executing function '%1' in module '%2':")
-                  .arg(function).arg(id()), e.err());
+                  .arg(function).arg(name()), e.err());
     }
 }
 

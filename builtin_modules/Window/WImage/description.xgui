@@ -1,9 +1,6 @@
 #Module WImage
 #------------------------------------------
-#module_class=WImage
-#module_name_hint=Image
-#module_id_hint=image
-#module_category=Window
+module_name_hint=wimage
 module_description=Widget for output image to the window.
 module_version=1.01
 module_impl=C++

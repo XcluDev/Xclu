@@ -5,6 +5,7 @@
 #include "dialogrenamemodule.h"
 #include "dialogaddmodule.h"
 #include "project.h"
+#include "dialogmodulename.h"
 
 //---------------------------------------------------------------------
 EditorModules::EditorModules(QWidget *parent, QMenu *modulesMenu)
@@ -148,12 +149,20 @@ void EditorModules::add_module_click() {
     //qDebug("add_module_click");
     //возвращает адрес диалога, если он успешен
     DialogAddModule *dialog = DialogAddModule::call_dialog(this);
-    if (dialog) {
-        qDebug() << "add module " << dialog->selected_type;
-        //отправляем команду в ProjectGui
-        PROJ_GUI->new_module(current_index()+1, dialog->selected_type);
-        //если все ок, то нам уже потом придет сигнал на добавление модуля
-    }
+    if (!dialog) return;
+    //подбор имени
+    QString class_name = dialog->selected_type;
+    auto name_hint = PROJ.generate_unique_name_by_class_name(class_name);
+
+    //диалог выбора имени
+    auto *name_dialog = DialogModuleName::call_dialog(this, name_hint);
+    if (!name_dialog) return;
+
+    qDebug() << "add module " << class_name;
+    //отправляем команду в ProjectGui
+    PROJ_GUI->new_module(current_index()+1, class_name, name_dialog->name_hint());
+    //если все ок, то нам уже потом придет сигнал на добавление модуля
+
 }
 
 //---------------------------------------------------------------------

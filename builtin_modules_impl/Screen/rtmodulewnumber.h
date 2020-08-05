@@ -30,15 +30,15 @@ struct RtModuleGuiNumberData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleGuiNumber: public RtModule
+class RtModuleWNumber: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleGuiNumber();
-    ~RtModuleGuiNumber();
+    RtModuleWNumber();
+    ~RtModuleWNumber();
 
     static QString *static_class_name_ptr; //"WNumber", эта переменная используется для создания новых объектов
-    static RtModuleGuiNumber *new_module();
+    static RtModuleWNumber *new_module();
 
 protected:
     //Выполнение
@@ -50,7 +50,7 @@ protected:
     virtual void call_internal(QString function, XcluObject *input, XcluObject * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
-    QString parent_id_;
+    QString parent_name_;
     bool parent_was_set_ = false;
 
     QWidget *widget_ = nullptr; //весь виджет

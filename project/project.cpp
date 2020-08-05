@@ -202,64 +202,59 @@ void Project::clear_modules() {
 }
 
 //---------------------------------------------------------------------
-void Project::update_names() {
-    //qDebug() << "Names:";
-    names.clear();
-    for (int i=0; i<modules_.size(); i++) {
-        names[modules_[i]->name()] = i;
-        //qDebug() << "    " << modules_[i]->name();
-    }
-    update_ids();
-
-}
-
-//---------------------------------------------------------------------
-bool Project::update_ids() {  //обновить все id - вызывается перед стартом проекта
-    ids_.clear();
+bool Project::update_names() {  //обновить все name - вызывается перед стартом проекта
+    names_.clear();
 
     for (int i=0; i<modules_.size(); i++) {
-        QString id = modules_[i]->id();
-        if (id.isEmpty()) {
-            xclu_message_box("Empty 'id' in module '" + modules_[i]->name() + "'");
+        QString name = modules_[i]->name();
+        if (name.isEmpty()) {
+            xclu_message_box("Empty 'name' in module '" + modules_[i]->name() + "'");
             return false;
         }
-        if (ids_.contains(id)) {
-            xclu_message_box("Duplicated 'id' in modules '" + modules_[i]->name() + "' and '" + modules_[ids_[id]]->name() + "'");
+        if (names_.contains(name)) {
+            xclu_message_box("Duplicated 'name' in modules '" + modules_[i]->name() + "' and '" + modules_[names_[name]]->name() + "'");
             return false;
         }
-        ids_[id] = i;
+        names_[name] = i;
     }
     return true;
 }
 
 //---------------------------------------------------------------------
-//Выбор уникального имени, начинающегося с id_hint - id_hint1, id_hint2,...
-ModuleNameAndId Project::generate_unique_name_and_id(const ModuleDescription &descr) {
+//Выбор уникального имени - webcam1, webcam2,...
+QString Project::generate_unique_name(QString name_hint, bool dont_change_if_ok) {
     update_names();
 
-    ModuleNameAndId result;
+    if (dont_change_if_ok && !names_.contains(name_hint)) {
+        return name_hint;
+    }
+
+    QString result;
     //бесконечный цикл
     for (int i=1;; i++) {
-        QString name = descr.name_hint + QString::number(i);
-        QString id = descr.id_hint + QString::number(i);
-        if (!names.contains(name) && !ids_.contains(id)) {
-            result.name = name;
-            result.id = id;
-            return result;
+        QString name = name_hint + QString::number(i);
+        if (!names_.contains(name)) {
+            return name;
         }
     }
     return result;
 }
 
 //---------------------------------------------------------------------
+QString Project::generate_unique_name_by_class_name(QString class_name) {
+    auto *module = FACTORY.get_module(class_name);
+    return generate_unique_name(module->description.name_hint);
+}
+
+//---------------------------------------------------------------------
 //Cгенерировать модуль данного типа и сгенерировать ему уникальное имя type1, type2,...
-Module *Project::new_module(int i, QString class_name) {
+Module *Project::new_module(int i, QString class_name, QString name_hint) {
     if (class_name.isEmpty()) {
         return nullptr;
     }
 
-    //проверка, можно ли обновить все id, чтобы вычислить новое имя
-    if (!update_ids()) {
+    //проверка, можно ли обновить все name, чтобы вычислить новое имя
+    if (!update_names()) {
         return nullptr;
     }
 
@@ -272,8 +267,8 @@ Module *Project::new_module(int i, QString class_name) {
         return nullptr;
     }
 
-    ModuleNameAndId nameid = generate_unique_name_and_id(module->description());
-    module->set_name_and_id(nameid);
+    QString name = generate_unique_name(name_hint, true); //не менять имя, если такого нет
+    module->set_name(name);
     modules_.insert(i, module);
     update_names();
     return module;
@@ -291,7 +286,7 @@ bool Project::can_rename_module(QString old_name, QString new_name) {
 
 //---------------------------------------------------------------------
 void Project::duplicate_module(int i) {
-    ModuleNameAndId new_nameid = generate_unique_name_and_id(modules_[i]->description());
+    QString new_nameid = generate_unique_name(modules_[i]->name());
     Module *module = modules_[i]->duplicate(new_nameid);
     if (!module) {
         //не выводим сообщение - так как описание ошибки выведет module
@@ -341,12 +336,12 @@ bool Project::has_module_with_index(int i) {
 
 //---------------------------------------------------------------------
 bool Project::has_module_with_name(QString name) {
-    return names.contains(name);
+    return names_.contains(name);
 }
 
 //---------------------------------------------------------------------
-bool Project::has_module_with_id(QString id) {
-    return ids_.contains(id);
+bool Project::has_module_with_id(QString name) {
+    return names_.contains(name);
 }
 
 
@@ -366,13 +361,13 @@ Module *Project::module_by_index(int i, bool can_return_null) {
 //---------------------------------------------------------------------
 Module *Project::module_by_name(QString name) {
     xclu_assert(has_module_with_name(name), QString("Requested module with unknown name '%1'").arg(name));
-    return module_by_index(names.value(name));
+    return module_by_index(names_.value(name));
 }
 
 //---------------------------------------------------------------------
-Module *Project::module_by_id(QString id) {
-    xclu_assert(has_module_with_id(id), QString("Requested module with unknown id '%1'").arg(id));
-    return module_by_index(ids_.value(id));
+Module *Project::module_by_id(QString name) {
+    xclu_assert(has_module_with_id(name), QString("Requested module with unknown name '%1'").arg(name));
+    return module_by_index(names_.value(name));
 }
 
 //---------------------------------------------------------------------
@@ -426,11 +421,11 @@ void Project::execute_start(bool &stop_out) {
     //начало измерения времени
     RUNTIME.reset_elapsed_timer();
 
-    //Сбор id всех модулей - для парсинга в дальнейшем
+    //Сбор name всех модулей - для парсинга в дальнейшем
     //очень важно это делать до modules_[i]->execute_start();
-    //так как в них могут считаться expression в зависимости от id
-    //и поэтому процедуру сбора id делаем до этого
-    if (!update_ids()) {    //он сам выдаст ошибку, поэтому здесь можно просто выйти
+    //так как в них могут считаться expression в зависимости от name
+    //и поэтому процедуру сбора name делаем до этого
+    if (!update_names()) {    //он сам выдаст ошибку, поэтому здесь можно просто выйти
         stop_out = true;
     }
 

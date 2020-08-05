@@ -1,7 +1,7 @@
 #Module SynthFromImage
 #------------------------------------------
 #module_class=SynthFromImage
-module_id_hint=synthfromimage
+module_name_hint=synthfromimage
 
 #module_category=Sound
 module_description=Sonification by sound synthesis from image, text and binary data. This module should be called by callback from SoundOutput.

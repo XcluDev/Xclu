@@ -68,9 +68,9 @@ void EditorModule::renamed_module() {
 //---------------------------------------------------------------------
 void EditorModule::reload_name() { //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
     if (module_) {
-        QString title = QString("%1 - %2 (%3)")
-                .arg(module_->id()).
-                arg(module_->name()).
+        QString title = QString("%1: %2")
+                .arg(module_->name()).
+                //arg(module_->name()).
                 arg(module_->description().class_name);
                 //.arg(ModuleRunMode_to_string(module_->rtmodule()->run_mode()));
         editor_label_->setText(title);

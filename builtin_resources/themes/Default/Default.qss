@@ -10,7 +10,7 @@ https://doc.qt.io/qt-5/stylesheet-reference.html
 * { 
 background-color: #4d4d4d;
 color: white;
-font-size: 18px;
+font-size: 16px;
 }
 
 /*
@@ -184,3 +184,52 @@ QTabBar::tab:!selected {
 }
 
 
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+    color: #000;
+	border: none;
+}
+
+
+QCheckBox::indicator
+{
+    background-color: lightgray;
+    border: 1px solid #000;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    /*image:url("./ressources/check.png");*/
+	background-color: #46a2da;
+    border: 1px solid #3a546e;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+	border: 1px solid #46a2da; 
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}

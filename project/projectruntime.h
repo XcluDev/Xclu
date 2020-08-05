@@ -51,7 +51,7 @@ public:
 
     //Построение списка модулей по строке, в которой модули разделены \n,
     //а также могут быть пустые строки и комментарии, начинающиеся с #, например:
-    //    #id of modules to play sound
+    //    #name of modules to play sound
     //    Synth1
     //    Synth2
     //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
@@ -59,7 +59,7 @@ public:
     static QVector<Module *> get_modules(QString modules_list);
 
     //Выполнение Callbacks
-    //список id модулей может быть разделен \n, TAB, пробелами
+    //список name модулей может быть разделен \n, TAB, пробелами
     //то есть идти из text или string
     //static void execute_callbacks(QVector<Module *> modules_list);
     //static void execute_callbacks(QString modules_list_string);

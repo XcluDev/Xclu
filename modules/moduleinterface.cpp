@@ -252,7 +252,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
     }
 
-    //Добавить страницу "General" с общими параметрами имя, id, тип и Enabled, обработка ошибок
+    //Добавить страницу "General" с общими параметрами имя, name, тип и Enabled, обработка ошибок
     //create_general_page();
 
     //Проверяем, что интерфейс начался с создания страницы

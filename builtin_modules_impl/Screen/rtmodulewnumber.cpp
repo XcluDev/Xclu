@@ -1,5 +1,5 @@
 #include <QtWidgets>
-#include "rtmoduleguinumber.h"
+#include "rtmodulewnumber.h"
 
 #include "incl_qtcpp.h"
 #include "rtmoduleregistrar.h"
@@ -11,32 +11,32 @@
 
 
 //заполнение имени класса и регистрация класса
-REGISTRAR(GuiNumber)
+REGISTRAR(WNumber)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleGuiNumber *RtModuleGuiNumber::new_module() {
-    return new RtModuleGuiNumber();
+/*static*/ RtModuleWNumber *RtModuleWNumber::new_module() {
+    return new RtModuleWNumber();
 }
 
 //---------------------------------------------------------------------
-RtModuleGuiNumber::RtModuleGuiNumber()
+RtModuleWNumber::RtModuleWNumber()
     :RtModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleGuiNumber::~RtModuleGuiNumber()
+RtModuleWNumber::~RtModuleWNumber()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::execute_start_internal() {
+void RtModuleWNumber::execute_start_internal() {
     //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
     parent_was_set_ = false;
-    parent_id_ = "";
-    set_string("parent_id", "");
+    parent_name_ = "";
+    set_string("parent_name", "");
 
     DataAccess access(data_);
     data_.clear();
@@ -44,7 +44,7 @@ void RtModuleGuiNumber::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::execute_update_internal() {
+void RtModuleWNumber::execute_update_internal() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -52,7 +52,7 @@ void RtModuleGuiNumber::execute_update_internal() {
 
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::execute_stop_internal() {
+void RtModuleWNumber::execute_stop_internal() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -61,10 +61,10 @@ void RtModuleGuiNumber::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleGuiNumber::call_internal(QString function, XcluObject *input, XcluObject *output) {
+void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObject *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
-        xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
+        xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_name_ + "'")
 
         //call get_widget_pointer
         //Window calls GUI elements to insert them into itself.
@@ -76,16 +76,16 @@ void RtModuleGuiNumber::call_internal(QString function, XcluObject *input, XcluO
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_id_ = ObjectRead(input).get_string("parent_id");
-        set_string("parent_id", parent_id_);
+        parent_name_ = ObjectRead(input).get_string("parent_name");
+        set_string("parent_name", parent_name_);
         parent_was_set_ = true;
 
         //проверяем, что еще не стартовали
         xclu_assert(status().was_started,
                     QString("Can't create widget, because module '%1' was not started yet."
                             " You need to place it before parent '%2'.")
-                    .arg(module_->id())
-                    .arg(parent_id_));
+                    .arg(module_->name())
+                    .arg(parent_name_));
 
         //создаем виджет
         create_widget();
@@ -100,7 +100,7 @@ void RtModuleGuiNumber::call_internal(QString function, XcluObject *input, XcluO
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::create_widget() {
+void RtModuleWNumber::create_widget() {
     //insert_label(input);
 
     spin_ = new XcluSpinBox();
@@ -141,7 +141,7 @@ void RtModuleGuiNumber::create_widget() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::spin_changed() {    //вызывается, если значение изменилось
+void RtModuleWNumber::spin_changed() {    //вызывается, если значение изменилось
     //это может вызваться не в основном потоке
     DataAccess access(data_);
     data_.gui_changed = 1;
@@ -149,7 +149,7 @@ void RtModuleGuiNumber::spin_changed() {    //вызывается, если з�
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::update_all(bool force) {
+void RtModuleWNumber::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -168,12 +168,12 @@ void RtModuleGuiNumber::update_all(bool force) {
 
 
 //---------------------------------------------------------------------
-RtModuleGuiNumber::Source RtModuleGuiNumber::get_source() {
+RtModuleWNumber::Source RtModuleWNumber::get_source() {
     return Source(get_int("source"));
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::update_value(bool force) {
+void RtModuleWNumber::update_value(bool force) {
     //stringlist source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     Source source = get_source();
     switch (source) {
@@ -211,13 +211,13 @@ void RtModuleGuiNumber::update_value(bool force) {
     }
         break;
     default:
-        xclu_exception("Unknown 'source' in '" + module()->id());
+        xclu_exception("Unknown 'source' in '" + module()->name());
     }
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleGuiNumber::set_value(int v) {
+void RtModuleWNumber::set_value(int v) {
     set_int("value", v);
     if (get_source() != Source_GUI) {
         spin_->setValue(v);

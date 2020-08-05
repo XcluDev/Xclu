@@ -85,6 +85,7 @@ ModuleInfo *ModulesFactory::get_module(int i) {
 
 //---------------------------------------------------------------------
 ModuleInfo *ModulesFactory::get_module(QString class_name) {
+    xclu_assert(modules_.contains(class_name), "Internal error at ModulesFactory::get_module, unknown module class '" + class_name + "'");
     return modules_.value(class_name, nullptr);
 }
 
