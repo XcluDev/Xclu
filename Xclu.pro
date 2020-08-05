@@ -36,6 +36,10 @@ Debug:UI_DIR = debug/.ui
 #else: unix:!android: target.path = /opt/$${TARGET}/bin
 #!isEmpty(target.path): INSTALLS += target
 
+#TODO enable all exceptions handling in VisualStudio, including division by zero:
+#Project Properties -> C/C++ -> Code Generation -> Modify the Enable C++ Exceptions to "Yes With SEH Exceptions". 
+
+ 
 
 QT       += core gui
 QT       += multimedia multimediawidgets
