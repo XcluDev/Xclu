@@ -35,7 +35,7 @@ InterfaceGuiText::InterfaceGuiText(InterfaceGuiPageCreator &input, InterfaceItem
     }
 
     //вставка на страницу, при этом с новой строки и на всю ширину
-    insert_widget(textEdit_, textEdit_, input, 0, 1, 2, 1);
+    insert_widget_next_line(textEdit_, textEdit_, input);
 
     //отслеживание изменений
     connect(textEdit_, SIGNAL (textChanged()), this, SLOT (on_value_changed()));

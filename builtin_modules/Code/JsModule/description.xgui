@@ -6,19 +6,71 @@ module_impl=C++
 
 #-------------------------------------------
 page Main
-    //General settings
+    //This page will be replaced with your custom GUI page(s).
 
 
-page GUI
-    //GUI description on XGUI language
-const text XGUI xgui="" 20 22
+#-------------------------------------------
+page Interface
+    //GUI description and module settings.
+     
+const text XGUI _xgui_="" 30 30
+    //GUI written in XGUI language.
+
+in button Refresh _refresh_
+    //Press this button to reload GUI.
+
+in button Test... _gui_test_button_
+//Press the button to test interface.
+
+separator
+
+in checkbox(group) Advanced _advanced_=0
+    //Adding module to Modules List and export.
+if _advanced_ 1
+
+const string Class _module_class_="MyModule"
+    //Module class name.
+
+const string Category _module_category_="MyModules"
+    //Module category.
     
+const string Description _module_description_=""
+    //Module description.
+    
+const string Version _module_version_="1.01"
+    //Module version.
+
+#module_impl=JS
+
+in button Add_to_List _add_module_list_
+    //Add to Modules List of the project.
+
+separator 
+
+in button Export... _export_
+    //Export as a ready stand-alone module.
+endif
+
+#-------------------------------------------
 page Setup
-    //JS code for setup
-const text Setup setup="" 20 22
+    //JS code for setup.
+in text Setup _setup_="" 30 30
 
+#-------------------------------------------
 page Update
-    //JS code for update
-const text Update update="" 20 22
+    //JS code for update.
+in text Update _update_="" 30 30
     
+#-------------------------------------------
+page Draw
+    //JS code for drawing at specified window or widget. If empty - it's ignored.
+in text Draw _draw_="" 30 30
+
+separator
+
+#TODO link
+in string Destination _draw_area_="wwindow1"
+    //Destination area for drawing, can be window or drawing widget.
+
+#-------------------------------------------
 

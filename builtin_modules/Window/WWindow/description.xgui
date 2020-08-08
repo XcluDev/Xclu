@@ -11,7 +11,7 @@ module_send_calls=get_widget_pointer
 page Structure
     //Window contents consisting of layouts and widgets, such as IntGui.
     
-const text Struct. structure 25 30
+const text Structure structure 25 30
     //Description of layouts and widgets.
 //HorizontalLayout
 //  #wnumber1

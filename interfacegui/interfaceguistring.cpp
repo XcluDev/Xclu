@@ -59,13 +59,13 @@ InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, Interface
         holder->setLayout(layout);
 
         //вставка на страницу, со сдвигом вниз
-        insert_widget(holder, lineEdit_, input, 0, 1, 2, 1);
+        insert_widget_next_line(holder, lineEdit_, input);
         inserted = true;
     }
 
     //просто вставка на страницу
     if (!inserted) {
-        insert_widget(lineEdit_, lineEdit_, input, 0, 1, 2, 1);
+        insert_widget_next_line(lineEdit_, lineEdit_, input);
         inserted = true;
     }
 

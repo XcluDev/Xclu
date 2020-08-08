@@ -74,6 +74,12 @@ void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, Inte
 }
 
 //---------------------------------------------------------------------
+//вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
+void InterfaceGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input) {
+    insert_widget(widget, internal_widget, input, 0, 1, 2, 1);
+}
+
+//---------------------------------------------------------------------
 //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
 //(int, float, checkbox, object)
 void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
@@ -89,6 +95,11 @@ void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_
     holder->setLayout(layout);
 
     insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
+}
+
+//---------------------------------------------------------------------
+void InterfaceGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input) {
+     insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 2, 1);
 }
 
 //---------------------------------------------------------------------

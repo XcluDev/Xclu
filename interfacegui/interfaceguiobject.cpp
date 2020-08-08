@@ -51,7 +51,7 @@ InterfaceGuiObject::InterfaceGuiObject(InterfaceGuiPageCreator &input, Interface
     //метка
     insert_label(input);
     //вставка на страницу
-    insert_widget_with_spacer(object_widget_, object_widget_, input, 0, 1, 2, 1);
+    insert_widget_with_spacer_next_line(object_widget_, object_widget_, input);
 
     //ДОБАВЛЕНИЕ КНОПКИ Inspect
 
