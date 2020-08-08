@@ -16,10 +16,15 @@ page Main
 #    //List of modules which will be called after sound request callback event
 #    //#id of modules to execute
     
-in text Play_Sounds_From modules_list 5 6
+in text Sound_Sources modules_list 5 6
     //List of modules to which will be sent callback for sound buffer
     //#id of modules to play and optional volumes
     //#for example: synthfromimage1 0.5
+    
+in button Edit... edit_btn
+    //Press to interactively edit sound sources.
+
+separator
 
 in float(slider) Volume volume=0.8 0:1 100,10
     //Output sound volume

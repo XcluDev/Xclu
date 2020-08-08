@@ -8,15 +8,18 @@ module_impl=C++
 module_send_calls=get_widget_pointer
 
 #------------------------------------------
-page Structure
-    //Window contents consisting of layouts and widgets, such as IntGui.
+page Content
+    //Window content consisting of layouts and widgets, such as WNumber.
     
-const text Structure structure 25 30
+const text Content content 20 20
     //Description of layouts and widgets.
 //HorizontalLayout
 //  #wnumber1
 
 #TODO margins, spacing
+
+in button Edit... edit_btn
+    //Press to interactively edit window content.
 
 #------------------------------------------
 page Properties

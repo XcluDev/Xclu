@@ -16,9 +16,10 @@ int string_to_Type(const QString &str, int N, const QString array[]);
 enum ModuleImplType : int {
     ModuleImplTypeNone = 0,
     ModuleImplTypeCPP = 1,
-    ModuleImplTypeDynlib = 2,
-    ModuleImplTypePython = 3,
-    ModuleImplTypeN = 4
+    ModuleImplTypeJS = 2,
+    ModuleImplTypeDynlib = 3,
+    ModuleImplTypePython = 4,
+    ModuleImplTypeN = 5
 };
 
 QString moduleimpltype_to_string(ModuleImplType moduleimpltype);

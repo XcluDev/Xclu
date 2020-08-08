@@ -30,7 +30,7 @@ int string_to_Type(const QString &str, int N, const QString array[]) {
 }
 
 //---------------------------------------------------------------------
-const QString ModuleImplTypeNames[ModuleImplTypeN] = {"?", "C++", "dynlib", "python"};
+const QString ModuleImplTypeNames[ModuleImplTypeN] = {"?", "C++", "JS", "dynlib", "python"};
 
 QString moduleimpltype_to_string(ModuleImplType moduleimpltype) {
     return Type_to_string(int(moduleimpltype), ModuleImplTypeN, ModuleImplTypeNames);
