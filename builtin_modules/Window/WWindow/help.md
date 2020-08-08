@@ -13,7 +13,7 @@ Window module creates a window with specified layouts and widgets.
 #### Window structure
 Window can contain of several nested layouts and widgets.
 ## 
-The window contents structure is described in text format at `Structure` tab. Here is the example of putting two images
+The window content is described in text format at `Content` tab. Here is the example of putting two images
 to the window center:
 
     HorizontalLayout
