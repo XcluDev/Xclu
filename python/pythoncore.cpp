@@ -1,7 +1,7 @@
 #include "python/pythoncore.h"
 
 #define PY_SSIZE_T_CLEAN
-#include <Python.h>
+//#include <Python.h>
 #include "incl_qtcpp.h"
 
 PythonCore PYTHON;
@@ -68,6 +68,8 @@ void PythonCore::test1() {
 
     //QString prog_name = QString("progr");
     //Py_SetProgramName((wchar_t*)prog_name.utf16());  // optional but recommended
+
+    /*
     Py_Initialize();
 
     qDebug() << "   run script...";
@@ -79,13 +81,13 @@ void PythonCore::test1() {
     }
     qDebug() << "finished...";
     //PyMem_RawFree((wchar_t*)prog_name.utf16());   //Free memory!
-
+  */
 
 }
 
 //---------------------------------------------------------------------
 void PythonCore::free() {
-    Py_Finalize();
+    //Py_Finalize();
 }
 
 //---------------------------------------------------------------------

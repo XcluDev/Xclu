@@ -34,8 +34,8 @@ InterfaceGuiText::InterfaceGuiText(InterfaceGuiPageCreator &input, InterfaceItem
         textEdit_->setMaximumHeight(hmax);
     }
 
-    //вставка на страницу
-    insert_widget(textEdit_, textEdit_, input);
+    //вставка на страницу, при этом с новой строки и на всю ширину
+    insert_widget(textEdit_, textEdit_, input, 0, 1, 2, 1);
 
     //отслеживание изменений
     connect(textEdit_, SIGNAL (textChanged()), this, SLOT (on_value_changed()));

@@ -75,11 +75,13 @@ protected:
     void insert_label(InterfaceGuiPageCreator &input);
 
     //вставить на страницу созданный виджет
-    void insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input, int pos_x = 1);
+    void insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+                       int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
 
     //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
-    //(int, float, checkbox)
-    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input);
+    //(int, float, checkbox, object)
+    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+                                   int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
 
     //запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов
     //также, вызывается из insert_widget и insert_widget_with_spacer

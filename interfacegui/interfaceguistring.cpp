@@ -17,7 +17,7 @@ InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, Interface
     connect(lineEdit_, SIGNAL (textChanged(QString)), this, SLOT (on_value_changed()));
 
     bool inserted = false;
-    //если нет опций - то встравляем только редактор
+    //если нет опций - то вставляем только редактор строки
     if (item->options_choose_filesystem()) {
          //опции - кнопки выбора файла или папки
 
@@ -58,14 +58,14 @@ InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, Interface
         QWidget *holder = new QWidget;
         holder->setLayout(layout);
 
-        //вставка на страницу
-        insert_widget(holder, lineEdit_, input);
+        //вставка на страницу, со сдвигом вниз
+        insert_widget(holder, lineEdit_, input, 0, 1, 2, 1);
         inserted = true;
     }
 
     //просто вставка на страницу
     if (!inserted) {
-        insert_widget(lineEdit_, lineEdit_, input);
+        insert_widget(lineEdit_, lineEdit_, input, 0, 1, 2, 1);
         inserted = true;
     }
 

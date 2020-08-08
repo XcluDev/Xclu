@@ -1,7 +1,8 @@
 #ifndef PYTHONCORE_H
 #define PYTHONCORE_H
 
-//Работа с интерпретатором питона
+//Работа с интерпретатором Python.
+//В данный момент - приостановлено.
 
 class PythonCore
 {

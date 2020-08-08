@@ -80,9 +80,9 @@ INCLUDEPATH += python
 
 #windows64
 windows {
-    INCLUDEPATH += ../Xclu-bin/Python38/include
-    release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
-    debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
+    #INCLUDEPATH += ../Xclu-bin/Python38/include
+    #release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
+    #debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
 }
 
 unix {

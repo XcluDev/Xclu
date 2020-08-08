@@ -63,9 +63,11 @@ void InterfaceGui::insert_label(InterfaceGuiPageCreator &input) {
 
 //---------------------------------------------------------------------
 //вставить на страницу созданный виджет
-void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input, int pos_x) {
-    input.grid->addWidget(widget, input.y, pos_x);
-    input.y++;
+void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+                                 int pos_x, int shift_y, int spanx, int spany) {
+
+    input.grid->addWidget(widget, input.y + shift_y, pos_x, spany, spanx);
+    input.y += shift_y + spany;
 
     //запоминаем widget, чтобы управлять его видимостью и цветом фона
     set_widget(widget, internal_widget);
@@ -73,8 +75,9 @@ void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, Inte
 
 //---------------------------------------------------------------------
 //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
-//(int, float, checkbox)
-void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input) {
+//(int, float, checkbox, object)
+void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+                                             int pos_x, int shift_y, int spanx, int spany) {
     QSpacerItem *spacer = new QSpacerItem(1,1);
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setMargin(0);
@@ -85,7 +88,7 @@ void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_
     QWidget *holder= new QWidget;
     holder->setLayout(layout);
 
-    insert_widget(holder, internal_widget, input);
+    insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
 }
 
 //---------------------------------------------------------------------

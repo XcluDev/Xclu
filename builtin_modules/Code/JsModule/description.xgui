@@ -1,0 +1,24 @@
+#Module JsModule
+#------------------------------------------
+module_description=Custom JS-module.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings
+
+
+page GUI
+    //GUI description on XGUI language
+const text XGUI xgui="" 20 22
+    
+page Setup
+    //JS code for setup
+const text Setup setup="" 20 22
+
+page Update
+    //JS code for update
+const text Update update="" 20 22
+    
+

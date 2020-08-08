@@ -2,8 +2,9 @@
 
 ### Software
 
-* Qt - https://www.qt.io/
-* GLM - https://glm.g-truc.net
+* Qt - Development, https://www.qt.io/
+* GLM - Geometry, https://glm.g-truc.net
+* MinGW - Create DLL, http://www.mingw.org/
 
 ### Design
 
