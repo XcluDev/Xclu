@@ -14,5 +14,6 @@
 #include "xclu_types.h"
 #include "xclu_theme.h"
 #include "xclu_utils.h"
+#include "xclu_paths.h"
 
 #endif // INCL_QT_H

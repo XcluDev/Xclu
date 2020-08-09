@@ -3,7 +3,6 @@
 #include "dialogtestmoduleinterface.h"
 #include "incl_qtcpp.h"
 #include "project.h"
-#include "settingskeys.h"
 #include "moduleinfo.h"
 #include "moduleinterface.h"
 #include "editormodule.h"
@@ -72,10 +71,11 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
 
     //Cчитывание запомненного пути из настроек приложения
     //QSettings settings;
-    XCLU_SETTINGS
-    QString last_folder = settings.value(SettingsKey::dialogtestmodule_folder(), "").toString();
+    QString last_folder = Settings::get_string(Settings::dialogtestmodule_folder(), "");
+
+    //TODO - сейчас dialogtestmodule_tab не ставится!!!
     if (!last_folder.isEmpty()) {
-        int last_tab  = settings.value(SettingsKey::dialogtestmodule_tab(), 0).toInt();
+        int last_tab  = Settings::get_int(Settings::dialogtestmodule_tab(), 0);
         load_module(last_folder, last_tab);
     }
 
@@ -134,9 +134,7 @@ void DialogTestModuleInterface::reload(int tab_index) {
     }
 
     //запись папки в настройки
-    //QSettings settings;
-    XCLU_SETTINGS
-    settings.setValue(SettingsKey::dialogtestmodule_folder(), folder);
+    Settings::set_string(Settings::dialogtestmodule_folder(), folder);
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение

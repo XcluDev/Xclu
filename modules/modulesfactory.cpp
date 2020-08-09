@@ -108,7 +108,7 @@ void ModulesFactory::update_categories() {
     //qDebug() << "size " << size();
 
     //сбор категорий, и создание новой категории "All", содержащей все модули
-    QString All = "All";
+    QString All = All_Category_Name();
     for (int i=0; i<size(); i++) {
         auto *module = get_module(i);
         QString cat = module->description.category;

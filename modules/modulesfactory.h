@@ -13,6 +13,9 @@ public:
     ModulesFactory();
     ~ModulesFactory();
 
+    //Имя категории All - используется как Default-значение при считывании настроек
+    static QString All_Category_Name() { return "All"; }
+
     //Загружает модули из папки builtinmodules
     void setup();
 

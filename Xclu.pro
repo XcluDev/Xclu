@@ -100,6 +100,7 @@ SOURCES += \
     builtin_modules_impl/Screen/rtmodulewwindow.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_paths.cpp \
+    core/xclu_settings.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
@@ -171,7 +172,6 @@ SOURCES += \
     project/projectgui.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
-    project/settingskeys.cpp \
     python/pythoncore.cpp
 
 HEADERS += \
@@ -180,6 +180,7 @@ HEADERS += \
     builtin_modules_impl/Screen/rtmodulewwindow.h \
     core/xclu_parse_tree.h \
     core/xclu_paths.h \
+    core/xclu_settings.h \
     core/xclu_theme.h \
     core/xclu_types.h \
     core/xclu_utils.h \
@@ -250,7 +251,6 @@ HEADERS += \
     project/projectgui.h \
     project/projectproperties.h \
     project/projectruntime.h \
-    project/settingskeys.h \
     python/pythoncore.h
 
 

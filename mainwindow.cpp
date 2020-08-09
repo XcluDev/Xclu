@@ -74,10 +74,24 @@ void MainWindow::setup() {   //запуск всех процессов
     //помечаем, что готовы к запуску
     set_state(ProjectRunStateStopped);
 
-    //создаем новый проект
-    //newProjectStartup();
+    //ставим папку для первого открытия проекта из последней папки сохраненного проекта
+    open_projects_folder_ = Settings::get_string(Settings::lastProjectFolder());
 
-    openProject()
+    //открываем последний проект, если он есть
+    QString last_project = Settings::get_string(Settings::lastProjectFile());
+    bool loaded = false;
+    if (!last_project.isEmpty()) {
+        QFileInfo file(last_project);
+        if (file.exists() && file.isFile()) {
+            openProject(last_project);
+            loaded = true;
+        }
+    }
+    //иначе - создаем новый проект
+    if (!loaded) {
+        newProjectStartup();
+    }
+
 }
 
 //---------------------------------------------------------------------
@@ -278,7 +292,12 @@ void MainWindow::closeProject() {
 //---------------------------------------------------------------------
 void MainWindow::open() {
     if (!maybeSave()) return;
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Open Project"), "", "*.xclu");
+
+    //Берем папку открытия проектов - она нужна только при первом открытии, а затем будет использоваться предыдущая
+    QString folder = open_projects_folder_;
+    open_projects_folder_ = "";
+
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Open Project"), folder, "*.xclu");
     if (!fileName.isEmpty()) {
         openProject(fileName);
     }
@@ -401,10 +420,10 @@ bool MainWindow::saveProject(const QString &fileName) {
 QStringList MainWindow::readRecentFiles(QSettings &settings)
 {
     QStringList result;
-    const int count = settings.beginReadArray(SettingsKey::recentProjects());
+    const int count = settings.beginReadArray(Settings::recentProjects());
     for (int i = 0; i < count; ++i) {
         settings.setArrayIndex(i);
-        result.append(settings.value(SettingsKey::file()).toString());
+        result.append(settings.value(Settings::file()).toString());
     }
     settings.endArray();
     return result;
@@ -414,10 +433,10 @@ QStringList MainWindow::readRecentFiles(QSettings &settings)
 void MainWindow::writeRecentFiles(const QStringList &files, QSettings &settings)
 {
     const int count = files.size();
-    settings.beginWriteArray(SettingsKey::recentProjects());
+    settings.beginWriteArray(Settings::recentProjects());
     for (int i = 0; i < count; ++i) {
         settings.setArrayIndex(i);
-        settings.setValue(SettingsKey::file(), files.at(i));
+        settings.setValue(Settings::file(), files.at(i));
     }
     settings.endArray();
 }
@@ -426,7 +445,7 @@ void MainWindow::writeRecentFiles(const QStringList &files, QSettings &settings)
 bool MainWindow::hasRecentFiles() {
     //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
     XCLU_SETTINGS
-    const int count = settings.beginReadArray(SettingsKey::recentProjects());
+    const int count = settings.beginReadArray(Settings::recentProjects());
     settings.endArray();
     return count > 0;
 }
@@ -497,14 +516,26 @@ void MainWindow::set_current_file(const QString &fileName) {
     if (isUntitled) {
         projectFile = tr("Untitled%1.xclu").arg(sequenceNumber++);
     } else {
-        //Внимание, эта функция дает непустую строку только если файл существует.
+        //Внимание, эта функция дает непустую строку, только если файл существует.
         projectFile = QFileInfo(fileName).canonicalFilePath();
     }
 
-    if (!isUntitled && windowFilePath() != projectFile)
-        MainWindow::prependToRecentFiles(projectFile);
+    if (!isUntitled) {
+        //запомнить файл проекта, чтобы его потом открыть
+        Settings::set_string(Settings::lastProjectFile(), projectFile);
+
+        //запомнить папку проекта, чтобы от нее затем начинать Open Project
+        QString folder = QFileInfo(projectFile).canonicalPath();
+        Settings::set_string(Settings::lastProjectFolder(), folder);
+
+        //добавить в список недавно открытых файлов
+        if (windowFilePath() != projectFile) {
+            prependToRecentFiles(projectFile);
+        }
+    }
 
     setWindowFilePath(projectFile);
+
 
     //снять флажок, что проект был изменен
     reset_document_modified();

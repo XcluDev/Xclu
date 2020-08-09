@@ -1,22 +1,33 @@
 #ifndef SETTINGSKEYS_H
 #define SETTINGSKEYS_H
 
-//Объект QSettings с настройками приложения и ключи для записи настроек
+//Настройки приложения и ключи для записи настроек
 #include <QString>
 #include <QSettings>
+#include "xclu_paths.h"
 
-class SettingsKey
-{
+class Settings {
 public:
+    //Взятие и получение строки
+    static QString get_string(QString key, QString def = "");
+    static void set_string(QString key, QString value);
+    static int get_int(QString key, int def = 0);
+    static void set_int(QString key, int value);
+
+    //Конкретные ключи
+    //Диалог добавления модуля
     static QString dialogaddmodule_tab() { return "dialogaddmodule/tab"; }
+
+    //Диалог тестирования GUI новых модулей
     static QString dialogtestmodule_folder() { return "dialogtestmodule/folder"; }
     static QString dialogtestmodule_tab() { return "dialogtestmodule/tab"; }
 
+    //Основное окно
     static QString recentProjects() { return QStringLiteral("recent_projects"); }
     static QString file() { return QStringLiteral("file"); }
 
-    //QScopedPointer<QSettings> settings_;
-
+    static QString lastProjectFile() { return "app/last_project_file"; }
+    static QString lastProjectFolder() { return "app/last_project_folder"; }
 
 };
 

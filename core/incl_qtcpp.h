@@ -15,7 +15,7 @@
 
 #include <QScopedPointer>
 
-#include "settingskeys.h"
+#include "xclu_settings.h"
 #include "console.h"
 
 //функции для парсинга json - проверка, что это объект или массив, и возвращает этот элемент, или  nullptr
