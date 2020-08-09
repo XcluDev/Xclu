@@ -71,7 +71,8 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
     load_button->setFocus();
 
     //Cчитывание запомненного пути из настроек приложения
-    QSettings settings;
+    //QSettings settings;
+    XCLU_SETTINGS
     QString last_folder = settings.value(SettingsKey::dialogtestmodule_folder(), "").toString();
     if (!last_folder.isEmpty()) {
         int last_tab  = settings.value(SettingsKey::dialogtestmodule_tab(), 0).toInt();
@@ -133,7 +134,8 @@ void DialogTestModuleInterface::reload(int tab_index) {
     }
 
     //запись папки в настройки
-    QSettings settings;
+    //QSettings settings;
+    XCLU_SETTINGS
     settings.setValue(SettingsKey::dialogtestmodule_folder(), folder);
 
     //загрузка описания модуля

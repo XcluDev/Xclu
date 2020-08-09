@@ -99,6 +99,7 @@ SOURCES += \
     builtin_modules_impl/Screen/rtmodulewnumber.cpp \
     builtin_modules_impl/Screen/rtmodulewwindow.cpp \
     core/xclu_parse_tree.cpp \
+    core/xclu_paths.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
@@ -178,6 +179,7 @@ HEADERS += \
     builtin_modules_impl/Screen/rtmodulewnumber.h \
     builtin_modules_impl/Screen/rtmodulewwindow.h \
     core/xclu_parse_tree.h \
+    core/xclu_paths.h \
     core/xclu_theme.h \
     core/xclu_types.h \
     core/xclu_utils.h \

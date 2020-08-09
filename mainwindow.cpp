@@ -75,8 +75,9 @@ void MainWindow::setup() {   //запуск всех процессов
     set_state(ProjectRunStateStopped);
 
     //создаем новый проект
-    newProjectStartup();
+    //newProjectStartup();
 
+    openProject()
 }
 
 //---------------------------------------------------------------------
@@ -423,7 +424,8 @@ void MainWindow::writeRecentFiles(const QStringList &files, QSettings &settings)
 
 //---------------------------------------------------------------------
 bool MainWindow::hasRecentFiles() {
-    QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    XCLU_SETTINGS
     const int count = settings.beginReadArray(SettingsKey::recentProjects());
     settings.endArray();
     return count > 0;
@@ -431,7 +433,8 @@ bool MainWindow::hasRecentFiles() {
 
 //---------------------------------------------------------------------
 void MainWindow::prependToRecentFiles(const QString &fileName) {
-    QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    XCLU_SETTINGS
 
     const QStringList oldRecentFiles = readRecentFiles(settings);
     QStringList recentFiles = oldRecentFiles;
@@ -446,7 +449,8 @@ void MainWindow::prependToRecentFiles(const QString &fileName) {
 
 //---------------------------------------------------------------------
 void MainWindow::updateRecentFileActions() {
-    QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    XCLU_SETTINGS
 
     const QStringList recentFiles = readRecentFiles(settings);
     const int count = qMin(int(MaxRecentFiles), recentFiles.size());

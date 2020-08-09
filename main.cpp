@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         XcluTheme::set_theme(&app);
 
 
-        //Описание - используется для записи настроек QSettings
+        //Описание (используется для записи настроек QSettings, но мы их считываем из xclu.ini
         QCoreApplication::setApplicationName("Xclu");
         QCoreApplication::setOrganizationName("Xclu");
         QCoreApplication::setOrganizationDomain("xclu.dev");

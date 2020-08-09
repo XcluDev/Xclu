@@ -29,7 +29,8 @@ DialogAddModule::DialogAddModule(QWidget *parent)
 {
     //Cчитывание запомненного tab из настроек приложения
     //это нужно тут сделать, так как потом вызовется tab_current_changed
-    QSettings settings;
+    //QSettings settings;
+    XCLU_SETTINGS
     QString tab_name = settings.value(SettingsKey::dialogaddmodule_tab(), 0).toString();
     //qDebug() << "tab index stored" << tab_index;
 
@@ -205,7 +206,8 @@ void DialogAddModule::tab_current_changed(int index) {
     //qDebug() << "tab_current_changed" << index;
     if (index >= 0) {
         QString tab_name = category_list_->item(index)->text();
-        QSettings settings;
+        //QSettings settings;
+        XCLU_SETTINGS
         settings.setValue(SettingsKey::dialogaddmodule_tab(), tab_name);
     }
 }
