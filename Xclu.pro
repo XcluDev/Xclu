@@ -165,7 +165,6 @@ SOURCES += \
     project/dialogtestmoduleinterface.cpp \
     project/editormodule.cpp \
     project/editormodules.cpp \
-    project/engines.cpp \
     project/project.cpp \
     project/dialogaddmodule.cpp \
     mainwindow.cpp  \
@@ -244,7 +243,6 @@ HEADERS += \
     project/dialogtestmoduleinterface.h \
     project/editormodule.h \
     project/editormodules.h \
-    project/engines.h \
     project/project.h \
     project/dialogaddmodule.h \
     mainwindow.h   \

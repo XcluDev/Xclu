@@ -7,19 +7,6 @@ module_impl=C++
 
 module_send_calls=get_widget_pointer
 
-#------------------------------------------
-page Content
-    //Window content consisting of layouts and widgets, such as WNumber.
-    
-const text Content content 20 20
-    //Description of layouts and widgets.
-//HorizontalLayout
-//  #wnumber1
-
-#TODO margins, spacing
-
-in button Edit... edit_btn
-    //Press to interactively edit window content.
 
 #------------------------------------------
 page Properties
@@ -89,7 +76,19 @@ const int Font_Size font_size_pix=18 1:1000 1,10
     //pixels
 endif
 
+#------------------------------------------
+page Content
+    //Window content consisting of layouts and widgets, such as WNumber.
+    
+const text Content content 20 20
+    //Description of layouts and widgets.
+//HorizontalLayout
+//  #wnumber1
 
+#TODO margins, spacing
+
+in button Edit... edit_btn
+    //Press to interactively edit window content.
 
 #---------------------------------------------------
 #TODO Menu

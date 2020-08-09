@@ -10,17 +10,17 @@ page Main
 
 
 #-------------------------------------------
-page Interface
-    //GUI description and module settings.
+page Parameters
+    //Parameters GUI description. Also here is Export settings.
      
 const text XGUI _xgui_="" 30 30
     //GUI written in XGUI language.
 
-in button Refresh _refresh_
-    //Press this button to reload GUI.
+in button Apply _gui_apply_
+    //Press this button to reload parameters GUI.
 
-in button Test... _gui_test_button_
-//Press the button to test interface.
+in button Edit... _gui_edit_button_
+    //Edit interface visually.
 
 separator
 
@@ -42,8 +42,8 @@ const string Version _module_version_="1.01"
 
 #module_impl=JS
 
-in button Add_to_List _add_module_list_
-    //Add to Modules List of the project.
+#in button Add_to_List _add_module_list_
+#    //Add to Modules List of the project.
 
 separator 
 
@@ -52,25 +52,41 @@ in button Export... _export_
 endif
 
 #-------------------------------------------
-page Setup
+page Functions
+    //Functions headers list. Each function in the list creates new page for filling the function code.
+     
+const text Functions _functions_="" 30 30
+    //Functions list.
+    //void setup();
+    //void update(); 
+    ////void draw();
+
+in button Apply _functions_apply_
+    //Press this button to reload function.
+
+in button Edit... _functions_edit_button_
+    //Edit functions list visually.
+    
+#-------------------------------------------
+page setup()
     //JS code for setup.
 in text Setup _setup_="" 30 30
 
 #-------------------------------------------
-page Update
+page update()
     //JS code for update.
 in text Update _update_="" 30 30
     
 #-------------------------------------------
-page Draw
-    //JS code for drawing at specified window or widget. If empty - it's ignored.
-in text Draw _draw_="" 30 30
+#page draw()
+#    //JS code for drawing at specified window or widget. If empty - it's ignored.
+#in text Draw _draw_="" 30 30
 
-separator
+#separator
 
 #TODO link
-in string Destination _draw_area_="wwindow1"
-    //Destination area for drawing, can be window or drawing widget.
+#in string Destination _draw_area_="wwindow1"
+#    //Destination area for drawing, can be window or drawing widget.
 
 #-------------------------------------------
 
