@@ -67,13 +67,13 @@ RESOURCES += \
 RC_ICONS = builtin_resources/images/appicon.ico
 
 FORMS += \
-    project/DialogPreferences1.ui \
-    project/dialog.ui \
-    project/dialogmodulename.ui \
-    project/dialogpreferences.ui
+    project/dialogs/DialogPreferences1.ui \
+    project/dialogs/dialog.ui \
+    project/dialogs/dialogmodulename.ui \
+    project/dialogs/dialogpreferences.ui
 
 INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
-INCLUDEPATH += project objects
+INCLUDEPATH += project project/dialogs objects
 
 # Python
 INCLUDEPATH += python
@@ -159,14 +159,14 @@ SOURCES += \
     objects/xcluobjectwrapper.cpp \
     objects/xcluprotecteddata.cpp \
     project/consoleview.cpp \
-    project/dialogmodulename.cpp \
-    project/dialogpreferences.cpp \
-    project/dialogrenamemodule.cpp \
-    project/dialogtestmoduleinterface.cpp \
+    project/dialogs/dialogmodulename.cpp \
+    project/dialogs/dialogpreferences.cpp \
+    project/dialogs/dialogrenamemodule.cpp \
+    project/dialogs/dialogtestmoduleinterface.cpp \
     project/editormodule.cpp \
     project/editormodules.cpp \
     project/project.cpp \
-    project/dialogaddmodule.cpp \
+    project/dialogs/dialogaddmodule.cpp \
     mainwindow.cpp  \
     project/projectgui.cpp \
     project/projectproperties.cpp \
@@ -237,14 +237,14 @@ HEADERS += \
     objects/xcluobjectwrapper.h \
     objects/xcluprotecteddata.h \
     project/consoleview.h \
-    project/dialogmodulename.h \
-    project/dialogpreferences.h \
-    project/dialogrenamemodule.h \
-    project/dialogtestmoduleinterface.h \
+    project/dialogs/dialogmodulename.h \
+    project/dialogs/dialogpreferences.h \
+    project/dialogs/dialogrenamemodule.h \
+    project/dialogs/dialogtestmoduleinterface.h \
     project/editormodule.h \
     project/editormodules.h \
     project/project.h \
-    project/dialogaddmodule.h \
+    project/dialogs/dialogaddmodule.h \
     mainwindow.h   \
     project/projectgui.h \
     project/projectproperties.h \

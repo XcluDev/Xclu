@@ -8,7 +8,6 @@
 #include "xcluobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
-#include "engines.h"
 
 MainWindow *MAIN_WINDOW = nullptr;
 
@@ -68,9 +67,6 @@ void MainWindow::init() {
 
 //---------------------------------------------------------------------
 void MainWindow::setup() {   //запуск всех процессов
-    //запуск движков - Python
-    ENGINES.setup();
-
     //помечаем, что готовы к запуску
     set_state(ProjectRunStateStopped);
 
