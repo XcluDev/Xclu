@@ -33,11 +33,15 @@ InterfaceGuiPage::InterfaceGuiPage(InterfaceGuiPageCreator &input, InterfaceItem
     //вставляем в tabs
     QWidget *scrollWidget = xclu::vwidget(0, scrollarea_, 0);
 
-    input.tabs->addTab(scrollWidget, item->title());
+    auto *tabs = input.tabs;
+    tabs->addTab(scrollWidget, item->title());
+    //устанавливаем подсказку
+    tabs->setTabToolTip(tabs->count()-1, get_tip());
 
+    //начинаем вставлять с верха
     input.y = 0;
 
-    //отслеживание изменений
+    //отслеживание изменений области промотки
     connect(scrollarea_->verticalScrollBar(), SIGNAL (valueChanged(int)), this, SLOT (on_vscroll_changed()));
 
 }

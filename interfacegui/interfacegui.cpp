@@ -19,11 +19,24 @@ InterfaceGui::~InterfaceGui() {
 }
 
 //---------------------------------------------------------------------
+//строка-подсказка, может быть разных типов - см. Tip_Style
 QString InterfaceGui::get_tip() {
-    QString tip = item__->name();
-    if (!item__->description().isEmpty()) {
-        tip.append(" - ");
-        tip.append(item__->description());
+    QString tip;
+    switch (get_tip_style()) {
+    case Tip_Full: {
+        QString tip = item__->name();
+        if (!item__->description().isEmpty()) {
+            tip.append(" - ");
+            tip.append(item__->description());
+        }
+        break;
+    }
+    case Tip_Description: {
+        tip = item__->description();
+        break;
+    }
+    default:
+        xclu_exception("Bad tip style of '" + item__->name() + "'");
     }
     return tip;
 }

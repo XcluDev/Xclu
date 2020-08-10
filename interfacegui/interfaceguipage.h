@@ -22,6 +22,11 @@ protected:
     //скролл-область, которая восстановит свое положение после создания
     XcluScroollArea *scrollarea_ = nullptr;
 
+    //Указываем, что в подсказке страницы требуется только описание, без имени
+    //(так как имя - это и есть заголовок)
+    virtual Tip_Style get_tip_style() { return Tip_Description; }
+
+
 protected slots:
     //будет посылать сигнал изменения, только если это произошло уже после загрузки
     void on_vscroll_changed();

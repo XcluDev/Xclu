@@ -69,6 +69,45 @@ public:
     void propagate_visibility();
 
 protected:
+    //Визуальные элементы
+    //Динамический интерфейс - группы видимости
+    QVector<VisibilityGroupGui *> vis_groups_;
+
+    //метка - используется при регуляции visible и блокировке константы
+    QLabel *label_ = nullptr;   //не надо удалять
+    QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
+
+    //виджет - используется для регуляции visible
+    QWidget *widget_ = nullptr; //не надо удалять
+    QWidget *internal_widget_ = nullptr;    //виджет для установки фона при read_only
+    QBrush default_internal_widget_brush_;  //кисть фона виджета - используется при переключении
+
+    //Свойства для разных ситуаций
+    //заблокирован ли ввод
+    bool blocked() { return blocked_; }
+    bool blocked_ = false;
+
+    //константы делать bold (false для text)
+    virtual bool is_const_bold() { return true; }
+
+    //виртуальная функция, которую подклассы должны переопределить, чтобы разрешать или запрещать редактирование4
+    //конкретно эта функция, реализованная по умолчанию - ставит фон в widget_
+    virtual void set_read_only(bool read_only);
+
+    //строка-подсказка, может быть разных типов - см. Tip_Style
+    QString get_tip();
+
+    //тип подсказки - подклассы могут менять get_tip_style, чтобы установить свой тип
+    //например, page использует только описание
+    enum Tip_Style: int {
+        Tip_Full = 0,       //'name - description'
+        Tip_Description = 1 //'decription'
+    };
+
+    virtual Tip_Style get_tip_style() { return Tip_Full; }
+
+protected:
+    //Члены и функции для создания страницы
     InterfaceItem *item__ = nullptr;
 
     //создать label
@@ -92,39 +131,12 @@ protected:
     //также, вызывается из insert_widget и insert_widget_with_spacer
     void set_widget(QWidget *widget, QWidget *internal_widget);
 
-    //Свойства для разных ситуаций
-    virtual bool is_const_bold() { return true; }   //константы делать bold (false для text)
-
 protected slots:
     //Отслеживание изменений
     //Подклассы должны его вызывать, чтобы пометить, что проект был изменен, вот так:
     //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
     //также, они могут переопределять их для собственных целей, но обязательно вызывать этот базовый метод
     virtual void on_value_changed();
-
-protected:
-    //Динамический интерфейс - группы видимости
-    QVector<VisibilityGroupGui *> vis_groups_;
-
-    //метка - используется при регуляции visible и блокировке константы
-    QLabel *label_ = nullptr;   //не надо удалять
-    QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
-
-    //виджет - используется для регуляции visible
-    QWidget *widget_ = nullptr; //не надо удалять
-    QWidget *internal_widget_ = nullptr;    //виджет для установки фона при read_only
-    QBrush default_internal_widget_brush_;  //кисть фона виджета - используется при переключении
-
-    //заблокирован ли ввод
-    bool blocked() { return blocked_; }
-    bool blocked_ = false;
-
-    //виртуальная функция, которую подклассы должны переопределить, чтобы разрешать или запрещать редактирование4
-    //конкретно эта функция, реализованная по умолчанию - ставит фон в widget_
-    virtual void set_read_only(bool read_only);
-
-    //строка-подсказка, используется в Labels и для кнопки
-    QString get_tip();
 
 };
 
