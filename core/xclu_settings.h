@@ -6,6 +6,9 @@
 #include <QSettings>
 #include "xclu_paths.h"
 
+class QWindow;
+class QMainWindow;
+
 class Settings {
 public:
     //Взятие и получение строки
@@ -15,6 +18,8 @@ public:
     static void set_int(QString key, int value);
 
     //Конкретные ключи
+    static QString key_main_window() { return "main_window"; }
+
     //Диалог добавления модуля
     static QString dialogaddmodule_tab() { return "dialogaddmodule/tab"; }
 
@@ -29,6 +34,9 @@ public:
     static QString lastProjectFile() { return "app/last_project_file"; }
     static QString lastProjectFolder() { return "app/last_project_folder"; }
 
+    //запись/восстановление окна
+    static void save_window(QString window_name, QMainWindow *win);
+    static void load_window(QString window_name, QMainWindow *win);
 };
 
 //Настройки приложения из файла xclu_settings_file()

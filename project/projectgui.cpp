@@ -18,17 +18,17 @@ ProjectGui::ProjectGui(QWidget *parent, QMenu *modulesMenu)
     //CONS_VIEW->setVisible(false);
 
     //консоль слева внизу
-    //this->setLayout(xclu::hlayout(0,
-    //                              xclu::vwidget(0, editor_modules, 10,
-    //                                            CONS_VIEW, 5), 5,
-    //                             editor_module, 10));
+    this->setLayout(xclu::hlayout(0,
+                                  xclu::vwidget(0, editor_modules, 10,
+                                                CONS_VIEW, 5), 5,
+                                 editor_module, 10));
 
     //консоль внизу
-    this->setLayout(xclu::vlayout(0,
-                                  xclu::hwidget(0,
-                                                editor_modules, 5,
-                                                editor_module, 10), 10,
-                                  CONS_VIEW, 2));
+    //this->setLayout(xclu::vlayout(0,
+    //                              xclu::hwidget(0,
+    //                                            editor_modules, 5,
+    //                                            editor_module, 10), 10,
+    //                              CONS_VIEW, 2));
 
     //"фабрика" модулей
     FACTORY.setup();

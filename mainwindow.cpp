@@ -333,12 +333,12 @@ void MainWindow::dev_test_module_interface() {
 
 //---------------------------------------------------------------------
 void MainWindow::readSettings() {
-
+    Settings::load_window(Settings::key_main_window(), this);
 }
 
 //---------------------------------------------------------------------
 void MainWindow::writeSettings() {
-
+    Settings::save_window(Settings::key_main_window(), this);
 }
 
 //---------------------------------------------------------------------
@@ -346,7 +346,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     //Запись проекта, если требуется
     if (maybeSave()) {
-        //Запись состояния
+        //Запись состояния - делаем до остановки, чтобы в случае ошибки все равно записалось
         writeSettings();
         //Остановка проекта
         immediate_stop();
