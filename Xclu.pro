@@ -39,8 +39,7 @@ Debug:UI_DIR = debug/.ui
 #TODO enable all exceptions handling in VisualStudio, including division by zero:
 #Project Properties -> C/C++ -> Code Generation -> Modify the Enable C++ Exceptions to "Yes With SEH Exceptions". 
 
- 
-QT      += gui
+
 QT       += core gui
 QT       += multimedia multimediawidgets
 

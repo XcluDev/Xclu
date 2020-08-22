@@ -1,23 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>builtin_examples/Modules/Screen/OpenGLWindow/description.ini</file>
-        <file>builtin_examples/Modules/Screen/PointCloudDraw/description.ini</file>
-        <file>builtin_examples/Modules/Screen/PythonDraw/description.ini</file>
-        <file>builtin_examples/Modules/Screen/StringEditor/description.ini</file>
-        <file>builtin_examples/Modules/Screen/TextEditor/description.ini</file>
-        <file>builtin_examples/Modules/Screen/ViewArea/description.ini</file>
-        <file>builtin_examples/Modules/Screen/Window/description.ini</file>
-        <file>builtin_examples/Modules/Sound/PlaySound/description.ini</file>
-        <file>builtin_examples/Modules/System/Execute/description.ini</file>
-        <file>builtin_examples/Modules/System/FileLoad/description.ini</file>
-        <file>builtin_examples/Modules/System/FileSave/description.ini</file>
-        <file>builtin_examples/Modules/System/LogConsole/description.ini</file>
-        <file>builtin_examples/Modules/System/PythonCode/description.ini</file>
-        <file>builtin_examples/Modules/System/Stopper/description.ini</file>
-        <file>builtin_examples/Modules/Web/FileDownload/description.ini</file>
-        <file>builtin_examples/Modules/Web/FileUpload/description.ini</file>
-        <file>builtin_examples/Modules/Web/Instagram/description.ini</file>
-        <file>builtin_examples/Modules/Web/Twitter/description.ini</file>
         <file>builtin_resources/general_page.xgui</file>
         <file>builtin_resources/object_types.xgui</file>
         <file>builtin_modules/Code/ComputeShaderCode/description.xgui</file>

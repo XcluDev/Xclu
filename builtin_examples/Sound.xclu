@@ -1,0 +1,245 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "frame_rate": "30",
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "SoundOut",
+                "name": "sound_out1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "2"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "modules_list",
+                        "atitle": "Sound Sources",
+                        "atype": "text",
+                        "avalue": "#id of modules to play and optional volumes\n#for example: synthfromimage1 0.5",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "volume",
+                        "atitle": "Volume",
+                        "atype": "float",
+                        "avalue": "0.8",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_device",
+                        "atitle": "Sound Device",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_index",
+                        "atitle": "Device Index",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "settings",
+                        "atitle": "Settings",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "sample_rate",
+                        "atitle": "Sample Rate",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "custom_sample_rate",
+                        "atitle": "Custom Sample Rate",
+                        "atype": "int",
+                        "avalue": "44100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "channels",
+                        "atitle": "Channels",
+                        "atype": "int",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "buffer_size_desired",
+                        "atitle": "Buffer Size",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "runtime",
+                        "atitle": "Runtime",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "atitle": "Connected Device Name",
+                        "atype": "string",
+                        "avalue": "Default Output Device"
+                    },
+                    {
+                        "aname": "is_started",
+                        "atitle": "Is Started",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "sound_format",
+                        "atitle": "Sound Format",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "buffer_size",
+                        "atitle": "Buffer Size",
+                        "atype": "int",
+                        "avalue": "35280"
+                    },
+                    {
+                        "aname": "Devices",
+                        "atitle": "Devices",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_devices",
+                        "atitle": "Print Devices",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_formats",
+                        "atitle": "Print Formats",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "local_console",
+                        "atitle": "Local Console",
+                        "atype": "text",
+                        "avalue": "Connected Output Audio devices:\n0: Focusrite USB (Focusrite USB Audio)\n1: Динамики (NoMachine Microphone Adapter)\n2: Focusrite USB (Focusrite USB Audio)\n3: �������� (NoMachine Microphone Adapter)\n\nStarting: Default Output Device\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
+                    },
+                    {
+                        "aname": "Test_Sound",
+                        "atitle": "Test Sound",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "gen_test",
+                        "atitle": "Generate Test Sound",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        }
+    ]
+}

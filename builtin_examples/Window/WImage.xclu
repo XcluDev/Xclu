@@ -1,0 +1,812 @@
+{
+    "application": {
+        "name": "XCLU",
+        "version": "1.111"
+    },
+    "aproject_properties": {
+        "frame_rate": "30",
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Webcamera",
+                "id": "webcam1",
+                "name": "Webcamera1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "capture_source",
+                        "atitle": "Capture Source",
+                        "atype": "stringlist",
+                        "avalue": "Camera",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_device",
+                        "atitle": "Device",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_index",
+                        "atitle": "Device Index",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image",
+                        "atitle": "Image",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "settings",
+                        "atitle": "Settings",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "atitle": "Frame Rate",
+                        "atype": "stringlist",
+                        "avalue": "Camera_Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "custom_frame_rate",
+                        "atitle": "Custom Frame Rate",
+                        "atype": "int",
+                        "avalue": "30",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "resolution",
+                        "atitle": "Resolution",
+                        "atype": "stringlist",
+                        "avalue": "Camera_Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "res_x",
+                        "atitle": "Resolution X",
+                        "atype": "int",
+                        "avalue": "1024",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "res_y",
+                        "atitle": "Resolution Y",
+                        "atype": "int",
+                        "avalue": "768",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_channels",
+                        "atitle": "Channels",
+                        "atype": "stringlist",
+                        "avalue": "RGB",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_data_type",
+                        "atitle": "Data Type",
+                        "atype": "stringlist",
+                        "avalue": "u8bit",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "runtime",
+                        "atitle": "Runtime Details",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "Microsoft® LifeCam Cinema(TM)"
+                    },
+                    {
+                        "aname": "is_started",
+                        "atitle": "Is Started",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frames_captured",
+                        "atitle": "Frames Captured",
+                        "atype": "string",
+                        "avalue": "Captured 169, Processed 169, Dropped 0 frame(s)"
+                    },
+                    {
+                        "aname": "Devices",
+                        "atitle": "Devices",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_devices",
+                        "atitle": "Print Devices",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_formats",
+                        "atitle": "Print Formats",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "local_console",
+                        "atitle": "Local Console",
+                        "atype": "text",
+                        "avalue": "Connected Web Cameras:\n0: Microsoft® LifeCam Cinema(TM)\n1: Integrated Webcam\n2: THETA UVC FullHD Blender\n3: THETA UVC HD Blender\n\nStarting: Microsoft® LifeCam Cinema(TM)\n\nSupported Formats for 'Microsoft® LifeCam Cinema(TM)'\n  640x480, 30 FPS\n  640x480, 20 FPS\n  640x480, 14 FPS\n  640x480, 10 FPS\n  640x480, 7 FPS\n  640x360, 30 FPS\n  640x360, 20 FPS\n  640x360, 14 FPS\n  640x360, 10 FPS\n  640x360, 7 FPS\n  424x240, 30 FPS\n  424x240, 20 FPS\n  424x240, 14 FPS\n  424x240, 10 FPS\n  424x240, 7 FPS\n  352x288, 30 FPS\n  352x288, 20 FPS\n  352x288, 14 FPS\n  352x288, 10 FPS\n  352x288, 7 FPS\n  320x240, 30 FPS\n  320x240, 20 FPS\n  320x240, 14 FPS\n  320x240, 10 FPS\n  320x240, 7 FPS\n  176x144, 30 FPS\n  176x144, 20 FPS\n  176x144, 14 FPS\n  176x144, 10 FPS\n  176x144, 7 FPS\n  160x120, 30 FPS\n  160x120, 20 FPS\n  160x120, 14 FPS\n  160x120, 10 FPS\n  160x120, 7 FPS\n  1280x720, 30 FPS\n  1280x720, 20 FPS\n  1280x720, 14 FPS\n  1280x720, 10 FPS\n  1280x720, 7 FPS\n  960x544, 30 FPS\n  960x544, 20 FPS\n  960x544, 14 FPS\n  960x544, 10 FPS\n  960x544, 7 FPS\n  800x448, 30 FPS\n  800x448, 20 FPS\n  800x448, 14 FPS\n  800x448, 10 FPS\n  800x448, 7 FPS\n  800x600, 30 FPS\n  800x600, 20 FPS\n  800x600, 14 FPS\n  800x600, 10 FPS\n  800x600, 7 FPS\n\n"
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "id",
+                        "atitle": "Id",
+                        "atype": "string",
+                        "avalue": "webcam1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "run_mode",
+                        "atitle": "Run Mode",
+                        "atype": "stringlist",
+                        "avalue": "Main_Loop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next_if_disabled",
+                        "atitle": "Execute Next If Disabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next",
+                        "atitle": "Execute Next",
+                        "atype": "stringlist",
+                        "avalue": "Next_Module",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_module_id",
+                        "atitle": "Next Module Id",
+                        "atype": "string",
+                        "avalue": "module1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_script",
+                        "atitle": "Next Script",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "WImage",
+                "id": "wimage1",
+                "name": "WImage1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "atitle": "Value",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image",
+                        "atitle": "Image",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "parent_id",
+                        "atitle": "Parent",
+                        "atype": "string",
+                        "avalue": "window1"
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "source",
+                        "atitle": "Value Source",
+                        "atype": "stringlist",
+                        "avalue": "Other_Module_Value",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_link",
+                        "atitle": "Image Link",
+                        "atype": "string",
+                        "avalue": "webcam1->image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "is_new_frame_link",
+                        "atitle": "Is New Frame Link",
+                        "atype": "string",
+                        "avalue": "webcam1->is_new_frame",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "expression",
+                        "atitle": "Expression",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Properties",
+                        "atitle": "Properties",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "w",
+                        "atitle": "W",
+                        "atype": "int",
+                        "avalue": "640",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "h",
+                        "atitle": "H",
+                        "atype": "int",
+                        "avalue": "480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_text",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_placement",
+                        "atitle": "Placement",
+                        "atype": "stringlist",
+                        "avalue": "Left",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "atitle": "Alignment",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width",
+                        "atitle": "Width",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "id",
+                        "atitle": "Id",
+                        "atype": "string",
+                        "avalue": "wimage1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "run_mode",
+                        "atitle": "Run Mode",
+                        "atype": "stringlist",
+                        "avalue": "Main_Loop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next_if_disabled",
+                        "atitle": "Execute Next If Disabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next",
+                        "atitle": "Execute Next",
+                        "atype": "stringlist",
+                        "avalue": "Next_Module",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_module_id",
+                        "atitle": "Next Module Id",
+                        "atype": "string",
+                        "avalue": "module1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_script",
+                        "atitle": "Next Script",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "id": "window1",
+                "name": "Window1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Structure",
+                        "atitle": "Structure",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "structure",
+                        "atitle": "Struct.",
+                        "atype": "text",
+                        "avalue": "HorizontalLayout\n  wimage1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Properties",
+                        "atitle": "Properties",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size",
+                        "atitle": "Size",
+                        "atype": "stringlist",
+                        "avalue": "640x480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_x",
+                        "atitle": "Size X",
+                        "atype": "int",
+                        "avalue": "1280",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_y",
+                        "atitle": "Size Y",
+                        "atype": "int",
+                        "avalue": "720",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "position",
+                        "atitle": "Position",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_x",
+                        "atitle": "Pos X",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_y",
+                        "atitle": "Pos Y",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "mode",
+                        "atitle": "Mode",
+                        "atype": "stringlist",
+                        "avalue": "Normal_Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "theme",
+                        "atitle": "Theme",
+                        "atype": "stringlist",
+                        "avalue": "Standard",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size",
+                        "atitle": "Font Size",
+                        "atype": "stringlist",
+                        "avalue": "Custom",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "atitle": "Font Size",
+                        "atype": "int",
+                        "avalue": "18",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Actions",
+                        "atitle": "Actions",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "on_close",
+                        "atitle": "On Close",
+                        "atype": "stringlist",
+                        "avalue": "Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "id",
+                        "atitle": "Id",
+                        "atype": "string",
+                        "avalue": "window1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "run_mode",
+                        "atitle": "Run Mode",
+                        "atype": "stringlist",
+                        "avalue": "Main_Loop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next_if_disabled",
+                        "atitle": "Execute Next If Disabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "execute_next",
+                        "atitle": "Execute Next",
+                        "atype": "stringlist",
+                        "avalue": "Next_Module",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_module_id",
+                        "atitle": "Next Module Id",
+                        "atype": "string",
+                        "avalue": "module1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "next_script",
+                        "atitle": "Next Script",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        }
+    ]
+}
