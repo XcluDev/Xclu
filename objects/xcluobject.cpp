@@ -222,15 +222,22 @@ QString XcluObject::var_string(QString name, bool create_if_not_exists) const {
         xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
+#define XcluObject_get_pointer_(TYPE_NAME, CPP_TYPE, FUN_CONST) \
+    CPP_TYPE XcluObject::get_##TYPE_NAME(QString name) FUN_CONST { \
+        xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
+        auto result = TYPE_NAME##_[name]; \
+        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr during calling 'XcluObject::get"));\
+        return result; \
+    }
 
 XcluObject_get_(int,int,const)
 XcluObject_get_(float,float,const)
 XcluObject_get_(string,QString,const)
-XcluObject_get_(array,const XcluArray *,const)
-XcluObject_get_(strings,const QStringList *,const)
-XcluObject_get_(object,const XcluObject *,const)
-XcluObject_get_(pointer,void const *,const)
-XcluObject_get_(pointer,void *,)
+XcluObject_get_pointer_(array,const XcluArray *,const)
+XcluObject_get_pointer_(strings,const QStringList *,const)
+XcluObject_get_pointer_(object,const XcluObject *,const)
+XcluObject_get_pointer_(pointer,void const *,const)
+XcluObject_get_pointer_(pointer,void *,)
 
 
 //---------------------------------------------------------------------
@@ -247,22 +254,24 @@ QString &XcluObject::var_string(QString name, bool create_if_not_exists) {
         return TYPE_NAME##_[name]; \
     }
 
-#define XcluObject_var_create_(TYPE_NAME, CPP_TYPE) \
+#define XcluObject_var_pointer_(TYPE_NAME, CPP_TYPE) \
     CPP_TYPE XcluObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
         bool has = has_##TYPE_NAME(name); \
         xclu_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME"'" + name + "'"); \
         if (!has) { \
-            TYPE_NAME##_[name] = create_##TYPE_NAME(name);      \
+            TYPE_NAME##_.insert(name, create_##TYPE_NAME(name));      \
         }           \
+        auto result = TYPE_NAME##_[name]; \
+        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr, during calling 'XcluObject::var'"));\
         return TYPE_NAME##_[name]; \
     }
 
 XcluObject_var_(int,int &)
 XcluObject_var_(float,float &)
 XcluObject_var_(string,QString &)
-XcluObject_var_create_(array,XcluArray *)
-XcluObject_var_create_(strings,QStringList *)
-XcluObject_var_create_(object,XcluObject *)
+XcluObject_var_pointer_(array,XcluArray *)
+XcluObject_var_pointer_(strings,QStringList *)
+XcluObject_var_pointer_(object,XcluObject *)
 
 //---------------------------------------------------------------------
 /* Макрос для функций установки значения set_int, set_float, ...
