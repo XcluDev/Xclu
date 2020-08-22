@@ -21,14 +21,14 @@ class QSpacerItem;
 
 
 //Структура для создания layouts
-struct RtModuleWWindowStructureItem {
-    RtModuleWWindowStructureItem();
-    RtModuleWWindowStructureItem(QWidget* widget, int stretch = 0);
-    RtModuleWWindowStructureItem(QLayout *layout, int stretch = 0);
-    RtModuleWWindowStructureItem(QWidget* widget, QString tab_title);
-    RtModuleWWindowStructureItem(int stretch);
+struct RtModuleWindowStructureItem {
+    RtModuleWindowStructureItem();
+    RtModuleWindowStructureItem(QWidget* widget, int stretch = 0);
+    RtModuleWindowStructureItem(QLayout *layout, int stretch = 0);
+    RtModuleWindowStructureItem(QWidget* widget, QString tab_title);
+    RtModuleWindowStructureItem(int stretch);
 
-    ~RtModuleWWindowStructureItem();
+    ~RtModuleWindowStructureItem();
 
     QWidget *take_widget();         //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
 
@@ -46,15 +46,15 @@ struct RtModuleWWindowStructureItem {
 
 
 //Модуль
-class RtModuleWWindow: public RtModule
+class RtModuleWindow: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleWWindow();
-    ~RtModuleWWindow();
+    RtModuleWindow();
+    ~RtModuleWindow();
 
     static QString *static_class_name_ptr; //"Window", эта переменная используется для создания новых объектов
-    static RtModuleWWindow *new_module();
+    static RtModuleWindow *new_module();
 
 protected:
     //Выполнение
@@ -141,7 +141,7 @@ protected:
     //Рекурсивное создание структуры окна
     //При реализации я старался сделать здесь безопасным при exceptions и исключить утечки памяти
     //для этого старался использовать QScopedPointer и забирать его указатели с помощью take в безопасные моменты
-    RtModuleWWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
+    RtModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
 
     //парсить число, если оно есть, иначе - выдать default_value
     int parse_int(QStringList list, int index, int default_value, QString line);

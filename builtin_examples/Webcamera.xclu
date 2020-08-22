@@ -6,7 +6,7 @@
     "aproject_properties": {
         "frame_rate": "30",
         "name": "",
-        "selected_module": "2"
+        "selected_module": "3"
     },
     "modules": [
         {
@@ -461,8 +461,210 @@
         },
         {
             "description": {
-                "class": "WNumber",
-                "name": "wnumber1",
+                "class": "Window",
+                "name": "wwindow1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "atitle": "Properties",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size",
+                        "atitle": "Size",
+                        "atype": "stringlist",
+                        "avalue": "640x480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_x",
+                        "atitle": "Size X",
+                        "atype": "int",
+                        "avalue": "1280",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_y",
+                        "atitle": "Size Y",
+                        "atype": "int",
+                        "avalue": "720",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "position",
+                        "atitle": "Position",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_x",
+                        "atitle": "Pos X",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_y",
+                        "atitle": "Pos Y",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "mode",
+                        "atitle": "Mode",
+                        "atype": "stringlist",
+                        "avalue": "Normal_Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "theme",
+                        "atitle": "Theme",
+                        "atype": "stringlist",
+                        "avalue": "Standard",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size",
+                        "atitle": "Font Size",
+                        "atype": "stringlist",
+                        "avalue": "Custom",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "atitle": "Font Size",
+                        "atype": "int",
+                        "avalue": "18",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Content",
+                        "atitle": "Content",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "content",
+                        "atitle": "Content",
+                        "atype": "text",
+                        "avalue": "HorizontalLayout\n  #wnumber1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Actions",
+                        "atitle": "Actions",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "on_close",
+                        "atitle": "On Close",
+                        "atype": "stringlist",
+                        "avalue": "Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Scalar",
+                "name": "scalar1",
                 "version": "1.01"
             },
             "interface": {
@@ -496,7 +698,7 @@
                         "aname": "source",
                         "atitle": "Value Source",
                         "atype": "stringlist",
-                        "avalue": "Other_Module_Value",
+                        "avalue": "GUI",
                         "expr": "",
                         "expr_use": false
                     },
@@ -757,208 +959,6 @@
                         "atitle": "Was Error",
                         "atype": "checkbox",
                         "avalue": "1"
-                    },
-                    {
-                        "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    }
-                ]
-            }
-        },
-        {
-            "description": {
-                "class": "WWindow",
-                "name": "wwindow1",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "3"
-                },
-                "items": [
-                    {
-                        "aname": "Properties",
-                        "atitle": "Properties",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title",
-                        "atitle": "Title",
-                        "atype": "string",
-                        "avalue": "Window",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "size",
-                        "atitle": "Size",
-                        "atype": "stringlist",
-                        "avalue": "640x480",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "size_x",
-                        "atitle": "Size X",
-                        "atype": "int",
-                        "avalue": "1280",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "size_y",
-                        "atitle": "Size Y",
-                        "atype": "int",
-                        "avalue": "720",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "position",
-                        "atitle": "Position",
-                        "atype": "stringlist",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "pos_x",
-                        "atitle": "Pos X",
-                        "atype": "int",
-                        "avalue": "50",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "pos_y",
-                        "atitle": "Pos Y",
-                        "atype": "int",
-                        "avalue": "50",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "visible",
-                        "atitle": "Visible",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "mode",
-                        "atitle": "Mode",
-                        "atype": "stringlist",
-                        "avalue": "Normal_Window",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "theme",
-                        "atitle": "Theme",
-                        "atype": "stringlist",
-                        "avalue": "Standard",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "font_size",
-                        "atitle": "Font Size",
-                        "atype": "stringlist",
-                        "avalue": "Custom",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "font_size_pix",
-                        "atitle": "Font Size",
-                        "atype": "int",
-                        "avalue": "18",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "Content",
-                        "atitle": "Content",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "content",
-                        "atitle": "Content",
-                        "atype": "text",
-                        "avalue": "VerticalLayout\n  wimage1\n  #wnumber1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "Actions",
-                        "atitle": "Actions",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "on_close",
-                        "atitle": "On Close",
-                        "atype": "stringlist",
-                        "avalue": "Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "stringlist",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
-                        "avalue": "0"
                     },
                     {
                         "aname": "error_text",
