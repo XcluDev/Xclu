@@ -50,7 +50,7 @@ protected:
     virtual void call_internal(QString function, XcluObject *input, XcluObject * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
-    QString parent_name_;
+    QString parent_id_;
     bool parent_was_set_ = false;
 
     QWidget *widget_ = nullptr; //весь виджет

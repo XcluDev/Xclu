@@ -35,8 +35,8 @@ RtModuleWNumber::~RtModuleWNumber()
 void RtModuleWNumber::execute_start_internal() {
     //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
     parent_was_set_ = false;
-    parent_name_ = "";
-    set_string("parent_name", "");
+    parent_id_ = "";
+    set_string("parent_id", "");
 
     DataAccess access(data_);
     data_.clear();
@@ -64,7 +64,7 @@ void RtModuleWNumber::execute_stop_internal() {
 void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObject *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
-        xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_name_ + "'")
+        xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
         //call get_widget_pointer
         //Window calls GUI elements to insert them into itself.
@@ -76,8 +76,8 @@ void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObj
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_name_ = ObjectRead(input).get_string("parent_name");
-        set_string("parent_name", parent_name_);
+        parent_id_ = ObjectRead(input).get_string("parent_id");
+        set_string("parent_id", parent_id_);
         parent_was_set_ = true;
 
         //проверяем, что еще не стартовали
@@ -85,7 +85,7 @@ void RtModuleWNumber::call_internal(QString function, XcluObject *input, XcluObj
                     QString("Can't create widget, because module '%1' was not started yet."
                             " You need to place it before parent '%2'.")
                     .arg(module_->name())
-                    .arg(parent_name_));
+                    .arg(parent_id_));
 
         //создаем виджет
         create_widget();
