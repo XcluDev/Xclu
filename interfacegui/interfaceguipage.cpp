@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "interfaceguipage.h"
 #include "interfaceitempage.h"
 #include "xcluscrollarea.h"

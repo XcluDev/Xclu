@@ -35,6 +35,7 @@ void xclu_console_warning(QString message) {
 void xclu_console_append(QString message) {
     xclu_assert(CONS_VIEW, "CONS_VIEW is not created, can't add log message there");
     CONS_VIEW->log(message);
+    qDebug() << ">>" << message;
 }
 
 //Сигнал, что проект был изменен

@@ -40,7 +40,7 @@ Debug:UI_DIR = debug/.ui
 #Project Properties -> C/C++ -> Code Generation -> Modify the Enable C++ Exceptions to "Yes With SEH Exceptions". 
 
  
-
+QT      += gui
 QT       += core gui
 QT       += multimedia multimediawidgets
 
@@ -249,6 +249,7 @@ HEADERS += \
     project/projectgui.h \
     project/projectproperties.h \
     project/projectruntime.h \
-    python/pythoncore.h
+    python/pythoncore.h \
+    core/qt_widgets.h
 
 

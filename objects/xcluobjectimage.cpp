@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 
 #include "xcluobjectimage.h"
 #include "incl_qtcpp.h"

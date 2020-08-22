@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 
 #include "mainwindow.h"
 #include "project.h"

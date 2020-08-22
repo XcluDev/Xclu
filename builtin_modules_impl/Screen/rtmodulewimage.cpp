@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "rtmodulewimage.h"
 
 #include "incl_qtcpp.h"

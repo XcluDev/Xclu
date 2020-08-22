@@ -274,7 +274,8 @@ void RtModuleSoundOut::on_changed_audio_state(QAudio::State state) {
         case QAudio::SuspendedState:
         case QAudio::StoppedState:
         case QAudio::IdleState:
-        case QAudio::InterruptedState:
+        //TODO Qt 5.13:
+        //case QAudio::InterruptedState:
             set_started(false);
             QAudio::Error error = m_audioOutput->error();
             switch (error) {

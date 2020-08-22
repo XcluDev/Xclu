@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 
 #include "dialogtestmoduleinterface.h"
 #include "incl_qtcpp.h"

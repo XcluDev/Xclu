@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "incl_qtcpp.h"
 #include "dialogaddmodule.h"
 #include "modulesfactory.h"

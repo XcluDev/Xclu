@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "editormodule.h"
 #include "project.h"
 #include "incl_qtcpp.h"
@@ -169,7 +169,8 @@ void EditorModule::load_module(ModuleInfo *info, ModuleInterface *interf, QStrin
     if (!help_text.isEmpty()) {
         QTextEdit *help = new QTextEdit;
         help->setReadOnly(true);
-        help->setMarkdown(help_text);
+        //TODO Qt 5.15
+        //help->setMarkdown(help_text);
         xclu::set_font_size(help, xclu::help_font_size);
         tabs->addTab(help, tr("Help"));
     }

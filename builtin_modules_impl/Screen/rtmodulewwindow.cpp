@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include <QScreen>
 #include "rtmodulewwindow.h"
 

@@ -16,8 +16,9 @@ class QTabWidget;
 class QTableWidget;
 class QListWidget;
 QT_END_NAMESPACE
-class ModuleInfo;
-class ModuleInterface;
+#include "moduleinfo.h"
+#include "moduleinterface.h"
+
 class EditorModule;
 
 

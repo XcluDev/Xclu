@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "xcluobjectwrapper.h"
 #include "incl_qtcpp.h"
 #include "interfaceitemobject.h"

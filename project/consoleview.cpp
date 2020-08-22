@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "consoleview.h"
 #include "incl_qtcpp.h"
 

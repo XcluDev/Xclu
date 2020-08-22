@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include "modulesfactory.h"
 #include "project.h"
 #include "projectgui.h"

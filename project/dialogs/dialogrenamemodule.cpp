@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 
 #include "dialogrenamemodule.h"
 #include "project.h"

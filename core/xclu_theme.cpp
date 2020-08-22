@@ -1,8 +1,13 @@
-#include <QtWidgets>
+#include "qt_widgets.h"
 #include <QFontDatabase>
 #include <QApplication>
 #include "xclu_theme.h"
 #include "incl_qtcpp.h"
+
+//---------------------------------------------------------------------
+QString font_family_values() {
+    return "Courier New";
+}
 
 //---------------------------------------------------------------------
 /*static*/ void XcluTheme::set_theme(QApplication *app) {

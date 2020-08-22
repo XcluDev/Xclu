@@ -74,7 +74,7 @@ const int console_font_size = 15;    //размер шрифта консоли 
 
 //Тип шрифта
 //static QString font_family_main() { return "Courier New"; }
-static QString font_family_values() { return "Courier New"; }
+QString font_family_values();
 
 //Диалог добавления нового модуля
 const int add_module_categories_list_minimum_width = 150; //ширина списка категорий

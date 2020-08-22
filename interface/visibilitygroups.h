@@ -12,6 +12,7 @@ class VisibilityGroupGui;
 //группа для сбора дерева зависимости
 class VisibleGroupBase {
 public:
+    VisibleGroupBase() {}
     VisibleGroupBase(QString item_name, QStringList variants);
     void add_affected_item(QString name);
 
