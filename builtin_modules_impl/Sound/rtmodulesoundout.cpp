@@ -283,7 +283,7 @@ void RtModuleSoundOut::on_changed_audio_state(QAudio::State state) {
                 break;
             case QAudio::IOError:  xclu_exception("QAudio::IOError");
                 break;
-            case QAudio::OpenError: xclu_exception("QAudio::IOError");
+            case QAudio::OpenError: xclu_exception("QAudio::OpenError");
                 break;
             case QAudio::UnderrunError: xclu_exception("QAudio::UnderrunError");
                 break;

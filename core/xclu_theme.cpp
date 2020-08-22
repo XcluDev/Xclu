@@ -36,7 +36,7 @@ QString font_family_values() {
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XcluTheme::set_theme(QMainWindow *window) {
+/*static*/ void XcluTheme::set_theme(QMainWindow */*window*/) {
     //https://doc.qt.io/qt-5/stylesheet.html
     //https://wiki.qt.io/How_to_Change_the_Background_Color_of_QWidget
 
@@ -75,7 +75,7 @@ QString font_family_values() {
 namespace xclu {
 //---------------------------------------------------------------------
 //ставит шрифт не менее, чем уже стоит
-void set_font_size(QWidget *widget, int size) {
+void set_font_size(QWidget */*widget*/, int /*size*/) {
    /* auto font = widget->font();
     if (font.pixelSize() < size) {
         font.setPixelSize(size);

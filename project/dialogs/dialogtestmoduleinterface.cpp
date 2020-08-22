@@ -119,7 +119,7 @@ void DialogTestModuleInterface::clear() {
 }
 
 //---------------------------------------------------------------------
-void DialogTestModuleInterface::reload(int tab_index) {
+void DialogTestModuleInterface::reload(int /*tab_index*/) {
     clear();
 
     QString folder = folder_edit_->toPlainText();

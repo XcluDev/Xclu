@@ -14,14 +14,14 @@ Xclu is made to help media artists (and scientists and creative coders) to do th
 
 )
 
-Project website: xclu.dev
+Project website: https://xclu.dev
 
-Forum & docs: forum.xclu.dev
+Forum & docs: https://forum.xclu.dev
 
 ## Supported platforms
 Xclu intended to work on Windows, Mac OS, Linux.
 
-It's written using Qt C++ 5.9.x and later.
+It's written for Qt C++ 5.9.5 and later (the reason is that this Qt version is used on Jetson Nano).
 
 Instructions on installing and building at Jetson Nano: https://forum.xclu.dev/t/setting-up-jetson-nano-for-xclu-qt-realsense-nomachine/25
 

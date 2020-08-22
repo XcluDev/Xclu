@@ -85,7 +85,7 @@ void RtModule::execute(ModuleExecuteStage stage) {
         reset_error_values();
 
         //auto mode = run_mode();
-        bool enabled = is_enabled();
+        //bool enabled = is_enabled();
         switch (stage) {
         case ModuleExecuteStageStart:
             //if (enabled && mode == ModuleRunMode_Main_Loop)

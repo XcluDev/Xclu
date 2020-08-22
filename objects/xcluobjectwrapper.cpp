@@ -58,7 +58,7 @@ void XcluObjectWrapper::show_object(InterfaceGuiObject *item) {
 
 //---------------------------------------------------------------------
 //показать объект в QLabel
-void XcluObjectWrapper::show_object(QLabel *label, const XcluObjectShowSettings &settings) {
+void XcluObjectWrapper::show_object(QLabel *label, const XcluObjectShowSettings &/*settings*/) {
     label->setText("");
 }
 

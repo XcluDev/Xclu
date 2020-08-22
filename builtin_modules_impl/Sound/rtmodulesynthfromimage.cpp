@@ -162,11 +162,11 @@ void RtModuleSynthFromImage::update_data() {
         int w = obj.get_int("w");
         int h = obj.get_int("h");
 
-        int channels = obj.get_int("channels");
+        //int channels = obj.get_int("channels");
         //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
-        auto data_type = array->data_type();
+        //auto data_type = array->data_type();
         //xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
         //            "XcluObjectImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
         data_.set_image(w, h, array->data_u8bit());
