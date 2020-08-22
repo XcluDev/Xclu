@@ -32,6 +32,7 @@ void RtModuleSoundOutGenerator::stop()
 
 //---------------------------------------------------------------------
 void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //создать звук в объекте sound_
+    qDebug() << "request_sound";
     try {
         DataAccess access(data_);
         {
@@ -78,16 +79,25 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
         }
     }
     catch (XCluException &e) {
+        qDebug() << "request_sound exception " << e.whatQt();
         DataAccess access(data_);
         data_->err = e.err();
     }
-
+    catch(std::exception& e) {
+        qDebug() << QString("Exception at request_sound:\n") + e.what();
+        throw e;
+    }
+    catch(...) {
+        qDebug() << QString("Unhandled exception at request_sound");
+    }
+    qDebug() << "request_sound finished";
 }
 
 
 //---------------------------------------------------------------------
 qint64 RtModuleSoundOutGenerator::readData(char *data, qint64 len)
 {
+    qDebug() << "readData";
     qint64 total = 0;
     try {
         //qDebug() << "readData " << len;
@@ -152,6 +162,7 @@ qint64 RtModuleSoundOutGenerator::readData(char *data, qint64 len)
 //---------------------------------------------------------------------
 qint64 RtModuleSoundOutGenerator::writeData(const char *data, qint64 len)
 {
+    qDebug() << "writeData";
     Q_UNUSED(data);
     Q_UNUSED(len);
 
@@ -211,10 +222,13 @@ void RtModuleSoundOut::execute_start_internal() {
 
     //если требуется, печать подключенных устройств
     print_devices();
+
+    qDebug() << "end start_internal";
 }
 
 //---------------------------------------------------------------------
 void RtModuleSoundOut::execute_update_internal() {
+    qDebug() << "execute_update_internal begin";
     //запустить устройство, если еще это не делали
     start_audio();
 
@@ -237,6 +251,8 @@ void RtModuleSoundOut::execute_update_internal() {
     }
     //показ размера буфера
     set_int("buffer_size", buffer_size_);
+
+    qDebug() << "execute_update_internal end";
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
@@ -264,6 +280,7 @@ void RtModuleSoundOut::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleSoundOut::on_changed_audio_state(QAudio::State state) {
+    qDebug() << "on_changed_audio_state";
     try {
         switch (state) {
         case QAudio::ActiveState:
@@ -311,6 +328,8 @@ void RtModuleSoundOut::stop_audio() {
 void RtModuleSoundOut::start_audio() {
     //запустить устройство, если еще это не делали
     if (!audio_tried_to_start_) {
+        qDebug("start_audio");
+
         //пытаемся стартовать устройство
         audio_tried_to_start_ = true;
 
@@ -352,6 +371,8 @@ void RtModuleSoundOut::start_audio() {
 
 //---------------------------------------------------------------------
 void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
+    qDebug() << "start_audio internal";
+
     //сбор значений параметров
     QAudioFormat format;
 
@@ -390,8 +411,12 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
         format = deviceInfo.nearestFormat(format);
     }
 
+
     //выдача информации о устройстве
     QString device_name = deviceInfo.deviceName();
+
+    qDebug() << "start_audio - " << device_name;
+
     set_string("connected_device_name", device_name);
     append_string("local_console", "Starting: " + device_name + "\n\n");
 
@@ -424,8 +449,12 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //чтобы в случае ее падения увидеть поддерживаемые разрешения
     print_formats(deviceInfo);
 
+    qDebug() << "now m_generator->start";
     m_generator->start();
+    qDebug() << "now m_audioOutput->start";
     m_audioOutput->start(m_generator.data());
+
+    qDebug() << "end start_audio internal";
 }
 
 
