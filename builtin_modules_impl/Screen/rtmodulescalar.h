@@ -1,7 +1,8 @@
-#ifndef RTMODULEWNUMBER_H
-#define RTMODULEWNUMBER_H
+#ifndef RTMODULESCALAR_H
+#define RTMODULESCALAR_H
 
-//Реализация модуля WNumber - целочисленная переменная в окне, в виде поля ввода и/или слайдера
+//Реализация модуля Scalar - скаляр (int, float, string, checkbox, stringlist),
+//в виде поля ввода и/или слайдера
 
 #include <QObject>
 #include <QScopedPointer>
@@ -30,15 +31,15 @@ struct RtModuleGuiNumberData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleWNumber: public RtModule
+class RtModuleScalar: public RtModule
 {
     Q_OBJECT
 public:
-    RtModuleWNumber();
-    ~RtModuleWNumber();
+    RtModuleScalar();
+    ~RtModuleScalar();
 
     static QString *static_class_name_ptr; //"WNumber", эта переменная используется для создания новых объектов
-    static RtModuleWNumber *new_module();
+    static RtModuleScalar *new_module();
 
 protected:
     //Выполнение
@@ -75,4 +76,4 @@ protected:
 };
 
 
-#endif // RTMODULEWNUMBER_H
+#endif // RtModuleScalar_H

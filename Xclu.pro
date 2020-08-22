@@ -95,7 +95,6 @@ INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
     builtin_modules_impl/Screen/rtmodulewimage.cpp \
-    builtin_modules_impl/Screen/rtmodulewnumber.cpp \
     builtin_modules_impl/Screen/rtmodulewwindow.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_paths.cpp \
@@ -170,11 +169,11 @@ SOURCES += \
     project/projectgui.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
-    python/pythoncore.cpp
+    python/pythoncore.cpp \
+    builtin_modules_impl/Screen/rtmodulescalar.cpp
 
 HEADERS += \
     builtin_modules_impl/Screen/rtmodulewimage.h \
-    builtin_modules_impl/Screen/rtmodulewnumber.h \
     builtin_modules_impl/Screen/rtmodulewwindow.h \
     core/xclu_parse_tree.h \
     core/xclu_paths.h \
@@ -249,6 +248,7 @@ HEADERS += \
     project/projectproperties.h \
     project/projectruntime.h \
     python/pythoncore.h \
-    core/qt_widgets.h
+    core/qt_widgets.h \
+    builtin_modules_impl/Screen/rtmodulescalar.h
 
 

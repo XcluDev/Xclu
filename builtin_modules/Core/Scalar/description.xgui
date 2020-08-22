@@ -1,4 +1,4 @@
-#Module WNumber
+#Module Scalar
 #------------------------------------------
 #module_name_hint=wscalar
 module_description=Scalar representing value as a text field or slider. It must be placed before parent (Window or WLayout).

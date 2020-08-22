@@ -1,8 +1,6 @@
-#Module ArrayCreate
+#Module Object
 #------------------------------------------
-#module_class=ArrayCreate
-#module_category=Types
-module_description=Create an array.
+module_description=Object.
 module_version=1.01
 module_impl=C++
 

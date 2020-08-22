@@ -1,8 +1,6 @@
-#Module ArrayReshape
+#Module Array
 #------------------------------------------
-#module_class=ArrayReshape
-#module_category=Types
-module_description=Transform arrays 1D->2D, 2D->1D, and so on.
+module_description=Array.
 module_version=1.01
 module_impl=C++
 
