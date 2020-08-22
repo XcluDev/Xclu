@@ -141,8 +141,8 @@
                         "avalue": "35280"
                     },
                     {
-                        "aname": "Devices",
-                        "atitle": "Devices",
+                        "aname": "Device_Info",
+                        "atitle": "Device Info",
                         "atype": "page",
                         "avalue": "0",
                         "expr": "",

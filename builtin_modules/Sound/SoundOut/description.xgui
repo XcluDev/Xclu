@@ -108,7 +108,7 @@ endif
 #   //record output sound to a file
 
 #--------------------
-page Devices
+page Device_Info
     //Print list of output audio devices and supported formats of the selected device
 
 in checkbox Print_Devices print_devices=1

@@ -136,7 +136,7 @@ endif
 #endif
 
 #--------------------
-page Devices
+page Device_Info
     //Print list of cameras and supported formats
 
 in checkbox Print_Devices print_devices=1

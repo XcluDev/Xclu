@@ -18,37 +18,28 @@ page Value
 out object(image) Image image
     //Resulted image.
 
-out checkbox Is_New_Frame is_new_frame=0
-    //Flag is true when new frame is arrived.
-    
-    
-out string Parent parent_id=""
-    //Parent module name (Window or WLayout) at which this element is placed.
-
-in checkbox Visible visible=1
-    //Is visible.
+out checkbox Is_Updated is_updated=0
+    //Flag is true when new frame is arrived during current 'update' step.
+   
 
 #-------------------------------------------
 separator
 
-in stringlist Value_Source source=Other_Module_Value [Fixed_Value,Other_Module_Value,Expression]
+in stringlist Value_Source source=Link [File,Link,Expression]
     //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
     
 #in stringlist Type type=int [int,float]
 #    //Type of value.
  
 #-------------
-if source Fixed_Value
-#in int Value fixed_value=0 -1000000:1000000 1,10
+if source File
 
-#if source GUI
-#in int Default_Value default_value=0 -1000000:1000000 1,10
 
-if source Other_Module_Value
-in string(choose:int) Image_Link image_link="webcam1->image"
+if source Link
+in string(link:int) Image_Link image_link="webcam1->image"
     //Link to other module's image.
 
-in string(choose:checkbox) Is_New_Frame_Link is_new_frame_link="webcam1->is_new_frame"
+in string(link:checkbox) Is_New_Frame_Link is_new_frame_link="webcam1->is_new_frame"
     //Link to flag that image was changed.
 
     
@@ -61,9 +52,15 @@ in text Expression expression 15 17
 endif
 
 #-------------------------------------------
-page Properties
+page Visuals
     //Visual settings.    
 
+out string Parent parent_id=""
+    //Parent module name (Window or WLayout) at which this element is placed.
+
+in checkbox Visible visible=1
+    //Is visible.
+    
 separator
     
 

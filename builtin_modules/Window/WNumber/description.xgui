@@ -1,7 +1,7 @@
 #Module WNumber
 #------------------------------------------
-module_name_hint=wnumber
-module_description=Number widget representing value as a text field or slider. It must be placed before parent (Window or WLayout).
+#module_name_hint=wscalar
+module_description=Scalar representing value as a text field or slider. It must be placed before parent (Window or WLayout).
 module_version=1.01
 module_impl=C++
 
@@ -16,22 +16,18 @@ page Value
 
 out int Resulted_Value value=0 -1000000:1000000 1,10
     //Resulted value
-    
-out string Parent parent_id=""
-    //Parent module name (Window or WLayout) at which this element is placed.
-
-in checkbox Visible visible=1
-    //Is visible.
-
-#const stringlist Font_Size font_size=Parent [Parent,Custom]
 
 separator
+    
+in stringlist Type type=int [int,float,string,checkbox,stringlist]
+    //Type of value.
+    
+separator
 
+    
 in stringlist Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
     
-in stringlist Type type=int [int,float]
-    //Type of value.
  
 #-------------
 if source Fixed_Value
@@ -53,8 +49,14 @@ in text Expression expression 15 17
 endif
 
 #-------------------------------------------
-page Properties
+page Visuals
     //Range and visual settings.    
+
+out string Parent parent_id=""
+    //Parent module name (Window or WLayout) at which this element is placed.
+
+in checkbox Visible visible=1
+    //Is visible.
 
 #-------------
 #separator

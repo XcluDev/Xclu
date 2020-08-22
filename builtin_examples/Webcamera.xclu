@@ -163,8 +163,8 @@
                         "avalue": "Captured 97, Processed 97, Dropped 0 frame(s)"
                     },
                     {
-                        "aname": "Devices",
-                        "atitle": "Devices",
+                        "aname": "Device_Info",
+                        "atitle": "Device Info",
                         "atype": "page",
                         "avalue": "0",
                         "expr": "",
@@ -255,7 +255,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -273,30 +273,16 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "is_new_frame",
-                        "atitle": "Is New Frame",
+                        "aname": "is_updated",
+                        "atitle": "Is Updated",
                         "atype": "checkbox",
                         "avalue": "0"
-                    },
-                    {
-                        "aname": "parent_id",
-                        "atitle": "Parent",
-                        "atype": "string",
-                        "avalue": "wwindow1"
-                    },
-                    {
-                        "aname": "visible",
-                        "atitle": "Visible",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
                     },
                     {
                         "aname": "source",
                         "atitle": "Value Source",
                         "atype": "stringlist",
-                        "avalue": "Other_Module_Value",
+                        "avalue": "File",
                         "expr": "",
                         "expr_use": false
                     },
@@ -325,10 +311,24 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "Properties",
-                        "atitle": "Properties",
+                        "aname": "Visuals",
+                        "atitle": "Visuals",
                         "atype": "page",
                         "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "parent_id",
+                        "atitle": "Parent",
+                        "atype": "string",
+                        "avalue": "wwindow1"
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -352,7 +352,7 @@
                         "aname": "title",
                         "atitle": "Title",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -461,13 +461,329 @@
         },
         {
             "description": {
+                "class": "WNumber",
+                "name": "wnumber1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "atitle": "Value",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "value",
+                        "atitle": "Resulted Value",
+                        "atype": "int",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "atitle": "Type",
+                        "atype": "stringlist",
+                        "avalue": "int",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "source",
+                        "atitle": "Value Source",
+                        "atype": "stringlist",
+                        "avalue": "Other_Module_Value",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "fixed_value",
+                        "atitle": "Value",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "int_link",
+                        "atitle": "Int Link",
+                        "atype": "string",
+                        "avalue": "module1->value",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "expression",
+                        "atitle": "Expression",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Visuals",
+                        "atitle": "Visuals",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "parent_id",
+                        "atitle": "Parent",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "use_range_min",
+                        "atitle": "Use Min",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "min_value",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "use_range_max",
+                        "atitle": "Use Max",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "max_value",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_text",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Int",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_placement",
+                        "atitle": "Placement",
+                        "atype": "stringlist",
+                        "avalue": "Left",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "atitle": "Alignment",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width",
+                        "atitle": "Width",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units",
+                        "atitle": "Units",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units_text",
+                        "atitle": "Units",
+                        "atype": "string",
+                        "avalue": "pixels",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units_alignment",
+                        "atitle": "Alignment",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units_width",
+                        "atitle": "Width",
+                        "atype": "stringlist",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units_width_min",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "units_width_max",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Actions",
+                        "atitle": "Actions",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_changed",
+                        "atitle": "Was Changed",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_change",
+                        "atitle": "On Change",
+                        "atype": "stringlist",
+                        "avalue": "Do_Nothing",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "on_change_module_call_link",
+                        "atitle": "Module Call Link",
+                        "atype": "string",
+                        "avalue": "module1->execute",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "on_change_script",
+                        "atitle": "Script",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "stringlist",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
                 "class": "WWindow",
                 "name": "wwindow1",
                 "version": "1.01"
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "3"
                 },
                 "items": [
                     {
