@@ -1,0 +1,301 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "frame_rate": "30",
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "RealsenseCamera",
+                "name": "realsense_camera1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "capture_source",
+                        "atitle": "Capture Source",
+                        "atype": "enum",
+                        "avalue": "Camera",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_device",
+                        "atitle": "Device",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_index",
+                        "atitle": "Device Index",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_serial",
+                        "atitle": "Device Serial",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "runtime",
+                        "atitle": "Runtime Details",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_started",
+                        "atitle": "Is Started",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frames_captured",
+                        "atitle": "Frames Captured",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "RGB",
+                        "atitle": "RGB",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_stream_enabled",
+                        "atitle": "RGB Stream",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_resolution",
+                        "atitle": "Resolution",
+                        "atype": "enum",
+                        "avalue": "640_x_480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_frame_rate",
+                        "atitle": "Frame Rate",
+                        "atype": "enum",
+                        "avalue": "30",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_image_channels",
+                        "atitle": "Channels",
+                        "atype": "enum",
+                        "avalue": "RGB",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_data_type",
+                        "atitle": "Data Type",
+                        "atype": "enum",
+                        "avalue": "u8bit",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_image",
+                        "atitle": "RGB",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "rgb_is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Depth_+_IR",
+                        "atitle": "Depth + IR",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "depth_stream_enabled",
+                        "atitle": "Depth Stream",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "IR_stream_enabled",
+                        "atitle": "IR Stream",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "depth_preset",
+                        "atitle": "Preset",
+                        "atype": "enum",
+                        "avalue": "High_Density",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "depth_resolution",
+                        "atitle": "Resolution",
+                        "atype": "enum",
+                        "avalue": "640_x_480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "depth_frame_rate",
+                        "atitle": "Frame Rate",
+                        "atype": "enum",
+                        "avalue": "30",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "emitter",
+                        "atitle": "Emitter",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "depth_image",
+                        "atitle": "Depth",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "ir_image",
+                        "atitle": "IR",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "depth_is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "atitle": "Device Info",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_devices",
+                        "atitle": "Print Devices",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "local_console",
+                        "atitle": "Local Console",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        }
+    ]
+}

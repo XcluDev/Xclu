@@ -1,8 +1,6 @@
 #Module RealsenseCamera
 #------------------------------------------
-#module_class=RealsenseCamera
-#module_category=Images
-module_description=Capture depth, IR and color frames from a Intel Realsense camera and convert to point cloud.
+module_description=Capture depth, IR and color frames from a Intel Realsense camera. 
 module_version=1.01
 module_impl=C++
 
@@ -10,6 +8,132 @@ module_impl=C++
 page Main
     //General settings
 
-#in string Send_Channel addr="localhost:12345"
-#    //Address with port: localhost:12345
+#-----------------------------
+in enum Capture_Source capture_source=Camera [Disable,Camera]
+    //Source of frames - capture frames from real camera of load images from a disk.
+    
+#-------- Camera --------------
+const enum Device select_device=Default [Default,By_Index,By_Serial]
+	//Choose the way for selecting the camera.
+    
+if select_device By_Index
+const int Device_Index device_index=0 0:100 1,10
+    //Camera index in Operating System.
+endif
+
+if select_device By_Serial
+const string Device_Serial device_serial=""
+	//Serial of the camera to connect (or part of the serial), go to 'Device Info' to see the list.
+endif	
+
+#out object(image) Image image
+#    //Resulted webcamera image.
+
+#out checkbox Is_New_Frame is_new_frame=0
+#    //Flag is true when new frame is arrived.
+
+#-----------------------------
+separator
+in checkbox(group) Runtime_Details runtime=1
+	//Runtime variables.
+
+if runtime 1
+
+out string Device_Name connected_device_name=""
+	//Name of the connected camera.
+
+out checkbox Is_Started is_started=0
+    //Does capture started.
+	
+out string Frames_Captured frames_captured=""
+    //How much frames were captured and processed after last start.
+    
+
+endif
+
+
+#-------------------------------------------
+page RGB
+    //Settings for RGB stream.
+    
+const checkbox RGB_Stream rgb_stream_enabled=1
+    //Capture RGB stream.
+    
+const enum Resolution rgb_resolution=640_x_480 [320_x_180,320_x_240,424_x_240,640_x_360,640_x_480,848_x_480,960_x_540,1280_x_720,1920_x_1080]
+    //Resolution for RGB stream.
+    //pix
+    
+const enum Frame_Rate rgb_frame_rate=30 [6,15,30,60]
+    //Frame rate for RGB stream.
+    //fps
+    
+in enum Channels rgb_image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
+#TODO не поддерживаются каналы HSL,H,S,L
+    //Desired channels of the output image.
+in enum Data_Type image_data_type=u8bit [u8bit,float]
+    //Desired data type of the output image, u8bit=0..255, float=[0,1].
+
+separator
+
+out object(image) RGB rgb_image
+    //Resulted RGB image.
+
+out checkbox Is_New_Frame rgb_is_new_frame=0
+    //Flag is true when new frame is arrived.
+    
+#-------------------------------------------
+page Depth_+_IR
+    //Settings for Depth and IR stream.
+
+#TODO and point cloud).
+    
+const checkbox Depth_Stream depth_stream_enabled=1
+    //Capture Depth stream.
+    
+const checkbox IR_Stream IR_stream_enabled=0
+    //Capture IR stream.
+
+const enum Preset depth_preset=High_Density [Custom,Default,Hand,High_Accuracy,High_Density,Medium_Density,Remove_IR_Pattern]
+    //Depth preset.
+    
+const enum Resolution depth_resolution=640_x_480 [424_x_240,480_x_270,640_x_360,640_x_480,848_x_480,1280_x_720,1280_x_800]
+    //Resolution for Depth stream.
+    //pix
+
+const enum Frame_Rate depth_frame_rate=30 [6,15,25,30,60,90]
+    //Frame rate for Depth stream.
+    //fps
+
+        
+separator
+const checkbox Emitter emitter=1
+    //Enabling laser emitter.
+    
+
+    
+
+separator
+out object(image) Depth depth_image
+    //Resulted Depth image.
+    
+out object(image) IR ir_image
+    //Resulted IR image.
+
+out checkbox Is_New_Frame depth_is_new_frame=0
+    //Flag is true when new frame is arrived.
+
+#--------------------
+page Device_Info
+    //Print list of cameras.
+
+in checkbox Print_Devices print_devices=1
+	//Print list of all connected webcams
+
+#in checkbox Print_Formats print_formats=1
+#	//Print once list of supported formats of connected camera
+
+
+out text Local_Console local_console 10 15
+    //Console output.
+    
 
