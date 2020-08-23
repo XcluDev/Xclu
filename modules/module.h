@@ -65,14 +65,14 @@ public:
 
 
     //Доступ к переменным и запуску из других модулей
-    QString access_get_string(QString name);   //int, checkbox, button, stringlist (rawtext), string, text
-    void access_set_string(QString name, QString v); //только out: int, checkbox, stringlist (rawtext), string, text
-    int access_get_int(QString name);    //int, checkbox, button, stringlist (index)
-    void access_set_int(QString name, int v); //только out: int, checkbox, stringlist (index)
+    QString access_get_string(QString name);   //int, checkbox, button, enum (rawtext), string, text
+    void access_set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
+    int access_get_int(QString name);    //int, checkbox, button, enum (index)
+    void access_set_int(QString name, int v); //только out: int, checkbox, enum (index)
     float access_get_float(QString name);  //float
     void access_set_float(QString name, float v);  //out: float
-    QString access_get_title_value(QString name);  //stringlist (title)
-    void access_set_title_value(QString name, QString v); //только out: stringlist (title)
+    QString access_get_title_value(QString name);  //enum (title)
+    void access_set_title_value(QString name, QString v); //только out: enum (title)
     //доступ к объектам идет только по указателям
     XcluObject *access_get_object(QString name);
 

@@ -15,7 +15,7 @@ in string Title title="Dialog"
     //Title of the window.
     
 #-------------
-#const stringlist Screen screen=Default [Default,Custom]
+#const enum Screen screen=Default [Default,Custom]
 #    //If you have several screens, you can select the screen for placing window there.
 #
 #if screen Custom
@@ -24,7 +24,7 @@ in string Title title="Dialog"
 #endif    
     
 #-------------
-in stringlist Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+in enum Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
     //Size of the window.
 
 if size Custom
@@ -38,7 +38,7 @@ in int Size_Y size_y=720 1:20000 1,10
 endif
 #-------------
 
-in stringlist Position position=Automatic [Default,Custom,Screen_Center]
+in enum Position position=Automatic [Default,Custom,Screen_Center]
     //Position of the window.
 
 #-------------
@@ -57,13 +57,13 @@ separator
 in checkbox Visible visible=1
     //Is window visible.
 
-in stringlist Mode mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
+in enum Mode mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
     //Full screen, minimized and maximized settings.
     
     
 separator
 
-const stringlist Theme theme=Standard [Standard,Dark]
+const enum Theme theme=Standard [Standard,Dark]
     //Theme of design.
 
 const int Font_Size font_size=14 1:1000 1,10
@@ -118,7 +118,7 @@ const text Struct. structure 25 30
 page Actions
     //Action on closing window
 
-in stringlist On_Close on_close=Stop [Ignore,Stop]
+in enum On_Close on_close=Stop [Ignore,Stop]
    //What to do when user closes the window.
 #,Custom_Action]
 

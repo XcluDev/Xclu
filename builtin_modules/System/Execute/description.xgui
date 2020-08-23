@@ -22,7 +22,7 @@ in string Arguments args=""
 
 line
     
-in stringlist Work_Mode work_mode=On_Bang [Each_Frame,On_Bang]
+in enum Work_Mode work_mode=On_Bang [Each_Frame,On_Bang]
     //Should we execute file at each frame or on Bang signal
         
 in checkbox Bang bang_signal=0

@@ -11,7 +11,7 @@ page Main
 
 group Device_Selection
 
-const stringlist Choose_Method choose_method=By_Id [By_Id,By_Name]
+const enum Choose_Method choose_method=By_Id [By_Id,By_Name]
     //Method of choosing the device
 
 #--------------------
@@ -32,7 +32,7 @@ endif
 
 separator
 
-const stringlist Speed_Baud baud=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
+const enum Speed_Baud baud=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
 
 separator
 
@@ -49,7 +49,7 @@ out int Total_Received_bytes total_received=0 0:10000000 1,10
 #------------------------------------------
 page Console
 
-in stringlist Send_Type send_type=String [String,Byte]
+in enum Send_Type send_type=String [String,Byte]
     //Choose what to send manually
 
 #----------------
@@ -58,7 +58,7 @@ if send_type String
 in string Send_String send_string=""
     //Send string
 
-in stringlist Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
+in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
 
 in button Send send_string_btn
 endif
@@ -74,7 +74,7 @@ endif
 
 separator
 
-in stringlist Show_Received show_received=Text [None,Text,Bytes]
+in enum Show_Received show_received=Text [None,Text,Bytes]
     //Show received data as text or bytes.
 
 #----------------
@@ -94,11 +94,11 @@ endif
 in button Clear clear
     //Clear received data
 
-in stringlist Auto_Clear auto_clear=On [Off,On]
+in enum Auto_Clear auto_clear=On [Off,On]
     //Automatically clear received data before each update
 
 
-in stringlist Limit_Show limit_show=On [Off,On]
+in enum Limit_Show limit_show=On [Off,On]
 #----------------
 if limit_show On
 in int Limit_Show_Count limit_show_count=100 0:10000 1,100 

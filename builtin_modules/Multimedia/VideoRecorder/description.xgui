@@ -17,13 +17,13 @@ page Main
 #images sequences - can set frame, can preload.
 
 #-----------------------------
-const stringlist Mode mode=Load [Load,Save]
+const enum Mode mode=Load [Load,Save]
 	//Choose the working mode - load or save images
 	
 #------------ Load -----------
 if mode Load
 
-in stringlist load_source=Single_File [Single_File,Folder]
+in enum load_source=Single_File [Single_File,Folder]
     //Image source - single image or folder
 endif
 
@@ -34,7 +34,7 @@ string image_file= [file_select]
 string folder=data [folder_select]
     //Folder for loading frames
 
-stringlist frame_method=autoincrease [autoincrease,fixed]
+enum frame_method=autoincrease [autoincrease,fixed]
     //Scan all images in folder or use fixed frame
 
 int frame=0 0:100000 1,10

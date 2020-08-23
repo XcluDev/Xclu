@@ -12,9 +12,9 @@ page Main
 
 #Channels - split, join
 #Mode
-in stringlist Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
+in enum Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
 #data format
-in stringlist Output_Format output_format=u8bit [u8bit,float]
+in enum Output_Format output_format=u8bit [u8bit,float]
 
 
 #-----------------------------
@@ -23,7 +23,7 @@ in checkbox(group) Resize_and_Crop resize_crop=0
 	//Resizing and cropping options
 
 if resize_crop 1
-in stringlist Resize resize=No [No,Percent,Pixels]
+in enum Resize resize=No [No,Percent,Pixels]
     //Resize image
     #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
@@ -36,7 +36,7 @@ in int Resize_Y resize_y=768 0:10000 1,20
 #------------------
 
 if resize_crop 1
-in stringlist Crop crop=No [No,Percent,Pixels]
+in enum Crop crop=No [No,Percent,Pixels]
     //Crop...
 
     

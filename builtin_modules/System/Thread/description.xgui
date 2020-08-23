@@ -11,11 +11,11 @@ module_impl=C++
 
 separator
 
-in stringlist Period_Mode period_mode=Period [Period,Random_Period]
+in enum Period_Mode period_mode=Period [Period,Random_Period]
 
 
 
-#stringlist show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
+#enum show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
 #    //Show message box
 
 #string message_box_text=Stopping

@@ -1,7 +1,7 @@
 #ifndef RTMODULESCALAR_H
 #define RTMODULESCALAR_H
 
-//Реализация модуля Scalar - скаляр (int, float, string, checkbox, stringlist),
+//Реализация модуля Scalar - скаляр (int, float, string, checkbox, enum),
 //в виде поля ввода и/или слайдера
 
 #include <QObject>

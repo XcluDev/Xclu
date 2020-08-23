@@ -32,7 +32,7 @@ in float(slider) Volume volume=0.8 0:1 100,10
     
 #-------- Sound device  --------------
 separator
-const stringlist Sound_Device select_device=Default [Default,By_Index,By_Name]
+const enum Sound_Device select_device=Default [Default,By_Index,By_Name]
 	//Choose the way for selecting sound output device
     
 if select_device By_Index
@@ -52,7 +52,7 @@ in checkbox(group) Settings settings=0
 	//Setting sound output parameters
     
 if settings 1
-const stringlist Sample_Rate sample_rate=Default [Default,Custom,8000,11025,22050,32000,44100,48000,96000]
+const enum Sample_Rate sample_rate=Default [Default,Custom,8000,11025,22050,32000,44100,48000,96000]
     //Frame rate
     //Hz
 
@@ -69,12 +69,12 @@ if settings 1
 const int Channels channels=2 1:16 1,10
     //Number of output channels 
     
-const stringlist Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,1024,2048,4096,8192,16384,32768]
+const enum Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,1024,2048,4096,8192,16384,32768]
     //Desired buffer size for sound generation. Larger values increase stability but decrease response time.
 #    Numberofbuffers 
  
 #TODO choose format
-#in stringlist Sound_Data_Type sound_data_type=int16 [int16,float]
+#in enum Sound_Data_Type sound_data_type=int16 [int16,float]
 #    //Output sound format, int16=-32768..32767, float=[-1,1]
 
 #TODO: automatic restart in autorestart_sec seconds

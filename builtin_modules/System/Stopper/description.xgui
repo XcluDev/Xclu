@@ -15,10 +15,10 @@ in checkbox Use_Condition use_cond=0
 
 in string Condition_Expr condition=1
     
-in stringlist Mode mode=Stop [Stop,Exit]
+in enum Mode mode=Stop [Stop,Exit]
     //Mode: Stop, Exit
 
-#stringlist show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
+#enum show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
 #    //Show message box
 
 #string message_box_text=Stopping

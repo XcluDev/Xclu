@@ -90,7 +90,7 @@ public:
     virtual float value_float() { return 0; }
     virtual void set_value_float(float) {}
 
-    //value_title - для stringlist
+    //value_title - для enum
     virtual bool supports_value_title() { return false; }
     virtual QString value_title() { return ""; }
     virtual void set_value_title(QString) {}

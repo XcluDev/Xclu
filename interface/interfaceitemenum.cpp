@@ -1,9 +1,9 @@
-#include "interfaceitemstringlist.h"
+#include "interfaceitemenum.h"
 #include "incl_qtcpp.h"
-#include "interfaceguistringlist.h"
+#include "interfaceguienum.h"
 
 //---------------------------------------------------------------------
-//in stringlist List list=OFF [OFF,ON]
+//in enum List list=OFF [OFF,ON]
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 

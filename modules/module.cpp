@@ -252,22 +252,22 @@ void Module::access_call(QString function, XcluObject *input, XcluObject *output
 
 //---------------------------------------------------------------------
 //Доступ к переменным и запуску из других модулей
-QString Module::access_get_string(QString name) {   //int, checkbox, button, stringlist (rawtext), string, text
+QString Module::access_get_string(QString name) {   //int, checkbox, button, enum (rawtext), string, text
     return rtmodule()->get_string(name);
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_string(QString name, QString v) { //только out: int, checkbox, stringlist (rawtext), string, text
+void Module::access_set_string(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
     rtmodule()->set_string(name, v);
 }
 
 //---------------------------------------------------------------------
-int Module::access_get_int(QString name) {    //int, checkbox, button, stringlist (index)
+int Module::access_get_int(QString name) {    //int, checkbox, button, enum (index)
     return rtmodule()->get_int(name);
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_int(QString name, int v) { //только out: int, checkbox, stringlist (index)
+void Module::access_set_int(QString name, int v) { //только out: int, checkbox, enum (index)
     rtmodule()->set_int(name, v);
 }
 
@@ -282,12 +282,12 @@ void Module::access_set_float(QString name, float v) {  //out: float
 }
 
 //---------------------------------------------------------------------
-QString Module::access_get_title_value(QString name) {  //stringlist (title)
+QString Module::access_get_title_value(QString name) {  //enum (title)
      return rtmodule()->get_title_value(name);
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_title_value(QString name, QString v) { //только out: stringlist (title)
+void Module::access_set_title_value(QString name, QString v) { //только out: enum (title)
     rtmodule()->set_title_value(name, v);
 }
 

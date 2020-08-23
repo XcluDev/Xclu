@@ -9,10 +9,10 @@ module_impl=C++
 #------------------------------------------
 page Main
                 
-const stringlist Layout type=Horizontal_Layout [Horizontal_Layout,Vertical_Layout,Grid_Layout]
+const enum Layout type=Horizontal_Layout [Horizontal_Layout,Vertical_Layout,Grid_Layout]
     //Layout type
 
-const stringlist Decorate decorate=No [No,Frame,Group_Box]
+const enum Decorate decorate=No [No,Frame,Group_Box]
     //Type of decoration - no, frame or group box
 
 #---------------
@@ -39,7 +39,7 @@ separator
 #---------------
 #Spacing
 if type Horizontal_Layout,Vertical_Layout,Grid_Layout
-const stringlist Spacing layout_spacing=Default [Default,Custom]
+const enum Spacing layout_spacing=Default [Default,Custom]
     //Spacing of layout in pixels. 
     //pixels
 if layout_spacing Custom
@@ -51,7 +51,7 @@ endif
 #---------------
 #Margin
 if content Horizontal_Layout,Vertical_Layout,Grid_Layout
-const stringlist Margin layout_margin=Default [Default,Custom]
+const enum Margin layout_margin=Default [Default,Custom]
     //Margin of layout. 
     //pixels
 if layout_margin Custom

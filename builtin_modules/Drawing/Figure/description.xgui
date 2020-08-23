@@ -14,7 +14,7 @@ page Figure
 in checkbox Visible visible=1
     //Is module enabled
 
-in stringlist Type type=Rectangle [Point,Line,Triangle,Rectangle]
+in enum Type type=Rectangle [Point,Line,Triangle,Rectangle]
     //Figure type
     
 

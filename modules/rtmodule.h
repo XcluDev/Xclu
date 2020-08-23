@@ -106,19 +106,19 @@ public:
     //поэтому, нельзя ее вызывать, если активирован другой ObjectRead[Write] для этого объекта
 
     //Доступ к переменным - с учетом их квалификатора
-    QString get_string(QString name);   //int, checkbox, button, stringlist (rawtext), string, text
-    void set_string(QString name, QString v); //только out: int, checkbox, stringlist (rawtext), string, text
+    QString get_string(QString name);   //int, checkbox, button, enum (rawtext), string, text
+    void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
     void append_string(QString name, QString v); //дописать к строке, применимо где set_string
 
-    int get_int(QString name);    //int, checkbox, button, stringlist (index)
-    void set_int(QString name, int v); //только out: int, checkbox, stringlist (index)
+    int get_int(QString name);    //int, checkbox, button, enum (index)
+    void set_int(QString name, int v); //только out: int, checkbox, enum (index)
     void increase_int(QString name, int increase = 1); //увеличение значения
 
     float get_float(QString name);  //float
     void set_float(QString name, float v);  //out: float
 
-    QString get_title_value(QString name);  //stringlist (title)
-    void set_title_value(QString name, QString v); //только out: stringlist (title)
+    QString get_title_value(QString name);  //enum (title)
+    void set_title_value(QString name, QString v); //только out: enum (title)
 
     //доступ к объектам идет только по указателям -
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,

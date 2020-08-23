@@ -6,7 +6,7 @@
     "aproject_properties": {
         "frame_rate": "30",
         "name": "",
-        "selected_module": "3"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -31,7 +31,7 @@
                     {
                         "aname": "capture_source",
                         "atitle": "Capture Source",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Camera",
                         "expr": "",
                         "expr_use": false
@@ -39,7 +39,7 @@
                     {
                         "aname": "select_device",
                         "atitle": "Device",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -83,8 +83,8 @@
                     {
                         "aname": "frame_rate",
                         "atitle": "Frame Rate",
-                        "atype": "stringlist",
-                        "avalue": "10",
+                        "atype": "enum",
+                        "avalue": "Camera_Default",
                         "expr": "",
                         "expr_use": false
                     },
@@ -99,8 +99,8 @@
                     {
                         "aname": "resolution",
                         "atitle": "Resolution",
-                        "atype": "stringlist",
-                        "avalue": "1280_x_720",
+                        "atype": "enum",
+                        "avalue": "Camera_Default",
                         "expr": "",
                         "expr_use": false
                     },
@@ -123,7 +123,7 @@
                     {
                         "aname": "image_channels",
                         "atitle": "Channels",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "RGB",
                         "expr": "",
                         "expr_use": false
@@ -131,7 +131,7 @@
                     {
                         "aname": "image_data_type",
                         "atitle": "Data Type",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "u8bit",
                         "expr": "",
                         "expr_use": false
@@ -219,7 +219,7 @@
                     {
                         "aname": "action_on_error",
                         "atitle": "Action On Error",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Show_Message_Box_and_Stop",
                         "expr": "",
                         "expr_use": false
@@ -281,8 +281,8 @@
                     {
                         "aname": "source",
                         "atitle": "Value Source",
-                        "atype": "stringlist",
-                        "avalue": "File",
+                        "atype": "enum",
+                        "avalue": "Link",
                         "expr": "",
                         "expr_use": false
                     },
@@ -367,7 +367,7 @@
                     {
                         "aname": "title_placement",
                         "atitle": "Placement",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Left",
                         "expr": "",
                         "expr_use": false
@@ -375,7 +375,7 @@
                     {
                         "aname": "title_alignment",
                         "atitle": "Alignment",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -383,7 +383,7 @@
                     {
                         "aname": "title_width",
                         "atitle": "Width",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -431,7 +431,7 @@
                     {
                         "aname": "action_on_error",
                         "atitle": "Action On Error",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Show_Message_Box_and_Stop",
                         "expr": "",
                         "expr_use": false
@@ -462,7 +462,7 @@
         {
             "description": {
                 "class": "Window",
-                "name": "wwindow1",
+                "name": "window1",
                 "version": "1.01"
             },
             "interface": {
@@ -489,7 +489,7 @@
                     {
                         "aname": "size",
                         "atitle": "Size",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "640x480",
                         "expr": "",
                         "expr_use": false
@@ -513,7 +513,7 @@
                     {
                         "aname": "position",
                         "atitle": "Position",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -545,7 +545,7 @@
                     {
                         "aname": "mode",
                         "atitle": "Mode",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Normal_Window",
                         "expr": "",
                         "expr_use": false
@@ -553,7 +553,7 @@
                     {
                         "aname": "theme",
                         "atitle": "Theme",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Standard",
                         "expr": "",
                         "expr_use": false
@@ -561,7 +561,7 @@
                     {
                         "aname": "font_size",
                         "atitle": "Font Size",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Custom",
                         "expr": "",
                         "expr_use": false
@@ -601,7 +601,7 @@
                     {
                         "aname": "on_close",
                         "atitle": "On Close",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Stop",
                         "expr": "",
                         "expr_use": false
@@ -633,7 +633,7 @@
                     {
                         "aname": "action_on_error",
                         "atitle": "Action On Error",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Show_Message_Box_and_Stop",
                         "expr": "",
                         "expr_use": false
@@ -689,7 +689,7 @@
                     {
                         "aname": "type",
                         "atitle": "Type",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "int",
                         "expr": "",
                         "expr_use": false
@@ -697,7 +697,7 @@
                     {
                         "aname": "source",
                         "atitle": "Value Source",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "GUI",
                         "expr": "",
                         "expr_use": false
@@ -799,7 +799,7 @@
                     {
                         "aname": "title_placement",
                         "atitle": "Placement",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Left",
                         "expr": "",
                         "expr_use": false
@@ -807,7 +807,7 @@
                     {
                         "aname": "title_alignment",
                         "atitle": "Alignment",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -815,7 +815,7 @@
                     {
                         "aname": "title_width",
                         "atitle": "Width",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -855,7 +855,7 @@
                     {
                         "aname": "units_alignment",
                         "atitle": "Alignment",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -863,7 +863,7 @@
                     {
                         "aname": "units_width",
                         "atitle": "Width",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -901,7 +901,7 @@
                     {
                         "aname": "on_change",
                         "atitle": "On Change",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Do_Nothing",
                         "expr": "",
                         "expr_use": false
@@ -949,7 +949,7 @@
                     {
                         "aname": "action_on_error",
                         "atitle": "Action On Error",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Show_Message_Box_and_Stop",
                         "expr": "",
                         "expr_use": false

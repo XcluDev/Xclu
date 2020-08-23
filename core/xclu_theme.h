@@ -58,7 +58,7 @@ const int gui_page_grid_spacing = 10;    //расстояние между эл�
 const int LABEL_WIDTH_MIN = 80;  //ширина label
 
 const int LINE_EDIT_WIDTH = 200;  //ширина строки
-const int COMBO_WIDTH_MIN = 150;  //ширина stringlist
+const int COMBO_WIDTH_MIN = 150;  //ширина enum
 const int COMBO_WIDTH_MAX = 300;
 const int BUTTON_WIDTH = 120;      //ширина button
 

@@ -27,13 +27,13 @@ page Visual
 in checkbox Visible visible=1
     //Is visible
 
-#const stringlist Font_Size font_size=Parent [Parent,Custom]
+#const enum Font_Size font_size=Parent [Parent,Custom]
 
 #---------    
 in string Title title_text="Int"
     //Button title
 
-const stringlist Width button_width=Default [Default,Custom_Range]
+const enum Width button_width=Default [Default,Custom_Range]
     //Width of button.
 
     
@@ -56,7 +56,7 @@ out checkbox Was_Clicked was_clicked=0
     
     
 separator
-in stringlist On_Click on_click=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
+in enum On_Click on_click=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
     //What to do on button click. The event occured after the module's "update".
     #TODO add option to fire event right after change
     

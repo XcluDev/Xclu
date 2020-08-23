@@ -10,7 +10,7 @@
 #include "interfaceitemint.h"
 #include "interfaceitemcheckbox.h"
 #include "interfaceitemstring.h"
-#include "interfaceitemstringlist.h"
+#include "interfaceitemenum.h"
 #include "interfaceitembutton.h"
 #include "interfaceitemtext.h"
 #include "interfaceitemobject.h"

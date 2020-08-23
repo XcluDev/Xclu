@@ -13,12 +13,12 @@ page Main
     //General settings
 
 #-----------------------------
-in stringlist Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
+in enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
     //Source of frames - capture frames from real camera of load images from a disk.
 
 
 #-------- Camera --------------
-const stringlist Device select_device=Default [Default,By_Index,By_Name]
+const enum Device select_device=Default [Default,By_Index,By_Name]
 	//Choose the way for selecting webcamera.
     
 if select_device By_Index
@@ -43,7 +43,7 @@ in checkbox(group) Settings settings=0
 	//Setting webcamera parameters.
     
 if settings 1
-const stringlist Frame_Rate frame_rate=Camera_Default [Camera_Default,Custom,5,10,15,30,60]
+const enum Frame_Rate frame_rate=Camera_Default [Camera_Default,Custom,5,10,15,30,60]
     //Frame rate.
     //fps
 
@@ -56,7 +56,7 @@ endif
 #----------------
 
 if settings 1    
-const stringlist Resolution resolution=Camera_Default [Camera_Default,Custom,160_x_120,320_x_240,640_x_480,1024_x_768,1280_x_720,1920_x_1080]
+const enum Resolution resolution=Camera_Default [Camera_Default,Custom,160_x_120,320_x_240,640_x_480,1024_x_768,1280_x_720,1920_x_1080]
     //Capture resolution.
 
     
@@ -74,10 +74,10 @@ endif
 
 if settings 1
 
-in stringlist Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
+in enum Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
 #TODO не поддерживаются каналы HSL,H,S,L
     //Desired channels of the output image.
-in stringlist Data_Type image_data_type=u8bit [u8bit,float]
+in enum Data_Type image_data_type=u8bit [u8bit,float]
     //Desired data type of the output image, u8bit=0..255, float=[0,1].
 
 #TODO wait_frame
@@ -119,7 +119,7 @@ endif
 #	//Resizing and cropping options
 
 #if resize_crop 1
-#in stringlist Resize resize=No [No,Percent,Pixels]
+#in enum Resize resize=No [No,Percent,Pixels]
 #    //Resize image
 #    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
@@ -130,7 +130,7 @@ endif
 #in int Resize_Y resize_y=768 0:10000 1,20
 #------------------
 #if resize_crop 1
-#in stringlist Crop crop=No [No,Percent,Pixels]
+#in enum Crop crop=No [No,Percent,Pixels]
 #    //Crop...
 #    
 #endif
@@ -156,7 +156,7 @@ out text Local_Console local_console 10 15
 #page Load_Frames
 #    //Load frames from disk - simulation of camera
 #    
-#in stringlist Load_Source load_source=Folder [Folder,Single_Image]
+#in enum Load_Source load_source=Folder [Folder,Single_Image]
 #    //Load images from a folder or use a single image
 #
 #if load_source Single_Image
@@ -173,13 +173,13 @@ out text Local_Console local_console 10 15
     
 #fps, original size or fixed as in web camera settings
     
-#stringlist load_mode=off [off,each_frame]
+#enum load_mode=off [off,each_frame]
 #    //Load frames
 
 #string load_folder=data/webcam [folder_select]
 #    //Folder for loading frames
 
-#in stringlist frame_method=autoincrease [autoincrease,fixed]
+#in enum frame_method=autoincrease [autoincrease,fixed]
 #    //Scan all images in folder or use fixed frame
 
 #int frame=0 0:100000 1,10

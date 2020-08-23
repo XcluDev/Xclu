@@ -12,7 +12,7 @@ page Main
     
 
 #-------------
-const stringlist Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+const enum Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
     //Size of the FBO.
 
 if size Custom
@@ -27,10 +27,10 @@ endif
 
 #---------------------------------- 
 separator
-in stringlist Channels image_channels=RGB [Grayscale,RGB,RGBA]
+in enum Channels image_channels=RGB [Grayscale,RGB,RGBA]
     //Desired channels of the output image.
     
-in stringlist Data_Type image_data_type=u8bit [u8bit,float]
+in enum Data_Type image_data_type=u8bit [u8bit,float]
     //Desired data type of the output texture, u8bit=0..255, float=[0,1].
 
 

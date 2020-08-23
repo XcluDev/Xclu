@@ -130,7 +130,6 @@ SOURCES += \
     interfacegui/interfaceguiint.cpp \
     interfacegui/interfaceguiseparator.cpp \
     interfacegui/interfaceguistring.cpp \
-    interfacegui/interfaceguistringlist.cpp \
     interface/interfaceitemcheckbox.cpp \
     interface/interfaceitemfloat.cpp \
     interface/interfaceitemgroup.cpp \
@@ -139,7 +138,6 @@ SOURCES += \
     interface/interfaceitemseparator.cpp \
     interface/interfaceitemstring.cpp \
     interfacegui/interfaceguipage.cpp \
-    interface/interfaceitemstringlist.cpp \
     interfacegui/interfaceguitext.cpp \
     builtin_modules_impl/Utils/rtmoduletest.cpp \
     modules/module.cpp \
@@ -170,7 +168,9 @@ SOURCES += \
     project/projectruntime.cpp \
     python/pythoncore.cpp \
     builtin_modules_impl/Core/rtmodulescalar.cpp \
-    builtin_modules_impl/Screen/rtmodulewindow.cpp
+    builtin_modules_impl/Screen/rtmodulewindow.cpp \
+    interface/interfaceitemenum.cpp \
+    interfacegui/interfaceguienum.cpp
 
 HEADERS += \
     builtin_modules_impl/Screen/rtmodulewimage.h \
@@ -209,7 +209,6 @@ HEADERS += \
     interfacegui/interfaceguiint.h \
     interfacegui/interfaceguiseparator.h \
     interfacegui/interfaceguistring.h \
-    interfacegui/interfaceguistringlist.h \
    interface/interfaceitemcheckbox.h \
    interface/interfaceitemfloat.h \
    interface/interfaceitemgroup.h \
@@ -218,7 +217,6 @@ HEADERS += \
     interface/interfaceitemseparator.h \
    interface/interfaceitemstring.h \
    interfacegui/interfaceguipage.h \
-    interface/interfaceitemstringlist.h \
     interfacegui/interfaceguitext.h \
     builtin_modules_impl/Utils/rtmoduletest.h \
     modules/module.h \
@@ -249,6 +247,8 @@ HEADERS += \
     python/pythoncore.h \
     core/qt_widgets.h \
     builtin_modules_impl/Core/rtmodulescalar.h \
-    builtin_modules_impl/Screen/rtmodulewindow.h
+    builtin_modules_impl/Screen/rtmodulewindow.h \
+    interface/interfaceitemenum.h \
+    interfacegui/interfaceguienum.h
 
 

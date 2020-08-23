@@ -25,10 +25,10 @@ out checkbox Is_Updated is_updated=0
 #-------------------------------------------
 separator
 
-in stringlist Value_Source source=Link [File,Link,Expression]
+in enum Value_Source source=Link [File,Link,Expression]
     //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
     
-#in stringlist Type type=int [int,float]
+#in enum Type type=int [int,float]
 #    //Type of value.
  
 #-------------
@@ -82,13 +82,13 @@ if title 1
 in string Title title_text="Image"
     //Text of title.
     
-const stringlist Placement title_placement=Default [Left,Right,Top,Bottom]
+const enum Placement title_placement=Default [Left,Right,Top,Bottom]
     //Title placement position.
 
-const stringlist Alignment title_alignment=Default [Default,Left,Center,Right]
+const enum Alignment title_alignment=Default [Default,Left,Center,Right]
     //Title alignment mode.
     
-const stringlist Width title_width=Default [Default,Custom_Range]
+const enum Width title_width=Default [Default,Custom_Range]
     //Width of title.
 endif
 if title_width Custom_Range

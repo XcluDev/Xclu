@@ -8,7 +8,7 @@ module_impl=C++
 page Input
 //Input text to process.
 
-in stringlist Source source=Text [Text,Text_file,Var,URL,Script]
+in enum Source source=Text [Text,Text_file,Var,URL,Script]
 //Source of input files.
 
 if source Text
@@ -57,7 +57,7 @@ in checkbox Extract_Lexems get_lexems=1
 
 separator
 
-in stringlist Result result=JSON [JSON_Text,JSON_Object,Python_Generator]
+in enum Result result=JSON [JSON_Text,JSON_Object,Python_Generator]
 //Output type - JSON Text is good for small data, JSON Object works faster, Python Generator is useful for further processing with Python.
 
 #JSON - можно определять типы названия?

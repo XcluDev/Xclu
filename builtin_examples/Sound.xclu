@@ -47,7 +47,7 @@
                     {
                         "aname": "select_device",
                         "atitle": "Sound Device",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -79,7 +79,7 @@
                     {
                         "aname": "sample_rate",
                         "atitle": "Sample Rate",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -103,7 +103,7 @@
                     {
                         "aname": "buffer_size_desired",
                         "atitle": "Buffer Size",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Default",
                         "expr": "",
                         "expr_use": false
@@ -213,7 +213,7 @@
                     {
                         "aname": "action_on_error",
                         "atitle": "Action On Error",
-                        "atype": "stringlist",
+                        "atype": "enum",
                         "avalue": "Show_Message_Box_and_Stop",
                         "expr": "",
                         "expr_use": false

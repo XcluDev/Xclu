@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "incl_qtcpp.h"
-#include "interfaceguistringlist.h"
-#include "interfaceitemstringlist.h"
+#include "interfaceguienum.h"
+#include "interfaceitemenum.h"
 #include "xclucombobox.h"
 
 //---------------------------------------------------------------------

@@ -174,7 +174,7 @@ RtModuleScalar::Source RtModuleScalar::get_source() {
 
 //---------------------------------------------------------------------
 void RtModuleScalar::update_value(bool force) {
-    //stringlist source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
+    //enum source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     Source source = get_source();
     switch (source) {
     case Source_Fixed_Value:

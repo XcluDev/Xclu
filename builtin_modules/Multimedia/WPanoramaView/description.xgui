@@ -22,14 +22,14 @@ out string Parent parent_id=""
 in checkbox Visible visible=1
     //Is visible.
 
-#const stringlist Font_Size font_size=Parent [Parent,Custom]
+#const enum Font_Size font_size=Parent [Parent,Custom]
 
 separator
 
-in stringlist Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
+in enum Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
     
-in stringlist Type type=int [int,float]
+in enum Type type=int [int,float]
     //Type of value.
  
 #-------------
@@ -90,13 +90,13 @@ if title 1
 in string Title title_text="Int"
     //Text of title.
 
-const stringlist Placement title_placement=Default [Left,Right,Top,Bottom]
+const enum Placement title_placement=Default [Left,Right,Top,Bottom]
     //Title placement position.
 
-const stringlist Alignment title_alignment=Default [Default,Left,Center,Right]
+const enum Alignment title_alignment=Default [Default,Left,Center,Right]
     //Title alignment mode.
     
-const stringlist Width title_width=Default [Default,Custom_Range]
+const enum Width title_width=Default [Default,Custom_Range]
     //Width of title.
 endif
 if title_width Custom_Range
@@ -119,10 +119,10 @@ if units 1
 in string Units units_text="pixels"
     //Text of units.
 
-const stringlist Alignment units_alignment=Default [Default,Left,Center,Right]
+const enum Alignment units_alignment=Default [Default,Left,Center,Right]
     //Units alignment mode.
     
-const stringlist Width units_width=Default [Default,Custom_Range]
+const enum Width units_width=Default [Default,Custom_Range]
     //Width of units.
 endif
 if units_width Custom_Range
@@ -145,7 +145,7 @@ out checkbox Was_Changed was_changed=0
     
     
 separator
-in stringlist On_Change on_change=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
+in enum On_Change on_change=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
     //What to do on value change. The event occured after the module's "update".
     #TODO add option to fire event right after change
     
@@ -179,7 +179,7 @@ endif
 #text editor
 #checkbox
 #button
-#stringlist
+#enum
 #array view
 #image view
 #Все параметры внешнего видео - const, чтобы не менялись при выполнении - для оптимизации.

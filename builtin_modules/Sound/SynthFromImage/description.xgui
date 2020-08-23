@@ -16,7 +16,7 @@ module_accept_calls=sound_buffer_add
 page Main
 
 #---------------------------------- 
-in stringlist Image_Source image_source=Image_File [Image_File,Other_Module_Image]
+in enum Image_Source image_source=Image_File [Image_File,Other_Module_Image]
     //Image source - file or image from other module.
 
 if image_source Image_File
@@ -39,7 +39,7 @@ in checkbox(group) Scan_Area_Setup scan_area_setup=0
     //Scanning area setup.
 
 if scan_area_setup 1
-in stringlist Scan_Shape scan_shape=Horizontal_Rectangle [Horizontal_Rectangle,Vertical_Rectangle,Radar]
+in enum Scan_Shape scan_shape=Horizontal_Rectangle [Horizontal_Rectangle,Vertical_Rectangle,Radar]
     //Shape of scanning.
 
 #TODO option to set in pixels
@@ -70,7 +70,7 @@ separator
 
 in checkbox(group) Interpretation interpr=1
     //Tools for transforming brightness value to sound value.
-#in stringlist Image_Background image_background=Black [Black,White]
+#in enum Image_Background image_background=Black [Black,White]
 #    //Color of background
 
 if interpr 1
@@ -96,12 +96,12 @@ endif
    
 separator
 
-in stringlist Interpretation_Method method=PCM [PCM,Sonogram]
+in enum Interpretation_Method method=PCM [PCM,Sonogram]
     //Interpretation method: pixels slices are PCM samples or sonogram.
 
 #-------------- 
 if method PCM
-in stringlist Scan_Speed_Measure pcm_speed_measure=Hz [Hz,Seconds,MIDI_note]
+in enum Scan_Speed_Measure pcm_speed_measure=Hz [Hz,Seconds,MIDI_note]
     //Speed of scanning.
 
 if pcm_speed_measure Hz
@@ -118,7 +118,7 @@ endif
 
 if method Sonogram
     
-in stringlist Scan_Speed_Measure sono_speed_measure=Hz [Seconds,BPM]
+in enum Scan_Speed_Measure sono_speed_measure=Hz [Seconds,BPM]
     //Speed of scanning.
 
 if sono_speed_measure Seconds
@@ -133,7 +133,7 @@ if method Sonogram
 in int Oscillators oscillators=64 1:256 1,10
     //Number of oscillators for sound generation.
 
-in stringlist Oscillator_Shape oscillator_shape=Sine [Sine,Square]
+in enum Oscillator_Shape oscillator_shape=Sine [Sine,Square]
     //Waveshape of the ocsillator.
     
 in int MIDI_Note_Low note_low=20 0:127 1,10

@@ -242,14 +242,14 @@ bool RtModule::was_changed(QString name) {
 }
 
 //---------------------------------------------------------------------
-//int, checkbox, button, stringlist (rawtext), string, text
+//int, checkbox, button, enum (rawtext), string, text
 QString RtModule::get_string(QString name) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     return var->value_string();
 }
 //---------------------------------------------------------------------
-//только out: int, checkbox, stringlist (rawtext), string, text
+//только out: int, checkbox, enum (rawtext), string, text
 void RtModule::set_string(QString name, QString v) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
@@ -266,7 +266,7 @@ void RtModule::append_string(QString name, QString v) {
 }
 
 //---------------------------------------------------------------------
-//int, checkbox, button, stringlist (index)
+//int, checkbox, button, enum (index)
 int RtModule::get_int(QString name) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -274,7 +274,7 @@ int RtModule::get_int(QString name) {
 }
 
 //---------------------------------------------------------------------
-//только out: int, checkbox, stringlist (index)
+//только out: int, checkbox, enum (index)
 void RtModule::set_int(QString name, int v) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
@@ -307,7 +307,7 @@ void RtModule::set_float(QString name, float v) {
 }
 
 //---------------------------------------------------------------------
-//stringlist (title)
+//enum (title)
 QString RtModule::get_title_value(QString name) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
@@ -316,7 +316,7 @@ QString RtModule::get_title_value(QString name) {
 }
 
 //---------------------------------------------------------------------
-//только out: stringlist (title)
+//только out: enum (title)
 void RtModule::set_title_value(QString name, QString v) {
     InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");

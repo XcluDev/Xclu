@@ -53,11 +53,11 @@ out string Out_String string3="Abc"
     //Output value.
 
 separator
-const stringlist Const_List list1=By_Id [By_Name,By_Id]
+const enum Const_List list1=By_Id [By_Name,By_Id]
     //Constant value.
-in stringlist In_List list2=By_Name [By_Name,By_Id]
+in enum In_List list2=By_Name [By_Name,By_Id]
     //Input value.
-out stringlist Out_List list3=By_Id [By_Name,By_Id]
+out enum Out_List list3=By_Id [By_Name,By_Id]
     //Output value.
 
 separator
@@ -87,7 +87,7 @@ in string(choose:folder) Choose_Folder choose_Folder="aa"
 
 page Conditional_GUI
 
-in stringlist Type type=Int [Int,Float,String]
+in enum Type type=Int [Int,Float,String]
     //Choose different types to see changed interface.
 
 separator

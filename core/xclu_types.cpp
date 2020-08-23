@@ -54,7 +54,7 @@ const QString InterfaceTypeNames[InterfaceItemTypeN] =
     "text",
     "checkbox",
     "button",
-    "stringlist",
+    "enum",
     "object"
 };
 

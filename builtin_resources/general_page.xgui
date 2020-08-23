@@ -14,7 +14,7 @@ in checkbox(group) Error_Handling error_handling=0
     //Settings for handling errors.
 
 if error_handling 1
-in stringlist Action_On_Error action_on_error=Show_Message_Box_and_Stop [Ignore,Print_To_Console,Show_Message_Box,Stop,Show_Message_Box_and_Stop]
+in enum Action_On_Error action_on_error=Show_Message_Box_and_Stop [Ignore,Print_To_Console,Show_Message_Box,Stop,Show_Message_Box_and_Stop]
     //What to do on error.
 
 out checkbox Was_Error was_error=1

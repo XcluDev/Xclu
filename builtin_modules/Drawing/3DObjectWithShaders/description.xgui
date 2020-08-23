@@ -12,7 +12,7 @@ page Main
     
 
 #-------------
-const stringlist Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+const enum Size size=640x480 [Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
     //Size of the FBO.
 
 if size Custom
@@ -31,7 +31,7 @@ const checkbox(group) Texture1 texture1=0
     //Use texture 1
     
 if texture1 1
-in stringlist Source tex1_source=Image_File [Image_File,Other_Module_Image]
+in enum Source tex1_source=Image_File [Image_File,Other_Module_Image]
     //Image source - file or image from other module.
 
 if tex1_source Image_File
