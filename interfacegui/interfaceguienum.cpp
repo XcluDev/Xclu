@@ -5,7 +5,7 @@
 #include "xclucombobox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiStringlist::InterfaceGuiStringlist(InterfaceGuiPageCreator &input, InterfaceItemStringlist *item)
+InterfaceGuiEnum::InterfaceGuiEnum(InterfaceGuiPageCreator &input, InterfaceItemEnum *item)
     :InterfaceGui(input, item)
 {
     insert_label(input);
@@ -40,13 +40,13 @@ InterfaceGuiStringlist::InterfaceGuiStringlist(InterfaceGuiPageCreator &input, I
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiStringlist::~InterfaceGuiStringlist() {
+InterfaceGuiEnum::~InterfaceGuiEnum() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiStringlist::set_read_only(bool read_only) {
+void InterfaceGuiEnum::set_read_only(bool read_only) {
     //цвет фона
     InterfaceGui::set_read_only(read_only);
 
@@ -54,12 +54,12 @@ void InterfaceGuiStringlist::set_read_only(bool read_only) {
 }
 
 //---------------------------------------------------------------------
-int InterfaceGuiStringlist::index() {
+int InterfaceGuiEnum::index() {
     return combo_->currentIndex();
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiStringlist::set_index(int v) {
+void InterfaceGuiEnum::set_index(int v) {
     if (v < 0 || v >= combo_->count()) v = 0;
     //проверяем, что значение не изменилось
     //(в противном случае, out-значение невозможно скопировать во время выполнения)
@@ -70,7 +70,7 @@ void InterfaceGuiStringlist::set_index(int v) {
 
 //---------------------------------------------------------------------
 //значение для проверки видимости детей
-QString InterfaceGuiStringlist::value_string_for_visibility() {
+QString InterfaceGuiEnum::value_string_for_visibility() {
     int i = index();
     if (i >= 0 && i < names_.size()) {
         return names_[i];

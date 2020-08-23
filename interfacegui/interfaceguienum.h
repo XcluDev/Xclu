@@ -1,17 +1,17 @@
-#ifndef INTERFACEGUISTRINGLIST_H
-#define INTERFACEGUISTRINGLIST_H
+#ifndef INTERFACEGUIENUM_H
+#define INTERFACEGUIENUM_H
 
 #include "interfacegui.h"
 
-class InterfaceItemStringlist;
+class InterfaceItemEnum;
 class XcluComboBox;
 
-class InterfaceGuiStringlist : public InterfaceGui
+class InterfaceGuiEnum : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiStringlist(InterfaceGuiPageCreator &input, InterfaceItemStringlist *item);
-    ~InterfaceGuiStringlist();
+    InterfaceGuiEnum(InterfaceGuiPageCreator &input, InterfaceItemEnum *item);
+    ~InterfaceGuiEnum();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility();
@@ -28,4 +28,4 @@ protected:
 
 };
 
-#endif // INTERFACEGUISTRINGLIST_H
+#endif // INTERFACEGUIENUM_H

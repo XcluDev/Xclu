@@ -84,7 +84,7 @@
         return new InterfaceItemButton(pre_description);
         break;
     case InterfaceItemTypeStringlist:
-        return new InterfaceItemStringlist(pre_description);
+        return new InterfaceItemEnum(pre_description);
         break;
     case InterfaceItemTypeObject:
         return new InterfaceItemObject(pre_description);

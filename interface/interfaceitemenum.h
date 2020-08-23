@@ -1,14 +1,14 @@
-#ifndef INTERFACEITEMSTRINGLIST_H
-#define INTERFACEITEMSTRINGLIST_H
+#ifndef INTERFACEITEMENUM_H
+#define INTERFACEITEMENUM_H
 
 #include "interfaceitem.h"
 
-class InterfaceGuiStringlist;
+class InterfaceGuiEnum;
 
-class InterfaceItemStringlist: public InterfaceItem
+class InterfaceItemEnum: public InterfaceItem
 {
 public:
-    InterfaceItemStringlist(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemEnum(const InterfaceItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string();    //rawtext, возвращает 'A_B_C'
@@ -48,9 +48,9 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiStringlist *gui_ = nullptr;
+    InterfaceGuiEnum *gui_ = nullptr;
 
 };
 
 
-#endif // INTERFACEITEMSTRINGLIST_H
+#endif // INTERFACEITEMENUM_H

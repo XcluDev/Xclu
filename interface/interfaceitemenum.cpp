@@ -7,7 +7,7 @@
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 
-InterfaceItemStringlist::InterfaceItemStringlist(const InterfaceItemPreDescription &pre_description)
+InterfaceItemEnum::InterfaceItemEnum(const InterfaceItemPreDescription &pre_description)
     : InterfaceItem(pre_description)
 {
     QString line = pre_description.line_to_parse;
@@ -46,7 +46,7 @@ InterfaceItemStringlist::InterfaceItemStringlist(const InterfaceItemPreDescripti
 }
 
 //---------------------------------------------------------------------
-int InterfaceItemStringlist::rawtext_to_index(QString rawtext) {
+int InterfaceItemEnum::rawtext_to_index(QString rawtext) {
     if (map_index_.contains(rawtext)) {
         return map_index_[rawtext];
     }
@@ -54,30 +54,30 @@ int InterfaceItemStringlist::rawtext_to_index(QString rawtext) {
 }
 
 //---------------------------------------------------------------------
-int InterfaceItemStringlist::rawtext_to_index_safe(QString rawtext) {
+int InterfaceItemEnum::rawtext_to_index_safe(QString rawtext) {
     int index = rawtext_to_index(rawtext);
     if (index == -1) return 0;
     return index;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItemStringlist::set_value_string(const QString &rawstring){
+void InterfaceItemEnum::set_value_string(const QString &rawstring){
     index_ = rawtext_to_index_safe(rawstring);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItemStringlist::value_string() {
+QString InterfaceItemEnum::value_string() {
     return rawtexts_.at(index_);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItemStringlist::value_title() {
+QString InterfaceItemEnum::value_title() {
     return xclu_remove_underscore(value_string());
 }
 
 //---------------------------------------------------------------------
 //Внимание, реализована неэффективно!
-void InterfaceItemStringlist::set_value_title(QString title) {
+void InterfaceItemEnum::set_value_title(QString title) {
     QStringList T = titles();       //все заголовки
     for (int i=0; i<T.size(); i++) {
         if (T[i] == title) {
@@ -89,7 +89,7 @@ void InterfaceItemStringlist::set_value_title(QString title) {
 }
 
 //---------------------------------------------------------------------
-QStringList InterfaceItemStringlist::titles() {       //все заголовки
+QStringList InterfaceItemEnum::titles() {       //все заголовки
     QStringList list;
     int n = rawtexts_.size();
     list.reserve(n);
@@ -100,26 +100,26 @@ QStringList InterfaceItemStringlist::titles() {       //все заголовк�
 }
 
 //---------------------------------------------------------------------
-QStringList InterfaceItemStringlist::names() {       //все заголовки с подчеркиванием - для программирования
+QStringList InterfaceItemEnum::names() {       //все заголовки с подчеркиванием - для программирования
     return rawtexts_;
 }
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemStringlist::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiStringlist(input, this);
+InterfaceGui *InterfaceItemEnum::create_gui(InterfaceGuiPageCreator &input) {
+    gui__ = gui_ = new InterfaceGuiEnum(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemStringlist::gui_to_var_internal() {
+void InterfaceItemEnum::gui_to_var_internal() {
     set_value_int(gui_->index());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemStringlist::var_to_gui_internal() {
+void InterfaceItemEnum::var_to_gui_internal() {
     gui_->set_index(value_int());
 }
 
