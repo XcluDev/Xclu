@@ -86,13 +86,13 @@
                         "aname": "is_started",
                         "atitle": "Is Started",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": "Processed 1679 frame(s)"
+                        "avalue": "Processed 443 frame(s)"
                     },
                     {
                         "aname": "show_color",
@@ -154,7 +154,7 @@
                         "aname": "color_stream_enabled",
                         "atitle": "Color Stream",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -162,7 +162,7 @@
                         "aname": "color_resolution",
                         "atitle": "Resolution",
                         "atype": "enum",
-                        "avalue": "640_x_480",
+                        "avalue": "1280_x_720",
                         "expr": "",
                         "expr_use": false
                     },
@@ -170,7 +170,7 @@
                         "aname": "color_frame_rate",
                         "atitle": "Frame Rate",
                         "atype": "enum",
-                        "avalue": "30",
+                        "avalue": "6",
                         "expr": "",
                         "expr_use": false
                     },
@@ -202,7 +202,7 @@
                         "aname": "ir_stream_enabled",
                         "atitle": "IR Stream",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -218,7 +218,7 @@
                         "aname": "depth_resolution",
                         "atitle": "Resolution",
                         "atype": "enum",
-                        "avalue": "640_x_480",
+                        "avalue": "1280_x_720",
                         "expr": "",
                         "expr_use": false
                     },
@@ -226,7 +226,7 @@
                         "aname": "depth_frame_rate",
                         "atitle": "Frame Rate",
                         "atype": "enum",
-                        "avalue": "15",
+                        "avalue": "6",
                         "expr": "",
                         "expr_use": false
                     },
@@ -272,7 +272,7 @@
                         "aname": "saved_to",
                         "atitle": "Saved To",
                         "atype": "text",
-                        "avalue": "/home/eamuseum/Desktop/Xclu/builtin_examples/../../temp/20_08_25_21_09_33_185"
+                        "avalue": "/home/eamuseum/Desktop/Xclu/builtin_examples/../../temp/20_08_25_21_32_37_639"
                     },
                     {
                         "aname": "Control",
@@ -337,7 +337,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -418,7 +418,7 @@
                         "aname": "w",
                         "atitle": "W",
                         "atype": "int",
-                        "avalue": "640",
+                        "avalue": "1280",
                         "expr": "",
                         "expr_use": false
                     },
@@ -426,7 +426,7 @@
                         "aname": "h",
                         "atitle": "H",
                         "atype": "int",
-                        "avalue": "480",
+                        "avalue": "720",
                         "expr": "",
                         "expr_use": false
                     },
@@ -549,7 +549,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -630,7 +630,7 @@
                         "aname": "w",
                         "atitle": "W",
                         "atype": "int",
-                        "avalue": "640",
+                        "avalue": "1280",
                         "expr": "",
                         "expr_use": false
                     },
@@ -638,7 +638,7 @@
                         "aname": "h",
                         "atitle": "H",
                         "atype": "int",
-                        "avalue": "480",
+                        "avalue": "720",
                         "expr": "",
                         "expr_use": false
                     },
