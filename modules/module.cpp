@@ -138,8 +138,8 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
     case GuiStageBeforeStart:   //GUI -> const и in, блокировка констант
         interf()->gui_to_vars(VarQualifierConst);
         interf()->gui_to_vars(VarQualifierIn);
-        interf()->block_gui_constants();
         if (affect_is_running) {
+            interf()->block_gui_constants();
             set_running(true);
         }
         break;
@@ -155,8 +155,8 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         interf()->gui_to_vars(VarQualifierConst);
         interf()->gui_to_vars(VarQualifierIn);
         interf()->vars_to_gui(VarQualifierOut);
-        interf()->unblock_gui_constants();
         if (affect_is_running) {
+            interf()->unblock_gui_constants();
             set_running(false);
         }
         break;
