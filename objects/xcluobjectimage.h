@@ -52,9 +52,9 @@ public:
     static XcluObjectImageData get_data(ObjectRead &object);
 
 
-    //создание изображения
+    //создание изображения - выделение памяти и заполнение из массива
     static void allocate(ObjectReadWrite &object, XcluArrayDataType data_type, int channels, int w, int h);
-    static void create_from_array(ObjectReadWrite &object, QVector<quint8> data, int channels, int w, int h);
+    static void create_from_array(ObjectReadWrite &object, quint8 *data, int channels, int w, int h);
 
     static XcluArray const *get_array(ObjectRead &object) {return object.get_array("data");}
     static XcluArray *var_array(ObjectReadWrite &object) {return object.var_array("data");}
@@ -66,6 +66,11 @@ public:
     static int get_channels_count(QString channels_str);
 
 
+    //Создание из Raster_...
+    static void create_from_raster(ObjectReadWrite &object, Raster_u8c3 &raster);
+
+
+    //Создание из QImage
     //TODO mirrorx не реализована
     static void create_from_QImage(ObjectReadWrite &object, const QImage &qimage,
                                    QString channels_str, QString data_type_str,

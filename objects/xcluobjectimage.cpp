@@ -266,7 +266,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XcluObjectImage::create_from_array(ObjectReadWrite &object, QVector<quint8> data, int channels, int w, int h) {
+/*static*/ void XcluObjectImage::create_from_array(ObjectReadWrite &object, quint8 *data, int channels, int w, int h) {
     //заполнение полей описания изображения
     allocate(object, XcluArrayDataType_u8bit, channels, w, h);
     //заполнение массива
@@ -275,6 +275,11 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     for (int i = 0; i<channels*w*h; i++) {
         output_pixels[i] = data[i];
     }
+}
+
+//---------------------------------------------------------------------
+/*static*/ void XcluObjectImage::create_from_raster(ObjectReadWrite &object, Raster_u8c3 &raster) {
+    create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------

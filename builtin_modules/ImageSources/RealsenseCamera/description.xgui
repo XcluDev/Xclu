@@ -89,6 +89,9 @@ const enum Frame_Rate rgb_frame_rate=30 [6,15,30,60]
     //Frame rate for RGB stream.
     //fps
     
+const checkbox Aligh_to_Depth align_to_depth=0
+    //Should RGB frames to be aligned to depth frames.
+    
 separator
 
 

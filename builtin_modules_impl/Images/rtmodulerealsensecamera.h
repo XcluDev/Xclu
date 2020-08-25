@@ -46,7 +46,6 @@ protected:
     void set_started(bool started); //ставит camera_started_ и gui-элемент is_started
 
 
-    XcluObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
     //количество обработанных кадров
     int processed_frames_ = 0;

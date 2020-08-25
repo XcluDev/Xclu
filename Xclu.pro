@@ -90,11 +90,17 @@ windows {
 }
 
 SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp \
+    core/raster.cpp \
+    core/types.cpp \
+    core/utils.cpp
 HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
     builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h \
     core/incl_h.h \
-    core/incl_cpp.h
+    core/incl_cpp.h \
+    core/raster.h \
+    core/types.h \
+    core/utils.h
 
 #--------------------------------------------------------------------------
 #Python

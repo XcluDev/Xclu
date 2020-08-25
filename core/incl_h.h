@@ -11,6 +11,10 @@
 #include <functional>
 #include <QScopedPointer>
 
+//types, utils
+#include "types.h"
+#include "utils.h"
+#include "raster.h"
 
 //geometry
 #include <glm/glm.hpp>

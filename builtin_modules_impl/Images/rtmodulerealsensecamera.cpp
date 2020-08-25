@@ -68,7 +68,11 @@ void RtModuleRealsenseCamera::execute_start_internal() {
     //Очистка переменных
     set_started(false); //также ставит gui-элемент is_started
 
-    ObjectReadWrite(image).clear();
+
+    ObjectReadWrite(get_object("rgb_image")).clear();
+    ObjectReadWrite(get_object("depth_image")).clear();
+    ObjectReadWrite(get_object("ir_image")).clear();
+
     is_new_frame = 0;
     processed_frames_ = 0;
 
@@ -103,12 +107,21 @@ void RtModuleRealsenseCamera::execute_update_internal() {
         set_int("is_new_frame", 1);
         processed_frames_++;
 
-        //копируем изображение для использования вовне и показа в GUI
-        //XcluObject *object = get_object("image");
-
         //метка числа обработанных кадров
         QString processed = QString("Processed %1 frame(s)").arg(processed_frames_);
         set_string("frames_captured", processed);
+
+        //установка изображений
+        if (camera_.settings().use_rgb) {
+            Raster_u8c3 raster;
+            camera_.get_color_pixels_rgb(raster);
+
+            //TODO оптимизация: устранить создание промежуточного растра raster !
+            XcluObject *rgb_image = get_object("rgb_image");
+            //bool mirrory = true;        //включаем переворот по Y на Windows
+            ObjectReadWrite image(rgb_image);
+            XcluObjectImage::create_from_raster(image, raster);
+        }
     }
 
 
@@ -210,6 +223,8 @@ RealsenseSettings RtModuleRealsenseCamera::get_settings() {
         s.depth_w = res.x;
         s.depth_h = res.y;
     }
+
+    s.align_to_depth = get_int("align_to_depth");
 
     return s;
 }

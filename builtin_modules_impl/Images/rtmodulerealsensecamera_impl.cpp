@@ -51,15 +51,6 @@
 //---------------------------------------------------------------------
 RealsenseCamera::RealsenseCamera() {
 
-    //Aligning - must to create before start camera
-    //https://github.com/IntelRealSense/librealsense/blob/master/examples/align/rs-align.cpp
-    // Define two align objects. One will be used to align
-    // to depth viewport and the other to color.
-    // Creating align object is an expensive operation
-    // that should not be performed in the main loop
-
-    //TODO !!!!!!!! control deleting when camera stop
-    device_.align_to_depth.reset(new rs2::align(RS2_STREAM_DEPTH));
 }
 
 //---------------------------------------------------------------------
@@ -82,6 +73,19 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
     //Start using settings
     QString stage = "---";
     try {
+
+        //Aligning - must to create before start camera
+        //https://github.com/IntelRealSense/librealsense/blob/master/examples/align/rs-align.cpp
+        // Define two align objects. One will be used to align
+        // to depth viewport and the other to color.
+        // Creating align object is an expensive operation
+        // that should not be performed in the main loop
+
+        //TODO !!!!!!!! control deleting when camera stop
+        if (S.align_to_depth && S.use_depth) {
+            device_.align_to_depth.reset(new rs2::align(RS2_STREAM_DEPTH));
+        }
+
         stage = "Disable all streams";
         cfg.disable_all_streams();
         stage = "Enable depth stream";
@@ -143,13 +147,10 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         device_.connected = true;
     }
     catch (std::exception &error) {
-        qDebug() << "Exception: Realsense connect error at stage: "
-                 << stage << endl
-                 << ". Error text: " << error.what() << endl;
-        //ofLogError() << error.what();
+        xclu_exception(
+                    QString("Realsense connect error at stage %1. Error text: %2")
+                 .arg(stage, error.what()));
     }
-
-
 
     //if (depth_sensor.supports(RS2_OPTION_LASER_POWER)) {
     //	depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f); // Disable laser
@@ -238,8 +239,10 @@ void RealsenseCamera::update() {
         rs2::frameset frameset;
         if (device_.pipe.poll_for_frames(&frameset)) {
 
-            // Align all frames to depth viewport
-            frameset = device_.align_to_depth->process(frameset);
+            if (S.align_to_depth && S.use_depth) {
+                // Align all frames to depth viewport
+                frameset = device_.align_to_depth->process(frameset);
+            }
 
             frameNew_ = true;
             if (S.use_depth) {
@@ -310,7 +313,7 @@ bool RealsenseCamera::get_point_cloud(QVector<glm::vec3> &pc,
     gridh = 0;
     if (device_.connected && device_.depth.get()) {
         rs2::points &points = device_.points;
-        int size = points.size();
+        int size = int(points.size());
         pc.resize(size);
         if (size > 0) {
             float kx = (mirrorx) ? -1000 : 1000;
@@ -332,21 +335,19 @@ bool RealsenseCamera::get_point_cloud(QVector<glm::vec3> &pc,
 
 
 //--------------------------------------------------------------
-bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, int &w, int &h, QVector<quint8> &data) {
+bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_u8c3 &raster) {
     auto format = frame.get_profile().format();
-    w = frame.get_width();
-    h = frame.get_height();
-    auto stream = frame.get_profile().stream_type();
+    int w = frame.get_width();
+    int h = frame.get_height();
+    raster.allocate(w, h);
+    auto &data = raster.data;
+    //auto stream = frame.get_profile().stream_type();
 
     unsigned char *input = (unsigned char *)frame.get_data();
-    data.resize(w*h * 3);
 
     if (format == RS2_FORMAT_Y8) {
-        int k = 0;
         for (int i = 0; i < w*h; i++) {
-            data[k++] = input[i];
-            data[k++] = input[i];
-            data[k++] = input[i];
+            data[i].set(input[i]);
         }
         //__log__("RS2_FORMAT_Y8 ok");
         return true;
@@ -357,12 +358,11 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, int &w,
         return true;
     }
     if (format == RS2_FORMAT_RGBA8) {
-        int k = 0;
         int j = 0;
         for (int i = 0; i < w*h; i++) {
-            data[k++] = input[j++];
-            data[k++] = input[j++];
-            data[k++] = input[j++];
+            data[i].v[0] = input[j++];
+            data[i].v[1] = input[j++];
+            data[i].v[2] = input[j++];
             j++;
         }
         //__log__("RS2_FORMAT_RGBA8 ok");
@@ -373,21 +373,21 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, int &w,
 
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_depth_pixels_rgb(int &w, int &h, QVector<quint8> &data) {
+bool RealsenseCamera::get_depth_pixels_rgb(Raster_u8c3 &raster) {
     if (!settings_.use_depth) return false;
     if (device_.connected && device_.depth.get()) {
         auto frame = device_.colorize_frame.process(device_.depth).as<rs2::video_frame>();
-        return frame_to_pixels_rgb(frame, w, h, data);
+        return frame_to_pixels_rgb(frame, raster);
     }
 
     return false;
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_color_pixels_rgb(int &w, int &h, QVector<quint8> &data) {
+bool RealsenseCamera::get_color_pixels_rgb(Raster_u8c3 &raster) {
     if (!settings_.use_rgb) return false;
     if (device_.connected && device_.color_frame.get()) {
-        return frame_to_pixels_rgb(device_.color_frame, w, h, data);
+        return frame_to_pixels_rgb(device_.color_frame, raster);
     }
 
     return false;

@@ -63,6 +63,8 @@ struct RealsenseSettings {
     int rgb_w = 1280;
     int rgb_h = 720;
     int rgb_fps = 30;
+
+    int align_to_depth = 0; //Should RGB frames to be aligned to depth frames.
 };
 
 
@@ -117,14 +119,15 @@ public:
     void close();
 
     bool connected() { return device_.connected; }
+    const RealsenseSettings &settings() { return settings_; }
 
     bool isFrameNew() { return frameNew_;  }
 
     //QImage &get_rgb_image();
     //QImage &get_depth_image();
 
-    bool get_depth_pixels_rgb(int &w, int &h, QVector<quint8> &data);
-    bool get_color_pixels_rgb(int &w, int &h, QVector<quint8> &data);
+    bool get_depth_pixels_rgb(Raster_u8c3 &raster);
+    bool get_color_pixels_rgb(Raster_u8c3 &raster);
 
     //TODO
     //callback for connecting/disconnecting devices, see rs-multicam example in SDK
@@ -159,7 +162,7 @@ protected:
 
     RealsenseDevice device_;
 
-    bool frame_to_pixels_rgb(const rs2::video_frame& frame, int &w, int &h, QVector<quint8> &data);
+    bool frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_u8c3 &raster);
 
     bool get_depth16_raw(int &w, int &h, uint16_t* &data16);
 

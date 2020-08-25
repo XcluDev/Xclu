@@ -24,7 +24,7 @@
                         "aname": "Main",
                         "atitle": "Main",
                         "atype": "page",
-                        "avalue": "0",
+                        "avalue": "174",
                         "expr": "",
                         "expr_use": false
                     },
@@ -92,7 +92,7 @@
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": "Processed 72 frame(s)"
+                        "avalue": "Processed 938 frame(s)"
                     },
                     {
                         "aname": "images",
@@ -155,6 +155,14 @@
                         "atitle": "Frame Rate",
                         "atype": "enum",
                         "avalue": "30",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "align_to_depth",
+                        "atitle": "Aligh to Depth",
+                        "atype": "checkbox",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
