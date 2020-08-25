@@ -87,7 +87,7 @@ public:
 		w = h = 0;
 		//clear data (note: data.clear() does not!) 
 		//https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
-		vector<T>().swap(data);		
+        QVector<T>().swap(data);
 	}
 	bool is_empty() const {
 		return data.empty();

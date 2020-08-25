@@ -89,8 +89,12 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         stage = "Disable all streams";
         cfg.disable_all_streams();
         stage = "Enable depth stream";
+
+        //See about formats:
+        //https://github.com/IntelRealSense/librealsense/issues/1140
+
         if (S.use_depth) {
-            cfg.enable_stream(RS2_STREAM_DEPTH, S.depth_w, S.depth_h, RS2_FORMAT_ANY, S.depth_fps);
+            cfg.enable_stream(RS2_STREAM_DEPTH, S.depth_w, S.depth_h, RS2_FORMAT_Z16, S.depth_fps);
         }
         stage = "Enable color stream";
         if (S.use_rgb) {
@@ -98,7 +102,8 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         }
         stage = "Enable IR stream";
         if (S.use_ir) {
-            cfg.enable_stream(RS2_STREAM_INFRARED, S.depth_w, S.depth_h, RS2_FORMAT_ANY, S.depth_fps);
+            int ir_id = 1;  //TODO can choose 1 or 2
+            cfg.enable_stream(RS2_STREAM_INFRARED, ir_id, S.depth_w, S.depth_h, RS2_FORMAT_Y8, S.depth_fps);
         }
         //__log__("resolution " + ofToString(w) + " " + ofToString(h) + " " + ofToString(fps));
 
@@ -110,37 +115,35 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         stage = "Pipe start";
         device_.profile = device_.pipe.start(cfg);
 
-        //obtain depth_scale
-        if (S.use_depth) {
-            stage = "Get selected device";
-            rs2::device selected_device = device_.profile.get_device();
+        //Setting preset and obtain depth_scale
+        stage = "Get selected device";
+        rs2::device selected_device = device_.profile.get_device();
 
-            stage = "Get depth sensor";
-            auto depth_sensor = selected_device.first<rs2::depth_sensor>();
+        stage = "Get depth sensor";
+        auto depth_sensor = selected_device.first<rs2::depth_sensor>();
 
-            //Setting preset
-            stage = "Set visual preset";
-            if (S.visual_preset > -1) {
-                if (depth_sensor.supports(RS2_OPTION_VISUAL_PRESET)) {
-                    depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, S.visual_preset);
+        //Setting preset
+        stage = "Set visual preset";
+        if (S.visual_preset > -1) {
+            if (depth_sensor.supports(RS2_OPTION_VISUAL_PRESET)) {
+                depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, S.visual_preset);
 
-                    //High accuracy preset
-                    //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY);
-                    //High density preset
-                    //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_DENSITY);
-                }
+                //High accuracy preset
+                //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY);
+                //High density preset
+                //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_DENSITY);
             }
+        }
 
-            stage = "Obtain depth scale";
-            //https://github.com/IntelRealSense/librealsense/issues/2348
-            //rs2::device dev = device_.profile.get_device();
-            //rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
-            device_.depth_scale_mm = depth_sensor.get_depth_scale() * 1000;
+        stage = "Obtain depth scale";
+        //https://github.com/IntelRealSense/librealsense/issues/2348
+        //rs2::device dev = device_.profile.get_device();
+        //rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
+        device_.depth_scale_mm = depth_sensor.get_depth_scale() * 1000;
 
-            stage = "Set using emitter";
-            if (depth_sensor.supports(RS2_OPTION_EMITTER_ENABLED)) {
-                depth_sensor.set_option(RS2_OPTION_EMITTER_ENABLED, S.use_emitter);//on/off emitter
-            }
+        stage = "Set using emitter";
+        if (depth_sensor.supports(RS2_OPTION_EMITTER_ENABLED)) {
+            depth_sensor.set_option(RS2_OPTION_EMITTER_ENABLED, S.use_emitter);//on/off emitter
         }
 
         //console_append("RealsenseCamera started");
@@ -371,6 +374,55 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_
     return false;
 }
 
+//--------------------------------------------------------------
+bool RealsenseCamera::get_color_pixels_rgb(Raster_u8c3 &raster) {
+    if (!settings_.use_rgb) return false;
+    if (device_.connected && device_.color_frame.get()) {
+        return frame_to_pixels_rgb(device_.color_frame, raster);
+    }
+
+    return false;
+}
+
+//--------------------------------------------------------------
+bool RealsenseCamera::get_depth16_raw(int &w, int &h, uint16_t* &data16) {
+    w = 0;
+    h = 0;
+    data16 = NULL;
+    if (!settings_.use_depth) return false;
+    if (device_.connected && device_.depth.get()) {
+        data16 = (uint16_t*)device_.depth.get_data(); //device_.depth.get_frame_data();
+        if (!data16) return false;
+        w = settings_.depth_w;		//TODO get straight from depth frame
+        h = settings_.depth_h;
+        return true;
+    }
+    return true;
+}
+
+//--------------------------------------------------------------
+bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, Raster_u8 &raster) {
+    raster.clear();
+    int w = 0;
+    int h = 0;
+    raster.clear();
+    uint16_t *data16;
+    bool result = get_depth16_raw(w, h, data16);
+    if (result) {
+        raster.allocate(w, h);
+        for (int i = 0; i < w*h; i++) {
+            if (data16[i] > 0) {
+                raster.data[i] = mapi_clamped(data16[i] * device_.depth_scale_mm, min_dist, max_dist, 255, 0);
+            }
+            else {
+                raster.data[i] = 0;
+            }
+        }
+        return true;
+    }
+
+    return false;
+}
 
 //--------------------------------------------------------------
 bool RealsenseCamera::get_depth_pixels_rgb(Raster_u8c3 &raster) {
@@ -383,47 +435,71 @@ bool RealsenseCamera::get_depth_pixels_rgb(Raster_u8c3 &raster) {
     return false;
 }
 
-//--------------------------------------------------------------
-bool RealsenseCamera::get_color_pixels_rgb(Raster_u8c3 &raster) {
-    if (!settings_.use_rgb) return false;
-    if (device_.connected && device_.color_frame.get()) {
-        return frame_to_pixels_rgb(device_.color_frame, raster);
-    }
 
+//--------------------------------------------------------------
+bool RealsenseCamera::get_depth_pixels_mm(Raster_float &raster) {
+    raster.clear();
+    int w = 0;
+    int h = 0;
+    uint16_t *data16;
+    bool result = get_depth16_raw(w, h, data16);
+    if (result) {
+        //https://github.com/IntelRealSense/librealsense/issues/2348
+        raster.allocate(w, h);
+        for (int i = 0; i < w*h; i++) {
+            raster.data[i] = data16[i];// * device_.depth_scale_mm;
+        }
+        return true;
+    }
     return false;
 }
 
-//---------------------------------------------------------------------
-/*QImage &RealsenseCamera::get_rgb_image() {
-    if (dirty_image_) {
-        if (device_.color_frame.get()) {
-            int w, h;
-            QVector<quint8> data;
-            bool res = frame_to_pixels_rgb(device_.color_frame, w, h, data);
-            if (res) {
-                pixels_rgb_to_QImage(w, h, data, image_);
-                dirty_image_ = false;
-            }
+//--------------------------------------------------------------
+bool RealsenseCamera::get_depth_pixels_mm(Raster_u16 &raster) {
+    raster.clear();
+    int w = 0;
+    int h = 0;
+    uint16_t *data16;
+    bool result = get_depth16_raw(w, h, data16);
+    if (result) {
+        //https://github.com/IntelRealSense/librealsense/issues/2348
+        raster.allocate(w, h);
+        for (int i = 0; i < w*h; i++) {
+            raster.data[i] = data16[i];// * device_.depth_scale_mm;
         }
+        return true;
     }
-    return image_;
-}*/
+    return false;
+}
 
-//---------------------------------------------------------------------
-/*QImage &RealsenseCamera::get_depth_image() {
-    if (dirty_image_depth_) {
-        if (device_.depth.get()) {
-            int w, h;
-            QVector<quint8> data;
-            bool res = get_depth_pixels_rgb(w, h, data);
-            if (res) {
-                pixels_rgb_to_QImage(w, h, data, image_);
-                dirty_image_depth_ = false;
-            }
+//--------------------------------------------------------------
+bool RealsenseCamera::get_ir_pixels8(Raster_u8 &raster) {
+    raster.clear();
+    if (!settings_.use_ir) return false;
+    if (device_.connected && device_.ir_frame.get()) {
+        uint8 *data8 = (uint8*)device_.ir_frame.get_data();
+        if (!data8) return false;
+        int w = settings_.depth_w;		//TODO get straight from IR frame
+        int h = settings_.depth_h;
+        raster.allocate(w, h);
+        for (int i=0; i<w*h; i++) {
+            raster.data[i] = data8[i];
         }
+        return true;
     }
-    return image_;
-}*/
+    return false;
+}
+
+//--------------------------------------------------------------
+bool RealsenseCamera::get_ir_pixels_rgb(Raster_u8c3 &raster) {
+    if (!settings_.use_ir) return false;
+    if (device_.connected && device_.ir_frame.get()) {
+        auto frame = device_.colorize_frame.process(device_.ir_frame).as<rs2::video_frame>();
+        //__log__("calling frame_to_pixels_rgb");
+        return frame_to_pixels_rgb(frame, raster);
+    }
+    return false;
+}
 
 //---------------------------------------------------------------------
 

@@ -250,14 +250,14 @@ QString &XcluObject::var_string(QString name, bool create_if_not_exists) {
 
 #define XcluObject_var_(TYPE_NAME, CPP_TYPE) \
     CPP_TYPE XcluObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
-        xclu_assert(create_if_not_exists || has_##TYPE_NAME(name), "Object has no "#TYPE_NAME"'" + name + "'"); \
+        xclu_assert(create_if_not_exists || has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
 
 #define XcluObject_var_pointer_(TYPE_NAME, CPP_TYPE) \
     CPP_TYPE XcluObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
         bool has = has_##TYPE_NAME(name); \
-        xclu_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME"'" + name + "'"); \
+        xclu_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME" '" + name + "'"); \
         if (!has) { \
             TYPE_NAME##_.insert(name, create_##TYPE_NAME(name));      \
         }           \

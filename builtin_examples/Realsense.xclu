@@ -24,7 +24,7 @@
                         "aname": "Main",
                         "atitle": "Main",
                         "atype": "page",
-                        "avalue": "174",
+                        "avalue": "270",
                         "expr": "",
                         "expr_use": false
                     },
@@ -40,7 +40,7 @@
                         "aname": "select_device",
                         "atitle": "Device",
                         "atype": "enum",
-                        "avalue": "By_Index",
+                        "avalue": "Default",
                         "expr": "",
                         "expr_use": false
                     },
@@ -86,17 +86,17 @@
                         "aname": "is_started",
                         "atitle": "Is Started",
                         "atype": "checkbox",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": "Processed 938 frame(s)"
+                        "avalue": "Processed 1865 frame(s)"
                     },
                     {
-                        "aname": "images",
-                        "atitle": "Images",
+                        "aname": "show_rgb",
+                        "atitle": "Show RGB",
                         "atype": "checkbox",
                         "avalue": "1",
                         "expr": "",
@@ -109,10 +109,26 @@
                         "avalue": ""
                     },
                     {
+                        "aname": "show_depth",
+                        "atitle": "Show Depth",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
                         "aname": "depth_image",
                         "atitle": "Depth",
                         "atype": "object",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "show_ir",
+                        "atitle": "Show IR",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
                     },
                     {
                         "aname": "ir_image",
@@ -178,7 +194,7 @@
                         "aname": "depth_stream_enabled",
                         "atitle": "Depth Stream",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -186,7 +202,7 @@
                         "aname": "ir_stream_enabled",
                         "atitle": "IR Stream",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -218,7 +234,7 @@
                         "aname": "emitter",
                         "atitle": "Emitter",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },

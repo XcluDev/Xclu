@@ -17,9 +17,29 @@ int sqri(int x);
 //x*x*x
 float pow3(float x);
 
+//min and max
+float minf(float x, float y);
+float maxf(float x, float y);
+double mind(double x, double y);
+double maxd(double x, double y);
+int mini(int x, int y);
+int maxi(int x, int y);
+
+
+//clamp to range [a,b], including a and b
+float clampf(float x, float a, float b);
+double clampd(double x, double a, double b);
+int clampi(int x, int a, int b);
+
 //linear interpolation
 float mapf(float x, float a, float b, float A, float B);
 double mapd(double x, double a, double b, double A, double B);
-int to_range(int x, int a, int b);
+int mapi(int x, int a, int b, int A, int B);
+
+//clamped linear interpolation
+float mapf_clamped(float x, float a, float b, float A, float B);
+double mapd_clamped(double x, double a, double b, double A, double B);
+int mapi_clamped(int x, int a, int b, int A, int B);
+
 
 //-------------------------------------------------------

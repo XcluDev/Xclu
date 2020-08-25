@@ -123,11 +123,18 @@ public:
 
     bool isFrameNew() { return frameNew_;  }
 
-    //QImage &get_rgb_image();
-    //QImage &get_depth_image();
-
-    bool get_depth_pixels_rgb(Raster_u8c3 &raster);
+    //RGB
     bool get_color_pixels_rgb(Raster_u8c3 &raster);
+
+    //Depth
+    bool get_depth_pixels8(float min_dist, float max_dist, Raster_u8 &raster);
+    bool get_depth_pixels_rgb(Raster_u8c3 &raster);
+    bool get_depth_pixels_mm(Raster_float &raster);
+    bool get_depth_pixels_mm(Raster_u16 &raster);
+
+    //IR
+    bool get_ir_pixels8(Raster_u8 &raster);
+    bool get_ir_pixels_rgb(Raster_u8c3 &raster);
 
     //TODO
     //callback for connecting/disconnecting devices, see rs-multicam example in SDK
@@ -135,19 +142,10 @@ public:
 
     //TODO optimization
     //not compute texture coordinates if not required
-
-
     bool get_point_cloud(QVector<glm::vec3> &pc,
                          int &gridw, int &gridh,
                          int mirrorx = 0, int mirrory = 0, int mirrorz = 0);	//get point cloud for connected device
 
-    //bool get_depth_pixels_mm(int &w, int &h, vector<float> &data);
-    //bool get_depth_pixels_mm(int &w, int &h, vector<unsigned short> &data);
-    //bool get_depth_pixels8(float min_dist, float max_dist, int &w, int &h, vector<unsigned char> &data);
-
-
-    //bool get_color_pixels_rgb(int &w, int &h, vector<unsigned char> &data);
-    //bool get_ir_pixels_rgb(int &w, int &h, vector<unsigned char> &data);
 
     //project 3d to screen
     glm::vec2 project_3d_to_screen(const glm::vec3 &p);
@@ -165,11 +163,6 @@ protected:
     bool frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_u8c3 &raster);
 
     bool get_depth16_raw(int &w, int &h, uint16_t* &data16);
-
-    //bool dirty_image_ = false;
-    //QImage image_;
-    //bool dirty_image_depth_ = false;
-    //QImage image_depth_;
 
     void setup(rs2::device &dev, const RealsenseSettings &settings);
 

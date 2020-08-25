@@ -278,6 +278,11 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
+/*static*/ void XcluObjectImage::create_from_raster(ObjectReadWrite &object, Raster_u8 &raster) {
+    create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
+}
+
+//---------------------------------------------------------------------
 /*static*/ void XcluObjectImage::create_from_raster(ObjectReadWrite &object, Raster_u8c3 &raster) {
     create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
 }

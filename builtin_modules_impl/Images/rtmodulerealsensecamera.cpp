@@ -112,14 +112,28 @@ void RtModuleRealsenseCamera::execute_update_internal() {
         set_string("frames_captured", processed);
 
         //установка изображений
-        if (camera_.settings().use_rgb) {
+        if (get_int("show_rgb") && camera_.settings().use_rgb) {
             Raster_u8c3 raster;
-            camera_.get_color_pixels_rgb(raster);
+            xclu_assert(camera_.get_color_pixels_rgb(raster), "get_color_pixels_rgb() returned false");
 
             //TODO оптимизация: устранить создание промежуточного растра raster !
-            XcluObject *rgb_image = get_object("rgb_image");
-            //bool mirrory = true;        //включаем переворот по Y на Windows
-            ObjectReadWrite image(rgb_image);
+            ObjectReadWrite image(get_object("rgb_image"));
+            XcluObjectImage::create_from_raster(image, raster);
+        }
+        if (get_int("show_depth") && camera_.settings().use_depth) {
+            Raster_u8c3 raster;
+            xclu_assert(camera_.get_depth_pixels_rgb(raster), "get_depth_pixels_rgb() returned false");
+
+            //TODO оптимизация: устранить создание промежуточного растра raster !
+            ObjectReadWrite image(get_object("depth_image"));
+            XcluObjectImage::create_from_raster(image, raster);
+        }
+        if (get_int("show_ir") && camera_.settings().use_ir) {
+            Raster_u8 raster;
+            xclu_assert(camera_.get_ir_pixels8(raster), "get_ir_pixels8() returned false");
+
+            //TODO оптимизация: устранить создание промежуточного растра raster !
+            ObjectReadWrite image(get_object("ir_image"));
             XcluObjectImage::create_from_raster(image, raster);
         }
     }

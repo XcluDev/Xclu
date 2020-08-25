@@ -67,6 +67,7 @@ public:
 
 
     //Создание из Raster_...
+    static void create_from_raster(ObjectReadWrite &object, Raster_u8 &raster);
     static void create_from_raster(ObjectReadWrite &object, Raster_u8c3 &raster);
 
 
