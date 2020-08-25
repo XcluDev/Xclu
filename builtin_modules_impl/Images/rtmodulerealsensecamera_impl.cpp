@@ -123,23 +123,25 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         auto depth_sensor = selected_device.first<rs2::depth_sensor>();
 
         //Setting preset
-        stage = "Set visual preset";
-        if (S.visual_preset > -1) {
-            if (depth_sensor.supports(RS2_OPTION_VISUAL_PRESET)) {
-                depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, S.visual_preset);
+        if (S.use_depth) {
+            stage = "Set visual preset";
+            if (S.visual_preset > -1) {
+                if (depth_sensor.supports(RS2_OPTION_VISUAL_PRESET)) {
+                    depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, S.visual_preset);
 
-                //High accuracy preset
-                //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY);
-                //High density preset
-                //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_DENSITY);
+                    //High accuracy preset
+                    //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY);
+                    //High density preset
+                    //depth_sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_DENSITY);
+                }
             }
-        }
 
-        stage = "Obtain depth scale";
-        //https://github.com/IntelRealSense/librealsense/issues/2348
-        //rs2::device dev = device_.profile.get_device();
-        //rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
-        device_.depth_scale_mm = depth_sensor.get_depth_scale() * 1000;
+            stage = "Obtain depth scale";
+            //https://github.com/IntelRealSense/librealsense/issues/2348
+            //rs2::device dev = device_.profile.get_device();
+            //rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
+            device_.depth_scale_mm = depth_sensor.get_depth_scale() * 1000;
+        }
 
         stage = "Set using emitter";
         if (depth_sensor.supports(RS2_OPTION_EMITTER_ENABLED)) {
