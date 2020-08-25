@@ -2,7 +2,7 @@
 #include <QJsonArray>
 
 #include "interfaceitem.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "interfaceitempage.h"
 #include "interfaceitemgroup.h"
 #include "interfaceitemseparator.h"

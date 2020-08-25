@@ -4,7 +4,7 @@
 //Свойства проекта, которые могут быть "интересны" модулям,
 //такие так время от старта приложения и рабочая папка проекта
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include <QElapsedTimer>
 class Module;
 class InterfaceItem;

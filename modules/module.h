@@ -3,7 +3,7 @@
 
 //Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (RtModule)
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "moduleinfo.h"
 #include "moduleinterface.h"
 #include "rtmodule.h"

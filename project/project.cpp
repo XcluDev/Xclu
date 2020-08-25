@@ -4,7 +4,7 @@
 #include <QJsonObject>
 
 #include "project.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "modulesfactory.h"
 #include "module.h"
 #include "projectruntime.h"

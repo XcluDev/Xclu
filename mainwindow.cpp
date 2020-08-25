@@ -2,7 +2,7 @@
 
 #include "mainwindow.h"
 #include "project.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "projectgui.h"
 #include "projectruntime.h"
 #include "xcluobjectimage.h"

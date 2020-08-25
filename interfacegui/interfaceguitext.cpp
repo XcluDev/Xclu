@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "interfaceguitext.h"
 #include "interfaceitemtext.h"
 

@@ -2,7 +2,7 @@
 
 #define PY_SSIZE_T_CLEAN
 //#include <Python.h>
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 PythonCore PYTHON;
 

@@ -9,7 +9,7 @@
 #include <QCamera>
 #include <QAbstractVideoSurface>
 #include <QMutex>
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"

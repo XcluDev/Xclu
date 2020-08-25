@@ -1,5 +1,5 @@
 #include "rtmodulesoundout.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>
 #include "rtmoduleregistrar.h"

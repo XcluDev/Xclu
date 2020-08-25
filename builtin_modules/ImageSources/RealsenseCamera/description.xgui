@@ -10,7 +10,7 @@ page Main
 
     
 #-----------------------------
-in enum Capture_Source capture_source=Camera [Disable,Camera,Bag_File]
+const enum Capture_Source capture_source=Camera [Disable,Camera,Bag_File]
     //Source of frames - capture frames from real camera of load BAG recording from a disk.
     
 #-------- Camera --------------
@@ -80,12 +80,6 @@ const enum Frame_Rate rgb_frame_rate=30 [6,15,30,60]
     //Frame rate for RGB stream.
     //fps
     
-in enum Channels rgb_image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
-#TODO не поддерживаются каналы HSL,H,S,L
-    //Desired channels of the output image.
-in enum Data_Type image_data_type=u8bit [u8bit,float]
-    //Desired data type of the output image, u8bit=0..255, float=[0,1].
-
 separator
 
 out object(image) RGB rgb_image
@@ -136,8 +130,8 @@ out checkbox Is_New_Frame depth_is_new_frame=0
     //Flag is true when new frame is arrived.
 
 #--------------------
-page Device_Info
-    //Print list of cameras.
+page Devices
+    //Here you can get list of connected cameras.
 
 in button Print_Devices print_devices
 	//Print list of all connected webcams
@@ -146,7 +140,7 @@ in button Print_Devices print_devices
 #	//Print once list of supported formats of connected camera
 
 
-out text Local_Console local_console 10 15
+out text Device_list device_list 10 15
     //Console output.
     
 

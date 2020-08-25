@@ -48,14 +48,14 @@ void RtModuleRealsenseCamera::print_devices() {
     if (n > 0) {
         out.append(RealsenseCamera::get_connected_devices_list());
     }
-    clear_string("local_console");
-    append_string("local_console", out, 1);
+    clear_string("device_list");
+    append_string("device_list", out, 1);
 
 }
 
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::execute_loaded_internal() {
-    clear_string("local_console");
+    clear_string("device_list");
 }
 
 //---------------------------------------------------------------------
@@ -64,55 +64,26 @@ void RtModuleRealsenseCamera::execute_start_internal() {
     //в зависимости от capture_source
 
     //Очистка переменных
-    camera_tried_to_start_ = false;
-
-    //данные surface
-    {
-        DataAccess access(data_);
-        data_.clear();
-    }
-
-    processed_frames_ = 0;
-
     set_started(false); //также ставит gui-элемент is_started
+
+    ObjectReadWrite(image).clear();
+    captured_frames = 0;
+    is_new_frame = 0;
+    processed_frames_ = 0;
 
     clear_string("connected_device_name");
     set_int("is_new_frame", 0);
     clear_string("frames_captured");
 
     //очищаем список устройств
-    clear_string("local_console");
+    clear_string("device_list");
 
     //запуск камеры или воспроизведения файла
     start_camera();
-    //------------------------------------
-
 }
 
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::execute_update_internal() {
-    update_camera();
-
-    //обработка ошибки
-    {
-        DataAccess access(data_);
-        data_.err.throw_error();
-    }
-}
-
-//---------------------------------------------------------------------
-void RtModuleRealsenseCamera::execute_stop_internal() {
-    //qDebug() << "stop";
-    stop_camera();
-
-}
-
-//---------------------------------------------------------------------
-void RtModuleRealsenseCamera::update_camera() {
-    //захват с камеры или считывание изображений
-    int source = get_int("capture_source");
-    if (source == CaptureSourceNone) return;
-
     //если камера не стартовала - то делать нечего
     //TODO возможно стоит попробовать запустить камеру снова через некоторое время
     if (!camera_started_) return;
@@ -147,104 +118,114 @@ void RtModuleRealsenseCamera::update_camera() {
     set_string("frames_captured", processed);
 
 
+
 }
+
+//---------------------------------------------------------------------
+void RtModuleRealsenseCamera::execute_stop_internal() {
+    //qDebug() << "stop";
+    /*if (camera_.data()) {
+        //camera_->stop();  //Это не полная остановка, камера продолжает потреблять энергию
+        camera_->unload();    //Остановка камеры
+        camera_.reset();
+    }*/
+
+}
+
+
 
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::start_camera() {
     //запуск камеры
-    if (!camera_tried_to_start_) {
-        //пытаемся стартовать камеру
-        camera_tried_to_start_ = true;
 
-        /*      //выбор устройства
-        const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
+    int capture_source = get_int("capture_source");
+    if (capture_source == CaptureSourceNone) return;
+    if (capture_source == CaptureSourceBagFile) {
+        //TODO реализовать считывание bag-файла
+        xclu_exception("RealsenseCamera: loading bag files are not implemented");
+    }
+    if (capture_source == CaptureSourceCamera) {
+        //выбор устройства
+        auto cameras = RealsenseCamera::get_connected_devices_list();
         xclu_assert(!cameras.empty(), "No connected devices");
 
+        int device_index = -1;
         SelectDevice method = SelectDevice(get_int("select_device"));
         switch (method) {
-        case SelectDeviceDefault: {
-            start_camera(QCameraInfo::defaultCamera());
+        case SelectDeviceDefault:
+            device_index = 0;
             break;
-        }
-        case SelectDeviceByIndex: {
-                int name = get_int("device_index");
-                xclu_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
-                start_camera(cameras[name]);
-                break;
-        }
+        case SelectDeviceByIndex:
+            device_index = get_int("device_index");
+            xclu_assert(device_index >= 0 && device_index < cameras.size(), "Bad device index " + QString::number(name));
+            break;
         case SelectDeviceByName: {
             QString name = get_string("device_name");
             for (int i=0; i<cameras.size(); i++) {
                 auto &info = cameras.at(i);
                 if (info.description().contains(name)) {
-                    start_camera(info);
+                    device_index = i;
                     break;
                 }
+                xclu_exception("No device with serial '" + name + "'");
             }
             break;
         }
         default:
             //мы здесь не должны быть, так как все методы запуска рассмотренли,
             //поэтому выдаем ошибку
-            xclu_exception(QString("Bad select_device value '%1'").arg(method));
+            xclu_exception(QString("Internal error, bad select_device value '%1'").arg(method));
         }
 
+        //TODO прикрутить реакцию на отключение камеры
+        connect(camera_.data(), &QCamera::stateChanged, this, &RtModuleRealsenseCamera::on_changed_camera_state);
+        connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &RtModuleRealsenseCamera::on_camera_error);
 
-    read_gui_output_data_format();
+        //считывание разрешения
+        int w, h;
+        get_gui_resolution(w, h);
 
-    camera_.reset(new QCamera(cameraInfo));
-    camera_->load();    //вообще это не требуется, но пробуем устранить ошибку с зависанием при старте.
+        //считывание FPS
+        int fps = get_gui_frame_rate();
 
-    connect(camera_.data(), &QCamera::stateChanged, this, &RtModuleRealsenseCamera::on_changed_camera_state);
-    connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &RtModuleRealsenseCamera::on_camera_error);
-
-    //считывание разрешения
-    int w, h;
-    get_gui_resolution(w, h);
-
-    //считывание FPS
-    int fps = get_gui_frame_rate();
-
-    if (w > 0 && h > 0 && fps > 0) {
-        //установка разрешения и FPS в камеру
-        QCameraViewfinderSettings settings;
-        if (w > 0 && h > 0) {
-            settings.setResolution(w, h);
+        if (w > 0 && h > 0 && fps > 0) {
+            //установка разрешения и FPS в камеру
+            QCameraViewfinderSettings settings;
+            if (w > 0 && h > 0) {
+                settings.setResolution(w, h);
+            }
+            if (fps > 0) {
+                settings.setMinimumFrameRate(fps);
+                settings.setMaximumFrameRate(fps);
+            }
+            //TODO проверить, что камера такое поддерживает
+            camera_->setViewfinderSettings(settings);
         }
-        if (fps > 0) {
-            settings.setMinimumFrameRate(fps);
-            settings.setMaximumFrameRate(fps);
-        }
-        //TODO проверить, что камера такое поддерживает
-        camera_->setViewfinderSettings(settings);
+
+        //ставим захват изображений в нашу surface_
+        camera_->setViewfinder(&surface_);
+
+        on_changed_camera_state(camera_->state());
+
+        QString device_name = cameraInfo.description();
+        set_string("connected_device_name", device_name);
+        append_string("device_list", "Starting: " + device_name, 1);
+
+        //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
+        //делаем тут это до старта камеры, и в функции делаем "camera_->load()",
+        //чтобы в случае ее падения увидеть поддерживаемые разрешения
+        print_formats();
+
+        camera_->start();
+
     }
-
-    //ставим захват изображений в нашу surface_
-    camera_->setViewfinder(&surface_);
-
-    on_changed_camera_state(camera_->state());
-
-    QString device_name = cameraInfo.description();
-    set_string("connected_device_name", device_name);
-    append_string("local_console", "Starting: " + device_name, 1);
-
-    //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
-    //делаем тут это до старта камеры, и в функции делаем "camera_->load()",
-    //чтобы в случае ее падения увидеть поддерживаемые разрешения
-    print_formats();
-
-    camera_->start();
-        */
-    }
-
 }
-
 
 
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
 void RtModuleRealsenseCamera::get_gui_resolution(int &w, int &h) {
-    /*QString res_string = get_string("resolution");
+    QString res_string = get_string("resolution");
     if (res_string == "Camera_Default") {
         w = -1;
         h = -1;
@@ -310,14 +291,6 @@ void RtModuleRealsenseCamera::set_started(bool started) { //ставит camera_
 }
 */
 
-//---------------------------------------------------------------------
-void RtModuleRealsenseCamera::stop_camera() {
-    /*if (camera_.data()) {
-        //camera_->stop();  //Это не полная остановка, камера продолжает потреблять энергию
-        camera_->unload();    //Остановка камеры
-        camera_.reset();
-    }*/
-}
 
 //---------------------------------------------------------------------
 

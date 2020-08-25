@@ -3,7 +3,7 @@
 
 //Числовой массив
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 //типы данных в массиве
 enum XcluArrayDataType : int {

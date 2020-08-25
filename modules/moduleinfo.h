@@ -8,7 +8,7 @@
 //Для скорости запуска, сначала парсятся только заголовки модуля
 //А текст описания GUI считывается как строки, но сразу не парсится
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "moduledescription.h"
 
 class ModuleInfo

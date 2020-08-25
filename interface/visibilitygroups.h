@@ -4,7 +4,7 @@
 //Структуры для динамического GUI - отслеживание, кто должен включиться/выключиться
 //причем, это работает только в GUI - а сами элементы (InterfaceItem) не меняют своего значения, пока не придет сигнал
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 class InterfaceGui;
 class VisibilityGroupGui;

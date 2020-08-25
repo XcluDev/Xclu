@@ -1,4 +1,4 @@
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "visibilitygroups.h"
 #include "interfacegui.h"
 

@@ -22,7 +22,7 @@ HorizontalLayout
 */
 
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 //элемент дерева
 class XcluParseTreeItem {

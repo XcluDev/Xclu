@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <QScreen>
 
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"

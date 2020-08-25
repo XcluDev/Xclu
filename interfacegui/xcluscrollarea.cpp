@@ -2,7 +2,7 @@
 #include <QScrollBar>
 #include "xcluscrollarea.h"
 #include "xcludoublespinbox.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 
 //---------------------------------------------------------------------

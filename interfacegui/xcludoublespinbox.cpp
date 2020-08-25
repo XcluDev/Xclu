@@ -1,6 +1,6 @@
 #include <QWheelEvent>
 #include "xcludoublespinbox.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 XcluDoubleSpinBox::XcluDoubleSpinBox(QWidget *parent)

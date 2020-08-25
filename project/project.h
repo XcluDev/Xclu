@@ -5,7 +5,7 @@
 //без графического интерфейса.
 
 #include <QJsonObject>
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "module.h"
 #include "projectproperties.h"
 

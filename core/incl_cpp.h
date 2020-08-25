@@ -1,7 +1,7 @@
 #ifndef INCL_QTCPP_H
 #define INCL_QTCPP_H
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>

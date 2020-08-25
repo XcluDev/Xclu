@@ -1,5 +1,5 @@
 #include "projectproperties.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 void ProjectProperties::reset_name() {

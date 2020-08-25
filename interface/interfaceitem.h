@@ -5,7 +5,7 @@
 //Подклассы реализуют конкретные элементы.
 //Также, они порождают визуальное представление в виде InterfaceGui
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 struct InterfaceGuiPageCreator;
 class InterfaceGui;

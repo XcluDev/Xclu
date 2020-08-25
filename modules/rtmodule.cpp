@@ -1,7 +1,7 @@
 #include "rtmodule.h"
 #include "moduleinterface.h"
 #include "module.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 RtModule::RtModule(QString class_name) {

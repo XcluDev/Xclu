@@ -92,7 +92,9 @@ windows {
 SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
     builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
 HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h \
+    core/incl_h.h \
+    core/incl_cpp.h
 
 #--------------------------------------------------------------------------
 #Python
@@ -206,6 +208,7 @@ SOURCES += \
 
 HEADERS += \
     builtin_modules_impl/Screen/rtmodulewimage.h \
+    core/int2.h \
     core/xclu_parse_tree.h \
     core/xclu_paths.h \
     core/xclu_settings.h \
@@ -228,8 +231,6 @@ HEADERS += \
     builtin_modules_impl/Images/rtmodulewebcamera.h \
     builtin_modules_impl/Sound/rtmodulesoundout.h \
     builtin_modules_impl/System/rtmoduleexecute.h \
-    core/incl_qt.h \
-    core/incl_qtcpp.h \
     core/incl_std.h \
     core/console.h \
     interface/interfaceitembutton.h \

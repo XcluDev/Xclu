@@ -2,7 +2,7 @@
 #include "modulesfactory.h"
 #include "project.h"
 #include "projectgui.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "consoleview.h"
 
 ProjectGui *PROJ_GUI;

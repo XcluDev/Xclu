@@ -1,7 +1,7 @@
 #ifndef PROJECTPROPERTIES_H
 #define PROJECTPROPERTIES_H
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 class QJsonObject;
 

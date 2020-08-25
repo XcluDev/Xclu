@@ -3,7 +3,7 @@
 
 //Тип данных "объект", которых хранит скаляры, строки, численные массивы и списки строк, и объекты.
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 #include "xcluarray.h"
 #include <QMutex>

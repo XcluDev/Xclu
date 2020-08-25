@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "interfacegui.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "interfaceitem.h"
 #include "visibilitygroups.h"
 

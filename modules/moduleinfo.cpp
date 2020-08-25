@@ -1,5 +1,5 @@
 #include "moduleinfo.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //строки описания страницы General
 //загружается при первом требовании и затем хранится в памяти тут

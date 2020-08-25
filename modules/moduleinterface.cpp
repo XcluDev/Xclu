@@ -2,7 +2,7 @@
 #include <QJsonArray>
 #include "rtmodule.h"
 #include "moduleinterface.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "editormodule.h"
 
 

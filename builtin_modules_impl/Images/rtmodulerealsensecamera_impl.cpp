@@ -1,5 +1,5 @@
 #include "rtmodulerealsensecamera_impl.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 /*static*/ QString RealsenseCamera::get_sdk_version() {

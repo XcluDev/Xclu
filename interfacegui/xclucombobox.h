@@ -7,7 +7,7 @@
 
 #include <QWidget>
 #include <QComboBox>
-#include "incl_qt.h"
+#include "incl_h.h"
 
 class QWheelEvent;
 

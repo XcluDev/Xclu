@@ -1,5 +1,5 @@
 #include "xcluobject.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 
 //---------------------------------------------------------------------

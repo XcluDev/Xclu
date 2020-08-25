@@ -2,7 +2,7 @@
 #include <QJsonArray>
 
 #include "module.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "modulesfactory.h"
 #include "xcluobject.h"
 

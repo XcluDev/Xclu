@@ -9,7 +9,7 @@
 #include <QMainWindow>
 #include <QStack>
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluprotecteddata.h"
 #include "xclu_parse_tree.h"

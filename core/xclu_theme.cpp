@@ -2,7 +2,7 @@
 #include <QFontDatabase>
 #include <QApplication>
 #include "xclu_theme.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 QString font_family_values() {

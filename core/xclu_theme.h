@@ -1,7 +1,7 @@
 #ifndef XCLU_GUI_CONST_H
 #define XCLU_GUI_CONST_H
 
-#include "incl_qt.h"
+#include "incl_h.h"
 
 //Пути к встроенным ресурсам
 //Параметры для GUI и имена файлов, а также вспомогательные функции для GUI

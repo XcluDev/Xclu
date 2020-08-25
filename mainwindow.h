@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include <QTimer>
-#include "incl_qt.h"
+#include "incl_h.h"
 
 QT_BEGIN_NAMESPACE
 class QWidget;

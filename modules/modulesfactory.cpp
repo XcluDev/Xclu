@@ -1,6 +1,6 @@
 #include "modulesfactory.h"
 #include <QDirIterator>
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "moduleinfo.h"
 #include "moduleinterface.h"
 #include "rtmoduleregistrar.h"

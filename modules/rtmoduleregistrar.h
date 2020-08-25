@@ -8,7 +8,7 @@
 //После этого модуль зарегистрируется и может быть создан в RtModulesFactory
 //Макрос REGISTRAR объявлен в конце этого файла.
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "moduledescription.h"
 
 //тип функции для регистрации модуля

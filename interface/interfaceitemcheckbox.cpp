@@ -1,6 +1,6 @@
 #include "interfaceitemcheckbox.h"
 #include "interfaceguicheckbox.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 //in checkbox Active active=0

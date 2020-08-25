@@ -3,7 +3,7 @@
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 
 class RtModuleTest: public RtModule

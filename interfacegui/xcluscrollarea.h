@@ -10,7 +10,7 @@
 
 #include <QWidget>
 #include <QScrollArea>
-#include "incl_qt.h"
+#include "incl_h.h"
 
 class QShowEvent;
 class QResizeEvent;

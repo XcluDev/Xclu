@@ -3,7 +3,7 @@
 #include <QScreen>
 #include "rtmodulewindow.h"
 
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"

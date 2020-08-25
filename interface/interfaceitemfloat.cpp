@@ -1,5 +1,5 @@
 #include "interfaceitemfloat.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "interfaceguifloat.h"
 
 //---------------------------------------------------------------------

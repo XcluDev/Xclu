@@ -3,7 +3,7 @@
 
 //Реализация модуля Execute - запуск программы с диска
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 
 class RtModuleExecute: public RtModule

@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "editormodule.h"
 #include "project.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "interfaceguipage.h"
 #include "visibilitygroups.h"
 

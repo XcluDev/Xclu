@@ -2,7 +2,7 @@
 #define MODULESFACTORY_H
 
 //База данных модулей, позволяет создавать инстансы модулей
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "moduleinfo.h"
 #include "module.h"
 

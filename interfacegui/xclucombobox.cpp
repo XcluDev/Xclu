@@ -1,6 +1,6 @@
 #include <QWheelEvent>
 #include "xclucombobox.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 XcluComboBox::XcluComboBox(QWidget *parent)

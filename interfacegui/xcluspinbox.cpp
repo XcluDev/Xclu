@@ -1,6 +1,6 @@
 #include <QWheelEvent>
 #include "xcluspinbox.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //---------------------------------------------------------------------
 XcluSpinBox::XcluSpinBox(QWidget *parent)

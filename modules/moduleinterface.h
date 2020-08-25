@@ -2,7 +2,7 @@
 #define MODULEINTERFACE_H
 
 //Невизуальное описание интерфейса, строится по ModuleInfo
-#include "incl_qt.h"
+#include "incl_h.h"
 
 #include "moduleinfo.h"
 #include "interfaceitem.h"

@@ -5,7 +5,7 @@
 //Он используется в основном окне приложения,
 //а также в диалоге теста GUI модуля DialogTestModuleInterface
 #include <QWidget>
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "module.h"
 #include "interfacegui.h"
 

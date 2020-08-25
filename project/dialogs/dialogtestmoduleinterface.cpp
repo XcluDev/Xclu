@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 
 #include "dialogtestmoduleinterface.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "project.h"
 #include "moduleinfo.h"
 #include "moduleinterface.h"

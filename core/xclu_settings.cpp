@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "xclu_settings.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 
 //---------------------------------------------------------------------

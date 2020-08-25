@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "rtmodulescalar.h"
 
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"

@@ -9,7 +9,7 @@
 #include <QMutex>
 #include <QWindow>
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluprotecteddata.h"
 #include "xcluobject.h"

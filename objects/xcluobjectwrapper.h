@@ -16,7 +16,7 @@
 //(QScopedPointer удалить объект автоматически)
 
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "xcluobject.h"
 
 class QLabel;

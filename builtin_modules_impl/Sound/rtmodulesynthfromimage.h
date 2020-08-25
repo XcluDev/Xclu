@@ -7,7 +7,7 @@
 #include <QScopedPointer>
 #include <QMutex>
 
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluarray.h"
 #include "xcluobjectsoundformat.h"

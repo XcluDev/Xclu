@@ -7,7 +7,7 @@
 
 #include <QWidget>
 #include <QSpinBox>
-#include "incl_qt.h"
+#include "incl_h.h"
 
 class QWheelEvent;
 
