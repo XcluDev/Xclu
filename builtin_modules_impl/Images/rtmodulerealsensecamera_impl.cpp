@@ -13,25 +13,38 @@
 }
 
 //---------------------------------------------------------------------
-/*static*/ QStringList RealsenseCamera::get_connected_devices_list() {
-    QStringList list;
-
+/*static*/ QVector<RealsenseCameraInfo> RealsenseCamera::get_connected_devices_info() {
+    QVector<RealsenseCameraInfo> list;
     rs2::context ctx;
-
     int i = 0;
     for (auto&& dev : ctx.query_devices()) {
         i++;
         QString id = dev.get_info(RS2_CAMERA_INFO_NAME);
+
         QString firmware = dev.get_info(RS2_CAMERA_INFO_FIRMWARE_VERSION);
         QString usb = dev.get_info(RS2_CAMERA_INFO_USB_TYPE_DESCRIPTOR);
 
-        list.append(QString("Device %1: %2, firmware %3, connected to USB %4")
-                    .arg(i).arg(id, firmware, usb));
+        QString serial = dev.get_info(RS2_CAMERA_INFO_SERIAL_NUMBER);
+
+        RealsenseCameraInfo info;
+        info.descr = QString("Device %1: %2, serial %3, firmware %4, connected to USB %5")
+                    .arg(i).arg(id, serial, firmware, usb);
+        info.serial = serial;
+        list.push_back(info);
     }
     return list;
 
 }
 
+//---------------------------------------------------------------------
+/*static*/ QStringList RealsenseCamera::get_connected_devices_list() {
+    QStringList list;
+    QVector<RealsenseCameraInfo> list1 = get_connected_devices_info();
+    for (auto &info: list1) {
+        list.append(info.descr);
+    }
+    return list;
+}
 
 //---------------------------------------------------------------------
 RealsenseCamera::RealsenseCamera() {
@@ -164,16 +177,23 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
 }
 
 //---------------------------------------------------------------------
-void RealsenseCamera::start_camera(const RealsenseSettings &settings) {	    //start camera
+bool RealsenseCamera::start_camera(int device_index, const RealsenseSettings &settings) {	    //start camera
+    xclu_assert(!connected(), "Can't start Realsense, because it's already connected");
+
     auto &ctx = Realsense_ctx;
 
-    //search
-    //bool success = false;
+    //TODO можно сразу взять нужное устройство, а не перебирать в цикле :)
+    int i = 0;
     for (auto&& dev : ctx.query_devices()) // Query the list of connected RealSense devices
     {
-        setup(dev, settings);
-        break;
+        if (i == device_index) {
+            setup(dev, settings);
+            return connected();
+            break;
+        }
+        i++;
     }
+    return false;
 }
 
 //--------------------------------------------------------------

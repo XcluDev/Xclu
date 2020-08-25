@@ -38,13 +38,7 @@ const string(choose:file) Bag_File bag_file=""
     //Choose BAG file 
     //Bag files (*.bag);;All files (*.*)
 endif
-    
-#out object(image) Image image
-#    //Resulted webcamera image.
-
-#out checkbox Is_New_Frame is_new_frame=0
-#    //Flag is true when new frame is arrived.
-
+   
 #-----------------------------
 separator
 in checkbox(group) Runtime_Details runtime=1
@@ -52,8 +46,8 @@ in checkbox(group) Runtime_Details runtime=1
 
 if runtime 1
 
-out string Device_Name connected_device_name=""
-	//Name of the connected camera.
+out string Device_Info connected_device_info=""
+	//Information about connected camera.
 
 out checkbox Is_Started is_started=0
     //Does capture started.
@@ -61,9 +55,24 @@ out checkbox Is_Started is_started=0
 out string Frames_Captured frames_captured=""
     //How much frames were captured and processed after last start.
     
-
 endif
 
+#-------------------------------------------
+separator
+in checkbox(group) Images images=1
+
+if images 1    
+out object(image) RGB rgb_image
+    //Resulted RGB image.
+out object(image) Depth depth_image
+    //Resulted Depth image.
+out object(image) IR ir_image
+    //Resulted IR image.
+
+out checkbox Is_New_Frame is_new_frame=0
+    //Flag is true when new frame is arrived.
+
+endif
 
 #-------------------------------------------
 page RGB
@@ -82,11 +91,7 @@ const enum Frame_Rate rgb_frame_rate=30 [6,15,30,60]
     
 separator
 
-out object(image) RGB rgb_image
-    //Resulted RGB image.
 
-out checkbox Is_New_Frame rgb_is_new_frame=0
-    //Flag is true when new frame is arrived.
     
 #-------------------------------------------
 page Depth_+_IR
@@ -97,50 +102,38 @@ page Depth_+_IR
 const checkbox Depth_Stream depth_stream_enabled=1
     //Capture Depth stream.
     
-const checkbox IR_Stream IR_stream_enabled=0
+const checkbox IR_Stream ir_stream_enabled=0
     //Capture IR stream.
 
 const enum Preset depth_preset=High_Density [Custom,Default,Hand,High_Accuracy,High_Density,Medium_Density,Remove_IR_Pattern]
     //Depth preset.
     
 const enum Resolution depth_resolution=640_x_480 [424_x_240,480_x_270,640_x_360,640_x_480,848_x_480,1280_x_720,1280_x_800]
-    //Resolution for Depth stream.
+    //Resolution for Depth/IR stream.
     //pix
 
 const enum Frame_Rate depth_frame_rate=30 [6,15,25,30,60,90]
-    //Frame rate for Depth stream.
+    //Frame rate for Depth/IR stream.
     //fps
 
         
 separator
 const checkbox Emitter emitter=1
-    //Enabling laser emitter.
+    //Enabling IR laser emitter.
     
-
-    
-
-separator
-out object(image) Depth depth_image
-    //Resulted Depth image.
-    
-out object(image) IR ir_image
-    //Resulted IR image.
-
-out checkbox Is_New_Frame depth_is_new_frame=0
-    //Flag is true when new frame is arrived.
 
 #--------------------
 page Devices
     //Here you can get list of connected cameras.
 
 in button Print_Devices print_devices
-	//Print list of all connected webcams
+	//Print list of all connected devices
 
 #in checkbox Print_Formats print_formats=1
 #	//Print once list of supported formats of connected camera
 
 
 out text Device_list device_list 10 15
-    //Console output.
+    //Console with device list
     
 

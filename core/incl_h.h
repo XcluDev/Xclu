@@ -15,6 +15,7 @@
 //geometry
 #include <glm/glm.hpp>
 #include <glm/gtx/norm.hpp>
+#include "int2.h"
 
 //#include "incl_std.h"
 #include "xclu_types.h"

@@ -332,17 +332,16 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
     connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &RtModuleWebcamera::on_camera_error);
 
     //считывание разрешения
-    int w, h;
-    get_gui_resolution(w, h);
+    int2 res = get_gui_resolution();
 
     //считывание FPS
     int fps = get_gui_frame_rate();
 
-    if (w > 0 && h > 0 && fps > 0) {
+    if (res.x > 0 && res.y > 0 && fps > 0) {
         //установка разрешения и FPS в камеру
         QCameraViewfinderSettings settings;
-        if (w > 0 && h > 0) {
-            settings.setResolution(w, h);
+        if (res.x > 0 && res.y > 0) {
+            settings.setResolution(res.x, res.y);
         }
         if (fps > 0) {
             settings.setMinimumFrameRate(fps);
@@ -371,25 +370,23 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
-void RtModuleWebcamera::get_gui_resolution(int &w, int &h) {
+int2 RtModuleWebcamera::get_gui_resolution() {
     QString res_string = get_string("resolution");
     if (res_string == "Camera_Default") {
-        w = -1;
-        h = -1;
-        return;
+        return int2(-1, -1);
     }
+    int2 res(-1, -1);
     if (res_string == "Custom") {
-        w = get_int("res_x");
-        h = get_int("res_y");
+        res = int2(get_int("res_x"), get_int("res_y"));
     }
     else {
         //требуется распарсить "1280_x_720"
         auto list = res_string.split("_x_");
         xclu_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
-        w = list.at(0).toInt();
-        h = list.at(1).toInt();
+        res = int2(list.at(0).toInt(), list.at(1).toInt());
     }
-    xclu_assert(w > 0 && h > 0, QString("Can't start camera, bad resolution %1x%2").arg(w).arg(h));
+    xclu_assert(res.x > 0 && res.y > 0, QString("Can't start camera, bad resolution %1x%2").arg(res.x).arg(res.y));
+    return res;
 }
 
 //---------------------------------------------------------------------
@@ -405,7 +402,7 @@ int RtModuleWebcamera::get_gui_frame_rate() {
     }
     else {
         //FPS записано числом в строке
-        fps = fps_string.toUInt();
+        fps = fps_string.toInt();
     }
     xclu_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
     return fps;

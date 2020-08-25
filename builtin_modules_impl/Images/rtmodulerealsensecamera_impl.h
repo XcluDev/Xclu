@@ -90,18 +90,26 @@ struct RealsenseDevice
     QScopedPointer<rs2::align> align_to_depth;
 };
 
+//Description of a camera
+class RealsenseCameraInfo {
+public:
+    QString descr;
+    QString serial;
+};
+
 //Class for working with camera
 class RealsenseCamera
 {
 public:
     static QString get_sdk_version();
     static int get_number_of_connected_devices();
+    static QVector<RealsenseCameraInfo> get_connected_devices_info();
     static QStringList get_connected_devices_list();
 
     RealsenseCamera();
     ~RealsenseCamera();
 
-    void start_camera(const RealsenseSettings &settings);	    //start camera
+    bool start_camera(int device_index, const RealsenseSettings &settings);	    //start camera
     void start_bag(QString fileName);       //play BAG file
 
     void update();

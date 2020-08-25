@@ -1,6 +1,6 @@
 #include "xclu_types.h"
 #include "console.h"
-#include "incl_qtcpp.h"
+#include "incl_cpp.h"
 
 //TODO сейчас реализация ведется поиском,
 //лучше сделать через maps - для скорости работы

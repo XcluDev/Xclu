@@ -104,7 +104,7 @@ protected:
     bool camera_tried_to_start_ = false;
     void start_camera();
     void start_camera(const QCameraInfo &cameraInfo);
-    void get_gui_resolution(int &w, int &h);    //считать из GUI разрешение камеры, -1 - использовать по умолчанию
+    int2 get_gui_resolution();    //считать из GUI разрешение камеры, -1 - использовать по умолчанию
     int get_gui_frame_rate();          //считать из GUI частоту кадров, -1 - использовать по умолчанию
     void read_gui_output_data_format();       //получить из GUI описание данных. Предполагается что mutex включен
 

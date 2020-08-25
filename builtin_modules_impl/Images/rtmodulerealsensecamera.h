@@ -6,11 +6,11 @@
 #include <QScopedPointer>
 #include <QImage>
 #include <QMutex>
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
-#include "incl_qt.h"
+#include "incl_h.h"
 #include "rtmodulerealsensecamera_impl.h"
 //class RealsenseCamera;
 
@@ -40,17 +40,11 @@ protected:
     void print_devices();
 
     //камера
-    QScopedPointer<RealsenseCamera> camera_;
+    RealsenseCamera camera_;
     void start_camera();
-    void get_gui_resolution(int &w, int &h);
-    int get_gui_frame_rate();
-
-    bool camera_tried_to_start_ = false;
     bool camera_started_ = false;
     void set_started(bool started); //ставит camera_started_ и gui-элемент is_started
 
-    void update_camera();
-    void stop_camera();
 
     XcluObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
@@ -64,6 +58,10 @@ protected slots:
     //void on_camera_error();
 
 protected:
+    int2 get_res(QString res_string);    //320_x_240-> 320,240
+    int get_frame_rate(QString rate_string);
+    RealsenseSettings get_settings();
+
     //режим захвата картинок
     enum CaptureSource : int {
         CaptureSourceNone = 0,
@@ -75,7 +73,7 @@ protected:
     enum SelectDevice: int {
         SelectDeviceDefault = 0,
         SelectDeviceByIndex = 1,
-        SelectDeviceByName = 2,
+        SelectDeviceBySerial = 2,
         SelectDeviceByN = 3
     };
 

@@ -77,8 +77,8 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "connected_device_name",
-                        "atitle": "Device Name",
+                        "aname": "connected_device_info",
+                        "atitle": "Device Info",
                         "atype": "string",
                         "avalue": ""
                     },
@@ -93,6 +93,38 @@
                         "atitle": "Frames Captured",
                         "atype": "string",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "images",
+                        "atitle": "Images",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "rgb_image",
+                        "atitle": "RGB",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "depth_image",
+                        "atitle": "Depth",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "ir_image",
+                        "atitle": "IR",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "0"
                     },
                     {
                         "aname": "RGB",
@@ -127,34 +159,6 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "rgb_image_channels",
-                        "atitle": "Channels",
-                        "atype": "enum",
-                        "avalue": "RGB",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "image_data_type",
-                        "atitle": "Data Type",
-                        "atype": "enum",
-                        "avalue": "u8bit",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "rgb_image",
-                        "atitle": "RGB",
-                        "atype": "object",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "rgb_is_new_frame",
-                        "atitle": "Is New Frame",
-                        "atype": "checkbox",
-                        "avalue": "0"
-                    },
-                    {
                         "aname": "Depth_+_IR",
                         "atitle": "Depth + IR",
                         "atype": "page",
@@ -171,7 +175,7 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "IR_stream_enabled",
+                        "aname": "ir_stream_enabled",
                         "atitle": "IR Stream",
                         "atype": "checkbox",
                         "avalue": "0",
@@ -209,24 +213,6 @@
                         "avalue": "1",
                         "expr": "",
                         "expr_use": false
-                    },
-                    {
-                        "aname": "depth_image",
-                        "atitle": "Depth",
-                        "atype": "object",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "ir_image",
-                        "atitle": "IR",
-                        "atype": "object",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "depth_is_new_frame",
-                        "atitle": "Is New Frame",
-                        "atype": "checkbox",
-                        "avalue": "0"
                     },
                     {
                         "aname": "Devices",
