@@ -1,7 +1,6 @@
 #ifndef INCL_QTCPP_H
 #define INCL_QTCPP_H
 
-#include "incl_h.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>
@@ -12,6 +11,8 @@
 #include <QSettings>
 #include <QJsonArray>
 #include <QJsonObject>
+
+#include "incl_h.h"
 
 #include <QScopedPointer>
 

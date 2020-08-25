@@ -71,7 +71,7 @@ double mapd(double x, double a, double b, double A, double B) {
 int mapi(int x, int a, int b, int A, int B) {
     //Need to use "long long..." to avoid overflow.
     //And so we obtain perfect int result of map !
-    return (long long int(B-A)) * (x - a) / (b - a) + A;
+    return ((long long int)(B-A)) * (x - a) / (b - a) + A;
 }
 
 //-------------------------------------------------------

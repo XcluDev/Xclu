@@ -17,7 +17,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
@@ -80,19 +80,19 @@
                         "aname": "connected_device_info",
                         "atitle": "Device Info",
                         "atype": "string",
-                        "avalue": ""
+                        "avalue": "Device 1: Intel RealSense D435, serial 915112070579"
                     },
                     {
                         "aname": "is_started",
                         "atitle": "Is Started",
                         "atype": "checkbox",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": ""
+                        "avalue": "Processed 1679 frame(s)"
                     },
                     {
                         "aname": "show_color",
@@ -250,7 +250,7 @@
                         "aname": "device_list",
                         "atitle": "Device list",
                         "atype": "text",
-                        "avalue": "Realsense SDK: Realsense SDK 2.33.1\nNumber of Realsense devices: 0\n\n"
+                        "avalue": ""
                     },
                     {
                         "aname": "Save_Frames",
@@ -272,7 +272,7 @@
                         "aname": "saved_to",
                         "atitle": "Saved To",
                         "atype": "text",
-                        "avalue": ""
+                        "avalue": "/home/eamuseum/Desktop/Xclu/builtin_examples/../../temp/20_08_25_21_09_33_185"
                     },
                     {
                         "aname": "Control",
@@ -358,7 +358,7 @@
                         "aname": "is_new_frame",
                         "atitle": "Is New Frame",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "source",
@@ -570,7 +570,7 @@
                         "aname": "is_new_frame",
                         "atitle": "Is New Frame",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "source",

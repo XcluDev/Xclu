@@ -250,11 +250,11 @@ inline int2& int2::operator/=( const int f ) {
 // Distance between two points.
 //
 //
-inline float int2::distance( const int2& pnt) const {
+/*inline float int2::distance( const int2& pnt) const {
     int vx = x-pnt.x;
     int vy = y-pnt.y;
-    return (float)sqrt(float(vx*vx + vy*vy));
-}
+    return (float)std::sqrt(float(vx*vx + vy*vy));
+}*/
 
 
 inline int int2::squareDistance( const int2& pnt ) const {
@@ -268,9 +268,9 @@ inline int int2::squareDistance( const int2& pnt ) const {
 // Length
 //
 //
-inline float int2::length() const {
+/*inline float int2::length() const {
     return (float)sqrt( float(x*x + y*y) );
-}
+}*/
 
 inline int int2::lengthSquared() const {
     return (int)(x*x + y*y);
