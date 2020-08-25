@@ -38,6 +38,10 @@ public:
     void set_project_folder(QString project_folder);
     QString project_folder();   //папка проекта - полный путь
 
+    //возвращает абсолютный путь для папки, заданной относительно проекта
+    //также, может создать эту папку, если это требуется
+    QString absolute_path_from_project(QString relative_path, bool create_folder = false);
+
     //Получение модуля - можно получить к нему доступ, см. класс VarLink
     //а затем взять нужную переменную по access_get_int и прочим
     Module *get_module(QString module_id);

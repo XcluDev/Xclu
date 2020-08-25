@@ -60,11 +60,11 @@ endif
 #-------------------------------------------
 #Output images
 separator
-in checkbox(group) Show_RGB show_rgb=1
-//Generate RGB image preview. Please disable is not required for speed optimization.
-if show_rgb 1    
-out object(image) RGB rgb_image
-    //Resulted RGB image.
+in checkbox(group) Show_Color show_color=1
+//Generate color image preview. Please disable is not required for speed optimization.
+if show_color 1    
+out object(image) Color color_image
+    //Resulted Color image.
 endif
     
 in checkbox(group) Show_Depth show_depth=0
@@ -86,22 +86,22 @@ out checkbox Is_New_Frame is_new_frame=0
 
 
 #-------------------------------------------
-page RGB
-    //Settings for RGB stream.
+page Color
+    //Settings for color stream.
     
-const checkbox RGB_Stream rgb_stream_enabled=1
-    //Capture RGB stream.
+const checkbox Color_Stream color_stream_enabled=1
+    //Capture color stream.
     
-const enum Resolution rgb_resolution=640_x_480 [320_x_180,320_x_240,424_x_240,640_x_360,640_x_480,848_x_480,960_x_540,1280_x_720,1920_x_1080]
-    //Resolution for RGB stream.
+const enum Resolution color_resolution=640_x_480 [320_x_180,320_x_240,424_x_240,640_x_360,640_x_480,848_x_480,960_x_540,1280_x_720,1920_x_1080]
+    //Resolution for color stream.
     //pix
     
-const enum Frame_Rate rgb_frame_rate=30 [6,15,30,60]
-    //Frame rate for RGB stream.
+const enum Frame_Rate color_frame_rate=30 [6,15,30,60]
+    //Frame rate for color stream.
     //fps
     
 const checkbox Aligh_to_Depth align_to_depth=0
-    //Should RGB frames to be aligned to depth frames.
+    //Should color frames to be aligned to depth frames.
     
 separator
 
@@ -151,3 +151,16 @@ out text Device_list device_list 10 15
     //Console with device list
     
 
+#--------------------
+page Save_Frames
+    //Saving frames to disk
+
+in button Save_Frames save_frames_button
+    //Press the button to save images to a given folder
+    
+in string(choose:folder) Folder save_folder="realsense_frames"
+    //Folder for saving frames.
+    //Choose folder to save frames.
+
+out text Saved_To saved_to 5 5
+    //Path to last saving.

@@ -18,7 +18,7 @@ page Value
 out object(image) Image image
     //Resulted image.
 
-out checkbox Is_Updated is_updated=0
+out checkbox Is_New_Frame is_new_frame=0
     //Flag is true when new frame is arrived during current 'update' step.
    
 

@@ -36,6 +36,8 @@ protected:
     virtual void button_pressed_internal(QString button_id);
 
 protected:
+    void gui_clear();
+
     //вывод устройств
     void print_devices();
 
@@ -49,6 +51,12 @@ protected:
     int is_new_frame = 0;
     //количество обработанных кадров
     int processed_frames_ = 0;
+
+    //ожидание записи кадров на диск
+    int wait_save_frames_ = 0;
+
+    //запись кадра на диск
+    void save_frames(bool color, bool depth, bool ir);
 
 
 protected slots:

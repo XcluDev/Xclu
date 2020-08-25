@@ -52,6 +52,19 @@ QString ProjectRuntime::project_folder() {   //папка проекта - по�
 }
 
 //---------------------------------------------------------------------
+//возвращает абсолютный путь для папки, заданной относительно проекта
+//также, может создать эту папку, если это требуется
+QString ProjectRuntime::absolute_path_from_project(QString relative_path, bool create_folder) {
+    QDir dir(project_folder());
+    QString path = dir.absoluteFilePath(relative_path);
+    if (create_folder) {
+        QDir dir;
+        xclu_assert(dir.mkpath(path), "Can't create folder " + path);
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------
 //Получение модуля
 Module *ProjectRuntime::get_module(QString module_id) {
     return PROJ.module_by_id(module_id);

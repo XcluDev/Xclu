@@ -93,6 +93,10 @@ public:
     static void convert_to_QImage_fast_preview(ObjectRead &object, QImage &qimage, int out_w, int out_h,
                                                bool mirrorx=false, bool mirrory=false);
 
+    //Запись на диск
+    //TODO выполняется через QImage, поэтому не очень быстрая
+    //быстрее через OpenCV или FreeImage или TurboJpeg
+    static void save(ObjectRead &object, QString file_name, QString format = "JPG", int quality = 90);
 
 
 };

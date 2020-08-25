@@ -17,14 +17,14 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
                         "aname": "Main",
                         "atitle": "Main",
                         "atype": "page",
-                        "avalue": "270",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -86,25 +86,25 @@
                         "aname": "is_started",
                         "atitle": "Is Started",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": "Processed 1865 frame(s)"
+                        "avalue": "Processed 433 frame(s)"
                     },
                     {
-                        "aname": "show_rgb",
-                        "atitle": "Show RGB",
+                        "aname": "show_color",
+                        "atitle": "Show Color",
                         "atype": "checkbox",
                         "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "rgb_image",
-                        "atitle": "RGB",
+                        "aname": "color_image",
+                        "atitle": "Color",
                         "atype": "object",
                         "avalue": ""
                     },
@@ -143,23 +143,23 @@
                         "avalue": "1"
                     },
                     {
-                        "aname": "RGB",
-                        "atitle": "RGB",
+                        "aname": "Color",
+                        "atitle": "Color",
                         "atype": "page",
                         "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "rgb_stream_enabled",
-                        "atitle": "RGB Stream",
+                        "aname": "color_stream_enabled",
+                        "atitle": "Color Stream",
                         "atype": "checkbox",
                         "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "rgb_resolution",
+                        "aname": "color_resolution",
                         "atitle": "Resolution",
                         "atype": "enum",
                         "avalue": "640_x_480",
@@ -167,7 +167,7 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "rgb_frame_rate",
+                        "aname": "color_frame_rate",
                         "atitle": "Frame Rate",
                         "atype": "enum",
                         "avalue": "30",
@@ -251,6 +251,654 @@
                         "atitle": "Device list",
                         "atype": "text",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "Save_Frames",
+                        "atitle": "Save Frames",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "save_folder",
+                        "atitle": "Folder",
+                        "atype": "string",
+                        "avalue": "../../temp",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "saved_to",
+                        "atitle": "Saved To",
+                        "atype": "text",
+                        "avalue": "D:/perevalovds.com/_2020/Xclu/Xclu/builtin_examples/../../temp/20_08_25_19_47_18_619"
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "WImage",
+                "name": "wimage1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "atitle": "Value",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image",
+                        "atitle": "Image",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "source",
+                        "atitle": "Value Source",
+                        "atype": "enum",
+                        "avalue": "Link",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_link",
+                        "atitle": "Image Link",
+                        "atype": "string",
+                        "avalue": "realsense_camera1->color_image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "is_new_frame_link",
+                        "atitle": "Is New Frame Link",
+                        "atype": "string",
+                        "avalue": "realsense_camera1->is_new_frame",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "expression",
+                        "atitle": "Expression",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Visuals",
+                        "atitle": "Visuals",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "parent_id",
+                        "atitle": "Parent",
+                        "atype": "string",
+                        "avalue": "wwindow1"
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "w",
+                        "atitle": "W",
+                        "atype": "int",
+                        "avalue": "640",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "h",
+                        "atitle": "H",
+                        "atype": "int",
+                        "avalue": "480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_text",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_placement",
+                        "atitle": "Placement",
+                        "atype": "enum",
+                        "avalue": "Left",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "atitle": "Alignment",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width",
+                        "atitle": "Width",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "WImage",
+                "name": "wimage2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "atitle": "Value",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image",
+                        "atitle": "Image",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "atitle": "Is New Frame",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "source",
+                        "atitle": "Value Source",
+                        "atype": "enum",
+                        "avalue": "Link",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "image_link",
+                        "atitle": "Image Link",
+                        "atype": "string",
+                        "avalue": "realsense_camera1->ir_image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "is_new_frame_link",
+                        "atitle": "Is New Frame Link",
+                        "atype": "string",
+                        "avalue": "realsense_camera1->is_new_frame",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "expression",
+                        "atitle": "Expression",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Visuals",
+                        "atitle": "Visuals",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "parent_id",
+                        "atitle": "Parent",
+                        "atype": "string",
+                        "avalue": "wwindow1"
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "w",
+                        "atitle": "W",
+                        "atype": "int",
+                        "avalue": "640",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "h",
+                        "atitle": "H",
+                        "atype": "int",
+                        "avalue": "480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_text",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_placement",
+                        "atitle": "Placement",
+                        "atype": "enum",
+                        "avalue": "Left",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "atitle": "Alignment",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width",
+                        "atitle": "Width",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "atitle": "Min",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "atitle": "Max",
+                        "atype": "int",
+                        "avalue": "200",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "wwindow1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "atitle": "Properties",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "title",
+                        "atitle": "Title",
+                        "atype": "string",
+                        "avalue": "Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size",
+                        "atitle": "Size",
+                        "atype": "enum",
+                        "avalue": "640x480",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_x",
+                        "atitle": "Size X",
+                        "atype": "int",
+                        "avalue": "1280",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "size_y",
+                        "atitle": "Size Y",
+                        "atype": "int",
+                        "avalue": "720",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "position",
+                        "atitle": "Position",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_x",
+                        "atitle": "Pos X",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "pos_y",
+                        "atitle": "Pos Y",
+                        "atype": "int",
+                        "avalue": "50",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "visible",
+                        "atitle": "Visible",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "mode",
+                        "atitle": "Mode",
+                        "atype": "enum",
+                        "avalue": "Normal_Window",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "theme",
+                        "atitle": "Theme",
+                        "atype": "enum",
+                        "avalue": "Standard",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size",
+                        "atitle": "Font Size",
+                        "atype": "enum",
+                        "avalue": "Custom",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "atitle": "Font Size",
+                        "atype": "int",
+                        "avalue": "18",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Content",
+                        "atitle": "Content",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "content",
+                        "atitle": "Content",
+                        "atype": "text",
+                        "avalue": "HorizontalLayout\n  wimage1\n  wimage2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Actions",
+                        "atitle": "Actions",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "on_close",
+                        "atitle": "On Close",
+                        "atype": "enum",
+                        "avalue": "Stop",
+                        "expr": "",
+                        "expr_use": false
                     },
                     {
                         "aname": "Control",

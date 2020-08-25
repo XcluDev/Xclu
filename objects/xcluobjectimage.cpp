@@ -493,5 +493,14 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 }
 
+//---------------------------------------------------------------------
+//Запись на диск
+//TODO выполняется через QImage, поэтому не очень быстрая
+//быстрее через OpenCV или FreeImage или TurboJpeg
+/*static*/ void XcluObjectImage::save(ObjectRead &object, QString file_name, QString format, int quality) {
+    QImage qimage;
+    convert_to_QImage(object, qimage);
+    qimage.save(file_name, format.toStdString().c_str(), quality);
+}
 
 //---------------------------------------------------------------------
