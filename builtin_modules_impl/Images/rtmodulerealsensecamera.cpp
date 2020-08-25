@@ -286,6 +286,7 @@ RealsenseSettings RtModuleRealsenseCamera::get_settings() {
         int2 res = get_res(get_string("depth_resolution"));
         s.depth_w = res.x;
         s.depth_h = res.y;
+        s.depth_fps = get_frame_rate(get_string("depth_frame_rate"));
     }
 
     s.align_to_depth = get_int("align_to_depth");
