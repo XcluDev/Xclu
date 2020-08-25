@@ -93,7 +93,8 @@ struct RealsenseDevice
 //Description of a camera
 class RealsenseCameraInfo {
 public:
-    QString descr;
+    QString descr_full;
+    QString descr_short;
     QString serial;
 };
 

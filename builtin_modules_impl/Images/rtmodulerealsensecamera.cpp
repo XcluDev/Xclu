@@ -31,6 +31,12 @@ RtModuleRealsenseCamera::~RtModuleRealsenseCamera()
 }
 
 //---------------------------------------------------------------------
+void RtModuleRealsenseCamera::execute_loaded_internal() {
+    clear_string("device_list");
+    clear_string("connected_device_info");
+}
+
+//---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
 void RtModuleRealsenseCamera::button_pressed_internal(QString button_id) {
@@ -53,10 +59,6 @@ void RtModuleRealsenseCamera::print_devices() {
 
 }
 
-//---------------------------------------------------------------------
-void RtModuleRealsenseCamera::execute_loaded_internal() {
-    clear_string("device_list");
-}
 
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::execute_start_internal() {
@@ -67,7 +69,6 @@ void RtModuleRealsenseCamera::execute_start_internal() {
     set_started(false); //также ставит gui-элемент is_started
 
     ObjectReadWrite(image).clear();
-    captured_frames = 0;
     is_new_frame = 0;
     processed_frames_ = 0;
 
@@ -84,41 +85,34 @@ void RtModuleRealsenseCamera::execute_start_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::execute_update_internal() {
+    //TODO сделать возможность обработки кадров по callback
+    //- а сейчас реализовано из основного потока
+
     //если камера не стартовала - то делать нечего
     //TODO возможно стоит попробовать запустить камеру снова через некоторое время
-/*    if (!camera_started_) return;
+    if (!camera_started_) return;
 
     //на всякий случай ставим, что нет новых кадров
     //чтобы в случае ошибки не осталось "1"
     set_int("is_new_frame", 0);
 
-    //начинаем менять данные для surface - обновлять и считывать
-    bool is_new_frame;
-    {
-        DataAccess access(data_);
-        is_new_frame = data_.is_new_frame;
-        data_.is_new_frame = 0;
-    }
-
+    camera_.update();
+    bool is_new_frame = camera_.isFrameNew();
     //обрабатываем только новые кадры
     if (is_new_frame) {
-        set_int("is_new_frame", is_new_frame);
+        set_int("is_new_frame", 1);
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
-        XcluObject *object = get_object("image");
+        //XcluObject *object = get_object("image");
 
-        DataAccess access(data_);
-        ObjectRead(&data_.image).copy_to(object);
+        //метка числа обработанных кадров
+        QString processed = QString("Processed %1 frame(s)").arg(processed_frames_);
+        set_string("frames_captured", processed);
     }
 
-    //метка числа обработанных кадров
-    QString processed = QString("Captured %1, Processed %2, Dropped %3 frame(s)")
-            .arg(data_.captured_frames).arg(processed_frames_).arg(data_.captured_frames-processed_frames_);
-    set_string("frames_captured", processed);
 
 
-*/
 }
 
 //---------------------------------------------------------------------
@@ -185,7 +179,7 @@ void RtModuleRealsenseCamera::start_camera() {
         bool started = camera_.start_camera(device_index, sett);
         set_started(started);
         if (started) {
-            set_string("connected_device_info", cameras[device_index].descr);
+            set_string("connected_device_info", cameras[device_index].descr_short);
             //append_string("device_list", "Starting: " + device_name, 1);
         }
 

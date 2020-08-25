@@ -27,8 +27,10 @@
         QString serial = dev.get_info(RS2_CAMERA_INFO_SERIAL_NUMBER);
 
         RealsenseCameraInfo info;
-        info.descr = QString("Device %1: %2, serial %3, firmware %4, connected to USB %5")
+        info.descr_full = QString("Device %1: %2, serial %3, firmware %4, connected to USB %5")
                     .arg(i).arg(id, serial, firmware, usb);
+        info.descr_short = QString("Device %1: %2, serial %3")
+                    .arg(i).arg(id, serial);
         info.serial = serial;
         list.push_back(info);
     }
@@ -41,7 +43,7 @@
     QStringList list;
     QVector<RealsenseCameraInfo> list1 = get_connected_devices_info();
     for (auto &info: list1) {
-        list.append(info.descr);
+        list.append(info.descr_full);
     }
     return list;
 }

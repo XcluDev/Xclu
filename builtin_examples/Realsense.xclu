@@ -80,7 +80,7 @@
                         "aname": "connected_device_info",
                         "atitle": "Device Info",
                         "atype": "string",
-                        "avalue": ""
+                        "avalue": "Device 1: Intel RealSense D435, serial 915112070579"
                     },
                     {
                         "aname": "is_started",
@@ -92,7 +92,7 @@
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": ""
+                        "avalue": "Processed 72 frame(s)"
                     },
                     {
                         "aname": "images",
@@ -124,7 +124,7 @@
                         "aname": "is_new_frame",
                         "atitle": "Is New Frame",
                         "atype": "checkbox",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "RGB",

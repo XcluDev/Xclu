@@ -47,7 +47,6 @@ protected:
 
 
     XcluObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
-    int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
     //количество обработанных кадров
     int processed_frames_ = 0;
