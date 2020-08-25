@@ -8,14 +8,17 @@ module_impl=C++
 page Main
     //General settings
 
+    
 #-----------------------------
-in enum Capture_Source capture_source=Camera [Disable,Camera]
-    //Source of frames - capture frames from real camera of load images from a disk.
+in enum Capture_Source capture_source=Camera [Disable,Camera,Bag_File]
+    //Source of frames - capture frames from real camera of load BAG recording from a disk.
     
 #-------- Camera --------------
+if capture_source Camera
 const enum Device select_device=Default [Default,By_Index,By_Serial]
 	//Choose the way for selecting the camera.
-    
+endif    
+
 if select_device By_Index
 const int Device_Index device_index=0 0:100 1,10
     //Camera index in Operating System.
@@ -26,6 +29,16 @@ const string Device_Serial device_serial=""
 	//Serial of the camera to connect (or part of the serial), go to 'Device Info' to see the list.
 endif	
 
+#-------- Bagfile --------------
+if capture_source Bag_File
+
+
+const string(choose:file) Bag_File bag_file=""
+    //Choose BAG file. You can record it using Intel Realsense Viewer application.
+    //Choose BAG file 
+    //Bag files (*.bag);;All files (*.*)
+endif
+    
 #out object(image) Image image
 #    //Resulted webcamera image.
 
@@ -126,7 +139,7 @@ out checkbox Is_New_Frame depth_is_new_frame=0
 page Device_Info
     //Print list of cameras.
 
-in checkbox Print_Devices print_devices=1
+in button Print_Devices print_devices
 	//Print list of all connected webcams
 
 #in checkbox Print_Formats print_formats=1

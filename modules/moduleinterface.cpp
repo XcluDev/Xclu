@@ -1,5 +1,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
+#include "rtmodule.h"
 #include "moduleinterface.h"
 #include "incl_qtcpp.h"
 #include "editormodule.h"
@@ -46,6 +47,16 @@ ModuleInterface::~ModuleInterface() {
 //---------------------------------------------------------------------
 ModuleDescription &ModuleInterface::description() {
     return description_;
+}
+
+//---------------------------------------------------------------------
+void ModuleInterface::set_module(Module *module) {
+    module_ = module;
+}
+
+//---------------------------------------------------------------------
+Module *ModuleInterface::module() {
+    return module_;
 }
 
 //---------------------------------------------------------------------
@@ -270,7 +281,7 @@ void ModuleInterface::push_item(InterfaceItem *item) {
 
 //---------------------------------------------------------------------
 void ModuleInterface::create_item(const InterfaceItemPreDescription &pre_description) {
-    push_item(InterfaceItem::create_item(pre_description));
+    push_item(InterfaceItem::create_item(this, pre_description));
 }
 
 //---------------------------------------------------------------------
@@ -278,18 +289,18 @@ void ModuleInterface::create_item(QString title_underscored, InterfaceItemType t
                                   const QStringList &description,
                                   VarQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
-    push_item(InterfaceItem::create_item(title_underscored, type, description, qual, line_to_parse, options, qual_options));
+    push_item(InterfaceItem::create_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
 }
 
 //---------------------------------------------------------------------
 void ModuleInterface::create_decorate_item(QString name, InterfaceItemType type, const QStringList &description) {
-    items_.push_back(InterfaceItem::create_decorate_item(name, type, description));
+    items_.push_back(InterfaceItem::create_decorate_item(this, name, type, description));
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
 void ModuleInterface::create_separator(InterfaceItemType type, bool is_line) {
-    push_item(InterfaceItem::create_separator(generate_separator_name(), type, is_line));
+    push_item(InterfaceItem::create_separator(this, generate_separator_name(), type, is_line));
 }
 
 //---------------------------------------------------------------------
@@ -426,6 +437,13 @@ void ModuleInterface::state_to_gui() {
         //xclu_assert(editor_, "Internal error - ModuleInterface::state_to_gui is called, but editor_ == nullptr");
         editor_->set_state(editor_state_);
     }
+}
+
+//---------------------------------------------------------------------
+//callback из GUI
+void ModuleInterface::callback_button_pressed(QString button_id) {
+    xclu_assert(module(), "Can't process pressing button '" + button_id + "' because module() is nullptr");
+    module()->button_pressed(button_id);
 }
 
 //---------------------------------------------------------------------

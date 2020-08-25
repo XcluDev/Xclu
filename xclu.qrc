@@ -196,26 +196,6 @@
         <file>builtin_modules/Window/Window/help.md</file>
         <file>builtin_modules/Window/WLayout/description.xgui</file>
         <file>builtin_modules/Window/WMenu/description.xgui</file>
-        <file>builtin_modules/Window/WSweetArea/description.xgui</file>
-        <file>builtin_modules_impl/Core/rtmodulescalar.cpp</file>
-        <file>builtin_modules_impl/Core/rtmodulescalar.h</file>
-        <file>builtin_modules_impl/Images/rtmodulewebcamera.cpp</file>
-        <file>builtin_modules_impl/Images/rtmodulewebcamera.h</file>
-        <file>builtin_modules_impl/Screen/rtmodulefbo.cpp</file>
-        <file>builtin_modules_impl/Screen/rtmodulefbo.h</file>
-        <file>builtin_modules_impl/Screen/rtmodulefragmentshader.cpp</file>
-        <file>builtin_modules_impl/Screen/rtmodulefragmentshader.h</file>
-        <file>builtin_modules_impl/Screen/rtmodulewimage.cpp</file>
-        <file>builtin_modules_impl/Screen/rtmodulewimage.h</file>
-        <file>builtin_modules_impl/Screen/rtmodulewindow.cpp</file>
-        <file>builtin_modules_impl/Screen/rtmodulewindow.h</file>
-        <file>builtin_modules_impl/Sound/rtmodulesoundout.cpp</file>
-        <file>builtin_modules_impl/Sound/rtmodulesoundout.h</file>
-        <file>builtin_modules_impl/Sound/rtmodulesynthfromimage.cpp</file>
-        <file>builtin_modules_impl/Sound/rtmodulesynthfromimage.h</file>
-        <file>builtin_modules_impl/System/rtmoduleexecute.cpp</file>
-        <file>builtin_modules_impl/System/rtmoduleexecute.h</file>
-        <file>builtin_modules_impl/Utils/rtmoduletest.cpp</file>
-        <file>builtin_modules_impl/Utils/rtmoduletest.h</file>        
+        <file>builtin_modules/Window/WSweetArea/description.xgui</file>  
     </qresource>
 </RCC>

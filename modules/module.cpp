@@ -15,10 +15,13 @@ Module::Module(ModuleInfo *info_external, RtModule *rtmodule_new)
     rtmodule_ = rtmodule_new;
     xclu_assert(rtmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
 
-    //установка интерфейса и самого модуля в rt-модуль
-    rtmodule_->set_interface(interf_);
+    //установка самого модуля в rt-модуль и интерфейсный модуль, чтобы они могли обмениваться данными
     rtmodule_->set_module(this);
+    interf_->set_module(this);
 
+    //также, нужно вызвать событие, что модуль был загружен
+    //- после загрузки из json или после создания
+    //поэтому здесь это закомментировано: execute(ModuleExecuteStageLoaded);
 }
 
 //---------------------------------------------------------------------
@@ -115,7 +118,8 @@ bool Module::is_gui_attached() {
 //---------------------------------------------------------------------
 //Вычисление expressions и работа с GUI, см. определение GuiStage
 //Предполагается, что извне приходят только действия с проектом: GuiStageProjectLoaded и GuiStageProjectBeforeSaving
-void Module::gui_action(GuiStage stage) {
+//Побочное действие - также ставит и выключает is_running
+void Module::gui_action(GuiStage stage, bool affect_is_running) {
     switch (stage) {
     case GuiStageProjectAfterLoading:   //ничего не делаем, это для уровня проекта
     break;
@@ -135,7 +139,9 @@ void Module::gui_action(GuiStage stage) {
         interf()->gui_to_vars(VarQualifierConst);
         interf()->gui_to_vars(VarQualifierIn);
         interf()->block_gui_constants();
-        set_running(true);
+        if (affect_is_running) {
+            set_running(true);
+        }
         break;
 
     case GuiStageBeforeUpdate:   //GUI -> in; expressions
@@ -150,7 +156,9 @@ void Module::gui_action(GuiStage stage) {
         interf()->gui_to_vars(VarQualifierIn);
         interf()->vars_to_gui(VarQualifierOut);
         interf()->unblock_gui_constants();
-        set_running(false);
+        if (affect_is_running) {
+            set_running(false);
+        }
         break;
 
     case GuiStageProjectBeforeSaving: //GUI -> const, in;
@@ -180,6 +188,10 @@ bool Module::is_running() {
 //Выполнение
 void Module::execute(ModuleExecuteStage stage) {
     switch (stage) {
+    case ModuleExecuteStageLoaded:
+        //Выполнить что-то, требуемое самому модулю
+        rtmodule_->execute(stage);
+        break;
     case ModuleExecuteStageStart:
         //Установить все in и const переменные
         gui_action(GuiStageBeforeStart);
@@ -227,6 +239,22 @@ void Module::execute(ModuleExecuteStage stage) {
 //---------------------------------------------------------------------
 bool Module::is_stop_out() {
     return rtmodule_->is_stop_out();
+}
+
+//---------------------------------------------------------------------
+void Module::button_pressed(QString button_id) {   //нажатие кнопки, даже при редактировании
+    //если присоединен GUI и проект не запущен - то считать значения из GUI
+    if (!is_running()) {
+        gui_action(GuiStageBeforeStart, false /*not affect is_running()*/);
+    }
+
+    //исполнение нажатия кнопки
+    rtmodule_->button_pressed(button_id);
+
+    //если присоединен GUI и проект не запущен - то обновить GUI
+    if (!is_running()) {
+        gui_action(GuiStageAfterUpdate, false /*not affect is_running()*/);
+    }
 }
 
 //---------------------------------------------------------------------

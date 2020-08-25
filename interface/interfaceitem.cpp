@@ -19,7 +19,8 @@
 
 
 //---------------------------------------------------------------------
-/*static*/ InterfaceItem *InterfaceItem::create_item(QString title_underscored,
+/*static*/ InterfaceItem *InterfaceItem::create_item(ModuleInterface *parent,
+                                                     QString title_underscored,
                                                      InterfaceItemType type,
                                                      const QStringList &description,
                                                      VarQualifier qual,
@@ -35,59 +36,61 @@
     descr.line_to_parse = line_to_parse;
     descr.options = options;
     descr.description = description;
-    return create_item(descr);
+    return create_item(parent, descr);
 }
 
 //---------------------------------------------------------------------
 //page, group
-/*static*/ InterfaceItem *InterfaceItem::create_decorate_item(QString name, InterfaceItemType type, const QStringList &description) {
+/*static*/ InterfaceItem *InterfaceItem::create_decorate_item(ModuleInterface *parent,
+                                                              QString name,
+                                                              InterfaceItemType type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
-    return create_item(name, type, description, VarQualifierIn, name);
+    return create_item(parent, name, type, description, VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
 //separator
-/*static*/ InterfaceItem *InterfaceItem::create_separator(QString name, InterfaceItemType type, bool is_line) {
+/*static*/ InterfaceItem *InterfaceItem::create_separator(ModuleInterface *parent, QString name, InterfaceItemType type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
-    return create_item(name, type, QStringList(descr), VarQualifierIn, name);
+    return create_item(parent, name, type, QStringList(descr), VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
-/*static*/ InterfaceItem *InterfaceItem::create_item(const InterfaceItemPreDescription &pre_description) {
+/*static*/ InterfaceItem *InterfaceItem::create_item(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description) {
     switch(pre_description.type) {
     case InterfaceItemTypePage:
-        return new InterfaceItemPage(pre_description);
+        return new InterfaceItemPage(parent, pre_description);
         break;
     case InterfaceItemTypeGroup:
-        return new InterfaceItemGroup(pre_description);
+        return new InterfaceItemGroup(parent, pre_description);
         break;
     case InterfaceItemTypeSeparator:
-        return new InterfaceItemSeparator(pre_description);
+        return new InterfaceItemSeparator(parent, pre_description);
         break;
     case InterfaceItemTypeFloat:
-        return new InterfaceItemFloat(pre_description);
+        return new InterfaceItemFloat(parent, pre_description);
         break;
     case InterfaceItemTypeInt:
-        return new InterfaceItemInt(pre_description);
+        return new InterfaceItemInt(parent, pre_description);
         break;
     case InterfaceItemTypeString:
-        return new InterfaceItemString(pre_description);
+        return new InterfaceItemString(parent, pre_description);
         break;
     case InterfaceItemTypeText:
-        return new InterfaceItemText(pre_description);
+        return new InterfaceItemText(parent, pre_description);
         break;
     case InterfaceItemTypeCheckbox:
-        return new InterfaceItemCheckbox(pre_description);
+        return new InterfaceItemCheckbox(parent, pre_description);
         break;
     case InterfaceItemTypeButton:
-        return new InterfaceItemButton(pre_description);
+        return new InterfaceItemButton(parent, pre_description);
         break;
     case InterfaceItemTypeStringlist:
-        return new InterfaceItemEnum(pre_description);
+        return new InterfaceItemEnum(parent, pre_description);
         break;
     case InterfaceItemTypeObject:
-        return new InterfaceItemObject(pre_description);
+        return new InterfaceItemObject(parent, pre_description);
         break;
     default:
         break;
@@ -100,7 +103,11 @@
 
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
-InterfaceItem::InterfaceItem(const InterfaceItemPreDescription &pre_description) {
+InterfaceItem::InterfaceItem(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description) {
+    //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
+    xclu_assert(parent,
+                "Internal error in InterfaceItem constructor, empty 'ModuleInterface *parent' at '" + pre_description.title + "'");
+    parent_ = parent;
     title_ = pre_description.title;
     type_ = pre_description.type;
     qualifier_ = pre_description.qualifier;

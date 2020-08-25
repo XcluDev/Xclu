@@ -13,9 +13,13 @@
 #и добавить в строку вызова qmake: DEFINES+=XCLU_DEPLOY
 #ВАЖНО: Установить каталог сборки D:\perevalovds.com\_2020\Xclu\temp-build
 #тогда все промежуточные файлы будут в папке temp-build, а результат в Xclu-bin
-#---------------------------------------------------
 
-#---------------------------------------------------
+#ВНИМАНИЕ: На "старом" Qt 5.9 при переименовании или добавлении файлов
+#требуется выполнять команду меню "Запустить qmake", иначе выдает ошибки или не видит файл
+
+#--------------------------------------------------------------------------
+#General app settings
+#--------------------------------------------------------------------------
 
 Release:TARGET=Xclu
 Release:DESTDIR = ../Xclu-bin
@@ -47,16 +51,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
-
-# The following define makes your compiler emit warnings if you use
-# any Qt feature that has been marked deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
-# You can also make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 RESOURCES += \
@@ -65,16 +60,43 @@ RESOURCES += \
 # Про иконки: https://doc.qt.io/qt-5/appicon.html
 RC_ICONS = builtin_resources/images/appicon.ico
 
-FORMS += \
-    project/dialogs/DialogPreferences1.ui \
-    project/dialogs/dialog.ui \
-    project/dialogs/dialogmodulename.ui \
-    project/dialogs/dialogpreferences.ui
+#define to know which OS
+windows {
+    DEFINES += XCLU_WIN
+}
+unix {
+    DEFINES += XCLU_LINUX
+}
 
-INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
-INCLUDEPATH += project project/dialogs objects
+#--------------------------------------------------------------------------
+#Realsense camera support
+#Comment this block if Realsense camera is not required
+#--------------------------------------------------------------------------
+unix {
+    INCLUDEPATH += ~/librealsense/include
+    LIBS += -lrealsense2
+}
 
-# Python
+#windows 32 bit
+#windows {
+#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
+#}
+
+#windows 64 bit
+windows {
+    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
+}
+
+SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
+HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h
+
+#--------------------------------------------------------------------------
+#Python
+#--------------------------------------------------------------------------
 INCLUDEPATH += python
 
 #windows64
@@ -85,10 +107,20 @@ windows {
 }
 
 unix {
-#    INCLUDEPATH += ~/librealsense/include
-#    LIBS += -lrealsense2
 }
 
+#--------------------------------------------------------------------------
+#Common source, headers and forms files
+#--------------------------------------------------------------------------
+
+FORMS += \
+    project/dialogs/DialogPreferences1.ui \
+    project/dialogs/dialog.ui \
+    project/dialogs/dialogmodulename.ui \
+    project/dialogs/dialogpreferences.ui
+
+INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
+INCLUDEPATH += project project/dialogs objects
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
@@ -170,8 +202,7 @@ SOURCES += \
     builtin_modules_impl/Core/rtmodulescalar.cpp \
     builtin_modules_impl/Screen/rtmodulewindow.cpp \
     interface/interfaceitemenum.cpp \
-    interfacegui/interfaceguienum.cpp \
-    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp
+    interfacegui/interfaceguienum.cpp
 
 HEADERS += \
     builtin_modules_impl/Screen/rtmodulewimage.h \
@@ -250,7 +281,7 @@ HEADERS += \
     builtin_modules_impl/Core/rtmodulescalar.h \
     builtin_modules_impl/Screen/rtmodulewindow.h \
     interface/interfaceitemenum.h \
-    interfacegui/interfaceguienum.h \
-    builtin_modules_impl/Images/rtmodulerealsensecamera.h
+    interfacegui/interfaceguienum.h
 
 
+#--------------------------------------------------------------------------

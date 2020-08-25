@@ -11,6 +11,7 @@
 class EditorModule;
 class EditorModuleState;
 class QJsonObject;
+class Module;
 
 //Интерфейс модуля
 class ModuleInterface
@@ -20,6 +21,10 @@ public:
     ~ModuleInterface();
 
     ModuleDescription &description();
+
+    //доступ к родительскому модулю - для получения информации о запуске и name, а также интерфейсу
+    void set_module(Module *module);
+    Module *module();
 
     //весь интерфейс
     QVector<InterfaceItem *> &items();
@@ -55,6 +60,10 @@ public:
     void gui_to_state();
     void state_to_gui();
 
+    //callback из GUI
+    void callback_button_pressed(QString button_id);
+
+    //редактор
     EditorModuleState editor_state();
     void set_editor_state(EditorModuleState editor_state);
 
@@ -67,6 +76,9 @@ public:
     void read_json(const QJsonObject &json);
 
 private:
+    //Родительский модуль
+    Module *module_ = nullptr;  //удалять не надо
+
     ModuleDescription description_;
     //Предполагается, что строки не содержат комментарии и не пустые, и не содержат пробелов в начале и конце
     void parse_trimmed(const QStringList &lines);

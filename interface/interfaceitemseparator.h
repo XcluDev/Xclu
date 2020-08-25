@@ -3,10 +3,12 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
+
 class InterfaceItemSeparator: public InterfaceItem
 {
 public:
-    InterfaceItemSeparator(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemSeparator(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);

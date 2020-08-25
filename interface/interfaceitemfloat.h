@@ -3,12 +3,13 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
 class InterfaceGuiFloat;
 
 class InterfaceItemFloat: public InterfaceItem
 {
 public:
-    InterfaceItemFloat(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemFloat(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

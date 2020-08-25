@@ -37,6 +37,8 @@ void InterfaceGuiButton::button_pressed() {
     if (!blocked()) {
         value_ = 1;
     }
+    //в любом случае - отправляем сигнал в модуль
+    ((InterfaceItemButton *)item__)->callback_button_pressed();
 }
 
 //---------------------------------------------------------------------

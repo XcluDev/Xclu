@@ -19,18 +19,6 @@ QString RtModule::class_name() {
 }
 
 //---------------------------------------------------------------------
-//Установка интерфейса со списком переменных - требуется делать до начала выполнения
-void RtModule::set_interface(ModuleInterface *interf) { //interf потом удалять не надо
-    interf_ = interf;
-}
-
-//---------------------------------------------------------------------
-//доступ к интерфейсу модуля
-ModuleInterface *RtModule::interf() {
-    return interf_;
-}
-
-//---------------------------------------------------------------------
 void RtModule::set_module(Module *module) {
     module_ = module;
 }
@@ -44,6 +32,12 @@ Module *RtModule::module() {
 QString RtModule::name() {
     return module()->name();
 }
+
+//---------------------------------------------------------------------
+void RtModule::internal_loaded() {     //действия при загрузке модуля
+    execute_loaded_internal();
+}
+
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
 void RtModule::internal_update() {
@@ -87,6 +81,9 @@ void RtModule::execute(ModuleExecuteStage stage) {
         //auto mode = run_mode();
         //bool enabled = is_enabled();
         switch (stage) {
+        case ModuleExecuteStageLoaded:
+            internal_loaded();
+            break;
         case ModuleExecuteStageStart:
             //if (enabled && mode == ModuleRunMode_Main_Loop)
             internal_update();
@@ -128,6 +125,13 @@ void RtModule::execute(ModuleExecuteStage stage) {
         //отлов исключений путем обработки ошибок, и реакция соответственно настройках
         process_error(e.whatQt());
     }
+}
+
+//---------------------------------------------------------------------
+//нажатие кнопки - это можно делать и во время остановки всего
+//внимание, обычно вызывается из основного потока как callback
+void RtModule::button_pressed(QString button_id) {
+    button_pressed_internal(button_id);
 }
 
 //---------------------------------------------------------------------
@@ -237,38 +241,52 @@ void RtModule::process_error(QString message) {
 bool RtModule::was_changed(QString name) {
     //Важно, что для объектов эта функция получает доступ к объекту с помощью ObjectRead,
     //поэтому, нельзя ее вызывать, если активирован другой ObjectRead[Write] для этого объекта
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     return var->was_changed();
 }
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (rawtext), string, text
 QString RtModule::get_string(QString name) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     return var->value_string();
 }
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
 void RtModule::set_string(QString name, QString v) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     var->set_value_string(v);
 }
 
 //---------------------------------------------------------------------
+void RtModule::clear_string(QString name) {
+    set_string(name, "");
+}
+
+//---------------------------------------------------------------------
 //дописать к строке, применимо где set_string
-void RtModule::append_string(QString name, QString v) {
+void RtModule::append_string(QString name, QString v, int extra_new_lines_count) {
     QString value = get_string(name);
     value.append(v);
+    for (int i=0; i<1 + extra_new_lines_count; i++) {
+        value.append("\n");
+    }
+    qDebug() << "--- " << value;
     set_string(name, value);
+}
+
+//---------------------------------------------------------------------
+void RtModule::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где set_string
+    append_string(name, v.join("\n"), extra_new_lines_count);
 }
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (index)
 int RtModule::get_int(QString name) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
     return var->value_int();
 }
@@ -276,7 +294,7 @@ int RtModule::get_int(QString name) {
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
 void RtModule::set_int(QString name, int v) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
     var->set_value_int(v);
@@ -291,7 +309,7 @@ void RtModule::increase_int(QString name, int increase) { //value+=increase
 //---------------------------------------------------------------------
 //float
 float RtModule::get_float(QString name) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
     return var->value_float();
 
@@ -300,7 +318,7 @@ float RtModule::get_float(QString name) {
 //---------------------------------------------------------------------
 //только out: float
 void RtModule::set_float(QString name, float v) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
     var->set_value_float(v);
@@ -309,7 +327,7 @@ void RtModule::set_float(QString name, float v) {
 //---------------------------------------------------------------------
 //enum (title)
 QString RtModule::get_title_value(QString name) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     return var->value_title();
 
@@ -318,7 +336,7 @@ QString RtModule::get_title_value(QString name) {
 //---------------------------------------------------------------------
 //только out: enum (title)
 void RtModule::set_title_value(QString name, QString v) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     var->set_value_title(v);
@@ -331,7 +349,7 @@ void RtModule::set_title_value(QString name, QString v) {
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
 XcluObject *RtModule::get_object(QString name) {
-    InterfaceItem *var = interf()->var(name);   //проверка, что переменная есть - не требуется
+    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     XcluObject *object = var->get_object();
     return object;
@@ -341,7 +359,7 @@ XcluObject *RtModule::get_object(QString name) {
 //---------------------------------------------------------------------
 void RtModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
     set_int("was_error", 0);
-    set_string("error_text", "");
+    clear_string("error_text");
 }
 
 //---------------------------------------------------------------------

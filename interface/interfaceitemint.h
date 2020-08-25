@@ -3,13 +3,14 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
 class InterfaceGuiInt;
 
 class InterfaceItemInt: public InterfaceItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    InterfaceItemInt(const InterfaceItemPreDescription &pre_description, bool parse_range = true);
+    InterfaceItemInt(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description, bool parse_range = true);
 
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_int()); }

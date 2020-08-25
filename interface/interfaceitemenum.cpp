@@ -7,8 +7,8 @@
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 
-InterfaceItemEnum::InterfaceItemEnum(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemEnum::InterfaceItemEnum(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

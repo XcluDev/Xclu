@@ -179,6 +179,7 @@ void Project::read_json(const QJsonObject &json) {
         try {
             Module *module = FACTORY.create_unnamed_module(class_name, version);
             module->read_json(moduleObject);
+            module->execute(ModuleExecuteStageLoaded);
             modules_.append(module);
         }
         catch(XCluException& e) {
@@ -261,6 +262,7 @@ Module *Project::new_module(int i, QString class_name, QString name_hint) {
     Module *module = nullptr;
     try {
         module = FACTORY.create_unnamed_module(class_name);
+        module->execute(ModuleExecuteStageLoaded);
     }
     catch(XCluException& e) {
         xclu_message_box("Can't create module of class '" + class_name +"':\n" +  e.whatQt());

@@ -6,8 +6,8 @@
 //float Q Q qq=0 0:1 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-InterfaceItemFloat::InterfaceItemFloat(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemFloat::InterfaceItemFloat(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
 
     QString line = pre_description.line_to_parse;

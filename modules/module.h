@@ -42,6 +42,7 @@ public:
     void execute(ModuleExecuteStage stage);
     bool is_stop_out();
     bool is_running();
+    void button_pressed(QString button_id);   //нажатие кнопки, даже при редактировании
 
     //access_call - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
@@ -83,9 +84,8 @@ public:
 
     //Вычисление expressions и работа с GUI, см. определение GuiStage
     //Предполагается, что извне приходят только действия с проектом: GuiStageProjectLoaded и GuiStageProjectBeforeSaving
-    void gui_action(GuiStage stage);
-
-
+    //Побочное действие - также ставит и выключает is_running
+    void gui_action(GuiStage stage, bool affect_is_running = true);
 
     //Запись и считывание json
     void write_json(QJsonObject &json);
@@ -98,10 +98,8 @@ private:
     //Информация
     ModuleInfo *info_external_ = nullptr;    //хранится в ModulesFactory
 
-
     //Невизуальный интерфейс
     ModuleInterface *interf_ = nullptr;
-
 
     //Исполняемый модуль
     RtModule *rtmodule_ = nullptr;

@@ -1,13 +1,14 @@
 #ifndef INTERFACEITEMGROUP_H
 #define INTERFACEITEMGROUP_H
 
-
 #include "interfaceitem.h"
+
+class ModuleInterface;
 
 class InterfaceItemGroup: public InterfaceItem
 {
 public:
-    InterfaceItemGroup(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemGroup(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //Внимание: ставим, что не сохранять значения
     //Когда сделаем сохранение - убрать

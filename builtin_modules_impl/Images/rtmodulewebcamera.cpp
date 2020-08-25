@@ -17,8 +17,6 @@
 
 #include "xcluobjectimage.h"
 
-
-
 //заполнение имени класса и регистрация класса
 REGISTRAR(Webcamera)
 
@@ -127,11 +125,11 @@ void RtModuleWebcamera::execute_start_internal() {
 
     set_started(false); //также ставит gui-элемент is_started
 
-    set_string("connected_device_name", "");
+    clear_string("connected_device_name");
     set_int("is_new_frame", 0);
-    set_string("frames_captured", "");
+    clear_string("frames_captured");
 
-    set_string("local_console", "");
+    clear_string("local_console");
 
     //если требуется, напечатать все устройства
     print_devices();
@@ -235,8 +233,7 @@ void RtModuleWebcamera::print_devices() {
                 list.append(camera);
                 //xclu_console_append(camera);
             }
-            QString text = list.join("\n") + "\n\n";
-            append_string("local_console", text);
+            append_string("local_console", list, 1);
         }
     }
 }
@@ -276,8 +273,7 @@ void RtModuleWebcamera::print_formats() {
             //xclu_console_append(line);
         }
 
-        QString text = list.join("\n") + "\n\n";
-        append_string("local_console", text);
+        append_string("local_console", list, 1);
     }
 }
 
@@ -363,7 +359,7 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 
     QString device_name = cameraInfo.description();
     set_string("connected_device_name", device_name);
-    append_string("local_console", "Starting: " + device_name + "\n\n");
+    append_string("local_console", "Starting: " + device_name, 1);
 
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
     //делаем тут это до старта камеры, и в функции делаем "camera_->load()",

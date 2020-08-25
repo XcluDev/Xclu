@@ -36,7 +36,7 @@ void RtModuleScalar::execute_start_internal() {
     //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
-    set_string("parent_id", "");
+    clear_string("parent_id");
 
     DataAccess access(data_);
     data_.clear();

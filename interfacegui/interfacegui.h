@@ -69,6 +69,10 @@ public:
     void propagate_visibility();
 
 protected:
+    //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
+    InterfaceItem *item__ = nullptr;
+
+
     //Визуальные элементы
     //Динамический интерфейс - группы видимости
     QVector<VisibilityGroupGui *> vis_groups_;
@@ -108,7 +112,6 @@ protected:
 
 protected:
     //Члены и функции для создания страницы
-    InterfaceItem *item__ = nullptr;
 
     //создать label
     void insert_label(InterfaceGuiPageCreator &input);

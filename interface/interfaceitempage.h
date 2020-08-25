@@ -1,14 +1,15 @@
 #ifndef INTERFACEITEMPAGE_H
 #define INTERFACEITEMPAGE_H
 
-
 #include "interfaceitem.h"
+
+class ModuleInterface;
 class InterfaceGuiPage;
 
 class InterfaceItemPage: public InterfaceItem
 {
 public:
-    InterfaceItemPage(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemPage(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);

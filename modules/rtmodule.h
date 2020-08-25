@@ -17,7 +17,6 @@
 #include "incl_qt.h"
 #include <QObject>
 
-class ModuleInterface;
 class InterfaceItem;
 class Module;
 class XcluObject;
@@ -33,7 +32,6 @@ public:
 
     //модуль запрашивает остановку выполнения проекта
     bool request_stop_out = false;
-
 
 };
 
@@ -52,11 +50,16 @@ public:
     //эта информация передается в конструкторе
     QString class_name();
 
-    //Установка интерфейса со списком переменных - требуется делать до начала выполнения
-    void set_interface(ModuleInterface *interf); //interf потом удалять не надо
+    //доступ к родительскому модулю - для получения информации о запуске и name, а также интерфейсу
+    void set_module(Module *module);
+    Module *module();
 
     //основная функция запуска, вызывает execute_start_internal, execute_update_internal, execute_stop_internal
     void execute(ModuleExecuteStage stage);
+
+    //нажатие кнопки - это можно делать и во время остановки всего
+    //внимание, обычно вызывается из основного потока как callback
+    void button_pressed(QString button_id);
 
     //функция вызова между модулями, вызывает call_internal
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
@@ -78,13 +81,6 @@ public:
     //эта переменная управляется ставится изнутри, protected функциями reset_stop_out, set_stop_out
     bool is_stop_out();
 
-    //доступ к интерфейсу модуля
-    ModuleInterface *interf();
-
-    //доступ к основному модулю - для получения информации о запуске и name
-    void set_module(Module *module);
-    Module *module();
-
     //Имя модуля - берется из module
     QString name();
 
@@ -95,7 +91,7 @@ public:
     //ModuleRunMode run_mode() { return ModuleRunMode(get_int("run_mode")); }
 
     //статус - например, был ли выполнен старт
-    RtModuleStatus status() const { return status_; };
+    RtModuleStatus status() const { return status_; }
 
     void reset_error_values();                  //сброс того, что быда ошибка при выполнении
     void set_error_values(QString message);     //установка того, что была ошибка
@@ -108,7 +104,10 @@ public:
     //Доступ к переменным - с учетом их квалификатора
     QString get_string(QString name);   //int, checkbox, button, enum (rawtext), string, text
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
-    void append_string(QString name, QString v); //дописать к строке, применимо где set_string
+    void clear_string(QString name);
+    void append_string(QString name, QString v, int extra_new_lines_count = 0); //дописать к строке, применимо где set_string
+    void append_string(QString name, QStringList v, int extra_new_lines_count = 0); //дописать к строке, применимо где set_string
+
 
     int get_int(QString name);    //int, checkbox, button, enum (index)
     void set_int(QString name, int v); //только out: int, checkbox, enum (index)
@@ -128,6 +127,9 @@ public:
 
 
 protected:
+    //Родительский модуль
+    Module *module_ = nullptr;  //удалять не надо
+
     QString class_name_;
 
     //Переменные, описывающие состояние выполнения
@@ -135,6 +137,7 @@ protected:
 
     //start модуля вызывается при его первом update
     //если запустили - то больше не запускаем в update
+    void internal_loaded();     //действия при загрузке модуля
     void internal_update();     //выполнить update, и если нужно - start
     void internal_stop();       //выполнить stop
     void internal_one_shot();   //start, update, stop за один раз
@@ -144,16 +147,19 @@ protected:
     void reset_stop_out();
     void set_stop_out();
 
-    ModuleInterface *interf_ = nullptr; //удалять не надо
-    Module *module_ = nullptr;  //удалять не надо
 
     //обработка ошибки в соответствие с настройками модуля
     void process_error(QString message);
 
     //функции исполнения, специфичные для модулей - они должны их переопределить
+    virtual void execute_loaded_internal() {}
     virtual void execute_start_internal() {}
     virtual void execute_update_internal() {}
     virtual void execute_stop_internal() {}
+
+    //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
+    //внимание, обычно вызывается из основного потока как callback
+    virtual void button_pressed_internal(QString button_id) {}
 
     //вызов модуля извне
     //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер

@@ -3,12 +3,13 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
 class InterfaceGuiText;
 
 class InterfaceItemText: public InterfaceItem
 {
 public:
-    InterfaceItemText(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemText(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string() { return value_; }

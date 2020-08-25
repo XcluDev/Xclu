@@ -12,6 +12,7 @@ class InterfaceGui;
 class QJsonObject;
 class InterfaceItem;
 class XcluObject;
+class ModuleInterface;
 
 //предварительная информация для построения элемента интерфейса
 struct InterfaceItemPreDescription {
@@ -29,22 +30,25 @@ struct InterfaceItemPreDescription {
 class InterfaceItem
 {
 public:
-    static InterfaceItem *create_item(const InterfaceItemPreDescription &pre_description);
-    static InterfaceItem *create_item(QString title_underscored, InterfaceItemType type,
+    static InterfaceItem *create_item(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    static InterfaceItem *create_item(ModuleInterface *parent, QString title_underscored, InterfaceItemType type,
                                       const QStringList &description,
                                       VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
                                       QString options = "",
                                       QString qual_options = "");
     //page, group
-    static InterfaceItem *create_decorate_item(QString name, InterfaceItemType type, const QStringList &description);
+    static InterfaceItem *create_decorate_item(ModuleInterface *parent, QString name, InterfaceItemType type, const QStringList &description);
     //separator
-    static InterfaceItem *create_separator(QString name, InterfaceItemType type = InterfaceItemTypeSeparator, bool is_line = false);
+    static InterfaceItem *create_separator(ModuleInterface *parent, QString name, InterfaceItemType type = InterfaceItemTypeSeparator, bool is_line = false);
 
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
-    InterfaceItem(const InterfaceItemPreDescription &pre_description);
+    InterfaceItem(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
     virtual ~InterfaceItem();
+
+    //доступ ко всему интерфейсу
+    ModuleInterface *parent() { return parent_; }
 
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
@@ -64,7 +68,7 @@ public:
     int description_count();
     //void add_description(QString description); //не позволяем добавлять описание - так как его сразу передаем в конструктор
 
-    //Проверка, изменилось значение -------------------------
+    //Проверка, что изменилось значение -------------------------
     //Важно: для объектов эти функция получает доступ к объекту, поэтому, нельзя вызывать, когда объект уже заблокирован
     bool was_changed(); //эта функция позволяет выяснить, изменялось ли значение после последнего вызова was_changed
                         //при этом, при запуске проекта это всегда ставится в true
@@ -137,6 +141,10 @@ public:
     void propagate_visibility();    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
 
 protected:
+    //доступ ко всему интерфейсу
+    ModuleInterface *parent_ = nullptr;
+
+    //основные характеристики
     QString title_;
     QString name_;
     InterfaceItemType type_;

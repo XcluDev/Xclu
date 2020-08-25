@@ -9,8 +9,8 @@
 //in checkbox(group) Details show_details=0
 //- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
 
-InterfaceItemCheckbox::InterfaceItemCheckbox(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemCheckbox::InterfaceItemCheckbox(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

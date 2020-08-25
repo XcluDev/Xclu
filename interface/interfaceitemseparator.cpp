@@ -5,8 +5,8 @@
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
 //line - горизонтальная линия
-InterfaceItemSeparator::InterfaceItemSeparator(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemSeparator::InterfaceItemSeparator(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
     //separator
     name_ = pre_description.line_to_parse; //имя генерируется автоматически

@@ -210,9 +210,9 @@ void RtModuleSoundOut::execute_start_internal() {
     ObjectReadWrite(get_object("sound_format")).clear();
 
     set_started(false); //также ставит gui-элемент is_started
-    set_string("connected_device_name", "");
+    clear_string("connected_device_name");
 
-    set_string("local_console", "");
+    clear_string("local_console");
 
     //если требуется, печать подключенных устройств
     print_devices();
@@ -401,7 +401,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     QString device_name = deviceInfo.deviceName();
 
     set_string("connected_device_name", device_name);
-    append_string("local_console", "Starting: " + device_name + "\n\n");
+    append_string("local_console", "Starting: " + device_name, 2);
 
 
     //печатаем формат в used_format, пока без размера буфера - его допечатаем, когда устройство стартует
@@ -484,8 +484,7 @@ void RtModuleSoundOut::print_devices() {
                 list.append(device);
                 //xclu_console_append(device);
             }
-            QString text = list.join("\n") + "\n\n";
-            append_string("local_console", text);
+            append_string("local_console", list, 1);
         }
     }
 }
@@ -530,7 +529,6 @@ void RtModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
         //xclu_console_append(channels_str);
 
         //Печать
-        QString text = list.join("\n") + "\n\n";
-        append_string("local_console", text);
+        append_string("local_console", list, 1);
     }
 }

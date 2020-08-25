@@ -13,8 +13,8 @@ object(strings) - массив строк (?) - его можно ставить
 */
 
 
-InterfaceItemObject::InterfaceItemObject(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemObject::InterfaceItemObject(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

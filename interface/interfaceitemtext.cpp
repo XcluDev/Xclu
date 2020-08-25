@@ -14,8 +14,8 @@
 //дополнительные строки - это текст для значения по умолчанию,
 //в виде строк, ограниченных " " - чтобы триммер строк не съел пробелы в конце.
 
-InterfaceItemText::InterfaceItemText(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemText::InterfaceItemText(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
 
     QString line = pre_description.line_to_parse;

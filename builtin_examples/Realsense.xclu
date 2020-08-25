@@ -17,7 +17,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "3"
                 },
                 "items": [
                     {
@@ -40,7 +40,7 @@
                         "aname": "select_device",
                         "atitle": "Device",
                         "atype": "enum",
-                        "avalue": "Default",
+                        "avalue": "By_Index",
                         "expr": "",
                         "expr_use": false
                     },
@@ -55,6 +55,14 @@
                     {
                         "aname": "device_serial",
                         "atitle": "Device Serial",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "bag_file",
+                        "atitle": "Bag File",
                         "atype": "string",
                         "avalue": "",
                         "expr": "",
@@ -229,18 +237,10 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "print_devices",
-                        "atitle": "Print Devices",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
                         "aname": "local_console",
                         "atitle": "Local Console",
                         "atype": "text",
-                        "avalue": ""
+                        "avalue": "Realsense SDK: Realsense SDK 2.33.1\nNumber of Realsense devices: 1\nDevice 1: Intel RealSense D435, firmware 05.11.06.250, connected to USB 3.2\n\n"
                     },
                     {
                         "aname": "Control",
@@ -278,7 +278,7 @@
                         "aname": "was_error",
                         "atitle": "Was Error",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "error_text",

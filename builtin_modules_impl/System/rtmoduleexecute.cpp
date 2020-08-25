@@ -34,10 +34,10 @@ void RtModuleExecute::execute_start_internal() {
     set_int("last_success", 0);
     set_float("last_time", 0);
     set_float("last_duration", 0);
-    set_string("local_console", 0);
+    clear_string("local_console");
 
-    set_string("folder_path", "");
-    set_string("file_path", "");
+    clear_string("folder_path");
+    clear_string("file_path");
 
 }
 

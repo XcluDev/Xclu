@@ -7,13 +7,14 @@
 #include "xcluobject.h"
 #include <QScopedPointer>
 
+class ModuleInterface;
 class InterfaceGuiObject;
 
 class InterfaceItemObject: public InterfaceItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    InterfaceItemObject(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemObject(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
     //~InterfaceItemObject();
 
     //не поддерживаем скаляры, но будем записывать настройки в строку

@@ -14,8 +14,8 @@ QMap<QString, RtModuleCreateFunction> *rt_registered_classes_ = nullptr;
     if (!rt_registered_classes_) {
         rt_registered_classes_ = new QMap<QString, RtModuleCreateFunction>;
     }
-    //qDebug() << "Registered module class " << class_name;
-     (*rt_registered_classes_)[class_name] = creator_fun;
+    //qDebug() << "Registered module implementation " << class_name;
+    (*rt_registered_classes_)[class_name] = creator_fun;
 }
 
 //---------------------------------------------------------------------

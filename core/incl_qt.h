@@ -9,6 +9,12 @@
 #include <QString>
 #include <QStringList>
 #include <functional>
+#include <QScopedPointer>
+
+
+//geometry
+#include <glm/glm.hpp>
+#include <glm/gtx/norm.hpp>
 
 //#include "incl_std.h"
 #include "xclu_types.h"

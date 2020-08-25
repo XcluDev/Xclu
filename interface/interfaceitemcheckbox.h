@@ -3,13 +3,14 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
 class InterfaceGuiCheckbox;
 
 class InterfaceItemCheckbox: public InterfaceItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    InterfaceItemCheckbox(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemCheckbox(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

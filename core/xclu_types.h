@@ -121,13 +121,14 @@ QString ModuleRunMode_to_string(ModuleRunMode mode);
 
 //Режимы запуска модуля
 enum ModuleExecuteStage :int {
-    ModuleExecuteStageStart = 0,
-    ModuleExecuteStageAfterStart = 1,
-    ModuleExecuteStageUpdate = 2,
-    ModuleExecuteStageBeforeStop = 3,
-    ModuleExecuteStageStop = 4,
+    ModuleExecuteStageLoaded = 0,
+    ModuleExecuteStageStart = 1,
+    ModuleExecuteStageAfterStart = 2,
+    ModuleExecuteStageUpdate = 3,
+    ModuleExecuteStageBeforeStop = 4,
+    ModuleExecuteStageStop = 5,
     //ModuleExecuteStageCallback = 5,
-    ModuleExecuteStageN = 5
+    ModuleExecuteStageN = 6
 };
 QString ModuleExecuteStage_to_string(ModuleExecuteStage stage);
 

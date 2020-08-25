@@ -6,8 +6,8 @@
 //int A a=-1 -10:10 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-InterfaceItemInt::InterfaceItemInt(const InterfaceItemPreDescription &pre_description, bool parse_range)
-    : InterfaceItem(pre_description)
+InterfaceItemInt::InterfaceItemInt(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description, bool parse_range)
+    : InterfaceItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

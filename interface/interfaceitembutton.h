@@ -3,12 +3,13 @@
 
 #include "interfaceitem.h"
 
+class ModuleInterface;
 class InterfaceGuiButton;
 
 class InterfaceItemButton: public InterfaceItem
 {
 public:
-    InterfaceItemButton(const InterfaceItemPreDescription &pre_description);
+    InterfaceItemButton(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }
@@ -25,6 +26,8 @@ public:
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
 
+    //вызывается из gui при нажатии кнопки
+    void callback_button_pressed();
 
 protected:
     int value_ = 0;

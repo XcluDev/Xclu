@@ -1,5 +1,5 @@
-#ifndef RTMODULEREALSENSECAMERA_H
-#define RTMODULEREALSENSECAMERA_H
+#ifndef RTMODULEREALSENSECAMERA1_H
+#define RTMODULEREALSENSECAMERA1_H
 
 //Working with Realsense camera
 
@@ -10,181 +10,101 @@
 #include "rtmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
+#include "incl_qt.h"
+#include "rtmodulerealsensecamera_impl.h"
+//class RealsenseCamera;
 
-#include "incl.h"
-#include "librealsense2/rs.hpp"
-#include "librealsense2/hpp/rs_internal.hpp"
-#include "librealsense2/rsutil.h"
-
-
-void camera_test();
-
-/*
-    Available resolutions and framerates:
-    Depth/IR:
-    424x240
-    480x270
-    640x360
-    640x480
-    848x480
-    1280x720
-    1280x800
-    FPS: 6,15,25,30,60,90
-
-    RGB:
-    320x180
-    320x240
-    424x240
-    640x360
-    640x480
-    848x480
-    960x540
-    1280x720
-    1920x1080
-    FPS: 6,15,30,60
-
-    Visual presets
-    Table and more info: https://github.com/IntelRealSense/librealsense/wiki/D400-Series-Visual-Presets
-    Load from JSON: https://github.com/IntelRealSense/librealsense/issues/3037
-
-    RS2_RS400_VISUAL_PRESET_CUSTOM,            0
-    RS2_RS400_VISUAL_PRESET_DEFAULT,           1
-    RS2_RS400_VISUAL_PRESET_HAND,              2
-    RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY,     3
-    RS2_RS400_VISUAL_PRESET_HIGH_DENSITY,      4
-    RS2_RS400_VISUAL_PRESET_MEDIUM_DENSITY,    5
-    RS2_RS400_VISUAL_PRESET_REMOVE_IR_PATTERN  6
-*/
-
-
-//Settings for starting device
-struct Realsense_Settings {
-    //Loading settings from JSON file made with RealSense Viewer
-    //void set_config_file(QString file_name) {
-    //    use_config_file = true;
-    //    this->config_file_name = file_name;
-    //}
-
-    //bool use_config_file = false;
-    //QString config_file_name;
-
-    int visual_preset = RS2_RS400_VISUAL_PRESET_HIGH_DENSITY; //-1;	//-1 - Disable setting visual preset
-
-    int use_depth = 1;
-    int use_ir = 0;
-    int use_rgb = 1;
-    int use_emitter = 1;
-
-    int depth_w = 1280;
-    int depth_h = 720;
-    int depth_fps = 30;
-
-    int rgb_w = 1280;
-    int rgb_h = 720;
-    int rgb_fps = 30;
-};
-
-
-//Holder for Realsense device structures
-struct Realsense_Device
+//Данные, которые защищаются с помощью mutex
+struct RtModuleRealsenseData : public XcluProtectedData
 {
-    bool connected = false;
-    rs2::frame depth;
-    float depth_scale_mm = 1;
+    XcluObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
+    int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
+    int is_new_frame = 0;
 
-    rs2::colorizer colorize_frame;
-    rs2::pipeline pipe;
-    rs2::pipeline_profile profile;
+    QString channels;   //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
+    QString data_type;  //u8bit,float
 
-    // Declare pointcloud object, for calculating pointclouds and texture mappings
-    rs2::pointcloud pc;
-    // We want the points object to be persistent so we can display the last cloud when a frame drops
-    rs2::points points;
+    //данные об ошибке
+    ErrorInfo err;
 
-    rs2::frame color_frame;
-    rs2::frame ir_frame;
+    void clear() {
+        ObjectReadWrite(image).clear();
+        captured_frames = 0;
+        is_new_frame = 0;
+        channels = "";
+        data_type = "";
+        err.clear();
+    }
 
-    //Aligning
-    //https://github.com/IntelRealSense/librealsense/blob/master/examples/align/rs-align.cpp
-    QScopedPointer<rs2::align> align_to_depth;
 };
 
-class Camera
+//The module for working with Realsense
+class RtModuleRealsenseCamera: public RtModule
 {
 public:
-    static QString get_sdk_version();
-    static int get_number_of_connected_devices();
-    static QStringList get_connected_devices_list();
+    RtModuleRealsenseCamera();
+    ~RtModuleRealsenseCamera();
 
-    Camera();
-    ~Camera();
-
-    void start_camera(const Realsense_Settings &settings);	    //start camera
-    void start_bag(QString fileName);       //play BAG file
-
-    void update();
-    void close();
-
-    bool connected() { return device_.connected; }
-
-    bool isFrameNew() { return frameNew_;  }
-
-    QImage &get_rgb_image();
-    QImage &get_depth_image();
-
-    bool get_depth_pixels_rgb(int &w, int &h, QVector<quint8> &data);
-    bool get_color_pixels_rgb(int &w, int &h, QVector<quint8> &data);
-
-    //TODO
-    //callback for connecting/disconnecting devices, see rs-multicam example in SDK
-    //auto reconnect if device was connected again
-
-    //TODO optimization
-    //not compute texture coordinates if not required
-
-
-    bool get_point_cloud(QVector<glm::vec3> &pc,
-                         int &gridw, int &gridh,
-                         int mirrorx = 0, int mirrory = 0, int mirrorz = 0);	//get point cloud for connected device
-
-    //bool get_depth_pixels_mm(int &w, int &h, vector<float> &data);
-    //bool get_depth_pixels_mm(int &w, int &h, vector<unsigned short> &data);
-    //bool get_depth_pixels8(float min_dist, float max_dist, int &w, int &h, vector<unsigned char> &data);
-
-
-    //bool get_color_pixels_rgb(int &w, int &h, vector<unsigned char> &data);
-    //bool get_ir_pixels_rgb(int &w, int &h, vector<unsigned char> &data);
-
-    //project 3d to screen
-    glm::vec2 project_3d_to_screen(const glm::vec3 &p);
+    static QString *static_class_name_ptr; //"RealsenseCamera", эта переменная используется для создания новых объектов
+    static RtModuleRealsenseCamera *new_module();
 
 protected:
-    Realsense_Settings settings_;
+    //Выполнение
+    virtual void execute_loaded_internal();
+    virtual void execute_start_internal();
+    virtual void execute_update_internal();
+    virtual void execute_stop_internal();
 
-    bool frameNew_ = false;
+    //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
+    //внимание, обычно вызывается из основного потока как callback
+    virtual void button_pressed_internal(QString button_id);
 
-    //QMutex Realsense_mutex_;
-    rs2::context Realsense_ctx;
+protected:
+    //режим захвата картинок
+    enum CaptureSource : int {
+        CaptureSourceNone = 0,
+        CaptureSourceCamera = 1,
+        CaptureSourceBagFile = 2,
+        CaptureSourceN = 3
+    };
+    //режим выбора камеры
+    enum SelectDevice: int {
+        SelectDeviceDefault = 0,
+        SelectDeviceByIndex = 1,
+        SelectDeviceByName = 2,
+        SelectDeviceByN = 3
+    };
 
-    Realsense_Device device_;
+    //вывод устройств
+    void print_devices();
 
-    bool frame_to_pixels_rgb(const rs2::video_frame& frame, int &w, int &h, QVector<quint8> &data);
+    //камера
+    void update_camera();
+    void stop_camera();
 
-    bool get_depth16_raw(int &w, int &h, uint16_t* &data16);
+    QScopedPointer<RealsenseCamera> camera_;
+    bool camera_tried_to_start_ = false;
+    void start_camera();
 
-    bool dirty_image_ = false;
-    QImage image_;
-    bool dirty_image_depth_ = false;
-    QImage image_depth_;
+    RtModuleRealsenseData data_;
 
-    void setup(rs2::device &dev, const Realsense_Settings &settings);
+    bool camera_started_ = false;
+    void set_started(bool started); //ставит camera_started_ и gui-элемент is_started
 
-    //intrinsics for converting 3d to image
-    bool intrinsics_inited_ = false;
-    rs2_intrinsics intrinsics_;
+    //количество обработанных кадров
+    int processed_frames_ = 0;
+
+protected slots:
+    //void on_changed_camera_state(QCamera::State state);
+    //void on_camera_error();
+
+protected:
+    void get_gui_resolution(int &w, int &h);
+    int get_gui_frame_rate();
 
 
 };
+
 
 
 #endif // RTMODULEREALSENSECAMERA_H

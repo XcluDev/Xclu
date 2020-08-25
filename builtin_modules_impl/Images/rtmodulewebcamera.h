@@ -67,7 +67,7 @@ public:
     RtModuleWebcamera();
     ~RtModuleWebcamera();
 
-    static QString *static_class_name_ptr; //"Execute", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr; //"Webcamera", эта переменная используется для создания новых объектов
     static RtModuleWebcamera *new_module();
 
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение

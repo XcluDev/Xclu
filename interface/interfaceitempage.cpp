@@ -2,8 +2,8 @@
 #include "interfaceguipage.h"
 
 //---------------------------------------------------------------------
-InterfaceItemPage::InterfaceItemPage(const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(pre_description)
+InterfaceItemPage::InterfaceItemPage(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
+    : InterfaceItem(parent, pre_description)
 {
     //page Main_page
     name_ = pre_description.line_to_parse;
