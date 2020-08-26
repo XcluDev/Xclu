@@ -1,0 +1,423 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "frame_rate": "30",
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "SoundOsc",
+                "name": "sound_osc1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "out_eabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "volume",
+                        "atitle": "Volume",
+                        "atype": "float",
+                        "avalue": "0.5",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "vol_second",
+                        "atitle": "Volume Secondary",
+                        "atype": "float",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "freq",
+                        "atitle": "Frequency",
+                        "atype": "float",
+                        "avalue": "440",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "fm_enabled",
+                        "atitle": "FM",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "fm_rate",
+                        "atitle": "Rate",
+                        "atype": "float",
+                        "avalue": "5",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "fm_range",
+                        "atitle": "Range",
+                        "atype": "float",
+                        "avalue": "10",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "am_enabled",
+                        "atitle": "AM",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "am_rate",
+                        "atitle": "Rate",
+                        "atype": "float",
+                        "avalue": "5",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "am_range",
+                        "atitle": "Range",
+                        "atype": "float",
+                        "avalue": "0.1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Setup_Speed",
+                        "atitle": "Setup Speed",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "vol_speed",
+                        "atitle": "Volume speed",
+                        "atype": "float",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "freq_speed",
+                        "atitle": "Freq. speed",
+                        "atype": "float",
+                        "avalue": "100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundOut",
+                "name": "sound_out1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "modules_list",
+                        "atitle": "Sound Sources",
+                        "atype": "text",
+                        "avalue": "#id of modules to play and optional volumes\nsound_osc1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "volume",
+                        "atitle": "Volume",
+                        "atype": "float",
+                        "avalue": "0.8",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_device",
+                        "atitle": "Sound Device",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_index",
+                        "atitle": "Device Index",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "settings",
+                        "atitle": "Settings",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "sample_rate",
+                        "atitle": "Sample Rate",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "custom_sample_rate",
+                        "atitle": "Custom Sample Rate",
+                        "atype": "int",
+                        "avalue": "44100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "channels",
+                        "atitle": "Channels",
+                        "atype": "int",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "buffer_size_desired",
+                        "atitle": "Buffer Size",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "runtime",
+                        "atitle": "Runtime",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "atitle": "Connected Device Name",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_started",
+                        "atitle": "Is Started",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "sound_format",
+                        "atitle": "Sound Format",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "buffer_size",
+                        "atitle": "Buffer Size",
+                        "atype": "int",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "atitle": "Device Info",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_devices",
+                        "atitle": "Print Devices",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_formats",
+                        "atitle": "Print Formats",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "local_console",
+                        "atitle": "Local Console",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Test_Sound",
+                        "atitle": "Test Sound",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "gen_test",
+                        "atitle": "Generate Test Sound",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+#Module Osc~
+#------------------------------------------
+module_description=Oscillator with FM modulation. This module should be called by callback from SoundOutput.
+module_version=1.01
+module_impl=C++
+#module_default_run_mode=Callback
+
+#module_accept_calls=*
+module_accept_calls=sound_buffer_add
+
+#------------------------------------------
+page Main
+
+#---------------------------------- 
+#Volume
+#TODO in enum Volume_Measure=db [db,linear]
+#    //Volume measure method
+        
+in checkbox Enabled out_eabled=1
+    //Generate output sound.
+ 
+in float Volume volume=0.5 0:1 500,50
+    //Main volume.
+    //0..1
+
+in float Volume_Secondary vol_second=1 0:1 500,50
+    //Secondary volume - used for simple modulation
+    //0..1   
+
+#-------------- 
+#Frequency
+separator
+
+in float Frequency freq=440 0:20000 20000,2000
+    //Oscillator basic frequency.
+    //0..20000 Hz
+
+#-------------- 
+#FM
+separator
+   
+in checkbox FM fm_enabled=0
+    //Is FM enabled.
+    
+in float Rate fm_rate=5 0:20000 20000,2000
+    //FM frequency.
+    //0..20000 Hz
+    
+#TODO switch range/index. Index make dependence of original frequency.
+in float Range fm_range=10 0:20000 20000,2000
+    //FM range (instead of index).
+    //0..20000 Hz
+
+#-------------- 
+#FM
+separator
+   
+in checkbox AM am_enabled=0
+    //Is AM enabled.
+    
+in float Rate am_rate=5 0:20000 20000,2000
+    //AM frequency.
+    //0..20000 Hz
+    
+in float Range am_range=0.1 0:1 1000,100
+    //AM range.
+    //0..1
+
+#-------------- 
+page Setup_Speed
+    //Updating speed setup.
+
+in float Volume_speed vol_speed=1 0:10 100,10
+    //Speed of changing volume.
+    //1/(0.1 sec)
+
+in float Freq._speed freq_speed=100 0:20000 2000,200
+    //Speed of changing frequency.
+    //Hz/(0.1 sec)
+#-------------- 
