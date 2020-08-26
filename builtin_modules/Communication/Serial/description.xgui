@@ -1,8 +1,6 @@
-#Module Arduino
+#Module Serial
 #------------------------------------------
-#module_class=Arduino
-#module_category=Communication
-module_description=Send and receive data from Arduino.
+module_description=Send and receive data from Serial port - for Arduino and others.
 module_version=1.01
 module_impl=C++
 
