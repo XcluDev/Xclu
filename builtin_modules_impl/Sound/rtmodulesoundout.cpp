@@ -48,10 +48,7 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
         //заполнение массива
 
         //тестовый звук или остальные модули
-        int play_test_sound = 0;
-        {
-            play_test_sound = data_->play_test_sound_;
-        }
+        int play_test_sound = data_->play_test_sound_;
         if (play_test_sound) {
             ObjectReadWrite sound(&sound_);
             float *data = sound.var_array("data")->data_float();
@@ -74,6 +71,16 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
             for (int i=0; i<data_->modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
                 data_->modules_[i]->access_call(call_function_name::sound_buffer_add(), &sound_);
+            }
+        }
+
+        //применение громкости
+        {
+            ObjectReadWrite sound(&sound_);
+            float *data = sound.var_array("data")->data_float();
+            float volume = data_->volume_;
+            for (int i=0; i<samples * channels; i++) {
+                data[i] *= volume;
             }
         }
     }
@@ -236,6 +243,7 @@ void RtModuleSoundOut::execute_update_internal() {
     {
         DataAccess access(data_);
         data_.play_test_sound_ = get_int("gen_test");
+        data_.volume_ = get_float("volume");
         data_.modules_ = RUNTIME.get_modules(get_string("modules_list"));
 
         //если ошибка - обработать ошибку
@@ -253,8 +261,8 @@ void RtModuleSoundOut::execute_update_internal() {
 //---------------------------------------------------------------------
 void RtModuleSoundOut::check_volume_change() {
     if (audio_started_) {
-        if (was_changed("volume")) {
-            float volume = get_float("volume");
+        if (was_changed("device_volume")) {
+            float volume = get_float("device_volume");
             qreal linearVolume = QAudio::convertVolume(volume, QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
             m_audioOutput->setVolume(linearVolume);
         }

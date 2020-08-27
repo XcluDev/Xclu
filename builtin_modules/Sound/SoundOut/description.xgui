@@ -26,9 +26,14 @@ in button Edit... edit_btn
 
 separator
 
-in float(slider) Volume volume=0.8 0:1 100,10
-    //Output sound volume
-    //%
+in float(slider) Volume volume=1.0 0:10 1000,100
+    //Output sound volume.
+    //0..10
+
+
+in float(slider) Device_Volume device_volume=0.8 0:1 100,10
+    //Output device volume.
+    //0..1
     
 #-------- Sound device  --------------
 separator

@@ -12,13 +12,21 @@ module_accept_calls=sound_buffer_add
 page Main
 
 #---------------------------------- 
+#Frequency        
+in checkbox Enabled out_enabled=1
+    //Generate output sound.
+    
+in float Frequency freq=440 0:20000 20000,2000
+    //Oscillator basic frequency.
+    //0..20000 Hz
+ 
+#-------------- 
 #Volume
 #TODO in enum Volume_Measure=db [db,linear]
 #    //Volume measure method
-        
-in checkbox Enabled out_enabled=1
-    //Generate output sound.
- 
+
+separator
+
 in float Volume volume=0.5 0:1 500,50
     //Main volume.
     //0..1
@@ -27,13 +35,6 @@ in float Volume_Secondary vol_second=1 0:1 500,50
     //Secondary volume - used for simple modulation
     //0..1   
 
-#-------------- 
-#Frequency
-separator
-
-in float Frequency freq=440 0:20000 20000,2000
-    //Oscillator basic frequency.
-    //0..20000 Hz
 
 #-------------- 
 #FM

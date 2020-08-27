@@ -31,7 +31,6 @@ struct RtModuleSoundOscData: public XcluProtectedData
     float step_vol_ = 0;    //шаги для плавного изменения параметров
     float step_freq_ = 0;
 
-
     float vol_ = 0;
     float freq_ = 0;
 

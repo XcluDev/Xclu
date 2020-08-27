@@ -177,23 +177,25 @@ void RtModuleSoundOsc::call_internal(QString function, XcluObject *input, XcluOb
 
         //получаем доступ к данным и звуковому буферу
         DataAccess access(data_);
-        //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        ObjectReadWrite sound(input);
+        if (data_.out_enabled) {
+            //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
+            ObjectReadWrite sound(input);
 
-        float sample_rate = sound.get_int("sample_rate");
-        int samples = sound.get_int("samples");
-        int channels = sound.get_int("channels");
-        float *data = sound.var_array("data")->data_float();
+            float sample_rate = sound.get_int("sample_rate");
+            int samples = sound.get_int("samples");
+            int channels = sound.get_int("channels");
+            float *data = sound.var_array("data")->data_float();
 
 
-        data_.update_steps(sample_rate);    //обновляем приращение параметров
+            data_.update_steps(sample_rate);    //обновляем приращение параметров
 
-        int k = 0;
-        for (int i=0; i<samples; i++) {
-            //получить значение звука
-            float v = data_.get_next_sample();
-            for (int u=0; u<channels; u++) {
-                data[k++] += v;
+            int k = 0;
+            for (int i=0; i<samples; i++) {
+                //получить значение звука
+                float v = data_.get_next_sample();
+                for (int u=0; u<channels; u++) {
+                    data[k++] += v;
+                }
             }
         }
         return;

@@ -22,6 +22,7 @@ class Module;
 struct RtModuleSoundOutData: public XcluProtectedData
 {
     int play_test_sound_ = 0;   //воспроизводить ли тестовый звук
+    float volume_ = 1;          //громкость
 
     //список ссылок на другие модули, которым высылать call
     QVector<Module *> modules_;
@@ -34,6 +35,7 @@ struct RtModuleSoundOutData: public XcluProtectedData
 
     void clear() {
         play_test_sound_ = 0;
+        volume_ = 1;
         modules_.clear();
         volumes_.clear();
         err.clear();
