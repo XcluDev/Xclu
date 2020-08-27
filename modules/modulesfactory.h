@@ -40,7 +40,10 @@ public:
     QStringList general_page();
 
 private:
-    void add_module(ModuleInfo *module);
+    //считывание кастомных модулей
+    void read_custom_modules(QStringList &names, QStringList &folders);
+
+    void add_module(QString module_name, QString module_folder, QString category_name);
 
     QMap<QString, ModuleInfo *> modules_;
 
@@ -55,6 +58,7 @@ private:
 
     //имена модулей в категории
     QMap<QString, QVector<QString>> modules_in_category_;
+
 
 };
 

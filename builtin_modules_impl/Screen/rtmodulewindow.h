@@ -58,6 +58,7 @@ public:
 
 protected:
     //Выполнение
+    virtual void execute_loaded_internal() {}
     virtual void execute_start_internal();
     virtual void execute_update_internal();
     virtual void execute_stop_internal();

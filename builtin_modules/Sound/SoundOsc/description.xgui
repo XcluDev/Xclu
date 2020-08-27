@@ -1,4 +1,4 @@
-#Module Osc~
+#Module SoundOsc
 #------------------------------------------
 module_description=Oscillator with FM and AM modulation. This module should be called by callback from SoundOutput.
 module_version=1.01
@@ -16,7 +16,7 @@ page Main
 #TODO in enum Volume_Measure=db [db,linear]
 #    //Volume measure method
         
-in checkbox Enabled out_eabled=1
+in checkbox Enabled out_enabled=1
     //Generate output sound.
  
 in float Volume volume=0.5 0:1 500,50

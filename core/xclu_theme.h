@@ -29,9 +29,6 @@ public:
 //Константы и вспомогательные функции
 namespace xclu {
 
-//папка со встроенными ресурсами - темы, общие XGUI
-QString builtin_resources_folder();
-
 //тема
 QString builtin_themes_folder();    //папка с темами
 QString builtin_theme_folder();     //выбранная тема
@@ -41,15 +38,6 @@ QString builtin_theme_name();       //имя выбранной темы
 //папка с иконками
 QString builtin_icons_folder();
 
-//папка с описанием встроенных модулей
-QString builtin_modules_folder();
-
-
-//Файл с описанием интерфейса страницы General - добавляется во все модули
-QString general_page_file();
-
-//Расширение файлов для описания интерфейса
-QString XGUI_ext();
 
 
 const int gui_page_grid_margin = -1;     //margin, если -1 - не ставить

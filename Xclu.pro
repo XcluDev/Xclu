@@ -68,54 +68,6 @@ unix {
     DEFINES += XCLU_LINUX
 }
 
-#--------------------------------------------------------------------------
-#Realsense camera support
-#Comment this block if Realsense camera is not required
-#--------------------------------------------------------------------------
-unix {
-    INCLUDEPATH += ~/librealsense/include
-    LIBS += -lrealsense2
-}
-
-#windows 32 bit
-#windows {
-#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
-#}
-
-#windows 64 bit
-windows {
-    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
-}
-
-SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp \
-    core/raster.cpp \
-    core/types.cpp \
-    core/utils.cpp
-HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h \
-    core/incl_h.h \
-    core/incl_cpp.h \
-    core/raster.h \
-    core/types.h \
-    core/utils.h
-
-#--------------------------------------------------------------------------
-#Python
-#--------------------------------------------------------------------------
-INCLUDEPATH += python
-
-#windows64
-windows {
-    #INCLUDEPATH += ../Xclu-bin/Python38/include
-    #release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
-    #debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
-}
-
-unix {
-}
 
 #--------------------------------------------------------------------------
 #Common source, headers and forms files
@@ -134,6 +86,9 @@ INCLUDEPATH += project project/dialogs objects
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
+    core/raster.cpp \
+    core/types.cpp \
+    core/utils.cpp \
     builtin_modules_impl/Screen/rtmodulewimage.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_paths.cpp \
@@ -213,6 +168,11 @@ SOURCES += \
     interfacegui/interfaceguienum.cpp
 
 HEADERS += \
+    core/incl_h.h \
+    core/incl_cpp.h \
+    core/raster.h \
+    core/types.h \
+    core/utils.h \
     builtin_modules_impl/Screen/rtmodulewimage.h \
     core/int2.h \
     core/xclu_parse_tree.h \
@@ -290,5 +250,74 @@ HEADERS += \
     interface/interfaceitemenum.h \
     interfacegui/interfaceguienum.h
 
+#--------------------------------------------------------------------------
+#Realsense camera support
+#Comment this block if Realsense camera is not required
+#--------------------------------------------------------------------------
+unix {
+    INCLUDEPATH += ~/librealsense/include
+    LIBS += -lrealsense2
+}
 
+#windows 32 bit
+#windows {
+#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
+#}
+
+#windows 64 bit
+windows {
+    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
+}
+
+SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
+
+HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
+    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h
+
+
+
+
+#--------------------------------------------------------------------------
+#Custom modules
+#Comment if not required or you don't have them
+#--------------------------------------------------------------------------
+unix {
+    INCLUDEPATH += "../../Cosmo/Cosmovibro/CosmovibroRt"
+
+    SOURCES += \
+        ../../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
+
+    HEADERS += \
+        ../../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
+}
+
+#windows 64 bit
+windows {
+    INCLUDEPATH += "../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt"
+
+    SOURCES += \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
+
+    HEADERS += \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
+}
+
+#--------------------------------------------------------------------------
+#Python
+#Currently not used
+#--------------------------------------------------------------------------
+INCLUDEPATH += python
+
+#windows64
+windows {
+    #INCLUDEPATH += ../Xclu-bin/Python38/include
+    #release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
+    #debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
+}
+
+unix {
+}
 #--------------------------------------------------------------------------

@@ -119,16 +119,11 @@ void print_fonts() {
     }
 }
 
-//---------------------------------------------------------------------
-//папка со встроенными ресурсами - темы, общие XGUI
-//это файлы ресурсов, поэтому путь начинается с ":/"
-QString builtin_resources_folder() {
-    return  ":/builtin_resources/";
-}
 
- //папка с темами
+//---------------------------------------------------------------------
+//папка с темами
 QString builtin_themes_folder() {
-    return builtin_resources_folder() + "themes/";
+    return xclu_builtin_resources_folder() + "themes/";
 }
 
 //имя выбранной темы
@@ -157,29 +152,6 @@ QString builtin_theme_folder() {
 QString builtin_icons_folder() {
     return builtin_theme_folder() + "icons/";
 }
-
-//---------------------------------------------------------------------
-//папка с описанием встроенных модулей
-//это файлы ресурсов, поэтому путь начинается с ":/"
-QString builtin_modules_folder() {
-#ifdef XCLU_DEPLOY
-    //в режиме сборки Release-Deploy - это встроенные папки, и требуется добавить все в QRC
-    //в в остальных режимах - это путь на диске
-    return  ":/builtin_modules";
-#else
-    QFileInfo file("../Xclu/builtin_modules/");
-    return file.canonicalFilePath();
-#endif
-
-}
-
-//---------------------------------------------------------------------
-//Файл с описанием интерфейса страницы General - добавляется во все модули
-QString general_page_file() { return builtin_resources_folder() + "general_page" + XGUI_ext(); }
-
-//---------------------------------------------------------------------
-//Расширение файлов для описания интерфейса
-QString XGUI_ext() {return ".xgui";}
 
 //---------------------------------------------------------------------
 QHBoxLayout *hlayout(int margin, QWidget *widget1, int stretch1,

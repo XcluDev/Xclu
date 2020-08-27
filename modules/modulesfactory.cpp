@@ -28,7 +28,7 @@ void ModulesFactory::setup() {
     //qDebug("Listing modules:");
 
     //собираем встроенные модули
-    QDirIterator categories(xclu::builtin_modules_folder()); //, QDirIterator::Subdirectories);
+    QDirIterator categories(xclu_builtin_modules_folder()); //, QDirIterator::Subdirectories);
     while (categories.hasNext()) {
         QString category_folder = categories.next();
         QString category_name = categories.fileName();
@@ -38,12 +38,16 @@ void ModulesFactory::setup() {
             QString module_folder = it.next();
             QString module_name = it.fileName();
             if (module_name == "." || module_name == "..") continue;
-            //обработка исключений проводится внутри
-            auto *module_info = ModuleInfo::load_module(module_folder, category_name, module_name);
-            if (module_info) {
-                add_module(module_info);
-            }
+            add_module(module_name, module_folder, category_name);
         }
+    }
+
+    //считывание кастомных модулей
+    QStringList custom_names, custom_folders;
+    QString custom_category = "Custom";
+    read_custom_modules(custom_names, custom_folders);
+    for (int i=0; i<custom_names.size(); i++) {
+        add_module(custom_names[i], custom_folders[i], custom_category);
     }
 
     //обновить список категорий
@@ -56,16 +60,66 @@ void ModulesFactory::setup() {
     //}
 }
 
+
 //---------------------------------------------------------------------
-void ModulesFactory::add_module(ModuleInfo *module) {
-    QString name = module->description.class_name;
-    //qDebug() << "--- " << name;
-    //Если модуль с таким именем уже есть - предупредить
-    if (modules_.contains(name)) {
-        xclu_console_warning("Warning: duplicated module '" + name + "'.");
+//считывание кастомных модулей из файла
+//#------------------------------------------
+//#Custom modules list
+//#------------------------------------------
+//[windows]
+//module1=CosmoVibro
+//module1_folder=D:/eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt
+
+//[linux]
+//module1=CosmoVibro
+//module1_folder=~/Desktop/Cosmo/Cosmovibro/CosmovibroRt
+//#------------------------------------------
+
+void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folders) {
+    names.clear();
+    folders.clear();
+
+    QSettings settings(xclu_custom_modules_file(), QSettings::IniFormat);
+    int max_n = 100;    //Параметр, сколько кастомных файлов
+
+    //определение секции по ОС
+#ifdef XCLU_WIN
+    QString section = "windows";
+#endif
+#ifdef XCLU_LINUX
+    QString section = "linux";
+#endif
+
+
+    for (int i=1; i<=max_n; i++) {
+        //module1
+        QString key_name = QString("%1/module%2").arg(section).arg(i);
+        //module1_folder
+        QString key_folder = QString("%1/module%2_folder").arg(section).arg(i);
+        QString name = settings.value(key_name, "").toString();
+        QString folder = settings.value(key_folder, "").toString();
+        if (!name.isEmpty() && !folder.isEmpty()) {
+            names.push_back(name);
+            folders.push_back(folder);
+        }
     }
-    else {
-        modules_.insert(name, module);
+
+}
+
+//---------------------------------------------------------------------
+void ModulesFactory::add_module(QString module_name, QString module_folder, QString category_name) {
+    //обработка исключений проводится внутри load_module
+    auto *module = ModuleInfo::load_module(module_folder, category_name, module_name);
+    if (module) {
+        QString name = module->description.class_name;
+        //qDebug() << "--- " << name;
+        //Если модуль с таким именем уже есть - предупредить
+        if (modules_.contains(name)) {
+            xclu_console_warning("Warning: duplicated module '" + name + "'.");
+        }
+        else {
+            modules_.insert(name, module);
+        }
     }
 }
 

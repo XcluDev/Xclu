@@ -33,7 +33,7 @@ ModuleInfo::ModuleInfo()
 void ModuleInfo::load_module_from_folder(QString folder, QString category_name, QString module_name) {
     //qDebug() << "loading " + folder;
     folder_ = folder;
-    description_file_ = folder_ + "/description" + xclu::XGUI_ext();
+    description_file_ = folder_ + "/description" + xclu_XGUI_ext();
 
     //очищаем текущее описание
     description = ModuleDescription();
@@ -95,8 +95,8 @@ QStringList ModuleInfo::read_gui_file(QString file_name) {
 QStringList ModuleInfo::gui_lines() const {
     //Загрузить описание страницы General, если еще не загружено
     if (ModuleInfo_general_page_.isEmpty()) {
-        ModuleInfo_general_page_ = read_gui_file(xclu::general_page_file());
-        xclu_assert(!ModuleInfo_general_page_.isEmpty(), "General file description '" + xclu::general_page_file() + "' is empty");
+        ModuleInfo_general_page_ = read_gui_file(xclu_general_page_file());
+        xclu_assert(!ModuleInfo_general_page_.isEmpty(), "General file description '" + xclu_general_page_file() + "' is empty");
     }
 
     QStringList list = gui_lines_;

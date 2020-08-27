@@ -84,7 +84,6 @@
         <file>builtin_modules/Code/JsModule/description.xgui</file>
         <file>builtin_modules/Code/PythonCode/description.xgui</file>
         <file>builtin_modules/Code/СppCode/description.xgui</file>
-        <file>builtin_modules/Communication/Arduino/description.xgui</file>
         <file>builtin_modules/Communication/MailNotification/description.xgui</file>
         <file>builtin_modules/Communication/Midi/description.xgui</file>
         <file>builtin_modules/Communication/MQTT/description.xgui</file>
@@ -196,6 +195,7 @@
         <file>builtin_modules/Window/Window/help.md</file>
         <file>builtin_modules/Window/WLayout/description.xgui</file>
         <file>builtin_modules/Window/WMenu/description.xgui</file>
-        <file>builtin_modules/Window/WSweetArea/description.xgui</file>  
+        <file>builtin_modules/Window/WSweetArea/description.xgui</file>
+        <file>builtin_resources/custom_modules.ini</file>
     </qresource>
 </RCC>

@@ -17,7 +17,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "4"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -80,7 +80,7 @@
                         "aname": "connected_device_info",
                         "atitle": "Device Info",
                         "atype": "string",
-                        "avalue": "Device 1: Intel RealSense D435, serial 915112070579"
+                        "avalue": ""
                     },
                     {
                         "aname": "is_started",
@@ -92,7 +92,7 @@
                         "aname": "frames_captured",
                         "atitle": "Frames Captured",
                         "atype": "string",
-                        "avalue": "Processed 433 frame(s)"
+                        "avalue": ""
                     },
                     {
                         "aname": "show_color",
@@ -140,7 +140,7 @@
                         "aname": "is_new_frame",
                         "atitle": "Is New Frame",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "Color",
@@ -272,7 +272,7 @@
                         "aname": "saved_to",
                         "atitle": "Saved To",
                         "atype": "text",
-                        "avalue": "D:/perevalovds.com/_2020/Xclu/Xclu/builtin_examples/../../temp/20_08_25_19_47_18_619"
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",
