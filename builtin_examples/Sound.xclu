@@ -17,7 +17,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -40,7 +40,15 @@
                         "aname": "volume",
                         "atitle": "Volume",
                         "atype": "float",
-                        "avalue": "0.8",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_volume",
+                        "atitle": "Device Volume",
+                        "atype": "float",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -120,7 +128,7 @@
                         "aname": "connected_device_name",
                         "atitle": "Connected Device Name",
                         "atype": "string",
-                        "avalue": "Default Output Device"
+                        "avalue": "alsa_output.platform-sound.analog-stereo"
                     },
                     {
                         "aname": "is_started",
@@ -138,7 +146,7 @@
                         "aname": "buffer_size",
                         "atitle": "Buffer Size",
                         "atype": "int",
-                        "avalue": "35280"
+                        "avalue": "44100"
                     },
                     {
                         "aname": "Device_Info",
@@ -168,7 +176,7 @@
                         "aname": "local_console",
                         "atitle": "Local Console",
                         "atype": "text",
-                        "avalue": "Connected Output Audio devices:\n0: Focusrite USB (Focusrite USB Audio)\n1: Динамики (NoMachine Microphone Adapter)\n2: Focusrite USB (Focusrite USB Audio)\n3: �������� (NoMachine Microphone Adapter)\n\nStarting: Default Output Device\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
+                        "avalue": "Connected Output Audio devices:\n0: pulse\n1: default\n2: hdmi:CARD=tegrahda,DEV=0\n3: dmix:CARD=tegrahda,DEV=3\n4: dsnoop:CARD=tegrahda,DEV=3\n5: hw:CARD=tegrahda,DEV=3\n6: plughw:CARD=tegrahda,DEV=3\n7: sysdefault:CARD=tegrasndt210ref\n8: front:CARD=tegrasndt210ref,DEV=0\n9: dmix:CARD=tegrasndt210ref,DEV=0\n10: dmix:CARD=tegrasndt210ref,DEV=1\n11: dmix:CARD=tegrasndt210ref,DEV=2\n12: dmix:CARD=tegrasndt210ref,DEV=3\n13: dmix:CARD=tegrasndt210ref,DEV=4\n14: dmix:CARD=tegrasndt210ref,DEV=5\n15: dmix:CARD=tegrasndt210ref,DEV=6\n16: dmix:CARD=tegrasndt210ref,DEV=7\n17: dmix:CARD=tegrasndt210ref,DEV=8\n18: dmix:CARD=tegrasndt210ref,DEV=9\n19: dsnoop:CARD=tegrasndt210ref,DEV=0\n20: dsnoop:CARD=tegrasndt210ref,DEV=1\n21: dsnoop:CARD=tegrasndt210ref,DEV=2\n22: dsnoop:CARD=tegrasndt210ref,DEV=3\n23: dsnoop:CARD=tegrasndt210ref,DEV=4\n24: dsnoop:CARD=tegrasndt210ref,DEV=5\n25: dsnoop:CARD=tegrasndt210ref,DEV=6\n26: dsnoop:CARD=tegrasndt210ref,DEV=7\n27: dsnoop:CARD=tegrasndt210ref,DEV=8\n28: dsnoop:CARD=tegrasndt210ref,DEV=9\n29: hw:CARD=tegrasndt210ref,DEV=0\n30: hw:CARD=tegrasndt210ref,DEV=1\n31: hw:CARD=tegrasndt210ref,DEV=2\n32: hw:CARD=tegrasndt210ref,DEV=3\n33: hw:CARD=tegrasndt210ref,DEV=4\n34: hw:CARD=tegrasndt210ref,DEV=5\n35: hw:CARD=tegrasndt210ref,DEV=6\n36: hw:CARD=tegrasndt210ref,DEV=7\n37: hw:CARD=tegrasndt210ref,DEV=8\n38: hw:CARD=tegrasndt210ref,DEV=9\n39: plughw:CARD=tegrasndt210ref,DEV=0\n40: plughw:CARD=tegrasndt210ref,DEV=1\n41: plughw:CARD=tegrasndt210ref,DEV=2\n42: plughw:CARD=tegrasndt210ref,DEV=3\n43: plughw:CARD=tegrasndt210ref,DEV=4\n44: plughw:CARD=tegrasndt210ref,DEV=5\n45: plughw:CARD=tegrasndt210ref,DEV=6\n46: plughw:CARD=tegrasndt210ref,DEV=7\n47: plughw:CARD=tegrasndt210ref,DEV=8\n48: plughw:CARD=tegrasndt210ref,DEV=9\n49: sysdefault:CARD=Device\n50: front:CARD=Device,DEV=0\n51: surround21:CARD=Device,DEV=0\n52: surround40:CARD=Device,DEV=0\n53: surround41:CARD=Device,DEV=0\n54: surround50:CARD=Device,DEV=0\n55: surround51:CARD=Device,DEV=0\n56: surround71:CARD=Device,DEV=0\n57: iec958:CARD=Device,DEV=0\n58: dmix:CARD=Device,DEV=0\n59: dsnoop:CARD=Device,DEV=0\n60: hw:CARD=Device,DEV=0\n61: plughw:CARD=Device,DEV=0\n62: alsa_output.platform-sound.analog-stereo\n63: alsa_output.usb-GeneralPlus_USB_Audio_Device-00.analog-stereo\n\nStarting: alsa_output.platform-sound.analog-stereo\n\n\nSupported Formats for 'alsa_output.platform-sound.analog-stereo'\n  Sample rates: 8000, 11025, 22050, 44100, 48000\n  Channels: 1, 2, 4, 6, 8\n\n"
                     },
                     {
                         "aname": "Test_Sound",

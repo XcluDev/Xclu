@@ -252,6 +252,7 @@ HEADERS += \
     interfacegui/interfaceguienum.h \
     builtin_modules_impl/Sound/rtmodulesoundosc.h
 
+
 #--------------------------------------------------------------------------
 #Realsense camera support
 #Comment this block if Realsense camera is not required
@@ -290,10 +291,10 @@ unix {
     INCLUDEPATH += "../../Cosmo/Cosmovibro/CosmovibroRt"
 
     SOURCES += \
-        ../../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
 
     HEADERS += \
-        ../../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
 }
 
 #windows 64 bit

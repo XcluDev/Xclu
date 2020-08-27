@@ -287,21 +287,30 @@ void RtModuleSoundOut::on_changed_audio_state(QAudio::State state) {
             break;
         case QAudio::SuspendedState:
         case QAudio::StoppedState:
+            set_started(false);
+            break;
         case QAudio::IdleState:
         //TODO Qt 5.13:
         //case QAudio::InterruptedState:
-            set_started(false);
             QAudio::Error error = m_audioOutput->error();
             switch (error) {
-            case QAudio::NoError:
+            case QAudio::NoError:                
                 break;
-            case QAudio::IOError:  xclu_exception("QAudio::IOError");
+            case QAudio::IOError:
+                set_started(false);
+                xclu_exception("QAudio::IOError");
                 break;
-            case QAudio::OpenError: xclu_exception("QAudio::OpenError");
+            case QAudio::OpenError:
+                set_started(false);
+                xclu_exception("QAudio::OpenError");
                 break;
-            case QAudio::UnderrunError: xclu_exception("QAudio::UnderrunError");
+            case QAudio::UnderrunError:
+                //TODO some text to console!
+                //xclu_exception("QAudio::UnderrunError");
                 break;
-            case QAudio::FatalError: xclu_exception("QAudio::FatalError");
+            case QAudio::FatalError:
+                set_started(false);
+                xclu_exception("QAudio::FatalError");
                 break;
             }
         }
