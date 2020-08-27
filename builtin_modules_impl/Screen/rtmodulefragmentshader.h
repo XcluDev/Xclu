@@ -22,7 +22,7 @@ public:
     RtModuleFragmentShader();
     ~RtModuleFragmentShader();
 
-    static QString *static_class_name_ptr; //"FragmentShader", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleFragmentShader *new_module();
 
 protected:

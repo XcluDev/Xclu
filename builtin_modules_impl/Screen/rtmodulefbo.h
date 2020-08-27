@@ -21,7 +21,7 @@ public:
     RtModuleFbo();
     ~RtModuleFbo();
 
-    static QString *static_class_name_ptr; //"Fbo", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleFbo *new_module();
 
 protected:

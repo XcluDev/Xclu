@@ -37,7 +37,7 @@ public:
     RtModuleWImage();
     ~RtModuleWImage();
 
-    static QString *static_class_name_ptr; //"IntGui", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleWImage *new_module();
 
 protected:

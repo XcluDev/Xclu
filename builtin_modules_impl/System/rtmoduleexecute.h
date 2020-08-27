@@ -12,7 +12,7 @@ public:
     RtModuleExecute();
     ~RtModuleExecute();
 
-    static QString *static_class_name_ptr; //"Execute", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleExecute *new_module();
 
 protected:

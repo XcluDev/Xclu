@@ -38,7 +38,7 @@ public:
     RtModuleScalar();
     ~RtModuleScalar();
 
-    static QString *static_class_name_ptr; //"Scalar", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleScalar *new_module();
 
 protected:

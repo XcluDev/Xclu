@@ -63,7 +63,7 @@ public:
     RtModuleSynthFromImage();
     ~RtModuleSynthFromImage();
 
-    static QString *static_class_name_ptr; //"Test", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleSynthFromImage *new_module();
 
 protected:

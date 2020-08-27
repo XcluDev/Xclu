@@ -165,7 +165,8 @@ SOURCES += \
     builtin_modules_impl/Core/rtmodulescalar.cpp \
     builtin_modules_impl/Screen/rtmodulewindow.cpp \
     interface/interfaceitemenum.cpp \
-    interfacegui/interfaceguienum.cpp
+    interfacegui/interfaceguienum.cpp \
+    builtin_modules_impl/Sound/rtmodulesoundosc.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -248,7 +249,8 @@ HEADERS += \
     builtin_modules_impl/Core/rtmodulescalar.h \
     builtin_modules_impl/Screen/rtmodulewindow.h \
     interface/interfaceitemenum.h \
-    interfacegui/interfaceguienum.h
+    interfacegui/interfaceguienum.h \
+    builtin_modules_impl/Sound/rtmodulesoundosc.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support

@@ -53,7 +53,7 @@ public:
     RtModuleWindow();
     ~RtModuleWindow();
 
-    static QString *static_class_name_ptr; //"Window", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleWindow *new_module();
 
 protected:

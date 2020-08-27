@@ -52,7 +52,7 @@ in float Range fm_range=10 0:20000 20000,2000
     //0..20000 Hz
 
 #-------------- 
-#FM
+#AM
 separator
    
 in checkbox AM am_enabled=0

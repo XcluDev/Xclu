@@ -12,7 +12,7 @@ public:
     RtModuleTest();
     ~RtModuleTest();
 
-    static QString *static_class_name_ptr; //"Test", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleTest *new_module();
 
 protected:

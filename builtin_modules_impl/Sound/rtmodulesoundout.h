@@ -81,7 +81,7 @@ public:
     RtModuleSoundOut();
     ~RtModuleSoundOut();
 
-    static QString *static_class_name_ptr; //"SoundOut", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleSoundOut *new_module();
 
 protected:

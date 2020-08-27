@@ -21,7 +21,7 @@ public:
     RtModuleRealsenseCamera();
     ~RtModuleRealsenseCamera();
 
-    static QString *static_class_name_ptr; //"RealsenseCamera", эта переменная используется для создания новых объектов
+    static QString *static_class_name_ptr;
     static RtModuleRealsenseCamera *new_module();
 
 protected:

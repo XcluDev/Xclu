@@ -6,7 +6,7 @@
     "aproject_properties": {
         "frame_rate": "30",
         "name": "",
-        "selected_module": "1"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -29,7 +29,7 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "out_eabled",
+                        "aname": "out_enabled",
                         "atitle": "Enabled",
                         "atype": "checkbox",
                         "avalue": "1",
@@ -48,7 +48,7 @@
                         "aname": "vol_second",
                         "atitle": "Volume Secondary",
                         "atype": "float",
-                        "avalue": "1",
+                        "avalue": "0.6",
                         "expr": "",
                         "expr_use": false
                     },
@@ -56,7 +56,7 @@
                         "aname": "freq",
                         "atitle": "Frequency",
                         "atype": "float",
-                        "avalue": "440",
+                        "avalue": "900",
                         "expr": "",
                         "expr_use": false
                     },
@@ -72,7 +72,7 @@
                         "aname": "fm_rate",
                         "atitle": "Rate",
                         "atype": "float",
-                        "avalue": "5",
+                        "avalue": "0.5",
                         "expr": "",
                         "expr_use": false
                     },
@@ -80,7 +80,7 @@
                         "aname": "fm_range",
                         "atitle": "Range",
                         "atype": "float",
-                        "avalue": "10",
+                        "avalue": "20",
                         "expr": "",
                         "expr_use": false
                     },
@@ -96,7 +96,7 @@
                         "aname": "am_rate",
                         "atitle": "Rate",
                         "atype": "float",
-                        "avalue": "5",
+                        "avalue": "2",
                         "expr": "",
                         "expr_use": false
                     },
@@ -104,7 +104,7 @@
                         "aname": "am_range",
                         "atitle": "Range",
                         "atype": "float",
-                        "avalue": "0.1",
+                        "avalue": "0.2",
                         "expr": "",
                         "expr_use": false
                     },
@@ -120,7 +120,7 @@
                         "aname": "vol_speed",
                         "atitle": "Volume speed",
                         "atype": "float",
-                        "avalue": "1",
+                        "avalue": "0.2",
                         "expr": "",
                         "expr_use": false
                     },
@@ -298,13 +298,13 @@
                         "aname": "connected_device_name",
                         "atitle": "Connected Device Name",
                         "atype": "string",
-                        "avalue": ""
+                        "avalue": "Default Output Device"
                     },
                     {
                         "aname": "is_started",
                         "atitle": "Is Started",
                         "atype": "checkbox",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "sound_format",
@@ -316,7 +316,7 @@
                         "aname": "buffer_size",
                         "atitle": "Buffer Size",
                         "atype": "int",
-                        "avalue": "0"
+                        "avalue": "35280"
                     },
                     {
                         "aname": "Device_Info",
@@ -346,7 +346,7 @@
                         "aname": "local_console",
                         "atitle": "Local Console",
                         "atype": "text",
-                        "avalue": ""
+                        "avalue": "Connected Output Audio devices:\n0: Динамики (USB Audio Device)\n1: Динамики (NoMachine Microphone Adapter)\n2: Динамики (NoMachine Microphone Adapter)\n3: Динамики (USB Audio Device)\n\nStarting: Default Output Device\n\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
                     },
                     {
                         "aname": "Test_Sound",
