@@ -1,19 +1,18 @@
 #Module Serial
 #------------------------------------------
-module_description=Send and receive data from Serial port - for Arduino and others.
+module_description=Serial interface with Arduino and other devices.
 module_version=1.01
 module_impl=C++
 
 #------------------------------------------
 page Main
+    //General settings.
 
-group Device_Selection
-
-const enum Choose_Method choose_method=By_Id [By_Id,By_Name]
-    //Method of choosing the device
+const enum Port select_port=Default [Default,By_Index,By_Name]
+    //Method of choosing the port.
 
 #--------------------
-if choose_method By_Id
+if select_port By_Index
 
 const int Search_Device_From deviceid0=2 0:100 1,10
     //Start of id range, will search to first successful 
@@ -21,7 +20,7 @@ const int Search_Device_From deviceid0=2 0:100 1,10
 const int To deviceid1=10 0:100 1,10
     //End of id range 
 
-if choose_method By_Name
+if select_port By_Name
 
 const string Device_Name devicename="..."
     //Name of the device (may be specified only part, will be search for the first successful match)
@@ -35,25 +34,29 @@ const enum Speed_Baud baud=9600 [2400,4800,9600,19200,38400,57600,115200,230400,
 separator
 
 out checkbox Connected connected=0
-    //Is device connected
+    //Is port connected.
 
-out checkbox Data_Received data_received=0
-    //Is data received on the latest update
+#out checkbox Data_Received data_received=0
+#    //Is data received on the latest update
     
 separator
-out int Total_Sent_bytes total_sent=0 0:10000000 1,10
-out int Total_Received_bytes total_received=0 0:10000000 1,10
+out int Total_Sent total_sent=0 0:10000000 1,10 
+    //How much bytes was sent.
+    //bytes
+#out int Total_Received_bytes total_received=0 0:10000000 1,10
+#    //How much bytes was received.
+#    //bytes
 
 #------------------------------------------
 page Console
 
-in enum Send_Type send_type=String [String,Byte]
-    //Choose what to send manually
+in enum Send send_type=String [String,Bytes]
+    //Choose what to send manually.
 
 #----------------
 if send_type String
 
-in string Send_String send_string=""
+in string String_to_Send send_string=""
     //Send string
 
 in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
@@ -61,34 +64,37 @@ in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
 in button Send send_string_btn
 endif
 #----------------
-if send_type Byte
+if send_type Bytes
 
-in int Send_Byte send_byte=0 0:255 1,10
-    //Send byte
-in button Send send_byte_btn
+in string Send_Bytes send_bytes=""
+    //Bytes list, separated by spaces, for example, '32 32 13'.    
+    
+in button Send send_bytes_btn
 endif
 #----------------
 
 
 separator
 
-in enum Show_Received show_received=Text [None,Text,Bytes]
+in enum Show_Received_as show_received=None [None,Text,Bytes]
     //Show received data as text or bytes.
 
 #----------------
 if show_received Text 
 out text Received_Text received_text 10 25
-    //Received data as text
+    //Received data as text.
+    //Not yet implemented :)
 
 endif
 #----------------
 if show_received Bytes
 out text Received_Bytes received_bytes 10 25
     //Received data as bytes
+    //Not yet implemented :)
 
 endif
 #------------------------------------------
-
+if show_received Text,Bytes
 in button Clear clear
     //Clear received data
 
@@ -97,6 +103,7 @@ in enum Auto_Clear auto_clear=On [Off,On]
 
 
 in enum Limit_Show limit_show=On [Off,On]
+endif
 #----------------
 if limit_show On
 in int Limit_Show_Count limit_show_count=100 0:10000 1,100 

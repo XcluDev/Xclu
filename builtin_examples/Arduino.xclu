@@ -1,0 +1,249 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "frame_rate": "30",
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Serial",
+                "name": "serial1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_port",
+                        "atitle": "Port",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "deviceid0",
+                        "atitle": "Search Device From",
+                        "atype": "int",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "deviceid1",
+                        "atitle": "To",
+                        "atype": "int",
+                        "avalue": "10",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "devicename",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "...",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "baud",
+                        "atitle": "Speed Baud",
+                        "atype": "enum",
+                        "avalue": "9600",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected",
+                        "atitle": "Connected",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "data_received",
+                        "atitle": "Data Received",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "total_sent",
+                        "atitle": "Total Sent bytes",
+                        "atype": "int",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "total_received",
+                        "atitle": "Total Received bytes",
+                        "atype": "int",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Console",
+                        "atitle": "Console",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "send_type",
+                        "atitle": "Send Type",
+                        "atype": "enum",
+                        "avalue": "String",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "send_string",
+                        "atitle": "Send String",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "line_term",
+                        "atitle": "Line Terminator",
+                        "atype": "enum",
+                        "avalue": "\\r\\n",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "send_byte",
+                        "atitle": "Send Byte",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "show_received",
+                        "atitle": "Show Received",
+                        "atype": "enum",
+                        "avalue": "None",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "received_text",
+                        "atitle": "Received Text",
+                        "atype": "text",
+                        "avalue": "Not yet implemented :)"
+                    },
+                    {
+                        "aname": "received_bytes",
+                        "atitle": "Received Bytes",
+                        "atype": "text",
+                        "avalue": "Not yet implemented :)"
+                    },
+                    {
+                        "aname": "auto_clear",
+                        "atitle": "Auto Clear",
+                        "atype": "enum",
+                        "avalue": "On",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "limit_show",
+                        "atitle": "Limit Show",
+                        "atype": "enum",
+                        "avalue": "On",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "limit_show_count",
+                        "atitle": "Limit Show Count",
+                        "atype": "int",
+                        "avalue": "100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Devices",
+                        "atitle": "Devices",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_list",
+                        "atitle": "Device List",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        }
+    ]
+}

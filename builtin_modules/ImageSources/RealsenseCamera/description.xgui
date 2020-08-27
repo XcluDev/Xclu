@@ -6,7 +6,7 @@ module_impl=C++
 
 #-------------------------------------------
 page Main
-    //General settings
+    //General settings.
 
     
 #-----------------------------

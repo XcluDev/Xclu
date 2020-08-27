@@ -166,7 +166,8 @@ SOURCES += \
     builtin_modules_impl/Screen/rtmodulewindow.cpp \
     interface/interfaceitemenum.cpp \
     interfacegui/interfaceguienum.cpp \
-    builtin_modules_impl/Sound/rtmodulesoundosc.cpp
+    builtin_modules_impl/Sound/rtmodulesoundosc.cpp \
+    builtin_modules_impl/Communication/rtmoduleserial.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -250,7 +251,8 @@ HEADERS += \
     builtin_modules_impl/Screen/rtmodulewindow.h \
     interface/interfaceitemenum.h \
     interfacegui/interfaceguienum.h \
-    builtin_modules_impl/Sound/rtmodulesoundosc.h
+    builtin_modules_impl/Sound/rtmodulesoundosc.h \
+    builtin_modules_impl/Communication/rtmoduleserial.h
 
 
 #--------------------------------------------------------------------------
