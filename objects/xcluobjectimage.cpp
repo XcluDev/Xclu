@@ -493,6 +493,17 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 }
 
+
+//---------------------------------------------------------------------
+//Загрузка изображения с диска
+//TODO выполняется через QImage, поэтому не очень быстрая
+//быстрее через OpenCV или FreeImage или TurboJpeg
+/*static*/ void XcluObjectImage::load(ObjectReadWrite &object, QString file_name) {
+    QImage qimage;
+    xclu_assert(qimage.load(file_name), "Can't load image " + file_name);
+    create_from_QImage(object, qimage, "RGB", XcluArrayDataType_u8bit);
+}
+
 //---------------------------------------------------------------------
 //Запись на диск
 //TODO выполняется через QImage, поэтому не очень быстрая
@@ -500,7 +511,8 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 /*static*/ void XcluObjectImage::save(ObjectRead &object, QString file_name, QString format, int quality) {
     QImage qimage;
     convert_to_QImage(object, qimage);
-    qimage.save(file_name, format.toStdString().c_str(), quality);
+    xclu_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
+                "Can't save image " + file_name);
 }
 
 //---------------------------------------------------------------------

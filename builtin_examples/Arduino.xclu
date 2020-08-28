@@ -75,20 +75,8 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "data_received",
-                        "atitle": "Data Received",
-                        "atype": "checkbox",
-                        "avalue": "0"
-                    },
-                    {
                         "aname": "total_sent",
-                        "atitle": "Total Sent bytes",
-                        "atype": "int",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "total_received",
-                        "atitle": "Total Received bytes",
+                        "atitle": "Total Sent",
                         "atype": "int",
                         "avalue": "0"
                     },
@@ -102,7 +90,7 @@
                     },
                     {
                         "aname": "send_type",
-                        "atitle": "Send Type",
+                        "atitle": "Send",
                         "atype": "enum",
                         "avalue": "String",
                         "expr": "",
@@ -110,7 +98,7 @@
                     },
                     {
                         "aname": "send_string",
-                        "atitle": "Send String",
+                        "atitle": "String to Send",
                         "atype": "string",
                         "avalue": "",
                         "expr": "",
@@ -125,16 +113,16 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "send_byte",
-                        "atitle": "Send Byte",
-                        "atype": "int",
-                        "avalue": "0",
+                        "aname": "send_bytes",
+                        "atitle": "Send Bytes",
+                        "atype": "string",
+                        "avalue": "",
                         "expr": "",
                         "expr_use": false
                     },
                     {
                         "aname": "show_received",
-                        "atitle": "Show Received",
+                        "atitle": "Show Received as",
                         "atype": "enum",
                         "avalue": "None",
                         "expr": "",

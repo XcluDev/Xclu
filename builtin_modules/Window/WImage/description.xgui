@@ -36,7 +36,7 @@ if source File
 
 
 if source Link
-in string(link:int) Image_Link image_link="webcam1->image"
+in string(link:image) Image_Link image_link="webcam1->image"
     //Link to other module's image.
 
 in string(link:checkbox) Is_New_Frame_Link is_new_frame_link="webcam1->is_new_frame"
