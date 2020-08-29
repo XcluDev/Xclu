@@ -163,7 +163,7 @@ void RtModuleWindow::update_window() {
     //меняем положение, даже если изменили размер - если были настройки "в центре экрана"
     WindowPos position = WindowPos(get_int("position"));
     if (size_changed || was_changed("position")
-            || (position == WindowPos_Custom ||(was_changed("pos_x") && was_changed("pos_y")))) {
+            || (position == WindowPos_Custom && (was_changed("pos_x") || was_changed("pos_y")))) {
         switch (position) {
         case WindowPos_Default:
             break;
