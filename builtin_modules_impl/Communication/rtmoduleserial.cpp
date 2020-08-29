@@ -19,9 +19,10 @@ RtModuleSerial::RtModuleSerial()
 
 //---------------------------------------------------------------------
 void RtModuleSerial::gui_clear() {
-    clear_string("device_list");
+    /*clear_string("device_list");
     clear_string("connected_device_info");
     set_started(false); //также ставит gui-элемент is_started
+    */
 }
 //---------------------------------------------------------------------
 RtModuleSerial::~RtModuleSerial()
