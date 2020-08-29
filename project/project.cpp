@@ -48,7 +48,6 @@ void Project::close_project() {
     properties().reset_name();
     update_project_folder("");
     clear_modules();
-
 }
 
 //---------------------------------------------------------------------
@@ -115,6 +114,7 @@ Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat f
         update_names();
         update_project_folder(file_name);
 
+        //Если требуется автоматически запусить проект - это делается из MainWindow
     }
     catch(XCluException& e) {
         xclu_message_box("Can't load a project '" + file_name + "':\n" + e.whatQt());
@@ -177,9 +177,13 @@ void Project::read_json(const QJsonObject &json) {
         //делаем перехват исключений, чтобы к ним добавить имя модуля
         //ошибки выводим в консоль и продолжаем загрузку проекта
         try {
+            //создаем модуль
             Module *module = FACTORY.create_unnamed_module(class_name, version);
+            //считываем его параметры
             module->read_json(moduleObject);
+            //выполняем действие после загрузки
             module->execute(ModuleExecuteStageLoaded);
+            //добавляем в список
             modules_.append(module);
         }
         catch(XCluException& e) {

@@ -9,7 +9,7 @@ class QJsonObject;
 class ProjectProperties {
 public:
     QString name = "Untitled";
-    float frame_rate = 30;
+    //float frame_rate = 30;    //это настраивается в модуле Project
     int selected_module = -1;
 
     void reset_name();

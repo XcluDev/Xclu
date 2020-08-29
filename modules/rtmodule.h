@@ -152,7 +152,9 @@ protected:
     void process_error(QString message);
 
     //функции исполнения, специфичные для модулей - они должны их переопределить
+    //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
     virtual void execute_loaded_internal() {}
+    //эти функции запускаются, только если модуль включен:
     virtual void execute_start_internal() {}
     virtual void execute_update_internal() {}
     virtual void execute_stop_internal() {}

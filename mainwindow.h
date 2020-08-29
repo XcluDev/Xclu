@@ -120,6 +120,7 @@ private:
     bool is_stopped();
 
     QTimer *timer = 0;
+    int timer_fps_ = -1;
     //эта функция вызывается таймером
     void execute_update();
 

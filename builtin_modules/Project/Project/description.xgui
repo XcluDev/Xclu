@@ -8,12 +8,16 @@ module_impl=C++
 page Main
     //General settings
 
-const int Frame_Rate frame_rate=30 1:1000 1,10
+const int Frame_Rate frame_rate=30 1:120 1,10
     //Project frame rate.
     //fps
     
     
-const checkbox Autostart autostart =0 
+const checkbox Autostart autostart=0 
+    //Autostart project after loading.
+    
+#TODO wait 5 seconds to interrupt if required.
+    
 
 #TODO:
 #получение реального FPS

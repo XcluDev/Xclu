@@ -168,7 +168,8 @@ SOURCES += \
     interfacegui/interfaceguienum.cpp \
     builtin_modules_impl/Sound/rtmodulesoundosc.cpp \
     builtin_modules_impl/Communication/rtmoduleserial.cpp \
-    core/slowbit.cpp
+    core/slowbit.cpp \
+    builtin_modules_impl/Project/rtmoduleproject.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -254,7 +255,8 @@ HEADERS += \
     interfacegui/interfaceguienum.h \
     builtin_modules_impl/Sound/rtmodulesoundosc.h \
     builtin_modules_impl/Communication/rtmoduleserial.h \
-    core/slowbit.h
+    core/slowbit.h \
+    builtin_modules_impl/Project/rtmoduleproject.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support

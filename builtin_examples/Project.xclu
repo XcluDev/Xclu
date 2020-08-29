@@ -4,7 +4,6 @@
         "version": "1.150"
     },
     "aproject_properties": {
-        "frame_rate": "30",
         "name": "",
         "selected_module": "0"
     },
@@ -37,10 +36,10 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "autostart ",
+                        "aname": "autostart",
                         "atitle": "Autostart",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },

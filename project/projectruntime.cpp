@@ -26,8 +26,13 @@ ProjectRuntime::ProjectRuntime()
 }
 
 //---------------------------------------------------------------------
-//Команды для управления проектом - модули могут их посылать
-//Установка частоты таймера обновления проекта (вызова update)
+//установить значения по умолчанию для frate_rate и autostar
+void ProjectRuntime::reset_fps_autostart() {
+    frame_rate_ = 30;   //TODO параметр, значение по умолчанию
+    autostart_ = 0;
+}
+
+//---------------------------------------------------------------------
 void ProjectRuntime::set_frame_rate(int fps) {
     frame_rate_ = fps;
 }
@@ -41,13 +46,13 @@ int ProjectRuntime::get_frame_rate() {
 //Автозапуск проекта:
 //если какой-то модуль устанавливает это в своем internal_loaded,
 //то после загрузки проекта он стартует
-void ProjectRuntime::set_autorun(int v) {
-    autorun_ = v;
+void ProjectRuntime::set_autostart(int v) {
+    autostart_ = v;
 }
 
 //---------------------------------------------------------------------
-bool ProjectRuntime::get_autorun() {
-    return autorun_;
+bool ProjectRuntime::get_autostart() {
+    return autostart_;
 }
 
 //---------------------------------------------------------------------

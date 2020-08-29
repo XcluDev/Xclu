@@ -281,6 +281,8 @@ void MainWindow::closeProject() {
     PROJ.new_project();
     PROJ_GUI->after_close_project();
 
+    RUNTIME.reset_fps_autostart();  //сброк предыдущего FPS и aurostart
+
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
     set_current_file(""); //поставится в Untitled с новым номером
 }
@@ -396,6 +398,11 @@ void MainWindow::openProject(const QString &fileName) {
         //если были warnings при загрузке - то, ставим флажок изменения проекта, так как при сохранении он изменится
         if (load_result == Project::LoadProjectStatusWarnings) {
             xclu_document_modified();
+        }
+
+        //Если требуется - автозапуск проекта
+        if (RUNTIME.get_autostart()) {
+            execute_run();
         }
     }
 }
@@ -559,9 +566,12 @@ void MainWindow::execute_run() {
             connect(timer, &QTimer::timeout, this, &MainWindow::execute_update);
         }
 
+        //вычисляем частоту обновления
+        //float FPS = PROJ.properties().frame_rate;
+        int frame_rate = RUNTIME.get_frame_rate();
+        xclu_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
         //запускаем таймер
-        float FPS = PROJ.properties().frame_rate;
-        int delay = int(1000.0/FPS);
+        int delay = int(1000.0/frame_rate); //TODO вообще, при больших частотах будет вызываться неравномерно.
         timer->start(delay);
     }
 }
