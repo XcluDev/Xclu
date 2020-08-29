@@ -3,6 +3,7 @@
 //Raster class definition
 
 #include "incl_h.h"
+#include <QImage>
 
 //--------------------------------------------------
 //Color pixel type
@@ -21,6 +22,10 @@ struct u8_rgb {
   }
   void set(uint8 val) {
       v[0] = v[1] = v[2] = val;
+  }
+  uint8 gray() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
+  static uint8 gray(uint8 r, uint8 g, uint8 b) {
+      return (int(r)+int(g)+int(b))/3;
   }
 };
 
@@ -113,4 +118,17 @@ typedef Raster_<uint16> Raster_u16;
 typedef Raster_<float> Raster_float;
 
 
+//Конвертирование растров между собой и QImage, запись и считывание на диск
+//TODO при работе с диском используется QImage - быстрее было бы использовать OpenCV или FreeImage или TurboJpeg
+void raster_to_raster(Raster_u8c3 &raster_rgb, Raster_u8 &raster);
+void raster_to_raster(Raster_u8 &raster, Raster_u8c3 &raster_rgb);
 
+void raster_from_QImage(QImage qimage, Raster_u8 &raster);
+void raster_from_QImage(QImage qimage, Raster_u8c3 &raster);
+void raster_to_QImage(Raster_u8 &raster, QImage &qimage);
+void raster_to_QImage(Raster_u8c3 &raster, QImage &qimage);
+
+void raster_load(QString file_name, Raster_u8 &raster);
+void raster_load(QString file_name, Raster_u8c3 &raster);
+void raster_save(Raster_u8 &raster, QString file_name, QString format, int quality);
+void raster_save(Raster_u8c3 &raster, QString file_name, QString format, int quality);

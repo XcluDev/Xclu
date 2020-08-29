@@ -394,7 +394,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     xclu_assert(!mirrorx, "XcluObjectImage::create_from_QImage doesn't supports mirrorx");
 
     //TODO сейчас поддерживаем на вход только тип RGB32
-    xclu_assert(qimage.format() == QImage::Format_RGB32, "QImage format is unsupported");
+    xclu_assert(qimage.format() == QImage::Format_RGB32, "XcluObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     //TODO сейчас поддерживаем на вход только типы u8bit и float
     xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
