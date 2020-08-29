@@ -296,12 +296,14 @@ unix {
     INCLUDEPATH += "../../Cosmo/Cosmovibro/CosmovibroRt"
 
     SOURCES += \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
+         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp
 
     HEADERS += \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h
 }
 
 #windows 64 bit
