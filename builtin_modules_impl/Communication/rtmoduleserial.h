@@ -19,7 +19,7 @@ public:
     ~RtModuleSerial();
 
     static QString *static_class_name_ptr;
-    static RtModuleRealsenseCamera *new_module();
+    static RtModuleSerial *new_module();
 
 protected:
     //Выполнение

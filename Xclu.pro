@@ -254,7 +254,6 @@ HEADERS += \
     builtin_modules_impl/Sound/rtmodulesoundosc.h \
     builtin_modules_impl/Communication/rtmoduleserial.h
 
-
 #--------------------------------------------------------------------------
 #Realsense camera support
 #Comment this block if Realsense camera is not required
@@ -294,9 +293,11 @@ unix {
 
     SOURCES += \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp
 
     HEADERS += \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h
 }
 
 #windows 64 bit
@@ -304,10 +305,12 @@ windows {
     INCLUDEPATH += "../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt"
 
     SOURCES += \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp
 
     HEADERS += \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h
 }
 
 #--------------------------------------------------------------------------
