@@ -130,5 +130,5 @@ void raster_to_QImage(Raster_u8c3 &raster, QImage &qimage);
 
 void raster_load(QString file_name, Raster_u8 &raster);
 void raster_load(QString file_name, Raster_u8c3 &raster);
-void raster_save(Raster_u8 &raster, QString file_name, QString format, int quality);
-void raster_save(Raster_u8c3 &raster, QString file_name, QString format, int quality);
+void raster_save(Raster_u8 &raster, QString file_name, QString format, int quality = 90);
+void raster_save(Raster_u8c3 &raster, QString file_name, QString format, int quality = 90);

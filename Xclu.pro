@@ -306,11 +306,14 @@ windows {
 
     SOURCES += \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp
+
 
     HEADERS += \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h
 }
 
 #--------------------------------------------------------------------------

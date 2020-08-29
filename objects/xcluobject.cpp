@@ -4,12 +4,14 @@
 
 //---------------------------------------------------------------------
 ObjectRead::ObjectRead(XcluObject *object) {
+    xclu_assert(object, "Nullptr object at ObjectRead");
     object_ = object;
     object_->begin_access();
     accessed_ = true;
 }
 
 ObjectRead::ObjectRead(XcluObject &object) {
+    xclu_assert(&object, "Nullptr object at ObjectRead");
     object_ = &object;
     object_->begin_access();
     accessed_ = true;
