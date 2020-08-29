@@ -25,6 +25,17 @@ class ProjectRuntime
 public:
     ProjectRuntime();
 
+    //Команды для управления проектом - модули могут их посылать
+    //Установка частоты таймера обновления проекта (вызова update)
+    void set_frame_rate(int fps);   //команда просто запоминает, а сам проект уже считывает
+    int get_frame_rate();
+
+    //Автозапуск проекта:
+    //если какой-то модуль устанавливает это в своем internal_loaded,
+    //то после загрузки проекта он стартует
+    void set_autorun(int v);  //команда просто запоминает, а сам проект уже считывает
+    bool get_autorun();
+
     //Состояние запуска
     void set_state(ProjectRunStateBinary state);
     bool is_running();
@@ -68,6 +79,9 @@ public:
     //static void execute_callbacks(QVector<Module *> modules_list);
     //static void execute_callbacks(QString modules_list_string);
 protected:
+    int frame_rate_ = 30;
+    int autorun_ = 0;
+
     ProjectRunStateBinary state_ = ProjectRunStateBinaryStopped;
 
     QString project_folder_;
