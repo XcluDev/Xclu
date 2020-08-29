@@ -107,6 +107,44 @@ public:
 		return true;
     }*/
 
+
+    //rotate on 0, 90, 180, 270 angles
+    //TODO only works with 1-channel images (?)
+    void rotate(int angle) {
+        if (angle == 90) {
+            int w0 = w;
+            int h0 = h;
+            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            this->allocate(h0,w0);
+            for (int y=0; y<h0; y++) {
+                for (int x=0; x<w0; x++) {
+                    data[(h0-1-y) + h0*x] = temp.data[x+w0*y];
+                }
+            }
+        }
+        if (angle == 180) {
+            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            for (int y=0; y<h; y++) {
+                for (int x=0; x<w; x++) {
+                    data[(w-1-x) + w*(h-1-y)] = temp.data[x+w*y];
+                }
+            }
+        }
+        if (angle == 270) {
+            //rotate(90);
+            //rotate(180);
+            int w0 = w;
+            int h0 = h;
+            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            this->allocate(h0,w0);
+            for (int y=0; y<h0; y++) {
+                for (int x=0; x<w0; x++) {
+                    data[y + h0*(w0-1-x)] = temp.data[x+w0*y];
+                }
+            }
+        }
+
+    }
 };
 
 //--------------------------------------------------
