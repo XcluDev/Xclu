@@ -288,6 +288,94 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
+/*static*/ void XcluObjectImage::to_raster(ObjectRead &object, Raster_u8 &raster, rect_int rect) {
+
+    int w = object.get_int("w");
+    int h = object.get_int("h");
+    int channels = object.get_int("channels");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::to_raster - only 1,3 channels are supported");
+
+    //прямоугольник
+    if (rect.x == -1) {
+        rect = rect_int(0,0,w,h);
+    }
+    xclu_assert(rect.is_inside(w, h), "Bad rectange in XcluObjectImage::to_raster");
+
+    //доступ к пикселям
+    XcluArray const *array = get_array(object);
+
+    auto data_type = array->data_type();
+    xclu_assert(data_type == XcluArrayDataType_u8bit,
+                "XcluObjectImage::to_raster - only u8bit data type is supported");
+
+    raster.allocate(rect.w, rect.h);
+
+    quint8 const *pixels = array->data_u8bit();
+    if (channels == 1) {
+        for (int y=0; y<rect.h; y++) {
+            int k = 0;
+            for (int x=0; x<rect.w; x++) {
+                k = (rect.x+x+w*(rect.y+y));
+                raster.data[x+rect.w*y] = pixels[k];
+            }
+        }
+    }
+    if (channels == 3 || channels == 4) {
+        int k = 0;
+        for (int y=0; y<rect.h; y++) {
+            for (int x=0; x<rect.w; x++) {
+                k = channels * (rect.x+x+w*(rect.y+y));
+                raster.data[x+rect.w*y] = (int(pixels[k]) + int(pixels[k+1]) + int(pixels[k+2]))/3;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+/*static*/ void XcluObjectImage::to_raster(ObjectRead &object, Raster_u8c3 &raster, rect_int rect) {
+    int w = object.get_int("w");
+    int h = object.get_int("h");
+    int channels = object.get_int("channels");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::to_raster - only 1,3 channels are supported");
+
+    //прямоугольник
+    if (rect.x == -1) {
+        rect = rect_int(0,0,w,h);
+    }
+    xclu_assert(rect.is_inside(w, h), "Bad rectange in XcluObjectImage::to_raster");
+
+    //доступ к пикселям
+    XcluArray const *array = get_array(object);
+
+    auto data_type = array->data_type();
+    xclu_assert(data_type == XcluArrayDataType_u8bit,
+                "XcluObjectImage::to_raster - only u8bit data type is supported");
+
+    raster.allocate(w, h);
+
+    quint8 const *pixels = array->data_u8bit();
+    if (channels == 1) {
+        for (int y=0; y<rect.h; y++) {
+            int k = 0;
+            for (int x=0; x<rect.w; x++) {
+                k = (rect.x+x+w*(rect.y+y));
+                raster.data[x+rect.w*y] = u8_rgb(pixels[k]);
+            }
+        }
+    }
+    if (channels == 3 || channels == 4) {
+        int k = 0;
+        for (int y=0; y<rect.h; y++) {
+            for (int x=0; x<rect.w; x++) {
+                k = channels * (rect.x+x+w*(rect.y+y));
+                raster.data[x+rect.w*y] = u8_rgb(pixels[k], pixels[k+1], pixels[k+2]);
+            }
+        }
+    }
+
+}
+
+//---------------------------------------------------------------------
 /*static*/ void XcluObjectImage::create_from_QImage(ObjectReadWrite &object, const QImage &qimage,
                                               QString channels_str, QString data_type_str,
                                               bool mirrorx, bool mirrory) {

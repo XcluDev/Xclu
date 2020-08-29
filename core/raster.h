@@ -10,6 +10,9 @@
 struct u8_rgb {
   uint8 v[3];
   u8_rgb() { v[0] = v[1] = v[2] = 0; }
+  u8_rgb(uint8 val) {
+      v[0] = v[1] = v[2] = val;
+  }
   u8_rgb(uint8 r, uint8 g, uint8 b) {
       v[0] = r; v[1] = g; v[2] = b;
   }

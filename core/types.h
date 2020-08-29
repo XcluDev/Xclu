@@ -24,8 +24,13 @@ struct rect_int {
 	int y = 0;
 	int w = 0;
 	int h = 0;
+    rect_int() {}
 	rect_int(int x0, int y0, int w0, int h0) : x(x0),y(y0),w(w0),h(h0) {}
 	rect_int(int2 pos, int2 size) : x(pos.x), y(pos.y), w(size.x), h(size.y) {}
+    bool is_inside(int w0, int h0) {
+        return (x >= 0 && y >= 0 && w >= 0 && h >= 0 && x + w <= w0 && y + h <= h0);
+    }
+    void crop(int w0, int h0);
 };
 
 //convert int <-> float points

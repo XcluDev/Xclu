@@ -66,9 +66,12 @@ public:
     static int get_channels_count(QString channels_str);
 
 
-    //Создание из Raster_...
+    //Создание из Raster_... и обратно
     static void create_from_raster(ObjectReadWrite &object, Raster_u8 &raster);
     static void create_from_raster(ObjectReadWrite &object, Raster_u8c3 &raster);
+
+    static void to_raster(ObjectRead &object, Raster_u8 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
+    static void to_raster(ObjectRead &object, Raster_u8c3 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
 
 
     //Создание из QImage

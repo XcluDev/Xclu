@@ -1,4 +1,14 @@
 #include "types.h"
+#include "utils.h"
+
+//-------------------------------------------------------
+void rect_int::crop(int w0, int h0) {
+    int x0 = clampi(x, 0, w0-1);
+    int y0 = clampi(y, 0, h0-1);
+    int x1 = clampi(x + w, 1, w0);
+    int y1 = clampi(y + h, 1, h0);
+    *this = rect_int(x0,y0, x1-x0, y1-y0);
+};
 
 //-------------------------------------------------------
 //convert int -> float points
