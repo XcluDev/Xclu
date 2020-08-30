@@ -24,7 +24,7 @@ QString InterfaceGui::get_tip() {
     QString tip;
     switch (get_tip_style()) {
     case Tip_Full: {
-        QString tip = item__->name();
+        tip = item__->name();
         if (!item__->description().isEmpty()) {
             tip.append(" - ");
             tip.append(item__->description());

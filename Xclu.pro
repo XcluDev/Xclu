@@ -299,13 +299,15 @@ unix {
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
          ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
-         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp
+         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp
 
     HEADERS += \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h
 
 }
 
@@ -317,14 +319,16 @@ windows {
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp
-
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp
 
     HEADERS += \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h
+
 }
 
 #--------------------------------------------------------------------------
