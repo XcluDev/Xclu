@@ -273,8 +273,9 @@ QString RtModule::get_string(QString name, int index, int index2) {
         //string, separated by '\n' and spaces: "a b c\nc d e"
         QStringList list = value.split("\n");
         if (index < list.size()) {
-            QStringList list2 = value.split(" ");
+            QStringList list2 = list[index].split(" ");
             if (index2 < list2.size()) {
+                //qDebug() << list2.at(index2);
                 return list2.at(index2);
             }
         }
