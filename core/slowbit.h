@@ -14,8 +14,8 @@ struct SlowBit {
     void setup( float time00, float time01, float time10, float time11);
     void update( float dt, int target ); //target - state to go
     void update_times(float time00, float time01, float time10, float time11);
-    void update_times(float time_to_detect, float time_to_ignore);
-    void update_times(float switch_time);
+    void update_times(float fade_in_sec, float fade_out_sec);
+    void update_times(float fade_sec);
 
     int state();       //current state
     float stateFloat() { return _value; }   //current state as float

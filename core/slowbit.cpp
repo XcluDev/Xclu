@@ -22,13 +22,13 @@ void SlowBit::update_times( float time00, float time01, float time10, float time
 }
 
 //--------------------------------------------------------------
-void SlowBit::update_times(float time_to_detect, float time_to_ignore) {
-    update_times(time_to_ignore, time_to_detect, time_to_ignore, time_to_detect);
+void SlowBit::update_times(float fade_in_sec, float fade_out_sec) {
+    update_times(fade_out_sec, fade_in_sec, fade_out_sec, fade_in_sec);
 }
 
 //--------------------------------------------------------------
-void SlowBit::update_times(float switch_time) {
-    update_times(switch_time, switch_time);
+void SlowBit::update_times(float fade_sec) {
+    update_times(fade_sec, fade_sec);
 }
 
 //--------------------------------------------------------------
