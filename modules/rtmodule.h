@@ -161,7 +161,7 @@ protected:
 
     //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
     //внимание, обычно вызывается из основного потока как callback
-    virtual void button_pressed_internal(QString button_id) {}
+    virtual void button_pressed_internal(QString /*button_id*/) {}
 
     //вызов модуля извне
     //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер

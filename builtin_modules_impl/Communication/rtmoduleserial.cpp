@@ -160,7 +160,7 @@ void RtModuleSerial::execute_stop_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void RtModuleSerial::set_started(bool /*started*/) { //ставит camera_started_ и gui-элемент is_started
   /*  camera_started_ = started;
     set_int("is_started", started);
     */

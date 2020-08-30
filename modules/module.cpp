@@ -285,7 +285,7 @@ QString Module::get_string(QString name) {   //int, checkbox, button, enum (rawt
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_string(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
+void Module::set_string(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
     rtmodule()->set_string(name, v);
 }
 
@@ -295,7 +295,7 @@ int Module::get_int(QString name) {    //int, checkbox, button, enum (index)
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_int(QString name, int v) { //только out: int, checkbox, enum (index)
+void Module::set_int(QString name, int v) { //только out: int, checkbox, enum (index)
     rtmodule()->set_int(name, v);
 }
 
@@ -305,7 +305,7 @@ float Module::get_float(QString name) {  //float
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_float(QString name, float v) {  //out: float
+void Module::set_float(QString name, float v) {  //out: float
     rtmodule()->set_float(name, v);
 }
 
@@ -315,7 +315,7 @@ QString Module::get_title_value(QString name) {  //enum (title)
 }
 
 //---------------------------------------------------------------------
-void Module::access_set_title_value(QString name, QString v) { //только out: enum (title)
+void Module::set_title_value(QString name, QString v) { //только out: enum (title)
     rtmodule()->set_title_value(name, v);
 }
 
