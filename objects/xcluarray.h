@@ -60,8 +60,8 @@ public:
     quint32 to_index(const QVector<quint32> &index_vec) const;
     quint32 pixel_index(int channel, int x, int y) const;
     //получение ссылки на элемент массива
-    void *item_pointer(quint32 index);
-    void const *item_pointer(quint32 index) const;
+    void *item_pointer(qint32 index);
+    void const *item_pointer(qint32 index) const;
     void *pixel_pointer(int x, int y); //для изображений
     void const *pixel_pointer(int x, int y) const; //для изображений
 
@@ -73,12 +73,12 @@ public:
     void fill(int v);       //заполнить одинаковыми значениями
     void fill(double v);
 
-    int get_int(quint32 index) const;
-    void set_int(quint32 index, int v);
-    float get_float(quint32 index) const;
-    void set_float(quint32 index, float v);
-    double get_double(quint32 index) const;
-    void set_double(quint32 index, double v);
+    int get_int(qint32 index) const;
+    void set_int(qint32 index, int v);
+    float get_float(qint32 index) const;
+    void set_float(qint32 index, float v);
+    double get_double(qint32 index) const;
+    void set_double(qint32 index, double v);
 
     int get_int(const QVector<quint32> &index) const { return get_int(to_index(index)); }
     void set_int(const QVector<quint32> &index, int v) { set_int(to_index(index), v); }

@@ -304,11 +304,11 @@ inline quint32 XcluArray::pixel_index(int channel, int x, int y) const {
 
 //---------------------------------------------------------------------
 //получение ссылки на элемент массива
-void *XcluArray::item_pointer(quint32 index) {
+void *XcluArray::item_pointer(qint32 index) {
     return data_ptr_ + (index * elem_size_);
 }
 
-void const *XcluArray::item_pointer(quint32 index) const {
+void const *XcluArray::item_pointer(qint32 index) const {
     return data_ptr_ + (index * elem_size_);
 }
 
@@ -322,7 +322,7 @@ void const *XcluArray::pixel_pointer(int x, int y) const { //для изобра
 }
 
 //---------------------------------------------------------------------
-int XcluArray::get_int(quint32 index) const {
+int XcluArray::get_int(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_u8bit:
@@ -346,21 +346,27 @@ int XcluArray::get_int(quint32 index) const {
 
 
 //---------------------------------------------------------------------
-void XcluArray::set_int(quint32 index, int v) {
+void XcluArray::set_int(qint32 index, int v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_u8bit:
         data_u8bit()[index] = v;
+        break;
     case XcluArrayDataType_s8bit:
         data_s8bit()[index] = v;
+        break;
     case XcluArrayDataType_int16:
         data_int16()[index] = v;
+        break;
     case XcluArrayDataType_uint16:
         data_uint16()[index] = v;
+        break;
     case XcluArrayDataType_int32:
         data_int32()[index] = v;
+        break;
     case XcluArrayDataType_uint32:
         data_uint32()[index] = v;
+        break;
     default:
         xclu_exception("Can't set integer value for array");
         break;
@@ -368,7 +374,7 @@ void XcluArray::set_int(quint32 index, int v) {
 }
 
 //---------------------------------------------------------------------
-float XcluArray::get_float(quint32 index) const {
+float XcluArray::get_float(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:
@@ -383,13 +389,15 @@ float XcluArray::get_float(quint32 index) const {
 }
 
 //---------------------------------------------------------------------
-void XcluArray::set_float(quint32 index, float v) {
+void XcluArray::set_float(qint32 index, float v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:
         data_float()[index] = v;
+        break;
     case XcluArrayDataType_double:
         data_double()[index] = v;
+        break;
     default:
         xclu_exception("Can't set float value for array");
         break;
@@ -397,7 +405,7 @@ void XcluArray::set_float(quint32 index, float v) {
 }
 
 //---------------------------------------------------------------------
-double XcluArray::get_double(quint32 index) const {
+double XcluArray::get_double(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:
@@ -412,13 +420,15 @@ double XcluArray::get_double(quint32 index) const {
 }
 
 //---------------------------------------------------------------------
-void XcluArray::set_double(quint32 index, double v) {
+void XcluArray::set_double(qint32 index, double v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:
         data_float()[index] = v;
+        break;
     case XcluArrayDataType_double:
         data_double()[index] = v;
+        break;
     default:
         xclu_exception("Can't set double value for array");
         break;
