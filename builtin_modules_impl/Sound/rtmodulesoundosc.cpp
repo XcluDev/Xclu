@@ -52,13 +52,18 @@ float RtModuleSoundOscData::get_next_sample() {
     //обновление параметров
     float target_freq = freq;
     float target_vol = volume * vol_mod;
+    update_freq(freq_, target_freq);
+    update_vol(vol_, target_vol);
 
+    //modulation
+    float freq = freq_;
+    float vol = vol_;
     if (fm_enabled) {
         update_freq(fm_rate_, fm_rate);
         update_freq(fm_range_, fm_range);
 
         fm_phase_ += fm_rate_ * 2 * M_PI / sample_rate_;
-        target_freq += qSin(fm_phase_) * fm_range_;
+        freq += qSin(fm_phase_) * fm_range_;
     }
 
     if (am_enabled) {
@@ -66,15 +71,14 @@ float RtModuleSoundOscData::get_next_sample() {
         update_vol(am_range_, am_range);    //внимание, тут именно vol
 
         am_phase_ += am_rate_ * 2 * M_PI / sample_rate_;
-        target_vol *= 1 + qSin(am_phase_) * am_range_;
+        vol *= 1 + qSin(am_phase_) * am_range_;
     }
 
-    update_freq(freq_, target_freq);
-    update_vol(vol_, target_vol);
+
 
     //генерация звука
-    phase_ += freq_ * 2 * M_PI / sample_rate_;
-    float v = qSin(phase_) * vol_;
+    phase_ += freq * 2 * M_PI / sample_rate_;
+    float v = qSin(phase_) * vol;
 
     return v;
 }
