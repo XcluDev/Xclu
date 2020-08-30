@@ -1,4 +1,6 @@
 #include "utils.h"
+#include <random>
+#include "QDateTime"
 
 //-------------------------------------------------------
 //x*x
@@ -86,6 +88,17 @@ double mapd_clamped(double x, double a, double b, double A, double B) {
 
 int mapi_clamped(int x, int a, int b, int A, int B) {
     return clampi(mapi(x,a,b,A,B),A,B);
+}
+
+//-------------------------------------------------------
+//https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
+
+std::random_device randomi_rd_;  //Will be used to obtain a seed for the random number engine
+
+int randomi(int a, int b) {
+    std::mt19937 gen(randomi_rd_()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib(a, b);
+    return distrib(gen);
 }
 
 //-------------------------------------------------------

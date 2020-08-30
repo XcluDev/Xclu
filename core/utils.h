@@ -41,5 +41,7 @@ float mapf_clamped(float x, float a, float b, float A, float B);
 double mapd_clamped(double x, double a, double b, double A, double B);
 int mapi_clamped(int x, int a, int b, int A, int B);
 
+//random
+int randomi(int a, int b);
 
 //-------------------------------------------------------
