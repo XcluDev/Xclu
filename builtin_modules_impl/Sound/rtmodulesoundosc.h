@@ -53,8 +53,9 @@ struct RtModuleSoundOscData: public XcluProtectedData
 
     //внешние параметры
     int out_enabled = 0;       //Generate output sound.
+    int mod_enabled = 1;        //Is modulatio enabled
     float volume = 0.5f;        //Main volume.
-    float vol_second=1;         //Secondary volume - used for simple modulation
+    float vol_mod=1;         //Secondary volume - used for simple modulation
 
     float freq=440;     //Oscillator basic frequency.
 

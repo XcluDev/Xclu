@@ -15,7 +15,7 @@ REGISTRAR(SoundOsc)
 //запускать перед стартом звука, после считывания параметров из GUI
 void RtModuleSoundOscData::init() {
     //установка параметров
-    vol_ = volume * vol_second;
+    vol_ = volume * vol_mod;
     freq_ = freq;
 
     fm_rate_ = fm_rate;
@@ -51,7 +51,7 @@ float RtModuleSoundOscData::get_next_sample() {
 
     //обновление параметров
     float target_freq = freq;
-    float target_vol = volume * vol_second;
+    float target_vol = volume * vol_mod;
 
     if (fm_enabled) {
         update_freq(fm_rate_, fm_rate);
@@ -151,8 +151,16 @@ void RtModuleSoundOsc::update_data() {
     DataAccess access(data_);
 
     data_.out_enabled = get_int("out_enabled");
+    int mod = get_int("mod_enabled");   //modulation
+    data_.mod_enabled = mod;
     data_.volume = get_float("volume");
-    data_.vol_second = 1; //get_float("vol_second");
+    if (mod) {
+        data_.vol_mod = RUNTIME.get_float_by_link(get_string("volume_link"));
+        set_float("volume_mod", data_.vol_mod);
+    }
+    else {
+        data_.vol_mod = 1;
+    }
 
     data_.freq = get_float("freq");
 

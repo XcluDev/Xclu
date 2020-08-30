@@ -66,18 +66,25 @@ public:
 
 
     //Доступ к переменным и запуску из других модулей
-    QString get_string(QString name, int index = -1);
+
     //int, checkbox, button, enum (rawtext), string, text
-    //index>=0: string, text separated by ' '
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    QString get_string(QString name, int index = -1, int index2 = -1);
 
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
-    int get_int(QString name, int index = -1);    //int, checkbox, button, enum (index)
-    //index>=0: string, text separated by ' '
+
+    //int, checkbox, button, enum (index)
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    int get_int(QString name, int index = -1, int index2 = -1);
 
     void set_int(QString name, int v); //только out: int, checkbox, enum (index)
 
-    float get_float(QString name, int index = -1);  //float
-    //index>=0: string, text separated by ' '
+    //float
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    float get_float(QString name, int index = -1, int index2 = -1);
 
     void set_float(QString name, float v);  //out: float
 

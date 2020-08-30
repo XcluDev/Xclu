@@ -10,22 +10,26 @@ ProjectRuntime RUNTIME;
 //Работа с link - получение переменных по имени модуля и названию в формате:
 //webcam1->image
 //module1->line(1)
-VarLink::VarLink(QString link_str) {
+//module1->line(1,2)
+VarLink::VarLink(QString link_str0) {
     //для простоты "(", "->" на " " и убираем ")"
     //тогда module1->line(1) будет как "module1 line 1"
-    QString link = link_str.trimmed()
-            .replace("->"," ").replace("("," ").replace(")","");
+    QString link = link_str0.trimmed()
+            .replace("->"," ").replace("("," ").replace(","," ").replace(")","");
 
-    auto query = link_str.trimmed().split("->");
+    auto query = link.trimmed().split(" ");
     int n = query.size();
     xclu_assert(n >= 2
                 && !query.at(0).isEmpty()
-                && !query.at(1).isEmpty()
-                && (n == 2 || (n==3 && !query.at(1).isEmpty())),
-                "Bad link '" + link_str + "', expected in format webcam1->image or module1->line(0)");
+                && !query.at(1).isEmpty(),
+                "Bad link '" + link_str0 + "', expected at format webcam1->image or module1->line(0) or module1->line(1,2)");
+    xclu_assert(n < 3 || !query.at(2).isEmpty(), "Empty first index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
+    xclu_assert(n < 4 || !query.at(3).isEmpty(), "Empty second index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
+
     module = query.at(0);
     var = query.at(1);
     index = (n >= 3) ? query.at(2).toInt():-1;
+    index2 = (n >= 4) ? query.at(3).toInt():-1;
 }
 
 //---------------------------------------------------------------------
@@ -112,19 +116,19 @@ Module *ProjectRuntime::get_module(QString module_id) {
 //Получение переменных по link
 int ProjectRuntime::get_int_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->get_int(link.var);
+    return RUNTIME.get_module(link.module)->get_int(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float ProjectRuntime::get_float_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->get_float(link.var);
+    return RUNTIME.get_module(link.module)->get_float(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString ProjectRuntime::get_string_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->get_string(link.var);
+    return RUNTIME.get_module(link.module)->get_string(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------

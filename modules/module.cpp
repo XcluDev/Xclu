@@ -282,9 +282,10 @@ void Module::access_call(QString function, XcluObject *input, XcluObject *output
 //Доступ к переменным и запуску из других модулей
 
 //int, checkbox, button, enum (rawtext), string, text
-//index>=0: string, text separated by ' '
-QString Module::get_string(QString name, int index) {
-    return rtmodule()->get_string(name, index);
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+QString Module::get_string(QString name, int index, int index2) {
+    return rtmodule()->get_string(name, index, index2);
 }
 
 //---------------------------------------------------------------------
@@ -294,9 +295,10 @@ void Module::set_string(QString name, QString v) { //только out: int, chec
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (index)
-//index>=0: string, text separated by ' '
-int Module::get_int(QString name, int index) {
-    return rtmodule()->get_int(name, index);
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+int Module::get_int(QString name, int index, int index2) {
+    return rtmodule()->get_int(name, index, index2);
 }
 
 //---------------------------------------------------------------------
@@ -306,9 +308,10 @@ void Module::set_int(QString name, int v) { //только out: int, checkbox, e
 
 //---------------------------------------------------------------------
 //float
-//index>=0: string, text separated by ' '
-float Module::get_float(QString name, int index) {
-    return rtmodule()->get_float(name, index);
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+float Module::get_float(QString name, int index, int index2) {
+    return rtmodule()->get_float(name, index, index2);
 }
 
 //---------------------------------------------------------------------

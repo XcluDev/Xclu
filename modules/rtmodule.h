@@ -105,7 +105,8 @@ public:
 
     //int, checkbox, button, enum (rawtext), string, text
     //index>=0: string, text separated by ' ' - no error if no such string!
-    QString get_string(QString name, int index = -1);
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    QString get_string(QString name, int index = -1, int index2 = -1);
 
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
     void clear_string(QString name);
@@ -114,14 +115,16 @@ public:
 
     //int, checkbox, button, enum (index)
     //index>=0: string, text separated by ' ' - no error if no such string!
-    int get_int(QString name, int index = -1);
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    int get_int(QString name, int index = -1, int index2 = -1);
 
     void set_int(QString name, int v); //только out: int, checkbox, enum (index)
     void increase_int(QString name, int increase = 1); //увеличение значения
 
     //float
     //index>=0: string, text separated by ' ' - no error if no such string!
-    float get_float(QString name, int index = -1);
+    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+    float get_float(QString name, int index = -1, int index2 = -1);
 
     void set_float(QString name, float v);  //out: float
 

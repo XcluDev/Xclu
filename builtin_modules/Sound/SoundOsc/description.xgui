@@ -15,7 +15,12 @@ page Main
 #Frequency        
 in checkbox Enabled out_enabled=1
     //Generate output sound.
+
+in checkbox External_Modulation mod_enabled=0
+    //Should apply external modulation for controlling from other modules.
     
+separator
+
 in float Frequency freq=440 0:20000 20000,2000
     //Oscillator basic frequency.
     //0..20000 Hz
@@ -31,11 +36,13 @@ in float Volume volume=0.5 0:1 500,50
     //Main volume.
     //0..1
 
+if mod_enabled 1
 in string(link:string) mod_link volume_link=""
-    //Modulation link, such as module1->volumes(0) - first item in string
-#in float Volume_Secondary vol_second=1 0:1 500,50
-#    //Secondary volume - used for simple modulation
-#    //0..1   
+    //Modulation link, such as module1->volumes(0,2)
+
+out float mod_value volume_mod=0 0:1 100,10
+    //Modulation result.    
+endif
 
 
 #-------------- 

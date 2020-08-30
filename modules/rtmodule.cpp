@@ -247,24 +247,38 @@ bool RtModule::was_changed(QString name) {
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (rawtext), string, text
-QString RtModule::get_string(QString name, int index) {
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+QString RtModule::get_string(QString name, int index, int index2) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
-    if (index == -1) {
-        return value;
-    }
-    else {
-        QStringList list = value.split(" ");
-        if (index < list.size()) {
-            return list.at(index);
+    if (index2 == -1) {
+        if (index == -1) {  //plain string: "aaa"
+            return value;
         }
         else {
-            return "";
+            QStringList list = value.split(" "); //string, separated by spaces: "a b c"
+            if (index < list.size()) {
+                return list.at(index);
+            }
             //No error, just empty string
+            //For future improvement: exception text:
             //QString("Can't get value from `%1` with index %2, because value is `%3`")
             //.arg(name).arg(index).arg(value));
+            return "";
         }
+    }
+    else {
+        //string, separated by '\n' and spaces: "a b c\nc d e"
+        QStringList list = value.split("\n");
+        if (index < list.size()) {
+            QStringList list2 = value.split(" ");
+            if (index2 < list2.size()) {
+                return list2.at(index2);
+            }
+        }
+        return "";
     }
 }
 //---------------------------------------------------------------------
@@ -300,14 +314,16 @@ void RtModule::append_string(QString name, QStringList v, int extra_new_lines_co
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (index)
-int RtModule::get_int(QString name, int index) {
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+int RtModule::get_int(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
         return var->value_int();
     }
     else {
-        return get_string(name, index).toInt();
+        return get_string(name, index, index2).toInt();
     }
 }
 
@@ -328,14 +344,16 @@ void RtModule::increase_int(QString name, int increase) { //value+=increase
 
 //---------------------------------------------------------------------
 //float
-float RtModule::get_float(QString name, int index) {
+//index>=0: string, text separated by ' ' - no error if no such string!
+//index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
+float RtModule::get_float(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
         return var->value_float();
     }
     else {
-        return get_string(name, index).toFloat();
+        return get_string(name, index, index2).toFloat();
     }
 }
 

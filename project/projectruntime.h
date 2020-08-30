@@ -13,11 +13,13 @@ class XcluObject;
 //Работа с link - получение переменных по имени модуля и названию в формате:
 //webcam1->image
 //module1->line(1)
+//module1->line(1,2)
 class VarLink {
 public:
     QString module;
     QString var;
-    int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its index value
+    int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its item 'index'
+    int index2 = -1; //if index2 >= 0 - interpret as a string separated by "\n" and then spaces 'a b c' and get its line 'index' and item 'index2'
     bool has_index() { return index >= 0; }
     VarLink();
     VarLink(QString link);
