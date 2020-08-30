@@ -102,18 +102,27 @@ public:
     //поэтому, нельзя ее вызывать, если активирован другой ObjectRead[Write] для этого объекта
 
     //Доступ к переменным - с учетом их квалификатора
-    QString get_string(QString name);   //int, checkbox, button, enum (rawtext), string, text
+
+    //int, checkbox, button, enum (rawtext), string, text
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    QString get_string(QString name, int index = -1);
+
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
     void clear_string(QString name);
     void append_string(QString name, QString v, int extra_new_lines_count = 0); //дописать к строке, применимо где set_string
     void append_string(QString name, QStringList v, int extra_new_lines_count = 0); //дописать к строке, применимо где set_string
 
+    //int, checkbox, button, enum (index)
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    int get_int(QString name, int index = -1);
 
-    int get_int(QString name);    //int, checkbox, button, enum (index)
     void set_int(QString name, int v); //только out: int, checkbox, enum (index)
     void increase_int(QString name, int increase = 1); //увеличение значения
 
-    float get_float(QString name);  //float
+    //float
+    //index>=0: string, text separated by ' ' - no error if no such string!
+    float get_float(QString name, int index = -1);
+
     void set_float(QString name, float v);  //out: float
 
     QString get_title_value(QString name);  //enum (title)

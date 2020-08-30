@@ -7,17 +7,26 @@
 ProjectRuntime RUNTIME;
 
 //---------------------------------------------------------------------
-//Работа с link - получение переменных по имени модуля и названию в формате webcam1->image
+//Работа с link - получение переменных по имени модуля и названию в формате:
+//webcam1->image
+//module1->line(1)
 VarLink::VarLink(QString link_str) {
+    //для простоты "(", "->" на " " и убираем ")"
+    //тогда module1->line(1) будет как "module1 line 1"
+    QString link = link_str.trimmed()
+            .replace("->"," ").replace("("," ").replace(")","");
+
     auto query = link_str.trimmed().split("->");
-    xclu_assert(query.size() == 2
+    int n = query.size();
+    xclu_assert(n >= 2
                 && !query.at(0).isEmpty()
-                && !query.at(1).isEmpty(),
-                "Bad link '" + link_str + "', expected in format webcam1->image");
+                && !query.at(1).isEmpty()
+                && (n == 2 || (n==3 && !query.at(1).isEmpty())),
+                "Bad link '" + link_str + "', expected in format webcam1->image or module1->line(0)");
     module = query.at(0);
     var = query.at(1);
-};
-
+    index = (n >= 3) ? query.at(2).toInt():-1;
+}
 
 //---------------------------------------------------------------------
 ProjectRuntime::ProjectRuntime()

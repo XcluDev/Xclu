@@ -37,8 +37,9 @@ InterfaceItemString::InterfaceItemString(ModuleInterface *parent, const Interfac
     //значение по умолчанию
     default_value_ = query.at(0);
     //проверяем, что начало и конец - двойные кавычки
-    xclu_assert(!default_value_.isEmpty(), "default value must start and end with '\"', '...\"\"'");
-    xclu_assert(default_value_.startsWith("\"") && default_value_.endsWith("\""), "default value must start and end with '\"', '...\"\"'");
+    xclu_assert(!default_value_.isEmpty(), "default value is not filled, but must start and end with '\"', '...\"\"'");
+    xclu_assert(default_value_.startsWith("\"") && default_value_.endsWith("\""), "default value must start and end with '\"', '...\"\"',"
+                                                                                  "but is `" + default_value_ + "'");
     //удаляем кавычки в начале и конце
     default_value_ = default_value_.mid(1);
     default_value_.chop(1);

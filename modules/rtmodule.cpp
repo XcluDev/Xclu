@@ -247,10 +247,25 @@ bool RtModule::was_changed(QString name) {
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (rawtext), string, text
-QString RtModule::get_string(QString name) {
+QString RtModule::get_string(QString name, int index) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
-    return var->value_string();
+    QString value = var->value_string();
+    if (index == -1) {
+        return value;
+    }
+    else {
+        QStringList list = value.split(" ");
+        if (index < list.size()) {
+            return list.at(index);
+        }
+        else {
+            return "";
+            //No error, just empty string
+            //QString("Can't get value from `%1` with index %2, because value is `%3`")
+            //.arg(name).arg(index).arg(value));
+        }
+    }
 }
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
@@ -285,10 +300,15 @@ void RtModule::append_string(QString name, QStringList v, int extra_new_lines_co
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (index)
-int RtModule::get_int(QString name) {
-    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
-    return var->value_int();
+int RtModule::get_int(QString name, int index) {
+    if (index == -1) {
+        InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
+        xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
+        return var->value_int();
+    }
+    else {
+        return get_string(name, index).toInt();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -308,11 +328,15 @@ void RtModule::increase_int(QString name, int increase) { //value+=increase
 
 //---------------------------------------------------------------------
 //float
-float RtModule::get_float(QString name) {
-    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
-    return var->value_float();
-
+float RtModule::get_float(QString name, int index) {
+    if (index == -1) {
+        InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
+        xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
+        return var->value_float();
+    }
+    else {
+        return get_string(name, index).toFloat();
+    }
 }
 
 //---------------------------------------------------------------------

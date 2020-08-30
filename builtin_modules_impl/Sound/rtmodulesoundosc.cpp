@@ -152,7 +152,7 @@ void RtModuleSoundOsc::update_data() {
 
     data_.out_enabled = get_int("out_enabled");
     data_.volume = get_float("volume");
-    data_.vol_second = get_float("vol_second");
+    data_.vol_second = 1; //get_float("vol_second");
 
     data_.freq = get_float("freq");
 

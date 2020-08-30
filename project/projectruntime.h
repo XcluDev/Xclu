@@ -10,11 +10,15 @@ class Module;
 class InterfaceItem;
 class XcluObject;
 
-//Работа с link - получение переменных по имени модуля и названию в формате webcam1->image
+//Работа с link - получение переменных по имени модуля и названию в формате:
+//webcam1->image
+//module1->line(1)
 class VarLink {
 public:
     QString module;
     QString var;
+    int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its index value
+    bool has_index() { return index >= 0; }
     VarLink();
     VarLink(QString link);
 };

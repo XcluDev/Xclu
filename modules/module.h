@@ -66,12 +66,21 @@ public:
 
 
     //Доступ к переменным и запуску из других модулей
-    QString get_string(QString name);   //int, checkbox, button, enum (rawtext), string, text
+    QString get_string(QString name, int index = -1);
+    //int, checkbox, button, enum (rawtext), string, text
+    //index>=0: string, text separated by ' '
+
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
-    int get_int(QString name);    //int, checkbox, button, enum (index)
+    int get_int(QString name, int index = -1);    //int, checkbox, button, enum (index)
+    //index>=0: string, text separated by ' '
+
     void set_int(QString name, int v); //только out: int, checkbox, enum (index)
-    float get_float(QString name);  //float
+
+    float get_float(QString name, int index = -1);  //float
+    //index>=0: string, text separated by ' '
+
     void set_float(QString name, float v);  //out: float
+
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)
     //доступ к объектам идет только по указателям

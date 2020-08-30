@@ -280,8 +280,11 @@ void Module::access_call(QString function, XcluObject *input, XcluObject *output
 
 //---------------------------------------------------------------------
 //Доступ к переменным и запуску из других модулей
-QString Module::get_string(QString name) {   //int, checkbox, button, enum (rawtext), string, text
-    return rtmodule()->get_string(name);
+
+//int, checkbox, button, enum (rawtext), string, text
+//index>=0: string, text separated by ' '
+QString Module::get_string(QString name, int index) {
+    return rtmodule()->get_string(name, index);
 }
 
 //---------------------------------------------------------------------
@@ -290,8 +293,10 @@ void Module::set_string(QString name, QString v) { //только out: int, chec
 }
 
 //---------------------------------------------------------------------
-int Module::get_int(QString name) {    //int, checkbox, button, enum (index)
-    return rtmodule()->get_int(name);
+//int, checkbox, button, enum (index)
+//index>=0: string, text separated by ' '
+int Module::get_int(QString name, int index) {
+    return rtmodule()->get_int(name, index);
 }
 
 //---------------------------------------------------------------------
@@ -300,8 +305,10 @@ void Module::set_int(QString name, int v) { //только out: int, checkbox, e
 }
 
 //---------------------------------------------------------------------
-float Module::get_float(QString name) {  //float
-    return rtmodule()->get_float(name);
+//float
+//index>=0: string, text separated by ' '
+float Module::get_float(QString name, int index) {
+    return rtmodule()->get_float(name, index);
 }
 
 //---------------------------------------------------------------------

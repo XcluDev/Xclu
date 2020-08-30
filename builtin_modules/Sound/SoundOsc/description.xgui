@@ -31,9 +31,11 @@ in float Volume volume=0.5 0:1 500,50
     //Main volume.
     //0..1
 
-in float Volume_Secondary vol_second=1 0:1 500,50
-    //Secondary volume - used for simple modulation
-    //0..1   
+in string(link:string) mod_link volume_link=""
+    //Modulation link, such as module1->volumes(0) - first item in string
+#in float Volume_Secondary vol_second=1 0:1 500,50
+#    //Secondary volume - used for simple modulation
+#    //0..1   
 
 
 #-------------- 
