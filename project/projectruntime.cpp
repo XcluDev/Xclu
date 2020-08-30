@@ -12,6 +12,11 @@ ProjectRuntime RUNTIME;
 //module1->line(1)
 //module1->line(1,2)
 VarLink::VarLink(QString link_str0) {
+    is_empty = link_str0.isEmpty();
+    if (is_empty) {
+        return;
+    }
+
     //для простоты "(", "->" на " " и убираем ")"
     //тогда module1->line(1) будет как "module1 line 1"
     QString link = link_str0.trimmed()
@@ -116,18 +121,21 @@ Module *ProjectRuntime::get_module(QString module_id) {
 //Получение переменных по link
 int ProjectRuntime::get_int_by_link(QString link_str) {
     VarLink link(link_str);
+    if (link.is_empty) return 0;
     return RUNTIME.get_module(link.module)->get_int(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float ProjectRuntime::get_float_by_link(QString link_str) {
     VarLink link(link_str);
+    if (link.is_empty) return 0.0f;
     return RUNTIME.get_module(link.module)->get_float(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString ProjectRuntime::get_string_by_link(QString link_str) {
     VarLink link(link_str);
+    if (link.is_empty) return "";
     return RUNTIME.get_module(link.module)->get_string(link.var, link.index, link.index2);
 }
 

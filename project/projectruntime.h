@@ -16,6 +16,7 @@ class XcluObject;
 //module1->line(1,2)
 class VarLink {
 public:
+    bool is_empty = true;
     QString module;
     QString var;
     int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its item 'index'
