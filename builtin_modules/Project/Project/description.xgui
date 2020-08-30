@@ -6,7 +6,7 @@ module_impl=C++
 
 #-------------------------------------------
 page Main
-    //General settings
+    //General settings.
 
 const int Frame_Rate frame_rate=30 1:120 1,10
     //Project frame rate.
@@ -18,11 +18,24 @@ const checkbox Autostart autostart=0
     
 #TODO wait 5 seconds to interrupt if required.
     
+    
+separator
+out float Elapsed_Time elapsed_time_sec=0 0:1000000 1000,100
+    //Time in seconds from project start.
+    //sec
+    
+out float dt dt=0 0:100 100,10
+    //Time step between frames.
+    //sec
+    
+out float Measured_Fr_Rate measured_frame_rate=0 0:120 100,10
+    //Measured frame rate.
+    //fps
 
+    
 #TODO:
-#получение реального FPS
 #Номер кадра
-#текущее время от старта приложения, а также от 1970
+#время от 1970
 #дата-время в числах и в виде строки с настраиваемым параметром
 #- то, что также может быть доступно и через встроенные переменные. Но тут лучше, WYSIWYG.
 

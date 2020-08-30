@@ -453,6 +453,8 @@ void Project::execute_start(bool &stop_out) {
 
 //---------------------------------------------------------------------
 void Project::execute_update(bool &stop_out) {
+    RUNTIME.update_dt();    //update dt counter
+
     stop_out = false;
     xclu_assert(RUNTIME.is_running(), "Internal error: project update command, but not started");
     execute(ModuleExecuteStageUpdate, stop_out);

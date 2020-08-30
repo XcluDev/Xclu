@@ -559,7 +559,10 @@ void MainWindow::execute_run() {
     if (run_state_ == ProjectRunStateStopped) {
         set_state(ProjectRunStateStarting);
 
-        //создаем таймер
+        //вызываем "setup" модулей - чтобы сработали модули и установили время для FPS
+        execute_update();
+
+        //создаем таймер - теперь FPS есть
         if (!timer) {
             timer = new QTimer(this);
             timer->setTimerType(Qt::PreciseTimer);

@@ -179,11 +179,25 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
 //Измерение времени от начала проекта
 void ProjectRuntime::reset_elapsed_timer() {
     elapsed_timer_.start();
+    last_time_for_dt_ = elapsed_time_sec();
+    dt_ = 0;
 }
 
 //---------------------------------------------------------------------
 double ProjectRuntime::elapsed_time_sec() {   //время в секундах, прошедшее от запуска проекта
     return elapsed_timer_.elapsed() * 0.001;
+}
+
+//---------------------------------------------------------------------
+void ProjectRuntime::update_dt() {    //вызывается для обновления dt, в начале работы кадра
+    double time = elapsed_time_sec();
+    dt_ = time - last_time_for_dt_;
+    last_time_for_dt_ = time;
+}
+
+//---------------------------------------------------------------------
+float ProjectRuntime::dt() {
+    return dt_;
 }
 
 //---------------------------------------------------------------------

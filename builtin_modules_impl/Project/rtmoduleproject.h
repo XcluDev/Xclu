@@ -31,7 +31,7 @@ protected:
     virtual void execute_update_internal();
     virtual void execute_stop_internal();
 
-    void set_values();
+    void apply_control_values();
 
 };
 

@@ -46,6 +46,8 @@ public:
     //Измерение времени, прошедшего от запуска проекта
     void reset_elapsed_timer();
     double elapsed_time_sec();
+    void update_dt();    //вызывается для обновления dt, в начале работы кадра
+    float dt();
 
     //Папка проекта
     void set_project_folder(QString project_folder);
@@ -89,6 +91,8 @@ protected:
     QString project_folder_;
 
     QElapsedTimer elapsed_timer_;
+    double last_time_for_dt_ = 0;   //используется для вычисления dt
+    float dt_ = 0;
 
 };
 
