@@ -22,6 +22,16 @@ void SlowBit::update_times( float time00, float time01, float time10, float time
 }
 
 //--------------------------------------------------------------
+void SlowBit::update_times(float time_to_detect, float time_to_ignore) {
+    update_times(time_to_ignore, time_to_detect, time_to_ignore, time_to_detect);
+}
+
+//--------------------------------------------------------------
+void SlowBit::update_times(float switch_time) {
+    update_times(switch_time, switch_time);
+}
+
+//--------------------------------------------------------------
 void SlowBit::reset0()
 {
     reset( 0 );
