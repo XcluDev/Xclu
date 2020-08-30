@@ -202,7 +202,7 @@ void RtModuleScalar::update_value(bool force) {
         //взятие значение из другого модуля
         VarLink link(get_string("int_link"));
         Module *module = RUNTIME.get_module(link.module);
-        int value = module->access_get_int(link.var);
+        int value = module->get_int(link.var);
         set_value(value);
     }
         break;

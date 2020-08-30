@@ -280,7 +280,7 @@ void Module::access_call(QString function, XcluObject *input, XcluObject *output
 
 //---------------------------------------------------------------------
 //Доступ к переменным и запуску из других модулей
-QString Module::access_get_string(QString name) {   //int, checkbox, button, enum (rawtext), string, text
+QString Module::get_string(QString name) {   //int, checkbox, button, enum (rawtext), string, text
     return rtmodule()->get_string(name);
 }
 
@@ -290,7 +290,7 @@ void Module::access_set_string(QString name, QString v) { //только out: in
 }
 
 //---------------------------------------------------------------------
-int Module::access_get_int(QString name) {    //int, checkbox, button, enum (index)
+int Module::get_int(QString name) {    //int, checkbox, button, enum (index)
     return rtmodule()->get_int(name);
 }
 
@@ -300,7 +300,7 @@ void Module::access_set_int(QString name, int v) { //только out: int, chec
 }
 
 //---------------------------------------------------------------------
-float Module::access_get_float(QString name) {  //float
+float Module::get_float(QString name) {  //float
     return rtmodule()->get_float(name);
 }
 
@@ -310,7 +310,7 @@ void Module::access_set_float(QString name, float v) {  //out: float
 }
 
 //---------------------------------------------------------------------
-QString Module::access_get_title_value(QString name) {  //enum (title)
+QString Module::get_title_value(QString name) {  //enum (title)
      return rtmodule()->get_title_value(name);
 }
 
@@ -322,7 +322,7 @@ void Module::access_set_title_value(QString name, QString v) { //только ou
 //---------------------------------------------------------------------
 //доступ к объектам идет только по указателям
 //требуется начать и потом закончить доступ (mutex)
-XcluObject *Module::access_get_object(QString name) {
+XcluObject *Module::get_object(QString name) {
     return rtmodule()->get_object(name);
 }
 

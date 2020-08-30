@@ -103,25 +103,25 @@ Module *ProjectRuntime::get_module(QString module_id) {
 //Получение переменных по link
 int ProjectRuntime::get_int_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->access_get_int(link.var);
+    return RUNTIME.get_module(link.module)->get_int(link.var);
 }
 
 //---------------------------------------------------------------------
 float ProjectRuntime::get_float_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->access_get_float(link.var);
+    return RUNTIME.get_module(link.module)->get_float(link.var);
 }
 
 //---------------------------------------------------------------------
 QString ProjectRuntime::get_string_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->access_get_string(link.var);
+    return RUNTIME.get_module(link.module)->get_string(link.var);
 }
 
 //---------------------------------------------------------------------
 XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
     VarLink link(link_str);
-    return RUNTIME.get_module(link.module)->access_get_object(link.var);
+    return RUNTIME.get_module(link.module)->get_object(link.var);
 }
 
 
@@ -136,7 +136,7 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
 /*XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
     VarLink link(link_str);
     Module *module = get_module(link.module);
-    return module->access_get_object(link.var);
+    return module->get_object(link.var);
 }*/
 
 //---------------------------------------------------------------------

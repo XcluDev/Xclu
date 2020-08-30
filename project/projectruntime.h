@@ -58,7 +58,7 @@ public:
     QString absolute_path_from_project(QString relative_path, bool create_folder = false);
 
     //Получение модуля - можно получить к нему доступ, см. класс VarLink
-    //а затем взять нужную переменную по access_get_int и прочим
+    //а затем взять нужную переменную по get_int и прочим
     Module *get_module(QString module_id);
 
     //Получение переменных по link - то есть по имени модуля и названию в формате webcam1->image
