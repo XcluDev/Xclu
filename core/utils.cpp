@@ -61,7 +61,17 @@ int clampi(int x, int a, int b) {
 }
 
 //-------------------------------------------------------
-//linear interpolation
+//Linear interpolation from [0,1]
+float lerpf(float A, float B, float x) { //x = 0..1
+    return A*(1-x) + B*x;
+}
+
+float lerpd(float A, float B, float x) {
+    return A*(1-x) + B*x;
+}
+
+//-------------------------------------------------------
+//Linear interpolation
 float mapf(float x, float a, float b, float A, float B) {
     return (x - a) / (b - a) * (B - A) + A;
 }

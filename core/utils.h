@@ -29,13 +29,17 @@ int mini(int x, int y);
 int maxi(int x, int y);
 
 
-//clamp to range [a,b], including a and b
+//Clamp to range [a,b], including a and b
 float clampf(float x, float a, float b);
 double clampd(double x, double a, double b);
 int clampi(int x, int a, int b);
 
-//linear interpolation
-float mapf(float x, float a, float b, float A, float B);
+//Linear interpolation from [0,1]
+float lerpf(float A, float B, float x); //x = 0..1
+float lerpd(float A, float B, float x);
+
+//Linear interpolation
+float mapf(float x, float a, float b, float A, float B); //x = a..b
 double mapd(double x, double a, double b, double A, double B);
 int mapi(int x, int a, int b, int A, int B);
 
