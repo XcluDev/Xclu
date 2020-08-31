@@ -281,6 +281,13 @@ QString RtModule::get_string(QString name, int index, int index2) {
         return "";
     }
 }
+
+//---------------------------------------------------------------------
+//splits text using "\n"
+QStringList RtModule::get_strings(QString name) {
+    return get_string(name).split("\n");
+}
+
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
 void RtModule::set_string(QString name, QString v) {

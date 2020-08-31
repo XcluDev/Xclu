@@ -112,8 +112,6 @@ SOURCES += \
     builtin_modules_impl/Images/rtmodulewebcamera.cpp \
     builtin_modules_impl/Sound/rtmodulesoundout.cpp \
     builtin_modules_impl/System/rtmoduleexecute.cpp \
-    core/incl_qt.cpp \
-    core/incl_qtcpp.cpp \
     core/incl_std.cpp \
     core/console.cpp \
     interface/interfaceitembutton.cpp \
@@ -169,7 +167,9 @@ SOURCES += \
     builtin_modules_impl/Sound/rtmodulesoundosc.cpp \
     builtin_modules_impl/Communication/rtmoduleserial.cpp \
     core/slowbit.cpp \
-    builtin_modules_impl/Project/rtmoduleproject.cpp
+    builtin_modules_impl/Project/rtmoduleproject.cpp \
+    core/incl_cpp.cpp \
+    core/incl_h.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -298,16 +298,18 @@ unix {
     SOURCES += \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
-         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
-         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.cpp
 
     HEADERS += \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
         ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h \
+        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.h
 
 }
 
@@ -320,14 +322,16 @@ windows {
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.cpp
 
     HEADERS += \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
         ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h \
+        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.h
 
 }
 

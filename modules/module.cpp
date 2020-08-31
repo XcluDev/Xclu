@@ -289,6 +289,12 @@ QString Module::get_string(QString name, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
+//splits text using "\n"
+QStringList Module::get_strings(QString name) {
+    return rtmodule()->get_strings(name);
+}
+
+//---------------------------------------------------------------------
 void Module::set_string(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
     rtmodule()->set_string(name, v);
 }

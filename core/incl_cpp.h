@@ -1,5 +1,5 @@
-#ifndef INCL_QTCPP_H
-#define INCL_QTCPP_H
+#ifndef INCL_INCLCPP_H
+#define INCL_INCLCPP_H
 
 #include <QDebug>
 #include <QRegExp>
@@ -33,4 +33,4 @@ double json_double(const QJsonObject &json, QString name);
 
 
 
-#endif // INCL_QTCPP_H
+#endif // INCL_INCLCPP_H

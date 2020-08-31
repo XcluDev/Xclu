@@ -18,7 +18,14 @@
 
 //geometry
 #include <glm/glm.hpp>
+
+//vector norm glm::length, glm::length2
 #include <glm/gtx/norm.hpp>
+
+//rotation matrix mat4 glm::eulerAngleYXZ(yaw, pitch, roll)
+#include <glm/gtx/euler_angles.hpp>
+
+//int-vectors
 #include "int2.h"
 
 //#include "incl_std.h"

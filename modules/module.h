@@ -72,6 +72,9 @@ public:
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     QString get_string(QString name, int index = -1, int index2 = -1);
 
+    //splits text using "\n"
+    QStringList get_strings(QString name);
+
     void set_string(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
 
     //int, checkbox, button, enum (index)
