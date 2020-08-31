@@ -154,6 +154,8 @@ typedef Raster_<uint8> Raster_u8;
 typedef Raster_<u8_rgb> Raster_u8c3;    //color image
 typedef Raster_<uint16> Raster_u16;
 typedef Raster_<float> Raster_float;
+typedef Raster_<glm::vec2> Raster_vec2;
+typedef Raster_<glm::vec3> Raster_vec3;
 
 
 //Конвертирование растров между собой и QImage, запись и считывание на диск
