@@ -50,7 +50,7 @@ ConsoleView::ConsoleView(QWidget *parent)
 //добавить сообщение
 void ConsoleView::log(QString message) {
     textArea_->appendPlainText(message);
-    qDebug() << "Appending " << message;
+    //qDebug() << "Appending " << message;
 
     empty_ = false;
 }

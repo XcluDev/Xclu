@@ -22,7 +22,8 @@
 //vector norm glm::length, glm::length2
 #include <glm/gtx/norm.hpp>
 
-//rotation matrix mat4 glm::eulerAngleYXZ(yaw, pitch, roll)
+//rotation matrix mat4 glm::eulerAngleYXZ(float yaw, float pitch, float roll);
+//   and mat3x3 glm::orientate3(vec3 const &angles);
 #include <glm/gtx/euler_angles.hpp>
 
 //int-vectors
