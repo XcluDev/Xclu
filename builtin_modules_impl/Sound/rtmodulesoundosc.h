@@ -55,7 +55,7 @@ struct RtModuleSoundOscData: public XcluProtectedData
     int out_enabled = 0;       //Generate output sound.
     int mod_enabled = 1;        //Is modulatio enabled
     float volume = 0.5f;        //Main volume.
-    float vol_mod=1;         //Secondary volume - used for simple modulation
+    float vol_mod=1;            //External modulation
 
     float freq=440;     //Oscillator basic frequency.
 
@@ -63,8 +63,9 @@ struct RtModuleSoundOscData: public XcluProtectedData
     float fm_rate=5;    //FM frequency.
     float fm_range=10;  //FM range (instead of index), Hz
 
+
     int am_enabled=0;   //Is AM enabled.
-    float am_rate=5;    //AM rate
+    float am_rate=5;    //AM rate.
     float am_range=0.1f;  //AM range.
 
     //испльзуются в update_steps()

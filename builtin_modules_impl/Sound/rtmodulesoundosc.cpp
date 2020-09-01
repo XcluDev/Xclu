@@ -157,17 +157,21 @@ void RtModuleSoundOsc::update_data() {
     data_.out_enabled = get_int("out_enabled");
     int mod = get_int("mod_enabled");   //modulation
     data_.mod_enabled = mod;
+
+    //volume
     data_.volume = get_float("volume");
     if (mod) {
         data_.vol_mod = RUNTIME.get_float_by_link(get_string("volume_link"));
         set_float("volume_mod", data_.vol_mod);
     }
     else {
-        data_.vol_mod = 1;
+        data_.vol_mod = 1;   
     }
 
+    //freq
     data_.freq = get_float("freq");
 
+    //fm, am
     data_.fm_enabled = get_int("fm_enabled");
     data_.fm_rate = get_float("fm_rate");
     data_.fm_range = get_float("fm_range");
@@ -175,9 +179,22 @@ void RtModuleSoundOsc::update_data() {
     data_.am_enabled = get_int("am_enabled");
     data_.am_rate = get_float("am_rate");
     data_.am_range = get_float("am_range");
+    if (mod) {
+        data_.fm_rate = RUNTIME.get_float_by_link(get_string("fm_rate_link"), data_.fm_rate);
+        data_.fm_range = RUNTIME.get_float_by_link(get_string("fm_range_link"), data_.fm_range);
+        data_.am_rate = RUNTIME.get_float_by_link(get_string("am_rate_link"), data_.am_rate);
+        data_.am_range = RUNTIME.get_float_by_link(get_string("am_range_link"), data_.am_range);
 
+        set_float("fm_rate_mod", data_.fm_rate);
+        set_float("fm_range_mod", data_.fm_range);
+        set_float("am_rate_mod", data_.am_rate);
+        set_float("am_range_mod", data_.am_range);
+    }
+
+    //speed
     data_.vol_speed = get_float("vol_speed");
     data_.freq_speed = get_float("freq_speed");
+
 
 }
 

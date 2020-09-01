@@ -37,11 +37,8 @@ in float Volume volume=0.5 0:1 500,50
     //0..1
 
 if mod_enabled 1
-in string(link:string) mod_link volume_link=""
-    //Modulation link, such as module1->volumes(0,2)
-
-out float mod_value volume_mod=0 0:1 100,10
-    //Modulation result.    
+out float vol_mod volume_mod=0 0:1 100,10
+    //Modulation value.    
 endif
 
 
@@ -61,6 +58,11 @@ in float Range fm_range=10 0:20000 20000,2000
     //FM range (instead of index).
     //0..20000 Hz
 
+if mod_enabled 1
+out float fm_rate fm_rate_mod=0 0:1 100,10
+out float fm_range fm_range_mod=0 0:1 100,10
+endif
+
 #-------------- 
 #AM
 separator
@@ -75,6 +77,21 @@ in float Rate am_rate=5 0:20000 20000,2000
 in float Range am_range=0.1 0:1 1000,100
     //AM range.
     //0..1
+
+if mod_enabled 1
+out float am_rate am_rate_mod=0 0:1 100,10
+out float am_range am_range_mod=0 0:1 100,10
+endif
+
+#-------------- 
+page Modulation_Setup
+in string(link:string) volume_link volume_link=""
+    //Modulation link, such as module1->volumes(0,2)
+in string(link:string) fm_rate_link fm_rate_link=""
+in string(link:string) fm_range_link fm_range_link=""
+in string(link:string) am_rate_link am_rate_link=""
+in string(link:string) am_range_link am_range_link=""
+
 
 #-------------- 
 page Setup_Speed
