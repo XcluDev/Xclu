@@ -58,19 +58,30 @@ out int Total_Sent total_sent=0 0:10000000 1,10
 #------------------------------------------
 page Console
 
-in enum Send send_type=String [String,Bytes]
+in enum Send send_type=String [String,Bytes,String_Link]
     //Choose what to send manually.
 
 #----------------
 if send_type String
-
-in string String_to_Send send_string=""
-    //Send string
-
-in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
-
+in string String_To_Send send_string=""
+    //String for sending.    
 in button Send send_string_btn
 endif
+
+#----------------
+
+if send_type String_Link
+in string String_Link string_link_send="module1->string"
+    //Link to string for sending.
+in button Send send_string_link_btn
+endif
+
+if send_type String,String_Link
+in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
+endif
+
+#----------------
+    
 #----------------
 if send_type Byte
 

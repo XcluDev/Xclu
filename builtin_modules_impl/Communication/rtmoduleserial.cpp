@@ -25,12 +25,19 @@ void RtModuleSerial::gui_clear() {
     clear_string("port_info");
     set_connected(false); //также ставит gui-элемент connected
     port_name_ = "";
+    set_total_sent(0);
 }
 
 //---------------------------------------------------------------------
 void RtModuleSerial::set_connected(bool connected) {
   connected_ = connected;
   set_int("connected", connected);
+}
+
+//---------------------------------------------------------------------
+void RtModuleSerial::set_total_sent(int t) {
+    total_sent_ = t;
+    set_int("total_sent", t);
 }
 
 //---------------------------------------------------------------------
@@ -51,18 +58,41 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
+
+
+    bool connect_warning = false;
     if (button_id == "send_string_btn") {
-        QString str = get_string("send_string");
-        int ts = get_int("line_term"); //None,\n,\r,\r\n
-        if (ts == 1) str += "\n";
-        if (ts == 2) str += "\r";
-        if (ts == 3) str += "\r\n";
-        send_string(str);
+        if (connected_) {
+            QString str = get_string("send_string");
+            send_string(str);
+        }
+        else {
+            connect_warning = true;
+        }
 
     }
+    if (button_id == "send_string_link_btn") {
+        if (connected_) {
+            QString str = RUNTIME.get_string_by_link(get_string("string_link_send"));
+            send_string(str);
+        }
+        else {
+            connect_warning = true;
+        }
+    }
+
     if (button_id == "send_bytes_btn") {
-        int byte = get_int("send_byte");
-        send_byte(byte);
+        if (connected_) {
+            int byte = get_int("send_byte");
+            send_byte(byte);
+        }
+        else {
+            connect_warning = true;
+        }
+    }
+
+    if (connect_warning) {
+        xclu_message_box("Port is not connected, may be you need to start the project.");
     }
 }
 
@@ -203,6 +233,12 @@ void RtModuleSerial::execute_update_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::send_string(QString str) {
+    //добавляем завершение строки
+    int ts = get_int("line_term"); //None,\n,\r,\r\n
+    if (ts == 1) str += "\n";
+    if (ts == 2) str += "\r";
+    if (ts == 3) str += "\r\n";
+
     if (get_int("debug")) {
         xclu_console_append("Send string `" + str + "`");
     }
@@ -215,7 +251,10 @@ void RtModuleSerial::send_string(QString str) {
         if (bytesWritten == -1) {
             xclu_console_append(QString("Failed to write the data to port %1, error: %2")
                                 .arg(port_name_).arg(serialPort_.errorString()));
-        } else if (bytesWritten != writeData.size()) {
+        }
+
+        set_total_sent(total_sent_ + bytesWritten);
+        if (bytesWritten != writeData.size()) {
             xclu_console_append(QString("Failed to write all the data to port %1, error: %2")
                                 .arg(port_name_).arg(serialPort_.errorString()));
         }
@@ -232,6 +271,10 @@ void RtModuleSerial::send_byte(int byte) {
         xclu_console_append("Send byte `" + QString::number(byte) + "`");
     }
     xclu_exception("Sending byte is not implented");
+
+    //Пометить, что отправили
+    //set_total_sent(total_sent_ + 1);
+
 }
 
 //---------------------------------------------------------------------

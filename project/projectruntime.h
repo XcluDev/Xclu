@@ -74,6 +74,9 @@ public:
     QString get_string_by_link(QString link_str);
     XcluObject *get_object_by_link(QString link_str);
 
+    //Нажатие кнопки
+    void press_button_by_link(QString link_str);
+
 
     //Построение списка модулей по строке, в которой модули разделены \n,
     //а также могут быть пустые строки и комментарии, начинающиеся с #, например:

@@ -56,6 +56,10 @@ protected:
 
     void send_string(QString str);
     void send_byte(int byte);
+
+    int total_sent_ = 0;
+    void set_total_sent(int t);
+
 };
 
 

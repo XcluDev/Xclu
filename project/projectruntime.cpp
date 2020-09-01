@@ -145,6 +145,12 @@ XcluObject *ProjectRuntime::get_object_by_link(QString link_str) {
     return RUNTIME.get_module(link.module)->get_object(link.var);
 }
 
+//---------------------------------------------------------------------
+//Нажатие кнопки
+void ProjectRuntime::press_button_by_link(QString link_str) {
+    VarLink link(link_str);
+    return RUNTIME.get_module(link.module)->button_pressed(link.var);
+}
 
 //---------------------------------------------------------------------
 /*InterfaceItem *ProjectRuntime::get_var_by_link(QString link_str) {

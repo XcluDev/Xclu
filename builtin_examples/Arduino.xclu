@@ -79,7 +79,7 @@
                         "aname": "connected",
                         "atitle": "Connected",
                         "atype": "checkbox",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "port_info",
@@ -91,7 +91,7 @@
                         "aname": "total_sent",
                         "atitle": "Total Sent",
                         "atype": "int",
-                        "avalue": "0"
+                        "avalue": "3"
                     },
                     {
                         "aname": "Console",
@@ -111,9 +111,17 @@
                     },
                     {
                         "aname": "send_string",
-                        "atitle": "String to Send",
+                        "atitle": "String To Send",
                         "atype": "string",
                         "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "string_link",
+                        "atitle": "String Link",
+                        "atype": "string",
+                        "avalue": "module1->string",
                         "expr": "",
                         "expr_use": false
                     },
