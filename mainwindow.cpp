@@ -393,8 +393,9 @@ bool MainWindow::maybeSave() {
 //предполагается, что до этого вызван maybeSave()
 void MainWindow::openProject(const QString &fileName) {
     closeProject();
-    xclu_console_append("Loading project `" + fileName + "`");
-    xclu_console_append("");
+    bool dirty = false; //не помечаем, что в консоли есть ошибки, а просто сообщение
+    xclu_console_append("Loading project `" + fileName + "`", dirty);
+    xclu_console_append("", dirty);
 
     auto load_result = PROJ.load_project(fileName);
     if (load_result != Project::LoadProjectStatusNo) {

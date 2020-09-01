@@ -22,9 +22,8 @@ RtModuleSerial::RtModuleSerial()
 void RtModuleSerial::gui_clear() {
     set_int("total_sent",0);
     clear_string("device_list");
-    clear_string("connected_device_info");
+    clear_string("port_info");
     set_connected(false); //также ставит gui-элемент connected
-
 }
 
 //---------------------------------------------------------------------
@@ -89,23 +88,95 @@ void RtModuleSerial::print_devices() {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::execute_start_internal() {
-  /*  //здесь мы не стартуем камеру, так как делаем это в update
-    //в зависимости от capture_source
-
     //Очистка переменных
     gui_clear();
 
-    ObjectReadWrite(get_object("color_image")).clear();
-    ObjectReadWrite(get_object("depth_image")).clear();
-    ObjectReadWrite(get_object("ir_image")).clear();
+    //открытие порта
+    open_port();
+}
 
-    is_new_frame = 0;
-    processed_frames_ = 0;
-    wait_save_frames_ = 0;
+//---------------------------------------------------------------------
+void RtModuleSerial::open_port() {
+    const auto serialPortInfos = QSerialPortInfo::availablePorts();
+    int n = serialPortInfos.count();
 
-    //запуск камеры или воспроизведения файла
-    start_camera();
-    */
+    if (n == 0) {
+        //TODO сейчас просто игнорируем ошибку
+        xclu_console_append("Error: No Serial devices");
+        return;
+    }
+
+    int index0 = -1;
+    int index1 = -1;
+
+    int select_port = get_int("select_port");
+    switch (select_port) {
+    case SelectDeviceDefault: {
+        index0 = 0;
+        index1 = 0;
+    }
+        break;
+    case SelectDeviceByIndex: {
+        index0 = get_int("port_index0");
+        index1 = get_int("port_index1");
+        xclu_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
+        xclu_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
+    }
+        break;
+    case SelectDeviceByName: {
+        QString port_name = get_string("port_name");
+        int k = 0;
+        for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
+            QString name = serialPortInfo.portName();
+            if (name.contains(port_name)) {
+               index0 = k;
+               index1 = k;
+               break;
+            }
+            k++;
+        }
+        xclu_assert(k >= 0, "No port containing '" + port_name+ "'");
+        index0 = k;
+        index1 = k;
+    }
+        break;
+    default:
+        xclu_exception("Bad `select_port` value");
+    }
+
+    //Это не должно показываться пользователю, а проверка нашей логики
+    xclu_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
+
+    //Скорость подключения
+    int baud_rate = get_string("baud_rate").toInt();
+    xclu_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
+
+    //Поиск свободного порта
+    int k = 0;
+    for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
+        if (k >= index0 && k <= index1) {
+            if (!serialPortInfo.isBusy()) {
+                //подключение
+                serialPort_.setPort(serialPortInfo);
+                serialPort_.setBaudRate(baud_rate);
+                xclu_assert(serialPort_.open(QIODevice::ReadWrite),
+                    QString("Failed to open port %1, error: %2")
+                            .arg(serialPortInfo.portName()).arg(serialPort_.errorString()));
+                set_connected(true);
+
+                QString port_info = "port_info";
+                clear_string(port_info);
+                append_string(port_info, QString("Port: %1").arg(k));
+                append_string(port_info, QString("Name: %1").arg(serialPortInfo.portName()));
+                append_string(port_info, QString("Location: %1").arg(serialPortInfo.systemLocation()));
+                append_string(port_info, QString("Description: %1").arg((!serialPortInfo.description().isEmpty() ? serialPortInfo.description() : "N/A")));
+                break;
+            }
+        }
+        k++;
+    }
+
+    xclu_assert(connected_, "Can't connect, all selected ports are busy");
 }
 
 //---------------------------------------------------------------------
@@ -179,11 +250,10 @@ void RtModuleSerial::execute_update_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::execute_stop_internal() {
-    /*if (camera_started_) {
-        camera_.close();
-        set_started(false);
+    if (connected_) {
+        serialPort_.close();
+        set_connected(false);
     }
-*/
 }
 
 

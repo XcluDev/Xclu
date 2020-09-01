@@ -30,10 +30,10 @@ class ConsoleView : public QWidget
 public:
     ConsoleView(QWidget *parent);
 
-    //добавить сообщение
-    void log(QString message);
+    //добавить сообщение, dirty - помечать, что консоль не пустая (были ошибки)
+    void log(QString message, bool dirty = true);
 
-    //есть ли сообщения
+    //есть ли сообщения (кроме тех, для которых dirty = false)
     bool is_empty();
 
 public slots:

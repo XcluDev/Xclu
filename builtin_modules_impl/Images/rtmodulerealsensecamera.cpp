@@ -233,8 +233,8 @@ void RtModuleRealsenseCamera::start_camera() {
                     device_index = i;
                     break;
                 }
-                xclu_exception("No device with serial '" + serial + "'");
             }
+            xclu_assert(device_index >= 0, "No device with serial '" + serial + "'");
             break;
         }
         default:

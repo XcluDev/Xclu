@@ -27,8 +27,8 @@ void xclu_halt(QString message);
 void xclu_message_box(QString message);
 
 //Вывод в лог - ConsoleView
-void xclu_console_warning(QString message);
-void xclu_console_append(QString message);
+void xclu_console_warning(QString message, bool dirty = true);
+void xclu_console_append(QString message, bool dirty = true);
 void xclu_console_clear();
 
 //Сигнал, что проект был изменен

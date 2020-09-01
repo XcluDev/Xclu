@@ -14,29 +14,34 @@ const enum Port select_port=Default [Default,By_Index,By_Name]
 #--------------------
 if select_port By_Index
 
-const int Search_Device_From deviceid0=2 0:100 1,10
+const int Port_ID_From port_index0=2 0:100 1,10
     //Start of id range, will search to first successful.
 
-const int To deviceid1=10 0:100 1,10
+const int Port_ID_To port_index1=10 0:100 1,10
     //End of id range 
 
 if select_port By_Name
 
-const string Device_Name devicename="..."
+const string Port_Name port_name=""
     //Name of the device (may be specified only part, will be search for the first successful match).
 endif
 #--------------------
 
 separator
 
-const enum Speed_Baud baud=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
+const enum Baud_Rate baud_rate=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
+    //
+    //bps
 
 separator
 
 out checkbox Connected connected=0
     //Is port connected.
 
-#out checkbox Data_Received data_received=0
+out text Port_Info port_info 5 6
+	//Information about connected port.
+
+    #out checkbox Data_Received data_received=0
 #    //Is data received on the latest update
     
 separator

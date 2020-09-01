@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -36,32 +36,32 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "deviceid0",
-                        "atitle": "Search Device From",
+                        "aname": "port_index0",
+                        "atitle": "Port ID From",
                         "atype": "int",
                         "avalue": "2",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "deviceid1",
-                        "atitle": "To",
+                        "aname": "port_index1",
+                        "atitle": "Port ID To",
                         "atype": "int",
                         "avalue": "10",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "devicename",
-                        "atitle": "Device Name",
+                        "aname": "port_name",
+                        "atitle": "Port Name",
                         "atype": "string",
-                        "avalue": "...",
+                        "avalue": "",
                         "expr": "",
                         "expr_use": false
                     },
                     {
-                        "aname": "baud",
-                        "atitle": "Speed Baud",
+                        "aname": "baud_rate",
+                        "atitle": "Baud Rate",
                         "atype": "enum",
                         "avalue": "9600",
                         "expr": "",
@@ -72,6 +72,12 @@
                         "atitle": "Connected",
                         "atype": "checkbox",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "port_info",
+                        "atitle": "Port Info",
+                        "atype": "text",
+                        "avalue": ""
                     },
                     {
                         "aname": "total_sent",
@@ -175,7 +181,7 @@
                         "aname": "device_list",
                         "atitle": "Device List",
                         "atype": "text",
-                        "avalue": "Serial ports available: 1\nPort: 0\n  Name: COM3\n  Location: \\\\.\\COM3\n  Description: USB-SERIAL CH340\n  Manufacturer: wch.cn\n  Serial number: N/A\n  Vendor Identifier: 1a86\n  Product Identifier: 7523\n  Busy: No\n\n"
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",

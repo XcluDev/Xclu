@@ -6,6 +6,7 @@
 #include <QScopedPointer>
 #include <QImage>
 #include <QMutex>
+#include <QtSerialPort/QSerialPort>
 #include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluobjectimage.h"
@@ -40,6 +41,8 @@ protected:
 
 protected:
 
+    void open_port();
+
     //режим выбора камеры
     enum SelectDevice: int {
         SelectDeviceDefault = 0,
@@ -47,6 +50,8 @@ protected:
         SelectDeviceByName = 2,
         SelectDeviceByN = 3
     };
+
+    QSerialPort serialPort_;
 
 };
 
