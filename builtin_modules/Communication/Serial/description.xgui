@@ -7,6 +7,9 @@ module_impl=C++
 #------------------------------------------
 page Main
     //General settings.
+    
+in checkbox Debug debug=0
+    //Debug output to console.
 
 const enum Port select_port=Default [Default,By_Index,By_Name]
     //Method of choosing the port.
@@ -69,10 +72,12 @@ in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
 in button Send send_string_btn
 endif
 #----------------
-if send_type Bytes
+if send_type Byte
 
-in string Send_Bytes send_bytes=""
-    //Bytes list, separated by spaces, for example, '32 32 13'.    
+in int Send_Byte send_byte=0 0:255 1,10
+    //Byte to send.
+    //0..255
+    #//Bytes list, separated by spaces, for example, '32 32 13'.    
     
 in button Send send_bytes_btn
 endif

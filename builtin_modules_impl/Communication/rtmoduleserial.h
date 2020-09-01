@@ -52,7 +52,10 @@ protected:
     };
 
     QSerialPort serialPort_;
+    QString port_name_;
 
+    void send_string(QString str);
+    void send_byte(int byte);
 };
 
 

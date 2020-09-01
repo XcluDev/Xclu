@@ -24,6 +24,7 @@ void RtModuleSerial::gui_clear() {
     clear_string("device_list");
     clear_string("port_info");
     set_connected(false); //также ставит gui-элемент connected
+    port_name_ = "";
 }
 
 //---------------------------------------------------------------------
@@ -49,6 +50,19 @@ void RtModuleSerial::execute_loaded_internal() {
 void RtModuleSerial::button_pressed_internal(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
+    }
+    if (button_id == "send_string_btn") {
+        QString str = get_string("send_string");
+        int ts = get_int("line_term"); //None,\n,\r,\r\n
+        if (ts == 1) str += "\n";
+        if (ts == 2) str += "\r";
+        if (ts == 3) str += "\r\n";
+        send_string(str);
+
+    }
+    if (button_id == "send_bytes_btn") {
+        int byte = get_int("send_byte");
+        send_byte(byte);
     }
 }
 
@@ -164,6 +178,8 @@ void RtModuleSerial::open_port() {
                             .arg(serialPortInfo.portName()).arg(serialPort_.errorString()));
                 set_connected(true);
 
+                port_name_ = serialPortInfo.portName();
+
                 QString port_info = "port_info";
                 clear_string(port_info);
                 append_string(port_info, QString("Port: %1").arg(k));
@@ -181,71 +197,41 @@ void RtModuleSerial::open_port() {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::execute_update_internal() {
-    /*
-    //если нажата кнопка - поставить флажок ожидания записи кадров на диск
-    if (get_int("save_frames_button")) {
-        wait_save_frames_ = 1;
+   //отработка отправки данных путем нажатия кнопок идет в button_pressed_internal
+
+}
+
+//---------------------------------------------------------------------
+void RtModuleSerial::send_string(QString str) {
+    if (get_int("debug")) {
+        xclu_console_append("Send string `" + str + "`");
     }
 
-    //TODO сделать возможность обработки кадров по callback
-    //- а сейчас реализовано из основного потока
+    if (connected_ && !str.isEmpty()) {
+        QByteArray writeData;
+        writeData.append(str);
 
-    //если камера не стартовала - то делать нечего
-    //TODO возможно стоит попробовать запустить камеру снова через некоторое время
-    if (!camera_started_) return;
-
-    //на всякий случай ставим, что нет новых кадров
-    //чтобы в случае ошибки не осталось "1"
-    set_int("is_new_frame", 0);
-
-    camera_.update();
-    bool is_new_frame = camera_.isFrameNew();
-    //обрабатываем только новые кадры
-    if (is_new_frame) {
-        set_int("is_new_frame", 1);
-        processed_frames_++;
-
-        //метка числа обработанных кадров
-        QString processed = QString("Processed %1 frame(s)").arg(processed_frames_);
-        set_string("frames_captured", processed);
-
-        //установка изображений и запись их на диск, если нужно
-        //TODO оптимизация: устранить создание промежуточного растра raster !
-
-        bool make_color = false;
-        bool make_depth = false;
-        bool make_ir = false;
-        if ((get_int("show_color") || wait_save_frames_) && camera_.settings().use_rgb) {
-            Raster_u8c3 raster_color;
-            xclu_assert(camera_.get_color_pixels_rgb(raster_color), "get_color_pixels_rgb() returned false");
-            ObjectReadWrite image(get_object("color_image"));
-            XcluObjectImage::create_from_raster(image, raster_color);
-            make_color = true;
+        qint64 bytesWritten = serialPort_.write(writeData);
+        if (bytesWritten == -1) {
+            xclu_console_append(QString("Failed to write the data to port %1, error: %2")
+                                .arg(port_name_).arg(serialPort_.errorString()));
+        } else if (bytesWritten != writeData.size()) {
+            xclu_console_append(QString("Failed to write all the data to port %1, error: %2")
+                                .arg(port_name_).arg(serialPort_.errorString()));
         }
-        if ((get_int("show_depth") || wait_save_frames_) && camera_.settings().use_depth) {
-            Raster_u8c3 raster_depth;
-            xclu_assert(camera_.get_depth_pixels_rgb(raster_depth), "get_depth_pixels_rgb() returned false");
-            ObjectReadWrite image(get_object("depth_image"));
-            XcluObjectImage::create_from_raster(image, raster_depth);
-            make_depth = true;
-        }
-        if ((get_int("show_ir") || wait_save_frames_) && camera_.settings().use_ir) {
-            Raster_u8 raster_ir;
-            xclu_assert(camera_.get_ir_pixels8(raster_ir), "get_ir_pixels8() returned false");
-            ObjectReadWrite image(get_object("ir_image"));
-            XcluObjectImage::create_from_raster(image, raster_ir);
-            make_ir = true;
-        }
-        //если требуется - записать на диск
-        if (wait_save_frames_) {
-            save_frames(make_color, make_depth, make_ir);
-        }
-
-        wait_save_frames_ = 0;
+        //else if (!serialPort.waitForBytesWritten(5000)) {
+        //    standardOutput << QObject::tr("Operation timed out or an error occurred for port %1, error: %2").arg(serialPortName).arg(serialPort.errorString()) << endl;
+        //    return 1;
+        //}
     }
+}
 
-*/
-
+//---------------------------------------------------------------------
+void RtModuleSerial::send_byte(int byte) {
+    if (get_int("debug")) {
+        xclu_console_append("Send byte `" + QString::number(byte) + "`");
+    }
+    xclu_exception("Sending byte is not implented");
 }
 
 //---------------------------------------------------------------------

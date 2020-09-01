@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -24,6 +24,14 @@
                         "atitle": "Main",
                         "atype": "page",
                         "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "debug",
+                        "atitle": "Debug",
+                        "atype": "checkbox",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -71,13 +79,13 @@
                         "aname": "connected",
                         "atitle": "Connected",
                         "atype": "checkbox",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "port_info",
                         "atitle": "Port Info",
                         "atype": "text",
-                        "avalue": ""
+                        "avalue": "Port: 0\nName: COM3\nLocation: \\\\.\\COM3\nDescription: USB-SERIAL CH340\n"
                     },
                     {
                         "aname": "total_sent",
@@ -105,7 +113,7 @@
                         "aname": "send_string",
                         "atitle": "String to Send",
                         "atype": "string",
-                        "avalue": "",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -118,10 +126,10 @@
                         "expr_use": false
                     },
                     {
-                        "aname": "send_bytes",
-                        "atitle": "Send Bytes",
-                        "atype": "string",
-                        "avalue": "",
+                        "aname": "send_byte",
+                        "atitle": "Send Byte",
+                        "atype": "int",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
