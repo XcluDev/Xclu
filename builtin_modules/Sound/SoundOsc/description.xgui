@@ -59,8 +59,8 @@ in float Range fm_range=10 0:20000 20000,2000
     //0..20000 Hz
 
 if mod_enabled 1
-out float fm_rate fm_rate_mod=0 0:1 100,10
-out float fm_range fm_range_mod=0 0:1 100,10
+out float fm_rate fm_rate_mod=0 0:20000 20000,2000
+out float fm_range fm_range_mod=0 0:20000 20000,2000
 endif
 
 #-------------- 
@@ -79,8 +79,8 @@ in float Range am_range=0.1 0:1 1000,100
     //0..1
 
 if mod_enabled 1
-out float am_rate am_rate_mod=0 0:1 100,10
-out float am_range am_range_mod=0 0:1 100,10
+out float am_rate am_rate_mod=0 0:20000 20000,2000
+out float am_range am_range_mod=0 0:1 1000,100
 endif
 
 #-------------- 
