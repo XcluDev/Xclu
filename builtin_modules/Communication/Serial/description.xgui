@@ -15,7 +15,7 @@ const enum Port select_port=Default [Default,By_Index,By_Name]
 if select_port By_Index
 
 const int Search_Device_From deviceid0=2 0:100 1,10
-    //Start of id range, will search to first successful 
+    //Start of id range, will search to first successful.
 
 const int To deviceid1=10 0:100 1,10
     //End of id range 
@@ -23,7 +23,7 @@ const int To deviceid1=10 0:100 1,10
 if select_port By_Name
 
 const string Device_Name devicename="..."
-    //Name of the device (may be specified only part, will be search for the first successful match)
+    //Name of the device (may be specified only part, will be search for the first successful match).
 endif
 #--------------------
 

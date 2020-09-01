@@ -44,8 +44,9 @@ Debug:UI_DIR = debug/.ui
 #Project Properties -> C/C++ -> Code Generation -> Modify the Enable C++ Exceptions to "Yes With SEH Exceptions". 
 
 
-QT       += core gui
-QT       += multimedia multimediawidgets
+QT += core gui
+QT += multimedia multimediawidgets
+QT += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

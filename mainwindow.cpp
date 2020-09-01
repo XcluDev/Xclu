@@ -263,8 +263,8 @@ void MainWindow::createMenu() {
 //---------------------------------------------------------------------
 void MainWindow::newProject() {
     if (!maybeSave()) return;
-    CONS_VIEW->clear(); //очистка списка соощений
 
+    xclu_console_append("New project");
     newProjectStartup();
 }
 
@@ -277,6 +277,8 @@ void MainWindow::newProjectStartup() {
 void MainWindow::closeProject() {
     if (RUNTIME.is_running()) return;
 
+    xclu_console_clear();//очистка списка сообщений
+
     PROJ_GUI->before_close_project();
     PROJ.new_project();
     PROJ_GUI->after_close_project();
@@ -285,6 +287,7 @@ void MainWindow::closeProject() {
 
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
     set_current_file(""); //поставится в Untitled с новым номером
+
 }
 
 //---------------------------------------------------------------------
@@ -390,6 +393,9 @@ bool MainWindow::maybeSave() {
 //предполагается, что до этого вызван maybeSave()
 void MainWindow::openProject(const QString &fileName) {
     closeProject();
+    xclu_console_append("Loading project `" + fileName + "`");
+    xclu_console_append("");
+
     auto load_result = PROJ.load_project(fileName);
     if (load_result != Project::LoadProjectStatusNo) {
         PROJ_GUI->after_load_project();

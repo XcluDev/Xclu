@@ -35,8 +35,8 @@ protected:
     //вывод устройств
     void print_devices();
 
-    bool started_ = false;
-    void set_started(bool started);
+    bool connected_ = false;
+    void set_connected(bool connected); //также ставит gui-элемент connected
 
 protected:
 

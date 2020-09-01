@@ -310,7 +310,6 @@ void RtModule::append_string(QString name, QString v, int extra_new_lines_count)
     for (int i=0; i<1 + extra_new_lines_count; i++) {
         value.append("\n");
     }
-    qDebug() << "--- " << value;
     set_string(name, value);
 }
 

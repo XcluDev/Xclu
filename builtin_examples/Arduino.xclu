@@ -4,7 +4,6 @@
         "version": "1.150"
     },
     "aproject_properties": {
-        "frame_rate": "30",
         "name": "",
         "selected_module": "0"
     },
@@ -17,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -176,7 +175,7 @@
                         "aname": "device_list",
                         "atitle": "Device List",
                         "atype": "text",
-                        "avalue": ""
+                        "avalue": "Serial ports available: 1\nPort: 0\n  Name: COM3\n  Location: \\\\.\\COM3\n  Description: USB-SERIAL CH340\n  Manufacturer: wch.cn\n  Serial number: N/A\n  Vendor Identifier: 1a86\n  Product Identifier: 7523\n  Busy: No\n\n"
                     },
                     {
                         "aname": "Control",

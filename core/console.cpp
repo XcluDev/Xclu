@@ -37,6 +37,9 @@ void xclu_console_append(QString message) {
     CONS_VIEW->log(message);
     qDebug() << ">>" << message;
 }
+void xclu_console_clear() {
+    CONS_VIEW->clear();
+}
 
 //Сигнал, что проект был изменен
 //обращается прямо в MainWindow

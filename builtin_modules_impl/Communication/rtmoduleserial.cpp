@@ -2,6 +2,7 @@
 #include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
+#include <QtSerialPort/QSerialPortInfo>
 
 REGISTRAR(Serial)
 
@@ -19,11 +20,19 @@ RtModuleSerial::RtModuleSerial()
 
 //---------------------------------------------------------------------
 void RtModuleSerial::gui_clear() {
-    /*clear_string("device_list");
+    set_int("total_sent",0);
+    clear_string("device_list");
     clear_string("connected_device_info");
-    set_started(false); //также ставит gui-элемент is_started
-    */
+    set_connected(false); //также ставит gui-элемент connected
+
 }
+
+//---------------------------------------------------------------------
+void RtModuleSerial::set_connected(bool connected) {
+  connected_ = connected;
+  set_int("connected", connected);
+}
+
 //---------------------------------------------------------------------
 RtModuleSerial::~RtModuleSerial()
 {
@@ -46,16 +55,34 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::print_devices() {
-  /*  QStringList out;
-    out.append(QString("Realsense SDK: %1").arg(RealsenseCamera::get_sdk_version()));
-    int n = RealsenseCamera::get_number_of_connected_devices();
-    out.append(QString("Number of Realsense devices: %1").arg(n));
-    if (n > 0) {
-        out.append(RealsenseCamera::get_connected_devices_list());
+    const auto serialPortInfos = QSerialPortInfo::availablePorts();
+
+    QStringList out;
+    out.append(QString("Serial ports available: %1").arg(serialPortInfos.count()));
+
+    const QString blankString = QObject::tr("N/A");
+    QString description;
+    QString manufacturer;
+    QString serialNumber;
+
+    int k = 0;
+    for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
+        description = serialPortInfo.description();
+        manufacturer = serialPortInfo.manufacturer();
+        serialNumber = serialPortInfo.serialNumber();
+
+        out.append(QString("  Port: %1").arg(k++));
+        out.append(QString("  Name: %1").arg(serialPortInfo.portName()));
+        out.append(QString("  Location: %1").arg(serialPortInfo.systemLocation()));
+        out.append(QString("  Description: %1").arg((!description.isEmpty() ? description : blankString)));
+        out.append(QString("  Manufacturer: %1").arg((!manufacturer.isEmpty() ? manufacturer : blankString)));
+        out.append(QString("  Serial number: %1").arg((!serialNumber.isEmpty() ? serialNumber : blankString)));
+        out.append(QString("  Vendor Identifier: %1").arg((serialPortInfo.hasVendorIdentifier() ? QByteArray::number(serialPortInfo.vendorIdentifier(), 16) : blankString)));
+        out.append(QString("  Product Identifier: %1").arg((serialPortInfo.hasProductIdentifier() ? QByteArray::number(serialPortInfo.productIdentifier(), 16) : blankString)));
+        out.append(QString("  Busy: %1").arg((serialPortInfo.isBusy() ? "Yes" : "No")));
     }
     clear_string("device_list");
     append_string("device_list", out, 1);
-*/
 }
 
 
@@ -159,12 +186,7 @@ void RtModuleSerial::execute_stop_internal() {
 */
 }
 
-//---------------------------------------------------------------------
-void RtModuleSerial::set_started(bool /*started*/) { //ставит camera_started_ и gui-элемент is_started
-  /*  camera_started_ = started;
-    set_int("is_started", started);
-    */
-}
+
 
 
 //---------------------------------------------------------------------

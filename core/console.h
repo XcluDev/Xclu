@@ -29,6 +29,7 @@ void xclu_message_box(QString message);
 //Вывод в лог - ConsoleView
 void xclu_console_warning(QString message);
 void xclu_console_append(QString message);
+void xclu_console_clear();
 
 //Сигнал, что проект был изменен
 //обращается прямо в MainWindow
