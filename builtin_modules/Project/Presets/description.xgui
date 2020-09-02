@@ -1,0 +1,11 @@
+#Module Project
+#------------------------------------------
+module_description=Presets.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings.
+
+
