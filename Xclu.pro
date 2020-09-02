@@ -113,7 +113,6 @@ SOURCES += \
     builtin_modules_impl/Images/rtmodulewebcamera.cpp \
     builtin_modules_impl/Sound/rtmodulesoundout.cpp \
     builtin_modules_impl/System/rtmoduleexecute.cpp \
-    core/incl_std.cpp \
     core/console.cpp \
     interface/interfaceitembutton.cpp \
     interface/interfaceitemtext.cpp \
@@ -170,7 +169,8 @@ SOURCES += \
     core/slowbit.cpp \
     builtin_modules_impl/Project/rtmoduleproject.cpp \
     core/incl_cpp.cpp \
-    core/incl_h.cpp
+    core/incl_h.cpp \
+    sdk/xclass.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -202,7 +202,6 @@ HEADERS += \
     builtin_modules_impl/Images/rtmodulewebcamera.h \
     builtin_modules_impl/Sound/rtmodulesoundout.h \
     builtin_modules_impl/System/rtmoduleexecute.h \
-    core/incl_std.h \
     core/console.h \
     interface/interfaceitembutton.h \
     interface/interfaceitemtext.h \
@@ -257,7 +256,8 @@ HEADERS += \
     builtin_modules_impl/Sound/rtmodulesoundosc.h \
     builtin_modules_impl/Communication/rtmoduleserial.h \
     core/slowbit.h \
-    builtin_modules_impl/Project/rtmoduleproject.h
+    builtin_modules_impl/Project/rtmoduleproject.h \
+    sdk/xclass.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support

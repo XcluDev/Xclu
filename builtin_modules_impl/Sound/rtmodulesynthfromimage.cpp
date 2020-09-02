@@ -107,22 +107,22 @@ void RtModuleSynthFromImage::execute_start_internal() {
 //---------------------------------------------------------------------
 void RtModuleSynthFromImage::execute_update_internal() {
     //получение картинки - загрузка из файла или взятие из другого модуля
-    ImageSource image_source = ImageSource(get_int("image_source"));
+    ImageSource image_source = ImageSource(geti("image_source"));
     switch (image_source) {
     case ImageSource_ImageFile: {
-        QString image_file = get_string("image_file");
+        QString image_file = gets("image_file");
         if (image_file != image_file_) {
             load_image_file(image_file);
         }
     }
         break;
     case ImageSource_Other_Module_Image: {
-            QString image_link = get_string("image_link");
+            QString image_link = gets("image_link");
             load_image_link(image_link);
     }
         break;
      default:
-        xclu_exception("Unknown image_source " + get_string("image_source"));
+        xclu_exception("Unknown image_source " + gets("image_source"));
     }
 
     //считываем данные из GUI и обновляем картинку
@@ -151,18 +151,18 @@ void RtModuleSynthFromImage::execute_stop_internal() {
 //---------------------------------------------------------------------
 void RtModuleSynthFromImage::update_data() {
     DataAccess access(data_);
-    //data_.image_background = get_int("image_background");
-    data_.pcm_speed_hz = get_float("pcm_speed_hz");
-    data_.contrast = get_float("contrast");
+    //data_.image_background = geti("image_background");
+    data_.pcm_speed_hz = getf("pcm_speed_hz");
+    data_.contrast = getf("contrast");
 
     //установка картинки для генерации звука
     //TODO не только rgb
     ObjectRead obj(get_object("image"));
     if (obj.has_int("w")) {
-        int w = obj.get_int("w");
-        int h = obj.get_int("h");
+        int w = obj.geti("w");
+        int h = obj.geti("h");
 
-        //int channels = obj.get_int("channels");
+        //int channels = obj.geti("channels");
         //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
@@ -173,10 +173,10 @@ void RtModuleSynthFromImage::update_data() {
 
 
         //устанавливаем диапазон
-        set_float("min_value", data_.min_);
-        set_float("max_value", data_.max_);
-        set_float("center_value", data_.center_);
-        set_float("range_value", data_.range_);
+        setf("min_value", data_.min_);
+        setf("max_value", data_.max_);
+        setf("center_value", data_.center_);
+        setf("range_value", data_.range_);
 
         //рисуем выходную картинку
         {
@@ -207,9 +207,9 @@ void RtModuleSynthFromImage::call_internal(QString function, XcluObject *input, 
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
         ObjectReadWrite sound(input);
 
-        float sample_rate = sound.get_int("sample_rate");
-        int samples = sound.get_int("samples");
-        int channels = sound.get_int("channels");
+        float sample_rate = sound.geti("sample_rate");
+        int samples = sound.geti("samples");
+        int channels = sound.geti("channels");
 
         float *data = sound.var_array("data")->data_float();
         float freq_Hz = data_.pcm_speed_hz;

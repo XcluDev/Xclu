@@ -69,24 +69,24 @@ protected:
 
     //доступ к переменным
     bool has_int(QString name) const;
-    int get_int(QString name) const;
+    int geti(QString name) const;
     //используйте var_int для изменения переменной
     int &var_int(QString name, bool create_if_not_exists = false);
-    void set_int(QString name, const int &v);
+    void seti(QString name, const int &v);
     QMap<QString,int> &all_ints();
 
     bool has_float(QString name) const;
-    float get_float(QString name) const;
+    float getf(QString name) const;
     //используйте var_float для изменения переменной
     float &var_float(QString name, bool create_if_not_exists = false);
-    void set_float(QString name, const float &v);
+    void setf(QString name, const float &v);
     QMap<QString,float> &all_floats();
 
     bool has_string(QString name) const;
-    QString get_string(QString name) const;
+    QString gets(QString name) const;
     //используйте var_string для изменения переменной
     QString &var_string(QString name, bool create_if_not_exists = false);
-    void set_string(QString name, const QString &v);
+    void sets(QString name, const QString &v);
     QMap<QString,QString> &all_strings();
 
     bool has_array(QString name) const;
@@ -210,13 +210,13 @@ public:
 
     //доступ к переменным
     bool has_int(QString name)          { return object_->has_int(name); }
-    int get_int(QString name)           { return object_->var_int(name); }
+    int geti(QString name)           { return object_->var_int(name); }
 
     bool has_float(QString name)        { return object_->has_float(name); }
-    float get_float(QString name)        { return object_->var_float(name); }
+    float getf(QString name)        { return object_->var_float(name); }
 
     bool has_string(QString name)           { return object_->has_string(name); }
-    QString get_string(QString name)       { return object_->get_string(name); }
+    QString gets(QString name)       { return object_->gets(name); }
 
     bool has_array(QString name)           { return object_->has_array(name); }
     XcluArray const *get_array(QString name) { return object_->get_array(name); }
@@ -260,15 +260,15 @@ public:
 
     //доступ к переменным
     int &var_int(QString name, bool create_if_not_exists = false) { return object_->var_int(name, create_if_not_exists); }
-    void set_int(QString name, const int &v) { object_->set_int(name, v); }
+    void seti(QString name, const int &v) { object_->seti(name, v); }
     QMap<QString,int> &all_ints()           { return object_->all_ints(); }
 
     float &var_float(QString name, bool create_if_not_exists = false)  { return object_->var_float(name, create_if_not_exists); }
-    void set_float(QString name, const float &v) { object_->set_float(name, v); }
+    void setf(QString name, const float &v) { object_->setf(name, v); }
     QMap<QString,float> &all_floats()       { return object_->all_floats(); }
 
     QString &var_string(QString name, bool create_if_not_exists = false) { return object_->var_string(name, create_if_not_exists); }
-    void set_string(QString name, const QString &v) { object_->set_string(name, v); }
+    void sets(QString name, const QString &v) { object_->sets(name, v); }
     QMap<QString,QString> &all_strings()        { return object_->all_strings(); }
 
     //используйте var_array для изменения массива

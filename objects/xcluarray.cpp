@@ -134,7 +134,7 @@ void XcluArray::fill(int v) {
     if (is_empty()) return;
     if (is_int()) {
         for (quint32 i=0; i<size_; i++) {
-            set_int(i, v);
+            seti(i, v);
         }
         return;
     }
@@ -147,7 +147,7 @@ void XcluArray::fill(double v) {
     xclu_assert(is_float() || is_double(), "It's allowed to fill only float and double arrays with floats");
     if (is_float()) {
         for (quint32 i=0; i<size_; i++) {
-            set_float(i, v);
+            setf(i, v);
         }
     }
     if (is_double()) {
@@ -322,7 +322,7 @@ void const *XcluArray::pixel_pointer(int x, int y) const { //для изобра
 }
 
 //---------------------------------------------------------------------
-int XcluArray::get_int(qint32 index) const {
+int XcluArray::geti(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_u8bit:
@@ -346,7 +346,7 @@ int XcluArray::get_int(qint32 index) const {
 
 
 //---------------------------------------------------------------------
-void XcluArray::set_int(qint32 index, int v) {
+void XcluArray::seti(qint32 index, int v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_u8bit:
@@ -374,7 +374,7 @@ void XcluArray::set_int(qint32 index, int v) {
 }
 
 //---------------------------------------------------------------------
-float XcluArray::get_float(qint32 index) const {
+float XcluArray::getf(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:
@@ -389,7 +389,7 @@ float XcluArray::get_float(qint32 index) const {
 }
 
 //---------------------------------------------------------------------
-void XcluArray::set_float(qint32 index, float v) {
+void XcluArray::setf(qint32 index, float v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XcluArrayDataType_float:

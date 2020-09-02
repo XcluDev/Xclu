@@ -32,7 +32,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
 
     //По умолчанию - это категория "All"
     QString All = ModulesFactory::All_Category_Name();
-    QString tab_name = Settings::get_string(Settings::dialogaddmodule_tab(), "All");
+    QString tab_name = Settings::gets(Settings::dialogaddmodule_tab(), "All");
     //qDebug() << "tab index stored" << tab_index;
 
     //список категорий
@@ -207,7 +207,7 @@ void DialogAddModule::tab_current_changed(int index) {
     //qDebug() << "tab_current_changed" << index;
     if (index >= 0) {
         QString tab_name = category_list_->item(index)->text();
-        Settings::set_string(Settings::dialogaddmodule_tab(), tab_name);
+        Settings::sets(Settings::dialogaddmodule_tab(), tab_name);
     }
 }
 

@@ -71,11 +71,11 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
 
     //Cчитывание запомненного пути из настроек приложения
     //QSettings settings;
-    QString last_folder = Settings::get_string(Settings::dialogtestmodule_folder(), "");
+    QString last_folder = Settings::gets(Settings::dialogtestmodule_folder(), "");
 
     //TODO - сейчас dialogtestmodule_tab не ставится!!!
     if (!last_folder.isEmpty()) {
-        int last_tab  = Settings::get_int(Settings::dialogtestmodule_tab(), 0);
+        int last_tab  = Settings::geti(Settings::dialogtestmodule_tab(), 0);
         load_module(last_folder, last_tab);
     }
 
@@ -134,7 +134,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
     }
 
     //запись папки в настройки
-    Settings::set_string(Settings::dialogtestmodule_folder(), folder);
+    Settings::sets(Settings::dialogtestmodule_folder(), folder);
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение

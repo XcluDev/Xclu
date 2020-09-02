@@ -101,11 +101,11 @@ void XcluObjectImage::show_object(QLabel *label, const XcluObjectShowSettings &s
 
     XcluObjectImageData d;
 
-    d.w = object.get_int("w");
-    d.h = object.get_int("h");
-    d.channels = object.get_int("channels");
-    d.channels_description = object.get_string("channels_description");
-    d.data_type = object.get_string("data_type");
+    d.w = object.geti("w");
+    d.h = object.geti("h");
+    d.channels = object.geti("channels");
+    d.channels_description = object.gets("channels_description");
+    d.data_type = object.gets("data_type");
     //d.data = &object.get_array("data");
     return d;
 }
@@ -252,13 +252,13 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 /*static*/ void XcluObjectImage::allocate(ObjectReadWrite &object, XcluArrayDataType data_type, int channels, int w, int h) {
     object.clear();
     object.set_type(XcluObjectTypeImage);
-    object.set_int("w", w);
-    object.set_int("h", h);
-    object.set_int("channels", channels);
+    object.seti("w", w);
+    object.seti("h", h);
+    object.seti("channels", channels);
     QString channels_str = (channels==1) ? "Grayscale" : "RGB"; //TODO если каналов не 1 или 3, то будет пустое описание
-    object.set_string("channels_description", channels_str);
+    object.sets("channels_description", channels_str);
 
-    object.set_string("data_type", XcluArrayDataType_to_string(data_type));
+    object.sets("data_type", XcluArrayDataType_to_string(data_type));
 
     //создание массива
     XcluArray *array = object.var_array("data", true);
@@ -290,9 +290,9 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //---------------------------------------------------------------------
 /*static*/ void XcluObjectImage::to_raster(ObjectRead &object, Raster_u8 &raster, rect_int rect) {
 
-    int w = object.get_int("w");
-    int h = object.get_int("h");
-    int channels = object.get_int("channels");
+    int w = object.geti("w");
+    int h = object.geti("h");
+    int channels = object.geti("channels");
     xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::to_raster - only 1,3 channels are supported");
 
     //прямоугольник
@@ -333,9 +333,9 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 //---------------------------------------------------------------------
 /*static*/ void XcluObjectImage::to_raster(ObjectRead &object, Raster_u8c3 &raster, rect_int rect) {
-    int w = object.get_int("w");
-    int h = object.get_int("h");
-    int channels = object.get_int("channels");
+    int w = object.geti("w");
+    int h = object.geti("h");
+    int channels = object.geti("channels");
     xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::to_raster - only 1,3 channels are supported");
 
     //прямоугольник
@@ -407,12 +407,12 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     //заполнение полей описания изображения
     object.clear();
     object.set_type(XcluObjectTypeImage);
-    object.set_int("w", w);
-    object.set_int("h", h);
-    object.set_int("channels", channels);
-    object.set_string("channels_description", channels_str);
+    object.seti("w", w);
+    object.seti("h", h);
+    object.seti("channels", channels);
+    object.sets("channels_description", channels_str);
     QString data_type_str = XcluArrayDataType_to_string(data_type);
-    object.set_string("data_type", data_type_str);
+    object.sets("data_type", data_type_str);
 
     //заполнение массива
     XcluArray *array = object.var_array("data", true);
@@ -484,10 +484,10 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     xclu_assert(!mirrorx, "XcluObjectImage::convert_to_QImage doesn't supports mirrorx");
 
-    int w = object.get_int("w");
-    int h = object.get_int("h");
+    int w = object.geti("w");
+    int h = object.geti("h");
 
-    int channels = object.get_int("channels");
+    int channels = object.geti("channels");
     xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::convert_to_QImage - only 1,3,4 channels are supported");
 
     auto *array = object.get_array("data");
@@ -538,10 +538,10 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     object.assert_type(XcluObjectTypeImage);
 
-    int w = object.get_int("w");
-    int h = object.get_int("h");
+    int w = object.geti("w");
+    int h = object.geti("h");
 
-    int channels = object.get_int("channels");
+    int channels = object.geti("channels");
     xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
     auto *array = object.get_array("data");

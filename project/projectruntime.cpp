@@ -122,21 +122,21 @@ Module *ProjectRuntime::get_module(QString module_id) {
 int ProjectRuntime::get_int_by_link(QString link_str, int def_val) {
     VarLink link(link_str);
     if (link.is_empty) return def_val;
-    return RUNTIME.get_module(link.module)->get_int(link.var, link.index, link.index2);
+    return RUNTIME.get_module(link.module)->geti(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float ProjectRuntime::get_float_by_link(QString link_str, float def_val) {
     VarLink link(link_str);
     if (link.is_empty) return def_val;
-    return RUNTIME.get_module(link.module)->get_float(link.var, link.index, link.index2);
+    return RUNTIME.get_module(link.module)->getf(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString ProjectRuntime::get_string_by_link(QString link_str, QString def_val) {
     VarLink link(link_str);
     if (link.is_empty) return def_val;
-    return RUNTIME.get_module(link.module)->get_string(link.var, link.index, link.index2);
+    return RUNTIME.get_module(link.module)->gets(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------

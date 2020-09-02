@@ -284,8 +284,8 @@ void Module::access_call(QString function, XcluObject *input, XcluObject *output
 //int, checkbox, button, enum (rawtext), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-QString Module::get_string(QString name, int index, int index2) {
-    return rtmodule()->get_string(name, index, index2);
+QString Module::gets(QString name, int index, int index2) {
+    return rtmodule()->gets(name, index, index2);
 }
 
 //---------------------------------------------------------------------
@@ -295,34 +295,34 @@ QStringList Module::get_strings(QString name) {
 }
 
 //---------------------------------------------------------------------
-void Module::set_string(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
-    rtmodule()->set_string(name, v);
+void Module::sets(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
+    rtmodule()->sets(name, v);
 }
 
 //---------------------------------------------------------------------
 //int, checkbox, button, enum (index)
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-int Module::get_int(QString name, int index, int index2) {
-    return rtmodule()->get_int(name, index, index2);
+int Module::geti(QString name, int index, int index2) {
+    return rtmodule()->geti(name, index, index2);
 }
 
 //---------------------------------------------------------------------
-void Module::set_int(QString name, int v) { //только out: int, checkbox, enum (index)
-    rtmodule()->set_int(name, v);
+void Module::seti(QString name, int v) { //только out: int, checkbox, enum (index)
+    rtmodule()->seti(name, v);
 }
 
 //---------------------------------------------------------------------
 //float
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-float Module::get_float(QString name, int index, int index2) {
-    return rtmodule()->get_float(name, index, index2);
+float Module::getf(QString name, int index, int index2) {
+    return rtmodule()->getf(name, index, index2);
 }
 
 //---------------------------------------------------------------------
-void Module::set_float(QString name, float v) {  //out: float
-    rtmodule()->set_float(name, v);
+void Module::setf(QString name, float v) {  //out: float
+    rtmodule()->setf(name, v);
 }
 
 //---------------------------------------------------------------------

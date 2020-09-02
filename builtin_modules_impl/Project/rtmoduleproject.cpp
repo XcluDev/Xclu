@@ -35,8 +35,8 @@ void RtModuleProject::execute_loaded_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleProject::apply_control_values() {
-    RUNTIME.set_frame_rate(get_int("frame_rate"));
-    RUNTIME.set_autostart(get_int("autostart"));
+    RUNTIME.set_frame_rate(geti("frame_rate"));
+    RUNTIME.set_autostart(geti("autostart"));
 }
 
 //---------------------------------------------------------------------
@@ -46,14 +46,14 @@ void RtModuleProject::execute_start_internal() {
 
 //---------------------------------------------------------------------
 void RtModuleProject::execute_update_internal() {
-    set_float("elapsed_time_sec", RUNTIME.elapsed_time_sec());
+    setf("elapsed_time_sec", RUNTIME.elapsed_time_sec());
 
     float dt = RUNTIME.dt();
-    set_float("dt", dt);
+    setf("dt", dt);
 
     float fps = 10000;
     if (dt > 0) fps = 1.0 / dt;
-    set_float("measured_frame_rate", fps);
+    setf("measured_frame_rate", fps);
 
 }
 

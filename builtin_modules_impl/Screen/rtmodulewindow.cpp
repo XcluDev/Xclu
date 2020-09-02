@@ -46,13 +46,13 @@ void RtModuleWindow::set_position(int x, int y) {
 //получить экран в зависимости от настроек
 QScreen *RtModuleWindow::get_screen() {
     return QGuiApplication::primaryScreen();
-/*    WindowScreen screen = WindowScreen(get_int("screen"));
+/*    WindowScreen screen = WindowScreen(geti("screen"));
     switch (screen) {
     case WindowScreen_Default:
         return QGuiApplication::primaryScreen();
         break;
     case WindowScreen_Custom: {
-            int index = get_int("screen_index");
+            int index = geti("screen_index");
             auto screens = QGuiApplication::screens();
             xclu_assert(index>=0 && index<screens.count(),
                         QString("Bad screen index %1").arg(index));
@@ -89,8 +89,8 @@ void RtModuleWindow::setup_window() {
     //Qt::FramelessWindowHint
 
     //шрифт
-    if (get_int("font_size") == 1) {    //Custom
-        int font_size = get_int("font_size_pix");
+    if (geti("font_size") == 1) {    //Custom
+        int font_size = geti("font_size_pix");
         auto font = window_->font();
         font.setPixelSize(font_size);
         window_->setFont(font);
@@ -108,9 +108,9 @@ void RtModuleWindow::update_window() {
     //проверка, что пользователь закрыл окно
     if (notify_visible_change_) {
         notify_visible_change_ = false;
-        if (get_int("visible") && !window_->isVisible()) {
+        if (geti("visible") && !window_->isVisible()) {
             //пользователь нажал кнопку закрытия окна или другой сигнал для закрытия
-            OnCloseAction on_close = OnCloseAction(get_int("on_close"));
+            OnCloseAction on_close = OnCloseAction(geti("on_close"));
             switch (on_close) {
             case  OnCloseAction_Ignore:
                 window_->setVisible(true);  //делаем видимым
@@ -127,20 +127,20 @@ void RtModuleWindow::update_window() {
 
     //title
     if (was_changed("title")) {
-        window_->setWindowTitle(get_string("title"));
+        window_->setWindowTitle(gets("title"));
     }
 
     //TODO!!!!!!!!!!!!!!!!!!!!!!!!!! если меняем размер и положение - то сразу установить setGeometry
     //Size
     bool size_changed = false;
-    WindowSize size = WindowSize(get_int("size"));
+    WindowSize size = WindowSize(geti("size"));
     if (was_changed("size")
             || (size == WindowSize_Custom && (was_changed("size_x") || was_changed("size_y")))) {
         size_changed = true;
         switch (size) {
         case WindowSize_Default:
             break;
-        case WindowSize_Custom: set_size(get_int("size_x"), get_int("size_y"));
+        case WindowSize_Custom: set_size(geti("size_x"), geti("size_y"));
             break;
         case WindowSize_640x480: set_size(640,480);
             break;
@@ -161,13 +161,13 @@ void RtModuleWindow::update_window() {
 
     //Position
     //меняем положение, даже если изменили размер - если были настройки "в центре экрана"
-    WindowPos position = WindowPos(get_int("position"));
+    WindowPos position = WindowPos(geti("position"));
     if (size_changed || was_changed("position")
             || (position == WindowPos_Custom && (was_changed("pos_x") || was_changed("pos_y")))) {
         switch (position) {
         case WindowPos_Default:
             break;
-        case WindowPos_Custom: set_position(get_int("pos_x"), get_int("pos_y"));
+        case WindowPos_Custom: set_position(geti("pos_x"), geti("pos_y"));
             break;
         case WindowPos_ScreenCenter: {
                 QRect screenGeometry = get_screen()->geometry();
@@ -184,7 +184,7 @@ void RtModuleWindow::update_window() {
 
     //Visibility, fullscreen
     if (was_changed("visible") || was_changed("mode")) {
-        int visible = get_int("visible");
+        int visible = geti("visible");
         if (!visible) {
             window_->setVisible(false);
         }
@@ -194,7 +194,7 @@ void RtModuleWindow::update_window() {
             //minimized,maximized,fullscreen
             QWindow::Visibility visibility = QWindow::Windowed;
 
-            WindowMode mode = WindowMode(get_int("mode"));
+            WindowMode mode = WindowMode(geti("mode"));
             switch (mode) {
             case WindowMode_Minimized: visibility = QWindow::Minimized;
                 break;
@@ -466,7 +466,7 @@ QWidget *RtModuleWindow::request_widget(QString module_id) {
 
     //формируем запрос
     XcluObject input;
-    ObjectReadWrite(input).set_string("parent_id", module_->name());
+    ObjectReadWrite(input).sets("parent_id", module_->name());
 
     XcluObject output;
 

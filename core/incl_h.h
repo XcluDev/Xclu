@@ -11,6 +11,13 @@
 #include <functional>
 #include <QScopedPointer>
 
+//Stl - currently commented
+//#include <vector>
+//#include <string>
+//#include <algorithm>
+//using namespace std;
+
+
 //types, utils
 #include "types.h"
 #include "utils.h"

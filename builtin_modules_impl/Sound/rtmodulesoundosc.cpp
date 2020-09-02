@@ -154,46 +154,46 @@ void RtModuleSoundOsc::execute_stop_internal() {
 void RtModuleSoundOsc::update_data() {
     DataAccess access(data_);
 
-    data_.out_enabled = get_int("out_enabled");
-    int mod = get_int("mod_enabled");   //modulation
+    data_.out_enabled = geti("out_enabled");
+    int mod = geti("mod_enabled");   //modulation
     data_.mod_enabled = mod;
 
     //volume
-    data_.volume = get_float("volume");
+    data_.volume = getf("volume");
     if (mod) {
-        data_.vol_mod = RUNTIME.get_float_by_link(get_string("volume_link"));
-        set_float("volume_mod", data_.vol_mod);
+        data_.vol_mod = RUNTIME.get_float_by_link(gets("volume_link"));
+        setf("volume_mod", data_.vol_mod);
     }
     else {
         data_.vol_mod = 1;   
     }
 
     //freq
-    data_.freq = get_float("freq");
+    data_.freq = getf("freq");
 
     //fm, am
-    data_.fm_enabled = get_int("fm_enabled");
-    data_.fm_rate = get_float("fm_rate");
-    data_.fm_range = get_float("fm_range");
+    data_.fm_enabled = geti("fm_enabled");
+    data_.fm_rate = getf("fm_rate");
+    data_.fm_range = getf("fm_range");
 
-    data_.am_enabled = get_int("am_enabled");
-    data_.am_rate = get_float("am_rate");
-    data_.am_range = get_float("am_range");
+    data_.am_enabled = geti("am_enabled");
+    data_.am_rate = getf("am_rate");
+    data_.am_range = getf("am_range");
     if (mod) {
-        data_.fm_rate = RUNTIME.get_float_by_link(get_string("fm_rate_link"), data_.fm_rate);
-        data_.fm_range = RUNTIME.get_float_by_link(get_string("fm_range_link"), data_.fm_range);
-        data_.am_rate = RUNTIME.get_float_by_link(get_string("am_rate_link"), data_.am_rate);
-        data_.am_range = RUNTIME.get_float_by_link(get_string("am_range_link"), data_.am_range);
+        data_.fm_rate = RUNTIME.get_float_by_link(gets("fm_rate_link"), data_.fm_rate);
+        data_.fm_range = RUNTIME.get_float_by_link(gets("fm_range_link"), data_.fm_range);
+        data_.am_rate = RUNTIME.get_float_by_link(gets("am_rate_link"), data_.am_rate);
+        data_.am_range = RUNTIME.get_float_by_link(gets("am_range_link"), data_.am_range);
 
-        set_float("fm_rate_mod", data_.fm_rate);
-        set_float("fm_range_mod", data_.fm_range);
-        set_float("am_rate_mod", data_.am_rate);
-        set_float("am_range_mod", data_.am_range);
+        setf("fm_rate_mod", data_.fm_rate);
+        setf("fm_range_mod", data_.fm_range);
+        setf("am_rate_mod", data_.am_rate);
+        setf("am_range_mod", data_.am_range);
     }
 
     //speed
-    data_.vol_speed = get_float("vol_speed");
-    data_.freq_speed = get_float("freq_speed");
+    data_.vol_speed = getf("vol_speed");
+    data_.freq_speed = getf("freq_speed");
 
 
 }
@@ -210,9 +210,9 @@ void RtModuleSoundOsc::call_internal(QString function, XcluObject *input, XcluOb
             //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
             ObjectReadWrite sound(input);
 
-            float sample_rate = sound.get_int("sample_rate");
-            int samples = sound.get_int("samples");
-            int channels = sound.get_int("channels");
+            float sample_rate = sound.geti("sample_rate");
+            int samples = sound.geti("samples");
+            int channels = sound.geti("channels");
             float *data = sound.var_array("data")->data_float();
 
 

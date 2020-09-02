@@ -20,7 +20,7 @@ RtModuleSerial::RtModuleSerial()
 
 //---------------------------------------------------------------------
 void RtModuleSerial::gui_clear() {
-    set_int("total_sent",0);
+    seti("total_sent",0);
     clear_string("device_list");
     clear_string("port_info");
     set_connected(false); //также ставит gui-элемент connected
@@ -31,13 +31,13 @@ void RtModuleSerial::gui_clear() {
 //---------------------------------------------------------------------
 void RtModuleSerial::set_connected(bool connected) {
   connected_ = connected;
-  set_int("connected", connected);
+  seti("connected", connected);
 }
 
 //---------------------------------------------------------------------
 void RtModuleSerial::set_total_sent(int t) {
     total_sent_ = t;
-    set_int("total_sent", t);
+    seti("total_sent", t);
 }
 
 //---------------------------------------------------------------------
@@ -63,7 +63,7 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
     bool connect_warning = false;
     if (button_id == "send_string_btn") {
         if (connected_) {
-            QString str = get_string("send_string");
+            QString str = gets("send_string");
             send_string(str);
         }
         else {
@@ -73,7 +73,7 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
     }
     if (button_id == "send_string_link_btn") {
         if (connected_) {
-            QString str = RUNTIME.get_string_by_link(get_string("string_link_send"));
+            QString str = RUNTIME.get_string_by_link(gets("string_link_send"));
             send_string(str);
         }
         else {
@@ -83,7 +83,7 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
 
     if (button_id == "send_bytes_btn") {
         if (connected_) {
-            int byte = get_int("send_byte");
+            int byte = geti("send_byte");
             send_byte(byte);
         }
         else {
@@ -153,7 +153,7 @@ void RtModuleSerial::open_port() {
     int index0 = -1;
     int index1 = -1;
 
-    int select_port = get_int("select_port");
+    int select_port = geti("select_port");
     switch (select_port) {
     case SelectDeviceDefault: {
         index0 = 0;
@@ -161,14 +161,14 @@ void RtModuleSerial::open_port() {
     }
         break;
     case SelectDeviceByIndex: {
-        index0 = get_int("port_index0");
-        index1 = get_int("port_index1");
+        index0 = geti("port_index0");
+        index1 = geti("port_index1");
         xclu_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
         xclu_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
     }
         break;
     case SelectDeviceByName: {
-        QString port_name = get_string("port_name");
+        QString port_name = gets("port_name");
         int k = 0;
         for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
             QString name = serialPortInfo.portName();
@@ -192,7 +192,7 @@ void RtModuleSerial::open_port() {
     xclu_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
 
     //Скорость подключения
-    int baud_rate = get_string("baud_rate").toInt();
+    int baud_rate = gets("baud_rate").toInt();
     xclu_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
 
     //Поиск свободного порта
@@ -234,12 +234,12 @@ void RtModuleSerial::execute_update_internal() {
 //---------------------------------------------------------------------
 void RtModuleSerial::send_string(QString str) {
     //добавляем завершение строки
-    int ts = get_int("line_term"); //None,\n,\r,\r\n
+    int ts = geti("line_term"); //None,\n,\r,\r\n
     if (ts == 1) str += "\n";
     if (ts == 2) str += "\r";
     if (ts == 3) str += "\r\n";
 
-    if (get_int("debug")) {
+    if (geti("debug")) {
         xclu_console_append("Send string `" + str + "`");
     }
 
@@ -267,7 +267,7 @@ void RtModuleSerial::send_string(QString str) {
 
 //---------------------------------------------------------------------
 void RtModuleSerial::send_byte(int byte) {
-    if (get_int("debug")) {
+    if (geti("debug")) {
         xclu_console_append("Send byte `" + QString::number(byte) + "`");
     }
     xclu_exception("Sending byte is not implented");

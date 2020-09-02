@@ -12,10 +12,10 @@ class QMainWindow;
 class Settings {
 public:
     //Взятие и получение строки
-    static QString get_string(QString key, QString def = "");
-    static void set_string(QString key, QString value);
-    static int get_int(QString key, int def = 0);
-    static void set_int(QString key, int value);
+    static QString gets(QString key, QString def = "");
+    static void sets(QString key, QString value);
+    static int geti(QString key, int def = 0);
+    static void seti(QString key, int value);
 
     //Конкретные ключи
     static QString key_main_window() { return "main_window"; }

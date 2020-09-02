@@ -14,7 +14,7 @@ array data
 #------------------------------------------
 type sound_buffer
 #------------------------------------------
-#        sound.set_string("function","request_sound");
+#        sound.sets("function","request_sound");
 int samples=0 0:*
 int channels=0 0:*
 int sample_rate=0 0:*

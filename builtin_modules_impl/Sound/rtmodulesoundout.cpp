@@ -38,9 +38,9 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
             ObjectReadWrite sound(&sound_);
             sound.clear();
             //создаем массив
-            sound.set_int("samples", samples);
-            sound.set_int("channels", channels);
-            sound.set_int("sample_rate", format_.sampleRate());
+            sound.seti("samples", samples);
+            sound.seti("channels", channels);
+            sound.seti("sample_rate", format_.sampleRate());
             XcluArray *arr = sound.var_array("data", true);
             arr->allocate_1d(samples*channels, XcluArrayDataType_float);
         }
@@ -213,7 +213,7 @@ void RtModuleSoundOut::execute_start_internal() {
         data_.clear();
     }
     buffer_size_= 0;
-    set_int("buffer_size", 0);
+    seti("buffer_size", 0);
     ObjectReadWrite(get_object("sound_format")).clear();
 
     set_started(false); //также ставит gui-элемент is_started
@@ -242,19 +242,19 @@ void RtModuleSoundOut::execute_update_internal() {
     //также проверить - если есть ошибка, то остановиться
     {
         DataAccess access(data_);
-        data_.play_test_sound_ = get_int("gen_test");
-        data_.volume_ = get_float("volume");
-        data_.modules_ = RUNTIME.get_modules(get_string("modules_list"));
+        data_.play_test_sound_ = geti("gen_test");
+        data_.volume_ = getf("volume");
+        data_.modules_ = RUNTIME.get_modules(gets("modules_list"));
 
         //если ошибка - обработать ошибку
         data_.err.throw_error();
     }
     //показ размера буфера
-    set_int("buffer_size", buffer_size_);
+    seti("buffer_size", buffer_size_);
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
-    //RUNTIME.execute_callbacks(get_string("callback_modules"));
+    //RUNTIME.execute_callbacks(gets("callback_modules"));
 }
 
 
@@ -262,7 +262,7 @@ void RtModuleSoundOut::execute_update_internal() {
 void RtModuleSoundOut::check_volume_change() {
     if (audio_started_) {
         if (was_changed("device_volume")) {
-            float volume = get_float("device_volume");
+            float volume = getf("device_volume");
             qreal linearVolume = QAudio::convertVolume(volume, QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
             m_audioOutput->setVolume(linearVolume);
         }
@@ -341,20 +341,20 @@ void RtModuleSoundOut::start_audio() {
         const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
         xclu_assert(!devices.empty(), "No connected devices");
 
-        SelectDevice method = SelectDevice(get_int("select_device"));
+        SelectDevice method = SelectDevice(geti("select_device"));
         switch (method) {
         case SelectDeviceDefault: {
             start_audio(QAudioDeviceInfo::defaultOutputDevice());
             break;
         }
         case SelectDeviceByIndex: {
-                int name = get_int("device_index");
+                int name = geti("device_index");
                 xclu_assert(name >= 0 && name < devices.size(), "Bad device index " + QString::number(name));
                 start_audio(devices[name]);
                 break;
         }
         case SelectDeviceByName: {
-            QString name = get_string("device_name");
+            QString name = gets("device_name");
             for (int i=0; i<devices.size(); i++) {
                 auto &info = devices.at(i);
                 if (info.deviceName().contains(name)) {
@@ -379,14 +379,14 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     QAudioFormat format;
 
     //sample rate
-    QString srate_string = get_string("sample_rate");
+    QString srate_string = gets("sample_rate");
     int sample_rate = 44100;
     if (srate_string == "Default") {
         sample_rate = deviceInfo.preferredFormat().sampleRate();
     }
     else {
         if (srate_string == "Custom") {
-            sample_rate = get_int("custom_sample_rate");
+            sample_rate = geti("custom_sample_rate");
         }
         else {
             bool ok;
@@ -397,7 +397,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     format.setSampleRate(sample_rate);
 
     //channels
-    format.setChannelCount(get_int("channels"));
+    format.setChannelCount(geti("channels"));
 
     //sample format
     format.setCodec("audio/pcm");
@@ -417,7 +417,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //выдача информации о устройстве
     QString device_name = deviceInfo.deviceName();
 
-    set_string("connected_device_name", device_name);
+    sets("connected_device_name", device_name);
     append_string("local_console", "Starting: " + device_name, 2);
 
 
@@ -433,7 +433,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     connect(m_audioOutput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
 
     //вычисление и установка размера буфера
-    QString buffer_size_str = get_string("buffer_size_desired");
+    QString buffer_size_str = gets("buffer_size_desired");
     if (buffer_size_str != "Default") {
         int buffer_size = buffer_size_str.toInt();
         xclu_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));
@@ -457,7 +457,7 @@ void RtModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
 //---------------------------------------------------------------------
 void RtModuleSoundOut::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     audio_started_ = started;
-    set_int("is_started", started);
+    seti("is_started", started);
 }
 
 //---------------------------------------------------------------------
@@ -483,7 +483,7 @@ void RtModuleSoundOut::set_buffer_size(int buffer_size) {
 //---------------------------------------------------------------------
 //печать в консоль доступных устройств аудиовывода
 void RtModuleSoundOut::print_devices() {
-    int print = get_int("print_devices");
+    int print = geti("print_devices");
     if (!print) {
         print_devices_worked_ = false;
     }
@@ -512,7 +512,7 @@ void RtModuleSoundOut::print_devices() {
 void RtModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
     if (audio_tried_to_start_
             && !print_formats_worked_
-            && get_int("print_formats")) {
+            && geti("print_formats")) {
         print_formats_worked_ = true;
 
         QString device_name = deviceInfo.deviceName();

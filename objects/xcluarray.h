@@ -73,17 +73,17 @@ public:
     void fill(int v);       //заполнить одинаковыми значениями
     void fill(double v);
 
-    int get_int(qint32 index) const;
-    void set_int(qint32 index, int v);
-    float get_float(qint32 index) const;
-    void set_float(qint32 index, float v);
+    int geti(qint32 index) const;
+    void seti(qint32 index, int v);
+    float getf(qint32 index) const;
+    void setf(qint32 index, float v);
     double get_double(qint32 index) const;
     void set_double(qint32 index, double v);
 
-    int get_int(const QVector<quint32> &index) const { return get_int(to_index(index)); }
-    void set_int(const QVector<quint32> &index, int v) { set_int(to_index(index), v); }
-    float get_float(const QVector<quint32> &index) const { return get_float(to_index(index)); }
-    void set_float(const QVector<quint32> &index, int v) { set_float(to_index(index), v); }
+    int geti(const QVector<quint32> &index) const { return geti(to_index(index)); }
+    void seti(const QVector<quint32> &index, int v) { seti(to_index(index), v); }
+    float getf(const QVector<quint32> &index) const { return getf(to_index(index)); }
+    void setf(const QVector<quint32> &index, int v) { setf(to_index(index), v); }
     double get_double(const QVector<quint32> &index) const { return get_double(to_index(index)); }
     void set_double(const QVector<quint32> &index, int v) { set_double(to_index(index), v); }
 

@@ -71,10 +71,10 @@ void MainWindow::setup() {   //запуск всех процессов
     set_state(ProjectRunStateStopped);
 
     //ставим папку для первого открытия проекта из последней папки сохраненного проекта
-    open_projects_folder_ = Settings::get_string(Settings::lastProjectFolder());
+    open_projects_folder_ = Settings::gets(Settings::lastProjectFolder());
 
     //открываем последний проект, если он есть
-    QString last_project = Settings::get_string(Settings::lastProjectFile());
+    QString last_project = Settings::gets(Settings::lastProjectFile());
     bool loaded = false;
     if (!last_project.isEmpty()) {
         QFileInfo file(last_project);
@@ -532,11 +532,11 @@ void MainWindow::set_current_file(const QString &fileName) {
 
     if (!isUntitled) {
         //запомнить файл проекта, чтобы его потом открыть
-        Settings::set_string(Settings::lastProjectFile(), projectFile);
+        Settings::sets(Settings::lastProjectFile(), projectFile);
 
         //запомнить папку проекта, чтобы от нее затем начинать Open Project
         QString folder = QFileInfo(projectFile).canonicalPath();
-        Settings::set_string(Settings::lastProjectFolder(), folder);
+        Settings::sets(Settings::lastProjectFolder(), folder);
 
         //добавить в список недавно открытых файлов
         if (windowFilePath() != projectFile) {

@@ -13,8 +13,8 @@ XcluObjectSoundFormat::XcluObjectSoundFormat(XcluObject *object)
 //создание объекта
 /*static*/ void XcluObjectSoundFormat::set_to_object(ObjectReadWrite &object, XcluObjectSoundFormatData &data) {
     object.set_type(XcluObjectTypeSoundFormat);
-    object.set_int("sample_rate", data.sample_rate);
-    object.set_int("channels", data.channels);
+    object.seti("sample_rate", data.sample_rate);
+    object.seti("channels", data.channels);
 }
 
 //---------------------------------------------------------------------
@@ -23,8 +23,8 @@ XcluObjectSoundFormat::XcluObjectSoundFormat(XcluObject *object)
     object.assert_type(XcluObjectTypeSoundFormat);
 
     XcluObjectSoundFormatData data;
-    data.sample_rate = object.get_int("sample_rate");
-    data.channels = object.get_int("channels");
+    data.sample_rate = object.geti("sample_rate");
+    data.channels = object.geti("channels");
     return data;
 }
 

@@ -73,7 +73,7 @@ void RtModule::execute(ModuleExecuteStage stage) {
     //отлов исключений путем обработки ошибок, и реакция соответственно настройках
     try {
         //обновление enabled__
-        status_.enabled__ = get_int("enabled");
+        status_.enabled__ = geti("enabled");
 
         reset_stop_out();
         reset_error_values();
@@ -183,7 +183,7 @@ bool RtModule::is_stop_out() {
 //---------------------------------------------------------------------
 //обработка ошибки в соответствие с настройками модуля
 void RtModule::process_error(QString message) {
-    int action = get_int("action_on_error");
+    int action = geti("action_on_error");
     bool ignore = false;
     bool print_console = false;
     bool show_message = false;
@@ -249,7 +249,7 @@ bool RtModule::was_changed(QString name) {
 //int, checkbox, button, enum (rawtext), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-QString RtModule::get_string(QString name, int index, int index2) {
+QString RtModule::gets(QString name, int index, int index2) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
@@ -285,12 +285,12 @@ QString RtModule::get_string(QString name, int index, int index2) {
 //---------------------------------------------------------------------
 //splits text using "\n"
 QStringList RtModule::get_strings(QString name) {
-    return get_string(name).split("\n");
+    return gets(name).split("\n");
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
-void RtModule::set_string(QString name, QString v) {
+void RtModule::sets(QString name, QString v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
@@ -299,22 +299,22 @@ void RtModule::set_string(QString name, QString v) {
 
 //---------------------------------------------------------------------
 void RtModule::clear_string(QString name) {
-    set_string(name, "");
+    sets(name, "");
 }
 
 //---------------------------------------------------------------------
-//дописать к строке, применимо где set_string
+//дописать к строке, применимо где sets
 void RtModule::append_string(QString name, QString v, int extra_new_lines_count) {
-    QString value = get_string(name);
+    QString value = gets(name);
     value.append(v);
     for (int i=0; i<1 + extra_new_lines_count; i++) {
         value.append("\n");
     }
-    set_string(name, value);
+    sets(name, value);
 }
 
 //---------------------------------------------------------------------
-void RtModule::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где set_string
+void RtModule::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
     append_string(name, v.join("\n"), extra_new_lines_count);
 }
 
@@ -322,20 +322,20 @@ void RtModule::append_string(QString name, QStringList v, int extra_new_lines_co
 //int, checkbox, button, enum (index)
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-int RtModule::get_int(QString name, int index, int index2) {
+int RtModule::geti(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
         return var->value_int();
     }
     else {
-        return get_string(name, index, index2).toInt();
+        return gets(name, index, index2).toInt();
     }
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
-void RtModule::set_int(QString name, int v) {
+void RtModule::seti(QString name, int v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -345,27 +345,27 @@ void RtModule::set_int(QString name, int v) {
 //---------------------------------------------------------------------
 //увеличение значения
 void RtModule::increase_int(QString name, int increase) { //value+=increase
-    set_int(name, get_int(name) + increase);
+    seti(name, geti(name) + increase);
 }
 
 //---------------------------------------------------------------------
 //float
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-float RtModule::get_float(QString name, int index, int index2) {
+float RtModule::getf(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
         return var->value_float();
     }
     else {
-        return get_string(name, index, index2).toFloat();
+        return gets(name, index, index2).toFloat();
     }
 }
 
 //---------------------------------------------------------------------
 //только out: float
-void RtModule::set_float(QString name, float v) {
+void RtModule::setf(QString name, float v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
@@ -406,14 +406,14 @@ XcluObject *RtModule::get_object(QString name) {
 
 //---------------------------------------------------------------------
 void RtModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
-    set_int("was_error", 0);
+    seti("was_error", 0);
     clear_string("error_text");
 }
 
 //---------------------------------------------------------------------
 void RtModule::set_error_values(QString message) { //установка того, что была ошибка
-    set_int("was_error", 1);
-    set_string("error_text", message);
+    seti("was_error", 1);
+    sets("error_text", message);
 }
 
 //---------------------------------------------------------------------

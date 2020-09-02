@@ -76,8 +76,8 @@ void RtModuleScalar::call_internal(QString function, XcluObject *input, XcluObje
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_id_ = ObjectRead(input).get_string("parent_id");
-        set_string("parent_id", parent_id_);
+        parent_id_ = ObjectRead(input).gets("parent_id");
+        sets("parent_id", parent_id_);
         parent_was_set_ = true;
 
         //проверяем, что еще не стартовали
@@ -157,7 +157,7 @@ void RtModuleScalar::update_all(bool force) {
 
     //int visible
     if (force || was_changed("visible")) {
-        widget_->setVisible(get_int("visible"));
+        widget_->setVisible(geti("visible"));
     }
 
     //итоговое значение обновляем с force, или если изменился источник
@@ -169,7 +169,7 @@ void RtModuleScalar::update_all(bool force) {
 
 //---------------------------------------------------------------------
 RtModuleScalar::Source RtModuleScalar::get_source() {
-    return Source(get_int("source"));
+    return Source(geti("source"));
 }
 
 //---------------------------------------------------------------------
@@ -179,7 +179,7 @@ void RtModuleScalar::update_value(bool force) {
     switch (source) {
     case Source_Fixed_Value:
         if (force || was_changed("fixed_value")) {
-            set_value(get_int("fixed_value"));
+            set_value(geti("fixed_value"));
         }
         break;
     case Source_GUI: {
@@ -200,9 +200,9 @@ void RtModuleScalar::update_value(bool force) {
     case Source_Other_Module_Value:
     {
         //взятие значение из другого модуля
-        VarLink link(get_string("int_link"));
+        VarLink link(gets("int_link"));
         Module *module = RUNTIME.get_module(link.module);
-        int value = module->get_int(link.var);
+        int value = module->geti(link.var);
         set_value(value);
     }
         break;
@@ -218,7 +218,7 @@ void RtModuleScalar::update_value(bool force) {
 
 //---------------------------------------------------------------------
 void RtModuleScalar::set_value(int v) {
-    set_int("value", v);
+    seti("value", v);
     if (get_source() != Source_GUI) {
         spin_->setValue(v);
     }

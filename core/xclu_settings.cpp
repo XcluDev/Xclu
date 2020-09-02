@@ -4,26 +4,26 @@
 
 
 //---------------------------------------------------------------------
-/*static*/ QString Settings::get_string(QString key, QString def) {
+/*static*/ QString Settings::gets(QString key, QString def) {
     XCLU_SETTINGS
     return settings.value(key, def).toString();
 }
 
 //---------------------------------------------------------------------
-/*static*/ void Settings::set_string(QString key, QString value) {
+/*static*/ void Settings::sets(QString key, QString value) {
     XCLU_SETTINGS
     settings.setValue(key, value);
 }
 
 //---------------------------------------------------------------------
-/*static*/ int Settings::get_int(QString key, int def) {
+/*static*/ int Settings::geti(QString key, int def) {
     XCLU_SETTINGS
     return settings.value(key, def).toInt();
 
 }
 
 //---------------------------------------------------------------------
-/*static*/ void Settings::set_int(QString key, int value) {
+/*static*/ void Settings::seti(QString key, int value) {
     XCLU_SETTINGS
     settings.setValue(key, value);
 }

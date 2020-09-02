@@ -41,7 +41,7 @@ void RtModuleWImage::execute_start_internal() {
     DataAccess access(data_);
     data_.clear();
 
-    set_int("is_new_frame",0);
+    seti("is_new_frame",0);
 
     clear_image();
 
@@ -80,8 +80,8 @@ void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObje
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_id_ = ObjectRead(input).get_string("parent_id");
-        set_string("parent_id", parent_id_);
+        parent_id_ = ObjectRead(input).gets("parent_id");
+        sets("parent_id", parent_id_);
         parent_was_set_ = true;
 
         //проверяем, что еще не стартовали
@@ -135,7 +135,7 @@ void RtModuleWImage::update_all(bool force) {
 
     //int visible
     if (force || was_changed("visible")) {
-        widget_->setVisible(get_int("visible"));
+        widget_->setVisible(geti("visible"));
     }
 
     //итоговое значение
@@ -146,11 +146,11 @@ void RtModuleWImage::update_all(bool force) {
 
 //---------------------------------------------------------------------
 void RtModuleWImage::update_value() {
-    int new_frame = RUNTIME.get_int_by_link(get_string("is_new_frame_link"));
-    set_int("is_new_frame",new_frame);
+    int new_frame = RUNTIME.get_int_by_link(gets("is_new_frame_link"));
+    seti("is_new_frame",new_frame);
 
     if (new_frame) {
-        XcluObject *object = RUNTIME.get_object_by_link(get_string("image_link"));
+        XcluObject *object = RUNTIME.get_object_by_link(gets("image_link"));
         {
             ObjectRead obj(object);
             obj.copy_to(get_object("image"));
@@ -160,8 +160,8 @@ void RtModuleWImage::update_value() {
 
             //устанавливаем настройки показа
             XcluObjectShowSettings settings;
-            settings.w = get_int("w");
-            settings.h = get_int("h");
+            settings.w = geti("w");
+            settings.h = geti("h");
 
             //создаем wrapper для объекта, который установится в зависимости от его типа,
             //и вызываем функцию для его визуализации

@@ -212,15 +212,15 @@ XcluObject_has_(object)
 XcluObject_has_(pointer)
 
 //---------------------------------------------------------------------
-/* Макрос для функций получения значения get_int, get_float, ...
+/* Макрос для функций получения значения geti, getf, ...
 QString XcluObject::var_string(QString name, bool create_if_not_exists) const {
     xclu_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
     return string_[name];
 }
 */
 
-#define XcluObject_get_(TYPE_NAME, CPP_TYPE, FUN_CONST) \
-    CPP_TYPE XcluObject::get_##TYPE_NAME(QString name) FUN_CONST { \
+#define XcluObject_get_(SHORT_TYPE, TYPE_NAME, CPP_TYPE, FUN_CONST) \
+    CPP_TYPE XcluObject::get##SHORT_TYPE(QString name) FUN_CONST { \
         xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
@@ -232,9 +232,9 @@ QString XcluObject::var_string(QString name, bool create_if_not_exists) const {
         return result; \
     }
 
-XcluObject_get_(int,int,const)
-XcluObject_get_(float,float,const)
-XcluObject_get_(string,QString,const)
+XcluObject_get_(i,int,int,const)
+XcluObject_get_(f,float,float,const)
+XcluObject_get_(s,string,QString,const)
 XcluObject_get_pointer_(array,const XcluArray *,const)
 XcluObject_get_pointer_(strings,const QStringList *,const)
 XcluObject_get_pointer_(object,const XcluObject *,const)
@@ -276,23 +276,23 @@ XcluObject_var_pointer_(strings,QStringList *)
 XcluObject_var_pointer_(object,XcluObject *)
 
 //---------------------------------------------------------------------
-/* Макрос для функций установки значения set_int, set_float, ...
-void XcluObject::set_int(QString name, int v) {
+/* Макрос для функций установки значения seti, setf, ...
+void XcluObject::seti(QString name, int v) {
     int_[name] = v;
 }
 */
 
-#define XcluObject_set_(TYPE_NAME, CPP_TYPE) \
-    void XcluObject::set_##TYPE_NAME(QString name, CPP_TYPE v) { \
+#define XcluObject_set_(SHORT_TYPE, TYPE_NAME, CPP_TYPE) \
+    void XcluObject::set##SHORT_TYPE(QString name, CPP_TYPE v) { \
         TYPE_NAME##_[name] = v; \
         set_changed(); \
     }
 
-XcluObject_set_(int, const int &)
-XcluObject_set_(float, const float &)
-XcluObject_set_(string, const QString &)
+XcluObject_set_(i, int, const int &)
+XcluObject_set_(f, float, const float &)
+XcluObject_set_(s, string, const QString &)
 
-XcluObject_set_(pointer,void *)
+XcluObject_set_(_pointer,pointer,void *)
 
 XcluArray *XcluObject::create_array(QString name) {
     xclu_assert(!has_array(name), QString("Array '%1' is already created in object").arg(name));

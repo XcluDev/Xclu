@@ -64,7 +64,7 @@ void RtModuleRealsenseCamera::gui_clear() {
     clear_string("device_list");
     clear_string("connected_device_info");
     clear_string("saved_to");
-    set_int("is_new_frame", 0);
+    seti("is_new_frame", 0);
     clear_string("frames_captured");
 
     set_started(false); //также ставит gui-элемент is_started
@@ -93,7 +93,7 @@ void RtModuleRealsenseCamera::execute_start_internal() {
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::execute_update_internal() {
     //если нажата кнопка - поставить флажок ожидания записи кадров на диск
-    if (get_int("save_frames_button")) {
+    if (geti("save_frames_button")) {
         wait_save_frames_ = 1;
     }
 
@@ -106,18 +106,18 @@ void RtModuleRealsenseCamera::execute_update_internal() {
 
     //на всякий случай ставим, что нет новых кадров
     //чтобы в случае ошибки не осталось "1"
-    set_int("is_new_frame", 0);
+    seti("is_new_frame", 0);
 
     camera_.update();
     bool is_new_frame = camera_.isFrameNew();
     //обрабатываем только новые кадры
     if (is_new_frame) {
-        set_int("is_new_frame", 1);
+        seti("is_new_frame", 1);
         processed_frames_++;
 
         //метка числа обработанных кадров
         QString processed = QString("Processed %1 frame(s)").arg(processed_frames_);
-        set_string("frames_captured", processed);
+        sets("frames_captured", processed);
 
         //установка изображений и запись их на диск, если нужно
         //TODO оптимизация: устранить создание промежуточного растра raster !
@@ -125,21 +125,21 @@ void RtModuleRealsenseCamera::execute_update_internal() {
         bool make_color = false;
         bool make_depth = false;
         bool make_ir = false;
-        if ((get_int("show_color") || wait_save_frames_) && camera_.settings().use_rgb) {
+        if ((geti("show_color") || wait_save_frames_) && camera_.settings().use_rgb) {
             Raster_u8c3 raster_color;
             xclu_assert(camera_.get_color_pixels_rgb(raster_color), "get_color_pixels_rgb() returned false");
             ObjectReadWrite image(get_object("color_image"));
             XcluObjectImage::create_from_raster(image, raster_color);
             make_color = true;
         }
-        if ((get_int("show_depth") || wait_save_frames_) && camera_.settings().use_depth) {
+        if ((geti("show_depth") || wait_save_frames_) && camera_.settings().use_depth) {
             Raster_u8c3 raster_depth;
             xclu_assert(camera_.get_depth_pixels_rgb(raster_depth), "get_depth_pixels_rgb() returned false");
             ObjectReadWrite image(get_object("depth_image"));
             XcluObjectImage::create_from_raster(image, raster_depth);
             make_depth = true;
         }
-        if ((get_int("show_ir") || wait_save_frames_) && camera_.settings().use_ir) {
+        if ((geti("show_ir") || wait_save_frames_) && camera_.settings().use_ir) {
             Raster_u8 raster_ir;
             xclu_assert(camera_.get_ir_pixels8(raster_ir), "get_ir_pixels8() returned false");
             ObjectReadWrite image(get_object("ir_image"));
@@ -162,7 +162,7 @@ void RtModuleRealsenseCamera::execute_update_internal() {
 //запись кадра на диск
 void RtModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //Создаем папку для записи
-    QString folder = RUNTIME.absolute_path_from_project(get_string("save_folder"), true /*create_folder*/);
+    QString folder = RUNTIME.absolute_path_from_project(gets("save_folder"), true /*create_folder*/);
 
     //время
     /*dd.MM.yyyy    21.05.2001
@@ -188,7 +188,7 @@ void RtModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
         ObjectRead image(get_object("ir_image"));
         XcluObjectImage::save(image, path + "_ir.png", "PNG", 100);
     }
-    set_string("saved_to", path);
+    sets("saved_to", path);
 
 }
 
@@ -205,7 +205,7 @@ void RtModuleRealsenseCamera::execute_stop_internal() {
 void RtModuleRealsenseCamera::start_camera() {
     //запуск камеры
 
-    int capture_source = get_int("capture_source");
+    int capture_source = geti("capture_source");
     if (capture_source == CaptureSourceNone) return;
     if (capture_source == CaptureSourceBagFile) {
         //TODO реализовать считывание bag-файла
@@ -217,17 +217,17 @@ void RtModuleRealsenseCamera::start_camera() {
         xclu_assert(!cameras.empty(), "No connected devices");
 
         int device_index = -1;
-        SelectDevice method = SelectDevice(get_int("select_device"));
+        SelectDevice method = SelectDevice(geti("select_device"));
         switch (method) {
         case SelectDeviceDefault:
             device_index = 0;
             break;
         case SelectDeviceByIndex:
-            device_index = get_int("device_index");
+            device_index = geti("device_index");
             xclu_assert(device_index >= 0 && device_index < cameras.size(), "Bad device index " + QString::number(device_index));
             break;
         case SelectDeviceBySerial: {
-            QString serial = get_string("device_serial");
+            QString serial = gets("device_serial");
             for (int i=0; i<cameras.size(); i++) {
                 if (cameras[i].serial == serial) {
                     device_index = i;
@@ -256,7 +256,7 @@ void RtModuleRealsenseCamera::start_camera() {
         bool started = camera_.start_camera(device_index, sett);
         set_started(started);
         if (started) {
-            set_string("connected_device_info", cameras[device_index].descr_short);
+            sets("connected_device_info", cameras[device_index].descr_short);
             //append_string("device_list", "Starting: " + device_name, 1);
         }
 
@@ -269,27 +269,27 @@ RealsenseSettings RtModuleRealsenseCamera::get_settings() {
     RealsenseSettings s;
 
     //RGB
-    s.use_rgb = get_int("color_stream_enabled");
+    s.use_rgb = geti("color_stream_enabled");
     if (s.use_rgb) {
-        int2 res = get_res(get_string("color_resolution"));
+        int2 res = get_res(gets("color_resolution"));
         s.rgb_w = res.x;
         s.rgb_h = res.y;
-        s.rgb_fps = get_frame_rate(get_string("color_frame_rate"));
+        s.rgb_fps = get_frame_rate(gets("color_frame_rate"));
     }
 
     //Depth & IR
-    s.use_depth = get_int("depth_stream_enabled");
-    s.use_ir = get_int("ir_stream_enabled");
-    s.visual_preset = get_int("depth_preset");  //TODO convert string->RealsenseSDK enum values
-    s.use_emitter = get_int("emitter");
+    s.use_depth = geti("depth_stream_enabled");
+    s.use_ir = geti("ir_stream_enabled");
+    s.visual_preset = geti("depth_preset");  //TODO convert string->RealsenseSDK enum values
+    s.use_emitter = geti("emitter");
     if (s.use_depth || s.use_ir) {
-        int2 res = get_res(get_string("depth_resolution"));
+        int2 res = get_res(gets("depth_resolution"));
         s.depth_w = res.x;
         s.depth_h = res.y;
-        s.depth_fps = get_frame_rate(get_string("depth_frame_rate"));
+        s.depth_fps = get_frame_rate(gets("depth_frame_rate"));
     }
 
-    s.align_to_depth = get_int("align_to_depth");
+    s.align_to_depth = geti("align_to_depth");
 
     return s;
 }
@@ -313,7 +313,7 @@ int RtModuleRealsenseCamera::get_frame_rate(QString rate_string) {
 //---------------------------------------------------------------------
 void RtModuleRealsenseCamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
-    set_int("is_started", started);
+    seti("is_started", started);
 }
 
 

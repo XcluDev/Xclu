@@ -126,7 +126,7 @@ void RtModuleWebcamera::execute_start_internal() {
     set_started(false); //также ставит gui-элемент is_started
 
     clear_string("connected_device_name");
-    set_int("is_new_frame", 0);
+    seti("is_new_frame", 0);
     clear_string("frames_captured");
 
     clear_string("local_console");
@@ -145,11 +145,11 @@ void RtModuleWebcamera::execute_update_internal() {
     print_formats();
 
     //захват с камеры или считывание изображений
-    int source = get_int("capture_source");
+    int source = geti("capture_source");
     if (source == CaptureSourceCamera) update_camera();
     if (source == CaptureSourceLoad_Frames) update_load_frames();
     //запись кадров - внутри проверяется, что новый кадр
-    //if (get_int("save_frames")) {
+    //if (geti("save_frames")) {
     //    update_save_frames();
     //}
 
@@ -178,7 +178,7 @@ void RtModuleWebcamera::update_camera() {
 
     //на всякий случай ставим, что нет новых кадров
     //чтобы в случае ошибки не осталось "1"
-    set_int("is_new_frame", 0);
+    seti("is_new_frame", 0);
 
     //начинаем менять данные для surface - обновлять и считывать
     bool is_new_frame;
@@ -193,7 +193,7 @@ void RtModuleWebcamera::update_camera() {
 
     //обрабатываем только новые кадры
     if (is_new_frame) {
-        set_int("is_new_frame", is_new_frame);
+        seti("is_new_frame", is_new_frame);
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
@@ -206,7 +206,7 @@ void RtModuleWebcamera::update_camera() {
     //метка числа обработанных кадров
     QString processed = QString("Captured %1, Processed %2, Dropped %3 frame(s)")
             .arg(data_.captured_frames).arg(processed_frames_).arg(data_.captured_frames-processed_frames_);
-    set_string("frames_captured", processed);
+    sets("frames_captured", processed);
 
 
 }
@@ -215,7 +215,7 @@ void RtModuleWebcamera::update_camera() {
 //---------------------------------------------------------------------
 //печать в консоль доступных камер
 void RtModuleWebcamera::print_devices() {
-    int print = get_int("print_devices");
+    int print = geti("print_devices");
     if (!print) {
         print_devices_worked_ = false;
     }
@@ -244,10 +244,10 @@ void RtModuleWebcamera::print_devices() {
 void RtModuleWebcamera::print_formats() {
     if (camera_tried_to_start_
             && !print_formats_worked_
-            && get_int("print_formats")) {
+            && geti("print_formats")) {
         print_formats_worked_ = true;
 
-        QString device_name = get_string("connected_device_name");
+        QString device_name = gets("connected_device_name");
 
         QStringList list;
         list.append("Supported Formats for '" + device_name + "'");
@@ -288,20 +288,20 @@ void RtModuleWebcamera::start_camera() {
         const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
         xclu_assert(!cameras.empty(), "No connected devices");
 
-        SelectDevice method = SelectDevice(get_int("select_device"));
+        SelectDevice method = SelectDevice(geti("select_device"));
         switch (method) {
         case SelectDeviceDefault: {
             start_camera(QCameraInfo::defaultCamera());
             break;
         }
         case SelectDeviceByIndex: {
-                int name = get_int("device_index");
+                int name = geti("device_index");
                 xclu_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
                 start_camera(cameras[name]);
                 break;
         }
         case SelectDeviceByName: {
-            QString name = get_string("device_name");
+            QString name = gets("device_name");
             for (int i=0; i<cameras.size(); i++) {
                 auto &info = cameras.at(i);
                 if (info.description().contains(name)) {
@@ -357,7 +357,7 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
     on_changed_camera_state(camera_->state());
 
     QString device_name = cameraInfo.description();
-    set_string("connected_device_name", device_name);
+    sets("connected_device_name", device_name);
     append_string("local_console", "Starting: " + device_name, 1);
 
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
@@ -371,13 +371,13 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
 int2 RtModuleWebcamera::get_gui_resolution() {
-    QString res_string = get_string("resolution");
+    QString res_string = gets("resolution");
     if (res_string == "Camera_Default") {
         return int2(-1, -1);
     }
     int2 res(-1, -1);
     if (res_string == "Custom") {
-        res = int2(get_int("res_x"), get_int("res_y"));
+        res = int2(geti("res_x"), geti("res_y"));
     }
     else {
         //требуется распарсить "1280_x_720"
@@ -392,13 +392,13 @@ int2 RtModuleWebcamera::get_gui_resolution() {
 //---------------------------------------------------------------------
 //считать из GUI частоту кадров, -1 - использовать по умолчанию
 int RtModuleWebcamera::get_gui_frame_rate() {
-    QString fps_string = get_string("frame_rate");
+    QString fps_string = gets("frame_rate");
     if (fps_string == "Camera_Default") {
         return -1;
     }
     int fps = 30;
     if (fps_string == "Custom") {
-        fps = get_int("custom_frame_rate");
+        fps = geti("custom_frame_rate");
     }
     else {
         //FPS записано числом в строке
@@ -412,14 +412,14 @@ int RtModuleWebcamera::get_gui_frame_rate() {
 //получить из GUI описание данных
 void RtModuleWebcamera::read_gui_output_data_format() {
     DataAccess access(data_);
-    data_.channels = get_string("image_channels");
-    data_.data_type = get_string("image_data_type");
+    data_.channels = gets("image_channels");
+    data_.data_type = gets("image_data_type");
 }
 
 //---------------------------------------------------------------------
 void RtModuleWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
-    set_int("is_started", started);
+    seti("is_started", started);
 }
 
 //---------------------------------------------------------------------

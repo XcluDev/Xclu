@@ -29,11 +29,11 @@ RtModuleExecute::~RtModuleExecute()
 //---------------------------------------------------------------------
 void RtModuleExecute::execute_start_internal() {
     //qDebug() << "start";
-    set_int("success", 0);
-    set_int("exit_code", 0);
-    set_int("last_success", 0);
-    set_float("last_time", 0);
-    set_float("last_duration", 0);
+    seti("success", 0);
+    seti("exit_code", 0);
+    seti("last_success", 0);
+    setf("last_time", 0);
+    setf("last_duration", 0);
     clear_string("local_console");
 
     clear_string("folder_path");
@@ -44,25 +44,25 @@ void RtModuleExecute::execute_start_internal() {
 //---------------------------------------------------------------------
 void RtModuleExecute::execute_update_internal() {
     //очищаем флажок success - он действует только в рамках одного кадра
-    set_int("success", 0);
+    seti("success", 0);
 
-    WorkMode mode = WorkMode(get_int("work_mode"));
+    WorkMode mode = WorkMode(geti("work_mode"));
 
     //вычисляем, требуется ли запуск
     bool bang = false;
     if (mode == WorkModeEach_Frame) bang = true;
-    if (mode == WorkModeOn_Bang) bang = get_int("bang_signal") || get_int("bang_button");
+    if (mode == WorkModeOn_Bang) bang = geti("bang_signal") || geti("bang_button");
 
     //запуск
     if (bang) {
 
         //вычисляем пути, даже если не требуется запуск
-        QString folder = get_string("folder_name");
-        QString file_name_short = get_string("file_name");
+        QString folder = gets("folder_name");
+        QString file_name_short = gets("file_name");
 
         //относительный путь
         folder = RUNTIME.project_folder() + "/" + folder;
-        set_string("folder_path", folder);
+        sets("folder_path", folder);
 
         //построение имени файла
         xclu_assert(!file_name_short.isEmpty(), "File Name is empty");
@@ -71,14 +71,14 @@ void RtModuleExecute::execute_update_internal() {
         if (!QFileInfo::exists(file_name)) {
             file_name = file_name_short;
         }
-        set_string("file_path", file_name);
+        sets("file_path", file_name);
 
         //сейчас поддерживаем только режим ожидания результата
-        //int wait_finish = get_int("wait_finish");
+        //int wait_finish = geti("wait_finish");
 
         //запоминаем время старта
         double start_time = RUNTIME.elapsed_time_sec();
-        set_float("last_time", start_time);
+        setf("last_time", start_time);
 
         bool success = false;
 
@@ -95,11 +95,11 @@ void RtModuleExecute::execute_update_internal() {
 
         //аргумент запуска
         QStringList arguments;
-        arguments << get_string("args");
+        arguments << gets("args");
         process.setArguments(arguments);
 
         //timeout - время ожидания, если -1, то ждать неограниченно
-        int timeout = (get_int("set_timeout")) ? int(get_float("timeout_sec")*1000): -1;
+        int timeout = (geti("set_timeout")) ? int(getf("timeout_sec")*1000): -1;
 
         //запуск
         process.start();
@@ -107,20 +107,20 @@ void RtModuleExecute::execute_update_internal() {
 
         //код выхода
         int exit_code = process.exitCode();
-        set_int("exit_code", exit_code);
+        seti("exit_code", exit_code);
 
         //проверяем результат
         success = result && (process.exitStatus() == QProcess::NormalExit)
                 && (exit_code == 0);
         if (success) {
-            set_int("success", 1);
+            seti("success", 1);
         }
         //запоминаем результат
-        set_int("last_success", success);
+        seti("last_success", success);
 
         //Пишем в консоль
-        if (get_int("show_console")) {
-            set_string("local_console", process.readAll());
+        if (geti("show_console")) {
+            sets("local_console", process.readAll());
         }
 
         //если ошибка - выдаем это
@@ -128,7 +128,7 @@ void RtModuleExecute::execute_update_internal() {
 
         //ставим продолжительность
         double time = RUNTIME.elapsed_time_sec();
-        set_float("last_duration", time - start_time);
+        setf("last_duration", time - start_time);
     }
 
 
