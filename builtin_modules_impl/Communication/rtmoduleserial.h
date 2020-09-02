@@ -13,6 +13,10 @@
 #include "xcluprotecteddata.h"
 #include "incl_h.h"
 
+//Note: now this module writes warnings and errors to console, without interrupting the project.
+//TODO: make possibility to interrupt. (Already it's set in Control module).
+//It's great to do in wizard at adding the module.
+
 class RtModuleSerial: public RtModule
 {
 public:

@@ -81,7 +81,7 @@ FORMS += \
     project/dialogs/dialogpreferences.ui
 
 INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
-INCLUDEPATH += project project/dialogs objects
+INCLUDEPATH += project project/dialogs objects sdk
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx

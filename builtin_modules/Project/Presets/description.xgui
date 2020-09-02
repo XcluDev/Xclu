@@ -8,4 +8,5 @@ module_impl=C++
 page Main
     //General settings.
 
+//When changing presets - it's good idea to print to console that "Arduino is disconnected" for making clear what's preset changed.
 

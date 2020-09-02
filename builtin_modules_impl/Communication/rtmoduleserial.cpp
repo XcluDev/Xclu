@@ -59,40 +59,42 @@ void RtModuleSerial::button_pressed_internal(QString button_id) {
         print_devices();
     }
 
+    if (is_enabled()) {
+        bool connect_warning = false;
+        if (button_id == "send_string_btn") {
+            if (connected_) {
+                QString str = gets("send_string");
+                send_string(str);
+            }
+            else {
+                connect_warning = true;
+            }
 
-    bool connect_warning = false;
-    if (button_id == "send_string_btn") {
-        if (connected_) {
-            QString str = gets("send_string");
-            send_string(str);
         }
-        else {
-            connect_warning = true;
+        if (button_id == "send_string_link_btn") {
+            if (connected_) {
+                QString str = RUNTIME.get_string_by_link(gets("string_link_send"));
+                send_string(str);
+            }
+            else {
+                connect_warning = true;
+            }
         }
 
-    }
-    if (button_id == "send_string_link_btn") {
-        if (connected_) {
-            QString str = RUNTIME.get_string_by_link(gets("string_link_send"));
-            send_string(str);
+        if (button_id == "send_bytes_btn") {
+            if (connected_) {
+                int byte = geti("send_byte");
+                send_byte(byte);
+            }
+            else {
+                connect_warning = true;
+            }
         }
-        else {
-            connect_warning = true;
-        }
-    }
 
-    if (button_id == "send_bytes_btn") {
-        if (connected_) {
-            int byte = geti("send_byte");
-            send_byte(byte);
+        if (connect_warning) {
+            //xclu_message_box("Serial: Port is not connected, may be you need to start the project.");
+            xclu_console_warning("Serial: Port is not connected, may be you need to start the project.");
         }
-        else {
-            connect_warning = true;
-        }
-    }
-
-    if (connect_warning) {
-        xclu_message_box("Port is not connected, may be you need to start the project.");
     }
 }
 
