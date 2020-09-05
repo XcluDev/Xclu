@@ -37,6 +37,13 @@ InterfaceItemFloat::InterfaceItemFloat(ModuleInterface *parent, const InterfaceI
 }
 
 //---------------------------------------------------------------------
+float InterfaceItemFloat::get_small_step() {
+    xclu_assert(slow_steps_ > 0, "InterfaceItemFloat - bad slow_steps value, must be greater thatn zero");
+    return (max_value_ - min_value_) / slow_steps_;
+
+}
+
+//---------------------------------------------------------------------
 //графический интерфейс
 InterfaceGui *InterfaceItemFloat::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiFloat(input, this);

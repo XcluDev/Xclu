@@ -17,6 +17,12 @@ InterfaceGuiFloat::InterfaceGuiFloat(InterfaceGuiPageCreator &input, InterfaceIt
     spin_->setMinimum(item->min_value());
     spin_->setMaximum(item->max_value());
 
+
+    spin_->setSingleStep(item->get_small_step());
+
+    //точность - число цифр после запятой
+    spin_->setDecimals(3);
+
     //установка десятичной точки
     spin_->setLocale(QLocale::C);
 

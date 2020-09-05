@@ -22,6 +22,7 @@ public:
 
     float min_value() { return min_value_; }
     float max_value() { return max_value_; }
+    float get_small_step();
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
