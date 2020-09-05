@@ -177,7 +177,6 @@
         <file>builtin_modules/System/Stopper/description.xgui</file>
         <file>builtin_modules/System/Thread/description.xgui</file>
         <file>builtin_modules/System/Timer/description.xgui</file>
-        <file>builtin_modules/Utils/Notes/description.xgui</file>
         <file>builtin_modules/Utils/Test/description.xgui</file>
         <file>builtin_modules/Utils/Test_int/description.xgui</file>
         <file>builtin_modules/Web/Instagram/description.xgui</file>
