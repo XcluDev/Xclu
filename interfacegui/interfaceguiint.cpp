@@ -17,6 +17,9 @@ InterfaceGuiInt::InterfaceGuiInt(InterfaceGuiPageCreator &input, InterfaceItemIn
     spin_->setMinimum(item->min_value());
     spin_->setMaximum(item->max_value());
 
+    //шаг
+    spin_->setSingleStep(item->get_small_step());
+
     //вставка на страницу
     //если есть единицы измерения - создаем блок с Label
     QString units = item->units();

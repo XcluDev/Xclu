@@ -22,6 +22,7 @@ public:
 
     int min_value() { return min_value_; }
     int max_value() { return max_value_; }
+    int get_small_step() { return slow_step_; }
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
