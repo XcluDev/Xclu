@@ -16,7 +16,7 @@ void CosmoOsc::setup(Module *module, int index) {
 #include "incl_h.h"
 
 class Module;
-class XcluObject;
+class XDict;
 
 class XClass
 {
@@ -45,8 +45,8 @@ public:
     void sets(QString name, QString v);
     QStringList get_strings(QString name);     //splits text using "\n"
 
-    //get object - for particular access, you need to use ObjectRead or Object ReadWrite
-    XcluObject *get_object(QString name);
+    //get object - for particular access, you need to use XDictRead or Object ReadWrite
+    XDict *get_object(QString name);
 
 protected:
     Module *module_;

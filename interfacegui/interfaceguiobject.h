@@ -4,7 +4,7 @@
 #include "interfacegui.h"
 
 class InterfaceItemObject;
-class XcluObject;
+class XDict;
 class QSpacerItem;
 
 //визуальные компоненты для показа содержимого объекта
@@ -43,7 +43,7 @@ public:
     //мы это делаем только по команде извне - так как не знаем,
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
-    void show_object(XcluObject *object);
+    void show_object(XDict *object);
 
     //доступ к меткам и другим компонентам для визуализации
     InterfaceGuiObjectVisual &visual();

@@ -4,7 +4,7 @@
 #include "module.h"
 #include "incl_cpp.h"
 #include "modulesfactory.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 //---------------------------------------------------------------------
 Module::Module(ModuleInfo *info_external, RtModule *rtmodule_new)
@@ -259,7 +259,7 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
 
 //---------------------------------------------------------------------
 //исключение "записывается" в err
-void Module::access_call_no_exception(QString function, ErrorInfo &err, XcluObject *input, XcluObject *output) {
+void Module::access_call_no_exception(QString function, ErrorInfo &err, XDict *input, XDict *output) {
     //проверка, что модуль "понимает" запрошенную функцию
     if (!description().accept_calls.accepts(function)) {
         err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
@@ -272,7 +272,7 @@ void Module::access_call_no_exception(QString function, ErrorInfo &err, XcluObje
 
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
-void Module::access_call(QString function, XcluObject *input, XcluObject *output) {
+void Module::access_call(QString function, XDict *input, XDict *output) {
     ErrorInfo err;
     access_call_no_exception(function, err, input, output);
     err.throw_error();
@@ -338,7 +338,7 @@ void Module::set_title_value(QString name, QString v) { //только out: enum
 //---------------------------------------------------------------------
 //доступ к объектам идет только по указателям
 //требуется начать и потом закончить доступ (mutex)
-XcluObject *Module::get_object(QString name) {
+XDict *Module::get_object(QString name) {
     return rtmodule()->get_object(name);
 }
 

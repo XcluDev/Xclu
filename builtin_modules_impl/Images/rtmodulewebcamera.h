@@ -38,7 +38,7 @@ protected:
 struct RtModuleWebcameraSurfaceData : public XcluProtectedData
 {
 
-    XcluObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
+    XDict image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
 
@@ -49,7 +49,7 @@ struct RtModuleWebcameraSurfaceData : public XcluProtectedData
     ErrorInfo err;
 
     void clear() {
-        ObjectReadWrite(image).clear();
+        XDictWrite(image).clear();
         captured_frames = 0;
         is_new_frame = 0;
         channels = "";

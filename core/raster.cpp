@@ -27,7 +27,7 @@ void raster_from_QImage(QImage qimage, Raster_u8 &raster) {
 
     auto format = qimage.format();
     xclu_assert(format == QImage::Format_RGB32,
-                "XcluObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+                "XDictImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
 
@@ -53,7 +53,7 @@ void raster_from_QImage(QImage qimage, Raster_u8c3 &raster) {
 
     auto format = qimage.format();
     xclu_assert(format == QImage::Format_RGB32,
-                "XcluObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+                "XDictImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
 

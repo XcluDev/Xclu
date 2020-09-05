@@ -5,7 +5,7 @@
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xcluobject.h"
+#include "xdict.h"
 #include "xcluobjectwrapper.h"
 
 
@@ -65,7 +65,7 @@ void RtModuleWImage::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObject *output) {
+void RtModuleWImage::call_internal(QString function, XDict *input, XDict *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -80,7 +80,7 @@ void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObje
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_id_ = ObjectRead(input).gets("parent_id");
+        parent_id_ = XDictRead(input).gets("parent_id");
         sets("parent_id", parent_id_);
         parent_was_set_ = true;
 
@@ -95,7 +95,7 @@ void RtModuleWImage::call_internal(QString function, XcluObject *input, XcluObje
         create_widget();
 
         //ставим его в объект
-        ObjectReadWrite(output).set_pointer("widget_pointer", widget_);
+        XDictWrite(output).set_pointer("widget_pointer", widget_);
 
 
         return;
@@ -150,23 +150,23 @@ void RtModuleWImage::update_value() {
     seti("is_new_frame",new_frame);
 
     if (new_frame) {
-        XcluObject *object = RUNTIME.get_object_by_link(gets("image_link"));
+        XDict *object = RUNTIME.get_object_by_link(gets("image_link"));
         {
-            ObjectRead obj(object);
+            XDictRead obj(object);
             obj.copy_to(get_object("image"));
         }
 
         if (image_) {
 
             //устанавливаем настройки показа
-            XcluObjectShowSettings settings;
+            XDictShowSettings settings;
             settings.w = geti("w");
             settings.h = geti("h");
 
             //создаем wrapper для объекта, который установится в зависимости от его типа,
             //и вызываем функцию для его визуализации
-            QScopedPointer<XcluObjectWrapper> wrapper;
-           wrapper.reset(XcluObjectWrapper::create_wrapper(object));
+            QScopedPointer<XDictWrapper> wrapper;
+           wrapper.reset(XDictWrapper::create_wrapper(object));
 
            wrapper->show_object(image_, settings);
         }

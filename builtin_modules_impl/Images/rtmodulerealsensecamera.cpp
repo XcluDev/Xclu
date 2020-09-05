@@ -78,9 +78,9 @@ void RtModuleRealsenseCamera::execute_start_internal() {
     //Очистка переменных
     gui_clear();
 
-    ObjectReadWrite(get_object("color_image")).clear();
-    ObjectReadWrite(get_object("depth_image")).clear();
-    ObjectReadWrite(get_object("ir_image")).clear();
+    XDictWrite(get_object("color_image")).clear();
+    XDictWrite(get_object("depth_image")).clear();
+    XDictWrite(get_object("ir_image")).clear();
 
     is_new_frame = 0;
     processed_frames_ = 0;
@@ -128,22 +128,22 @@ void RtModuleRealsenseCamera::execute_update_internal() {
         if ((geti("show_color") || wait_save_frames_) && camera_.settings().use_rgb) {
             Raster_u8c3 raster_color;
             xclu_assert(camera_.get_color_pixels_rgb(raster_color), "get_color_pixels_rgb() returned false");
-            ObjectReadWrite image(get_object("color_image"));
-            XcluObjectImage::create_from_raster(image, raster_color);
+            XDictWrite image(get_object("color_image"));
+            XDictImage::create_from_raster(image, raster_color);
             make_color = true;
         }
         if ((geti("show_depth") || wait_save_frames_) && camera_.settings().use_depth) {
             Raster_u8c3 raster_depth;
             xclu_assert(camera_.get_depth_pixels_rgb(raster_depth), "get_depth_pixels_rgb() returned false");
-            ObjectReadWrite image(get_object("depth_image"));
-            XcluObjectImage::create_from_raster(image, raster_depth);
+            XDictWrite image(get_object("depth_image"));
+            XDictImage::create_from_raster(image, raster_depth);
             make_depth = true;
         }
         if ((geti("show_ir") || wait_save_frames_) && camera_.settings().use_ir) {
             Raster_u8 raster_ir;
             xclu_assert(camera_.get_ir_pixels8(raster_ir), "get_ir_pixels8() returned false");
-            ObjectReadWrite image(get_object("ir_image"));
-            XcluObjectImage::create_from_raster(image, raster_ir);
+            XDictWrite image(get_object("ir_image"));
+            XDictImage::create_from_raster(image, raster_ir);
             make_ir = true;
         }
         //если требуется - записать на диск
@@ -177,16 +177,16 @@ void RtModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //запись
     QString path = folder + "/" + time.toString(time_format);
     if (color) {
-        ObjectRead image(get_object("color_image"));
-        XcluObjectImage::save(image, path + "_color.png", "PNG", 100);
+        XDictRead image(get_object("color_image"));
+        XDictImage::save(image, path + "_color.png", "PNG", 100);
     }
     if (depth) {
-        ObjectRead image(get_object("depth_image"));
-        XcluObjectImage::save(image, path + "_depth.png", "PNG", 100);
+        XDictRead image(get_object("depth_image"));
+        XDictImage::save(image, path + "_depth.png", "PNG", 100);
     }
     if (ir) {
-        ObjectRead image(get_object("ir_image"));
-        XcluObjectImage::save(image, path + "_ir.png", "PNG", 100);
+        XDictRead image(get_object("ir_image"));
+        XDictImage::save(image, path + "_ir.png", "PNG", 100);
     }
     sets("saved_to", path);
 

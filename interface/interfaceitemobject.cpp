@@ -28,7 +28,7 @@ InterfaceItemObject::InterfaceItemObject(ModuleInterface *parent, const Interfac
     }
 
     //создаем объект
-    object_.reset(new XcluObject(XcluObjectTypeEmpty));
+    object_.reset(new XDict(XDictTypeEmpty));
 
 }
 
@@ -62,7 +62,7 @@ void InterfaceItemObject::var_to_gui_internal() {
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 void InterfaceItemObject::copy_data_to_internal(InterfaceItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
-    ObjectRead(get_object()).copy_to(item->get_object());
+    XDictRead(get_object()).copy_to(item->get_object());
 }
 
 //---------------------------------------------------------------------

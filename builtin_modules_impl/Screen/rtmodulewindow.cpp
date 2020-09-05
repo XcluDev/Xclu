@@ -7,7 +7,7 @@
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 
 //заполнение имени класса и регистрация класса
@@ -249,14 +249,14 @@ void RtModuleWindow::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWindow::call_internal(QString /*function*/, XcluObject * /*input*/, XcluObject * /*output*/) {
+void RtModuleWindow::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == call_function_name::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        //ObjectRead sound(input);
+        //XDictRead sound(input);
 
         //float sample_rate = sound.var_int("sample_rate");
         //return;
@@ -465,15 +465,15 @@ QWidget *RtModuleWindow::request_widget(QString module_id) {
     //out pointer widget_pointer
 
     //формируем запрос
-    XcluObject input;
-    ObjectReadWrite(input).sets("parent_id", module_->name());
+    XDict input;
+    XDictWrite(input).sets("parent_id", module_->name());
 
-    XcluObject output;
+    XDict output;
 
     module->access_call(call_function_name::get_widget_pointer(), &input, &output);
 
     //считываем указатель на виджет
-    QWidget *widget = (QWidget *)ObjectReadWrite(output).get_pointer("widget_pointer");
+    QWidget *widget = (QWidget *)XDictWrite(output).get_pointer("widget_pointer");
     xclu_assert(widget, "Returned empty widget");
 
     return widget;

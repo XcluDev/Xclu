@@ -68,7 +68,7 @@ InterfaceItemType string_to_interfacetype(const QString &vartypestr) {
 
 
 //---------------------------------------------------------------------
-const QString ObjectTypeNames[XcluObjectTypeN] =
+const QString ObjectTypeNames[XDictTypeN] =
 {
     "empty",
     "custom",
@@ -78,12 +78,12 @@ const QString ObjectTypeNames[XcluObjectTypeN] =
 };
 
 //---------------------------------------------------------------------
-QString object_type_to_string(XcluObjectType type) {
-        return Type_to_string(int(type), XcluObjectTypeN, ObjectTypeNames);
+QString object_type_to_string(XDictType type) {
+        return Type_to_string(int(type), XDictTypeN, ObjectTypeNames);
 }
 
-XcluObjectType string_to_object_type(QString type_str) {
-    return XcluObjectType(string_to_Type(type_str, XcluObjectTypeN, ObjectTypeNames));
+XDictType string_to_object_type(QString type_str) {
+    return XDictType(string_to_Type(type_str, XDictTypeN, ObjectTypeNames));
 
 }
 

@@ -144,19 +144,19 @@ enum ModuleActionOnError : int {
 };
 
 
-//Типы для объектов XcluObject
-//При добавлении новых типов объектов дописывать их визуализацию в систему XcluObjectWrapper
-enum XcluObjectType : int {
-    XcluObjectTypeEmpty = 0,            //пустой объект
-    XcluObjectTypeCustom = 1,           //специальный объект, без определенного типа
-    XcluObjectTypeImage = 2,            //изображение
-    XcluObjectTypeSoundFormat = 3,      //формат звука
-    XcluObjectTypeSoundBuffer = 4,      //звуковой буфер
-    XcluObjectTypeN = 5
+//Типы для объектов XDict
+//При добавлении новых типов объектов дописывать их визуализацию в систему XDictWrapper
+enum XDictType : int {
+    XDictTypeEmpty = 0,            //пустой объект
+    XDictTypeCustom = 1,           //специальный объект, без определенного типа
+    XDictTypeImage = 2,            //изображение
+    XDictTypeSoundFormat = 3,      //формат звука
+    XDictTypeSoundBuffer = 4,      //звуковой буфер
+    XDictTypeN = 5
 };
 
-QString object_type_to_string(XcluObjectType type);
-XcluObjectType string_to_object_type(QString type_str);
+QString object_type_to_string(XDictType type);
+XDictType string_to_object_type(QString type_str);
 
 
 //Тип ошибки

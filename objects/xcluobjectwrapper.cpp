@@ -8,20 +8,20 @@
 
 
 //---------------------------------------------------------------------
-/*static*/ XcluObjectWrapper *XcluObjectWrapper::create_wrapper(XcluObject *object) {
+/*static*/ XDictWrapper *XDictWrapper::create_wrapper(XDict *object) {
     //xclu_assert(object, "Internal error in 'create_wrapper': object is nullptr");
-    auto type = ObjectRead(object).type();
+    auto type = XDictRead(object).type();
     switch (type) {
-    case XcluObjectTypeEmpty:
-    case XcluObjectTypeCustom:
-    case XcluObjectTypeSoundBuffer:
-        return new XcluObjectWrapper(object);
+    case XDictTypeEmpty:
+    case XDictTypeCustom:
+    case XDictTypeSoundBuffer:
+        return new XDictWrapper(object);
         break;
-    case XcluObjectTypeSoundFormat:
-        return new XcluObjectSoundFormat(object);
+    case XDictTypeSoundFormat:
+        return new XDictSoundFormat(object);
         break;
-    case XcluObjectTypeImage:
-        return new XcluObjectImage(object);
+    case XDictTypeImage:
+        return new XDictImage(object);
         break;
     default:
         xclu_exception(QString("Unknown object type '%1'").arg(type));
@@ -30,22 +30,22 @@
 }
 
 //---------------------------------------------------------------------
-XcluObjectWrapper::XcluObjectWrapper(XcluObject *object) {
+XDictWrapper::XDictWrapper(XDict *object) {
     object_ = object;
 }
 
 //---------------------------------------------------------------------
-XcluObject *XcluObjectWrapper::object() {
+XDict *XDictWrapper::object() {
     return object_;
 }
 
 //---------------------------------------------------------------------
 //показать объект в редакторе
-void XcluObjectWrapper::show_object(InterfaceGuiObject *item) {
+void XDictWrapper::show_object(InterfaceGuiObject *item) {
     auto &visual = item->visual();
 
     {
-        ObjectRead obj(object());
+        XDictRead obj(object());
 
         //тип объекта и размер объекта в байтах
         visual.set_text(QString("%1\n%2 byte(s)")
@@ -58,7 +58,7 @@ void XcluObjectWrapper::show_object(InterfaceGuiObject *item) {
 
 //---------------------------------------------------------------------
 //показать объект в QLabel
-void XcluObjectWrapper::show_object(QLabel *label, const XcluObjectShowSettings &/*settings*/) {
+void XDictWrapper::show_object(QLabel *label, const XDictShowSettings &/*settings*/) {
     label->setText("");
 }
 

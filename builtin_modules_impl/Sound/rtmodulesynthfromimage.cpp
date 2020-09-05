@@ -98,8 +98,8 @@ void RtModuleSynthFromImage::execute_start_internal() {
         data_.clear();
     }
 
-    ObjectReadWrite(get_object("image")).clear();
-    ObjectReadWrite(get_object("image_sound")).clear();
+    XDictWrite(get_object("image")).clear();
+    XDictWrite(get_object("image_sound")).clear();
 
     update_data();
 }
@@ -138,8 +138,8 @@ void RtModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void RtModuleSynthFromImage::load_image_link(QString image_link) {    
-    XcluObject *object = RUNTIME.get_object_by_link(image_link);
-    ObjectRead obj(object);
+    XDict *object = RUNTIME.get_object_by_link(image_link);
+    XDictRead obj(object);
     obj.copy_to(get_object("image"));
 }
 
@@ -157,18 +157,18 @@ void RtModuleSynthFromImage::update_data() {
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    ObjectRead obj(get_object("image"));
+    XDictRead obj(get_object("image"));
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");
 
         //int channels = obj.geti("channels");
-        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XcluObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
+        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XDictImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
         //auto data_type = array->data_type();
         //xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
-        //            "XcluObjectImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
+        //            "XDictImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
         data_.set_image(w, h, array->data_u8bit());
 
 
@@ -182,9 +182,9 @@ void RtModuleSynthFromImage::update_data() {
         {
             int w = data_.w_;
             int h = 200;
-            ObjectReadWrite object(get_object("image_sound"));
-            XcluObjectImage::allocate(object, XcluArrayDataType_u8bit, 1, w, h);
-            quint8 *data =  XcluObjectImage::var_array(object)->data_u8bit();
+            XDictWrite object(get_object("image_sound"));
+            XDictImage::allocate(object, XcluArrayDataType_u8bit, 1, w, h);
+            quint8 *data =  XDictImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {
                 int y0 = int(xclu_map_clamped(data_.image_[x],-1,1, h, 0));
                 for (int y=0; y<y0; y++) {
@@ -198,14 +198,14 @@ void RtModuleSynthFromImage::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSynthFromImage::call_internal(QString function, XcluObject *input, XcluObject * /*output*/) {
+void RtModuleSynthFromImage::call_internal(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
     if (function == call_function_name::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         DataAccess access(data_);
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        ObjectReadWrite sound(input);
+        XDictWrite sound(input);
 
         float sample_rate = sound.geti("sample_rate");
         int samples = sound.geti("samples");

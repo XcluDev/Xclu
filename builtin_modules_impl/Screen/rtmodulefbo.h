@@ -31,7 +31,7 @@ protected:
     virtual void execute_stop_internal();
 
     //Вызовы
-    virtual void call_internal(QString function, XcluObject *input, XcluObject * /*output*/);
+    virtual void call_internal(QString function, XDict *input, XDict * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
 };

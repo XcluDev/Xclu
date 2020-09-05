@@ -1,7 +1,7 @@
 #ifndef XCLUOBJECTWRAPPER_H
 #define XCLUOBJECTWRAPPER_H
 
-//"Обертка" для XcluObject.
+//"Обертка" для XDict.
 //Он и его наследники позволяют следующее:
 //1. представлять объекты в GUI редактора,
 //2. описывать, как хранить настройки показа
@@ -10,49 +10,49 @@
 
 //Работа с ним идет путем создания wrapper, который будет привязан к типу объекта,
 //и затем работа с ним:
-//QScopedPointer<XcluObjectWrapper> wrapper;
-//wrapper.reset(XcluObjectWrapper::create_wrapper(object));
+//QScopedPointer<XDictWrapper> wrapper;
+//wrapper.reset(XDictWrapper::create_wrapper(object));
 //wrapper->show_object(this);
 //(QScopedPointer удалить объект автоматически)
 
 
 #include "incl_h.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 class QLabel;
 class InterfaceItemObject;
 class InterfaceGuiObjectVisual;
-class XcluObject;
+class XDict;
 class InterfaceGuiObject;
 
 
 //настройки показа объекта
-class XcluObjectShowSettings {
+class XDictShowSettings {
 public:
     int w = 256;
     int h = 256;
 };
 
 //wrapper для работы и показа объекта
-class XcluObjectWrapper
+class XDictWrapper
 {
 public:
     //создать wrapper для типа объекта, чтобы затем его вывести в GUI
     //или проделать другие операции
-    static XcluObjectWrapper *create_wrapper(XcluObject *object);
+    static XDictWrapper *create_wrapper(XDict *object);
 
-    XcluObjectWrapper(XcluObject *object);
+    XDictWrapper(XDict *object);
 
-    XcluObject *object();
+    XDict *object();
 
     //показать объект в редакторе
     virtual void show_object(InterfaceGuiObject *item);
 
     //показать объект в QLabel
-    virtual void show_object(QLabel *label, const XcluObjectShowSettings &settings);
+    virtual void show_object(QLabel *label, const XDictShowSettings &settings);
 
 protected:
-    XcluObject *object_;
+    XDict *object_;
 };
 
 #endif // XCLUOBJECTWRAPPER_H

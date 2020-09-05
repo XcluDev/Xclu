@@ -5,7 +5,7 @@
 #include "rtmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 #include "xcluspinbox.h"
 
@@ -61,7 +61,7 @@ void RtModuleScalar::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleScalar::call_internal(QString function, XcluObject *input, XcluObject *output) {
+void RtModuleScalar::call_internal(QString function, XDict *input, XDict *output) {
     //"get_widget_pointer"
     if (function == call_function_name::get_widget_pointer()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -76,7 +76,7 @@ void RtModuleScalar::call_internal(QString function, XcluObject *input, XcluObje
         xclu_assert(output, "Internal error, output object is nullptr");
 
         //устанавливаем, кто использует
-        parent_id_ = ObjectRead(input).gets("parent_id");
+        parent_id_ = XDictRead(input).gets("parent_id");
         sets("parent_id", parent_id_);
         parent_was_set_ = true;
 
@@ -91,7 +91,7 @@ void RtModuleScalar::call_internal(QString function, XcluObject *input, XcluObje
         create_widget();
 
         //ставим его в объект
-        ObjectReadWrite(output).set_pointer("widget_pointer", widget_);
+        XDictWrite(output).set_pointer("widget_pointer", widget_);
 
 
         return;

@@ -137,7 +137,7 @@ void RtModule::button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает call_internal
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void RtModule::call(QString function, ErrorInfo &err, XcluObject *input, XcluObject *output) {
+void RtModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
     try {
         if (err.is_error()) return;
         //if (is_enabled()) {
@@ -151,7 +151,7 @@ void RtModule::call(QString function, ErrorInfo &err, XcluObject *input, XcluObj
 }
 
 //---------------------------------------------------------------------
-void RtModule::call_internal(QString /*function*/, XcluObject * /*input*/, XcluObject * /*output*/) {
+void RtModule::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     xclu_exception("Calls processing is not implemented for module " + name());
 }
 
@@ -239,8 +239,8 @@ void RtModule::process_error(QString message) {
 //---------------------------------------------------------------------
 //Проверка, изменились ли переменные
 bool RtModule::was_changed(QString name) {
-    //Важно, что для объектов эта функция получает доступ к объекту с помощью ObjectRead,
-    //поэтому, нельзя ее вызывать, если активирован другой ObjectRead[Write] для этого объекта
+    //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
+    //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     return var->was_changed();
 }
@@ -396,10 +396,10 @@ void RtModule::set_title_value(QString name, QString v) {
 //без копирования
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
-XcluObject *RtModule::get_object(QString name) {
+XDict *RtModule::get_object(QString name) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
-    XcluObject *object = var->get_object();
+    XDict *object = var->get_object();
     return object;
 }
 

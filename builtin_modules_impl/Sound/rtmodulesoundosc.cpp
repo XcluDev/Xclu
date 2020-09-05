@@ -200,7 +200,7 @@ void RtModuleSoundOsc::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSoundOsc::call_internal(QString function, XcluObject *input, XcluObject * /*output*/) {
+void RtModuleSoundOsc::call_internal(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
     if (function == call_function_name::sound_buffer_add()) {
 
@@ -208,7 +208,7 @@ void RtModuleSoundOsc::call_internal(QString function, XcluObject *input, XcluOb
         DataAccess access(data_);
         if (data_.out_enabled) {
             //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-            ObjectReadWrite sound(input);
+            XDictWrite sound(input);
 
             float sample_rate = sound.geti("sample_rate");
             int samples = sound.geti("samples");

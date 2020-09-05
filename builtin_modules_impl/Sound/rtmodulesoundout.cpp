@@ -35,7 +35,7 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
     try {
         DataAccess access(data_);
         {
-            ObjectReadWrite sound(&sound_);
+            XDictWrite sound(&sound_);
             sound.clear();
             //создаем массив
             sound.seti("samples", samples);
@@ -50,7 +50,7 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
         //тестовый звук или остальные модули
         int play_test_sound = data_->play_test_sound_;
         if (play_test_sound) {
-            ObjectReadWrite sound(&sound_);
+            XDictWrite sound(&sound_);
             float *data = sound.var_array("data")->data_float();
             float freq_Hz = 600;
             float sample_rate = format_.sampleRate();
@@ -76,7 +76,7 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
 
         //применение громкости
         {
-            ObjectReadWrite sound(&sound_);
+            XDictWrite sound(&sound_);
             float *data = sound.var_array("data")->data_float();
             float volume = data_->volume_;
             for (int i=0; i<samples * channels; i++) {
@@ -118,7 +118,7 @@ qint64 RtModuleSoundOutGenerator::readData(char *data, qint64 len)
         request_sound(samples, channels);
 
         //считываем звук
-        ObjectRead sound(&sound_);
+        XDictRead sound(&sound_);
         XcluArray const *arr = sound.get_array("data");
         float const *data_float = arr->data_float();
 
@@ -214,7 +214,7 @@ void RtModuleSoundOut::execute_start_internal() {
     }
     buffer_size_= 0;
     seti("buffer_size", 0);
-    ObjectReadWrite(get_object("sound_format")).clear();
+    XDictWrite(get_object("sound_format")).clear();
 
     set_started(false); //также ставит gui-элемент is_started
     clear_string("connected_device_name");
@@ -463,9 +463,9 @@ void RtModuleSoundOut::set_started(bool started) { //ставит camera_started
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void RtModuleSoundOut::set_format(const QAudioFormat &format) {
-    auto format_ = XcluObjectSoundFormatData(format.sampleRate(), format.channelCount());
-    ObjectReadWrite object(get_object("sound_format"));
-    XcluObjectSoundFormat::set_to_object(object, format_);
+    auto format_ = XDictSoundFormatData(format.sampleRate(), format.channelCount());
+    XDictWrite object(get_object("sound_format"));
+    XDictSoundFormat::set_to_object(object, format_);
 
 }
 

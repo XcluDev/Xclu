@@ -19,7 +19,7 @@
 
 class InterfaceItem;
 class Module;
-class XcluObject;
+class XDict;
 
 //Переменные, описывающие состояние
 class RtModuleStatus {
@@ -72,7 +72,7 @@ public:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    void call(QString function, ErrorInfo &err, XcluObject *input, XcluObject *output);
+    void call(QString function, ErrorInfo &err, XDict *input, XDict *output);
 
 
     bool is_running();  //был фактический запуск
@@ -98,8 +98,8 @@ public:
 
     //Проверка, изменились ли переменные
     bool was_changed(QString name);
-    //Важно, что для объектов эта функция получает доступ к объекту с помощью ObjectRead,
-    //поэтому, нельзя ее вызывать, если активирован другой ObjectRead[Write] для этого объекта
+    //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
+    //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
 
     //Доступ к переменным - с учетом их квалификатора
 
@@ -139,7 +139,7 @@ public:
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
     //без копирования
     //объекты снабжены мютексами, поэтому следует начинать и завершать с ними взаимодействие
-    XcluObject *get_object(QString name);
+    XDict *get_object(QString name);
 
 
 protected:
@@ -188,7 +188,7 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-     virtual void call_internal(QString function, XcluObject *input, XcluObject *output);
+     virtual void call_internal(QString function, XDict *input, XDict *output);
 
     //выполнить только один раз - в начале или конце
     void execute_one_shot();

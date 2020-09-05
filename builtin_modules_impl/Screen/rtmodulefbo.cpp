@@ -51,14 +51,14 @@ void RtModuleFbo::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleFbo::call_internal(QString /*function*/, XcluObject * /*input*/, XcluObject * /*output*/) {
+void RtModuleFbo::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == call_function_name::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        //ObjectRead sound(input);
+        //XDictRead sound(input);
 
         //float sample_rate = sound.var_int("sample_rate");
         //return;

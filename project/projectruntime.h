@@ -8,7 +8,7 @@
 #include <QElapsedTimer>
 class Module;
 class InterfaceItem;
-class XcluObject;
+class XDict;
 
 //Работа с link - получение переменных по имени модуля и названию в формате:
 //webcam1->image
@@ -73,7 +73,7 @@ public:
     int get_int_by_link(QString link_str, int def_val = 0);
     float get_float_by_link(QString link_str, float def_val = 0);
     QString get_string_by_link(QString link_str, QString def_val = "");
-    XcluObject *get_object_by_link(QString link_str);
+    XDict *get_object_by_link(QString link_str);
 
     //Нажатие кнопки
     void press_button_by_link(QString link_str);

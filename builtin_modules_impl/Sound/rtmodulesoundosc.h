@@ -92,7 +92,7 @@ protected:
     virtual void execute_stop_internal();
 
     //генерация звука
-    virtual void call_internal(QString function, XcluObject *input, XcluObject * /*output*/);
+    virtual void call_internal(QString function, XDict *input, XDict * /*output*/);
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука

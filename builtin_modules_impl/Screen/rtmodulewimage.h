@@ -12,7 +12,7 @@
 #include "incl_h.h"
 #include "rtmodule.h"
 #include "xcluprotecteddata.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 class QWidget;
 class QLabel;
@@ -48,7 +48,7 @@ protected:
     virtual void execute_stop_internal();
 
     //Вызовы
-    virtual void call_internal(QString function, XcluObject *input, XcluObject * /*output*/);
+    virtual void call_internal(QString function, XDict *input, XDict * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
     QString parent_id_;

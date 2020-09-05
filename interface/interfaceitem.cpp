@@ -187,7 +187,7 @@ bool InterfaceItem::was_changed() {
         }
         //сбрасываем флажок с object
         if (supports_object()) {
-            ObjectRead(get_object()).reset_changed(); // Доступ к объекту!
+            XDictRead(get_object()).reset_changed(); // Доступ к объекту!
         }
         return true;
     }
@@ -215,7 +215,7 @@ bool InterfaceItem::was_changed() {
     }
     //объекты - у них есть своя метка
     if (supports_object()) {
-        return ObjectRead(get_object()).was_changed();  // Доступ к объекту!
+        return XDictRead(get_object()).was_changed();  // Доступ к объекту!
     }
 
     return false;

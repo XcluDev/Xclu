@@ -91,12 +91,12 @@ InterfaceGuiObjectVisual &InterfaceGuiObject::visual() {
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
 //при необходимости - можно ввести mutex в объект
-void InterfaceGuiObject::show_object(XcluObject *object) {
+void InterfaceGuiObject::show_object(XDict *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
-        QScopedPointer<XcluObjectWrapper> wrapper;
-        wrapper.reset(XcluObjectWrapper::create_wrapper(object));
+        QScopedPointer<XDictWrapper> wrapper;
+        wrapper.reset(XDictWrapper::create_wrapper(object));
         wrapper->show_object(this);
     }
 }

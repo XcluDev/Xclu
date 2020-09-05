@@ -1,7 +1,7 @@
 #include "xclass.h"
 #include "incl_cpp.h"
 #include "module.h"
-#include "xcluobject.h"
+#include "xdict.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(Module *module) {
@@ -58,7 +58,7 @@ QStringList XClass::get_strings(QString name) {     //splits text using "\n"
 }
 
 //---------------------------------------------------------------------
-XcluObject *XClass::get_object(QString name) {
+XDict *XClass::get_object(QString name) {
     xclu_assert(module_, "Error at XClass::get_object(): module is nullptr");
     return module_->get_object(name);
 }

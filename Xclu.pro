@@ -104,7 +104,6 @@ SOURCES += \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
     interface/visibilitygroups.cpp \
-    objects/xcluobject.cpp \
     interfacegui/interfaceguiobject.cpp \
     interfacegui/xclucombobox.cpp \
     interfacegui/xcludoublespinbox.cpp \
@@ -141,7 +140,6 @@ SOURCES += \
     interface/interfaceitem.cpp \
     modules/rtmodule.cpp \
     modules/rtmoduleregistrar.cpp \
-    objects/xcluobjectdatabase.cpp \
     objects/xcluobjectimage.cpp \
     objects/xcluobjectsoundformat.cpp \
     objects/xcluobjectwrapper.cpp \
@@ -170,7 +168,8 @@ SOURCES += \
     builtin_modules_impl/Project/rtmoduleproject.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
-    sdk/xclass.cpp
+    sdk/xclass.cpp \
+    objects/xdict.cpp
 
 HEADERS += \
     core/incl_h.h \
@@ -193,7 +192,6 @@ HEADERS += \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
     interface/visibilitygroups.h \
-    objects/xcluobject.h \
     interfacegui/interfaceguiobject.h \
     interfacegui/xclucombobox.h \
     interfacegui/xcludoublespinbox.h \
@@ -229,7 +227,6 @@ HEADERS += \
     interface/interfaceitem.h \
     modules/rtmodule.h \
     modules/rtmoduleregistrar.h \
-    objects/xcluobjectdatabase.h \
     objects/xcluobjectimage.h \
     objects/xcluobjectsoundformat.h \
     objects/xcluobjectwrapper.h \
@@ -257,7 +254,8 @@ HEADERS += \
     builtin_modules_impl/Communication/rtmoduleserial.h \
     core/slowbit.h \
     builtin_modules_impl/Project/rtmoduleproject.h \
-    sdk/xclass.h
+    sdk/xclass.h \
+    objects/xdict.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support

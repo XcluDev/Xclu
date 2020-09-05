@@ -1,28 +1,28 @@
-#include "xcluobject.h"
+#include "xdict.h"
 #include "incl_cpp.h"
 
 
 //---------------------------------------------------------------------
-ObjectRead::ObjectRead(XcluObject *object) {
-    xclu_assert(object, "Nullptr object at ObjectRead");
+XDictRead::XDictRead(XDict *object) {
+    xclu_assert(object, "Nullptr object at XDictRead");
     object_ = object;
     object_->begin_access();
     accessed_ = true;
 }
 
-ObjectRead::ObjectRead(XcluObject &object) {
-    xclu_assert(&object, "Nullptr object at ObjectRead");
+XDictRead::XDictRead(XDict &object) {
+    xclu_assert(&object, "Nullptr object at XDictRead");
     object_ = &object;
     object_->begin_access();
     accessed_ = true;
 }
 
 
-ObjectRead::~ObjectRead() {
+XDictRead::~XDictRead() {
     release();
 }
 
-void ObjectRead::release() {             //если надо освободить объект, но он остается в зоне видимости
+void XDictRead::release() {             //если надо освободить объект, но он остается в зоне видимости
     if (accessed_) {
         object_->end_access();
     }
@@ -31,73 +31,73 @@ void ObjectRead::release() {             //если надо освободит�
 }
 
 //---------------------------------------------------------------------
-ObjectReadWrite::ObjectReadWrite(XcluObject *object)
-    : ObjectRead(object)
+XDictWrite::XDictWrite(XDict *object)
+    : XDictRead(object)
 {
     object->set_changed();
 }
 
-ObjectReadWrite::ObjectReadWrite(XcluObject &object)
-    : ObjectRead(object)
+XDictWrite::XDictWrite(XDict &object)
+    : XDictRead(object)
 {
     object.set_changed();
 }
 
-//ObjectReadWrite::~ObjectReadWrite() {
+//XDictWrite::~XDictWrite() {
 //}
 
 //---------------------------------------------------------------------
-XcluObject::XcluObject(XcluObjectType type)
+XDict::XDict(XDictType type)
 {
     set_type(type);
 }
 
 //---------------------------------------------------------------------
-XcluObject::~XcluObject() {
+XDict::~XDict() {
 
 }
 
 //---------------------------------------------------------------------
-void XcluObject::begin_access() {
+void XDict::begin_access() {
     mutex_.lock();
 }
 
 //---------------------------------------------------------------------
-void XcluObject::end_access() {
+void XDict::end_access() {
     mutex_.unlock();
 }
 
 //---------------------------------------------------------------------
-bool XcluObject::was_changed() {     //показывает, было ли изменение после последнего запроса
+bool XDict::was_changed() {     //показывает, было ли изменение после последнего запроса
     bool res = was_changed_;
     was_changed_ = false;
     return res;
 }
 
 //---------------------------------------------------------------------
-void XcluObject::reset_changed() {
+void XDict::reset_changed() {
     was_changed_ = false;
 }
 
 //---------------------------------------------------------------------
-void XcluObject::set_changed() {     //устанавливает флаг, что было изменение
+void XDict::set_changed() {     //устанавливает флаг, что было изменение
     was_changed_ = true;
 }
 
 //---------------------------------------------------------------------
-XcluObjectType XcluObject::type() const { //тип - image, array, strings, используется для того, чтобы можно было фильтровать и управлять визуализацией
+XDictType XDict::type() const { //тип - image, array, strings, используется для того, чтобы можно было фильтровать и управлять визуализацией
     return type_;
 }
 
 //---------------------------------------------------------------------
-void XcluObject::set_type(XcluObjectType type) {
+void XDict::set_type(XDictType type) {
     type_ = type;
     set_changed();
 }
 
 //---------------------------------------------------------------------
 //проверить, что объект имеет конкретный тип, если нет - то выдаст expeption
-void XcluObject::assert_type(XcluObjectType expected_type) const {
+void XDict::assert_type(XDictType expected_type) const {
     xclu_assert(type() == expected_type,
             QString("Expected object of type '%1', but get %2")
                 .arg(object_type_to_string(expected_type))
@@ -107,7 +107,7 @@ void XcluObject::assert_type(XcluObjectType expected_type) const {
 
 //---------------------------------------------------------------------
 //размер данных, в байтах
-quint32 XcluObject::size_bytes() const {
+quint32 XDict::size_bytes() const {
     quint32 size = 0;
     size += int_.size() * 4;
     size += float_.size() * 4;
@@ -127,7 +127,7 @@ quint32 XcluObject::size_bytes() const {
 }
 
 //---------------------------------------------------------------------
-void XcluObject::clear() {
+void XDict::clear() {
     int_.clear();
     float_.clear();
     string_.clear();
@@ -154,11 +154,11 @@ void XcluObject::clear() {
 }
 
 //---------------------------------------------------------------------
-void XcluObject::copy_to(XcluObject *object) const {
-    xclu_assert(object, "nullptr in XcluObject::copy_to");
+void XDict::copy_to(XDict *object) const {
+    xclu_assert(object, "nullptr in XDict::copy_to");
 
     //защищаем объект - пока существует obj, object никто другой не сможет изменить
-    ObjectReadWrite obj(object);
+    XDictWrite obj(object);
 
     object->clear();
 
@@ -183,7 +183,7 @@ void XcluObject::copy_to(XcluObject *object) const {
     //objects
     for (auto i = object_.begin(); i != object_.end(); ++i) {
         QString name = i.key();
-        XcluObject *obj = object->create_object(name);
+        XDict *obj = object->create_object(name);
         i.value()->copy_to(obj);
     }
 
@@ -194,123 +194,123 @@ void XcluObject::copy_to(XcluObject *object) const {
 
 //---------------------------------------------------------------------
 /* Макрос для функций проверки наличия значения has_int, has_float, ...
-bool XcluObject::has_int(QString name) const {
+bool XDict::has_int(QString name) const {
     return int_.contains(name);
 }
 */
-#define XcluObject_has_(TYPE_NAME) \
-    bool XcluObject::has_##TYPE_NAME(QString name) const { \
+#define XDict_has_(TYPE_NAME) \
+    bool XDict::has_##TYPE_NAME(QString name) const { \
         return TYPE_NAME##_.contains(name); \
     }
 
-XcluObject_has_(int)
-XcluObject_has_(float)
-XcluObject_has_(string)
-XcluObject_has_(array)
-XcluObject_has_(strings)
-XcluObject_has_(object)
-XcluObject_has_(pointer)
+XDict_has_(int)
+XDict_has_(float)
+XDict_has_(string)
+XDict_has_(array)
+XDict_has_(strings)
+XDict_has_(object)
+XDict_has_(pointer)
 
 //---------------------------------------------------------------------
 /* Макрос для функций получения значения geti, getf, ...
-QString XcluObject::var_string(QString name, bool create_if_not_exists) const {
+QString XDict::var_string(QString name, bool create_if_not_exists) const {
     xclu_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
     return string_[name];
 }
 */
 
-#define XcluObject_get_(SHORT_TYPE, TYPE_NAME, CPP_TYPE, FUN_CONST) \
-    CPP_TYPE XcluObject::get##SHORT_TYPE(QString name) FUN_CONST { \
+#define XDict_get_(SHORT_TYPE, TYPE_NAME, CPP_TYPE, FUN_CONST) \
+    CPP_TYPE XDict::get##SHORT_TYPE(QString name) FUN_CONST { \
         xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
-#define XcluObject_get_pointer_(TYPE_NAME, CPP_TYPE, FUN_CONST) \
-    CPP_TYPE XcluObject::get_##TYPE_NAME(QString name) FUN_CONST { \
+#define XDict_get_pointer_(TYPE_NAME, CPP_TYPE, FUN_CONST) \
+    CPP_TYPE XDict::get_##TYPE_NAME(QString name) FUN_CONST { \
         xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         auto result = TYPE_NAME##_[name]; \
-        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr during calling 'XcluObject::get"));\
+        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr during calling 'XDict::get"));\
         return result; \
     }
 
-XcluObject_get_(i,int,int,const)
-XcluObject_get_(f,float,float,const)
-XcluObject_get_(s,string,QString,const)
-XcluObject_get_pointer_(array,const XcluArray *,const)
-XcluObject_get_pointer_(strings,const QStringList *,const)
-XcluObject_get_pointer_(object,const XcluObject *,const)
-XcluObject_get_pointer_(pointer,void const *,const)
-XcluObject_get_pointer_(pointer,void *,)
+XDict_get_(i,int,int,const)
+XDict_get_(f,float,float,const)
+XDict_get_(s,string,QString,const)
+XDict_get_pointer_(array,const XcluArray *,const)
+XDict_get_pointer_(strings,const QStringList *,const)
+XDict_get_pointer_(object,const XDict *,const)
+XDict_get_pointer_(pointer,void const *,const)
+XDict_get_pointer_(pointer,void *,)
 
 
 //---------------------------------------------------------------------
 /* Макрос для функций получения значения var_int, var_float, ...
-QString &XcluObject::var_string(QString name, bool create_if_not_exists) {
+QString &XDict::var_string(QString name, bool create_if_not_exists) {
     xclu_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
     return string_[name];
 }
 */
 
-#define XcluObject_var_(TYPE_NAME, CPP_TYPE) \
-    CPP_TYPE XcluObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
+#define XDict_var_(TYPE_NAME, CPP_TYPE) \
+    CPP_TYPE XDict::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
         xclu_assert(create_if_not_exists || has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
 
-#define XcluObject_var_pointer_(TYPE_NAME, CPP_TYPE) \
-    CPP_TYPE XcluObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
+#define XDict_var_pointer_(TYPE_NAME, CPP_TYPE) \
+    CPP_TYPE XDict::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
         bool has = has_##TYPE_NAME(name); \
         xclu_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME" '" + name + "'"); \
         if (!has) { \
             TYPE_NAME##_.insert(name, create_##TYPE_NAME(name));      \
         }           \
         auto result = TYPE_NAME##_[name]; \
-        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr, during calling 'XcluObject::var'"));\
+        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr, during calling 'XDict::var'"));\
         return TYPE_NAME##_[name]; \
     }
 
-XcluObject_var_(int,int &)
-XcluObject_var_(float,float &)
-XcluObject_var_(string,QString &)
-XcluObject_var_pointer_(array,XcluArray *)
-XcluObject_var_pointer_(strings,QStringList *)
-XcluObject_var_pointer_(object,XcluObject *)
+XDict_var_(int,int &)
+XDict_var_(float,float &)
+XDict_var_(string,QString &)
+XDict_var_pointer_(array,XcluArray *)
+XDict_var_pointer_(strings,QStringList *)
+XDict_var_pointer_(object,XDict *)
 
 //---------------------------------------------------------------------
 /* Макрос для функций установки значения seti, setf, ...
-void XcluObject::seti(QString name, int v) {
+void XDict::seti(QString name, int v) {
     int_[name] = v;
 }
 */
 
-#define XcluObject_set_(SHORT_TYPE, TYPE_NAME, CPP_TYPE) \
-    void XcluObject::set##SHORT_TYPE(QString name, CPP_TYPE v) { \
+#define XDict_set_(SHORT_TYPE, TYPE_NAME, CPP_TYPE) \
+    void XDict::set##SHORT_TYPE(QString name, CPP_TYPE v) { \
         TYPE_NAME##_[name] = v; \
         set_changed(); \
     }
 
-XcluObject_set_(i, int, const int &)
-XcluObject_set_(f, float, const float &)
-XcluObject_set_(s, string, const QString &)
+XDict_set_(i, int, const int &)
+XDict_set_(f, float, const float &)
+XDict_set_(s, string, const QString &)
 
-XcluObject_set_(_pointer,pointer,void *)
+XDict_set_(_pointer,pointer,void *)
 
-XcluArray *XcluObject::create_array(QString name) {
+XcluArray *XDict::create_array(QString name) {
     xclu_assert(!has_array(name), QString("Array '%1' is already created in object").arg(name));
     XcluArray *array = new XcluArray();
     array_[name] = array;
     return array;
 }
 
-QStringList *XcluObject::create_strings(QString name) {
+QStringList *XDict::create_strings(QString name) {
     xclu_assert(!has_array(name), QString("Strings '%1' are already created in object").arg(name));
     QStringList *strings = new QStringList();
     strings_[name] = strings;
     return strings;
 }
 
-XcluObject *XcluObject::create_object(QString name, XcluObjectType type) {
+XDict *XDict::create_object(QString name, XDictType type) {
     xclu_assert(!has_object(name), QString("Subobject '%1' is already created in object").arg(name));
-    XcluObject *object = new XcluObject(type);
+    XDict *object = new XDict(type);
     object_[name] = object;
     return object;
 }
@@ -319,22 +319,22 @@ XcluObject *XcluObject::create_object(QString name, XcluObjectType type) {
 
 //---------------------------------------------------------------------
 /* Макрос для функций получения всех значений данного типа all_ints, all_floats, ...
-QMap<QString,int> &XcluObject::all_ints() {
+QMap<QString,int> &XDict::all_ints() {
     return int_;
 }
 */
 
-#define XcluObject_all_(TYPE_NAME, CPP_TYPE) \
-    QMap<QString,CPP_TYPE> &XcluObject::all_##TYPE_NAME##s() { \
+#define XDict_all_(TYPE_NAME, CPP_TYPE) \
+    QMap<QString,CPP_TYPE> &XDict::all_##TYPE_NAME##s() { \
         return TYPE_NAME##_; \
     }
 
-XcluObject_all_(int,int)
-XcluObject_all_(float,float)
-XcluObject_all_(string,QString)
-XcluObject_all_(array,XcluArray *)
-XcluObject_all_(strings,QStringList *)
-XcluObject_all_(object,XcluObject *)
-XcluObject_all_(pointer,void *)
+XDict_all_(int,int)
+XDict_all_(float,float)
+XDict_all_(string,QString)
+XDict_all_(array,XcluArray *)
+XDict_all_(strings,QStringList *)
+XDict_all_(object,XDict *)
+XDict_all_(pointer,void *)
 
 //---------------------------------------------------------------------

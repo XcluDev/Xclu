@@ -3,26 +3,26 @@
 #include "interfaceguiobject.h"
 
 //---------------------------------------------------------------------
-XcluObjectSoundFormat::XcluObjectSoundFormat(XcluObject *object)
-: XcluObjectWrapper(object)
+XDictSoundFormat::XDictSoundFormat(XDict *object)
+: XDictWrapper(object)
 {
 
 }
 
 //---------------------------------------------------------------------
 //создание объекта
-/*static*/ void XcluObjectSoundFormat::set_to_object(ObjectReadWrite &object, XcluObjectSoundFormatData &data) {
-    object.set_type(XcluObjectTypeSoundFormat);
+/*static*/ void XDictSoundFormat::set_to_object(XDictWrite &object, XDictSoundFormatData &data) {
+    object.set_type(XDictTypeSoundFormat);
     object.seti("sample_rate", data.sample_rate);
     object.seti("channels", data.channels);
 }
 
 //---------------------------------------------------------------------
 //получение информации из объекта
-/*static*/ XcluObjectSoundFormatData XcluObjectSoundFormat::get_data(ObjectRead &object) {
-    object.assert_type(XcluObjectTypeSoundFormat);
+/*static*/ XDictSoundFormatData XDictSoundFormat::get_data(XDictRead &object) {
+    object.assert_type(XDictTypeSoundFormat);
 
-    XcluObjectSoundFormatData data;
+    XDictSoundFormatData data;
     data.sample_rate = object.geti("sample_rate");
     data.channels = object.geti("channels");
     return data;
@@ -30,9 +30,9 @@ XcluObjectSoundFormat::XcluObjectSoundFormat(XcluObject *object)
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XcluObjectSoundFormat::show_object(InterfaceGuiObject *item) {
+void XDictSoundFormat::show_object(InterfaceGuiObject *item) {
     auto &visual = item->visual();
-    ObjectRead obj(object());
+    XDictRead obj(object());
     auto data = get_data(obj);
 
     QString line;

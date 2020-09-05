@@ -4,7 +4,7 @@
 //Объект
 
 #include "interfaceitem.h"
-#include "xcluobject.h"
+#include "xdict.h"
 #include <QScopedPointer>
 
 class ModuleInterface;
@@ -26,13 +26,13 @@ public:
 
     //доступ к объекту
     virtual bool supports_object() { return true; }
-    virtual XcluObject *get_object() { return object_.data(); }
+    virtual XDict *get_object() { return object_.data(); }
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
 
 protected:
-    QScopedPointer<XcluObject> object_;
+    QScopedPointer<XDict> object_;
 
     QStringList types_; //список типов, которыми может быть этот объект, например, image, array
 

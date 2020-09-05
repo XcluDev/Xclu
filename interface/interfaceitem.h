@@ -11,7 +11,7 @@ struct InterfaceGuiPageCreator;
 class InterfaceGui;
 class QJsonObject;
 class InterfaceItem;
-class XcluObject;
+class XDict;
 class ModuleInterface;
 
 //предварительная информация для построения элемента интерфейса
@@ -101,7 +101,7 @@ public:
 
     //object
     virtual bool supports_object() { return false; }
-    virtual XcluObject *get_object() { return nullptr; }
+    virtual XDict *get_object() { return nullptr; }
 
     //Запись, считывание и копирование -------------------------
     //хранит ли данные (или просто интерфейсный элемент, например, сепаратор)
