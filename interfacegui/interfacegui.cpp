@@ -70,8 +70,28 @@ void InterfaceGui::insert_label(InterfaceGuiPageCreator &input) {
         label_->setFont(font);
     }
 
-    //вставка на страницу
+    //context menu
+    //https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
+    label_->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(label_, SIGNAL(customContextMenuRequested(QPoint)),
+                SLOT(customMenuRequested(QPoint)));
+
+
+    //insert on page
     input.grid->addWidget(label_, input.y, 0);
+}
+
+//---------------------------------------------------------------------
+void InterfaceGui::customMenuRequested(QPoint pos){
+    //QModelIndex index=table->indexAt(pos);
+
+    context_menu_.reset(new QMenu(this));
+    context_menu_->addAction(new QAction("Action 1", this));
+    context_menu_->addAction(new QAction("Action 2", this));
+    context_menu_->addAction(new QAction("Action 3", this));
+    context_menu_->popup(label_->mapToGlobal(pos));
+
+    //qDebug() << "popup menu for" << item__->name() << pos.x() << pos.y();
 }
 
 //---------------------------------------------------------------------

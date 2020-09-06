@@ -213,7 +213,7 @@
                         "aname": "Control",
                         "atitle": "Control",
                         "atype": "page",
-                        "avalue": "0",
+                        "avalue": "422",
                         "expr": "",
                         "expr_use": false
                     },
@@ -229,7 +229,7 @@
                         "aname": "presets_setup",
                         "atitle": "Presets",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -243,7 +243,7 @@
                         "aname": "links_setup",
                         "atitle": "Links Setup",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -267,7 +267,7 @@
                         "aname": "error_handling",
                         "atitle": "Error Handling",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -295,7 +295,7 @@
                         "aname": "calls_info",
                         "atitle": "Calls",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     }

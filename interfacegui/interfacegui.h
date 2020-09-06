@@ -13,6 +13,7 @@
 
 #include <QWidget>
 #include "incl_h.h"
+#include <QScopedPointer>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -28,6 +29,7 @@ class QListWidget;
 class QTabWidget;
 class QListWidgetItem;
 class QGridLayout;
+class QMenu;
 QT_END_NAMESPACE
 
 class InterfaceItem;
@@ -141,6 +143,9 @@ protected slots:
     //также, они могут переопределять их для собственных целей, но обязательно вызывать этот базовый метод
     virtual void on_value_changed();
 
+    void customMenuRequested(QPoint pos);
+protected:
+    QScopedPointer<QMenu> context_menu_;
 };
 
 #endif // INTERFACEITEMGUI_H
