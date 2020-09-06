@@ -1,12 +1,47 @@
 #General page, added to all modules
 #------------------------------------------
+
+    
+#------------------------------------------
 page Control
     //Common settings for all modules considering execution and error handling.
     
 in checkbox Enabled enabled=1
     //Is module working.
     
+#--------------------
 separator
+in checkbox(group) Presets presets_setup=0
+    //Setup presets.
+
+if presets_setup 1    
+out string Preset current_preset=""
+    //Name of current preset.
+in button Load... load_preset
+in button Save... save_preset
+in button Edit_List... edit_presets
+endif    
+
+#--------------------
+separator
+in checkbox(group) Links_Setup links_setup=0
+    //Setup links for variables, in two ways: as text list and in visual editor.
+
+if links_setup 1
+in checkbox Links_Enabled links_enabled=0
+    //Is links enabled.
+
+in text Links_List links 15 17
+    //List of links.
+    //# '#' - comment, '-' - deactivated link
+    //- volume module1->out_value
+    //- image webcamera1->image
+    
+in button Add... add_link
+    //Click to visually add a new link.
+in button Edit... edit_links
+    //Visual editor.
+endif
 
 #--------------------
 separator
