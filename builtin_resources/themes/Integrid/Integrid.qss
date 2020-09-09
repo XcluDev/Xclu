@@ -247,7 +247,7 @@ QLineEdit
 }
 
 
-/*-----QPlainTExtEdit-----*/
+/*-----QPlainTextEdit-----*/
 QPlainTextEdit
 {
 	background-color: #f6f6f6;
@@ -326,42 +326,40 @@ QTabBar::tab:!selected:hover
 /*-----QComboBox-----*/
 QComboBox
 {
-    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(184, 184, 184, 255),stop:1 rgba(159, 159, 159, 255));
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(224, 224, 224, 255),stop:1 rgba(200, 200, 200, 255));
     border: 1px solid #000;
     padding-left: 6px;
     color: #000;
     height: 20px;
+    
+
 
 }
-
 
 QComboBox::disabled
 {
-	background-color: #404040;
-	color: #656565;
+	background-color: #B0B0B0;
+	color: #353535;
 	border-color: #051a39;
-
 }
-
 
 QComboBox:on
 {
     background-color: #46a2da;
-	color: #fff;
+	color: #000000;
 
 }
-
 
 QComboBox QAbstractItemView
 {
-    background-color: #383838;
-    color: #ffffff;
+    background-color: #b8b8b8;
+    color: #00000;
     border: 1px solid black;
     selection-background-color: #46a2da;
     outline: 0;
-
+    
+	/*selection-color: #000;*/
 }
-
 
 QComboBox::drop-down
 {
@@ -372,9 +370,7 @@ QComboBox::drop-down
     border-left-width: 1px;
     border-left-color: black;
     border-left-style: solid; 
-
 }
-
 
 QComboBox::down-arrow
 {
