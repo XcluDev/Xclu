@@ -196,5 +196,30 @@
         <file>builtin_modules/Window/WMenu/description.xgui</file>
         <file>builtin_modules/Window/WSweetArea/description.xgui</file>
         <file>builtin_resources/custom_modules.ini</file>
+        <file>builtin_resources/qt_images/arrow-down.png</file>
+        <file>builtin_resources/qt_images/arrow-down@2x.png</file>
+        <file>builtin_resources/qt_images/arrow-left.png</file>
+        <file>builtin_resources/qt_images/arrow-left@2x.png</file>
+        <file>builtin_resources/qt_images/arrow-right.png</file>
+        <file>builtin_resources/qt_images/arrow-right@2x.png</file>
+        <file>builtin_resources/qt_images/arrow-up.png</file>
+        <file>builtin_resources/qt_images/arrow-up@2x.png</file>
+        <file>builtin_resources/qt_images/button.png</file>
+        <file>builtin_resources/qt_images/button_down.png</file>
+        <file>builtin_resources/qt_images/check.png</file>
+        <file>builtin_resources/qt_images/check@2x.png</file>
+        <file>builtin_resources/qt_images/editbox.png</file>
+        <file>builtin_resources/qt_images/focusframe.png</file>
+        <file>builtin_resources/qt_images/groupbox.png</file>
+        <file>builtin_resources/qt_images/header.png</file>
+        <file>builtin_resources/qt_images/leftanglearrow.png</file>
+        <file>builtin_resources/qt_images/rightanglearrow.png</file>
+        <file>builtin_resources/qt_images/scrollbar-handle-horizontal.png</file>
+        <file>builtin_resources/qt_images/scrollbar-handle-transient.png</file>
+        <file>builtin_resources/qt_images/scrollbar-handle-vertical.png</file>
+        <file>builtin_resources/qt_images/slider-groove.png</file>
+        <file>builtin_resources/qt_images/slider-handle.png</file>
+        <file>builtin_resources/qt_images/tab.png</file>
+        <file>builtin_resources/qt_images/tab_selected.png</file>
     </qresource>
 </RCC>

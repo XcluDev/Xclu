@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -213,7 +213,7 @@
                         "aname": "Control",
                         "atitle": "Control",
                         "atype": "page",
-                        "avalue": "422",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },
@@ -296,6 +296,616 @@
                         "atitle": "Calls",
                         "atype": "checkbox",
                         "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundOut",
+                "name": "sound_out1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "modules_list",
+                        "atitle": "Sound Sources",
+                        "atype": "text",
+                        "avalue": "#id of modules to play and optional volumes\n#for example: synthfromimage1 0.5",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "volume",
+                        "atitle": "Volume",
+                        "atype": "float",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_volume",
+                        "atitle": "Device Volume",
+                        "atype": "float",
+                        "avalue": "0.8",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "select_device",
+                        "atitle": "Sound Device",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_index",
+                        "atitle": "Device Index",
+                        "atype": "int",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "device_name",
+                        "atitle": "Device Name",
+                        "atype": "string",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "settings",
+                        "atitle": "Settings",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "sample_rate",
+                        "atitle": "Sample Rate",
+                        "atype": "enum",
+                        "avalue": "44100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "custom_sample_rate",
+                        "atitle": "Custom Sample Rate",
+                        "atype": "int",
+                        "avalue": "44100",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "channels",
+                        "atitle": "Channels",
+                        "atype": "int",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "buffer_size_desired",
+                        "atitle": "Buffer Size",
+                        "atype": "enum",
+                        "avalue": "Default",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "runtime",
+                        "atitle": "Runtime",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "atitle": "Connected Device Name",
+                        "atype": "string",
+                        "avalue": "Default Output Device"
+                    },
+                    {
+                        "aname": "is_started",
+                        "atitle": "Is Started",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "sound_format",
+                        "atitle": "Sound Format",
+                        "atype": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "buffer_size",
+                        "atitle": "Buffer Size",
+                        "atype": "int",
+                        "avalue": "35280"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "atitle": "Device Info",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_devices",
+                        "atitle": "Print Devices",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "print_formats",
+                        "atitle": "Print Formats",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "local_console",
+                        "atitle": "Local Console",
+                        "atype": "text",
+                        "avalue": "Connected Output Audio devices:\n0: Динамики (USB Audio Device)\n1: Динамики (NoMachine Microphone Adapter)\n2: Динамики (USB Audio Device)\n3: Динамики (NoMachine Microphone Adapter)\n\nStarting: Default Output Device\n\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
+                    },
+                    {
+                        "aname": "Test_Sound",
+                        "atitle": "Test Sound",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "gen_test",
+                        "atitle": "Generate Test Sound",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "atitle": "Presets",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "current_preset",
+                        "atitle": "Preset",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "atitle": "Links Setup",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "atitle": "Links Enabled",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "links",
+                        "atitle": "Links List",
+                        "atype": "text",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Test",
+                "name": "test1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "4"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "atitle": "Main",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "const_check",
+                        "atitle": "Const Checkbox",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "in_check",
+                        "atitle": "In Checkbox",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "out_check",
+                        "atitle": "Out Checkbox",
+                        "atype": "checkbox",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "float1",
+                        "atitle": "Const Float",
+                        "atype": "float",
+                        "avalue": "1.1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "float2",
+                        "atitle": "In Float",
+                        "atype": "float",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "float3",
+                        "atitle": "Out Float",
+                        "atype": "float",
+                        "avalue": "3.3"
+                    },
+                    {
+                        "aname": "int1",
+                        "atitle": "Const Int",
+                        "atype": "int",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "int2",
+                        "atitle": "In Int",
+                        "atype": "int",
+                        "avalue": "2",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "int3",
+                        "atitle": "Out Int",
+                        "atype": "int",
+                        "avalue": "3"
+                    },
+                    {
+                        "aname": "string1",
+                        "atitle": "Const String",
+                        "atype": "string",
+                        "avalue": "Abc",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "string2",
+                        "atitle": "In String",
+                        "atype": "string",
+                        "avalue": "Abc",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "string3",
+                        "atitle": "Out String",
+                        "atype": "string",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "list1",
+                        "atitle": "Const List",
+                        "atype": "enum",
+                        "avalue": "By_Id",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "list2",
+                        "atitle": "In List",
+                        "atype": "enum",
+                        "avalue": "By_Id",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "list3",
+                        "atitle": "Out List",
+                        "atype": "enum",
+                        "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "text1",
+                        "atitle": "Const Text",
+                        "atype": "text",
+                        "avalue": "This is a text example\nContinued...",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "text2",
+                        "atitle": "In Text",
+                        "atype": "text",
+                        "avalue": "",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "text3",
+                        "atitle": "Out Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Choose_Files",
+                        "atitle": "Choose Files",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "choose:file",
+                        "atitle": "Choose File",
+                        "atype": "string",
+                        "avalue": "aa",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "choose_Folder",
+                        "atitle": "Choose Folder",
+                        "atype": "string",
+                        "avalue": "aa",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Conditional_GUI",
+                        "atitle": "Conditional GUI",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "type",
+                        "atitle": "Type",
+                        "atype": "enum",
+                        "avalue": "Int",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "numbered",
+                        "atitle": "Numbered",
+                        "atype": "string",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "number_text",
+                        "atitle": "Number Text",
+                        "atype": "text",
+                        "avalue": "111\n222\n333",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "stringed",
+                        "atitle": "Stringed",
+                        "atype": "string",
+                        "avalue": "abcde",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "string_text",
+                        "atitle": "String Text",
+                        "atype": "text",
+                        "avalue": "aaa\nbbb\nccc",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Callback",
+                        "atitle": "Callback",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "callback_modules",
+                        "atitle": "Callback Modules",
+                        "atype": "text",
+                        "avalue": "#id of modules to execute",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "Control",
+                        "atitle": "Control",
+                        "atype": "page",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "enabled",
+                        "atitle": "Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "atitle": "Presets",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "current_preset",
+                        "atitle": "Preset",
+                        "atype": "string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "atitle": "Links Setup",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "atitle": "Links Enabled",
+                        "atype": "checkbox",
+                        "avalue": "1",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "links",
+                        "atitle": "Links List",
+                        "atype": "text",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "error_handling",
+                        "atitle": "Error Handling",
+                        "atype": "checkbox",
+                        "avalue": "0",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "atitle": "Action On Error",
+                        "atype": "enum",
+                        "avalue": "Show_Message_Box_and_Stop",
+                        "expr": "",
+                        "expr_use": false
+                    },
+                    {
+                        "aname": "was_error",
+                        "atitle": "Was Error",
+                        "atype": "checkbox",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "atitle": "Error Text",
+                        "atype": "text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "atitle": "Calls",
+                        "atype": "checkbox",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     }
