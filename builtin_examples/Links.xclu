@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -588,7 +588,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "4"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -603,7 +603,7 @@
                         "aname": "const_check",
                         "atitle": "Const Checkbox",
                         "atype": "checkbox",
-                        "avalue": "0",
+                        "avalue": "1",
                         "expr": "",
                         "expr_use": false
                     },
@@ -861,7 +861,7 @@
                         "aname": "links_enabled",
                         "atitle": "Links Enabled",
                         "atype": "checkbox",
-                        "avalue": "1",
+                        "avalue": "0",
                         "expr": "",
                         "expr_use": false
                     },

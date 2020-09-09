@@ -695,49 +695,44 @@ QCheckBox
 	background-color: transparent;
     color: #000;
 	border: none;
-
 }
-
 
 QCheckBox::indicator
 {
     background-color: lightgray;
     border: 1px solid #000;
-    width: 12px;
-    height: 12px;
-
+    width: 14px;
+    height: 14px;
 }
-
 
 QCheckBox::indicator:checked
 {
     image:url(":/builtin_resources/qt_images/check.png");
-	background-color: #46a2da;
+	background-color: #d2d2d2;
     border: 1px solid #3a546e;
+}
 
+QCheckBox::indicator:checked:hover
+{
+	border: 1px solid #46a2da; 
 }
 
 
 QCheckBox::indicator:unchecked:hover
 {
 	border: 1px solid #46a2da; 
-
 }
-
 
 QCheckBox::disabled
 {
-	color: #656565;
-
+	color: #b4b4b4;
 }
-
 
 QCheckBox::indicator:disabled
 {
-	background-color: #656565;
-	color: #656565;
-    border: 1px solid #656565;
-
+	background-color: #b4b4b4;
+	color: #b4b4b4;
+    border: 1px solid #b4b4b4;
 }
 
 
