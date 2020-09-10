@@ -195,7 +195,6 @@
         <file>builtin_modules/Window/WLayout/description.xgui</file>
         <file>builtin_modules/Window/WMenu/description.xgui</file>
         <file>builtin_modules/Window/WSweetArea/description.xgui</file>
-        <file>builtin_resources/custom_modules.ini</file>
         <file>builtin_resources/qt_images/arrow-down.png</file>
         <file>builtin_resources/qt_images/arrow-down@2x.png</file>
         <file>builtin_resources/qt_images/arrow-left.png</file>
@@ -221,5 +220,6 @@
         <file>builtin_resources/qt_images/slider-handle.png</file>
         <file>builtin_resources/qt_images/tab.png</file>
         <file>builtin_resources/qt_images/tab_selected.png</file>
+        <file>Xclu_custom.ini</file>
     </qresource>
 </RCC>

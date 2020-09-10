@@ -90,16 +90,12 @@ SOURCES += \
     core/raster.cpp \
     core/types.cpp \
     core/utils.cpp \
-    builtin_modules_impl/Screen/rtmodulewimage.cpp \
     core/xclu_parse_tree.cpp \
     core/xclu_paths.cpp \
     core/xclu_settings.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
-    builtin_modules_impl/Screen/rtmodulefbo.cpp \
-    builtin_modules_impl/Screen/rtmodulefragmentshader.cpp \
-    builtin_modules_impl/Sound/rtmodulesynthfromimage.cpp \
     modules/moduledescription.cpp \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
@@ -109,9 +105,6 @@ SOURCES += \
     interfacegui/xcludoublespinbox.cpp \
     interfacegui/xcluscrollarea.cpp \
     interfacegui/xcluspinbox.cpp \
-    builtin_modules_impl/Images/rtmodulewebcamera.cpp \
-    builtin_modules_impl/Sound/rtmodulesoundout.cpp \
-    builtin_modules_impl/System/rtmoduleexecute.cpp \
     core/console.cpp \
     interface/interfaceitembutton.cpp \
     interface/interfaceitemtext.cpp \
@@ -131,7 +124,6 @@ SOURCES += \
     interface/interfaceitemstring.cpp \
     interfacegui/interfaceguipage.cpp \
     interfacegui/interfaceguitext.cpp \
-    builtin_modules_impl/Utils/rtmoduletest.cpp \
     modules/module.cpp \
     modules/moduleinfo.cpp \
     modules/moduleinterface.cpp \
@@ -158,14 +150,9 @@ SOURCES += \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
     python/pythoncore.cpp \
-    builtin_modules_impl/Core/rtmodulescalar.cpp \
-    builtin_modules_impl/Screen/rtmodulewindow.cpp \
     interface/interfaceitemenum.cpp \
     interfacegui/interfaceguienum.cpp \
-    builtin_modules_impl/Sound/rtmodulesoundosc.cpp \
-    builtin_modules_impl/Communication/rtmoduleserial.cpp \
     core/slowbit.cpp \
-    builtin_modules_impl/Project/rtmoduleproject.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
     sdk/xclass.cpp \
@@ -177,7 +164,6 @@ HEADERS += \
     core/raster.h \
     core/types.h \
     core/utils.h \
-    builtin_modules_impl/Screen/rtmodulewimage.h \
     core/int2.h \
     core/xclu_parse_tree.h \
     core/xclu_paths.h \
@@ -185,9 +171,6 @@ HEADERS += \
     core/xclu_theme.h \
     core/xclu_types.h \
     core/xclu_utils.h \
-    builtin_modules_impl/Screen/rtmodulefbo.h \
-    builtin_modules_impl/Screen/rtmodulefragmentshader.h \
-    builtin_modules_impl/Sound/rtmodulesynthfromimage.h \
     modules/moduledescription.h \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
@@ -197,9 +180,6 @@ HEADERS += \
     interfacegui/xcludoublespinbox.h \
     interfacegui/xcluscrollarea.h \
     interfacegui/xcluspinbox.h \
-    builtin_modules_impl/Images/rtmodulewebcamera.h \
-    builtin_modules_impl/Sound/rtmodulesoundout.h \
-    builtin_modules_impl/System/rtmoduleexecute.h \
     core/console.h \
     interface/interfaceitembutton.h \
     interface/interfaceitemtext.h \
@@ -219,7 +199,6 @@ HEADERS += \
    interface/interfaceitemstring.h \
    interfacegui/interfaceguipage.h \
     interfacegui/interfaceguitext.h \
-    builtin_modules_impl/Utils/rtmoduletest.h \
     modules/module.h \
     modules/moduleinfo.h \
     modules/moduleinterface.h \
@@ -246,93 +225,11 @@ HEADERS += \
     project/projectruntime.h \
     python/pythoncore.h \
     core/qt_widgets.h \
-    builtin_modules_impl/Core/rtmodulescalar.h \
-    builtin_modules_impl/Screen/rtmodulewindow.h \
     interface/interfaceitemenum.h \
     interfacegui/interfaceguienum.h \
-    builtin_modules_impl/Sound/rtmodulesoundosc.h \
-    builtin_modules_impl/Communication/rtmoduleserial.h \
     core/slowbit.h \
-    builtin_modules_impl/Project/rtmoduleproject.h \
     sdk/xclass.h \
     objects/xdict.h
-
-#--------------------------------------------------------------------------
-#Realsense camera support
-#Comment this block if Realsense camera is not required
-#--------------------------------------------------------------------------
-unix {
-    INCLUDEPATH += ~/librealsense/include
-    LIBS += -lrealsense2
-}
-
-#windows 32 bit
-#windows {
-#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
-#}
-
-#windows 64 bit
-windows {
-    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
-}
-
-SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
-
-HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h
-
-
-
-
-#--------------------------------------------------------------------------
-#Custom modules
-#Comment if not required or you don't have them
-#--------------------------------------------------------------------------
-unix {
-    INCLUDEPATH += "../../Cosmo/Cosmovibro/CosmovibroRt"
-
-    SOURCES += \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.cpp
-
-    HEADERS += \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h \
-        ../Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.h
-
-}
-
-#windows 64 bit
-windows {
-    INCLUDEPATH += "../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt"
-
-    SOURCES += \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.cpp \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.cpp
-
-    HEADERS += \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmovibro.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoimage.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmodrawing.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmosound.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmoosc.h \
-        ../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/rtmodulecosmostars.h
-
-}
 
 #--------------------------------------------------------------------------
 #Python
@@ -350,3 +247,14 @@ windows {
 unix {
 }
 #--------------------------------------------------------------------------
+#Built-in and custom modules
+#https://wiki.qt.io/Including_.pro_Files
+#--------------------------------------------------------------------------
+include(Xclu_builtin.pri)
+
+#Custom modules of Xclu, used for private user's projects.
+#If you don't have them, just comment!
+include(Xclu_custom.pri)
+
+#--------------------------------------------------------------------------
+

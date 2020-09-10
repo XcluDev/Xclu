@@ -79,7 +79,11 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
     names.clear();
     folders.clear();
 
-    QSettings settings(xclu_custom_modules_file(), QSettings::IniFormat);
+    QString file_name = xclu_custom_modules_file();
+    xclu_assert(QFileInfo::exists(file_name), "Can't find list of custom modules `" + file_name + "`");
+
+    QSettings settings(file_name, QSettings::IniFormat);
+
     int max_n = 100;    //Параметр, сколько кастомных файлов
 
     //определение секции по ОС
@@ -87,7 +91,7 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
     QString section = "windows";
 #endif
 #ifdef XCLU_LINUX
-    QString section = "linux";
+    QString section = "unix";
 #endif
 
 

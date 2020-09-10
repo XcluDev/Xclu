@@ -14,6 +14,12 @@ QString xclu_settings_file() {
 
 
 //---------------------------------------------------------------------
+//корневая папка со встроенными ресурсами - например, Xclu_custom.ini
+QString xclu_root_resources_folder() {
+    return ":/";
+}
+
+//---------------------------------------------------------------------
 //папка со встроенными ресурсами - темы, общие XGUI
 //это файлы ресурсов, поэтому путь начинается с ":/"
 QString xclu_builtin_resources_folder() {
@@ -50,7 +56,7 @@ QString xclu_XGUI_ext() {
 //---------------------------------------------------------------------
 //Файл кастомных модулей
 QString xclu_custom_modules_file() {
-    return xclu_builtin_resources_folder() + "custom_modules.ini";
+    return xclu_root_resources_folder() + "Xclu_custom.ini";
 }
 
 //---------------------------------------------------------------------

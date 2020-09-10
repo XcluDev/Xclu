@@ -10,6 +10,9 @@ QString xclu_app_folder();
 //Путь к файлу настроек
 QString xclu_settings_file();
 
+//корневая папка со встроенными ресурсами - например, Xclu_custom.ini
+QString xclu_root_resources_folder();
+
 //папка со встроенными ресурсами - темы, общие XGUI
 QString xclu_builtin_resources_folder();
 //папка с описанием встроенных модулей
