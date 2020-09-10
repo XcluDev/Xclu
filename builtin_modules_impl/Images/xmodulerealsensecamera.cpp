@@ -162,7 +162,7 @@ void XModuleRealsenseCamera::impl_update() {
 //запись кадра на диск
 void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //Создаем папку для записи
-    QString folder = RUNTIME.absolute_path_from_project(gets("save_folder"), true /*create_folder*/);
+    QString folder = rt_path(gets("save_folder"), true /*create_folder*/);
 
     //время
     /*dd.MM.yyyy    21.05.2001

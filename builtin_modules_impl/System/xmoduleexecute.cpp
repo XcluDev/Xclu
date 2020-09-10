@@ -61,7 +61,7 @@ void XModuleExecute::impl_update() {
         QString file_name_short = gets("file_name");
 
         //относительный путь
-        folder = RUNTIME.project_folder() + "/" + folder;
+        folder = rt_project_folder() + "/" + folder;
         sets("folder_path", folder);
 
         //построение имени файла
@@ -77,7 +77,7 @@ void XModuleExecute::impl_update() {
         //int wait_finish = geti("wait_finish");
 
         //запоминаем время старта
-        double start_time = RUNTIME.elapsed_time_sec();
+        double start_time = rt_elapsed_time_sec();
         setf("last_time", start_time);
 
         bool success = false;
@@ -127,7 +127,7 @@ void XModuleExecute::impl_update() {
         xclu_assert(success, "Execution error or time is out");
 
         //ставим продолжительность
-        double time = RUNTIME.elapsed_time_sec();
+        double time = rt_elapsed_time_sec();
         setf("last_duration", time - start_time);
     }
 

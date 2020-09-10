@@ -2,10 +2,32 @@
 #include "incl_cpp.h"
 #include "module.h"
 #include "xdict.h"
+#include "projectruntime.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(Module *module) {
     set_module(module);
+}
+
+//---------------------------------------------------------------------
+double XClass::rt_elapsed_time_sec() {
+    return RUNTIME.elapsed_time_sec();
+}
+
+//---------------------------------------------------------------------
+float XClass::rt_dt() {
+    return RUNTIME.dt();
+}
+
+//---------------------------------------------------------------------
+QString XClass::rt_project_folder() {   //full path to project folder
+    return RUNTIME.project_folder();
+}
+
+//---------------------------------------------------------------------
+//get absolute path to folder, given relative to project
+QString XClass::rt_path(QString relative_path, bool create_folder) {
+    return RUNTIME.absolute_path_from_project(relative_path, create_folder);
 }
 
 //---------------------------------------------------------------------

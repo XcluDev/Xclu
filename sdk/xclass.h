@@ -26,11 +26,27 @@ public:
     XClass() {}
     XClass(Module *module);
 
+    //----------------------------------------------
+    //Runtime
+    //----------------------------------------------
+    double rt_elapsed_time_sec();
+    float rt_dt();
+
+    QString rt_project_folder();   //full path to project folder
+
+    //get absolute path to folder, given relative to project
+    QString rt_path(QString relative_path, bool create_folder = false);
+
+
+    //----------------------------------------------
     //Underlying module
+    //----------------------------------------------
     void set_module(Module *module);
     Module *module();
 
+    //----------------------------------------------
     //Variables access
+    //----------------------------------------------
     //int, checkbox, button, enum (rawtext), string, text
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!

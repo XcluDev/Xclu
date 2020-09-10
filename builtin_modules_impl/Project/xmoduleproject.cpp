@@ -46,9 +46,9 @@ void XModuleProject::impl_start() {
 
 //---------------------------------------------------------------------
 void XModuleProject::impl_update() {
-    setf("elapsed_time_sec", RUNTIME.elapsed_time_sec());
+    setf("elapsed_time_sec", rt_elapsed_time_sec());
 
-    float dt = RUNTIME.dt();
+    float dt = rt_dt();
     setf("dt", dt);
 
     float fps = 10000;
