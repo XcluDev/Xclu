@@ -199,11 +199,11 @@ protected:
 
 //Популярные названия для call-функций
 //вызов:
-//call_function_name::sound_buffer_add()
-class call_function_name {
+//functions_names::sound_buffer_add()
+class functions_names {
 public:
     static QString sound_buffer_add() { return "sound_buffer_add"; }
-    static QString get_widget_pointer() { return "get_widget_pointer";}
+    static QString create_widget() { return "create_widget";}
 };
 
 

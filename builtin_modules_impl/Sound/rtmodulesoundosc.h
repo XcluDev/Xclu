@@ -86,13 +86,13 @@ public:
 
 protected:
     //Выполнение
-    virtual void execute_loaded_internal() {}
-    virtual void execute_start_internal();
-    virtual void execute_update_internal();
-    virtual void execute_stop_internal();
+    virtual void loaded_impl() {}
+    virtual void start_impl();
+    virtual void update_impl();
+    virtual void stop_impl();
 
     //генерация звука
-    virtual void call_internal(QString function, XDict *input, XDict * /*output*/);
+    virtual void call_impl(QString function, XDict *input, XDict * /*output*/);
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука

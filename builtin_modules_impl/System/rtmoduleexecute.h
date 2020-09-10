@@ -18,9 +18,9 @@ public:
 protected:
     //Выполнение
 
-    virtual void execute_start_internal();
-    virtual void execute_update_internal();
-    virtual void execute_stop_internal();
+    virtual void start_impl();
+    virtual void update_impl();
+    virtual void stop_impl();
 
     enum WorkMode : int {
         WorkModeEach_Frame = 0,

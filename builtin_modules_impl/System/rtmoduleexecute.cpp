@@ -27,7 +27,7 @@ RtModuleExecute::~RtModuleExecute()
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::execute_start_internal() {
+void RtModuleExecute::start_impl() {
     //qDebug() << "start";
     seti("success", 0);
     seti("exit_code", 0);
@@ -42,7 +42,7 @@ void RtModuleExecute::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::execute_update_internal() {
+void RtModuleExecute::update_impl() {
     //очищаем флажок success - он действует только в рамках одного кадра
     seti("success", 0);
 
@@ -135,7 +135,7 @@ void RtModuleExecute::execute_update_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::execute_stop_internal() {
+void RtModuleExecute::stop_impl() {
     //qDebug() << "stop";
 
 }

@@ -55,8 +55,8 @@ public:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
     //
-    //Популярные call-имена для function в классе call_function_name:
-    //call_function_name::sound_buffer_add()
+    //Популярные call-имена для function в классе functions_names:
+    //functions_names::sound_buffer_add()
 
     //в случае исключения - оно выдастся
     void access_call(QString function, XDict *input = nullptr, XDict *output = nullptr);

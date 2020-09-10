@@ -227,7 +227,7 @@ void RtModuleWindow::on_visibleChanged(bool /*arg*/) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::execute_start_internal() {
+void RtModuleWindow::start_impl() {
     //создание и установка начальных настроек окна
     setup_window();
 
@@ -236,22 +236,22 @@ void RtModuleWindow::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::execute_update_internal() {
+void RtModuleWindow::update_impl() {
 
     update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleWindow::execute_stop_internal() {
+void RtModuleWindow::stop_impl() {
     window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWindow::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void RtModuleWindow::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
-    //if (function == call_function_name::sound_buffer_add()) {
+    //if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);
@@ -459,18 +459,18 @@ int RtModuleWindow::parse_int(QStringList list, int index, int default_value, QS
 QWidget *RtModuleWindow::request_widget(QString module_id) {
     Module *module = RUNTIME.get_module(module_id);
 
-    //call get_widget_pointer
+    //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
     //out pointer widget_pointer
 
     //формируем запрос
     XDict input;
-    XDictWrite(input).sets("parent_id", module_->name());
+    XDictWrite(input).sets("parent_id", this->module()->name());
 
     XDict output;
 
-    module->access_call(call_function_name::get_widget_pointer(), &input, &output);
+    module->access_call(functions_names::create_widget(), &input, &output);
 
     //считываем указатель на виджет
     QWidget *widget = (QWidget *)XDictWrite(output).get_pointer("widget_pointer");

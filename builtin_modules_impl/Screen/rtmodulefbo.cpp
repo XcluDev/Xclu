@@ -29,7 +29,7 @@ RtModuleFbo::~RtModuleFbo()
 }
 
 //---------------------------------------------------------------------
-void RtModuleFbo::execute_start_internal() {
+void RtModuleFbo::start_impl() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,22 +38,22 @@ void RtModuleFbo::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleFbo::execute_update_internal() {
+void RtModuleFbo::update_impl() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleFbo::execute_stop_internal() {
+void RtModuleFbo::stop_impl() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleFbo::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void RtModuleFbo::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
-    //if (function == call_function_name::sound_buffer_add()) {
+    //if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);

@@ -34,7 +34,7 @@ array(float) data
 
 
 #------------------------------------------
-call get_widget_pointer
+call create_widget
     //Window calls GUI elements to insert them into itself. If occurs at its first update call.
 string parent_id
 out pointer widget_pointer

@@ -27,7 +27,7 @@ RtModuleProject::~RtModuleProject()
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::execute_loaded_internal() {
+void RtModuleProject::loaded_impl() {
     if (is_enabled()) {
         apply_control_values();
     }
@@ -40,12 +40,12 @@ void RtModuleProject::apply_control_values() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::execute_start_internal() {
+void RtModuleProject::start_impl() {
     apply_control_values();
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::execute_update_internal() {
+void RtModuleProject::update_impl() {
     setf("elapsed_time_sec", RUNTIME.elapsed_time_sec());
 
     float dt = RUNTIME.dt();
@@ -58,7 +58,7 @@ void RtModuleProject::execute_update_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::execute_stop_internal() {
+void RtModuleProject::stop_impl() {
 
 }
 

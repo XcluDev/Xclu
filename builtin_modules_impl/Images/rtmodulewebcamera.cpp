@@ -106,7 +106,7 @@ RtModuleWebcamera::~RtModuleWebcamera()
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::execute_start_internal() {
+void RtModuleWebcamera::start_impl() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -138,7 +138,7 @@ void RtModuleWebcamera::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::execute_update_internal() {
+void RtModuleWebcamera::update_impl() {
     //если требуется, напечатать все устройства
     print_devices();
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
@@ -161,7 +161,7 @@ void RtModuleWebcamera::execute_update_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::execute_stop_internal() {
+void RtModuleWebcamera::stop_impl() {
     //qDebug() << "stop";
     stop_camera();
 

@@ -29,7 +29,7 @@ RtModuleFragmentShader::~RtModuleFragmentShader()
 }
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::execute_start_internal() {
+void RtModuleFragmentShader::start_impl() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,22 +38,22 @@ void RtModuleFragmentShader::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::execute_update_internal() {
+void RtModuleFragmentShader::update_impl() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::execute_stop_internal() {
+void RtModuleFragmentShader::stop_impl() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleFragmentShader::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void RtModuleFragmentShader::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
-    //if (function == call_function_name::sound_buffer_add()) {
+    //if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);

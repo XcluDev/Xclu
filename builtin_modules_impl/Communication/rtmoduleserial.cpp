@@ -43,18 +43,18 @@ void RtModuleSerial::set_total_sent(int t) {
 //---------------------------------------------------------------------
 RtModuleSerial::~RtModuleSerial()
 {
-    execute_stop_internal();
+    stop_impl();
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::execute_loaded_internal() {
+void RtModuleSerial::loaded_impl() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void RtModuleSerial::button_pressed_internal(QString button_id) {
+void RtModuleSerial::button_pressed_impl(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -133,7 +133,7 @@ void RtModuleSerial::print_devices() {
 
 
 //---------------------------------------------------------------------
-void RtModuleSerial::execute_start_internal() {
+void RtModuleSerial::start_impl() {
     //Очистка переменных
     gui_clear();
 
@@ -228,8 +228,8 @@ void RtModuleSerial::open_port() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::execute_update_internal() {
-   //отработка отправки данных путем нажатия кнопок идет в button_pressed_internal
+void RtModuleSerial::update_impl() {
+   //отработка отправки данных путем нажатия кнопок идет в button_pressed_impl
 
 }
 
@@ -280,7 +280,7 @@ void RtModuleSerial::send_byte(int byte) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::execute_stop_internal() {
+void RtModuleSerial::stop_impl() {
     if (connected_) {
         serialPort_.close();
         set_connected(false);

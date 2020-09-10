@@ -89,7 +89,7 @@ RtModuleSynthFromImage::~RtModuleSynthFromImage()
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::execute_start_internal() {
+void RtModuleSynthFromImage::start_impl() {
     //Очистка переменных
     image_file_ = "";
 
@@ -105,7 +105,7 @@ void RtModuleSynthFromImage::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::execute_update_internal() {
+void RtModuleSynthFromImage::update_impl() {
     //получение картинки - загрузка из файла или взятие из другого модуля
     ImageSource image_source = ImageSource(geti("image_source"));
     switch (image_source) {
@@ -144,7 +144,7 @@ void RtModuleSynthFromImage::load_image_link(QString image_link) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::execute_stop_internal() {
+void RtModuleSynthFromImage::stop_impl() {
 
 }
 
@@ -198,9 +198,9 @@ void RtModuleSynthFromImage::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSynthFromImage::call_internal(QString function, XDict *input, XDict * /*output*/) {
+void RtModuleSynthFromImage::call_impl(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
-    if (function == call_function_name::sound_buffer_add()) {
+    if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         DataAccess access(data_);

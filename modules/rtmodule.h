@@ -4,9 +4,9 @@
 //Вычислительный модуль (run-time module)
 //Базовый класс для конкретных реализаций модулей
 //каждый модуль должен реализовать следующие виртуальные функции:
-//execute_start_internal()
-//execute_update_internal()
-//execute_stop_internal()
+//start_impl()
+//update_impl()
+//stop_impl()
 // - они работают в основном потоке, и поэтому могут общаться с GUI
 //
 //execute_call_internal()  - опциональная функция, вызов из другого модуля
@@ -20,6 +20,7 @@
 class InterfaceItem;
 class Module;
 class XDict;
+class QWidget;
 
 //Переменные, описывающие состояние
 class RtModuleStatus {
@@ -40,6 +41,9 @@ class RtModule : public QObject
 {
     Q_OBJECT
 public:
+    //--------------------------------------------------------------
+    //Public interface
+    //--------------------------------------------------------------
     RtModule(QString class_name);
     virtual ~RtModule();
 
@@ -54,19 +58,20 @@ public:
     void set_module(Module *module);
     Module *module();
 
-    //основная функция запуска, вызывает execute_start_internal, execute_update_internal, execute_stop_internal
+    //основная функция запуска, вызывает start_impl, update_impl, stop_impl
     void execute(ModuleExecuteStage stage);
 
     //нажатие кнопки - это можно делать и во время остановки всего
     //внимание, обычно вызывается из основного потока как callback
     void button_pressed(QString button_id);
 
-    //функция вызова между модулями, вызывает call_internal
+    //------------------------------------------------------------------------
+    //функция вызова между модулями, вызывает call_impl
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //err - информация об ошибках.
     //При call-вызовах модули не должны генерировать исключения, а перехватывать их и писать в err.
-    //Поэтому call перехватывает их, но реализация в call_internal может генерировать исключение
+    //Поэтому call перехватывает их, но реализация в call_impl может генерировать исключение
     //То, что модуль может запрашивать у других модулей, определяется свойством
     //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
     //То, что модуль может отдавать другим модулям, определяется свойством
@@ -74,7 +79,7 @@ public:
 
     void call(QString function, ErrorInfo &err, XDict *input, XDict *output);
 
-
+    //------------------------------------------------------------------------
     bool is_running();  //был фактический запуск
 
     //Если true после start/update - то нужно останавливать запуск
@@ -141,8 +146,52 @@ public:
     //объекты снабжены мютексами, поэтому следует начинать и завершать с ними взаимодействие
     XDict *get_object(QString name);
 
-
 protected:
+    //--------------------------------------------------------------
+    //Protected interface for subclasses
+    //--------------------------------------------------------------
+
+    //нужно ли остановить исполнение
+    void reset_stop_out();
+    void set_stop_out();
+
+    //обработка ошибки в соответствие с настройками модуля
+    void process_error(QString message);
+
+    //функции исполнения, специфичные для модулей - они должны их переопределить
+    //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
+    virtual void loaded_impl() {}
+    //эти функции запускаются, только если модуль включен:
+    virtual void start_impl() {}
+    virtual void update_impl() {}
+    virtual void stop_impl() {}
+
+    //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
+    //внимание, обычно вызывается из основного потока как callback
+    virtual void button_pressed_impl(QString /*button_id*/) {}
+
+    //Universal call handler
+    //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
+    //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
+    //function - имя функции (действие, которое следует выполнить)
+    //То, что модуль может запрашивать у других модулей, определяется свойством
+    //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
+    //То, что модуль может отдавать другим модулям, определяется свойством
+    //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
+
+    virtual void call_impl(QString function, XDict *input, XDict *output);
+
+    //Concrete call handlers
+    virtual void *create_widget_impl(QString parent_id);
+
+    //"sound_buffer_add" call, fills `data` buffer
+    //there are required to fill channels * samples values at data
+    virtual void sound_buffer_add_impl(int sample_rate, int channels, int samples, float * data);
+
+private:
+    //--------------------------------------------------------------
+    //Private members
+    //--------------------------------------------------------------
     //Родительский модуль
     Module *module_ = nullptr;  //удалять не надо
 
@@ -158,40 +207,12 @@ protected:
     void internal_stop();       //выполнить stop
     void internal_one_shot();   //start, update, stop за один раз
 
+    //Concrete call handlers
+    //"create_widget" call, returns QWidget pointer
+    void create_widget_internal(XDict *input, XDict *output);
+    //"sound_buffer_add" call
+    void sound_buffer_add_internal(XDict *input, XDict *output);
 
-    //нужно ли остановить исполнение
-    void reset_stop_out();
-    void set_stop_out();
-
-
-    //обработка ошибки в соответствие с настройками модуля
-    void process_error(QString message);
-
-    //функции исполнения, специфичные для модулей - они должны их переопределить
-    //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
-    virtual void execute_loaded_internal() {}
-    //эти функции запускаются, только если модуль включен:
-    virtual void execute_start_internal() {}
-    virtual void execute_update_internal() {}
-    virtual void execute_stop_internal() {}
-
-    //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
-    //внимание, обычно вызывается из основного потока как callback
-    virtual void button_pressed_internal(QString /*button_id*/) {}
-
-    //вызов модуля извне
-    //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
-    //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-    //function - имя функции (действие, которое следует выполнить)
-    //То, что модуль может запрашивать у других модулей, определяется свойством
-    //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
-    //То, что модуль может отдавать другим модулям, определяется свойством
-    //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
-
-     virtual void call_internal(QString function, XDict *input, XDict *output);
-
-    //выполнить только один раз - в начале или конце
-    void execute_one_shot();
 
 };
 

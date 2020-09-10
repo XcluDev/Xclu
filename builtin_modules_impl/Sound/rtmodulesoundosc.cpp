@@ -128,7 +128,7 @@ RtModuleSoundOsc::~RtModuleSoundOsc()
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::execute_start_internal() {
+void RtModuleSoundOsc::start_impl() {
     //Очистка переменных
 
     update_data();
@@ -140,13 +140,13 @@ void RtModuleSoundOsc::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::execute_update_internal() {
+void RtModuleSoundOsc::update_impl() {
     //считываем данные из GUI
     update_data();
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::execute_stop_internal() {
+void RtModuleSoundOsc::stop_impl() {
 
 }
 
@@ -200,9 +200,9 @@ void RtModuleSoundOsc::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSoundOsc::call_internal(QString function, XDict *input, XDict * /*output*/) {
+void RtModuleSoundOsc::call_impl(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
-    if (function == call_function_name::sound_buffer_add()) {
+    if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         DataAccess access(data_);

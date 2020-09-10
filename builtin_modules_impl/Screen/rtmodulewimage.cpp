@@ -32,8 +32,8 @@ RtModuleWImage::~RtModuleWImage()
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_start_internal() {
-    //сбрасываем родителя - это будет установлено в call_internal, когда родитель запросит
+void RtModuleWImage::start_impl() {
+    //сбрасываем родителя - это будет установлено в call_impl, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
     clear_string("parent_id");
@@ -48,7 +48,7 @@ void RtModuleWImage::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_update_internal() {
+void RtModuleWImage::update_impl() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -56,7 +56,7 @@ void RtModuleWImage::execute_update_internal() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::execute_stop_internal() {
+void RtModuleWImage::stop_impl() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -65,12 +65,12 @@ void RtModuleWImage::execute_stop_internal() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWImage::call_internal(QString function, XDict *input, XDict *output) {
-    //"get_widget_pointer"
-    if (function == call_function_name::get_widget_pointer()) {
+void RtModuleWImage::call_impl(QString function, XDict *input, XDict *output) {
+    //"create_widget"
+    if (function == functions_names::create_widget()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
-        //call get_widget_pointer
+        //call create_widget
         //Window calls GUI elements to insert them into itself.
         //string parent_id
         //out pointer widget_pointer
@@ -88,7 +88,7 @@ void RtModuleWImage::call_internal(QString function, XDict *input, XDict *output
         xclu_assert(status().was_started,
                     QString("Can't create widget, because module '%1' was not started yet."
                             " You need to place it before parent '%2'.")
-                    .arg(module_->name())
+                    .arg(module()->name())
                     .arg(parent_id_));
 
         //создаем виджет

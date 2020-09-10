@@ -2,6 +2,7 @@
 #include "moduleinterface.h"
 #include "module.h"
 #include "incl_cpp.h"
+#include "xdict.h"
 
 //---------------------------------------------------------------------
 RtModule::RtModule(QString class_name) {
@@ -35,7 +36,7 @@ QString RtModule::name() {
 
 //---------------------------------------------------------------------
 void RtModule::internal_loaded() {     //действия при загрузке модуля
-    execute_loaded_internal();
+    loaded_impl();
 }
 
 //---------------------------------------------------------------------
@@ -43,10 +44,10 @@ void RtModule::internal_loaded() {     //действия при загрузк�
 void RtModule::internal_update() {
     if (is_enabled()) {
         if (!status_.was_started) {
-            execute_start_internal();
+            start_impl();
             status_.was_started = true;
         }
-        execute_update_internal();
+        update_impl();
     }
 }
 
@@ -55,7 +56,7 @@ void RtModule::internal_update() {
 void RtModule::internal_stop() {
     if (status_.was_started) {
         status_.was_started = false;
-        execute_stop_internal();
+        stop_impl();
     }
     status_.enabled__ = false;
 }
@@ -131,17 +132,29 @@ void RtModule::execute(ModuleExecuteStage stage) {
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
 void RtModule::button_pressed(QString button_id) {
-    button_pressed_internal(button_id);
+    button_pressed_impl(button_id);
 }
 
 //---------------------------------------------------------------------
-//функция вызова между модулями, вызывает call_internal
+//функция вызова между модулями, вызывает call_impl
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
 void RtModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
     try {
         if (err.is_error()) return;
+
+        //process predefined functions
+        if (function == functions_names::create_widget()) {
+            create_widget_internal(input, output);
+            return;
+        }
+        if (function == functions_names::sound_buffer_add()) {
+            sound_buffer_add_internal(input, output);
+            return;
+        }
+
+        //process universal function
         //if (is_enabled()) {
-        call_internal(function, input, output);
+        call_impl(function, input, output);
         //}
     }
     catch (XCluException &e) {
@@ -151,8 +164,70 @@ void RtModule::call(QString function, ErrorInfo &err, XDict *input, XDict *outpu
 }
 
 //---------------------------------------------------------------------
-void RtModule::call_internal(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
-    xclu_exception("Calls processing is not implemented for module " + name());
+//"create_widget" call, returns QWidget pointer
+void RtModule::create_widget_internal(XDict *input, XDict *output) {
+    //call create_widget
+    //Window calls GUI elements to insert them into itself.
+    //string parent_id
+    //out pointer widget_pointer
+
+    //проверка, что оба объекта переданы
+    xclu_assert(input, "Internal error, input object is nullptr");
+    xclu_assert(output, "Internal error, output object is nullptr");
+
+    //устанавливаем, кто использует
+    QString parent_id = XDictRead(input).gets("parent_id");
+
+    //проверяем, что еще не стартовали
+    xclu_assert(status().was_started,
+                QString("Can't create widget, because module '%1' was not started yet."
+                        " You need to place it before parent '%2'.")
+                .arg(module_->name())
+                .arg(parent_id));
+
+    //создаем виджет
+    void* widget = create_widget_impl(parent_id);
+
+    //ставим его в объект
+    XDictWrite(output).set_pointer("widget_pointer", widget);
+}
+
+//---------------------------------------------------------------------
+//"sound_buffer_add" call
+void RtModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
+    //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
+    XDictWrite sound(input);
+    int sample_rate = sound.geti("sample_rate");
+    int samples = sound.geti("samples");
+    int channels = sound.geti("channels");
+    float *data = sound.var_array("data")->data_float();
+    sound_buffer_add_impl(sample_rate, channels, samples, data);
+}
+
+//---------------------------------------------------------------------
+void RtModule::call_impl(QString function, XDict * /*input*/, XDict * /*output*/) {
+    xclu_exception("Module '" + name()
+                   + "' can't process function '" + function + "', because call_impl() is not implemented");
+}
+
+//---------------------------------------------------------------------
+//Concrete call handlers
+void *RtModule::create_widget_impl(QString /*parent_id*/) {
+    xclu_exception("Module '" + name()
+                   + "' can't process function 'create_widget', because create_widget_impl() is not implemented");
+
+
+
+
+    return nullptr;
+}
+
+//---------------------------------------------------------------------
+//"sound_buffer_add" call, fills `data` buffer
+//there are required to fill channels * samples values at data
+void RtModule::sound_buffer_add_impl(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+    xclu_exception("Module '" + name()
+                   + "' can't process function 'sound_buffer_add', because sound_buffer_add_impl() is not implemented");
 }
 
 //---------------------------------------------------------------------

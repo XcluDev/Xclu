@@ -8,7 +8,7 @@ module_description=Send notification using Mail using your own SMTP server or Xc
 module_version=1.01
 module_impl=C++
 
-#module_accept_calls=get_widget_pointer
+#module_accept_calls=create_widget
 
 #отправка через пользователя или через сервера Xclu.
 #важно, что адреса не могут меняться - чтобы не было рассылки спама. 

@@ -70,7 +70,7 @@ void RtModuleSoundOutGenerator::request_sound(int samples, int channels) { //с�
             //вызов генерации звуков у остальных модулей
             for (int i=0; i<data_->modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-                data_->modules_[i]->access_call(call_function_name::sound_buffer_add(), &sound_);
+                data_->modules_[i]->access_call(functions_names::sound_buffer_add(), &sound_);
             }
         }
 
@@ -201,7 +201,7 @@ RtModuleSoundOut::~RtModuleSoundOut()
 //Вывод низкоуровневого звука - https://doc.qt.io/qt-5/qaudiooutput.html
 //Пример Qt - Audio Output Example
 
-void RtModuleSoundOut::execute_start_internal() {
+void RtModuleSoundOut::start_impl() {
     //Очистка переменных
     audio_tried_to_start_ = false;
     print_devices_worked_ = false;
@@ -227,7 +227,7 @@ void RtModuleSoundOut::execute_start_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOut::execute_update_internal() {
+void RtModuleSoundOut::update_impl() {
     //запустить устройство, если еще это не делали
     start_audio();
 
@@ -270,7 +270,7 @@ void RtModuleSoundOut::check_volume_change() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOut::execute_stop_internal() {
+void RtModuleSoundOut::stop_impl() {
     stop_audio();
 
 }

@@ -26,12 +26,12 @@ public:
 
 protected:
     //Выполнение
-    virtual void execute_start_internal();
-    virtual void execute_update_internal();
-    virtual void execute_stop_internal();
+    virtual void start_impl();
+    virtual void update_impl();
+    virtual void stop_impl();
 
     //Вызовы
-    virtual void call_internal(QString function, XDict *input, XDict * /*output*/);
+    virtual void call_impl(QString function, XDict *input, XDict * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
 };

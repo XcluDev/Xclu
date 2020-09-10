@@ -25,13 +25,13 @@ RtModuleTest::~RtModuleTest()
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::execute_start_internal() {
+void RtModuleTest::start_impl() {
     xclu_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::execute_update_internal() {
+void RtModuleTest::update_impl() {
     xclu_console_append(QString("%1 - update").arg(name()));
     if (geti("callback")) {
         xclu_console_append(QString("%1 - pressed Callback").arg(name()));
@@ -41,7 +41,7 @@ void RtModuleTest::execute_update_internal() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::execute_stop_internal() {
+void RtModuleTest::stop_impl() {
     xclu_console_append(QString("%1 - stop").arg(name()));
 
 

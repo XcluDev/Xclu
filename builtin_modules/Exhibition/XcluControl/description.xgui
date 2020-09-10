@@ -8,7 +8,7 @@ module_description=Start, stop and update Xclu project, and control its paramete
 module_version=1.01
 module_impl=C++
 
-#module_accept_calls=get_widget_pointer
+#module_accept_calls=create_widget
 
 #!!! Настройки как для локальной сети, так и для веб - тогда траффик идет через XCLU-сервер и вводится ключ
 #и вводится ключ и хранится MD5

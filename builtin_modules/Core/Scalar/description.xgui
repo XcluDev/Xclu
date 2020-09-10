@@ -5,7 +5,7 @@ module_description=Scalar representing value as a text field or slider. It must 
 module_version=1.01
 module_impl=C++
 
-module_accept_calls=get_widget_pointer
+module_accept_calls=create_widget
 
 
 #TODO slider representation
