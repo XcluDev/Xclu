@@ -15,36 +15,36 @@ REGISTRAR(Window)
 
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleWindow *RtModuleWindow::new_module() {
-    return new RtModuleWindow();
+/*static*/ XModuleWindow *XModuleWindow::new_module() {
+    return new XModuleWindow();
 }
 
 //---------------------------------------------------------------------
-RtModuleWindow::RtModuleWindow()
-    :RtModule(*static_class_name_ptr)
+XModuleWindow::XModuleWindow()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleWindow::~RtModuleWindow()
+XModuleWindow::~XModuleWindow()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::set_size(int w, int h) {
+void XModuleWindow::set_size(int w, int h) {
     window_->resize(w, h);
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::set_position(int x, int y) {
+void XModuleWindow::set_position(int x, int y) {
     window_->setGeometry(x, y, window_->width(), window_->height());
 }
 
 //---------------------------------------------------------------------
 //получить экран в зависимости от настроек
-QScreen *RtModuleWindow::get_screen() {
+QScreen *XModuleWindow::get_screen() {
     return QGuiApplication::primaryScreen();
 /*    WindowScreen screen = WindowScreen(geti("screen"));
     switch (screen) {
@@ -60,7 +60,7 @@ QScreen *RtModuleWindow::get_screen() {
         }
         break;
     default:
-        xclu_exception("RtModuleWindow - Unknown screen specifier");
+        xclu_exception("XModuleWindow - Unknown screen specifier");
     }
 
     //если что-то пошло не так, возвращаем экран по умолчанию
@@ -69,7 +69,7 @@ QScreen *RtModuleWindow::get_screen() {
 
 //---------------------------------------------------------------------
 //создание и установка начальных настроек окна
-void RtModuleWindow::setup_window() {
+void XModuleWindow::setup_window() {
     //Создание окна на нужном экране
     //QScreen *screen = get_screen();
     window_.reset(new QMainWindow());
@@ -80,8 +80,8 @@ void RtModuleWindow::setup_window() {
     //window_.setUnifiedTitleAndToolBarOnMac(true);
 
     //??????????
-    //connect(window_.data(), &QMainWindow::visibleChanged, this, &RtModuleWindow::on_visibleChanged);
-    //connect(window_.data(), &QMainWindow::windowStateChanged, this, &RtModuleWindow::on_windowStateChanged);
+    //connect(window_.data(), &QMainWindow::visibleChanged, this, &XModuleWindow::on_visibleChanged);
+    //connect(window_.data(), &QMainWindow::windowStateChanged, this, &XModuleWindow::on_windowStateChanged);
 
     notify_visible_change_ = false;
 
@@ -104,7 +104,7 @@ void RtModuleWindow::setup_window() {
 //---------------------------------------------------------------------
 //прочитать данные из интерфейса и использовать для управления окном
 //он использует was_changed - поэтому, при старте всегда эти значения будут использованы (при старте все переменные was_changed)
-void RtModuleWindow::update_window() {
+void XModuleWindow::update_window() {
     //проверка, что пользователь закрыл окно
     if (notify_visible_change_) {
         notify_visible_change_ = false;
@@ -119,7 +119,7 @@ void RtModuleWindow::update_window() {
                 set_stop_out(); //команда остановки
                 break;
             default:
-                xclu_exception("RtModuleWindow - Unknown on_close specifier");
+                xclu_exception("XModuleWindow - Unknown on_close specifier");
             }
 
         }
@@ -155,7 +155,7 @@ void RtModuleWindow::update_window() {
         case WindowSize_1920x1200: set_size(1920,1200);
             break;
         default:
-            xclu_exception("RtModuleWindow - Unknown window size specifier");
+            xclu_exception("XModuleWindow - Unknown window size specifier");
         }
     }
 
@@ -177,7 +177,7 @@ void RtModuleWindow::update_window() {
             }
             break;
         default:
-            xclu_exception("RtModuleWindow - Unknown window position specifier");
+            xclu_exception("XModuleWindow - Unknown window position specifier");
         }
     }
 
@@ -205,7 +205,7 @@ void RtModuleWindow::update_window() {
             case WindowMode_Full_Screen: visibility = QWindow::FullScreen;
                 break;
             default:
-                xclu_exception("RtModuleWindow - Unknown window mode specifier");
+                xclu_exception("XModuleWindow - Unknown window mode specifier");
             }
             window_->setVisible(visibility);
         }
@@ -217,17 +217,17 @@ void RtModuleWindow::update_window() {
 
 //---------------------------------------------------------------------
 //сигнал на изменение состояния окна
-void RtModuleWindow::on_windowStateChanged(Qt::WindowState /*windowState*/) {
+void XModuleWindow::on_windowStateChanged(Qt::WindowState /*windowState*/) {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::on_visibleChanged(bool /*arg*/) {
+void XModuleWindow::on_visibleChanged(bool /*arg*/) {
     notify_visible_change_ = true;
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::start_impl() {
+void XModuleWindow::start_impl() {
     //создание и установка начальных настроек окна
     setup_window();
 
@@ -236,20 +236,20 @@ void RtModuleWindow::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindow::update_impl() {
+void XModuleWindow::update_impl() {
 
     update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleWindow::stop_impl() {
+void XModuleWindow::stop_impl() {
     window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWindow::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleWindow::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -282,7 +282,7 @@ HorizontalLayout
 
 
 //Создать структуру окна - при этом, запрашиваются виджеты из соответствующих модулей
-void RtModuleWindow::create_layouts() {
+void XModuleWindow::create_layouts() {
     QStringList lines = get_strings("content");
 
     //парсим структуру окна
@@ -291,7 +291,7 @@ void RtModuleWindow::create_layouts() {
 
     //создаем элементы
     //по умолчанию, используется VerticalLayout, если у дерева несколько узлов самого верхнего уровня и внутри
-    RtModuleWindowStructureItem item = create_layouts_internal(tree, 0);
+    XModuleWindowStructureItem item = create_layouts_internal(tree, 0);
     if (item.widget) {
         window_->setCentralWidget(item.take_widget());
     }
@@ -305,7 +305,7 @@ void RtModuleWindow::create_layouts() {
 //Рекурсивное создание структуры окна
 //При реализации я старался сделать здесь безопасным при exceptions и исключить утечки памяти
 //для этого старался использовать QScopedPointer и забирать его указатели с помощью take в безопасные моменты
-RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluParseTree &tree, int index) {
+XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluParseTree &tree, int index) {
 
     //считываем тип
     //разбиваем на название и параметры
@@ -320,7 +320,7 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
             int n = tree_item.children.size();
             if (n == 0) {
                 //дерево пустое, ничего делать не надо
-                return RtModuleWindowStructureItem();
+                return XModuleWindowStructureItem();
             }
             if (n == 1) {
                 //один ребенок - вот его и возвратим
@@ -332,10 +332,10 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
                 layout.reset(new QVBoxLayout());
 
                 for (int i=0; i<n; i++) {
-                    RtModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
+                    XModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
                     item.add_to_layout(layout.data());
                 }
-                return RtModuleWindowStructureItem(layout.take());
+                return XModuleWindowStructureItem(layout.take());
             }
         }
 
@@ -364,10 +364,10 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
 
             //добавляем детей
             for (int i=0; i<tree_item.children.size(); i++) {
-                RtModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
+                XModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
                 item.add_to_layout(layout.data());
             }
-            return RtModuleWindowStructureItem(layout.take(), stretch);
+            return XModuleWindowStructureItem(layout.take(), stretch);
         }
 
         //Tabs --------------------------------
@@ -381,10 +381,10 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
 
             //добавляем детей
             for (int i=0; i<tree_item.children.size(); i++) {
-                RtModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
+                XModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[i]);
                 item.add_to_tabs(tabs.data());  //там при добавлении будет проверка, что добавляется Tab
             }
-            return RtModuleWindowStructureItem(tabs.take(), stretch);
+            return XModuleWindowStructureItem(tabs.take(), stretch);
 
         }
 
@@ -401,12 +401,12 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
             xclu_assert(n <= 1, "Tab must contain not more than one widget or layout");
             if (n == 0) {
                 //просто пустой виджет с именем страницы
-                return RtModuleWindowStructureItem(new QWidget, tab_title);
+                return XModuleWindowStructureItem(new QWidget, tab_title);
             }
             //n == 1
-            RtModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[0]);
+            XModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[0]);
             xclu_assert(item.widget, "Expected widget or layout");
-            return RtModuleWindowStructureItem(item.take_widget(), tab_title);
+            return XModuleWindowStructureItem(item.take_widget(), tab_title);
         }
 
         //Stretch --------------------------------
@@ -414,7 +414,7 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
             //Stretch или Stretch 5
             //stretch
             int stretch = parse_int(query, 1, 0, line);
-            return RtModuleWindowStructureItem(stretch);
+            return XModuleWindowStructureItem(stretch);
         }
 
         //Widget --------------------------------
@@ -425,7 +425,7 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
         //stretch
         int stretch = parse_int(query, 1, 0, line);
         QString module_id = name;
-        return RtModuleWindowStructureItem(request_widget(module_id), stretch);
+        return XModuleWindowStructureItem(request_widget(module_id), stretch);
 
     }
     catch (XCluException& e) {
@@ -436,13 +436,13 @@ RtModuleWindowStructureItem RtModuleWindow::create_layouts_internal(const XcluPa
                             );
     }
 
-    return RtModuleWindowStructureItem();
+    return XModuleWindowStructureItem();
 }
 
 
 //---------------------------------------------------------------------
 //парсить число, если оно есть, иначе - выдать default_value
-int RtModuleWindow::parse_int(QStringList list, int index, int default_value, QString line) {
+int XModuleWindow::parse_int(QStringList list, int index, int default_value, QString line) {
     if (index >= list.size()) {
         return default_value;
     }
@@ -456,7 +456,7 @@ int RtModuleWindow::parse_int(QStringList list, int index, int default_value, QS
 //запрос виджета из другого модуля
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
-QWidget *RtModuleWindow::request_widget(QString module_id) {
+QWidget *XModuleWindow::request_widget(QString module_id) {
     Module *module = RUNTIME.get_module(module_id);
 
     //call create_widget
@@ -482,48 +482,48 @@ QWidget *RtModuleWindow::request_widget(QString module_id) {
 //---------------------------------------------------------------------
 //Структура для создания layouts
 
-RtModuleWindowStructureItem::RtModuleWindowStructureItem() {
+XModuleWindowStructureItem::XModuleWindowStructureItem() {
 
 }
 
 
-RtModuleWindowStructureItem::RtModuleWindowStructureItem(QWidget* widget, int stretch) {
+XModuleWindowStructureItem::XModuleWindowStructureItem(QWidget* widget, int stretch) {
     xclu_assert(widget, "Empty widget");
     this->widget = widget;
     this->stretch = stretch;
 }
 
-RtModuleWindowStructureItem::RtModuleWindowStructureItem(QLayout *layout, int stretch) {
+XModuleWindowStructureItem::XModuleWindowStructureItem(QLayout *layout, int stretch) {
     widget = new QWidget();
     widget->setLayout(layout);
     this->stretch = stretch;
 }
 
-RtModuleWindowStructureItem::RtModuleWindowStructureItem(QWidget* widget, QString tab_title) {
+XModuleWindowStructureItem::XModuleWindowStructureItem(QWidget* widget, QString tab_title) {
     xclu_assert(widget, "Empty widget");
     this->widget = widget;
     is_tab = true;
     this->tab_title = tab_title;
 }
 
-RtModuleWindowStructureItem::RtModuleWindowStructureItem(int stretch) {
+XModuleWindowStructureItem::XModuleWindowStructureItem(int stretch) {
     is_stretch = true;
     this->stretch = stretch;
 }
 
-RtModuleWindowStructureItem::~RtModuleWindowStructureItem() {
+XModuleWindowStructureItem::~XModuleWindowStructureItem() {
     if (widget) delete widget;
 }
 
 //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
-QWidget *RtModuleWindowStructureItem::take_widget() {
+QWidget *XModuleWindowStructureItem::take_widget() {
     QWidget *w = widget;
     widget = nullptr;
     return w;
 }
 
 
-void RtModuleWindowStructureItem::add_to_layout(QLayout *layout) {    //вставить в layout
+void XModuleWindowStructureItem::add_to_layout(QLayout *layout) {    //вставить в layout
     QHBoxLayout *hlayout = qobject_cast<QHBoxLayout *>(layout);
     QVBoxLayout *vlayout = qobject_cast<QVBoxLayout *>(layout);
     xclu_assert(hlayout || vlayout, "Internal error, unrecognized layout");
@@ -539,7 +539,7 @@ void RtModuleWindowStructureItem::add_to_layout(QLayout *layout) {    //вста
 }
 
 //---------------------------------------------------------------------
-void RtModuleWindowStructureItem::add_to_tabs(QTabWidget *tabs) {     //вставить в Tabs - должно быть имя страницы
+void XModuleWindowStructureItem::add_to_tabs(QTabWidget *tabs) {     //вставить в Tabs - должно быть имя страницы
     xclu_assert(is_tab, "Tabs contains only Tab items");
     xclu_assert(widget, "Can't add not widget to Tabs");
     tabs->addTab(take_widget(), tab_title);

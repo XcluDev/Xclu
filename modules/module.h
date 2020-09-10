@@ -1,12 +1,12 @@
 #ifndef MODULEINSTANCE_H
 #define MODULEINSTANCE_H
 
-//Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (RtModule)
+//Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (XModule)
 
 #include "incl_h.h"
 #include "moduleinfo.h"
 #include "moduleinterface.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 
 class EditorModule;
 class QJsonObject;
@@ -16,7 +16,7 @@ class Module
 {
 public:
     //ModuleInfo парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
-    Module(ModuleInfo *info_external, RtModule *rtmodule_new);
+    Module(ModuleInfo *info_external, XModule *rtmodule_new);
     ~Module();
 
     //Описание типа модуля
@@ -36,7 +36,7 @@ public:
     ModuleInterface *interf();
 
     //Исполняемый модуль
-    RtModule *rtmodule();
+    XModule *rtmodule();
 
     //Выполнение
     void execute(ModuleExecuteStage stage);
@@ -121,7 +121,7 @@ private:
     ModuleInterface *interf_ = nullptr;
 
     //Исполняемый модуль
-    RtModule *rtmodule_ = nullptr;
+    XModule *rtmodule_ = nullptr;
 
     //Сигнал, что был запуск - вне зависимости от того, запустился ли реально rtmodule_
     bool running_ = false;

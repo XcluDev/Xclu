@@ -10,20 +10,20 @@
 #include <QWindow>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluprotecteddata.h"
 
 
 //Модуль
-class RtModuleFragmentShader: public RtModule
+class XModuleFragmentShader: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleFragmentShader();
-    ~RtModuleFragmentShader();
+    XModuleFragmentShader();
+    ~XModuleFragmentShader();
 
     static QString *static_class_name_ptr;
-    static RtModuleFragmentShader *new_module();
+    static XModuleFragmentShader *new_module();
 
 protected:
     //Выполнение

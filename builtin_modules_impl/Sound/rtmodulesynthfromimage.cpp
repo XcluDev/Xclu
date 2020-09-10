@@ -14,7 +14,7 @@ REGISTRAR(SynthFromImage)
 //---------------------------------------------------------------------
 //установить картинку - схлапывает в однопиксельную float
 //TODO сейчас только rbg
-void RtModuleSynthFromImageData::set_image(int w, int h, const quint8 *rgb) {
+void XModuleSynthFromImageData::set_image(int w, int h, const quint8 *rgb) {
     w_ = w;
     image_.resize(w_);
     for (int x=0; x<w; x++) {
@@ -59,7 +59,7 @@ void RtModuleSynthFromImageData::set_image(int w, int h, const quint8 *rgb) {
 
 //---------------------------------------------------------------------
 //получить значение звука
-float RtModuleSynthFromImageData::get_volume(float phase) {  //x=0..1
+float XModuleSynthFromImageData::get_volume(float phase) {  //x=0..1
     if (w_ == 0) return 0;
     float x = phase * w_;
     int x0 = int(x);
@@ -71,25 +71,25 @@ float RtModuleSynthFromImageData::get_volume(float phase) {  //x=0..1
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ RtModuleSynthFromImage *RtModuleSynthFromImage::new_module() {
-    return new RtModuleSynthFromImage();
+/*static*/ XModuleSynthFromImage *XModuleSynthFromImage::new_module() {
+    return new XModuleSynthFromImage();
 }
 
 //---------------------------------------------------------------------
-RtModuleSynthFromImage::RtModuleSynthFromImage()
-    :RtModule(*static_class_name_ptr)
+XModuleSynthFromImage::XModuleSynthFromImage()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleSynthFromImage::~RtModuleSynthFromImage()
+XModuleSynthFromImage::~XModuleSynthFromImage()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::start_impl() {
+void XModuleSynthFromImage::start_impl() {
     //Очистка переменных
     image_file_ = "";
 
@@ -105,7 +105,7 @@ void RtModuleSynthFromImage::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::update_impl() {
+void XModuleSynthFromImage::update_impl() {
     //получение картинки - загрузка из файла или взятие из другого модуля
     ImageSource image_source = ImageSource(geti("image_source"));
     switch (image_source) {
@@ -130,26 +130,26 @@ void RtModuleSynthFromImage::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::load_image_file(QString image_file) {
+void XModuleSynthFromImage::load_image_file(QString image_file) {
     image_file_ = image_file;
 }
 
 //---------------------------------------------------------------------
 //загрузка изображения из другого модуля
 //webcam1->image
-void RtModuleSynthFromImage::load_image_link(QString image_link) {    
+void XModuleSynthFromImage::load_image_link(QString image_link) {    
     XDict *object = RUNTIME.get_object_by_link(image_link);
     XDictRead obj(object);
     obj.copy_to(get_object("image"));
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::stop_impl() {
+void XModuleSynthFromImage::stop_impl() {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSynthFromImage::update_data() {
+void XModuleSynthFromImage::update_data() {
     DataAccess access(data_);
     //data_.image_background = geti("image_background");
     data_.pcm_speed_hz = getf("pcm_speed_hz");
@@ -198,7 +198,7 @@ void RtModuleSynthFromImage::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSynthFromImage::call_impl(QString function, XDict *input, XDict * /*output*/) {
+void XModuleSynthFromImage::call_impl(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
     if (function == functions_names::sound_buffer_add()) {
 

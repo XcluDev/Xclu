@@ -7,7 +7,7 @@
 #include <QImage>
 #include <QMutex>
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
 #include "incl_h.h"
@@ -15,14 +15,14 @@
 //class RealsenseCamera;
 
 //The module for working with Realsense
-class RtModuleRealsenseCamera: public RtModule
+class XModuleRealsenseCamera: public XModule
 {
 public:
-    RtModuleRealsenseCamera();
-    ~RtModuleRealsenseCamera();
+    XModuleRealsenseCamera();
+    ~XModuleRealsenseCamera();
 
     static QString *static_class_name_ptr;
-    static RtModuleRealsenseCamera *new_module();
+    static XModuleRealsenseCamera *new_module();
 
 protected:
     //Выполнение

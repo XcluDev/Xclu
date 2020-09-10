@@ -1,5 +1,5 @@
-#ifndef RTMODULE_H
-#define RTMODULE_H
+#ifndef XMODULE_H
+#define XMODULE_H
 
 //Вычислительный модуль (run-time module)
 //Базовый класс для конкретных реализаций модулей
@@ -20,10 +20,9 @@
 class InterfaceItem;
 class Module;
 class XDict;
-class QWidget;
 
 //Переменные, описывающие состояние
-class RtModuleStatus {
+class XModuleStatus {
 public:
     bool was_started = false;
 
@@ -37,15 +36,15 @@ public:
 };
 
 //Описание модуля
-class RtModule : public QObject
+class XModule : public QObject
 {
     Q_OBJECT
 public:
     //--------------------------------------------------------------
     //Public interface
     //--------------------------------------------------------------
-    RtModule(QString class_name);
-    virtual ~RtModule();
+    XModule(QString class_name);
+    virtual ~XModule();
 
     //подклассы должны переопределить для своего имени
     //но это не виртуальная функция, так как статичная
@@ -96,7 +95,7 @@ public:
     //ModuleRunMode run_mode() { return ModuleRunMode(geti("run_mode")); }
 
     //статус - например, был ли выполнен старт
-    RtModuleStatus status() const { return status_; }
+    XModuleStatus status() const { return status_; }
 
     void reset_error_values();                  //сброс того, что быда ошибка при выполнении
     void set_error_values(QString message);     //установка того, что была ошибка
@@ -198,14 +197,14 @@ private:
     QString class_name_;
 
     //Переменные, описывающие состояние выполнения
-    RtModuleStatus status_;
+    XModuleStatus status_;
 
     //start модуля вызывается при его первом update
     //если запустили - то больше не запускаем в update
-    void internal_loaded();     //действия при загрузке модуля
-    void internal_update();     //выполнить update, и если нужно - start
-    void internal_stop();       //выполнить stop
-    void internal_one_shot();   //start, update, stop за один раз
+    void loaded_internal();     //действия при загрузке модуля
+    void update_internal();     //выполнить update, и если нужно - start
+    void stop_internal();       //выполнить stop
+    void one_shot_internal();   //start, update, stop за один раз
 
     //Concrete call handlers
     //"create_widget" call, returns QWidget pointer
@@ -216,4 +215,4 @@ private:
 
 };
 
-#endif // RTMODULE_H
+#endif // XMODULE_H

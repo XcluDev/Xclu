@@ -11,25 +11,25 @@
 REGISTRAR(FragmentShader)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleFragmentShader *RtModuleFragmentShader::new_module() {
-    return new RtModuleFragmentShader();
+/*static*/ XModuleFragmentShader *XModuleFragmentShader::new_module() {
+    return new XModuleFragmentShader();
 }
 
 //---------------------------------------------------------------------
-RtModuleFragmentShader::RtModuleFragmentShader()
-    :RtModule(*static_class_name_ptr)
+XModuleFragmentShader::XModuleFragmentShader()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleFragmentShader::~RtModuleFragmentShader()
+XModuleFragmentShader::~XModuleFragmentShader()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::start_impl() {
+void XModuleFragmentShader::start_impl() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,20 +38,20 @@ void RtModuleFragmentShader::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::update_impl() {
+void XModuleFragmentShader::update_impl() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleFragmentShader::stop_impl() {
+void XModuleFragmentShader::stop_impl() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleFragmentShader::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleFragmentShader::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

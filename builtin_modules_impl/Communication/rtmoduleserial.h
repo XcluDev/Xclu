@@ -8,7 +8,7 @@
 #include <QMutex>
 #include <QtSerialPort/QSerialPort>
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
 #include "incl_h.h"
@@ -17,14 +17,14 @@
 //TODO: make possibility to interrupt. (Already it's set in Control module).
 //It's great to do in wizard at adding the module.
 
-class RtModuleSerial: public RtModule
+class XModuleSerial: public XModule
 {
 public:
-    RtModuleSerial();
-    ~RtModuleSerial();
+    XModuleSerial();
+    ~XModuleSerial();
 
     static QString *static_class_name_ptr;
-    static RtModuleSerial *new_module();
+    static XModuleSerial *new_module();
 
 protected:
     //Выполнение

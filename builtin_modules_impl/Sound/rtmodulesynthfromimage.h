@@ -8,13 +8,13 @@
 #include <QMutex>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluarray.h"
 #include "xcluobjectsoundformat.h"
 #include "xcluprotecteddata.h"
 
 //Данные для генерации
-struct RtModuleSynthFromImageData: public XcluProtectedData
+struct XModuleSynthFromImageData: public XcluProtectedData
 {
     int image_background = 0;   //0 - black, 1 - white
     float pcm_speed_hz = 10;
@@ -56,15 +56,15 @@ struct RtModuleSynthFromImageData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleSynthFromImage: public RtModule
+class XModuleSynthFromImage: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleSynthFromImage();
-    ~RtModuleSynthFromImage();
+    XModuleSynthFromImage();
+    ~XModuleSynthFromImage();
 
     static QString *static_class_name_ptr;
-    static RtModuleSynthFromImage *new_module();
+    static XModuleSynthFromImage *new_module();
 
 protected:
     //Выполнение
@@ -91,7 +91,7 @@ protected:
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    RtModuleSynthFromImageData data_;
+    XModuleSynthFromImageData data_;
     void update_data();
 
 };

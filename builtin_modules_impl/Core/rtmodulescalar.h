@@ -10,7 +10,7 @@
 #include <QWindow>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluprotecteddata.h"
 #include "xdict.h"
 
@@ -20,7 +20,7 @@ class XcluSpinBox;
 
 
 //Данные, которые защищаются с помощью mutex
-struct RtModuleGuiNumberData: public XcluProtectedData
+struct XModuleGuiNumberData: public XcluProtectedData
 {
     int gui_changed = 0;
 
@@ -31,15 +31,15 @@ struct RtModuleGuiNumberData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleScalar: public RtModule
+class XModuleScalar: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleScalar();
-    ~RtModuleScalar();
+    XModuleScalar();
+    ~XModuleScalar();
 
     static QString *static_class_name_ptr;
-    static RtModuleScalar *new_module();
+    static XModuleScalar *new_module();
 
 protected:
     //Выполнение
@@ -70,11 +70,11 @@ protected:
     };
     Source get_source();
 
-    RtModuleGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
+    XModuleGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 
     void spin_changed();    //вызывается, если значение изменилось
 
 };
 
 
-#endif // RtModuleScalar_H
+#endif // XModuleScalar_H

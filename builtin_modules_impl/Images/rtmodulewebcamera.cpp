@@ -22,12 +22,12 @@ REGISTRAR(Webcamera)
 
 
 //---------------------------------------------------------------------
-RtModuleWebcameraSurface::RtModuleWebcameraSurface(RtModuleWebcamera *module) {
+XModuleWebcameraSurface::XModuleWebcameraSurface(XModuleWebcamera *module) {
     module_ = module;
 }
 
 //---------------------------------------------------------------------
-QList<QVideoFrame::PixelFormat> RtModuleWebcameraSurface::supportedPixelFormats(
+QList<QVideoFrame::PixelFormat> XModuleWebcameraSurface::supportedPixelFormats(
         QAbstractVideoBuffer::HandleType handleType) const
 {
     Q_UNUSED(handleType); //это просто пометка, чтобы компилятор не говорил что переменная не используется
@@ -38,7 +38,7 @@ QList<QVideoFrame::PixelFormat> RtModuleWebcameraSurface::supportedPixelFormats(
 }
 
 //---------------------------------------------------------------------
-bool RtModuleWebcameraSurface::present(const QVideoFrame &frame)
+bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
 {
     //Q_UNUSED(frame);
     // Handle the frame and do your processing
@@ -61,7 +61,7 @@ bool RtModuleWebcameraSurface::present(const QVideoFrame &frame)
         //но внутреннее состояние изображения в модуле меняется ТОЛЬКО при update
         //поэтому мы сохраняем изображение, но не вставляем его в результа работы модуля
 
-        RtModuleWebcameraSurfaceData &data = module_->surface_data();
+        XModuleWebcameraSurfaceData &data = module_->surface_data();
         DataAccess access(data);
         //ловим исключение, чтобы в случае ошибки мютекс не заблокировался
         try {
@@ -88,25 +88,25 @@ bool RtModuleWebcameraSurface::present(const QVideoFrame &frame)
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ RtModuleWebcamera *RtModuleWebcamera::new_module() {
-    return new RtModuleWebcamera();
+/*static*/ XModuleWebcamera *XModuleWebcamera::new_module() {
+    return new XModuleWebcamera();
 }
 
 //---------------------------------------------------------------------
-RtModuleWebcamera::RtModuleWebcamera()
-    :RtModule(*static_class_name_ptr), surface_(this)
+XModuleWebcamera::XModuleWebcamera()
+    :XModule(*static_class_name_ptr), surface_(this)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleWebcamera::~RtModuleWebcamera()
+XModuleWebcamera::~XModuleWebcamera()
 {
     stop_camera();
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::start_impl() {
+void XModuleWebcamera::start_impl() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -138,7 +138,7 @@ void RtModuleWebcamera::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::update_impl() {
+void XModuleWebcamera::update_impl() {
     //если требуется, напечатать все устройства
     print_devices();
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
@@ -161,14 +161,14 @@ void RtModuleWebcamera::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::stop_impl() {
+void XModuleWebcamera::stop_impl() {
     //qDebug() << "stop";
     stop_camera();
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::update_camera() {
+void XModuleWebcamera::update_camera() {
     //запуск камеры, если еще не запущена
     start_camera();
 
@@ -214,7 +214,7 @@ void RtModuleWebcamera::update_camera() {
 
 //---------------------------------------------------------------------
 //печать в консоль доступных камер
-void RtModuleWebcamera::print_devices() {
+void XModuleWebcamera::print_devices() {
     int print = geti("print_devices");
     if (!print) {
         print_devices_worked_ = false;
@@ -241,7 +241,7 @@ void RtModuleWebcamera::print_devices() {
 //---------------------------------------------------------------------
 //печать в консоль разрешений запускаемой камеры
 //внимание, эта функция запускает camera_->load()
-void RtModuleWebcamera::print_formats() {
+void XModuleWebcamera::print_formats() {
     if (camera_tried_to_start_
             && !print_formats_worked_
             && geti("print_formats")) {
@@ -278,7 +278,7 @@ void RtModuleWebcamera::print_formats() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::start_camera() {
+void XModuleWebcamera::start_camera() {
     //запуск камеры
     if (!camera_tried_to_start_) {
         //пытаемся стартовать камеру
@@ -321,15 +321,15 @@ void RtModuleWebcamera::start_camera() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
+void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
     //перед запуском камеры мы должны убедиться, что данные о формате считаны
     read_gui_output_data_format();
 
     camera_.reset(new QCamera(cameraInfo));
     camera_->load();    //вообще это не требуется, но пробуем устранить ошибку с зависанием при старте.
 
-    connect(camera_.data(), &QCamera::stateChanged, this, &RtModuleWebcamera::on_changed_camera_state);
-    connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &RtModuleWebcamera::on_camera_error);
+    connect(camera_.data(), &QCamera::stateChanged, this, &XModuleWebcamera::on_changed_camera_state);
+    connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XModuleWebcamera::on_camera_error);
 
     //считывание разрешения
     int2 res = get_gui_resolution();
@@ -370,7 +370,7 @@ void RtModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
-int2 RtModuleWebcamera::get_gui_resolution() {
+int2 XModuleWebcamera::get_gui_resolution() {
     QString res_string = gets("resolution");
     if (res_string == "Camera_Default") {
         return int2(-1, -1);
@@ -391,7 +391,7 @@ int2 RtModuleWebcamera::get_gui_resolution() {
 
 //---------------------------------------------------------------------
 //считать из GUI частоту кадров, -1 - использовать по умолчанию
-int RtModuleWebcamera::get_gui_frame_rate() {
+int XModuleWebcamera::get_gui_frame_rate() {
     QString fps_string = gets("frame_rate");
     if (fps_string == "Camera_Default") {
         return -1;
@@ -410,20 +410,20 @@ int RtModuleWebcamera::get_gui_frame_rate() {
 
 //---------------------------------------------------------------------
 //получить из GUI описание данных
-void RtModuleWebcamera::read_gui_output_data_format() {
+void XModuleWebcamera::read_gui_output_data_format() {
     DataAccess access(data_);
     data_.channels = gets("image_channels");
     data_.data_type = gets("image_data_type");
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XModuleWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
     seti("is_started", started);
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::on_changed_camera_state(QCamera::State state) {
+void XModuleWebcamera::on_changed_camera_state(QCamera::State state) {
     switch (state) {
     case QCamera::ActiveState:
         set_started(true);
@@ -436,13 +436,13 @@ void RtModuleWebcamera::on_changed_camera_state(QCamera::State state) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::on_camera_error() {
+void XModuleWebcamera::on_camera_error() {
     DataAccess access(data_);
     data_.err.setup(tr("Camera Error: ") + camera_->errorString());
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::stop_camera() {
+void XModuleWebcamera::stop_camera() {
     if (camera_.data()) {
         //camera_->stop();  //Это не полная остановка, камера продолжает потреблять энергию
         camera_->unload();    //Остановка камеры
@@ -452,19 +452,19 @@ void RtModuleWebcamera::stop_camera() {
 
 //---------------------------------------------------------------------
 //работа с surface_ - чтобы он мог установить обновленное изображение
-RtModuleWebcameraSurfaceData &RtModuleWebcamera::surface_data() {
+XModuleWebcameraSurfaceData &XModuleWebcamera::surface_data() {
     return data_;
 }
 
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-void RtModuleWebcamera::update_load_frames() {
+void XModuleWebcamera::update_load_frames() {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWebcamera::update_save_frames() {
+void XModuleWebcamera::update_save_frames() {
     //проверить, что пришел новый кадр
 }
 

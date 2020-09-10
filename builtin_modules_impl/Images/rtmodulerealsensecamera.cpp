@@ -14,39 +14,39 @@ REGISTRAR(RealsenseCamera)
 
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleRealsenseCamera *RtModuleRealsenseCamera::new_module() {
-    return new RtModuleRealsenseCamera();
+/*static*/ XModuleRealsenseCamera *XModuleRealsenseCamera::new_module() {
+    return new XModuleRealsenseCamera();
 }
 
 //---------------------------------------------------------------------
-RtModuleRealsenseCamera::RtModuleRealsenseCamera()
-    :RtModule(*static_class_name_ptr)
+XModuleRealsenseCamera::XModuleRealsenseCamera()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleRealsenseCamera::~RtModuleRealsenseCamera()
+XModuleRealsenseCamera::~XModuleRealsenseCamera()
 {
     stop_impl();
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::loaded_impl() {
+void XModuleRealsenseCamera::loaded_impl() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void RtModuleRealsenseCamera::button_pressed_impl(QString button_id) {
+void XModuleRealsenseCamera::button_pressed_impl(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::print_devices() {
+void XModuleRealsenseCamera::print_devices() {
     QStringList out;
     out.append(QString("Realsense SDK: %1").arg(RealsenseCamera::get_sdk_version()));
     int n = RealsenseCamera::get_number_of_connected_devices();
@@ -60,7 +60,7 @@ void RtModuleRealsenseCamera::print_devices() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::gui_clear() {
+void XModuleRealsenseCamera::gui_clear() {
     clear_string("device_list");
     clear_string("connected_device_info");
     clear_string("saved_to");
@@ -71,7 +71,7 @@ void RtModuleRealsenseCamera::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::start_impl() {
+void XModuleRealsenseCamera::start_impl() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -91,7 +91,7 @@ void RtModuleRealsenseCamera::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::update_impl() {
+void XModuleRealsenseCamera::update_impl() {
     //если нажата кнопка - поставить флажок ожидания записи кадров на диск
     if (geti("save_frames_button")) {
         wait_save_frames_ = 1;
@@ -160,7 +160,7 @@ void RtModuleRealsenseCamera::update_impl() {
 
 //---------------------------------------------------------------------
 //запись кадра на диск
-void RtModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
+void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //Создаем папку для записи
     QString folder = RUNTIME.absolute_path_from_project(gets("save_folder"), true /*create_folder*/);
 
@@ -193,7 +193,7 @@ void RtModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::stop_impl() {
+void XModuleRealsenseCamera::stop_impl() {
     if (camera_started_) {
         camera_.close();
         set_started(false);
@@ -202,7 +202,7 @@ void RtModuleRealsenseCamera::stop_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::start_camera() {
+void XModuleRealsenseCamera::start_camera() {
     //запуск камеры
 
     int capture_source = geti("capture_source");
@@ -245,8 +245,8 @@ void RtModuleRealsenseCamera::start_camera() {
         //TODO может быть нюанс, что список камер изменится пока мы ищем индекс.
 
         //TODO прикрутить реакцию на отключение камеры
-        //connect(camera_.data(), &QCamera::stateChanged, this, &RtModuleRealsenseCamera::on_changed_camera_state);
-        //connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &RtModuleRealsenseCamera::on_camera_error);
+        //connect(camera_.data(), &QCamera::stateChanged, this, &XModuleRealsenseCamera::on_changed_camera_state);
+        //connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XModuleRealsenseCamera::on_camera_error);
         //TODO также, стоит запускать watchdog, чтобы он проверял, что камера не зависла
 
         //Заполнение настроек
@@ -265,7 +265,7 @@ void RtModuleRealsenseCamera::start_camera() {
 
 //---------------------------------------------------------------------
 //заполнение настроек камеры из интерфейса
-RealsenseSettings RtModuleRealsenseCamera::get_settings() {
+RealsenseSettings XModuleRealsenseCamera::get_settings() {
     RealsenseSettings s;
 
     //RGB
@@ -295,7 +295,7 @@ RealsenseSettings RtModuleRealsenseCamera::get_settings() {
 }
 
 //---------------------------------------------------------------------
-int2 RtModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,240 {
+int2 XModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,240 {
     auto list = res_string.split("_x_");
     xclu_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
     int2 res(list.at(0).toInt(), list.at(1).toInt());
@@ -304,14 +304,14 @@ int2 RtModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320
 }
 
 //---------------------------------------------------------------------
-int RtModuleRealsenseCamera::get_frame_rate(QString rate_string) {
+int XModuleRealsenseCamera::get_frame_rate(QString rate_string) {
     int fps = rate_string.toInt();
     xclu_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
     return fps;
 }
 
 //---------------------------------------------------------------------
-void RtModuleRealsenseCamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XModuleRealsenseCamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
     seti("is_started", started);
 }

@@ -4,16 +4,16 @@
 //Реализация модуля Execute - запуск программы с диска
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 
-class RtModuleExecute: public RtModule
+class XModuleExecute: public XModule
 {
 public:
-    RtModuleExecute();
-    ~RtModuleExecute();
+    XModuleExecute();
+    ~XModuleExecute();
 
     static QString *static_class_name_ptr;
-    static RtModuleExecute *new_module();
+    static XModuleExecute *new_module();
 
 protected:
     //Выполнение

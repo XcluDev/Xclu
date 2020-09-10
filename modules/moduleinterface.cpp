@@ -1,6 +1,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "moduleinterface.h"
 #include "incl_cpp.h"
 #include "editormodule.h"
@@ -333,7 +333,7 @@ InterfaceItem *ModuleInterface::var(QString name) {
 //---------------------------------------------------------------------
 //список по типу использования - const, in, out
 QVector<InterfaceItem *> &ModuleInterface::vars_qual(VarQualifier qual) {
-    xclu_assert(qual >= 0 && qual < vars_qual_.size(), "Internal error: RtModuleVariables::vars(VarQualifier qual) - bad request");
+    xclu_assert(qual >= 0 && qual < vars_qual_.size(), "Internal error: XModuleVariables::vars(VarQualifier qual) - bad request");
     return vars_qual_[qual];
 }
 

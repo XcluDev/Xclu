@@ -10,7 +10,7 @@
 #include <QStack>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluprotecteddata.h"
 #include "xclu_parse_tree.h"
 
@@ -21,14 +21,14 @@ class QSpacerItem;
 
 
 //Структура для создания layouts
-struct RtModuleWindowStructureItem {
-    RtModuleWindowStructureItem();
-    RtModuleWindowStructureItem(QWidget* widget, int stretch = 0);
-    RtModuleWindowStructureItem(QLayout *layout, int stretch = 0);
-    RtModuleWindowStructureItem(QWidget* widget, QString tab_title);
-    RtModuleWindowStructureItem(int stretch);
+struct XModuleWindowStructureItem {
+    XModuleWindowStructureItem();
+    XModuleWindowStructureItem(QWidget* widget, int stretch = 0);
+    XModuleWindowStructureItem(QLayout *layout, int stretch = 0);
+    XModuleWindowStructureItem(QWidget* widget, QString tab_title);
+    XModuleWindowStructureItem(int stretch);
 
-    ~RtModuleWindowStructureItem();
+    ~XModuleWindowStructureItem();
 
     QWidget *take_widget();         //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
 
@@ -46,15 +46,15 @@ struct RtModuleWindowStructureItem {
 
 
 //Модуль
-class RtModuleWindow: public RtModule
+class XModuleWindow: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleWindow();
-    ~RtModuleWindow();
+    XModuleWindow();
+    ~XModuleWindow();
 
     static QString *static_class_name_ptr;
-    static RtModuleWindow *new_module();
+    static XModuleWindow *new_module();
 
 protected:
     //Выполнение
@@ -142,7 +142,7 @@ protected:
     //Рекурсивное создание структуры окна
     //При реализации я старался сделать здесь безопасным при exceptions и исключить утечки памяти
     //для этого старался использовать QScopedPointer и забирать его указатели с помощью take в безопасные моменты
-    RtModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
+    XModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
 
     //парсить число, если оно есть, иначе - выдать default_value
     int parse_int(QStringList list, int index, int default_value, QString line);

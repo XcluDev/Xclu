@@ -126,7 +126,7 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
 
 //---------------------------------------------------------------------
 bool ModuleDescription::is_implemented() {  //реализован ли уже модуль
-    return RtModuleRegistrar::is_module_implemented(class_name);
+    return XModuleRegistrar::is_module_implemented(class_name);
 }
 
 //---------------------------------------------------------------------

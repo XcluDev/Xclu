@@ -7,19 +7,19 @@
 REGISTRAR(Serial)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleSerial *RtModuleSerial::new_module() {
-    return new RtModuleSerial();
+/*static*/ XModuleSerial *XModuleSerial::new_module() {
+    return new XModuleSerial();
 }
 
 //---------------------------------------------------------------------
-RtModuleSerial::RtModuleSerial()
-    :RtModule(*static_class_name_ptr)
+XModuleSerial::XModuleSerial()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::gui_clear() {
+void XModuleSerial::gui_clear() {
     seti("total_sent",0);
     clear_string("device_list");
     clear_string("port_info");
@@ -29,32 +29,32 @@ void RtModuleSerial::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::set_connected(bool connected) {
+void XModuleSerial::set_connected(bool connected) {
   connected_ = connected;
   seti("connected", connected);
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::set_total_sent(int t) {
+void XModuleSerial::set_total_sent(int t) {
     total_sent_ = t;
     seti("total_sent", t);
 }
 
 //---------------------------------------------------------------------
-RtModuleSerial::~RtModuleSerial()
+XModuleSerial::~XModuleSerial()
 {
     stop_impl();
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::loaded_impl() {
+void XModuleSerial::loaded_impl() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void RtModuleSerial::button_pressed_impl(QString button_id) {
+void XModuleSerial::button_pressed_impl(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -99,7 +99,7 @@ void RtModuleSerial::button_pressed_impl(QString button_id) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::print_devices() {
+void XModuleSerial::print_devices() {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
 
     QStringList out;
@@ -133,7 +133,7 @@ void RtModuleSerial::print_devices() {
 
 
 //---------------------------------------------------------------------
-void RtModuleSerial::start_impl() {
+void XModuleSerial::start_impl() {
     //Очистка переменных
     gui_clear();
 
@@ -142,7 +142,7 @@ void RtModuleSerial::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::open_port() {
+void XModuleSerial::open_port() {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
     int n = serialPortInfos.count();
 
@@ -228,13 +228,13 @@ void RtModuleSerial::open_port() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::update_impl() {
+void XModuleSerial::update_impl() {
    //отработка отправки данных путем нажатия кнопок идет в button_pressed_impl
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::send_string(QString str) {
+void XModuleSerial::send_string(QString str) {
     //добавляем завершение строки
     int ts = geti("line_term"); //None,\n,\r,\r\n
     if (ts == 1) str += "\n";
@@ -268,7 +268,7 @@ void RtModuleSerial::send_string(QString str) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::send_byte(int byte) {
+void XModuleSerial::send_byte(int byte) {
     if (geti("debug")) {
         xclu_console_append("Send byte `" + QString::number(byte) + "`");
     }
@@ -280,7 +280,7 @@ void RtModuleSerial::send_byte(int byte) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSerial::stop_impl() {
+void XModuleSerial::stop_impl() {
     if (connected_) {
         serialPort_.close();
         set_connected(false);

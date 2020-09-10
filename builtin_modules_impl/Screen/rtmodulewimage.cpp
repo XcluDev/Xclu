@@ -14,25 +14,25 @@
 REGISTRAR(WImage)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleWImage *RtModuleWImage::new_module() {
-    return new RtModuleWImage();
+/*static*/ XModuleWImage *XModuleWImage::new_module() {
+    return new XModuleWImage();
 }
 
 //---------------------------------------------------------------------
-RtModuleWImage::RtModuleWImage()
-    :RtModule(*static_class_name_ptr)
+XModuleWImage::XModuleWImage()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleWImage::~RtModuleWImage()
+XModuleWImage::~XModuleWImage()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::start_impl() {
+void XModuleWImage::start_impl() {
     //сбрасываем родителя - это будет установлено в call_impl, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -48,7 +48,7 @@ void RtModuleWImage::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::update_impl() {
+void XModuleWImage::update_impl() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -56,7 +56,7 @@ void RtModuleWImage::update_impl() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::stop_impl() {
+void XModuleWImage::stop_impl() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -65,7 +65,7 @@ void RtModuleWImage::stop_impl() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleWImage::call_impl(QString function, XDict *input, XDict *output) {
+void XModuleWImage::call_impl(QString function, XDict *input, XDict *output) {
     //"create_widget"
     if (function == functions_names::create_widget()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -104,7 +104,7 @@ void RtModuleWImage::call_impl(QString function, XDict *input, XDict *output) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::create_widget() {
+void XModuleWImage::create_widget() {
     //insert_label(input);
 
     image_ = new QLabel();
@@ -127,7 +127,7 @@ void RtModuleWImage::create_widget() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::update_all(bool force) {
+void XModuleWImage::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -145,7 +145,7 @@ void RtModuleWImage::update_all(bool force) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::update_value() {
+void XModuleWImage::update_value() {
     int new_frame = RUNTIME.get_int_by_link(gets("is_new_frame_link"));
     seti("is_new_frame",new_frame);
 
@@ -176,7 +176,7 @@ void RtModuleWImage::update_value() {
 
 
 //---------------------------------------------------------------------
-void RtModuleWImage::set_image(const QImage &image) {
+void XModuleWImage::set_image(const QImage &image) {
     if (image_) {
         QPixmap pix = QPixmap::fromImage(image);
         image_->setPixmap(pix);
@@ -185,7 +185,7 @@ void RtModuleWImage::set_image(const QImage &image) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleWImage::clear_image() {
+void XModuleWImage::clear_image() {
     if (image_) {
         image_->setText("");
         image_->setVisible(false);

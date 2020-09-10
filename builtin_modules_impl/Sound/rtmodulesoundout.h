@@ -11,7 +11,7 @@
 #include <QScopedPointer>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluarray.h"
 #include "xcluobjectsoundformat.h"
 #include "xcluprotecteddata.h"
@@ -19,7 +19,7 @@
 class Module;
 
 //Данные для обмена с generator, которые защищаются с помощью mutex
-struct RtModuleSoundOutData: public XcluProtectedData
+struct XModuleSoundOutData: public XcluProtectedData
 {
     int play_test_sound_ = 0;   //воспроизводить ли тестовый звук
     float volume_ = 1;          //громкость
@@ -45,12 +45,12 @@ struct RtModuleSoundOutData: public XcluProtectedData
 
 
 //Генератор звука
-class RtModuleSoundOutGenerator : public QIODevice
+class XModuleSoundOutGenerator : public QIODevice
 {
     Q_OBJECT
 
 public:
-    RtModuleSoundOutGenerator(const QAudioFormat &format, RtModuleSoundOutData *data);
+    XModuleSoundOutGenerator(const QAudioFormat &format, XModuleSoundOutData *data);
 
     void start();
     void stop();
@@ -63,7 +63,7 @@ private:
     //QByteArray m_buffer;
     QAudioFormat format_;
 
-    RtModuleSoundOutData *data_;
+    XModuleSoundOutData *data_;
 
     //функция создания звука, во float
     //вызывает нужные модули и заполняет тестовым звуком, если требуется
@@ -76,15 +76,15 @@ private:
 
 
 //Модуль
-class RtModuleSoundOut: public RtModule
+class XModuleSoundOut: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleSoundOut();
-    ~RtModuleSoundOut();
+    XModuleSoundOut();
+    ~XModuleSoundOut();
 
     static QString *static_class_name_ptr;
-    static RtModuleSoundOut *new_module();
+    static XModuleSoundOut *new_module();
 
 protected:
     //Выполнение
@@ -111,10 +111,10 @@ protected:
     QScopedPointer<QAudioOutput> m_audioOutput;
 
     //генератор звука
-    QScopedPointer<RtModuleSoundOutGenerator> m_generator;
+    QScopedPointer<XModuleSoundOutGenerator> m_generator;
 
     //данные для обмена с генератором
-    RtModuleSoundOutData data_;
+    XModuleSoundOutData data_;
 
     bool audio_started_ = false;
     void set_started(bool started); //ставит audio_started_ и gui-элемент is_started

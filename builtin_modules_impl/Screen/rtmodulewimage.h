@@ -10,7 +10,7 @@
 #include <QWindow>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluprotecteddata.h"
 #include "xdict.h"
 
@@ -19,7 +19,7 @@ class QLabel;
 
 
 //Данные, которые защищаются с помощью mutex
-struct RtModuleWImageData: public XcluProtectedData
+struct XModuleWImageData: public XcluProtectedData
 {
     //int gui_changed = 0;
 
@@ -30,15 +30,15 @@ struct RtModuleWImageData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleWImage: public RtModule
+class XModuleWImage: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleWImage();
-    ~RtModuleWImage();
+    XModuleWImage();
+    ~XModuleWImage();
 
     static QString *static_class_name_ptr;
-    static RtModuleWImage *new_module();
+    static XModuleWImage *new_module();
 
 protected:
     //Выполнение
@@ -57,7 +57,7 @@ protected:
     QWidget *widget_ = nullptr; //весь виджет
     QLabel *image_ = nullptr;   //изображение
 
-    RtModuleWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
+    XModuleWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 
     void create_widget();
 

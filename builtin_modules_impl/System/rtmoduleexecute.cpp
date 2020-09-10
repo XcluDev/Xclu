@@ -9,25 +9,25 @@
 REGISTRAR(Execute)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleExecute *RtModuleExecute::new_module() {
-    return new RtModuleExecute();
+/*static*/ XModuleExecute *XModuleExecute::new_module() {
+    return new XModuleExecute();
 }
 
 //---------------------------------------------------------------------
-RtModuleExecute::RtModuleExecute()
-    :RtModule(*static_class_name_ptr)
+XModuleExecute::XModuleExecute()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleExecute::~RtModuleExecute()
+XModuleExecute::~XModuleExecute()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::start_impl() {
+void XModuleExecute::start_impl() {
     //qDebug() << "start";
     seti("success", 0);
     seti("exit_code", 0);
@@ -42,7 +42,7 @@ void RtModuleExecute::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::update_impl() {
+void XModuleExecute::update_impl() {
     //очищаем флажок success - он действует только в рамках одного кадра
     seti("success", 0);
 
@@ -135,7 +135,7 @@ void RtModuleExecute::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleExecute::stop_impl() {
+void XModuleExecute::stop_impl() {
     //qDebug() << "stop";
 
 }

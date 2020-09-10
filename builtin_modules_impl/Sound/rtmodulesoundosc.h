@@ -8,13 +8,13 @@
 #include <QMutex>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluarray.h"
 #include "xcluobjectsoundformat.h"
 #include "xcluprotecteddata.h"
 
 //Данные для генерации
-struct RtModuleSoundOscData: public XcluProtectedData
+struct XModuleSoundOscData: public XcluProtectedData
 {
     void init();    //запускать перед стартом звука, после считывания параметров из GUI
 
@@ -74,15 +74,15 @@ struct RtModuleSoundOscData: public XcluProtectedData
 };
 
 //Модуль
-class RtModuleSoundOsc: public RtModule
+class XModuleSoundOsc: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleSoundOsc();
-    ~RtModuleSoundOsc();
+    XModuleSoundOsc();
+    ~XModuleSoundOsc();
 
     static QString *static_class_name_ptr;
-    static RtModuleSoundOsc *new_module();
+    static XModuleSoundOsc *new_module();
 
 protected:
     //Выполнение
@@ -96,7 +96,7 @@ protected:
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    RtModuleSoundOscData data_;
+    XModuleSoundOscData data_;
     void update_data();
 
 };

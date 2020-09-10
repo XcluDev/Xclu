@@ -13,7 +13,7 @@ REGISTRAR(SoundOsc)
 
 //---------------------------------------------------------------------
 //запускать перед стартом звука, после считывания параметров из GUI
-void RtModuleSoundOscData::init() {
+void XModuleSoundOscData::init() {
     //установка параметров
     vol_ = volume * vol_mod;
     freq_ = freq;
@@ -34,7 +34,7 @@ void RtModuleSoundOscData::init() {
 //---------------------------------------------------------------------
 //обновить размер шагов - вызывается для одного вызова заполнения буфера
 //также, делает warping фаз
-void RtModuleSoundOscData::update_steps(float sample_rate) {
+void XModuleSoundOscData::update_steps(float sample_rate) {
     sample_rate_ = sample_rate;
     step_vol_ = vol_speed / (sample_rate * 0.1);
     step_freq_ = freq_speed / (sample_rate * 0.1);
@@ -47,7 +47,7 @@ void RtModuleSoundOscData::update_steps(float sample_rate) {
 
 //---------------------------------------------------------------------
 //получить значение звука
-float RtModuleSoundOscData::get_next_sample() {
+float XModuleSoundOscData::get_next_sample() {
 
     //обновление параметров
     float target_freq = freq;
@@ -86,7 +86,7 @@ float RtModuleSoundOscData::get_next_sample() {
 //---------------------------------------------------------------------
 //плавная модификация параметра громкости к целевой
 //со скоростью vol_speed за 0.1 сек
-void RtModuleSoundOscData::update_vol(float &var, float target) {
+void XModuleSoundOscData::update_vol(float &var, float target) {
     if (var < target) {
         var = qMin(var + step_vol_, target);
     }
@@ -98,7 +98,7 @@ void RtModuleSoundOscData::update_vol(float &var, float target) {
 //---------------------------------------------------------------------
 //плавная модификация параметра громкости к целевой
 //со скоростью freq_speed за 0.1 сек
-void RtModuleSoundOscData::update_freq(float &var, float target) {
+void XModuleSoundOscData::update_freq(float &var, float target) {
     if (var < target) {
         var = qMin(var + step_freq_, target);
     }
@@ -110,25 +110,25 @@ void RtModuleSoundOscData::update_freq(float &var, float target) {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ RtModuleSoundOsc *RtModuleSoundOsc::new_module() {
-    return new RtModuleSoundOsc();
+/*static*/ XModuleSoundOsc *XModuleSoundOsc::new_module() {
+    return new XModuleSoundOsc();
 }
 
 //---------------------------------------------------------------------
-RtModuleSoundOsc::RtModuleSoundOsc()
-    :RtModule(*static_class_name_ptr)
+XModuleSoundOsc::XModuleSoundOsc()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleSoundOsc::~RtModuleSoundOsc()
+XModuleSoundOsc::~XModuleSoundOsc()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::start_impl() {
+void XModuleSoundOsc::start_impl() {
     //Очистка переменных
 
     update_data();
@@ -140,18 +140,18 @@ void RtModuleSoundOsc::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::update_impl() {
+void XModuleSoundOsc::update_impl() {
     //считываем данные из GUI
     update_data();
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::stop_impl() {
+void XModuleSoundOsc::stop_impl() {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleSoundOsc::update_data() {
+void XModuleSoundOsc::update_data() {
     DataAccess access(data_);
 
     data_.out_enabled = geti("out_enabled");
@@ -200,7 +200,7 @@ void RtModuleSoundOsc::update_data() {
 
 //---------------------------------------------------------------------
 //генерация звука
-void RtModuleSoundOsc::call_impl(QString function, XDict *input, XDict * /*output*/) {
+void XModuleSoundOsc::call_impl(QString function, XDict *input, XDict * /*output*/) {
     //"sound_buffer_add"
     if (function == functions_names::sound_buffer_add()) {
 

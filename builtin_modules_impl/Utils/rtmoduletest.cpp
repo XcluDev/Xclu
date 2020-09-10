@@ -7,31 +7,31 @@
 REGISTRAR(Test)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleTest *RtModuleTest::new_module() {
-    return new RtModuleTest();
+/*static*/ XModuleTest *XModuleTest::new_module() {
+    return new XModuleTest();
 }
 
 //---------------------------------------------------------------------
-RtModuleTest::RtModuleTest()
-    :RtModule(*static_class_name_ptr)
+XModuleTest::XModuleTest()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleTest::~RtModuleTest()
+XModuleTest::~XModuleTest()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::start_impl() {
+void XModuleTest::start_impl() {
     xclu_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::update_impl() {
+void XModuleTest::update_impl() {
     xclu_console_append(QString("%1 - update").arg(name()));
     if (geti("callback")) {
         xclu_console_append(QString("%1 - pressed Callback").arg(name()));
@@ -41,7 +41,7 @@ void RtModuleTest::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleTest::stop_impl() {
+void XModuleTest::stop_impl() {
     xclu_console_append(QString("%1 - stop").arg(name()));
 
 

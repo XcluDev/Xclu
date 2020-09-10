@@ -14,25 +14,25 @@
 REGISTRAR(Scalar)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleScalar *RtModuleScalar::new_module() {
-    return new RtModuleScalar();
+/*static*/ XModuleScalar *XModuleScalar::new_module() {
+    return new XModuleScalar();
 }
 
 //---------------------------------------------------------------------
-RtModuleScalar::RtModuleScalar()
-    :RtModule(*static_class_name_ptr)
+XModuleScalar::XModuleScalar()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleScalar::~RtModuleScalar()
+XModuleScalar::~XModuleScalar()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::start_impl() {
+void XModuleScalar::start_impl() {
     //сбрасываем родителя - это будет установлено в call_impl, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -44,7 +44,7 @@ void RtModuleScalar::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::update_impl() {
+void XModuleScalar::update_impl() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -52,7 +52,7 @@ void RtModuleScalar::update_impl() {
 
 
 //---------------------------------------------------------------------
-void RtModuleScalar::stop_impl() {
+void XModuleScalar::stop_impl() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -61,7 +61,7 @@ void RtModuleScalar::stop_impl() {
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleScalar::call_impl(QString function, XDict *input, XDict *output) {
+void XModuleScalar::call_impl(QString function, XDict *input, XDict *output) {
     //"create_widget"
     if (function == functions_names::create_widget()) {
         xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
@@ -100,7 +100,7 @@ void RtModuleScalar::call_impl(QString function, XDict *input, XDict *output) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::create_widget() {
+void XModuleScalar::create_widget() {
     //insert_label(input);
 
     spin_ = new XcluSpinBox();
@@ -141,7 +141,7 @@ void RtModuleScalar::create_widget() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::spin_changed() {    //вызывается, если значение изменилось
+void XModuleScalar::spin_changed() {    //вызывается, если значение изменилось
     //это может вызваться не в основном потоке
     DataAccess access(data_);
     data_.gui_changed = 1;
@@ -149,7 +149,7 @@ void RtModuleScalar::spin_changed() {    //вызывается, если зна
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::update_all(bool force) {
+void XModuleScalar::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -168,12 +168,12 @@ void RtModuleScalar::update_all(bool force) {
 
 
 //---------------------------------------------------------------------
-RtModuleScalar::Source RtModuleScalar::get_source() {
+XModuleScalar::Source XModuleScalar::get_source() {
     return Source(geti("source"));
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::update_value(bool force) {
+void XModuleScalar::update_value(bool force) {
     //enum source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     Source source = get_source();
     switch (source) {
@@ -217,7 +217,7 @@ void RtModuleScalar::update_value(bool force) {
 }
 
 //---------------------------------------------------------------------
-void RtModuleScalar::set_value(int v) {
+void XModuleScalar::set_value(int v) {
     seti("value", v);
     if (get_source() != Source_GUI) {
         spin_->setValue(v);

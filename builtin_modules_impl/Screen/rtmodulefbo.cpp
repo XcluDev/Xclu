@@ -11,25 +11,25 @@
 REGISTRAR(Fbo)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleFbo *RtModuleFbo::new_module() {
-    return new RtModuleFbo();
+/*static*/ XModuleFbo *XModuleFbo::new_module() {
+    return new XModuleFbo();
 }
 
 //---------------------------------------------------------------------
-RtModuleFbo::RtModuleFbo()
-    :RtModule(*static_class_name_ptr)
+XModuleFbo::XModuleFbo()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleFbo::~RtModuleFbo()
+XModuleFbo::~XModuleFbo()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleFbo::start_impl() {
+void XModuleFbo::start_impl() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,20 +38,20 @@ void RtModuleFbo::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleFbo::update_impl() {
+void XModuleFbo::update_impl() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void RtModuleFbo::stop_impl() {
+void XModuleFbo::stop_impl() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void RtModuleFbo::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleFbo::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

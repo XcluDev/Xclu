@@ -229,7 +229,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
 
     //если возникла ошибка парсинга - то выдастся исключение
     ModuleInfo *info = nullptr; //удалять не надо, это внешняя информация!
-    RtModule *rtmodule_new = nullptr;
+    XModule *rtmodule_new = nullptr;
     Module *module_new = nullptr;
     try {
         //Получение информации
@@ -237,7 +237,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
         xclu_assert(info, "Module class is unknown");
 
         //Загрузка
-        rtmodule_new = RtModuleRegistrar::create_rt_module(info->description);
+        rtmodule_new = XModuleRegistrar::create_rt_module(info->description);
         xclu_assert(rtmodule_new, "Internal error: module implementation is not created");
 
         //Создание модуля

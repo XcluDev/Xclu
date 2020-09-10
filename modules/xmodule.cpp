@@ -5,43 +5,43 @@
 #include "xdict.h"
 
 //---------------------------------------------------------------------
-RtModule::RtModule(QString class_name) {
+XModule::XModule(QString class_name) {
     class_name_ = class_name;
 }
 
 //---------------------------------------------------------------------
-RtModule::~RtModule() {
+XModule::~XModule() {
 
 }
 
 //---------------------------------------------------------------------
-QString RtModule::class_name() {
+QString XModule::class_name() {
     return class_name_;
 }
 
 //---------------------------------------------------------------------
-void RtModule::set_module(Module *module) {
+void XModule::set_module(Module *module) {
     module_ = module;
 }
 
 //---------------------------------------------------------------------
-Module *RtModule::module() {
+Module *XModule::module() {
     return module_;
 }
 
 //---------------------------------------------------------------------
-QString RtModule::name() {
+QString XModule::name() {
     return module()->name();
 }
 
 //---------------------------------------------------------------------
-void RtModule::internal_loaded() {     //действия при загрузке модуля
+void XModule::loaded_internal() {     //действия при загрузке модуля
     loaded_impl();
 }
 
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
-void RtModule::internal_update() {
+void XModule::update_internal() {
     if (is_enabled()) {
         if (!status_.was_started) {
             start_impl();
@@ -53,7 +53,7 @@ void RtModule::internal_update() {
 
 //---------------------------------------------------------------------
 //выполнить stop, и если нужно - start
-void RtModule::internal_stop() {
+void XModule::stop_internal() {
     if (status_.was_started) {
         status_.was_started = false;
         stop_impl();
@@ -63,14 +63,14 @@ void RtModule::internal_stop() {
 
 //---------------------------------------------------------------------
 //выполнить только один раз - в начале или конце
-void RtModule::internal_one_shot() {
-    internal_update();
-    internal_stop();
+void XModule::one_shot_internal() {
+    update_internal();
+    stop_internal();
 }
 
 //---------------------------------------------------------------------
 //единая функция исполнения
-void RtModule::execute(ModuleExecuteStage stage) {
+void XModule::execute(ModuleExecuteStage stage) {
     //отлов исключений путем обработки ошибок, и реакция соответственно настройках
     try {
         //обновление enabled__
@@ -83,38 +83,38 @@ void RtModule::execute(ModuleExecuteStage stage) {
         //bool enabled = is_enabled();
         switch (stage) {
         case ModuleExecuteStageLoaded:
-            internal_loaded();
+            loaded_internal();
             break;
         case ModuleExecuteStageStart:
             //if (enabled && mode == ModuleRunMode_Main_Loop)
-            internal_update();
+            update_internal();
             break;
 
         case ModuleExecuteStageAfterStart:
             //Сразу после старта - TODO Executor
-            //if (enabled && mode == ModuleRunMode_One_Shot_After_Start) internal_one_shot();
+            //if (enabled && mode == ModuleRunMode_One_Shot_After_Start) one_shot_internal();
 
             break;
 
         case ModuleExecuteStageUpdate:
             //if (enabled && mode == ModuleRunMode_Main_Loop)
-            internal_update();
+            update_internal();
             break;
 
         case ModuleExecuteStageBeforeStop:
              //Прямо перед остановкой - TODO Executor
-            //if (enabled && mode == ModuleRunMode_One_Shot_Before_Stop) internal_one_shot();
+            //if (enabled && mode == ModuleRunMode_One_Shot_Before_Stop) one_shot_internal();
             break;
 
         case ModuleExecuteStageStop:
             //останавливаем всегда
-            internal_stop();
+            stop_internal();
             break;
 
         /*case ModuleExecuteStageCallback:
             if (enabled) {
                 xclu_assert(mode == ModuleRunMode_Callback, "Module is called by callback, but it's Run Mode is not Callback!");
-                internal_update();
+                update_internal();
             }
             break;*/
 
@@ -131,14 +131,14 @@ void RtModule::execute(ModuleExecuteStage stage) {
 //---------------------------------------------------------------------
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
-void RtModule::button_pressed(QString button_id) {
+void XModule::button_pressed(QString button_id) {
     button_pressed_impl(button_id);
 }
 
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает call_impl
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void RtModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
+void XModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
     try {
         if (err.is_error()) return;
 
@@ -165,7 +165,7 @@ void RtModule::call(QString function, ErrorInfo &err, XDict *input, XDict *outpu
 
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
-void RtModule::create_widget_internal(XDict *input, XDict *output) {
+void XModule::create_widget_internal(XDict *input, XDict *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
@@ -194,7 +194,7 @@ void RtModule::create_widget_internal(XDict *input, XDict *output) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void RtModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
+void XModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
     XDictWrite sound(input);
     int sample_rate = sound.geti("sample_rate");
@@ -205,14 +205,14 @@ void RtModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
 }
 
 //---------------------------------------------------------------------
-void RtModule::call_impl(QString function, XDict * /*input*/, XDict * /*output*/) {
+void XModule::call_impl(QString function, XDict * /*input*/, XDict * /*output*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function '" + function + "', because call_impl() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //Concrete call handlers
-void *RtModule::create_widget_impl(QString /*parent_id*/) {
+void *XModule::create_widget_impl(QString /*parent_id*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function 'create_widget', because create_widget_impl() is not implemented");
 
@@ -225,39 +225,39 @@ void *RtModule::create_widget_impl(QString /*parent_id*/) {
 //---------------------------------------------------------------------
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void RtModule::sound_buffer_add_impl(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+void XModule::sound_buffer_add_impl(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_add', because sound_buffer_add_impl() is not implemented");
 }
 
 //---------------------------------------------------------------------
-bool RtModule::is_running() {
+bool XModule::is_running() {
     return status_.running;
 }
 
 //---------------------------------------------------------------------
-bool RtModule::is_enabled() {
+bool XModule::is_enabled() {
     return status_.enabled__;
 }
 
 //---------------------------------------------------------------------
-void RtModule::reset_stop_out() {
+void XModule::reset_stop_out() {
     status_.request_stop_out = false;
 }
 
 //---------------------------------------------------------------------
-void RtModule::set_stop_out() {
+void XModule::set_stop_out() {
     status_.request_stop_out = true;
 }
 
 //---------------------------------------------------------------------
-bool RtModule::is_stop_out() {
+bool XModule::is_stop_out() {
     return status_.request_stop_out;
 }
 
 //---------------------------------------------------------------------
 //обработка ошибки в соответствие с настройками модуля
-void RtModule::process_error(QString message) {
+void XModule::process_error(QString message) {
     int action = geti("action_on_error");
     bool ignore = false;
     bool print_console = false;
@@ -313,7 +313,7 @@ void RtModule::process_error(QString message) {
 
 //---------------------------------------------------------------------
 //Проверка, изменились ли переменные
-bool RtModule::was_changed(QString name) {
+bool XModule::was_changed(QString name) {
     //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
     //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
@@ -324,7 +324,7 @@ bool RtModule::was_changed(QString name) {
 //int, checkbox, button, enum (rawtext), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-QString RtModule::gets(QString name, int index, int index2) {
+QString XModule::gets(QString name, int index, int index2) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
@@ -359,13 +359,13 @@ QString RtModule::gets(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //splits text using "\n"
-QStringList RtModule::get_strings(QString name) {
+QStringList XModule::get_strings(QString name) {
     return gets(name).split("\n");
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
-void RtModule::sets(QString name, QString v) {
+void XModule::sets(QString name, QString v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
@@ -373,13 +373,13 @@ void RtModule::sets(QString name, QString v) {
 }
 
 //---------------------------------------------------------------------
-void RtModule::clear_string(QString name) {
+void XModule::clear_string(QString name) {
     sets(name, "");
 }
 
 //---------------------------------------------------------------------
 //дописать к строке, применимо где sets
-void RtModule::append_string(QString name, QString v, int extra_new_lines_count) {
+void XModule::append_string(QString name, QString v, int extra_new_lines_count) {
     QString value = gets(name);
     value.append(v);
     for (int i=0; i<1 + extra_new_lines_count; i++) {
@@ -389,7 +389,7 @@ void RtModule::append_string(QString name, QString v, int extra_new_lines_count)
 }
 
 //---------------------------------------------------------------------
-void RtModule::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
+void XModule::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
     append_string(name, v.join("\n"), extra_new_lines_count);
 }
 
@@ -397,7 +397,7 @@ void RtModule::append_string(QString name, QStringList v, int extra_new_lines_co
 //int, checkbox, button, enum (index)
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-int RtModule::geti(QString name, int index, int index2) {
+int XModule::geti(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -410,7 +410,7 @@ int RtModule::geti(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
-void RtModule::seti(QString name, int v) {
+void XModule::seti(QString name, int v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -419,7 +419,7 @@ void RtModule::seti(QString name, int v) {
 
 //---------------------------------------------------------------------
 //увеличение значения
-void RtModule::increase_int(QString name, int increase) { //value+=increase
+void XModule::increase_int(QString name, int increase) { //value+=increase
     seti(name, geti(name) + increase);
 }
 
@@ -427,7 +427,7 @@ void RtModule::increase_int(QString name, int increase) { //value+=increase
 //float
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-float RtModule::getf(QString name, int index, int index2) {
+float XModule::getf(QString name, int index, int index2) {
     if (index == -1) {
         InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
@@ -440,7 +440,7 @@ float RtModule::getf(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //только out: float
-void RtModule::setf(QString name, float v) {
+void XModule::setf(QString name, float v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
@@ -449,7 +449,7 @@ void RtModule::setf(QString name, float v) {
 
 //---------------------------------------------------------------------
 //enum (title)
-QString RtModule::get_title_value(QString name) {
+QString XModule::get_title_value(QString name) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     return var->value_title();
@@ -458,7 +458,7 @@ QString RtModule::get_title_value(QString name) {
 
 //---------------------------------------------------------------------
 //только out: enum (title)
-void RtModule::set_title_value(QString name, QString v) {
+void XModule::set_title_value(QString name, QString v) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
@@ -471,7 +471,7 @@ void RtModule::set_title_value(QString name, QString v) {
 //без копирования
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
-XDict *RtModule::get_object(QString name) {
+XDict *XModule::get_object(QString name) {
     InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     XDict *object = var->get_object();
@@ -480,13 +480,13 @@ XDict *RtModule::get_object(QString name) {
 
 
 //---------------------------------------------------------------------
-void RtModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
+void XModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
     seti("was_error", 0);
     clear_string("error_text");
 }
 
 //---------------------------------------------------------------------
-void RtModule::set_error_values(QString message) { //установка того, что была ошибка
+void XModule::set_error_values(QString message) { //установка того, что была ошибка
     seti("was_error", 1);
     sets("error_text", message);
 }

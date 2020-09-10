@@ -11,18 +11,18 @@
 #include <QLabel>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 
 
-class RtModuleProject: public RtModule
+class XModuleProject: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleProject();
-    ~RtModuleProject();
+    XModuleProject();
+    ~XModuleProject();
 
     static QString *static_class_name_ptr;
-    static RtModuleProject *new_module();
+    static XModuleProject *new_module();
 
 protected:
     //Выполнение

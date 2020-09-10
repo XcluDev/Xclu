@@ -9,20 +9,20 @@
 #include <QWindow>
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluprotecteddata.h"
 
 
 //Модуль
-class RtModuleFbo: public RtModule
+class XModuleFbo: public XModule
 {
     Q_OBJECT
 public:
-    RtModuleFbo();
-    ~RtModuleFbo();
+    XModuleFbo();
+    ~XModuleFbo();
 
     static QString *static_class_name_ptr;
-    static RtModuleFbo *new_module();
+    static XModuleFbo *new_module();
 
 protected:
     //Выполнение
@@ -37,6 +37,6 @@ protected:
 };
 
 
-//RtModuleFbo
+//XModuleFbo
 
 #endif // RTMODULEFBO_H

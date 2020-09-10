@@ -9,43 +9,43 @@
 REGISTRAR(Project)
 
 //---------------------------------------------------------------------
-/*static*/ RtModuleProject *RtModuleProject::new_module() {
-    return new RtModuleProject();
+/*static*/ XModuleProject *XModuleProject::new_module() {
+    return new XModuleProject();
 }
 
 //---------------------------------------------------------------------
-RtModuleProject::RtModuleProject()
-    :RtModule(*static_class_name_ptr)
+XModuleProject::XModuleProject()
+    :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-RtModuleProject::~RtModuleProject()
+XModuleProject::~XModuleProject()
 {
 
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::loaded_impl() {
+void XModuleProject::loaded_impl() {
     if (is_enabled()) {
         apply_control_values();
     }
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::apply_control_values() {
+void XModuleProject::apply_control_values() {
     RUNTIME.set_frame_rate(geti("frame_rate"));
     RUNTIME.set_autostart(geti("autostart"));
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::start_impl() {
+void XModuleProject::start_impl() {
     apply_control_values();
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::update_impl() {
+void XModuleProject::update_impl() {
     setf("elapsed_time_sec", RUNTIME.elapsed_time_sec());
 
     float dt = RUNTIME.dt();
@@ -58,7 +58,7 @@ void RtModuleProject::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void RtModuleProject::stop_impl() {
+void XModuleProject::stop_impl() {
 
 }
 

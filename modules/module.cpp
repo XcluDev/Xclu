@@ -7,7 +7,7 @@
 #include "xdict.h"
 
 //---------------------------------------------------------------------
-Module::Module(ModuleInfo *info_external, RtModule *rtmodule_new)
+Module::Module(ModuleInfo *info_external, XModule *rtmodule_new)
 {
     info_external_ = info_external;
 
@@ -94,7 +94,7 @@ ModuleInterface *Module::interf() {
 
 //---------------------------------------------------------------------
 //Исполняемый модуль
-RtModule *Module::rtmodule() {
+XModule *Module::rtmodule() {
     return rtmodule_;
 }
 

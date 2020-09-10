@@ -4,16 +4,16 @@
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 
-class RtModuleTest: public RtModule
+class XModuleTest: public XModule
 {
 public:
-    RtModuleTest();
-    ~RtModuleTest();
+    XModuleTest();
+    ~XModuleTest();
 
     static QString *static_class_name_ptr;
-    static RtModuleTest *new_module();
+    static XModuleTest *new_module();
 
 protected:
     //Выполнение

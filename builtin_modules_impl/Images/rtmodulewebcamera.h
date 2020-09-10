@@ -10,32 +10,32 @@
 #include <QAbstractVideoSurface>
 #include <QMutex>
 #include "incl_h.h"
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
 class QCameraInfo;
 
-class RtModuleWebcamera;
+class XModuleWebcamera;
 
 //класс для обработки полученных изображений с камеры
 //https://doc.qt.io/archives/qt-5.8/videooverview.html
 //https://www.qtcentre.org/threads/57090-How-could-I-get-the-image-buffer-of-QCamera
-class RtModuleWebcameraSurface: public QAbstractVideoSurface
+class XModuleWebcameraSurface: public QAbstractVideoSurface
 {
 public:
     //в конструктор передается сам модуль, чтобы в него посылать сигналы
-    RtModuleWebcameraSurface(RtModuleWebcamera *module);
+    XModuleWebcameraSurface(XModuleWebcamera *module);
 
     QList<QVideoFrame::PixelFormat> supportedPixelFormats(
             QAbstractVideoBuffer::HandleType handleType = QAbstractVideoBuffer::NoHandle) const;
     bool present(const QVideoFrame &frame);
 
 protected:
-    RtModuleWebcamera *module_; //удалять не нужно
+    XModuleWebcamera *module_; //удалять не нужно
 };
 
 //Данные для обмена с surface, которые защищаются с помощью mutex
-struct RtModuleWebcameraSurfaceData : public XcluProtectedData
+struct XModuleWebcameraSurfaceData : public XcluProtectedData
 {
 
     XDict image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
@@ -61,17 +61,17 @@ struct RtModuleWebcameraSurfaceData : public XcluProtectedData
 
 
 //Сам модуль для работы с вебкамерой
-class RtModuleWebcamera: public RtModule
+class XModuleWebcamera: public XModule
 {
 public:
-    RtModuleWebcamera();
-    ~RtModuleWebcamera();
+    XModuleWebcamera();
+    ~XModuleWebcamera();
 
     static QString *static_class_name_ptr;
-    static RtModuleWebcamera *new_module();
+    static XModuleWebcamera *new_module();
 
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение
-    RtModuleWebcameraSurfaceData &surface_data();
+    XModuleWebcameraSurfaceData &surface_data();
 
 protected:
     //Выполнение
@@ -112,10 +112,10 @@ protected:
     void set_started(bool started); //ставит camera_started_ и gui-элемент is_started
 
     //получение кадров с камеры
-    RtModuleWebcameraSurface surface_;
+    XModuleWebcameraSurface surface_;
 
     //Данные для обмена с surface, которые защищаются с помощью mutex
-    RtModuleWebcameraSurfaceData data_;
+    XModuleWebcameraSurfaceData data_;
 
     //количество обработанных кадров
     int processed_frames_ = 0;

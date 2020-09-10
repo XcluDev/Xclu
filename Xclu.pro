@@ -97,6 +97,7 @@ SOURCES += \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
     modules/moduledescription.cpp \
+    modules/xmodule.cpp \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
     interface/visibilitygroups.cpp \
@@ -130,7 +131,6 @@ SOURCES += \
     modules/modulesfactory.cpp \
     main.cpp \
     interface/interfaceitem.cpp \
-    modules/rtmodule.cpp \
     modules/rtmoduleregistrar.cpp \
     objects/xcluobjectimage.cpp \
     objects/xcluobjectsoundformat.cpp \
@@ -172,6 +172,7 @@ HEADERS += \
     core/xclu_types.h \
     core/xclu_utils.h \
     modules/moduledescription.h \
+    modules/xmodule.h \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
     interface/visibilitygroups.h \
@@ -204,7 +205,6 @@ HEADERS += \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
     interface/interfaceitem.h \
-    modules/rtmodule.h \
     modules/rtmoduleregistrar.h \
     objects/xcluobjectimage.h \
     objects/xcluobjectsoundformat.h \
