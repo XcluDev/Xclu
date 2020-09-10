@@ -27,7 +27,7 @@ XModuleProject::~XModuleProject()
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::loaded_impl() {
+void XModuleProject::impl_loaded() {
     if (is_enabled()) {
         apply_control_values();
     }
@@ -40,12 +40,12 @@ void XModuleProject::apply_control_values() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::start_impl() {
+void XModuleProject::impl_start() {
     apply_control_values();
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::update_impl() {
+void XModuleProject::impl_update() {
     setf("elapsed_time_sec", RUNTIME.elapsed_time_sec());
 
     float dt = RUNTIME.dt();
@@ -58,7 +58,7 @@ void XModuleProject::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::stop_impl() {
+void XModuleProject::impl_stop() {
 
 }
 

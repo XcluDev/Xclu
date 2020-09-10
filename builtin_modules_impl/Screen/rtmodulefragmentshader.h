@@ -27,13 +27,13 @@ public:
 
 protected:
     //Выполнение
-    virtual void loaded_impl() {}
-    virtual void start_impl();
-    virtual void update_impl();
-    virtual void stop_impl();
+    virtual void impl_loaded() {}
+    virtual void impl_start();
+    virtual void impl_update();
+    virtual void impl_stop();
 
     //Вызовы
-    virtual void call_impl(QString function, XDict *input, XDict * /*output*/);
+    virtual void impl_call(QString function, XDict *input, XDict * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
 };

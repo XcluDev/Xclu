@@ -32,8 +32,8 @@ XModuleScalar::~XModuleScalar()
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::start_impl() {
-    //сбрасываем родителя - это будет установлено в call_impl, когда родитель запросит
+void XModuleScalar::impl_start() {
+    //сбрасываем родителя - это будет установлено в impl_call, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
     clear_string("parent_id");
@@ -44,7 +44,7 @@ void XModuleScalar::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::update_impl() {
+void XModuleScalar::impl_update() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -52,7 +52,7 @@ void XModuleScalar::update_impl() {
 
 
 //---------------------------------------------------------------------
-void XModuleScalar::stop_impl() {
+void XModuleScalar::impl_stop() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -60,47 +60,14 @@ void XModuleScalar::stop_impl() {
 }
 
 //---------------------------------------------------------------------
-//Вызов
-void XModuleScalar::call_impl(QString function, XDict *input, XDict *output) {
-    //"create_widget"
-    if (function == functions_names::create_widget()) {
-        xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
+//`create_widget` call implementation, creates QWidget and returns pointer on it
+void *XModuleScalar::impl_create_widget(QString parent_id) {
+    xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
-        //call create_widget
-        //Window calls GUI elements to insert them into itself.
-        //string parent_id
-        //out pointer widget_pointer
+            parent_id_ = parent_id;
+    sets("parent_id", parent_id_);
+    parent_was_set_ = true;
 
-        //проверка, что оба объекта переданы
-        xclu_assert(input, "Internal error, input object is nullptr");
-        xclu_assert(output, "Internal error, output object is nullptr");
-
-        //устанавливаем, кто использует
-        parent_id_ = XDictRead(input).gets("parent_id");
-        sets("parent_id", parent_id_);
-        parent_was_set_ = true;
-
-        //проверяем, что еще не стартовали
-        xclu_assert(status().was_started,
-                    QString("Can't create widget, because module '%1' was not started yet."
-                            " You need to place it before parent '%2'.")
-                    .arg(module()->name())
-                    .arg(parent_id_));
-
-        //создаем виджет
-        create_widget();
-
-        //ставим его в объект
-        XDictWrite(output).set_pointer("widget_pointer", widget_);
-
-
-        return;
-    }
-
-}
-
-//---------------------------------------------------------------------
-void XModuleScalar::create_widget() {
     //insert_label(input);
 
     spin_ = new XcluSpinBox();
@@ -116,7 +83,7 @@ void XModuleScalar::create_widget() {
     //если есть единицы измерения - создаем блок с Label
     //QString units = item->units();
     //if (!units.isEmpty()) {
-        //qDebug() << "units" << units;
+    //qDebug() << "units" << units;
     //    insert_widget_with_spacer(xclu::hwidget(0,
     //                                            spin_,0,
     //                                            new QLabel(units), 0),
@@ -134,10 +101,12 @@ void XModuleScalar::create_widget() {
 
     //отслеживание изменений
     connect(spin_, QOverload<int>::of(&QSpinBox::valueChanged),
-          [=](int /*i*/){ spin_changed(); });
+            [=](int /*i*/){ spin_changed(); });
 
     //установка всех значений
     update_all(true);
+
+    return widget_;
 }
 
 //---------------------------------------------------------------------

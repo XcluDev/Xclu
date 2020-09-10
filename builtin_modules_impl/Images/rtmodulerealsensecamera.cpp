@@ -28,18 +28,18 @@ XModuleRealsenseCamera::XModuleRealsenseCamera()
 //---------------------------------------------------------------------
 XModuleRealsenseCamera::~XModuleRealsenseCamera()
 {
-    stop_impl();
+    impl_stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::loaded_impl() {
+void XModuleRealsenseCamera::impl_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleRealsenseCamera::button_pressed_impl(QString button_id) {
+void XModuleRealsenseCamera::impl_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -71,7 +71,7 @@ void XModuleRealsenseCamera::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::start_impl() {
+void XModuleRealsenseCamera::impl_start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -91,7 +91,7 @@ void XModuleRealsenseCamera::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::update_impl() {
+void XModuleRealsenseCamera::impl_update() {
     //если нажата кнопка - поставить флажок ожидания записи кадров на диск
     if (geti("save_frames_button")) {
         wait_save_frames_ = 1;
@@ -193,7 +193,7 @@ void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::stop_impl() {
+void XModuleRealsenseCamera::impl_stop() {
     if (camera_started_) {
         camera_.close();
         set_started(false);

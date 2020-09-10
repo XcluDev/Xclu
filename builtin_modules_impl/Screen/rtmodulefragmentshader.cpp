@@ -29,7 +29,7 @@ XModuleFragmentShader::~XModuleFragmentShader()
 }
 
 //---------------------------------------------------------------------
-void XModuleFragmentShader::start_impl() {
+void XModuleFragmentShader::impl_start() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,20 +38,20 @@ void XModuleFragmentShader::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFragmentShader::update_impl() {
+void XModuleFragmentShader::impl_update() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFragmentShader::stop_impl() {
+void XModuleFragmentShader::impl_stop() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleFragmentShader::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleFragmentShader::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

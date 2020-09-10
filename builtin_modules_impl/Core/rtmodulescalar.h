@@ -43,13 +43,13 @@ public:
 
 protected:
     //Выполнение
-    virtual void loaded_impl() {}
-    virtual void start_impl();
-    virtual void update_impl();
-    virtual void stop_impl();
+    virtual void impl_loaded() {}
+    virtual void impl_start();
+    virtual void impl_update();
+    virtual void impl_stop();
 
-    //Вызовы
-    virtual void call_impl(QString function, XDict *input, XDict * /*output*/);
+    //`create_widget` call implementation, creates QWidget and returns pointer on it
+    void *impl_create_widget(QString parent_id);
 protected:
     //QScopedPointer<QWindow> window_;
     QString parent_id_;
@@ -57,9 +57,6 @@ protected:
 
     QWidget *widget_ = nullptr; //весь виджет
     XcluSpinBox *spin_ = nullptr;
-
-    void create_widget();
-
 
     void update_all(bool force);
 

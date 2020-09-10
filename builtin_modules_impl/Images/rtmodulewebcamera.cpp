@@ -106,7 +106,7 @@ XModuleWebcamera::~XModuleWebcamera()
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::start_impl() {
+void XModuleWebcamera::impl_start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -138,7 +138,7 @@ void XModuleWebcamera::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::update_impl() {
+void XModuleWebcamera::impl_update() {
     //если требуется, напечатать все устройства
     print_devices();
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
@@ -161,7 +161,7 @@ void XModuleWebcamera::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::stop_impl() {
+void XModuleWebcamera::impl_stop() {
     //qDebug() << "stop";
     stop_camera();
 

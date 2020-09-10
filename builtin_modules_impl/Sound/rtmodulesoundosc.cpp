@@ -128,7 +128,7 @@ XModuleSoundOsc::~XModuleSoundOsc()
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::start_impl() {
+void XModuleSoundOsc::impl_start() {
     //Очистка переменных
 
     update_data();
@@ -140,13 +140,13 @@ void XModuleSoundOsc::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::update_impl() {
+void XModuleSoundOsc::impl_update() {
     //считываем данные из GUI
     update_data();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::stop_impl() {
+void XModuleSoundOsc::impl_stop() {
 
 }
 
@@ -199,37 +199,23 @@ void XModuleSoundOsc::update_data() {
 }
 
 //---------------------------------------------------------------------
-//генерация звука
-void XModuleSoundOsc::call_impl(QString function, XDict *input, XDict * /*output*/) {
-    //"sound_buffer_add"
-    if (function == functions_names::sound_buffer_add()) {
-
-        //получаем доступ к данным и звуковому буферу
-        DataAccess access(data_);
-        if (data_.out_enabled) {
-            //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-            XDictWrite sound(input);
-
-            float sample_rate = sound.geti("sample_rate");
-            int samples = sound.geti("samples");
-            int channels = sound.geti("channels");
-            float *data = sound.var_array("data")->data_float();
-
-
-            data_.update_steps(sample_rate);    //обновляем приращение параметров
-
-            int k = 0;
-            for (int i=0; i<samples; i++) {
-                //получить значение звука
-                float v = data_.get_next_sample();
-                for (int u=0; u<channels; u++) {
-                    data[k++] += v;
-                }
+//sound generation
+//"sound_buffer_add" call, fills `data` buffer
+//there are required to fill channels * samples values at data
+void XModuleSoundOsc::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+    //получаем доступ к данным и звуковому буферу
+    DataAccess access(data_);
+    if (data_.out_enabled) {
+        data_.update_steps(sample_rate);    //обновляем приращение параметров
+        int k = 0;
+        for (int i=0; i<samples; i++) {
+            //получить значение звука
+            float v = data_.get_next_sample();
+            for (int u=0; u<channels; u++) {
+                data[k++] += v;
             }
         }
-        return;
     }
-
 }
 
 //---------------------------------------------------------------------

@@ -43,18 +43,18 @@ void XModuleSerial::set_total_sent(int t) {
 //---------------------------------------------------------------------
 XModuleSerial::~XModuleSerial()
 {
-    stop_impl();
+    impl_stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::loaded_impl() {
+void XModuleSerial::impl_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleSerial::button_pressed_impl(QString button_id) {
+void XModuleSerial::impl_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -133,7 +133,7 @@ void XModuleSerial::print_devices() {
 
 
 //---------------------------------------------------------------------
-void XModuleSerial::start_impl() {
+void XModuleSerial::impl_start() {
     //Очистка переменных
     gui_clear();
 
@@ -228,8 +228,8 @@ void XModuleSerial::open_port() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::update_impl() {
-   //отработка отправки данных путем нажатия кнопок идет в button_pressed_impl
+void XModuleSerial::impl_update() {
+   //отработка отправки данных путем нажатия кнопок идет в impl_button_pressed
 
 }
 
@@ -280,7 +280,7 @@ void XModuleSerial::send_byte(int byte) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::stop_impl() {
+void XModuleSerial::impl_stop() {
     if (connected_) {
         serialPort_.close();
         set_connected(false);

@@ -1,4 +1,4 @@
-#include "rtmodule.h"
+#include "xmodule.h"
 #include "moduleinterface.h"
 #include "module.h"
 #include "incl_cpp.h"
@@ -36,7 +36,7 @@ QString XModule::name() {
 
 //---------------------------------------------------------------------
 void XModule::loaded_internal() {     //действия при загрузке модуля
-    loaded_impl();
+    impl_loaded();
 }
 
 //---------------------------------------------------------------------
@@ -44,10 +44,10 @@ void XModule::loaded_internal() {     //действия при загрузке
 void XModule::update_internal() {
     if (is_enabled()) {
         if (!status_.was_started) {
-            start_impl();
+            impl_start();
             status_.was_started = true;
         }
-        update_impl();
+        impl_update();
     }
 }
 
@@ -56,7 +56,7 @@ void XModule::update_internal() {
 void XModule::stop_internal() {
     if (status_.was_started) {
         status_.was_started = false;
-        stop_impl();
+        impl_stop();
     }
     status_.enabled__ = false;
 }
@@ -132,11 +132,11 @@ void XModule::execute(ModuleExecuteStage stage) {
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
 void XModule::button_pressed(QString button_id) {
-    button_pressed_impl(button_id);
+    impl_button_pressed(button_id);
 }
 
 //---------------------------------------------------------------------
-//функция вызова между модулями, вызывает call_impl
+//функция вызова между модулями, вызывает impl_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
 void XModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
     try {
@@ -154,7 +154,7 @@ void XModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output
 
         //process universal function
         //if (is_enabled()) {
-        call_impl(function, input, output);
+        impl_call(function, input, output);
         //}
     }
     catch (XCluException &e) {
@@ -186,9 +186,9 @@ void XModule::create_widget_internal(XDict *input, XDict *output) {
                 .arg(parent_id));
 
     //создаем виджет
-    void* widget = create_widget_impl(parent_id);
+    void* widget = impl_create_widget(parent_id);
 
-    //ставим его в объект
+    //ставим его в выходной объект
     XDictWrite(output).set_pointer("widget_pointer", widget);
 }
 
@@ -201,33 +201,29 @@ void XModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
     int samples = sound.geti("samples");
     int channels = sound.geti("channels");
     float *data = sound.var_array("data")->data_float();
-    sound_buffer_add_impl(sample_rate, channels, samples, data);
+    impl_sound_buffer_add(sample_rate, channels, samples, data);
 }
 
 //---------------------------------------------------------------------
-void XModule::call_impl(QString function, XDict * /*input*/, XDict * /*output*/) {
+void XModule::impl_call(QString function, XDict * /*input*/, XDict * /*output*/) {
     xclu_exception("Module '" + name()
-                   + "' can't process function '" + function + "', because call_impl() is not implemented");
+                   + "' can't process function '" + function + "', because impl_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
-//Concrete call handlers
-void *XModule::create_widget_impl(QString /*parent_id*/) {
+//`create_widget` call implementation, creates QWidget and returns pointer on it
+void *XModule::impl_create_widget(QString /*parent_id*/) {
     xclu_exception("Module '" + name()
-                   + "' can't process function 'create_widget', because create_widget_impl() is not implemented");
-
-
-
-
+                   + "' can't process function 'create_widget', because impl_create_widget() is not implemented");
     return nullptr;
 }
 
 //---------------------------------------------------------------------
-//"sound_buffer_add" call, fills `data` buffer
+//`sound_buffer_add` call implementation, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModule::sound_buffer_add_impl(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+void XModule::impl_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xclu_exception("Module '" + name()
-                   + "' can't process function 'sound_buffer_add', because sound_buffer_add_impl() is not implemented");
+                   + "' can't process function 'sound_buffer_add', because impl_sound_buffer_add() is not implemented");
 }
 
 //---------------------------------------------------------------------

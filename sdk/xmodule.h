@@ -4,9 +4,9 @@
 //Вычислительный модуль (run-time module)
 //Базовый класс для конкретных реализаций модулей
 //каждый модуль должен реализовать следующие виртуальные функции:
-//start_impl()
-//update_impl()
-//stop_impl()
+//impl_start()
+//impl_update()
+//impl_stop()
 // - они работают в основном потоке, и поэтому могут общаться с GUI
 //
 //execute_call_internal()  - опциональная функция, вызов из другого модуля
@@ -57,7 +57,7 @@ public:
     void set_module(Module *module);
     Module *module();
 
-    //основная функция запуска, вызывает start_impl, update_impl, stop_impl
+    //основная функция запуска, вызывает impl_start, impl_update, impl_stop
     void execute(ModuleExecuteStage stage);
 
     //нажатие кнопки - это можно делать и во время остановки всего
@@ -65,12 +65,12 @@ public:
     void button_pressed(QString button_id);
 
     //------------------------------------------------------------------------
-    //функция вызова между модулями, вызывает call_impl
+    //функция вызова между модулями, вызывает impl_call
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //err - информация об ошибках.
     //При call-вызовах модули не должны генерировать исключения, а перехватывать их и писать в err.
-    //Поэтому call перехватывает их, но реализация в call_impl может генерировать исключение
+    //Поэтому call перехватывает их, но реализация в impl_call может генерировать исключение
     //То, что модуль может запрашивать у других модулей, определяется свойством
     //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
     //То, что модуль может отдавать другим модулям, определяется свойством
@@ -159,15 +159,15 @@ protected:
 
     //функции исполнения, специфичные для модулей - они должны их переопределить
     //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
-    virtual void loaded_impl() {}
+    virtual void impl_loaded() {}
     //эти функции запускаются, только если модуль включен:
-    virtual void start_impl() {}
-    virtual void update_impl() {}
-    virtual void stop_impl() {}
+    virtual void impl_start() {}
+    virtual void impl_update() {}
+    virtual void impl_stop() {}
 
     //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
     //внимание, обычно вызывается из основного потока как callback
-    virtual void button_pressed_impl(QString /*button_id*/) {}
+    virtual void impl_button_pressed(QString /*button_id*/) {}
 
     //Universal call handler
     //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
@@ -178,14 +178,15 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void call_impl(QString function, XDict *input, XDict *output);
+    virtual void impl_call(QString function, XDict *input, XDict *output);
 
     //Concrete call handlers
-    virtual void *create_widget_impl(QString parent_id);
+    //`create_widget` call implementation, creates QWidget and returns pointer on it
+    virtual void *impl_create_widget(QString parent_id);
 
-    //"sound_buffer_add" call, fills `data` buffer
+    //`sound_buffer_add` call implementation, fills `data` buffer
     //there are required to fill channels * samples values at data
-    virtual void sound_buffer_add_impl(int sample_rate, int channels, int samples, float * data);
+    virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
 private:
     //--------------------------------------------------------------

@@ -67,14 +67,15 @@ public:
     static XModuleSynthFromImage *new_module();
 
 protected:
-    //Выполнение
-    virtual void loaded_impl() {}
-    virtual void start_impl();
-    virtual void update_impl();
-    virtual void stop_impl();
+    virtual void impl_loaded() {}
+    virtual void impl_start();
+    virtual void impl_update();
+    virtual void impl_stop();
 
-    //генерация звука
-    virtual void call_impl(QString function, XDict *input, XDict * /*output*/);
+    //sound generation
+    //"sound_buffer_add" call, fills `data` buffer
+    //there are required to fill channels * samples values at data
+    virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
 
     //режим выбора источника изображения

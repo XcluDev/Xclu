@@ -97,7 +97,7 @@ SOURCES += \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
     modules/moduledescription.cpp \
-    modules/xmodule.cpp \
+    sdk/xmodule.cpp \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
     interface/visibilitygroups.cpp \
@@ -172,7 +172,7 @@ HEADERS += \
     core/xclu_types.h \
     core/xclu_utils.h \
     modules/moduledescription.h \
-    modules/xmodule.h \
+    sdk/xmodule.h \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
     interface/visibilitygroups.h \

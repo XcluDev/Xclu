@@ -89,7 +89,7 @@ XModuleSynthFromImage::~XModuleSynthFromImage()
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::start_impl() {
+void XModuleSynthFromImage::impl_start() {
     //Очистка переменных
     image_file_ = "";
 
@@ -105,7 +105,7 @@ void XModuleSynthFromImage::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::update_impl() {
+void XModuleSynthFromImage::impl_update() {
     //получение картинки - загрузка из файла или взятие из другого модуля
     ImageSource image_source = ImageSource(geti("image_source"));
     switch (image_source) {
@@ -144,7 +144,7 @@ void XModuleSynthFromImage::load_image_link(QString image_link) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::stop_impl() {
+void XModuleSynthFromImage::impl_stop() {
 
 }
 
@@ -197,37 +197,24 @@ void XModuleSynthFromImage::update_data() {
 }
 
 //---------------------------------------------------------------------
-//генерация звука
-void XModuleSynthFromImage::call_impl(QString function, XDict *input, XDict * /*output*/) {
-    //"sound_buffer_add"
-    if (function == functions_names::sound_buffer_add()) {
+//sound generation
+//"sound_buffer_add" call, fills `data` buffer
+//there are required to fill channels * samples values at data
+void XModuleSynthFromImage::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+    DataAccess access(data_);
+    float freq_Hz = data_.pcm_speed_hz;
+    int k = 0;
 
-        //получаем доступ к данным и звуковому буферу
-        DataAccess access(data_);
-        //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        XDictWrite sound(input);
-
-        float sample_rate = sound.geti("sample_rate");
-        int samples = sound.geti("samples");
-        int channels = sound.geti("channels");
-
-        float *data = sound.var_array("data")->data_float();
-        float freq_Hz = data_.pcm_speed_hz;
-        int k = 0;
-
-        qreal phase_add = freq_Hz / sample_rate;
-        for (int i=0; i<samples; i++) {
-            //получить значение звука
-            float v = data_.get_volume(data_.phase_); //qSin(data_.phase_);
-            data_.phase_+=phase_add;
-            data_.phase_ = fmod(data_.phase_, 1);
-            for (int u=0; u<channels; u++) {
-                data[k++] += v;
-            }
+    qreal phase_add = freq_Hz / sample_rate;
+    for (int i=0; i<samples; i++) {
+        //получить значение звука
+        float v = data_.get_volume(data_.phase_); //qSin(data_.phase_);
+        data_.phase_+=phase_add;
+        data_.phase_ = fmod(data_.phase_, 1);
+        for (int u=0; u<channels; u++) {
+            data[k++] += v;
         }
-        return;
     }
-
 }
 
 //---------------------------------------------------------------------

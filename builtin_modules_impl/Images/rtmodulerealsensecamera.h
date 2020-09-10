@@ -26,14 +26,14 @@ public:
 
 protected:
     //Выполнение
-    virtual void loaded_impl();
-    virtual void start_impl();
-    virtual void update_impl();
-    virtual void stop_impl();
+    virtual void impl_loaded();
+    virtual void impl_start();
+    virtual void impl_update();
+    virtual void impl_stop();
 
     //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
     //внимание, обычно вызывается из основного потока как callback
-    virtual void button_pressed_impl(QString button_id);
+    virtual void impl_button_pressed(QString button_id);
 
 protected:
     void gui_clear();

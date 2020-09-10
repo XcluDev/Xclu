@@ -227,7 +227,7 @@ void XModuleWindow::on_visibleChanged(bool /*arg*/) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWindow::start_impl() {
+void XModuleWindow::impl_start() {
     //создание и установка начальных настроек окна
     setup_window();
 
@@ -236,20 +236,20 @@ void XModuleWindow::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWindow::update_impl() {
+void XModuleWindow::impl_update() {
 
     update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleWindow::stop_impl() {
+void XModuleWindow::impl_stop() {
     window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleWindow::call_impl(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleWindow::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

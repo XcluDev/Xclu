@@ -201,7 +201,7 @@ XModuleSoundOut::~XModuleSoundOut()
 //Вывод низкоуровневого звука - https://doc.qt.io/qt-5/qaudiooutput.html
 //Пример Qt - Audio Output Example
 
-void XModuleSoundOut::start_impl() {
+void XModuleSoundOut::impl_start() {
     //Очистка переменных
     audio_tried_to_start_ = false;
     print_devices_worked_ = false;
@@ -227,7 +227,7 @@ void XModuleSoundOut::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::update_impl() {
+void XModuleSoundOut::impl_update() {
     //запустить устройство, если еще это не делали
     start_audio();
 
@@ -270,7 +270,7 @@ void XModuleSoundOut::check_volume_change() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::stop_impl() {
+void XModuleSoundOut::impl_stop() {
     stop_audio();
 
 }

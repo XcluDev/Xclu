@@ -27,7 +27,7 @@ XModuleExecute::~XModuleExecute()
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::start_impl() {
+void XModuleExecute::impl_start() {
     //qDebug() << "start";
     seti("success", 0);
     seti("exit_code", 0);
@@ -42,7 +42,7 @@ void XModuleExecute::start_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::update_impl() {
+void XModuleExecute::impl_update() {
     //очищаем флажок success - он действует только в рамках одного кадра
     seti("success", 0);
 
@@ -135,7 +135,7 @@ void XModuleExecute::update_impl() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::stop_impl() {
+void XModuleExecute::impl_stop() {
     //qDebug() << "stop";
 
 }
