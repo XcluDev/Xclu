@@ -1,4 +1,4 @@
-#include "rtmodulesoundosc.h"
+#include "xmodulesoundosc.h"
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>

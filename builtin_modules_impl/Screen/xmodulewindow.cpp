@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "qt_widgets.h"
 #include <QScreen>
-#include "rtmodulewindow.h"
+#include "xmodulewindow.h"
 
 #include "incl_cpp.h"
 #include "rtmoduleregistrar.h"

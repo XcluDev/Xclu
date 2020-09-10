@@ -1,4 +1,4 @@
-#include "rtmodulewebcamera.h"
+#include "xmodulewebcamera.h"
 #include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include <QProcess>

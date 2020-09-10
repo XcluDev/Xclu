@@ -11,7 +11,7 @@
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
 #include "incl_h.h"
-#include "rtmodulerealsensecamera_impl.h"
+#include "xmodulerealsensecamera_impl.h"
 //class RealsenseCamera;
 
 //The module for working with Realsense

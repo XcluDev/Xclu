@@ -3,34 +3,34 @@
 #---------------------------------------------------
 
 SOURCES += \
-    builtin_modules_impl/Screen/rtmodulewimage.cpp \
-    builtin_modules_impl/Screen/rtmodulefbo.cpp \
-    builtin_modules_impl/Screen/rtmodulefragmentshader.cpp \
-    builtin_modules_impl/Sound/rtmodulesynthfromimage.cpp \
-    builtin_modules_impl/Images/rtmodulewebcamera.cpp \
-    builtin_modules_impl/Sound/rtmodulesoundout.cpp \
-    builtin_modules_impl/System/rtmoduleexecute.cpp \
-    builtin_modules_impl/Utils/rtmoduletest.cpp \
-    builtin_modules_impl/Core/rtmodulescalar.cpp \
-    builtin_modules_impl/Screen/rtmodulewindow.cpp \
-    builtin_modules_impl/Sound/rtmodulesoundosc.cpp \
-    builtin_modules_impl/Communication/rtmoduleserial.cpp \
-    builtin_modules_impl/Project/rtmoduleproject.cpp 
+    builtin_modules_impl/Screen/xmodulewimage.cpp \
+    builtin_modules_impl/Screen/xmodulefbo.cpp \
+    builtin_modules_impl/Screen/xmodulefragmentshader.cpp \
+    builtin_modules_impl/Sound/xmodulesynthfromimage.cpp \
+    builtin_modules_impl/Images/xmodulewebcamera.cpp \
+    builtin_modules_impl/Sound/xmodulesoundout.cpp \
+    builtin_modules_impl/System/xmoduleexecute.cpp \
+    builtin_modules_impl/Utils/xmoduletest.cpp \
+    builtin_modules_impl/Core/xmodulescalar.cpp \
+    builtin_modules_impl/Screen/xmodulewindow.cpp \
+    builtin_modules_impl/Sound/xmodulesoundosc.cpp \
+    builtin_modules_impl/Communication/xmoduleserial.cpp \
+    builtin_modules_impl/Project/xmoduleproject.cpp 
 
 HEADERS += \
-    builtin_modules_impl/Screen/rtmodulewimage.h \
-    builtin_modules_impl/Screen/rtmodulefbo.h \
-    builtin_modules_impl/Screen/rtmodulefragmentshader.h \
-    builtin_modules_impl/Sound/rtmodulesynthfromimage.h \
-    builtin_modules_impl/Images/rtmodulewebcamera.h \
-    builtin_modules_impl/Sound/rtmodulesoundout.h \
-    builtin_modules_impl/System/rtmoduleexecute.h \
-    builtin_modules_impl/Utils/rtmoduletest.h \
-    builtin_modules_impl/Core/rtmodulescalar.h \
-    builtin_modules_impl/Screen/rtmodulewindow.h \
-    builtin_modules_impl/Sound/rtmodulesoundosc.h \
-    builtin_modules_impl/Communication/rtmoduleserial.h \
-    builtin_modules_impl/Project/rtmoduleproject.h 
+    builtin_modules_impl/Screen/xmodulewimage.h \
+    builtin_modules_impl/Screen/xmodulefbo.h \
+    builtin_modules_impl/Screen/xmodulefragmentshader.h \
+    builtin_modules_impl/Sound/xmodulesynthfromimage.h \
+    builtin_modules_impl/Images/xmodulewebcamera.h \
+    builtin_modules_impl/Sound/xmodulesoundout.h \
+    builtin_modules_impl/System/xmoduleexecute.h \
+    builtin_modules_impl/Utils/xmoduletest.h \
+    builtin_modules_impl/Core/xmodulescalar.h \
+    builtin_modules_impl/Screen/xmodulewindow.h \
+    builtin_modules_impl/Sound/xmodulesoundosc.h \
+    builtin_modules_impl/Communication/xmoduleserial.h \
+    builtin_modules_impl/Project/xmoduleproject.h 
 
 #--------------------------------------------------------------------------
 #Realsense camera support
@@ -53,11 +53,11 @@ windows {
     LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
 }
 
-SOURCES +=    builtin_modules_impl/Images/rtmodulerealsensecamera.cpp \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.cpp
+SOURCES +=    builtin_modules_impl/Images/xmodulerealsensecamera.cpp \
+    builtin_modules_impl/Images/xmodulerealsensecamera_impl.cpp
 
-HEADERS +=    builtin_modules_impl/Images/rtmodulerealsensecamera.h \
-    builtin_modules_impl/Images/rtmodulerealsensecamera_impl.h
+HEADERS +=    builtin_modules_impl/Images/xmodulerealsensecamera.h \
+    builtin_modules_impl/Images/xmodulerealsensecamera_impl.h
 
 
 #--------------------------------------------------------------------------

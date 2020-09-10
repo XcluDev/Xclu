@@ -1,4 +1,4 @@
-#include "rtmodulesynthfromimage.h"
+#include "xmodulesynthfromimage.h"
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>

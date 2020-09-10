@@ -1,4 +1,4 @@
-#include "rtmodulerealsensecamera_impl.h"
+#include "xmodulerealsensecamera_impl.h"
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------

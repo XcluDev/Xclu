@@ -1,4 +1,4 @@
-#include "rtmodulesoundout.h"
+#include "xmodulesoundout.h"
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>

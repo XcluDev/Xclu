@@ -1,4 +1,4 @@
-#include "rtmodulefbo.h"
+#include "xmodulefragmentshader.h"
 #include <QApplication>
 #include <QScreen>
 
@@ -8,28 +8,28 @@
 #include "module.h"
 
 //заполнение имени класса и регистрация класса
-REGISTRAR(Fbo)
+REGISTRAR(FragmentShader)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleFbo *XModuleFbo::new_module() {
-    return new XModuleFbo();
+/*static*/ XModuleFragmentShader *XModuleFragmentShader::new_module() {
+    return new XModuleFragmentShader();
 }
 
 //---------------------------------------------------------------------
-XModuleFbo::XModuleFbo()
+XModuleFragmentShader::XModuleFragmentShader()
     :XModule(*static_class_name_ptr)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleFbo::~XModuleFbo()
+XModuleFragmentShader::~XModuleFragmentShader()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_start() {
+void XModuleFragmentShader::impl_start() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -38,20 +38,20 @@ void XModuleFbo::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_update() {
+void XModuleFragmentShader::impl_update() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_stop() {
+void XModuleFragmentShader::impl_stop() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleFbo::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleFragmentShader::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -67,4 +67,3 @@ void XModuleFbo::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*ou
 }
 
 //---------------------------------------------------------------------
-

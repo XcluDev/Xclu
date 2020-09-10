@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "rtmodulescalar.h"
+#include "xmodulescalar.h"
 
 #include "incl_cpp.h"
 #include "rtmoduleregistrar.h"

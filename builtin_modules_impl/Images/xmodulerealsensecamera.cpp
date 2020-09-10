@@ -1,4 +1,4 @@
-#include "rtmodulerealsensecamera.h"
+#include "xmodulerealsensecamera.h"
 #include "incl_cpp.h"
 #include "rtmoduleregistrar.h"
 #include <QProcess>
