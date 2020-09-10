@@ -1,7 +1,7 @@
 #ifndef XMODULE_H
 #define XMODULE_H
 
-//Вычислительный модуль (run-time module)
+//Вычислительный модуль (runtime module)
 //Базовый класс для конкретных реализаций модулей
 //каждый модуль должен реализовать следующие виртуальные функции:
 //impl_start()
@@ -16,12 +16,13 @@
 
 #include "incl_h.h"
 #include <QObject>
+#include "xclass.h"
 
 class InterfaceItem;
 class Module;
 class XDict;
 
-//Переменные, описывающие состояние
+//Runtime module status
 class XModuleStatus {
 public:
     bool was_started = false;
@@ -35,8 +36,8 @@ public:
 
 };
 
-//Описание модуля
-class XModule : public QObject
+//Runtime module class, base for most modules implementations
+class XModule : public QObject, public XClass
 {
     Q_OBJECT
 public:
@@ -46,16 +47,15 @@ public:
     XModule(QString class_name);
     virtual ~XModule();
 
+    //Module access, variables access and runtime values are inherited from XClass.
+
+
     //подклассы должны переопределить для своего имени
     //но это не виртуальная функция, так как статичная
     //static const QString static_class_name() { return ""; }
 
     //эта информация передается в конструкторе
     QString class_name();
-
-    //доступ к родительскому модулю - для получения информации о запуске и name, а также интерфейсу
-    void set_module(Module *module);
-    Module *module();
 
     //основная функция запуска, вызывает impl_start, impl_update, impl_stop
     void execute(ModuleExecuteStage stage);
@@ -105,45 +105,6 @@ public:
     //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
     //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
 
-    //Доступ к переменным - с учетом их квалификатора
-
-    //int, checkbox, button, enum (rawtext), string, text
-    //index>=0: string, text separated by ' ' - no error if no such string!
-    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-    QString gets(QString name, int index = -1, int index2 = -1);
-
-    //splits text using "\n"
-    QStringList get_strings(QString name);
-
-
-    void sets(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
-    void clear_string(QString name);
-    void append_string(QString name, QString v, int extra_new_lines_count = 0); //дописать к строке, применимо где sets
-    void append_string(QString name, QStringList v, int extra_new_lines_count = 0); //дописать к строке, применимо где sets
-
-    //int, checkbox, button, enum (index)
-    //index>=0: string, text separated by ' ' - no error if no such string!
-    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-    int geti(QString name, int index = -1, int index2 = -1);
-
-    void seti(QString name, int v); //только out: int, checkbox, enum (index)
-    void increase_int(QString name, int increase = 1); //увеличение значения
-
-    //float
-    //index>=0: string, text separated by ' ' - no error if no such string!
-    //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-    float getf(QString name, int index = -1, int index2 = -1);
-
-    void setf(QString name, float v);  //out: float
-
-    QString get_title_value(QString name);  //enum (title)
-    void set_title_value(QString name, QString v); //только out: enum (title)
-
-    //доступ к объектам идет только по указателям -
-    //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
-    //без копирования
-    //объекты снабжены мютексами, поэтому следует начинать и завершать с ними взаимодействие
-    XDict *get_object(QString name);
 
 protected:
     //--------------------------------------------------------------
@@ -192,9 +153,6 @@ private:
     //--------------------------------------------------------------
     //Private members
     //--------------------------------------------------------------
-    //Родительский модуль
-    Module *module_ = nullptr;  //удалять не надо
-
     QString class_name_;
 
     //Переменные, описывающие состояние выполнения
