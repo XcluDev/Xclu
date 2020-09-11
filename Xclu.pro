@@ -75,13 +75,13 @@ unix {
 #--------------------------------------------------------------------------
 
 FORMS += \
-    project/dialogs/DialogPreferences1.ui \
-    project/dialogs/dialog.ui \
-    project/dialogs/dialogmodulename.ui \
-    project/dialogs/dialogpreferences.ui
+    host/dialogs/DialogPreferences1.ui \
+    host/dialogs/dialog.ui \
+    host/dialogs/dialogmodulename.ui \
+    host/dialogs/dialogpreferences.ui
 
 INCLUDEPATH += core sdk/math modules components components/gui
-INCLUDEPATH += project project/dialogs objects sdk
+INCLUDEPATH += host host/dialogs objects sdk
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
@@ -110,16 +110,20 @@ SOURCES += \
     components/xitemseparator.cpp \
     components/xitemstring.cpp \
     components/xitemtext.cpp \
+    host/mainwindow.cpp \
+    host/xclu_paths.cpp \
+    host/xclu_settings.cpp \
+    host/xclu_theme.cpp \
     modules/moduleregistrar.cpp \
+    sdk/console.cpp \
+    sdk/incl_cpp.cpp \
+    sdk/incl_h.cpp \
     sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/raster.cpp \
     sdk/math/slowbit.cpp \
     sdk/math/xclu_parse_tree.cpp \
     sdk/math/xclu_utils.cpp \
-    core/xclu_paths.cpp \
-    core/xclu_settings.cpp \
-    core/xclu_theme.cpp \
     core/xclu_types.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
@@ -131,7 +135,6 @@ SOURCES += \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
     components/gui/xcluspinbox.cpp \
-    core/console.cpp \
     modules/module.cpp \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
@@ -140,22 +143,19 @@ SOURCES += \
     objects/xcluobjectsoundformat.cpp \
     objects/xcluobjectwrapper.cpp \
     objects/xcluprotecteddata.cpp \
-    project/consoleview.cpp \
-    project/dialogs/dialogmodulename.cpp \
-    project/dialogs/dialogpreferences.cpp \
-    project/dialogs/dialogrenamemodule.cpp \
-    project/dialogs/dialogtestmoduleinterface.cpp \
-    project/editormodule.cpp \
-    project/editormodules.cpp \
-    project/project.cpp \
-    project/dialogs/dialogaddmodule.cpp \
-    mainwindow.cpp  \
-    project/projectgui.cpp \
-    project/projectproperties.cpp \
-    project/projectruntime.cpp \
+    host/consoleview.cpp \
+    host/dialogs/dialogmodulename.cpp \
+    host/dialogs/dialogpreferences.cpp \
+    host/dialogs/dialogrenamemodule.cpp \
+    host/dialogs/dialogtestmoduleinterface.cpp \
+    host/editormodule.cpp \
+    host/editormodules.cpp \
+    host/project.cpp \
+    host/dialogs/dialogaddmodule.cpp \
+    host/projectgui.cpp \
+    host/projectproperties.cpp \
+    host/projectruntime.cpp \
     python/pythoncore.cpp \
-    core/incl_cpp.cpp \
-    core/incl_h.cpp \
     sdk/xclass.cpp \
     objects/xdict.cpp
 
@@ -171,8 +171,6 @@ HEADERS += \
     components/gui/xguiseparator.h \
     components/gui/xguistring.h \
     components/gui/xguitext.h \
-    core/incl_h.h \
-    core/incl_cpp.h \
     components/xitem.h \
     components/xitembutton.h \
     components/xitemcheckbox.h \
@@ -185,7 +183,14 @@ HEADERS += \
     components/xitemseparator.h \
     components/xitemstring.h \
     components/xitemtext.h \
+    host/mainwindow.h \
+    host/xclu_paths.h \
+    host/xclu_settings.h \
+    host/xclu_theme.h \
     modules/moduleregistrar.h \
+    sdk/console.h \
+    sdk/incl_cpp.h \
+    sdk/incl_h.h \
     sdk/math/int2.h \
     sdk/math/math_types.h \
     sdk/math/math_utils.h \
@@ -193,21 +198,18 @@ HEADERS += \
     sdk/math/slowbit.h \
     sdk/math/xclu_parse_tree.h \
     sdk/math/xclu_utils.h \
-    core/xclu_paths.h \
-    core/xclu_settings.h \
-    core/xclu_theme.h \
     core/xclu_types.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
     objects/xarray.h \
+    sdk/qt_widgets.h \
     sdk/xmodule.h \
     components/visibilitygroups.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \
     components/gui/xcluspinbox.h \
-    core/console.h \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
@@ -215,21 +217,19 @@ HEADERS += \
     objects/xcluobjectsoundformat.h \
     objects/xcluobjectwrapper.h \
     objects/xcluprotecteddata.h \
-    project/consoleview.h \
-    project/dialogs/dialogmodulename.h \
-    project/dialogs/dialogpreferences.h \
-    project/dialogs/dialogrenamemodule.h \
-    project/dialogs/dialogtestmoduleinterface.h \
-    project/editormodule.h \
-    project/editormodules.h \
-    project/project.h \
-    project/dialogs/dialogaddmodule.h \
-    mainwindow.h   \
-    project/projectgui.h \
-    project/projectproperties.h \
-    project/projectruntime.h \
+    host/consoleview.h \
+    host/dialogs/dialogmodulename.h \
+    host/dialogs/dialogpreferences.h \
+    host/dialogs/dialogrenamemodule.h \
+    host/dialogs/dialogtestmoduleinterface.h \
+    host/editormodule.h \
+    host/editormodules.h \
+    host/project.h \
+    host/dialogs/dialogaddmodule.h \
+    host/projectgui.h \
+    host/projectproperties.h \
+    host/projectruntime.h \
     python/pythoncore.h \
-    core/qt_widgets.h \
     sdk/xclass.h \
     objects/xdict.h
 
