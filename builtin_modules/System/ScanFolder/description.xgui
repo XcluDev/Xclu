@@ -1,0 +1,21 @@
+#Module ScanFolder
+#------------------------------------------
+module_description=Scan folder.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings
+
+in string(choose:folder) Folder folder=""
+    //Folder to scan.
+    //Please choose a folder
+    
+const enum Start start=By_Button [By_Button,At_Start]
+
+if start By_Button
+in button Scan scan_button
+endif
+    
+
