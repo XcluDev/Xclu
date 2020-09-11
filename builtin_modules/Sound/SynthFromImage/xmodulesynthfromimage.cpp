@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
 #include "xcluobjectimage.h"
@@ -167,7 +167,7 @@ void XModuleSynthFromImage::update_data() {
 
         auto *array = obj.get_array("data");
         //auto data_type = array->data_type();
-        //xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
+        //xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
         //            "XDictImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
         data_.set_image(w, h, array->data_u8bit());
 
@@ -183,7 +183,7 @@ void XModuleSynthFromImage::update_data() {
             int w = data_.w_;
             int h = 200;
             XDictWrite object(get_object("image_sound"));
-            XDictImage::allocate(object, XcluArrayDataType_u8bit, 1, w, h);
+            XDictImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
             quint8 *data =  XDictImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {
                 int y0 = int(xclu_map_clamped(data_.image_[x],-1,1, h, 0));

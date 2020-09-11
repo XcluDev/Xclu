@@ -1,41 +1,41 @@
-#ifndef XCLUARRAY_H
-#define XCLUARRAY_H
+#ifndef XARRAY_H
+#define XARRAY_H
 
 //Числовой массив
 
 #include "incl_h.h"
 
 //типы данных в массиве
-enum XcluArrayDataType : int {
-    XcluArrayDataType_none = 0,
-    XcluArrayDataType_u8bit = 1,
-    XcluArrayDataType_s8bit = 2,
-    XcluArrayDataType_int16 = 3,
-    XcluArrayDataType_uint16 = 4,
-    XcluArrayDataType_int32 = 5,
-    XcluArrayDataType_uint32 = 6,
-    XcluArrayDataType_float = 7,
-    XcluArrayDataType_double = 8,
-    XcluArrayDataType_N = 9
+enum XArrayDataType : int {
+    XArrayDataType_none = 0,
+    XArrayDataType_u8bit = 1,
+    XArrayDataType_s8bit = 2,
+    XArrayDataType_int16 = 3,
+    XArrayDataType_uint16 = 4,
+    XArrayDataType_int32 = 5,
+    XArrayDataType_uint32 = 6,
+    XArrayDataType_float = 7,
+    XArrayDataType_double = 8,
+    XArrayDataType_N = 9
 };
 
 //размер одного элемента данных
-unsigned int XcluArrayDataTypeSize(XcluArrayDataType type);
-QString XcluArrayDataType_to_string(XcluArrayDataType type);
-XcluArrayDataType string_to_XcluArrayDataType(QString type);
-bool is_XcluArrayDataType_integer(XcluArrayDataType type);
-bool is_XcluArrayDataType_float(XcluArrayDataType type);
+unsigned int XArrayDataTypeSize(XArrayDataType type);
+QString XArrayDataType_to_string(XArrayDataType type);
+XArrayDataType string_to_XArrayDataType(QString type);
+bool is_XArrayDataType_integer(XArrayDataType type);
+bool is_XArrayDataType_float(XArrayDataType type);
 
 
 //Массив
 //Важно, что у изображений перечисление размерности идет так: channels, w, h
-class XcluArray
+class XArray
 {
 public:
-    XcluArray();
+    XArray();
 
     //тип данных
-    XcluArrayDataType data_type() const;
+    XArrayDataType data_type() const;
 
     //размер массива
     bool is_empty() const;
@@ -51,9 +51,9 @@ public:
 
     //выделение памяти и очистка
     void clear();
-    void allocate(QVector<unsigned int> dim, XcluArrayDataType data_type);
-    void allocate_1d(unsigned int size, XcluArrayDataType data_type);
-    void allocate_image(int channels, int w, int h, XcluArrayDataType data_type);
+    void allocate(QVector<unsigned int> dim, XArrayDataType data_type);
+    void allocate_1d(unsigned int size, XArrayDataType data_type);
+    void allocate_image(int channels, int w, int h, XArrayDataType data_type);
 
     //перевести вектор индексов в одномерный индекс
     //TODO почему-то to_index не делается inline
@@ -116,7 +116,7 @@ public:
     double* data_double();
     double const* data_double() const;
 protected:
-    XcluArrayDataType data_type_ = XcluArrayDataType_none;
+    XArrayDataType data_type_ = XArrayDataType_none;
     QVector<quint32> dim_;      //размер по измерениям. Последнее - число каналов для изображений и звуков
     int dims_ = 0;
     QVector<quint8> data_;    //данные
@@ -135,4 +135,4 @@ protected:
 
 };
 
-#endif // XCLUARRAY_H
+#endif // XARRAY_H

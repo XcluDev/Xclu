@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
 
@@ -41,8 +41,8 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
             sound.seti("samples", samples);
             sound.seti("channels", channels);
             sound.seti("sample_rate", format_.sampleRate());
-            XcluArray *arr = sound.var_array("data", true);
-            arr->allocate_1d(samples*channels, XcluArrayDataType_float);
+            XArray *arr = sound.var_array("data", true);
+            arr->allocate_1d(samples*channels, XArrayDataType_float);
         }
 
         //заполнение массива
@@ -119,7 +119,7 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
 
         //считываем звук
         XDictRead sound(&sound_);
-        XcluArray const *arr = sound.get_array("data");
+        XArray const *arr = sound.get_array("data");
         float const *data_float = arr->data_float();
 
         //записываем его в буфер звуковой карты

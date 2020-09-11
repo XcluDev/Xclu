@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
 #include "xcluobjectimage.h"

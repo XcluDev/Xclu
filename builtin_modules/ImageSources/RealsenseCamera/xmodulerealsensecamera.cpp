@@ -1,6 +1,6 @@
 #include "xmodulerealsensecamera.h"
 #include "incl_cpp.h"
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include <QProcess>
 #include "projectruntime.h"
 #include <QDateTime>

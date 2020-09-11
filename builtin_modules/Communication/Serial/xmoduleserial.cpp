@@ -1,6 +1,6 @@
 #include "xmoduleserial.h"
 #include "incl_cpp.h"
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include "projectruntime.h"
 #include <QtSerialPort/QSerialPortInfo>
 

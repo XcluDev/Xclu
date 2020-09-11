@@ -5,7 +5,7 @@
 
 #include "incl_h.h"
 
-#include "xcluarray.h"
+#include "xarray.h"
 #include <QMutex>
 
 //Объект
@@ -90,11 +90,11 @@ protected:
     QMap<QString,QString> &all_strings();
 
     bool has_array(QString name) const;
-    const XcluArray *get_array(QString name) const;
+    const XArray *get_array(QString name) const;
     //используйте var_array для изменения массива
-    XcluArray *var_array(QString name, bool create_if_not_exists = false);
-    XcluArray *create_array(QString name);
-    QMap<QString,XcluArray *> &all_arrays();
+    XArray *var_array(QString name, bool create_if_not_exists = false);
+    XArray *create_array(QString name);
+    QMap<QString,XArray *> &all_arrays();
 
     bool has_strings(QString name) const;
     const QStringList *get_strings(QString name) const;
@@ -141,8 +141,8 @@ protected:
     //string
     QMap<QString,QString> string_;
 
-    //array XcluArray
-    QMap<QString,XcluArray *> array_;
+    //array XArray
+    QMap<QString,XArray *> array_;
 
     //strings   QStringList
     QMap<QString,QStringList *> strings_;
@@ -219,7 +219,7 @@ public:
     QString gets(QString name)       { return object_->gets(name); }
 
     bool has_array(QString name)           { return object_->has_array(name); }
-    XcluArray const *get_array(QString name) { return object_->get_array(name); }
+    XArray const *get_array(QString name) { return object_->get_array(name); }
 
     bool has_strings(QString name)          { return object_->has_strings(name); }
     QStringList const *get_strings(QString name) { return object_->get_strings(name); }
@@ -272,9 +272,9 @@ public:
     QMap<QString,QString> &all_strings()        { return object_->all_strings(); }
 
     //используйте var_array для изменения массива
-    XcluArray *var_array(QString name, bool create_if_not_exists = false) { return object_->var_array(name, create_if_not_exists); }
-    XcluArray *create_array(QString name) { return object_->create_array(name); }
-    QMap<QString,XcluArray *> &all_arrays()   { return object_->all_arrays(); }
+    XArray *var_array(QString name, bool create_if_not_exists = false) { return object_->var_array(name, create_if_not_exists); }
+    XArray *create_array(QString name) { return object_->create_array(name); }
+    QMap<QString,XArray *> &all_arrays()   { return object_->all_arrays(); }
 
     //используйте var_strings для изменения strings
     QStringList *var_strings(QString name, bool create_if_not_exists = false) { return object_->var_strings(name, create_if_not_exists); }

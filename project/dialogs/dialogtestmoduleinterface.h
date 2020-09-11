@@ -36,11 +36,14 @@ public:
 private slots:
     void pressed_load();
     void pressed_reload();
+    void pressed_export();
 
 private:
     QPlainTextEdit *folder_edit_;
 
     EditorModule *editor_;
+    QString folder_;
+
 
     void load_module(QString folder, int tab_index = 0);
     void reload(int tab_index);

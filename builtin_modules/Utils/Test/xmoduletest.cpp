@@ -1,6 +1,6 @@
 #include "xmoduletest.h"
 #include "incl_cpp.h"
-#include "rtmoduleregistrar.h"
+#include "xmoduleregistrar.h"
 #include "projectruntime.h"
 
 //заполнение имени класса и регистрация класса

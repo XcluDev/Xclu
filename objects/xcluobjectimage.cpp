@@ -249,7 +249,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XDictImage::allocate(XDictWrite &object, XcluArrayDataType data_type, int channels, int w, int h) {
+/*static*/ void XDictImage::allocate(XDictWrite &object, XArrayDataType data_type, int channels, int w, int h) {
     object.clear();
     object.set_type(XDictTypeImage);
     object.seti("w", w);
@@ -258,19 +258,19 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     QString channels_str = (channels==1) ? "Grayscale" : "RGB"; //TODO если каналов не 1 или 3, то будет пустое описание
     object.sets("channels_description", channels_str);
 
-    object.sets("data_type", XcluArrayDataType_to_string(data_type));
+    object.sets("data_type", XArrayDataType_to_string(data_type));
 
     //создание массива
-    XcluArray *array = object.var_array("data", true);
+    XArray *array = object.var_array("data", true);
     array->allocate_image(channels, w, h, data_type);
 }
 
 //---------------------------------------------------------------------
 /*static*/ void XDictImage::create_from_array(XDictWrite &object, quint8 *data, int channels, int w, int h) {
     //заполнение полей описания изображения
-    allocate(object, XcluArrayDataType_u8bit, channels, w, h);
+    allocate(object, XArrayDataType_u8bit, channels, w, h);
     //заполнение массива
-    XcluArray *array = object.var_array("data");
+    XArray *array = object.var_array("data");
     quint8 *output_pixels = array->data_u8bit();
     for (int i = 0; i<channels*w*h; i++) {
         output_pixels[i] = data[i];
@@ -302,10 +302,10 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     xclu_assert(rect.is_inside(w, h), "Bad rectange in XDictImage::to_raster");
 
     //доступ к пикселям
-    XcluArray const *array = get_array(object);
+    XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
-    xclu_assert(data_type == XcluArrayDataType_u8bit,
+    xclu_assert(data_type == XArrayDataType_u8bit,
                 "XDictImage::to_raster - only u8bit data type is supported");
 
     raster.allocate(rect.w, rect.h);
@@ -345,10 +345,10 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     xclu_assert(rect.is_inside(w, h), "Bad rectange in XDictImage::to_raster");
 
     //доступ к пикселям
-    XcluArray const *array = get_array(object);
+    XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
-    xclu_assert(data_type == XcluArrayDataType_u8bit,
+    xclu_assert(data_type == XArrayDataType_u8bit,
                 "XDictImage::to_raster - only u8bit data type is supported");
 
     raster.allocate(w, h);
@@ -379,7 +379,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 /*static*/ void XDictImage::create_from_QImage(XDictWrite &object, const QImage &qimage,
                                               QString channels_str, QString data_type_str,
                                               bool mirrorx, bool mirrory) {
-    XcluArrayDataType data_type = string_to_XcluArrayDataType(data_type_str);
+    XArrayDataType data_type = string_to_XArrayDataType(data_type_str);
     create_from_QImage(object, qimage, channels_str, data_type, mirrorx, mirrory);
 }
 
@@ -389,7 +389,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 //---------------------------------------------------------------------
 /*static*/ void XDictImage::create_from_QImage(XDictWrite &object, const QImage &qimage,
-                                              QString channels_str, XcluArrayDataType data_type,
+                                              QString channels_str, XArrayDataType data_type,
                                               bool mirrorx, bool mirrory) {
     xclu_assert(!mirrorx, "XDictImage::create_from_QImage doesn't supports mirrorx");
 
@@ -397,7 +397,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     xclu_assert(qimage.format() == QImage::Format_RGB32, "XDictImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     //TODO сейчас поддерживаем на вход только типы u8bit и float
-    xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
+    xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
                 "Only u8bit and float types for images are supported");
 
     int w = qimage.size().width();
@@ -411,15 +411,15 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     object.seti("h", h);
     object.seti("channels", channels);
     object.sets("channels_description", channels_str);
-    QString data_type_str = XcluArrayDataType_to_string(data_type);
+    QString data_type_str = XArrayDataType_to_string(data_type);
     object.sets("data_type", data_type_str);
 
     //заполнение массива
-    XcluArray *array = object.var_array("data", true);
+    XArray *array = object.var_array("data", true);
     array->allocate_image(channels, w, h, data_type);
 
 #define XcluImage_IMPLEMENT(TYPE, CPP_TYPE) \
-    if (data_type == XcluArrayDataType_##TYPE) { \
+    if (data_type == XArrayDataType_##TYPE) { \
         auto pixel_fun = Get_XcluImageGetChannelsFunction_##TYPE(channels_str); \
         CPP_TYPE *output_pixels = array->data_##TYPE(); \
         for (int y=0; y<h; y++) { \
@@ -492,14 +492,14 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
-    xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
+    xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
                 "XDictImage::convert_to_QImage - only u8bit and float data types are supported");
 
     qimage = QImage(w, h, QImage::Format_RGB32);
 
 
     //u8bit
-    if (data_type == XcluArrayDataType_u8bit) {
+    if (data_type == XArrayDataType_u8bit) {
         quint8 const *input_pixels = array->data_u8bit();
         for (int y=0; y<h; y++) {
             uchar *line = XcluImage_SCANLINE(h);
@@ -510,7 +510,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         }
     }
     //float
-    if (data_type == XcluArrayDataType_float) {
+    if (data_type == XArrayDataType_float) {
         float const *input_pixels = array->data_float();
         for (int y=0; y<h; y++) {
             uchar *line = XcluImage_SCANLINE(h);
@@ -546,7 +546,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
-    xclu_assert(data_type == XcluArrayDataType_u8bit || data_type == XcluArrayDataType_float,
+    xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
                 "XDictImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
 
     qimage = QImage(out_w, out_h, QImage::Format_RGB32);
@@ -555,7 +555,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 #define XcluImage_GET_PIX(CPP_TYPE) { input_pixels = (CPP_TYPE const*) array->pixel_pointer(x*w/out_w,y1); }
 
     //u8bit
-    if (data_type == XcluArrayDataType_u8bit) {
+    if (data_type == XArrayDataType_u8bit) {
         quint8 const*input_pixels;
         for (int y=0; y<out_h; y++) {
             uchar *line = XcluImage_SCANLINE(out_h);
@@ -567,7 +567,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         }
     }
     //float
-    if (data_type == XcluArrayDataType_float) {
+    if (data_type == XArrayDataType_float) {
         float const *input_pixels;
         for (int y=0; y<out_h; y++) {
             uchar *line = XcluImage_SCANLINE(out_h);
@@ -589,7 +589,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 /*static*/ void XDictImage::load(XDictWrite &object, QString file_name) {
     QImage qimage;
     xclu_assert(qimage.load(file_name), "Can't load image " + file_name);
-    create_from_QImage(object, qimage, "RGB", XcluArrayDataType_u8bit);
+    create_from_QImage(object, qimage, "RGB", XArrayDataType_u8bit);
 }
 
 //---------------------------------------------------------------------

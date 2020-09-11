@@ -59,4 +59,11 @@ QString xclu_custom_modules_file() {
     return xclu_root_resources_folder() + "Xclu_custom.ini";
 }
 
+
+//---------------------------------------------------------------------
+//h file template for modules
+QString xclu_module_h_template_file() {
+    return xclu_builtin_resources_folder() + "module_h_template.h";
+}
+
 //---------------------------------------------------------------------

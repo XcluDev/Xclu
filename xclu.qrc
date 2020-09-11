@@ -221,5 +221,6 @@
         <file>builtin_resources/qt_images/tab.png</file>
         <file>builtin_resources/qt_images/tab_selected.png</file>
         <file>Xclu_custom.ini</file>
+        <file>builtin_resources/module_h_template.h</file>
     </qresource>
 </RCC>

@@ -235,7 +235,7 @@ QString XDict::var_string(QString name, bool create_if_not_exists) const {
 XDict_get_(i,int,int,const)
 XDict_get_(f,float,float,const)
 XDict_get_(s,string,QString,const)
-XDict_get_pointer_(array,const XcluArray *,const)
+XDict_get_pointer_(array,const XArray *,const)
 XDict_get_pointer_(strings,const QStringList *,const)
 XDict_get_pointer_(object,const XDict *,const)
 XDict_get_pointer_(pointer,void const *,const)
@@ -271,7 +271,7 @@ QString &XDict::var_string(QString name, bool create_if_not_exists) {
 XDict_var_(int,int &)
 XDict_var_(float,float &)
 XDict_var_(string,QString &)
-XDict_var_pointer_(array,XcluArray *)
+XDict_var_pointer_(array,XArray *)
 XDict_var_pointer_(strings,QStringList *)
 XDict_var_pointer_(object,XDict *)
 
@@ -294,9 +294,9 @@ XDict_set_(s, string, const QString &)
 
 XDict_set_(_pointer,pointer,void *)
 
-XcluArray *XDict::create_array(QString name) {
+XArray *XDict::create_array(QString name) {
     xclu_assert(!has_array(name), QString("Array '%1' is already created in object").arg(name));
-    XcluArray *array = new XcluArray();
+    XArray *array = new XArray();
     array_[name] = array;
     return array;
 }
@@ -332,7 +332,7 @@ QMap<QString,int> &XDict::all_ints() {
 XDict_all_(int,int)
 XDict_all_(float,float)
 XDict_all_(string,QString)
-XDict_all_(array,XcluArray *)
+XDict_all_(array,XArray *)
 XDict_all_(strings,QStringList *)
 XDict_all_(object,XDict *)
 XDict_all_(pointer,void *)

@@ -5,7 +5,7 @@
 #include <QImage>
 #include "xcluobjectwrapper.h"
 class QLabel;
-class XcluArray;
+class XArray;
 class InterfaceGuiObject;
 
 //Здесь описан класс XDictImage,
@@ -53,11 +53,11 @@ public:
 
 
     //создание изображения - выделение памяти и заполнение из массива
-    static void allocate(XDictWrite &object, XcluArrayDataType data_type, int channels, int w, int h);
+    static void allocate(XDictWrite &object, XArrayDataType data_type, int channels, int w, int h);
     static void create_from_array(XDictWrite &object, quint8 *data, int channels, int w, int h);
 
-    static XcluArray const *get_array(XDictRead &object) {return object.get_array("data");}
-    static XcluArray *var_array(XDictWrite &object) {return object.var_array("data");}
+    static XArray const *get_array(XDictRead &object) {return object.get_array("data");}
+    static XArray *var_array(XDictWrite &object) {return object.var_array("data");}
 
 
 
@@ -80,7 +80,7 @@ public:
                                    QString channels_str, QString data_type_str,
                                    bool mirrorx=false, bool mirrory=false);
     static void create_from_QImage(XDictWrite &object, const QImage &qimage,
-                                   QString channels_str, XcluArrayDataType data_type,
+                                   QString channels_str, XArrayDataType data_type,
                                    bool mirrorx=false, bool mirrory=false);
 
     //Конвертировать изображение в QImage - например, для записи на диск

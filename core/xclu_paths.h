@@ -21,6 +21,10 @@ QString xclu_builtin_modules_folder();
 //Файл кастомных модулей
 QString xclu_custom_modules_file();
 
+//h file template for modules
+QString xclu_module_h_template_file();
+
+
 //Файл с описанием интерфейса страницы General - добавляется во все модули
 QString xclu_general_page_file();
 

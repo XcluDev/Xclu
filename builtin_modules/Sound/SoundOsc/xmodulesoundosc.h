@@ -9,7 +9,7 @@
 
 #include "incl_h.h"
 #include "xmodule.h"
-#include "xcluarray.h"
+#include "xarray.h"
 #include "xcluobjectsoundformat.h"
 #include "xcluprotecteddata.h"
 

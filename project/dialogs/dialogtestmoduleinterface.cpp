@@ -6,6 +6,7 @@
 #include "moduleseed.h"
 #include "moduleinterface.h"
 #include "editormodule.h"
+#include "exportinterface.h"
 
 DialogTestModuleInterface *D_TEST_MODULE_INTERFACE;
 
@@ -41,6 +42,7 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
 
     connect(load_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_load);
     connect(reload_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_reload);
+    connect(export_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_export);
 
     //Выбор файла
     QGroupBox *control_group = new QGroupBox(tr("Module folder"));
@@ -107,6 +109,17 @@ void DialogTestModuleInterface::pressed_reload() {
     reload(tab_index);
 }
 
+//---------------------------------------------------------------------
+void DialogTestModuleInterface::pressed_export() {
+    try {
+        xclu_assert(interf_.data(), "No module loaded");
+        ExportInterface exporter;
+        exporter.export_to_file(interf_.data(), folder_);
+    }
+    catch(XCluException& e) {
+        xclu_message_box("Error during export: " + e.whatQt());
+    }
+}
 
 //---------------------------------------------------------------------
 void DialogTestModuleInterface::load_module(QString folder, int tab_index) {
@@ -127,23 +140,23 @@ void DialogTestModuleInterface::clear() {
 void DialogTestModuleInterface::reload(int /*tab_index*/) {
     clear();
 
-    QString folder = folder_edit_->toPlainText();
-    if (folder.isEmpty()) {
+    folder_ = folder_edit_->toPlainText();
+    if (folder_.isEmpty()) {
         xclu_message_box("Please choose module folder");
         return;
     }
-    QDir dir(folder);
+    QDir dir(folder_);
     if (!dir.exists()) {
-        xclu_message_box("Folder doesn't exists: '" + folder + "'");
+        xclu_message_box("Folder doesn't exists: '" + folder_ + "'");
         return;
     }
 
     //запись папки в настройки
-    Settings::sets(Settings::dialogtestmodule_folder(), folder);
+    Settings::sets(Settings::dialogtestmodule_folder(), folder_);
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение
-    module_seed_.reset(ModuleSeed::load_module(folder, "Category...", "Name..."));
+    module_seed_.reset(ModuleSeed::load_module(folder_, "Category...", "Name..."));
     if (!module_seed_.data()) return;
 
     //могут возникнуть исключения - поэтому, отлавливаем их
