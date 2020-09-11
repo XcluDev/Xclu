@@ -1,5 +1,15 @@
 Xclu: Changelog 
 
+#### 2020-09-11
+- Реализация функций getX, setX перенесена в ModuleInterface.
+- Запись проекта – убрана запись типа и имени. Это сокращает объекм файла в ~2 раза.
+- Перенес C++-реализацию встроенных модулей в их папки в builtin_modules
+- ModuleInfo renamed to ModuleSeed
+- InterfaceItem -> XItem
+- InterfaceGui -> Xgui
+- objects -> sdk/types
+
+
 #### 2020-09-10
 - Сделал простой механизм создания кастомных модулей, с помощью создания `pri`-файлов.
 - RtModule переименован в XModule, а также реализована поддержка create_widget и sound_buffer_add для модулей.
