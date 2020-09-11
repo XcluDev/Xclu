@@ -1,6 +1,6 @@
 #include "moduledescription.h"
 #include "incl_cpp.h"
-#include "xmoduleregistrar.h"
+#include "moduleregistrar.h"
 
 //---------------------------------------------------------------------
 ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {

@@ -80,25 +80,26 @@ FORMS += \
     project/dialogs/dialogmodulename.ui \
     project/dialogs/dialogpreferences.ui
 
-INCLUDEPATH += core sdk/math modules interface interfacegui
+INCLUDEPATH += core sdk/math modules components components/gui
 INCLUDEPATH += project project/dialogs objects sdk
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
-    interface/xitem.cpp \
-    interface/xitembutton.cpp \
-    interface/xitemcheckbox.cpp \
-    interface/xitemenum.cpp \
-    interface/xitemfloat.cpp \
-    interface/xitemgroup.cpp \
-    interface/xitemint.cpp \
-    interface/xitemobject.cpp \
-    interface/xitempage.cpp \
-    interface/xitemseparator.cpp \
-    interface/xitemstring.cpp \
-    interface/xitemtext.cpp \
+    components/xitem.cpp \
+    components/xitembutton.cpp \
+    components/xitemcheckbox.cpp \
+    components/xitemenum.cpp \
+    components/xitemfloat.cpp \
+    components/xitemgroup.cpp \
+    components/xitemint.cpp \
+    components/xitemobject.cpp \
+    components/xitempage.cpp \
+    components/xitemseparator.cpp \
+    components/xitemstring.cpp \
+    components/xitemtext.cpp \
+    modules/moduleregistrar.cpp \
     sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/raster.cpp \
@@ -112,25 +113,24 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
-    modules/xmoduleregistrar.cpp \
     objects/xarray.cpp \
     sdk/xmodule.cpp \
-    interface/visibilitygroups.cpp \
-    interfacegui/interfaceguiobject.cpp \
-    interfacegui/xclucombobox.cpp \
-    interfacegui/xcludoublespinbox.cpp \
-    interfacegui/xcluscrollarea.cpp \
-    interfacegui/xcluspinbox.cpp \
+    components/visibilitygroups.cpp \
+    components/gui/interfaceguiobject.cpp \
+    components/gui/xclucombobox.cpp \
+    components/gui/xcludoublespinbox.cpp \
+    components/gui/xcluscrollarea.cpp \
+    components/gui/xcluspinbox.cpp \
     core/console.cpp \
-    interfacegui/interfacegui.cpp \
-    interfacegui/interfaceguibutton.cpp \
-    interfacegui/interfaceguicheckbox.cpp \
-    interfacegui/interfaceguifloat.cpp \
-    interfacegui/interfaceguiint.cpp \
-    interfacegui/interfaceguiseparator.cpp \
-    interfacegui/interfaceguistring.cpp \
-    interfacegui/interfaceguipage.cpp \
-    interfacegui/interfaceguitext.cpp \
+    components/gui/interfacegui.cpp \
+    components/gui/interfaceguibutton.cpp \
+    components/gui/interfaceguicheckbox.cpp \
+    components/gui/interfaceguifloat.cpp \
+    components/gui/interfaceguiint.cpp \
+    components/gui/interfaceguiseparator.cpp \
+    components/gui/interfaceguistring.cpp \
+    components/gui/interfaceguipage.cpp \
+    components/gui/interfaceguitext.cpp \
     modules/module.cpp \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
@@ -153,7 +153,7 @@ SOURCES += \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
     python/pythoncore.cpp \
-    interfacegui/interfaceguienum.cpp \
+    components/gui/interfaceguienum.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
     sdk/xclass.cpp \
@@ -162,18 +162,19 @@ SOURCES += \
 HEADERS += \
     core/incl_h.h \
     core/incl_cpp.h \
-    interface/xitem.h \
-    interface/xitembutton.h \
-    interface/xitemcheckbox.h \
-    interface/xitemenum.h \
-    interface/xitemfloat.h \
-    interface/xitemgroup.h \
-    interface/xitemint.h \
-    interface/xitemobject.h \
-    interface/xitempage.h \
-    interface/xitemseparator.h \
-    interface/xitemstring.h \
-    interface/xitemtext.h \
+    components/xitem.h \
+    components/xitembutton.h \
+    components/xitemcheckbox.h \
+    components/xitemenum.h \
+    components/xitemfloat.h \
+    components/xitemgroup.h \
+    components/xitemint.h \
+    components/xitemobject.h \
+    components/xitempage.h \
+    components/xitemseparator.h \
+    components/xitemstring.h \
+    components/xitemtext.h \
+    modules/moduleregistrar.h \
     sdk/math/int2.h \
     sdk/math/math_types.h \
     sdk/math/math_utils.h \
@@ -188,25 +189,24 @@ HEADERS += \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
-    modules/xmoduleregistrar.h \
     objects/xarray.h \
     sdk/xmodule.h \
-    interface/visibilitygroups.h \
-    interfacegui/interfaceguiobject.h \
-    interfacegui/xclucombobox.h \
-    interfacegui/xcludoublespinbox.h \
-    interfacegui/xcluscrollarea.h \
-    interfacegui/xcluspinbox.h \
+    components/visibilitygroups.h \
+    components/gui/interfaceguiobject.h \
+    components/gui/xclucombobox.h \
+    components/gui/xcludoublespinbox.h \
+    components/gui/xcluscrollarea.h \
+    components/gui/xcluspinbox.h \
     core/console.h \
-   interfacegui/interfacegui.h \
-    interfacegui/interfaceguibutton.h \
-    interfacegui/interfaceguicheckbox.h \
-    interfacegui/interfaceguifloat.h \
-    interfacegui/interfaceguiint.h \
-    interfacegui/interfaceguiseparator.h \
-    interfacegui/interfaceguistring.h \
-   interfacegui/interfaceguipage.h \
-    interfacegui/interfaceguitext.h \
+   components/gui/interfacegui.h \
+    components/gui/interfaceguibutton.h \
+    components/gui/interfaceguicheckbox.h \
+    components/gui/interfaceguifloat.h \
+    components/gui/interfaceguiint.h \
+    components/gui/interfaceguiseparator.h \
+    components/gui/interfaceguistring.h \
+   components/gui/interfaceguipage.h \
+    components/gui/interfaceguitext.h \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
@@ -229,7 +229,7 @@ HEADERS += \
     project/projectruntime.h \
     python/pythoncore.h \
     core/qt_widgets.h \
-    interfacegui/interfaceguienum.h \
+    components/gui/interfaceguienum.h \
     sdk/xclass.h \
     objects/xdict.h
 

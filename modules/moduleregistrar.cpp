@@ -1,4 +1,4 @@
-#include "xmoduleregistrar.h"
+#include "moduleregistrar.h"
 #include "incl_cpp.h"
 #include "xmodule.h"
 

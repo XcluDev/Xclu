@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 #include "moduleseed.h"
 #include "moduleinterface.h"
-#include "xmoduleregistrar.h"
+#include "moduleregistrar.h"
 
 ModulesFactory FACTORY;
 

@@ -1,6 +1,6 @@
 #include "xmoduleexecute.h"
 #include "incl_cpp.h"
-#include "xmoduleregistrar.h"
+#include "moduleregistrar.h"
 #include <QProcess>
 #include "projectruntime.h"
 
