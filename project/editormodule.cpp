@@ -74,10 +74,15 @@ void EditorModule::reload_name() { //обновить имя и класс мо�
                 arg(module_->description().class_name);
                 //.arg(ModuleRunMode_to_string(module_->rtmodule()->run_mode()));
         editor_label_->setText(title);
+
+        //Module description to tip
+        editor_label_->setToolTip(module_->description().description);
+
         editor_label_->show();
     }
     else {
         editor_label_->setText("");
+        editor_label_->setToolTip("");
         editor_label_->hide();
     }
 }
