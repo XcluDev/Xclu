@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUICHECKBOX_H
 #define INTERFACEGUICHECKBOX_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemCheckbox;
 class QCheckBox;
 
-class InterfaceGuiCheckbox : public InterfaceGui
+class XGuiCheckbox : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, XItemCheckbox *item);
-    ~InterfaceGuiCheckbox();
+    XGuiCheckbox(XGuiPageCreator &input, XItemCheckbox *item);
+    ~XGuiCheckbox();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

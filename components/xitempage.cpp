@@ -1,5 +1,5 @@
 #include "xitempage.h"
-#include "interfaceguipage.h"
+#include "xguipage.h"
 
 //---------------------------------------------------------------------
 XItemPage::XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description)
@@ -11,8 +11,8 @@ XItemPage::XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_des
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemPage::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiPage(input, this);
+XGui *XItemPage::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiPage(input, this);
     return gui_;
 }
 

@@ -4,7 +4,7 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class InterfaceGuiCheckbox;
+class XGuiCheckbox;
 
 class XItemCheckbox: public XItem
 {
@@ -23,7 +23,7 @@ public:
     void set_value_int(int value) { value_ = value; }
 
     //графический интерфейс
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
 
     //это "групповой" чекбокс, который нужно показывать слева, без label, и справа от которого идет линия
     bool is_group_checkbox() { return is_group_checkbox_; }
@@ -37,7 +37,7 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiCheckbox *gui_ = nullptr;
+    XGuiCheckbox *gui_ = nullptr;
 
     bool is_group_checkbox_ = false;    //"групповой" чекбокс, который нужно показывать слева, без label
 };

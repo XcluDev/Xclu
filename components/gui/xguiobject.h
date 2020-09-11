@@ -1,14 +1,14 @@
 #ifndef INTERFACEGUIOBJECT_H
 #define INTERFACEGUIOBJECT_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemObject;
 class XDict;
 class QSpacerItem;
 
 //визуальные компоненты для показа содержимого объекта
-class InterfaceGuiObjectVisual {
+class XGuiObjectVisual {
 public:
     void set_text(QString text);
     void set_image(const QImage &image);
@@ -25,12 +25,12 @@ public:
 
 };
 
-class InterfaceGuiObject : public InterfaceGui
+class XGuiObject : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiObject(InterfaceGuiPageCreator &input, XItemObject *item);
-    ~InterfaceGuiObject();
+    XGuiObject(XGuiPageCreator &input, XItemObject *item);
+    ~XGuiObject();
 
     //значение для проверки видимости детей
     //QString value_string_for_visibility() { return QString::number(value()); };
@@ -46,7 +46,7 @@ public:
     void show_object(XDict *object);
 
     //доступ к меткам и другим компонентам для визуализации
-    InterfaceGuiObjectVisual &visual();
+    XGuiObjectVisual &visual();
 
 protected:
     //установка режима read_only - для out и блокировки констант при запуске проекта
@@ -55,7 +55,7 @@ protected:
 private:
     //виджет для всей информации об объекте
     QWidget *object_widget_ = nullptr;  //удалять не надо
-    InterfaceGuiObjectVisual visual_; //визуальные компоненты для описания объекта
+    XGuiObjectVisual visual_; //визуальные компоненты для описания объекта
 
 };
 

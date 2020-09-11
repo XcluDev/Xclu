@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUIFLOAT_H
 #define INTERFACEGUIFLOAT_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemFloat;
 class XcluDoubleSpinBox;
 
-class InterfaceGuiFloat : public InterfaceGui
+class XGuiFloat : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiFloat(InterfaceGuiPageCreator &input, XItemFloat *item);
-    ~InterfaceGuiFloat();
+    XGuiFloat(XGuiPageCreator &input, XItemFloat *item);
+    ~XGuiFloat();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

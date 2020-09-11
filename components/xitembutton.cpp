@@ -1,5 +1,5 @@
 #include "xitembutton.h"
-#include "interfaceguibutton.h"
+#include "xguibutton.h"
 #include "incl_cpp.h"
 #include "moduleinterface.h"
 
@@ -17,8 +17,8 @@ XItemButton::XItemButton(ModuleInterface *parent, const XItemPreDescription &pre
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemButton::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiButton(input, this);
+XGui *XItemButton::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiButton(input, this);
     return gui_;
 }
 

@@ -2,7 +2,7 @@
 #include "editormodule.h"
 #include "project.h"
 #include "incl_cpp.h"
-#include "interfaceguipage.h"
+#include "xguipage.h"
 #include "visibilitygroups.h"
 
 //---------------------------------------------------------------------
@@ -159,20 +159,20 @@ void EditorModule::load_module(ModuleSeed *info, ModuleInterface *interf, QStrin
     //ModuleDescription &descr = interf->description();
     auto &items = interf->items();
 
-    InterfaceGuiPageCreator input;
+    XGuiPageCreator input;
     input.parent = nullptr;
     input.tabs = tabs;     //сюда добавляются страницы
     input.grid = nullptr;    //страницы создают новый, а остальные добавляются в него
 
     for (int i=0; i<items.size(); i++) {
         auto *item = items.at(i);
-        InterfaceGui *itemgui = item->create_gui(input);
+        XGui *itemgui = item->create_gui(input);
         xclu_assert(itemgui, "Internal error loading module " + module_name + ": can't create GUI for '" + item->title() + "'");
         items_.push_back(itemgui);
         items_by_name_[item->name()] = itemgui;
     }
     //Завершаем последнюю страницу
-    InterfaceGuiPage::finalize_page(input);
+    XGuiPage::finalize_page(input);
 
     //Добавляем страницу Help, если есть файл help.md
     QString help_text = info->help();
@@ -192,7 +192,7 @@ void EditorModule::load_module(ModuleSeed *info, ModuleInterface *interf, QStrin
         VisibleGroupBase &group = vis_groups[i];
         QString item_name = group.item_name();
         xclu_assert(items_by_name_.contains(item_name), "No GUI item '" + item_name + "' for using as a parent of visibility group");
-        InterfaceGui *parent = items_by_name_[item_name];
+        XGui *parent = items_by_name_[item_name];
 
         //создаем и заполняем GUI-группу
         VisibilityGroupGui *new_gui_group = group.create_group_gui();

@@ -21,9 +21,9 @@
 
 class QLabel;
 class XItemObject;
-class InterfaceGuiObjectVisual;
+class XGuiObjectVisual;
 class XDict;
-class InterfaceGuiObject;
+class XGuiObject;
 
 
 //настройки показа объекта
@@ -46,7 +46,7 @@ public:
     XDict *object();
 
     //показать объект в редакторе
-    virtual void show_object(InterfaceGuiObject *item);
+    virtual void show_object(XGuiObject *item);
 
     //показать объект в QLabel
     virtual void show_object(QLabel *label, const XDictShowSettings &settings);

@@ -1,5 +1,5 @@
 #include "xitemcheckbox.h"
-#include "interfaceguicheckbox.h"
+#include "xguicheckbox.h"
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
@@ -34,8 +34,8 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *parent, const XItemPreDescription 
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemCheckbox::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiCheckbox(input, this);
+XGui *XItemCheckbox::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiCheckbox(input, this);
     return gui_;
 }
 

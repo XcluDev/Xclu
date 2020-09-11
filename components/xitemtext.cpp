@@ -1,6 +1,6 @@
 #include "xitemtext.h"
 #include "incl_cpp.h"
-#include "interfaceguitext.h"
+#include "xguitext.h"
 
 //---------------------------------------------------------------------
 //  in text Text1 text 7 20
@@ -33,8 +33,8 @@ XItemText::XItemText(ModuleInterface *parent, const XItemPreDescription &pre_des
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemText::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiText(input, this);
+XGui *XItemText::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiText(input, this);
     return gui_;
 }
 

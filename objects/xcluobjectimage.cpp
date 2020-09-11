@@ -2,7 +2,7 @@
 
 #include "xcluobjectimage.h"
 #include "incl_cpp.h"
-#include "interfaceguiobject.h"
+#include "xguiobject.h"
 
 #include <QImageReader>
 #include <QImageWriter>
@@ -17,7 +17,7 @@ XDictImage::XDictImage(XDict *object)
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XDictImage::show_object(InterfaceGuiObject *item) {
+void XDictImage::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     //описание изображения

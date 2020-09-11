@@ -1,6 +1,6 @@
 #include "xitemfloat.h"
 #include "incl_cpp.h"
-#include "interfaceguifloat.h"
+#include "xguifloat.h"
 
 //---------------------------------------------------------------------
 //float Q Q qq=0 0:1 100,10
@@ -45,8 +45,8 @@ float XItemFloat::get_small_step() {
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemFloat::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiFloat(input, this);
+XGui *XItemFloat::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiFloat(input, this);
     return gui_;
 }
 

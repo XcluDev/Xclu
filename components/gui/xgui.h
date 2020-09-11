@@ -36,7 +36,7 @@ class XItem;
 class VisibilityGroupGui;
 
 //данные для создания визуального интерфейса
-struct InterfaceGuiPageCreator {
+struct XGuiPageCreator {
     QWidget *parent = nullptr;
     QTabWidget *tabs = nullptr;     //сюда добавляются страницы
     QGridLayout *grid = nullptr;    //страницы создают новый, а остальные добавляются в него
@@ -44,13 +44,13 @@ struct InterfaceGuiPageCreator {
 };
 
 //Один элемент визуального интерфейса
-class InterfaceGui : public QWidget
+class XGui : public QWidget
 {
     Q_OBJECT
 public:
     //item - не следует удалять
-    InterfaceGui(InterfaceGuiPageCreator &input, XItem *item);
-    virtual ~InterfaceGui();
+    XGui(XGuiPageCreator &input, XItem *item);
+    virtual ~XGui();
 
     //Функции для блокировки и разблокировки редактирования констант при запуске проекта.
     void block_editing(); //блокирование изменения констант, вызывается перед запуском проекта
@@ -116,20 +116,20 @@ protected:
     //Члены и функции для создания страницы
 
     //создать label
-    void insert_label(InterfaceGuiPageCreator &input);
+    void insert_label(XGuiPageCreator &input);
 
     //вставить на страницу созданный виджет
-    void insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+    void insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                        int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
 
     //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-    void insert_widget_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input);
+    void insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input);
 
     //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
     //(int, float, checkbox, object)
-    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                    int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
-    void insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input);
+    void insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input);
 
 
     //запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов

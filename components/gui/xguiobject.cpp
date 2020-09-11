@@ -1,26 +1,26 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "xitemobject.h"
-#include "interfaceguiobject.h"
+#include "xguiobject.h"
 #include "xcluobjectimage.h"
 #include "xcluobjectwrapper.h"
 
 
 //---------------------------------------------------------------------
-void InterfaceGuiObjectVisual::set_text(QString text) {
+void XGuiObjectVisual::set_text(QString text) {
     info_label_->setText(text);
 
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiObjectVisual::set_image(const QImage &image) {
+void XGuiObjectVisual::set_image(const QImage &image) {
     QPixmap pix = QPixmap::fromImage(image);
     preview_label_->setPixmap(pix);
     preview_label_->setVisible(true);
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiObjectVisual::clear_image() {
+void XGuiObjectVisual::clear_image() {
     preview_label_->setText("");
     preview_label_->setVisible(false);
     //spacer_->spacerItem()-> setVisible(false);
@@ -29,8 +29,8 @@ void InterfaceGuiObjectVisual::clear_image() {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-InterfaceGuiObject::InterfaceGuiObject(InterfaceGuiPageCreator &input, XItemObject *item)
-    :InterfaceGui(input, item)
+XGuiObject::XGuiObject(XGuiPageCreator &input, XItemObject *item)
+    :XGui(input, item)
 {
     visual_.preview_label_ = new QLabel("");
     visual_.info_label_ = new QLabel("");
@@ -66,14 +66,14 @@ InterfaceGuiObject::InterfaceGuiObject(InterfaceGuiPageCreator &input, XItemObje
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiObject::~InterfaceGuiObject() {
+XGuiObject::~XGuiObject() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiObject::set_read_only(bool read_only) {
-    InterfaceGui::set_read_only(read_only);
+void XGuiObject::set_read_only(bool read_only) {
+    XGui::set_read_only(read_only);
 
 
 
@@ -81,7 +81,7 @@ void InterfaceGuiObject::set_read_only(bool read_only) {
 
 //---------------------------------------------------------------------
 //доступ к меткам и другим компонентам для визуализации
-InterfaceGuiObjectVisual &InterfaceGuiObject::visual() {
+XGuiObjectVisual &XGuiObject::visual() {
     return visual_;
 }
 
@@ -91,7 +91,7 @@ InterfaceGuiObjectVisual &InterfaceGuiObject::visual() {
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
 //при необходимости - можно ввести mutex в объект
-void InterfaceGuiObject::show_object(XDict *object) {
+void XGuiObject::show_object(XDict *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации

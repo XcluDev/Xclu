@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUIINT_H
 #define INTERFACEGUIINT_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemInt;
 class XcluSpinBox;
 
-class InterfaceGuiInt : public InterfaceGui
+class XGuiInt : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiInt(InterfaceGuiPageCreator &input, XItemInt *item);
-    ~InterfaceGuiInt();
+    XGuiInt(XGuiPageCreator &input, XItemInt *item);
+    ~XGuiInt();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

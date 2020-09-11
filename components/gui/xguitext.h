@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUITEXT_H
 #define INTERFACEGUITEXT_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemText;
 class QPlainTextEdit;
 
-class InterfaceGuiText : public InterfaceGui
+class XGuiText : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiText(InterfaceGuiPageCreator &input, XItemText *item);
-    ~InterfaceGuiText();
+    XGuiText(XGuiPageCreator &input, XItemText *item);
+    ~XGuiText();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return value(); }

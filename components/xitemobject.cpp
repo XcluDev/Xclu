@@ -1,5 +1,5 @@
 #include "xitemobject.h"
-#include "interfaceguiobject.h"
+#include "xguiobject.h"
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
@@ -34,8 +34,8 @@ XItemObject::XItemObject(ModuleInterface *parent, const XItemPreDescription &pre
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemObject::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiObject(input, this);
+XGui *XItemObject::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiObject(input, this);
     return gui_;
 }
 

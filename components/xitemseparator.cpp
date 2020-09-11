@@ -1,6 +1,6 @@
 #include "xitemseparator.h"
 
-#include "interfaceguiseparator.h"
+#include "xguiseparator.h"
 
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
@@ -17,8 +17,8 @@ XItemSeparator::XItemSeparator(ModuleInterface *parent, const XItemPreDescriptio
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemSeparator::create_gui(InterfaceGuiPageCreator &input) {
-    return new InterfaceGuiSeparator(input, this);
+XGui *XItemSeparator::create_gui(XGuiPageCreator &input) {
+    return new XGuiSeparator(input, this);
 }
 
 //---------------------------------------------------------------------

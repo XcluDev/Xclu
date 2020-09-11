@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceguitext.h"
+#include "xguitext.h"
 #include "xitemtext.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiText::InterfaceGuiText(InterfaceGuiPageCreator &input, XItemText *item)
-    :InterfaceGui(input, item)
+XGuiText::XGuiText(XGuiPageCreator &input, XItemText *item)
+    :XGui(input, item)
 {
     insert_label(input);
 
@@ -42,28 +42,28 @@ InterfaceGuiText::InterfaceGuiText(InterfaceGuiPageCreator &input, XItemText *it
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiText::~InterfaceGuiText() {
+XGuiText::~XGuiText() {
 
 }
 
 //---------------------------------------------------------------------
 //Отслеживание изменений - переопределяем, чтобы скролл текста не сбрасывался при запросе toPlainText
-void InterfaceGuiText::on_value_changed() {
-    InterfaceGui::on_value_changed();
+void XGuiText::on_value_changed() {
+    XGui::on_value_changed();
     dirty_ = true;
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiText::set_read_only(bool read_only) {
+void XGuiText::set_read_only(bool read_only) {
     //цвет фона
-    InterfaceGui::set_read_only(read_only);
+    XGui::set_read_only(read_only);
 
     textEdit_->setReadOnly(read_only);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceGuiText::value() {
+QString XGuiText::value() {
     if (dirty_) {
         value_ = textEdit_->toPlainText();
         dirty_ = false;
@@ -72,7 +72,7 @@ QString InterfaceGuiText::value() {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiText::set_value(QString v) {
+void XGuiText::set_value(QString v) {
     //проверяем, что значение не изменилось
     //(в противном случае, out-значение невозможно скопировать во время выполнения)
     if (value() != v) {

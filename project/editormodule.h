@@ -7,7 +7,7 @@
 #include <QWidget>
 #include "incl_h.h"
 #include "module.h"
-#include "interfacegui.h"
+#include "xgui.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -71,8 +71,8 @@ protected:
     //модуль, который в данный момент показываем в редакторе
     Module *module_ = nullptr;
 
-    QVector<InterfaceGui *> items_; //элементы GUI
-    QMap<QString, InterfaceGui *> items_by_name_;   //элементы по имени, для установки связей видимости
+    QVector<XGui *> items_; //элементы GUI
+    QMap<QString, XGui *> items_by_name_;   //элементы по имени, для установки связей видимости
 
     void reload_name(); //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
 

@@ -1,6 +1,6 @@
 #include "xitemenum.h"
 #include "incl_cpp.h"
-#include "interfaceguienum.h"
+#include "xguienum.h"
 
 //---------------------------------------------------------------------
 //in enum List list=OFF [OFF,ON]
@@ -106,8 +106,8 @@ QStringList XItemEnum::names() {       //все заголовки с подче
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemEnum::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiEnum(input, this);
+XGui *XItemEnum::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiEnum(input, this);
     return gui_;
 }
 

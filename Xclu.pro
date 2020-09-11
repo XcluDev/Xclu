@@ -87,6 +87,17 @@ INCLUDEPATH += project project/dialogs objects sdk
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
+    components/gui/xgui.cpp \
+    components/gui/xguibutton.cpp \
+    components/gui/xguicheckbox.cpp \
+    components/gui/xguienum.cpp \
+    components/gui/xguifloat.cpp \
+    components/gui/xguiint.cpp \
+    components/gui/xguiobject.cpp \
+    components/gui/xguipage.cpp \
+    components/gui/xguiseparator.cpp \
+    components/gui/xguistring.cpp \
+    components/gui/xguitext.cpp \
     components/xitem.cpp \
     components/xitembutton.cpp \
     components/xitemcheckbox.cpp \
@@ -116,21 +127,11 @@ SOURCES += \
     objects/xarray.cpp \
     sdk/xmodule.cpp \
     components/visibilitygroups.cpp \
-    components/gui/interfaceguiobject.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
     components/gui/xcluspinbox.cpp \
     core/console.cpp \
-    components/gui/interfacegui.cpp \
-    components/gui/interfaceguibutton.cpp \
-    components/gui/interfaceguicheckbox.cpp \
-    components/gui/interfaceguifloat.cpp \
-    components/gui/interfaceguiint.cpp \
-    components/gui/interfaceguiseparator.cpp \
-    components/gui/interfaceguistring.cpp \
-    components/gui/interfaceguipage.cpp \
-    components/gui/interfaceguitext.cpp \
     modules/module.cpp \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
@@ -153,13 +154,23 @@ SOURCES += \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
     python/pythoncore.cpp \
-    components/gui/interfaceguienum.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
     sdk/xclass.cpp \
     objects/xdict.cpp
 
 HEADERS += \
+    components/gui/xgui.h \
+    components/gui/xguibutton.h \
+    components/gui/xguicheckbox.h \
+    components/gui/xguienum.h \
+    components/gui/xguifloat.h \
+    components/gui/xguiint.h \
+    components/gui/xguiobject.h \
+    components/gui/xguipage.h \
+    components/gui/xguiseparator.h \
+    components/gui/xguistring.h \
+    components/gui/xguitext.h \
     core/incl_h.h \
     core/incl_cpp.h \
     components/xitem.h \
@@ -192,21 +203,11 @@ HEADERS += \
     objects/xarray.h \
     sdk/xmodule.h \
     components/visibilitygroups.h \
-    components/gui/interfaceguiobject.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \
     components/gui/xcluspinbox.h \
     core/console.h \
-   components/gui/interfacegui.h \
-    components/gui/interfaceguibutton.h \
-    components/gui/interfaceguicheckbox.h \
-    components/gui/interfaceguifloat.h \
-    components/gui/interfaceguiint.h \
-    components/gui/interfaceguiseparator.h \
-    components/gui/interfaceguistring.h \
-   components/gui/interfaceguipage.h \
-    components/gui/interfaceguitext.h \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
@@ -229,7 +230,6 @@ HEADERS += \
     project/projectruntime.h \
     python/pythoncore.h \
     core/qt_widgets.h \
-    components/gui/interfaceguienum.h \
     sdk/xclass.h \
     objects/xdict.h
 

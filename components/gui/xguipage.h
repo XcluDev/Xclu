@@ -1,20 +1,20 @@
 #ifndef INTERFACEGUIPAGE_H
 #define INTERFACEGUIPAGE_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemPage;
 class XcluScroollArea;
 
-class InterfaceGuiPage : public InterfaceGui
+class XGuiPage : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiPage(InterfaceGuiPageCreator &input, XItemPage *item);
-    ~InterfaceGuiPage();
+    XGuiPage(XGuiPageCreator &input, XItemPage *item);
+    ~XGuiPage();
 
     //закончить страницу
-    static void finalize_page(InterfaceGuiPageCreator &input);
+    static void finalize_page(XGuiPageCreator &input);
 
     int get_vscroll();
     void set_vscroll(int v);

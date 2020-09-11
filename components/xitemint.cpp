@@ -1,6 +1,6 @@
 #include "xitemint.h"
 #include "incl_cpp.h"
-#include "interfaceguiint.h"
+#include "xguiint.h"
 
 //---------------------------------------------------------------------
 //int A a=-1 -10:10 100,10
@@ -41,8 +41,8 @@ XItemInt::XItemInt(ModuleInterface *parent, const XItemPreDescription &pre_descr
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemInt::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiInt(input, this);
+XGui *XItemInt::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiInt(input, this);
     return gui_;
 }
 

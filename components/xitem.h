@@ -3,12 +3,12 @@
 
 //Абстрактный элемент интерфейса (переменные и оформление GUI), невизуальная часть
 //Подклассы реализуют конкретные элементы.
-//Также, они порождают визуальное представление в виде InterfaceGui
+//Также, они порождают визуальное представление в виде XGui
 
 #include "incl_h.h"
 
-struct InterfaceGuiPageCreator;
-class InterfaceGui;
+struct XGuiPageCreator;
+class XGui;
 class QJsonObject;
 class XItem;
 class XDict;
@@ -125,7 +125,7 @@ public:
 
     //GUI -------------------------
     //графический интерфейс, он тут создается, но хранится отдельно
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached();
@@ -201,7 +201,7 @@ protected:
     //это общее gui__ - хотя в самих представителях будут конкретные представители,
     //нам требуется общий, чтобы передавать сигналы о видимости
     //подклассы должны его устанавливать!
-    InterfaceGui *gui__ = nullptr; //не нужно его удалять
+    XGui *gui__ = nullptr; //не нужно его удалять
 };
 
 

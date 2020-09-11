@@ -5,7 +5,7 @@
 
 #include "xdict.h"
 #include "xcluobjectwrapper.h"
-class InterfaceGuiObject;
+class XGuiObject;
 
 //данные
 class XDictSoundFormatData {
@@ -30,7 +30,7 @@ public:
     XDictSoundFormat(XDict *object);
 
     //показ в GUI
-    virtual void show_object(InterfaceGuiObject *item);
+    virtual void show_object(XGuiObject *item);
 
     //создание объекта
     static void set_to_object(XDictWrite &object, XDictSoundFormatData &data);

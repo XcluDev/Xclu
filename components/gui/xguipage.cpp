@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
-#include "interfaceguipage.h"
+#include "xguipage.h"
 #include "xitempage.h"
 #include "xcluscrollarea.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiPage::InterfaceGuiPage(InterfaceGuiPageCreator &input, XItemPage *item)
-    :InterfaceGui(input, item)
+XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
+    :XGui(input, item)
 {
     //завершаем предыдущую страницу
     finalize_page(input);
@@ -47,13 +47,13 @@ InterfaceGuiPage::InterfaceGuiPage(InterfaceGuiPageCreator &input, XItemPage *it
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiPage::~InterfaceGuiPage() {
+XGuiPage::~XGuiPage() {
 
 }
 
 //---------------------------------------------------------------------
 //закончить страницу
-/*static*/ void InterfaceGuiPage::finalize_page(InterfaceGuiPageCreator &input) {
+/*static*/ void XGuiPage::finalize_page(XGuiPageCreator &input) {
     if (input.grid) {
         //вставляем spacer в конце
         QSpacerItem *spacer = new QSpacerItem(1,10);
@@ -64,18 +64,18 @@ InterfaceGuiPage::~InterfaceGuiPage() {
 }
 
 //---------------------------------------------------------------------
-int InterfaceGuiPage::get_vscroll() {
+int XGuiPage::get_vscroll() {
     return scrollarea_->get_vscroll();
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiPage::set_vscroll(int v) {
+void XGuiPage::set_vscroll(int v) {
    scrollarea_->set_vscroll(v);
 }
 
 //---------------------------------------------------------------------
 //будет посылать сигнал изменения, только если это произошло уже после загрузки
-void InterfaceGuiPage::on_vscroll_changed() {
+void XGuiPage::on_vscroll_changed() {
     if (scrollarea_->is_shown()) {
         on_value_changed();
     }

@@ -4,7 +4,7 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class InterfaceGuiEnum;
+class XGuiEnum;
 
 class XItemEnum: public XItem
 {
@@ -27,7 +27,7 @@ public:
     QStringList names();       //все заголовки с подчеркиванием - для программирования
 
     //графический интерфейс
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
 
     //единицы измерения
     QString units() { return units_; }
@@ -49,7 +49,7 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiEnum *gui_ = nullptr;
+    XGuiEnum *gui_ = nullptr;
 
 };
 

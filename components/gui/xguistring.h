@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUISTRING_H
 #define INTERFACEGUISTRING_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemString;
 class QLineEdit;
 
-class InterfaceGuiString : public InterfaceGui
+class XGuiString : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiString(InterfaceGuiPageCreator &input, XItemString *item);
-    ~InterfaceGuiString();
+    XGuiString(XGuiPageCreator &input, XItemString *item);
+    ~XGuiString();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return value(); }

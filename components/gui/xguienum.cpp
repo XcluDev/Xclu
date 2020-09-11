@@ -1,12 +1,12 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceguienum.h"
+#include "xguienum.h"
 #include "xitemenum.h"
 #include "xclucombobox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiEnum::InterfaceGuiEnum(InterfaceGuiPageCreator &input, XItemEnum *item)
-    :InterfaceGui(input, item)
+XGuiEnum::XGuiEnum(XGuiPageCreator &input, XItemEnum *item)
+    :XGui(input, item)
 {
     insert_label(input);
 
@@ -40,26 +40,26 @@ InterfaceGuiEnum::InterfaceGuiEnum(InterfaceGuiPageCreator &input, XItemEnum *it
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiEnum::~InterfaceGuiEnum() {
+XGuiEnum::~XGuiEnum() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiEnum::set_read_only(bool read_only) {
+void XGuiEnum::set_read_only(bool read_only) {
     //цвет фона
-    InterfaceGui::set_read_only(read_only);
+    XGui::set_read_only(read_only);
 
     combo_->setEnabled(!read_only);
 }
 
 //---------------------------------------------------------------------
-int InterfaceGuiEnum::index() {
+int XGuiEnum::index() {
     return combo_->currentIndex();
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiEnum::set_index(int v) {
+void XGuiEnum::set_index(int v) {
     if (v < 0 || v >= combo_->count()) v = 0;
     //проверяем, что значение не изменилось
     //(в противном случае, out-значение невозможно скопировать во время выполнения)
@@ -70,7 +70,7 @@ void InterfaceGuiEnum::set_index(int v) {
 
 //---------------------------------------------------------------------
 //значение для проверки видимости детей
-QString InterfaceGuiEnum::value_string_for_visibility() {
+QString XGuiEnum::value_string_for_visibility() {
     int i = index();
     if (i >= 0 && i < names_.size()) {
         return names_[i];

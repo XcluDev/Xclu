@@ -1,30 +1,24 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceguifloat.h"
-#include "xitemfloat.h"
-#include "xcludoublespinbox.h"
+#include "xguiint.h"
+#include "xitemint.h"
+#include "xcluspinbox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiFloat::InterfaceGuiFloat(InterfaceGuiPageCreator &input, XItemFloat *item)
-    :InterfaceGui(input, item)
+XGuiInt::XGuiInt(XGuiPageCreator &input, XItemInt *item)
+    :XGui(input, item)
 {
     insert_label(input);
 
-    spin_ = new XcluDoubleSpinBox();
+    spin_ = new XcluSpinBox();
     spin_->setMinimumWidth(xclu::SPIN_WIDTH);
     spin_->setMaximumWidth(xclu::SPIN_WIDTH);
 
     spin_->setMinimum(item->min_value());
     spin_->setMaximum(item->max_value());
 
-
+    //шаг
     spin_->setSingleStep(item->get_small_step());
-
-    //точность - число цифр после запятой
-    spin_->setDecimals(3);
-
-    //установка десятичной точки
-    spin_->setLocale(QLocale::C);
 
     //вставка на страницу
     //если есть единицы измерения - создаем блок с Label
@@ -41,34 +35,34 @@ InterfaceGuiFloat::InterfaceGuiFloat(InterfaceGuiPageCreator &input, XItemFloat 
     }
 
     //отслеживание изменений
-    connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
+    connect(spin_, SIGNAL (valueChanged(int)), this, SLOT (on_value_changed()));
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiFloat::~InterfaceGuiFloat() {
+XGuiInt::~XGuiInt() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiFloat::set_read_only(bool read_only) {
+void XGuiInt::set_read_only(bool read_only) {
     //цвет фона
-    InterfaceGui::set_read_only(read_only);
+    XGui::set_read_only(read_only);
 
     spin_->setReadOnly(read_only);
 }
 
 //---------------------------------------------------------------------
-float InterfaceGuiFloat::value() {
+int XGuiInt::value() {
     return spin_->value();
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiFloat::set_value(float v) {
+void XGuiInt::set_value(int v) {
     //проверяем, что значение не изменилось
     //(в противном случае, out-значение невозможно скопировать во время выполнения)
     if (value() != v) {
-       spin_->setValue(v);
+        spin_->setValue(v);
     }
 }
 

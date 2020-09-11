@@ -6,7 +6,7 @@
 #include "xcluobjectwrapper.h"
 class QLabel;
 class XArray;
-class InterfaceGuiObject;
+class XGuiObject;
 
 //Здесь описан класс XDictImage,
 //который позволяет конвертировать QImage в XDict и обратно
@@ -43,7 +43,7 @@ public:
     XDictImage(XDict *object);
 
     //показать объект в GUI
-    virtual void show_object(InterfaceGuiObject *item);
+    virtual void show_object(XGuiObject *item);
 
     //показать объект в QLabel
     virtual void show_object(QLabel *label, const XDictShowSettings &settings);

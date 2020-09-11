@@ -1,18 +1,18 @@
 #ifndef INTERFACEGUISEPARATOR_H
 #define INTERFACEGUISEPARATOR_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemSeparator;
 class QSpacerItem;
 class QFrame;
 
-class InterfaceGuiSeparator : public InterfaceGui
+class XGuiSeparator : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiSeparator(InterfaceGuiPageCreator &input, XItemSeparator *item);
-    ~InterfaceGuiSeparator();
+    XGuiSeparator(XGuiPageCreator &input, XItemSeparator *item);
+    ~XGuiSeparator();
 
     //здесь нам нужно кастомно менять размер сепаратора, так как у него нет метода setVisible
     virtual void set_visible(bool visible);

@@ -1,6 +1,6 @@
 #include "xcluobjectsoundformat.h"
 #include "incl_cpp.h"
-#include "interfaceguiobject.h"
+#include "xguiobject.h"
 
 //---------------------------------------------------------------------
 XDictSoundFormat::XDictSoundFormat(XDict *object)
@@ -30,7 +30,7 @@ XDictSoundFormat::XDictSoundFormat(XDict *object)
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XDictSoundFormat::show_object(InterfaceGuiObject *item) {
+void XDictSoundFormat::show_object(XGuiObject *item) {
     auto &visual = item->visual();
     XDictRead obj(object());
     auto data = get_data(obj);

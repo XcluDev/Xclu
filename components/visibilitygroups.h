@@ -6,7 +6,7 @@
 
 #include "incl_h.h"
 
-class InterfaceGui;
+class XGui;
 class VisibilityGroupGui;
 
 //группа для сбора дерева зависимости
@@ -37,7 +37,7 @@ class VisibilityGroupGui
 {
 public:
     VisibilityGroupGui(const QMap<QString, int> &variants);
-    void add_affected_item(InterfaceGui *item);
+    void add_affected_item(XGui *item);
 
     //сигналы
     void propagate_visibility(QString new_value);   //отправить сигналы о видимости, этот сигнал отправляется после установки значения переменной
@@ -45,7 +45,7 @@ public:
     void visibility_changed(bool visibility);   //видимость самого элемента
 protected:
     QMap<QString, int> variants_;
-    QVector<InterfaceGui *> affected_items_;
+    QVector<XGui *> affected_items_;
 
     bool self_visibility_ = true;
     bool group_visibility_ = true;

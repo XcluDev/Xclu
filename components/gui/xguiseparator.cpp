@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
-#include "interfaceguiseparator.h"
+#include "xguiseparator.h"
 #include "xitemseparator.h"
 
 
 //---------------------------------------------------------------------
-InterfaceGuiSeparator::InterfaceGuiSeparator(InterfaceGuiPageCreator &input, XItemSeparator *item)
-    :InterfaceGui(input, item)
+XGuiSeparator::XGuiSeparator(XGuiPageCreator &input, XItemSeparator *item)
+    :XGui(input, item)
 {
     is_line_ = item->is_line();
     is_separator_ = item->is_separator();
@@ -31,13 +31,13 @@ InterfaceGuiSeparator::InterfaceGuiSeparator(InterfaceGuiPageCreator &input, XIt
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiSeparator::~InterfaceGuiSeparator() {
+XGuiSeparator::~XGuiSeparator() {
 
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiSeparator::set_visible(bool visible) {
-    InterfaceGui::set_visible(visible);
+void XGuiSeparator::set_visible(bool visible) {
+    XGui::set_visible(visible);
 
     if (is_separator_) {
         if (visible) {

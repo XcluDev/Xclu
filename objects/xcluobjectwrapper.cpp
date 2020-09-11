@@ -2,7 +2,7 @@
 #include "xcluobjectwrapper.h"
 #include "incl_cpp.h"
 #include "xitemobject.h"
-#include "interfaceguiobject.h"
+#include "xguiobject.h"
 #include "xcluobjectimage.h"
 #include "xcluobjectsoundformat.h"
 
@@ -41,7 +41,7 @@ XDict *XDictWrapper::object() {
 
 //---------------------------------------------------------------------
 //показать объект в редакторе
-void XDictWrapper::show_object(InterfaceGuiObject *item) {
+void XDictWrapper::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     {

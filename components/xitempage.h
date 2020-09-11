@@ -4,7 +4,7 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class InterfaceGuiPage;
+class XGuiPage;
 
 class XItemPage: public XItem
 {
@@ -12,7 +12,7 @@ public:
     XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //графический интерфейс
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
 
     bool supports_string() { return true; }
     QString value_string() { return QString().setNum(scroll_); }
@@ -26,7 +26,7 @@ protected:
     virtual void var_to_gui_internal(); //установка значения в gui
 
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiPage *gui_ = nullptr;
+    XGuiPage *gui_ = nullptr;
 
     //значение scroll
     int scroll_ = 0;

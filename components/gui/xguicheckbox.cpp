@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "xitemcheckbox.h"
-#include "interfaceguicheckbox.h"
+#include "xguicheckbox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiCheckbox::InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, XItemCheckbox *item)
-    :InterfaceGui(input, item)
+XGuiCheckbox::XGuiCheckbox(XGuiPageCreator &input, XItemCheckbox *item)
+    :XGui(input, item)
 {
     checkbox_ = new QCheckBox("");
 
@@ -41,25 +41,25 @@ InterfaceGuiCheckbox::InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, XItem
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiCheckbox::~InterfaceGuiCheckbox() {
+XGuiCheckbox::~XGuiCheckbox() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiCheckbox::set_read_only(bool read_only) {
-    //тут не вызываем InterfaceGui::set_read_only(read_only);
+void XGuiCheckbox::set_read_only(bool read_only) {
+    //тут не вызываем XGui::set_read_only(read_only);
     //так как цвета фона ставить не нужно
     checkbox_->setEnabled(!read_only);
 }
 
 //---------------------------------------------------------------------
-int InterfaceGuiCheckbox::value() {
+int XGuiCheckbox::value() {
     return (checkbox_->checkState() == Qt::Checked) ? 1 : 0;
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiCheckbox::set_value(int v) {
+void XGuiCheckbox::set_value(int v) {
     Qt::CheckState state = (v == 1) ? Qt::Checked : Qt::Unchecked;
     //проверяем, что значение не изменилось
     //(в противном случае, проект будет помечен как измененный, хотя это не так)

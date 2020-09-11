@@ -4,7 +4,7 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class InterfaceGuiButton;
+class XGuiButton;
 
 class XItemButton: public XItem
 {
@@ -24,7 +24,7 @@ public:
     virtual bool store_data() { return false; }
 
     //графический интерфейс
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
 
     //вызывается из gui при нажатии кнопки
     void callback_button_pressed();
@@ -36,7 +36,7 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiButton *gui_ = nullptr;
+    XGuiButton *gui_ = nullptr;
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal

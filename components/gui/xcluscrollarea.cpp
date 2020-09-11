@@ -25,7 +25,7 @@ void XcluScroollArea::resizeEvent(QResizeEvent *e) {
         apply_vscroll();
         //очень важно поставить shown_ после apply_vscroll()
         //- чтобы не посылался ненужный сигнал, будто значение изменилось и is_shown()
-        //это используется в InterfaceGuiPage при отслеживании изменения значения
+        //это используется в XGuiPage при отслеживании изменения значения
         shown_ = true;
     }
 }

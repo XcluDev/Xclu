@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUIBUTTON_H
 #define INTERFACEGUIBUTTON_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemButton;
 class QPushButton;
 
-class InterfaceGuiButton : public InterfaceGui
+class XGuiButton : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiButton(InterfaceGuiPageCreator &input, XItemButton *item);
-    ~InterfaceGuiButton();
+    XGuiButton(XGuiPageCreator &input, XItemButton *item);
+    ~XGuiButton();
 
     //значение - нажатие считывается один раз, затем стирается
     int value();

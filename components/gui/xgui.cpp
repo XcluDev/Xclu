@@ -1,18 +1,18 @@
 #include "qt_widgets.h"
-#include "interfacegui.h"
+#include "xgui.h"
 #include "incl_cpp.h"
 #include "xitem.h"
 #include "visibilitygroups.h"
 
 //---------------------------------------------------------------------
-InterfaceGui::InterfaceGui(InterfaceGuiPageCreator &input, XItem * item)
+XGui::XGui(XGuiPageCreator &input, XItem * item)
     :QWidget(input.parent)
 {
     item__ = item;
 }
 
 //---------------------------------------------------------------------
-InterfaceGui::~InterfaceGui() {
+XGui::~XGui() {
     for (int i=0; i<vis_groups_.size(); i++) {
         delete vis_groups_[i];
     }
@@ -20,7 +20,7 @@ InterfaceGui::~InterfaceGui() {
 
 //---------------------------------------------------------------------
 //строка-подсказка, может быть разных типов - см. Tip_Style
-QString InterfaceGui::get_tip() {
+QString XGui::get_tip() {
     QString tip;
     switch (get_tip_style()) {
     case Tip_Full: {
@@ -43,7 +43,7 @@ QString InterfaceGui::get_tip() {
 
 //---------------------------------------------------------------------
 //создать и вставить label
-void InterfaceGui::insert_label(InterfaceGuiPageCreator &input) {
+void XGui::insert_label(XGuiPageCreator &input) {
     //запоминаем label_, чтобы управлять ее видимостью
     label_ = new QLabel(item__->title());
     label_->setMinimumWidth(xclu::LABEL_WIDTH_MIN);
@@ -82,7 +82,7 @@ void InterfaceGui::insert_label(InterfaceGuiPageCreator &input) {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::customMenuRequested(QPoint pos){
+void XGui::customMenuRequested(QPoint pos){
     //QModelIndex index=table->indexAt(pos);
 
     context_menu_.reset(new QMenu(this));
@@ -96,7 +96,7 @@ void InterfaceGui::customMenuRequested(QPoint pos){
 
 //---------------------------------------------------------------------
 //вставить на страницу созданный виджет
-void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                  int pos_x, int shift_y, int spanx, int spany) {
 
     input.grid->addWidget(widget, input.y + shift_y, pos_x, spany, spanx);
@@ -108,14 +108,14 @@ void InterfaceGui::insert_widget(QWidget *widget, QWidget *internal_widget, Inte
 
 //---------------------------------------------------------------------
 //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-void InterfaceGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input) {
+void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
     insert_widget(widget, internal_widget, input, 0, 1, 2, 1);
 }
 
 //---------------------------------------------------------------------
 //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
 //(int, float, checkbox, object)
-void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input,
+void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                              int pos_x, int shift_y, int spanx, int spany) {
     QSpacerItem *spacer = new QSpacerItem(1,1);
     QHBoxLayout *layout = new QHBoxLayout;
@@ -131,14 +131,14 @@ void InterfaceGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, InterfaceGuiPageCreator &input) {
+void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
      insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 2, 1);
 }
 
 //---------------------------------------------------------------------
 //запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов
 //также, вызывается из insert_widget и insert_widget_with_spacer
-void InterfaceGui::set_widget(QWidget *widget, QWidget *internal_widget) {
+void XGui::set_widget(QWidget *widget, QWidget *internal_widget) {
     widget_ = widget;
     internal_widget_ = internal_widget;
 
@@ -165,7 +165,7 @@ void InterfaceGui::set_widget(QWidget *widget, QWidget *internal_widget) {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::set_read_only(bool read_only) {
+void XGui::set_read_only(bool read_only) {
     //установка фона
     if (internal_widget_) {
         QPalette pal = internal_widget_->palette();
@@ -187,7 +187,7 @@ void InterfaceGui::set_read_only(bool read_only) {
 //Отслеживание изменений
 //Подклассы должны его вызывать, чтобы пометить, что проект был изменен, вот так:
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
-void InterfaceGui::on_value_changed() {
+void XGui::on_value_changed() {
     xclu_document_modified();
 
     QString value_string_vis = value_string_for_visibility();
@@ -197,7 +197,7 @@ void InterfaceGui::on_value_changed() {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::block_editing() { //блокирование изменения констант, вызывается перед запуском проекта
+void XGui::block_editing() { //блокирование изменения констант, вызывается перед запуском проекта
     if (label_) {
         default_label_color_ = xclu::set_font_color_gray(label_);
     }
@@ -206,7 +206,7 @@ void InterfaceGui::block_editing() { //блокирование изменени
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::unblock_editing() { //разблокирование изменения констант, вызывается после остановки проекта
+void XGui::unblock_editing() { //разблокирование изменения констант, вызывается после остановки проекта
     if (label_) {
         xclu::reset_font_color(label_, default_label_color_);
     }
@@ -215,7 +215,7 @@ void InterfaceGui::unblock_editing() { //разблокирование изме
 }
 
 //---------------------------------------------------------------------
-void InterfaceGui::set_visible(bool visible) {
+void XGui::set_visible(bool visible) {
     if (label_) {
         label_->setVisible(visible);
     }
@@ -231,14 +231,14 @@ void InterfaceGui::set_visible(bool visible) {
 //---------------------------------------------------------------------
 //Если требуется - добавить группу видимости
 //групп может быть несколько, их нужно в деструкторе удалить
-void InterfaceGui::add_visibility_group(VisibilityGroupGui *created_group) {
+void XGui::add_visibility_group(VisibilityGroupGui *created_group) {
     vis_groups_.push_back(created_group);
     //vis_group_->value_visibility_setup(true)
 }
 
 //---------------------------------------------------------------------
 //сигнал послать данные об изменении видимости - высылается после первой установки значения в переменную
-void InterfaceGui::propagate_visibility() {
+void XGui::propagate_visibility() {
     for (int i=0; i<vis_groups_.size(); i++) {
         vis_groups_[i]->propagate_visibility(value_string_for_visibility());
     }

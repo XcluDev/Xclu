@@ -1,17 +1,17 @@
 #ifndef INTERFACEGUIENUM_H
 #define INTERFACEGUIENUM_H
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 class XItemEnum;
 class XcluComboBox;
 
-class InterfaceGuiEnum : public InterfaceGui
+class XGuiEnum : public XGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiEnum(InterfaceGuiPageCreator &input, XItemEnum *item);
-    ~InterfaceGuiEnum();
+    XGuiEnum(XGuiPageCreator &input, XItemEnum *item);
+    ~XGuiEnum();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility();

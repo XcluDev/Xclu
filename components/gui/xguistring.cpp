@@ -1,12 +1,12 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceguistring.h"
+#include "xguistring.h"
 #include "xitemstring.h"
 #include "projectruntime.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, XItemString *item)
-    :InterfaceGui(input, item)
+XGuiString::XGuiString(XGuiPageCreator &input, XItemString *item)
+    :XGui(input, item)
 {
     insert_label(input);
 
@@ -72,26 +72,26 @@ InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, XItemStri
 }
 
 //---------------------------------------------------------------------
-InterfaceGuiString::~InterfaceGuiString() {
+XGuiString::~XGuiString() {
 
 }
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void InterfaceGuiString::set_read_only(bool read_only) {
+void XGuiString::set_read_only(bool read_only) {
     //цвет фона
-    InterfaceGui::set_read_only(read_only);
+    XGui::set_read_only(read_only);
 
     lineEdit_->setReadOnly(read_only);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceGuiString::value() {
+QString XGuiString::value() {
     return lineEdit_->text();
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiString::set_value(QString v) {
+void XGuiString::set_value(QString v) {
     //проверяем, что значение не изменилось
     //(в противном случае, out-значение невозможно скопировать во время выполнения)
     if (value() != v) {
@@ -100,7 +100,7 @@ void InterfaceGuiString::set_value(QString v) {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiString::choose_file() {
+void XGuiString::choose_file() {
     //запрашиваем и вычисляем относительный путь относительно пути к проекту
     //а если пустой - сказать про это
     //при этом, тут нельзя использовать xclu_assert - так как выпадет вся программа
@@ -121,7 +121,7 @@ void InterfaceGuiString::choose_file() {
 }
 
 //---------------------------------------------------------------------
-void InterfaceGuiString::choose_folder() {
+void XGuiString::choose_folder() {
     //запрашиваем и вычисляем относительный путь относительно пути к проекту, если он не пустой
     //а если пустой - сказать про это
     //при этом, тут нельзя использовать xclu_assert - так как выпадет вся программа

@@ -4,7 +4,7 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class InterfaceGuiText;
+class XGuiText;
 
 class XItemText: public XItem
 {
@@ -20,7 +20,7 @@ public:
     QString default_value();
 
     //графический интерфейс
-    virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageCreator &input);
     int lines_count_min() { return lines_count_min_; }
     int lines_count_max() { return lines_count_max_; }
 
@@ -35,7 +35,7 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
     //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    InterfaceGuiText *gui_ = nullptr;
+    XGuiText *gui_ = nullptr;
 
 };
 

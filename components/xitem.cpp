@@ -15,7 +15,7 @@
 #include "xitemtext.h"
 #include "xitemobject.h"
 
-#include "interfacegui.h"
+#include "xgui.h"
 
 
 //---------------------------------------------------------------------
@@ -305,8 +305,8 @@ void XItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //графический интерфейс, он тут создается, но хранится отдельно
-InterfaceGui *XItem::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = new InterfaceGui(input, this);
+XGui *XItem::create_gui(XGuiPageCreator &input) {
+    gui__ = new XGui(input, this);
     return gui__;   //не нужно его удалять
 }
 

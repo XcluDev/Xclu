@@ -1,6 +1,6 @@
 #include "xitemstring.h"
 #include "incl_cpp.h"
-#include "interfaceguistring.h"
+#include "xguistring.h"
 
 //---------------------------------------------------------------------
 //Строка
@@ -61,8 +61,8 @@ XItemString::XItemString(ModuleInterface *parent, const XItemPreDescription &pre
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *XItemString::create_gui(InterfaceGuiPageCreator &input) {
-    gui__ = gui_ = new InterfaceGuiString(input, this);
+XGui *XItemString::create_gui(XGuiPageCreator &input) {
+    gui__ = gui_ = new XGuiString(input, this);
     return gui_;
 }
 
