@@ -156,7 +156,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение
-    module_seed_.reset(ModuleSeed::load_module(folder_, "Category...", "Name..."));
+    module_seed_.reset(ModuleSeed::load_module(folder_, "Category is not set", "Name is not set"));
     if (!module_seed_.data()) return;
 
     //могут возникнуть исключения - поэтому, отлавливаем их

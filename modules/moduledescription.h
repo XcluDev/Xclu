@@ -30,7 +30,6 @@ struct ModuleDescription {
     //Внимание, при изменении - требуется скорректировать
     //запись/считывание json в module.cpp
 
-
     //Названия полей - заводим переменную, а также добавляем название поля
 #define MOD_DESCR_FIELD(NAME, SUFFIX) \
     QString NAME##SUFFIX; \
