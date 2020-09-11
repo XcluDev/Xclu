@@ -420,13 +420,15 @@ void InterfaceItem::write_json(QJsonObject &json) {
 
     //"a..." - чтобы были в начале списка
     json["aname"] = name_;
-    json["atitle"] = title_;
-    json["atype"] = interfacetype_to_string(type_);  //записываем, чтобы отловить ошибки при изменении интерфейса
     json["avalue"] = value_string();
-    if (expression_enabled()) {
-        json["expr_use"] = use_expression_;
-        json["expr"] = expression_;
-    }
+
+    //json["atitle"] = title_;
+    //json["atype"] = interfacetype_to_string(type_);  //записываем, чтобы отловить ошибки при изменении интерфейса
+
+    //if (expression_enabled()) {
+        //json["expr_use"] = use_expression_;
+        //json["expr"] = expression_;
+   // }
 }
 
 //---------------------------------------------------------------------
@@ -440,22 +442,23 @@ void InterfaceItem::read_json(const QJsonObject &json) {
     xclu_assert(name == name_, "Different name for '" + name_ + "'.\n"
                 "May be module's version is different");
 
+    //значение
+    set_value_string(json_string(json, "avalue"));
+
     //заголовок - закомментировал, пусть он меняется
     //title_ = json_string(json, "atitle");
 
     //проверяем, что тип совпадает
-    QString type_str = json_string(json, "atype");
-    xclu_assert(type_str == interfacetype_to_string(type_), "Different type for '" + name_ + "'.\n"
-                "May be module's version is different");
+    //QString type_str = json_string(json, "atype");
+    //xclu_assert(type_str == interfacetype_to_string(type_), "Different type for '" + name_ + "'.\n"
+    //            "May be module's version is different");
 
-    //значение
-    set_value_string(json_string(json, "avalue"));
 
     //expression
-    if (expression_enabled()) {
-        use_expression_ = json_bool(json, "expr_use");
-        expression_ = json_string(json, "expr");
-    }
+    //if (expression_enabled()) {
+    //    use_expression_ = json_bool(json, "expr_use");
+    //    expression_ = json_string(json, "expr");
+    //}
 
 }
 
