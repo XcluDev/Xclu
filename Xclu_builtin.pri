@@ -3,34 +3,34 @@
 #---------------------------------------------------
 
 SOURCES += \
-    builtin_modules_impl/Screen/xmodulewimage.cpp \
-    builtin_modules_impl/Screen/xmodulefbo.cpp \
-    builtin_modules_impl/Screen/xmodulefragmentshader.cpp \
-    builtin_modules_impl/Sound/xmodulesynthfromimage.cpp \
-    builtin_modules_impl/Images/xmodulewebcamera.cpp \
-    builtin_modules_impl/Sound/xmodulesoundout.cpp \
-    builtin_modules_impl/System/xmoduleexecute.cpp \
-    builtin_modules_impl/Utils/xmoduletest.cpp \
-    builtin_modules_impl/Core/xmodulescalar.cpp \
-    builtin_modules_impl/Screen/xmodulewindow.cpp \
-    builtin_modules_impl/Sound/xmodulesoundosc.cpp \
-    builtin_modules_impl/Communication/xmoduleserial.cpp \
-    builtin_modules_impl/Project/xmoduleproject.cpp 
+    $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
+    $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
+    $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.cpp \
+    $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.cpp \
+    $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.cpp \
+    $$PWD/builtin_modules/Project/Project/xmoduleproject.cpp \
+    $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp \
+    $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
+    $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
+    $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
+    $$PWD/builtin_modules/Utils/Test/xmoduletest.cpp \
+    $$PWD/builtin_modules/Window/WImage/xmodulewimage.cpp \
+    $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp
 
 HEADERS += \
-    builtin_modules_impl/Screen/xmodulewimage.h \
-    builtin_modules_impl/Screen/xmodulefbo.h \
-    builtin_modules_impl/Screen/xmodulefragmentshader.h \
-    builtin_modules_impl/Sound/xmodulesynthfromimage.h \
-    builtin_modules_impl/Images/xmodulewebcamera.h \
-    builtin_modules_impl/Sound/xmodulesoundout.h \
-    builtin_modules_impl/System/xmoduleexecute.h \
-    builtin_modules_impl/Utils/xmoduletest.h \
-    builtin_modules_impl/Core/xmodulescalar.h \
-    builtin_modules_impl/Screen/xmodulewindow.h \
-    builtin_modules_impl/Sound/xmodulesoundosc.h \
-    builtin_modules_impl/Communication/xmoduleserial.h \
-    builtin_modules_impl/Project/xmoduleproject.h 
+    $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
+    $$PWD/builtin_modules/Core/Scalar/xmodulescalar.h \
+    $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.h \
+    $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.h \
+    $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.h \
+    $$PWD/builtin_modules/Project/Project/xmoduleproject.h \
+    $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.h \
+    $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.h \
+    $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
+    $$PWD/builtin_modules/System/Execute/xmoduleexecute.h \
+    $$PWD/builtin_modules/Utils/Test/xmoduletest.h \
+    $$PWD/builtin_modules/Window/WImage/xmodulewimage.h \
+    $$PWD/builtin_modules/Window/Window/xmodulewindow.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support
@@ -53,11 +53,13 @@ windows {
     LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
 }
 
-SOURCES +=    builtin_modules_impl/Images/xmodulerealsensecamera.cpp \
-    builtin_modules_impl/Images/xmodulerealsensecamera_impl.cpp
+SOURCES +=    \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
 
-HEADERS +=    builtin_modules_impl/Images/xmodulerealsensecamera.h \
-    builtin_modules_impl/Images/xmodulerealsensecamera_impl.h
+HEADERS +=    \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
 
 
 #--------------------------------------------------------------------------

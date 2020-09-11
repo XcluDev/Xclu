@@ -6,16 +6,51 @@ module_impl=C++
 
 #-------------------------------------------
 page Main
-    //General settings
+    //General settings.
 
 in string(choose:folder) Folder folder=""
     //Folder to scan.
     //Please choose a folder
-    
-const enum Start start=By_Button [By_Button,At_Start]
 
-if start By_Button
-in button Scan scan_button
-endif
+in enum Filter filter=All [All,Files,Folders,Images,Videos,Txt,Csv,Ini,Xml,Json,Custom]
+    //Type of content we are searching for
     
+if filter Custom
+in string Custom_Filter custom_filter="*.exe;*.dll"
+    //Custom filter specification.
+endif
+
+    
+separator
+const enum Run_Mode run_mode=By_Button [By_Button_Press,At_Project_Start]
+
+if run_mode By_Button_Press
+in button Run run_button
+    //Press to start scanning.
+endif
+
+separator
+    
+in enum Result_Type result_type=List_Whole [List_Whole,List_Batch,One_String_By_Update,Burst_of_Strings]
+    //Represent results as a list of all or several found files, or one-by-one as a string.
+
+in enum On_New_Data on_data=Checkbox [Checkbox,Send_Press]
+
+in enum On_End on_end=Do_Nothing [Do_Nothing,Stop_Project]
+
+separator
+
+out int Items_Processed items_processed=0 0:1000000 1,10
+    //How much items are processed.
+
+if result_type List_Whole,List_Batch
+out text Output_Items output_items 10 12
+    //Output list of found files.
+    
+if result_type One_String_By_Update,Burst_of_Strings
+out string Output_Item output_item=""
+    //Output string.
+
+endif
+
 

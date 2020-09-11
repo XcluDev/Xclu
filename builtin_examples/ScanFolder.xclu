@@ -28,8 +28,40 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "start",
-                        "avalue": "By_Button"
+                        "aname": "filter",
+                        "avalue": "All"
+                    },
+                    {
+                        "aname": "custom_filter",
+                        "avalue": "*.exe;*.dll"
+                    },
+                    {
+                        "aname": "run_mode",
+                        "avalue": "By_Button_Press"
+                    },
+                    {
+                        "aname": "result_type",
+                        "avalue": "List_Whole"
+                    },
+                    {
+                        "aname": "on_data",
+                        "avalue": "Checkbox"
+                    },
+                    {
+                        "aname": "on_end",
+                        "avalue": "Do_Nothing"
+                    },
+                    {
+                        "aname": "items_processed",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "output_items",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "output_item",
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",
