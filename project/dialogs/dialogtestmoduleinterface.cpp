@@ -27,11 +27,16 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
     //Кнопки для выбора файла
     QPushButton *load_button;
     QPushButton *reload_button;
+    QPushButton *export_button;
+
     QWidget *buttonBox = xclu::hwidget(0,
                                        load_button = new QPushButton(tr("Load...")), 0,
                                        reload_button = new QPushButton(tr("Reload")),0,
-                                       new QLabel(""), 5
+                                       new QLabel(""), 5,
+                                       export_button = new QPushButton(tr("Export .h file")),0
                                        );
+    export_button->setToolTip("Create h file with interface description.");
+
     xclu::set_font_size(buttonBox, xclu::main_font_size);
 
     connect(load_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_load);

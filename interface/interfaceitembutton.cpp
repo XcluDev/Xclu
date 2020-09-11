@@ -26,9 +26,9 @@ InterfaceGui *InterfaceItemButton::create_gui(InterfaceGuiPageCreator &input) {
 //вызывается из gui при нажатии кнопки
 void InterfaceItemButton::callback_button_pressed() {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
-    xclu_assert(parent(),
-                "Internal error in InterfaceItemButton::callback_button_pressed, empty 'parent()' at '" + name() + "'");
-    parent()->callback_button_pressed(name());
+    xclu_assert(interf(),
+                "Internal error in InterfaceItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
+    interf()->callback_button_pressed(name());
 }
 
 //---------------------------------------------------------------------

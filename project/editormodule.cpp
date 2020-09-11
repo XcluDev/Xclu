@@ -66,6 +66,11 @@ void EditorModule::renamed_module() {
 }
 
 //---------------------------------------------------------------------
+Module *EditorModule::module() {
+    return module_;
+}
+
+//---------------------------------------------------------------------
 void EditorModule::reload_name() { //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
     if (module_) {
         QString title = QString("%1: %2")

@@ -49,17 +49,9 @@ public slots:
     //сигнал, что модуль был переименован
     void renamed_module();
 
-protected:
-    void createParams();
-    QGroupBox *editor_frame_;
-    QLabel *editor_label_;
-    QTabWidget *tabs;
-    //QGroupBox *paramEditor;
+    //used module
+    Module *module();
 
-    //модуль, который в данный момент показываем в редакторе
-    Module *module_ = 0;
-
-    friend class DialogTestModuleInterface;   //этот класс дружественный!
     //загрузить GUI модуля
     void load_module(Module *module);
 
@@ -68,6 +60,16 @@ protected:
     //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
     //но для кастомного применения, например, тестирования интерфейса - это нужно
     void load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
+
+protected:
+    void createParams();
+    QGroupBox *editor_frame_;
+    QLabel *editor_label_;
+    QTabWidget *tabs;
+    //QGroupBox *paramEditor;
+
+    //модуль, который в данный момент показываем в редакторе
+    Module *module_ = nullptr;
 
     QVector<InterfaceGui *> items_; //элементы GUI
     QMap<QString, InterfaceGui *> items_by_name_;   //элементы по имени, для установки связей видимости

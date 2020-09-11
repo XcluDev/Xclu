@@ -103,11 +103,11 @@
 
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
-InterfaceItem::InterfaceItem(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description) {
+InterfaceItem::InterfaceItem(ModuleInterface *interf, const InterfaceItemPreDescription &pre_description) {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
-    xclu_assert(parent,
-                "Internal error in InterfaceItem constructor, empty 'ModuleInterface *parent' at '" + pre_description.title + "'");
-    parent_ = parent;
+    xclu_assert(interf,
+                "Internal error in InterfaceItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
+    interf_ = interf;
     title_ = pre_description.title;
     type_ = pre_description.type;
     qualifier_ = pre_description.qualifier;
@@ -460,6 +460,18 @@ void InterfaceItem::read_json(const QJsonObject &json) {
     //    expression_ = json_string(json, "expr");
     //}
 
+}
+
+//---------------------------------------------------------------------
+//function generates function or functions definitions
+//for using inside C++ class module definition
+//for example, float get_status() { return getf("status"); }
+//in, const - only 'get'
+//out - 'get' and 'set'
+//Subclasses must reimplement it, in opposite case the exception will arise.
+QStringList InterfaceItem::generate_cpp_header() {
+    xclu_exception("Can't generate C++ header for interface element of type `" + interfacetype_to_string(type()) + "'");
+    return QStringList();
 }
 
 //---------------------------------------------------------------------

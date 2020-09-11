@@ -532,6 +532,19 @@ void ModuleInterface::read_json(const QJsonObject &json) {
     }
 }
 
+//---------------------------------------------------------------------
+//Generate h file by given template
+void ModuleInterface::generate_cpp_header(QStringList templ, QStringList &hfile) {
+    hfile.clear();
+    for (auto &T: templ) {
+        hfile.append(T);    //test
+        //CLASS_NAME
+        //DATETIME
+        //ITEMS
+
+        //QStringList list = item->generate_cpp_header();
+    }
+}
 
 //---------------------------------------------------------------------
 //Variables access

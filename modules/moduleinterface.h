@@ -75,6 +75,11 @@ public:
     void write_json(QJsonObject &json);
     void read_json(const QJsonObject &json);
 
+    //----------------------------------------------
+    //C++ operations
+    //----------------------------------------------
+    //Generate h file by given template
+    void generate_cpp_header(QStringList templ, QStringList &hfile);
 
     //----------------------------------------------
     //Variables access

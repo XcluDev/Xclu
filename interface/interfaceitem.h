@@ -44,11 +44,11 @@ public:
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
-    InterfaceItem(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    InterfaceItem(ModuleInterface *interf, const InterfaceItemPreDescription &pre_description);
     virtual ~InterfaceItem();
 
     //доступ ко всему интерфейсу
-    ModuleInterface *parent() { return parent_; }
+    ModuleInterface *interf() { return interf_; }
 
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
@@ -140,9 +140,18 @@ public:
     void unblock_gui_editing();     //разрешить редактирование
     void propagate_visibility();    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
 
+    //C++ -------------------------
+    //function generates function or functions definitions
+    //for using inside C++ class module definition
+    //for example, float get_status() { return getf("status"); }
+    //in, const - only 'get'
+    //out - 'get' and 'set'
+    //Subclasses must reimplement it, in opposite case the exception will arise.
+    virtual QStringList generate_cpp_header();
+
 protected:
     //доступ ко всему интерфейсу
-    ModuleInterface *parent_ = nullptr;
+    ModuleInterface *interf_ = nullptr;
 
     //основные характеристики
     QString title_;
