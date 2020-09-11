@@ -153,7 +153,7 @@ void EditorModule::load_module(Module *module) {
 //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
 //но для кастомного применения, например, тестирования интерфейса - это нужно
 
-void EditorModule::load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
+void EditorModule::load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
     detach();   //внимание - тут делается detach, поэтому module_ ставится в nullptr
 
     //ModuleDescription &descr = interf->description();

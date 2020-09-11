@@ -16,7 +16,7 @@ class QTabWidget;
 class QTableWidget;
 class QListWidget;
 QT_END_NAMESPACE
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "moduleinterface.h"
 
 class EditorModule;
@@ -46,7 +46,7 @@ private:
     void reload(int tab_index);
 
 
-    QScopedPointer<ModuleInfo> module_info_;
+    QScopedPointer<ModuleSeed> module_seed_;
     QScopedPointer<ModuleInterface> interf_;
 
     void clear();

@@ -4,7 +4,7 @@
 //Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (XModule)
 
 #include "incl_h.h"
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "moduleinterface.h"
 #include "xmodule.h"
 
@@ -15,13 +15,13 @@ class XDict;
 class Module
 {
 public:
-    //ModuleInfo парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
-    Module(ModuleInfo *info_external, XModule *rtmodule_new);
+    //ModuleSeed парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
+    Module(ModuleSeed *info_external, XModule *rtmodule_new);
     ~Module();
 
     //Описание типа модуля
     ModuleDescription &description();
-    ModuleInfo *info() { return info_external_; } //хранится не тут, а в ModulesFactory - нужен для Help
+    ModuleSeed *info() { return info_external_; } //хранится не тут, а в ModulesFactory - нужен для Help
 
     //Имя и name
     QString name();
@@ -115,7 +115,7 @@ private:
     QString module_type_title_;   //тип
 
     //Информация
-    ModuleInfo *info_external_ = nullptr;    //хранится в ModulesFactory
+    ModuleSeed *info_external_ = nullptr;    //хранится в ModulesFactory
 
     //Невизуальный интерфейс
     ModuleInterface *interf_ = nullptr;

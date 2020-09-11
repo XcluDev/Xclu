@@ -97,6 +97,7 @@ SOURCES += \
     core/xclu_types.cpp \
     core/xclu_utils.cpp \
     modules/moduledescription.cpp \
+    modules/moduleseed.cpp \
     sdk/xmodule.cpp \
     objects/xcluarray.cpp \
     interface/interfaceitemobject.cpp \
@@ -126,7 +127,6 @@ SOURCES += \
     interfacegui/interfaceguipage.cpp \
     interfacegui/interfaceguitext.cpp \
     modules/module.cpp \
-    modules/moduleinfo.cpp \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
     main.cpp \
@@ -172,6 +172,7 @@ HEADERS += \
     core/xclu_types.h \
     core/xclu_utils.h \
     modules/moduledescription.h \
+    modules/moduleseed.h \
     sdk/xmodule.h \
     objects/xcluarray.h \
     interface/interfaceitemobject.h \
@@ -201,7 +202,6 @@ HEADERS += \
    interfacegui/interfaceguipage.h \
     interfacegui/interfaceguitext.h \
     modules/module.h \
-    modules/moduleinfo.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
     interface/interfaceitem.h \

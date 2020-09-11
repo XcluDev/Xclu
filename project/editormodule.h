@@ -59,7 +59,7 @@ public slots:
     //force_propagate_visibility - нужно ли сделать обновление видимости.
     //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
     //но для кастомного применения, например, тестирования интерфейса - это нужно
-    void load_module(ModuleInfo *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
+    void load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
 
 protected:
     void createParams();

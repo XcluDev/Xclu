@@ -1,7 +1,7 @@
 #include "modulesfactory.h"
 #include <QDirIterator>
 #include "incl_cpp.h"
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "moduleinterface.h"
 #include "rtmoduleregistrar.h"
 
@@ -15,7 +15,7 @@ ModulesFactory::ModulesFactory() {
 //---------------------------------------------------------------------
 ModulesFactory::~ModulesFactory() {
     //qDebug() << "ModulesFactory destructor:";
-    QMapIterator<QString, ModuleInfo *> i(modules_);
+    QMapIterator<QString, ModuleSeed *> i(modules_);
     while (i.hasNext()) {
         i.next();
         //qDebug() << "    " << i.key() << ": " << i.value();
@@ -113,7 +113,7 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
 //---------------------------------------------------------------------
 void ModulesFactory::add_module(QString module_name, QString module_folder, QString category_name) {
     //обработка исключений проводится внутри load_module
-    auto *module = ModuleInfo::load_module(module_folder, category_name, module_name);
+    auto *module = ModuleSeed::load_module(module_folder, category_name, module_name);
     if (module) {
         QString name = module->description.class_name;
         //qDebug() << "--- " << name;
@@ -134,7 +134,7 @@ int ModulesFactory::size() {
 }
 
 //---------------------------------------------------------------------
-ModuleInfo *ModulesFactory::get_module(int i) {
+ModuleSeed *ModulesFactory::get_module(int i) {
     if (i >= 0 && i < size()) {
         return modules_.value(names_[i]);
     }
@@ -142,7 +142,7 @@ ModuleInfo *ModulesFactory::get_module(int i) {
 }
 
 //---------------------------------------------------------------------
-ModuleInfo *ModulesFactory::get_module(QString class_name) {
+ModuleSeed *ModulesFactory::get_module(QString class_name) {
     xclu_assert(modules_.contains(class_name), "Internal error at ModulesFactory::get_module, unknown module class '" + class_name + "'");
     return modules_.value(class_name, nullptr);
 }
@@ -156,7 +156,7 @@ void ModulesFactory::update_categories() {
 
     //сбор имен
     {
-        QMapIterator<QString, ModuleInfo *> i(modules_);
+        QMapIterator<QString, ModuleSeed *> i(modules_);
         while (i.hasNext()) {
             i.next();
             names_.push_back(i.key());
@@ -228,7 +228,7 @@ QString ModulesFactory::category_module_type(int i, int j) {
 Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*version*/) {
 
     //если возникла ошибка парсинга - то выдастся исключение
-    ModuleInfo *info = nullptr; //удалять не надо, это внешняя информация!
+    ModuleSeed *info = nullptr; //удалять не надо, это внешняя информация!
     XModule *rtmodule_new = nullptr;
     Module *module_new = nullptr;
     try {

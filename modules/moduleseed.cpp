@@ -1,4 +1,4 @@
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "incl_cpp.h"
 
 //строки описания страницы General
@@ -6,9 +6,9 @@
 QStringList ModuleInfo_general_page_;
 
 //---------------------------------------------------------------------
-/*static*/ ModuleInfo* ModuleInfo::load_module(QString folder, QString category_name, QString module_name) {
+/*static*/ ModuleSeed* ModuleSeed::load_module(QString folder, QString category_name, QString module_name) {
     //создаем модуль и пытаемся в него загрузить информацию
-    ModuleInfo* module = new ModuleInfo();
+    ModuleSeed* module = new ModuleSeed();
     try {
         module->load_module_from_folder(folder, category_name, module_name);
     }
@@ -24,13 +24,13 @@ QStringList ModuleInfo_general_page_;
 }
 
 //---------------------------------------------------------------------
-ModuleInfo::ModuleInfo()
+ModuleSeed::ModuleSeed()
 {
 
 }
 
 //---------------------------------------------------------------------
-void ModuleInfo::load_module_from_folder(QString folder, QString category_name, QString module_name) {
+void ModuleSeed::load_module_from_folder(QString folder, QString category_name, QString module_name) {
     //qDebug() << "loading " + folder;
     folder_ = folder;
     description_file_ = folder_ + "/description" + xclu_XGUI_ext();
@@ -73,7 +73,7 @@ void ModuleInfo::load_module_from_folder(QString folder, QString category_name, 
 //---------------------------------------------------------------------
 //Загрузить GUI-файл, отбросив комментарии и сделать trim строк
 //применяется при считывании описания общей страницы General.
-QStringList ModuleInfo::read_gui_file(QString file_name) {
+QStringList ModuleSeed::read_gui_file(QString file_name) {
     QFile file(file_name);
     xclu_assert(file.open(QIODevice::ReadOnly), "Can't open " + file_name);
     QTextStream in(&file);
@@ -92,7 +92,7 @@ QStringList ModuleInfo::read_gui_file(QString file_name) {
 //---------------------------------------------------------------------
 //строки с описанием GUI, не включающие описание модуля, пустые и комментарии
 //так же, с добавлением General Page
-QStringList ModuleInfo::gui_lines() const {
+QStringList ModuleSeed::gui_lines() const {
     //Загрузить описание страницы General, если еще не загружено
     if (ModuleInfo_general_page_.isEmpty()) {
         ModuleInfo_general_page_ = read_gui_file(xclu_general_page_file());
@@ -107,7 +107,7 @@ QStringList ModuleInfo::gui_lines() const {
 //---------------------------------------------------------------------
 //Help
 //мы считываем его при необходимости, при первом обращении к help(), и затем храним
-QString ModuleInfo::help() {
+QString ModuleSeed::help() {
     if (!help_was_read_) {
         help_was_read_ = true;
         QString help_file = folder_ + "/help.md";

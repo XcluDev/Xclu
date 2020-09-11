@@ -3,7 +3,7 @@
 #include "dialogtestmoduleinterface.h"
 #include "incl_cpp.h"
 #include "project.h"
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "moduleinterface.h"
 #include "editormodule.h"
 
@@ -120,7 +120,7 @@ void DialogTestModuleInterface::clear() {
         interf_.data()->gui_detached();
         interf_.reset();
     }
-    module_info_.reset();
+    module_seed_.reset();
 }
 
 //---------------------------------------------------------------------
@@ -143,18 +143,18 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение
-    module_info_.reset(ModuleInfo::load_module(folder, "Category...", "Name..."));
-    if (!module_info_.data()) return;
+    module_seed_.reset(ModuleSeed::load_module(folder, "Category...", "Name..."));
+    if (!module_seed_.data()) return;
 
     //могут возникнуть исключения - поэтому, отлавливаем их
     try {
         //загрузка интерфейса модуля
-        interf_.reset(new ModuleInterface(*module_info_.data()));
+        interf_.reset(new ModuleInterface(*module_seed_.data()));
         if (!interf_.data()) return;
 
         //загружаем GUI и устанавливаем видимость
         bool force_propagate_visibility = true;
-        editor_->load_module(module_info_.data(), interf_.data(), "Name...", force_propagate_visibility);
+        editor_->load_module(module_seed_.data(), interf_.data(), "Name...", force_propagate_visibility);
     }
     catch (XCluException &e) {
         xclu_message_box(e.whatQt());

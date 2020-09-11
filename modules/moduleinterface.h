@@ -1,10 +1,10 @@
 #ifndef MODULEINTERFACE_H
 #define MODULEINTERFACE_H
 
-//Невизуальное описание интерфейса, строится по ModuleInfo
+//Невизуальное описание интерфейса, строится по ModuleSeed
 #include "incl_h.h"
 
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "interfaceitem.h"
 #include "visibilitygroups.h"
 
@@ -17,7 +17,7 @@ class Module;
 class ModuleInterface
 {
 public:
-    ModuleInterface(const ModuleInfo &info);
+    ModuleInterface(const ModuleSeed &info);
     ~ModuleInterface();
 
     ModuleDescription &description();

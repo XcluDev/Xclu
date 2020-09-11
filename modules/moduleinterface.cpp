@@ -7,7 +7,7 @@
 
 
 //---------------------------------------------------------------------
-ModuleInterface::ModuleInterface(const ModuleInfo &info)
+ModuleInterface::ModuleInterface(const ModuleSeed &info)
 {
     //копирование описания модуля
     description_ = info.description;

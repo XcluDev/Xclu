@@ -3,7 +3,7 @@
 
 //База данных модулей, позволяет создавать инстансы модулей
 #include "incl_h.h"
-#include "moduleinfo.h"
+#include "moduleseed.h"
 #include "module.h"
 
 
@@ -27,8 +27,8 @@ public:
 
     //Доступ к модулям
     int size();
-    ModuleInfo *get_module(int i);
-    ModuleInfo *get_module(QString class_name);
+    ModuleSeed *get_module(int i);
+    ModuleSeed *get_module(QString class_name);
 
     //Создание модуля, но без имени
     //version - не пустая при загрузке проекта из файла, можно проверять
@@ -45,7 +45,7 @@ private:
 
     void add_module(QString module_name, QString module_folder, QString category_name);
 
-    QMap<QString, ModuleInfo *> modules_;
+    QMap<QString, ModuleSeed *> modules_;
 
     //имена (типы) всех модулей
     QVector<QString> names_;

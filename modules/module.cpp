@@ -7,7 +7,7 @@
 #include "xdict.h"
 
 //---------------------------------------------------------------------
-Module::Module(ModuleInfo *info_external, XModule *rtmodule_new)
+Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
 {
     info_external_ = info_external;
 

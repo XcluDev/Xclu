@@ -1,8 +1,8 @@
-#ifndef MODULEINFO_H
-#define MODULEINFO_H
+#ifndef MODULESEED_H
+#define MODULESEED_H
 
 //Информация о модуле:
-//Имя, тип, версия модуля и его GUI
+//Имя, тип, версия модуля и его GUI в виде строк
 //Парсится из description.xgui и хранится в modules,
 //но также может создаваться и меняться runtime в отдельном moduleinstance.
 //Для скорости запуска, сначала парсятся только заголовки модуля
@@ -11,19 +11,23 @@
 #include "incl_h.h"
 #include "moduledescription.h"
 
-class ModuleInfo
+//TODO can be optimized loading of the project.
+//No the interface is parsed each time when createing a module.
+
+
+class ModuleSeed
 {
 public:
     //Загрузить модуль из папки. В случае ошибки - возвращает NULL
     //Если category_name и module_name непустые - они ставятся в категорию и имя модуля
     //(это полезно при загрузке встроенных модулей прямо из папок)
-    static ModuleInfo* load_module(QString folder, QString category_name = "", QString module_name = "");
+    static ModuleSeed* load_module(QString folder, QString category_name = "", QString module_name = "");
 
     //Загрузить GUI-файл, отбросив комментарии и сделать trim строк
     //применяется при считывании описания общей страницы General.
     static QStringList read_gui_file(QString file_name);
 
-    ModuleInfo();
+    ModuleSeed();
 
     //Загрузить информацию из папки
     //Если category_name и module_name непустые - они ставятся в категорию и имя модуля
@@ -55,4 +59,4 @@ private:
 
 };
 
-#endif // MODULEINFO_H
+#endif // MODULESEED_H
