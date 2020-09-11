@@ -1,4 +1,4 @@
-#include "interfaceitemcheckbox.h"
+#include "xitemcheckbox.h"
 #include "interfaceguicheckbox.h"
 #include "incl_cpp.h"
 
@@ -9,8 +9,8 @@
 //in checkbox(group) Details show_details=0
 //- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
 
-InterfaceItemCheckbox::InterfaceItemCheckbox(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemCheckbox::XItemCheckbox(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -34,20 +34,20 @@ InterfaceItemCheckbox::InterfaceItemCheckbox(ModuleInterface *parent, const Inte
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemCheckbox::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemCheckbox::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiCheckbox(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemCheckbox::gui_to_var_internal() {
+void XItemCheckbox::gui_to_var_internal() {
     set_value_int(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemCheckbox::var_to_gui_internal() {
+void XItemCheckbox::var_to_gui_internal() {
     gui_->set_value(value_int());
 }
 

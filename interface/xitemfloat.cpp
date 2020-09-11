@@ -1,4 +1,4 @@
-#include "interfaceitemfloat.h"
+#include "xitemfloat.h"
 #include "incl_cpp.h"
 #include "interfaceguifloat.h"
 
@@ -6,8 +6,8 @@
 //float Q Q qq=0 0:1 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-InterfaceItemFloat::InterfaceItemFloat(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemFloat::XItemFloat(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -37,28 +37,28 @@ InterfaceItemFloat::InterfaceItemFloat(ModuleInterface *parent, const InterfaceI
 }
 
 //---------------------------------------------------------------------
-float InterfaceItemFloat::get_small_step() {
-    xclu_assert(slow_steps_ > 0, "InterfaceItemFloat - bad slow_steps value, must be greater thatn zero");
+float XItemFloat::get_small_step() {
+    xclu_assert(slow_steps_ > 0, "XItemFloat - bad slow_steps value, must be greater thatn zero");
     return (max_value_ - min_value_) / slow_steps_;
 
 }
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemFloat::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemFloat::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiFloat(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemFloat::gui_to_var_internal() {
+void XItemFloat::gui_to_var_internal() {
     set_value_float(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemFloat::var_to_gui_internal() {
+void XItemFloat::var_to_gui_internal() {
     gui_->set_value(value_float());
 }
 

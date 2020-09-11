@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemCheckbox;
+class XItemCheckbox;
 class QCheckBox;
 
 class InterfaceGuiCheckbox : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, InterfaceItemCheckbox *item);
+    InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, XItemCheckbox *item);
     ~InterfaceGuiCheckbox();
 
     //значение для проверки видимости детей

@@ -5,7 +5,7 @@
 #include "incl_h.h"
 
 #include "moduleseed.h"
-#include "interfaceitem.h"
+#include "xitem.h"
 #include "visibilitygroups.h"
 
 class EditorModule;
@@ -27,13 +27,13 @@ public:
     Module *module();
 
     //весь интерфейс
-    QVector<InterfaceItem *> &items();
+    QVector<XItem *> &items();
 
     //элемент по имени - кроме сепараторов
-    InterfaceItem *var(QString name);
+    XItem *var(QString name);
 
     //список по типу использования - const, in, out
-    QVector<InterfaceItem *> &vars_qual(VarQualifier qual);
+    QVector<XItem *> &vars_qual(VarQualifier qual);
 
     //группы видимости - для создания дерева управления видимостью на GUI
     QVector<VisibleGroupBase> &vis_groups();
@@ -124,17 +124,17 @@ private:
 
     //Общая функция добавления элемента интерфейса в список
     //а также вставка в группу визуализации
-    void push_item(InterfaceItem *item);
+    void push_item(XItem *item);
 
     //Добавление конкретных элементов в интерфейс - вызывают push_item
-    void create_item(const InterfaceItemPreDescription &pre_description);
-    void create_item(QString title_underscored, InterfaceItemType type,
+    void create_item(const XItemPreDescription &pre_description);
+    void create_item(QString title_underscored, XItemType type,
                      const QStringList &description,
                      VarQualifier qual = VarQualifierIn,
                      QString line_to_parse = "", QString options = "",
                      QString qual_options = "");
-    void create_decorate_item(QString name, InterfaceItemType type, const QStringList &description);
-    void create_separator(InterfaceItemType type = InterfaceItemTypeSeparator, bool is_line = false);
+    void create_decorate_item(QString name, XItemType type, const QStringList &description);
+    void create_separator(XItemType type = XItemTypeSeparator, bool is_line = false);
 
     //создание имен для сепараторов, чтобы их использовать в visibility
     int separator_index_ = 0;
@@ -144,7 +144,7 @@ private:
     QStringList collect_description(const QStringList &lines, int &i);
 
     //Список всех элементов
-    QVector<InterfaceItem *> items_;
+    QVector<XItem *> items_;
 
     //Группы видимости - для динамического интерфейса
     QVector<VisibleGroupBase> vis_groups_;
@@ -161,9 +161,9 @@ private:
     //установка параметров по-умолчанию из описания модуля на страницу general
     void set_general_values();
 
-    QMap<QString, InterfaceItem *> items_by_name_;
+    QMap<QString, XItem *> items_by_name_;
 
-    QVector<QVector<InterfaceItem *>> vars_qual_;
+    QVector<QVector<XItem *>> vars_qual_;
 
     //Редактор модуля - используется, чтобы запомнить его tab. Удалять не следует
     EditorModule *editor_ = nullptr;

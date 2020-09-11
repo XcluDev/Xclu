@@ -1,12 +1,12 @@
-#include "interfaceitemseparator.h"
+#include "xitemseparator.h"
 
 #include "interfaceguiseparator.h"
 
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
 //line - горизонтальная линия
-InterfaceItemSeparator::InterfaceItemSeparator(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemSeparator::XItemSeparator(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     //separator
     name_ = pre_description.line_to_parse; //имя генерируется автоматически
@@ -17,7 +17,7 @@ InterfaceItemSeparator::InterfaceItemSeparator(ModuleInterface *parent, const In
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemSeparator::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemSeparator::create_gui(InterfaceGuiPageCreator &input) {
     return new InterfaceGuiSeparator(input, this);
 }
 

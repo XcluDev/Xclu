@@ -87,6 +87,18 @@ INCLUDEPATH += project project/dialogs objects sdk
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
+    interface/xitem.cpp \
+    interface/xitembutton.cpp \
+    interface/xitemcheckbox.cpp \
+    interface/xitemenum.cpp \
+    interface/xitemfloat.cpp \
+    interface/xitemgroup.cpp \
+    interface/xitemint.cpp \
+    interface/xitemobject.cpp \
+    interface/xitempage.cpp \
+    interface/xitemseparator.cpp \
+    interface/xitemstring.cpp \
+    interface/xitemtext.cpp \
     sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/raster.cpp \
@@ -103,7 +115,6 @@ SOURCES += \
     modules/xmoduleregistrar.cpp \
     objects/xarray.cpp \
     sdk/xmodule.cpp \
-    interface/interfaceitemobject.cpp \
     interface/visibilitygroups.cpp \
     interfacegui/interfaceguiobject.cpp \
     interfacegui/xclucombobox.cpp \
@@ -111,8 +122,6 @@ SOURCES += \
     interfacegui/xcluscrollarea.cpp \
     interfacegui/xcluspinbox.cpp \
     core/console.cpp \
-    interface/interfaceitembutton.cpp \
-    interface/interfaceitemtext.cpp \
     interfacegui/interfacegui.cpp \
     interfacegui/interfaceguibutton.cpp \
     interfacegui/interfaceguicheckbox.cpp \
@@ -120,20 +129,12 @@ SOURCES += \
     interfacegui/interfaceguiint.cpp \
     interfacegui/interfaceguiseparator.cpp \
     interfacegui/interfaceguistring.cpp \
-    interface/interfaceitemcheckbox.cpp \
-    interface/interfaceitemfloat.cpp \
-    interface/interfaceitemgroup.cpp \
-    interface/interfaceitemint.cpp \
-    interface/interfaceitempage.cpp \
-    interface/interfaceitemseparator.cpp \
-    interface/interfaceitemstring.cpp \
     interfacegui/interfaceguipage.cpp \
     interfacegui/interfaceguitext.cpp \
     modules/module.cpp \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
     main.cpp \
-    interface/interfaceitem.cpp \
     objects/xcluobjectimage.cpp \
     objects/xcluobjectsoundformat.cpp \
     objects/xcluobjectwrapper.cpp \
@@ -152,7 +153,6 @@ SOURCES += \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
     python/pythoncore.cpp \
-    interface/interfaceitemenum.cpp \
     interfacegui/interfaceguienum.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
@@ -162,6 +162,18 @@ SOURCES += \
 HEADERS += \
     core/incl_h.h \
     core/incl_cpp.h \
+    interface/xitem.h \
+    interface/xitembutton.h \
+    interface/xitemcheckbox.h \
+    interface/xitemenum.h \
+    interface/xitemfloat.h \
+    interface/xitemgroup.h \
+    interface/xitemint.h \
+    interface/xitemobject.h \
+    interface/xitempage.h \
+    interface/xitemseparator.h \
+    interface/xitemstring.h \
+    interface/xitemtext.h \
     sdk/math/int2.h \
     sdk/math/math_types.h \
     sdk/math/math_utils.h \
@@ -179,7 +191,6 @@ HEADERS += \
     modules/xmoduleregistrar.h \
     objects/xarray.h \
     sdk/xmodule.h \
-    interface/interfaceitemobject.h \
     interface/visibilitygroups.h \
     interfacegui/interfaceguiobject.h \
     interfacegui/xclucombobox.h \
@@ -187,8 +198,6 @@ HEADERS += \
     interfacegui/xcluscrollarea.h \
     interfacegui/xcluspinbox.h \
     core/console.h \
-    interface/interfaceitembutton.h \
-    interface/interfaceitemtext.h \
    interfacegui/interfacegui.h \
     interfacegui/interfaceguibutton.h \
     interfacegui/interfaceguicheckbox.h \
@@ -196,19 +205,11 @@ HEADERS += \
     interfacegui/interfaceguiint.h \
     interfacegui/interfaceguiseparator.h \
     interfacegui/interfaceguistring.h \
-   interface/interfaceitemcheckbox.h \
-   interface/interfaceitemfloat.h \
-   interface/interfaceitemgroup.h \
-   interface/interfaceitemint.h \
-   interface/interfaceitempage.h \
-    interface/interfaceitemseparator.h \
-   interface/interfaceitemstring.h \
    interfacegui/interfaceguipage.h \
     interfacegui/interfaceguitext.h \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
-    interface/interfaceitem.h \
     objects/xcluobjectimage.h \
     objects/xcluobjectsoundformat.h \
     objects/xcluobjectwrapper.h \
@@ -228,7 +229,6 @@ HEADERS += \
     project/projectruntime.h \
     python/pythoncore.h \
     core/qt_widgets.h \
-    interface/interfaceitemenum.h \
     interfacegui/interfaceguienum.h \
     sdk/xclass.h \
     objects/xdict.h

@@ -7,7 +7,7 @@
 #include "incl_h.h"
 #include <QElapsedTimer>
 class Module;
-class InterfaceItem;
+class XItem;
 class XDict;
 
 //Работа с link - получение переменных по имени модуля и названию в формате:

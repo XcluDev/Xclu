@@ -1,14 +1,14 @@
 #ifndef INTERFACEITEMGROUP_H
 #define INTERFACEITEMGROUP_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 
-class InterfaceItemGroup: public InterfaceItem
+class XItemGroup: public XItem
 {
 public:
-    InterfaceItemGroup(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemGroup(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //Внимание: ставим, что не сохранять значения
     //Когда сделаем сохранение - убрать
@@ -17,7 +17,7 @@ public:
 protected:
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    void copy_data_to_internal(InterfaceItem * /*item*/ ) {}
+    void copy_data_to_internal(XItem * /*item*/ ) {}
 };
 
 #endif // INTERFACEITEMGROUP_H

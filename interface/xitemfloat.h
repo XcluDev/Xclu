@@ -1,15 +1,15 @@
 #ifndef INTERFACEITEMFLOAT_H
 #define INTERFACEITEMFLOAT_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 class InterfaceGuiFloat;
 
-class InterfaceItemFloat: public InterfaceItem
+class XItemFloat: public XItem
 {
 public:
-    InterfaceItemFloat(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemFloat(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

@@ -60,7 +60,7 @@ Module *ModuleInterface::module() {
 }
 
 //---------------------------------------------------------------------
-QVector<InterfaceItem *> &ModuleInterface::items() {
+QVector<XItem *> &ModuleInterface::items() {
     return items_;
 }
 
@@ -113,7 +113,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     items_.clear();
 
     //Начинаем страницу Main - закомментировано
-    //create_decorate_item("Main", InterfaceItemTypePage, QStringList(""));
+    //create_decorate_item("Main", XItemTypePage, QStringList(""));
 
     for (int i=0; i<lines.count(); /*i++*/) {//не увеличиваем i, так как это делает collect_desctiption
         // page XXX
@@ -186,9 +186,9 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //сепаратор: separator или line
             //line сейчас задан неофициально,  в программе он как тип не обозначен,
-            //его обрабатываем только тут и еще в InterfaceItem::create_separator
+            //его обрабатываем только тут и еще в XItem::create_separator
             if (item1 == "separator" || item1 == "line") {
-                auto type = InterfaceItemTypeSeparator; //string_to_interfacetype(item1);
+                auto type = XItemTypeSeparator; //string_to_interfacetype(item1);
                 bool is_line = (item1 == "line");
                 create_separator(type, is_line);
                 //collect_description увеличивает i
@@ -203,7 +203,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                 xclu_assert(!name.isEmpty(), "empty page name at line " + line);
 
                 auto type = string_to_interfacetype(item1);
-                xclu_assert(type != InterfaceItemTypeNone, "internal error: unknown type at line " + line);
+                xclu_assert(type != XItemTypeNone, "internal error: unknown type at line " + line);
 
                 //collect_description увеличивает i
                 create_decorate_item(name, type, collect_description(lines, i));
@@ -232,7 +232,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             xclu_assert(!type_options.isEmpty(), "bad type string at line '" + line + "'");
 
             auto type = string_to_interfacetype(type_options.at(0));
-            xclu_assert(type != InterfaceItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");
+            xclu_assert(type != XItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");
 
             QString options;
             if (type_options.size() >= 2) {
@@ -267,40 +267,40 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     //create_general_page();
 
     //Проверяем, что интерфейс начался с создания страницы
-    xclu_assert(items_[0]->type() == InterfaceItemTypePage, "Interface description must start with a page");
+    xclu_assert(items_[0]->type() == XItemTypePage, "Interface description must start with a page");
 
 }
 
 //---------------------------------------------------------------------
 //Общая функция добавления элемента интерфейса в список
 //а также вставка в группу визуализации
-void ModuleInterface::push_item(InterfaceItem *item) {
+void ModuleInterface::push_item(XItem *item) {
     items_.push_back(item);
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_item(const InterfaceItemPreDescription &pre_description) {
-    push_item(InterfaceItem::create_item(this, pre_description));
+void ModuleInterface::create_item(const XItemPreDescription &pre_description) {
+    push_item(XItem::create_item(this, pre_description));
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_item(QString title_underscored, InterfaceItemType type,
+void ModuleInterface::create_item(QString title_underscored, XItemType type,
                                   const QStringList &description,
                                   VarQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
-    push_item(InterfaceItem::create_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
+    push_item(XItem::create_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_decorate_item(QString name, InterfaceItemType type, const QStringList &description) {
-    items_.push_back(InterfaceItem::create_decorate_item(this, name, type, description));
+void ModuleInterface::create_decorate_item(QString name, XItemType type, const QStringList &description) {
+    items_.push_back(XItem::create_decorate_item(this, name, type, description));
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_separator(InterfaceItemType type, bool is_line) {
-    push_item(InterfaceItem::create_separator(this, generate_separator_name(), type, is_line));
+void ModuleInterface::create_separator(XItemType type, bool is_line) {
+    push_item(XItem::create_separator(this, generate_separator_name(), type, is_line));
 }
 
 //---------------------------------------------------------------------
@@ -311,7 +311,7 @@ void ModuleInterface::update_maps() {
     vars_qual_.resize(VarQualifierN);
 
     for (int i=0; i<items_.size(); i++) {
-        InterfaceItem *item = items_[i];
+        XItem *item = items_[i];
         QString name = item->name();
 
         xclu_assert(!name.isEmpty(), "Item name can't be empty, title: '" + item->title() + "'");
@@ -325,14 +325,14 @@ void ModuleInterface::update_maps() {
 
 //---------------------------------------------------------------------
 //элемент по имени - кроме сепараторов
-InterfaceItem *ModuleInterface::var(QString name) {
+XItem *ModuleInterface::var(QString name) {
     xclu_assert(items_by_name_.contains(name), "Unknown item '" + name + "'");
     return items_by_name_[name];
 }
 
 //---------------------------------------------------------------------
 //список по типу использования - const, in, out
-QVector<InterfaceItem *> &ModuleInterface::vars_qual(VarQualifier qual) {
+QVector<XItem *> &ModuleInterface::vars_qual(VarQualifier qual) {
     xclu_assert(qual >= 0 && qual < vars_qual_.size(), "Internal error: XModuleVariables::vars(VarQualifier qual) - bad request");
     return vars_qual_[qual];
 }
@@ -376,7 +376,7 @@ void ModuleInterface::propagate_visibility() {
 //---------------------------------------------------------------------
 //команды для обновления внутренних значений из GUI и в GUI
 void ModuleInterface::gui_to_vars(VarQualifier qual, bool evaluate_expr) {
-    QVector<InterfaceItem *> &vars = vars_qual(qual);
+    QVector<XItem *> &vars = vars_qual(qual);
     for (int i=0; i<vars.size(); i++) {
         vars[i]->gui_to_var(evaluate_expr); //получение значения из gui и вычисление expression, и если expression - установка значения в gui
     }
@@ -385,7 +385,7 @@ void ModuleInterface::gui_to_vars(VarQualifier qual, bool evaluate_expr) {
 //---------------------------------------------------------------------
 void ModuleInterface::vars_to_gui(VarQualifier qual) {
     if (is_gui_attached()) {
-        QVector<InterfaceItem *> &vars = vars_qual(qual);
+        QVector<XItem *> &vars = vars_qual(qual);
         for (int i=0; i<vars.size(); i++) {
             vars[i]->var_to_gui();  //установка значения в gui
         }
@@ -396,7 +396,7 @@ void ModuleInterface::vars_to_gui(VarQualifier qual) {
 //заблокировать константы, вызывается перед запуском проекта
 void ModuleInterface::block_gui_constants() {
     if (is_gui_attached()) {
-        QVector<InterfaceItem *> &vars = vars_qual(VarQualifierConst);
+        QVector<XItem *> &vars = vars_qual(VarQualifierConst);
         for (int i=0; i<vars.size(); i++) {
             vars[i]->block_gui_editing();
         }
@@ -406,7 +406,7 @@ void ModuleInterface::block_gui_constants() {
 //---------------------------------------------------------------------
 void ModuleInterface::unblock_gui_constants() {       //раззаблокировать константы, вызывается после остановки проекта
     if (is_gui_attached()) {
-        QVector<InterfaceItem *> &vars = vars_qual(VarQualifierConst);
+        QVector<XItem *> &vars = vars_qual(VarQualifierConst);
         for (int i=0; i<vars.size(); i++) {
             vars[i]->unblock_gui_editing();
         }
@@ -538,7 +538,7 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString ModuleInterface::gets(QString name, int index, int index2) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
     if (index2 == -1) {
@@ -579,7 +579,7 @@ QStringList ModuleInterface::get_strings(QString name) {
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (rawtext), string, text
 void ModuleInterface::sets(QString name, QString v) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     var->set_value_string(v);
@@ -612,7 +612,7 @@ void ModuleInterface::append_string(QString name, QStringList v, int extra_new_l
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 int ModuleInterface::geti(QString name, int index, int index2) {
     if (index == -1) {
-        InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+        XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
         return var->value_int();
     }
@@ -624,7 +624,7 @@ int ModuleInterface::geti(QString name, int index, int index2) {
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
 void ModuleInterface::seti(QString name, int v) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
     var->set_value_int(v);
@@ -642,7 +642,7 @@ void ModuleInterface::increase_int(QString name, int increase) { //value+=increa
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 float ModuleInterface::getf(QString name, int index, int index2) {
     if (index == -1) {
-        InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+        XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
         xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
         return var->value_float();
     }
@@ -654,7 +654,7 @@ float ModuleInterface::getf(QString name, int index, int index2) {
 //---------------------------------------------------------------------
 //только out: float
 void ModuleInterface::setf(QString name, float v) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
     var->set_value_float(v);
@@ -663,7 +663,7 @@ void ModuleInterface::setf(QString name, float v) {
 //---------------------------------------------------------------------
 //enum (title)
 QString ModuleInterface::get_title_value(QString name) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     return var->value_title();
 
@@ -672,7 +672,7 @@ QString ModuleInterface::get_title_value(QString name) {
 //---------------------------------------------------------------------
 //только out: enum (title)
 void ModuleInterface::set_title_value(QString name, QString v) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     var->set_value_title(v);
@@ -685,7 +685,7 @@ void ModuleInterface::set_title_value(QString name, QString v) {
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
 XDict *ModuleInterface::get_object(QString name) {
-    InterfaceItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     XDict *object = var->get_object();
     return object;

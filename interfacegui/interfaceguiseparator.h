@@ -3,7 +3,7 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemSeparator;
+class XItemSeparator;
 class QSpacerItem;
 class QFrame;
 
@@ -11,7 +11,7 @@ class InterfaceGuiSeparator : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiSeparator(InterfaceGuiPageCreator &input, InterfaceItemSeparator *item);
+    InterfaceGuiSeparator(InterfaceGuiPageCreator &input, XItemSeparator *item);
     ~InterfaceGuiSeparator();
 
     //здесь нам нужно кастомно менять размер сепаратора, так как у него нет метода setVisible

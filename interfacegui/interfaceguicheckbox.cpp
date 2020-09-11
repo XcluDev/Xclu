@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceitemcheckbox.h"
+#include "xitemcheckbox.h"
 #include "interfaceguicheckbox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiCheckbox::InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, InterfaceItemCheckbox *item)
+InterfaceGuiCheckbox::InterfaceGuiCheckbox(InterfaceGuiPageCreator &input, XItemCheckbox *item)
     :InterfaceGui(input, item)
 {
     checkbox_ = new QCheckBox("");

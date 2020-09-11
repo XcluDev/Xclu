@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemText;
+class XItemText;
 class QPlainTextEdit;
 
 class InterfaceGuiText : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiText(InterfaceGuiPageCreator &input, InterfaceItemText *item);
+    InterfaceGuiText(InterfaceGuiPageCreator &input, XItemText *item);
     ~InterfaceGuiText();
 
     //значение для проверки видимости детей

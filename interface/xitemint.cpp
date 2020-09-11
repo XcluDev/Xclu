@@ -1,4 +1,4 @@
-#include "interfaceitemint.h"
+#include "xitemint.h"
 #include "incl_cpp.h"
 #include "interfaceguiint.h"
 
@@ -6,8 +6,8 @@
 //int A a=-1 -10:10 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-InterfaceItemInt::InterfaceItemInt(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description, bool parse_range)
-    : InterfaceItem(parent, pre_description)
+XItemInt::XItemInt(ModuleInterface *parent, const XItemPreDescription &pre_description, bool parse_range)
+    : XItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -41,20 +41,20 @@ InterfaceItemInt::InterfaceItemInt(ModuleInterface *parent, const InterfaceItemP
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemInt::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemInt::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiInt(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemInt::gui_to_var_internal() {
+void XItemInt::gui_to_var_internal() {
     set_value_int(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemInt::var_to_gui_internal() {
+void XItemInt::var_to_gui_internal() {
     gui_->set_value(value_int());
 }
 

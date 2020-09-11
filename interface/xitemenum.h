@@ -1,15 +1,15 @@
 #ifndef INTERFACEITEMENUM_H
 #define INTERFACEITEMENUM_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 class InterfaceGuiEnum;
 
-class InterfaceItemEnum: public InterfaceItem
+class XItemEnum: public XItem
 {
 public:
-    InterfaceItemEnum(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemEnum(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string();    //rawtext, возвращает 'A_B_C'

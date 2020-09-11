@@ -1,4 +1,4 @@
-#include "interfaceitemenum.h"
+#include "xitemenum.h"
 #include "incl_cpp.h"
 #include "interfaceguienum.h"
 
@@ -7,8 +7,8 @@
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 
-InterfaceItemEnum::InterfaceItemEnum(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemEnum::XItemEnum(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -46,7 +46,7 @@ InterfaceItemEnum::InterfaceItemEnum(ModuleInterface *parent, const InterfaceIte
 }
 
 //---------------------------------------------------------------------
-int InterfaceItemEnum::rawtext_to_index(QString rawtext) {
+int XItemEnum::rawtext_to_index(QString rawtext) {
     if (map_index_.contains(rawtext)) {
         return map_index_[rawtext];
     }
@@ -54,30 +54,30 @@ int InterfaceItemEnum::rawtext_to_index(QString rawtext) {
 }
 
 //---------------------------------------------------------------------
-int InterfaceItemEnum::rawtext_to_index_safe(QString rawtext) {
+int XItemEnum::rawtext_to_index_safe(QString rawtext) {
     int index = rawtext_to_index(rawtext);
     if (index == -1) return 0;
     return index;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItemEnum::set_value_string(const QString &rawstring){
+void XItemEnum::set_value_string(const QString &rawstring){
     index_ = rawtext_to_index_safe(rawstring);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItemEnum::value_string() {
+QString XItemEnum::value_string() {
     return rawtexts_.at(index_);
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItemEnum::value_title() {
+QString XItemEnum::value_title() {
     return xclu_remove_underscore(value_string());
 }
 
 //---------------------------------------------------------------------
 //Внимание, реализована неэффективно!
-void InterfaceItemEnum::set_value_title(QString title) {
+void XItemEnum::set_value_title(QString title) {
     QStringList T = titles();       //все заголовки
     for (int i=0; i<T.size(); i++) {
         if (T[i] == title) {
@@ -89,7 +89,7 @@ void InterfaceItemEnum::set_value_title(QString title) {
 }
 
 //---------------------------------------------------------------------
-QStringList InterfaceItemEnum::titles() {       //все заголовки
+QStringList XItemEnum::titles() {       //все заголовки
     QStringList list;
     int n = rawtexts_.size();
     list.reserve(n);
@@ -100,26 +100,26 @@ QStringList InterfaceItemEnum::titles() {       //все заголовки
 }
 
 //---------------------------------------------------------------------
-QStringList InterfaceItemEnum::names() {       //все заголовки с подчеркиванием - для программирования
+QStringList XItemEnum::names() {       //все заголовки с подчеркиванием - для программирования
     return rawtexts_;
 }
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemEnum::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemEnum::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiEnum(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemEnum::gui_to_var_internal() {
+void XItemEnum::gui_to_var_internal() {
     set_value_int(gui_->index());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemEnum::var_to_gui_internal() {
+void XItemEnum::var_to_gui_internal() {
     gui_->set_index(value_int());
 }
 

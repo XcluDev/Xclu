@@ -1,4 +1,4 @@
-#include "interfaceitemstring.h"
+#include "xitemstring.h"
 #include "incl_cpp.h"
 #include "interfaceguistring.h"
 
@@ -25,8 +25,8 @@
 
 
 
-InterfaceItemString::InterfaceItemString(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemString::XItemString(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -61,36 +61,36 @@ InterfaceItemString::InterfaceItemString(ModuleInterface *parent, const Interfac
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemString::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemString::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiString(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemString::gui_to_var_internal() {
+void XItemString::gui_to_var_internal() {
     set_value_string(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemString::var_to_gui_internal() {
+void XItemString::var_to_gui_internal() {
     gui_->set_value(value_string());
 }
 
 //---------------------------------------------------------------------
 //опциональные элементы
-bool InterfaceItemString::options_choose_filesystem() {                 //есть ли какие-нибудь опции
+bool XItemString::options_choose_filesystem() {                 //есть ли какие-нибудь опции
     return options_choose_file() || options_choose_folder();
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItemString::options_choose_file() {     //кнопка выбора файла
+bool XItemString::options_choose_file() {     //кнопка выбора файла
     return options_choose_file_;
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItemString::options_choose_folder() {   //кнопка выбора папки
+bool XItemString::options_choose_folder() {   //кнопка выбора папки
     return options_choose_folder_;
 }
 

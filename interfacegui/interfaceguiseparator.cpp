@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
 #include "interfaceguiseparator.h"
-#include "interfaceitemseparator.h"
+#include "xitemseparator.h"
 
 
 //---------------------------------------------------------------------
-InterfaceGuiSeparator::InterfaceGuiSeparator(InterfaceGuiPageCreator &input, InterfaceItemSeparator *item)
+InterfaceGuiSeparator::InterfaceGuiSeparator(InterfaceGuiPageCreator &input, XItemSeparator *item)
     :InterfaceGui(input, item)
 {
     is_line_ = item->is_line();

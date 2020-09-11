@@ -1,34 +1,34 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include "interfaceitem.h"
+#include "xitem.h"
 #include "incl_cpp.h"
-#include "interfaceitempage.h"
-#include "interfaceitemgroup.h"
-#include "interfaceitemseparator.h"
-#include "interfaceitemfloat.h"
-#include "interfaceitemint.h"
-#include "interfaceitemcheckbox.h"
-#include "interfaceitemstring.h"
-#include "interfaceitemenum.h"
-#include "interfaceitembutton.h"
-#include "interfaceitemtext.h"
-#include "interfaceitemobject.h"
+#include "xitempage.h"
+#include "xitemgroup.h"
+#include "xitemseparator.h"
+#include "xitemfloat.h"
+#include "xitemint.h"
+#include "xitemcheckbox.h"
+#include "xitemstring.h"
+#include "xitemenum.h"
+#include "xitembutton.h"
+#include "xitemtext.h"
+#include "xitemobject.h"
 
 #include "interfacegui.h"
 
 
 //---------------------------------------------------------------------
-/*static*/ InterfaceItem *InterfaceItem::create_item(ModuleInterface *parent,
+/*static*/ XItem *XItem::create_item(ModuleInterface *parent,
                                                      QString title_underscored,
-                                                     InterfaceItemType type,
+                                                     XItemType type,
                                                      const QStringList &description,
                                                      VarQualifier qual,
                                                      QString line_to_parse,
                                                      QString options,
                                                      QString qual_options
                                                      ) {
-    InterfaceItemPreDescription descr;
+    XItemPreDescription descr;
     descr.title = xclu_remove_underscore(title_underscored);
     descr.type = type;
     descr.qualifier = qual;
@@ -41,56 +41,56 @@
 
 //---------------------------------------------------------------------
 //page, group
-/*static*/ InterfaceItem *InterfaceItem::create_decorate_item(ModuleInterface *parent,
+/*static*/ XItem *XItem::create_decorate_item(ModuleInterface *parent,
                                                               QString name,
-                                                              InterfaceItemType type, const QStringList &description) {
+                                                              XItemType type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
     return create_item(parent, name, type, description, VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
 //separator
-/*static*/ InterfaceItem *InterfaceItem::create_separator(ModuleInterface *parent, QString name, InterfaceItemType type, bool is_line) {
+/*static*/ XItem *XItem::create_separator(ModuleInterface *parent, QString name, XItemType type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
     return create_item(parent, name, type, QStringList(descr), VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
-/*static*/ InterfaceItem *InterfaceItem::create_item(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description) {
+/*static*/ XItem *XItem::create_item(ModuleInterface *parent, const XItemPreDescription &pre_description) {
     switch(pre_description.type) {
-    case InterfaceItemTypePage:
-        return new InterfaceItemPage(parent, pre_description);
+    case XItemTypePage:
+        return new XItemPage(parent, pre_description);
         break;
-    case InterfaceItemTypeGroup:
-        return new InterfaceItemGroup(parent, pre_description);
+    case XItemTypeGroup:
+        return new XItemGroup(parent, pre_description);
         break;
-    case InterfaceItemTypeSeparator:
-        return new InterfaceItemSeparator(parent, pre_description);
+    case XItemTypeSeparator:
+        return new XItemSeparator(parent, pre_description);
         break;
-    case InterfaceItemTypeFloat:
-        return new InterfaceItemFloat(parent, pre_description);
+    case XItemTypeFloat:
+        return new XItemFloat(parent, pre_description);
         break;
-    case InterfaceItemTypeInt:
-        return new InterfaceItemInt(parent, pre_description);
+    case XItemTypeInt:
+        return new XItemInt(parent, pre_description);
         break;
-    case InterfaceItemTypeString:
-        return new InterfaceItemString(parent, pre_description);
+    case XItemTypeString:
+        return new XItemString(parent, pre_description);
         break;
-    case InterfaceItemTypeText:
-        return new InterfaceItemText(parent, pre_description);
+    case XItemTypeText:
+        return new XItemText(parent, pre_description);
         break;
-    case InterfaceItemTypeCheckbox:
-        return new InterfaceItemCheckbox(parent, pre_description);
+    case XItemTypeCheckbox:
+        return new XItemCheckbox(parent, pre_description);
         break;
-    case InterfaceItemTypeButton:
-        return new InterfaceItemButton(parent, pre_description);
+    case XItemTypeButton:
+        return new XItemButton(parent, pre_description);
         break;
-    case InterfaceItemTypeStringlist:
-        return new InterfaceItemEnum(parent, pre_description);
+    case XItemTypeStringlist:
+        return new XItemEnum(parent, pre_description);
         break;
-    case InterfaceItemTypeObject:
-        return new InterfaceItemObject(parent, pre_description);
+    case XItemTypeObject:
+        return new XItemObject(parent, pre_description);
         break;
     default:
         break;
@@ -103,10 +103,10 @@
 
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
-InterfaceItem::InterfaceItem(ModuleInterface *interf, const InterfaceItemPreDescription &pre_description) {
+XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xclu_assert(interf,
-                "Internal error in InterfaceItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
+                "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
     interf_ = interf;
     title_ = pre_description.title;
     type_ = pre_description.type;
@@ -121,53 +121,53 @@ InterfaceItem::InterfaceItem(ModuleInterface *interf, const InterfaceItemPreDesc
 }
 
 //---------------------------------------------------------------------
-InterfaceItem::~InterfaceItem() {
+XItem::~XItem() {
 
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItem::name() {
+QString XItem::name() {
     return name_;
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItem::title() {
+QString XItem::title() {
     return title_;
 }
 
 //---------------------------------------------------------------------
-InterfaceItemType InterfaceItem::type() {
+XItemType XItem::type() {
     return type_;
 }
 
 //---------------------------------------------------------------------
-VarQualifier InterfaceItem::qualifier() {
+VarQualifier XItem::qualifier() {
     return qualifier_;
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::is_const() {
+bool XItem::is_const() {
     return (qualifier_ == VarQualifierConst);
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::is_in() {
+bool XItem::is_in() {
     return (qualifier_ == VarQualifierIn);
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::is_out() {
+bool XItem::is_out() {
     return (qualifier_ == VarQualifierOut);
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::is_save_to_project() {
+bool XItem::is_save_to_project() {
     return save_to_project_;
 }
 
 //---------------------------------------------------------------------
 //Описание добавляется уже после создания, следующей строкой в скрипте GUI
-QString InterfaceItem::description(int index) {
+QString XItem::description(int index) {
     if (index >= 0 && index < description_.size()) {
         return description_.at(index);
     }
@@ -175,7 +175,7 @@ QString InterfaceItem::description(int index) {
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::was_changed() {
+bool XItem::was_changed() {
     //Если было задано, что переменная изменилась - то просто запомнить
     if (force_changed_) {
         force_changed_ = false;
@@ -222,17 +222,17 @@ bool InterfaceItem::was_changed() {
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::set_changed() { //пометить, что переменная была изменена
+void XItem::set_changed() { //пометить, что переменная была изменена
     force_changed_ = true;
 }
 
 //---------------------------------------------------------------------
-int InterfaceItem::description_count() {
+int XItem::description_count() {
     return description_.size();
 }
 
 //---------------------------------------------------------------------
-/*void InterfaceItem::add_description(QString description) {
+/*void XItem::add_description(QString description) {
     //xclu_assert(description_.isEmpty(), "non-empty description for variable '" + name_ + "' is already set, but trying to set another '" + description + "'");
     //description_ = description;
     description_.append(description);
@@ -240,33 +240,33 @@ int InterfaceItem::description_count() {
 */
 
 //---------------------------------------------------------------------
-bool InterfaceItem::expression_enabled() {
+bool XItem::expression_enabled() {
     return (qualifier_ != VarQualifierOut);
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::use_expression() {  //используется ли expression для установки значения
+bool XItem::use_expression() {  //используется ли expression для установки значения
     return use_expression_;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::set_use_expression(bool v) {
+void XItem::set_use_expression(bool v) {
     use_expression_ = v;
 }
 
 //---------------------------------------------------------------------
-QString InterfaceItem::expression() {
+QString XItem::expression() {
     return expression_;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::set_expression(const QString &expr) {
+void XItem::set_expression(const QString &expr) {
     expression_ = expr;
 }
 
 //---------------------------------------------------------------------
 //парсинг q=0 0:1 100,10 -> name='q', query = '0','0:1','100,10'
-/*static*/ void InterfaceItem::split_equal(const QString &line, QString &name, QStringList &query) {
+/*static*/ void XItem::split_equal(const QString &line, QString &name, QStringList &query) {
     int equal = line.indexOf('=');
     xclu_assert(equal != -1, "no '=', expect 'some_name=...'");
     xclu_assert(equal != 0, "empty variable name, expect 'some_name=...'");
@@ -278,7 +278,7 @@ void InterfaceItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //парсинг q A B -> name='q', query = 'A','B'
-/*static*/ void InterfaceItem::split_spaced(const QString &line, QString &name, QStringList &query) {
+/*static*/ void XItem::split_spaced(const QString &line, QString &name, QStringList &query) {
     QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
     query = line.split(rx);
     xclu_assert(!query.isEmpty(), "empty name, expected ... q ...");
@@ -288,7 +288,7 @@ void InterfaceItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //парсинг числовых значений
-/*static*/ float InterfaceItem::parse_float(QString line, QString error_message) {
+/*static*/ float XItem::parse_float(QString line, QString error_message) {
     bool ok;
     float value = line.toFloat(&ok);
     xclu_assert(ok, error_message);
@@ -296,7 +296,7 @@ void InterfaceItem::set_expression(const QString &expr) {
 }
 
 //---------------------------------------------------------------------
-/*static*/ int InterfaceItem::parse_int(QString line, QString error_message) {
+/*static*/ int XItem::parse_int(QString line, QString error_message) {
     bool ok;
     float value = line.toInt(&ok);
     xclu_assert(ok, error_message);
@@ -305,29 +305,29 @@ void InterfaceItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //графический интерфейс, он тут создается, но хранится отдельно
-InterfaceGui *InterfaceItem::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItem::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = new InterfaceGui(input, this);
     return gui__;   //не нужно его удалять
 }
 
 //---------------------------------------------------------------------
 //сигнал, что GUI подключен/отключен
-void InterfaceItem::gui_attached() {
+void XItem::gui_attached() {
     gui_attached_ = true;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::gui_detached() {
+void XItem::gui_detached() {
     gui_attached_ = false;
 }
 
 //---------------------------------------------------------------------
-bool InterfaceItem::is_gui_attached() {
+bool XItem::is_gui_attached() {
     return gui_attached_;
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::gui_to_var(bool evaluate_expr) { //вычисление expression и получение значения из gui
+void XItem::gui_to_var(bool evaluate_expr) { //вычисление expression и получение значения из gui
     if (use_expression()) {
         if (evaluate_expr) {
             //... expression()
@@ -344,7 +344,7 @@ void InterfaceItem::gui_to_var(bool evaluate_expr) { //вычисление expr
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::var_to_gui() { //установка значения в gui, также отправляет сигнал о видимости
+void XItem::var_to_gui() { //установка значения в gui, также отправляет сигнал о видимости
     //if (!use_expression()) {
     if (is_gui_attached()) {
         var_to_gui_internal();
@@ -354,7 +354,7 @@ void InterfaceItem::var_to_gui() { //установка значения в gui,
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::propagate_visibility() {    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
+void XItem::propagate_visibility() {    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
     if (gui__) {
         gui__->propagate_visibility();
     }
@@ -362,7 +362,7 @@ void InterfaceItem::propagate_visibility() {    //обновить дерево 
 
 //---------------------------------------------------------------------
 //запретить редактирование - всегда для out и после запуска для const
-void InterfaceItem::block_gui_editing() {
+void XItem::block_gui_editing() {
     if (is_gui_attached()) {
         if (gui__) {
             gui__->block_editing();
@@ -372,7 +372,7 @@ void InterfaceItem::block_gui_editing() {
 
 //---------------------------------------------------------------------
 //разрешить редактирование
-void InterfaceItem::unblock_gui_editing() {
+void XItem::unblock_gui_editing() {
     if (is_gui_attached()) {
         if (gui__) {
             gui__->unblock_editing();
@@ -383,13 +383,13 @@ void InterfaceItem::unblock_gui_editing() {
 //---------------------------------------------------------------------
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-void InterfaceItem::copy_data_to(InterfaceItem *item) {
+void XItem::copy_data_to(XItem *item) {
     //если для данного типа не надо копировать - то ничего не делаем
     if (!store_data()) return;
 
-    xclu_assert(name() == item->name(), "Internal error InterfaceItem::copy_data_to: different items names '"
+    xclu_assert(name() == item->name(), "Internal error XItem::copy_data_to: different items names '"
                 + name() + "' and '" + item->name() + "'");
-    xclu_assert(type() == item->type(), "Internal error InterfaceItem::copy_data_to: different items types '"
+    xclu_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
                 + interfacetype_to_string(type()) + "' and '" + interfacetype_to_string(item->type()) + "'");
 
     item->set_use_expression(use_expression());
@@ -407,13 +407,13 @@ void InterfaceItem::copy_data_to(InterfaceItem *item) {
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::copy_data_to_internal(InterfaceItem *) {
+void XItem::copy_data_to_internal(XItem *) {
     xclu_halt("Internal error: copy_data_to_internal is not implemented for type '" + interfacetype_to_string(type()) + "'");
 }
 
 //---------------------------------------------------------------------
 //Запись и считывание json
-void InterfaceItem::write_json(QJsonObject &json) {
+void XItem::write_json(QJsonObject &json) {
     if (!is_save_to_project()) return;
     if (!store_data()) return;
     xclu_assert(supports_string(), "Can't write item '" + name_ + "' to json");
@@ -432,7 +432,7 @@ void InterfaceItem::write_json(QJsonObject &json) {
 }
 
 //---------------------------------------------------------------------
-void InterfaceItem::read_json(const QJsonObject &json) {
+void XItem::read_json(const QJsonObject &json) {
     if (!is_save_to_project()) return;
     if (!store_data()) return;
     xclu_assert(supports_string(), "Can't read item '" + name_ + "' from json, because it's has 'out' (that means read-only) qualifier.\n"
@@ -469,7 +469,7 @@ void InterfaceItem::read_json(const QJsonObject &json) {
 //in, const - only 'get'
 //out - 'get' and 'set'
 //Subclasses must reimplement it, in opposite case the exception will arise.
-QStringList InterfaceItem::generate_cpp_header() {
+QStringList XItem::generate_cpp_header() {
     xclu_exception("Can't generate C++ header for interface element of type `" + interfacetype_to_string(type()) + "'");
     return QStringList();
 }

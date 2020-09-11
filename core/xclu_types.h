@@ -36,24 +36,24 @@ public:
 
 
 //Типы элементов интерфейса
-enum InterfaceItemType : int {
-    InterfaceItemTypeNone       = 0,
-    InterfaceItemTypePage       = 1,
-    InterfaceItemTypeGroup      = 2,
-    InterfaceItemTypeSeparator  = 3,
-    InterfaceItemTypeFloat      = 4,
-    InterfaceItemTypeInt        = 5,
-    InterfaceItemTypeString     = 6,
-    InterfaceItemTypeText       = 7,
-    InterfaceItemTypeCheckbox   = 8,
-    InterfaceItemTypeButton     = 9,
-    InterfaceItemTypeStringlist = 10,
-    InterfaceItemTypeObject     = 11,
-    InterfaceItemTypeN          = 12
+enum XItemType : int {
+    XItemTypeNone       = 0,
+    XItemTypePage       = 1,
+    XItemTypeGroup      = 2,
+    XItemTypeSeparator  = 3,
+    XItemTypeFloat      = 4,
+    XItemTypeInt        = 5,
+    XItemTypeString     = 6,
+    XItemTypeText       = 7,
+    XItemTypeCheckbox   = 8,
+    XItemTypeButton     = 9,
+    XItemTypeStringlist = 10,
+    XItemTypeObject     = 11,
+    XItemTypeN          = 12
 };
 
-QString interfacetype_to_string(InterfaceItemType vartype);
-InterfaceItemType string_to_interfacetype(const QString &vartypestr);
+QString interfacetype_to_string(XItemType vartype);
+XItemType string_to_interfacetype(const QString &vartypestr);
 
 //Способ использования переменной
 enum VarQualifier : int {

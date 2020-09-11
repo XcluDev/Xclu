@@ -42,7 +42,7 @@ ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
 
 
 //---------------------------------------------------------------------
-const QString InterfaceTypeNames[InterfaceItemTypeN] =
+const QString InterfaceTypeNames[XItemTypeN] =
 {
     "?",
     "page",
@@ -58,12 +58,12 @@ const QString InterfaceTypeNames[InterfaceItemTypeN] =
     "object"
 };
 
-QString interfacetype_to_string(InterfaceItemType vartype) {
-    return Type_to_string(int(vartype), InterfaceItemTypeN, InterfaceTypeNames);
+QString interfacetype_to_string(XItemType vartype) {
+    return Type_to_string(int(vartype), XItemTypeN, InterfaceTypeNames);
 }
 
-InterfaceItemType string_to_interfacetype(const QString &vartypestr) {
-    return InterfaceItemType(string_to_Type(vartypestr, InterfaceItemTypeN, InterfaceTypeNames));
+XItemType string_to_interfacetype(const QString &vartypestr) {
+    return XItemType(string_to_Type(vartypestr, XItemTypeN, InterfaceTypeNames));
 }
 
 

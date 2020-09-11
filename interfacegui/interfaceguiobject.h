@@ -3,7 +3,7 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemObject;
+class XItemObject;
 class XDict;
 class QSpacerItem;
 
@@ -29,7 +29,7 @@ class InterfaceGuiObject : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiObject(InterfaceGuiPageCreator &input, InterfaceItemObject *item);
+    InterfaceGuiObject(InterfaceGuiPageCreator &input, XItemObject *item);
     ~InterfaceGuiObject();
 
     //значение для проверки видимости детей

@@ -1,8 +1,8 @@
-#include "interfaceitemgroup.h"
+#include "xitemgroup.h"
 
 //---------------------------------------------------------------------
-InterfaceItemGroup::InterfaceItemGroup(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemGroup::XItemGroup(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     //page Main_page
     name_ = pre_description.line_to_parse;

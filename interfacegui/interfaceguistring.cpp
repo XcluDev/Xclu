@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "interfaceguistring.h"
-#include "interfaceitemstring.h"
+#include "xitemstring.h"
 #include "projectruntime.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, InterfaceItemString *item)
+InterfaceGuiString::InterfaceGuiString(InterfaceGuiPageCreator &input, XItemString *item)
     :InterfaceGui(input, item)
 {
     insert_label(input);

@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceitembutton.h"
+#include "xitembutton.h"
 #include "interfaceguibutton.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiButton::InterfaceGuiButton(InterfaceGuiPageCreator &input, InterfaceItemButton *item)
+InterfaceGuiButton::InterfaceGuiButton(InterfaceGuiPageCreator &input, XItemButton *item)
     :InterfaceGui(input, item)
 {
     button_ = new QPushButton(item->title());
@@ -38,7 +38,7 @@ void InterfaceGuiButton::button_pressed() {
         value_ = 1;
     }
     //в любом случае - отправляем сигнал в модуль
-    ((InterfaceItemButton *)item__)->callback_button_pressed();
+    ((XItemButton *)item__)->callback_button_pressed();
 }
 
 //---------------------------------------------------------------------

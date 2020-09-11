@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemEnum;
+class XItemEnum;
 class XcluComboBox;
 
 class InterfaceGuiEnum : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiEnum(InterfaceGuiPageCreator &input, InterfaceItemEnum *item);
+    InterfaceGuiEnum(InterfaceGuiPageCreator &input, XItemEnum *item);
     ~InterfaceGuiEnum();
 
     //значение для проверки видимости детей

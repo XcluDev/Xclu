@@ -32,7 +32,7 @@ class QGridLayout;
 class QMenu;
 QT_END_NAMESPACE
 
-class InterfaceItem;
+class XItem;
 class VisibilityGroupGui;
 
 //данные для создания визуального интерфейса
@@ -49,7 +49,7 @@ class InterfaceGui : public QWidget
     Q_OBJECT
 public:
     //item - не следует удалять
-    InterfaceGui(InterfaceGuiPageCreator &input, InterfaceItem *item);
+    InterfaceGui(InterfaceGuiPageCreator &input, XItem *item);
     virtual ~InterfaceGui();
 
     //Функции для блокировки и разблокировки редактирования констант при запуске проекта.
@@ -72,7 +72,7 @@ public:
 
 protected:
     //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
-    InterfaceItem *item__ = nullptr;
+    XItem *item__ = nullptr;
 
 
     //Визуальные элементы

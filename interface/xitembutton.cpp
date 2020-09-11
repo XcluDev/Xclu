@@ -1,12 +1,12 @@
-#include "interfaceitembutton.h"
+#include "xitembutton.h"
 #include "interfaceguibutton.h"
 #include "incl_cpp.h"
 #include "moduleinterface.h"
 
 //---------------------------------------------------------------------
 //in button Execute execute
-InterfaceItemButton::InterfaceItemButton(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemButton::XItemButton(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     //Button не может быть out
     xclu_assert(pre_description.qualifier != VarQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
@@ -17,23 +17,23 @@ InterfaceItemButton::InterfaceItemButton(ModuleInterface *parent, const Interfac
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemButton::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemButton::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiButton(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //вызывается из gui при нажатии кнопки
-void InterfaceItemButton::callback_button_pressed() {
+void XItemButton::callback_button_pressed() {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xclu_assert(interf(),
-                "Internal error in InterfaceItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
+                "Internal error in XItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
     interf()->callback_button_pressed(name());
 }
 
 //---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
-int InterfaceItemButton::value_int() {
+int XItemButton::value_int() {
     int res = value_;
     value_ = 0;
     return res;
@@ -41,13 +41,13 @@ int InterfaceItemButton::value_int() {
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemButton::gui_to_var_internal() {
+void XItemButton::gui_to_var_internal() {
     value_ = gui_->value();
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemButton::var_to_gui_internal() {
+void XItemButton::var_to_gui_internal() {
     //gui_->set_value(value());
 }
 

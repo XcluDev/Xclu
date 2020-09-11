@@ -1,7 +1,7 @@
 #include "projectruntime.h"
 #include "incl_cpp.h"
 #include "project.h"
-#include "interfaceitem.h"
+#include "xitem.h"
 #include "xdict.h"
 
 ProjectRuntime RUNTIME;
@@ -153,7 +153,7 @@ void ProjectRuntime::press_button_by_link(QString link_str) {
 }
 
 //---------------------------------------------------------------------
-/*InterfaceItem *ProjectRuntime::get_var_by_link(QString link_str) {
+/*XItem *ProjectRuntime::get_var_by_link(QString link_str) {
     VarLink link(link_str);
     Module *module = get_module(link.module);
     return module->interf()->var(link.var);

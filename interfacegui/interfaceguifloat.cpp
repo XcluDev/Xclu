@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "interfaceguifloat.h"
-#include "interfaceitemfloat.h"
+#include "xitemfloat.h"
 #include "xcludoublespinbox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiFloat::InterfaceGuiFloat(InterfaceGuiPageCreator &input, InterfaceItemFloat *item)
+InterfaceGuiFloat::InterfaceGuiFloat(InterfaceGuiPageCreator &input, XItemFloat *item)
     :InterfaceGui(input, item)
 {
     insert_label(input);

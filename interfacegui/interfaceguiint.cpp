@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "interfaceguiint.h"
-#include "interfaceitemint.h"
+#include "xitemint.h"
 #include "xcluspinbox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiInt::InterfaceGuiInt(InterfaceGuiPageCreator &input, InterfaceItemInt *item)
+InterfaceGuiInt::InterfaceGuiInt(InterfaceGuiPageCreator &input, XItemInt *item)
     :InterfaceGui(input, item)
 {
     insert_label(input);

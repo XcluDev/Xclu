@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "interfaceitemobject.h"
+#include "xitemobject.h"
 #include "interfaceguiobject.h"
 #include "xcluobjectimage.h"
 #include "xcluobjectwrapper.h"
@@ -29,7 +29,7 @@ void InterfaceGuiObjectVisual::clear_image() {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-InterfaceGuiObject::InterfaceGuiObject(InterfaceGuiPageCreator &input, InterfaceItemObject *item)
+InterfaceGuiObject::InterfaceGuiObject(InterfaceGuiPageCreator &input, XItemObject *item)
     :InterfaceGui(input, item)
 {
     visual_.preview_label_ = new QLabel("");

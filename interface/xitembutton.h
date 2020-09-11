@@ -1,15 +1,15 @@
 #ifndef INTERFACEITEMBUTTON_H
 #define INTERFACEITEMBUTTON_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 class InterfaceGuiButton;
 
-class InterfaceItemButton: public InterfaceItem
+class XItemButton: public XItem
 {
 public:
-    InterfaceItemButton(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemButton(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }
@@ -40,7 +40,7 @@ protected:
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    void copy_data_to_internal(InterfaceItem * /*item*/ ) {}
+    void copy_data_to_internal(XItem * /*item*/ ) {}
 };
 
 #endif // INTERFACEITEMBUTTON_H

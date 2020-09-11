@@ -1,4 +1,4 @@
-#include "interfaceitemobject.h"
+#include "xitemobject.h"
 #include "interfaceguiobject.h"
 #include "incl_cpp.h"
 
@@ -13,8 +13,8 @@ object(strings) - массив строк (?) - его можно ставить
 */
 
 
-InterfaceItemObject::InterfaceItemObject(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemObject::XItemObject(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -34,20 +34,20 @@ InterfaceItemObject::InterfaceItemObject(ModuleInterface *parent, const Interfac
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemObject::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemObject::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiObject(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemObject::gui_to_var_internal() {
+void XItemObject::gui_to_var_internal() {
     //set_value_int(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemObject::var_to_gui_internal() {
+void XItemObject::var_to_gui_internal() {
     //показать объект визуально
     //если изображение - то картинкой, если нет - то текстовым описанием
     //мы это делаем только по команде извне - так как не знаем,
@@ -60,7 +60,7 @@ void InterfaceItemObject::var_to_gui_internal() {
 //---------------------------------------------------------------------
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-void InterfaceItemObject::copy_data_to_internal(InterfaceItem *item) {
+void XItemObject::copy_data_to_internal(XItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
     XDictRead(get_object()).copy_to(item->get_object());
 }

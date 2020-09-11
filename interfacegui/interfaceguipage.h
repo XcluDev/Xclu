@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemPage;
+class XItemPage;
 class XcluScroollArea;
 
 class InterfaceGuiPage : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiPage(InterfaceGuiPageCreator &input, InterfaceItemPage *item);
+    InterfaceGuiPage(InterfaceGuiPageCreator &input, XItemPage *item);
     ~InterfaceGuiPage();
 
     //закончить страницу

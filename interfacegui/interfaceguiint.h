@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemInt;
+class XItemInt;
 class XcluSpinBox;
 
 class InterfaceGuiInt : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiInt(InterfaceGuiPageCreator &input, InterfaceItemInt *item);
+    InterfaceGuiInt(InterfaceGuiPageCreator &input, XItemInt *item);
     ~InterfaceGuiInt();
 
     //значение для проверки видимости детей

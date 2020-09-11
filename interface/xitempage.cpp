@@ -1,9 +1,9 @@
-#include "interfaceitempage.h"
+#include "xitempage.h"
 #include "interfaceguipage.h"
 
 //---------------------------------------------------------------------
-InterfaceItemPage::InterfaceItemPage(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemPage::XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
     //page Main_page
     name_ = pre_description.line_to_parse;
@@ -11,20 +11,20 @@ InterfaceItemPage::InterfaceItemPage(ModuleInterface *parent, const InterfaceIte
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemPage::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemPage::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiPage(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemPage::gui_to_var_internal() {
+void XItemPage::gui_to_var_internal() {
     scroll_ = gui_->get_vscroll();
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemPage::var_to_gui_internal() {
+void XItemPage::var_to_gui_internal() {
     gui_->set_vscroll(scroll_);
 }
 

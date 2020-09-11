@@ -1,14 +1,14 @@
 #ifndef INTERFACEITEMSEPARATOR_H
 #define INTERFACEITEMSEPARATOR_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 
-class InterfaceItemSeparator: public InterfaceItem
+class XItemSeparator: public XItem
 {
 public:
-    InterfaceItemSeparator(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemSeparator(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
@@ -21,7 +21,7 @@ public:
 protected:
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    void copy_data_to_internal(InterfaceItem * /*item*/) {}
+    void copy_data_to_internal(XItem * /*item*/) {}
 
     bool is_line_ = false;  //является ли линией или просто вертикальным сепаратором
 };

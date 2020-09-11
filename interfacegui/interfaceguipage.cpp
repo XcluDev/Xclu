@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
 #include "interfaceguipage.h"
-#include "interfaceitempage.h"
+#include "xitempage.h"
 #include "xcluscrollarea.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiPage::InterfaceGuiPage(InterfaceGuiPageCreator &input, InterfaceItemPage *item)
+InterfaceGuiPage::InterfaceGuiPage(InterfaceGuiPageCreator &input, XItemPage *item)
     :InterfaceGui(input, item)
 {
     //завершаем предыдущую страницу

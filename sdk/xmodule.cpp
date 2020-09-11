@@ -302,7 +302,7 @@ void XModule::process_error(QString message) {
 bool XModule::was_changed(QString name) {
     //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
     //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
-    InterfaceItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
+    XItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
     return var->was_changed();
 }
 

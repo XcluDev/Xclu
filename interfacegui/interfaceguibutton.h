@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemButton;
+class XItemButton;
 class QPushButton;
 
 class InterfaceGuiButton : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiButton(InterfaceGuiPageCreator &input, InterfaceItemButton *item);
+    InterfaceGuiButton(InterfaceGuiPageCreator &input, XItemButton *item);
     ~InterfaceGuiButton();
 
     //значение - нажатие считывается один раз, затем стирается

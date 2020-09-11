@@ -3,19 +3,19 @@
 
 //Объект
 
-#include "interfaceitem.h"
+#include "xitem.h"
 #include "xdict.h"
 #include <QScopedPointer>
 
 class ModuleInterface;
 class InterfaceGuiObject;
 
-class InterfaceItemObject: public InterfaceItem
+class XItemObject: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    InterfaceItemObject(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
-    //~InterfaceItemObject();
+    XItemObject(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    //~XItemObject();
 
     //не поддерживаем скаляры, но будем записывать настройки в строку
     bool supports_string() { return true; }
@@ -45,7 +45,7 @@ protected:
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    virtual void copy_data_to_internal(InterfaceItem *item);
+    virtual void copy_data_to_internal(XItem *item);
 };
 
 

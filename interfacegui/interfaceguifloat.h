@@ -3,14 +3,14 @@
 
 #include "interfacegui.h"
 
-class InterfaceItemFloat;
+class XItemFloat;
 class XcluDoubleSpinBox;
 
 class InterfaceGuiFloat : public InterfaceGui
 {
     Q_OBJECT
 public:
-    InterfaceGuiFloat(InterfaceGuiPageCreator &input, InterfaceItemFloat *item);
+    InterfaceGuiFloat(InterfaceGuiPageCreator &input, XItemFloat *item);
     ~InterfaceGuiFloat();
 
     //значение для проверки видимости детей

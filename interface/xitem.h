@@ -10,14 +10,14 @@
 struct InterfaceGuiPageCreator;
 class InterfaceGui;
 class QJsonObject;
-class InterfaceItem;
+class XItem;
 class XDict;
 class ModuleInterface;
 
 //предварительная информация для построения элемента интерфейса
-struct InterfaceItemPreDescription {
+struct XItemPreDescription {
     QString title;
-    InterfaceItemType type = InterfaceItemTypeNone;
+    XItemType type = XItemTypeNone;
     VarQualifier qualifier = VarQualifierIn;
     QString qualifier_options; //опции в квалификаторе, типа out(not_save)
     QString options;        //дополнительные опции, типа choose:file, choose:folder для строк string(choose:file)
@@ -27,25 +27,24 @@ struct InterfaceItemPreDescription {
 
 
 //Элемент интерфейса
-class InterfaceItem
-{
+class XItem {
 public:
-    static InterfaceItem *create_item(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
-    static InterfaceItem *create_item(ModuleInterface *parent, QString title_underscored, InterfaceItemType type,
+    static XItem *create_item(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    static XItem *create_item(ModuleInterface *parent, QString title_underscored, XItemType type,
                                       const QStringList &description,
                                       VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
                                       QString options = "",
                                       QString qual_options = "");
     //page, group
-    static InterfaceItem *create_decorate_item(ModuleInterface *parent, QString name, InterfaceItemType type, const QStringList &description);
+    static XItem *create_decorate_item(ModuleInterface *parent, QString name, XItemType type, const QStringList &description);
     //separator
-    static InterfaceItem *create_separator(ModuleInterface *parent, QString name, InterfaceItemType type = InterfaceItemTypeSeparator, bool is_line = false);
+    static XItem *create_separator(ModuleInterface *parent, QString name, XItemType type = XItemTypeSeparator, bool is_line = false);
 
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
-    InterfaceItem(ModuleInterface *interf, const InterfaceItemPreDescription &pre_description);
-    virtual ~InterfaceItem();
+    XItem(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    virtual ~XItem();
 
     //доступ ко всему интерфейсу
     ModuleInterface *interf() { return interf_; }
@@ -53,7 +52,7 @@ public:
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
     QString title();
-    InterfaceItemType type();
+    XItemType type();
     VarQualifier qualifier();
     bool is_const();
     bool is_in();
@@ -109,7 +108,7 @@ public:
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (object) - должны переписать copy_data_to_internal
-    void copy_data_to(InterfaceItem *item);
+    void copy_data_to(XItem *item);
 
     //Запись и считывание json
     void write_json(QJsonObject &json);
@@ -156,7 +155,7 @@ protected:
     //основные характеристики
     QString title_;
     QString name_;
-    InterfaceItemType type_;
+    XItemType type_;
     VarQualifier qualifier_;
     QStringList description_;   //может быть несколько строк
 
@@ -196,7 +195,7 @@ protected:
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    virtual void copy_data_to_internal(InterfaceItem *item);
+    virtual void copy_data_to_internal(XItem *item);
 
 
     //это общее gui__ - хотя в самих представителях будут конкретные представители,

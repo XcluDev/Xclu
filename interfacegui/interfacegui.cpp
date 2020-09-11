@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "interfacegui.h"
 #include "incl_cpp.h"
-#include "interfaceitem.h"
+#include "xitem.h"
 #include "visibilitygroups.h"
 
 //---------------------------------------------------------------------
-InterfaceGui::InterfaceGui(InterfaceGuiPageCreator &input, InterfaceItem * item)
+InterfaceGui::InterfaceGui(InterfaceGuiPageCreator &input, XItem * item)
     :QWidget(input.parent)
 {
     item__ = item;

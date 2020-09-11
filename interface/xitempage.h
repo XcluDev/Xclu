@@ -1,15 +1,15 @@
 #ifndef INTERFACEITEMPAGE_H
 #define INTERFACEITEMPAGE_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 class InterfaceGuiPage;
 
-class InterfaceItemPage: public InterfaceItem
+class XItemPage: public XItem
 {
 public:
-    InterfaceItemPage(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual InterfaceGui *create_gui(InterfaceGuiPageCreator &input);
@@ -33,7 +33,7 @@ protected:
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-    void copy_data_to_internal(InterfaceItem * /*item*/) {}
+    void copy_data_to_internal(XItem * /*item*/) {}
 };
 
 #endif // INTERFACEITEMPAGE_H

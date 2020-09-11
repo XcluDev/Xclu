@@ -1,15 +1,15 @@
 #ifndef INTERFACEITEMSTRING_H
 #define INTERFACEITEMSTRING_H
 
-#include "interfaceitem.h"
+#include "xitem.h"
 
 class ModuleInterface;
 class InterfaceGuiString;
 
-class InterfaceItemString: public InterfaceItem
+class XItemString: public XItem
 {
 public:
-    InterfaceItemString(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description);
+    XItemString(ModuleInterface *parent, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string() { return value_; }

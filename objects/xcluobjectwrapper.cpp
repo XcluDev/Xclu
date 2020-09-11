@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "xcluobjectwrapper.h"
 #include "incl_cpp.h"
-#include "interfaceitemobject.h"
+#include "xitemobject.h"
 #include "interfaceguiobject.h"
 #include "xcluobjectimage.h"
 #include "xcluobjectsoundformat.h"

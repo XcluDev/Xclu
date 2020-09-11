@@ -20,7 +20,7 @@
 #include "xdict.h"
 
 class QLabel;
-class InterfaceItemObject;
+class XItemObject;
 class InterfaceGuiObjectVisual;
 class XDict;
 class InterfaceGuiObject;

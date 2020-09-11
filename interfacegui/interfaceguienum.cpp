@@ -1,11 +1,11 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "interfaceguienum.h"
-#include "interfaceitemenum.h"
+#include "xitemenum.h"
 #include "xclucombobox.h"
 
 //---------------------------------------------------------------------
-InterfaceGuiEnum::InterfaceGuiEnum(InterfaceGuiPageCreator &input, InterfaceItemEnum *item)
+InterfaceGuiEnum::InterfaceGuiEnum(InterfaceGuiPageCreator &input, XItemEnum *item)
     :InterfaceGui(input, item)
 {
     insert_label(input);

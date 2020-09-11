@@ -1,4 +1,4 @@
-#include "interfaceitemtext.h"
+#include "xitemtext.h"
 #include "incl_cpp.h"
 #include "interfaceguitext.h"
 
@@ -14,8 +14,8 @@
 //дополнительные строки - это текст для значения по умолчанию,
 //в виде строк, ограниченных " " - чтобы триммер строк не съел пробелы в конце.
 
-InterfaceItemText::InterfaceItemText(ModuleInterface *parent, const InterfaceItemPreDescription &pre_description)
-    : InterfaceItem(parent, pre_description)
+XItemText::XItemText(ModuleInterface *parent, const XItemPreDescription &pre_description)
+    : XItem(parent, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -33,27 +33,27 @@ InterfaceItemText::InterfaceItemText(ModuleInterface *parent, const InterfaceIte
 
 //---------------------------------------------------------------------
 //графический интерфейс
-InterfaceGui *InterfaceItemText::create_gui(InterfaceGuiPageCreator &input) {
+InterfaceGui *XItemText::create_gui(InterfaceGuiPageCreator &input) {
     gui__ = gui_ = new InterfaceGuiText(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void InterfaceItemText::gui_to_var_internal() {
+void XItemText::gui_to_var_internal() {
     set_value_string(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void InterfaceItemText::var_to_gui_internal() {
+void XItemText::var_to_gui_internal() {
     gui_->set_value(value_string());
 }
 
 //---------------------------------------------------------------------
 //значение по умолчанию
 //это строки описания, начиная со второй. Они с кавычками - поэтому, удаляем их
-QString InterfaceItemText::default_value() {
+QString XItemText::default_value() {
     QStringList list;
     for (int i=1; i<description_count(); i++) {
         QString line = description(i);
