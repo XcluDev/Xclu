@@ -80,8 +80,8 @@ FORMS += \
     host/dialogs/dialogmodulename.ui \
     host/dialogs/dialogpreferences.ui
 
-INCLUDEPATH += core sdk/math modules components components/gui
-INCLUDEPATH += host host/dialogs objects sdk
+INCLUDEPATH += project sdk/math modules components components/gui
+INCLUDEPATH += host host/dialogs sdk/types sdk
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
@@ -115,6 +115,9 @@ SOURCES += \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
     modules/moduleregistrar.cpp \
+    project/project.cpp \
+    project/projectproperties.cpp \
+    project/projectruntime.cpp \
     sdk/console.cpp \
     sdk/incl_cpp.cpp \
     sdk/incl_h.cpp \
@@ -124,11 +127,11 @@ SOURCES += \
     sdk/math/slowbit.cpp \
     sdk/math/xclu_parse_tree.cpp \
     sdk/math/xclu_utils.cpp \
-    core/xclu_types.cpp \
+    project/xclu_types.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
-    objects/xarray.cpp \
+    sdk/types/xarray.cpp \
     sdk/xmodule.cpp \
     components/visibilitygroups.cpp \
     components/gui/xclucombobox.cpp \
@@ -139,10 +142,10 @@ SOURCES += \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
     main.cpp \
-    objects/xcluobjectimage.cpp \
-    objects/xcluobjectsoundformat.cpp \
-    objects/xcluobjectwrapper.cpp \
-    objects/xcluprotecteddata.cpp \
+    sdk/types/xcluobjectimage.cpp \
+    sdk/types/xcluobjectsoundformat.cpp \
+    sdk/types/xcluobjectwrapper.cpp \
+    sdk/types/xcluprotecteddata.cpp \
     host/consoleview.cpp \
     host/dialogs/dialogmodulename.cpp \
     host/dialogs/dialogpreferences.cpp \
@@ -150,14 +153,11 @@ SOURCES += \
     host/dialogs/dialogtestmoduleinterface.cpp \
     host/editormodule.cpp \
     host/editormodules.cpp \
-    host/project.cpp \
     host/dialogs/dialogaddmodule.cpp \
     host/projectgui.cpp \
-    host/projectproperties.cpp \
-    host/projectruntime.cpp \
     python/pythoncore.cpp \
     sdk/xclass.cpp \
-    objects/xdict.cpp
+    sdk/types/xdict.cpp
 
 HEADERS += \
     components/gui/xgui.h \
@@ -188,6 +188,9 @@ HEADERS += \
     host/xclu_settings.h \
     host/xclu_theme.h \
     modules/moduleregistrar.h \
+    project/project.h \
+    project/projectproperties.h \
+    project/projectruntime.h \
     sdk/console.h \
     sdk/incl_cpp.h \
     sdk/incl_h.h \
@@ -198,11 +201,11 @@ HEADERS += \
     sdk/math/slowbit.h \
     sdk/math/xclu_parse_tree.h \
     sdk/math/xclu_utils.h \
-    core/xclu_types.h \
+    project/xclu_types.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
-    objects/xarray.h \
+    sdk/types/xarray.h \
     sdk/qt_widgets.h \
     sdk/xmodule.h \
     components/visibilitygroups.h \
@@ -213,10 +216,10 @@ HEADERS += \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
-    objects/xcluobjectimage.h \
-    objects/xcluobjectsoundformat.h \
-    objects/xcluobjectwrapper.h \
-    objects/xcluprotecteddata.h \
+    sdk/types/xcluobjectimage.h \
+    sdk/types/xcluobjectsoundformat.h \
+    sdk/types/xcluobjectwrapper.h \
+    sdk/types/xcluprotecteddata.h \
     host/consoleview.h \
     host/dialogs/dialogmodulename.h \
     host/dialogs/dialogpreferences.h \
@@ -224,14 +227,11 @@ HEADERS += \
     host/dialogs/dialogtestmoduleinterface.h \
     host/editormodule.h \
     host/editormodules.h \
-    host/project.h \
     host/dialogs/dialogaddmodule.h \
     host/projectgui.h \
-    host/projectproperties.h \
-    host/projectruntime.h \
     python/pythoncore.h \
     sdk/xclass.h \
-    objects/xdict.h
+    sdk/types/xdict.h
 
 #--------------------------------------------------------------------------
 #Python
