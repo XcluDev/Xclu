@@ -5,7 +5,18 @@
 //---------------------------------------------------------------------
 ExportInterface::ExportInterface()
 {
+    //Reading template
+    QString file_name = xclu_module_h_template_file();
+    xclu_assert(QFileInfo(file_name).exists(), "No template h file '" + file_name + "'");
 
+    QFile textFile(file_name);
+    QTextStream in(&textFile);
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        templ_.append(line);
+    }
+    textFile.close();
+    xclu_console_append("Template size " + QString::number(templ_.size()));
 }
 
 //---------------------------------------------------------------------

@@ -1,5 +1,5 @@
-#include "types.h"
-#include "utils.h"
+#include "math_types.h"
+#include "math_utils.h"
 
 //-------------------------------------------------------
 void rect_int::crop(int w0, int h0) {

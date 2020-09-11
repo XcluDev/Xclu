@@ -80,22 +80,23 @@ FORMS += \
     project/dialogs/dialogmodulename.ui \
     project/dialogs/dialogpreferences.ui
 
-INCLUDEPATH += core modules builtin_modules_impl/System/ interface interfacegui 
+INCLUDEPATH += core sdk/math modules interface interfacegui
 INCLUDEPATH += project project/dialogs objects sdk
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
 
 SOURCES += \
-    core/raster.cpp \
-    core/types.cpp \
-    core/utils.cpp \
-    core/xclu_parse_tree.cpp \
+    sdk/math/math_types.cpp \
+    sdk/math/math_utils.cpp \
+    sdk/math/raster.cpp \
+    sdk/math/slowbit.cpp \
+    sdk/math/xclu_parse_tree.cpp \
+    sdk/math/xclu_utils.cpp \
     core/xclu_paths.cpp \
     core/xclu_settings.cpp \
     core/xclu_theme.cpp \
     core/xclu_types.cpp \
-    core/xclu_utils.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
@@ -153,7 +154,6 @@ SOURCES += \
     python/pythoncore.cpp \
     interface/interfaceitemenum.cpp \
     interfacegui/interfaceguienum.cpp \
-    core/slowbit.cpp \
     core/incl_cpp.cpp \
     core/incl_h.cpp \
     sdk/xclass.cpp \
@@ -162,16 +162,17 @@ SOURCES += \
 HEADERS += \
     core/incl_h.h \
     core/incl_cpp.h \
-    core/raster.h \
-    core/types.h \
-    core/utils.h \
-    core/int2.h \
-    core/xclu_parse_tree.h \
+    sdk/math/int2.h \
+    sdk/math/math_types.h \
+    sdk/math/math_utils.h \
+    sdk/math/raster.h \
+    sdk/math/slowbit.h \
+    sdk/math/xclu_parse_tree.h \
+    sdk/math/xclu_utils.h \
     core/xclu_paths.h \
     core/xclu_settings.h \
     core/xclu_theme.h \
     core/xclu_types.h \
-    core/xclu_utils.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
@@ -229,7 +230,6 @@ HEADERS += \
     core/qt_widgets.h \
     interface/interfaceitemenum.h \
     interfacegui/interfaceguienum.h \
-    core/slowbit.h \
     sdk/xclass.h \
     objects/xdict.h
 

@@ -1,7 +1,6 @@
 #pragma once
 
 //Utility functions and includes
-#include "types.h"
 
 //------ Math --------------------------------------------------
 //Pi

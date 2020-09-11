@@ -19,8 +19,8 @@
 
 
 //types, utils
-#include "types.h"
-#include "utils.h"
+#include "math_types.h"
+#include "math_utils.h"
 #include "raster.h"
 
 //geometry

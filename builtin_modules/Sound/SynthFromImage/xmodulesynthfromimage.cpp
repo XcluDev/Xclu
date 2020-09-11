@@ -47,7 +47,7 @@ void XModuleSynthFromImageData::set_image(int w, int h, const quint8 *rgb) {
     if (contrast > 0) {
         float use_range = 1.0 / contrast;
         for (int x=0; x<w; x++) {
-            image_[x] = xclu_map_clamped(image_[x],center_ - use_range/2, center_ + use_range/2, -1, 1);
+            image_[x] = mapf_clamped(image_[x],center_ - use_range/2, center_ + use_range/2, -1, 1);
         }
     }
     else {
@@ -186,7 +186,7 @@ void XModuleSynthFromImage::update_data() {
             XDictImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
             quint8 *data =  XDictImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {
-                int y0 = int(xclu_map_clamped(data_.image_[x],-1,1, h, 0));
+                int y0 = int(mapf_clamped(data_.image_[x],-1,1, h, 0));
                 for (int y=0; y<y0; y++) {
                     data[x+w*y] = 255;
                 }
