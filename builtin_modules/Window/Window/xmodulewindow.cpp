@@ -10,7 +10,7 @@
 #include "xdict.h"
 
 
-//заполнение имени класса и регистрация класса
+//registering module implementation
 REGISTRAR(Window)
 
 

@@ -25,7 +25,7 @@ public:
     static XModuleFbo *new_module();
 
 protected:
-    //Выполнение
+    virtual void impl_loaded() {}
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();

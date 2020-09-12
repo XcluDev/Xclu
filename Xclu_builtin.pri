@@ -13,6 +13,7 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
+    $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.cpp \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.cpp \
     $$PWD/builtin_modules/Window/WImage/xmodulewimage.cpp \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp
@@ -28,6 +29,8 @@ HEADERS += \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.h \
+    $$PWD/builtin_modules/System/ScanFolder/auto.h \
+    $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.h \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.h \
     $$PWD/builtin_modules/Window/WImage/xmodulewimage.h \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.h

@@ -151,9 +151,9 @@ public:
     //....
 
     //Folder to scan.
-    QString ui_folder() {...}
+    QString s_folder() {...}
        //for 'out' qualified variables:
-    void ui_folder(QString value) {...}
+    void s_folder(QString value) {...}
 
     //Type of content we are searching for
     enum enum_filter {
@@ -162,9 +162,7 @@ public:
         filter_Folders = 2,
         filter_N__ = 3
     };
-    enum_filter ui_filter() {...}
-
-    //__separator0 - blank line
+    enum_filter en_filter() {...}
      */
     //Subclasses must reimplement it, in opposite case the exception will arise.
     //export_interface_template() - useful helper for this
@@ -238,6 +236,7 @@ protected:
 
                                    bool getter_setter = false,
                                    QString cpp_type = "",
+                                   QString fun_prefix = "",
                                    QString cpp_getter = "",
                                    QString cpp_setter = "",
                                    bool final_blank = true

@@ -489,9 +489,9 @@ void XItem::export_interface(QStringList & /*file*/) {
 //....
 
 //Folder to scan.
-QString ui_folder() {...}
+QString s_folder() {...}
    //for 'out' qualified variables:
-void ui_folder(QString value) {...}
+void s_folder(QString value) {...}
 
 //Type of content we are searching for
 enum enum_filter {
@@ -499,7 +499,7 @@ enum enum_filter {
     filter_Files = 2,
     filter_Folders = 3
 }
-enum_filter ui_filter() {...}
+enum_filter en_filter() {...}
 */
 
 void XItem::export_interface_template(QStringList &file,
@@ -508,6 +508,7 @@ void XItem::export_interface_template(QStringList &file,
                                       QString custom_comment_begin,
                                       bool getter_setter,
                                       QString cpp_type,
+                                      QString fun_prefix,
                                       QString cpp_getter,
                                       QString cpp_setter,
                                       bool final_blank) {
@@ -515,14 +516,17 @@ void XItem::export_interface_template(QStringList &file,
         file.append("//----------------------------------------------------");
     }
     if (comment_description) {
-        file.append("//" + custom_comment_begin + title());
+        QString qualif;
+        if (qualifier() == VarQualifierOut) qualif = "Out ";
+        if (qualifier() == VarQualifierConst) qualif = "Const ";
+        file.append("//" + qualif + custom_comment_begin + title());
         file.append("//" + description());
     }
     if (getter_setter) {
-        file.append(QString("%2ui_%1() { return %3(\"%1\"); }").arg(name()).arg(cpp_type).arg(cpp_getter));
+        file.append(QString("%2%3_%1() { return %4(\"%1\"); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_getter));
         if (qualifier() == VarQualifierOut
                 && !cpp_setter.isEmpty()) {
-            file.append(QString("void ui_%1(%2value) { %3(\"%1\", value); }").arg(name()).arg(cpp_type).arg(cpp_setter));
+            file.append(QString("void %3_%1(%2value) { %4(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
         }
     }
     if (final_blank) {

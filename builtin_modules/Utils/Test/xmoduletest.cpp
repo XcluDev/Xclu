@@ -3,7 +3,7 @@
 #include "moduleregistrar.h"
 #include "projectruntime.h"
 
-//заполнение имени класса и регистрация класса
+//registering module implementation
 REGISTRAR(Test)
 
 //---------------------------------------------------------------------

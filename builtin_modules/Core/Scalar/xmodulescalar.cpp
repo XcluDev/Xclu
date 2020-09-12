@@ -10,7 +10,7 @@
 #include "xcluspinbox.h"
 
 
-//заполнение имени класса и регистрация класса
+//registering module implementation
 REGISTRAR(Scalar)
 
 //---------------------------------------------------------------------

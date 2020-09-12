@@ -78,7 +78,7 @@ void ExportInterface::export_all_builtin_h_files() {
             //Export
             export_to_h_file(interf.data(), seed->folder());
         }
-        catch(XCluException& e) {
+        catch(XCluException& /*e*/) {
             xclu_console_append("Error at `" + seed->description.class_name + "`");
         }
     }

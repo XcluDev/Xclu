@@ -7,7 +7,7 @@
 #include "projectruntime.h"
 #include "module.h"
 
-//заполнение имени класса и регистрация класса
+//registering module implementation
 REGISTRAR(Fbo)
 
 //---------------------------------------------------------------------

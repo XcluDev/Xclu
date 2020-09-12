@@ -9,7 +9,7 @@
 
 #include "xcluobjectimage.h"
 
-//заполнение имени класса и регистрация класса
+//registering module implementation
 REGISTRAR(RealsenseCamera)
 
 
