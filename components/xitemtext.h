@@ -24,6 +24,10 @@ public:
     int lines_count_min() { return lines_count_min_; }
     int lines_count_max() { return lines_count_max_; }
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     QString value_;
 

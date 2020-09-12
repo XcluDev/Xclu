@@ -115,6 +115,13 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     //Начинаем страницу Main - закомментировано
     //create_decorate_item("Main", XItemTypePage, QStringList(""));
 
+    //Общая страница добавляется в ModuleSeed::gui_lines().
+    //general_page_start sets by "GENERAL_PAGE" at general_page.xgui
+    //after parsing all such items marked as "general_page_ = true;"
+    QString general_page_marker = GENERAL_PAGE_marker();
+    int general_page_start = -1;
+
+
     for (int i=0; i<lines.count(); /*i++*/) {//не увеличиваем i, так как это делает collect_desctiption
         // page XXX
         // //description
@@ -130,6 +137,13 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
         QString line = lines[i];
         //будем отлавливать исключение и добавлять к нему информацию, какую строку парсим
         try {
+            //GENERAL_PAGE - command for switching to general page
+            if (line == general_page_marker) {
+                general_page_start = items_.size();
+                i++;
+                continue;
+            }
+
             //описание - его не должно быть, так как мы их сразу считываем
             if (line.startsWith("//")) {
                 xclu_exception("Description '" + line + "' is not related to some item");
@@ -263,8 +277,12 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
     }
 
-    //Добавить страницу "General" с общими параметрами имя, name, тип и Enabled, обработка ошибок
-    //create_general_page();
+    //Mark items of general page
+    if (general_page_start >= 0) {
+        for (int i=general_page_start; i<items_.size(); i++) {
+            items_[i]->set_belongs_general_page(true);
+        }
+    }
 
     //Проверяем, что интерфейс начался с создания страницы
     xclu_assert(items_[0]->type() == XItemTypePage, "Interface description must start with a page");

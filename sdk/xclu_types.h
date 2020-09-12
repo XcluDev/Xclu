@@ -54,6 +54,7 @@ enum XItemType : int {
 
 QString interfacetype_to_string(XItemType vartype);
 XItemType string_to_interfacetype(const QString &vartypestr);
+QString GENERAL_PAGE_marker();
 
 //Способ использования переменной
 enum VarQualifier : int {

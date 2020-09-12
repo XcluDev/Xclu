@@ -14,6 +14,11 @@ public:
     //Когда сделаем сохранение - убрать
     bool store_data() { return false; }
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
+
 protected:
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal

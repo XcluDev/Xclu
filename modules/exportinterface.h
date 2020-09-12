@@ -14,6 +14,8 @@ public:
     void export_to_file(ModuleInterface *interf, QString folder);
 private:
     QStringList templ_;
+
+    void append_interface(ModuleInterface *interf, QStringList &file);
 };
 
 #endif // EXPORTINTERFACE_H

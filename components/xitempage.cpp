@@ -29,3 +29,9 @@ void XItemPage::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemPage::export_interface(QStringList &file) {
+    export_interface_template(file, true, true, "Page ");
+}
+
+//---------------------------------------------------------------------

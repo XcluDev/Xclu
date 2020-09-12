@@ -100,6 +100,8 @@ QStringList ModuleSeed::gui_lines() const {
     }
 
     QStringList list = gui_lines_;
+
+    //добавление страницы General
     list.append(ModuleInfo_general_page_);
     return list;
 }

@@ -30,6 +30,10 @@ public:
     //единицы измерения
     QString units() { return units_; }
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     int value_ = 0;
 

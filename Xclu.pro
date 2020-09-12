@@ -125,13 +125,13 @@ SOURCES += \
     sdk/math/math_utils.cpp \
     sdk/math/raster.cpp \
     sdk/math/slowbit.cpp \
-    sdk/math/xclu_parse_tree.cpp \
-    sdk/math/xclu_utils.cpp \
-    project/xclu_types.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
+    sdk/xclu_parse_tree.cpp \
+    sdk/xclu_types.cpp \
+    sdk/xclu_utils.cpp \
     sdk/xmodule.cpp \
     components/visibilitygroups.cpp \
     components/gui/xclucombobox.cpp \
@@ -199,14 +199,14 @@ HEADERS += \
     sdk/math/math_utils.h \
     sdk/math/raster.h \
     sdk/math/slowbit.h \
-    sdk/math/xclu_parse_tree.h \
-    sdk/math/xclu_utils.h \
-    project/xclu_types.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/types/xarray.h \
     sdk/qt_widgets.h \
+    sdk/xclu_parse_tree.h \
+    sdk/xclu_types.h \
+    sdk/xclu_utils.h \
     sdk/xmodule.h \
     components/visibilitygroups.h \
     components/gui/xclucombobox.h \

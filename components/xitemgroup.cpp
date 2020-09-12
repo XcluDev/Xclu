@@ -9,3 +9,9 @@ XItemGroup::XItemGroup(ModuleInterface *parent, const XItemPreDescription &pre_d
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemGroup::export_interface(QStringList & /*file*/) {
+
+}
+
+//---------------------------------------------------------------------

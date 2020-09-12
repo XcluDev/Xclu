@@ -23,6 +23,10 @@ public:
     bool options_choose_file();     //кнопка выбора файла
     bool options_choose_folder();   //кнопка выбора папки
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     QString value_;
     QString default_value_;

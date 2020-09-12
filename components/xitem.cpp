@@ -462,17 +462,71 @@ void XItem::read_json(const QJsonObject &json) {
 
 }
 
+
+//---------------------------------------------------------------------
+//Belonging to general page, common for all modules
+void XItem::set_belongs_general_page(bool v) {
+    belongs_general_page_ = v;
+}
+
+//---------------------------------------------------------------------
+bool XItem::belongs_general_page() {
+    return belongs_general_page_;
+}
+
 //---------------------------------------------------------------------
 //function generates function or functions definitions
-//for using inside C++ class module definition
-//for example, float get_status() { return getf("status"); }
-//in, const - only 'get'
-//out - 'get' and 'set'
 //Subclasses must reimplement it, in opposite case the exception will arise.
-QStringList XItem::generate_cpp_header() {
+void XItem::export_interface(QStringList & /*file*/) {
     xclu_exception("Can't generate C++ header for interface element of type `" + interfacetype_to_string(type()) + "'");
-    return QStringList();
 }
+
+//---------------------------------------------------------------------
+//Helper for export_interface
+//----------------------------------------------------
+/*
+//Page Main
+//....
+
+//Folder to scan.
+QString ui_folder() {...}
+   //for 'out' qualified variables:
+void ui_folder(QString value) {...}
+
+//Type of content we are searching for
+enum enum_filter {
+    filter_All = 1,
+    filter_Files = 2,
+    filter_Folders = 3
+}
+enum_filter ui_filter() {...}
+*/
+
+void XItem::export_interface_template(QStringList &file,
+                                      bool horiz_line,
+                                      bool comment_description,
+                                      QString custom_comment_begin,
+                                      bool getter_setter,
+                                      QString cpp_type,
+                                      QString cpp_getter,
+                                      QString cpp_setter) {
+    if (horiz_line) {
+        file.append("//----------------------------------------------------");
+    }
+    if (comment_description) {
+        file.append("//" + custom_comment_begin + title());
+        file.append("//" + description());
+    }
+    if (getter_setter) {
+        file.append(QString("%2 ui_%1() { return %3(\"%1\"); }").arg(name()).arg(cpp_type).arg(cpp_getter));
+        if (qualifier() == VarQualifierOut) {
+            file.append(QString("void ui_%1(%2 value) { %3(\"%1\", value); }").arg(name()).arg(cpp_type).arg(cpp_setter));
+        }
+    }
+    file.append("");
+
+}
+
 
 //---------------------------------------------------------------------
 

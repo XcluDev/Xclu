@@ -52,3 +52,10 @@ void XItemButton::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemButton::export_interface(QStringList &file) {
+    export_interface_template(file, false, true, "Button ", true,
+                              "int", "geti", "seti");
+}
+
+//---------------------------------------------------------------------

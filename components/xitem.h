@@ -139,14 +139,37 @@ public:
     void unblock_gui_editing();     //разрешить редактирование
     void propagate_visibility();    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
 
+    //Belonging to general page, common for all modules
+    void set_belongs_general_page(bool v);
+    bool belongs_general_page();
     //C++ -------------------------
     //function generates function or functions definitions
     //for using inside C++ class module definition
-    //for example, float get_status() { return getf("status"); }
-    //in, const - only 'get'
-    //out - 'get' and 'set'
+    /*
+    //----------------------------------------------------
+    //Page Main
+    //....
+
+    //Folder to scan.
+    QString ui_folder() {...}
+       //for 'out' qualified variables:
+    void ui_folder(QString value) {...}
+
+    //Type of content we are searching for
+    enum enum_filter {
+        filter_All = 1,
+        filter_Files = 2,
+        filter_Folders = 3
+    }
+    enum_filter ui_filter() {...}
+
+    //__separator0 - blank line
+     */
     //Subclasses must reimplement it, in opposite case the exception will arise.
-    virtual QStringList generate_cpp_header();
+    //export_interface_template() - useful helper for this
+    //Note: only items which are not belong to general page, that is belongs_general_page() == false
+    //are exported by default
+    virtual void export_interface(QStringList &file);
 
 protected:
     //доступ ко всему интерфейсу
@@ -202,6 +225,22 @@ protected:
     //нам требуется общий, чтобы передавать сигналы о видимости
     //подклассы должны его устанавливать!
     XGui *gui__ = nullptr; //не нужно его удалять
+
+    //General page marker
+    bool belongs_general_page_ = false;
+
+    //Helper for export_interface
+    void export_interface_template(QStringList &file,
+                                   bool horiz_line,
+                                   bool comment_description,
+                                   QString custom_comment_begin,
+
+                                   bool getter_setter = false,
+                                   QString cpp_type = "",
+                                   QString cpp_getter = "",
+                                   QString cpp_setter = ""
+            );
+
 };
 
 

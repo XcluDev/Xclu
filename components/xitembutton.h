@@ -29,6 +29,11 @@ public:
     //вызывается из gui при нажатии кнопки
     void callback_button_pressed();
 
+
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     int value_ = 0;
 

@@ -66,5 +66,11 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemObject::export_interface(QStringList &file) {
+
+}
+
+//---------------------------------------------------------------------
 
 

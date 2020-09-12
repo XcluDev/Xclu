@@ -1,8 +1,9 @@
 #General page, added to all modules
 #------------------------------------------
-
-    
+#Marker of general page
+GENERAL_PAGE
 #------------------------------------------
+
 page Control
     //Common settings for all modules considering execution and error handling.
     

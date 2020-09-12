@@ -28,6 +28,10 @@ public:
     //это "групповой" чекбокс, который нужно показывать слева, без label, и справа от которого идет линия
     bool is_group_checkbox() { return is_group_checkbox_; }
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     int value_ = 0;
     float default_value_ = 0;

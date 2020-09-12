@@ -18,6 +18,11 @@ public:
     //является ли линией или просто вертикальным сепаратором
     bool is_line() { return is_line_; }
     bool is_separator() { return !is_line(); }
+
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal

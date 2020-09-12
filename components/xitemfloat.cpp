@@ -63,3 +63,11 @@ void XItemFloat::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemFloat::export_interface(QStringList &file) {
+    export_interface_template(file, false, true, "Float ", true,
+                              "float", "getf", "setf");
+
+}
+
+//---------------------------------------------------------------------

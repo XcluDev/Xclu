@@ -13,7 +13,7 @@ in string(choose:folder) Folder folder=""
     //Please choose a folder
 
 in enum Filter filter=All [All,Files,Folders,Images,Videos,Txt,Csv,Ini,Xml,Json,Custom]
-    //Type of content we are searching for
+    //Type of content we are searching for.
     
 if filter Custom
 in string Custom_Filter custom_filter="*.exe;*.dll"

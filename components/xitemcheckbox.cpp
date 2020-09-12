@@ -52,3 +52,10 @@ void XItemCheckbox::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemCheckbox::export_interface(QStringList &file) {
+    export_interface_template(file, false, true, "Checkbox ", true,
+                              "int", "geti", "seti");
+}
+
+//---------------------------------------------------------------------

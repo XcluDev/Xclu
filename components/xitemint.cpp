@@ -59,4 +59,11 @@ void XItemInt::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemInt::export_interface(QStringList &file) {
+    export_interface_template(file, false, true, "Int ", true,
+                              "int", "geti", "seti");
+}
+
+//---------------------------------------------------------------------
 

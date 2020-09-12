@@ -22,3 +22,9 @@ XGui *XItemSeparator::create_gui(XGuiPageCreator &input) {
 }
 
 //---------------------------------------------------------------------
+//C++
+void XItemSeparator::export_interface(QStringList &file) {
+    file.append("");
+}
+
+//---------------------------------------------------------------------

@@ -31,6 +31,10 @@ public:
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
 
+    //C++ -------------------------
+    virtual void export_interface(QStringList &file);
+    //-----------------------------
+
 protected:
     QScopedPointer<XDict> object_;
 

@@ -66,6 +66,9 @@ XItemType string_to_interfacetype(const QString &vartypestr) {
     return XItemType(string_to_Type(vartypestr, XItemTypeN, InterfaceTypeNames));
 }
 
+QString GENERAL_PAGE_marker() {
+    return "GENERAL_PAGE";
+}
 
 //---------------------------------------------------------------------
 const QString ObjectTypeNames[XDictTypeN] =
