@@ -125,7 +125,34 @@ void XItemEnum::var_to_gui_internal() {
 
 //---------------------------------------------------------------------
 //C++
+/*
+//Type of content we are searching for
+enum enum_filter {
+    filter_All = 0,
+    filter_Files = 1,
+    filter_Folders = 2,
+    filter_N__ = 3
+};
+enum_filter ui_filter() {...}
+*/
+
 void XItemEnum::export_interface(QStringList &file) {
+    export_interface_template(file, false, true, "Enum ", false, "", "", "", false);
+    QString nam = name();
+    QString cpp_type = "enum_" + nam;
+    int n = rawtexts_.size();
+    file.append(QString("enum %1").arg(cpp_type));
+    for (int i=0; i<n; i++) {
+        file.append(QString("    %1_%2 = %3").arg(nam).arg(rawtexts_.at(i)).arg(i));
+    }
+    file.append(QString("    %1_%2 = %3").arg(nam).arg("N__").arg(n));
+    file.append("};");
+
+    file.append(QString("%2 ui_%1() { return %2(geti(\"%1\")); }").arg(nam).arg(cpp_type));
+    if (qualifier() == VarQualifierOut) {
+        file.append(QString("void ui_%1(%2 value) { seti(\"%1\", value); }").arg(name()).arg(cpp_type));
+    }
+    file.append("");
 
 }
 

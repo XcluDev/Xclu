@@ -67,8 +67,10 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 
 //---------------------------------------------------------------------
 //C++
+//original: XDict *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
-
+    export_interface_template(file, false, true, "Object ", true,
+                              "XDict *", "get_object", "");
 }
 
 //---------------------------------------------------------------------

@@ -157,10 +157,11 @@ public:
 
     //Type of content we are searching for
     enum enum_filter {
-        filter_All = 1,
-        filter_Files = 2,
-        filter_Folders = 3
-    }
+        filter_All = 0,
+        filter_Files = 1,
+        filter_Folders = 2,
+        filter_N__ = 3
+    };
     enum_filter ui_filter() {...}
 
     //__separator0 - blank line
@@ -238,7 +239,8 @@ protected:
                                    bool getter_setter = false,
                                    QString cpp_type = "",
                                    QString cpp_getter = "",
-                                   QString cpp_setter = ""
+                                   QString cpp_setter = "",
+                                   bool final_blank = true
             );
 
 };

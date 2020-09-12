@@ -509,7 +509,8 @@ void XItem::export_interface_template(QStringList &file,
                                       bool getter_setter,
                                       QString cpp_type,
                                       QString cpp_getter,
-                                      QString cpp_setter) {
+                                      QString cpp_setter,
+                                      bool final_blank) {
     if (horiz_line) {
         file.append("//----------------------------------------------------");
     }
@@ -518,13 +519,15 @@ void XItem::export_interface_template(QStringList &file,
         file.append("//" + description());
     }
     if (getter_setter) {
-        file.append(QString("%2 ui_%1() { return %3(\"%1\"); }").arg(name()).arg(cpp_type).arg(cpp_getter));
-        if (qualifier() == VarQualifierOut) {
-            file.append(QString("void ui_%1(%2 value) { %3(\"%1\", value); }").arg(name()).arg(cpp_type).arg(cpp_setter));
+        file.append(QString("%2ui_%1() { return %3(\"%1\"); }").arg(name()).arg(cpp_type).arg(cpp_getter));
+        if (qualifier() == VarQualifierOut
+                && !cpp_setter.isEmpty()) {
+            file.append(QString("void ui_%1(%2value) { %3(\"%1\", value); }").arg(name()).arg(cpp_type).arg(cpp_setter));
         }
     }
-    file.append("");
-
+    if (final_blank) {
+        file.append("");
+    }
 }
 
 

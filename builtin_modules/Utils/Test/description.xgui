@@ -71,6 +71,10 @@ in text In_Text text2 3 3
 out text Out_Text text3 3 3
     //Output value.
 
+separator
+
+in object Object object
+    
 page Choose_Files
 
 #Строка с кнопкой для выбора файла, затем описание, диалог и фильтр 
