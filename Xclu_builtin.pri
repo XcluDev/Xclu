@@ -19,20 +19,33 @@ SOURCES += \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp
 
 HEADERS += \
+    $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
+    $$PWD/builtin_modules/Core/Scalar/auto.h \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.h \
+    $$PWD/builtin_modules/Drawing/Fbo/auto.h \
     $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.h \
+    $$PWD/builtin_modules/Drawing/FragmentShader/auto.h \
     $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.h \
+    $$PWD/builtin_modules/ImageSources/Webcamera/auto.h \
     $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.h \
+    $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xmoduleproject.h \
+    $$PWD/builtin_modules/Sound/SoundOsc/auto.h \
     $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.h \
+    $$PWD/builtin_modules/Sound/SoundOut/auto.h \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.h \
+    $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
+    $$PWD/builtin_modules/System/Execute/auto.h \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.h \
     $$PWD/builtin_modules/System/ScanFolder/auto.h \
     $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.h \
+    $$PWD/builtin_modules/Utils/Test/auto.h \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.h \
+    $$PWD/builtin_modules/Window/WImage/auto.h \
     $$PWD/builtin_modules/Window/WImage/xmodulewimage.h \
+    $$PWD/builtin_modules/Window/Window/auto.h \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.h
 
 #--------------------------------------------------------------------------

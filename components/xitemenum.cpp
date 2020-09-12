@@ -137,7 +137,7 @@ enum_filter en_filter() {...}
 */
 
 void XItemEnum::export_interface(QStringList &file) {
-    export_interface_template(file, false, true, "Enum ", false, "", "", "", false);
+    export_interface_template(file, false, true, "Enum ", false, "", "", "", "", false);
     QString nam = name();
     QString cpp_type = "enum_" + nam;
     int n = rawtexts_.size();

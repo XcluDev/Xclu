@@ -46,13 +46,13 @@ void XModuleWindow::set_position(int x, int y) {
 //получить экран в зависимости от настроек
 QScreen *XModuleWindow::get_screen() {
     return QGuiApplication::primaryScreen();
-/*    WindowScreen screen = WindowScreen(geti("screen"));
+/*    WindowScreen screen = WindowScreen(i_screen"));
     switch (screen) {
     case WindowScreen_Default:
         return QGuiApplication::primaryScreen();
         break;
     case WindowScreen_Custom: {
-            int index = geti("screen_index");
+            int index = i_screen_index");
             auto screens = QGuiApplication::screens();
             xclu_assert(index>=0 && index<screens.count(),
                         QString("Bad screen index %1").arg(index));
@@ -89,8 +89,8 @@ void XModuleWindow::setup_window() {
     //Qt::FramelessWindowHint
 
     //шрифт
-    if (geti("font_size") == 1) {    //Custom
-        int font_size = geti("font_size_pix");
+    if (en_font_size() == font_size_Custom) {    //Custom
+        int font_size = i_font_size_pix();
         auto font = window_->font();
         font.setPixelSize(font_size);
         window_->setFont(font);
@@ -108,14 +108,14 @@ void XModuleWindow::update_window() {
     //проверка, что пользователь закрыл окно
     if (notify_visible_change_) {
         notify_visible_change_ = false;
-        if (geti("visible") && !window_->isVisible()) {
+        if (i_visible() && !window_->isVisible()) {
             //пользователь нажал кнопку закрытия окна или другой сигнал для закрытия
-            OnCloseAction on_close = OnCloseAction(geti("on_close"));
+            auto on_close = en_on_close();
             switch (on_close) {
-            case  OnCloseAction_Ignore:
+            case  on_close_Ignore:
                 window_->setVisible(true);  //делаем видимым
                 break;
-            case OnCloseAction_Stop:
+            case on_close_Stop:
                 set_stop_out(); //команда остановки
                 break;
             default:
@@ -127,32 +127,32 @@ void XModuleWindow::update_window() {
 
     //title
     if (was_changed("title")) {
-        window_->setWindowTitle(gets("title"));
+        window_->setWindowTitle(s_title());
     }
 
     //TODO!!!!!!!!!!!!!!!!!!!!!!!!!! если меняем размер и положение - то сразу установить setGeometry
     //Size
     bool size_changed = false;
-    WindowSize size = WindowSize(geti("size"));
+    auto size = en_size();
     if (was_changed("size")
-            || (size == WindowSize_Custom && (was_changed("size_x") || was_changed("size_y")))) {
+            || (size == size_Custom && (was_changed("size_x") || was_changed("size_y")))) {
         size_changed = true;
         switch (size) {
-        case WindowSize_Default:
+        case size_Default:
             break;
-        case WindowSize_Custom: set_size(geti("size_x"), geti("size_y"));
+        case size_Custom: set_size(i_size_x(), i_size_y());
             break;
-        case WindowSize_640x480: set_size(640,480);
+        case size_640x480: set_size(640,480);
             break;
-        case WindowSize_800x600: set_size(800,600);
+        case size_800x600: set_size(800,600);
             break;
-        case WindowSize_1024x768: set_size(1024,768);
+        case size_1024x768: set_size(1024,768);
             break;
-        case WindowSize_1280x720: set_size(1280,720);
+        case size_1280x720: set_size(1280,720);
             break;
-        case WindowSize_1920x1080: set_size(1920,1080);
+        case size_1920x1080: set_size(1920,1080);
             break;
-        case WindowSize_1920x1200: set_size(1920,1200);
+        case size_1920x1200: set_size(1920,1200);
             break;
         default:
             xclu_exception("XModuleWindow - Unknown window size specifier");
@@ -161,15 +161,15 @@ void XModuleWindow::update_window() {
 
     //Position
     //меняем положение, даже если изменили размер - если были настройки "в центре экрана"
-    WindowPos position = WindowPos(geti("position"));
+    auto position = en_position();
     if (size_changed || was_changed("position")
-            || (position == WindowPos_Custom && (was_changed("pos_x") || was_changed("pos_y")))) {
+            || (position == position_Custom && (was_changed("pos_x") || was_changed("pos_y")))) {
         switch (position) {
-        case WindowPos_Default:
+        case position_Default:
             break;
-        case WindowPos_Custom: set_position(geti("pos_x"), geti("pos_y"));
+        case position_Custom: set_position(i_pos_x(), i_pos_y());
             break;
-        case WindowPos_ScreenCenter: {
+        case position_Screen_Center: {
                 QRect screenGeometry = get_screen()->geometry();
                 int height = screenGeometry.height();
                 int width = screenGeometry.width();
@@ -184,7 +184,7 @@ void XModuleWindow::update_window() {
 
     //Visibility, fullscreen
     if (was_changed("visible") || was_changed("mode")) {
-        int visible = geti("visible");
+        int visible = i_visible();
         if (!visible) {
             window_->setVisible(false);
         }
@@ -194,15 +194,15 @@ void XModuleWindow::update_window() {
             //minimized,maximized,fullscreen
             QWindow::Visibility visibility = QWindow::Windowed;
 
-            WindowMode mode = WindowMode(geti("mode"));
+            auto mode = en_mode();
             switch (mode) {
-            case WindowMode_Minimized: visibility = QWindow::Minimized;
+            case mode_Minimized: visibility = QWindow::Minimized;
                 break;
-            case WindowMode_Normal_Window: visibility = QWindow::Windowed;
+            case mode_Normal_Window: visibility = QWindow::Windowed;
                 break;
-            case WindowMode_Maximized: visibility = QWindow::Maximized;
+            case mode_Maximized: visibility = QWindow::Maximized;
                 break;
-            case WindowMode_Full_Screen: visibility = QWindow::FullScreen;
+            case mode_Full_Screen: visibility = QWindow::FullScreen;
                 break;
             default:
                 xclu_exception("XModuleWindow - Unknown window mode specifier");
@@ -210,10 +210,7 @@ void XModuleWindow::update_window() {
             window_->setVisible(visibility);
         }
     }
-
-
 }
-
 
 //---------------------------------------------------------------------
 //сигнал на изменение состояния окна

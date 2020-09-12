@@ -66,6 +66,8 @@ protected:
     //Вызовы
     virtual void impl_call(QString function, XDict *input, XDict * /*output*/);
 protected:
+#include "auto.h"
+
     QScopedPointer<QMainWindow> window_;
 
     //создание и установка начальных настроек окна
@@ -75,48 +77,12 @@ protected:
     //он использует was_changed - поэтому, при старте всегда эти значения будут использованы (при старте все переменные was_changed)
     void update_window();
 
-    enum WindowSize : int {
-        WindowSize_Default = 0,
-        WindowSize_Custom = 1,
-        WindowSize_640x480 = 2,
-        WindowSize_800x600 = 3,
-        WindowSize_1024x768 = 4,
-        WindowSize_1280x720 = 5,
-        WindowSize_1920x1080 = 6,
-        WindowSize_1920x1200 = 7,
-        WindowSize_N = 8
-    };
     void set_size(int w, int h);
 
-    enum WindowPos : int {
-        WindowPos_Default = 0,
-        WindowPos_Custom = 1,
-        WindowPos_ScreenCenter = 2,
-        WindowPos_N = 3
-    };
     void set_position(int x, int y);
 
-    //enum WindowScreen : int {
-    //    WindowScreen_Default = 0,
-    //    WindowScreen_Custom = 1,
-    //    WindowScreen_N = 2
-    //};
     //получить экран в зависимости от настроек
     QScreen *get_screen();
-
-    enum WindowMode : int {
-        WindowMode_Minimized = 0,
-        WindowMode_Normal_Window = 1,
-        WindowMode_Maximized = 2,
-        WindowMode_Full_Screen = 3,
-        WindowMode_N = 4
-    };
-
-    enum OnCloseAction : int {
-        OnCloseAction_Ignore = 0,
-        OnCloseAction_Stop = 1,
-        OnCloseAction_N = 2
-    };
 
 protected slots:
 
