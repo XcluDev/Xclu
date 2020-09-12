@@ -153,14 +153,14 @@ QTableWidget *DialogAddModule::create_table_for_category(int i) {
 
     for (int j=0; j<FACTORY.category_size(i); j++) {
         QString module_name = FACTORY.category_module_type(i,j);
-        auto *module = FACTORY.get_module(module_name);
-        if (module) {
+        auto *seed = FACTORY.get_module(module_name);
+        if (seed) {
             //Имя
             QTableWidgetItem *name = new QTableWidgetItem(module_name);
             //выключаем редактирование
             name->setFlags(name->flags() ^ Qt::ItemIsEditable);
             //если реализован, то ставим шрифт bold
-            if (module->description.is_implemented()) {
+            if (seed->description.is_implemented()) {
                 QFont originalFont = name->font();
                 originalFont.setBold(true);
                 name->setFont(originalFont);
@@ -168,7 +168,7 @@ QTableWidget *DialogAddModule::create_table_for_category(int i) {
             table->setItem(j, 0, name);
 
             //Описание
-            QTableWidgetItem *descr = new QTableWidgetItem(module->description.description);
+            QTableWidgetItem *descr = new QTableWidgetItem(seed->description.description);
             descr->setFlags(descr->flags() ^ Qt::ItemIsEditable); // ^ Qt::ItemIsSelectable);
             table->setItem(j, 1, descr);
         }

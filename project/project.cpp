@@ -247,8 +247,8 @@ QString Project::generate_unique_name(QString name_hint, bool dont_change_if_ok)
 
 //---------------------------------------------------------------------
 QString Project::generate_unique_name_by_class_name(QString class_name) {
-    auto *module = FACTORY.get_module(class_name);
-    return generate_unique_name(module->description.name_hint);
+    auto *seed = FACTORY.get_module(class_name);
+    return generate_unique_name(seed->description.name_hint);
 }
 
 //---------------------------------------------------------------------

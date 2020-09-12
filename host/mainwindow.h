@@ -72,6 +72,7 @@ private slots:
     //Developer
     //диалог тестирования XGUI создаваемых модулей
     void dev_test_module_interface();
+    void dev_update_all_auto_h();   //update auto.h for all built-in modules
 
 private:
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта

@@ -36,7 +36,7 @@ public:
 private slots:
     void pressed_load();
     void pressed_reload();
-    void pressed_export();
+    void pressed_export_h();
 
 private:
     QPlainTextEdit *folder_edit_;

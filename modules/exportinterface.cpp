@@ -1,6 +1,7 @@
 #include "exportinterface.h"
 #include "incl_cpp.h"
 #include "moduleinterface.h"
+#include "modulesfactory.h"
 #include <QDateTime>
 
 //---------------------------------------------------------------------
@@ -17,12 +18,11 @@ ExportInterface::ExportInterface()
 //DATETIME - replace with date time
 //CONTENT - replace with lines we want
 
-void ExportInterface::export_to_file(ModuleInterface *interf, QString folder) {
+void ExportInterface::export_to_h_file(ModuleInterface *interf, QString folder) {
     //interf->description().class_name can be not set, so deduce it from folder name
     QString class_name = "XClass" + QFileInfo(folder).baseName();
 
     QString file_name = folder + "/" + "auto.h"; //class_name + ".h";
-    xclu_console_append("Exporting to `" + file_name + "`");
 
     QStringList file;
     for (auto T: templ_) {
@@ -59,6 +59,30 @@ void ExportInterface::append_interface(ModuleInterface *interf, QStringList &fil
             item->export_interface(file);
         }
     }
+}
+
+//---------------------------------------------------------------------
+void ExportInterface::export_all_builtin_h_files() {
+    int n = FACTORY.size();
+    for (int i=0; i<n; i++) {
+        ModuleSeed *seed = FACTORY.get_module(i);
+        if (!seed) {
+            continue;
+        }
+        try {
+            //Create interface
+            QScopedPointer<ModuleInterface> interf;
+            interf.reset(new ModuleInterface(*seed));
+            if (!interf.data()) continue;
+
+            //Export
+            export_to_h_file(interf.data(), seed->folder());
+        }
+        catch(XCluException& e) {
+            xclu_console_append("Error at `" + seed->description.class_name + "`");
+        }
+    }
+
 }
 
 //---------------------------------------------------------------------

@@ -36,6 +36,9 @@ public:
 
     ModuleDescription description;
 
+    //Module folder
+    QString folder() { return folder_; }
+
     //строки с описанием GUI, не включающие описание модуля, пустые и комментарии
     //так же, с добавлением General Page
     QStringList gui_lines() const;

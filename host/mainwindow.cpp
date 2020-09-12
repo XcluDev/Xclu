@@ -8,6 +8,7 @@
 #include "xcluobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
+#include "exportinterface.h"
 
 MainWindow *MAIN_WINDOW = nullptr;
 
@@ -248,6 +249,7 @@ void MainWindow::createMenu() {
     //Developer
     QMenu *devMenu = menuBar()->addMenu(tr("Developer"));
     devMenu->addAction(tr("Test module interface..."), this, &MainWindow::dev_test_module_interface);
+    devMenu->addAction(tr("Update auto.h files for all modules"), this, &MainWindow::dev_update_all_auto_h);
 
 
     //Help
@@ -334,6 +336,20 @@ void MainWindow::about() {
 void MainWindow::dev_test_module_interface() {
     //диалог тестирования XGUI создаваемых модулей
     DialogTestModuleInterface::call_dialog(this);
+}
+
+//---------------------------------------------------------------------
+void MainWindow::dev_update_all_auto_h() {   //update auto.h for all modules
+    try {
+        xclu_console_append("Updating auto.h files for all modules...");
+        ExportInterface exporter;
+        exporter.export_all_builtin_h_files();
+        xclu_console_append("Updating finished");
+    }
+    catch(XCluException& e) {
+        xclu_message_box("Error during export: " + e.whatQt());
+    }
+
 }
 
 //---------------------------------------------------------------------

@@ -11,7 +11,8 @@ class ExportInterface
 {
 public:
     ExportInterface();
-    void export_to_file(ModuleInterface *interf, QString folder);
+    void export_to_h_file(ModuleInterface *interf, QString folder);
+    void export_all_builtin_h_files();
 private:
     QStringList templ_;
 

@@ -42,7 +42,7 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
 
     connect(load_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_load);
     connect(reload_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_reload);
-    connect(export_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_export);
+    connect(export_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_export_h);
 
     //Выбор файла
     QGroupBox *control_group = new QGroupBox(tr("Module folder"));
@@ -110,11 +110,12 @@ void DialogTestModuleInterface::pressed_reload() {
 }
 
 //---------------------------------------------------------------------
-void DialogTestModuleInterface::pressed_export() {
+void DialogTestModuleInterface::pressed_export_h() {
     try {
         xclu_assert(interf_.data(), "No module loaded");
+        xclu_console_append("Exporting to `" + folder_ + "`");
         ExportInterface exporter;
-        exporter.export_to_file(interf_.data(), folder_);
+        exporter.export_to_h_file(interf_.data(), folder_);
     }
     catch(XCluException& e) {
         xclu_message_box("Error during export: " + e.whatQt());

@@ -143,7 +143,7 @@ void XItemEnum::export_interface(QStringList &file) {
     int n = rawtexts_.size();
     file.append(QString("enum %1").arg(cpp_type));
     for (int i=0; i<n; i++) {
-        file.append(QString("    %1_%2 = %3").arg(nam).arg(rawtexts_.at(i)).arg(i));
+        file.append(QString("    %1_%2 = %3,").arg(nam).arg(rawtexts_.at(i)).arg(i));
     }
     file.append(QString("    %1_%2 = %3").arg(nam).arg("N__").arg(n));
     file.append("};");
