@@ -46,14 +46,16 @@ public:
 
     //----------------------------------------------
     //Variables access
+    //they are marked with "_" at end, because it's proposed use them using "auto.h" file,
+    //see https://forum.xclu.dev/t/export-modules-xgui-interface-as-h-file/38
     //----------------------------------------------
     //int, checkbox, button, enum (rawtext), string, text
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     QString gets(QString name, int index = -1, int index2 = -1);
-
     //splits text using "\n"
     QStringList get_strings(QString name);
+
     void sets(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
     void clear_string(QString name);
     void append_string(QString name, QString v, int extra_new_lines_count = 0); //дописать к строке, применимо где sets
@@ -71,7 +73,6 @@ public:
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     float getf(QString name, int index = -1, int index2 = -1);
-
     void setf(QString name, float v);  //out: float
 
     QString get_title_value(QString name);  //enum (title)

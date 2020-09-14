@@ -89,8 +89,8 @@ void XModuleWindow::setup_window() {
     //Qt::FramelessWindowHint
 
     //шрифт
-    if (en_font_size() == font_size_Custom) {    //Custom
-        int font_size = i_font_size_pix();
+    if (gete_font_size() == font_size_Custom) {    //Custom
+        int font_size = geti_font_size_pix();
         auto font = window_->font();
         font.setPixelSize(font_size);
         window_->setFont(font);
@@ -98,6 +98,7 @@ void XModuleWindow::setup_window() {
 
     //Структура окна
     create_layouts();
+
 
 }
 
@@ -108,9 +109,9 @@ void XModuleWindow::update_window() {
     //проверка, что пользователь закрыл окно
     if (notify_visible_change_) {
         notify_visible_change_ = false;
-        if (i_visible() && !window_->isVisible()) {
+        if (geti_visible() && !window_->isVisible()) {
             //пользователь нажал кнопку закрытия окна или другой сигнал для закрытия
-            auto on_close = en_on_close();
+            auto on_close = gete_on_close();
             switch (on_close) {
             case  on_close_Ignore:
                 window_->setVisible(true);  //делаем видимым
@@ -126,21 +127,21 @@ void XModuleWindow::update_window() {
     }
 
     //title
-    if (was_changed("title")) {
-        window_->setWindowTitle(s_title());
+    if (was_changed_title()) {
+        window_->setWindowTitle(gets_title());
     }
 
     //TODO!!!!!!!!!!!!!!!!!!!!!!!!!! если меняем размер и положение - то сразу установить setGeometry
     //Size
     bool size_changed = false;
-    auto size = en_size();
-    if (was_changed("size")
-            || (size == size_Custom && (was_changed("size_x") || was_changed("size_y")))) {
+    auto size = gete_size();
+    if (was_changed_size()
+            || (size == size_Custom && (was_changed_size_x() || was_changed_size_y()))) {
         size_changed = true;
         switch (size) {
         case size_Default:
             break;
-        case size_Custom: set_size(i_size_x(), i_size_y());
+        case size_Custom: set_size(geti_size_x(), geti_size_y());
             break;
         case size_640x480: set_size(640,480);
             break;
@@ -161,13 +162,13 @@ void XModuleWindow::update_window() {
 
     //Position
     //меняем положение, даже если изменили размер - если были настройки "в центре экрана"
-    auto position = en_position();
-    if (size_changed || was_changed("position")
-            || (position == position_Custom && (was_changed("pos_x") || was_changed("pos_y")))) {
+    auto position = gete_position();
+    if (size_changed || was_changed_position()
+            || (position == position_Custom && (was_changed_pos_x() || was_changed_pos_y()))) {
         switch (position) {
         case position_Default:
             break;
-        case position_Custom: set_position(i_pos_x(), i_pos_y());
+        case position_Custom: set_position(geti_pos_x(), geti_pos_y());
             break;
         case position_Screen_Center: {
                 QRect screenGeometry = get_screen()->geometry();
@@ -183,8 +184,8 @@ void XModuleWindow::update_window() {
 
 
     //Visibility, fullscreen
-    if (was_changed("visible") || was_changed("mode")) {
-        int visible = i_visible();
+    if (was_changed_visible() || was_changed_mode()) {
+        int visible = geti_visible();
         if (!visible) {
             window_->setVisible(false);
         }
@@ -194,7 +195,7 @@ void XModuleWindow::update_window() {
             //minimized,maximized,fullscreen
             QWindow::Visibility visibility = QWindow::Windowed;
 
-            auto mode = en_mode();
+            auto mode = gete_mode();
             switch (mode) {
             case mode_Minimized: visibility = QWindow::Minimized;
                 break;

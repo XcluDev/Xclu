@@ -75,7 +75,9 @@ QString XItemText::default_value() {
 //C++
 void XItemText::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Text ", true,
-                              "QString ", "s", "gets", "sets");
+                              "QString ", "s", "gets", "sets",
+                              true,
+                              false, true);
 }
 
 //---------------------------------------------------------------------

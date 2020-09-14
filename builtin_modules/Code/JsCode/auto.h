@@ -1,12 +1,14 @@
 //----------------------------------------------------
 //Interface for XClassJsCode
-//Created automatically at 2020.09.12 21:37:01
+//Created automatically at 2020.09.14 11:01:46
 //----------------------------------------------------
 //Page Main
 //General settings
 
 //Text Code
 //
-QString s_code=""() { return gets("code="""); }
+bool was_changed_code=""() { return was_changed("code="""); }
+QString gets_code=""() { return gets("code="""); }
+QStringList get_strings_code=""() { return get_strings("code="""); }
 
 //----------------------------------------------------

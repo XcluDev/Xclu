@@ -148,21 +148,35 @@ public:
     /*
     //----------------------------------------------------
     //Page Main
-    //....
+    //...
 
     //Folder to scan.
-    QString s_folder() {...}
-       //for 'out' qualified variables:
-    void s_folder(QString value) {...}
+    QString gets_folder() {...}
+    void sets_folder(QString value) {...}
 
-    //Type of content we are searching for
-    enum enum_filter {
-        filter_All = 0,
-        filter_Files = 1,
-        filter_Folders = 2,
-        filter_N__ = 3
+    //Enum Position
+    //Position of the window.
+    enum enum_position {
+        position_Default = 0,
+        position_Custom = 1,
+        position_Screen_Center = 2,
+        position_N__ = 3
     };
-    enum_filter en_filter() {...}
+    bool was_changed_position() { ... }
+    enum_position gete_position() { ... }
+
+    Function names begin with prefix denoting type of the item as the following:
+
+    * `geti_...`, `seti_...` - int, button, checkbox
+    * `gete_...`, `sete_...` - enum
+    * `getf_...`,`setf_...` - float
+    * `gets_...`, `sets_...` - string, text
+    * `get_obj_...` - object
+
+    Also are defined the following functions:
+    * `was_changed_...` - all items,
+    * `clear_string_...`, `append_string_...` - out string, out text,
+    * `increase_int_...` - out int
      */
     //Subclasses must reimplement it, in opposite case the exception will arise.
     //export_interface_template() - useful helper for this
@@ -239,7 +253,9 @@ protected:
                                    QString fun_prefix = "",
                                    QString cpp_getter = "",
                                    QString cpp_setter = "",
-                                   bool final_blank = true
+                                   bool final_blank = true,
+                                   bool is_int = false,
+                                   bool is_string = false
             );
 
 };

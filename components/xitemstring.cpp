@@ -98,7 +98,9 @@ bool XItemString::options_choose_folder() {   //кнопка выбора пап
 //C++
 void XItemString::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "String ", true,
-                              "QString ", "s", "gets", "sets");
+                              "QString ", "s", "gets", "sets",
+                              true,
+                              false, true);
 }
 
 //---------------------------------------------------------------------

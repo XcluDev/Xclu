@@ -485,22 +485,27 @@ void XItem::export_interface(QStringList & /*file*/) {
 //Helper for export_interface
 //----------------------------------------------------
 /*
-//Page Main
-//....
+    //Page Main
+    //...
 
-//Folder to scan.
-QString s_folder() {...}
-   //for 'out' qualified variables:
-void s_folder(QString value) {...}
+    //Folder to scan.
+    QString gets_folder() {...}
+    void sets_folder(QString value) {...}
 
-//Type of content we are searching for
-enum enum_filter {
-    filter_All = 1,
-    filter_Files = 2,
-    filter_Folders = 3
-}
-enum_filter en_filter() {...}
+    //Enum Position
+    //Position of the window.
+    enum enum_position {
+        position_Default = 0,
+        position_Custom = 1,
+        position_Screen_Center = 2,
+        position_N__ = 3
+    };
+    bool was_changed_position() { ... }
+    enum_position gete_position() { ... }
 */
+//-----------------
+//Note: `enum` main part of export is added at file `xitemenum.cpp`
+//-----------------
 
 void XItem::export_interface_template(QStringList &file,
                                       bool horiz_line,
@@ -511,7 +516,9 @@ void XItem::export_interface_template(QStringList &file,
                                       QString fun_prefix,
                                       QString cpp_getter,
                                       QString cpp_setter,
-                                      bool final_blank) {
+                                      bool final_blank,
+                                      bool is_int,
+                                      bool is_string) {
     if (horiz_line) {
         file.append("//----------------------------------------------------");
     }
@@ -523,10 +530,30 @@ void XItem::export_interface_template(QStringList &file,
         file.append("//" + description());
     }
     if (getter_setter) {
-        file.append(QString("%2%3_%1() { return %4(\"%1\"); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_getter));
+        file.append(QString("bool was_changed_%1() { return was_changed(\"%1\"); }").arg(name()));
+        file.append(QString("%2get%3_%1() { return %4(\"%1\"); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_getter));
+
+        if (is_string) {
+            //get_strings
+            file.append(QString("QStringList get_strings_%1() { return get_strings(\"%1\"); }").arg(name()));
+        }
+
+        //out
         if (qualifier() == VarQualifierOut
                 && !cpp_setter.isEmpty()) {
-            file.append(QString("void %3_%1(%2value) { %4(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
+            file.append(QString("void set%3_%1(%2value) { %4(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
+
+            if (is_int) {
+                //increase_int
+                file.append(QString("void increase_int_%1(int increase = 1) { increase_int(\"%1\", increase); }").arg(name()));
+            }
+            if (is_string) {
+                //clear_string
+                file.append(QString("void clear_string_%1() { clear_string(\"%1\"); }").arg(name()));
+                //append_string
+                file.append(QString("void append_string_%1(QString v, int extra_new_lines_count = 0) { append_string(\"%1\", v, extra_new_lines_count); }").arg(name()));
+                file.append(QString("void append_string_%1(QStringList v, int extra_new_lines_count = 0) { append_string(\"%1\", v, extra_new_lines_count); }").arg(name()));
+            }
         }
     }
     if (final_blank) {

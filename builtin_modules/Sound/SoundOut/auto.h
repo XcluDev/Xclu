@@ -1,55 +1,63 @@
 //----------------------------------------------------
 //Interface for XClassSoundOut
-//Created automatically at 2020.09.12 21:37:02
+//Created automatically at 2020.09.14 11:01:46
 //----------------------------------------------------
 //Page Main
 //General settings
 
 //Text Sound Sources
 //List of modules to which will be sent callback for sound buffer
-QString s_modules_list() { return gets("modules_list"); }
+bool was_changed_modules_list() { return was_changed("modules_list"); }
+QString gets_modules_list() { return gets("modules_list"); }
+QStringList get_strings_modules_list() { return get_strings("modules_list"); }
 
 //Button Edit...
 //Press to interactively edit sound sources.
-int i_edit_btn() { return geti("edit_btn"); }
+bool was_changed_edit_btn() { return was_changed("edit_btn"); }
+int geti_edit_btn() { return geti("edit_btn"); }
 
 
 //Float Volume
 //Output sound volume.
-float f_volume() { return getf("volume"); }
+bool was_changed_volume() { return was_changed("volume"); }
+float getf_volume() { return getf("volume"); }
 
 //Float Device Volume
 //Output device volume.
-float f_device_volume() { return getf("device_volume"); }
+bool was_changed_device_volume() { return was_changed("device_volume"); }
+float getf_device_volume() { return getf("device_volume"); }
 
 
 //Const Enum Sound Device
 //Choose the way for selecting sound output device
-
 enum enum_select_device {
     select_device_Default = 0,
     select_device_By_Index = 1,
     select_device_By_Name = 2,
     select_device_N__ = 3
 };
-enum_select_device en_select_device() { return enum_select_device(geti("select_device")); }
+bool was_changed_select_device() { return was_changed("select_device"); }
+enum_select_device gete_select_device() { return enum_select_device(geti("select_device")); }
 
 //Const Int Device Index
 //Sound device index in Operating System.
-int i_device_index() { return geti("device_index"); }
+bool was_changed_device_index() { return was_changed("device_index"); }
+int geti_device_index() { return geti("device_index"); }
 
 //Const String Device Name
 //Name of the sound output device to connect (or part of the name), press 'Show Devices' to see the list
-QString s_device_name() { return gets("device_name"); }
+bool was_changed_device_name() { return was_changed("device_name"); }
+QString gets_device_name() { return gets("device_name"); }
+QStringList get_strings_device_name() { return get_strings("device_name"); }
 
 
 //Checkbox Settings
 //Setting sound output parameters
-int i_settings() { return geti("settings"); }
+bool was_changed_settings() { return was_changed("settings"); }
+int geti_settings() { return geti("settings"); }
 
 //Const Enum Sample Rate
 //Frame rate
-
 enum enum_sample_rate {
     sample_rate_Default = 0,
     sample_rate_Custom = 1,
@@ -62,19 +70,21 @@ enum enum_sample_rate {
     sample_rate_96000 = 8,
     sample_rate_N__ = 9
 };
-enum_sample_rate en_sample_rate() { return enum_sample_rate(geti("sample_rate")); }
+bool was_changed_sample_rate() { return was_changed("sample_rate"); }
+enum_sample_rate gete_sample_rate() { return enum_sample_rate(geti("sample_rate")); }
 
 //Const Int Custom Sample Rate
 //Custom sample rate
-int i_custom_sample_rate() { return geti("custom_sample_rate"); }
+bool was_changed_custom_sample_rate() { return was_changed("custom_sample_rate"); }
+int geti_custom_sample_rate() { return geti("custom_sample_rate"); }
 
 //Const Int Channels
 //Number of output channels
-int i_channels() { return geti("channels"); }
+bool was_changed_channels() { return was_changed("channels"); }
+int geti_channels() { return geti("channels"); }
 
 //Const Enum Buffer Size
 //Desired buffer size for sound generation. Larger values increase stability but decrease response time.
-
 enum enum_buffer_size_desired {
     buffer_size_desired_Default = 0,
     buffer_size_desired_32 = 1,
@@ -90,31 +100,42 @@ enum enum_buffer_size_desired {
     buffer_size_desired_32768 = 11,
     buffer_size_desired_N__ = 12
 };
-enum_buffer_size_desired en_buffer_size_desired() { return enum_buffer_size_desired(geti("buffer_size_desired")); }
+bool was_changed_buffer_size_desired() { return was_changed("buffer_size_desired"); }
+enum_buffer_size_desired gete_buffer_size_desired() { return enum_buffer_size_desired(geti("buffer_size_desired")); }
 
 
 //Checkbox Runtime
 //Runtime variables
-int i_runtime() { return geti("runtime"); }
+bool was_changed_runtime() { return was_changed("runtime"); }
+int geti_runtime() { return geti("runtime"); }
 
 //Out String Connected Device Name
 //Name of the connected camera
-QString s_connected_device_name() { return gets("connected_device_name"); }
-void s_connected_device_name(QString value) { sets("connected_device_name", value); }
+bool was_changed_connected_device_name() { return was_changed("connected_device_name"); }
+QString gets_connected_device_name() { return gets("connected_device_name"); }
+QStringList get_strings_connected_device_name() { return get_strings("connected_device_name"); }
+void sets_connected_device_name(QString value) { sets("connected_device_name", value); }
+void clear_string_connected_device_name() { clear_string("connected_device_name"); }
+void append_string_connected_device_name(QString v, int extra_new_lines_count = 0) { append_string("connected_device_name", v, extra_new_lines_count); }
+void append_string_connected_device_name(QStringList v, int extra_new_lines_count = 0) { append_string("connected_device_name", v, extra_new_lines_count); }
 
 //Out Checkbox Is Started
 //Does capture started
-int i_is_started() { return geti("is_started"); }
-void i_is_started(int value) { seti("is_started", value); }
+bool was_changed_is_started() { return was_changed("is_started"); }
+int geti_is_started() { return geti("is_started"); }
+void seti_is_started(int value) { seti("is_started", value); }
 
 //Out Object Sound Format
 //Used sound format
-XDict *obj_sound_format() { return get_object("sound_format"); }
+bool was_changed_sound_format() { return was_changed("sound_format"); }
+XDict *getobj_sound_format() { return get_object("sound_format"); }
 
 //Out Int Buffer Size
 //Buffer size
-int i_buffer_size() { return geti("buffer_size"); }
-void i_buffer_size(int value) { seti("buffer_size", value); }
+bool was_changed_buffer_size() { return was_changed("buffer_size"); }
+int geti_buffer_size() { return geti("buffer_size"); }
+void seti_buffer_size(int value) { seti("buffer_size", value); }
+void increase_int_buffer_size(int increase = 1) { increase_int("buffer_size", increase); }
 
 //----------------------------------------------------
 //Page Device Info
@@ -122,16 +143,23 @@ void i_buffer_size(int value) { seti("buffer_size", value); }
 
 //Checkbox Print Devices
 //Print list of all connected output audio devices
-int i_print_devices() { return geti("print_devices"); }
+bool was_changed_print_devices() { return was_changed("print_devices"); }
+int geti_print_devices() { return geti("print_devices"); }
 
 //Const Checkbox Print Formats
 //Print once list of supported formats of connected audio device
-int i_print_formats() { return geti("print_formats"); }
+bool was_changed_print_formats() { return was_changed("print_formats"); }
+int geti_print_formats() { return geti("print_formats"); }
 
 //Out Text Local Console
 //Console output
-QString s_local_console() { return gets("local_console"); }
-void s_local_console(QString value) { sets("local_console", value); }
+bool was_changed_local_console() { return was_changed("local_console"); }
+QString gets_local_console() { return gets("local_console"); }
+QStringList get_strings_local_console() { return get_strings("local_console"); }
+void sets_local_console(QString value) { sets("local_console", value); }
+void clear_string_local_console() { clear_string("local_console"); }
+void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string("local_console", v, extra_new_lines_count); }
+void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string("local_console", v, extra_new_lines_count); }
 
 //----------------------------------------------------
 //Page Test Sound
@@ -139,6 +167,7 @@ void s_local_console(QString value) { sets("local_console", value); }
 
 //Checkbox Generate Test Sound
 //Enable generating the test sinewave sound. Note, other sounds will be muted.
-int i_gen_test() { return geti("gen_test"); }
+bool was_changed_gen_test() { return was_changed("gen_test"); }
+int geti_gen_test() { return geti("gen_test"); }
 
 //----------------------------------------------------

@@ -126,14 +126,16 @@ void XItemEnum::var_to_gui_internal() {
 //---------------------------------------------------------------------
 //C++
 /*
-//Type of content we are searching for
-enum enum_filter {
-    filter_All = 0,
-    filter_Files = 1,
-    filter_Folders = 2,
-    filter_N__ = 3
-};
-enum_filter en_filter() {...}
+    //Enum Position
+    //Position of the window.
+    enum enum_position {
+        position_Default = 0,
+        position_Custom = 1,
+        position_Screen_Center = 2,
+        position_N__ = 3
+    };
+    bool was_changed_position() { ... }
+    enum_position gete_position() { ... }
 */
 
 void XItemEnum::export_interface(QStringList &file) {
@@ -148,9 +150,10 @@ void XItemEnum::export_interface(QStringList &file) {
     file.append(QString("    %1_%2 = %3").arg(nam).arg("N__").arg(n));
     file.append("};");
 
-    file.append(QString("%2 en_%1() { return %2(geti(\"%1\")); }").arg(nam).arg(cpp_type));
+    file.append(QString("bool was_changed_%1() { return was_changed(\"%1\"); }").arg(nam));
+    file.append(QString("%2 gete_%1() { return %2(geti(\"%1\")); }").arg(nam).arg(cpp_type));
     if (qualifier() == VarQualifierOut) {
-        file.append(QString("void en_%1(%2 value) { seti(\"%1\", value); }").arg(name()).arg(cpp_type));
+        file.append(QString("void sete_%1(%2 value) { seti(\"%1\", value); }").arg(name()).arg(cpp_type));
     }
     file.append("");
 
