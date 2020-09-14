@@ -213,13 +213,13 @@ void XModuleSoundOut::impl_start() {
         data_.clear();
     }
     buffer_size_= 0;
-    seti("buffer_size", 0);
-    XDictWrite(get_object("sound_format")).clear();
+    seti_buffer_size(0);
+    XDictWrite(getobj_sound_format()).clear();
 
     set_started(false); //также ставит gui-элемент is_started
-    clear_string("connected_device_name");
+    clear_string_connected_device_name();
 
-    clear_string("local_console");
+    clear_string_local_console();
 
     //если требуется, печать подключенных устройств
     print_devices();
@@ -242,27 +242,27 @@ void XModuleSoundOut::impl_update() {
     //также проверить - если есть ошибка, то остановиться
     {
         DataAccess access(data_);
-        data_.play_test_sound_ = geti("gen_test");
-        data_.volume_ = getf("volume");
-        data_.modules_ = RUNTIME.get_modules(gets("modules_list"));
+        data_.play_test_sound_ = geti_gen_test();
+        data_.volume_ = getf_volume();
+        data_.modules_ = RUNTIME.get_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
         data_.err.throw_error();
     }
     //показ размера буфера
-    seti("buffer_size", buffer_size_);
+    seti_buffer_size(buffer_size_);
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
-    //RUNTIME.execute_callbacks(gets("callback_modules"));
+    //RUNTIME.execute_callbacks(gets_callback_modules"));
 }
 
 
 //---------------------------------------------------------------------
 void XModuleSoundOut::check_volume_change() {
     if (audio_started_) {
-        if (was_changed("device_volume")) {
-            float volume = getf("device_volume");
+        if (was_changed_device_volume()) {
+            float volume = getf_device_volume();
             qreal linearVolume = QAudio::convertVolume(volume, QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
             m_audioOutput->setVolume(linearVolume);
         }
@@ -290,8 +290,9 @@ void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
             set_started(false);
             break;
         case QAudio::IdleState:
-        //TODO Qt 5.13:
-        //case QAudio::InterruptedState:
+            //default used for handling Qt 5.13:
+            //case QAudio::InterruptedState:
+        default:
             QAudio::Error error = m_audioOutput->error();
             switch (error) {
             case QAudio::NoError:                
@@ -341,20 +342,20 @@ void XModuleSoundOut::start_audio() {
         const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
         xclu_assert(!devices.empty(), "No connected devices");
 
-        SelectDevice method = SelectDevice(geti("select_device"));
+        auto method = gete_select_device();
         switch (method) {
-        case SelectDeviceDefault: {
+        case select_device_Default: {
             start_audio(QAudioDeviceInfo::defaultOutputDevice());
             break;
         }
-        case SelectDeviceByIndex: {
-                int name = geti("device_index");
+        case select_device_By_Index: {
+                int name = geti_device_index();
                 xclu_assert(name >= 0 && name < devices.size(), "Bad device index " + QString::number(name));
                 start_audio(devices[name]);
                 break;
         }
-        case SelectDeviceByName: {
-            QString name = gets("device_name");
+        case select_device_By_Name: {
+            QString name = gets_device_name();
             for (int i=0; i<devices.size(); i++) {
                 auto &info = devices.at(i);
                 if (info.deviceName().contains(name)) {
@@ -379,14 +380,14 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     QAudioFormat format;
 
     //sample rate
-    QString srate_string = gets("sample_rate");
+    QString srate_string = gets_("sample_rate");
     int sample_rate = 44100;
     if (srate_string == "Default") {
         sample_rate = deviceInfo.preferredFormat().sampleRate();
     }
     else {
         if (srate_string == "Custom") {
-            sample_rate = geti("custom_sample_rate");
+            sample_rate = geti_custom_sample_rate();
         }
         else {
             bool ok;
@@ -397,7 +398,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     format.setSampleRate(sample_rate);
 
     //channels
-    format.setChannelCount(geti("channels"));
+    format.setChannelCount(geti_channels());
 
     //sample format
     format.setCodec("audio/pcm");
@@ -417,8 +418,8 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //выдача информации о устройстве
     QString device_name = deviceInfo.deviceName();
 
-    sets("connected_device_name", device_name);
-    append_string("local_console", "Starting: " + device_name, 2);
+    sets_connected_device_name(device_name);
+    append_string_local_console("Starting: " + device_name, 2);
 
 
     //печатаем формат в used_format, пока без размера буфера - его допечатаем, когда устройство стартует
@@ -433,7 +434,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     connect(m_audioOutput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
 
     //вычисление и установка размера буфера
-    QString buffer_size_str = gets("buffer_size_desired");
+    QString buffer_size_str = gets_("buffer_size_desired");
     if (buffer_size_str != "Default") {
         int buffer_size = buffer_size_str.toInt();
         xclu_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));
@@ -457,14 +458,14 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
 //---------------------------------------------------------------------
 void XModuleSoundOut::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     audio_started_ = started;
-    seti("is_started", started);
+    seti_is_started(started);
 }
 
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void XModuleSoundOut::set_format(const QAudioFormat &format) {
     auto format_ = XDictSoundFormatData(format.sampleRate(), format.channelCount());
-    XDictWrite object(get_object("sound_format"));
+    XDictWrite object(getobj_sound_format());
     XDictSoundFormat::set_to_object(object, format_);
 
 }
@@ -477,13 +478,13 @@ void XModuleSoundOut::set_buffer_size(int buffer_size) {
     //data_.buffer_size = buffer_size;
     //это может быть вызвано из другого потока,
     //поэтому мы не можем тут ставить в GUI - надо дождаться основного потока update
-    //append_string("used_format",QString("Buffer size: %1").arg(buffer_size));
+    //append_string_used_format",QString("Buffer size: %1").arg(buffer_size));
 }
 
 //---------------------------------------------------------------------
 //печать в консоль доступных устройств аудиовывода
 void XModuleSoundOut::print_devices() {
-    int print = geti("print_devices");
+    int print = geti_print_devices();
     if (!print) {
         print_devices_worked_ = false;
     }
@@ -501,7 +502,7 @@ void XModuleSoundOut::print_devices() {
                 list.append(device);
                 //xclu_console_append(device);
             }
-            append_string("local_console", list, 1);
+            append_string_local_console(list, 1);
         }
     }
 }
@@ -512,7 +513,7 @@ void XModuleSoundOut::print_devices() {
 void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
     if (audio_tried_to_start_
             && !print_formats_worked_
-            && geti("print_formats")) {
+            && geti_print_formats()) {
         print_formats_worked_ = true;
 
         QString device_name = deviceInfo.deviceName();
@@ -546,6 +547,8 @@ void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
         //xclu_console_append(channels_str);
 
         //Печать
-        append_string("local_console", list, 1);
+        append_string_local_console(list, 1);
     }
 }
+
+//---------------------------------------------------------------------

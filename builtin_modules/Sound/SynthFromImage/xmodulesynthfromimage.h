@@ -67,6 +67,7 @@ public:
     static XModuleSynthFromImage *new_module();
 
 protected:
+#include "auto.h"
     virtual void impl_loaded() {}
     virtual void impl_start();
     virtual void impl_update();
@@ -76,14 +77,6 @@ protected:
     //"sound_buffer_add" call, fills `data` buffer
     //there are required to fill channels * samples values at data
     virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
-
-
-    //режим выбора источника изображения
-    enum ImageSource: int {
-        ImageSource_ImageFile = 0,
-        ImageSource_Other_Module_Image = 1,
-        ImageSource_N = 2
-    };
 
     QString image_file_;    //файл с последней загруженной картинкой
     void load_image_file(QString image_file);

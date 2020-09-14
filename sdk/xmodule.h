@@ -100,12 +100,6 @@ public:
     void reset_error_values();                  //сброс того, что быда ошибка при выполнении
     void set_error_values(QString message);     //установка того, что была ошибка
 
-    //Проверка, изменились ли переменные
-    bool was_changed(QString name);
-    //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
-    //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
-
-
 protected:
     //--------------------------------------------------------------
     //Protected interface for subclasses

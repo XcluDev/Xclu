@@ -33,10 +33,10 @@ void XModuleTest::impl_start() {
 //---------------------------------------------------------------------
 void XModuleTest::impl_update() {
     xclu_console_append(QString("%1 - update").arg(name()));
-    if (geti("callback")) {
+    if (geti_("callback")) {
         xclu_console_append(QString("%1 - pressed Callback").arg(name()));
         xclu_message_box("Callbacks are not implemented here");
-        //RUNTIME.execute_callbacks(gets("callback_modules"));
+        //RUNTIME.execute_callbacks(gets_callback_modules"));
     }
 }
 

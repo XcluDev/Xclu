@@ -530,29 +530,29 @@ void XItem::export_interface_template(QStringList &file,
         file.append("//" + description());
     }
     if (getter_setter) {
-        file.append(QString("bool was_changed_%1() { return was_changed(\"%1\"); }").arg(name()));
-        file.append(QString("%2get%3_%1() { return %4(\"%1\"); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_getter));
+        file.append(QString("bool was_changed_%1() { return was_changed_(\"%1\"); }").arg(name()));
+        file.append(QString("%2get%3_%1() { return %4_(\"%1\"); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_getter));
 
         if (is_string) {
             //get_strings
-            file.append(QString("QStringList get_strings_%1() { return get_strings(\"%1\"); }").arg(name()));
+            file.append(QString("QStringList get_strings_%1() { return get_strings_(\"%1\"); }").arg(name()));
         }
 
         //out
         if (qualifier() == VarQualifierOut
                 && !cpp_setter.isEmpty()) {
-            file.append(QString("void set%3_%1(%2value) { %4(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
+            file.append(QString("void set%3_%1(%2value) { %4_(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
 
             if (is_int) {
                 //increase_int
-                file.append(QString("void increase_int_%1(int increase = 1) { increase_int(\"%1\", increase); }").arg(name()));
+                file.append(QString("void increase_int_%1(int increase = 1) { increase_int_(\"%1\", increase); }").arg(name()));
             }
             if (is_string) {
                 //clear_string
-                file.append(QString("void clear_string_%1() { clear_string(\"%1\"); }").arg(name()));
+                file.append(QString("void clear_string_%1() { clear_string_(\"%1\"); }").arg(name()));
                 //append_string
-                file.append(QString("void append_string_%1(QString v, int extra_new_lines_count = 0) { append_string(\"%1\", v, extra_new_lines_count); }").arg(name()));
-                file.append(QString("void append_string_%1(QStringList v, int extra_new_lines_count = 0) { append_string(\"%1\", v, extra_new_lines_count); }").arg(name()));
+                file.append(QString("void append_string_%1(QString v, int extra_new_lines_count = 0) { append_string_(\"%1\", v, extra_new_lines_count); }").arg(name()));
+                file.append(QString("void append_string_%1(QStringList v, int extra_new_lines_count = 0) { append_string_(\"%1\", v, extra_new_lines_count); }").arg(name()));
             }
         }
     }

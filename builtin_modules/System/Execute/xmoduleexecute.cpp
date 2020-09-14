@@ -29,40 +29,40 @@ XModuleExecute::~XModuleExecute()
 //---------------------------------------------------------------------
 void XModuleExecute::impl_start() {
     //qDebug() << "start";
-    seti("success", 0);
-    seti("exit_code", 0);
-    seti("last_success", 0);
-    setf("last_time", 0);
-    setf("last_duration", 0);
-    clear_string("local_console");
+    seti_success(0);
+    seti_exit_code(0);
+    seti_last_success(0);
+    setf_last_time(0);
+    setf_last_duration(0);
+    clear_string_local_console();
 
-    clear_string("folder_path");
-    clear_string("file_path");
+    clear_string_folder_path();
+    clear_string_file_path();
 
 }
 
 //---------------------------------------------------------------------
 void XModuleExecute::impl_update() {
     //очищаем флажок success - он действует только в рамках одного кадра
-    seti("success", 0);
+    seti_success(0);
 
-    WorkMode mode = WorkMode(geti("work_mode"));
+   auto mode = gete_work_mode();
 
     //вычисляем, требуется ли запуск
     bool bang = false;
-    if (mode == WorkModeEach_Frame) bang = true;
-    if (mode == WorkModeOn_Bang) bang = geti("bang_signal") || geti("bang_button");
+    if (mode == work_mode_Each_Frame) bang = true;
+    if (mode == work_mode_On_Bang) bang = geti_bang_signal() || geti_bang_button();
 
     //запуск
     if (bang) {
 
         //вычисляем пути, даже если не требуется запуск
-        QString folder = gets("folder_name");
-        QString file_name_short = gets("file_name");
+        QString folder = gets_folder_name();
+        QString file_name_short = gets_file_name();
 
         //относительный путь
         folder = rt_project_folder() + "/" + folder;
-        sets("folder_path", folder);
+        sets_folder_path(folder);
 
         //построение имени файла
         xclu_assert(!file_name_short.isEmpty(), "File Name is empty");
@@ -71,14 +71,14 @@ void XModuleExecute::impl_update() {
         if (!QFileInfo::exists(file_name)) {
             file_name = file_name_short;
         }
-        sets("file_path", file_name);
+        sets_file_path(file_name);
 
         //сейчас поддерживаем только режим ожидания результата
-        //int wait_finish = geti("wait_finish");
+        //int wait_finish = geti_wait_finish");
 
         //запоминаем время старта
         double start_time = rt_elapsed_time_sec();
-        setf("last_time", start_time);
+        setf_last_time(start_time);
 
         bool success = false;
 
@@ -95,11 +95,11 @@ void XModuleExecute::impl_update() {
 
         //аргумент запуска
         QStringList arguments;
-        arguments << gets("args");
+        arguments << gets_args();
         process.setArguments(arguments);
 
         //timeout - время ожидания, если -1, то ждать неограниченно
-        int timeout = (geti("set_timeout")) ? int(getf("timeout_sec")*1000): -1;
+        int timeout = (geti_set_timeout()) ? int(getf_timeout_sec()*1000): -1;
 
         //запуск
         process.start();
@@ -107,20 +107,20 @@ void XModuleExecute::impl_update() {
 
         //код выхода
         int exit_code = process.exitCode();
-        seti("exit_code", exit_code);
+        seti_exit_code(exit_code);
 
         //проверяем результат
         success = result && (process.exitStatus() == QProcess::NormalExit)
                 && (exit_code == 0);
         if (success) {
-            seti("success", 1);
+            seti_success(1);
         }
         //запоминаем результат
-        seti("last_success", success);
+        seti_last_success(success);
 
         //Пишем в консоль
-        if (geti("show_console")) {
-            sets("local_console", process.readAll());
+        if (geti_show_console()) {
+            sets_local_console(process.readAll());
         }
 
         //если ошибка - выдаем это
@@ -128,7 +128,7 @@ void XModuleExecute::impl_update() {
 
         //ставим продолжительность
         double time = rt_elapsed_time_sec();
-        setf("last_duration", time - start_time);
+        setf_last_duration(time - start_time);
     }
 
 

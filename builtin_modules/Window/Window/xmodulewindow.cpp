@@ -281,7 +281,7 @@ HorizontalLayout
 
 //Создать структуру окна - при этом, запрашиваются виджеты из соответствующих модулей
 void XModuleWindow::create_layouts() {
-    QStringList lines = get_strings("content");
+    QStringList lines = get_strings_content();
 
     //парсим структуру окна
     XcluParseTree tree;

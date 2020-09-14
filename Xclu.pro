@@ -81,7 +81,7 @@ FORMS += \
     host/dialogs/dialogpreferences.ui
 
 INCLUDEPATH += project sdk/math modules components components/gui
-INCLUDEPATH += host host/dialogs sdk/types sdk
+INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
 
 # GLM
 INCLUDEPATH += ./ glm glm/ glm/gtx
@@ -118,9 +118,6 @@ SOURCES += \
     project/project.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
-    sdk/console.cpp \
-    sdk/incl_cpp.cpp \
-    sdk/incl_h.cpp \
     sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/raster.cpp \
@@ -129,9 +126,12 @@ SOURCES += \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
-    sdk/xclu_parse_tree.cpp \
-    sdk/xclu_types.cpp \
-    sdk/xclu_utils.cpp \
+    sdk/utility/console.cpp \
+    sdk/utility/incl_cpp.cpp \
+    sdk/utility/incl_h.cpp \
+    sdk/utility/xclu_parse_tree.cpp \
+    sdk/utility/xclu_types.cpp \
+    sdk/utility/xclu_utils.cpp \
     sdk/xmodule.cpp \
     components/visibilitygroups.cpp \
     components/gui/xclucombobox.cpp \
@@ -191,9 +191,6 @@ HEADERS += \
     project/project.h \
     project/projectproperties.h \
     project/projectruntime.h \
-    sdk/console.h \
-    sdk/incl_cpp.h \
-    sdk/incl_h.h \
     sdk/math/int2.h \
     sdk/math/math_types.h \
     sdk/math/math_utils.h \
@@ -203,10 +200,13 @@ HEADERS += \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/types/xarray.h \
-    sdk/qt_widgets.h \
-    sdk/xclu_parse_tree.h \
-    sdk/xclu_types.h \
-    sdk/xclu_utils.h \
+    sdk/utility/console.h \
+    sdk/utility/incl_cpp.h \
+    sdk/utility/incl_h.h \
+    sdk/utility/qt_widgets.h \
+    sdk/utility/xclu_parse_tree.h \
+    sdk/utility/xclu_types.h \
+    sdk/utility/xclu_utils.h \
     sdk/xmodule.h \
     components/visibilitygroups.h \
     components/gui/xclucombobox.h \

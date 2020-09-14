@@ -1,5 +1,5 @@
 //----------------------------------------------------
 //Interface for CLASS_NAME
-//Created automatically at DATETIME
+//Created automatically.
 CONTENT
 //----------------------------------------------------

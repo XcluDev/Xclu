@@ -1,15 +1,15 @@
 //----------------------------------------------------
 //Interface for XClassWSweetArea
-//Created automatically at 2020.09.14 11:01:46
+//Created automatically.
 //----------------------------------------------------
 //Page Structure
 //Window contents consisting of layouts and widgets, such as IntGui.
 
 //Const Text Struct.
 //Description of layouts and widgets.
-bool was_changed_structure() { return was_changed("structure"); }
-QString gets_structure() { return gets("structure"); }
-QStringList get_strings_structure() { return get_strings("structure"); }
+bool was_changed_structure() { return was_changed_("structure"); }
+QString gets_structure() { return gets_("structure"); }
+QStringList get_strings_structure() { return get_strings_("structure"); }
 
 //----------------------------------------------------
 //Page Properties
@@ -17,9 +17,9 @@ QStringList get_strings_structure() { return get_strings("structure"); }
 
 //String Title
 //Title of the window.
-bool was_changed_title() { return was_changed("title"); }
-QString gets_title() { return gets("title"); }
-QStringList get_strings_title() { return get_strings("title"); }
+bool was_changed_title() { return was_changed_("title"); }
+QString gets_title() { return gets_("title"); }
+QStringList get_strings_title() { return get_strings_("title"); }
 
 //Enum Size
 //Size of the window.
@@ -34,18 +34,18 @@ enum enum_size {
     size_1920x1200 = 7,
     size_N__ = 8
 };
-bool was_changed_size() { return was_changed("size"); }
-enum_size gete_size() { return enum_size(geti("size")); }
+bool was_changed_size() { return was_changed_("size"); }
+enum_size gete_size() { return enum_size(geti_("size")); }
 
 //Int Size X
 //Width of window.
-bool was_changed_size_x() { return was_changed("size_x"); }
-int geti_size_x() { return geti("size_x"); }
+bool was_changed_size_x() { return was_changed_("size_x"); }
+int geti_size_x() { return geti_("size_x"); }
 
 //Int Size Y
 //Height of window.
-bool was_changed_size_y() { return was_changed("size_y"); }
-int geti_size_y() { return geti("size_y"); }
+bool was_changed_size_y() { return was_changed_("size_y"); }
+int geti_size_y() { return geti_("size_y"); }
 
 //Enum Position
 //Position of the window.
@@ -55,24 +55,24 @@ enum enum_position {
     position_Screen_Center = 2,
     position_N__ = 3
 };
-bool was_changed_position() { return was_changed("position"); }
-enum_position gete_position() { return enum_position(geti("position")); }
+bool was_changed_position() { return was_changed_("position"); }
+enum_position gete_position() { return enum_position(geti_("position")); }
 
 //Int Pos X
 //X position of window.
-bool was_changed_pos_x() { return was_changed("pos_x"); }
-int geti_pos_x() { return geti("pos_x"); }
+bool was_changed_pos_x() { return was_changed_("pos_x"); }
+int geti_pos_x() { return geti_("pos_x"); }
 
 //Int Pos Y
 //Y position of window.
-bool was_changed_pos_y() { return was_changed("pos_y"); }
-int geti_pos_y() { return geti("pos_y"); }
+bool was_changed_pos_y() { return was_changed_("pos_y"); }
+int geti_pos_y() { return geti_("pos_y"); }
 
 
 //Checkbox Visible
 //Is window visible.
-bool was_changed_visible() { return was_changed("visible"); }
-int geti_visible() { return geti("visible"); }
+bool was_changed_visible() { return was_changed_("visible"); }
+int geti_visible() { return geti_("visible"); }
 
 //Enum Mode
 //Full screen, minimized and maximized settings.
@@ -83,8 +83,8 @@ enum enum_mode {
     mode_Full_Screen = 3,
     mode_N__ = 4
 };
-bool was_changed_mode() { return was_changed("mode"); }
-enum_mode gete_mode() { return enum_mode(geti("mode")); }
+bool was_changed_mode() { return was_changed_("mode"); }
+enum_mode gete_mode() { return enum_mode(geti_("mode")); }
 
 
 //Const Enum Theme
@@ -94,8 +94,8 @@ enum enum_theme {
     theme_Dark = 1,
     theme_N__ = 2
 };
-bool was_changed_theme() { return was_changed("theme"); }
-enum_theme gete_theme() { return enum_theme(geti("theme")); }
+bool was_changed_theme() { return was_changed_("theme"); }
+enum_theme gete_theme() { return enum_theme(geti_("theme")); }
 
 //Const Enum Font Size
 //Font size for elements.
@@ -104,13 +104,13 @@ enum enum_font_size {
     font_size_Custom = 1,
     font_size_N__ = 2
 };
-bool was_changed_font_size() { return was_changed("font_size"); }
-enum_font_size gete_font_size() { return enum_font_size(geti("font_size")); }
+bool was_changed_font_size() { return was_changed_("font_size"); }
+enum_font_size gete_font_size() { return enum_font_size(geti_("font_size")); }
 
 //Const Int Font Size
 //Custom font size.
-bool was_changed_font_size_pix() { return was_changed("font_size_pix"); }
-int geti_font_size_pix() { return geti("font_size_pix"); }
+bool was_changed_font_size_pix() { return was_changed_("font_size_pix"); }
+int geti_font_size_pix() { return geti_("font_size_pix"); }
 
 //----------------------------------------------------
 //Page Actions
@@ -123,7 +123,7 @@ enum enum_on_close {
     on_close_Stop = 1,
     on_close_N__ = 2
 };
-bool was_changed_on_close() { return was_changed("on_close"); }
-enum_on_close gete_on_close() { return enum_on_close(geti("on_close")); }
+bool was_changed_on_close() { return was_changed_("on_close"); }
+enum_on_close gete_on_close() { return enum_on_close(geti_("on_close")); }
 
 //----------------------------------------------------

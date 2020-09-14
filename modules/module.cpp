@@ -285,18 +285,33 @@ void Module::access_call(QString function, XDict *input, XDict *output) {
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString Module::gets(QString name, int index, int index2) {
-    return rtmodule()->gets(name, index, index2);
+    return interf()->gets(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 //splits text using "\n"
 QStringList Module::get_strings(QString name) {
-    return rtmodule()->get_strings(name);
+    return interf()->get_strings(name);
 }
 
 //---------------------------------------------------------------------
 void Module::sets(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
-    rtmodule()->sets(name, v);
+    interf()->sets(name, v);
+}
+
+//---------------------------------------------------------------------
+void Module::clear_string(QString name) {
+    interf()->clear_string(name);
+}
+
+//---------------------------------------------------------------------
+void Module::append_string(QString name, QString v, int extra_new_lines_count) {
+    interf()->append_string(name, v, extra_new_lines_count);
+}
+
+//---------------------------------------------------------------------
+void Module::append_string(QString name, QStringList v, int extra_new_lines_count) {
+    interf()->append_string(name, v, extra_new_lines_count);
 }
 
 //---------------------------------------------------------------------
@@ -304,12 +319,17 @@ void Module::sets(QString name, QString v) { //только out: int, checkbox, 
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 int Module::geti(QString name, int index, int index2) {
-    return rtmodule()->geti(name, index, index2);
+    return interf()->geti(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 void Module::seti(QString name, int v) { //только out: int, checkbox, enum (index)
-    rtmodule()->seti(name, v);
+    interf()->seti(name, v);
+}
+
+//---------------------------------------------------------------------
+void Module::increase_int(QString name, int increase) {
+    interf()->increase_int(name, increase);
 }
 
 //---------------------------------------------------------------------
@@ -317,29 +337,29 @@ void Module::seti(QString name, int v) { //только out: int, checkbox, enum
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 float Module::getf(QString name, int index, int index2) {
-    return rtmodule()->getf(name, index, index2);
+    return interf()->getf(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 void Module::setf(QString name, float v) {  //out: float
-    rtmodule()->setf(name, v);
+    interf()->setf(name, v);
 }
 
 //---------------------------------------------------------------------
 QString Module::get_title_value(QString name) {  //enum (title)
-     return rtmodule()->get_title_value(name);
+     return interf()->get_title_value(name);
 }
 
 //---------------------------------------------------------------------
 void Module::set_title_value(QString name, QString v) { //только out: enum (title)
-    rtmodule()->set_title_value(name, v);
+    interf()->set_title_value(name, v);
 }
 
 //---------------------------------------------------------------------
 //доступ к объектам идет только по указателям
 //требуется начать и потом закончить доступ (mutex)
 XDict *Module::get_object(QString name) {
-    return rtmodule()->get_object(name);
+    return interf()->get_object(name);
 }
 
 

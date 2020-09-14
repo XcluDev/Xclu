@@ -76,6 +76,9 @@ public:
     QStringList get_strings(QString name);
 
     void sets(QString name, QString v); //только out: int, checkbox, enum (rawtext), string, text
+    void clear_string(QString name);
+    void append_string(QString name, QString v, int extra_new_lines_count = 0); //дописать к строке, применимо где sets
+    void append_string(QString name, QStringList v, int extra_new_lines_count = 0); //дописать к строке, применимо где sets
 
     //int, checkbox, button, enum (index)
     //index>=0: string, text separated by ' ' - no error if no such string!
@@ -83,6 +86,7 @@ public:
     int geti(QString name, int index = -1, int index2 = -1);
 
     void seti(QString name, int v); //только out: int, checkbox, enum (index)
+    void increase_int(QString name, int increase = 1); //увеличение значения
 
     //float
     //index>=0: string, text separated by ' ' - no error if no such string!

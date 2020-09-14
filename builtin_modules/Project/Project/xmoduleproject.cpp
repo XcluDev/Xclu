@@ -35,8 +35,8 @@ void XModuleProject::impl_loaded() {
 
 //---------------------------------------------------------------------
 void XModuleProject::apply_control_values() {
-    RUNTIME.set_frame_rate(geti("frame_rate"));
-    RUNTIME.set_autostart(geti("autostart"));
+    RUNTIME.set_frame_rate(geti_frame_rate());
+    RUNTIME.set_autostart(geti_autostart());
 }
 
 //---------------------------------------------------------------------
@@ -46,14 +46,14 @@ void XModuleProject::impl_start() {
 
 //---------------------------------------------------------------------
 void XModuleProject::impl_update() {
-    setf("elapsed_time_sec", rt_elapsed_time_sec());
+    setf_elapsed_time_sec(rt_elapsed_time_sec());
 
     float dt = rt_dt();
-    setf("dt", dt);
+    setf_dt(dt);
 
     float fps = 10000;
     if (dt > 0) fps = 1.0 / dt;
-    setf("measured_frame_rate", fps);
+    setf_measured_frame_rate(fps);
 
 }
 

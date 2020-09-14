@@ -36,12 +36,12 @@ void XModuleWImage::impl_start() {
     //сбрасываем родителя - это будет установлено в impl_call, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
-    clear_string("parent_id");
+    clear_string_parent_id();
 
     DataAccess access(data_);
     data_.clear();
 
-    seti("is_new_frame",0);
+    seti_is_new_frame(0);
 
     clear_image();
 
@@ -69,7 +69,7 @@ void *XModuleWImage::impl_create_widget(QString parent_id) {
     xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
     parent_id_ = parent_id;
-    sets("parent_id", parent_id_);
+    sets_parent_id(parent_id_);
     parent_was_set_ = true;
 
     //создаем виджет
@@ -99,8 +99,8 @@ void XModuleWImage::update_all(bool force) {
     //parent_id - set by call
 
     //int visible
-    if (force || was_changed("visible")) {
-        widget_->setVisible(geti("visible"));
+    if (force || was_changed_visible()) {
+        widget_->setVisible(geti_visible());
     }
 
     //итоговое значение
@@ -111,22 +111,22 @@ void XModuleWImage::update_all(bool force) {
 
 //---------------------------------------------------------------------
 void XModuleWImage::update_value() {
-    int new_frame = RUNTIME.get_int_by_link(gets("is_new_frame_link"));
-    seti("is_new_frame",new_frame);
+    int new_frame = RUNTIME.get_int_by_link(gets_is_new_frame_link());
+    seti_is_new_frame(new_frame);
 
     if (new_frame) {
-        XDict *object = RUNTIME.get_object_by_link(gets("image_link"));
+        XDict *object = RUNTIME.get_object_by_link(gets_image_link());
         {
             XDictRead obj(object);
-            obj.copy_to(get_object("image"));
+            obj.copy_to(getobj_image());
         }
 
         if (image_) {
 
             //устанавливаем настройки показа
             XDictShowSettings settings;
-            settings.w = geti("w");
-            settings.h = geti("h");
+            settings.w = geti_w();
+            settings.h = geti_h();
 
             //создаем wrapper для объекта, который установится в зависимости от его типа,
             //и вызываем функцию для его визуализации

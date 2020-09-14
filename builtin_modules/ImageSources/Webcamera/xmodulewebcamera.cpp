@@ -125,11 +125,11 @@ void XModuleWebcamera::impl_start() {
 
     set_started(false); //также ставит gui-элемент is_started
 
-    clear_string("connected_device_name");
-    seti("is_new_frame", 0);
-    clear_string("frames_captured");
+    clear_string_connected_device_name();
+    seti_is_new_frame(0);
+    clear_string_frames_captured();
 
-    clear_string("local_console");
+    clear_string_local_console();
 
     //если требуется, напечатать все устройства
     print_devices();
@@ -145,11 +145,11 @@ void XModuleWebcamera::impl_update() {
     print_formats();
 
     //захват с камеры или считывание изображений
-    int source = geti("capture_source");
-    if (source == CaptureSourceCamera) update_camera();
-    if (source == CaptureSourceLoad_Frames) update_load_frames();
+    auto source = gete_capture_source();
+    if (source == capture_source_Camera) update_camera();
+    if (source == capture_source_Load_Frames) update_load_frames();
     //запись кадров - внутри проверяется, что новый кадр
-    //if (geti("save_frames")) {
+    //if (geti_save_frames")) {
     //    update_save_frames();
     //}
 
@@ -178,7 +178,7 @@ void XModuleWebcamera::update_camera() {
 
     //на всякий случай ставим, что нет новых кадров
     //чтобы в случае ошибки не осталось "1"
-    seti("is_new_frame", 0);
+    seti_is_new_frame(0);
 
     //начинаем менять данные для surface - обновлять и считывать
     bool is_new_frame;
@@ -193,11 +193,11 @@ void XModuleWebcamera::update_camera() {
 
     //обрабатываем только новые кадры
     if (is_new_frame) {
-        seti("is_new_frame", is_new_frame);
+        seti_is_new_frame(is_new_frame);
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
-        XDict *object = get_object("image");
+        XDict *object = getobj_image();
 
         DataAccess access(data_);
         XDictRead(&data_.image).copy_to(object);
@@ -206,7 +206,7 @@ void XModuleWebcamera::update_camera() {
     //метка числа обработанных кадров
     QString processed = QString("Captured %1, Processed %2, Dropped %3 frame(s)")
             .arg(data_.captured_frames).arg(processed_frames_).arg(data_.captured_frames-processed_frames_);
-    sets("frames_captured", processed);
+    sets_frames_captured(processed);
 
 
 }
@@ -215,7 +215,7 @@ void XModuleWebcamera::update_camera() {
 //---------------------------------------------------------------------
 //печать в консоль доступных камер
 void XModuleWebcamera::print_devices() {
-    int print = geti("print_devices");
+    int print = geti_print_devices();
     if (!print) {
         print_devices_worked_ = false;
     }
@@ -233,7 +233,7 @@ void XModuleWebcamera::print_devices() {
                 list.append(camera);
                 //xclu_console_append(camera);
             }
-            append_string("local_console", list, 1);
+            append_string_local_console(list, 1);
         }
     }
 }
@@ -244,10 +244,10 @@ void XModuleWebcamera::print_devices() {
 void XModuleWebcamera::print_formats() {
     if (camera_tried_to_start_
             && !print_formats_worked_
-            && geti("print_formats")) {
+            && geti_print_formats()) {
         print_formats_worked_ = true;
 
-        QString device_name = gets("connected_device_name");
+        QString device_name = gets_connected_device_name();
 
         QStringList list;
         list.append("Supported Formats for '" + device_name + "'");
@@ -273,7 +273,7 @@ void XModuleWebcamera::print_formats() {
             //xclu_console_append(line);
         }
 
-        append_string("local_console", list, 1);
+        append_string_local_console(list, 1);
     }
 }
 
@@ -288,20 +288,20 @@ void XModuleWebcamera::start_camera() {
         const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
         xclu_assert(!cameras.empty(), "No connected devices");
 
-        SelectDevice method = SelectDevice(geti("select_device"));
+        auto method = gete_select_device();
         switch (method) {
-        case SelectDeviceDefault: {
+        case select_device_Default: {
             start_camera(QCameraInfo::defaultCamera());
             break;
         }
-        case SelectDeviceByIndex: {
-                int name = geti("device_index");
+        case select_device_By_Index: {
+                int name = geti_device_index();
                 xclu_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
                 start_camera(cameras[name]);
                 break;
         }
-        case SelectDeviceByName: {
-            QString name = gets("device_name");
+        case select_device_By_Name: {
+            QString name = gets_device_name();
             for (int i=0; i<cameras.size(); i++) {
                 auto &info = cameras.at(i);
                 if (info.description().contains(name)) {
@@ -357,8 +357,8 @@ void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
     on_changed_camera_state(camera_->state());
 
     QString device_name = cameraInfo.description();
-    sets("connected_device_name", device_name);
-    append_string("local_console", "Starting: " + device_name, 1);
+    sets_connected_device_name(device_name);
+    append_string_local_console("Starting: " + device_name, 1);
 
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
     //делаем тут это до старта камеры, и в функции делаем "camera_->load()",
@@ -371,13 +371,13 @@ void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
 int2 XModuleWebcamera::get_gui_resolution() {
-    QString res_string = gets("resolution");
+    QString res_string = gets_("resolution");
     if (res_string == "Camera_Default") {
         return int2(-1, -1);
     }
     int2 res(-1, -1);
     if (res_string == "Custom") {
-        res = int2(geti("res_x"), geti("res_y"));
+        res = int2(geti_res_x(), geti_res_y());
     }
     else {
         //требуется распарсить "1280_x_720"
@@ -392,13 +392,13 @@ int2 XModuleWebcamera::get_gui_resolution() {
 //---------------------------------------------------------------------
 //считать из GUI частоту кадров, -1 - использовать по умолчанию
 int XModuleWebcamera::get_gui_frame_rate() {
-    QString fps_string = gets("frame_rate");
+    QString fps_string = gets_("frame_rate");
     if (fps_string == "Camera_Default") {
         return -1;
     }
     int fps = 30;
     if (fps_string == "Custom") {
-        fps = geti("custom_frame_rate");
+        fps = geti_custom_frame_rate();
     }
     else {
         //FPS записано числом в строке
@@ -412,14 +412,14 @@ int XModuleWebcamera::get_gui_frame_rate() {
 //получить из GUI описание данных
 void XModuleWebcamera::read_gui_output_data_format() {
     DataAccess access(data_);
-    data_.channels = gets("image_channels");
-    data_.data_type = gets("image_data_type");
+    data_.channels = gets_("image_channels");
+    data_.data_type = gets_("image_data_type");
 }
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
-    seti("is_started", started);
+    seti_is_started(started);
 }
 
 //---------------------------------------------------------------------

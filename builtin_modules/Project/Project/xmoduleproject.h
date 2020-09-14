@@ -25,6 +25,8 @@ public:
     static XModuleProject *new_module();
 
 protected:
+#include "auto.h"
+
     //Выполнение
     virtual void impl_loaded();
     virtual void impl_start();

@@ -25,6 +25,8 @@ public:
     static XModuleRealsenseCamera *new_module();
 
 protected:
+#include "auto.h"
+
     //Выполнение
     virtual void impl_loaded();
     virtual void impl_start();
@@ -68,20 +70,6 @@ protected:
     int get_frame_rate(QString rate_string);
     RealsenseSettings get_settings();
 
-    //режим захвата картинок
-    enum CaptureSource : int {
-        CaptureSourceNone = 0,
-        CaptureSourceCamera = 1,
-        CaptureSourceBagFile = 2,
-        CaptureSourceN = 3
-    };
-    //режим выбора камеры
-    enum SelectDevice: int {
-        SelectDeviceDefault = 0,
-        SelectDeviceByIndex = 1,
-        SelectDeviceBySerial = 2,
-        SelectDeviceByN = 3
-    };
 
 };
 

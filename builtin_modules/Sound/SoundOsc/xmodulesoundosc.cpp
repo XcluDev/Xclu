@@ -154,46 +154,46 @@ void XModuleSoundOsc::impl_stop() {
 void XModuleSoundOsc::update_data() {
     DataAccess access(data_);
 
-    data_.out_enabled = geti("out_enabled");
-    int mod = geti("mod_enabled");   //modulation
+    data_.out_enabled = geti_out_enabled();
+    int mod = geti_mod_enabled();   //modulation
     data_.mod_enabled = mod;
 
     //volume
-    data_.volume = getf("volume");
+    data_.volume = getf_volume();
     if (mod) {
-        data_.vol_mod = RUNTIME.get_float_by_link(gets("volume_link"));
-        setf("volume_mod", data_.vol_mod);
+        data_.vol_mod = RUNTIME.get_float_by_link(gets_volume_link());
+        setf_volume_mod(data_.vol_mod);
     }
     else {
         data_.vol_mod = 1;   
     }
 
     //freq
-    data_.freq = getf("freq");
+    data_.freq = getf_freq();
 
     //fm, am
-    data_.fm_enabled = geti("fm_enabled");
-    data_.fm_rate = getf("fm_rate");
-    data_.fm_range = getf("fm_range");
+    data_.fm_enabled = geti_fm_enabled();
+    data_.fm_rate = getf_fm_rate();
+    data_.fm_range = getf_fm_range();
 
-    data_.am_enabled = geti("am_enabled");
-    data_.am_rate = getf("am_rate");
-    data_.am_range = getf("am_range");
+    data_.am_enabled = geti_am_enabled();
+    data_.am_rate = getf_am_rate();
+    data_.am_range = getf_am_range();
     if (mod) {
-        data_.fm_rate = RUNTIME.get_float_by_link(gets("fm_rate_link"), data_.fm_rate);
-        data_.fm_range = RUNTIME.get_float_by_link(gets("fm_range_link"), data_.fm_range);
-        data_.am_rate = RUNTIME.get_float_by_link(gets("am_rate_link"), data_.am_rate);
-        data_.am_range = RUNTIME.get_float_by_link(gets("am_range_link"), data_.am_range);
+        data_.fm_rate = RUNTIME.get_float_by_link(gets_fm_rate_link(), data_.fm_rate);
+        data_.fm_range = RUNTIME.get_float_by_link(gets_fm_range_link(), data_.fm_range);
+        data_.am_rate = RUNTIME.get_float_by_link(gets_am_rate_link(), data_.am_rate);
+        data_.am_range = RUNTIME.get_float_by_link(gets_am_range_link(), data_.am_range);
 
-        setf("fm_rate_mod", data_.fm_rate);
-        setf("fm_range_mod", data_.fm_range);
-        setf("am_rate_mod", data_.am_rate);
-        setf("am_range_mod", data_.am_range);
+        setf_fm_rate_mod(data_.fm_rate);
+        setf_fm_range_mod(data_.fm_range);
+        setf_am_rate_mod(data_.am_rate);
+        setf_am_range_mod(data_.am_range);
     }
 
     //speed
-    data_.vol_speed = getf("vol_speed");
-    data_.freq_speed = getf("freq_speed");
+    data_.vol_speed = getf_vol_speed();
+    data_.freq_speed = getf_freq_speed();
 
 
 }

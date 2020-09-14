@@ -16,16 +16,12 @@ public:
     static XModuleExecute *new_module();
 
 protected:
+#include "auto.h"
+
     virtual void impl_loaded() {}
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
-
-    enum WorkMode : int {
-        WorkModeEach_Frame = 0,
-        WorkModeOn_Bang = 1
-    };
-
 
 };
 

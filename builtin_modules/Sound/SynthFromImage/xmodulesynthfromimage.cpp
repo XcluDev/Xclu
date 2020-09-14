@@ -98,8 +98,8 @@ void XModuleSynthFromImage::impl_start() {
         data_.clear();
     }
 
-    XDictWrite(get_object("image")).clear();
-    XDictWrite(get_object("image_sound")).clear();
+    XDictWrite(getobj_image()).clear();
+    XDictWrite(getobj_image_sound()).clear();
 
     update_data();
 }
@@ -107,22 +107,22 @@ void XModuleSynthFromImage::impl_start() {
 //---------------------------------------------------------------------
 void XModuleSynthFromImage::impl_update() {
     //получение картинки - загрузка из файла или взятие из другого модуля
-    ImageSource image_source = ImageSource(geti("image_source"));
+    auto image_source = gete_image_source();
     switch (image_source) {
-    case ImageSource_ImageFile: {
-        QString image_file = gets("image_file");
+    case image_source_Image_File: {
+        QString image_file = gets_image_file();
         if (image_file != image_file_) {
             load_image_file(image_file);
         }
     }
         break;
-    case ImageSource_Other_Module_Image: {
-            QString image_link = gets("image_link");
+    case image_source_Other_Module_Image: {
+            QString image_link = gets_image_link();
             load_image_link(image_link);
     }
         break;
      default:
-        xclu_exception("Unknown image_source " + gets("image_source"));
+        xclu_exception("Unknown image_source " + gets_("image_source"));
     }
 
     //считываем данные из GUI и обновляем картинку
@@ -140,7 +140,7 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
     XDict *object = RUNTIME.get_object_by_link(image_link);
     XDictRead obj(object);
-    obj.copy_to(get_object("image"));
+    obj.copy_to(getobj_image());
 }
 
 //---------------------------------------------------------------------
@@ -151,18 +151,18 @@ void XModuleSynthFromImage::impl_stop() {
 //---------------------------------------------------------------------
 void XModuleSynthFromImage::update_data() {
     DataAccess access(data_);
-    //data_.image_background = geti("image_background");
-    data_.pcm_speed_hz = getf("pcm_speed_hz");
-    data_.contrast = getf("contrast");
+    //data_.image_background = geti_image_background");
+    data_.pcm_speed_hz = getf_pcm_speed_hz();
+    data_.contrast = getf_contrast();
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    XDictRead obj(get_object("image"));
+    XDictRead obj(getobj_image());
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");
 
-        //int channels = obj.geti("channels");
+        //int channels = obj.geti_channels");
         //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XDictImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
@@ -173,16 +173,16 @@ void XModuleSynthFromImage::update_data() {
 
 
         //устанавливаем диапазон
-        setf("min_value", data_.min_);
-        setf("max_value", data_.max_);
-        setf("center_value", data_.center_);
-        setf("range_value", data_.range_);
+        setf_min_value(data_.min_);
+        setf_max_value(data_.max_);
+        setf_center_value(data_.center_);
+        setf_range_value(data_.range_);
 
         //рисуем выходную картинку
         {
             int w = data_.w_;
             int h = 200;
-            XDictWrite object(get_object("image_sound"));
+            XDictWrite object(getobj_image_sound());
             XDictImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
             quint8 *data =  XDictImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {

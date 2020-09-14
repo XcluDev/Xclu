@@ -87,19 +87,13 @@ public:
     static XModuleSoundOut *new_module();
 
 protected:
+#include "auto.h"
+
     //Выполнение
     virtual void impl_loaded() {}
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
-
-    //режим выбора аудиоустройства
-    enum SelectDevice: int {
-        SelectDeviceDefault = 0,
-        SelectDeviceByIndex = 1,
-        SelectDeviceByName = 2,
-        SelectDeviceByN = 3
-    };
 
     bool audio_tried_to_start_ = false;
     void start_audio();

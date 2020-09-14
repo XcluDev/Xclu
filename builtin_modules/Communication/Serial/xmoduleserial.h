@@ -27,6 +27,7 @@ public:
     static XModuleSerial *new_module();
 
 protected:
+#include "auto.h"
     //Выполнение
     virtual void impl_loaded();
     virtual void impl_start();
@@ -46,14 +47,6 @@ protected:
 protected:
 
     void open_port();
-
-    //режим выбора камеры
-    enum SelectDevice: int {
-        SelectDeviceDefault = 0,
-        SelectDeviceByIndex = 1,
-        SelectDeviceByName = 2,
-        SelectDeviceByN = 3
-    };
 
     QSerialPort serialPort_;
     QString port_name_;

@@ -171,7 +171,7 @@ public:
     * `gete_...`, `sete_...` - enum
     * `getf_...`,`setf_...` - float
     * `gets_...`, `sets_...` - string, text
-    * `get_obj_...` - object
+    * `getobj_...` - object
 
     Also are defined the following functions:
     * `was_changed_...` - all items,

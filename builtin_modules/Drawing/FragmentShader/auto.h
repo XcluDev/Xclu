@@ -1,6 +1,6 @@
 //----------------------------------------------------
 //Interface for XClassFragmentShader
-//Created automatically at 2020.09.14 11:01:46
+//Created automatically.
 //----------------------------------------------------
 //Page Main
 //General settings
@@ -17,18 +17,18 @@ enum enum_size {
     size_1920x1200 = 6,
     size_N__ = 7
 };
-bool was_changed_size() { return was_changed("size"); }
-enum_size gete_size() { return enum_size(geti("size")); }
+bool was_changed_size() { return was_changed_("size"); }
+enum_size gete_size() { return enum_size(geti_("size")); }
 
 //Const Int Size X
 //Width of FBO.
-bool was_changed_size_x() { return was_changed("size_x"); }
-int geti_size_x() { return geti("size_x"); }
+bool was_changed_size_x() { return was_changed_("size_x"); }
+int geti_size_x() { return geti_("size_x"); }
 
 //Const Int Size Y
 //Height of FBO.
-bool was_changed_size_y() { return was_changed("size_y"); }
-int geti_size_y() { return geti("size_y"); }
+bool was_changed_size_y() { return was_changed_("size_y"); }
+int geti_size_y() { return geti_("size_y"); }
 
 //----------------------------------------------------
 //Page Inputs
@@ -36,8 +36,8 @@ int geti_size_y() { return geti("size_y"); }
 
 //Const Checkbox Texture1
 //Use texture 1
-bool was_changed_texture1() { return was_changed("texture1"); }
-int geti_texture1() { return geti("texture1"); }
+bool was_changed_texture1() { return was_changed_("texture1"); }
+int geti_texture1() { return geti_("texture1"); }
 
 //Enum Source
 //Image source - file or image from other module.
@@ -46,20 +46,20 @@ enum enum_tex1_source {
     tex1_source_Other_Module_Image = 1,
     tex1_source_N__ = 2
 };
-bool was_changed_tex1_source() { return was_changed("tex1_source"); }
-enum_tex1_source gete_tex1_source() { return enum_tex1_source(geti("tex1_source")); }
+bool was_changed_tex1_source() { return was_changed_("tex1_source"); }
+enum_tex1_source gete_tex1_source() { return enum_tex1_source(geti_("tex1_source")); }
 
 //String Image File Name
 //Image File.
-bool was_changed_image1_file() { return was_changed("image1_file"); }
-QString gets_image1_file() { return gets("image1_file"); }
-QStringList get_strings_image1_file() { return get_strings("image1_file"); }
+bool was_changed_image1_file() { return was_changed_("image1_file"); }
+QString gets_image1_file() { return gets_("image1_file"); }
+QStringList get_strings_image1_file() { return get_strings_("image1_file"); }
 
 //String Image Link
 //Reference to image in another module.
-bool was_changed_image1_link() { return was_changed("image1_link"); }
-QString gets_image1_link() { return gets("image1_link"); }
-QStringList get_strings_image1_link() { return get_strings("image1_link"); }
+bool was_changed_image1_link() { return was_changed_("image1_link"); }
+QString gets_image1_link() { return gets_("image1_link"); }
+QStringList get_strings_image1_link() { return get_strings_("image1_link"); }
 
 //----------------------------------------------------
 //Page Shader
@@ -67,14 +67,14 @@ QStringList get_strings_image1_link() { return get_strings("image1_link"); }
 
 //Out Object Fbo
 //output FBO, can be used in Screen to draw
-bool was_changed_fbo() { return was_changed("fbo"); }
-XDict *getobj_fbo() { return get_object("fbo"); }
+bool was_changed_fbo() { return was_changed_("fbo"); }
+XDict *getobj_fbo() { return get_object_("fbo"); }
 
 
 //Text Code
 //Shader's code.
-bool was_changed_fragment_code() { return was_changed("fragment_code"); }
-QString gets_fragment_code() { return gets("fragment_code"); }
-QStringList get_strings_fragment_code() { return get_strings("fragment_code"); }
+bool was_changed_fragment_code() { return was_changed_("fragment_code"); }
+QString gets_fragment_code() { return gets_("fragment_code"); }
+QStringList get_strings_fragment_code() { return get_strings_("fragment_code"); }
 
 //----------------------------------------------------

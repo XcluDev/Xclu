@@ -1,26 +1,26 @@
 //----------------------------------------------------
 //Interface for XClassButton
-//Created automatically at 2020.09.14 11:01:46
+//Created automatically.
 //----------------------------------------------------
 //Page Value
 //Settings of value.
 
 //Out Int Resulted Value
 //Resulted value
-bool was_changed_value() { return was_changed("value"); }
-int geti_value() { return geti("value"); }
-void seti_value(int value) { seti("value", value); }
-void increase_int_value(int increase = 1) { increase_int("value", increase); }
+bool was_changed_value() { return was_changed_("value"); }
+int geti_value() { return geti_("value"); }
+void seti_value(int value) { seti_("value", value); }
+void increase_int_value(int increase = 1) { increase_int_("value", increase); }
 
 //Out String Belongs To
 //Window/layout this element is placed - specified by window.
-bool was_changed_belongs_to() { return was_changed("belongs_to"); }
-QString gets_belongs_to() { return gets("belongs_to"); }
-QStringList get_strings_belongs_to() { return get_strings("belongs_to"); }
-void sets_belongs_to(QString value) { sets("belongs_to", value); }
-void clear_string_belongs_to() { clear_string("belongs_to"); }
-void append_string_belongs_to(QString v, int extra_new_lines_count = 0) { append_string("belongs_to", v, extra_new_lines_count); }
-void append_string_belongs_to(QStringList v, int extra_new_lines_count = 0) { append_string("belongs_to", v, extra_new_lines_count); }
+bool was_changed_belongs_to() { return was_changed_("belongs_to"); }
+QString gets_belongs_to() { return gets_("belongs_to"); }
+QStringList get_strings_belongs_to() { return get_strings_("belongs_to"); }
+void sets_belongs_to(QString value) { sets_("belongs_to", value); }
+void clear_string_belongs_to() { clear_string_("belongs_to"); }
+void append_string_belongs_to(QString v, int extra_new_lines_count = 0) { append_string_("belongs_to", v, extra_new_lines_count); }
+void append_string_belongs_to(QStringList v, int extra_new_lines_count = 0) { append_string_("belongs_to", v, extra_new_lines_count); }
 
 //----------------------------------------------------
 //Page Visual
@@ -28,14 +28,14 @@ void append_string_belongs_to(QStringList v, int extra_new_lines_count = 0) { ap
 
 //Checkbox Visible
 //Is visible
-bool was_changed_visible() { return was_changed("visible"); }
-int geti_visible() { return geti("visible"); }
+bool was_changed_visible() { return was_changed_("visible"); }
+int geti_visible() { return geti_("visible"); }
 
 //String Title
 //Button title
-bool was_changed_title_text() { return was_changed("title_text"); }
-QString gets_title_text() { return gets("title_text"); }
-QStringList get_strings_title_text() { return get_strings("title_text"); }
+bool was_changed_title_text() { return was_changed_("title_text"); }
+QString gets_title_text() { return gets_("title_text"); }
+QStringList get_strings_title_text() { return get_strings_("title_text"); }
 
 //Const Enum Width
 //Width of button.
@@ -44,18 +44,18 @@ enum enum_button_width {
     button_width_Custom_Range = 1,
     button_width_N__ = 2
 };
-bool was_changed_button_width() { return was_changed("button_width"); }
-enum_button_width gete_button_width() { return enum_button_width(geti("button_width")); }
+bool was_changed_button_width() { return was_changed_("button_width"); }
+enum_button_width gete_button_width() { return enum_button_width(geti_("button_width")); }
 
 //Const Int Min
 //Minimal button width.
-bool was_changed_button_width_min() { return was_changed("button_width_min"); }
-int geti_button_width_min() { return geti("button_width_min"); }
+bool was_changed_button_width_min() { return was_changed_("button_width_min"); }
+int geti_button_width_min() { return geti_("button_width_min"); }
 
 //Const Int Max
 //Maximal button width.
-bool was_changed_button_width_max() { return was_changed("button_width_max"); }
-int geti_button_width_max() { return geti("button_width_max"); }
+bool was_changed_button_width_max() { return was_changed_("button_width_max"); }
+int geti_button_width_max() { return geti_("button_width_max"); }
 
 //----------------------------------------------------
 //Page On Change
@@ -63,9 +63,9 @@ int geti_button_width_max() { return geti("button_width_max"); }
 
 //Out Checkbox Was Clicked
 //This checkbox is set to true when button was clicked, after the module's "update" and until next module's "update".
-bool was_changed_was_clicked() { return was_changed("was_clicked"); }
-int geti_was_clicked() { return geti("was_clicked"); }
-void seti_was_clicked(int value) { seti("was_clicked", value); }
+bool was_changed_was_clicked() { return was_changed_("was_clicked"); }
+int geti_was_clicked() { return geti_("was_clicked"); }
+void seti_was_clicked(int value) { seti_("was_clicked", value); }
 
 
 //Enum On Click
@@ -76,19 +76,19 @@ enum enum_on_click {
     on_click_Execute_Script = 2,
     on_click_N__ = 3
 };
-bool was_changed_on_click() { return was_changed("on_click"); }
-enum_on_click gete_on_click() { return enum_on_click(geti("on_click")); }
+bool was_changed_on_click() { return was_changed_("on_click"); }
+enum_on_click gete_on_click() { return enum_on_click(geti_("on_click")); }
 
 //String Module Call Link
 //Call other module on value change.
-bool was_changed_on_change_module_call_link() { return was_changed("on_change_module_call_link"); }
-QString gets_on_change_module_call_link() { return gets("on_change_module_call_link"); }
-QStringList get_strings_on_change_module_call_link() { return get_strings("on_change_module_call_link"); }
+bool was_changed_on_change_module_call_link() { return was_changed_("on_change_module_call_link"); }
+QString gets_on_change_module_call_link() { return gets_("on_change_module_call_link"); }
+QStringList get_strings_on_change_module_call_link() { return get_strings_("on_change_module_call_link"); }
 
 //Text Script
 //Script to execute on value change.
-bool was_changed_on_change_script() { return was_changed("on_change_script"); }
-QString gets_on_change_script() { return gets("on_change_script"); }
-QStringList get_strings_on_change_script() { return get_strings("on_change_script"); }
+bool was_changed_on_change_script() { return was_changed_("on_change_script"); }
+QString gets_on_change_script() { return gets_("on_change_script"); }
+QStringList get_strings_on_change_script() { return get_strings_("on_change_script"); }
 
 //----------------------------------------------------

@@ -74,6 +74,8 @@ public:
     XModuleWebcameraSurfaceData &surface_data();
 
 protected:
+#include "auto.h"
+
     //Выполнение
     virtual void impl_loaded() {}
     virtual void impl_start();
@@ -81,20 +83,6 @@ protected:
     virtual void impl_stop();
 
 protected:
-    //режим захвата картинок
-    enum CaptureSource : int {
-        CaptureSourceNone = 0,
-        CaptureSourceCamera = 1,
-        CaptureSourceLoad_Frames = 2,
-        CaptureSourceN = 3
-    };
-    //режим выбора камеры
-    enum SelectDevice: int {
-        SelectDeviceDefault = 0,
-        SelectDeviceByIndex = 1,
-        SelectDeviceByName = 2,
-        SelectDeviceByN = 3
-    };
 
     //камера
     void update_camera();

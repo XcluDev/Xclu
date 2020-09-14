@@ -20,9 +20,9 @@ XModuleSerial::XModuleSerial()
 
 //---------------------------------------------------------------------
 void XModuleSerial::gui_clear() {
-    seti("total_sent",0);
-    clear_string("device_list");
-    clear_string("port_info");
+    seti_total_sent(0);
+    clear_string_device_list();
+    clear_string_port_info();
     set_connected(false); //также ставит gui-элемент connected
     port_name_ = "";
     set_total_sent(0);
@@ -31,13 +31,13 @@ void XModuleSerial::gui_clear() {
 //---------------------------------------------------------------------
 void XModuleSerial::set_connected(bool connected) {
   connected_ = connected;
-  seti("connected", connected);
+  seti_connected(connected);
 }
 
 //---------------------------------------------------------------------
 void XModuleSerial::set_total_sent(int t) {
     total_sent_ = t;
-    seti("total_sent", t);
+    seti_total_sent(t);
 }
 
 //---------------------------------------------------------------------
@@ -63,7 +63,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
         bool connect_warning = false;
         if (button_id == "send_string_btn") {
             if (connected_) {
-                QString str = gets("send_string");
+                QString str = gets_send_string();
                 send_string(str);
             }
             else {
@@ -73,7 +73,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
         }
         if (button_id == "send_string_link_btn") {
             if (connected_) {
-                QString str = RUNTIME.get_string_by_link(gets("string_link_send"));
+                QString str = RUNTIME.get_string_by_link(gets_string_link_send());
                 send_string(str);
             }
             else {
@@ -83,7 +83,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
 
         if (button_id == "send_bytes_btn") {
             if (connected_) {
-                int byte = geti("send_byte");
+                int byte = geti_send_byte();
                 send_byte(byte);
             }
             else {
@@ -126,8 +126,8 @@ void XModuleSerial::print_devices() {
         out.append(QString("  Product Identifier: %1").arg((serialPortInfo.hasProductIdentifier() ? QByteArray::number(serialPortInfo.productIdentifier(), 16) : blankString)));
         out.append(QString("  Busy: %1").arg((serialPortInfo.isBusy() ? "Yes" : "No")));
     }
-    clear_string("device_list");
-    append_string("device_list", out, 1);
+    clear_string_device_list();
+    append_string_device_list(out, 1);
 }
 
 
@@ -155,22 +155,22 @@ void XModuleSerial::open_port() {
     int index0 = -1;
     int index1 = -1;
 
-    int select_port = geti("select_port");
+    auto select_port = gete_select_port();
     switch (select_port) {
-    case SelectDeviceDefault: {
+    case select_port_Default: {
         index0 = 0;
         index1 = 0;
     }
         break;
-    case SelectDeviceByIndex: {
-        index0 = geti("port_index0");
-        index1 = geti("port_index1");
+    case select_port_By_Index: {
+        index0 = geti_port_index0();
+        index1 = geti_port_index1();
         xclu_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
         xclu_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
     }
         break;
-    case SelectDeviceByName: {
-        QString port_name = gets("port_name");
+    case select_port_By_Name: {
+        QString port_name = gets_port_name();
         int k = 0;
         for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
             QString name = serialPortInfo.portName();
@@ -194,7 +194,7 @@ void XModuleSerial::open_port() {
     xclu_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
 
     //Скорость подключения
-    int baud_rate = gets("baud_rate").toInt();
+    int baud_rate = gets_("baud_rate").toInt();
     xclu_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
 
     //Поиск свободного порта
@@ -213,11 +213,11 @@ void XModuleSerial::open_port() {
                 port_name_ = serialPortInfo.portName();
 
                 QString port_info = "port_info";
-                clear_string(port_info);
-                append_string(port_info, QString("Port: %1").arg(k));
-                append_string(port_info, QString("Name: %1").arg(serialPortInfo.portName()));
-                append_string(port_info, QString("Location: %1").arg(serialPortInfo.systemLocation()));
-                append_string(port_info, QString("Description: %1").arg((!serialPortInfo.description().isEmpty() ? serialPortInfo.description() : "N/A")));
+                clear_string_port_info();
+                append_string_port_info(QString("Port: %1").arg(k));
+                append_string_port_info(QString("Name: %1").arg(serialPortInfo.portName()));
+                append_string_port_info(QString("Location: %1").arg(serialPortInfo.systemLocation()));
+                append_string_port_info(QString("Description: %1").arg((!serialPortInfo.description().isEmpty() ? serialPortInfo.description() : "N/A")));
                 break;
             }
         }
@@ -236,12 +236,12 @@ void XModuleSerial::impl_update() {
 //---------------------------------------------------------------------
 void XModuleSerial::send_string(QString str) {
     //добавляем завершение строки
-    int ts = geti("line_term"); //None,\n,\r,\r\n
-    if (ts == 1) str += "\n";
-    if (ts == 2) str += "\r";
-    if (ts == 3) str += "\r\n";
+    auto ts = gete_line_term(); //None,\n,\r,\r\n
+    if (ts == line_term__n) str += "\n";
+    if (ts == line_term__r) str += "\r";
+    if (ts == line_term__r_n) str += "\r\n";
 
-    if (geti("debug")) {
+    if (geti_debug()) {
         xclu_console_append("Send string `" + str + "`");
     }
 
@@ -269,7 +269,7 @@ void XModuleSerial::send_string(QString str) {
 
 //---------------------------------------------------------------------
 void XModuleSerial::send_byte(int byte) {
-    if (geti("debug")) {
+    if (geti_debug()) {
         xclu_console_append("Send byte `" + QString::number(byte) + "`");
     }
     xclu_exception("Sending byte is not implented");

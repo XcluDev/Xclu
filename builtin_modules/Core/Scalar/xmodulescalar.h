@@ -42,6 +42,8 @@ public:
     static XModuleScalar *new_module();
 
 protected:
+#include "auto.h"
+
     //Выполнение
     virtual void impl_loaded() {}
     virtual void impl_start();
@@ -62,10 +64,7 @@ protected:
 
     void update_value(bool force);
     void set_value(int v);
-    enum Source : int {
-        Source_Fixed_Value = 0, Source_GUI = 1, Source_Other_Module_Value = 2, Source_Expression = 3
-    };
-    Source get_source();
+
 
     XModuleGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 

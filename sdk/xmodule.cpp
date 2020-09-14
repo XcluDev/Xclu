@@ -64,7 +64,7 @@ void XModule::execute(ModuleExecuteStage stage) {
     //отлов исключений путем обработки ошибок, и реакция соответственно настройках
     try {
         //обновление enabled__
-        status_.enabled__ = geti("enabled");
+        status_.enabled__ = geti_("enabled");
 
         reset_stop_out();
         reset_error_values();
@@ -244,7 +244,7 @@ bool XModule::is_stop_out() {
 //---------------------------------------------------------------------
 //обработка ошибки в соответствие с настройками модуля
 void XModule::process_error(QString message) {
-    int action = geti("action_on_error");
+    int action = geti_("action_on_error");
     bool ignore = false;
     bool print_console = false;
     bool show_message = false;
@@ -298,24 +298,15 @@ void XModule::process_error(QString message) {
 }
 
 //---------------------------------------------------------------------
-//Проверка, изменились ли переменные
-bool XModule::was_changed(QString name) {
-    //Важно, что для объектов эта функция получает доступ к объекту с помощью XDictRead,
-    //поэтому, нельзя ее вызывать, если активирован другой XDictRead[Write] для этого объекта
-    XItem *var = module()->interf()->var(name);   //проверка, что переменная есть - не требуется
-    return var->was_changed();
-}
-
-//---------------------------------------------------------------------
 void XModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
-    seti("was_error", 0);
-    clear_string("error_text");
+    seti_("was_error", 0);
+    clear_string_("error_text");
 }
 
 //---------------------------------------------------------------------
 void XModule::set_error_values(QString message) { //установка того, что была ошибка
-    seti("was_error", 1);
-    sets("error_text", message);
+    seti_("was_error", 1);
+    sets_("error_text", message);
 }
 
 //---------------------------------------------------------------------
