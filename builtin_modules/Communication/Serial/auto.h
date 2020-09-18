@@ -123,9 +123,9 @@ QString button_send_string_link_btn() { return "send_string_link_btn"; }
 //
 enum enum_line_term {
     line_term_None = 0,
-    line_term_\n = 1,
-    line_term_\r = 2,
-    line_term_\r\n = 3,
+    line_term__n = 1,
+    line_term__r = 2,
+    line_term__r_n = 3,
     line_term_N__ = 4
 };
 bool was_changed_line_term() { return was_changed_("line_term"); }
