@@ -28,7 +28,7 @@ XItemObject::XItemObject(ModuleInterface *parent, const XItemPreDescription &pre
     }
 
     //создаем объект
-    object_.reset(new XDict(XDictTypeEmpty));
+    object_.reset(new XStruct(XStructTypeEmpty));
 
 }
 
@@ -62,15 +62,15 @@ void XItemObject::var_to_gui_internal() {
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 void XItemObject::copy_data_to_internal(XItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
-    XDictRead(get_object()).copy_to(item->get_object());
+    XStructRead(get_object()).copy_to(item->get_object());
 }
 
 //---------------------------------------------------------------------
 //C++
-//original: XDict *get_object(QString name);
+//original: XStruct *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XDict *", "obj", "get_object", "");
+                              "XStruct *", "struct", "get_struct", "");
 }
 
 //---------------------------------------------------------------------

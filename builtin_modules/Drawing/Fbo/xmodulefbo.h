@@ -33,7 +33,7 @@ protected:
     virtual void impl_stop();
 
     //Вызовы
-    virtual void impl_call(QString function, XDict *input, XDict * /*output*/);
+    virtual void impl_call(QString function, XStruct *input, XStruct * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
 };

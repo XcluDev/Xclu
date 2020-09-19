@@ -12,7 +12,7 @@
 #include "incl_h.h"
 #include "xmodule.h"
 #include "xcluprotecteddata.h"
-#include "xstruct.h"
+#include "xdict.h"
 
 class QWidget;
 class XcluSpinBox;

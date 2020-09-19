@@ -12,7 +12,7 @@
 #include "incl_h.h"
 #include "xmodule.h"
 #include "xcluprotecteddata.h"
-#include "xdict.h"
+#include "xstruct.h"
 
 class QWidget;
 class QLabel;

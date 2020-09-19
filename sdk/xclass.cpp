@@ -1,7 +1,7 @@
 #include "xclass.h"
 #include "incl_cpp.h"
 #include "module.h"
-#include "xdict.h"
+#include "xstruct.h"
 #include "projectruntime.h"
 
 //---------------------------------------------------------------------
@@ -44,8 +44,8 @@ Module *XClass::module() {
 
 //---------------------------------------------------------------------
 //Check if value was changed
-//It's important, that for objects this function obtain access using XDictRead,
-//hence it should not be called for already active XDictRead[Write] for this object
+//It's important, that for objects this function obtain access using XStructRead,
+//hence it should not be called for already active XStructRead[Write] for this object
 bool XClass::was_changed_(QString name) {
     return module()->interf()->var(name)->was_changed();
 }
@@ -153,7 +153,7 @@ void XClass::set_title_value_(QString name, QString v) {
 //без копирования
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
-XDict *XClass::get_object_(QString name) {
+XStruct *XClass::get_struct_(QString name) {
     xclu_assert(module_, "Error at XClass::get_object(): module is nullptr");
     return module()->get_object(name);
 }

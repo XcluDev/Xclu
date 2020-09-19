@@ -7,7 +7,7 @@
 #include "moduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xdict.h"
+#include "xstruct.h"
 
 
 //registering module implementation
@@ -247,14 +247,14 @@ void XModuleWindow::impl_stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleWindow::impl_call(QString /*function*/, XDict * /*input*/, XDict * /*output*/) {
+void XModuleWindow::impl_call(QString /*function*/, XStruct * /*input*/, XStruct * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        //XDictRead sound(input);
+        //XStructRead sound(input);
 
         //float sample_rate = sound.var_int("sample_rate");
         //return;
@@ -463,15 +463,15 @@ QWidget *XModuleWindow::request_widget(QString module_id) {
     //out pointer widget_pointer
 
     //формируем запрос
-    XDict input;
-    XDictWrite(input).sets("parent_id", this->module()->name());
+    XStruct input;
+    XStructWrite(input).sets("parent_id", this->module()->name());
 
-    XDict output;
+    XStruct output;
 
     module->access_call(functions_names::create_widget(), &input, &output);
 
     //считываем указатель на виджет
-    QWidget *widget = (QWidget *)XDictWrite(output).get_pointer("widget_pointer");
+    QWidget *widget = (QWidget *)XStructWrite(output).get_pointer("widget_pointer");
     xclu_assert(widget, "Returned empty widget");
 
     return widget;

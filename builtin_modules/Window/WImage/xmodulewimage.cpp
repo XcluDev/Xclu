@@ -5,7 +5,7 @@
 #include "moduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xdict.h"
+#include "xstruct.h"
 #include "xcluobjectwrapper.h"
 
 
@@ -115,23 +115,23 @@ void XModuleWImage::update_value() {
     seti_is_new_frame(new_frame);
 
     if (new_frame) {
-        XDict *object = RUNTIME.get_object_by_link(gets_image_link());
+        XStruct *object = RUNTIME.get_struct_by_link(gets_image_link());
         {
-            XDictRead obj(object);
-            obj.copy_to(getobj_image());
+            XStructRead obj(object);
+            obj.copy_to(getstruct_image());
         }
 
         if (image_) {
 
             //устанавливаем настройки показа
-            XDictShowSettings settings;
+            XStructShowSettings settings;
             settings.w = geti_w();
             settings.h = geti_h();
 
             //создаем wrapper для объекта, который установится в зависимости от его типа,
             //и вызываем функцию для его визуализации
-            QScopedPointer<XDictWrapper> wrapper;
-           wrapper.reset(XDictWrapper::create_wrapper(object));
+            QScopedPointer<XStructWrapper> wrapper;
+           wrapper.reset(XStructWrapper::create_wrapper(object));
 
            wrapper->show_object(image_, settings);
         }

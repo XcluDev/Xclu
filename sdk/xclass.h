@@ -16,7 +16,7 @@ void CosmoOsc::setup(Module *module, int index) {
 #include "incl_h.h"
 
 class Module;
-class XDict;
+class XStruct;
 
 class XClass
 {
@@ -50,8 +50,8 @@ public:
     //see https://forum.xclu.dev/t/export-modules-xgui-interface-as-h-file/38
     //----------------------------------------------
     //Check if value was changed
-    //It's important, that for objects this function obtain access using XDictRead,
-    //hence it should not be called for already active XDictRead[Write] for this object
+    //It's important, that for objects this function obtain access using XStructRead,
+    //hence it should not be called for already active XStructRead[Write] for this object
     bool was_changed_(QString name);
 
     //int, checkbox, button, enum (rawtext), string, text
@@ -87,7 +87,7 @@ public:
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
     //без копирования
     //объекты снабжены мютексами, поэтому следует начинать и завершать с ними взаимодействие
-    XDict *get_object_(QString name);
+    XStruct *get_struct_(QString name);
 
 protected:
     Module *module_ = nullptr;

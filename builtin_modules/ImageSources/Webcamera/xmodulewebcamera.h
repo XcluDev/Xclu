@@ -38,7 +38,7 @@ protected:
 struct XModuleWebcameraSurfaceData : public XcluProtectedData
 {
 
-    XDict image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
+    XStruct image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
 
@@ -49,7 +49,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
     ErrorInfo err;
 
     void clear() {
-        XDictWrite(image).clear();
+        XStructWrite(image).clear();
         captured_frames = 0;
         is_new_frame = 0;
         channels = "";

@@ -126,6 +126,7 @@ SOURCES += \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
+    sdk/types/xstruct.cpp \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
     sdk/utility/incl_h.cpp \
@@ -156,8 +157,7 @@ SOURCES += \
     host/dialogs/dialogaddmodule.cpp \
     host/projectgui.cpp \
     python/pythoncore.cpp \
-    sdk/xclass.cpp \
-    sdk/types/xdict.cpp
+    sdk/xclass.cpp
 
 HEADERS += \
     components/gui/xgui.h \
@@ -200,6 +200,7 @@ HEADERS += \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/types/xarray.h \
+    sdk/types/xstruct.h \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \
     sdk/utility/incl_h.h \
@@ -230,8 +231,7 @@ HEADERS += \
     host/dialogs/dialogaddmodule.h \
     host/projectgui.h \
     python/pythoncore.h \
-    sdk/xclass.h \
-    sdk/types/xdict.h
+    sdk/xclass.h
 
 #--------------------------------------------------------------------------
 #Python

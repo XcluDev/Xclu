@@ -35,7 +35,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
     try {
         DataAccess access(data_);
         {
-            XDictWrite sound(&sound_);
+            XStructWrite sound(&sound_);
             sound.clear();
             //создаем массив
             sound.seti("samples", samples);
@@ -50,7 +50,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
         //тестовый звук или остальные модули
         int play_test_sound = data_->play_test_sound_;
         if (play_test_sound) {
-            XDictWrite sound(&sound_);
+            XStructWrite sound(&sound_);
             float *data = sound.var_array("data")->data_float();
             float freq_Hz = 600;
             float sample_rate = format_.sampleRate();
@@ -76,7 +76,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
 
         //применение громкости
         {
-            XDictWrite sound(&sound_);
+            XStructWrite sound(&sound_);
             float *data = sound.var_array("data")->data_float();
             float volume = data_->volume_;
             for (int i=0; i<samples * channels; i++) {
@@ -118,7 +118,7 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
         request_sound(samples, channels);
 
         //считываем звук
-        XDictRead sound(&sound_);
+        XStructRead sound(&sound_);
         XArray const *arr = sound.get_array("data");
         float const *data_float = arr->data_float();
 
@@ -214,7 +214,7 @@ void XModuleSoundOut::impl_start() {
     }
     buffer_size_= 0;
     seti_buffer_size(0);
-    XDictWrite(getobj_sound_format()).clear();
+    XStructWrite(getstruct_sound_format()).clear();
 
     set_started(false); //также ставит gui-элемент is_started
     clear_string_connected_device_name();
@@ -464,9 +464,9 @@ void XModuleSoundOut::set_started(bool started) { //ставит camera_started_
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void XModuleSoundOut::set_format(const QAudioFormat &format) {
-    auto format_ = XDictSoundFormatData(format.sampleRate(), format.channelCount());
-    XDictWrite object(getobj_sound_format());
-    XDictSoundFormat::set_to_object(object, format_);
+    auto format_ = XStructSoundFormatData(format.sampleRate(), format.channelCount());
+    XStructWrite object(getstruct_sound_format());
+    XStructSoundFormat::set_to_object(object, format_);
 
 }
 

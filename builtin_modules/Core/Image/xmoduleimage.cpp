@@ -5,7 +5,7 @@
 #include "moduleregistrar.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xstruct.h"
+#include "xdict.h"
 
 #include "xcluspinbox.h"
 

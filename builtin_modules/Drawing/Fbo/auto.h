@@ -56,6 +56,6 @@ enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_(
 //Out Object Fbo
 //output FBO, can be used in Window to draw
 bool was_changed_fbo() { return was_changed_("fbo"); }
-XDict *getobj_fbo() { return get_object_("fbo"); }
+XStruct *getstruct_fbo() { return get_struct_("fbo"); }
 
 //----------------------------------------------------

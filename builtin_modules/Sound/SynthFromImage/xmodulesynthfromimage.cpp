@@ -98,8 +98,8 @@ void XModuleSynthFromImage::impl_start() {
         data_.clear();
     }
 
-    XDictWrite(getobj_image()).clear();
-    XDictWrite(getobj_image_sound()).clear();
+    XStructWrite(getstruct_image()).clear();
+    XStructWrite(getstruct_image_sound()).clear();
 
     update_data();
 }
@@ -138,9 +138,9 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XDict *object = RUNTIME.get_object_by_link(image_link);
-    XDictRead obj(object);
-    obj.copy_to(getobj_image());
+    XStruct *object = RUNTIME.get_struct_by_link(image_link);
+    XStructRead obj(object);
+    obj.copy_to(getstruct_image());
 }
 
 //---------------------------------------------------------------------
@@ -157,18 +157,18 @@ void XModuleSynthFromImage::update_data() {
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    XDictRead obj(getobj_image());
+    XStructRead obj(getstruct_image());
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");
 
         //int channels = obj.geti_channels");
-        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XDictImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
+        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
         //auto data_type = array->data_type();
         //xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
-        //            "XDictImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
+        //            "XStructImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
         data_.set_image(w, h, array->data_u8bit());
 
 
@@ -182,9 +182,9 @@ void XModuleSynthFromImage::update_data() {
         {
             int w = data_.w_;
             int h = 200;
-            XDictWrite object(getobj_image_sound());
-            XDictImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
-            quint8 *data =  XDictImage::var_array(object)->data_u8bit();
+            XStructWrite object(getstruct_image_sound());
+            XStructImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
+            quint8 *data =  XStructImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {
                 int y0 = int(mapf_clamped(data_.image_[x],-1,1, h, 0));
                 for (int y=0; y<y0; y++) {

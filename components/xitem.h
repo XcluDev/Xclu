@@ -11,7 +11,7 @@ struct XGuiPageCreator;
 class XGui;
 class QJsonObject;
 class XItem;
-class XDict;
+class XStruct;
 class ModuleInterface;
 
 //предварительная информация для построения элемента интерфейса
@@ -100,7 +100,7 @@ public:
 
     //object
     virtual bool supports_object() { return false; }
-    virtual XDict *get_object() { return nullptr; }
+    virtual XStruct *get_object() { return nullptr; }
 
     //Запись, считывание и копирование -------------------------
     //хранит ли данные (или просто интерфейсный элемент, например, сепаратор)
@@ -171,7 +171,7 @@ public:
     * `gete_...`, `sete_...` - enum
     * `getf_...`,`setf_...` - float
     * `gets_...`, `sets_...` - string, text
-    * `getobj_...` - object
+    * `getstruct_...` - object
 
     Also are defined the following functions:
     * `was_changed_...` - all items,

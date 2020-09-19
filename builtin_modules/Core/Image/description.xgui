@@ -1,0 +1,15 @@
+#Module Image
+#------------------------------------------
+module_description=Core image module.
+module_version=1.01
+module_impl=C++
+
+module_accept_calls=gui_draw
+#------------------------------------------
+int w=0 0:*
+int h=0 0:*
+int channels=0 0:*
+#string channels_str=""
+#enum data_type=u8bit [u8bit,s8bit,int16,uint16,int32,uint32,float,double]
+array data
+

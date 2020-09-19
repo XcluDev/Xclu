@@ -129,7 +129,7 @@ void seti_is_started(int value) { seti_("is_started", value); }
 //Out Object Sound Format
 //Used sound format
 bool was_changed_sound_format() { return was_changed_("sound_format"); }
-XDict *getobj_sound_format() { return get_object_("sound_format"); }
+XStruct *getstruct_sound_format() { return get_struct_("sound_format"); }
 
 //Out Int Buffer Size
 //Buffer size

@@ -4,7 +4,7 @@
 //Объект
 
 #include "xitem.h"
-#include "xdict.h"
+#include "xstruct.h"
 #include <QScopedPointer>
 
 class ModuleInterface;
@@ -26,7 +26,7 @@ public:
 
     //доступ к объекту
     virtual bool supports_object() { return true; }
-    virtual XDict *get_object() { return object_.data(); }
+    virtual XStruct *get_object() { return object_.data(); }
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
@@ -36,7 +36,7 @@ public:
     //-----------------------------
 
 protected:
-    QScopedPointer<XDict> object_;
+    QScopedPointer<XStruct> object_;
 
     QStringList types_; //список типов, которыми может быть этот объект, например, image, array
 

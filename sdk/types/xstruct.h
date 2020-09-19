@@ -1,7 +1,7 @@
-#ifndef XCLUOBJECT_H
-#define XCLUOBJECT_H
+#ifndef XSTRUCT_H
+#define XSTRUCT_H
 
-//Тип данных "объект", которых хранит скаляры, строки, численные массивы и списки строк, и объекты.
+//XStruct - Structure - basic Xclu type
 
 #include "incl_h.h"
 
@@ -9,43 +9,42 @@
 #include <QMutex>
 
 //Объект
-//Типы объектов заданы в XDictType
+//Типы объектов заданы в XStructType
 //Управление визуализацией в редакторе конкретных объектов,
-//а также работа с их элементами осуществляется через XDictWrapper
+//а также работа с их элементами осуществляется через XStructWrapper
 
 //в объектах есть mutex, поэтому, при начале изменения нужно вызвать begin_access, а затем end_access
 
-//XDictRead - класс для безопасного доступа к объекту, кратко называется XDictRead:
-//    XDictRead access(object);
+//XStructRead - класс для безопасного доступа к объекту, кратко называется XStructRead:
+//    XStructRead access(object);
 //для быстрого доступа к одному элементу объекта:
-//    XDictRead(object).type()
+//    XStructRead(object).type()
 //- конструктор вызовет object->begin_access(), а деструктор object->end_access()
 //все операции можно проводить только через него
 //Но, нельзя кратко в одной строке делать доступ, так как деструктор не вызывается:
 //QString("%1\n%2 byte(s)")
-//    .arg(object_type_to_string(XDictRead(object()).type()))
-//    .arg(XDictRead(object()).size_bytes()));   ---- так нельзя, mutex приведет к зависанию
+//    .arg(object_type_to_string(XStructRead(object()).type()))
+//    .arg(XStructRead(object()).size_bytes()));   ---- так нельзя, mutex приведет к зависанию
 
 //TODO как-то усовершенствовать код, а то все одно и то же дублируется - использовать макросы
 
 
 //----------------------------------------------------------------
-class XDictRead;
-class XDictWrite;
+class XStructRead;
+class XStructWrite;
 
-//Класс словаря
-class XDict
+class XStruct
 {
 public:
     //создает объект заданного типа, по описанию из object_types
-    XDict(XDictType type = XDictTypeEmpty);
-    virtual ~XDict();
+    XStruct(XStructType type = XStructTypeEmpty);
+    virtual ~XStruct();
 
 
 protected:
-    //эти функции доступны из XDictRead, XDictWrite
-    friend XDictRead;
-    friend XDictWrite;
+    //эти функции доступны из XStructRead, XStructWrite
+    friend XStructRead;
+    friend XStructWrite;
 
     void begin_access();
     void end_access();
@@ -55,17 +54,17 @@ protected:
     void reset_changed();   //сброс флага, что было изменение
 
     //тип - не очищается при clear
-    XDictType type() const;
-    void set_type(XDictType);
+    XStructType type() const;
+    void set_type(XStructType);
     //проверить, что объект имеет конкретный тип, если нет - то выдаст exception
-    void assert_type(XDictType expected_type) const;
+    void assert_type(XStructType expected_type) const;
 
     //размер данных, в байтах
     quint32 size_bytes() const;
 
     //очистка и копирование
     void clear();
-    void copy_to(XDict *object) const;
+    void copy_to(XStruct *object) const;
 
     //доступ к переменным
     bool has_int(QString name) const;
@@ -104,12 +103,12 @@ protected:
     QMap<QString,QStringList *> &all_stringss();  //любопытное название
 
     bool has_object(QString name) const;
-    XDict const *get_object(QString name) const;
+    XStruct const *get_object(QString name) const;
     //используйте var_strings для изменения объекта
-    XDict *var_object(QString name, bool create_if_not_exists = false);
+    XStruct *var_object(QString name, bool create_if_not_exists = false);
     //создает объект, затем его можно наполнять - например, скопировать другой объект
-    XDict *create_object(QString name, XDictType type = XDictTypeEmpty);
-    QMap<QString,XDict *> &all_objects();
+    XStruct *create_object(QString name, XStructType type = XStructTypeEmpty);
+    QMap<QString,XStruct *> &all_objects();
 
     //Указатели - например, для хранения FBO или передачи виджетов QWidget *.
     //В отличие от полноценного объекта, у указателя одна задача - хранить что-то системное, что мы не можем хранить как набор скаляров и массивов.
@@ -123,7 +122,7 @@ protected:
 
 protected:
     //встроенные поля
-    XDictType type_;
+    XStructType type_;
 
     //мютекс для доступа
     QMutex mutex_;
@@ -148,7 +147,7 @@ protected:
     QMap<QString,QStringList *> strings_;
 
     //object
-    QMap<QString,XDict *> object_;
+    QMap<QString,XStruct *> object_;
     //то есть, объектов может быть много - но к ним доступ по имени, а не как к массиву
 
     //pointer - для хранения системных объектов типа FBO
@@ -157,11 +156,11 @@ protected:
 };
 
 //----------------------------------------------------------------
-//XDictRead, XDictWrite - классы для безопасного доступа к объекту,
+//XStructRead, XStructWrite - классы для безопасного доступа к объекту,
 //только считываниеи на считывание и запись:
-//    XDictRead access(object);
+//    XStructRead access(object);
 //для быстрого доступа к одному элементу объекта:
-//    XDictRead(object).type()
+//    XStructRead(object).type()
 //- конструктор вызовет object->begin_access(), а деструктор object->end_access()
 //все операции можно проводить только через него
 //Кроме деструктора - можно вызывать access.release() для освобождения объекта
@@ -169,44 +168,44 @@ protected:
 //для того, чтобы многопоточные операции типа получение кадра с камеры не зависали
 //Но, нельзя кратко в одной строке делать доступ, так как деструктор не вызывается:
 //QString("%1\n%2 byte(s)")
-//    .arg(object_type_to_string(XDictRead(object()).type()))
-//    .arg(XDictRead(object()).size_bytes()));   ---- так нельзя, mutex приведет к зависанию
+//    .arg(object_type_to_string(XStructRead(object()).type()))
+//    .arg(XStructRead(object()).size_bytes()));   ---- так нельзя, mutex приведет к зависанию
 //   Внимание: если был доступ на запись, то автоматически ставится пометка, что объект был изменен
 
-//ВАЖНО: XDictRead все же меняет состояние объекта - а именно, его was_changed
+//ВАЖНО: XStructRead все же меняет состояние объекта - а именно, его was_changed
 //(при его запросе сбрасывается флажок)
 
-class XDictRead {
+class XStructRead {
 public:
-    XDictRead(XDict *object);
-    XDictRead(XDict &object);
-    virtual ~XDictRead();
+    XStructRead(XStruct *object);
+    XStructRead(XStruct &object);
+    virtual ~XStructRead();
 
     void release();             //если надо освободить объект, но он остается в зоне видимости
     //bool assert_is_correct();  //проверка, что объект соответствует его формальному описанию
 private:
-    XDictRead(XDictRead &){}   //запрещаем создавать копию объекта, чтобы не вызывали XDictRead(ObjectAcess(...))
+    XStructRead(XStructRead &){}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
     bool accessed_ = false;
 public:
     //Все эти функции вызывают соответствующие функции объекта
     //но тут они защищены
 
     //показывает, было ли изменение объекта после последнего запроса "was_changed"
-    //Важно, что, несмотря на то, что это XDictRead, эти две функции меняют объект
+    //Важно, что, несмотря на то, что это XStructRead, эти две функции меняют объект
     //так как показатель изменения - это внешняя характеристика объекта, которая, например, не записывается в файл
     bool was_changed() { return object_->was_changed(); }
     void reset_changed() { object_->reset_changed(); }
 
     //тип - не очищается при clear
-    XDictType type()               { return object_->type(); }
+    XStructType type()               { return object_->type(); }
     //проверить, что объект имеет конкретный тип, если нет - то выдаст exception
-    void assert_type(XDictType expected_type)  { object_->assert_type(expected_type); }
+    void assert_type(XStructType expected_type)  { object_->assert_type(expected_type); }
 
     //размер данных, в байтах
     quint32 size_bytes()                { return object_->size_bytes(); }
 
     //очистка и копирование
-    void copy_to(XDict *object)    { return object_->copy_to(object); }
+    void copy_to(XStruct *object)    { return object_->copy_to(object); }
 
     //доступ к переменным
     bool has_int(QString name)          { return object_->has_int(name); }
@@ -225,34 +224,34 @@ public:
     QStringList const *get_strings(QString name) { return object_->get_strings(name); }
 
     bool has_object(QString name)            { return object_->has_object(name); }
-    XDict const *get_object(QString name) { return object_->get_object(name); }
+    XStruct const *get_object(QString name) { return object_->get_object(name); }
 
     bool has_pointer(QString name)            { return object_->has_pointer(name); }
     void const *get_pointer(QString name)     { return object_->get_pointer(name); }
 
 
 protected:
-    XDict *object_;
+    XStruct *object_;
 };
 
 
 //Класс для изменения объекта
 //При создании сразу помечаем, что объект был изменен
-class XDictWrite: public XDictRead {
+class XStructWrite: public XStructRead {
 public:
-    XDictWrite(XDict *object);
-    XDictWrite(XDict &object);
-    //virtual ~XDictWrite();
+    XStructWrite(XStruct *object);
+    XStructWrite(XStruct &object);
+    //virtual ~XStructWrite();
 
     //bool assert_is_correct();  //проверка, что объект соответствует его формальному описанию
 private:
-//    XDictWrite(XDictWrite &a): XDictRead(a) {}   //запрещаем создавать копию объекта, чтобы не вызывали XDictRead(ObjectAcess(...))
+//    XStructWrite(XStructWrite &a): XStructRead(a) {}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
 public:
     //Все эти функции вызывают соответствующие функции объекта
     //но тут они защищены
 
     //тип - не очищается при clear
-    void set_type(XDictType type)  { object_->set_type(type); }
+    void set_type(XStructType type)  { object_->set_type(type); }
     //проверить, что объект имеет конкретный тип, если нет - то выдаст expeption
 
     //очистка и копирование
@@ -282,9 +281,9 @@ public:
     QMap<QString,QStringList *> &all_stringss()  { return object_->all_stringss(); }  //любопытное название
 
     //используйте var_object для изменения подобъектов
-    XDict *var_object(QString name, bool create_if_not_exists = false) { return object_->var_object(name, create_if_not_exists); }
-    XDict *create_object(QString name, XDictType type = XDictTypeEmpty)  { return object_->create_object(name, type); }
-    QMap<QString,XDict *> &all_objects() { return object_->all_objects(); }
+    XStruct *var_object(QString name, bool create_if_not_exists = false) { return object_->var_object(name, create_if_not_exists); }
+    XStruct *create_object(QString name, XStructType type = XStructTypeEmpty)  { return object_->create_object(name, type); }
+    QMap<QString,XStruct *> &all_objects() { return object_->all_objects(); }
 
     void *get_pointer(QString name)                    { return object_->get_pointer(name); }
     void set_pointer(QString name, void *pointer)     { object_->set_pointer(name, pointer); }
@@ -295,4 +294,4 @@ protected:
 };
 
 
-#endif // XCLUOBJECT_H
+#endif // XSTRUCT_H

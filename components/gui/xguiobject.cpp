@@ -91,12 +91,12 @@ XGuiObjectVisual &XGuiObject::visual() {
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
 //при необходимости - можно ввести mutex в объект
-void XGuiObject::show_object(XDict *object) {
+void XGuiObject::show_object(XStruct *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
-        QScopedPointer<XDictWrapper> wrapper;
-        wrapper.reset(XDictWrapper::create_wrapper(object));
+        QScopedPointer<XStructWrapper> wrapper;
+        wrapper.reset(XStructWrapper::create_wrapper(object));
         wrapper->show_object(this);
     }
 }

@@ -10,7 +10,7 @@
 
 class EditorModule;
 class QJsonObject;
-class XDict;
+class XStruct;
 
 class Module
 {
@@ -59,10 +59,10 @@ public:
     //functions_names::sound_buffer_add()
 
     //в случае исключения - оно выдастся
-    void access_call(QString function, XDict *input = nullptr, XDict *output = nullptr);
+    void access_call(QString function, XStruct *input = nullptr, XStruct *output = nullptr);
 
     //исключение "записывается" в err
-    void access_call_no_exception(QString function, ErrorInfo &err, XDict *input = nullptr, XDict *output = nullptr);
+    void access_call_no_exception(QString function, ErrorInfo &err, XStruct *input = nullptr, XStruct *output = nullptr);
 
 
     //Доступ к переменным и запуску из других модулей
@@ -98,7 +98,7 @@ public:
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)
     //доступ к объектам идет только по указателям
-    XDict *get_object(QString name);
+    XStruct *get_object(QString name);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached(EditorModule *editor);

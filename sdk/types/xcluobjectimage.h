@@ -1,15 +1,15 @@
 #ifndef XCLUIMAGE_H
 #define XCLUIMAGE_H
 
-#include "xdict.h"
+#include "xstruct.h"
 #include <QImage>
 #include "xcluobjectwrapper.h"
 class QLabel;
 class XArray;
 class XGuiObject;
 
-//Здесь описан класс XDictImage,
-//который позволяет конвертировать QImage в XDict и обратно
+//Здесь описан класс XStructImage,
+//который позволяет конвертировать QImage в XStruct и обратно
 
 //Функция для тестирования работы с изображениями
 void XcluImage_test();
@@ -27,7 +27,7 @@ array "data"
 
 
 //поля класса, которые полностью характеризует изображение
-class XDictImageData {
+class XStructImageData {
 public:
     int w = 0;
     int h = 0;
@@ -38,26 +38,26 @@ public:
 
 
 //класс для работы с объектами-изображениями
-class XDictImage: public XDictWrapper {
+class XStructImage: public XStructWrapper {
 public:
-    XDictImage(XDict *object);
+    XStructImage(XStruct *object);
 
     //показать объект в GUI
     virtual void show_object(XGuiObject *item);
 
     //показать объект в QLabel
-    virtual void show_object(QLabel *label, const XDictShowSettings &settings);
+    virtual void show_object(QLabel *label, const XStructShowSettings &settings);
 
     //Извлечение всех полей из изображения
-    static XDictImageData get_data(XDictRead &object);
+    static XStructImageData get_data(XStructRead &object);
 
 
     //создание изображения - выделение памяти и заполнение из массива
-    static void allocate(XDictWrite &object, XArrayDataType data_type, int channels, int w, int h);
-    static void create_from_array(XDictWrite &object, quint8 *data, int channels, int w, int h);
+    static void allocate(XStructWrite &object, XArrayDataType data_type, int channels, int w, int h);
+    static void create_from_array(XStructWrite &object, quint8 *data, int channels, int w, int h);
 
-    static XArray const *get_array(XDictRead &object) {return object.get_array("data");}
-    static XArray *var_array(XDictWrite &object) {return object.var_array("data");}
+    static XArray const *get_array(XStructRead &object) {return object.get_array("data");}
+    static XArray *var_array(XStructWrite &object) {return object.var_array("data");}
 
 
 
@@ -67,44 +67,44 @@ public:
 
 
     //Создание из Raster_... и обратно
-    static void create_from_raster(XDictWrite &object, Raster_u8 &raster);
-    static void create_from_raster(XDictWrite &object, Raster_u8c3 &raster);
+    static void create_from_raster(XStructWrite &object, Raster_u8 &raster);
+    static void create_from_raster(XStructWrite &object, Raster_u8c3 &raster);
 
-    static void to_raster(XDictRead &object, Raster_u8 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
-    static void to_raster(XDictRead &object, Raster_u8c3 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
+    static void to_raster(XStructRead &object, Raster_u8 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
+    static void to_raster(XStructRead &object, Raster_u8c3 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
 
 
     //Создание из QImage
     //TODO mirrorx не реализована
-    static void create_from_QImage(XDictWrite &object, const QImage &qimage,
+    static void create_from_QImage(XStructWrite &object, const QImage &qimage,
                                    QString channels_str, QString data_type_str,
                                    bool mirrorx=false, bool mirrory=false);
-    static void create_from_QImage(XDictWrite &object, const QImage &qimage,
+    static void create_from_QImage(XStructWrite &object, const QImage &qimage,
                                    QString channels_str, XArrayDataType data_type,
                                    bool mirrorx=false, bool mirrory=false);
 
     //Конвертировать изображение в QImage - например, для записи на диск
     //Внимание - не учитывается значение каналов, а только их количество
     //то есть "R" будет выглядет как Grayscale
-    static void convert_to_QImage(XDictRead &object, QImage &qimage,
+    static void convert_to_QImage(XStructRead &object, QImage &qimage,
                                   bool mirrorx=false, bool mirrory=false);
 
     //Конвертировать изображение в QImage с уменьшением размера, быстро
     //используется для создания быстрых Preview
     //Внимание - не учитывается значение каналов, а только их количество
     //то есть "R" будет выглядет как Grayscale
-    static void convert_to_QImage_fast_preview(XDictRead &object, QImage &qimage, int out_w, int out_h,
+    static void convert_to_QImage_fast_preview(XStructRead &object, QImage &qimage, int out_w, int out_h,
                                                bool mirrorx=false, bool mirrory=false);
 
     //Загрузка изображения с диска
     //TODO выполняется через QImage, поэтому не очень быстрая
     //быстрее через OpenCV или FreeImage или TurboJpeg
-    static void load(XDictWrite &object, QString file_name);
+    static void load(XStructWrite &object, QString file_name);
 
     //Запись изображения на диск
     //TODO выполняется через QImage, поэтому не очень быстрая
     //быстрее через OpenCV или FreeImage или TurboJpeg
-    static void save(XDictRead &object, QString file_name, QString format = "JPG", int quality = 90);
+    static void save(XStructRead &object, QString file_name, QString format = "JPG", int quality = 90);
 
 
 };

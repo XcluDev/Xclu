@@ -2,7 +2,7 @@
 #include "moduleinterface.h"
 #include "module.h"
 #include "incl_cpp.h"
-#include "xdict.h"
+#include "xstruct.h"
 
 //---------------------------------------------------------------------
 XModule::XModule(QString class_name) {
@@ -128,7 +128,7 @@ void XModule::button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает impl_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output) {
+void XModule::call(QString function, ErrorInfo &err, XStruct *input, XStruct *output) {
     try {
         if (err.is_error()) return;
 
@@ -155,7 +155,7 @@ void XModule::call(QString function, ErrorInfo &err, XDict *input, XDict *output
 
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
-void XModule::create_widget_internal(XDict *input, XDict *output) {
+void XModule::create_widget_internal(XStruct *input, XStruct *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
@@ -166,7 +166,7 @@ void XModule::create_widget_internal(XDict *input, XDict *output) {
     xclu_assert(output, "Internal error, output object is nullptr");
 
     //устанавливаем, кто использует
-    QString parent_id = XDictRead(input).gets("parent_id");
+    QString parent_id = XStructRead(input).gets("parent_id");
 
     //проверяем, что еще не стартовали
     xclu_assert(status().was_started,
@@ -179,14 +179,14 @@ void XModule::create_widget_internal(XDict *input, XDict *output) {
     void* widget = impl_create_widget(parent_id);
 
     //ставим его в выходной объект
-    XDictWrite(output).set_pointer("widget_pointer", widget);
+    XStructWrite(output).set_pointer("widget_pointer", widget);
 }
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
+void XModule::sound_buffer_add_internal(XStruct *input, XStruct * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-    XDictWrite sound(input);
+    XStructWrite sound(input);
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");
     int channels = sound.geti("channels");
@@ -195,7 +195,7 @@ void XModule::sound_buffer_add_internal(XDict *input, XDict * /*output*/) {
 }
 
 //---------------------------------------------------------------------
-void XModule::impl_call(QString function, XDict * /*input*/, XDict * /*output*/) {
+void XModule::impl_call(QString function, XStruct * /*input*/, XStruct * /*output*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function '" + function + "', because impl_call() is not implemented");
 }

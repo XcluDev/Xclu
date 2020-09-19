@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "project.h"
 #include "xitem.h"
-#include "xdict.h"
+#include "xstruct.h"
 
 ProjectRuntime RUNTIME;
 
@@ -140,7 +140,7 @@ QString ProjectRuntime::get_string_by_link(QString link_str, QString def_val) {
 }
 
 //---------------------------------------------------------------------
-XDict *ProjectRuntime::get_object_by_link(QString link_str) {
+XStruct *ProjectRuntime::get_struct_by_link(QString link_str) {
     VarLink link(link_str);
     return RUNTIME.get_module(link.module)->get_object(link.var);
 }
@@ -160,7 +160,7 @@ void ProjectRuntime::press_button_by_link(QString link_str) {
 }*/
 
 //---------------------------------------------------------------------
-/*XDict *ProjectRuntime::get_object_by_link(QString link_str) {
+/*XStruct *ProjectRuntime::get_struct_by_link(QString link_str) {
     VarLink link(link_str);
     Module *module = get_module(link.module);
     return module->get_object(link.var);

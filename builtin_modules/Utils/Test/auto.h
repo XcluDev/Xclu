@@ -145,7 +145,7 @@ void append_string_text3(QStringList v, int extra_new_lines_count = 0) { append_
 //Object Object
 //
 bool was_changed_object() { return was_changed_("object"); }
-XDict *getobj_object() { return get_object_("object"); }
+XStruct *getstruct_object() { return get_struct_("object"); }
 
 //----------------------------------------------------
 //Page Choose Files
