@@ -126,6 +126,7 @@ SOURCES += \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
+    sdk/types/xarray_multi.cpp \
     sdk/types/xstruct.cpp \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
@@ -200,6 +201,7 @@ HEADERS += \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/types/xarray.h \
+    sdk/types/xarray_multi.h \
     sdk/types/xstruct.h \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \

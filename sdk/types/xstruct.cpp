@@ -128,6 +128,7 @@ quint32 XStruct::size_bytes() const {
 
 //---------------------------------------------------------------------
 void XStruct::clear() {
+    type_ = XStructTypeEmpty;
     int_.clear();
     float_.clear();
     string_.clear();

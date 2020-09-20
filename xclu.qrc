@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>builtin_resources/general_page.xgui</file>
-        <file>builtin_resources/object_types.xgui</file>
         <file>builtin_resources/themes/Combinear/Combinear.png</file>
         <file>builtin_resources/themes/Combinear/Combinear.qss</file>
         <file>builtin_resources/themes/Combinear/License.txt</file>
@@ -222,5 +221,6 @@
         <file>builtin_resources/qt_images/tab_selected.png</file>
         <file>Xclu_custom.ini</file>
         <file>builtin_resources/module_h_template.h</file>
+        <file>builtin_resources/structs.xgui</file>
     </qresource>
 </RCC>

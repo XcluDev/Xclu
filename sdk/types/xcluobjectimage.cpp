@@ -262,7 +262,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     //создание массива
     XArray *array = object.var_array("data", true);
-    array->allocate_image(channels, w, h, data_type);
+    array->allocate(channels*w*h, data_type);
 }
 
 //---------------------------------------------------------------------
@@ -416,7 +416,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     //заполнение массива
     XArray *array = object.var_array("data", true);
-    array->allocate_image(channels, w, h, data_type);
+    array->allocate(channels*w*h, data_type);
 
 #define XcluImage_IMPLEMENT(TYPE, CPP_TYPE) \
     if (data_type == XArrayDataType_##TYPE) { \
@@ -552,7 +552,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     qimage = QImage(out_w, out_h, QImage::Format_RGB32);
 
     //макрос для взятие координат пикселей
-#define XcluImage_GET_PIX(CPP_TYPE) { input_pixels = (CPP_TYPE const*) array->pixel_pointer(x*w/out_w,y1); }
+#define XcluImage_GET_PIX(CPP_TYPE) { input_pixels = (CPP_TYPE const*) array->item_pointer(channels*(x*w/out_w + w*y1)); }
 
     //u8bit
     if (data_type == XArrayDataType_u8bit) {

@@ -53,7 +53,7 @@ protected:
     void set_changed();     //устанавливает флаг, что было изменение
     void reset_changed();   //сброс флага, что было изменение
 
-    //тип - не очищается при clear
+    //тип - очищается при clear
     XStructType type() const;
     void set_type(XStructType);
     //проверить, что объект имеет конкретный тип, если нет - то выдаст exception
