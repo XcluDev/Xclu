@@ -1,5 +1,3 @@
-#include "mainwindow.h"
-
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QStyleFactory>
@@ -9,6 +7,8 @@
 //для настройки антиалиасинга
 #include <QSurfaceFormat>
 
+#include "mainwindow.h"
+#include "mainwindow1.h"
 #include "console.h"
 
 
@@ -56,11 +56,8 @@ int main(int argc, char *argv[])
         //QSurfaceFormat::setDefaultFormat(fmt);
 
         //-------------------------------------------
-        MainWindow *mainWin = new MainWindow;
+        MainWindow1 *mainWin = new MainWindow1;
         mainWin->show();
-
-        mainWin->setup();   //запуск процессов - считывание списка модулей, открытие файлов
-
         result = app.exec();
         //-------------------------------------------
     }

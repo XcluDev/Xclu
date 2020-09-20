@@ -1,8 +1,7 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINWINDOW1_H
+#define MAINWINDOW1_H
 
 #include <QMainWindow>
-
 #include <QTimer>
 #include "incl_h.h"
 
@@ -14,67 +13,59 @@ class QMenuBar;
 class QSettings;
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+namespace Ui {
+class MainWindow1;
+}
+
+class MainWindow1 : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow1(QWidget *parent = nullptr);
+    ~MainWindow1();
 
-    static MainWindow *main_window();   //эта функция используется для передачи изменений проекта из xclu_document_modified()
+    static MainWindow1 *main_window();   //эта функция используется для передачи изменений проекта из xclu_document_modified()
 
     //сигнал извне, из xclu_document_modified(), что проект был изменен
     void set_document_modified();
     void reset_document_modified();
     bool is_document_modified();
 
-protected:
-    //Функция, которая вызывается при закрытии окна
-    void closeEvent(QCloseEvent *event) override;
+private:
+    Ui::MainWindow1 *ui;
+
 
     void init();
     void setup_internal();   //запуск всех процессов - считывание списка модулей, открытие проекта
 
-    //Menu
-    void createMenu();
+    //Функция, которая вызывается при закрытии окна
+    void closeEvent(QCloseEvent *event) override;
 
-    //QMenuBar *menuBar;
-    QMenu *fileMenu;    
-    QAction *newAct;
-    QAction *openAct;
-    QAction *saveAct;
-    QAction *saveAsAct;
-    QAction *examplesAct;
-    QAction *exitAction;
+private slots:
+    void on_actionNew_Project_triggered();
+    void on_actionOpen_Project_triggered();
+    void on_actionSave_Project_triggered();
+    void on_actionSave_Project_As_triggered();
+    void on_actionExit_triggered();
+    void on_actionTest_Module_Interface_triggered();
+    void on_actionUpdate_auto_h_files_for_all_modules_triggered();
+    void on_actionAbout_triggered();
+    void on_actionRun_triggered();
+    void on_actionStop_triggered();
 
-    QMenu *modulesMenu;
-
+private:
     //обновить заголовок окна и состояние элементов управления
     void update_window_state();
     void update_window_title();
     void updateMenusVisible();
     QString stage_to_string();
 
-private slots:
-    void newProject();
     void newProjectStartup();
-    void open();
-    bool save();
-    bool saveAs();
     void closeProject();
-    void examples();
+    bool saveProject();
+    bool saveAsProject();
 
-    void updateRecentFileActions();
-    void openRecentFile();
-    void about();
-
-    //Developer
-    //диалог тестирования XGUI создаваемых модулей
-    void dev_test_module_interface();
-    void dev_update_all_auto_h();   //update auto.h for all built-in modules
-
-private:
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
     void set_current_file(const QString &fileName);
 
@@ -94,6 +85,7 @@ private:
     void readSettings();
     void writeSettings();
 
+private:
     //работа с недавними файлами
     enum { MaxRecentFiles = 5 };
     static bool hasRecentFiles();
@@ -104,18 +96,19 @@ private:
     static QString strippedName(const QString &fullFileName);
 
     QAction *recentFileActs[MaxRecentFiles];
-    QAction *recentFileSeparator;
-    QAction *recentFileSubMenuAct;
 
     QString projectFile;
     bool isUntitled = true;
 
+    void updateRecentFileActions();
+    void openRecentFile();
+
+private:
     //Execution
-private slots:
     void execute_run();
     void execute_stop();    //остановка, но когда вызовет таймер
     void immediate_stop();    //немедленная остановка таймера и проекта
-private:
+
     ProjectRunState run_state_ = ProjectRunStateLoading;
     void set_state(ProjectRunState run_state);
     bool is_stopped();
@@ -125,5 +118,8 @@ private:
     //эта функция вызывается таймером
     void execute_update();
 
+
+
 };
-#endif // MAINWINDOW_H
+
+#endif // MAINWINDOW1_H

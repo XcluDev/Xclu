@@ -1,7 +1,7 @@
 #ifndef XARRAYMULTI_H
 #define XARRAYMULTI_H
 
-//Числовой массив
+//Multidimensional array, currently not used
 
 #include "incl_h.h"
 #include "xarray.h"

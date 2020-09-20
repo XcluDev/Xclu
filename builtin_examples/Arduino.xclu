@@ -21,235 +21,147 @@
                 "items": [
                     {
                         "aname": "Main",
-                        "atitle": "Main",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "debug",
-                        "atitle": "Debug",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "1"
                     },
                     {
                         "aname": "select_port",
-                        "atitle": "Port",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Default"
                     },
                     {
                         "aname": "port_index0",
-                        "atitle": "Port ID From",
-                        "atype": "int",
-                        "avalue": "2",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "2"
                     },
                     {
                         "aname": "port_index1",
-                        "atitle": "Port ID To",
-                        "atype": "int",
-                        "avalue": "10",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "10"
                     },
                     {
                         "aname": "port_name",
-                        "atitle": "Port Name",
-                        "atype": "string",
-                        "avalue": "",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": ""
                     },
                     {
                         "aname": "baud_rate",
-                        "atitle": "Baud Rate",
-                        "atype": "enum",
-                        "avalue": "9600",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "9600"
                     },
                     {
                         "aname": "connected",
-                        "atitle": "Connected",
-                        "atype": "checkbox",
                         "avalue": "0"
                     },
                     {
                         "aname": "port_info",
-                        "atitle": "Port Info",
-                        "atype": "text",
-                        "avalue": "Port: 0\nName: COM3\nLocation: \\\\.\\COM3\nDescription: USB-SERIAL CH340\n"
+                        "avalue": ""
                     },
                     {
                         "aname": "total_sent",
-                        "atitle": "Total Sent",
-                        "atype": "int",
-                        "avalue": "3"
+                        "avalue": "0"
                     },
                     {
                         "aname": "Console",
-                        "atitle": "Console",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "send_type",
-                        "atitle": "Send",
-                        "atype": "enum",
-                        "avalue": "String",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "String"
                     },
                     {
                         "aname": "send_string",
-                        "atitle": "String To Send",
-                        "atype": "string",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "1"
                     },
                     {
-                        "aname": "string_link",
-                        "atitle": "String Link",
-                        "atype": "string",
-                        "avalue": "module1->string",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "string_link_send",
+                        "avalue": "module1->string"
                     },
                     {
                         "aname": "line_term",
-                        "atitle": "Line Terminator",
-                        "atype": "enum",
-                        "avalue": "\\r\\n",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "\\r\\n"
                     },
                     {
                         "aname": "send_byte",
-                        "atitle": "Send Byte",
-                        "atype": "int",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "show_received",
-                        "atitle": "Show Received as",
-                        "atype": "enum",
-                        "avalue": "None",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "None"
                     },
                     {
                         "aname": "received_text",
-                        "atitle": "Received Text",
-                        "atype": "text",
                         "avalue": "Not yet implemented :)"
                     },
                     {
                         "aname": "received_bytes",
-                        "atitle": "Received Bytes",
-                        "atype": "text",
                         "avalue": "Not yet implemented :)"
                     },
                     {
                         "aname": "auto_clear",
-                        "atitle": "Auto Clear",
-                        "atype": "enum",
-                        "avalue": "On",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "On"
                     },
                     {
                         "aname": "limit_show",
-                        "atitle": "Limit Show",
-                        "atype": "enum",
-                        "avalue": "On",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "On"
                     },
                     {
                         "aname": "limit_show_count",
-                        "atitle": "Limit Show Count",
-                        "atype": "int",
-                        "avalue": "100",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "100"
                     },
                     {
                         "aname": "Devices",
-                        "atitle": "Devices",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "device_list",
-                        "atitle": "Device List",
-                        "atype": "text",
                         "avalue": ""
                     },
                     {
                         "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
                     },
                     {
                         "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "enum",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Show_Message_Box_and_Stop"
                     },
                     {
                         "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
                         "avalue": "0"
                     },
                     {
                         "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
                         "avalue": ""
                     },
                     {
                         "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     }
                 ]
             }

@@ -64,7 +64,7 @@ public:
     double get_double(qint32 index) const;
     void set_double(qint32 index, double v);
 
-      //получение массивов данных для быстрой работы
+    //получение массивов данных для быстрой работы
     //если size_bytes_ == 0, возвращает nullptr    
     void* data();
     void const* data() const;
