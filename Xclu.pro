@@ -111,7 +111,6 @@ SOURCES += \
     components/xitemseparator.cpp \
     components/xitemstring.cpp \
     components/xitemtext.cpp \
-    host/mainwindow.cpp \
     host/mainwindow1.cpp \
     host/xclu_paths.cpp \
     host/xclu_settings.cpp \
@@ -186,7 +185,6 @@ HEADERS += \
     components/xitemseparator.h \
     components/xitemstring.h \
     components/xitemtext.h \
-    host/mainwindow.h \
     host/mainwindow1.h \
     host/xclu_paths.h \
     host/xclu_settings.h \

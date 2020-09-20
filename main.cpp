@@ -7,7 +7,6 @@
 //для настройки антиалиасинга
 #include <QSurfaceFormat>
 
-#include "mainwindow.h"
 #include "mainwindow1.h"
 #include "console.h"
 
