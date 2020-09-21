@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QString>
-#include "mainwindow1.h"
+#include "mainwindow.h"
 #include "consoleview.h"
 
 //Вызовы исключений:
@@ -45,7 +45,7 @@ void xclu_console_clear() {
 //Сигнал, что проект был изменен
 //обращается прямо в MainWindow
 void xclu_document_modified() {
-    static MainWindow1 *win = nullptr;
-    if (!win) win = MainWindow1::main_window();
+    static MainWindow *win = nullptr;
+    if (!win) win = MainWindow::window();
     win->set_document_modified();
 }

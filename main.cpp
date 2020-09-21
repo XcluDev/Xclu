@@ -7,7 +7,7 @@
 //для настройки антиалиасинга
 #include <QSurfaceFormat>
 
-#include "mainwindow1.h"
+#include "mainwindow.h"
 #include "console.h"
 
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         //QSurfaceFormat::setDefaultFormat(fmt);
 
         //-------------------------------------------
-        MainWindow1 *mainWin = new MainWindow1;
+        MainWindow *mainWin = new MainWindow;
         mainWin->show();
         result = app.exec();
         //-------------------------------------------

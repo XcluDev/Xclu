@@ -1,9 +1,10 @@
-#ifndef MAINWINDOW1_H
-#define MAINWINDOW1_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QMainWindow>
 #include <QTimer>
 #include "incl_h.h"
+#include "recentfiles.h"
+#include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 class QWidget;
@@ -14,18 +15,18 @@ class QSettings;
 QT_END_NAMESPACE
 
 namespace Ui {
-class MainWindow1;
+class MainWindow;
 }
 
-class MainWindow1 : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow1(QWidget *parent = nullptr);
-    ~MainWindow1();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    static MainWindow1 *main_window();   //эта функция используется для передачи изменений проекта из xclu_document_modified()
+    static MainWindow *window();   //эта функция используется для передачи изменений проекта из xclu_document_modified()
 
     //сигнал извне, из xclu_document_modified(), что проект был изменен
     void set_document_modified();
@@ -33,7 +34,7 @@ public:
     bool is_document_modified();
 
 private:
-    Ui::MainWindow1 *ui;
+    Ui::MainWindow *ui;
 
 
     void init();
@@ -58,7 +59,6 @@ private:
     //обновить заголовок окна и состояние элементов управления
     void update_window_state();
     void update_window_title();
-    void updateMenusVisible();
     QString stage_to_string();
 
     void newProjectStartup();
@@ -72,6 +72,7 @@ private:
     //папка для операций открытия проекта - в начале ставится из последней папки проекта, а затем ""
     QString open_projects_folder_;
 
+public:
     //показать диалог сохранения проекта, если он был изменен
     bool maybeSave();
 
@@ -82,28 +83,19 @@ private:
     //сохранить файл проекта
     bool saveProject(const QString &fileName);
 
+    void updateMenusVisible();
+
     void readSettings();
     void writeSettings();
 
 private:
-    //работа с недавними файлами
-    enum { MaxRecentFiles = 5 };
-    static bool hasRecentFiles();
-    void prependToRecentFiles(const QString &fileName);
-    static QStringList readRecentFiles(QSettings &settings);
-    static void writeRecentFiles(const QStringList &files, QSettings &settings);
+    //Recent files
+    QScopedPointer<RecentFiles> recent_;
 
-    static QString strippedName(const QString &fullFileName);
-
-    QAction *recentFileActs[MaxRecentFiles];
-
+    //Project name
     QString projectFile;
     bool isUntitled = true;
 
-    void updateRecentFileActions();
-    void openRecentFile();
-
-private:
     //Execution
     void execute_run();
     void execute_stop();    //остановка, но когда вызовет таймер
@@ -122,4 +114,4 @@ private:
 
 };
 
-#endif // MAINWINDOW1_H
+#endif // MAINWINDOW_H

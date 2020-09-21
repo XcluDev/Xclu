@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 
-#include "mainwindow1.h"
-#include "ui_mainwindow1.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "project.h"
 #include "incl_cpp.h"
 #include "projectgui.h"
@@ -11,29 +11,27 @@
 #include "dialogtestmoduleinterface.h"
 #include "exportinterface.h"
 
-MainWindow1 *MAIN_WINDOW1 = nullptr;
+MainWindow *MAIN_WINDOW = nullptr;
 
 //---------------------------------------------------------------------
-/*static*/ MainWindow1 *MainWindow1::main_window() {
-    return MAIN_WINDOW1;
+/*static*/ MainWindow *MainWindow::window() {
+    return MAIN_WINDOW;
 }
 
 //---------------------------------------------------------------------
-MainWindow1::MainWindow1(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow1)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    //add recent file actions
-    connect(ui->menuRecent_Projects, &QMenu::aboutToShow, this, &MainWindow1::updateRecentFileActions);
-    for (int i = 0; i < MaxRecentFiles; ++i) {
-        recentFileActs[i] = ui->menuRecent_Projects->addAction(QString(), this, &MainWindow1::openRecentFile);
-        recentFileActs[i]->setVisible(false);
-    }
+    //recent files
+    recent_.reset(new RecentFiles(ui->menuRecent_Projects));
 
 
-    MAIN_WINDOW1 = this;
+
+
+    MAIN_WINDOW = this;
 
     init();
     readSettings();
@@ -42,13 +40,13 @@ MainWindow1::MainWindow1(QWidget *parent) :
 }
 
 //---------------------------------------------------------------------
-MainWindow1::~MainWindow1()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::init() {
+void MainWindow::init() {
     setAttribute(Qt::WA_DeleteOnClose);
     setUnifiedTitleAndToolBarOnMac(true);
     //setMinimumSize(900, 800);
@@ -71,7 +69,7 @@ void MainWindow1::init() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::setup_internal() {   //запуск всех процессов
+void MainWindow::setup_internal() {   //запуск всех процессов
     //помечаем, что готовы к запуску
     set_state(ProjectRunStateStopped);
 
@@ -97,7 +95,7 @@ void MainWindow1::setup_internal() {   //запуск всех процессо�
 
 //---------------------------------------------------------------------
 //Функция, которая вызывается при закрытии окна
-void MainWindow1::closeEvent(QCloseEvent *event) {
+void MainWindow::closeEvent(QCloseEvent *event) {
     //Запись проекта, если требуется
     if (maybeSave()) {
         //Запись состояния - делаем до остановки, чтобы в случае ошибки все равно записалось
@@ -113,7 +111,7 @@ void MainWindow1::closeEvent(QCloseEvent *event) {
 
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionNew_Project_triggered()
+void MainWindow::on_actionNew_Project_triggered()
 {
     if (!maybeSave()) return;
 
@@ -122,12 +120,12 @@ void MainWindow1::on_actionNew_Project_triggered()
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::newProjectStartup() {
+void MainWindow::newProjectStartup() {
     closeProject();
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::closeProject() {
+void MainWindow::closeProject() {
     if (RUNTIME.is_running()) return;
 
     xclu_console_clear();//очистка списка сообщений
@@ -145,7 +143,7 @@ void MainWindow1::closeProject() {
 
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionOpen_Project_triggered()
+void MainWindow::on_actionOpen_Project_triggered()
 {
     if (!maybeSave()) return;
 
@@ -160,18 +158,18 @@ void MainWindow1::on_actionOpen_Project_triggered()
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::saveProject() {
+bool MainWindow::saveProject() {
     return isUntitled ? saveAsProject() : saveProject(projectFile);
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionSave_Project_triggered()
+void MainWindow::on_actionSave_Project_triggered()
 {
     saveProject();
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::saveAsProject() {
+bool MainWindow::saveAsProject() {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"), projectFile, "*.xclu");
     if (fileName.isEmpty()) {
         return false;
@@ -180,25 +178,25 @@ bool MainWindow1::saveAsProject() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionSave_Project_As_triggered() {
+void MainWindow::on_actionSave_Project_As_triggered() {
     saveAsProject();
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionExit_triggered()
+void MainWindow::on_actionExit_triggered()
 {
-
+    qApp->closeAllWindows();
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionTest_Module_Interface_triggered()
+void MainWindow::on_actionTest_Module_Interface_triggered()
 {
     //диалог тестирования XGUI создаваемых модулей
     DialogTestModuleInterface::call_dialog(this);
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionUpdate_auto_h_files_for_all_modules_triggered()
+void MainWindow::on_actionUpdate_auto_h_files_for_all_modules_triggered()
 {
     try {
         xclu_console_append("Updating auto.h files for all modules...");
@@ -212,7 +210,7 @@ void MainWindow1::on_actionUpdate_auto_h_files_for_all_modules_triggered()
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionAbout_triggered()
+void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About XCLU"),
                        tr("<b>XCLU</b> is a module-based system for creating production-ready applications"
@@ -220,20 +218,20 @@ void MainWindow1::on_actionAbout_triggered()
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionRun_triggered()
+void MainWindow::on_actionRun_triggered()
 {
     execute_run();
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::on_actionStop_triggered()
+void MainWindow::on_actionStop_triggered()
 {
     execute_stop();
 }
 
 //---------------------------------------------------------------------
 //сигнал извне, из xclu_document_modified(), что проект был изменен
-void MainWindow1::set_document_modified() {
+void MainWindow::set_document_modified() {
     if (!is_document_modified()) {
         setWindowModified(true);
         update_window_title();
@@ -241,7 +239,7 @@ void MainWindow1::set_document_modified() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::reset_document_modified() {
+void MainWindow::reset_document_modified() {
     if (is_document_modified()) {
         setWindowModified(false);
         update_window_title();
@@ -249,13 +247,13 @@ void MainWindow1::reset_document_modified() {
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::is_document_modified() {
+bool MainWindow::is_document_modified() {
     return isWindowModified();
 }
 
 
 //---------------------------------------------------------------------
-QString MainWindow1::stage_to_string() {
+QString MainWindow::stage_to_string() {
     QString stage;
     switch (run_state_) {
     case ProjectRunStateLoading: stage = tr("Loading");
@@ -275,7 +273,7 @@ QString MainWindow1::stage_to_string() {
 
 //---------------------------------------------------------------------
 //обновить заголовок окна и состояние элементов управления
-void MainWindow1::update_window_state() {
+void MainWindow::update_window_state() {
     //Управление элементами
     //редактирование разрешено только в режиме полной остановки
     bool editing = is_stopped();
@@ -289,14 +287,14 @@ void MainWindow1::update_window_state() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::update_window_title() {
+void MainWindow::update_window_title() {
     //Заголовок окна
 
     //XCLU - proj.xclu* - Running
     QString title = "Xclu";
     if (!projectFile.isEmpty()) {
         title.append(" - ");
-        title.append(strippedName(projectFile));
+        title.append(QFileInfo(projectFile).fileName());
     }
     //if (!stage.isEmpty()) title.append(" - " + stage);
     title.append("[*]");    //чтобы показывать, что документ изменен
@@ -310,7 +308,7 @@ void MainWindow1::update_window_title() {
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::maybeSave() {
+bool MainWindow::maybeSave() {
     if (!is_document_modified()) {
         return true;
     }
@@ -338,7 +336,7 @@ bool MainWindow1::maybeSave() {
 //---------------------------------------------------------------------
 //загрузить файл проекта
 //предполагается, что до этого вызван maybeSave()
-void MainWindow1::openProject(const QString &fileName) {
+void MainWindow::openProject(const QString &fileName) {
     closeProject();
     bool dirty = false; //не помечаем, что в консоли есть ошибки, а просто сообщение
     xclu_console_append("Loading project `" + fileName + "`", dirty);
@@ -362,7 +360,7 @@ void MainWindow1::openProject(const QString &fileName) {
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::saveProject(const QString &fileName) {
+bool MainWindow::saveProject(const QString &fileName) {
     PROJ_GUI->before_save_project();
     if (PROJ.save_project(fileName)) {
         //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
@@ -375,107 +373,33 @@ bool MainWindow1::saveProject(const QString &fileName) {
 
 
 //---------------------------------------------------------------------
-void MainWindow1::readSettings() {
+void MainWindow::readSettings() {
     Settings::load_window(Settings::key_main_window(), this);
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::writeSettings() {
+void MainWindow::writeSettings() {
     Settings::save_window(Settings::key_main_window(), this);
 }
 
-//---------------------------------------------------------------------
-QStringList MainWindow1::readRecentFiles(QSettings &settings)
-{
-    QStringList result;
-    const int count = settings.beginReadArray(Settings::recentProjects());
-    for (int i = 0; i < count; ++i) {
-        settings.setArrayIndex(i);
-        result.append(settings.value(Settings::file()).toString());
-    }
-    settings.endArray();
-    return result;
-}
-
-//---------------------------------------------------------------------
-void MainWindow1::writeRecentFiles(const QStringList &files, QSettings &settings)
-{
-    const int count = files.size();
-    settings.beginWriteArray(Settings::recentProjects());
-    for (int i = 0; i < count; ++i) {
-        settings.setArrayIndex(i);
-        settings.setValue(Settings::file(), files.at(i));
-    }
-    settings.endArray();
-}
-
-//---------------------------------------------------------------------
-bool MainWindow1::hasRecentFiles() {
-    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
-    XCLU_SETTINGS
-    const int count = settings.beginReadArray(Settings::recentProjects());
-    settings.endArray();
-    return count > 0;
-}
-
-//---------------------------------------------------------------------
-void MainWindow1::prependToRecentFiles(const QString &fileName) {
-    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
-    XCLU_SETTINGS
-
-    const QStringList oldRecentFiles = readRecentFiles(settings);
-    QStringList recentFiles = oldRecentFiles;
-    recentFiles.removeAll(fileName);
-    recentFiles.prepend(fileName);
-    if (oldRecentFiles != recentFiles)
-        writeRecentFiles(recentFiles, settings);
-
-    updateMenusVisible();
-}
 
 
 //---------------------------------------------------------------------
-void MainWindow1::updateRecentFileActions() {
-    //QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
-    XCLU_SETTINGS
-
-    const QStringList recentFiles = readRecentFiles(settings);
-    const int count = qMin(int(MaxRecentFiles), recentFiles.size());
-    int i = 0;
-    for ( ; i < count; ++i) {
-        const QString fileName = strippedName(recentFiles.at(i));
-        recentFileActs[i]->setText(tr("&%1 %2").arg(i + 1).arg(fileName));
-        recentFileActs[i]->setData(recentFiles.at(i));
-        recentFileActs[i]->setVisible(true);
-    }
-    for ( ; i < MaxRecentFiles; ++i)
-        recentFileActs[i]->setVisible(false);
-}
-
-//---------------------------------------------------------------------
-void MainWindow1::openRecentFile() {
-    if (const QAction *action = qobject_cast<const QAction *>(sender())) {
-        if (!maybeSave()) return;
-        openProject(action->data().toString());
-    }
-}
-
-//---------------------------------------------------------------------
-void MainWindow1::updateMenusVisible() {
+void MainWindow::updateMenusVisible() {
     bool visible = is_stopped();
 
 
     ui->actionNew_Project->setVisible(visible);
     ui->actionOpen_Project->setVisible(visible);
 
-    //bool recent_visible = MainWindow1::hasRecentFiles() && visible;
+    //bool recent_visible = MainWindow::hasRecentFiles() && visible;
     //ui->menuFile->setVisible(recent_visible);
     //ui->menuRecent_Projects->setVisible(recent_visible);
 }
 
 //---------------------------------------------------------------------
 //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
-void MainWindow1::set_current_file(const QString &fileName) {
+void MainWindow::set_current_file(const QString &fileName) {
     static int sequenceNumber = 1;
 
     isUntitled = fileName.isEmpty();
@@ -496,7 +420,7 @@ void MainWindow1::set_current_file(const QString &fileName) {
 
         //добавить в список недавно открытых файлов
         if (windowFilePath() != projectFile) {
-            prependToRecentFiles(projectFile);
+            recent_->prependToRecentFiles(projectFile);
         }
     }
 
@@ -510,13 +434,9 @@ void MainWindow1::set_current_file(const QString &fileName) {
     update_window_state();
 }
 
-//---------------------------------------------------------------------
-QString MainWindow1::strippedName(const QString &fullFileName) {
-    return QFileInfo(fullFileName).fileName();
-}
 
 //---------------------------------------------------------------------
-void MainWindow1::execute_run() {
+void MainWindow::execute_run() {
     qDebug("execute_run");
 
     if (run_state_ == ProjectRunStateStopped) {
@@ -529,7 +449,7 @@ void MainWindow1::execute_run() {
         if (!timer) {
             timer = new QTimer(this);
             timer->setTimerType(Qt::PreciseTimer);
-            connect(timer, &QTimer::timeout, this, &MainWindow1::execute_update);
+            connect(timer, &QTimer::timeout, this, &MainWindow::execute_update);
         }
 
         //вычисляем частоту обновления
@@ -543,7 +463,7 @@ void MainWindow1::execute_run() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::execute_stop() {
+void MainWindow::execute_stop() {
     qDebug("execute_stop");
     if (run_state_ == ProjectRunStateStarting || run_state_ == ProjectRunStateRunning) {
         set_state(ProjectRunStateStopping);
@@ -552,7 +472,7 @@ void MainWindow1::execute_stop() {
 
 //---------------------------------------------------------------------
 //немедленная остановка
-void MainWindow1::immediate_stop() {
+void MainWindow::immediate_stop() {
     if (run_state_ != ProjectRunStateStopped) {
         timer->stop();
         //остановка вычислений
@@ -563,7 +483,7 @@ void MainWindow1::immediate_stop() {
 
 //---------------------------------------------------------------------
 //эта функция вызывается таймером
-void MainWindow1::execute_update() {
+void MainWindow::execute_update() {
     //идет запуск
     if (run_state_ == ProjectRunStateStarting) {
         bool stopped;
@@ -600,7 +520,7 @@ void MainWindow1::execute_update() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow1::set_state(ProjectRunState run_state) {
+void MainWindow::set_state(ProjectRunState run_state) {
     //Закомментировал проверку - так как при закрытии окна это событие может прийти параллельно с таймером
     //xclu_assert(run_state != run_state_, "Internal error - MainWindow::set_state the same state");
     if (run_state != run_state_) {
@@ -610,7 +530,7 @@ void MainWindow1::set_state(ProjectRunState run_state) {
 }
 
 //---------------------------------------------------------------------
-bool MainWindow1::is_stopped() {
+bool MainWindow::is_stopped() {
     return (run_state_ == ProjectRunStateStopped);
 }
 //---------------------------------------------------------------------

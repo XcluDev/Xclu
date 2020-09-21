@@ -79,7 +79,7 @@ FORMS += \
     host/dialogs/dialog.ui \
     host/dialogs/dialogmodulename.ui \
     host/dialogs/dialogpreferences.ui \
-    host/mainwindow1.ui
+    host/mainwindow.ui
 
 INCLUDEPATH += project sdk/math modules components components/gui
 INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
@@ -111,7 +111,8 @@ SOURCES += \
     components/xitemseparator.cpp \
     components/xitemstring.cpp \
     components/xitemtext.cpp \
-    host/mainwindow1.cpp \
+    host/mainwindow.cpp \
+    host/recentfiles.cpp \
     host/xclu_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
@@ -185,7 +186,8 @@ HEADERS += \
     components/xitemseparator.h \
     components/xitemstring.h \
     components/xitemtext.h \
-    host/mainwindow1.h \
+    host/mainwindow.h \
+    host/recentfiles.h \
     host/xclu_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
