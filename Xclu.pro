@@ -85,7 +85,7 @@ INCLUDEPATH += project sdk/math modules components components/gui
 INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
 
 # GLM
-INCLUDEPATH += ./ glm glm/ glm/gtx
+INCLUDEPATH += ./ libs/glm libs/glm/gtx
 
 SOURCES += \
     components/gui/xgui.cpp \
