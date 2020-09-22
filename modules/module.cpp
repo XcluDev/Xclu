@@ -388,16 +388,16 @@ void Module::write_json(QJsonObject &json) {
 //---------------------------------------------------------------------
 //Считывание из json
 void Module::read_json(const QJsonObject &json) {
-    QJsonObject descrObject = json_object(json, "description");
+    QJsonObject descrObject = JsonUtils::json_object(json, "description");
 
     //Уникальные свойства, которые нужно считывать
-    QString name = json_string(descrObject, "name");
+    QString name = JsonUtils::json_string(descrObject, "name");
     //QString name = json_string(descrObject, "name");
     set_name(name);
     //set_id(name);
 
     //Переменные
-    QJsonObject interfObject = json_object(json, "interface");
+    QJsonObject interfObject = JsonUtils::json_object(json, "interface");
     interf()->read_json(interfObject);
 }
 

@@ -438,26 +438,26 @@ void XItem::read_json(const QJsonObject &json) {
     xclu_assert(supports_string(), "Can't read item '" + name_ + "' from json, because it's has 'out' (that means read-only) qualifier.\n"
                 "May be module's version is different");
     //проверяем, что имя совпадает
-    QString name = json_string(json, "aname");
+    QString name = JsonUtils::json_string(json, "aname");
     xclu_assert(name == name_, "Different name for '" + name_ + "'.\n"
                 "May be module's version is different");
 
     //значение
-    set_value_string(json_string(json, "avalue"));
+    set_value_string(JsonUtils::json_string(json, "avalue"));
 
     //заголовок - закомментировал, пусть он меняется
-    //title_ = json_string(json, "atitle");
+    //title_ = JsonUtils::json_string(json, "atitle");
 
     //проверяем, что тип совпадает
-    //QString type_str = json_string(json, "atype");
+    //QString type_str = JsonUtils::json_string(json, "atype");
     //xclu_assert(type_str == interfacetype_to_string(type_), "Different type for '" + name_ + "'.\n"
     //            "May be module's version is different");
 
 
     //expression
     //if (expression_enabled()) {
-    //    use_expression_ = json_bool(json, "expr_use");
-    //    expression_ = json_string(json, "expr");
+    //    use_expression_ = JsonUtils::json_bool(json, "expr_use");
+    //    expression_ = JsonUtils::json_string(json, "expr");
     //}
 
 }

@@ -161,18 +161,18 @@ void Project::read_json(const QJsonObject &json) {
     //Описание приложения - сейчас не нужно
 
     //Свойства проекта
-    properties().read_json(json_object(json,"aproject_properties"));
+    properties().read_json(JsonUtils::json_object(json,"aproject_properties"));
 
     //Модули
-    QJsonArray modulesArray = json_array(json, "modules");
+    QJsonArray modulesArray = JsonUtils::json_array(json, "modules");
     int n = modulesArray.size();
     for (int i=0; i<n; i++) {
-         QJsonObject moduleObject = json_array_object(modulesArray, i);
+         QJsonObject moduleObject = JsonUtils::json_array_object(modulesArray, i);
         //получаем класс и версию модуля, а также имя - для обработки исключения
-        QJsonObject descrObject = json_object(moduleObject, "description");
-        QString class_name = json_string(descrObject, "class");
-        QString version = json_string(descrObject, "version");
-        QString name = json_string(descrObject, "name");
+        QJsonObject descrObject = JsonUtils::json_object(moduleObject, "description");
+        QString class_name = JsonUtils::json_string(descrObject, "class");
+        QString version = JsonUtils::json_string(descrObject, "version");
+        QString name = JsonUtils::json_string(descrObject, "name");
 
         //делаем перехват исключений, чтобы к ним добавить имя модуля
         //ошибки выводим в консоль и продолжаем загрузку проекта

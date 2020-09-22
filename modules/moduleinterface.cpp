@@ -516,10 +516,10 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 
     QStringList errors; //сюда накопим ошибки про считывание модуля и потом их выдадим в консоль
     //переменные
-    QJsonArray itemsArray = json_array(json, "items");
+    QJsonArray itemsArray = JsonUtils::json_array(json, "items");
     for (int i=0; i<itemsArray.size(); i++) {
-        QJsonObject itemObject = json_array_object(itemsArray, i);
-        QString name = json_string(itemObject, "aname");
+        QJsonObject itemObject = JsonUtils::json_array_object(itemsArray, i);
+        QString name = JsonUtils::json_string(itemObject, "aname");
 
         //пытаемся считать переменную,
         //если не получается - пишем сообщение в лог и продолжаем загрузку
@@ -538,8 +538,8 @@ void ModuleInterface::read_json(const QJsonObject &json) {
     }
 
     //состояние редактора
-    QJsonObject editorObject = json_object(json, "editor_state");
-    editor_state_.tab_index = json_int(editorObject, "tab_index");
+    QJsonObject editorObject = JsonUtils::json_object(json, "editor_state");
+    editor_state_.tab_index = JsonUtils::json_int(editorObject, "tab_index");
 
     //выдача ошибок в консоль про даннный модуль
     if (!errors.isEmpty()) {

@@ -16,9 +16,9 @@ void ProjectProperties::write_json(QJsonObject &json) {
 
 //---------------------------------------------------------------------
 void ProjectProperties::read_json(const QJsonObject &json) {
-    name = json_string(json, "name");
+    name = JsonUtils::json_string(json, "name");
     //frame_rate = json_double(json, "frame_rate");
-    selected_module = json_int(json, "selected_module");
+    selected_module = JsonUtils::json_int(json, "selected_module");
 }
 
 //---------------------------------------------------------------------

@@ -133,6 +133,7 @@ SOURCES += \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
     sdk/utility/incl_h.cpp \
+    sdk/utility/jsonutils.cpp \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
@@ -209,6 +210,7 @@ HEADERS += \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \
     sdk/utility/incl_h.h \
+    sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
