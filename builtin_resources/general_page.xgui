@@ -12,7 +12,7 @@ in checkbox Enabled enabled=1
     
 #--------------------
 separator
-in checkbox(group) Presets presets_setup=0
+in checkbox_group Presets presets_setup=0
     //Setup presets.
 
 if presets_setup 1    
@@ -25,7 +25,7 @@ endif
 
 #--------------------
 separator
-in checkbox(group) Links_Setup links_setup=0
+in checkbox_group Links_Setup links_setup=0
     //Setup links for variables, in two ways: as text list and in visual editor.
 
 if links_setup 1
@@ -46,7 +46,7 @@ endif
 
 #--------------------
 separator
-in checkbox(group) Error_Handling error_handling=0
+in checkbox_group Error_Handling error_handling=0
     //Settings for handling errors.
 
 if error_handling 1
@@ -62,7 +62,7 @@ endif
 #--------------------
 
 separator
-in checkbox(group) Calls calls_info=0
+in checkbox_group Calls calls_info=0
     //Information about functions which module can call or receive from other modules.
 
 if calls_info 1

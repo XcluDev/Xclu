@@ -8,7 +8,7 @@ module_impl=C++
 page Main
     //General settings.
 
-in string(choose:folder) Folder folder=""
+in string_folder Folder folder=""
     //Folder to scan.
     //Please choose a folder
 

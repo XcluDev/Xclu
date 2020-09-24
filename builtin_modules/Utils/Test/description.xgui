@@ -78,14 +78,14 @@ in object Object object
 page Choose_Files
 
 #Строка с кнопкой для выбора файла, затем описание, диалог и фильтр 
-in string(choose:file) Choose_File choose:file="aa"
+in string_file Choose_File choose:file="aa"
     //Description
     //Choose File to load
     //All files (*.*);;Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)
 
 
 #Строка с кнопкой для выбора папки 
-in string(choose:folder) Choose_Folder choose_Folder="aa"  
+in string_folder Choose_Folder choose_Folder="aa"  
     //Description.
     //Choose Floder to scan
 

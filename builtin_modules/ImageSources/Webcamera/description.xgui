@@ -30,7 +30,7 @@ const string Device_Name device_name=""
 	//Name of the camera to connect (or part of the name), go to 'Device Info' to see the list.
 endif	
 
-out object(image) Image image
+out object_image Image image
     //Resulted webcamera image.
 
 out checkbox Is_New_Frame is_new_frame=0
@@ -38,7 +38,7 @@ out checkbox Is_New_Frame is_new_frame=0
     
 #-----------------------------
 separator
-in checkbox(group) Settings settings=0
+in checkbox_group Settings settings=0
 	//Setting webcamera parameters.
     
 if settings 1
@@ -93,7 +93,7 @@ endif
 
 #-----------------------------
 separator
-in checkbox(group) Runtime_Details runtime=1
+in checkbox_group Runtime_Details runtime=1
 	//Runtime variables.
 
 if runtime 1
@@ -114,7 +114,7 @@ endif
 #-----------------------------
 #TODO resize & crop
 #separator
-#in checkbox(group) Resize_and_Crop resize_crop=0
+#in checkbox_group Resize_and_Crop resize_crop=0
 #	//Resizing and cropping options
 
 #if resize_crop 1
@@ -159,13 +159,13 @@ out text Local_Console local_console 10 15
 #    //Load images from a folder or use a single image
 #
 #if load_source Single_Image
-#in string(choose:file) Image_File load_image_file=""
+#in string_file Image_File load_image_file=""
 #    //Image file to load.
 #    //Choose an Image
 #    //Images (*.jpg *.png *.bmp *.tif);; All files (*.*)
 #
 #if load_source Folder
-#in string(choose:folder) Folder load_folder=""
+#in string_folder Folder load_folder=""
 #    //Folder for loading images.
 #endif
     

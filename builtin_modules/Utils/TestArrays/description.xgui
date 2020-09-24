@@ -1,0 +1,17 @@
+#Module TestArrays
+#------------------------------------------
+module_description=Test array, image, sound_buffer.
+module_version=1.01
+module_impl=C++
+
+#------------------------------------------
+
+page Main
+
+in string_file Image_file image_file=""
+
+in button Load load_button
+
+#in image_uint8
+
+#in image_float

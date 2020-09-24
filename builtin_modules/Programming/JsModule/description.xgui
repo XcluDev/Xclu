@@ -24,7 +24,7 @@ in button Edit... _gui_edit_button_
 
 separator
 
-in checkbox(group) Advanced _advanced_=0
+in checkbox_group Advanced _advanced_=0
     //Adding module to Modules List and export.
 if _advanced_ 1
 

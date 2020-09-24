@@ -85,12 +85,12 @@ endif
 
 #-------------- 
 page Modulation_Setup
-in string(link:string) volume_link volume_link=""
+in string_link_string volume_link volume_link=""
     //Modulation link, such as module1->volumes(0,2)
-in string(link:string) fm_rate_link fm_rate_link=""
-in string(link:string) fm_range_link fm_range_link=""
-in string(link:string) am_rate_link am_rate_link=""
-in string(link:string) am_range_link am_range_link=""
+in string_link_string fm_rate_link fm_rate_link=""
+in string_link_string fm_range_link fm_range_link=""
+in string_link_string am_rate_link am_rate_link=""
+in string_link_string am_range_link am_range_link=""
 
 
 #-------------- 

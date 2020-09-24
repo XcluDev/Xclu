@@ -27,7 +27,7 @@ endif
 
 #---------------------------------- 
 page Inputs
-const checkbox(group) Texture1 texture1=0
+const checkbox_group Texture1 texture1=0
     //Use texture 1
     
 if texture1 1
@@ -35,7 +35,7 @@ in enum Source tex1_source=Image_File [Image_File,Other_Module_Image]
     //Image source - file or image from other module.
 
 if tex1_source Image_File
-in string(choose:file) Image_File_Name image1_file=""
+in string_file Image_File_Name image1_file=""
     //Image File.
     //Choose Image File
     //Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)

@@ -26,12 +26,12 @@ in button Edit... edit_btn
 
 separator
 
-in float(slider) Volume volume=1.0 0:10 1000,100
+in float_slider Volume volume=1.0 0:10 1000,100
     //Output sound volume.
     //0..10
 
 
-in float(slider) Device_Volume device_volume=0.8 0:1 100,10
+in float_slider Device_Volume device_volume=0.8 0:1 100,10
     //Output device volume.
     //0..1
     
@@ -53,7 +53,7 @@ endif
         
 #-----------------------------
 separator
-in checkbox(group) Settings settings=0
+in checkbox_group Settings settings=0
 	//Setting sound output parameters
     
 if settings 1
@@ -88,7 +88,7 @@ endif
 
 #-----------------------------
 separator
-in checkbox(group) Runtime runtime=0
+in checkbox_group Runtime runtime=0
 	//Runtime variables
 
 if runtime 1
@@ -99,7 +99,7 @@ out string Connected_Device_Name connected_device_name=""
 out checkbox Is_Started is_started=0
     //Does capture started
 	    
-out object(sound_format) Sound_Format sound_format
+out object_soundformat Sound_Format sound_format
     //Used sound format
 
 out int Buffer_Size buffer_size=0 0:100000 1,10

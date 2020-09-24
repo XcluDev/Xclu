@@ -48,8 +48,11 @@ enum XItemType : int {
     XItemTypeCheckbox   = 8,
     XItemTypeButton     = 9,
     XItemTypeStringlist = 10,
-    XItemTypeObject     = 11,
-    XItemTypeN          = 12
+    XItemTypeArray      = 11,
+    XItemTypeImage      = 12,
+    XItemTypeSoundBuffer= 13,
+    XItemTypeObject     = 14,
+    XItemTypeN          = 15
 };
 
 QString interfacetype_to_string(XItemType vartype);

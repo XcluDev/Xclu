@@ -9,10 +9,10 @@ module_impl=C++
 #------------------------------------------
 page Main
 
-in string(choose:folder) Working_Folder folder_name=""
+in string_folder Working_Folder folder_name=""
     //Folder for running the file.
     
-in string(choose:file) File_Name file_name=""
+in string_file File_Name file_name=""
     //File to execute.
     //Choose File to execute
     //Executables (*.exe *.bat *.sh);; All files (*.*)
@@ -36,7 +36,7 @@ line
 
 #--------------------
 separator
-in checkbox(group) Settings settings=0
+in checkbox_group Settings settings=0
     //Settings for timeout
 #    and running in a separate thread
 #if settings 1
@@ -57,7 +57,7 @@ endif
 
 #-----------------------------
 separator
-in checkbox(group) Runtime runtime=0
+in checkbox_group Runtime runtime=0
 	//Runtime variables
 
 if runtime 1
@@ -85,7 +85,7 @@ endif
    
 #--------------------
 separator
-in checkbox(group) Show_Absolute_Paths show_abs_paths=0
+in checkbox_group Show_Absolute_Paths show_abs_paths=0
     //Show full path for working folder and file used for execution    
 if show_abs_paths 1
 out text Folder_Path folder_path 4 5
@@ -100,7 +100,7 @@ endif
 #--------------------
 separator
 
-in checkbox(group) Show_Local_Console show_console=0
+in checkbox_group Show_Local_Console show_console=0
     //Show local console for printing there output of executed program
 
 if show_console 1

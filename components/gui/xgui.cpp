@@ -85,10 +85,21 @@ void XGui::insert_label(XGuiPageCreator &input) {
 void XGui::customMenuRequested(QPoint pos){
     //QModelIndex index=table->indexAt(pos);
 
+    QStringList arr;
+    arr.append("Edit Ref...");
+    arr.append("Disable Ref");
+    arr.append("Edit Expression...");
+    arr.append("Disable expression");
+    arr.append("Copy Ref");
+    arr.append("Paste Ref");
+    arr.append("Promote Ref...");
+    arr.append("Reset to default value (for scalars)");
+    arr.append("Set size... (for images and other rich elements)");
+
     context_menu_.reset(new QMenu(this));
-    context_menu_->addAction(new QAction("Action 1", this));
-    context_menu_->addAction(new QAction("Action 2", this));
-    context_menu_->addAction(new QAction("Action 3", this));
+    for (auto &s: arr) {
+        context_menu_->addAction(new QAction(s, this));
+    }
     context_menu_->popup(label_->mapToGlobal(pos));
 
     //qDebug() << "popup menu for" << item__->name() << pos.x() << pos.y();

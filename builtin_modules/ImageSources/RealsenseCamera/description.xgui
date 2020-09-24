@@ -33,7 +33,7 @@ endif
 if capture_source Bag_File
 
 
-const string(choose:file) Bag_File bag_file=""
+const string_file Bag_File bag_file=""
     //Choose BAG file. You can record it using Intel Realsense Viewer application.
     //Choose BAG file 
     //Bag files (*.bag);;All files (*.*)
@@ -41,7 +41,7 @@ endif
    
 #-----------------------------
 separator
-in checkbox(group) Runtime_Details runtime=1
+in checkbox_group Runtime_Details runtime=1
 	//Runtime variables.
 
 if runtime 1
@@ -60,24 +60,24 @@ endif
 #-------------------------------------------
 #Output images
 separator
-in checkbox(group) Show_Color show_color=1
+in checkbox_group Show_Color show_color=1
 //Generate color image preview. Please disable is not required for speed optimization.
 if show_color 1    
-out object(image) Color color_image
+out object_image Color color_image
     //Resulted Color image.
 endif
     
-in checkbox(group) Show_Depth show_depth=0
+in checkbox_group Show_Depth show_depth=0
 //Generate Depth image preview. Please disable is not required for speed optimization.
 if show_depth 1  
-out object(image) Depth depth_image
+out object_image Depth depth_image
     //Resulted Depth image.
 endif
 
-in checkbox(group) Show_IR show_ir=0
+in checkbox_group Show_IR show_ir=0
 //Generate IR image preview. Please disable is not required for speed optimization.
 if show_ir 1  
-out object(image) IR ir_image
+out object_image IR ir_image
     //Resulted IR image.
 endif
 
@@ -158,7 +158,7 @@ page Save_Frames
 in button Save_Frames save_frames_button
     //Press the button to save images to a given folder
     
-in string(choose:folder) Folder save_folder="realsense_frames"
+in string_folder Folder save_folder="realsense_frames"
     //Folder for saving frames.
     //Choose folder to save frames.
 

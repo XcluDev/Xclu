@@ -17,12 +17,12 @@ in text Text input_text 5 7
     //My hope is to make it good.
 
 if source Text_file
-in string(choose:file) File input_file="text.txt"
+in string_file File input_file="text.txt"
     //File name.
 endif
 
 if source Var
-in string(choose:string) Var input_var="module1->text"
+in string_link_string Var input_var="module1->text"
     //Var name.
 endif
 

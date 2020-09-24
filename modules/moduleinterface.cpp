@@ -241,9 +241,10 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             }
 
 
-            //парсим type(options) на тип и опции, для простоты - отсекаем обе скобки:
-            QStringList type_options=query.at(1).split(QRegExp("(\\(|\\))"));
-            xclu_assert(!type_options.isEmpty(), "bad type string at line '" + line + "'");
+            //парсим type_attribute1_attribute2_... на тип и атрибуты:
+            //QStringList type_options=query.at(1).split(QRegExp("(\\(|\\))"));
+            QStringList type_options=query.at(1).split("_");
+            xclu_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
 
             auto type = string_to_interfacetype(type_options.at(0));
             xclu_assert(type != XItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");

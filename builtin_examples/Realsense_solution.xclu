@@ -1,0 +1,734 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "6"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "RealsenseCamera",
+                "name": "realsense_camera1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "capture_source",
+                        "avalue": "Camera"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_serial",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "bag_file",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "runtime",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "connected_device_info",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_started",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frames_captured",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "show_color",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "color_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "show_depth",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "depth_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "show_ir",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "ir_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Color",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "color_stream_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "color_resolution",
+                        "avalue": "640_x_480"
+                    },
+                    {
+                        "aname": "color_frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "align_to_depth",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Depth_+_IR",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_stream_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "ir_stream_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_preset",
+                        "avalue": "High_Density"
+                    },
+                    {
+                        "aname": "depth_resolution",
+                        "avalue": "640_x_480"
+                    },
+                    {
+                        "aname": "depth_frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "emitter",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Devices",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_list",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Save_Frames",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "save_folder",
+                        "avalue": "realsense_frames"
+                    },
+                    {
+                        "aname": "saved_to",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "PointCloudProject",
+                "name": "point_cloud_project1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Osc",
+                "name": "osc1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "addr",
+                        "avalue": "localhost:12345"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Ndi",
+                "name": "ndi1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Spout",
+                "name": "spout1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Tcp",
+                "name": "tcp1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "ScreenControl",
+                "name": "screen_control1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "parent_id",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "source",
+                        "avalue": "GUI"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "int"
+                    },
+                    {
+                        "aname": "fixed_value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "int_link",
+                        "avalue": "module1->value"
+                    },
+                    {
+                        "aname": "expression",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "use_range_min",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "min_value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "use_range_max",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "max_value",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title_text",
+                        "avalue": "Int"
+                    },
+                    {
+                        "aname": "title_placement",
+                        "avalue": "Left"
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "units",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "units_text",
+                        "avalue": "pixels"
+                    },
+                    {
+                        "aname": "units_alignment",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "units_width",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "units_width_min",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "units_width_max",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "was_changed",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_change",
+                        "avalue": "Do_Nothing"
+                    },
+                    {
+                        "aname": "on_change_module_call_link",
+                        "avalue": "module1->execute"
+                    },
+                    {
+                        "aname": "on_change_script",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

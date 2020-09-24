@@ -20,22 +20,22 @@ in enum Image_Source image_source=Image_File [Image_File,Other_Module_Image]
     //Image source - file or image from other module.
 
 if image_source Image_File
-in string(choose:file) Image_File_Name image_file=""
+in string_file Image_File_Name image_file=""
     //Image File.
     //Choose Image File
     //Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)
 
 if image_source Other_Module_Image
-in string(link:image) Image_Link image_link="webcam1->image"
+in string_link_image Image_Link image_link="webcam1->image"
     //Reference to image in another module.
 endif
 
-out object(image) Image image
+out object_image Image image
     //Input image.
     
 #----------------------------------    
 separator
-in checkbox(group) Scan_Area_Setup scan_area_setup=0
+in checkbox_group Scan_Area_Setup scan_area_setup=0
     //Scanning area setup.
 
 if scan_area_setup 1
@@ -68,13 +68,13 @@ endif
 #----------------------------------   
 separator
 
-in checkbox(group) Interpretation interpr=1
+in checkbox_group Interpretation interpr=1
     //Tools for transforming brightness value to sound value.
 #in enum Image_Background image_background=Black [Black,White]
 #    //Color of background
 
 if interpr 1
-out object(image) Image_Sound image_sound
+out object_image Image_Sound image_sound
     //Image depicting the sound values.
 
 out float Min_Brightness min_value=0 0:1 1000,100

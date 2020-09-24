@@ -55,6 +55,9 @@ const QString InterfaceTypeNames[XItemTypeN] =
     "checkbox",
     "button",
     "enum",
+    "array",
+    "image",
+    "soundbuffer",
     "object"
 };
 

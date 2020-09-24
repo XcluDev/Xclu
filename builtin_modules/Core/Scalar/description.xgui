@@ -37,7 +37,7 @@ in int Value fixed_value=0 -1000000:1000000 1,10
 #in int Default_Value default_value=0 -1000000:1000000 1,10
 
 if source Other_Module_Value
-in string(choose:int) Int_Link int_link="module1->value"
+in string_link_int Int_Link int_link="module1->value"
     //Link to other module's variable.
     
 #in checkbox Use_Value_Properties use_value_properties=0
@@ -65,7 +65,7 @@ in checkbox Visible visible=1
 
 separator
 #-------------
-in checkbox(group) Use_Min use_range_min=0
+in checkbox_group Use_Min use_range_min=0
     //Clamp value to specified minimal value.
 
 
@@ -75,7 +75,7 @@ endif
 
 #-------------
 separator
-in checkbox(group) Use_Max use_range_max=0
+in checkbox_group Use_Max use_range_max=0
     //Clamp value to specified maxinal value.
     
 if use_range_max 1
@@ -86,7 +86,7 @@ endif
 #---------    
 #Title
 separator
-const checkbox(group) Title title=1
+const checkbox_group Title title=1
     //Title, placed at the left of the value.
     
 if title 1
@@ -115,7 +115,7 @@ endif
 #---------    
 #Units
 separator
-const checkbox(group) Units units=0
+const checkbox_group Units units=0
     //Units, placed at the right of the value.
 
 if units 1
