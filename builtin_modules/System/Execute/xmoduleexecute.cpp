@@ -9,13 +9,8 @@
 REGISTRAR(Execute)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleExecute *XModuleExecute::new_module() {
-    return new XModuleExecute();
-}
-
-//---------------------------------------------------------------------
-XModuleExecute::XModuleExecute()
-    :XModule(*static_class_name_ptr)
+XModuleExecute::XModuleExecute(QString class_name)
+    :XModule(class_name)
 {
 
 }

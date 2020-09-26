@@ -64,12 +64,8 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
 class XModuleWebcamera: public XModule
 {
 public:
-    XModuleWebcamera();
+    XModuleWebcamera(QString class_name);
     ~XModuleWebcamera();
-
-    static QString *static_class_name_ptr;
-    static XModuleWebcamera *new_module();
-
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение
     XModuleWebcameraSurfaceData &surface_data();
 

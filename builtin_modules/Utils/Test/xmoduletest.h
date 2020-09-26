@@ -9,12 +9,8 @@
 class XModuleTest: public XModule
 {
 public:
-    XModuleTest();
+    XModuleTest(QString class_name);
     ~XModuleTest();
-
-    static QString *static_class_name_ptr;
-    static XModuleTest *new_module();
-
 protected:
     //Выполнение
     virtual void impl_loaded() {}

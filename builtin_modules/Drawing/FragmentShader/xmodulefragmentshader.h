@@ -19,12 +19,8 @@ class XModuleFragmentShader: public XModule
 {
     Q_OBJECT
 public:
-    XModuleFragmentShader();
+    XModuleFragmentShader(QString class_name);
     ~XModuleFragmentShader();
-
-    static QString *static_class_name_ptr;
-    static XModuleFragmentShader *new_module();
-
 protected:
 #include "auto.h"
 

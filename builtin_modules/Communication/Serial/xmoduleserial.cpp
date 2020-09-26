@@ -7,13 +7,8 @@
 REGISTRAR(Serial)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleSerial *XModuleSerial::new_module() {
-    return new XModuleSerial();
-}
-
-//---------------------------------------------------------------------
-XModuleSerial::XModuleSerial()
-    :XModule(*static_class_name_ptr)
+XModuleSerial::XModuleSerial(QString class_name)
+    :XModule(class_name)
 {
 
 }

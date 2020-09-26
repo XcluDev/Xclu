@@ -34,12 +34,8 @@ class XModuleWImage: public XModule
 {
     Q_OBJECT
 public:
-    XModuleWImage();
+    XModuleWImage(QString class_name);
     ~XModuleWImage();
-
-    static QString *static_class_name_ptr;
-    static XModuleWImage *new_module();
-
 protected:
 #include "auto.h"
 

@@ -8,49 +8,43 @@
 //After that the module is registered and can be created in XItemsFactory
 //The REGISTRAR_XITEM macro is declared at the end of this file.
 
-
-/*   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-
 #include "incl_h.h"
-#include "moduledescription.h"
 
-//тип функции для регистрации модуля
-class XModule;
-typedef std::function<XModule *()> XModuleCreateFunction;
+/*
+class XItem;
+typedef std::function<XItem *()> XItemCreateFunction;
 
-//класс для регистрации модуля
-class RegistrarXModule
+class RegistrarXItem
 {
 public:
-    RegistrarXModule();
+    RegistrarXItem();
 
-    //Функция для регистрации модуля по имени класса
-    static void register_rt_class(QString class_name, XModuleCreateFunction creator_function);
+    static void register_xitem(QString class_name, XItemCreateFunction creator_function);
 
-    //Проверка, реализован ли модуль
-    static bool is_module_implemented(QString class_name);
+    //Check if item is registered
+    static bool is_item_registered(QString class_name);
 
-    //Создание модуля по имени класса
-    static XModule *create_rt_module(const ModuleDescription &description);
+    //Create item by name
+    static XItem *create_item();
 };
+*/
 
 //------------------------------------------------------------------
 //макрос для регистрации класса модуля
 //для этого создаем класс и объявляем один объект, который в своем конструкторе вызывает нужное добавление в класc
 //так мы избавляемся от необходимости прописывать в коде все названия классов
 //  ## - конкатенация в коде   # - превратить в строку
-#define REGISTRAR(CLASS_NAME) \
-    QString *XModule##CLASS_NAME::static_class_name_ptr; \
-    QString Rt_ClassName_##CLASS_NAME = #CLASS_NAME; \
-    struct Registrar_##CLASS_NAME { \
+/*#define REGISTRAR_XITEM(CLASS_NAME) \
+    QString *XItem##CLASS_NAME::static_class_name_ptr; \
+    QString XItem_ClassName_##CLASS_NAME = #CLASS_NAME; \
+    struct Registrar_XItem##CLASS_NAME { \
         Registrar_##CLASS_NAME() { \
             XModule##CLASS_NAME::static_class_name_ptr = &Rt_ClassName_##CLASS_NAME; \
             RegistrarXModule::register_rt_class(Rt_ClassName_##CLASS_NAME, std::bind(&XModule##CLASS_NAME::new_module)); \
         } \
     }; \
-    Registrar_##CLASS_NAME registrar_##CLASS_NAME;
-
-    */
+    Registrar_XItem##CLASS_NAME registrar_XItem##CLASS_NAME;
+*/
 /*
 Usage REGISTRAR_XITEM(Button)
 
@@ -68,10 +62,5 @@ struct Registrar_Execute {
 Registrar_Execute registrar_Execute;
 */
 
-class ResistrarXItem
-{
-public:
-    ResistrarXItem();
-};
 
 #endif // RESISTRARXITEM_H

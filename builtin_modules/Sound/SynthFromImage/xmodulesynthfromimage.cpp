@@ -71,13 +71,8 @@ float XModuleSynthFromImageData::get_volume(float phase) {  //x=0..1
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ XModuleSynthFromImage *XModuleSynthFromImage::new_module() {
-    return new XModuleSynthFromImage();
-}
-
-//---------------------------------------------------------------------
-XModuleSynthFromImage::XModuleSynthFromImage()
-    :XModule(*static_class_name_ptr)
+XModuleSynthFromImage::XModuleSynthFromImage(QString class_name)
+    :XModule(class_name)
 {
 
 }

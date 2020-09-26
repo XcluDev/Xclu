@@ -18,12 +18,8 @@
 class XModuleRealsenseCamera: public XModule
 {
 public:
-    XModuleRealsenseCamera();
+    XModuleRealsenseCamera(QString class_name);
     ~XModuleRealsenseCamera();
-
-    static QString *static_class_name_ptr;
-    static XModuleRealsenseCamera *new_module();
-
 protected:
 #include "auto.h"
 

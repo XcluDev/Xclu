@@ -11,13 +11,8 @@
 REGISTRAR(Fbo)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleFbo *XModuleFbo::new_module() {
-    return new XModuleFbo();
-}
-
-//---------------------------------------------------------------------
-XModuleFbo::XModuleFbo()
-    :XModule(*static_class_name_ptr)
+XModuleFbo::XModuleFbo(QString class_name)
+    :XModule(class_name)
 {
 
 }

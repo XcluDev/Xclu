@@ -9,13 +9,8 @@
 REGISTRAR(ScanFolder)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleScanFolder *XModuleScanFolder::new_module() {
-    return new XModuleScanFolder();
-}
-
-//---------------------------------------------------------------------
-XModuleScanFolder::XModuleScanFolder()
-    :XModule(*static_class_name_ptr)
+XModuleScanFolder::XModuleScanFolder(QString class_name)
+    :XModule(class_name)
 {
 
 }

@@ -110,13 +110,8 @@ void XModuleSoundOscData::update_freq(float &var, float target) {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ XModuleSoundOsc *XModuleSoundOsc::new_module() {
-    return new XModuleSoundOsc();
-}
-
-//---------------------------------------------------------------------
-XModuleSoundOsc::XModuleSoundOsc()
-    :XModule(*static_class_name_ptr)
+XModuleSoundOsc::XModuleSoundOsc(QString class_name)
+    :XModule(class_name)
 {
 
 }

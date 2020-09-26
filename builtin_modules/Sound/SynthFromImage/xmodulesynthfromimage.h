@@ -60,12 +60,8 @@ class XModuleSynthFromImage: public XModule
 {
     Q_OBJECT
 public:
-    XModuleSynthFromImage();
+    XModuleSynthFromImage(QString class_name);
     ~XModuleSynthFromImage();
-
-    static QString *static_class_name_ptr;
-    static XModuleSynthFromImage *new_module();
-
 protected:
 #include "auto.h"
     virtual void impl_loaded() {}

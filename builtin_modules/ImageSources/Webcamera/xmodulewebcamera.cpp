@@ -88,13 +88,8 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-/*static*/ XModuleWebcamera *XModuleWebcamera::new_module() {
-    return new XModuleWebcamera();
-}
-
-//---------------------------------------------------------------------
-XModuleWebcamera::XModuleWebcamera()
-    :XModule(*static_class_name_ptr), surface_(this)
+XModuleWebcamera::XModuleWebcamera(QString class_name)
+    :XModule(class_name), surface_(this)
 {
 
 }

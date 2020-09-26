@@ -9,13 +9,8 @@
 REGISTRAR(Project)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleProject *XModuleProject::new_module() {
-    return new XModuleProject();
-}
-
-//---------------------------------------------------------------------
-XModuleProject::XModuleProject()
-    :XModule(*static_class_name_ptr)
+XModuleProject::XModuleProject(QString class_name)
+    :XModule(class_name)
 {
 
 }

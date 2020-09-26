@@ -18,12 +18,8 @@ class XModuleProject: public XModule
 {
     Q_OBJECT
 public:
-    XModuleProject();
+    XModuleProject(QString class_name);
     ~XModuleProject();
-
-    static QString *static_class_name_ptr;
-    static XModuleProject *new_module();
-
 protected:
 #include "auto.h"
 

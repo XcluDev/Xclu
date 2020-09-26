@@ -9,12 +9,8 @@
 class XModuleExecute: public XModule
 {
 public:
-    XModuleExecute();
+    XModuleExecute(QString class_name);
     ~XModuleExecute();
-
-    static QString *static_class_name_ptr;
-    static XModuleExecute *new_module();
-
 protected:
 #include "auto.h"
 

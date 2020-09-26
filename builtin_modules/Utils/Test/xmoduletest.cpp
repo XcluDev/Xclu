@@ -7,13 +7,8 @@
 REGISTRAR(Test)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleTest *XModuleTest::new_module() {
-    return new XModuleTest();
-}
-
-//---------------------------------------------------------------------
-XModuleTest::XModuleTest()
-    :XModule(*static_class_name_ptr)
+XModuleTest::XModuleTest(QString class_name)
+    :XModule(class_name)
 {
 
 }

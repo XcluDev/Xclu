@@ -80,12 +80,8 @@ class XModuleSoundOut: public XModule
 {
     Q_OBJECT
 public:
-    XModuleSoundOut();
+    XModuleSoundOut(QString class_name);
     ~XModuleSoundOut();
-
-    static QString *static_class_name_ptr;
-    static XModuleSoundOut *new_module();
-
 protected:
 #include "auto.h"
 

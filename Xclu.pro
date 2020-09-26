@@ -99,7 +99,7 @@ SOURCES += \
     components/gui/xguiseparator.cpp \
     components/gui/xguistring.cpp \
     components/gui/xguitext.cpp \
-    components/resistrarxitem.cpp \
+    components/registrarxitem.cpp \
     components/xitem.cpp \
     components/xitembutton.cpp \
     components/xitemcheckbox.cpp \
@@ -176,7 +176,7 @@ HEADERS += \
     components/gui/xguiseparator.h \
     components/gui/xguistring.h \
     components/gui/xguitext.h \
-    components/resistrarxitem.h \
+    components/registrarxitem.h \
     components/xitem.h \
     components/xitembutton.h \
     components/xitemcheckbox.h \

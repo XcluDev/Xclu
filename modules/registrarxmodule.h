@@ -37,15 +37,13 @@ public:
 //так мы избавляемся от необходимости прописывать в коде все названия классов
 //  ## - конкатенация в коде   # - превратить в строку
 #define REGISTRAR(CLASS_NAME) \
-    QString *XModule##CLASS_NAME::static_class_name_ptr; \
-    QString Rt_ClassName_##CLASS_NAME = #CLASS_NAME; \
-    struct Registrar_##CLASS_NAME { \
-        Registrar_##CLASS_NAME() { \
-            XModule##CLASS_NAME::static_class_name_ptr = &Rt_ClassName_##CLASS_NAME; \
-            RegistrarXModule::register_rt_class(Rt_ClassName_##CLASS_NAME, std::bind(&XModule##CLASS_NAME::new_module)); \
+    struct Registrar_XModule##CLASS_NAME { \
+        static XModule *create() { return new XModule##CLASS_NAME(#CLASS_NAME); } \
+        Registrar_XModule##CLASS_NAME() { \
+            RegistrarXModule::register_rt_class(#CLASS_NAME, std::bind(&Registrar_XModule##CLASS_NAME::create)); \
         } \
     }; \
-    Registrar_##CLASS_NAME registrar_##CLASS_NAME;
+    Registrar_XModule##CLASS_NAME registrar_XModule##CLASS_NAME;
 
 /*
 Использование:
@@ -53,15 +51,13 @@ REGISTRAR(Execute)
 
 приведет к вставке такого кода:
 
-QString Rt_ClassName_Execute = "Execute";
-QString *XModuleExecute::static_class_name_ptr;
-struct Registrar_Execute {
-    Registrar_Execute() {
-        XModuleExecute::static_class_name_ptr = &Rt_ClassName_Execute;
-        RegistrarXModule::register_rt_class(Rt_ClassName_Execute, std::bind(&XModuleExecute::new_module));
-    }
-};
-Registrar_Execute registrar_Execute;
+    struct Registrar_XModuleExecute { \
+        static XModule *create() { return new XModule##CLASS_NAME("Execute"); } \
+        Registrar_XModuleExecute() { \
+            RegistrarXModule::register_rt_class("Execute", std::bind(&Registrar_XModuleExecute::create)); \
+        } \
+    }; \
+    Registrar_XModuleExecute registrar_XModuleExecute;
 */
 
 //------------------------------------------------------------------

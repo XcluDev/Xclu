@@ -14,13 +14,8 @@
 REGISTRAR(WImage)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleWImage *XModuleWImage::new_module() {
-    return new XModuleWImage();
-}
-
-//---------------------------------------------------------------------
-XModuleWImage::XModuleWImage()
-    :XModule(*static_class_name_ptr)
+XModuleWImage::XModuleWImage(QString class_name)
+    :XModule(class_name)
 {
 
 }

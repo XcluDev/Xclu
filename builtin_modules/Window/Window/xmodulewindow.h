@@ -50,12 +50,8 @@ class XModuleWindow: public XModule
 {
     Q_OBJECT
 public:
-    XModuleWindow();
+    XModuleWindow(QString class_name);
     ~XModuleWindow();
-
-    static QString *static_class_name_ptr;
-    static XModuleWindow *new_module();
-
 protected:
     //Выполнение
     virtual void impl_loaded() {}

@@ -11,13 +11,8 @@
 REGISTRAR(FragmentShader)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleFragmentShader *XModuleFragmentShader::new_module() {
-    return new XModuleFragmentShader();
-}
-
-//---------------------------------------------------------------------
-XModuleFragmentShader::XModuleFragmentShader()
-    :XModule(*static_class_name_ptr)
+XModuleFragmentShader::XModuleFragmentShader(QString class_name)
+    :XModule(class_name)
 {
 
 }

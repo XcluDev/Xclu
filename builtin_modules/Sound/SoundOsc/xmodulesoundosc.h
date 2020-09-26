@@ -78,12 +78,8 @@ class XModuleSoundOsc: public XModule
 {
     Q_OBJECT
 public:
-    XModuleSoundOsc();
+    XModuleSoundOsc(QString class_name);
     ~XModuleSoundOsc();
-
-    static QString *static_class_name_ptr;
-    static XModuleSoundOsc *new_module();
-
 protected:
 #include "auto.h"
 

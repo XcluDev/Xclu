@@ -20,12 +20,8 @@
 class XModuleSerial: public XModule
 {
 public:
-    XModuleSerial();
+    XModuleSerial(QString class_name);
     ~XModuleSerial();
-
-    static QString *static_class_name_ptr;
-    static XModuleSerial *new_module();
-
 protected:
 #include "auto.h"
     //Выполнение

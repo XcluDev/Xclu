@@ -18,12 +18,8 @@ class XModuleFbo: public XModule
 {
     Q_OBJECT
 public:
-    XModuleFbo();
+    XModuleFbo(QString class_name);
     ~XModuleFbo();
-
-    static QString *static_class_name_ptr;
-    static XModuleFbo *new_module();
-
 protected:
 #include "auto.h"
 

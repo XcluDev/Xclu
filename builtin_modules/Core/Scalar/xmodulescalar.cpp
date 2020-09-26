@@ -14,13 +14,8 @@
 REGISTRAR(Scalar)
 
 //---------------------------------------------------------------------
-/*static*/ XModuleScalar *XModuleScalar::new_module() {
-    return new XModuleScalar();
-}
-
-//---------------------------------------------------------------------
-XModuleScalar::XModuleScalar()
-    :XModule(*static_class_name_ptr)
+XModuleScalar::XModuleScalar(QString class_name)
+    :XModule(class_name)
 {
 
 }

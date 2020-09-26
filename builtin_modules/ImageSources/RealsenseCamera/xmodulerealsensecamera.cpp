@@ -14,13 +14,8 @@ REGISTRAR(RealsenseCamera)
 
 
 //---------------------------------------------------------------------
-/*static*/ XModuleRealsenseCamera *XModuleRealsenseCamera::new_module() {
-    return new XModuleRealsenseCamera();
-}
-
-//---------------------------------------------------------------------
-XModuleRealsenseCamera::XModuleRealsenseCamera()
-    :XModule(*static_class_name_ptr)
+XModuleRealsenseCamera::XModuleRealsenseCamera(QString class_name)
+    :XModule(class_name)
 {
 
 }

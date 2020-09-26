@@ -9,12 +9,8 @@
 class XModuleScanFolder: public XModule
 {
 public:
-    XModuleScanFolder();
+    XModuleScanFolder(QString class_name);
     ~XModuleScanFolder();
-
-    static QString *static_class_name_ptr;
-    static XModuleScanFolder *new_module();
-
 #include "auto.h"
 
 protected:

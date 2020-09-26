@@ -1,6 +1,8 @@
-#include "resistrarxitem.h"
+#include "registrarxitem.h"
 
+/*
 ResistrarXItem::ResistrarXItem()
 {
 
 }
+*/

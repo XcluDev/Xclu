@@ -13,15 +13,9 @@
 //registering module implementation
 REGISTRAR(Window)
 
-
 //---------------------------------------------------------------------
-/*static*/ XModuleWindow *XModuleWindow::new_module() {
-    return new XModuleWindow();
-}
-
-//---------------------------------------------------------------------
-XModuleWindow::XModuleWindow()
-    :XModule(*static_class_name_ptr)
+XModuleWindow::XModuleWindow(QString class_name)
+    :XModule(class_name)
 {
 
 }

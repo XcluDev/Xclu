@@ -35,12 +35,8 @@ class XModuleScalar: public XModule
 {
     Q_OBJECT
 public:
-    XModuleScalar();
+    XModuleScalar(QString class_name);
     ~XModuleScalar();
-
-    static QString *static_class_name_ptr;
-    static XModuleScalar *new_module();
-
 protected:
 #include "auto.h"
 
