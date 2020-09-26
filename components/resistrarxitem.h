@@ -1,12 +1,15 @@
-#ifndef RTMODULEREGISTRAR_H
-#define RTMODULEREGISTRAR_H
+#ifndef RESISTRARXITEM_H
+#define RESISTRARXITEM_H
 
-//Здесь реализована автоматизация регистрации исполняемых модулей
-//Модули с конкретными реализациями должны добавлять в своем CPP-файле строку:
-//REGISTRAR(Имя), например, для XModuleExecute это будет:
-//REGISTRAR(Execute)
-//После этого модуль зарегистрируется и может быть создан в XModulesFactory
-//Макрос REGISTRAR объявлен в конце этого файла.
+//Automation of registration of XItem components is implemented here
+//Modules with specific implementations should add the line in their CPP file:
+//REGISTRAR_XITEM(Name), for example for XItemButton it would be:
+//REGISTRAR_XITEM(Button)
+//After that the module is registered and can be created in XItemsFactory
+//The REGISTRAR_XITEM macro is declared at the end of this file.
+
+
+/*   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 
 #include "incl_h.h"
 #include "moduledescription.h"
@@ -16,10 +19,10 @@ class XModule;
 typedef std::function<XModule *()> XModuleCreateFunction;
 
 //класс для регистрации модуля
-class XModuleRegistrar
+class RegistrarXModule
 {
 public:
-    XModuleRegistrar();
+    RegistrarXModule();
 
     //Функция для регистрации модуля по имени класса
     static void register_rt_class(QString class_name, XModuleCreateFunction creator_function);
@@ -42,27 +45,33 @@ public:
     struct Registrar_##CLASS_NAME { \
         Registrar_##CLASS_NAME() { \
             XModule##CLASS_NAME::static_class_name_ptr = &Rt_ClassName_##CLASS_NAME; \
-            XModuleRegistrar::register_rt_class(Rt_ClassName_##CLASS_NAME, std::bind(&XModule##CLASS_NAME::new_module)); \
+            RegistrarXModule::register_rt_class(Rt_ClassName_##CLASS_NAME, std::bind(&XModule##CLASS_NAME::new_module)); \
         } \
     }; \
     Registrar_##CLASS_NAME registrar_##CLASS_NAME;
 
+    */
 /*
-Использование:
-REGISTRAR(Execute)
+Usage REGISTRAR_XITEM(Button)
 
-приведет к вставке такого кода:
+leads to inserting the following code:
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 QString Rt_ClassName_Execute = "Execute";
 QString *XModuleExecute::static_class_name_ptr;
 struct Registrar_Execute {
     Registrar_Execute() {
         XModuleExecute::static_class_name_ptr = &Rt_ClassName_Execute;
-        XModuleRegistrar::register_rt_class(Rt_ClassName_Execute, std::bind(&XModuleExecute::new_module));
+        RegistrarXModule::register_rt_class(Rt_ClassName_Execute, std::bind(&XModuleExecute::new_module));
     }
 };
 Registrar_Execute registrar_Execute;
 */
 
-//------------------------------------------------------------------
-#endif // RTMODULEREGISTRAR_H
+class ResistrarXItem
+{
+public:
+    ResistrarXItem();
+};
+
+#endif // RESISTRARXITEM_H

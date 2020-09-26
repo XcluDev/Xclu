@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "xmoduleproject.h"
 #include "incl_cpp.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include "projectruntime.h"
 
 

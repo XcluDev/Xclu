@@ -99,6 +99,7 @@ SOURCES += \
     components/gui/xguiseparator.cpp \
     components/gui/xguistring.cpp \
     components/gui/xguitext.cpp \
+    components/resistrarxitem.cpp \
     components/xitem.cpp \
     components/xitembutton.cpp \
     components/xitemcheckbox.cpp \
@@ -116,7 +117,7 @@ SOURCES += \
     host/xclu_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
-    modules/moduleregistrar.cpp \
+    modules/registrarxmodule.cpp \
     project/project.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
@@ -175,6 +176,7 @@ HEADERS += \
     components/gui/xguiseparator.h \
     components/gui/xguistring.h \
     components/gui/xguitext.h \
+    components/resistrarxitem.h \
     components/xitem.h \
     components/xitembutton.h \
     components/xitemcheckbox.h \
@@ -192,7 +194,7 @@ HEADERS += \
     host/xclu_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
-    modules/moduleregistrar.h \
+    modules/registrarxmodule.h \
     project/project.h \
     project/projectproperties.h \
     project/projectruntime.h \

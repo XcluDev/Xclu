@@ -89,13 +89,24 @@
     case XItemTypeStringlist:
         return new XItemEnum(parent, pre_description);
         break;
+
+    /*case XItemTypeArray:
+        return new XItemArray(parent, pre_description);
+        break;
+    case XItemTypeImage:
+        return new XItemImage(parent, pre_description);
+        break;
+    case XItemTypeSoundBuffer:
+        return new XItemSoundBuffer(parent, pre_description);
+        break;*/
+
     case XItemTypeObject:
         return new XItemObject(parent, pre_description);
         break;
     default:
         break;
     }
-    xclu_exception("Internal error: item was not created, '" + pre_description.title
+    xclu_exception("Internal error: item was not created because it's type is not implemented, '" + pre_description.title
                    + "', type '" + interfacetype_to_string(pre_description.type) + "'");
     return nullptr;
 }

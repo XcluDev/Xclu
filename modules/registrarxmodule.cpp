@@ -1,4 +1,4 @@
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include "incl_cpp.h"
 #include "xmodule.h"
 
@@ -10,7 +10,7 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Функция для регистрации модуля по имени класса
-/*static*/ void XModuleRegistrar::register_rt_class(QString class_name, XModuleCreateFunction creator_fun) {
+/*static*/ void RegistrarXModule::register_rt_class(QString class_name, XModuleCreateFunction creator_fun) {
     if (!rt_registered_classes_) {
         rt_registered_classes_ = new QMap<QString, XModuleCreateFunction>;
     }
@@ -20,13 +20,13 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Проверка, реализован ли модуль
-/*static*/ bool XModuleRegistrar::is_module_implemented(QString class_name) {
+/*static*/ bool RegistrarXModule::is_module_implemented(QString class_name) {
     return rt_registered_classes_->contains(class_name);
 }
 
 //---------------------------------------------------------------------
 //Создание модуля по имени класса
-/*static*/ XModule *XModuleRegistrar::create_rt_module(const ModuleDescription &description) {
+/*static*/ XModule *RegistrarXModule::create_rt_module(const ModuleDescription &description) {
     xclu_assert(rt_registered_classes_, "No modules classes were added at startup");
 
     //получаем функцию для создания элемента класса

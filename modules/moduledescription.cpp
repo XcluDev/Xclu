@@ -1,6 +1,6 @@
 #include "moduledescription.h"
 #include "incl_cpp.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 
 //---------------------------------------------------------------------
 ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {
@@ -126,7 +126,7 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
 
 //---------------------------------------------------------------------
 bool ModuleDescription::is_implemented() {  //реализован ли уже модуль
-    return XModuleRegistrar::is_module_implemented(class_name);
+    return RegistrarXModule::is_module_implemented(class_name);
 }
 
 //---------------------------------------------------------------------

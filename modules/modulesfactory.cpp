@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 #include "moduleseed.h"
 #include "moduleinterface.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 
 ModulesFactory FACTORY;
 
@@ -237,7 +237,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
         xclu_assert(info, "Module class is unknown");
 
         //Загрузка
-        rtmodule_new = XModuleRegistrar::create_rt_module(info->description);
+        rtmodule_new = RegistrarXModule::create_rt_module(info->description);
         xclu_assert(rtmodule_new, "Internal error: module implementation is not created");
 
         //Создание модуля

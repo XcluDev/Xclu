@@ -1,6 +1,6 @@
 #include "xmodulewebcamera.h"
 #include "incl_cpp.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include <QProcess>
 #include "projectruntime.h"
 

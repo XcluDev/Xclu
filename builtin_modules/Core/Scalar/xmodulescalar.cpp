@@ -2,7 +2,7 @@
 #include "xmodulescalar.h"
 
 #include "incl_cpp.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include "projectruntime.h"
 #include "module.h"
 #include "xstruct.h"

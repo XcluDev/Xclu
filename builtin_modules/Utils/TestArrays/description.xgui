@@ -12,6 +12,6 @@ in string_file Image_file image_file=""
 
 in button Load load_button
 
-#in image_uint8
+in image_uint8 Image8 image8
 
-#in image_float
+in image_float ImageF imagef

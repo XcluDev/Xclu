@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include <qmath.h>
 #include <qendian.h>
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include "projectruntime.h"
 #include "module.h"
 

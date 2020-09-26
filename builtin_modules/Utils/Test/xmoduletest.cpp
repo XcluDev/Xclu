@@ -1,6 +1,6 @@
 #include "xmoduletest.h"
 #include "incl_cpp.h"
-#include "moduleregistrar.h"
+#include "registrarxmodule.h"
 #include "projectruntime.h"
 
 //registering module implementation
