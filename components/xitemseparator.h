@@ -8,7 +8,7 @@ class ModuleInterface;
 class XItemSeparator: public XItem
 {
 public:
-    XItemSeparator(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemSeparator(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);

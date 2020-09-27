@@ -10,7 +10,7 @@
 #include "xcluobjectimage.h"
 
 //registering module implementation
-REGISTRAR(RealsenseCamera)
+REGISTER_XMODULE(RealsenseCamera)
 
 
 //---------------------------------------------------------------------

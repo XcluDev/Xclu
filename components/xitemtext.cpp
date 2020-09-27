@@ -1,7 +1,9 @@
 #include "xitemtext.h"
 #include "incl_cpp.h"
 #include "xguitext.h"
+#include "registrarxitem.h"
 
+REGISTER_XITEM(Text, text)
 //---------------------------------------------------------------------
 //  in text Text1 text 7 20
 //  //Description - описание
@@ -14,8 +16,8 @@
 //дополнительные строки - это текст для значения по умолчанию,
 //в виде строк, ограниченных " " - чтобы триммер строк не съел пробелы в конце.
 
-XItemText::XItemText(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;

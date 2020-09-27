@@ -8,7 +8,7 @@
 #include "module.h"
 
 //registering module implementation
-REGISTRAR(FragmentShader)
+REGISTER_XMODULE(FragmentShader)
 
 //---------------------------------------------------------------------
 XModuleFragmentShader::XModuleFragmentShader(QString class_name)

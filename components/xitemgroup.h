@@ -8,7 +8,7 @@ class ModuleInterface;
 class XItemGroup: public XItem
 {
 public:
-    XItemGroup(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemGroup(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //Внимание: ставим, что не сохранять значения
     //Когда сделаем сохранение - убрать

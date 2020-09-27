@@ -2,13 +2,17 @@
 #include "incl_cpp.h"
 #include "xguienum.h"
 
+#include "registrarxitem.h"
+
+REGISTER_XITEM(Enum, enum)
+
 //---------------------------------------------------------------------
 //in enum List list=OFF [OFF,ON]
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 
-XItemEnum::XItemEnum(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemEnum::XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

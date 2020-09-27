@@ -9,7 +9,7 @@ class XGuiEnum;
 class XItemEnum: public XItem
 {
 public:
-    XItemEnum(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string();    //rawtext, возвращает 'A_B_C'

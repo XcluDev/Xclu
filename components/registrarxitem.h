@@ -3,64 +3,68 @@
 
 //Automation of registration of XItem components is implemented here
 //Modules with specific implementations should add the line in their CPP file:
-//REGISTRAR_XITEM(Name), for example for XItemButton it would be:
-//REGISTRAR_XITEM(Button)
+//REGISTER_XITEM(Name, Xgui_name), for example for XItemButton it would be:
+//REGISTER_XITEM(Button, button)
 //After that the module is registered and can be created in XItemsFactory
 //The REGISTRAR_XITEM macro is declared at the end of this file.
 
 #include "incl_h.h"
 
-/*
 class XItem;
-typedef std::function<XItem *()> XItemCreateFunction;
+class ModuleInterface;
+class XItemPreDescription;
+
+typedef std::function<XItem *(ModuleInterface *interf, const XItemPreDescription *pre_description)> XItemCreateFunction;
 
 class RegistrarXItem
 {
 public:
     RegistrarXItem();
 
+    //Registering item class by name
     static void register_xitem(QString class_name, XItemCreateFunction creator_function);
 
-    //Check if item is registered
-    static bool is_item_registered(QString class_name);
+    //Check if item class registered
+    static bool is_xitem_registered(QString class_name);
 
-    //Create item by name
-    static XItem *create_item();
+    //Create item object
+    static XItem *create_xitem(ModuleInterface *interf, const XItemPreDescription *pre_description);
 };
-*/
 
 //------------------------------------------------------------------
 //макрос для регистрации класса модуля
 //для этого создаем класс и объявляем один объект, который в своем конструкторе вызывает нужное добавление в класc
 //так мы избавляемся от необходимости прописывать в коде все названия классов
 //  ## - конкатенация в коде   # - превратить в строку
-/*#define REGISTRAR_XITEM(CLASS_NAME) \
-    QString *XItem##CLASS_NAME::static_class_name_ptr; \
-    QString XItem_ClassName_##CLASS_NAME = #CLASS_NAME; \
+#define REGISTER_XITEM(CLASS_NAME, XGUI_NAME) \
     struct Registrar_XItem##CLASS_NAME { \
-        Registrar_##CLASS_NAME() { \
-            XModule##CLASS_NAME::static_class_name_ptr = &Rt_ClassName_##CLASS_NAME; \
-            RegistrarXModule::register_rt_class(Rt_ClassName_##CLASS_NAME, std::bind(&XModule##CLASS_NAME::new_module)); \
+        static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {\
+            return new XItem##CLASS_NAME(interf, *pre_description);\
+        } \
+        Registrar_XItem##CLASS_NAME() { \
+            using namespace std::placeholders;  \
+            RegistrarXItem::register_xitem(#XGUI_NAME, std::bind(&Registrar_XItem##CLASS_NAME::create, _1, _2)); \
         } \
     }; \
     Registrar_XItem##CLASS_NAME registrar_XItem##CLASS_NAME;
-*/
+
 /*
-Usage REGISTRAR_XITEM(Button)
+Usage:
+REGISTER_XITEM(Button, button)
 
-leads to inserting the following code:
+This results in the following code:
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-QString Rt_ClassName_Execute = "Execute";
-QString *XModuleExecute::static_class_name_ptr;
-struct Registrar_Execute {
-    Registrar_Execute() {
-        XModuleExecute::static_class_name_ptr = &Rt_ClassName_Execute;
-        RegistrarXModule::register_rt_class(Rt_ClassName_Execute, std::bind(&XModuleExecute::new_module));
+struct Registrar_XItemButton {
+    static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {
+        return new XItemButton(interf, *pre_description);
+    }
+    Registrar_XItemButton() {
+        using namespace std::placeholders;  // for _1, _2, _3...
+        RegistrarXItem::register_xitem("button", std::bind(&Registrar_XItemButton::create, _1, _2));
     }
 };
-Registrar_Execute registrar_Execute;
-*/
+Registrar_XItemButton registrar_XItemButton;
 
+*/
 
 #endif // RESISTRARXITEM_H

@@ -18,7 +18,7 @@
 #include "xcluobjectimage.h"
 
 //registering module implementation
-REGISTRAR(Webcamera)
+REGISTER_XMODULE(Webcamera)
 
 
 //---------------------------------------------------------------------

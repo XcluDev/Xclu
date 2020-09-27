@@ -21,6 +21,7 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
 //---------------------------------------------------------------------
 //Проверка, реализован ли модуль
 /*static*/ bool RegistrarXModule::is_module_implemented(QString class_name) {
+    if (!rt_registered_classes_) return false;
     return rt_registered_classes_->contains(class_name);
 }
 
@@ -33,7 +34,7 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
     QString class_name = description.class_name;
 
     //возврат модуля, если он зарегистрирован
-    if (rt_registered_classes_->contains(class_name)) {
+    if (is_module_implemented(class_name)) {
         XModuleCreateFunction creator_fun = (*rt_registered_classes_)[class_name];
 
         //создаем модуль

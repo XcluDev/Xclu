@@ -10,7 +10,7 @@ class XItemCheckbox: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemCheckbox(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

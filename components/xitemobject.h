@@ -14,7 +14,7 @@ class XItemObject: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemObject(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description);
     //~XItemObject();
 
     //не поддерживаем скаляры, но будем записывать настройки в строку

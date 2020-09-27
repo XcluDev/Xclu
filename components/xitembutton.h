@@ -9,7 +9,7 @@ class XGuiButton;
 class XItemButton: public XItem
 {
 public:
-    XItemButton(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

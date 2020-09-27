@@ -9,7 +9,7 @@ class XGuiText;
 class XItemText: public XItem
 {
 public:
-    XItemText(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string() { return value_; }

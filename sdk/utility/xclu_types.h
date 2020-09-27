@@ -34,29 +34,6 @@ public:
     int tab_index = 0; //номер страницы
 };
 
-
-//Типы элементов интерфейса
-enum XItemType : int {
-    XItemTypeNone       = 0,
-    XItemTypePage       = 1,
-    XItemTypeGroup      = 2,
-    XItemTypeSeparator  = 3,
-    XItemTypeFloat      = 4,
-    XItemTypeInt        = 5,
-    XItemTypeString     = 6,
-    XItemTypeText       = 7,
-    XItemTypeCheckbox   = 8,
-    XItemTypeButton     = 9,
-    XItemTypeStringlist = 10,
-    XItemTypeArray      = 11,
-    XItemTypeImage      = 12,
-    XItemTypeSoundBuffer= 13,
-    XItemTypeObject     = 14,
-    XItemTypeN          = 15
-};
-
-QString interfacetype_to_string(XItemType vartype);
-XItemType string_to_interfacetype(const QString &vartypestr);
 QString GENERAL_PAGE_marker();
 
 //Способ использования переменной

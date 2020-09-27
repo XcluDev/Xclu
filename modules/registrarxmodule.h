@@ -3,10 +3,10 @@
 
 //Здесь реализована автоматизация регистрации исполняемых модулей
 //Модули с конкретными реализациями должны добавлять в своем CPP-файле строку:
-//REGISTRAR(Имя), например, для XModuleExecute это будет:
-//REGISTRAR(Execute)
+//REGISTER_XMODULE(Имя), например, для XModuleExecute это будет:
+//REGISTER_XMODULE(Execute)
 //После этого модуль зарегистрируется и может быть создан в XModulesFactory
-//Макрос REGISTRAR объявлен в конце этого файла.
+//Макрос REGISTER_XMODULE объявлен в конце этого файла.
 
 #include "incl_h.h"
 #include "moduledescription.h"
@@ -36,7 +36,7 @@ public:
 //для этого создаем класс и объявляем один объект, который в своем конструкторе вызывает нужное добавление в класc
 //так мы избавляемся от необходимости прописывать в коде все названия классов
 //  ## - конкатенация в коде   # - превратить в строку
-#define REGISTRAR(CLASS_NAME) \
+#define REGISTER_XMODULE(CLASS_NAME) \
     struct Registrar_XModule##CLASS_NAME { \
         static XModule *create() { return new XModule##CLASS_NAME(#CLASS_NAME); } \
         Registrar_XModule##CLASS_NAME() { \
@@ -47,7 +47,7 @@ public:
 
 /*
 Использование:
-REGISTRAR(Execute)
+REGISTER_XMODULE(Execute)
 
 приведет к вставке такого кода:
 

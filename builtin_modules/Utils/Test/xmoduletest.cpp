@@ -4,7 +4,7 @@
 #include "projectruntime.h"
 
 //registering module implementation
-REGISTRAR(Test)
+REGISTER_XMODULE(Test)
 
 //---------------------------------------------------------------------
 XModuleTest::XModuleTest(QString class_name)

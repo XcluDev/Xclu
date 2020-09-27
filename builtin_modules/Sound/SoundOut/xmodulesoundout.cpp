@@ -7,7 +7,7 @@
 #include "module.h"
 
 //registering module implementation
-REGISTRAR(SoundOut)
+REGISTER_XMODULE(SoundOut)
 
 //---------------------------------------------------------------------
 XModuleSoundOutGenerator::XModuleSoundOutGenerator(const QAudioFormat &format,

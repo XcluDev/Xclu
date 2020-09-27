@@ -1,7 +1,9 @@
 #include "xitemstring.h"
 #include "incl_cpp.h"
 #include "xguistring.h"
+#include "registrarxitem.h"
 
+REGISTER_XITEM(String, string)
 //---------------------------------------------------------------------
 //Строка
 //in string Name name="aa"
@@ -25,8 +27,8 @@
 
 
 
-XItemString::XItemString(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;

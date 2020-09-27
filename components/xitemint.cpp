@@ -2,12 +2,15 @@
 #include "incl_cpp.h"
 #include "xguiint.h"
 
+#include "registrarxitem.h"
+
+REGISTER_XITEM(Int, int)
 //---------------------------------------------------------------------
 //int A a=-1 -10:10 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-XItemInt::XItemInt(ModuleInterface *parent, const XItemPreDescription &pre_description, bool parse_range)
-    : XItem(parent, pre_description)
+XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
+    : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

@@ -4,7 +4,7 @@
 #include "projectruntime.h"
 #include <QtSerialPort/QSerialPortInfo>
 
-REGISTRAR(Serial)
+REGISTER_XMODULE(Serial)
 
 //---------------------------------------------------------------------
 XModuleSerial::XModuleSerial(QString class_name)

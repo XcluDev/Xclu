@@ -1,7 +1,9 @@
 #include "xitemobject.h"
 #include "xguiobject.h"
 #include "incl_cpp.h"
+#include "registrarxitem.h"
 
+REGISTER_XITEM(Object, object)
 //---------------------------------------------------------------------
 /*
 in object Object_To_Save obj_to_save
@@ -13,8 +15,8 @@ object(strings) - массив строк (?) - его можно ставить
 */
 
 
-XItemObject::XItemObject(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

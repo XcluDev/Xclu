@@ -2,6 +2,10 @@
 #include "xguicheckbox.h"
 #include "incl_cpp.h"
 
+#include "registrarxitem.h"
+
+REGISTER_XITEM(Checkbox, checkbox)
+
 //---------------------------------------------------------------------
 //in checkbox Active active=0
 //      //Length of the object.    описание
@@ -9,8 +13,8 @@
 //in checkbox(group) Details show_details=0
 //- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
 
-XItemCheckbox::XItemCheckbox(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;

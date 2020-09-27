@@ -8,7 +8,7 @@
 #include "xcluobjectimage.h"
 
 //registering module implementation
-REGISTRAR(SoundOsc)
+REGISTER_XMODULE(SoundOsc)
 
 
 //---------------------------------------------------------------------

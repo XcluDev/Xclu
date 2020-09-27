@@ -42,8 +42,7 @@ ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
 
 
 //---------------------------------------------------------------------
-const QString InterfaceTypeNames[XItemTypeN] =
-{
+/*
     "?",
     "page",
     "group",
@@ -59,15 +58,9 @@ const QString InterfaceTypeNames[XItemTypeN] =
     "image",
     "soundbuffer",
     "object"
-};
+*/
 
-QString interfacetype_to_string(XItemType vartype) {
-    return Type_to_string(int(vartype), XItemTypeN, InterfaceTypeNames);
-}
 
-XItemType string_to_interfacetype(const QString &vartypestr) {
-    return XItemType(string_to_Type(vartypestr, XItemTypeN, InterfaceTypeNames));
-}
 
 QString GENERAL_PAGE_marker() {
     return "GENERAL_PAGE";

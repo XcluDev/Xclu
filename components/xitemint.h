@@ -10,7 +10,7 @@ class XItemInt: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemInt(ModuleInterface *parent, const XItemPreDescription &pre_description, bool parse_range = true);
+    XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range = true);
 
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_int()); }

@@ -8,7 +8,7 @@
 #include "module.h"
 
 //registering module implementation
-REGISTRAR(Fbo)
+REGISTER_XMODULE(Fbo)
 
 //---------------------------------------------------------------------
 XModuleFbo::XModuleFbo(QString class_name)

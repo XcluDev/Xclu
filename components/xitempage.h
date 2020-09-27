@@ -9,7 +9,7 @@ class XGuiPage;
 class XItemPage: public XItem
 {
 public:
-    XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemPage(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);

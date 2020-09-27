@@ -11,7 +11,7 @@
 
 
 //registering module implementation
-REGISTRAR(Scalar)
+REGISTER_XMODULE(Scalar)
 
 //---------------------------------------------------------------------
 XModuleScalar::XModuleScalar(QString class_name)

@@ -11,7 +11,7 @@
 
 
 //registering module implementation
-REGISTRAR(Window)
+REGISTER_XMODULE(Window)
 
 //---------------------------------------------------------------------
 XModuleWindow::XModuleWindow(QString class_name)

@@ -1,12 +1,13 @@
 #include "xitemseparator.h"
-
 #include "xguiseparator.h"
+#include "registrarxitem.h"
 
+REGISTER_XITEM(Separator, separator)
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
 //line - горизонтальная линия
-XItemSeparator::XItemSeparator(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemSeparator::XItemSeparator(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
     //separator
     name_ = pre_description.line_to_parse; //имя генерируется автоматически

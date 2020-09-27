@@ -1,9 +1,11 @@
 #include "xitempage.h"
 #include "xguipage.h"
+#include "registrarxitem.h"
 
+REGISTER_XITEM(Page, page)
 //---------------------------------------------------------------------
-XItemPage::XItemPage(ModuleInterface *parent, const XItemPreDescription &pre_description)
-    : XItem(parent, pre_description)
+XItemPage::XItemPage(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    : XItem(interf, pre_description)
 {
     //page Main_page
     name_ = pre_description.line_to_parse;

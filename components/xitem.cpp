@@ -16,10 +16,10 @@
 #include "xitemobject.h"
 
 #include "xgui.h"
-
+#include "registrarxitem.h"
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItem::create_item(ModuleInterface *parent,
+/*static*/ XItem *XItem::create_item(ModuleInterface *interf,
                                                      QString title_underscored,
                                                      XItemType type,
                                                      const QStringList &description,
@@ -36,86 +36,36 @@
     descr.line_to_parse = line_to_parse;
     descr.options = options;
     descr.description = description;
-    return create_item(parent, descr);
+    return create_item(interf, descr);
 }
 
 //---------------------------------------------------------------------
 //page, group
-/*static*/ XItem *XItem::create_decorate_item(ModuleInterface *parent,
+/*static*/ XItem *XItem::create_decorate_item(ModuleInterface *interf,
                                                               QString name,
                                                               XItemType type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
-    return create_item(parent, name, type, description, VarQualifierIn, name);
+    return create_item(interf, name, type, description, VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
 //separator
-/*static*/ XItem *XItem::create_separator(ModuleInterface *parent, QString name, XItemType type, bool is_line) {
+/*static*/ XItem *XItem::create_separator(ModuleInterface *interf, QString name, XItemType type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
-    return create_item(parent, name, type, QStringList(descr), VarQualifierIn, name);
+    return create_item(interf, name, type, QStringList(descr), VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItem::create_item(ModuleInterface *parent, const XItemPreDescription &pre_description) {
-    switch(pre_description.type) {
-    case XItemTypePage:
-        return new XItemPage(parent, pre_description);
-        break;
-    case XItemTypeGroup:
-        return new XItemGroup(parent, pre_description);
-        break;
-    case XItemTypeSeparator:
-        return new XItemSeparator(parent, pre_description);
-        break;
-    case XItemTypeFloat:
-        return new XItemFloat(parent, pre_description);
-        break;
-    case XItemTypeInt:
-        return new XItemInt(parent, pre_description);
-        break;
-    case XItemTypeString:
-        return new XItemString(parent, pre_description);
-        break;
-    case XItemTypeText:
-        return new XItemText(parent, pre_description);
-        break;
-    case XItemTypeCheckbox:
-        return new XItemCheckbox(parent, pre_description);
-        break;
-    case XItemTypeButton:
-        return new XItemButton(parent, pre_description);
-        break;
-    case XItemTypeStringlist:
-        return new XItemEnum(parent, pre_description);
-        break;
-
-    /*case XItemTypeArray:
-        return new XItemArray(parent, pre_description);
-        break;
-    case XItemTypeImage:
-        return new XItemImage(parent, pre_description);
-        break;
-    case XItemTypeSoundBuffer:
-        return new XItemSoundBuffer(parent, pre_description);
-        break;*/
-
-    case XItemTypeObject:
-        return new XItemObject(parent, pre_description);
-        break;
-    default:
-        break;
-    }
-    xclu_exception("Internal error: item was not created because it's type is not implemented, '" + pre_description.title
-                   + "', type '" + interfacetype_to_string(pre_description.type) + "'");
-    return nullptr;
+/*static*/ XItem *XItem::create_item(ModuleInterface *interf, const XItemPreDescription &pre_description) {
+    return RegistrarXItem::create_xitem(interf, &pre_description);
 }
 
 
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
 XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {
-    //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
+    //Проверка, что interf не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xclu_assert(interf,
                 "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
     interf_ = interf;
@@ -147,7 +97,7 @@ QString XItem::title() {
 }
 
 //---------------------------------------------------------------------
-XItemType XItem::type() {
+QString XItem::type() {
     return type_;
 }
 
@@ -401,7 +351,7 @@ void XItem::copy_data_to(XItem *item) {
     xclu_assert(name() == item->name(), "Internal error XItem::copy_data_to: different items names '"
                 + name() + "' and '" + item->name() + "'");
     xclu_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
-                + interfacetype_to_string(type()) + "' and '" + interfacetype_to_string(item->type()) + "'");
+                + type() + "' and '" + item->type() + "'");
 
     item->set_use_expression(use_expression());
     item->set_expression(expression());
@@ -419,7 +369,7 @@ void XItem::copy_data_to(XItem *item) {
 
 //---------------------------------------------------------------------
 void XItem::copy_data_to_internal(XItem *) {
-    xclu_halt("Internal error: copy_data_to_internal is not implemented for type '" + interfacetype_to_string(type()) + "'");
+    xclu_halt("Internal error: copy_data_to_internal is not implemented for type '" + type() + "'");
 }
 
 //---------------------------------------------------------------------
@@ -489,7 +439,7 @@ bool XItem::belongs_general_page() {
 //function generates function or functions definitions
 //Subclasses must reimplement it, in opposite case the exception will arise.
 void XItem::export_interface(QStringList & /*file*/) {
-    xclu_exception("Can't generate C++ header for interface element of type `" + interfacetype_to_string(type()) + "'");
+    xclu_exception("Can't generate C++ header for interface element of type `" + type() + "'");
 }
 
 //---------------------------------------------------------------------

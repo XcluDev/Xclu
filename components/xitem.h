@@ -15,9 +15,10 @@ class XStruct;
 class ModuleInterface;
 
 //предварительная информация для построения элемента интерфейса
-struct XItemPreDescription {
+class XItemPreDescription {
+public:
     QString title;
-    XItemType type = XItemTypeNone;
+    QString type = "";
     VarQualifier qualifier = VarQualifierIn;
     QString qualifier_options; //опции в квалификаторе, типа out(not_save)
     QString options;        //дополнительные опции, типа choose:file, choose:folder для строк string(choose:file)
@@ -29,16 +30,16 @@ struct XItemPreDescription {
 //Элемент интерфейса
 class XItem {
 public:
-    static XItem *create_item(ModuleInterface *parent, const XItemPreDescription &pre_description);
-    static XItem *create_item(ModuleInterface *parent, QString title_underscored, XItemType type,
+    static XItem *create_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    static XItem *create_item(ModuleInterface *interf, QString title_underscored, XItemType type,
                                       const QStringList &description,
                                       VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
                                       QString options = "",
                                       QString qual_options = "");
     //page, group
-    static XItem *create_decorate_item(ModuleInterface *parent, QString name, XItemType type, const QStringList &description);
+    static XItem *create_decorate_item(ModuleInterface *interf, QString name, XItemType type, const QStringList &description);
     //separator
-    static XItem *create_separator(ModuleInterface *parent, QString name, XItemType type = XItemTypeSeparator, bool is_line = false);
+    static XItem *create_separator(ModuleInterface *interf, QString name, XItemType type = XItemTypeSeparator, bool is_line = false);
 
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
@@ -52,7 +53,7 @@ public:
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
     QString title();
-    XItemType type();
+    QString type();
     VarQualifier qualifier();
     bool is_const();
     bool is_in();
@@ -191,7 +192,7 @@ protected:
     //основные характеристики
     QString title_;
     QString name_;
-    XItemType type_;
+    QString type_;
     VarQualifier qualifier_;
     QStringList description_;   //может быть несколько строк
 

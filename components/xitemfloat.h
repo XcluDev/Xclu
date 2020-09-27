@@ -9,7 +9,7 @@ class XGuiFloat;
 class XItemFloat: public XItem
 {
 public:
-    XItemFloat(ModuleInterface *parent, const XItemPreDescription &pre_description);
+    XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }
