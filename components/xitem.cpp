@@ -21,7 +21,7 @@
 //---------------------------------------------------------------------
 /*static*/ XItem *XItem::create_item(ModuleInterface *interf,
                                                      QString title_underscored,
-                                                     XItemType type,
+                                                     QString type,
                                                      const QStringList &description,
                                                      VarQualifier qual,
                                                      QString line_to_parse,
@@ -43,14 +43,14 @@
 //page, group
 /*static*/ XItem *XItem::create_decorate_item(ModuleInterface *interf,
                                                               QString name,
-                                                              XItemType type, const QStringList &description) {
+                                                              QString type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
     return create_item(interf, name, type, description, VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
 //separator
-/*static*/ XItem *XItem::create_separator(ModuleInterface *interf, QString name, XItemType type, bool is_line) {
+/*static*/ XItem *XItem::create_separator(ModuleInterface *interf, QString name, QString type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
     return create_item(interf, name, type, QStringList(descr), VarQualifierIn, name);

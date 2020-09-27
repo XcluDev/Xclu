@@ -1,5 +1,17 @@
 Xclu: Changelog 
 
+#### 2020-09-27
+- Работа с json вынесена в отдельный модуль jsonutils.
+- glm перенести в libs/glm
+- В xgui вместо type(…) – теперь type_...:
+  *  check_group
+  * string_file
+  *  string_folder
+  *  string_link_image
+- Упрощена регистрация XModule.
+- Реализовал регистрацию новых компонент.
+
+
 #### 2020-09-21
 - В enum для auto.h – менять спецсимволы “\r”, “\n”, “\t” на _r, _n, _t
 - XDict переименовал в XStruct.

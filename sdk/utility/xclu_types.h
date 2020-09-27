@@ -34,6 +34,9 @@ public:
     int tab_index = 0; //номер страницы
 };
 
+QString xitem_separator();
+QString xitem_line();
+QString xitem_page();
 QString GENERAL_PAGE_marker();
 
 //Способ использования переменной

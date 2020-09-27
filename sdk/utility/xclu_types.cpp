@@ -61,6 +61,18 @@ ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
 */
 
 
+//---------------------------------------------------------------------
+QString xitem_separator() {
+    return "separator";
+}
+
+QString xitem_line() {
+    return "line";
+}
+
+QString xitem_page() {
+    return "page";
+}
 
 QString GENERAL_PAGE_marker() {
     return "GENERAL_PAGE";

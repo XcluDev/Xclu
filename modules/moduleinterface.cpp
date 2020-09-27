@@ -201,8 +201,8 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             //сепаратор: separator или line
             //line сейчас задан неофициально,  в программе он как тип не обозначен,
             //его обрабатываем только тут и еще в XItem::create_separator
-            if (item1 == "separator" || item1 == "line") {
-                auto type = XItemTypeSeparator; //string_to_interfacetype(item1);
+            if (item1 == xitem_separator() || item1 == xitem_line()) {
+                auto type = xitem_separator(); //string_to_interfacetype(item1);
                 bool is_line = (item1 == "line");
                 create_separator(type, is_line);
                 //collect_description увеличивает i
@@ -216,8 +216,8 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                 QString name = query.at(1);
                 xclu_assert(!name.isEmpty(), "empty page name at line " + line);
 
-                auto type = string_to_interfacetype(item1);
-                xclu_assert(type != XItemTypeNone, "internal error: unknown type at line " + line);
+                auto type = item1;
+                //xclu_assert(!type.isEmpty(), "internal error: empty type at line " + line);
 
                 //collect_description увеличивает i
                 create_decorate_item(name, type, collect_description(lines, i));
@@ -246,8 +246,8 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             QStringList type_options=query.at(1).split("_");
             xclu_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
 
-            auto type = string_to_interfacetype(type_options.at(0));
-            xclu_assert(type != XItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");
+            auto type = type_options.at(0);
+            //xclu_assert(type != XItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");
 
             QString options;
             if (type_options.size() >= 2) {
@@ -286,7 +286,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     }
 
     //Проверяем, что интерфейс начался с создания страницы
-    xclu_assert(items_[0]->type() == XItemTypePage, "Interface description must start with a page");
+    xclu_assert(items_[0]->type() == xitem_page(), "Interface description must start with a page");
 
 }
 
@@ -304,7 +304,7 @@ void ModuleInterface::create_item(const XItemPreDescription &pre_description) {
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_item(QString title_underscored, XItemType type,
+void ModuleInterface::create_item(QString title_underscored, QString type,
                                   const QStringList &description,
                                   VarQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
@@ -312,13 +312,13 @@ void ModuleInterface::create_item(QString title_underscored, XItemType type,
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_decorate_item(QString name, XItemType type, const QStringList &description) {
+void ModuleInterface::create_decorate_item(QString name, QString type, const QStringList &description) {
     items_.push_back(XItem::create_decorate_item(this, name, type, description));
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_separator(XItemType type, bool is_line) {
+void ModuleInterface::create_separator(QString type, bool is_line) {
     push_item(XItem::create_separator(this, generate_separator_name(), type, is_line));
 }
 

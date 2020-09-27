@@ -128,13 +128,13 @@ private:
 
     //Добавление конкретных элементов в интерфейс - вызывают push_item
     void create_item(const XItemPreDescription &pre_description);
-    void create_item(QString title_underscored, XItemType type,
+    void create_item(QString title_underscored, QString type,
                      const QStringList &description,
                      VarQualifier qual = VarQualifierIn,
                      QString line_to_parse = "", QString options = "",
                      QString qual_options = "");
-    void create_decorate_item(QString name, XItemType type, const QStringList &description);
-    void create_separator(XItemType type = XItemTypeSeparator, bool is_line = false);
+    void create_decorate_item(QString name, QString type, const QStringList &description);
+    void create_separator(QString type = xitem_separator(), bool is_line = false);
 
     //создание имен для сепараторов, чтобы их использовать в visibility
     int separator_index_ = 0;
