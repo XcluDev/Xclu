@@ -123,13 +123,14 @@ SOURCES += \
     project/projectruntime.cpp \
     sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
-    sdk/math/raster.cpp \
     sdk/math/slowbit.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
+    sdk/types/xraster.cpp \
+    sdk/types/xref.cpp \
     sdk/types/xstruct.cpp \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
@@ -201,13 +202,14 @@ HEADERS += \
     sdk/math/int2.h \
     sdk/math/math_types.h \
     sdk/math/math_utils.h \
-    sdk/math/raster.h \
     sdk/math/slowbit.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
+    sdk/types/xraster.h \
+    sdk/types/xref.h \
     sdk/types/xstruct.h \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \

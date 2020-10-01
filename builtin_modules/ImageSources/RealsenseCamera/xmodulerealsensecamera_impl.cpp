@@ -340,7 +340,7 @@ bool RealsenseCamera::get_point_cloud(QVector<glm::vec3> &pc,
 
 
 //--------------------------------------------------------------
-bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_u8c3 &raster) {
+bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, XRaster_u8c3 &raster) {
     auto format = frame.get_profile().format();
     int w = frame.get_width();
     int h = frame.get_height();
@@ -377,7 +377,7 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_color_pixels_rgb(Raster_u8c3 &raster) {
+bool RealsenseCamera::get_color_pixels_rgb(XRaster_u8c3 &raster) {
     if (!settings_.use_rgb) return false;
     if (device_.connected && device_.color_frame.get()) {
         return frame_to_pixels_rgb(device_.color_frame, raster);
@@ -403,7 +403,7 @@ bool RealsenseCamera::get_depth16_raw(int &w, int &h, uint16_t* &data16) {
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, Raster_u8 &raster) {
+bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, XRaster_u8 &raster) {
     raster.clear();
     int w = 0;
     int h = 0;
@@ -427,7 +427,7 @@ bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, Raster_u
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_depth_pixels_rgb(Raster_u8c3 &raster) {
+bool RealsenseCamera::get_depth_pixels_rgb(XRaster_u8c3 &raster) {
     if (!settings_.use_depth) return false;
     if (device_.connected && device_.depth.get()) {
         auto frame = device_.colorize_frame.process(device_.depth).as<rs2::video_frame>();
@@ -439,7 +439,7 @@ bool RealsenseCamera::get_depth_pixels_rgb(Raster_u8c3 &raster) {
 
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_depth_pixels_mm(Raster_float &raster) {
+bool RealsenseCamera::get_depth_pixels_mm(XRaster_float &raster) {
     raster.clear();
     int w = 0;
     int h = 0;
@@ -457,7 +457,7 @@ bool RealsenseCamera::get_depth_pixels_mm(Raster_float &raster) {
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_depth_pixels_mm(Raster_u16 &raster) {
+bool RealsenseCamera::get_depth_pixels_mm(XRaster_u16 &raster) {
     raster.clear();
     int w = 0;
     int h = 0;
@@ -475,7 +475,7 @@ bool RealsenseCamera::get_depth_pixels_mm(Raster_u16 &raster) {
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_ir_pixels8(Raster_u8 &raster) {
+bool RealsenseCamera::get_ir_pixels8(XRaster_u8 &raster) {
     raster.clear();
     if (!settings_.use_ir) return false;
     if (device_.connected && device_.ir_frame.get()) {
@@ -493,7 +493,7 @@ bool RealsenseCamera::get_ir_pixels8(Raster_u8 &raster) {
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_ir_pixels_rgb(Raster_u8c3 &raster) {
+bool RealsenseCamera::get_ir_pixels_rgb(XRaster_u8c3 &raster) {
     if (!settings_.use_ir) return false;
     if (device_.connected && device_.ir_frame.get()) {
         auto frame = device_.colorize_frame.process(device_.ir_frame).as<rs2::video_frame>();

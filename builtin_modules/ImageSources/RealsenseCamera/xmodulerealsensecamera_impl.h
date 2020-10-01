@@ -124,17 +124,17 @@ public:
     bool isFrameNew() { return frameNew_;  }
 
     //RGB
-    bool get_color_pixels_rgb(Raster_u8c3 &raster);
+    bool get_color_pixels_rgb(XRaster_u8c3 &raster);
 
     //Depth
-    bool get_depth_pixels8(float min_dist, float max_dist, Raster_u8 &raster);
-    bool get_depth_pixels_rgb(Raster_u8c3 &raster);
-    bool get_depth_pixels_mm(Raster_float &raster);
-    bool get_depth_pixels_mm(Raster_u16 &raster);
+    bool get_depth_pixels8(float min_dist, float max_dist, XRaster_u8 &raster);
+    bool get_depth_pixels_rgb(XRaster_u8c3 &raster);
+    bool get_depth_pixels_mm(XRaster_float &raster);
+    bool get_depth_pixels_mm(XRaster_u16 &raster);
 
     //IR
-    bool get_ir_pixels8(Raster_u8 &raster);
-    bool get_ir_pixels_rgb(Raster_u8c3 &raster);
+    bool get_ir_pixels8(XRaster_u8 &raster);
+    bool get_ir_pixels_rgb(XRaster_u8c3 &raster);
 
     //TODO
     //callback for connecting/disconnecting devices, see rs-multicam example in SDK
@@ -160,7 +160,7 @@ protected:
 
     RealsenseDevice device_;
 
-    bool frame_to_pixels_rgb(const rs2::video_frame& frame, Raster_u8c3 &raster);
+    bool frame_to_pixels_rgb(const rs2::video_frame& frame, XRaster_u8c3 &raster);
 
     bool get_depth16_raw(int &w, int &h, uint16_t* &data16);
 

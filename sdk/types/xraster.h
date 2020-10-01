@@ -1,6 +1,15 @@
 #pragma once
 
 //Raster class definition
+//Allows to work with rasters are with the following classes:
+//    XRaster_u8    - grayscale 1-channel 8-bit image,
+//    XRaster_u8c3  - color 3-channel 8-bit image,
+//    XRaster_u16   - grayscale 1-channel 16-bit image,
+//    XRaster_float - grayscale 1-channel 8-bit image,
+//    XRaster_vec2  - 2-dimensional float vector (glm::vec2) image,
+//    XRaster_vec3  - 3-dimensional float vector (glm::vec3) image,
+//    XRaster - class containing static functions convert, load, save for converting color
+//              rasters to grayscale and back, to QImage and back, and also save and load rasters to disk.
 
 #include "incl_h.h"
 #include <QImage>
@@ -33,7 +42,7 @@ struct u8_rgb {
 //Template raster type
 //--------------------------------------------------
 template<typename T>
-class Raster_ {
+class XRaster_ {
 public:
 	int w = 0;
 	int h = 0;
@@ -114,7 +123,7 @@ public:
         if (angle == 90) {
             int w0 = w;
             int h0 = h;
-            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
             this->allocate(h0,w0);
             for (int y=0; y<h0; y++) {
                 for (int x=0; x<w0; x++) {
@@ -123,7 +132,7 @@ public:
             }
         }
         if (angle == 180) {
-            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
             for (int y=0; y<h; y++) {
                 for (int x=0; x<w; x++) {
                     data[(w-1-x) + w*(h-1-y)] = temp.data[x+w*y];
@@ -135,7 +144,7 @@ public:
             //rotate(180);
             int w0 = w;
             int h0 = h;
-            Raster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
             this->allocate(h0,w0);
             for (int y=0; y<h0; y++) {
                 for (int x=0; x<w0; x++) {
@@ -150,25 +159,32 @@ public:
 //--------------------------------------------------
 //Particular raster types
 //--------------------------------------------------
-typedef Raster_<uint8> Raster_u8;
-typedef Raster_<u8_rgb> Raster_u8c3;    //color image
-typedef Raster_<uint16> Raster_u16;
-typedef Raster_<float> Raster_float;
-typedef Raster_<glm::vec2> Raster_vec2;
-typedef Raster_<glm::vec3> Raster_vec3;
+typedef XRaster_<uint8> XRaster_u8;
+typedef XRaster_<u8_rgb> XRaster_u8c3;    //color image
+typedef XRaster_<uint16> XRaster_u16;
+typedef XRaster_<float> XRaster_float;
+typedef XRaster_<glm::vec2> XRaster_vec2;
+typedef XRaster_<glm::vec3> XRaster_vec3;
 
+//class for static-defined operations:
+//converting color raster to grayscale abd back,
+//to QImage and back,
+//load and save raster to disk
 
-//Конвертирование растров между собой и QImage, запись и считывание на диск
-//TODO при работе с диском используется QImage - быстрее было бы использовать OpenCV или FreeImage или TurboJpeg
-void raster_to_raster(Raster_u8c3 &raster_rgb, Raster_u8 &raster);
-void raster_to_raster(Raster_u8 &raster, Raster_u8c3 &raster_rgb);
+class XRaster {
+public:
+    //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
+    static void convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster);
+    static void convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb);
 
-void raster_from_QImage(QImage qimage, Raster_u8 &raster);
-void raster_from_QImage(QImage qimage, Raster_u8c3 &raster);
-void raster_to_QImage(Raster_u8 &raster, QImage &qimage);
-void raster_to_QImage(Raster_u8c3 &raster, QImage &qimage);
+    static void convert(QImage qimage, XRaster_u8 &raster);
+    static void convert(QImage qimage, XRaster_u8c3 &raster);
+    static void convert(XRaster_u8 &raster, QImage &qimage);
+    static void convert(XRaster_u8c3 &raster, QImage &qimage);
 
-void raster_load(QString file_name, Raster_u8 &raster);
-void raster_load(QString file_name, Raster_u8c3 &raster);
-void raster_save(Raster_u8 &raster, QString file_name, QString format, int quality = 90);
-void raster_save(Raster_u8c3 &raster, QString file_name, QString format, int quality = 90);
+    static void load(QString file_name, XRaster_u8 &raster);
+    static void load(QString file_name, XRaster_u8c3 &raster);
+    static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
+    static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
+
+};

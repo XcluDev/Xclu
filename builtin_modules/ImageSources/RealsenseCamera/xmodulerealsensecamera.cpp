@@ -121,21 +121,21 @@ void XModuleRealsenseCamera::impl_update() {
         bool make_depth = false;
         bool make_ir = false;
         if ((geti_show_color() || wait_save_frames_) && camera_.settings().use_rgb) {
-            Raster_u8c3 raster_color;
+            XRaster_u8c3 raster_color;
             xclu_assert(camera_.get_color_pixels_rgb(raster_color), "get_color_pixels_rgb() returned false");
             XStructWrite image(getstruct_color_image());
             XStructImage::create_from_raster(image, raster_color);
             make_color = true;
         }
         if ((geti_show_depth() || wait_save_frames_) && camera_.settings().use_depth) {
-            Raster_u8c3 raster_depth;
+            XRaster_u8c3 raster_depth;
             xclu_assert(camera_.get_depth_pixels_rgb(raster_depth), "get_depth_pixels_rgb() returned false");
             XStructWrite image(getstruct_depth_image());
             XStructImage::create_from_raster(image, raster_depth);
             make_depth = true;
         }
         if ((geti_show_ir() || wait_save_frames_) && camera_.settings().use_ir) {
-            Raster_u8 raster_ir;
+            XRaster_u8 raster_ir;
             xclu_assert(camera_.get_ir_pixels8(raster_ir), "get_ir_pixels8() returned false");
             XStructWrite image(getstruct_ir_image());
             XStructImage::create_from_raster(image, raster_ir);

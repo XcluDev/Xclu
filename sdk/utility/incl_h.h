@@ -21,7 +21,7 @@
 //types, utils
 #include "math_types.h"
 #include "math_utils.h"
-#include "raster.h"
+#include "xraster.h"
 
 //geometry
 #include <glm/glm.hpp>

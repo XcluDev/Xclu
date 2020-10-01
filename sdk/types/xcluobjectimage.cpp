@@ -278,17 +278,17 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStructWrite &object, Raster_u8 &raster) {
+/*static*/ void XStructImage::create_from_raster(XStructWrite &object, XRaster_u8 &raster) {
     create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStructWrite &object, Raster_u8c3 &raster) {
+/*static*/ void XStructImage::create_from_raster(XStructWrite &object, XRaster_u8c3 &raster) {
     create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(XStructRead &object, Raster_u8 &raster, rect_int rect) {
+/*static*/ void XStructImage::to_raster(XStructRead &object, XRaster_u8 &raster, rect_int rect) {
 
     int w = object.geti("w");
     int h = object.geti("h");
@@ -332,7 +332,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(XStructRead &object, Raster_u8c3 &raster, rect_int rect) {
+/*static*/ void XStructImage::to_raster(XStructRead &object, XRaster_u8c3 &raster, rect_int rect) {
     int w = object.geti("w");
     int h = object.geti("h");
     int channels = object.geti("channels");
