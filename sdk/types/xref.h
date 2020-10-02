@@ -15,15 +15,22 @@ public:
     //set link to object
     void link(T *object);
 
-    //create object
-    void create();
+    //become owner of the object
+    void own(T *object);
 
+    //free
+    void release();
+
+    //properties
     bool is_empty();
+    bool is_link();   //raises exception if empty
+    bool is_owner();  //raises  exception if empty
 
     //get data
-    //returns exception if empty
+    //raises  exception if empty
     T* data();
 protected:
+    bool is_owner_ = false;
     T* pointer_ = nullptr;
     QScopedPointer<T> data_;
 

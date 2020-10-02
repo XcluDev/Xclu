@@ -8,22 +8,30 @@ XRef<T>::XRef() {
 
 }
 
-
-//T* pointer_ = nullptr;
-//QScopedPointer<T> data_;
+//---------------------------------------------------------------------
+template<typename T>
+void XRef<T>::release() {
+    pointer_ = nullptr;
+    data_.reset();
+}
 
 //---------------------------------------------------------------------
 //set link to object
 template<typename T>
 void XRef<T>::link(T *object) {
+    release();
+    pointer_ = object;
+    is_owner_ = false;
 
 }
 
 //---------------------------------------------------------------------
-//create object
+//become owner of the object
 template<typename T>
-void XRef<T>::create() {
-
+void XRef<T>::own(T *object) {
+    data_.reset(object);
+    pointer_ = object;
+    is_owner_ = true;
 }
 
 //---------------------------------------------------------------------
@@ -33,11 +41,25 @@ bool XRef<T>::is_empty() {
 }
 
 //---------------------------------------------------------------------
+template<typename T>
+bool XRef<T>::is_link() {
+    xclu_assert(!is_empty(), "Calling 'is_link' of unitialized XRef object");
+    return !is_owner_;
+}
+
+//---------------------------------------------------------------------
+template<typename T>
+bool XRef<T>::is_owner() {
+    xclu_assert(!is_empty(), "Calling 'is_owner' of unitialized XRef object");
+    return is_owner_;
+}
+
+//---------------------------------------------------------------------
 //get data
-//returns exception if empty
+//raises exception if empty
 template<typename T>
 T* XRef<T>::data() {
-    xclu_assert(!is_empty(), "Trying to access unitialized XRef object");
+    xclu_assert(!is_empty(), "Calling 'data' of unitialized XRef object");
     return pointer_;
 }
 
