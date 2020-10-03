@@ -111,20 +111,20 @@ QStringList XItemEnum::names() {       //все заголовки с подче
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemEnum::create_gui(XGuiPageCreator &input) {
-    gui__ = gui_ = new XGuiEnum(input, this);
-    return gui_;
+    gui__ = new XGuiEnum(input, this);
+    return gui__;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemEnum::gui_to_var_internal() {
-    set_value_int(gui_->index());
+    set_value_int(((XGuiEnum *)gui__)->index());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
 void XItemEnum::var_to_gui_internal() {
-    gui_->set_index(value_int());
+    ((XGuiEnum *)gui__)->set_index(value_int());
 }
 
 //---------------------------------------------------------------------

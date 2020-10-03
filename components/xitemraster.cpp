@@ -72,8 +72,8 @@ XRaster_<TRaster> &XItemRaster_<TRaster>::get_raster_ref() {
 //графический интерфейс
 template<typename TRaster>
 XGui *XItemRaster_<TRaster>::create_gui(XGuiPageCreator &input) {
-    gui__ = gui_ = new XGuiObject(input, this);
-    return gui_;
+    gui__ = new XGuiObject(input, this);
+    return gui__;
 }
 
 //---------------------------------------------------------------------

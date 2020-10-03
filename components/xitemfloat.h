@@ -4,7 +4,6 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class XGuiFloat;
 
 class XItemFloat: public XItem
 {
@@ -49,9 +48,6 @@ protected:
     //работа с GUI - вызывается когда is_gui_attached
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
-    //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    XGuiFloat *gui_ = nullptr;
-
 };
 
 #endif // INTERFACEITEMFLOAT_H

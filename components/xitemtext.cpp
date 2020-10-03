@@ -36,20 +36,20 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemText::create_gui(XGuiPageCreator &input) {
-    gui__ = gui_ = new XGuiText(input, this);
-    return gui_;
+    gui__ = new XGuiText(input, this);
+    return gui__;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemText::gui_to_var_internal() {
-    set_value_string(gui_->value());
+    set_value_string(((XGuiText *)gui__)->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
 void XItemText::var_to_gui_internal() {
-    gui_->set_value(value_string());
+    ((XGuiText *)gui__)->set_value(value_string());
 }
 
 //---------------------------------------------------------------------

@@ -21,8 +21,8 @@ XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemButton::create_gui(XGuiPageCreator &input) {
-    gui__ = gui_ = new XGuiButton(input, this);
-    return gui_;
+    gui__ = new XGuiButton(input, this);
+    return gui__;
 }
 
 //---------------------------------------------------------------------
@@ -45,7 +45,7 @@ int XItemButton::value_int() {
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemButton::gui_to_var_internal() {
-    value_ = gui_->value();
+    value_ = ((XGuiButton *)gui__)->value();
 }
 
 //---------------------------------------------------------------------

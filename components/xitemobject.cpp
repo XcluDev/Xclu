@@ -37,8 +37,8 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemObject::create_gui(XGuiPageCreator &input) {
-    gui__ = gui_ = new XGuiObject(input, this);
-    return gui_;
+    gui__ = new XGuiObject(input, this);
+    return gui__;
 }
 
 //---------------------------------------------------------------------
@@ -56,7 +56,7 @@ void XItemObject::var_to_gui_internal() {
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
 
-    gui_->show_object(get_object());
+    ((XGuiObject *)gui__)->show_object(get_object());
 }
 
 //---------------------------------------------------------------------

@@ -4,7 +4,6 @@
 #include "xitem.h"
 
 class ModuleInterface;
-class XGuiButton;
 
 class XItemButton: public XItem
 {
@@ -40,8 +39,6 @@ protected:
     //работа с GUI - вызывается когда is_gui_attached
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
-    //gui_ актуален только в случае is_gui_attached. Не следует его удалять
-    XGuiButton *gui_ = nullptr;
 
     //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
