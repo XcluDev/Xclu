@@ -6,8 +6,6 @@
 //Autostart
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QLabel>
 
 #include "incl_h.h"

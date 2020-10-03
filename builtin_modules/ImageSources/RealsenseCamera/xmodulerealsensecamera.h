@@ -3,9 +3,7 @@
 
 //Working with Realsense camera
 
-#include <QScopedPointer>
 #include <QImage>
-#include <QMutex>
 #include "incl_h.h"
 #include "xmodule.h"
 #include "xcluobjectimage.h"

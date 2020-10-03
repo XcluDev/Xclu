@@ -5,8 +5,6 @@
 //Это FBO можно конвертировать в картинку или использовать как текстуру для вывода в окно
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QWindow>
 
 #include "incl_h.h"

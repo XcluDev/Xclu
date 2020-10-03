@@ -4,8 +4,6 @@
 //Реализация модуля SoundOsc - осциллятор с FM и AM модуляциями
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 
 #include "incl_h.h"
 #include "xmodule.h"

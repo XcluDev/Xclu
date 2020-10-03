@@ -9,6 +9,8 @@
 #include <QString>
 #include <QStringList>
 #include <functional>
+#include <QMutex>
+#include <QReadWriteLock>
 #include <QScopedPointer>
 
 //Stl - currently commented
@@ -21,6 +23,8 @@
 //types, utils
 #include "math_types.h"
 #include "math_utils.h"
+#include "xtypes.h"
+#include "xref.h"
 #include "xraster.h"
 
 //geometry

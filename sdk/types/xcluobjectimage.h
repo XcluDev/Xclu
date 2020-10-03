@@ -15,7 +15,7 @@ class XGuiObject;
 void XcluImage_test();
 
 //Поддерживаемые каналы: Grayscale,RGB,BGR,RGBA,ABGR,R,G,B  [не поддерживается HSL,H,S,L]
-//Подерживаемые типы данных: u8bit,float
+//Подерживаемые типы данных: u8,float
 /*Поля изображения:
 int "w"
 int "h"
@@ -53,7 +53,7 @@ public:
 
 
     //создание изображения - выделение памяти и заполнение из массива
-    static void allocate(XStructWrite &object, XArrayDataType data_type, int channels, int w, int h);
+    static void allocate(XStructWrite &object, XTypeId data_type, int channels, int w, int h);
     static void create_from_array(XStructWrite &object, quint8 *data, int channels, int w, int h);
 
     static XArray const *get_array(XStructRead &object) {return object.get_array("data");}
@@ -80,7 +80,7 @@ public:
                                    QString channels_str, QString data_type_str,
                                    bool mirrorx=false, bool mirrory=false);
     static void create_from_QImage(XStructWrite &object, const QImage &qimage,
-                                   QString channels_str, XArrayDataType data_type,
+                                   QString channels_str, XTypeId data_type,
                                    bool mirrorx=false, bool mirrory=false);
 
     //Конвертировать изображение в QImage - например, для записи на диск

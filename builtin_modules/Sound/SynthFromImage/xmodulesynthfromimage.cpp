@@ -162,8 +162,8 @@ void XModuleSynthFromImage::update_data() {
 
         auto *array = obj.get_array("data");
         //auto data_type = array->data_type();
-        //xclu_assert(data_type == XArrayDataType_u8bit || data_type == XArrayDataType_float,
-        //            "XStructImage::convert_to_QImage_fast_preview - only u8bit and float data types are supported");
+        //xclu_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
+        //            "XStructImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
         data_.set_image(w, h, array->data_u8bit());
 
 
@@ -178,7 +178,7 @@ void XModuleSynthFromImage::update_data() {
             int w = data_.w_;
             int h = 200;
             XStructWrite object(getstruct_image_sound());
-            XStructImage::allocate(object, XArrayDataType_u8bit, 1, w, h);
+            XStructImage::allocate(object, XTypeId_u8, 1, w, h);
             quint8 *data =  XStructImage::var_array(object)->data_u8bit();
             for (int x=0; x<w; x++) {
                 int y0 = int(mapf_clamped(data_.image_[x],-1,1, h, 0));

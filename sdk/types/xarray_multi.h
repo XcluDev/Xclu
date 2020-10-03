@@ -16,7 +16,7 @@ public:
     XArrayMulti();
 
     //тип данных
-    XArrayDataType data_type() const;
+    XTypeId data_type() const;
 
     //размер массива
     bool is_empty() const;
@@ -32,9 +32,9 @@ public:
 
     //выделение памяти и очистка
     void clear();
-    void allocate(QVector<unsigned int> dim, XArrayDataType data_type);
-    void allocate_1d(unsigned int size, XArrayDataType data_type);
-    void allocate_image(int channels, int w, int h, XArrayDataType data_type);
+    void allocate(QVector<unsigned int> dim, XTypeId data_type);
+    void allocate_1d(unsigned int size, XTypeId data_type);
+    void allocate_image(int channels, int w, int h, XTypeId data_type);
 
     //перевести вектор индексов в одномерный индекс
     //TODO почему-то to_index не делается inline
@@ -97,7 +97,7 @@ public:
     double* data_double();
     double const* data_double() const;
 protected:
-    XArrayDataType data_type_ = XArrayDataType_none;
+    XTypeId data_type_ = XTypeId_none;
     QVector<quint32> dim_;      //размер по измерениям. Последнее - число каналов для изображений и звуков
     int dims_ = 0;
     QVector<quint8> data_;    //данные

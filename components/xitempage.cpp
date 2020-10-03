@@ -2,7 +2,7 @@
 #include "xguipage.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Page, page)
+REGISTER_XITEM(XItemPage, page)
 //---------------------------------------------------------------------
 XItemPage::XItemPage(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)

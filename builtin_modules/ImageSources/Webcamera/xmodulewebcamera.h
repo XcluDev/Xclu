@@ -5,10 +5,8 @@
 //Важно, что камера может давать кадры в собственном потоке
 //но внутреннее состояние изображения в модуле меняется ТОЛЬКО при update
 
-#include <QScopedPointer>
 #include <QCamera>
 #include <QAbstractVideoSurface>
-#include <QMutex>
 #include "incl_h.h"
 #include "xmodule.h"
 #include "xcluobjectimage.h"
@@ -43,7 +41,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
     int is_new_frame = 0;
 
     QString channels;   //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
-    QString data_type;  //u8bit,float
+    QString data_type;  //u8,float
 
     //данные об ошибке
     ErrorInfo err;

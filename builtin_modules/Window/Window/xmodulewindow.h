@@ -4,8 +4,6 @@
 //Реализация модуля Window - окно на экране
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QMainWindow>
 #include <QStack>
 

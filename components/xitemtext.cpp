@@ -3,7 +3,7 @@
 #include "xguitext.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Text, text)
+REGISTER_XITEM(XItemText, text)
 //---------------------------------------------------------------------
 //  in text Text1 text 7 20
 //  //Description - описание

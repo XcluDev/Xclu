@@ -14,7 +14,7 @@ page Main
 #Mode
 in enum Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
 #data format
-in enum Output_Format output_format=u8bit [u8bit,float]
+in enum Output_Format output_format=u8 [u8,float]
 
 
 #-----------------------------

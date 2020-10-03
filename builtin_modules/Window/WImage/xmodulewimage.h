@@ -5,8 +5,6 @@
 //Реализация модуля WImage - показ изображения в окне
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QWindow>
 
 #include "incl_h.h"

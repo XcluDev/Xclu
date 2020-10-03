@@ -5,6 +5,7 @@
 //It's used for uniform representing objects and links to the objects
 
 #include "incl_h.h"
+#include "xcluprotecteddata.h"
 
 template<typename T>
 class XRef
@@ -35,5 +36,6 @@ protected:
     QScopedPointer<T> data_;
 
 };
+
 
 #endif // XREF_H

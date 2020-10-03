@@ -5,35 +5,13 @@
 
 #include "incl_h.h"
 
-//possible data types in array
-enum XArrayDataType : int {
-    XArrayDataType_none = 0,
-    XArrayDataType_u8bit = 1,
-    XArrayDataType_s8bit = 2,
-    XArrayDataType_int16 = 3,
-    XArrayDataType_uint16 = 4,
-    XArrayDataType_int32 = 5,
-    XArrayDataType_uint32 = 6,
-    XArrayDataType_float = 7,
-    XArrayDataType_double = 8,
-    XArrayDataType_N = 9
-};
-
-//size of one element
-unsigned int XArrayDataTypeSize(XArrayDataType type);
-QString XArrayDataType_to_string(XArrayDataType type);
-XArrayDataType string_to_XArrayDataType(QString type);
-bool is_XArrayDataType_integer(XArrayDataType type);
-bool is_XArrayDataType_float(XArrayDataType type);
-
-
 //Array type
 class XArray {
 public:
     XArray();
 
     //тип данных
-    XArrayDataType data_type() const;
+    XTypeId data_type() const;
 
     //размер массива
     bool is_empty() const;
@@ -43,7 +21,7 @@ public:
 
     //выделение памяти и очистка
     void clear();
-    void allocate(unsigned int size, XArrayDataType data_type);
+    void allocate(unsigned int size, XTypeId data_type);
 
     //получение ссылки на элемент массива
     void *item_pointer(qint32 index);
@@ -93,7 +71,7 @@ public:
     double* data_double();
     double const* data_double() const;
 protected:
-    XArrayDataType data_type_ = XArrayDataType_none;
+    XTypeId data_type_ = XTypeId_none;
     QVector<quint8> data_;    //данные
     quint8 *data_ptr_ = nullptr;    //указатель на данные в data_
 

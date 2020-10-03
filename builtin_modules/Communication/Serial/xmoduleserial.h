@@ -3,9 +3,7 @@
 
 //Serial interface with Arduino and other devices
 
-#include <QScopedPointer>
 #include <QImage>
-#include <QMutex>
 #include <QtSerialPort/QSerialPort>
 #include "incl_h.h"
 #include "xmodule.h"

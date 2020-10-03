@@ -96,6 +96,7 @@ SOURCES += \
     components/gui/xguiint.cpp \
     components/gui/xguiobject.cpp \
     components/gui/xguipage.cpp \
+    components/gui/xguiraster.cpp \
     components/gui/xguiseparator.cpp \
     components/gui/xguistring.cpp \
     components/gui/xguitext.cpp \
@@ -109,6 +110,7 @@ SOURCES += \
     components/xitemint.cpp \
     components/xitemobject.cpp \
     components/xitempage.cpp \
+    components/xitemraster.cpp \
     components/xitemseparator.cpp \
     components/xitemstring.cpp \
     components/xitemtext.cpp \
@@ -132,6 +134,7 @@ SOURCES += \
     sdk/types/xraster.cpp \
     sdk/types/xref.cpp \
     sdk/types/xstruct.cpp \
+    sdk/types/xtypes.cpp \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
     sdk/utility/incl_h.cpp \
@@ -174,6 +177,7 @@ HEADERS += \
     components/gui/xguiint.h \
     components/gui/xguiobject.h \
     components/gui/xguipage.h \
+    components/gui/xguiraster.h \
     components/gui/xguiseparator.h \
     components/gui/xguistring.h \
     components/gui/xguitext.h \
@@ -187,6 +191,7 @@ HEADERS += \
     components/xitemint.h \
     components/xitemobject.h \
     components/xitempage.h \
+    components/xitemraster.h \
     components/xitemseparator.h \
     components/xitemstring.h \
     components/xitemtext.h \
@@ -211,6 +216,7 @@ HEADERS += \
     sdk/types/xraster.h \
     sdk/types/xref.h \
     sdk/types/xstruct.h \
+    sdk/types/xtypes.h \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \
     sdk/utility/incl_h.h \

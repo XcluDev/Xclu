@@ -43,7 +43,7 @@ bool was_changed_image_channels() { return was_changed_("image_channels"); }
 enum_image_channels gete_image_channels() { return enum_image_channels(geti_("image_channels")); }
 
 //Enum Data Type
-//Desired data type of the output texture, u8bit=0..255, float=[0,1].
+//Desired data type of the output texture, u8=0..255, float=[0,1].
 enum enum_image_data_type {
     image_data_type_u8bit = 0,
     image_data_type_float = 1,

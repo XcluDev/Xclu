@@ -12,7 +12,7 @@ void XArrayMulti::clear() {
     size_ = 0;
     size_bytes_ = 0;
     elem_size_ = 0;
-    data_type_ = XArrayDataType_none;
+    data_type_ = XTypeId_none;
     dim_.clear();
     dims_ = 0;
     data_.clear();
@@ -52,13 +52,13 @@ void XArrayMulti::fill(double v) {
 }
 
 //---------------------------------------------------------------------
-void XArrayMulti::allocate(QVector<quint32> dim, XArrayDataType data_type) {
+void XArrayMulti::allocate(QVector<quint32> dim, XTypeId data_type) {
     quint32 size = 1;
     for (int i=0; i<dim.size(); i++) {
         size *= dim[i];
     }
     xclu_assert(size>=0, QString("Bad total array size %1").arg(size));
-    quint32 elem_size = XArrayDataTypeSize(data_type);
+    quint32 elem_size = XTypeIdSize(data_type);
     quint32 size_bytes = elem_size * size;
 
     //данные
@@ -95,14 +95,14 @@ void XArrayMulti::allocate(QVector<quint32> dim, XArrayDataType data_type) {
 }
 
 //---------------------------------------------------------------------
-void XArrayMulti::allocate_1d(unsigned int size, XArrayDataType data_type) {
+void XArrayMulti::allocate_1d(unsigned int size, XTypeId data_type) {
     QVector<unsigned int> dim(1);
     dim[0] = size;
     allocate(dim, data_type);
 }
 
 //---------------------------------------------------------------------
-void XArrayMulti::allocate_image(int channels, int w, int h, XArrayDataType data_type) {
+void XArrayMulti::allocate_image(int channels, int w, int h, XTypeId data_type) {
     QVector<unsigned int> dim(3);
     dim[0] = channels;
     dim[1] = w;
@@ -111,7 +111,7 @@ void XArrayMulti::allocate_image(int channels, int w, int h, XArrayDataType data
 }
 
 //---------------------------------------------------------------------
-XArrayDataType XArrayMulti::data_type() const {
+XTypeId XArrayMulti::data_type() const {
     return data_type_;
 }
 
@@ -166,17 +166,17 @@ int XArrayMulti::h() const {
 
 //---------------------------------------------------------------------
 inline bool XArrayMulti::is_int() const {      //это целочисленный массив
-    return is_XArrayDataType_integer(data_type_);
+    return is_XTypeId_integer(data_type_);
 }
 
 //---------------------------------------------------------------------
 inline bool XArrayMulti::is_float() const {    //это массив float
-    return data_type_ == XArrayDataType_float;
+    return data_type_ == XTypeId_float;
 }
 
 //---------------------------------------------------------------------
 inline bool XArrayMulti::is_double() const {    //это массив double
-    return data_type_ == XArrayDataType_double;
+    return data_type_ == XTypeId_double;
 }
 
 //---------------------------------------------------------------------
@@ -219,17 +219,17 @@ void const *XArrayMulti::pixel_pointer(int x, int y) const { //для изобр
 int XArrayMulti::geti(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_u8bit:
+    case XTypeId_u8:
         return data_u8bit()[index];
-    case XArrayDataType_s8bit:
+    case XTypeId_s8:
         return data_s8bit()[index];
-    case XArrayDataType_int16:
+    case XTypeId_int16:
         return data_int16()[index];
-    case XArrayDataType_uint16:
+    case XTypeId_u16:
         return data_uint16()[index];
-    case XArrayDataType_int32:
+    case XTypeId_int32:
         return data_int32()[index];
-    case XArrayDataType_uint32:
+    case XTypeId_u32:
         return data_uint32()[index];
     default:
         xclu_exception("Can't get integer value for array");
@@ -243,22 +243,22 @@ int XArrayMulti::geti(qint32 index) const {
 void XArrayMulti::seti(qint32 index, int v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_u8bit:
+    case XTypeId_u8:
         data_u8bit()[index] = v;
         break;
-    case XArrayDataType_s8bit:
+    case XTypeId_s8:
         data_s8bit()[index] = v;
         break;
-    case XArrayDataType_int16:
+    case XTypeId_int16:
         data_int16()[index] = v;
         break;
-    case XArrayDataType_uint16:
+    case XTypeId_u16:
         data_uint16()[index] = v;
         break;
-    case XArrayDataType_int32:
+    case XTypeId_int32:
         data_int32()[index] = v;
         break;
-    case XArrayDataType_uint32:
+    case XTypeId_u32:
         data_uint32()[index] = v;
         break;
     default:
@@ -271,9 +271,9 @@ void XArrayMulti::seti(qint32 index, int v) {
 float XArrayMulti::getf(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_float:
+    case XTypeId_float:
         return data_float()[index];
-    case XArrayDataType_double:
+    case XTypeId_double:
         return data_double()[index];
     default:
         xclu_exception("Can't get float value for array");
@@ -286,10 +286,10 @@ float XArrayMulti::getf(qint32 index) const {
 void XArrayMulti::setf(qint32 index, float v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_float:
+    case XTypeId_float:
         data_float()[index] = v;
         break;
-    case XArrayDataType_double:
+    case XTypeId_double:
         data_double()[index] = v;
         break;
     default:
@@ -302,9 +302,9 @@ void XArrayMulti::setf(qint32 index, float v) {
 double XArrayMulti::get_double(qint32 index) const {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_float:
+    case XTypeId_float:
         return data_float()[index];
-    case XArrayDataType_double:
+    case XTypeId_double:
         return data_double()[index];
     default:
         xclu_exception("Can't get double value for array");
@@ -317,10 +317,10 @@ double XArrayMulti::get_double(qint32 index) const {
 void XArrayMulti::set_double(qint32 index, double v) {
     xclu_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XArrayDataType_float:
+    case XTypeId_float:
         data_float()[index] = v;
         break;
-    case XArrayDataType_double:
+    case XTypeId_double:
         data_double()[index] = v;
         break;
     default:
@@ -334,7 +334,7 @@ void XArrayMulti::set_double(qint32 index, double v) {
 получение массивов данных для быстрой работы
 quint8* XArrayMulti::data_u8bit() {
     if (size_bytes_ == 0) return nullptr;
-    xclu_assert(data_type_ == XArrayDataType_u8bit, "Array has no " "u8bit" " pointer");
+    xclu_assert(data_type_ == XTypeId_u8, "Array has no " "u8" " pointer");
     return (quint8*)(&data_[0]);
 }
 
@@ -342,19 +342,19 @@ quint8* XArrayMulti::data_u8bit() {
 #define XArray_get_data(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE* XArrayMulti::data_##TYPE_NAME() { \
         if (size_bytes_ == 0) return nullptr; \
-        xclu_assert(data_type_ == XArrayDataType_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xclu_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 
 #define XArray_get_data_const(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE const* XArrayMulti::data_##TYPE_NAME() const { \
         if (size_bytes_ == 0) return nullptr; \
-        xclu_assert(data_type_ == XArrayDataType_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xclu_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 
-XArray_get_data(u8bit, quint8)
-XArray_get_data(s8bit, qint8)
+XArray_get_data(u8, quint8)
+XArray_get_data(s8, qint8)
 XArray_get_data(int16, qint16)
 XArray_get_data(uint16, quint16)
 XArray_get_data(int32, qint32)
@@ -363,8 +363,8 @@ XArray_get_data(float, float)
 XArray_get_data(double, double)
 
 
-XArray_get_data_const(u8bit, quint8)
-XArray_get_data_const(s8bit, qint8)
+XArray_get_data_const(u8, quint8)
+XArray_get_data_const(s8, qint8)
 XArray_get_data_const(int16, qint16)
 XArray_get_data_const(uint16, quint16)
 XArray_get_data_const(int32, qint32)

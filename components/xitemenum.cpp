@@ -4,7 +4,7 @@
 
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Enum, enum)
+REGISTER_XITEM(XItemEnum, enum)
 
 //---------------------------------------------------------------------
 //in enum List list=OFF [OFF,ON]

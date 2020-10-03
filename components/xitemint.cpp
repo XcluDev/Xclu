@@ -4,7 +4,7 @@
 
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Int, int)
+REGISTER_XITEM(XItemInt, int)
 //---------------------------------------------------------------------
 //int A a=-1 -10:10 100,10
 //      //Length of the object.    описание

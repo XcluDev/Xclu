@@ -12,6 +12,7 @@
 //              rasters to grayscale and back, to QImage and back, and also save and load rasters to disk.
 
 #include "incl_h.h"
+
 #include <QImage>
 
 //--------------------------------------------------
@@ -47,6 +48,8 @@ public:
 	int w = 0;
 	int h = 0;
     QVector<T> data;
+
+    XTypeId type_id();
 
 	//useful wrapper that checks if data is empty
 	T* data_pointer() {
@@ -161,10 +164,17 @@ public:
 //--------------------------------------------------
 typedef XRaster_<uint8> XRaster_u8;
 typedef XRaster_<u8_rgb> XRaster_u8c3;    //color image
+typedef XRaster_<sint8> XRaster_s8;
+typedef XRaster_<int16> XRaster_int16;
 typedef XRaster_<uint16> XRaster_u16;
+typedef XRaster_<uint32> XRaster_u32;
+typedef XRaster_<int32> XRaster_int32;
 typedef XRaster_<float> XRaster_float;
+typedef XRaster_<double> XRaster_double;
 typedef XRaster_<glm::vec2> XRaster_vec2;
 typedef XRaster_<glm::vec3> XRaster_vec3;
+typedef XRaster_<glm::int2> XRaster_int2;
+
 
 //class for static-defined operations:
 //converting color raster to grayscale abd back,
@@ -186,5 +196,8 @@ public:
     static void load(QString file_name, XRaster_u8c3 &raster);
     static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
     static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
+
+
+
 
 };

@@ -5,6 +5,45 @@
 #include <QImageWriter>
 
 //-------------------------------------------------------
+/*XRaster_u8;
+ XRaster_u8c3;
+XRaster_s8;
+XRaster_int16;
+ XRaster_u16;
+ XRaster_u32;
+XRaster_int32;
+XRaster_float;
+ XRaster_double;
+XRaster_vec2;
+XRaster_vec3;
+XRaster_int2;
+*/
+
+//-------------------------------------------------------
+#define XTypeId_XRaster_type_id(TYPE_RASTER, TYPE_ID) \
+template<> XTypeId TYPE_RASTER::type_id() \
+    return TYPE_ID; \
+}
+
+//template<> XTypeId XRaster_u8::type_id() {
+//    return XTypeId_u8;
+//}
+
+XTypeId_XRaster_type_id(XRaster_u8, XTypeId_u8)
+XTypeId_XRaster_type_id(XRaster_u8c3, XTypeId_u8c3)
+XTypeId_XRaster_type_id(XRaster_s8, XTypeId_s8)
+XTypeId_XRaster_type_id(XRaster_int16, XTypeId_int16)
+XTypeId_XRaster_type_id(XRaster_u16, XTypeId_u16)
+XTypeId_XRaster_type_id(XRaster_int32, XTypeId_int32)
+XTypeId_XRaster_type_id(XRaster_u32, XTypeId_u32)
+XTypeId_XRaster_type_id(XRaster_float, XTypeId_float)
+XTypeId_XRaster_type_id(XRaster_double, XTypeId_double)
+XTypeId_XRaster_type_id(XRaster_vec2, XTypeId_vec2)
+XTypeId_XRaster_type_id(XRaster_vec3, XTypeId_vec3)
+XTypeId_XRaster_type_id(XRaster_int2, XTypeId_int2)
+
+
+//-------------------------------------------------------
 void raster_to_raster(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
     raster.allocate(raster_rgb.w, raster_rgb.h);
     for (int i=0; i<raster.w*raster.h; i++) {

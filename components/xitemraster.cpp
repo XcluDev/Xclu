@@ -1,21 +1,29 @@
-#include "xitemobject.h"
+#include "xitemraster.h"
+
 #include "xguiobject.h"
 #include "incl_cpp.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(XItemObject, object)
+REGISTER_XITEM(XItemRaster_<XRaster_u8>,     raster_u8)
+REGISTER_XITEM(XItemRaster_<XRaster_u8c3>,   raster_u8c3)
+REGISTER_XITEM(XItemRaster_<XRaster_s8>,     raster_s8)
+REGISTER_XITEM(XItemRaster_<XRaster_int16>,  raster_int16)
+REGISTER_XITEM(XItemRaster_<XRaster_u16>,    raster_u16)
+REGISTER_XITEM(XItemRaster_<XRaster_u32>,    raster_u32)
+REGISTER_XITEM(XItemRaster_<XRaster_int32>,  raster_int32)
+REGISTER_XITEM(XItemRaster_<XRaster_float>,  raster_float)
+REGISTER_XITEM(XItemRaster_<XRaster_double>, raster_double)
+REGISTER_XITEM(XItemRaster_<XRaster_vec2>,   raster_vec2)
+REGISTER_XITEM(XItemRaster_<XRaster_vec3>,   raster_vec3)
+REGISTER_XITEM(XItemRaster_<XRaster_int2>,   raster_int2)
+
+
 //---------------------------------------------------------------------
 /*
-in object Object_To_Save obj_to_save
-    //Object for saving
-object_image - дает намек, что ожидается тип изображения.
-object(image,array) - что ожидаются изображения и массивы.
-И тогда при выборе объекта это учитывается и показываются только они.
-object(strings) - массив строк (?) - его можно ставить в text
+in raster_rgb Image image
 */
-
-
-XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
+template<typename TRaster>
+XItemRaster_<TRaster>::XItemRaster_(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
@@ -25,6 +33,9 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
 
     //опции - типы объектов
     QString options = pre_description.options;
+
+    type
+
     if (!options.isEmpty()) {
         types_ = options.split(",");
     }
@@ -35,21 +46,47 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
 }
 
 //---------------------------------------------------------------------
+//raster access
+template<typename TRaster>
+bool XItemRaster_<TRaster>::is_empty() {
+    return raster_.is_empty();
+}
+
+//---------------------------------------------------------------------
+//returns nullptr if empty
+template<typename TRaster>
+XRaster_<TRaster> *XItemRaster_<TRaster>::get_raster() {
+    if (is_empty()) return nullptr;
+    return raster_.data();
+}
+
+//---------------------------------------------------------------------
+//raises exception if empty
+template<typename TRaster>
+XRaster_<TRaster> &XItemRaster_<TRaster>::get_raster_ref() {
+    xclu_assert(!is_empty(), "XItemRaster_<TRaster>::get_raster_ref error - raster is empty");
+    return *raster_.data();
+}
+
+//---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemObject::create_gui(XGuiPageCreator &input) {
+template<typename TRaster>
+XGui *XItemRaster_<TRaster>::create_gui(XGuiPageCreator &input) {
     gui__ = gui_ = new XGuiObject(input, this);
     return gui_;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
-void XItemObject::gui_to_var_internal() {
+template<typename TRaster>
+void XItemRaster_<TRaster>::gui_to_var_internal() {
     //set_value_int(gui_->value());
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
-void XItemObject::var_to_gui_internal() {
+template<typename TRaster>
+void XItemRaster_<TRaster>::var_to_gui_internal() {
     //показать объект визуально
     //если изображение - то картинкой, если нет - то текстовым описанием
     //мы это делаем только по команде извне - так как не знаем,
@@ -62,7 +99,8 @@ void XItemObject::var_to_gui_internal() {
 //---------------------------------------------------------------------
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-void XItemObject::copy_data_to_internal(XItem *item) {
+template<typename TRaster>
+void XItemRaster_<TRaster>::copy_data_to_internal(XItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
     XStructRead(get_object()).copy_to(item->get_object());
 }
@@ -70,7 +108,8 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 //---------------------------------------------------------------------
 //C++
 //original: XStruct *get_object(QString name);
-void XItemObject::export_interface(QStringList &file) {
+template<typename TRaster>
+void XItemRaster_<TRaster>::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
                               "XStruct *", "struct", "get_struct", "");
 }

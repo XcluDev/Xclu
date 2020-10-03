@@ -5,8 +5,6 @@
 //в виде поля ввода и/или слайдера
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QWindow>
 
 #include "incl_h.h"

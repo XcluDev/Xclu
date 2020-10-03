@@ -4,7 +4,7 @@
 #include "moduleinterface.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Button, button)
+REGISTER_XITEM(XItemButton, button)
 
 //---------------------------------------------------------------------
 //in button Execute execute

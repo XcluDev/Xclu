@@ -6,7 +6,6 @@
 #include "incl_h.h"
 
 #include "xarray.h"
-#include <QMutex>
 
 //Объект
 //Типы объектов заданы в XStructType

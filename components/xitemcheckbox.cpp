@@ -4,7 +4,7 @@
 
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Checkbox, checkbox)
+REGISTER_XITEM(XItemCheckbox, checkbox)
 
 //---------------------------------------------------------------------
 //in checkbox Active active=0

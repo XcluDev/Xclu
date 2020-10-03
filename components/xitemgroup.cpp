@@ -1,7 +1,7 @@
 #include "xitemgroup.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Group, group)
+REGISTER_XITEM(XItemGroup, group)
 //---------------------------------------------------------------------
 XItemGroup::XItemGroup(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)

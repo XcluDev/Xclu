@@ -13,7 +13,12 @@
 
 
 typedef unsigned char uint8;
+typedef char sint8;
+typedef unsigned short int16;
 typedef unsigned short uint16;
+typedef unsigned int uint32;
+typedef int int32;
+
 const int max_uint16 = 65535;
 const int uint16_n = 65536;
 typedef unsigned long long int uint64;

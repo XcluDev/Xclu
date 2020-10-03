@@ -37,33 +37,34 @@ public:
 //так мы избавляемся от необходимости прописывать в коде все названия классов
 //  ## - конкатенация в коде   # - превратить в строку
 #define REGISTER_XITEM(CLASS_NAME, XGUI_NAME) \
-    struct Registrar_XItem##CLASS_NAME { \
+    struct Registrar_XItem_##XGUI_NAME { \
         static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {\
-            return new XItem##CLASS_NAME(interf, *pre_description);\
+            return new CLASS_NAME(interf, *pre_description);\
         } \
-        Registrar_XItem##CLASS_NAME() { \
+        Registrar_XItem_##XGUI_NAME() { \
             using namespace std::placeholders;  \
-            RegistrarXItem::register_xitem(#XGUI_NAME, std::bind(&Registrar_XItem##CLASS_NAME::create, _1, _2)); \
+            RegistrarXItem::register_xitem(#XGUI_NAME, std::bind(&Registrar_XItem_##XGUI_NAME::create, _1, _2)); \
         } \
     }; \
-    Registrar_XItem##CLASS_NAME registrar_XItem##CLASS_NAME;
+    Registrar_XItem_##XGUI_NAME registrar_XItem_##XGUI_NAME;
 
 /*
 Usage:
-REGISTER_XITEM(Button, button)
+REGISTER_XITEM(XItemButton,button)
+REGISTER_XITEM(XItemRaster<uint8>, raster_u8)
 
 This results in the following code:
 
-struct Registrar_XItemButton {
+struct Registrar_XItem_button {
     static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {
         return new XItemButton(interf, *pre_description);
     }
-    Registrar_XItemButton() {
+    Registrar_XItem_button() {
         using namespace std::placeholders;  // for _1, _2, _3...
-        RegistrarXItem::register_xitem("button", std::bind(&Registrar_XItemButton::create, _1, _2));
+        RegistrarXItem::register_xitem("button", std::bind(&Registrar_XItem_button::create, _1, _2));
     }
 };
-Registrar_XItemButton registrar_XItemButton;
+Registrar_XItem_button registrar_XItem_button;
 
 */
 

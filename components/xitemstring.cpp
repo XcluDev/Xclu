@@ -3,7 +3,7 @@
 #include "xguistring.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(String, string)
+REGISTER_XITEM(XItemString, string)
 //---------------------------------------------------------------------
 //Строка
 //in string Name name="aa"

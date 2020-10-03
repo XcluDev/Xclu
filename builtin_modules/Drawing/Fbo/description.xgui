@@ -30,8 +30,8 @@ separator
 in enum Channels image_channels=RGB [Grayscale,RGB,RGBA]
     //Desired channels of the output image.
     
-in enum Data_Type image_data_type=u8bit [u8bit,float]
-    //Desired data type of the output texture, u8bit=0..255, float=[0,1].
+in enum Data_Type image_data_type=u8 [u8,float]
+    //Desired data type of the output texture, u8=0..255, float=[0,1].
 
 
 #---------------------------------- 

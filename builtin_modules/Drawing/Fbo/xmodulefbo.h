@@ -4,8 +4,6 @@
 //FBO для рисования
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 #include <QWindow>
 
 #include "incl_h.h"

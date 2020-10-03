@@ -2,7 +2,7 @@
 #include "xguiseparator.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Separator, separator)
+REGISTER_XITEM(XItemSeparator, separator)
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
 //line - горизонтальная линия

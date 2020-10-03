@@ -4,8 +4,6 @@
 //Реализация модуля SynthFromImage - сонификация картинки
 
 #include <QObject>
-#include <QScopedPointer>
-#include <QMutex>
 
 #include "incl_h.h"
 #include "xmodule.h"

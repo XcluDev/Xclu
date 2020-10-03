@@ -3,7 +3,7 @@
 #include "xguifloat.h"
 #include "registrarxitem.h"
 
-REGISTER_XITEM(Float, float)
+REGISTER_XITEM(XItemFloat, float)
 //---------------------------------------------------------------------
 //float Q Q qq=0 0:1 100,10
 //      //Length of the object.    описание
