@@ -4,6 +4,7 @@
 #include "xstruct.h"
 #include <QImage>
 #include "xcluobjectwrapper.h"
+#include "xraster.h"
 class QLabel;
 class XArray;
 class XGuiObject;

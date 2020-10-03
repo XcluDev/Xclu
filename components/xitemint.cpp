@@ -10,8 +10,8 @@ REGISTER_XITEM(XItemInt, int)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
-    : XItem(interf, pre_description)
-{
+    : XItem_<int>(interf, pre_description)
+{    
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_equal(line, name_, query);
@@ -19,7 +19,7 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
 
     //значение по умолчанию
     default_value_ = parse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
-    value_ = default_value_;
+    set_value_int(default_value_);
 
     //Единицы измерения - вторая строка описания после hint
     units_ = description(1);

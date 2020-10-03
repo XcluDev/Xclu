@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------
 XGuiInt::XGuiInt(XGuiPageCreator &input, XItemInt *item)
     :XGui(input, item)
-{
+{    
     insert_label(input);
 
     spin_ = new XcluSpinBox();

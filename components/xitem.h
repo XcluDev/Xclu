@@ -6,6 +6,7 @@
 //Также, они порождают визуальное представление в виде XGui
 
 #include "incl_h.h"
+#include "xref.h"
 
 struct XGuiPageCreator;
 class XGui;
@@ -14,7 +15,8 @@ class XItem;
 class XStruct;
 class ModuleInterface;
 
-//предварительная информация для построения элемента интерфейса
+//---------------------------------------------------------------------
+//Preliminary information for contructing interface element
 class XItemPreDescription {
 public:
     QString title;
@@ -27,7 +29,8 @@ public:
 };
 
 
-//Element creator class
+//---------------------------------------------------------------------
+//Hepler - Element creator class
 class XItemCreator {
 public:
     static XItem *new_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -42,12 +45,9 @@ public:
     static XItem *new_separator(ModuleInterface *interf, QString name, QString type = xitem_separator(), bool is_line = false);
 };
 
-
-//Элемент интерфейса
+//---------------------------------------------------------------------
+//Interface element
 class XItem {
-public:
-
-
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
@@ -265,6 +265,23 @@ protected:
                                    bool is_int = false,
                                    bool is_string = false
             );
+};
+
+//---------------------------------------------------------------------
+//Interface element with value
+//allows to use links and protection for multithread access
+template<typename T>
+class XItem_: public XItem {
+public:
+    XItem_<T>(ModuleInterface *interf, const XItemPreDescription &pre_description)
+        : XItem(interf, pre_description) {
+        //by default, set value_ as owner
+        value_.own(new XProtectedData_<T>(new T()));
+
+    }
+
+protected:
+     XRef<XProtectedData_<T>> value_;
 
 };
 

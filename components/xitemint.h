@@ -5,7 +5,7 @@
 
 class ModuleInterface;
 
-class XItemInt: public XItem
+class XItemInt: public XItem_<int>
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -13,11 +13,11 @@ public:
 
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_int()); }
-    void set_value_string(const QString &value) { value_ = value.toInt(); }
+    void set_value_string(const QString &value) { set_value_int(value.toInt()); }
 
     virtual bool supports_int() { return true; }
-    int value_int() { return value_; }
-    void set_value_int(int value) { value_ = value; }
+    int value_int() { return value_.data()->read().data(); }
+    void set_value_int(int value) {}// value_.data()->write().data() = value; }
 
     int min_value() { return min_value_; }
     int max_value() { return max_value_; }
@@ -34,11 +34,11 @@ public:
     //-----------------------------
 
 protected:
-    int value_ = 0;
+    //int value_ = 0;
 
-    float default_value_ = 0;
-    float min_value_ = 0;
-    float max_value_ = 1;
+    int default_value_ = 0;
+    int min_value_ = 0;
+    int max_value_ = 1;
     int slow_step_ = 1;
     int fast_step_ = 10;
 

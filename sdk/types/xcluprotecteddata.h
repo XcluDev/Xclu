@@ -13,6 +13,7 @@
 //when `write` gos out of scope - it unlocks `value`
 //3. read by creating XProtectedRead_<float> read(value), and read its `data`
 //when `read` gos out of scope - it unlocks `value`
+//for single operation - can use value.read().data(), value.write()...
 
 template<typename T>
 class XProtectedRead_;
@@ -23,10 +24,13 @@ class XProtectedWrite_;
 //class for representing data
 template<typename T>
 class XProtectedData_ {
+public:
     XProtectedData_() {}
-    XProtectedData_(T *data);
-    XProtectedRead_<T> read();  //creates reader
-    XProtectedWrite_<T> write(); //created writer
+    XProtectedData_(T *data) { data_.reset(data); }
+    //creates reader
+    XProtectedRead_<T> read() { return XProtectedRead_<T>(this); }
+    //creates writer
+    XProtectedWrite_<T> write() { return XProtectedWrite_<T>(this); }
 protected:
     QScopedPointer<T> data_;
     QReadWriteLock lock_;
@@ -37,28 +41,38 @@ protected:
 //class for reading data (multiple access)
 template<typename T>
 class XProtectedRead_ {
-    XProtectedRead_(XProtectedData_<T> *value);
-    XProtectedRead_(XProtectedData_<T> &value);
-    ~XProtectedRead_();
-    const T &data();
+public:
+    XProtectedRead_(XProtectedData_<T> *value) { lock(value); }
+    XProtectedRead_(XProtectedData_<T> &value) { lock(&value); }
+    ~XProtectedRead_() { unlock(); }
+    const T &data() { return *value_->data_.data(); }
 protected:
-    void lock(XProtectedData_<T> *value);
-    void unlock();
     XProtectedData_<T> *value_ = nullptr;
+
+    void lock(XProtectedData_<T> *value) {
+        value_ = value;
+        value_->lock_.lockForRead();
+    }
+    void unlock() { value_->lock_.unlock(); }
 };
 
 //class for writing data (single access)
 template<typename T>
 class XProtectedWrite_ {
-    XProtectedWrite_(XProtectedData_<T> *value);
-    XProtectedWrite_(XProtectedData_<T> &value);
-    ~XProtectedWrite_();
-    T &data();
-    void reset(T *data);
+public:
+    XProtectedWrite_(XProtectedData_<T> *value) { lock(value); }
+    XProtectedWrite_(XProtectedData_<T> &value) { lock(&value); }
+    ~XProtectedWrite_() { unlock(); }
+    T &data() { return *value_->data_.data(); }
+    void reset(T *data) { return *value_->data_.reset(data); }
 protected:
-    void lock(XProtectedData_<T> *value);
-    void unlock();
     XProtectedData_<T> *value_ = nullptr;
+
+    void lock(XProtectedData_<T> *value) {
+        value_ = value;
+        value_->lock_.lockForWrite();
+    }
+    void unlock() { value_->lock_.unlock(); }
 };
 
 //---------------------------------------

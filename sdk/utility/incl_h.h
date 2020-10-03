@@ -24,8 +24,6 @@
 #include "math_types.h"
 #include "math_utils.h"
 #include "xtypes.h"
-#include "xref.h"
-#include "xraster.h"
 
 //geometry
 #include <glm/glm.hpp>
