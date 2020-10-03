@@ -23,9 +23,9 @@ class XProtectedWrite_;
 template<typename T>
 class XProtectedData_ {
     XProtectedData_() {}
-    XProtectedData_(T *data) {
-        data_.reset(data);
-    }
+    XProtectedData_(T *data);
+    XProtectedRead_<T> read();  //creates reader
+    XProtectedWrite_<T> write(); //created writer
 protected:
     QScopedPointer<T> data_;
     QReadWriteLock lock_;

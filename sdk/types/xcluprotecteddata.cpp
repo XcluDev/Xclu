@@ -3,6 +3,24 @@
 
 //---------------------------------------------------------------------
 template<typename T>
+XProtectedData_<T>::XProtectedData_(T *data) {
+    data_.reset(data);
+}
+
+//---------------------------------------------------------------------
+template<typename T>
+XProtectedRead_<T> XProtectedData_<T>::read() {  //creates reader
+    return XProtectedRead_<T>(this);
+}
+
+//---------------------------------------------------------------------
+template<typename T>
+XProtectedWrite_<T> XProtectedData_<T>::write() { //created writer
+    return XProtectedWrite_<T>(this);
+}
+
+//---------------------------------------------------------------------
+template<typename T>
 XProtectedRead_<T>::XProtectedRead_(XProtectedData_<T> *value) {
     lock(value);
 }
