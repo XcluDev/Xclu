@@ -19,7 +19,7 @@
 #include "registrarxitem.h"
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItem::create_item(ModuleInterface *interf,
+/*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf,
                                                      QString title_underscored,
                                                      QString type,
                                                      const QStringList &description,
@@ -36,32 +36,34 @@
     descr.line_to_parse = line_to_parse;
     descr.options = options;
     descr.description = description;
-    return create_item(interf, descr);
+    return new_item(interf, descr);
 }
 
 //---------------------------------------------------------------------
 //page, group
-/*static*/ XItem *XItem::create_decorate_item(ModuleInterface *interf,
+/*static*/ XItem *XItemCreator::new_decorate_item(ModuleInterface *interf,
                                                               QString name,
                                                               QString type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
-    return create_item(interf, name, type, description, VarQualifierIn, name);
+    return new_item(interf, name, type, description, VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
 //separator
-/*static*/ XItem *XItem::create_separator(ModuleInterface *interf, QString name, QString type, bool is_line) {
+/*static*/ XItem *XItemCreator::new_separator(ModuleInterface *interf, QString name, QString type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
-    return create_item(interf, name, type, QStringList(descr), VarQualifierIn, name);
+    return new_item(interf, name, type, QStringList(descr), VarQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItem::create_item(ModuleInterface *interf, const XItemPreDescription &pre_description) {
+/*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf, const XItemPreDescription &pre_description) {
     return RegistrarXItem::create_xitem(interf, &pre_description);
 }
 
 
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
 XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {

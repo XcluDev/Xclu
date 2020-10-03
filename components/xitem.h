@@ -27,19 +27,26 @@ public:
 };
 
 
+//Element creator class
+class XItemCreator {
+public:
+    static XItem *new_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    static XItem *new_item(ModuleInterface *interf, QString title_underscored, QString type,
+                                  const QStringList &description,
+                                  VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
+                                  QString options = "",
+                                  QString qual_options = "");
+    //page, group
+    static XItem *new_decorate_item(ModuleInterface *interf, QString name, QString type, const QStringList &description);
+    //separator
+    static XItem *new_separator(ModuleInterface *interf, QString name, QString type = xitem_separator(), bool is_line = false);
+};
+
+
 //Элемент интерфейса
 class XItem {
 public:
-    static XItem *create_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
-    static XItem *create_item(ModuleInterface *interf, QString title_underscored, QString type,
-                                      const QStringList &description,
-                                      VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
-                                      QString options = "",
-                                      QString qual_options = "");
-    //page, group
-    static XItem *create_decorate_item(ModuleInterface *interf, QString name, QString type, const QStringList &description);
-    //separator
-    static XItem *create_separator(ModuleInterface *interf, QString name, QString type = xitem_separator(), bool is_line = false);
+
 
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),

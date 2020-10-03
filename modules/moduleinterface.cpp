@@ -113,7 +113,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     items_.clear();
 
     //Начинаем страницу Main - закомментировано
-    //create_decorate_item("Main", XItemTypePage, QStringList(""));
+    //new_decorate_item("Main", XItemTypePage, QStringList(""));
 
     //Общая страница добавляется в ModuleSeed::gui_lines().
     //general_page_start sets by "GENERAL_PAGE" at general_page.xgui
@@ -200,11 +200,11 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //сепаратор: separator или line
             //line сейчас задан неофициально,  в программе он как тип не обозначен,
-            //его обрабатываем только тут и еще в XItem::create_separator
+            //его обрабатываем только тут и еще в XItem::new_separator
             if (item1 == xitem_separator() || item1 == xitem_line()) {
                 auto type = xitem_separator(); //string_to_interfacetype(item1);
                 bool is_line = (item1 == "line");
-                create_separator(type, is_line);
+                new_separator(type, is_line);
                 //collect_description увеличивает i
                 collect_description(lines, i); //считываем описание, но никуда его не используем
                 continue;
@@ -220,7 +220,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                 //xclu_assert(!type.isEmpty(), "internal error: empty type at line " + line);
 
                 //collect_description увеличивает i
-                create_decorate_item(name, type, collect_description(lines, i));
+                new_decorate_item(name, type, collect_description(lines, i));
                 continue;
             }
 
@@ -269,7 +269,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             //парсим уже в зависимости от типа переменной
             //здесь при возникновении ошибки добавляем, откуда она взялась
             //collect_description увеличивает i
-            create_item(title, type, collect_description(lines, i),
+            new_item(title, type, collect_description(lines, i),
                         qual, line_to_parse, options, qual_options);
         }
         catch (XCluException& e) {
@@ -299,27 +299,27 @@ void ModuleInterface::push_item(XItem *item) {
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_item(const XItemPreDescription &pre_description) {
-    push_item(XItem::create_item(this, pre_description));
+void ModuleInterface::new_item(const XItemPreDescription &pre_description) {
+    push_item(XItemCreator::new_item(this, pre_description));
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_item(QString title_underscored, QString type,
+void ModuleInterface::new_item(QString title_underscored, QString type,
                                   const QStringList &description,
                                   VarQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
-    push_item(XItem::create_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
+    push_item(XItemCreator::new_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_decorate_item(QString name, QString type, const QStringList &description) {
-    items_.push_back(XItem::create_decorate_item(this, name, type, description));
+void ModuleInterface::new_decorate_item(QString name, QString type, const QStringList &description) {
+    items_.push_back(XItemCreator::new_decorate_item(this, name, type, description));
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::create_separator(QString type, bool is_line) {
-    push_item(XItem::create_separator(this, generate_separator_name(), type, is_line));
+void ModuleInterface::new_separator(QString type, bool is_line) {
+    push_item(XItemCreator::new_separator(this, generate_separator_name(), type, is_line));
 }
 
 //---------------------------------------------------------------------
