@@ -21,7 +21,7 @@ XRaster_int2;
 
 //-------------------------------------------------------
 #define XTypeId_XRaster_type_id(TYPE_RASTER, TYPE_ID) \
-template<> XTypeId TYPE_RASTER::type_id() \
+template<> XTypeId TYPE_RASTER::type_id() { \
     return TYPE_ID; \
 }
 

@@ -8,6 +8,7 @@
 #include "xcluprotecteddata.h"
 #include "xitem.h"
 
+/*
 class XGuiRaster_;
 
 class ModuleInterface;
@@ -23,7 +24,7 @@ public:
     //не поддерживаем скаляры, но будем записывать настройки в строку
     bool supports_string() { return true; }
     QString value_string() { return ""; }
-    void set_value_string(const QString & /*value*/) {}
+    void set_value_string(const QString &value) {}
 
     bool supports_int() { return false; }
 
@@ -48,7 +49,7 @@ public:
     //-----------------------------
 
 protected:
-    XProtectedData_<XRef<TRaster>> raster_;
+    XRef<XProtectedData_<TRaster>> raster_;
 
 
 protected:
@@ -63,7 +64,7 @@ protected:
     virtual void copy_data_to_internal(XItem *item);
 };
 
-
+*/
 
 
 #endif // XITEMRASTER_H

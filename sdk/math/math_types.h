@@ -14,13 +14,13 @@
 
 typedef unsigned char uint8;
 typedef char sint8;
-typedef unsigned short int16;
-typedef unsigned short uint16;
-typedef unsigned int uint32;
+typedef short int16;
+typedef unsigned short u16;
+typedef unsigned int u32;
 typedef int int32;
 
-const int max_uint16 = 65535;
-const int uint16_n = 65536;
+const int max_u16 = 65535;
+const int u16_n = 65536;
 typedef unsigned long long int uint64;
 
 //rectangle

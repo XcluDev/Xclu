@@ -34,7 +34,6 @@ protected:
     bool is_owner_ = false;
     T* pointer_ = nullptr;
     QScopedPointer<T> data_;
-
 };
 
 

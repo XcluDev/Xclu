@@ -166,14 +166,14 @@ typedef XRaster_<uint8> XRaster_u8;
 typedef XRaster_<u8_rgb> XRaster_u8c3;    //color image
 typedef XRaster_<sint8> XRaster_s8;
 typedef XRaster_<int16> XRaster_int16;
-typedef XRaster_<uint16> XRaster_u16;
-typedef XRaster_<uint32> XRaster_u32;
+typedef XRaster_<u16> XRaster_u16;
+typedef XRaster_<u32> XRaster_u32;
 typedef XRaster_<int32> XRaster_int32;
 typedef XRaster_<float> XRaster_float;
 typedef XRaster_<double> XRaster_double;
 typedef XRaster_<glm::vec2> XRaster_vec2;
 typedef XRaster_<glm::vec3> XRaster_vec3;
-typedef XRaster_<glm::int2> XRaster_int2;
+typedef XRaster_<int2> XRaster_int2;
 
 
 //class for static-defined operations:

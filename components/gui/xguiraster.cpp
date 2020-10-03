@@ -4,6 +4,7 @@
 #include "xitemraster.h"
 #include "xguiraster.h"
 
+/*
 //---------------------------------------------------------------------
 void XGuiRasterVisual::set_text(QString text) {
     info_label_->setText(text);
@@ -61,7 +62,7 @@ XGuiRaster_<T>::XGuiRaster_(XGuiPageCreator &input, XItemRaster_<T> *item)
 
 
     //отслеживание изменений
-    //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));*/
+    //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));
 }
 
 //---------------------------------------------------------------------
@@ -103,5 +104,5 @@ void XGuiRaster_<T>::show_object(XStruct *object) {
         wrapper->show_object(this);
     }
 }
-
+*/
 //---------------------------------------------------------------------

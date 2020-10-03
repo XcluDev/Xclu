@@ -45,7 +45,7 @@ enum_image_channels gete_image_channels() { return enum_image_channels(geti_("im
 //Enum Data Type
 //Desired data type of the output texture, u8=0..255, float=[0,1].
 enum enum_image_data_type {
-    image_data_type_u8bit = 0,
+    image_data_type_u8 = 0,
     image_data_type_float = 1,
     image_data_type_N__ = 2
 };

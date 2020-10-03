@@ -4,6 +4,7 @@
 
 #include "xgui.h"
 
+/*
 template<typename T>
 class XItemRaster_;
 
@@ -61,6 +62,6 @@ private:
     QWidget *object_widget_ = nullptr;  //удалять не надо
     XGuiRasterVisual visual_; //визуальные компоненты для описания объекта
 
-};
+};*/
 
 #endif // XGUIRASTER_H

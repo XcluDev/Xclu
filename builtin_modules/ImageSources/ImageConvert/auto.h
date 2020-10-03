@@ -28,7 +28,7 @@ enum_output_mode gete_output_mode() { return enum_output_mode(geti_("output_mode
 //Enum Output Format
 //
 enum enum_output_format {
-    output_format_u8bit = 0,
+    output_format_u8 = 0,
     output_format_float = 1,
     output_format_N__ = 2
 };

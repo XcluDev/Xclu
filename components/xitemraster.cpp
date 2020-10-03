@@ -4,6 +4,7 @@
 #include "incl_cpp.h"
 #include "registrarxitem.h"
 
+/*
 REGISTER_XITEM(XItemRaster_<XRaster_u8>,     raster_u8)
 REGISTER_XITEM(XItemRaster_<XRaster_u8c3>,   raster_u8c3)
 REGISTER_XITEM(XItemRaster_<XRaster_s8>,     raster_s8)
@@ -19,9 +20,8 @@ REGISTER_XITEM(XItemRaster_<XRaster_int2>,   raster_int2)
 
 
 //---------------------------------------------------------------------
-/*
-in raster_rgb Image image
-*/
+//in raster_rgb Image image
+
 template<typename TRaster>
 XItemRaster_<TRaster>::XItemRaster_(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)
@@ -113,7 +113,7 @@ void XItemRaster_<TRaster>::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
                               "XStruct *", "struct", "get_struct", "");
 }
-
+*/
 //---------------------------------------------------------------------
 
 

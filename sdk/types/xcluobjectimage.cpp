@@ -140,42 +140,42 @@ void XcluImage_test() {
 //---------------------------------------------------------------------
 //функция для взятия каналов
 //записывает прямо в массивы pixel - а потом сдвигаем это писель за пикселем
-typedef std::function<void (uchar r, uchar g, uchar b, uchar *&pixel)> XcluImageGetChannelsFunction_u8bit;
+typedef std::function<void (uchar r, uchar g, uchar b, uchar *&pixel)> XcluImageGetChannelsFunction_u8;
 typedef std::function<void (uchar r, uchar g, uchar b, float *&pixel)> XcluImageGetChannelsFunction_float;
 
 //Grayscale,RGB,BGR,RGBA,ABGR,R,G,B
-void XcluImageGetChannels_u8bit_Grayscale(uchar r, uchar g, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_Grayscale(uchar r, uchar g, uchar b, uchar *&pixel) {
     *(pixel++) = (int(r)+int(g)+int(b))/3;
 }
-void XcluImageGetChannels_u8bit_RGB(uchar r, uchar g, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_RGB(uchar r, uchar g, uchar b, uchar *&pixel) {
     *(pixel++) = r;
     *(pixel++) = g;
     *(pixel++) = b;
 }
-void XcluImageGetChannels_u8bit_BGR(uchar r, uchar g, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_BGR(uchar r, uchar g, uchar b, uchar *&pixel) {
     *(pixel++) = b;
     *(pixel++) = g;
     *(pixel++) = r;
 }
-void XcluImageGetChannels_u8bit_RGBA(uchar r, uchar g, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_RGBA(uchar r, uchar g, uchar b, uchar *&pixel) {
     *(pixel++) = r;
     *(pixel++) = g;
     *(pixel++) = b;
     *(pixel++) = 255;
 }
-void XcluImageGetChannels_u8bit_ABGR(uchar r, uchar g, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_ABGR(uchar r, uchar g, uchar b, uchar *&pixel) {
     *(pixel++) = 255;
     *(pixel++) = b;
     *(pixel++) = g;
     *(pixel++) = r;
 }
-void XcluImageGetChannels_u8bit_R(uchar r, uchar /*g*/, uchar /*b*/, uchar *&pixel) {
+void XcluImageGetChannels_u8_R(uchar r, uchar /*g*/, uchar /*b*/, uchar *&pixel) {
     *(pixel++) = r;
 }
-void XcluImageGetChannels_u8bit_G(uchar /*r*/, uchar g, uchar /*b*/, uchar *&pixel) {
+void XcluImageGetChannels_u8_G(uchar /*r*/, uchar g, uchar /*b*/, uchar *&pixel) {
     *(pixel++) = g;
 }
-void XcluImageGetChannels_u8bit_B(uchar /*r*/, uchar /*g*/, uchar b, uchar *&pixel) {
+void XcluImageGetChannels_u8_B(uchar /*r*/, uchar /*g*/, uchar b, uchar *&pixel) {
     *(pixel++) = b;
 }
 
@@ -222,7 +222,7 @@ void XcluImageGetChannels_float_B(uchar /*r*/, uchar /*g*/, uchar b, float *&pix
 #define GET_XcluImageGetChannelsFunction(CHANNELS, TYPE) \
 { if (channels_string == #CHANNELS) return XcluImageGetChannels_##TYPE##_##CHANNELS; }
 
-XcluImageGetChannelsFunction_u8bit Get_XcluImageGetChannelsFunction_u8bit(QString channels_string) {
+XcluImageGetChannelsFunction_u8 Get_XcluImageGetChannelsFunction_u8(QString channels_string) {
     GET_XcluImageGetChannelsFunction(Grayscale, u8);
     GET_XcluImageGetChannelsFunction(RGB, u8);
     GET_XcluImageGetChannelsFunction(BGR, u8);
@@ -271,7 +271,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     allocate(object, XTypeId_u8, channels, w, h);
     //заполнение массива
     XArray *array = object.var_array("data");
-    quint8 *output_pixels = array->data_u8bit();
+    quint8 *output_pixels = array->data_u8();
     for (int i = 0; i<channels*w*h; i++) {
         output_pixels[i] = data[i];
     }
@@ -310,7 +310,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     raster.allocate(rect.w, rect.h);
 
-    quint8 const *pixels = array->data_u8bit();
+    quint8 const *pixels = array->data_u8();
     if (channels == 1) {
         for (int y=0; y<rect.h; y++) {
             int k = 0;
@@ -353,7 +353,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     raster.allocate(w, h);
 
-    quint8 const *pixels = array->data_u8bit();
+    quint8 const *pixels = array->data_u8();
     if (channels == 1) {
         for (int y=0; y<rect.h; y++) {
             int k = 0;
@@ -500,7 +500,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     //u8
     if (data_type == XTypeId_u8) {
-        quint8 const *input_pixels = array->data_u8bit();
+        quint8 const *input_pixels = array->data_u8();
         for (int y=0; y<h; y++) {
             uchar *line = XcluImage_SCANLINE(h);
             int k = 0;

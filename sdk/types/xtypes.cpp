@@ -10,7 +10,7 @@ unsigned int XTypeIdSize(XTypeId type) {
         return 0;
     case XTypeId_u8:
         return 1;
-    XTypeId_u8c3:
+    case XTypeId_u8c3:
         return 3;
     case XTypeId_s8:
         return 1;
@@ -31,7 +31,7 @@ unsigned int XTypeIdSize(XTypeId type) {
     case XTypeId_vec3:
         return sizeof(glm::vec3);
     case XTypeId_int2:
-        return sizeof(glm::int2);
+        return sizeof(int2);
     default:
         xclu_exception(QString("Unknown XTypeId %1").arg(type));
         break;
@@ -53,11 +53,11 @@ QString XTypeId_to_string(XTypeId type) {
     case XTypeId_int16:
         return "int16";
     case XTypeId_u16:
-        return "uint16";
+        return "u16";
     case XTypeId_int32:
         return "int32";
     case XTypeId_u32:
-        return "uint32";
+        return "u32";
     case XTypeId_float:
         return "float";
     case XTypeId_double:
@@ -83,9 +83,9 @@ XTypeId string_to_XTypeId(QString type) {
     if (type == "u8c3") return XTypeId_u8c3;
     if (type == "s8") return XTypeId_s8;
     if (type == "int16") return XTypeId_int16;
-    if (type == "uint16") return XTypeId_u16;
+    if (type == "u16") return XTypeId_u16;
     if (type == "int32") return XTypeId_int32;
-    if (type == "uint32") return XTypeId_u32;
+    if (type == "u32") return XTypeId_u32;
     if (type == "float") return XTypeId_float;
     if (type == "double") return XTypeId_double;
     if (type == "vec2") return XTypeId_vec2;

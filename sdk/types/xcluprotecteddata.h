@@ -20,6 +20,7 @@ class XProtectedRead_;
 template<typename T>
 class XProtectedWrite_;
 
+//class for representing data
 template<typename T>
 class XProtectedData_ {
     XProtectedData_() {}
@@ -33,6 +34,7 @@ protected:
     friend XProtectedWrite_<T>;
 };
 
+//class for reading data (multiple access)
 template<typename T>
 class XProtectedRead_ {
     XProtectedRead_(XProtectedData_<T> *value);
@@ -45,6 +47,7 @@ protected:
     XProtectedData_<T> *value_ = nullptr;
 };
 
+//class for writing data (single access)
 template<typename T>
 class XProtectedWrite_ {
     XProtectedWrite_(XProtectedData_<T> *value);
