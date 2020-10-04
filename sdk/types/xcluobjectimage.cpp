@@ -8,7 +8,7 @@
 #include <QImageWriter>
 
 //---------------------------------------------------------------------
-XStructImage::XStructImage(XStruct *object)
+XStructImage::XStructImage(const XStruct *object)
 : XStructWrapper(object)
 {
 
@@ -21,10 +21,9 @@ void XStructImage::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     //описание изображения
-    XStructRead obj_1(object());
+    const XStruct &obj_1 = *object();
     auto d = XStructImage::get_data(obj_1);
     QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj_1.type())).arg(obj_1.size_bytes());
-    obj_1.release();    //освобождаем объект
 
 
     info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
@@ -45,7 +44,7 @@ void XStructImage::show_object(XGuiObject *item) {
 
         QImage img;
         {
-            XStructRead obj(object());
+            const XStruct &obj = *object();
             XStructImage::convert_to_QImage_fast_preview(obj, img, w, h);
         }
 
@@ -61,9 +60,8 @@ void XStructImage::show_object(XGuiObject *item) {
 //---------------------------------------------------------------------
 //показать объект в QLabel
 void XStructImage::show_object(QLabel *label, const XStructShowSettings &settings) {
-    XStructRead obj_1(object());
+    const XStruct &obj_1 = *object();
     auto d = XStructImage::get_data(obj_1);
-    obj_1.release();    //освобождаем объект
 
     //описание изображения
     //QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj.type())).arg(obj.size_bytes());
@@ -81,8 +79,7 @@ void XStructImage::show_object(QLabel *label, const XStructShowSettings &setting
 
         QImage img;
         {
-            XStructRead obj(object());
-            XStructImage::convert_to_QImage_fast_preview(obj, img, w, h);
+            XStructImage::convert_to_QImage_fast_preview(*object(), img, w, h);
         }
 
         QPixmap pix = QPixmap::fromImage(img);
@@ -113,7 +110,7 @@ void XStructImage::show_object(QLabel *label, const XStructShowSettings &setting
 //---------------------------------------------------------------------
 //Функция для тестирования работы с изображениями
 void XcluImage_test() {
-    qDebug()<< "TEST: XcluImage_test ------------";
+    /*qDebug()<< "TEST: XcluImage_test ------------";
     QImageReader reader("D:\\temp\\img.jpg");
     QImage img = reader.read();
     XStruct obj;
@@ -134,7 +131,7 @@ void XcluImage_test() {
     XStructImage::convert_to_QImage_fast_preview(object, img2, 100, 100);
 
     QImageWriter writer("D:\\temp\\img2.jpg");
-    writer.write(img2);
+    writer.write(img2);*/
 }
 
 //---------------------------------------------------------------------

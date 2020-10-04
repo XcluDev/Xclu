@@ -458,14 +458,14 @@ QWidget *XModuleWindow::request_widget(QString module_id) {
 
     //формируем запрос
     XStruct input;
-    XStructWrite(input).sets("parent_id", this->module()->name());
+    input.sets("parent_id", this->module()->name());
 
     XStruct output;
 
     module->access_call(functions_names::create_widget(), &input, &output);
 
     //считываем указатель на виджет
-    QWidget *widget = (QWidget *)XStructWrite(output).get_pointer("widget_pointer");
+    QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
     xclu_assert(widget, "Returned empty widget");
 
     return widget;

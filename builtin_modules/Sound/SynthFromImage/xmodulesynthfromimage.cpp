@@ -176,9 +176,9 @@ void XModuleSynthFromImage::update_data() {
         {
             int w = data_.w_;
             int h = 200;
-            XStructWrite object(getstruct_image_sound());
+            XStruct &object = getstruct_image_sound()->write().data();
             XStructImage::allocate(object, XTypeId_u8, 1, w, h);
-            quint8 *data =  XStructImage::var_array(object)->data_u8();
+            quint8 *data = XStructImage::var_array(object)->data_u8();
             for (int x=0; x<w; x++) {
                 int y0 = int(mapf_clamped(data_.image_[x],-1,1, h, 0));
                 for (int y=0; y<y0; y++) {

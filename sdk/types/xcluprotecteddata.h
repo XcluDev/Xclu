@@ -8,12 +8,19 @@
 //Wrapper for data protection, with multiple-read and single-write features
 //Classes: XProtectedData_<T>, XProtectedRead_<T>, XProtectedWrite_<T>
 //Usage:
-//1. define object XProtectedData_<float> value;
-//2. write by creating XProtectedWrite_<float> write(value), and read/write its `data`
-//when `write` gos out of scope - it unlocks `value`
-//3. read by creating XProtectedRead_<float> read(value), and read its `data`
-//when `read` gos out of scope - it unlocks `value`
-//for single operation - can use value.read().data(), value.write()...
+//1. define object
+//    XProtectedData_<float> value;
+//2. write by creating 'write' value in scope
+//    auto write = value.write();
+//    float &data = write.data();   //- can change data now
+//when `write` goes out of scope and descructed - it unlocks `value`
+//3. read by creating
+//    auto read = value.read();
+//    const float &data = read.data();   //- readed data
+//when `read` goes out of scope and desctructed - it unlocks `value`
+//
+//For single operation - can use value.read().data(), value.write(), but be careful,
+//not use such obtained data below in next code lines, you need mutex to do all correctly!
 
 template<typename T>
 class XProtectedRead_;
@@ -25,7 +32,7 @@ class XProtectedWrite_;
 template<typename T>
 class XProtectedData_ {
 public:
-    XProtectedData_() {}
+    XProtectedData_() { data_.reset(new T); }
     XProtectedData_(T *data) { data_.reset(data); }
     //creates reader
     XProtectedRead_<T> read() { return XProtectedRead_<T>(this); }

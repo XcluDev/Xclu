@@ -41,7 +41,7 @@ public:
 //класс для работы с объектами-изображениями
 class XStructImage: public XStructWrapper {
 public:
-    XStructImage(XStruct *object);
+    XStructImage(const XStruct *object);
 
     //показать объект в GUI
     virtual void show_object(XGuiObject *item);

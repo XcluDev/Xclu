@@ -35,7 +35,8 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
     try {
         DataAccess access(data_);
         {
-            XStructWrite sound(&sound_);
+            auto write = sound_.write();
+            XStruct &sound = write.data();
             sound.clear();
             //создаем массив
             sound.seti("samples", samples);
@@ -50,7 +51,8 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
         //тестовый звук или остальные модули
         int play_test_sound = data_->play_test_sound_;
         if (play_test_sound) {
-            XStructWrite sound(&sound_);
+            auto write = sound_.write();
+            XStruct &sound = write.data();
             float *data = sound.var_array("data")->data_float();
             float freq_Hz = 600;
             float sample_rate = format_.sampleRate();
@@ -68,16 +70,18 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
         }
         else {
             //вызов генерации звуков у остальных модулей
+            auto sound_write = sound_.write();
+
             for (int i=0; i<data_->modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-                data_->modules_[i]->access_call(functions_names::sound_buffer_add(), &sound_);
+                data_->modules_[i]->access_call(functions_names::sound_buffer_add(), sound_write.pointer());
             }
         }
 
         //применение громкости
         {
-            XStructWrite sound(&sound_);
-            float *data = sound.var_array("data")->data_float();
+            auto sound_write = sound_.write();
+            float *data = sound_write.data().var_array("data")->data_float();
             float volume = data_->volume_;
             for (int i=0; i<samples * channels; i++) {
                 data[i] *= volume;
@@ -118,8 +122,8 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
         request_sound(samples, channels);
 
         //считываем звук
-        XStructRead sound(&sound_);
-        XArray const *arr = sound.get_array("data");
+        auto sound_read = sound_.read();
+        XArray const *arr = sound_read.data().get_array("data");
         float const *data_float = arr->data_float();
 
         //записываем его в буфер звуковой карты
@@ -209,7 +213,7 @@ void XModuleSoundOut::impl_start() {
     }
     buffer_size_= 0;
     seti_buffer_size(0);
-    XStructWrite(getstruct_sound_format()).clear();
+    getstruct_sound_format()->write().data().clear();
 
     set_started(false); //также ставит gui-элемент is_started
     clear_string_connected_device_name();
@@ -460,8 +464,8 @@ void XModuleSoundOut::set_started(bool started) { //ставит camera_started_
  //печать текущего формата в used_format
 void XModuleSoundOut::set_format(const QAudioFormat &format) {
     auto format_ = XStructSoundFormatData(format.sampleRate(), format.channelCount());
-    XStructWrite object(getstruct_sound_format());
-    XStructSoundFormat::set_to_object(object, format_);
+    auto write = getstruct_sound_format()->write();
+    XStructSoundFormat::set_to_object(write.data(), format_);
 
 }
 

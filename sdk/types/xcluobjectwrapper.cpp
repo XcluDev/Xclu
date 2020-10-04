@@ -45,12 +45,10 @@ void XStructWrapper::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     {
-        XStructRead obj(object());
-
         //тип объекта и размер объекта в байтах
         visual.set_text(QString("%1\n%2 byte(s)")
-                        .arg(object_type_to_string(obj.type()))
-                        .arg(obj.size_bytes()));
+                        .arg(object_type_to_string(object()->type()))
+                        .arg(object()->size_bytes()));
     }
     visual.clear_image();
 

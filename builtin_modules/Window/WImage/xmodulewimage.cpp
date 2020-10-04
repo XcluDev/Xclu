@@ -110,10 +110,9 @@ void XModuleWImage::update_value() {
     seti_is_new_frame(new_frame);
 
     if (new_frame) {
-        XStruct *object = RUNTIME.get_struct_by_link(gets_image_link());
+        XProtectedStruct *object = RUNTIME.get_struct_by_link(gets_image_link());
         {
-            XStructRead obj(object);
-            obj.copy_to(getstruct_image());
+            object->read().data().copy_to(getstruct_image()->write().pointer());
         }
 
         if (image_) {
@@ -126,7 +125,7 @@ void XModuleWImage::update_value() {
             //создаем wrapper для объекта, который установится в зависимости от его типа,
             //и вызываем функцию для его визуализации
             QScopedPointer<XStructWrapper> wrapper;
-           wrapper.reset(XStructWrapper::create_wrapper(object));
+           wrapper.reset(XStructWrapper::create_wrapper(object->read().pointer()));
 
            wrapper->show_object(image_, settings);
         }
