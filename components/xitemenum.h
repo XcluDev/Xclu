@@ -5,7 +5,7 @@
 
 class ModuleInterface;
 
-class XItemEnum: public XItem
+class XItemEnum: public XItem_<int>
 {
 public:
     XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -15,8 +15,8 @@ public:
     void set_value_string(const QString &rawstring);  //rawtext ожидается 'A_B_C'
 
     bool supports_int() { return true; }
-    int value_int() { return index_; }    //index
-    void set_value_int(int index) { index_ = index; }
+    int value_int() { return value_read().data(); }    //index
+    void set_value_int(int index) { value_write().data() = index; }
 
     bool supports_value_title() { return true; }
     QString value_title();
@@ -36,7 +36,7 @@ public:
     //-----------------------------
 
 protected:
-    int index_ = 0;
+    //int index_ = 0; //inside XItem_
 
     int default_index_ = 0;
     QStringList rawtexts_;

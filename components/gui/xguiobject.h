@@ -2,6 +2,7 @@
 #define INTERFACEGUIOBJECT_H
 
 #include "xgui.h"
+#include "xcluprotecteddata.h"
 
 class XItemObject;
 class XStruct;
@@ -46,7 +47,7 @@ public:
     //мы это делаем только по команде извне - так как не знаем,
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
-    void show_object(XStruct *object);
+    void show_object(XProtectedStruct *object);
 
     //доступ к меткам и другим компонентам для визуализации
     XGuiObjectVisual &visual();

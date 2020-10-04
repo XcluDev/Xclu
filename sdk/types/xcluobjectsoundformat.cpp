@@ -3,7 +3,7 @@
 #include "xguiobject.h"
 
 //---------------------------------------------------------------------
-XStructSoundFormat::XStructSoundFormat(XStruct *object)
+XStructSoundFormat::XStructSoundFormat(const XStruct *object)
 : XStructWrapper(object)
 {
 
@@ -11,7 +11,7 @@ XStructSoundFormat::XStructSoundFormat(XStruct *object)
 
 //---------------------------------------------------------------------
 //создание объекта
-/*static*/ void XStructSoundFormat::set_to_object(XStructWrite &object, XStructSoundFormatData &data) {
+/*static*/ void XStructSoundFormat::set_to_object(XStruct &object, XStructSoundFormatData &data) {
     object.set_type(XStructTypeSoundFormat);
     object.seti("sample_rate", data.sample_rate);
     object.seti("channels", data.channels);
@@ -19,7 +19,7 @@ XStructSoundFormat::XStructSoundFormat(XStruct *object)
 
 //---------------------------------------------------------------------
 //получение информации из объекта
-/*static*/ XStructSoundFormatData XStructSoundFormat::get_data(XStructRead &object) {
+/*static*/ XStructSoundFormatData XStructSoundFormat::get_data(const XStruct &object) {
     object.assert_type(XStructTypeSoundFormat);
 
     XStructSoundFormatData data;
@@ -32,7 +32,7 @@ XStructSoundFormat::XStructSoundFormat(XStruct *object)
 //показ в GUI
 void XStructSoundFormat::show_object(XGuiObject *item) {
     auto &visual = item->visual();
-    XStructRead obj(object());
+    const XStruct &obj = *object();
     auto data = get_data(obj);
 
     QString line;

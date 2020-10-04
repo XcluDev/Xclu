@@ -3,7 +3,7 @@
 
 //Реализация модуля Execute - запуск программы с диска
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 
 class XModuleExecute: public XModule

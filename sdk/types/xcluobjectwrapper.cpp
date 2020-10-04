@@ -8,9 +8,9 @@
 
 
 //---------------------------------------------------------------------
-/*static*/ XStructWrapper *XStructWrapper::create_wrapper(XStruct *object) {
+/*static*/ XStructWrapper *XStructWrapper::create_wrapper(const XStruct *object) {
     //xclu_assert(object, "Internal error in 'create_wrapper': object is nullptr");
-    auto type = XStructRead(object).type();
+    auto type = object->type();
     switch (type) {
     case XStructTypeEmpty:
     case XStructTypeCustom:
@@ -30,12 +30,12 @@
 }
 
 //---------------------------------------------------------------------
-XStructWrapper::XStructWrapper(XStruct *object) {
+XStructWrapper::XStructWrapper(const XStruct *object) {
     object_ = object;
 }
 
 //---------------------------------------------------------------------
-XStruct *XStructWrapper::object() {
+const XStruct *XStructWrapper::object() {
     return object_;
 }
 

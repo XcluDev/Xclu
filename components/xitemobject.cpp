@@ -16,7 +16,7 @@ object(strings) - массив строк (?) - его можно ставить
 
 
 XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItem_<XStruct>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -30,7 +30,7 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
     }
 
     //создаем объект
-    object_.reset(new XStruct(XStructTypeEmpty));
+    value_write().reset(new XStruct(XStructTypeEmpty));
 
 }
 
@@ -64,7 +64,7 @@ void XItemObject::var_to_gui_internal() {
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 void XItemObject::copy_data_to_internal(XItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
-    XStructRead(get_object()).copy_to(item->get_object());
+    get_object()->read().data().copy_to(item->get_object()->write().pointer());
 }
 
 //---------------------------------------------------------------------
@@ -72,7 +72,7 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 //original: XStruct *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XStruct *", "struct", "get_struct", "");
+                              "XProtectedStruct *", "struct", "get_struct", "");
 }
 
 //---------------------------------------------------------------------

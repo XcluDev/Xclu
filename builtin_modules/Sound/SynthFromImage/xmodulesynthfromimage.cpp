@@ -93,8 +93,8 @@ void XModuleSynthFromImage::impl_start() {
         data_.clear();
     }
 
-    XStructWrite(getstruct_image()).clear();
-    XStructWrite(getstruct_image_sound()).clear();
+    getstruct_image()->write().data().clear();
+    getstruct_image_sound()->write().data().clear();
 
     update_data();
 }
@@ -133,9 +133,8 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XStruct *object = RUNTIME.get_struct_by_link(image_link);
-    XStructRead obj(object);
-    obj.copy_to(getstruct_image());
+    XProtectedStruct *object = RUNTIME.get_struct_by_link(image_link);
+    object->read().data().copy_to(getstruct_image()->write().pointer());
 }
 
 //---------------------------------------------------------------------
@@ -152,7 +151,7 @@ void XModuleSynthFromImage::update_data() {
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    XStructRead obj(getstruct_image());
+    const XStruct &obj = getstruct_image()->read().data();
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");

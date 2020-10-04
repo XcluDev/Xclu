@@ -222,6 +222,8 @@ HEADERS += \
     sdk/utility/incl_h.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
+    sdk/utility/sdk_cpp.h \
+    sdk/utility/sdk_h.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \

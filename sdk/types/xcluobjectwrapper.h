@@ -39,11 +39,11 @@ class XStructWrapper
 public:
     //создать wrapper для типа объекта, чтобы затем его вывести в GUI
     //или проделать другие операции
-    static XStructWrapper *create_wrapper(XStruct *object);
+    static XStructWrapper *create_wrapper(const XStruct *object);
 
-    XStructWrapper(XStruct *object);
+    XStructWrapper(const XStruct *object);
 
-    XStruct *object();
+    const XStruct *object();
 
     //показать объект в редакторе
     virtual void show_object(XGuiObject *item);
@@ -52,7 +52,7 @@ public:
     virtual void show_object(QLabel *label, const XStructShowSettings &settings);
 
 protected:
-    XStruct *object_;
+    const XStruct *object_;
 };
 
 #endif // XCLUOBJECTWRAPPER_H

@@ -63,7 +63,8 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
 
         XModuleWebcameraSurfaceData &data = module_->surface_data();
         DataAccess access(data);
-        //ловим исключение, чтобы в случае ошибки мютекс не заблокировался
+
+        //(ловим исключение, чтобы в случае ошибки мютекс не заблокировался)
         try {
             data.is_new_frame = 1;
             data.captured_frames++;

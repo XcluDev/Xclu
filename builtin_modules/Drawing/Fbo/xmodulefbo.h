@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QWindow>
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluprotecteddata.h"
 

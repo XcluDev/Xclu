@@ -10,7 +10,7 @@
 #include <QObject>
 #include <QScopedPointer>
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xarray.h"
 #include "xcluobjectsoundformat.h"

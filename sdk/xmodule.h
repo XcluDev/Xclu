@@ -14,7 +14,7 @@
 //поэтому модули должны быть к этому готовы - они должны “защищать” с помощью mutex свои данные
 //и работать со своим gui только в update.
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include <QObject>
 #include "xclass.h"
 

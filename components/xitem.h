@@ -7,12 +7,12 @@
 
 #include "incl_h.h"
 #include "xref.h"
+#include "xstruct.h"
 
 struct XGuiPageCreator;
 class XGui;
 class QJsonObject;
 class XItem;
-class XStruct;
 class ModuleInterface;
 
 //---------------------------------------------------------------------
@@ -108,7 +108,7 @@ public:
 
     //object
     virtual bool supports_object() { return false; }
-    virtual XStruct *get_object() { return nullptr; }
+    virtual XProtectedStruct *get_object() { return nullptr; }
 
     //Запись, считывание и копирование -------------------------
     //хранит ли данные (или просто интерфейсный элемент, например, сепаратор)

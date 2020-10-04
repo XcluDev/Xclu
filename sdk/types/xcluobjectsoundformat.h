@@ -27,16 +27,16 @@ public:
 //wrapper
 class XStructSoundFormat: public XStructWrapper {
 public:
-    XStructSoundFormat(XStruct *object);
+    XStructSoundFormat(const XStruct *object);
 
     //показ в GUI
     virtual void show_object(XGuiObject *item);
 
     //создание объекта
-    static void set_to_object(XStructWrite &object, XStructSoundFormatData &data);
+    static void set_to_object(XStruct &object, XStructSoundFormatData &data);
 
     //получение информации из объекта
-    static XStructSoundFormatData get_data(XStructRead &object);
+    static XStructSoundFormatData get_data(const XStruct &object);
 
 
 };

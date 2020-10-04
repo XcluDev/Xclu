@@ -5,10 +5,10 @@
 //такие так время от старта приложения и рабочая папка проекта
 
 #include "incl_h.h"
+#include "xstruct.h"
 #include <QElapsedTimer>
 class Module;
 class XItem;
-class XStruct;
 
 //Работа с link - получение переменных по имени модуля и названию в формате:
 //webcam1->image
@@ -73,7 +73,7 @@ public:
     int get_int_by_link(QString link_str, int def_val = 0);
     float get_float_by_link(QString link_str, float def_val = 0);
     QString get_string_by_link(QString link_str, QString def_val = "");
-    XStruct *get_struct_by_link(QString link_str);
+    XProtectedStruct *get_struct_by_link(QString link_str);
 
     //Нажатие кнопки
     void press_button_by_link(QString link_str);

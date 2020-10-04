@@ -14,7 +14,7 @@ REGISTER_XITEM(XItemCheckbox, checkbox)
 //- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
 
 XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItem_<int>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -32,7 +32,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
 
     //значение по умолчанию
     default_value_ = parse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
-    value_ = default_value_;
+    set_value_int(default_value_);
 
 }
 

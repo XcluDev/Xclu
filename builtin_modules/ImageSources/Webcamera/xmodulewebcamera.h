@@ -7,7 +7,7 @@
 
 #include <QCamera>
 #include <QAbstractVideoSurface>
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
@@ -47,7 +47,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
     ErrorInfo err;
 
     void clear() {
-        XStructWrite(image).clear();
+        image.clear();
         captured_frames = 0;
         is_new_frame = 0;
         channels = "";

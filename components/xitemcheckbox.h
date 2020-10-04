@@ -5,7 +5,7 @@
 
 class ModuleInterface;
 
-class XItemCheckbox: public XItem
+class XItemCheckbox: public XItem_<int>
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -14,12 +14,12 @@ public:
     //string
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_int()); }
-    void set_value_string(const QString &value) { value_ = value.toInt(); }
+    void set_value_string(const QString &value) { set_value_int(value.toInt()); }
 
     //int
     bool supports_int() { return true; }
-    int value_int() { return value_; }
-    void set_value_int(int value) { value_ = value; }
+    int value_int() { return value_read().data(); }
+    void set_value_int(int value) { value_write().data() = value; }
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
@@ -32,8 +32,8 @@ public:
     //-----------------------------
 
 protected:
-    int value_ = 0;
-    float default_value_ = 0;
+    //int value_ = 0; //inside XItem_
+    int default_value_ = 0;
 
 protected:
     //работа с GUI - вызывается когда is_gui_attached

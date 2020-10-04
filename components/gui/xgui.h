@@ -12,8 +12,7 @@
 */
 
 #include <QWidget>
-#include "incl_h.h"
-#include <QScopedPointer>
+#include "sdk_h.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;

@@ -5,7 +5,7 @@
 
 class ModuleInterface;
 
-class XItemButton: public XItem
+class XItemButton: public XItem_<int>
 {
 public:
     XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -34,7 +34,7 @@ public:
     //-----------------------------
 
 protected:
-    int value_ = 0;
+    //int value_ = 0; //inside XItem_
 
     //работа с GUI - вызывается когда is_gui_attached
     virtual void gui_to_var_internal(); //получение значения из gui

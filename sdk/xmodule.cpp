@@ -166,7 +166,7 @@ void XModule::create_widget_internal(XStruct *input, XStruct *output) {
     xclu_assert(output, "Internal error, output object is nullptr");
 
     //устанавливаем, кто использует
-    QString parent_id = XStructRead(input).gets("parent_id");
+    QString parent_id = input->gets("parent_id");
 
     //проверяем, что еще не стартовали
     xclu_assert(status().was_started,
@@ -179,14 +179,14 @@ void XModule::create_widget_internal(XStruct *input, XStruct *output) {
     void* widget = impl_create_widget(parent_id);
 
     //ставим его в выходной объект
-    XStructWrite(output).set_pointer("widget_pointer", widget);
+    output->set_pointer("widget_pointer", widget);
 }
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
 void XModule::sound_buffer_add_internal(XStruct *input, XStruct * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-    XStructWrite sound(input);
+    XStruct &sound = *input;
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");
     int channels = sound.geti("channels");

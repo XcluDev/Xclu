@@ -7,8 +7,8 @@
 //для настройки антиалиасинга
 #include <QSurfaceFormat>
 
+#include "sdk_cpp.h"
 #include "mainwindow.h"
-#include "console.h"
 
 
 int main(int argc, char *argv[])

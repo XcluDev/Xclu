@@ -4,7 +4,7 @@
 //Export interface as h file
 //Constructor loads template from `module_h_template.h`
 
-#include "incl_h.h"
+#include "sdk_h.h"
 class ModuleInterface;
 
 class ExportInterface

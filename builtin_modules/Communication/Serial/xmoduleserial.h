@@ -5,11 +5,11 @@
 
 #include <QImage>
 #include <QtSerialPort/QSerialPort>
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
-#include "incl_h.h"
+#include "sdk_h.h"
 
 //Note: now this module writes warnings and errors to console, without interrupting the project.
 //TODO: make possibility to interrupt. (Already it's set in Control module).

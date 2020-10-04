@@ -9,7 +9,7 @@ REGISTER_XITEM(XItemButton, button)
 //---------------------------------------------------------------------
 //in button Execute execute
 XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItem_<int>(interf, pre_description)
 {
     //Button не может быть out
     xclu_assert(pre_description.qualifier != VarQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
@@ -37,15 +37,16 @@ void XItemButton::callback_button_pressed() {
 //---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XItemButton::value_int() {
-    int res = value_;
-    value_ = 0;
+    auto v_write = value_write();
+    int res = v_write.data();
+    v_write.data() = 0;
     return res;
 }
 
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemButton::gui_to_var_internal() {
-    value_ = ((XGuiButton *)gui__)->value();
+    value_write().data() = ((XGuiButton *)gui__)->value();
 }
 
 //---------------------------------------------------------------------

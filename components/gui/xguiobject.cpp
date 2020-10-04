@@ -90,13 +90,12 @@ XGuiObjectVisual &XGuiObject::visual() {
 //если изображение - то картинкой, если нет - то текстовым описанием
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
-//при необходимости - можно ввести mutex в объект
-void XGuiObject::show_object(XStruct *object) {
+void XGuiObject::show_object(XProtectedStruct *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
         QScopedPointer<XStructWrapper> wrapper;
-        wrapper.reset(XStructWrapper::create_wrapper(object));
+        wrapper.reset(XStructWrapper::create_wrapper((XStruct *)object));
         wrapper->show_object(this);
     }
 }

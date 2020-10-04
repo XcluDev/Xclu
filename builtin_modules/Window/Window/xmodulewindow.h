@@ -7,7 +7,7 @@
 #include <QMainWindow>
 #include <QStack>
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluprotecteddata.h"
 #include "xclu_parse_tree.h"

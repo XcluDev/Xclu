@@ -1,5 +1,5 @@
 #include "exportinterface.h"
-#include "incl_cpp.h"
+#include "sdk_cpp.h"
 #include "moduleinterface.h"
 #include "modulesfactory.h"
 #include <QDateTime>

@@ -96,7 +96,7 @@ void XStructImage::show_object(QLabel *label, const XStructShowSettings &setting
 
 //---------------------------------------------------------------------
 //Извлечение всех полей из изображения
-/*static*/ XStructImageData XStructImage::get_data(XStructRead &object) {
+/*static*/ XStructImageData XStructImage::get_data(const XStruct &object) {
     object.assert_type(XStructTypeImage);
 
     XStructImageData d;
@@ -249,7 +249,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::allocate(XStructWrite &object, XTypeId data_type, int channels, int w, int h) {
+/*static*/ void XStructImage::allocate(XStruct &object, XTypeId data_type, int channels, int w, int h) {
     object.clear();
     object.set_type(XStructTypeImage);
     object.seti("w", w);
@@ -266,7 +266,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_array(XStructWrite &object, quint8 *data, int channels, int w, int h) {
+/*static*/ void XStructImage::create_from_array(XStruct &object, quint8 *data, int channels, int w, int h) {
     //заполнение полей описания изображения
     allocate(object, XTypeId_u8, channels, w, h);
     //заполнение массива
@@ -278,17 +278,17 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStructWrite &object, XRaster_u8 &raster) {
+/*static*/ void XStructImage::create_from_raster(XStruct &object, XRaster_u8 &raster) {
     create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStructWrite &object, XRaster_u8c3 &raster) {
+/*static*/ void XStructImage::create_from_raster(XStruct &object, XRaster_u8c3 &raster) {
     create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(XStructRead &object, XRaster_u8 &raster, rect_int rect) {
+/*static*/ void XStructImage::to_raster(const XStruct &object, XRaster_u8 &raster, rect_int rect) {
 
     int w = object.geti("w");
     int h = object.geti("h");
@@ -332,7 +332,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(XStructRead &object, XRaster_u8c3 &raster, rect_int rect) {
+/*static*/ void XStructImage::to_raster(const XStruct &object, XRaster_u8c3 &raster, rect_int rect) {
     int w = object.geti("w");
     int h = object.geti("h");
     int channels = object.geti("channels");
@@ -376,7 +376,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_QImage(XStructWrite &object, const QImage &qimage,
+/*static*/ void XStructImage::create_from_QImage(XStruct &object, const QImage &qimage,
                                               QString channels_str, QString data_type_str,
                                               bool mirrorx, bool mirrory) {
     XTypeId data_type = string_to_XTypeId(data_type_str);
@@ -388,7 +388,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 #define XcluImage_SCANLINE(H) (qimage.scanLine(mirrory?(H-1-y):y))
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_QImage(XStructWrite &object, const QImage &qimage,
+/*static*/ void XStructImage::create_from_QImage(XStruct &object, const QImage &qimage,
                                               QString channels_str, XTypeId data_type,
                                               bool mirrorx, bool mirrory) {
     xclu_assert(!mirrorx, "XStructImage::create_from_QImage doesn't supports mirrorx");
@@ -477,7 +477,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Конвертировать изображение в QImage - например, для записи на диск
 //Внимание - не учитывается значение каналов, а только их количество
 //то есть "R" будет выглядет как Grayscale
-/*static*/ void XStructImage::convert_to_QImage(XStructRead &object, QImage &qimage,
+/*static*/ void XStructImage::convert_to_QImage(const XStruct &object, QImage &qimage,
                                              bool mirrorx, bool mirrory) {
 
     object.assert_type(XStructTypeImage);
@@ -525,7 +525,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::convert_to_QImage_fast_preview(XStructRead &object, QImage &qimage,
+/*static*/ void XStructImage::convert_to_QImage_fast_preview(const XStruct &object, QImage &qimage,
                                                           int out_w, int out_h,
                                                           bool mirrorx, bool mirrory) {
     xclu_assert(!mirrorx, "XStructImage::convert_to_QImage_fast_preview doesn't supports mirrorx");
@@ -586,7 +586,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Загрузка изображения с диска
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-/*static*/ void XStructImage::load(XStructWrite &object, QString file_name) {
+/*static*/ void XStructImage::load(XStruct &object, QString file_name) {
     QImage qimage;
     xclu_assert(qimage.load(file_name), "Can't load image " + file_name);
     create_from_QImage(object, qimage, "RGB", XTypeId_u8);
@@ -596,7 +596,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Запись на диск
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-/*static*/ void XStructImage::save(XStructRead &object, QString file_name, QString format, int quality) {
+/*static*/ void XStructImage::save(const XStruct &object, QString file_name, QString format, int quality) {
     QImage qimage;
     convert_to_QImage(object, qimage);
     xclu_assert(qimage.save(file_name, format.toStdString().c_str(), quality),

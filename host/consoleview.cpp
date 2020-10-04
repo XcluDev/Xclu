@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "consoleview.h"
-#include "incl_cpp.h"
+#include "sdk_cpp.h"
 
 ConsoleView *CONS_VIEW;
 

@@ -5,7 +5,7 @@
 
 #include <QObject>
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xarray.h"
 #include "xcluobjectsoundformat.h"

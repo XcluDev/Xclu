@@ -14,9 +14,9 @@ void CosmoOsc::setup(Module *module, int index) {
  */
 
 #include "incl_h.h"
+#include "xstruct.h"
 
 class Module;
-class XStruct;
 
 class XClass
 {
@@ -86,8 +86,7 @@ public:
     //доступ к объектам идет только по указателям -
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
     //без копирования
-    //объекты снабжены мютексами, поэтому следует начинать и завершать с ними взаимодействие
-    XStruct *get_struct_(QString name);
+    XProtectedStruct *get_struct_(QString name);
 
 protected:
     Module *module_ = nullptr;

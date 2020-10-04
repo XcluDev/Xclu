@@ -9,7 +9,7 @@
 
 class ModuleInterface;
 
-class XItemObject: public XItem
+class XItemObject: public XItem_<XStruct>
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -25,7 +25,7 @@ public:
 
     //доступ к объекту
     virtual bool supports_object() { return true; }
-    virtual XStruct *get_object() { return object_.data(); }
+    virtual XProtectedStruct *get_object() { return value_.data(); }
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
@@ -35,7 +35,7 @@ public:
     //-----------------------------
 
 protected:
-    QScopedPointer<XStruct> object_;
+    //QScopedPointer<XStruct> object_; //inside XItem_
 
     QStringList types_; //список типов, которыми может быть этот объект, например, image, array
 

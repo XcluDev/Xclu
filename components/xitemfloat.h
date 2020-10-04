@@ -5,7 +5,7 @@
 
 class ModuleInterface;
 
-class XItemFloat: public XItem
+class XItemFloat: public XItem_<float>
 {
 public:
     XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -13,11 +13,11 @@ public:
     //string
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_float()); }
-    void set_value_string(const QString &value) { value_ = value.toFloat(); }
+    void set_value_string(const QString &value) { set_value_float(value.toFloat()); }
 
     virtual bool supports_float() { return true; }
-    float value_float() { return value_; }
-    void set_value_float(float value) { value_ = value; }
+    float value_float() { return value_read().data(); }
+    void set_value_float(float value) { value_write().data() = value; }
 
     float min_value() { return min_value_; }
     float max_value() { return max_value_; }
@@ -34,7 +34,7 @@ public:
     //-----------------------------
 
 protected:
-    float value_ = 0;
+    //float value_ = 0; //inside XItem_
 
     float default_value_ = 0;
     float min_value_ = 0;

@@ -12,7 +12,7 @@ REGISTER_XITEM(XItemEnum, enum)
 //      //mm                       опционально - единица измерения, показывается справа
 
 XItemEnum::XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItem_<int>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -43,7 +43,7 @@ XItemEnum::XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_des
 
     //установка индексов по умолчанию
     default_index_ = rawtext_to_index_safe(default_value);
-    index_ = default_index_;
+    set_value_int(default_index_);
 
     //Единицы измерения - вторая строка описания после hint
     units_ = description(1);
@@ -66,12 +66,12 @@ int XItemEnum::rawtext_to_index_safe(QString rawtext) {
 
 //---------------------------------------------------------------------
 void XItemEnum::set_value_string(const QString &rawstring){
-    index_ = rawtext_to_index_safe(rawstring);
+    set_value_int(rawtext_to_index_safe(rawstring));
 }
 
 //---------------------------------------------------------------------
 QString XItemEnum::value_string() {
-    return rawtexts_.at(index_);
+    return rawtexts_.at(value_int());
 }
 
 //---------------------------------------------------------------------

@@ -356,9 +356,7 @@ void Module::set_title_value(QString name, QString v) { //только out: enum
 }
 
 //---------------------------------------------------------------------
-//доступ к объектам идет только по указателям
-//требуется начать и потом закончить доступ (mutex)
-XStruct *Module::get_object(QString name) {
+XProtectedStruct *Module::get_object(QString name) {
     return interf()->get_object(name);
 }
 

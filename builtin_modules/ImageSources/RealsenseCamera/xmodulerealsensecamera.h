@@ -4,11 +4,11 @@
 //Working with Realsense camera
 
 #include <QImage>
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluobjectimage.h"
 #include "xcluprotecteddata.h"
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodulerealsensecamera_impl.h"
 //class RealsenseCamera;
 

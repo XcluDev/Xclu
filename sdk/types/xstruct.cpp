@@ -1,18 +1,18 @@
 #include "xstruct.h"
 #include "incl_cpp.h"
 
-
+/*
 //---------------------------------------------------------------------
-XStructRead::XStructRead(XStruct *object) {
+XStructRead::XStructRead(const XStruct *object) {
     xclu_assert(object, "Nullptr object at XStructRead");
-    object_ = object;
+    object_ = (XStruct *)object;
     object_->begin_access();
     accessed_ = true;
 }
 
-XStructRead::XStructRead(XStruct &object) {
+XStructRead::XStructRead(const XStruct &object) {
     xclu_assert(&object, "Nullptr object at XStructRead");
-    object_ = &object;
+    object_ = (XStruct *) &object;
     object_->begin_access();
     accessed_ = true;
 }
@@ -44,7 +44,7 @@ XStructWrite::XStructWrite(XStruct &object)
 }
 
 //XStructWrite::~XStructWrite() {
-//}
+//}*/
 
 //---------------------------------------------------------------------
 XStruct::XStruct(XStructType type)
@@ -158,8 +158,7 @@ void XStruct::clear() {
 void XStruct::copy_to(XStruct *object) const {
     xclu_assert(object, "nullptr in XStruct::copy_to");
 
-    //защищаем объект - пока существует obj, object никто другой не сможет изменить
-    XStructWrite obj(object);
+    XStruct &obj = *object;
 
     object->clear();
 

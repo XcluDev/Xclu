@@ -9,7 +9,7 @@ REGISTER_XITEM(XItemFloat, float)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItem_<float>(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -19,7 +19,7 @@ XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_d
 
     //значение по умолчанию
     default_value_ = parse_float(query.at(0), "default value must be a number");
-    value_ = default_value_;
+    set_value_float(default_value_);
 
     //Единицы измерения - вторая строка описания после hint
     units_ = description(1);

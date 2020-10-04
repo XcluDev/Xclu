@@ -46,6 +46,7 @@ public:
     XProtectedRead_(XProtectedData_<T> &value) { lock(&value); }
     ~XProtectedRead_() { unlock(); }
     const T &data() { return *value_->data_.data(); }
+    const T *pointer() { return value_->data_.data(); }
 protected:
     XProtectedData_<T> *value_ = nullptr;
 
@@ -64,7 +65,8 @@ public:
     XProtectedWrite_(XProtectedData_<T> &value) { lock(&value); }
     ~XProtectedWrite_() { unlock(); }
     T &data() { return *value_->data_.data(); }
-    void reset(T *data) { return *value_->data_.reset(data); }
+    T *pointer() { return value_->data_.data(); }
+    void reset(T *data) { value_->data_.reset(data); }
 protected:
     XProtectedData_<T> *value_ = nullptr;
 

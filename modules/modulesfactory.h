@@ -2,7 +2,7 @@
 #define MODULESFACTORY_H
 
 //База данных модулей, позволяет создавать инстансы модулей
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "moduleseed.h"
 #include "module.h"
 

@@ -703,11 +703,10 @@ void ModuleInterface::set_title_value(QString name, QString v) {
 //без копирования
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
-XStruct *ModuleInterface::get_object(QString name) {
+XProtectedStruct *ModuleInterface::get_object(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
-    XStruct *object = var->get_object();
-    return object;
+    return var->get_object();
 }
 
 

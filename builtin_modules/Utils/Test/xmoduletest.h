@@ -3,7 +3,7 @@
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 
 class XModuleTest: public XModule

@@ -150,7 +150,7 @@ bool XItem::was_changed() {
         }
         //сбрасываем флажок с object
         if (supports_object()) {
-            XStructRead(get_object()).reset_changed(); // Доступ к объекту!
+            get_object()->write().data().reset_changed(); // Доступ к объекту!
         }
         return true;
     }
@@ -178,7 +178,7 @@ bool XItem::was_changed() {
     }
     //объекты - у них есть своя метка
     if (supports_object()) {
-        return XStructRead(get_object()).was_changed();  // Доступ к объекту!
+        return get_object()->write().data().was_changed();  // Доступ к объекту!
     }
 
     return false;

@@ -3,7 +3,7 @@
 
 //ScanFolder implementation
 
-#include "incl_h.h"
+#include "sdk_h.h"
 #include "xmodule.h"
 
 class XModuleScanFolder: public XModule

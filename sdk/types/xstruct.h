@@ -4,8 +4,9 @@
 //XStruct - Structure - basic Xclu type
 
 #include "incl_h.h"
-
 #include "xarray.h"
+#include "xcluprotecteddata.h"
+
 
 //Объект
 //Типы объектов заданы в XStructType
@@ -29,8 +30,8 @@
 
 
 //----------------------------------------------------------------
-class XStructRead;
-class XStructWrite;
+//class XStructRead;
+//class XStructWrite;
 
 class XStruct
 {
@@ -39,11 +40,10 @@ public:
     XStruct(XStructType type = XStructTypeEmpty);
     virtual ~XStruct();
 
-
-protected:
+//protected:
     //эти функции доступны из XStructRead, XStructWrite
-    friend XStructRead;
-    friend XStructWrite;
+    //friend XStructRead;
+    //friend XStructWrite;
 
     void begin_access();
     void end_access();
@@ -154,6 +154,12 @@ protected:
 
 };
 
+
+//protected XStruct
+typedef XProtectedData_<XStruct> XProtectedStruct;
+
+
+/*
 //----------------------------------------------------------------
 //XStructRead, XStructWrite - классы для безопасного доступа к объекту,
 //только считываниеи на считывание и запись:
@@ -176,14 +182,14 @@ protected:
 
 class XStructRead {
 public:
-    XStructRead(XStruct *object);
-    XStructRead(XStruct &object);
+    XStructRead(const XStruct *object);
+    XStructRead(const XStruct &object);
     virtual ~XStructRead();
 
     void release();             //если надо освободить объект, но он остается в зоне видимости
     //bool assert_is_correct();  //проверка, что объект соответствует его формальному описанию
 private:
-    XStructRead(XStructRead &){}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
+    XStructRead(const XStruct &){}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
     bool accessed_ = false;
 public:
     //Все эти функции вызывают соответствующие функции объекта
@@ -234,6 +240,7 @@ protected:
 };
 
 
+
 //Класс для изменения объекта
 //При создании сразу помечаем, что объект был изменен
 class XStructWrite: public XStructRead {
@@ -244,7 +251,7 @@ public:
 
     //bool assert_is_correct();  //проверка, что объект соответствует его формальному описанию
 private:
-//    XStructWrite(XStructWrite &a): XStructRead(a) {}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
+//    XStructWrite(XStruct &a): XStructRead(a) {}   //запрещаем создавать копию объекта, чтобы не вызывали XStructRead(ObjectAcess(...))
 public:
     //Все эти функции вызывают соответствующие функции объекта
     //но тут они защищены
@@ -291,6 +298,6 @@ public:
 protected:
 
 };
-
+*/
 
 #endif // XSTRUCT_H
