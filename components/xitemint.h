@@ -16,8 +16,8 @@ public:
     void set_value_string(const QString &value) { set_value_int(value.toInt()); }
 
     virtual bool supports_int() { return true; }
-    int value_int() { return value_.data()->read().data(); }
-    void set_value_int(int value) {}// value_.data()->write().data() = value; }
+    int value_int() { return value_read().data(); }
+    void set_value_int(int value) { value_write().data() = value; }
 
     int min_value() { return min_value_; }
     int max_value() { return max_value_; }
@@ -34,7 +34,7 @@ public:
     //-----------------------------
 
 protected:
-    //int value_ = 0;
+    //int value_ = 0; //inside XItem_
 
     int default_value_ = 0;
     int min_value_ = 0;

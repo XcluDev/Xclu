@@ -280,6 +280,12 @@ public:
 
     }
 
+    //Access for read and write value
+    //for one-time access of scalars,
+    //can use `value_read().data()`, `value_.data()->write().data() = value`
+    XProtectedRead_<T> value_read() { return value_.data()->read(); }
+    XProtectedWrite_<T> value_write() { return value_.data()->write(); }
+
 protected:
      XRef<XProtectedData_<T>> value_;
 
