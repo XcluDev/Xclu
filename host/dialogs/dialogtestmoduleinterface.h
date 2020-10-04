@@ -19,7 +19,7 @@ QT_END_NAMESPACE
 #include "moduleseed.h"
 #include "moduleinterface.h"
 
-class EditorModule;
+class XGuiEditor;
 
 
 class DialogTestModuleInterface : public QDialog
@@ -41,7 +41,7 @@ private slots:
 private:
     QPlainTextEdit *folder_edit_;
 
-    EditorModule *editor_;
+    XGuiEditor *editor_;
     QString folder_;
 
 

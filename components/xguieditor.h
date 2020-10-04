@@ -26,12 +26,12 @@ class QGridLayout;
 QT_END_NAMESPACE
 
 
-class EditorModule : public QWidget
+class XGuiEditor : public QWidget
 {
     Q_OBJECT
 
 public:
-    EditorModule(QWidget *parent);
+    XGuiEditor(QWidget *parent);
 
     EditorModuleState state();
     void set_state(EditorModuleState state);
@@ -81,6 +81,9 @@ protected slots:
     //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
     void on_value_changed();
 
+protected:
+    //context popup menu
+    QScopedPointer<QMenu> context_menu_;
 };
 
 

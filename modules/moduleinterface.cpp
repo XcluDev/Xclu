@@ -3,7 +3,7 @@
 #include "xmodule.h"
 #include "moduleinterface.h"
 #include "incl_cpp.h"
-#include "editormodule.h"
+#include "xguieditor.h"
 
 
 //---------------------------------------------------------------------
@@ -364,7 +364,7 @@ QVector<VisibleGroupBase> &ModuleInterface::vis_groups() {
 
 //---------------------------------------------------------------------
 //сигнал, что GUI подключен/отключен
-void ModuleInterface::gui_attached(EditorModule *editor) {
+void ModuleInterface::gui_attached(XGuiEditor *editor) {
     editor_ = editor;
     for (int i=0; i<items_.size(); i++) {
         items_[i]->gui_attached();

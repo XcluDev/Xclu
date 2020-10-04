@@ -99,7 +99,7 @@ XModule *Module::rtmodule() {
 }
 
 //---------------------------------------------------------------------
-void Module::gui_attached(EditorModule *editor) {
+void Module::gui_attached(XGuiEditor *editor) {
     //qDebug() << "module " << name() << ": GUI attached";
     interf()->gui_attached(editor);
 }

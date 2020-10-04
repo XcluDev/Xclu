@@ -8,7 +8,7 @@
 #include "xitem.h"
 #include "visibilitygroups.h"
 
-class EditorModule;
+class XGuiEditor;
 class EditorModuleState;
 class QJsonObject;
 class Module;
@@ -39,7 +39,7 @@ public:
     QVector<VisibleGroupBase> &vis_groups();
 
     //сигнал, что GUI подключен/отключен
-    void gui_attached(EditorModule *editor);
+    void gui_attached(XGuiEditor *editor);
     void gui_detached();
     bool is_gui_attached();
 
@@ -166,7 +166,7 @@ private:
     QVector<QVector<XItem *>> vars_qual_;
 
     //Редактор модуля - используется, чтобы запомнить его tab. Удалять не следует
-    EditorModule *editor_ = nullptr;
+    XGuiEditor *editor_ = nullptr;
     //состояние GUI-редактора (номер страницы)
     EditorModuleState editor_state_;
 

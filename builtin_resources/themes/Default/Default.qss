@@ -26,7 +26,7 @@ EditorModules > QToolBar {
     border-color: transparent;
 }
 
-EditorModule  > QWidget {
+XGuiEditor  > QWidget {
     border: 1px solid #6f6f6f;
 }
 

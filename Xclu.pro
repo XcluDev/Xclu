@@ -81,39 +81,59 @@ FORMS += \
     host/dialogs/dialogpreferences.ui \
     host/mainwindow.ui
 
-INCLUDEPATH += project sdk/math modules components components/gui
+INCLUDEPATH += \
+    components \
+    components/gui \
+    components/hosting \
+    components/button \
+    components/checkbox \
+    components/enum \
+    components/float \
+    components/group \
+    components/int \
+    components/object \
+    components/page \
+    components/raster \
+    components/separator \
+    components/string \
+    components/text
+
+INCLUDEPATH += project sdk/math modules
 INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
 
 # GLM
 INCLUDEPATH += ./ libs/glm libs/glm/gtx
 
 SOURCES += \
-    components/gui/xgui.cpp \
-    components/gui/xguibutton.cpp \
-    components/gui/xguicheckbox.cpp \
-    components/gui/xguienum.cpp \
-    components/gui/xguifloat.cpp \
-    components/gui/xguiint.cpp \
-    components/gui/xguiobject.cpp \
-    components/gui/xguipage.cpp \
-    components/gui/xguiraster.cpp \
-    components/gui/xguiseparator.cpp \
-    components/gui/xguistring.cpp \
-    components/gui/xguitext.cpp \
+    components/button/xguibutton.cpp \
+    components/button/xitembutton.cpp \
+    components/checkbox/xguicheckbox.cpp \
+    components/checkbox/xitemcheckbox.cpp \
+    components/enum/xguienum.cpp \
+    components/enum/xitemenum.cpp \
+    components/float/xguifloat.cpp \
+    components/float/xitemfloat.cpp \
+    components/group/xitemgroup.cpp \
+    components/int/xguiint.cpp \
+    components/int/xitemint.cpp \
+    components/itempopupmenu.cpp \
+    components/object/xguiobject.cpp \
+    components/object/xitemobject.cpp \
+    components/page/xguipage.cpp \
+    components/page/xitempage.cpp \
+    components/raster/xguiraster.cpp \
+    components/raster/xitemraster.cpp \
     components/registrarxitem.cpp \
+    components/separator/xguiseparator.cpp \
+    components/separator/xitemseparator.cpp \
+    components/string/xguistring.cpp \
+    components/string/xitemstring.cpp \
+    components/text/xguitext.cpp \
+    components/text/xitemtext.cpp \
+    components/visibilitygroups.cpp \
+    components/xgui.cpp \
+    components/xguieditor.cpp \
     components/xitem.cpp \
-    components/xitembutton.cpp \
-    components/xitemcheckbox.cpp \
-    components/xitemenum.cpp \
-    components/xitemfloat.cpp \
-    components/xitemgroup.cpp \
-    components/xitemint.cpp \
-    components/xitemobject.cpp \
-    components/xitempage.cpp \
-    components/xitemraster.cpp \
-    components/xitemseparator.cpp \
-    components/xitemstring.cpp \
-    components/xitemtext.cpp \
     host/mainwindow.cpp \
     host/recentfiles.cpp \
     host/xclu_paths.cpp \
@@ -143,7 +163,6 @@ SOURCES += \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
     sdk/xmodule.cpp \
-    components/visibilitygroups.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
@@ -161,7 +180,6 @@ SOURCES += \
     host/dialogs/dialogpreferences.cpp \
     host/dialogs/dialogrenamemodule.cpp \
     host/dialogs/dialogtestmoduleinterface.cpp \
-    host/editormodule.cpp \
     host/editormodules.cpp \
     host/dialogs/dialogaddmodule.cpp \
     host/projectgui.cpp \
@@ -169,32 +187,35 @@ SOURCES += \
     sdk/xclass.cpp
 
 HEADERS += \
-    components/gui/xgui.h \
-    components/gui/xguibutton.h \
-    components/gui/xguicheckbox.h \
-    components/gui/xguienum.h \
-    components/gui/xguifloat.h \
-    components/gui/xguiint.h \
-    components/gui/xguiobject.h \
-    components/gui/xguipage.h \
-    components/gui/xguiraster.h \
-    components/gui/xguiseparator.h \
-    components/gui/xguistring.h \
-    components/gui/xguitext.h \
+    components/button/xguibutton.h \
+    components/button/xitembutton.h \
+    components/checkbox/xguicheckbox.h \
+    components/checkbox/xitemcheckbox.h \
+    components/enum/xguienum.h \
+    components/enum/xitemenum.h \
+    components/float/xguifloat.h \
+    components/float/xitemfloat.h \
+    components/group/xitemgroup.h \
+    components/int/xguiint.h \
+    components/int/xitemint.h \
+    components/itempopupmenu.h \
+    components/object/xguiobject.h \
+    components/object/xitemobject.h \
+    components/page/xguipage.h \
+    components/page/xitempage.h \
+    components/raster/xguiraster.h \
+    components/raster/xitemraster.h \
     components/registrarxitem.h \
+    components/separator/xguiseparator.h \
+    components/separator/xitemseparator.h \
+    components/string/xguistring.h \
+    components/string/xitemstring.h \
+    components/text/xguitext.h \
+    components/text/xitemtext.h \
+    components/visibilitygroups.h \
+    components/xgui.h \
+    components/xguieditor.h \
     components/xitem.h \
-    components/xitembutton.h \
-    components/xitemcheckbox.h \
-    components/xitemenum.h \
-    components/xitemfloat.h \
-    components/xitemgroup.h \
-    components/xitemint.h \
-    components/xitemobject.h \
-    components/xitempage.h \
-    components/xitemraster.h \
-    components/xitemseparator.h \
-    components/xitemstring.h \
-    components/xitemtext.h \
     host/mainwindow.h \
     host/recentfiles.h \
     host/xclu_paths.h \
@@ -228,7 +249,6 @@ HEADERS += \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
     sdk/xmodule.h \
-    components/visibilitygroups.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \
@@ -245,7 +265,6 @@ HEADERS += \
     host/dialogs/dialogpreferences.h \
     host/dialogs/dialogrenamemodule.h \
     host/dialogs/dialogtestmoduleinterface.h \
-    host/editormodule.h \
     host/editormodules.h \
     host/dialogs/dialogaddmodule.h \
     host/projectgui.h \

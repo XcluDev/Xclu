@@ -12,7 +12,7 @@ ProjectGui::ProjectGui(QWidget *parent, QMenu *modulesMenu)
     :QWidget(parent)
 {
     editor_modules = new EditorModules(nullptr, modulesMenu);
-    editor_module = new EditorModule(nullptr);
+    editor_module = new XGuiEditor(nullptr);
     CONS_VIEW = new ConsoleView(nullptr);
 
     //CONS_VIEW->setVisible(false);

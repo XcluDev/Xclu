@@ -8,7 +8,7 @@
 #include "moduleinterface.h"
 #include "xmodule.h"
 
-class EditorModule;
+class XGuiEditor;
 class QJsonObject;
 class XStruct;
 
@@ -101,7 +101,7 @@ public:
     XProtectedStruct *get_object(QString name);
 
     //сигнал, что GUI подключен/отключен
-    void gui_attached(EditorModule *editor);
+    void gui_attached(XGuiEditor *editor);
     void gui_detached();
     bool is_gui_attached();
 

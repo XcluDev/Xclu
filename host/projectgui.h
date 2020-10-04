@@ -4,7 +4,7 @@
 //Визуальное представление проекта, и управление списком модулей и редактором
 
 #include <QWidget>
-#include "editormodule.h"
+#include "xguieditor.h"
 #include "editormodules.h"
 
 QT_BEGIN_NAMESPACE
@@ -47,7 +47,7 @@ public:
 
 protected:
     EditorModules *editor_modules; //Редактор списка модулей проекта
-    EditorModule *editor_module;  //Редактор параметров
+    XGuiEditor *editor_module;  //Редактор параметров
 
     void properties_from_gui();
     void properties_to_gui();

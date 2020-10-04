@@ -5,7 +5,7 @@
 #include "project.h"
 #include "moduleseed.h"
 #include "moduleinterface.h"
-#include "editormodule.h"
+#include "xguieditor.h"
 #include "exportinterface.h"
 
 DialogTestModuleInterface *D_TEST_MODULE_INTERFACE;
@@ -59,7 +59,7 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
     folder_edit_->setMaximumHeight(hmin);
 
     //Редактор параметров
-    editor_ = new EditorModule(nullptr);
+    editor_ = new XGuiEditor(nullptr);
 
     //Сборка layout диалога
     setLayout(xclu::vlayout(-1,

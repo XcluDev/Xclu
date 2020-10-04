@@ -143,8 +143,6 @@ protected slots:
     virtual void on_value_changed();
 
     void customMenuRequested(QPoint pos);
-protected:
-    QScopedPointer<QMenu> context_menu_;
 };
 
 #endif // INTERFACEITEMGUI_H

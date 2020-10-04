@@ -1,12 +1,12 @@
 #include "qt_widgets.h"
-#include "editormodule.h"
+#include "xguieditor.h"
 #include "project.h"
 #include "incl_cpp.h"
 #include "xguipage.h"
 #include "visibilitygroups.h"
 
 //---------------------------------------------------------------------
-EditorModule::EditorModule(QWidget *parent)
+XGuiEditor::XGuiEditor(QWidget *parent)
     :QWidget(parent)
 {
     //Редактор параметров
@@ -50,7 +50,7 @@ EditorModule::EditorModule(QWidget *parent)
 
 //---------------------------------------------------------------------
 //сигнал, что модуль сменился и нужно загрузить новый модуль
-void EditorModule::changed_module_selection(int i) {
+void XGuiEditor::changed_module_selection(int i) {
     bool can_return_null = true;
     Module *module = PROJ.module_by_index(i, can_return_null);
     if (module != module_) {
@@ -61,17 +61,17 @@ void EditorModule::changed_module_selection(int i) {
 
 //---------------------------------------------------------------------
 //сигнал, что модуль был переименован
-void EditorModule::renamed_module() {
+void XGuiEditor::renamed_module() {
     reload_name();
 }
 
 //---------------------------------------------------------------------
-Module *EditorModule::module() {
+Module *XGuiEditor::module() {
     return module_;
 }
 
 //---------------------------------------------------------------------
-void EditorModule::reload_name() { //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
+void XGuiEditor::reload_name() { //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
     if (module_) {
         QString title = QString("%1: %2")
                 .arg(module_->name()).
@@ -93,17 +93,17 @@ void EditorModule::reload_name() { //обновить имя и класс мо�
 }
 
 //---------------------------------------------------------------------
-void EditorModule::before_close_project() {
+void XGuiEditor::before_close_project() {
     detach();
 }
 
 //---------------------------------------------------------------------
-void EditorModule::after_close_project() {
+void XGuiEditor::after_close_project() {
 
 }
 
 //---------------------------------------------------------------------
-void EditorModule::detach() {
+void XGuiEditor::detach() {
     if (module_) {
         //отключаем от модуля
         module_->gui_action(GuiStageBeforeGuiDetached);
@@ -122,7 +122,7 @@ void EditorModule::detach() {
 
 //---------------------------------------------------------------------
 //создать GUI модуля
-void EditorModule::load_module(Module *module) {
+void XGuiEditor::load_module(Module *module) {
     if (!module) {
         detach();
         return;
@@ -153,7 +153,7 @@ void EditorModule::load_module(Module *module) {
 //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
 //но для кастомного применения, например, тестирования интерфейса - это нужно
 
-void EditorModule::load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
+void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
     detach();   //внимание - тут делается detach, поэтому module_ ставится в nullptr
 
     //ModuleDescription &descr = interf->description();
@@ -219,21 +219,21 @@ void EditorModule::load_module(ModuleSeed *info, ModuleInterface *interf, QStrin
 }
 
 //---------------------------------------------------------------------
-EditorModuleState EditorModule::state() {
+EditorModuleState XGuiEditor::state() {
     EditorModuleState s;
     s.tab_index = tabs->currentIndex();
     return s;
 }
 
 //---------------------------------------------------------------------
-void EditorModule::set_state(EditorModuleState state) {
+void XGuiEditor::set_state(EditorModuleState state) {
     tabs->setCurrentIndex(state.tab_index);
 }
 
 //---------------------------------------------------------------------
 //Отслеживание изменений, чтобы пометить, что проект был изменен
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
-void EditorModule::on_value_changed() {
+void XGuiEditor::on_value_changed() {
     xclu_document_modified();
 }
 
