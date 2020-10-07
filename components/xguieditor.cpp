@@ -4,6 +4,7 @@
 #include "incl_cpp.h"
 #include "xguipage.h"
 #include "visibilitygroups.h"
+#include "componentpopupmenu.h"
 
 //---------------------------------------------------------------------
 XGuiEditor::XGuiEditor(QWidget *parent)

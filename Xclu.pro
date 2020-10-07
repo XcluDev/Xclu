@@ -109,6 +109,7 @@ SOURCES += \
     components/button/xitembutton.cpp \
     components/checkbox/xguicheckbox.cpp \
     components/checkbox/xitemcheckbox.cpp \
+    components/componentpopupmenu.cpp \
     components/enum/xguienum.cpp \
     components/enum/xitemenum.cpp \
     components/float/xguifloat.cpp \
@@ -116,7 +117,6 @@ SOURCES += \
     components/group/xitemgroup.cpp \
     components/int/xguiint.cpp \
     components/int/xitemint.cpp \
-    components/itempopupmenu.cpp \
     components/object/xguiobject.cpp \
     components/object/xitemobject.cpp \
     components/page/xguipage.cpp \
@@ -191,6 +191,7 @@ HEADERS += \
     components/button/xitembutton.h \
     components/checkbox/xguicheckbox.h \
     components/checkbox/xitemcheckbox.h \
+    components/componentpopupmenu.h \
     components/enum/xguienum.h \
     components/enum/xitemenum.h \
     components/float/xguifloat.h \
@@ -198,7 +199,6 @@ HEADERS += \
     components/group/xitemgroup.h \
     components/int/xguiint.h \
     components/int/xitemint.h \
-    components/itempopupmenu.h \
     components/object/xguiobject.h \
     components/object/xitemobject.h \
     components/page/xguipage.h \
@@ -232,6 +232,8 @@ HEADERS += \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
+    sdk/sdk_cpp.h \
+    sdk/sdk_h.h \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
     sdk/types/xraster.h \
@@ -243,8 +245,6 @@ HEADERS += \
     sdk/utility/incl_h.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
-    sdk/utility/sdk_cpp.h \
-    sdk/utility/sdk_h.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
