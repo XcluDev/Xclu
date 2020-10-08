@@ -49,6 +49,7 @@ public slots:
     //сигнал, что модуль был переименован
     void renamed_module();
 
+public:
     //used module
     Module *module();
 

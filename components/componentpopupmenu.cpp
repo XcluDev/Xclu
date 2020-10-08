@@ -1,30 +1,19 @@
-#include "componentpopupmenu.h"
-
+#include <QWidget>
+#include <QMenu>
+#include <QAction>
 #include "incl_cpp.h"
+#include "componentpopupmenu.h"
+#include "xgui.h"
 
-ComponentPopupMenu COMPONENT_POPUP;
+ComponentPopupMenu *COMPONENT_POPUP;
 
-
-/*
-    context_menu_.reset(new QMenu(this));
-    for (auto &s: arr) {
-        context_menu_->addAction(new QAction(s, this));
+//---------------------------------------------------------------------
+/*static*/ ComponentPopupMenu *ComponentPopupMenu::COMP_MENU() {
+    if (!COMPONENT_POPUP) {
+        COMPONENT_POPUP = new ComponentPopupMenu();
     }
-    context_menu_->popup(label_->mapToGlobal(pos));
-
-    //qDebug() << "popup menu for" << item__->name() << pos.x() << pos.y();
-
-    ComponentPopupMenu_none = -1,
-    ComponentPopupMenu_edit_link = 0,
-    ComponentPopupMenu_link_enabled = 1,
-    ComponentPopupMenu_copy_link = 2,
-    ComponentPopupMenu_paste_link = 3,
-    ComponentPopupMenu_reset_default_value = 4,
-    ComponentPopupMenu_set_size = 5,
-    ComponentPopupMenu_N = 6
-
-*/
-
+    return COMPONENT_POPUP;
+}
 
 //---------------------------------------------------------------------
 /*
@@ -59,6 +48,30 @@ void ComponentPopupMenu::append(QString title, int id, bool enabled, bool visibl
                                 bool checkable, bool checked) {
     items_.append(ComponentPopupMenuItem(title, id, enabled, visible, checkable, checked));
 }
+
+//---------------------------------------------------------------------
+//Gui should call this when switching modules, so `responder` is no valid
+void ComponentPopupMenu::clear() {
+    menu_.reset();
+}
+
+//---------------------------------------------------------------------
+//Create and show popup menu asyncr. The clicked action will be sent to `responder` as "on_component_popup_menu()
+void ComponentPopupMenu::show_menu(XGui *responder, QWidget *parent, const QPoint &pos) {
+    menu_.reset(new QMenu(parent));
+    for (auto &item: items_) {
+        QAction *a = new QAction();
+        a->setText(item.title);
+        a->setData(item.id_);
+        menu_->addAction(a);
+        connect(a, &QAction::triggered, responder, &XGui::on_component_popup_menu);
+    }
+
+    menu_->popup(pos);
+
+    //qDebug() << "popup menu for" << item__->name() << pos.x() << pos.y();
+}
+
 
 //---------------------------------------------------------------------
 

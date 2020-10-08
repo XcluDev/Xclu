@@ -1,0 +1,384 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Test",
+                "name": "test1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "const_check",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "in_check",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "out_check",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "float1",
+                        "avalue": "1.1"
+                    },
+                    {
+                        "aname": "float2",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "float3",
+                        "avalue": "3.3"
+                    },
+                    {
+                        "aname": "int1",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "int2",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "int3",
+                        "avalue": "3"
+                    },
+                    {
+                        "aname": "string1",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "string2",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "string3",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "list1",
+                        "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "list2",
+                        "avalue": "By_Name"
+                    },
+                    {
+                        "aname": "list3",
+                        "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "text1",
+                        "avalue": "This is a text example\nContinued..."
+                    },
+                    {
+                        "aname": "text2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "text3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Choose_Files",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "choose:file",
+                        "avalue": "aa"
+                    },
+                    {
+                        "aname": "choose_Folder",
+                        "avalue": "aa"
+                    },
+                    {
+                        "aname": "Conditional_GUI",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Int"
+                    },
+                    {
+                        "aname": "numbered",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "number_text",
+                        "avalue": "111\n222\n333"
+                    },
+                    {
+                        "aname": "stringed",
+                        "avalue": "abcde"
+                    },
+                    {
+                        "aname": "string_text",
+                        "avalue": "aaa\nbbb\nccc"
+                    },
+                    {
+                        "aname": "Callback",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "callback_modules",
+                        "avalue": "#id of modules to execute"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Test",
+                "name": "test2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "const_check",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "in_check",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "out_check",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "float1",
+                        "avalue": "1.1"
+                    },
+                    {
+                        "aname": "float2",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "float3",
+                        "avalue": "3.3"
+                    },
+                    {
+                        "aname": "int1",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "int2",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "int3",
+                        "avalue": "3"
+                    },
+                    {
+                        "aname": "string1",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "string2",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "string3",
+                        "avalue": "Abc"
+                    },
+                    {
+                        "aname": "list1",
+                        "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "list2",
+                        "avalue": "By_Name"
+                    },
+                    {
+                        "aname": "list3",
+                        "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "text1",
+                        "avalue": "This is a text example\nContinued..."
+                    },
+                    {
+                        "aname": "text2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "text3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "object",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Choose_Files",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "choose:file",
+                        "avalue": "aa"
+                    },
+                    {
+                        "aname": "choose_Folder",
+                        "avalue": "aa"
+                    },
+                    {
+                        "aname": "Conditional_GUI",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Int"
+                    },
+                    {
+                        "aname": "numbered",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "number_text",
+                        "avalue": "111\n222\n333"
+                    },
+                    {
+                        "aname": "stringed",
+                        "avalue": "abcde"
+                    },
+                    {
+                        "aname": "string_text",
+                        "avalue": "aaa\nbbb\nccc"
+                    },
+                    {
+                        "aname": "Callback",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "callback_modules",
+                        "avalue": "#id of modules to execute"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "links_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "links",
+                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -69,6 +69,10 @@ public:
     //сигнал послать данные об изменении видимости - высылается после первой установки значения в переменную
     void propagate_visibility();
 
+public slots:
+    //signal from popup menu, action->data().toInt() is ComponentPopupMenuEnum
+    void on_component_popup_menu();
+
 protected:
     //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
     XItem *item__ = nullptr;
@@ -142,6 +146,7 @@ protected slots:
     //также, они могут переопределять их для собственных целей, но обязательно вызывать этот базовый метод
     virtual void on_value_changed();
 
+    //show popup menu
     void customMenuRequested(QPoint pos);
 };
 

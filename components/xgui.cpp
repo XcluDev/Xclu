@@ -3,6 +3,7 @@
 #include "incl_cpp.h"
 #include "xitem.h"
 #include "visibilitygroups.h"
+#include "componentpopupmenu.h"
 
 //---------------------------------------------------------------------
 XGui::XGui(XGuiPageCreator &input, XItem * item)
@@ -82,7 +83,24 @@ void XGui::insert_label(XGuiPageCreator &input) {
 }
 
 //---------------------------------------------------------------------
+//show popup menu
 void XGui::customMenuRequested(QPoint pos){
+    xclu_assert(label_, "XGui::customMenuRequested - empty label_, can't compute menu position");
+    ComponentPopupMenu::COMP_MENU()->setup(true, true, true, true);
+    ComponentPopupMenu::COMP_MENU()->show_menu(this, label_, label_->mapToGlobal(pos));
+}
+
+//---------------------------------------------------------------------
+//signal from popup menu, action->data().toInt() is ComponentPopupMenuEnum
+void XGui::on_component_popup_menu() {
+    if (const QAction *action = qobject_cast<const QAction *>(sender())) {
+        int id = action->data().toInt();
+        xclu_console_append(QString("Popup %1").arg(id));
+    }
+    else {
+      xclu_exception("Error casting action at XGui::on_component_popup_menu");
+    }
+
 
 
 }
