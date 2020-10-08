@@ -1,18 +1,18 @@
 #ifndef INTERFACEITEMSTRING_H
 #define INTERFACEITEMSTRING_H
 
-#include "xitem.h"
+#include "xitemscalar.h"
 
 class ModuleInterface;
 
-class XItemString: public XItem
+class XItemString: public XItemScalar_<QString>
 {
 public:
     XItemString(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
-    QString value_string() { return value_; }
-    void set_value_string(const QString &value) { value_ = value;}
+    QString value_string() { return value_read().data(); }
+    void set_value_string(const QString &value) { value_write().data() = value; }
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
@@ -22,16 +22,11 @@ public:
     bool options_choose_file();     //кнопка выбора файла
     bool options_choose_folder();   //кнопка выбора папки
 
-    //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
-
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
     //-----------------------------
 
 protected:
-    QString value_;
     QString default_value_;
 
 protected:

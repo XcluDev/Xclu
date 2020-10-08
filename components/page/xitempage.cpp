@@ -31,13 +31,6 @@ void XItemPage::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemPage::component_popup_info() {
-    return ComponentPopupMenuInfo(false, false, false, false);
-}
-
-//---------------------------------------------------------------------
 //C++
 void XItemPage::export_interface(QStringList &file) {
     export_interface_template(file, true, true, "Page ");

@@ -17,7 +17,7 @@ REGISTER_XITEM(XItemText, text)
 //в виде строк, ограниченных " " - чтобы триммер строк не съел пробелы в конце.
 
 XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItemScalar_<QString>(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -30,7 +30,7 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
     lines_count_max_ = parse_int(query.at(1), "max lines count must be an integer, '... 10 15'");
 
     //устанавливаем значение в значение по умолчанию
-    value_ = default_value();
+    set_value_string(default_value());
 }
 
 //---------------------------------------------------------------------
@@ -71,13 +71,6 @@ QString XItemText::default_value() {
         }
     }
     return list.join("\n");
-}
-
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemText::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
 }
 
 //---------------------------------------------------------------------

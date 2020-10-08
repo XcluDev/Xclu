@@ -28,7 +28,7 @@ REGISTER_XITEM(XItemString, string)
 
 
 XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem(interf, pre_description)
+    : XItemScalar_<QString>(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -46,7 +46,7 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
     default_value_ = default_value_.mid(1);
     default_value_.chop(1);
 
-    value_ = default_value_;
+    set_value_string(default_value_);
 
     //опции
     QString options = pre_description.options;
@@ -94,13 +94,6 @@ bool XItemString::options_choose_file() {     //кнопка выбора фай
 //---------------------------------------------------------------------
 bool XItemString::options_choose_folder() {   //кнопка выбора папки
     return options_choose_folder_;
-}
-
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemString::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
 }
 
 //---------------------------------------------------------------------

@@ -9,7 +9,7 @@ REGISTER_XITEM(XItemFloat, float)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem_<float>(interf, pre_description)
+    : XItemScalar_<float>(interf, pre_description)
 {
 
     QString line = pre_description.line_to_parse;
@@ -62,13 +62,6 @@ void XItemFloat::gui_to_var_internal() {
 //установка значения в gui
 void XItemFloat::var_to_gui_internal() {
     ((XGuiFloat *)gui__)->set_value(value_float());
-}
-
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemFloat::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
 }
 
 //---------------------------------------------------------------------

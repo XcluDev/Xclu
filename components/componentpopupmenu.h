@@ -61,10 +61,10 @@ struct ComponentPopupMenuInfo {
         this->has_default_value = has_default_value;
         this->has_set_size = has_set_size;
     }
-    bool can_use_link = true;
-    bool link_enabled_checked = true;
-    bool has_default_value = true;
-    bool has_set_size = true;
+    bool can_use_link = false;
+    bool link_enabled_checked = false;
+    bool has_default_value = false;
+    bool has_set_size = false;
 };
 
 //Class for generating popup menu

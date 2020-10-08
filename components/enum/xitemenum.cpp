@@ -12,7 +12,7 @@ REGISTER_XITEM(XItemEnum, enum)
 //      //mm                       опционально - единица измерения, показывается справа
 
 XItemEnum::XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem_<int>(interf, pre_description)
+    : XItemScalar_<int>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -125,13 +125,6 @@ void XItemEnum::gui_to_var_internal() {
 //установка значения в gui
 void XItemEnum::var_to_gui_internal() {
     ((XGuiEnum *)gui__)->set_index(value_int());
-}
-
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemEnum::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
 }
 
 //---------------------------------------------------------------------

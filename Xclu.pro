@@ -134,6 +134,7 @@ SOURCES += \
     components/xgui.cpp \
     components/xguieditor.cpp \
     components/xitem.cpp \
+    components/xitemscalar.cpp \
     host/mainwindow.cpp \
     host/recentfiles.cpp \
     host/xclu_paths.cpp \
@@ -216,6 +217,7 @@ HEADERS += \
     components/xgui.h \
     components/xguieditor.h \
     components/xitem.h \
+    components/xitemscalar.h \
     host/mainwindow.h \
     host/recentfiles.h \
     host/xclu_paths.h \

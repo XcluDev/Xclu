@@ -1,11 +1,11 @@
 #ifndef INTERFACEITEMENUM_H
 #define INTERFACEITEMENUM_H
 
-#include "xitem.h"
+#include "xitemscalar.h"
 
 class ModuleInterface;
 
-class XItemEnum: public XItem_<int>
+class XItemEnum: public XItemScalar_<int>
 {
 public:
     XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -30,10 +30,6 @@ public:
 
     //единицы измерения
     QString units() { return units_; }
-
-    //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);

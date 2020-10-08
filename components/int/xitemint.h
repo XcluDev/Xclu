@@ -1,11 +1,11 @@
 #ifndef INTERFACEITEMINT_H
 #define INTERFACEITEMINT_H
 
-#include "xitem.h"
+#include "xitemscalar.h"
 
 class ModuleInterface;
 
-class XItemInt: public XItem_<int>
+class XItemInt: public XItemScalar_<int>
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -28,10 +28,6 @@ public:
 
     //единицы измерения
     QString units() { return units_; }
-
-    //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);

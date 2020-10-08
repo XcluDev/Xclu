@@ -14,7 +14,7 @@ REGISTER_XITEM(XItemCheckbox, checkbox)
 //- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
 
 XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem_<int>(interf, pre_description)
+    : XItemScalar_<int>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -53,13 +53,6 @@ void XItemCheckbox::gui_to_var_internal() {
 //установка значения в gui
 void XItemCheckbox::var_to_gui_internal() {
     ((XGuiCheckbox *)gui__)->set_value(value_int());
-}
-
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemCheckbox::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
 }
 
 //---------------------------------------------------------------------

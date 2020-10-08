@@ -1,19 +1,18 @@
 #ifndef INTERFACEITEMTEXT_H
 #define INTERFACEITEMTEXT_H
 
-#include "xitem.h"
+#include "xitemscalar.h"
 
 class ModuleInterface;
 
-class XItemText: public XItem
+class XItemText: public XItemScalar_<QString>
 {
 public:
     XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
-    QString value_string() { return value_; }
-    void set_value_string(const QString &value) { value_ = value; }
-
+    QString value_string() { return value_read().data(); }
+    void set_value_string(const QString &value) { value_write().data() = value; }
 
     //значение по умолчаию
     QString default_value();
@@ -23,16 +22,12 @@ public:
     int lines_count_min() { return lines_count_min_; }
     int lines_count_max() { return lines_count_max_; }
 
-    //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
-
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
     //-----------------------------
 
 protected:
-    QString value_;
+    //QString value_;
 
     int lines_count_min_ = 1;
     int lines_count_max_ = 1;

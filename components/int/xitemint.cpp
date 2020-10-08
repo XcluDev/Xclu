@@ -10,7 +10,7 @@ REGISTER_XITEM(XItemInt, int)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
-    : XItem_<int>(interf, pre_description)
+    : XItemScalar_<int>(interf, pre_description)
 {    
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -61,12 +61,6 @@ void XItemInt::var_to_gui_internal() {
     ((XGuiInt *)gui__)->set_value(value_int());
 }
 
-//---------------------------------------------------------------------
-//Context menu
-//Each component must provide information about its menu
-ComponentPopupMenuInfo XItemInt::component_popup_info() {
-    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
-}
 
 //---------------------------------------------------------------------
 //C++

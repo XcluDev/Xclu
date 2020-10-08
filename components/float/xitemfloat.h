@@ -1,11 +1,11 @@
 #ifndef INTERFACEITEMFLOAT_H
 #define INTERFACEITEMFLOAT_H
 
-#include "xitem.h"
+#include "xitemscalar.h"
 
 class ModuleInterface;
 
-class XItemFloat: public XItem_<float>
+class XItemFloat: public XItemScalar_<float>
 {
 public:
     XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description);
@@ -28,10 +28,6 @@ public:
 
     //единицы измерения
     QString units() { return units_; }
-
-    //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
