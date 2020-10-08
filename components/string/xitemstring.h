@@ -22,6 +22,10 @@ public:
     bool options_choose_file();     //кнопка выбора файла
     bool options_choose_folder();   //кнопка выбора папки
 
+    //Context menu ----------------
+    //Each component must provide information about its menu
+    virtual ComponentPopupMenuInfo component_popup_info();
+
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
     //-----------------------------

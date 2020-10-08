@@ -11,6 +11,13 @@ XItemGroup::XItemGroup(ModuleInterface *interf, const XItemPreDescription &pre_d
 }
 
 //---------------------------------------------------------------------
+//Context menu
+//Each component must provide information about its menu
+ComponentPopupMenuInfo XItemGroup::component_popup_info() {
+    return ComponentPopupMenuInfo(false, false, false, false);
+}
+
+//---------------------------------------------------------------------
 //C++
 void XItemGroup::export_interface(QStringList & /*file*/) {
 

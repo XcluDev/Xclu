@@ -27,6 +27,10 @@ public:
     //это "групповой" чекбокс, который нужно показывать слева, без label, и справа от которого идет линия
     bool is_group_checkbox() { return is_group_checkbox_; }
 
+    //Context menu ----------------
+    //Each component must provide information about its menu
+    virtual ComponentPopupMenuInfo component_popup_info();
+
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
     //-----------------------------

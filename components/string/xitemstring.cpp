@@ -97,6 +97,13 @@ bool XItemString::options_choose_folder() {   //кнопка выбора пап
 }
 
 //---------------------------------------------------------------------
+//Context menu
+//Each component must provide information about its menu
+ComponentPopupMenuInfo XItemString::component_popup_info() {
+    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
+}
+
+//---------------------------------------------------------------------
 //C++
 void XItemString::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "String ", true,

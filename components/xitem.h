@@ -8,6 +8,7 @@
 #include "incl_h.h"
 #include "xref.h"
 #include "xstruct.h"
+#include "componentpopupmenu.h"
 
 struct XGuiPageCreator;
 class XGui;
@@ -150,47 +151,21 @@ public:
     //Belonging to general page, common for all modules
     void set_belongs_general_page(bool v);
     bool belongs_general_page();
+
+    //Context menu ----------------
+    //Each component must provide information about its menu
+    virtual ComponentPopupMenuInfo component_popup_info() { return ComponentPopupMenuInfo(); }
+
     //C++ -------------------------
-    //function generates function or functions definitions
+    //function `export_interface` generates function or functions definitions
     //for using inside C++ class module definition
-    /*
     //----------------------------------------------------
-    //Page Main
-    //...
-
-    //Folder to scan.
-    QString gets_folder() {...}
-    void sets_folder(QString value) {...}
-
-    //Enum Position
-    //Position of the window.
-    enum enum_position {
-        position_Default = 0,
-        position_Custom = 1,
-        position_Screen_Center = 2,
-        position_N__ = 3
-    };
-    bool was_changed_position() { ... }
-    enum_position gete_position() { ... }
-
-    Function names begin with prefix denoting type of the item as the following:
-
-    * `geti_...`, `seti_...` - int, button, checkbox
-    * `gete_...`, `sete_...` - enum
-    * `getf_...`,`setf_...` - float
-    * `gets_...`, `sets_...` - string, text
-    * `getstruct_...` - object
-
-    Also are defined the following functions:
-    * `was_changed_...` - all items,
-    * `clear_string_...`, `append_string_...` - out string, out text,
-    * `increase_int_...` - out int
-     */
+    virtual void export_interface(QStringList &file);
     //Subclasses must reimplement it, in opposite case the exception will arise.
     //export_interface_template() - useful helper for this
     //Note: only items which are not belong to general page, that is belongs_general_page() == false
     //are exported by default
-    virtual void export_interface(QStringList &file);
+
 
 protected:
     //доступ ко всему интерфейсу

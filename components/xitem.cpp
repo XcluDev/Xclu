@@ -438,8 +438,42 @@ bool XItem::belongs_general_page() {
 }
 
 //---------------------------------------------------------------------
-//function generates function or functions definitions
+//function `export_interface` generates function or functions definitions
 //Subclasses must reimplement it, in opposite case the exception will arise.
+
+/* The example generation:
+//Page Main
+//...
+
+//Folder to scan.
+QString gets_folder() {...}
+void sets_folder(QString value) {...}
+
+//Enum Position
+//Position of the window.
+enum enum_position {
+    position_Default = 0,
+    position_Custom = 1,
+    position_Screen_Center = 2,
+    position_N__ = 3
+};
+bool was_changed_position() { ... }
+enum_position gete_position() { ... }
+
+Function names begin with prefix denoting type of the item as the following:
+
+* `geti_...`, `seti_...` - int, button, checkbox
+* `gete_...`, `sete_...` - enum
+* `getf_...`,`setf_...` - float
+* `gets_...`, `sets_...` - string, text
+* `getstruct_...` - object
+
+Also are defined the following functions:
+* `was_changed_...` - all items,
+* `clear_string_...`, `append_string_...` - out string, out text,
+* `increase_int_...` - out int
+ */
+
 void XItem::export_interface(QStringList & /*file*/) {
     xclu_exception("Can't generate C++ header for interface element of type `" + type() + "'");
 }

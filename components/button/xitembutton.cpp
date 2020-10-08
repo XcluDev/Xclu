@@ -35,6 +35,13 @@ void XItemButton::callback_button_pressed() {
 }
 
 //---------------------------------------------------------------------
+//Context menu
+//Each component must provide information about its menu
+ComponentPopupMenuInfo XItemButton::component_popup_info() {
+    return ComponentPopupMenuInfo(!is_out(), false, false, false);
+}
+
+//---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XItemButton::value_int() {
     auto v_write = value_write();

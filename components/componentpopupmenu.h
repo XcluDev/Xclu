@@ -50,7 +50,21 @@ struct ComponentPopupMenuItem {
     bool checkable = false;
     bool checked = false;
     int id_ = ComponentPopupMenu_none;    //for access after pressing
+};
 
+//Item-dependent information for creating popup menu
+struct ComponentPopupMenuInfo {
+    ComponentPopupMenuInfo() {}
+    ComponentPopupMenuInfo(bool can_use_link, bool link_enabled_checked, bool has_default_value, bool has_set_size) {
+        this->can_use_link = can_use_link;
+        this->link_enabled_checked = link_enabled_checked;
+        this->has_default_value = has_default_value;
+        this->has_set_size = has_set_size;
+    }
+    bool can_use_link = true;
+    bool link_enabled_checked = true;
+    bool has_default_value = true;
+    bool has_set_size = true;
 };
 
 //Class for generating popup menu
@@ -62,9 +76,9 @@ public:
     static ComponentPopupMenu *COMP_MENU();
 
     //prepare structure
-    void setup(bool can_use_link, bool link_enabled_checked, bool has_default_value, bool has_set_size);
+    void setup(const ComponentPopupMenuInfo &info);
 
-    //Create and show popup menu asyncr. The clicked action will be sent to `responder` as "on_component_popup_menu()
+    //Create and show popup menu asyncr. The clicked action will be sent to `responder` as "on_component_popup_action()
     void show_menu(XGui *responder, QWidget *parent, const QPoint &pos);
 
     //Gui should call this when switching modules, so `responder` is no valid

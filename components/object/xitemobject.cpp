@@ -68,6 +68,13 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 }
 
 //---------------------------------------------------------------------
+//Context menu
+//Each component must provide information about its menu
+ComponentPopupMenuInfo XItemObject::component_popup_info() {
+    return ComponentPopupMenuInfo(!is_out(), false, false, true);
+}
+
+//---------------------------------------------------------------------
 //C++
 //original: XStruct *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {

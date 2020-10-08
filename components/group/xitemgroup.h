@@ -14,6 +14,10 @@ public:
     //Когда сделаем сохранение - убрать
     bool store_data() { return false; }
 
+    //Context menu ----------------
+    //Each component must provide information about its menu
+    virtual ComponentPopupMenuInfo component_popup_info();
+
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
     //-----------------------------

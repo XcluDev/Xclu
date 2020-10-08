@@ -62,6 +62,13 @@ void XItemInt::var_to_gui_internal() {
 }
 
 //---------------------------------------------------------------------
+//Context menu
+//Each component must provide information about its menu
+ComponentPopupMenuInfo XItemInt::component_popup_info() {
+    return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
+}
+
+//---------------------------------------------------------------------
 //C++
 void XItemInt::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Int ", true,
