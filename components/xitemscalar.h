@@ -16,10 +16,8 @@ public:
     }
 
     //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info() {
-        return ComponentPopupMenuInfo(!is_out(), false, !is_out(), false);
-    }
+    //Scalars have default value!
+    virtual bool context_menu_has_set_default_value() { return !is_out(); }
 };
 
 #endif // XITEMSCALAR_H

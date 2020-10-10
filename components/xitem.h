@@ -8,7 +8,7 @@
 #include "incl_h.h"
 #include "xref.h"
 #include "xstruct.h"
-#include "componentpopupmenu.h"
+#include "componentcontextmenu.h"
 
 struct XGuiPageCreator;
 class XGui;
@@ -17,7 +17,7 @@ class XItem;
 class ModuleInterface;
 
 //---------------------------------------------------------------------
-//Preliminary information for contructing interface element
+//Preliminary information for constructing interface element
 class XItemPreDescription {
 public:
     QString title;
@@ -47,7 +47,7 @@ public:
 };
 
 //---------------------------------------------------------------------
-//Interface element
+//Module interface component
 class XItem {
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
@@ -123,11 +123,16 @@ public:
     void write_json(QJsonObject &json);
     void read_json(const QJsonObject &json);
 
+    //Link -------------------------
+    bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
+    bool is_use_link();     //use link
+    void set_use_link(bool v);
+    QString link();
+    void set_link(const QString &link);
 
     //Expression -------------------------
-    bool expression_enabled(); //требуется ли expression (для out - нет), используется при записи на диск
-
-    bool use_expression();  //используется ли expression для установки значения
+    bool is_expression_can_be_used(); //требуется ли expression (для out - нет), используется при записи на диск
+    bool is_use_expression();  //используется ли expression для установки значения
     void set_use_expression(bool v);
     QString expression();
     void set_expression(const QString &expr);
@@ -153,8 +158,17 @@ public:
     bool belongs_general_page();
 
     //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info() { return ComponentPopupMenuInfo(); }
+    //Common setting up of context menu
+    //It's filled using custom implementations of context_menu_has_set_default_value() and context_menu_has_set_size()
+    ComponentContextMenuInfo context_menu_info();
+
+    //Each component can provide information menu details
+    virtual bool context_menu_has_set_default_value() { return false; }
+    virtual bool context_menu_has_set_size() { return false; }
+
+    //Processing of context menu actions
+    //Subclasses must implement non-common actions and call parent method
+    virtual void context_menu_on_action(ComponentContextMenuEnum id, QString action_text);
 
     //C++ -------------------------
     //function `export_interface` generates function or functions definitions
@@ -188,6 +202,10 @@ protected:
     int last_int_ = 0;
     float last_float_ = 0;
     QString last_string_;
+
+    //Link info
+    bool use_link_ = false;
+    QString link_;
 
     //Выражения (в данный момент не поддерживаются)
     bool use_expression_ = false;

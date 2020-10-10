@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 #include "xitem.h"
 #include "visibilitygroups.h"
-#include "componentpopupmenu.h"
+#include "componentcontextmenu.h"
 
 //---------------------------------------------------------------------
 XGui::XGui(XGuiPageCreator &input, XItem * item)
@@ -87,23 +87,21 @@ void XGui::insert_label(XGuiPageCreator &input) {
 void XGui::customMenuRequested(QPoint pos){
     xclu_assert(label_, "XGui::customMenuRequested - empty label_, can't compute menu position");
     //Get information about menu
-    ComponentPopupMenu::COMP_MENU()->setup(item__->component_popup_info());
+    ComponentContextMenu::COMP_MENU()->setup(item__->context_menu_info());
     //Start menu async.
-    ComponentPopupMenu::COMP_MENU()->show_menu(this, label_, label_->mapToGlobal(pos));
+    ComponentContextMenu::COMP_MENU()->show_menu(this, label_, label_->mapToGlobal(pos));
 }
 
 //---------------------------------------------------------------------
-//signal from popup menu, action->data().toInt() is ComponentPopupMenuEnum
+//signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
 void XGui::on_component_popup_action() {
     if (const QAction *action = qobject_cast<const QAction *>(sender())) {
-        int id = action->data().toInt();
-        xclu_console_append(QString("Popup %1").arg(id));
+        ComponentContextMenuEnum id = (ComponentContextMenuEnum)action->data().toInt();
+        item__->context_menu_on_action(id, action->text());
     }
     else {
       xclu_exception("Error casting action at XGui::on_component_popup_action");
     }
-
-
 
 }
 

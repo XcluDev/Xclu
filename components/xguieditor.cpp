@@ -4,8 +4,8 @@
 #include "incl_cpp.h"
 #include "xguipage.h"
 #include "visibilitygroups.h"
-#include "componentpopupmenu.h"
-#include "componentpopupmenu.h"
+#include "componentcontextmenu.h"
+#include "componentcontextmenu.h"
 
 //---------------------------------------------------------------------
 XGuiEditor::XGuiEditor(QWidget *parent)
@@ -126,7 +126,7 @@ void XGuiEditor::detach() {
 //создать GUI модуля
 void XGuiEditor::load_module(Module *module) {
     //detach popup menu
-    ComponentPopupMenu::COMP_MENU()->clear();
+    ComponentContextMenu::COMP_MENU()->clear();
 
     //detach module
     if (!module) {

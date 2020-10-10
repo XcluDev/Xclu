@@ -202,13 +202,40 @@ int XItem::description_count() {
 }
 */
 
-//---------------------------------------------------------------------
-bool XItem::expression_enabled() {
-    return (qualifier_ != VarQualifierOut);
+//Link ----------------------------------------------------------------
+//can be link used (for out - no), used for project saving
+bool XItem::is_link_can_be_used() {
+    return (!is_out());
 }
 
 //---------------------------------------------------------------------
-bool XItem::use_expression() {  //используется ли expression для установки значения
+//use link
+bool XItem::is_use_link() {
+    return use_link_;
+}
+
+//---------------------------------------------------------------------
+void XItem::set_use_link(bool v) {
+    use_link_ = v;
+}
+
+//---------------------------------------------------------------------
+QString XItem::link() {
+    return link_;
+}
+
+//---------------------------------------------------------------------
+void XItem::set_link(const QString &link) {
+    link_ = link;
+}
+
+//Expression ----------------------------------------------------------
+bool XItem::is_expression_can_be_used() {
+    return (!is_out());
+}
+
+//---------------------------------------------------------------------
+bool XItem::is_use_expression() {  //используется ли expression для установки значения
     return use_expression_;
 }
 
@@ -291,7 +318,7 @@ bool XItem::is_gui_attached() {
 
 //---------------------------------------------------------------------
 void XItem::gui_to_var(bool evaluate_expr) { //вычисление expression и получение значения из gui
-    if (use_expression()) {
+    if (is_use_expression()) {
         if (evaluate_expr) {
             //... expression()
             //if (is_gui_attached()) {
@@ -308,7 +335,7 @@ void XItem::gui_to_var(bool evaluate_expr) { //вычисление expression �
 
 //---------------------------------------------------------------------
 void XItem::var_to_gui() { //установка значения в gui, также отправляет сигнал о видимости
-    //if (!use_expression()) {
+    //if (!is_use_expression()) {
     if (is_gui_attached()) {
         var_to_gui_internal();
         //отправляем сигнал о видимости
@@ -355,7 +382,7 @@ void XItem::copy_data_to(XItem *item) {
     xclu_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
                 + type() + "' and '" + item->type() + "'");
 
-    item->set_use_expression(use_expression());
+    item->set_use_expression(is_use_expression());
     item->set_expression(expression());
 
     //если можно пробросить через строку - делаем так
@@ -388,7 +415,7 @@ void XItem::write_json(QJsonObject &json) {
     //json["atitle"] = title_;
     //json["atype"] = interfacetype_to_string(type_);  //записываем, чтобы отловить ошибки при изменении интерфейса
 
-    //if (expression_enabled()) {
+    //if (is_expression_can_be_used()) {
         //json["expr_use"] = use_expression_;
         //json["expr"] = expression_;
    // }
@@ -418,7 +445,7 @@ void XItem::read_json(const QJsonObject &json) {
 
 
     //expression
-    //if (expression_enabled()) {
+    //if (is_expression_can_be_used()) {
     //    use_expression_ = JsonUtils::json_bool(json, "expr_use");
     //    expression_ = JsonUtils::json_string(json, "expr");
     //}
@@ -435,6 +462,43 @@ void XItem::set_belongs_general_page(bool v) {
 //---------------------------------------------------------------------
 bool XItem::belongs_general_page() {
     return belongs_general_page_;
+}
+
+//---------------------------------------------------------------------
+//Context menu
+ComponentContextMenuInfo XItem::context_menu_info() {
+    return ComponentContextMenuInfo(is_link_can_be_used(), is_use_link(),
+                                    context_menu_has_set_default_value(),
+                                    context_menu_has_set_size());
+}
+
+//---------------------------------------------------------------------
+//Processing the context menu actions
+//Subclasses must implement non-common actions and call parent method
+void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_text) {
+    switch (id) {
+    case ComponentContextMenu_use_input:
+        set_use_link(false);
+        break;
+    case ComponentContextMenu_use_link:
+        set_use_link(true);
+        break;
+    case ComponentContextMenu_edit_link:
+        break;
+    case ComponentContextMenu_paste_link:
+        break;
+    case ComponentContextMenu_copy_link:
+
+        break;
+    //this cases must be implemented in subclasses
+    case ComponentContextMenu_reset_default_value:
+    case ComponentContextMenu_set_size:
+        xclu_exception(QString("XGui::on_component_popup_action - not implemented response to `%1`").arg(action_text));
+        break;
+    default:
+        xclu_exception(QString("XGui::on_component_popup_action error - bad action `%1`").arg(action_text));
+    }
+
 }
 
 //---------------------------------------------------------------------

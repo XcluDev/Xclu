@@ -109,7 +109,7 @@ SOURCES += \
     components/button/xitembutton.cpp \
     components/checkbox/xguicheckbox.cpp \
     components/checkbox/xitemcheckbox.cpp \
-    components/componentpopupmenu.cpp \
+    components/componentcontextmenu.cpp \
     components/enum/xguienum.cpp \
     components/enum/xitemenum.cpp \
     components/float/xguifloat.cpp \
@@ -192,7 +192,7 @@ HEADERS += \
     components/button/xitembutton.h \
     components/checkbox/xguicheckbox.h \
     components/checkbox/xitemcheckbox.h \
-    components/componentpopupmenu.h \
+    components/componentcontextmenu.h \
     components/enum/xguienum.h \
     components/enum/xitemenum.h \
     components/float/xguifloat.h \

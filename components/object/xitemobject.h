@@ -31,8 +31,8 @@ public:
     virtual XGui *create_gui(XGuiPageCreator &input);
 
     //Context menu ----------------
-    //Each component must provide information about its menu
-    virtual ComponentPopupMenuInfo component_popup_info();
+    //Objects have size in GUI editor!
+    virtual bool context_menu_has_set_size() { return true; }
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);

@@ -147,7 +147,7 @@ protected slots:
     //show popup menu
     void customMenuRequested(QPoint pos);    
 public slots:
-    //signal from popup menu, action->data().toInt() is ComponentPopupMenuEnum
+    //signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
     void on_component_popup_action();
 
 };
