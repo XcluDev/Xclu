@@ -152,6 +152,7 @@ SOURCES += \
     modules/moduleseed.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
+    sdk/types/xlink.cpp \
     sdk/types/xraster.cpp \
     sdk/types/xref.cpp \
     sdk/types/xstruct.cpp \
@@ -238,6 +239,7 @@ HEADERS += \
     sdk/sdk_h.h \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
+    sdk/types/xlink.h \
     sdk/types/xraster.h \
     sdk/types/xref.h \
     sdk/types/xstruct.h \

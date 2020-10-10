@@ -35,6 +35,11 @@ void xclu_console_clear();
 //обращается прямо в MainWindow
 void xclu_document_modified();
 
+//Copy text to clipboard
+void xclu_clipboard_set_text(QString text);
+//Get text from clipboard
+QString xclu_clipboard_get_text();
+
 
 //Исключение внутри программы
 struct XCluException: public std::exception {

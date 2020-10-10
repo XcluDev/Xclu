@@ -17,13 +17,13 @@ ComponentContextMenu *COMPONENT_POPUP;
 
 //---------------------------------------------------------------------
 //Menu items:
+//    Copy Link: module3->input
+//    -----
 //    * Use User Input
 //    - Use Link: webcamera1->image
 //    -----
 //    Edit Link...
 //    Paste Link: webcamera2->image
-//    -----
-//    Copy Link: module3->input
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)
@@ -39,15 +39,17 @@ ComponentContextMenu *COMPONENT_POPUP;
 void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     items_.clear();
     was_added_ = false;
+    append(QString("Copy Link: '%1'").arg(info.link_to_itself), ComponentContextMenu_copy_link);
+    append_separator();
     if (info.can_use_link) {
         append("Use User Input", ComponentContextMenu_use_input, true, !info.use_link);
-        append("Use Link: ........................", ComponentContextMenu_use_link, true, info.use_link);
+        append(QString("Use Link: '%1'").arg(info.used_link), ComponentContextMenu_use_link, true, info.use_link);
         append_separator();
         append("Edit Link...", ComponentContextMenu_edit_link);
-        append("Paste Link", ComponentContextMenu_paste_link);
+
+        QString paste_link = XLink::get_link_from_clipboard();
+        append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
     }
-    append_separator();
-    append("Copy Link", ComponentContextMenu_copy_link);
     append_separator();
     if (info.has_default_value) {
         append("Reset to Default Value", ComponentContextMenu_reset_default_value);

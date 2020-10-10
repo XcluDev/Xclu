@@ -8,6 +8,7 @@
 #include "incl_h.h"
 #include "xref.h"
 #include "xstruct.h"
+#include "xlink.h"
 #include "componentcontextmenu.h"
 
 struct XGuiPageCreator;
@@ -124,6 +125,9 @@ public:
     void read_json(const QJsonObject &json);
 
     //Link -------------------------
+    //link to itself
+    XLink link_to_itself();
+
     bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
     bool is_use_link();     //use link
     void set_use_link(bool v);

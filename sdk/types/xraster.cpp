@@ -4,7 +4,7 @@
 #include <QImageReader>
 #include <QImageWriter>
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 /*XRaster_u8;
  XRaster_u8c3;
 XRaster_s8;
@@ -19,7 +19,7 @@ XRaster_vec3;
 XRaster_int2;
 */
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 #define XTypeId_XRaster_type_id(TYPE_RASTER, TYPE_ID) \
 template<> XTypeId TYPE_RASTER::type_id() { \
     return TYPE_ID; \
@@ -43,7 +43,7 @@ XTypeId_XRaster_type_id(XRaster_vec3, XTypeId_vec3)
 XTypeId_XRaster_type_id(XRaster_int2, XTypeId_int2)
 
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void raster_to_raster(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
     raster.allocate(raster_rgb.w, raster_rgb.h);
     for (int i=0; i<raster.w*raster.h; i++) {
@@ -51,7 +51,7 @@ void raster_to_raster(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
     }
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void raster_to_raster(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
     raster_rgb.allocate(raster.w, raster.h);
     for (int i=0; i<raster.w*raster.h; i++) {
@@ -59,7 +59,7 @@ void raster_to_raster(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
     }
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
     int w = qimage.size().width();
     int h = qimage.size().height();
@@ -85,7 +85,7 @@ void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
 }
 
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
     int w = qimage.size().width();
     int h = qimage.size().height();
@@ -111,7 +111,7 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
 
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8 &raster, QImage &qimage) {
     int w = raster.w;
     int h = raster.h;
@@ -132,7 +132,7 @@ void XRaster::convert(XRaster_u8 &raster, QImage &qimage) {
     }
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8c3 &raster, QImage &qimage) {
     int w = raster.w;
     int h = raster.h;
@@ -153,21 +153,21 @@ void XRaster::convert(XRaster_u8c3 &raster, QImage &qimage) {
     }
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::load(QString file_name, XRaster_u8 &raster) {
     QImage qimage;
     xclu_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
 }
 
-//-------------------------------------------------------
+//---------------------------------------------------------------------
 void XRaster::load(QString file_name, XRaster_u8c3 &raster) {
     QImage qimage;
     xclu_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
 }
 
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
 void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int quality) {
     QImage qimage;
     convert(raster, qimage);
@@ -175,7 +175,7 @@ void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int qu
                 "save: Can't save image '" + file_name + "'");
 }
 
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
 void XRaster::save(XRaster_u8c3 &raster, QString file_name, QString format, int quality) {
     QImage qimage;
     convert(raster, qimage);
@@ -183,4 +183,4 @@ void XRaster::save(XRaster_u8c3 &raster, QString file_name, QString format, int 
                 "save: Can't save image '" + file_name + "'");
 }
 
-//---------------------------------------------------------------------
+//-----------------------------------------------------------------------------------

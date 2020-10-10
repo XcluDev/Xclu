@@ -15,4 +15,6 @@
 #include "console.h"
 #include "jsonutils.h"
 
+#include "xlink.h"
+
 #endif // INCL_INCLCPP_H

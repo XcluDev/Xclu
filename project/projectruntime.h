@@ -6,25 +6,10 @@
 
 #include "incl_h.h"
 #include "xstruct.h"
+#include "xlink.h"
 #include <QElapsedTimer>
 class Module;
 class XItem;
-
-//Работа с link - получение переменных по имени модуля и названию в формате:
-//webcam1->image
-//module1->line(1)
-//module1->line(1,2)
-class VarLink {
-public:
-    bool is_empty = true;
-    QString module;
-    QString var;
-    int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its item 'index'
-    int index2 = -1; //if index2 >= 0 - interpret as a string separated by "\n" and then spaces 'a b c' and get its line 'index' and item 'index2'
-    bool has_index() { return index >= 0; }
-    VarLink();
-    VarLink(QString link);
-};
 
 
 class ProjectRuntime
@@ -64,7 +49,7 @@ public:
     //также, может создать эту папку, если это требуется
     QString absolute_path_from_project(QString relative_path, bool create_folder = false);
 
-    //Получение модуля - можно получить к нему доступ, см. класс VarLink
+    //Получение модуля - можно получить к нему доступ, см. класс XLink
     //а затем взять нужную переменную по geti и прочим
     Module *get_module(QString module_id);
 

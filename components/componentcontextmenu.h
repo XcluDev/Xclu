@@ -4,13 +4,13 @@
 //Support class for managing context menu.
 //-------------------------------------------------------
 //Menu items:
+//    Copy Link: module3->input
+//    -----
 //    * Use User Input
 //    - Use Link: webcamera1->image
 //    -----
 //    Edit Link...
 //    Paste Link: webcamera2->image
-//    -----
-//    Copy Link: module3->input
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)
@@ -62,12 +62,18 @@ struct ComponentContextMenuItem {
 //Item-dependent information for creating popup menu
 struct ComponentContextMenuInfo {
     ComponentContextMenuInfo() {}
-    ComponentContextMenuInfo(bool can_use_link, bool use_link, bool has_default_value, bool has_set_size) {
+    ComponentContextMenuInfo(QString link_to_itself, QString used_link,
+                             bool can_use_link, bool use_link, bool has_default_value, bool has_set_size
+                             ) {
+        this->link_to_itself = link_to_itself;
+        this->used_link = used_link;
         this->can_use_link = can_use_link;
         this->use_link = use_link;
         this->has_default_value = has_default_value;
         this->has_set_size = has_set_size;
     }
+    QString link_to_itself;
+    QString used_link;
     bool can_use_link = false;
     bool use_link = false;
     bool has_default_value = false;

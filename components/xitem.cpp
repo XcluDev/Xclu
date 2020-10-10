@@ -17,6 +17,8 @@
 
 #include "xgui.h"
 #include "registrarxitem.h"
+#include "moduleinterface.h"
+#include "module.h"
 
 //---------------------------------------------------------------------
 /*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf,
@@ -202,7 +204,15 @@ int XItem::description_count() {
 }
 */
 
+//---------------------------------------------------------------------
 //Link ----------------------------------------------------------------
+//---------------------------------------------------------------------
+//link to itself
+XLink XItem::link_to_itself() {
+    return XLink(interf()->module()->name(), name());
+}
+
+//---------------------------------------------------------------------
 //can be link used (for out - no), used for project saving
 bool XItem::is_link_can_be_used() {
     return (!is_out());
@@ -229,7 +239,9 @@ void XItem::set_link(const QString &link) {
     link_ = link;
 }
 
+//---------------------------------------------------------------------
 //Expression ----------------------------------------------------------
+//---------------------------------------------------------------------
 bool XItem::is_expression_can_be_used() {
     return (!is_out());
 }
@@ -467,9 +479,12 @@ bool XItem::belongs_general_page() {
 //---------------------------------------------------------------------
 //Context menu
 ComponentContextMenuInfo XItem::context_menu_info() {
-    return ComponentContextMenuInfo(is_link_can_be_used(), is_use_link(),
-                                    context_menu_has_set_default_value(),
-                                    context_menu_has_set_size());
+    //xclu_console_append(link_to_itself);
+    return ComponentContextMenuInfo(
+                link_to_itself().to_str(), link(),
+                is_link_can_be_used(), is_use_link(),
+                context_menu_has_set_default_value(),
+                context_menu_has_set_size());
 }
 
 //---------------------------------------------------------------------
@@ -486,9 +501,18 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     case ComponentContextMenu_edit_link:
         break;
     case ComponentContextMenu_paste_link:
+    {
+        QString text = XLink::get_link_from_clipboard();
+        if (!text.isEmpty()) {
+            set_link(text);
+        }
+    }
         break;
-    case ComponentContextMenu_copy_link:
-
+    case ComponentContextMenu_copy_link: {
+        QString link = link_to_itself().to_str();
+        xclu_clipboard_set_text(link);
+        xclu_console_append("Clipboard: `" + link + "'");
+    }
         break;
     //this cases must be implemented in subclasses
     case ComponentContextMenu_reset_default_value:
