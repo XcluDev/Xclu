@@ -55,10 +55,8 @@ void XGuiText::on_value_changed() {
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void XGuiText::set_read_only(bool read_only) {
-    //цвет фона
-    XGui::set_read_only(read_only);
-
+void XGuiText::set_read_only_(bool read_only) {
+    set_background_for_read_only_(read_only);
     textEdit_->setReadOnly(read_only);
 }
 

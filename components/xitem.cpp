@@ -395,7 +395,7 @@ void XItem::propagate_visibility() {    //обновить дерево види
 void XItem::block_gui_editing(const XQualifierMask &qual) {
     if (is_matches_qual_mask(qual) && is_gui_attached()) {
         if (gui__) {
-            gui__->block_editing();
+            gui__->block_editing_on_running();
         }
     }
 }
@@ -405,7 +405,7 @@ void XItem::block_gui_editing(const XQualifierMask &qual) {
 void XItem::unblock_gui_editing(const XQualifierMask &qual) {
     if (is_matches_qual_mask(qual) && is_gui_attached()) {
         if (gui__) {
-            gui__->unblock_editing();
+            gui__->unblock_editing_on_stopping();
         }
     }
 }

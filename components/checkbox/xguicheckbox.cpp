@@ -47,9 +47,8 @@ XGuiCheckbox::~XGuiCheckbox() {
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void XGuiCheckbox::set_read_only(bool read_only) {
-    //тут не вызываем XGui::set_read_only(read_only);
-    //так как цвета фона ставить не нужно
+void XGuiCheckbox::set_read_only_(bool read_only) {
+    //тут цвета фона ставить не нужно!
     checkbox_->setEnabled(!read_only);
 }
 

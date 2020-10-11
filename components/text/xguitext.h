@@ -30,7 +30,7 @@ protected:
     bool dirty_ = false;    //если true - это значит, что пользователь изменил текст
 
     //установка режима read_only - для out и блокировки констант при запуске проекта
-    void set_read_only(bool read_only);
+    void set_read_only_(bool read_only);
 
     //Свойства для разных ситуаций
     virtual bool is_const_bold() { return false; }   //тут константы не делать bold

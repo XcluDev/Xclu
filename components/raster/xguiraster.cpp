@@ -74,11 +74,8 @@ XGuiRaster_<T>::~XGuiRaster_() {
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
 template<typename T>
-void XGuiRaster_<T>::set_read_only(bool read_only) {
-    XGui::set_read_only(read_only);
-
-
-
+void XGuiRaster_<T>::set_read_only_(bool read_only) {
+    set_background_for_read_only_(read_only);
 }
 
 //---------------------------------------------------------------------

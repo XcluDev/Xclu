@@ -52,8 +52,8 @@ public:
     virtual ~XGui();
 
     //Функции для блокировки и разблокировки редактирования констант при запуске проекта.
-    void block_editing(); //блокирование изменения констант, вызывается перед запуском проекта
-    void unblock_editing(); //разблокирование изменения констант, вызывается после остановки проекта
+    void block_editing_on_running(); //блокирование изменения констант, вызывается перед запуском проекта
+    void unblock_editing_on_stopping(); //разблокирование изменения констант, вызывается после остановки проекта
 
     //Работа с видимостью
     //функция виртуальная - так как, например, у сепаратора нужно делать специальным образом
@@ -72,35 +72,39 @@ public:
     //User change link settings - should show it in GUI
     virtual void link_was_changed();
 
+    bool is_read_only() { return current_read_only_; }
+
 protected:
     //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
     XItem *item__ = nullptr;
 
+    //This function controls "read only" and link properties
+    //It should be called when changed read_only and link
+    void update_view();
 
-    //Визуальные элементы
-    //Динамический интерфейс - группы видимости
-    QVector<VisibilityGroupGui *> vis_groups_;
-
-    //метка - используется при регуляции visible и блокировке константы
-    QLabel *label_ = nullptr;   //не надо удалять
-    QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
-
-    //виджет - используется для регуляции visible
-    QWidget *widget_ = nullptr; //не надо удалять
-    QWidget *internal_widget_ = nullptr;    //виджет для установки фона при read_only
-    QBrush default_internal_widget_brush_;  //кисть фона виджета - используется при переключении
-
-    //Свойства для разных ситуаций
-    //заблокирован ли ввод
-    bool blocked() { return blocked_; }
-    bool blocked_ = false;
-
-    //константы делать bold (false для text)
+    //нужно ли константы делать bold (false для text)
     virtual bool is_const_bold() { return true; }
 
-    //виртуальная функция, которую подклассы должны переопределить, чтобы разрешать или запрещать редактирование4
-    //конкретно эта функция, реализованная по умолчанию - ставит фон в widget_
-    virtual void set_read_only(bool read_only);
+    //Is running - so need to set "read only" for constants
+    bool running_blocked() { return running_blocked_; }
+    bool running_blocked_ = false;
+
+    //Common function which controls setting "read only" mode.
+    //It calls `set_read_only_` virtual function, thish is specific for components
+    //This function is called for `out` variables, for `const` after running, for `linked` variables when set.
+    //The `in` and `const` can be set to `linked` and back.
+    void set_read_only(bool read_only);
+    bool current_read_only_ = false;    //current state of "read only"
+
+    //Internal function, which must be implemented for components
+    virtual void set_read_only_(bool read_only);
+
+    //Helper function for setting gray background - is called by most components except checkbox
+    void set_background_for_read_only_(bool read_only);
+
+
+protected:
+    //Tip control
 
     //строка-подсказка, может быть разных типов - см. Tip_Style
     QString get_tip();
@@ -115,7 +119,18 @@ protected:
     virtual Tip_Style get_tip_style() { return Tip_Full; }
 
 protected:
-    //Члены и функции для создания страницы
+    //Визуальные элементы
+    //Динамический интерфейс - группы видимости
+    QVector<VisibilityGroupGui *> vis_groups_;
+
+    //метка - используется при регуляции visible и блокировке константы
+    QLabel *label_ = nullptr;   //не надо удалять
+    QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
+
+    //виджет - используется для регуляции visible
+    QWidget *widget_ = nullptr; //не надо удалять
+    QWidget *internal_widget_ = nullptr;    //виджет для установки фона при read_only
+    QBrush default_internal_widget_brush_;  //кисть фона виджета - используется при переключении
 
     //создать label
     void insert_label(XGuiPageCreator &input);
@@ -152,6 +167,8 @@ protected slots:
 public slots:
     //signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
     void on_component_popup_action();
+
+protected:
 
 };
 

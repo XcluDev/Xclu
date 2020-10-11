@@ -153,11 +153,6 @@ void XGui::set_widget(QWidget *widget, QWidget *internal_widget) {
     widget_ = widget;
     internal_widget_ = internal_widget;
 
-    //out
-    if (item__->is_out()) {
-        set_read_only(true);    //выключаем редактирование
-    }
-
     //Установка типа шрифта
     /*if (internal_widget) {
         auto font = internal_widget->font();
@@ -173,11 +168,30 @@ void XGui::set_widget(QWidget *widget, QWidget *internal_widget) {
             internal_widget_->setFont(font);
         }
     }
+
+    //out and links - set "read only"
+    update_view();
+
 }
 
 //---------------------------------------------------------------------
 void XGui::set_read_only(bool read_only) {
-    //установка фона
+    //decide if required to do something
+    if (current_read_only_ == read_only) return;
+    current_read_only_ = read_only;
+
+    set_read_only_(read_only);
+}
+
+//---------------------------------------------------------------------
+//Internal function, which must be implemented for components
+void XGui::set_read_only_(bool /*read_only*/) {
+    xclu_exception("set_read_only_ is not implemented for " + item__->name());
+}
+
+//---------------------------------------------------------------------
+//Helper function for setting gray background - is called by most components except checkbox
+void XGui::set_background_for_read_only_(bool read_only) {
     if (internal_widget_) {
         QPalette pal = internal_widget_->palette();
         QBrush brush;
@@ -208,20 +222,20 @@ void XGui::on_value_changed() {
 }
 
 //---------------------------------------------------------------------
-void XGui::block_editing() { //блокирование изменения констант, вызывается перед запуском проекта
+void XGui::block_editing_on_running() { //блокирование изменения констант, вызывается перед запуском проекта
     if (label_) {
         default_label_color_ = xclu::set_font_color_gray(label_);
     }
-    blocked_ = true;
+    running_blocked_ = true;
     set_read_only(true);
 }
 
 //---------------------------------------------------------------------
-void XGui::unblock_editing() { //разблокирование изменения констант, вызывается после остановки проекта
+void XGui::unblock_editing_on_stopping() { //разблокирование изменения констант, вызывается после остановки проекта
     if (label_) {
         xclu::reset_font_color(label_, default_label_color_);
     }
-    blocked_ = false;
+    running_blocked_ = false;
     set_read_only(false);
 }
 
@@ -258,7 +272,20 @@ void XGui::propagate_visibility() {
 //---------------------------------------------------------------------
 //User change link settings - should show it in GUI
 void XGui::link_was_changed() {
-
+    update_view();
 }
 
 //---------------------------------------------------------------------
+//Controls "read only" and link properties
+//Should be called when changed read_only and link
+void XGui::update_view() {
+    bool read_only = item__->is_out() || item__->is_linked() || (item__->is_const() && running_blocked());
+    set_read_only(read_only);
+}
+
+//---------------------------------------------------------------------
+
+
+
+
+

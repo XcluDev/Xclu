@@ -22,7 +22,7 @@ protected:
     XcluDoubleSpinBox *spin_ = nullptr;
 
     //установка режима read_only - для out и блокировки констант при запуске проекта
-    void set_read_only(bool read_only);
+    void set_read_only_(bool read_only);
 
 };
 
