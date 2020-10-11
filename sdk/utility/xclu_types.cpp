@@ -99,14 +99,14 @@ XStructType string_to_object_type(QString type_str) {
 }
 
 //---------------------------------------------------------------------
-const QString VarQualifierNames[VarQualifierN] = {"?", "in", "out", "const"};
+const QString XQualifierNames[XQualifierN] = {"?", "in", "out", "const"};
 
-QString varqualifier_to_string(VarQualifier varqualifier) {
-    return Type_to_string(int(varqualifier), VarQualifierN, VarQualifierNames);
+QString xqualifier_to_string(XQualifier xqualifier) {
+    return Type_to_string(int(xqualifier), XQualifierN, XQualifierNames);
 }
 
-VarQualifier string_to_varqualifier(const QString &varqualifierstr) {
-    return VarQualifier(string_to_Type(varqualifierstr, VarQualifierN, VarQualifierNames));
+XQualifier string_to_xqualifier(const QString &xqualifierstr) {
+    return XQualifier(string_to_Type(xqualifierstr, XQualifierN, XQualifierNames));
 }
 
 //---------------------------------------------------------------------

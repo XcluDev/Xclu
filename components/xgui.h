@@ -69,6 +69,9 @@ public:
     //сигнал послать данные об изменении видимости - высылается после первой установки значения в переменную
     void propagate_visibility();
 
+    //User change link settings - should show it in GUI
+    virtual void link_was_changed();
+
 protected:
     //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
     XItem *item__ = nullptr;

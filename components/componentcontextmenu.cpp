@@ -39,7 +39,7 @@ ComponentContextMenu *COMPONENT_POPUP;
 void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     items_.clear();
     was_added_ = false;
-    append(QString("Copy Link: '%1'").arg(info.link_to_itself), ComponentContextMenu_copy_link);
+    append(QString("Copy Link: '%1'").arg(info.get_link_to_itself), ComponentContextMenu_copy_link);
     append_separator();
     if (info.can_use_link) {
         append("Use User Input", ComponentContextMenu_use_input, true, !info.use_link);

@@ -125,46 +125,42 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
     break;
 
     case GuiStageAfterGuiAttached:
-        interf()->vars_to_gui(VarQualifierConst);
-        interf()->vars_to_gui(VarQualifierIn);
-        interf()->vars_to_gui(VarQualifierOut);
+        interf()->vars_to_gui(XQualifierMask::get_all());
         interf()->state_to_gui();
         //если дело происходит при уже запущенном проекте - то заблокировать константы
         if (is_running()) {
-            interf()->block_gui_constants();
+            interf()->block_gui(XQualifierMask(XQualifierConst));
         }
     break;
 
-    case GuiStageBeforeStart:   //GUI -> const и in, блокировка констант
-        interf()->gui_to_vars(VarQualifierConst);
-        interf()->gui_to_vars(VarQualifierIn);
+    case GuiStageBeforeStart: {   //GUI -> const и in, блокировка констант
+        interf()->gui_to_vars(XQualifierMask::get_const_in());
         if (affect_is_running) {
-            interf()->block_gui_constants();
+            interf()->block_gui(XQualifierMask(XQualifierConst));
             set_running(true);
         }
+    }
         break;
 
     case GuiStageBeforeUpdate:   //GUI -> in; expressions
-        interf()->gui_to_vars(VarQualifierIn, true);
+        interf()->gui_to_vars(XQualifierMask(XQualifierIn), true);
         break;
     case GuiStageAfterUpdate:    //out -> GUI
-        interf()->vars_to_gui(VarQualifierOut);
+        interf()->vars_to_gui(XQualifierMask(XQualifierOut));
         break;
 
     case GuiStageAfterStop:     //GUI -> const, in;  out -> GUI, разблокировка констант
-        interf()->gui_to_vars(VarQualifierConst);
-        interf()->gui_to_vars(VarQualifierIn);
-        interf()->vars_to_gui(VarQualifierOut);
+        interf()->gui_to_vars(XQualifierMask::get_const_in());
+        interf()->vars_to_gui(XQualifierMask::get_out_link());
         if (affect_is_running) {
-            interf()->unblock_gui_constants();
+            interf()->unblock_gui(XQualifierMask(XQualifierConst));
             set_running(false);
         }
         break;
 
     case GuiStageProjectBeforeSaving: //GUI -> const, in;
     case GuiStageBeforeGuiDetached:   //то же
-        interf()->gui_to_vars(VarQualifierConst);
-        interf()->gui_to_vars(VarQualifierIn);
+        interf()->gui_to_vars(XQualifierMask::get_const_in());
         interf()->gui_to_state();
         break;
 

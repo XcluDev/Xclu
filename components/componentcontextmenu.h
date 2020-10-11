@@ -62,17 +62,17 @@ struct ComponentContextMenuItem {
 //Item-dependent information for creating popup menu
 struct ComponentContextMenuInfo {
     ComponentContextMenuInfo() {}
-    ComponentContextMenuInfo(QString link_to_itself, QString used_link,
+    ComponentContextMenuInfo(QString get_link_to_itself, QString used_link,
                              bool can_use_link, bool use_link, bool has_default_value, bool has_set_size
                              ) {
-        this->link_to_itself = link_to_itself;
+        this->get_link_to_itself = get_link_to_itself;
         this->used_link = used_link;
         this->can_use_link = can_use_link;
         this->use_link = use_link;
         this->has_default_value = has_default_value;
         this->has_set_size = has_set_size;
     }
-    QString link_to_itself;
+    QString get_link_to_itself;
     QString used_link;
     bool can_use_link = false;
     bool use_link = false;

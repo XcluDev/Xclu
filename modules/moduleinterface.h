@@ -13,6 +13,7 @@ class EditorModuleState;
 class QJsonObject;
 class Module;
 
+
 //Интерфейс модуля
 class ModuleInterface
 {
@@ -32,9 +33,6 @@ public:
     //элемент по имени - кроме сепараторов
     XItem *var(QString name);
 
-    //список по типу использования - const, in, out
-    QVector<XItem *> &vars_qual(VarQualifier qual);
-
     //группы видимости - для создания дерева управления видимостью на GUI
     QVector<VisibleGroupBase> &vis_groups();
 
@@ -48,10 +46,10 @@ public:
     void propagate_visibility();
 
     //команды для обновления внутренних значений из GUI и в GUI
-    void gui_to_vars(VarQualifier qual, bool evaluate_expr = false); //вычисление expression и получение значения из gui
-    void vars_to_gui(VarQualifier qual); //установка значения в gui
-    void block_gui_constants();         //заблокировать константы, вызывается перед запуском проекта
-    void unblock_gui_constants();       //раззаблокировать константы, вызывается после остановки проекта
+    void gui_to_vars(const XQualifierMask &qual, bool evaluate_expr = false); //вычисление expression и получение значения из gui
+    void vars_to_gui(const XQualifierMask &qual); //установка значения в gui
+    void block_gui(const XQualifierMask &qual);         //заблокировать константы, вызывается перед запуском проекта
+    void unblock_gui(const XQualifierMask &qual);       //разблокировать константы, вызывается после остановки проекта
 
     //пометить, что все элементы были изменены - при старте
     void set_changed_at_start();
@@ -130,7 +128,7 @@ private:
     void new_item(const XItemPreDescription &pre_description);
     void new_item(QString title_underscored, QString type,
                      const QStringList &description,
-                     VarQualifier qual = VarQualifierIn,
+                     XQualifier qual = XQualifierIn,
                      QString line_to_parse = "", QString options = "",
                      QString qual_options = "");
     void new_decorate_item(QString name, QString type, const QStringList &description);
@@ -162,8 +160,6 @@ private:
     void set_general_values();
 
     QMap<QString, XItem *> items_by_name_;
-
-    QVector<QVector<XItem *>> vars_qual_;
 
     //Редактор модуля - используется, чтобы запомнить его tab. Удалять не следует
     XGuiEditor *editor_ = nullptr;

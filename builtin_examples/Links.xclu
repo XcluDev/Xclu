@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -41,7 +41,7 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2"
+                        "avalue": "0.96"
                     },
                     {
                         "aname": "float3",
@@ -227,7 +227,7 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2"
+                        "avalue": "1.76"
                     },
                     {
                         "aname": "float3",

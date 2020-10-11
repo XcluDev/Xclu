@@ -40,17 +40,40 @@ QString xitem_page();
 QString GENERAL_PAGE_marker();
 
 //Способ использования переменной
-enum VarQualifier : int {
-    VarQualifierNone = 0,
-    VarQualifierIn = 1,
-    VarQualifierOut = 2,
-    VarQualifierConst = 3,
-    VarQualifierN = 4
+enum XQualifier : int {
+    XQualifierNone = 0,
+    XQualifierIn = 1,
+    XQualifierOut = 2,
+    XQualifierConst = 3,
+    XQualifierN = 4
 };
 
-QString varqualifier_to_string(VarQualifier varqualifier);
-VarQualifier string_to_varqualifier(const QString &varqualifierstr);
+QString xqualifier_to_string(XQualifier xqualifier);
+XQualifier string_to_xqualifier(const QString &xqualifierstr);
 
+//Qualifiers mask - used for GUI-module interaction
+struct XQualifierMask {
+    static XQualifierMask get_all() { return XQualifierMask(true,true,true,true); }
+    static XQualifierMask get_const_in() { return XQualifierMask(true,true,false,false); }
+    static XQualifierMask get_out_link() { return XQualifierMask(false,false,true,true); }
+    XQualifierMask() {}
+    XQualifierMask(XQualifier qual) {
+        qual_const = (qual == XQualifierConst);
+        qual_in = (qual == XQualifierIn);
+        qual_out = (qual == XQualifierOut);
+        qual_link = false;
+    }
+    XQualifierMask(bool qual_const, bool qual_in, bool qual_out = false, bool qual_link = false) {
+        this->qual_const = qual_const;
+        this->qual_in = qual_in;
+        this->qual_out = qual_out;
+        this->qual_link = qual_link;
+    }
+    bool qual_const = false;
+    bool qual_in = false;
+    bool qual_out = false;
+    bool qual_link = false;
+};
 
 //Этапы работы проекта
 enum ProjectRunState : int {

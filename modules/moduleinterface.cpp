@@ -72,7 +72,6 @@ void ModuleInterface::clear() {
     items_.clear();
 
     items_by_name_.clear();
-    vars_qual_.clear();
 }
 
 //---------------------------------------------------------------------
@@ -233,8 +232,8 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             QStringList qual_list=item1.split(QRegExp("(\\(|\\))"));
             xclu_assert(!qual_list.isEmpty(), "bad qualifiers string at line '" + line + "'");
 
-            auto qual = string_to_varqualifier(qual_list.at(0));
-            xclu_assert(qual != VarQualifierNone, "unknown variable qualifier at line '" + line + "', expected: 'in', 'out', 'const'");
+            auto qual = string_to_xqualifier(qual_list.at(0));
+            xclu_assert(qual != XQualifierNone, "unknown variable qualifier at line '" + line + "', expected: 'in', 'out', 'const'");
             QString qual_options;
             if (qual_list.size() >= 2) {
                 qual_options = qual_list.at(1);
@@ -306,7 +305,7 @@ void ModuleInterface::new_item(const XItemPreDescription &pre_description) {
 //---------------------------------------------------------------------
 void ModuleInterface::new_item(QString title_underscored, QString type,
                                   const QStringList &description,
-                                  VarQualifier qual, QString line_to_parse, QString options,
+                                  XQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
     push_item(XItemCreator::new_item(this, title_underscored, type, description, qual, line_to_parse, options, qual_options));
 }
@@ -326,8 +325,6 @@ void ModuleInterface::new_separator(QString type, bool is_line) {
 //проверка того, что разные элементы имеют разные имена, и заполнение map для быстрого доступа
 void ModuleInterface::update_maps() {
     items_by_name_.clear();
-    vars_qual_.clear();
-    vars_qual_.resize(VarQualifierN);
 
     for (int i=0; i<items_.size(); i++) {
         XItem *item = items_[i];
@@ -338,7 +335,6 @@ void ModuleInterface::update_maps() {
 
         xclu_assert(!items_by_name_.contains(name), "Duplicated item '" + name + "'");
         items_by_name_[name] = item;
-        vars_qual_[int(item->qualifier())].push_back(item);
     }
 }
 
@@ -347,13 +343,6 @@ void ModuleInterface::update_maps() {
 XItem *ModuleInterface::var(QString name) {
     xclu_assert(items_by_name_.contains(name), "Unknown item '" + name + "'");
     return items_by_name_[name];
-}
-
-//---------------------------------------------------------------------
-//список по типу использования - const, in, out
-QVector<XItem *> &ModuleInterface::vars_qual(VarQualifier qual) {
-    xclu_assert(qual >= 0 && qual < vars_qual_.size(), "Internal error: XModuleVariables::vars(VarQualifier qual) - bad request");
-    return vars_qual_[qual];
 }
 
 //---------------------------------------------------------------------
@@ -394,40 +383,43 @@ void ModuleInterface::propagate_visibility() {
 
 //---------------------------------------------------------------------
 //команды для обновления внутренних значений из GUI и в GUI
-void ModuleInterface::gui_to_vars(VarQualifier qual, bool evaluate_expr) {
-    QVector<XItem *> &vars = vars_qual(qual);
-    for (int i=0; i<vars.size(); i++) {
-        vars[i]->gui_to_var(evaluate_expr); //получение значения из gui и вычисление expression, и если expression - установка значения в gui
+void ModuleInterface::gui_to_vars(const XQualifierMask &qual, bool evaluate_expr) {
+    if (is_gui_attached()) {
+        for (auto &item: items_) {
+            item->gui_to_var(qual, evaluate_expr);
+        }
     }
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::vars_to_gui(VarQualifier qual) {
+void ModuleInterface::vars_to_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
-        QVector<XItem *> &vars = vars_qual(qual);
-        for (int i=0; i<vars.size(); i++) {
-            vars[i]->var_to_gui();  //установка значения в gui
+        for (auto &item: items_) {
+            item->var_to_gui(qual);
         }
     }
 }
 
 //---------------------------------------------------------------------
 //заблокировать константы, вызывается перед запуском проекта
-void ModuleInterface::block_gui_constants() {
+void ModuleInterface::block_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
-        QVector<XItem *> &vars = vars_qual(VarQualifierConst);
-        for (int i=0; i<vars.size(); i++) {
-            vars[i]->block_gui_editing();
+        if (is_gui_attached()) {
+            for (auto &item: items_) {
+                item->block_gui_editing(qual);
+            }
         }
     }
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::unblock_gui_constants() {       //раззаблокировать константы, вызывается после остановки проекта
+//разблокировать константы, вызывается после остановки проекта
+void ModuleInterface::unblock_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
-        QVector<XItem *> &vars = vars_qual(VarQualifierConst);
-        for (int i=0; i<vars.size(); i++) {
-            vars[i]->unblock_gui_editing();
+        if (is_gui_attached()) {
+            for (auto &item: items_) {
+                item->unblock_gui_editing(qual);
+            }
         }
     }
 }

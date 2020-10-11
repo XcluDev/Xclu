@@ -256,3 +256,9 @@ void XGui::propagate_visibility() {
 }
 
 //---------------------------------------------------------------------
+//User change link settings - should show it in GUI
+void XGui::link_was_changed() {
+
+}
+
+//---------------------------------------------------------------------

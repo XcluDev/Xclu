@@ -25,7 +25,7 @@
                                                      QString title_underscored,
                                                      QString type,
                                                      const QStringList &description,
-                                                     VarQualifier qual,
+                                                     XQualifier qual,
                                                      QString line_to_parse,
                                                      QString options,
                                                      QString qual_options
@@ -47,7 +47,7 @@
                                                               QString name,
                                                               QString type, const QStringList &description) {
     //QString title = xclu_remove_underscore(name);
-    return new_item(interf, name, type, description, VarQualifierIn, name);
+    return new_item(interf, name, type, description, XQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
@@ -55,7 +55,7 @@
 /*static*/ XItem *XItemCreator::new_separator(ModuleInterface *interf, QString name, QString type, bool is_line) {
     QString descr;
     if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
-    return new_item(interf, name, type, QStringList(descr), VarQualifierIn, name);
+    return new_item(interf, name, type, QStringList(descr), XQualifierIn, name);
 }
 
 //---------------------------------------------------------------------
@@ -106,23 +106,23 @@ QString XItem::type() {
 }
 
 //---------------------------------------------------------------------
-VarQualifier XItem::qualifier() {
+XQualifier XItem::qualifier() {
     return qualifier_;
 }
 
 //---------------------------------------------------------------------
 bool XItem::is_const() {
-    return (qualifier_ == VarQualifierConst);
+    return (qualifier_ == XQualifierConst);
 }
 
 //---------------------------------------------------------------------
 bool XItem::is_in() {
-    return (qualifier_ == VarQualifierIn);
+    return (qualifier_ == XQualifierIn);
 }
 
 //---------------------------------------------------------------------
 bool XItem::is_out() {
-    return (qualifier_ == VarQualifierOut);
+    return (qualifier_ == XQualifierOut);
 }
 
 //---------------------------------------------------------------------
@@ -208,7 +208,7 @@ int XItem::description_count() {
 //Link ----------------------------------------------------------------
 //---------------------------------------------------------------------
 //link to itself
-XLink XItem::link_to_itself() {
+XLink XItem::get_link_to_itself() {
     return XLink(interf()->module()->name(), name());
 }
 
@@ -220,13 +220,14 @@ bool XItem::is_link_can_be_used() {
 
 //---------------------------------------------------------------------
 //use link
-bool XItem::is_use_link() {
-    return use_link_;
+bool XItem::is_linked() {
+    return linked_;
 }
 
 //---------------------------------------------------------------------
-void XItem::set_use_link(bool v) {
-    use_link_ = v;
+void XItem::set_linked(bool v) {
+    linked_ = v;
+    link_was_changed();
 }
 
 //---------------------------------------------------------------------
@@ -237,6 +238,15 @@ QString XItem::link() {
 //---------------------------------------------------------------------
 void XItem::set_link(const QString &link) {
     link_ = link;
+    link_was_changed();
+}
+
+//---------------------------------------------------------------------
+//User change link settings - should show it in GUI
+void XItem::link_was_changed() {
+    if (is_gui_attached()) {
+        gui__->link_was_changed();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -329,26 +339,44 @@ bool XItem::is_gui_attached() {
 }
 
 //---------------------------------------------------------------------
-void XItem::gui_to_var(bool evaluate_expr) { //вычисление expression и получение значения из gui
-    if (is_use_expression()) {
-        if (evaluate_expr) {
-            //... expression()
-            //if (is_gui_attached()) {
-            //    var_to_gui_internal();
-            //}
-        }
+bool XItem::is_matches_qual_mask(const XQualifierMask &qual) {
+    //if item is linked - it's the most important!
+    if (is_linked()) {
+        return qual.qual_link;
     }
     else {
-        if (is_gui_attached()) {
-            gui_to_var_internal();
+        return (
+            (qual.qual_const && is_const())
+            || (qual.qual_in && is_in())
+            || (qual.qual_out && is_out())
+            );
+    }
+
+}
+
+//---------------------------------------------------------------------
+void XItem::gui_to_var(const XQualifierMask &qual, bool evaluate_expr) { //вычисление expression и получение значения из gui
+     if (is_gui_attached() && is_matches_qual_mask(qual)) {
+        if (is_use_expression()) {
+            if (evaluate_expr) {
+                //... expression()
+                //if (is_gui_attached()) {
+                //    var_to_gui_internal();
+                //}
+            }
+        }
+        else {
+            if (is_gui_attached()) {
+                gui_to_var_internal();
+            }
         }
     }
 }
 
 //---------------------------------------------------------------------
-void XItem::var_to_gui() { //установка значения в gui, также отправляет сигнал о видимости
+void XItem::var_to_gui(const XQualifierMask &qual) { //установка значения в gui, также отправляет сигнал о видимости
     //if (!is_use_expression()) {
-    if (is_gui_attached()) {
+     if (is_gui_attached() && is_matches_qual_mask(qual)) {
         var_to_gui_internal();
         //отправляем сигнал о видимости
         propagate_visibility();
@@ -364,8 +392,8 @@ void XItem::propagate_visibility() {    //обновить дерево види
 
 //---------------------------------------------------------------------
 //запретить редактирование - всегда для out и после запуска для const
-void XItem::block_gui_editing() {
-    if (is_gui_attached()) {
+void XItem::block_gui_editing(const XQualifierMask &qual) {
+    if (is_matches_qual_mask(qual) && is_gui_attached()) {
         if (gui__) {
             gui__->block_editing();
         }
@@ -374,8 +402,8 @@ void XItem::block_gui_editing() {
 
 //---------------------------------------------------------------------
 //разрешить редактирование
-void XItem::unblock_gui_editing() {
-    if (is_gui_attached()) {
+void XItem::unblock_gui_editing(const XQualifierMask &qual) {
+    if (is_matches_qual_mask(qual) && is_gui_attached()) {
         if (gui__) {
             gui__->unblock_editing();
         }
@@ -479,10 +507,10 @@ bool XItem::belongs_general_page() {
 //---------------------------------------------------------------------
 //Context menu
 ComponentContextMenuInfo XItem::context_menu_info() {
-    //xclu_console_append(link_to_itself);
+    //xclu_console_append(get_link_to_itself);
     return ComponentContextMenuInfo(
-                link_to_itself().to_str(), link(),
-                is_link_can_be_used(), is_use_link(),
+                get_link_to_itself().to_str(), link(),
+                is_link_can_be_used(), is_linked(),
                 context_menu_has_set_default_value(),
                 context_menu_has_set_size());
 }
@@ -493,10 +521,10 @@ ComponentContextMenuInfo XItem::context_menu_info() {
 void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_text) {
     switch (id) {
     case ComponentContextMenu_use_input:
-        set_use_link(false);
+        set_linked(false);
         break;
     case ComponentContextMenu_use_link:
-        set_use_link(true);
+        set_linked(true);
         break;
     case ComponentContextMenu_edit_link:
         break;
@@ -509,7 +537,7 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     }
         break;
     case ComponentContextMenu_copy_link: {
-        QString link = link_to_itself().to_str();
+        QString link = get_link_to_itself().to_str();
         xclu_clipboard_set_text(link);
         xclu_console_append("Clipboard: `" + link + "'");
     }
@@ -609,8 +637,8 @@ void XItem::export_interface_template(QStringList &file,
     }
     if (comment_description) {
         QString qualif;
-        if (qualifier() == VarQualifierOut) qualif = "Out ";
-        if (qualifier() == VarQualifierConst) qualif = "Const ";
+        if (qualifier() == XQualifierOut) qualif = "Out ";
+        if (qualifier() == XQualifierConst) qualif = "Const ";
         file.append("//" + qualif + custom_comment_begin + title());
         file.append("//" + description());
     }
@@ -624,7 +652,7 @@ void XItem::export_interface_template(QStringList &file,
         }
 
         //out
-        if (qualifier() == VarQualifierOut
+        if (qualifier() == XQualifierOut
                 && !cpp_setter.isEmpty()) {
             file.append(QString("void set%3_%1(%2value) { %4_(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
 

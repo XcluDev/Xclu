@@ -12,7 +12,7 @@ XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre
     : XItem_<int>(interf, pre_description)
 {
     //Button не может быть out
-    xclu_assert(pre_description.qualifier != VarQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
+    xclu_assert(pre_description.qualifier != XQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
 
     //page Main_page
     name_ = pre_description.line_to_parse;

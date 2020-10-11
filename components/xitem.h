@@ -23,7 +23,7 @@ class XItemPreDescription {
 public:
     QString title;
     QString type = "";
-    VarQualifier qualifier = VarQualifierIn;
+    XQualifier qualifier = XQualifierIn;
     QString qualifier_options; //опции в квалификаторе, типа out(not_save)
     QString options;        //дополнительные опции, типа choose:file, choose:folder для строк string(choose:file)
     QString line_to_parse;
@@ -38,7 +38,7 @@ public:
     static XItem *new_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
     static XItem *new_item(ModuleInterface *interf, QString title_underscored, QString type,
                                   const QStringList &description,
-                                  VarQualifier qual = VarQualifierIn, QString line_to_parse = "",
+                                  XQualifier qual = XQualifierIn, QString line_to_parse = "",
                                   QString options = "",
                                   QString qual_options = "");
     //page, group
@@ -63,7 +63,9 @@ public:
     QString name();
     QString title();
     QString type();
-    VarQualifier qualifier();
+    //Qualifier of the item
+    //Please note, also `is_linked` can be used - for linked variables, which are const or in
+    XQualifier qualifier();
     bool is_const();
     bool is_in();
     bool is_out();
@@ -125,14 +127,17 @@ public:
     void read_json(const QJsonObject &json);
 
     //Link -------------------------
-    //link to itself
-    XLink link_to_itself();
+    //obtain link to itself - for using in "Copy link"
+    XLink get_link_to_itself();
 
     bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
-    bool is_use_link();     //use link
-    void set_use_link(bool v);
+    bool is_linked();     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
+    void set_linked(bool v);
     QString link();
     void set_link(const QString &link);
+
+    //User change link settings - should show it in GUI and switch XRef value_ in XItem_
+    virtual void link_was_changed();
 
     //Expression -------------------------
     bool is_expression_can_be_used(); //требуется ли expression (для out - нет), используется при записи на диск
@@ -150,11 +155,12 @@ public:
     void gui_detached();
     bool is_gui_attached();
 
-    //работа с GUI
-    void gui_to_var(bool evaluate_expr); //вычисление expression и получение значения из gui
-    void var_to_gui(); //установка значения в gui, также отправляет сигнал о видимости
-    void block_gui_editing();       //запретить редактирование - всегда для out и после запуска для const
-    void unblock_gui_editing();     //разрешить редактирование
+    //Working with GUI
+    bool is_matches_qual_mask(const XQualifierMask &qual);
+    void gui_to_var(const XQualifierMask &qual, bool evaluate_expr); //вычисление expression и получение значения из gui
+    void var_to_gui(const XQualifierMask &qual); //установка значения в gui, также отправляет сигнал о видимости
+    void block_gui_editing(const XQualifierMask &qual);       //запретить редактирование - всегда для out и после запуска для const
+    void unblock_gui_editing(const XQualifierMask &qual);     //разрешить редактирование
     void propagate_visibility();    //обновить дерево видимости - используется, в частности, при тестировании интерфейса
 
     //Belonging to general page, common for all modules
@@ -193,7 +199,7 @@ protected:
     QString title_;
     QString name_;
     QString type_;
-    VarQualifier qualifier_;
+    XQualifier qualifier_;
     QStringList description_;   //может быть несколько строк
 
     bool save_to_project_ = true;  //если false, то не записывать значение в проект
@@ -208,7 +214,7 @@ protected:
     QString last_string_;
 
     //Link info
-    bool use_link_ = false;
+    bool linked_ = false;
     QString link_;
 
     //Выражения (в данный момент не поддерживаются)

@@ -159,7 +159,7 @@ void XItemEnum::export_interface(QStringList &file) {
 
     file.append(QString("bool was_changed_%1() { return was_changed_(\"%1\"); }").arg(nam));
     file.append(QString("%2 gete_%1() { return %2(geti_(\"%1\")); }").arg(nam).arg(cpp_type));
-    if (qualifier() == VarQualifierOut) {
+    if (qualifier() == XQualifierOut) {
         file.append(QString("void sete_%1(%2 value) { seti_(\"%1\", value); }").arg(name()).arg(cpp_type));
     }
     file.append("");
