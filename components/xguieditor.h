@@ -39,15 +39,7 @@ public:
     void before_close_project();
     void after_close_project();
 
-public slots:
-    //сигнал, что модуль сменился и нужно загрузить новый модуль
-    void changed_module_selection(int i);
-
-    //сброс модуля
-    void detach();
-
-    //сигнал, что модуль был переименован
-    void renamed_module();
+    void set_show_components_names(bool show);
 
 public:
     //used module
@@ -61,6 +53,16 @@ public:
     //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
     //но для кастомного применения, например, тестирования интерфейса - это нужно
     void load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
+
+public slots:
+    //сигнал, что модуль сменился и нужно загрузить новый модуль
+    void changed_module_selection(int i);
+
+    //сброс модуля
+    void detach();
+
+    //сигнал, что модуль был переименован
+    void renamed_module();
 
 protected:
     void createParams();

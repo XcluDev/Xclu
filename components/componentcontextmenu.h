@@ -6,7 +6,7 @@
 //Menu items:
 //    Copy Link: module3->input
 //    -----
-//    * Use User Input
+//    * Use Direct Input
 //    - Use Link: webcamera1->image
 //    -----
 //    Edit Link...
@@ -98,7 +98,7 @@ public:
     void clear();
 protected:
     QVector<ComponentContextMenuItem> items_;
-    void append(QString title, int id, bool checkable = false, bool checked = false);
+    void append(QString title, int id, bool checkable = false, bool checked = false, bool enabled = true);
     void append_separator();
     bool was_added_ = false;    //for separator
 

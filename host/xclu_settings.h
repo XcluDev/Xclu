@@ -37,6 +37,12 @@ public:
     //запись/восстановление окна
     static void save_window(QString window_name, QMainWindow *win);
     static void load_window(QString window_name, QMainWindow *win);
+
+    //View
+    //Show Components Names
+    static QString key_show_components_names() { return "view/show_components_names"; }
+    static bool is_show_components_names();
+
 };
 
 //Настройки приложения из файла xclu_settings_file()

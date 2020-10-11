@@ -12,7 +12,8 @@ XGuiButton::XGuiButton(XGuiPageCreator &input, XItemButton *item)
     button_->setToolTip(get_tip());
 
     //вставка на страницу
-    insert_widget_with_spacer_next_line(button_, button_, input);
+    //insert_widget_with_spacer_next_line(button_, button_, input);
+    insert_widget(button_, button_, input);
 
     connect(button_, SIGNAL (released()), this, SLOT (button_pressed()));
 

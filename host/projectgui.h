@@ -44,6 +44,8 @@ public:
     //перед сохранением проекта
     void before_save_project();
 
+    //user changed "Show Components Names" checkbox menu item
+    void on_changed_show_components_names(bool show);
 
 protected:
     EditorModules *editor_modules; //Редактор списка модулей проекта

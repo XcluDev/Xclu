@@ -170,6 +170,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
     input.parent = nullptr;
     input.tabs = tabs;     //сюда добавляются страницы
     input.grid = nullptr;    //страницы создают новый, а остальные добавляются в него
+    input.settings.show_names = Settings::is_show_components_names();
 
     for (int i=0; i<items.size(); i++) {
         auto *item = items.at(i);
@@ -242,6 +243,14 @@ void XGuiEditor::set_state(EditorModuleState state) {
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
 void XGuiEditor::on_value_changed() {
     xclu_document_modified();
+}
+
+//---------------------------------------------------------------------
+//user changed "Show Components Names" checkbox menu item
+void XGuiEditor::set_show_components_names(bool show) {
+    for (auto item: items_) {
+        item->set_show_components_names(show);
+    }
 }
 
 //---------------------------------------------------------------------

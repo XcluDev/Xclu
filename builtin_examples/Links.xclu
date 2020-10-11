@@ -202,7 +202,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "4"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -339,7 +339,7 @@
                     },
                     {
                         "aname": "presets_setup",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "current_preset",
@@ -347,7 +347,7 @@
                     },
                     {
                         "aname": "links_setup",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "links_enabled",

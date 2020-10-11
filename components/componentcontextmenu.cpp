@@ -19,7 +19,7 @@ ComponentContextMenu *COMPONENT_POPUP;
 //Menu items:
 //    Copy Link: module3->input
 //    -----
-//    * Use User Input
+//    * Use Direct Input
 //    - Use Link: webcamera1->image
 //    -----
 //    Edit Link...
@@ -42,16 +42,19 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     append(QString("Copy Link: '%1'").arg(XLink::shorten_link(info.get_link_to_itself)), ComponentContextMenu_copy_link);
     append_separator();
     if (info.can_use_link) {
-        append("Use User Input", ComponentContextMenu_use_input, true, !info.use_link);
-        append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
-        append_separator();
+        //if link is enpty - not show choosing options
+        if (!info.used_link.isEmpty() || info.use_link) {
+            append("Use Direct Input", ComponentContextMenu_use_input, true, !info.use_link);
+            append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
+            append_separator();
+        }
         append("Edit Link...", ComponentContextMenu_edit_link);
 
         QString paste_link = XLink::shorten_link(XLink::get_link_from_clipboard());
         append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
     }
     append_separator();
-    if (info.has_default_value) {
+    if (info.has_default_value && !info.use_link) {
         append("Reset to Default Value", ComponentContextMenu_reset_default_value);
     }
     if (info.has_set_size) {
@@ -61,8 +64,8 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
 
 //---------------------------------------------------------------------
 void ComponentContextMenu::append(QString title, int id,
-                                bool checkable, bool checked) {
-    items_.append(ComponentContextMenuItem(title, id, true, true, checkable, checked));
+                                bool checkable, bool checked, bool enabled) {
+    items_.append(ComponentContextMenuItem(title, id, enabled, true, checkable, checked));
     was_added_ = true;  //for separator
 }
 

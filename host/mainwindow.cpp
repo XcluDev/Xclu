@@ -28,9 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //recent files
     recent_.reset(new RecentFiles(ui->menuRecent_Projects));
 
-
-
-
     MAIN_WINDOW = this;
 
     init();
@@ -375,14 +372,14 @@ bool MainWindow::saveProject(const QString &fileName) {
 //---------------------------------------------------------------------
 void MainWindow::readSettings() {
     Settings::load_window(Settings::key_main_window(), this);
+
+    ui->actionShow_Component_Names->setChecked(Settings::is_show_components_names());
 }
 
 //---------------------------------------------------------------------
 void MainWindow::writeSettings() {
     Settings::save_window(Settings::key_main_window(), this);
 }
-
-
 
 //---------------------------------------------------------------------
 void MainWindow::updateMenusVisible() {
@@ -533,4 +530,12 @@ void MainWindow::set_state(ProjectRunState run_state) {
 bool MainWindow::is_stopped() {
     return (run_state_ == ProjectRunStateStopped);
 }
+
+//---------------------------------------------------------------------
+void MainWindow::on_actionShow_Component_Names_triggered(bool checked)
+{
+    Settings::seti(Settings::key_show_components_names(), checked);
+    PROJ_GUI->on_changed_show_components_names(checked);
+}
+
 //---------------------------------------------------------------------

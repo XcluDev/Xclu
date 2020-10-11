@@ -34,12 +34,19 @@ QT_END_NAMESPACE
 class XItem;
 class VisibilityGroupGui;
 
+//Settings for created GUI
+struct XGuiSettings {
+    bool show_names = false;
+};
+
 //данные для создания визуального интерфейса
 struct XGuiPageCreator {
     QWidget *parent = nullptr;
     QTabWidget *tabs = nullptr;     //сюда добавляются страницы
     QGridLayout *grid = nullptr;    //страницы создают новый, а остальные добавляются в него
     int y = 0;                      //положение в сетке
+
+    XGuiSettings settings;
 };
 
 //Один элемент визуального интерфейса
@@ -74,9 +81,14 @@ public:
 
     bool is_read_only() { return current_read_only_; }
 
+    //Change show components names
+    void set_show_components_names(bool show);
 protected:
     //Ссылка на невизуальный элемент интерфейса (который и представляется данным GUI-элементом)
     XItem *item__ = nullptr;
+
+    //Settings
+    XGuiSettings settings_;
 
     //This function controls "read only" and link properties
     //It should be called when changed read_only and link
@@ -121,8 +133,11 @@ protected:
     QVector<VisibilityGroupGui *> vis_groups_;
 
     //метка - используется при регуляции visible и блокировке константы
-    QLabel *label_ = nullptr;   //не надо удалять
+    QLabel *label_ = nullptr;       //не надо удалять
     QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
+
+    void update_label_link();       //set label link
+    QLabel *label_link_ = nullptr;  //label for link
 
     //виджет - используется для регуляции visible
     QWidget *widget_ = nullptr; //не надо удалять
@@ -166,8 +181,6 @@ protected slots:
 public slots:
     //signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
     void on_component_popup_action();
-
-protected:
 
 };
 

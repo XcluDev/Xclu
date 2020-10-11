@@ -522,9 +522,11 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     switch (id) {
     case ComponentContextMenu_use_input:
         set_linked(false);
+        xclu_document_modified();
         break;
     case ComponentContextMenu_use_link:
         set_linked(true);
+        xclu_document_modified();
         break;
     case ComponentContextMenu_edit_link:
         break;
@@ -533,6 +535,8 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         QString text = XLink::get_link_from_clipboard();
         if (!text.isEmpty()) {
             set_link(text);
+            set_linked(true);
+            xclu_document_modified();
         }
     }
         break;

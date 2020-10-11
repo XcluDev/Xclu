@@ -160,6 +160,10 @@ void ProjectGui::selected_module_updated() {
     xclu_document_modified();
 }
 
-
+//---------------------------------------------------------------------
+//user changed "Show Components Names" checkbox menu item
+void ProjectGui::on_changed_show_components_names(bool show) {
+    editor_module->set_show_components_names(show);
+}
 
 //---------------------------------------------------------------------

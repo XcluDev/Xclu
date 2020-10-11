@@ -10,6 +10,7 @@ XGui::XGui(XGuiPageCreator &input, XItem * item)
     :QWidget(input.parent)
 {
     item__ = item;
+    settings_ = input.settings;
 }
 
 //---------------------------------------------------------------------
@@ -110,7 +111,17 @@ void XGui::on_component_popup_action() {
 void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                  int pos_x, int shift_y, int spanx, int spany) {
 
+    //create link label with spacer - always at 3th column, without shift_y
+    {
+
+        label_link_ = new QLabel("");
+        input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
+        update_label_link();
+    }
+
+    //insert widget
     input.grid->addWidget(widget, input.y + shift_y, pos_x, spany, spanx);
+
     input.y += shift_y + spany;
 
     //запоминаем widget, чтобы управлять его видимостью и цветом фона
@@ -120,7 +131,7 @@ void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCrea
 //---------------------------------------------------------------------
 //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
 void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
-    insert_widget(widget, internal_widget, input, 0, 1, 2, 1);
+    insert_widget(widget, internal_widget, input, 0, 1, 4, 1);
 }
 
 //---------------------------------------------------------------------
@@ -128,7 +139,7 @@ void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XG
 //(int, float, checkbox, object)
 void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                              int pos_x, int shift_y, int spanx, int spany) {
-    QSpacerItem *spacer = new QSpacerItem(1,1);
+    /*QSpacerItem *spacer = new QSpacerItem(1,1);
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setMargin(0);
     layout->addWidget(widget);
@@ -139,13 +150,15 @@ void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, 
     atribute_as_GuiEditorPage(holder);  //set background as a whole page
 
     holder->setLayout(layout);
-
     insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
+*/
+    insert_widget(widget, internal_widget, input, pos_x, shift_y, spanx, spany);
+
 }
 
 //---------------------------------------------------------------------
 void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
-     insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 2, 1);
+     insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 4, 1);
 }
 
 //---------------------------------------------------------------------
@@ -233,6 +246,9 @@ void XGui::set_visible(bool visible) {
     if (label_) {
         label_->setVisible(visible);
     }
+    if (label_link_) {
+        label_link_->setVisible(visible);
+    }
     if (widget_) {
         widget_->setVisible(visible);
     }
@@ -280,7 +296,42 @@ void XGui::update_view() {
         }
     }
 
+    update_label_link();
+
 }
+
+//---------------------------------------------------------------------
+void XGui::update_label_link() {       //set label_link as optional item name and link
+    if (label_link_) {
+        QString name_text;
+        if (settings_.show_names) {
+            name_text = item__->name();
+        }
+        QString link_text = item__->link();
+        if (!link_text.isEmpty()) {
+            if (!item__->is_linked()) {
+                link_text = QString("(%1)").arg(link_text);
+            }
+        }
+        QString text = name_text;
+        if (!link_text.isEmpty()) {
+            if (!text.isEmpty()) {
+                text.append(": ");
+            }
+            text.append(link_text);
+        }
+        label_link_->setText(text);
+    }
+}
+
+//---------------------------------------------------------------------
+//Change show components names
+void XGui::set_show_components_names(bool show) {
+    if (settings_.show_names != show) {
+        settings_.show_names = show;
+        update_label_link();
+    }
+ }
 
 //---------------------------------------------------------------------
 

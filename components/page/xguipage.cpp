@@ -19,6 +19,7 @@ XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
     if (xclu::gui_page_grid_spacing != -1) {
         input.grid->setSpacing(xclu::gui_page_grid_spacing);    //расстояние между элементами
     }
+    input.grid->setColumnStretch(xclu::gui_page_link_column,1);  //stretch for link column
 
     //страница, содержащая сетку
     QWidget *page = new QWidget;

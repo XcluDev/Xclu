@@ -23,6 +23,7 @@ XGuiInt::XGuiInt(XGuiPageCreator &input, XItemInt *item)
     //вставка на страницу
     //если есть единицы измерения - создаем блок с Label
     QString units = item->units();
+
     if (!units.isEmpty()) {
         //qDebug() << "units" << units;
         insert_widget_with_spacer(xclu::hwidget(0,
