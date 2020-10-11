@@ -270,6 +270,16 @@ void XGui::link_was_changed() {
 void XGui::update_view() {
     bool read_only = item__->is_out() || item__->is_linked() || (item__->is_const() && running_blocked());
     set_read_only(read_only);
+
+    //update "is_linked" property in widget, to set its background
+    if (internal_widget_) {
+        if (current_is_linked_ != item__->is_linked()) {
+            current_is_linked_ = item__->is_linked();
+            internal_widget_->setProperty("is_link", current_is_linked_);
+            xclu::widget_update_css(internal_widget_);
+        }
+    }
+
 }
 
 //---------------------------------------------------------------------

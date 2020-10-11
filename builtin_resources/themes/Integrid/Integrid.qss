@@ -39,6 +39,12 @@ QDateTimeEdit[readOnly="true"]*/
     border: 1px solid #000000;
 }
 
+/* For links */
+[is_link="true"]
+{
+    background-color: #c7f2c7;
+}
+
 /*----- GuiEditorPage -----*/
 QWidget#GuiEditorPage,
 QWidget#GuiEditorPage QLabel
@@ -186,9 +192,10 @@ QPushButton::disabled
 	border-color: #051a39;
 }
 
+
 QPushButton::hover
 {
-	background-color: rgba(70,162,218,50%);
+	/*background-color: rgba(70,162,218,20%);*/
 	border: 1px solid #46a2da;
 }
 
@@ -587,8 +594,8 @@ QCheckBox::indicator
 {
     background-color: #ffffff;
     border: 1px solid #000;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
 QCheckBox::indicator:checked
 {

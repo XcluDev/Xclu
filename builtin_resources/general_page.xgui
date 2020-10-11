@@ -34,14 +34,13 @@ in checkbox Links_Enabled links_enabled=0
 
 in text Links_List links 15 17
     //List of links.
-    //# '#' - comment, '-' - deactivated link
-    //- volume module1->out_value
-    //- image webcamera1->image
+    //#volume module1->out_value
+    //#image webcamera1->image
     
-in button Add... add_link
-    //Click to visually add a new link.
-in button Edit... edit_links
-    //Visual editor.
+in button Apply... _apply_links_
+    //Click to apply list changes.
+in button Reset... edit_links
+    //Clict to reset to current state.
 endif
 
 #--------------------

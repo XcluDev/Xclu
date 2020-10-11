@@ -95,6 +95,7 @@ protected:
     //The `in` and `const` can be set to `linked` and back.
     void set_read_only(bool read_only);
     bool current_read_only_ = false;    //current state of "read only"
+    bool current_is_linked_ = false;
 
     //Internal function, which can be reimplemented for components
     virtual void set_read_only_(bool read_only);

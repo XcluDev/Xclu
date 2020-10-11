@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -41,7 +41,7 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "0.96"
+                        "avalue": "2"
                     },
                     {
                         "aname": "float3",
@@ -169,7 +169,7 @@
                     },
                     {
                         "aname": "links",
-                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                        "avalue": "#volume module1->out_value\n#image webcamera1->image"
                     },
                     {
                         "aname": "error_handling",
@@ -227,7 +227,7 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "1.76"
+                        "avalue": "2"
                     },
                     {
                         "aname": "float3",
@@ -339,7 +339,7 @@
                     },
                     {
                         "aname": "presets_setup",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "current_preset",
@@ -355,7 +355,7 @@
                     },
                     {
                         "aname": "links",
-                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
+                        "avalue": "#volume module1->out_value\n#image webcamera1->image"
                     },
                     {
                         "aname": "error_handling",
