@@ -5,15 +5,14 @@
 //-------------------------------------------------------
 //Menu items:
 //    Copy Link: module3->input
-//    -----
-//    * Use Direct Input
-//    - Use Link: webcamera1->image
-//    -----
-//    Edit Link...
 //    Paste Link: webcamera2->image
+//    Edit Link...
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)
+//    -----
+//    * Use Direct Input
+//    - Use Link: webcamera1->image
 //-------------------------------------------------------
 
 #include "incl_h.h"
@@ -100,7 +99,7 @@ protected:
     QVector<ComponentContextMenuItem> items_;
     void append(QString title, int id, bool checkable = false, bool checked = false, bool enabled = true);
     void append_separator();
-    bool was_added_ = false;    //for separator
+    bool want_separator_ = false;
 
     QScopedPointer<QMenu> menu_;
 };

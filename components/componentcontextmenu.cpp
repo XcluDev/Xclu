@@ -18,15 +18,14 @@ ComponentContextMenu *COMPONENT_POPUP;
 //---------------------------------------------------------------------
 //Menu items:
 //    Copy Link: module3->input
-//    -----
-//    * Use Direct Input
-//    - Use Link: webcamera1->image
-//    -----
-//    Edit Link...
 //    Paste Link: webcamera2->image
+//    Edit Link...
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)
+//    -----
+//    * Use Direct Input
+//    - Use Link: webcamera1->image
 //
 //ComponentContextMenu_use_input
 //ComponentContextMenu_use_link
@@ -38,20 +37,12 @@ ComponentContextMenu *COMPONENT_POPUP;
 
 void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     items_.clear();
-    was_added_ = false;
+    want_separator_ = false;
     append(QString("Copy Link: '%1'").arg(XLink::shorten_link(info.get_link_to_itself)), ComponentContextMenu_copy_link);
-    append_separator();
     if (info.can_use_link) {
-        //if link is enpty - not show choosing options
-        if (!info.used_link.isEmpty() || info.use_link) {
-            append("Use Direct Input", ComponentContextMenu_use_input, true, !info.use_link);
-            append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
-            append_separator();
-        }
-        append("Edit Link...", ComponentContextMenu_edit_link);
-
         QString paste_link = XLink::shorten_link(XLink::get_link_from_clipboard());
         append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
+        append("Edit Link...", ComponentContextMenu_edit_link);
     }
     append_separator();
     if (info.has_default_value && !info.use_link) {
@@ -60,21 +51,30 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     if (info.has_set_size) {
         append("Set Size...", ComponentContextMenu_set_size);
     }
+    if (info.can_use_link) {
+        append_separator();
+        //if link is enpty - not show choosing options
+        if (!info.used_link.isEmpty() || info.use_link) {
+            append("Use Direct Input", ComponentContextMenu_use_input, true, !info.use_link);
+            append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
+            append_separator();
+        }
+    }
 }
 
 //---------------------------------------------------------------------
 void ComponentContextMenu::append(QString title, int id,
                                 bool checkable, bool checked, bool enabled) {
+    if (want_separator_) {
+        items_.append(ComponentContextMenuItem("", ComponentContextMenu_none));
+        want_separator_ = false;
+    }
     items_.append(ComponentContextMenuItem(title, id, enabled, true, checkable, checked));
-    was_added_ = true;  //for separator
 }
 
 //---------------------------------------------------------------------
 void ComponentContextMenu::append_separator() {
-    if (was_added_) {
-        append("", ComponentContextMenu_none);
-        was_added_ = false;
-    }
+    want_separator_ = true;
 }
 
 //---------------------------------------------------------------------
