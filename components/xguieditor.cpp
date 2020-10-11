@@ -13,6 +13,7 @@ XGuiEditor::XGuiEditor(QWidget *parent)
 {
     //Редактор параметров
     editor_frame_ = new QGroupBox("");
+
     editor_frame_->setLayout(xclu::vlayout(-1,
                                            editor_label_ = new QLabel(""), 0,
                                            tabs = new QTabWidget(), 0)

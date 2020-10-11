@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -202,7 +202,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
@@ -339,7 +339,7 @@
                     },
                     {
                         "aname": "presets_setup",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "current_preset",
@@ -347,7 +347,7 @@
                     },
                     {
                         "aname": "links_setup",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "links_enabled",

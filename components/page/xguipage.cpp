@@ -24,6 +24,9 @@ XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
     QWidget *page = new QWidget;
     page->setLayout(input.grid);
 
+    //Setting up name for using in QSS as `QWidget#GuiEditorPage` and set its background
+    atribute_as_GuiEditorPage(page);  //set background as a whole page
+
     //scrollarea
     scrollarea_ = new XcluScroollArea;
     scrollarea_->setWidget(page);
@@ -32,6 +35,7 @@ XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
 
     //вставляем в tabs
     QWidget *scrollWidget = xclu::vwidget(0, scrollarea_, 0);
+
 
     auto *tabs = input.tabs;
     tabs->addTab(scrollWidget, item->title());

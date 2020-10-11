@@ -136,6 +136,8 @@ void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, 
     layout->setStretch(0,0);
     layout->setStretch(1,1);
     QWidget *holder= new QWidget;
+    atribute_as_GuiEditorPage(holder);  //set background as a whole page
+
     holder->setLayout(layout);
 
     insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
@@ -144,6 +146,12 @@ void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, 
 //---------------------------------------------------------------------
 void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
      insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 2, 1);
+}
+
+//---------------------------------------------------------------------
+//set "GuiEditorPage" for QWidget in order QSS set its background darker
+void XGui::atribute_as_GuiEditorPage(QWidget *widget) {
+    widget->setObjectName("GuiEditorPage");
 }
 
 //---------------------------------------------------------------------
@@ -184,28 +192,9 @@ void XGui::set_read_only(bool read_only) {
 }
 
 //---------------------------------------------------------------------
-//Internal function, which must be implemented for components
-void XGui::set_read_only_(bool /*read_only*/) {
-    xclu_exception("set_read_only_ is not implemented for " + item__->name());
-}
+//Internal function, which should be reimplemented for components
+void XGui::set_read_only_(bool read_only) {
 
-//---------------------------------------------------------------------
-//Helper function for setting gray background - is called by most components except checkbox
-void XGui::set_background_for_read_only_(bool read_only) {
-    if (internal_widget_) {
-        QPalette pal = internal_widget_->palette();
-        QBrush brush;
-        if (read_only) {
-            //запоминаем старую кисть
-            default_internal_widget_brush_ = pal.brush(QPalette::Base);
-            brush = pal.brush(QPalette::Midlight);
-        }
-        else {
-            brush = default_internal_widget_brush_;
-        }
-        pal.setBrush(QPalette::Base, brush);
-        internal_widget_->setPalette(pal);
-    }
 }
 
 //---------------------------------------------------------------------

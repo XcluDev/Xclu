@@ -148,9 +148,17 @@ QString builtin_theme_folder() {
 
 
 
+//---------------------------------------------------------------------
 //папка с иконками
 QString builtin_icons_folder() {
     return builtin_theme_folder() + "icons/";
+}
+
+//---------------------------------------------------------------------
+//Update widget style (used for read-only on/off)
+void widget_update_css(QWidget *widget) {
+    widget->style()->unpolish(widget);
+    widget->style()->polish(widget);
 }
 
 //---------------------------------------------------------------------

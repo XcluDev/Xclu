@@ -3,12 +3,21 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
-/*static*/ QString XLink::get_link_from_clipboard() { //control max length
+/*static*/ QString XLink::get_link_from_clipboard() {
     QString text = xclu_clipboard_get_text();
     if (text.length() < Max_Link_Length) {
         return text;
      }
     return "";
+}
+
+//---------------------------------------------------------------------
+//for text longer Shorten_Link_Length changes end to "..."
+/*static*/ QString XLink::shorten_link(QString link) {
+    if (link.length() > Shorten_Link_Length) {
+        return link.left(Shorten_Link_Length).append("...");
+    }
+    return link;
 }
 
 //---------------------------------------------------------------------

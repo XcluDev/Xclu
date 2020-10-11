@@ -96,12 +96,8 @@ protected:
     void set_read_only(bool read_only);
     bool current_read_only_ = false;    //current state of "read only"
 
-    //Internal function, which must be implemented for components
+    //Internal function, which can be reimplemented for components
     virtual void set_read_only_(bool read_only);
-
-    //Helper function for setting gray background - is called by most components except checkbox
-    void set_background_for_read_only_(bool read_only);
-
 
 protected:
     //Tip control
@@ -129,8 +125,7 @@ protected:
 
     //виджет - используется для регуляции visible
     QWidget *widget_ = nullptr; //не надо удалять
-    QWidget *internal_widget_ = nullptr;    //виджет для установки фона при read_only
-    QBrush default_internal_widget_brush_;  //кисть фона виджета - используется при переключении
+    QWidget *internal_widget_ = nullptr;    //виджет для установки read_only
 
     //создать label
     void insert_label(XGuiPageCreator &input);
@@ -152,6 +147,9 @@ protected:
     //запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов
     //также, вызывается из insert_widget и insert_widget_with_spacer
     void set_widget(QWidget *widget, QWidget *internal_widget);
+
+    //set "GuiEditorPage" for QWidget in order QSS set its background darker
+    void atribute_as_GuiEditorPage(QWidget *widget);
 
 protected slots:
     //Отслеживание изменений

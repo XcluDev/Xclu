@@ -12,8 +12,10 @@
 class XLink {
 public:
     //Clipboard:
-    static const int Max_Link_Length = 100;   //constant for limitins link length from clibboard to avoit "giant" strings
-    static QString get_link_from_clipboard(); //control max length
+    static const int Max_Link_Length = 100;   //constant for limiting link length from clibboard to avoit "giant" strings
+    static const int Shorten_Link_Length = 30;   //constant for limiting link length when output at menu
+    static QString get_link_from_clipboard(); //for text longer Max_Link_Length returns empty string
+    static QString shorten_link(QString link); //for text longer Shorten_Link_Length changes end to "..."
 
     //Constructor
     XLink() {}

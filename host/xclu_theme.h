@@ -38,6 +38,8 @@ QString builtin_theme_name();       //имя выбранной темы
 //папка с иконками
 QString builtin_icons_folder();
 
+//Update widget style (used for read-only on/off)
+void widget_update_css(QWidget *widget);
 
 
 const int gui_page_grid_margin = -1;     //margin, если -1 - не ставить
