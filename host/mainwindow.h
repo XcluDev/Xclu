@@ -57,6 +57,8 @@ private slots:
 
     void on_actionShow_Component_Names_triggered(bool checked);
 
+    void on_actionLinks_Editor_triggered();
+
 private:
     //обновить заголовок окна и состояние элементов управления
     void update_window_state();

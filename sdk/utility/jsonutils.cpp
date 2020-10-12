@@ -58,3 +58,28 @@ double JsonUtils::json_double(const QJsonObject &json, QString name) {
 }
 
 //---------------------------------------------------------------------
+//Read values and use default value if not exists
+QString JsonUtils::json_string(const QJsonObject &json, QString name, QString def) {
+    if (json.contains(name)) return json_string(json, name);
+    return def;
+}
+
+//---------------------------------------------------------------------
+bool JsonUtils::json_bool(const QJsonObject &json, QString name, bool def) {
+    if (json.contains(name)) return json_bool(json, name);
+    return def;
+}
+
+//---------------------------------------------------------------------
+int JsonUtils::json_int(const QJsonObject &json, QString name, int def) {
+    if (json.contains(name)) return json_int(json, name);
+    return def;
+}
+
+//---------------------------------------------------------------------
+double JsonUtils::json_double(const QJsonObject &json, QString name, double def) {
+    if (json.contains(name)) return json_double(json, name);
+    return def;
+}
+
+//---------------------------------------------------------------------

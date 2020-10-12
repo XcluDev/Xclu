@@ -18,7 +18,6 @@ ComponentContextMenu *COMPONENT_POPUP;
 //---------------------------------------------------------------------
 //Menu items:
 //    Copy Link: module3->input
-//    Paste Link: webcamera2->image
 //    Edit Link...
 //    -----
 //    Reset to Default Value    (for scalars)
@@ -40,9 +39,11 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     want_separator_ = false;
     append(QString("Copy Link: '%1'").arg(XLink::shorten_link(info.get_link_to_itself)), ComponentContextMenu_copy_link);
     if (info.can_use_link) {
-        QString paste_link = XLink::shorten_link(XLink::get_link_from_clipboard());
-        append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
         append("Edit Link...", ComponentContextMenu_edit_link);
+        //QString paste_link = XLink::shorten_link(XLink::get_link_from_clipboard());
+        //if (!paste_link.isEmpty()) {
+        //    append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
+        //}
     }
     append_separator();
     if (info.has_default_value && !info.use_link) {
@@ -53,7 +54,7 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     }
     if (info.can_use_link) {
         append_separator();
-        //if link is enpty - not show choosing options
+        //if link is empty - not show choosing options
         if (!info.used_link.isEmpty() || info.use_link) {
             append("Use Direct Input", ComponentContextMenu_use_input, true, !info.use_link);
             append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);

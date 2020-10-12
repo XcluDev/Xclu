@@ -15,6 +15,7 @@ struct XGuiPageCreator;
 class XGui;
 class QJsonObject;
 class XItem;
+class Module;
 class ModuleInterface;
 
 //---------------------------------------------------------------------
@@ -56,8 +57,10 @@ public:
     XItem(ModuleInterface *interf, const XItemPreDescription &pre_description);
     virtual ~XItem();
 
-    //доступ ко всему интерфейсу
-    ModuleInterface *interf() { return interf_; }
+    //access to interface
+    ModuleInterface *interf();
+    //access to module
+    Module *module();
 
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
@@ -132,9 +135,9 @@ public:
 
     bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
     bool is_linked();     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
-    void set_linked(bool v);
+    void set_linked(bool v, bool send_change_signal = true);
     QString link();
-    void set_link(const QString &link);
+    void set_link(const QString &link, bool send_change_signal = true);
 
     //User change link settings - should show it in GUI and switch XRef value_ in XItem_
     virtual void link_was_changed();

@@ -22,8 +22,8 @@ class DialogAddModule : public QDialog
     Q_OBJECT
 
 public:
-    //Вызывайте эту функцию для работы с диалогом,
-    //если не nullptr - то диалог успешен и можно брать значения из него
+    //Call this function for working with dialog
+    //if returns not nullptr - then success and you can use dialog's value
     static DialogAddModule* call_dialog(QWidget *parent);
 
     DialogAddModule(QWidget *parent);

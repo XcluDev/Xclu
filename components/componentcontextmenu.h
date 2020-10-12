@@ -5,7 +5,6 @@
 //-------------------------------------------------------
 //Menu items:
 //    Copy Link: module3->input
-//    Paste Link: webcamera2->image
 //    Edit Link...
 //    -----
 //    Reset to Default Value    (for scalars)

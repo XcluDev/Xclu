@@ -25,26 +25,6 @@ endif
 
 #--------------------
 separator
-in checkbox_group Links_Setup links_setup=0
-    //Setup links for variables, in two ways: as text list and in visual editor.
-
-if links_setup 1
-in checkbox Links_Enabled links_enabled=0
-    //Is links enabled.
-
-in text Links_List links 15 17
-    //List of links.
-    //#volume module1->out_value
-    //#image webcamera1->image
-    
-in button Apply... _apply_links_
-    //Click to apply list changes.
-in button Reset... edit_links
-    //Clict to reset to current state.
-endif
-
-#--------------------
-separator
 in checkbox_group Error_Handling error_handling=0
     //Settings for handling errors.
 

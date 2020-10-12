@@ -19,6 +19,7 @@
 #include "registrarxitem.h"
 #include "moduleinterface.h"
 #include "module.h"
+#include "dialogeditlink.h"
 
 //---------------------------------------------------------------------
 /*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf,
@@ -88,6 +89,17 @@ XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description
 //---------------------------------------------------------------------
 XItem::~XItem() {
 
+}
+
+//---------------------------------------------------------------------
+ModuleInterface *XItem::interf() {
+    return interf_;
+}
+
+//---------------------------------------------------------------------
+Module *XItem::module() {
+    xclu_assert(interf(), "XItem::module() error: empty interf()");
+    return interf()->module();
 }
 
 //---------------------------------------------------------------------
@@ -225,9 +237,11 @@ bool XItem::is_linked() {
 }
 
 //---------------------------------------------------------------------
-void XItem::set_linked(bool v) {
+void XItem::set_linked(bool v, bool send_change_signal) {
     linked_ = v;
-    link_was_changed();
+    if (send_change_signal) {
+        link_was_changed();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -236,9 +250,11 @@ QString XItem::link() {
 }
 
 //---------------------------------------------------------------------
-void XItem::set_link(const QString &link) {
+void XItem::set_link(const QString &link, bool send_change_signal) {
     link_ = link;
-    link_was_changed();
+    if (send_change_signal) {
+        link_was_changed();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -247,6 +263,7 @@ void XItem::link_was_changed() {
     if (is_gui_attached()) {
         gui__->link_was_changed();
     }
+    xclu_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -452,6 +469,14 @@ void XItem::write_json(QJsonObject &json) {
     json["aname"] = name_;
     json["avalue"] = value_string();
 
+    //link
+    if (is_linked()) {
+        json["linked"] = "1";
+    }
+    if (!link().isEmpty()) {
+        json["link"] = link();
+    }
+
     //json["atitle"] = title_;
     //json["atype"] = interfacetype_to_string(type_);  //записываем, чтобы отловить ошибки при изменении интерфейса
 
@@ -474,6 +499,14 @@ void XItem::read_json(const QJsonObject &json) {
 
     //значение
     set_value_string(JsonUtils::json_string(json, "avalue"));
+
+    //link
+    bool linked = JsonUtils::json_int(json, "linked", false);
+    QString link = JsonUtils::json_string(json, "link", "");
+    if (linked || !link.isEmpty()) {
+        set_linked(linked, false);
+        set_link(link, true);
+    }
 
     //заголовок - закомментировал, пусть он меняется
     //title_ = JsonUtils::json_string(json, "atitle");
@@ -522,21 +555,25 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     switch (id) {
     case ComponentContextMenu_use_input:
         set_linked(false);
-        xclu_document_modified();
         break;
     case ComponentContextMenu_use_link:
         set_linked(true);
         xclu_document_modified();
         break;
-    case ComponentContextMenu_edit_link:
+    case ComponentContextMenu_edit_link: {
+        auto dialog = DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), name(), link(), is_linked()));
+        if (dialog) {
+            set_linked(dialog->link_enabled(), false);
+            set_link(dialog->link(), true);
+        }
+    }
         break;
     case ComponentContextMenu_paste_link:
     {
         QString text = XLink::get_link_from_clipboard();
         if (!text.isEmpty()) {
-            set_link(text);
+            set_link(text, false);
             set_linked(true);
-            xclu_document_modified();
         }
     }
         break;

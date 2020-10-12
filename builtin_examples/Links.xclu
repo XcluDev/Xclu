@@ -160,18 +160,6 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "links_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links_enabled",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links",
-                        "avalue": "#volume module1->out_value\n#image webcamera1->image"
-                    },
-                    {
                         "aname": "error_handling",
                         "avalue": "0"
                     },
@@ -227,7 +215,9 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2"
+                        "avalue": "2",
+                        "link": "test2->float1",
+                        "linked": "1"
                     },
                     {
                         "aname": "float3",
@@ -247,7 +237,8 @@
                     },
                     {
                         "aname": "string1",
-                        "avalue": "Abc"
+                        "avalue": "Abc",
+                        "link": "test2->float1"
                     },
                     {
                         "aname": "string2",
@@ -339,23 +330,11 @@
                     },
                     {
                         "aname": "presets_setup",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "current_preset",
                         "avalue": ""
-                    },
-                    {
-                        "aname": "links_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links_enabled",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links",
-                        "avalue": "#volume module1->out_value\n#image webcamera1->image"
                     },
                     {
                         "aname": "error_handling",

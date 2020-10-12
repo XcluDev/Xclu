@@ -45,7 +45,7 @@
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
-     <string>Project</string>
+     <string>Modules</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuRun">
@@ -74,11 +74,18 @@
     </property>
     <addaction name="actionShow_Component_Names"/>
    </widget>
+   <widget class="QMenu" name="menuWindows">
+    <property name="title">
+     <string>Windows</string>
+    </property>
+    <addaction name="actionLinks_Editor"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuProject"/>
    <addaction name="menuRun"/>
    <addaction name="menuDeveloper"/>
+   <addaction name="menuWindows"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -181,6 +188,11 @@
    </property>
    <property name="text">
     <string>Show Components Names</string>
+   </property>
+  </action>
+  <action name="actionLinks_Editor">
+   <property name="text">
+    <string>Links Editor...</string>
    </property>
   </action>
  </widget>
