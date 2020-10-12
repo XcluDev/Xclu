@@ -11,7 +11,8 @@
 DialogTestModuleInterface *D_TEST_MODULE_INTERFACE;
 
 //---------------------------------------------------------------------
-//делает все операции
+//Call this function for working with dialog
+//if returns not nullptr - then success and you can use dialog's value
 /*static*/ void DialogTestModuleInterface::call_dialog(QWidget *parent) {
     //Внимание, тут parent только один раз задается
     if (!D_TEST_MODULE_INTERFACE) {

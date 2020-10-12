@@ -41,7 +41,6 @@ public:
 
     void set_show_components_names(bool show);
 
-public:
     //used module
     Module *module();
 

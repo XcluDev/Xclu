@@ -4,8 +4,8 @@
 DialogModuleName *D_MODULE_NAME = 0;
 
 //---------------------------------------------------------------------
-//Вызывайте эту функцию для работы с диалогом,
-//если не nullptr - то диалог успешен и можно брать значения из него
+//Call this function for working with dialog
+//if returns not nullptr - then success and you can use dialog's value
 /*static*/ DialogModuleName* DialogModuleName::call_dialog(QWidget *parent, QString name_hint) {
     //Внимание, тут parent только один раз задается
     if (!D_MODULE_NAME) {

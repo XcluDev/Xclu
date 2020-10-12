@@ -7,8 +7,8 @@ DialogAddModule *D_ADD_MODULE = 0;
 
 
 //---------------------------------------------------------------------
-//Вызывайте эту функцию для работы с диалогом,
-//если не nullptr - то диалог успешен и можно брать значения из него
+//Call this function for working with dialog
+//if returns not nullptr - then success and you can use dialog's value
 /*static*/ DialogAddModule* DialogAddModule::call_dialog(QWidget *parent) {
     //Внимание, тут parent только один раз задается
     if (!D_ADD_MODULE) {

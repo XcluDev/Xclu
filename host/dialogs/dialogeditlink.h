@@ -7,17 +7,15 @@ namespace Ui {
 class DialogEditLink;
 }
 
+class XItem;
+
 struct DialogEditLinkData {
-    DialogEditLinkData(QString module_name, QString item_name, QString link, bool link_enabled) {
+    DialogEditLinkData(QString module_name, XItem *item) {
         this->module_name = module_name;
-        this->item_name = item_name;
-        this->link = link;
-        this->link_enabled = link_enabled;
+        this->item = item;
     }
     QString module_name;
-    QString item_name;
-    QString link;
-    bool link_enabled = false;
+    XItem *item;
 };
 
 class DialogEditLink : public QDialog
@@ -27,7 +25,7 @@ class DialogEditLink : public QDialog
 public:
     //Call this function for working with dialog
     //if returns not nullptr - then success and you can use dialog's value
-    static DialogEditLink* call_dialog(const DialogEditLinkData &data);
+    static void call_dialog(const DialogEditLinkData &data);
 
     explicit DialogEditLink(QWidget *parent = nullptr);
     ~DialogEditLink();
@@ -36,8 +34,12 @@ public:
     bool link_enabled();
     QString link();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::DialogEditLink *ui;
+    XItem *item_ = nullptr;
 
 };
 

@@ -541,7 +541,7 @@ void MainWindow::on_actionShow_Component_Names_triggered(bool checked)
 //---------------------------------------------------------------------
 void MainWindow::on_actionLinks_Editor_triggered()
 {
-
+    PROJ_GUI->show_links_editor();
 }
 
 //---------------------------------------------------------------------

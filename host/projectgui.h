@@ -47,6 +47,9 @@ public:
     //user changed "Show Components Names" checkbox menu item
     void on_changed_show_components_names(bool show);
 
+    //show Links Editor dialog
+    void show_links_editor();
+
 protected:
     EditorModules *editor_modules; //Редактор списка модулей проекта
     XGuiEditor *editor_module;  //Редактор параметров

@@ -561,11 +561,7 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         xclu_document_modified();
         break;
     case ComponentContextMenu_edit_link: {
-        auto dialog = DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), name(), link(), is_linked()));
-        if (dialog) {
-            set_linked(dialog->link_enabled(), false);
-            set_link(dialog->link(), true);
-        }
+        DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), this));
     }
         break;
     case ComponentContextMenu_paste_link:

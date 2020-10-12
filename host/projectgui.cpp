@@ -4,6 +4,7 @@
 #include "projectgui.h"
 #include "incl_cpp.h"
 #include "consoleview.h"
+#include "dialogeditlinks.h"
 
 ProjectGui *PROJ_GUI;
 
@@ -164,6 +165,17 @@ void ProjectGui::selected_module_updated() {
 //user changed "Show Components Names" checkbox menu item
 void ProjectGui::on_changed_show_components_names(bool show) {
     editor_module->set_show_components_names(show);
+}
+
+//---------------------------------------------------------------------
+//show Links Editor dialog
+void ProjectGui::show_links_editor() {
+    auto module = editor_module->module();
+    if (!module) {
+        xclu_message_box("Can't show Links Editor dialog, because there is no selected module");
+        return;
+    }
+    DialogEditLinks::call_dialog(module);
 }
 
 //---------------------------------------------------------------------

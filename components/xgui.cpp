@@ -121,7 +121,6 @@ void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCrea
 
     //create link label always at 3th column, without shift_y
     {
-
         label_link_ = new QLabel("");
         input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
         update_label_link();

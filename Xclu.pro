@@ -77,6 +77,7 @@ unix {
 FORMS += \
     host/dialogs/DialogPreferences1.ui \
     host/dialogs/dialogeditlink.ui \
+    host/dialogs/dialogeditlinks.ui \
     host/dialogs/dialogmodulename.ui \
     host/dialogs/dialogpreferences.ui \
     host/mainwindow.ui
@@ -137,6 +138,7 @@ SOURCES += \
     components/xitem.cpp \
     components/xitemscalar.cpp \
     host/dialogs/dialogeditlink.cpp \
+    host/dialogs/dialogeditlinks.cpp \
     host/mainwindow.cpp \
     host/recentfiles.cpp \
     host/xclu_paths.cpp \
@@ -223,6 +225,7 @@ HEADERS += \
     components/xitem.h \
     components/xitemscalar.h \
     host/dialogs/dialogeditlink.h \
+    host/dialogs/dialogeditlinks.h \
     host/mainwindow.h \
     host/recentfiles.h \
     host/xclu_paths.h \

@@ -1,13 +1,14 @@
 #include "dialogeditlink.h"
 #include "ui_dialogeditlink.h"
 #include "mainwindow.h"
+#include "xitem.h"
 
 DialogEditLink *D_EDIT_LINK = 0;
 
 //---------------------------------------------------------------------
-//Вызывайте эту функцию для работы с диалогом,
-//если не nullptr - то диалог успешен и можно брать значения из него
-/*static*/ DialogEditLink* DialogEditLink::call_dialog(const DialogEditLinkData &data) {
+//Call this function for working with dialog
+//if returns not nullptr - then success and you can use dialog's value
+/*static*/ void DialogEditLink::call_dialog(const DialogEditLinkData &data) {
     auto parent = MainWindow::window();
 
     if (!D_EDIT_LINK) {
@@ -17,13 +18,7 @@ DialogEditLink *D_EDIT_LINK = 0;
 
     dialog->set_data(data);
 
-    //TODO now edit link dialog blocks execution, it should be done async.
-    int result = dialog->exec();
-    if (result == QDialog::Accepted) {
-        return dialog;
-    }
-
-    return nullptr;
+    dialog->open();
 }
 
 //---------------------------------------------------------------------
@@ -42,10 +37,11 @@ DialogEditLink::~DialogEditLink()
 
 //---------------------------------------------------------------------
 void DialogEditLink::set_data(const DialogEditLinkData &data) {
+    item_ = data.item;
     ui->module_name->setText(data.module_name);
-    ui->component_name->setText(data.item_name);
-    ui->link->setText(data.link);
-    ui->link_enabled->setChecked(data.link_enabled);
+    ui->component_name->setText(item_->name());
+    ui->link->setText(item_->link());
+    ui->link_enabled->setChecked(item_->is_linked());
 }
 
 //---------------------------------------------------------------------
@@ -56,6 +52,13 @@ bool DialogEditLink::link_enabled() {
 //---------------------------------------------------------------------
 QString DialogEditLink::link() {
     return ui->link->text();
+}
+
+//---------------------------------------------------------------------
+void DialogEditLink::on_buttonBox_accepted()
+{
+    item_->set_link(ui->link->text(), false);
+    item_->set_linked(ui->link_enabled->isChecked(), true);
 }
 
 //---------------------------------------------------------------------
