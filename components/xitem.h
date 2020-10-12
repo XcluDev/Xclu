@@ -137,7 +137,10 @@ public:
     bool is_linked();     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
     void set_linked(bool v, bool send_change_signal = true);
     QString link();
+    bool is_link_empty();
     void set_link(const QString &link, bool send_change_signal = true);
+    void set_link_and_linked(const QString &link, bool linked);
+    void clear_link();
 
     //User change link settings - should show it in GUI and switch XRef value_ in XItem_
     virtual void link_was_changed();

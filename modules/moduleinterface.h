@@ -30,6 +30,9 @@ public:
     //весь интерфейс
     QVector<XItem *> &items();
 
+    //does module contains item with given name
+    bool has_item(QString name);
+
     //элемент по имени - кроме сепараторов
     XItem *var(QString name);
 

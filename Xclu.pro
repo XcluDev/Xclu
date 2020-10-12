@@ -75,11 +75,9 @@ unix {
 #--------------------------------------------------------------------------
 
 FORMS += \
-    host/dialogs/DialogPreferences1.ui \
     host/dialogs/dialogeditlink.ui \
     host/dialogs/dialogeditlinks.ui \
     host/dialogs/dialogmodulename.ui \
-    host/dialogs/dialogpreferences.ui \
     host/mainwindow.ui
 
 INCLUDEPATH += \
@@ -183,7 +181,6 @@ SOURCES += \
     sdk/types/xcluprotecteddata.cpp \
     host/consoleview.cpp \
     host/dialogs/dialogmodulename.cpp \
-    host/dialogs/dialogpreferences.cpp \
     host/dialogs/dialogrenamemodule.cpp \
     host/dialogs/dialogtestmoduleinterface.cpp \
     host/editormodules.cpp \
@@ -273,7 +270,6 @@ HEADERS += \
     sdk/types/xcluprotecteddata.h \
     host/consoleview.h \
     host/dialogs/dialogmodulename.h \
-    host/dialogs/dialogpreferences.h \
     host/dialogs/dialogrenamemodule.h \
     host/dialogs/dialogtestmoduleinterface.h \
     host/editormodules.h \

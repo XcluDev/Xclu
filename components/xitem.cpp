@@ -250,6 +250,11 @@ QString XItem::link() {
 }
 
 //---------------------------------------------------------------------
+bool XItem::is_link_empty() {
+    return link_.isEmpty() && !linked_;
+}
+
+//---------------------------------------------------------------------
 void XItem::set_link(const QString &link, bool send_change_signal) {
     link_ = link;
     if (send_change_signal) {
@@ -258,9 +263,20 @@ void XItem::set_link(const QString &link, bool send_change_signal) {
 }
 
 //---------------------------------------------------------------------
+void XItem::set_link_and_linked(const QString &link, bool linked) {
+    set_link(link, false);
+    set_linked(linked, true);
+}
+
+//---------------------------------------------------------------------
+void XItem::clear_link() {
+    set_link_and_linked("", false);
+}
+
+//---------------------------------------------------------------------
 //User change link settings - should show it in GUI
 void XItem::link_was_changed() {
-    if (is_gui_attached()) {
+    if (is_gui_attached() && gui__) {
         gui__->link_was_changed();
     }
     xclu_document_modified();
@@ -504,8 +520,7 @@ void XItem::read_json(const QJsonObject &json) {
     bool linked = JsonUtils::json_int(json, "linked", false);
     QString link = JsonUtils::json_string(json, "link", "");
     if (linked || !link.isEmpty()) {
-        set_linked(linked, false);
-        set_link(link, true);
+        set_link_and_linked(link, linked);
     }
 
     //заголовок - закомментировал, пусть он меняется
@@ -568,8 +583,7 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     {
         QString text = XLink::get_link_from_clipboard();
         if (!text.isEmpty()) {
-            set_link(text, false);
-            set_linked(true);
+            set_link_and_linked(text, true);
         }
     }
         break;

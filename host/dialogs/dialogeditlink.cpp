@@ -57,8 +57,7 @@ QString DialogEditLink::link() {
 //---------------------------------------------------------------------
 void DialogEditLink::on_buttonBox_accepted()
 {
-    item_->set_link(ui->link->text(), false);
-    item_->set_linked(ui->link_enabled->isChecked(), true);
+    item_->set_link_and_linked(ui->link->text(), ui->link_enabled->isChecked());
 }
 
 //---------------------------------------------------------------------

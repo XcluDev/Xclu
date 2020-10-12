@@ -339,9 +339,15 @@ void ModuleInterface::update_maps() {
 }
 
 //---------------------------------------------------------------------
+//does module contains item with given name
+bool ModuleInterface::has_item(QString name) {
+    return items_by_name_.contains(name);
+}
+
+//---------------------------------------------------------------------
 //элемент по имени - кроме сепараторов
 XItem *ModuleInterface::var(QString name) {
-    xclu_assert(items_by_name_.contains(name), "Unknown item '" + name + "'");
+    xclu_assert(has_item(name), "Unknown item '" + name + "'");
     return items_by_name_[name];
 }
 
