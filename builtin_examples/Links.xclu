@@ -237,8 +237,7 @@
                     },
                     {
                         "aname": "string1",
-                        "avalue": "Abc",
-                        "link": "test2->float1"
+                        "avalue": "Abc"
                     },
                     {
                         "aname": "string2",

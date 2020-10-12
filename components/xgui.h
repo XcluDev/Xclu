@@ -33,6 +33,7 @@ QT_END_NAMESPACE
 
 class XItem;
 class VisibilityGroupGui;
+//class XcluClickableLabel;
 
 //Settings for created GUI
 struct XGuiSettings {
@@ -178,9 +179,16 @@ protected slots:
 protected slots:
     //show popup menu
     void customMenuRequested(QPoint pos);    
+
+    //Show "Edit link" dialog when right-clicked link
+    void on_label_link_right_click(QPoint pos);
+
 public slots:
     //signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
     void on_component_popup_action();
+
+    //Show "Edit link" dialog when clicked link
+    //void on_label_link_clicked();
 
 };
 

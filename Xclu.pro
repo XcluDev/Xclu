@@ -115,6 +115,7 @@ SOURCES += \
     components/float/xguifloat.cpp \
     components/float/xitemfloat.cpp \
     components/group/xitemgroup.cpp \
+    components/gui/xcluclickablelabel.cpp \
     components/int/xguiint.cpp \
     components/int/xitemint.cpp \
     components/object/xguiobject.cpp \
@@ -200,6 +201,7 @@ HEADERS += \
     components/float/xguifloat.h \
     components/float/xitemfloat.h \
     components/group/xitemgroup.h \
+    components/gui/xcluclickablelabel.h \
     components/int/xguiint.h \
     components/int/xitemint.h \
     components/object/xguiobject.h \

@@ -4,6 +4,7 @@
 #include "xitem.h"
 #include "visibilitygroups.h"
 #include "componentcontextmenu.h"
+//#include "xcluclickablelabel.h"
 
 //---------------------------------------------------------------------
 XGui::XGui(XGuiPageCreator &input, XItem * item)
@@ -103,7 +104,14 @@ void XGui::on_component_popup_action() {
     else {
       xclu_exception("Error casting action at XGui::on_component_popup_action");
     }
+}
 
+//---------------------------------------------------------------------
+//Show "Edit link" dialog when right-clicked link
+void XGui::on_label_link_right_click(QPoint /*pos*/) {
+    if (!item__->link().isEmpty()) {
+        item__->context_menu_on_action(ComponentContextMenu_edit_link, "Label link is clicked");
+    }
 }
 
 //---------------------------------------------------------------------
@@ -111,12 +119,18 @@ void XGui::on_component_popup_action() {
 void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
                                  int pos_x, int shift_y, int spanx, int spany) {
 
-    //create link label with spacer - always at 3th column, without shift_y
+    //create link label always at 3th column, without shift_y
     {
 
         label_link_ = new QLabel("");
         input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
         update_label_link();
+        //Show "Edit link" dialog when right-clicked link
+        label_link_->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(label_link_, SIGNAL(customContextMenuRequested(QPoint)),
+                    SLOT(on_label_link_right_click(QPoint)));
+
+        //connect(label_link_, SIGNAL(clicked()), SLOT(on_label_link_clicked()));
     }
 
     //insert widget
