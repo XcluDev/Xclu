@@ -19,6 +19,7 @@ ComponentContextMenu *COMPONENT_POPUP;
 //Menu items:
 //    Copy Link: module3->input
 //    Edit Link...
+//    Paste Link: module->var
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)
@@ -37,13 +38,13 @@ ComponentContextMenu *COMPONENT_POPUP;
 void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
     items_.clear();
     want_separator_ = false;
-    append(QString("Copy Link: '%1'").arg(XLink::shorten_link(info.get_link_to_itself)), ComponentContextMenu_copy_link);
+    append(QString("Copy Link: '%1'").arg(XLinkParser::shorten_link(info.get_link_to_itself)), ComponentContextMenu_copy_link);
     if (info.can_use_link) {
         append("Edit Link...", ComponentContextMenu_edit_link);
-        //QString paste_link = XLink::shorten_link(XLink::get_link_from_clipboard());
-        //if (!paste_link.isEmpty()) {
-        //    append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
-        //}
+        QString paste_link = XLinkParser::shorten_link(XLinkParser::get_link_from_clipboard());
+        if (!paste_link.isEmpty()) {
+            append(QString("Paste Link: '%1'").arg(paste_link), ComponentContextMenu_paste_link);
+        }
     }
     append_separator();
     if (info.has_default_value && !info.use_link) {
@@ -57,7 +58,7 @@ void ComponentContextMenu::setup(const ComponentContextMenuInfo &info) {
         //if link is empty - not show choosing options
         if (!info.used_link.isEmpty() || info.use_link) {
             append("Use Direct Input", ComponentContextMenu_use_input, true, !info.use_link);
-            append(QString("Use Link: '%1'").arg(XLink::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
+            append(QString("Use Link: '%1'").arg(XLinkParser::shorten_link(info.used_link)), ComponentContextMenu_use_link, true, info.use_link);
             append_separator();
         }
     }

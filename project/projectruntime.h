@@ -49,7 +49,7 @@ public:
     //также, может создать эту папку, если это требуется
     QString absolute_path_from_project(QString relative_path, bool create_folder = false);
 
-    //Получение модуля - можно получить к нему доступ, см. класс XLink
+    //Получение модуля - можно получить к нему доступ, см. класс XLinkParser
     //а затем взять нужную переменную по geti и прочим
     Module *get_module(QString module_id);
 

@@ -89,48 +89,48 @@ Module *ProjectRuntime::get_module(QString module_id) {
 //---------------------------------------------------------------------
 //Получение переменных по link
 int ProjectRuntime::get_int_by_link(QString link_str, int def_val) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     if (link.is_empty) return def_val;
     return RUNTIME.get_module(link.module)->geti(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float ProjectRuntime::get_float_by_link(QString link_str, float def_val) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     if (link.is_empty) return def_val;
     return RUNTIME.get_module(link.module)->getf(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString ProjectRuntime::get_string_by_link(QString link_str, QString def_val) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     if (link.is_empty) return def_val;
     return RUNTIME.get_module(link.module)->gets(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 XProtectedStruct *ProjectRuntime::get_struct_by_link(QString link_str) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     return RUNTIME.get_module(link.module)->get_object(link.var);
 }
 
 //---------------------------------------------------------------------
 //Нажатие кнопки
 void ProjectRuntime::press_button_by_link(QString link_str) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     return RUNTIME.get_module(link.module)->button_pressed(link.var);
 }
 
 //---------------------------------------------------------------------
 /*XItem *ProjectRuntime::get_var_by_link(QString link_str) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     Module *module = get_module(link.module);
     return module->interf()->var(link.var);
 }*/
 
 //---------------------------------------------------------------------
 /*XStruct *ProjectRuntime::get_struct_by_link(QString link_str) {
-    XLink link(link_str);
+    XLinkParser link(link_str);
     Module *module = get_module(link.module);
     return module->get_object(link.var);
 }*/

@@ -109,7 +109,7 @@ void XGui::on_component_popup_action() {
 //---------------------------------------------------------------------
 //Show "Edit link" dialog when right-clicked link
 void XGui::on_label_link_right_click(QPoint /*pos*/) {
-    if (!item__->link().isEmpty()) {
+    if (!item__->link().link.isEmpty()) {
         item__->context_menu_on_action(ComponentContextMenu_edit_link, "Label link is clicked");
     }
 }
@@ -320,7 +320,7 @@ void XGui::update_label_link() {       //set label_link as optional item name an
         if (settings_.show_names) {
             name_text = item__->name();
         }
-        QString link_text = item__->link();
+        QString link_text = item__->link().link;
         if (!link_text.isEmpty()) {
             if (!item__->is_linked()) {
                 link_text = QString("(%1)").arg(link_text);

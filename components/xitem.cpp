@@ -220,8 +220,8 @@ int XItem::description_count() {
 //Link ----------------------------------------------------------------
 //---------------------------------------------------------------------
 //link to itself
-XLink XItem::get_link_to_itself() {
-    return XLink(interf()->module()->name(), name());
+XLinkParser XItem::get_link_to_itself() {
+    return XLinkParser(interf()->module()->name(), name());
 }
 
 //---------------------------------------------------------------------
@@ -232,45 +232,29 @@ bool XItem::is_link_can_be_used() {
 
 //---------------------------------------------------------------------
 //use link
-bool XItem::is_linked() {
-    return linked_;
+bool XItem::is_linked() const {
+    return link_.enabled;
 }
 
 //---------------------------------------------------------------------
-void XItem::set_linked(bool v, bool send_change_signal) {
-    linked_ = v;
-    if (send_change_signal) {
-        link_was_changed();
-    }
-}
-
-//---------------------------------------------------------------------
-QString XItem::link() {
+const XLink &XItem::link() const {
     return link_;
 }
 
 //---------------------------------------------------------------------
-bool XItem::is_link_empty() {
-    return link_.isEmpty() && !linked_;
-}
-
-//---------------------------------------------------------------------
-void XItem::set_link(const QString &link, bool send_change_signal) {
+void XItem::set_link(const XLink &link) {
     link_ = link;
-    if (send_change_signal) {
-        link_was_changed();
-    }
+    link_was_changed();
 }
 
 //---------------------------------------------------------------------
-void XItem::set_link_and_linked(const QString &link, bool linked) {
-    set_link(link, false);
-    set_linked(linked, true);
+void XItem::set_link(bool enabled, QString link) {
+    set_link(XLink(enabled, link));
 }
 
 //---------------------------------------------------------------------
 void XItem::clear_link() {
-    set_link_and_linked("", false);
+    set_link(XLink());
 }
 
 //---------------------------------------------------------------------
@@ -486,11 +470,9 @@ void XItem::write_json(QJsonObject &json) {
     json["avalue"] = value_string();
 
     //link
-    if (is_linked()) {
-        json["linked"] = "1";
-    }
-    if (!link().isEmpty()) {
-        json["link"] = link();
+    if (!link().is_empty()) {
+        json["link"] = link().to_str();
+        xclu_console_append(link().to_str());
     }
 
     //json["atitle"] = title_;
@@ -517,10 +499,9 @@ void XItem::read_json(const QJsonObject &json) {
     set_value_string(JsonUtils::json_string(json, "avalue"));
 
     //link
-    bool linked = JsonUtils::json_int(json, "linked", false);
-    QString link = JsonUtils::json_string(json, "link", "");
-    if (linked || !link.isEmpty()) {
-        set_link_and_linked(link, linked);
+    QString link_str = JsonUtils::json_string(json, "link", "");
+    if (!link_str.isEmpty()) {
+        set_link(XLink(link_str));
     }
 
     //заголовок - закомментировал, пусть он меняется
@@ -557,7 +538,7 @@ bool XItem::belongs_general_page() {
 ComponentContextMenuInfo XItem::context_menu_info() {
     //xclu_console_append(get_link_to_itself);
     return ComponentContextMenuInfo(
-                get_link_to_itself().to_str(), link(),
+                get_link_to_itself().to_str(), link().link,
                 is_link_can_be_used(), is_linked(),
                 context_menu_has_set_default_value(),
                 context_menu_has_set_size());
@@ -569,11 +550,10 @@ ComponentContextMenuInfo XItem::context_menu_info() {
 void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_text) {
     switch (id) {
     case ComponentContextMenu_use_input:
-        set_linked(false);
+        set_link(link().get_disabled_link());
         break;
     case ComponentContextMenu_use_link:
-        set_linked(true);
-        xclu_document_modified();
+        set_link(link().get_enabled_link());
         break;
     case ComponentContextMenu_edit_link: {
         DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), this));
@@ -581,9 +561,9 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         break;
     case ComponentContextMenu_paste_link:
     {
-        QString text = XLink::get_link_from_clipboard();
+        QString text = XLinkParser::get_link_from_clipboard();
         if (!text.isEmpty()) {
-            set_link_and_linked(text, true);
+            set_link(XLink(true, text));
         }
     }
         break;

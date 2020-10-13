@@ -40,8 +40,8 @@ void DialogEditLink::set_data(const DialogEditLinkData &data) {
     item_ = data.item;
     ui->module_name->setText(data.module_name);
     ui->component_name->setText(item_->name());
-    ui->link->setText(item_->link());
-    ui->link_enabled->setChecked(item_->is_linked());
+    ui->link->setText(item_->link().link);
+    ui->link_enabled->setChecked(item_->link().enabled);
 }
 
 //---------------------------------------------------------------------
@@ -57,7 +57,7 @@ QString DialogEditLink::link() {
 //---------------------------------------------------------------------
 void DialogEditLink::on_buttonBox_accepted()
 {
-    item_->set_link_and_linked(ui->link->text(), ui->link_enabled->isChecked());
+    item_->set_link(ui->link_enabled->isChecked(), ui->link->text());
 }
 
 //---------------------------------------------------------------------

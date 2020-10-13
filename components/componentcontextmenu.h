@@ -6,6 +6,7 @@
 //Menu items:
 //    Copy Link: module3->input
 //    Edit Link...
+//    Paste Link: module->var
 //    -----
 //    Reset to Default Value    (for scalars)
 //    Set Size...     (for images and other rich elements)

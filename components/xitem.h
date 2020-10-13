@@ -131,15 +131,13 @@ public:
 
     //Link -------------------------
     //obtain link to itself - for using in "Copy link"
-    XLink get_link_to_itself();
+    XLinkParser get_link_to_itself();
 
     bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
-    bool is_linked();     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
-    void set_linked(bool v, bool send_change_signal = true);
-    QString link();
-    bool is_link_empty();
-    void set_link(const QString &link, bool send_change_signal = true);
-    void set_link_and_linked(const QString &link, bool linked);
+    bool is_linked() const;     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
+    const XLink &link() const;
+    void set_link(const XLink &link);
+    void set_link(bool enabled, QString link);
     void clear_link();
 
     //User change link settings - should show it in GUI and switch XRef value_ in XItem_
@@ -220,8 +218,7 @@ protected:
     QString last_string_;
 
     //Link info
-    bool linked_ = false;
-    QString link_;
+    XLink link_;
 
     //Выражения (в данный момент не поддерживаются)
     bool use_expression_ = false;

@@ -54,9 +54,10 @@ void DialogEditLinks::set_module(Module *module) {
         if (item->type() == xitem_page()) {
             page = item->title();
         }
-        if (!item->link().isEmpty()) {
-            QString link = item->name() + " = " + item->link();
-            if (!item->is_linked()) {
+        auto &item_link = item->link();
+        if (!item_link.link.isEmpty()) {
+            QString link = item->name() + " = " + item_link.link;
+            if (!item_link.enabled) {
                 link = "#" + link;
             }
             //check if there is unprinted page name
@@ -78,7 +79,7 @@ void DialogEditLinks::on_buttonBox_accepted()
     //at first, clear all links
     auto items = module_->interf()->items();
     for (auto item: items) {
-        if (!item->is_link_empty()) {
+        if (!item->link().is_empty()) {
             item->clear_link();
         }
     }
@@ -118,7 +119,7 @@ void DialogEditLinks::on_buttonBox_accepted()
             continue;
         }
         XItem *item = module_->interf()->var(var);
-        item->set_link_and_linked(link, enabled);
+        item->set_link(enabled, link);
     }
 
 }

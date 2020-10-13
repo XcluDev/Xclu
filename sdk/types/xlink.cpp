@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
-/*static*/ QString XLink::get_link_from_clipboard() {
+/*static*/ QString XLinkParser::get_link_from_clipboard() {
     QString text = xclu_clipboard_get_text();
     if (text.length() < Max_Link_Length) {
         return text;
@@ -13,7 +13,7 @@
 
 //---------------------------------------------------------------------
 //for text longer Shorten_Link_Length changes end to "..."
-/*static*/ QString XLink::shorten_link(QString link) {
+/*static*/ QString XLinkParser::shorten_link(QString link) {
     if (link.length() > Shorten_Link_Length) {
         return link.left(Shorten_Link_Length).append("...");
     }
@@ -21,7 +21,7 @@
 }
 
 //---------------------------------------------------------------------
-XLink::XLink(QString module, QString var, int index, int index2) {
+XLinkParser::XLinkParser(QString module, QString var, int index, int index2) {
     this->module = module;
     this->var = var;
     this->index = index;
@@ -29,7 +29,7 @@ XLink::XLink(QString module, QString var, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
-XLink::XLink(QString link_str0) {
+XLinkParser::XLinkParser(QString link_str0) {
     is_empty = link_str0.isEmpty();
     if (is_empty) {
         return;
@@ -57,7 +57,7 @@ XLink::XLink(QString link_str0) {
 
 //---------------------------------------------------------------------
 //String representation of link, such as `webcam1->image`
-QString XLink::to_str() const {
+QString XLinkParser::to_str() const {
     QString res;
     res.append(module).append("->").append(var);
     if (index >= 0) {
