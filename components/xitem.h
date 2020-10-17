@@ -62,6 +62,9 @@ public:
     //access to module
     Module *module();
 
+    //update - for "link" copies (for scalars and objects) or sets pointer (for objects optionally)
+    virtual void update();
+
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();
     QString title();
@@ -282,18 +285,18 @@ public:
     XItem_<T>(ModuleInterface *interf, const XItemPreDescription &pre_description)
         : XItem(interf, pre_description) {
         //by default, set value_ as owner
-        value_.own(new XProtectedData_<T>(new T()));
+        //value_.own(new XProtectedData_<T>(new T()));
 
     }
 
     //Access for read and write value
     //for one-time access of scalars,
     //can use `value_read().data()`, `value_.data()->write().data() = value`
-    XProtectedRead_<T> value_read() { return value_.data()->read(); }
-    XProtectedWrite_<T> value_write() { return value_.data()->write(); }
+    XProtectedRead_<T> value_read() { return value_.read(); }
+    XProtectedWrite_<T> value_write() { return value_.write(); }
 
 protected:
-     XRef<XProtectedData_<T>> value_;
+     XProtectedData_<T> value_;
 
 };
 

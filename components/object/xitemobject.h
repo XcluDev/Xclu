@@ -25,7 +25,7 @@ public:
 
     //доступ к объекту
     virtual bool supports_object() { return true; }
-    virtual XProtectedStruct *get_object() { return value_.data(); }
+    virtual XProtectedStruct *get_object() { return &value_; }
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);

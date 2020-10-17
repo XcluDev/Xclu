@@ -3,6 +3,51 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
+XLink::XLink(bool enabled, QString link) {
+    this->enabled = enabled;
+    this->link = link;
+}
+
+//---------------------------------------------------------------------
+XLink::XLink(QString link_str) {
+    if (!link_str.isEmpty()) {
+        if (link_str.left(1) == "#") {
+            link_str.remove(0, 1);
+            enabled = false;
+            this->link = link_str;
+        }
+        else {
+            enabled = true;
+            this->link = link_str;
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+bool XLink::is_empty() const {
+    return !enabled && link.isEmpty();
+}
+
+//---------------------------------------------------------------------
+void XLink::clear() {
+    enabled = false;
+    link = "";
+}
+
+//---------------------------------------------------------------------
+QString XLink::to_str() const {
+    if (is_empty()) return "";
+    if (enabled) {
+        return link;
+    }
+    else {
+        return "#" + link;
+    }
+}
+
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
 /*static*/ QString XLinkParser::get_link_from_clipboard() {
     QString text = xclu_clipboard_get_text();
     if (text.length() < Max_Link_Length) {

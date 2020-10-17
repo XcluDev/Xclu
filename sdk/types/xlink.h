@@ -15,47 +15,11 @@ public:
     bool enabled = false;
     QString link;
     XLink() {}
-    XLink(bool enabled, QString link) {
-        this->enabled = enabled;
-        this->link = link;
-    }
-    XLink(QString link_str) {
-        if (!link_str.isEmpty()) {
-            if (link_str.left(1) == "#") {
-                link_str.remove(0, 1);
-                enabled = false;
-                this->link = link_str;
-            }
-            else {
-                enabled = true;
-                this->link = link_str;
-            }
-        }
-    }
-    bool is_empty() const { return !enabled && link.isEmpty(); }
-    void clear() {
-        enabled = false;
-        link = "";
-    }
-    QString to_str() const {
-        if (is_empty()) return "";
-        if (enabled) {
-            return link;
-        }
-        else {
-            return "#" + link;
-        }
-    }
-    XLink get_enabled_link() const {
-        XLink link = *this;
-        link.enabled = true;
-        return link;
-    }
-    XLink get_disabled_link() const {
-        XLink link = *this;
-        link.enabled = false;
-        return link;
-    }
+    XLink(bool enabled, QString link);
+    XLink(QString link_str);
+    bool is_empty() const;
+    void clear();
+    QString to_str() const;
 
 };
 

@@ -212,12 +212,12 @@
                     {
                         "aname": "float1",
                         "avalue": "1.1",
-                        "link": "#test2->float2"
+                        "link": "test2->float2"
                     },
                     {
                         "aname": "float2",
                         "avalue": "2",
-                        "link": "test2->float1"
+                        "link": "copy test2->float1"
                     },
                     {
                         "aname": "float3",

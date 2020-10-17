@@ -103,6 +103,14 @@ Module *XItem::module() {
 }
 
 //---------------------------------------------------------------------
+//update - for "link" copies (for scalars and objects) or sets pointer (for objects optionally)
+void XItem::update() {
+    if (is_linked()) {
+
+    }
+}
+
+//---------------------------------------------------------------------
 QString XItem::name() {
     return name_;
 }
@@ -549,11 +557,17 @@ ComponentContextMenuInfo XItem::context_menu_info() {
 //Subclasses must implement non-common actions and call parent method
 void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_text) {
     switch (id) {
-    case ComponentContextMenu_use_input:
-        set_link(link().get_disabled_link());
+    case ComponentContextMenu_use_input: {
+        XLink link1 = link();
+        link1.enabled = false;
+        set_link(link1);
+    }
         break;
-    case ComponentContextMenu_use_link:
-        set_link(link().get_enabled_link());
+    case ComponentContextMenu_use_link: {
+            XLink link1 = link();
+            link1.enabled = true;
+            set_link(link1);
+        }
         break;
     case ComponentContextMenu_edit_link: {
         DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), this));
