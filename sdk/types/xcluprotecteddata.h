@@ -4,6 +4,8 @@
 #include <QMutex>
 #include <QReadWriteLock>
 #include "incl_h.h"
+#include "xwaschanged.h"
+
 
 //Wrapper for data protection, with multiple-read and single-write features
 //Classes: XProtectedData_<T>, XProtectedRead_<T>, XProtectedWrite_<T>
@@ -28,21 +30,35 @@ class XProtectedRead_;
 template<typename T>
 class XProtectedWrite_;
 
-//class for representing data
+//Class for representing data.
+//Also it supports tracing of changes automatically, at calling "write"
+//It's ok, because nobody can "read" while writing
 template<typename T>
-class XProtectedData_ {
+class XProtectedData_: public XWasChangedKeeper {
 public:
     XProtectedData_() { data_.reset(new T); }
     XProtectedData_(T *data) { data_.reset(data); }
     //creates reader
     XProtectedRead_<T> read() { return XProtectedRead_<T>(this); }
     //creates writer
-    XProtectedWrite_<T> write() { return XProtectedWrite_<T>(this); }
+    XProtectedWrite_<T> write() {
+        //touch() will be called during XProtectedWrite_<T>::lock()
+        return XProtectedWrite_<T>(this);
+    }
+
+    //Mechanism for test changing
+    //Mark that value was changed - it's done automatically at "write" calling
+    //void touch();
+
+    //Check if was change relative to the checker
+    //bool was_changed(XWasChangedChecker &checker) const;
+
 protected:
     QScopedPointer<T> data_;
     QReadWriteLock lock_;
     friend XProtectedRead_<T>;
     friend XProtectedWrite_<T>;
+
 };
 
 //class for reading data (multiple access)
@@ -70,6 +86,7 @@ class XProtectedWrite_ {
 public:
     XProtectedWrite_(XProtectedData_<T> *value) { lock(value); }
     XProtectedWrite_(XProtectedData_<T> &value) { lock(&value); }
+
     ~XProtectedWrite_() { unlock(); }
     T &data() { return *value_->data_.data(); }
     T *pointer() { return value_->data_.data(); }
@@ -80,6 +97,9 @@ protected:
     void lock(XProtectedData_<T> *value) {
         value_ = value;
         value_->lock_.lockForWrite();
+
+        //notify keeper about value change!
+        value_->touch();
     }
     void unlock() { value_->lock_.unlock(); }
 };

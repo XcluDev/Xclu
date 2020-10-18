@@ -57,6 +57,9 @@ public:
     //пометить, что все элементы были изменены - при старте
     void set_changed_at_start();
 
+    //update before rt-module's update
+    void update();
+
     //запомнить/восстановить состояние GUI (страницу, промотку)
     void gui_to_state();
     void state_to_gui();

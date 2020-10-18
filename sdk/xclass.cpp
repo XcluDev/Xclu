@@ -46,6 +46,12 @@ Module *XClass::module() {
 //Check if value was changed
 //It's important, that for objects this function obtain access using XStructRead,
 //hence it should not be called for already active XStructRead[Write] for this object
+bool XClass::was_changed_(QString name, XWasChangedChecker &checker) {
+    return module()->interf()->var(name)->was_changed(checker);
+}
+
+//---------------------------------------------------------------------
+//This was_changed is checks changes between `update` calls
 bool XClass::was_changed_(QString name) {
     return module()->interf()->var(name)->was_changed();
 }

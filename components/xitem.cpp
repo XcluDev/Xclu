@@ -103,11 +103,14 @@ Module *XItem::module() {
 }
 
 //---------------------------------------------------------------------
-//update - for "link" copies (for scalars and objects) or sets pointer (for objects optionally)
+//checks changes at current frame
+//and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
+//Note: update should be called after updating value from user GUI to correctly maintain "was changed"
 void XItem::update() {
     if (is_linked()) {
 
     }
+    was_changed_ = was_changed(was_changed_checker_);
 }
 
 //---------------------------------------------------------------------
@@ -160,55 +163,10 @@ QString XItem::description(int index) {
 }
 
 //---------------------------------------------------------------------
-bool XItem::was_changed() {
-    //Если было задано, что переменная изменилась - то просто запомнить
-    if (force_changed_) {
-        force_changed_ = false;
-        if (supports_int()) last_int_ = value_int();
-        else {
-            if (supports_float()) last_float_ = value_float();
-            else
-                if (supports_string()) last_string_ = value_string();
-        }
-        //сбрасываем флажок с object
-        if (supports_object()) {
-            get_object()->write().data().reset_changed(); // Доступ к объекту!
-        }
-        return true;
-    }
-
-    if (supports_int()) {
-        if (last_int_ != value_int()) {
-            last_int_ = value_int();
-            return true;
-        }
-        return false;
-    }
-    if (supports_float()) {
-        if (last_float_ != value_float()) {
-            last_float_ = value_float();
-            return true;
-        }
-        return false;
-    }
-    if (supports_string()) {
-        if (last_string_ != value_string()) {
-            last_string_ = value_string();
-            return true;
-        }
-        return false;
-    }
-    //объекты - у них есть своя метка
-    if (supports_object()) {
-        return get_object()->write().data().was_changed();  // Доступ к объекту!
-    }
-
+//Checking that value was changed
+//works relative to save "change checker", which stores frame fo last check
+bool XItem::was_changed(XWasChangedChecker &checker) {
     return false;
-}
-
-//---------------------------------------------------------------------
-void XItem::set_changed() { //пометить, что переменная была изменена
-    force_changed_ = true;
 }
 
 //---------------------------------------------------------------------

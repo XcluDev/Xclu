@@ -10,6 +10,7 @@
 #include "xstruct.h"
 #include "xlink.h"
 #include "componentcontextmenu.h"
+#include "xwaschanged.h"
 
 struct XGuiPageCreator;
 class XGui;
@@ -62,7 +63,10 @@ public:
     //access to module
     Module *module();
 
-    //update - for "link" copies (for scalars and objects) or sets pointer (for objects optionally)
+    //update
+    //checks changes at current frame
+    //and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
+    //Note: update should be called after updating value from user GUI to correctly maintain "was changed"
     virtual void update();
 
     //Имя и тип, а также информация для создания GUI  -------------------------
@@ -85,13 +89,13 @@ public:
     int description_count();
     //void add_description(QString description); //не позволяем добавлять описание - так как его сразу передаем в конструктор
 
-    //Проверка, что изменилось значение -------------------------
-    //Важно: для объектов эти функция получает доступ к объекту, поэтому, нельзя вызывать, когда объект уже заблокирован
-    bool was_changed(); //эта функция позволяет выяснить, изменялось ли значение после последнего вызова was_changed
-                        //при этом, при запуске проекта это всегда ставится в true
-                        //функция предназначена для обновлений объектов во время работы, а не для записи состояния проекта
-                        //поэтому для const значение true только один раз после запуска проекта
-    void set_changed(); //переменная была точно изменена - при следующем запросе was_changed выдастся true
+    //Checking that value was changed -------------------------
+    //works relative to save "change chacker", which stores frame fo last check
+    //It's really implemented at XItem_<T>
+    virtual bool was_changed(XWasChangedChecker &checker);
+
+    //was changed for one-point access, between "update" calling
+    bool was_changed() { return was_changed_; }
 
     //Доступ к значениям -------------------------
     //Соответствующие типы должны переопределить эти функции
@@ -211,14 +215,9 @@ protected:
 
     bool save_to_project_ = true;  //если false, то не записывать значение в проект
 
-    //изменялась ли переменная после последнего вызова was_changed (после старта всегда true)
-    //это реализуется с помощью set_changed и may_changed
-    //при этом, проверка may_changed выполняется на основе анализа того, что поддерживает объект
-    //сначала int, потом float, потом string, потом object
-    bool force_changed_ = false;
-    int last_int_ = 0;
-    float last_float_ = 0;
-    QString last_string_;
+    //Was changed checker
+    XWasChangedChecker was_changed_checker_;
+    bool was_changed_ = false;  //value changed at each update"
 
     //Link info
     XLink link_;
@@ -292,8 +291,15 @@ public:
     //Access for read and write value
     //for one-time access of scalars,
     //can use `value_read().data()`, `value_.data()->write().data() = value`
+    //Note: each "value_write" calling calls increasing frame for "was changed keeper"
     XProtectedRead_<T> value_read() { return value_.read(); }
     XProtectedWrite_<T> value_write() { return value_.write(); }
+
+    //Checking that value was changed -------------------------
+    //works relative to save "change chacker", which stores frame fo last check
+    virtual bool was_changed(XWasChangedChecker &checker) {
+        return value_.was_changed(checker);
+    }
 
 protected:
      XProtectedData_<T> value_;

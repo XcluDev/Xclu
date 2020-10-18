@@ -52,6 +52,9 @@ public:
     //Check if value was changed
     //It's important, that for objects this function obtain access using XStructRead,
     //hence it should not be called for already active XStructRead[Write] for this object
+    bool was_changed_(QString name, XWasChangedChecker &checker);
+
+    //This was_changed is checks changes between `update` calls
     bool was_changed_(QString name);
 
     //int, checkbox, button, enum (rawtext), string, text

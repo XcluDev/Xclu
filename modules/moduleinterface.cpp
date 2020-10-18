@@ -434,8 +434,16 @@ void ModuleInterface::unblock_gui(const XQualifierMask &qual) {
 //---------------------------------------------------------------------
 //пометить, что все элементы были изменены - при старте
 void ModuleInterface::set_changed_at_start() {
-    for (int i=0; i<items_.size(); i++) {
-        items_[i]->set_changed();
+    //for (auto &item: items_) {
+    //    item->set_changed();
+    //}
+}
+
+//---------------------------------------------------------------------
+//update before rt-module's update
+void ModuleInterface::update() {
+    for (auto &item: items_) {
+        item->update();
     }
 }
 

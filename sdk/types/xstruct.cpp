@@ -34,13 +34,13 @@ void XStructRead::release() {             //если надо освободит
 XStructWrite::XStructWrite(XStruct *object)
     : XStructRead(object)
 {
-    object->set_changed();
+    object->//set_changed();
 }
 
 XStructWrite::XStructWrite(XStruct &object)
     : XStructRead(object)
 {
-    object.set_changed();
+    object.//set_changed();
 }
 
 //XStructWrite::~XStructWrite() {
@@ -68,21 +68,21 @@ void XStruct::end_access() {
 }
 
 //---------------------------------------------------------------------
-bool XStruct::was_changed() {     //показывает, было ли изменение после последнего запроса
-    bool res = was_changed_;
-    was_changed_ = false;
-    return res;
-}
+//bool XStruct::was_changed() {     //показывает, было ли изменение после последнего запроса
+//    bool res = was_changed_;
+//    was_changed_ = false;
+//    return res;
+//}
 
 //---------------------------------------------------------------------
-void XStruct::reset_changed() {
-    was_changed_ = false;
-}
+//void XStruct::reset_changed() {
+//    was_changed_ = false;
+//}
 
 //---------------------------------------------------------------------
-void XStruct::set_changed() {     //устанавливает флаг, что было изменение
-    was_changed_ = true;
-}
+//void XStruct::set_changed() {     //устанавливает флаг, что было изменение
+//    was_changed_ = true;
+//}
 
 //---------------------------------------------------------------------
 XStructType XStruct::type() const { //тип - image, array, strings, используется для того, чтобы можно было фильтровать и управлять визуализацией
@@ -92,7 +92,7 @@ XStructType XStruct::type() const { //тип - image, array, strings, испол
 //---------------------------------------------------------------------
 void XStruct::set_type(XStructType type) {
     type_ = type;
-    set_changed();
+    //set_changed();
 }
 
 //---------------------------------------------------------------------
@@ -151,7 +151,7 @@ void XStruct::clear() {
     }
     object_.clear();
 
-    set_changed();
+    //set_changed();
 }
 
 //---------------------------------------------------------------------
@@ -285,7 +285,7 @@ void XStruct::seti(QString name, int v) {
 #define XStruct_set_(SHORT_TYPE, TYPE_NAME, CPP_TYPE) \
     void XStruct::set##SHORT_TYPE(QString name, CPP_TYPE v) { \
         TYPE_NAME##_[name] = v; \
-        set_changed(); \
+        /*set_changed();*/\
     }
 
 XStruct_set_(i, int, const int &)

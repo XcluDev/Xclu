@@ -48,9 +48,9 @@ public:
     void begin_access();
     void end_access();
 
-    bool was_changed();     //показывает, было ли изменение после последнего запроса "was_changed"
-    void set_changed();     //устанавливает флаг, что было изменение
-    void reset_changed();   //сброс флага, что было изменение
+    //bool was_changed();     //показывает, было ли изменение после последнего запроса "was_changed"
+    //void set_changed();     //устанавливает флаг, что было изменение
+    //void reset_changed();   //сброс флага, что было изменение
 
     //тип - очищается при clear
     XStructType type() const;

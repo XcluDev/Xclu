@@ -139,11 +139,16 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
             interf()->block_gui(XQualifierMask(XQualifierConst));
             set_running(true);
         }
+        //Пометить, что все переменные были изменены
+        //interf()->set_changed_at_start();
+
     }
         break;
 
     case GuiStageBeforeUpdate:   //GUI -> in; expressions
         interf()->gui_to_vars(XQualifierMask(XQualifierIn), true);
+        //update links and "was_changed"
+        interf()->update();
         break;
     case GuiStageAfterUpdate:    //out -> GUI
         interf()->vars_to_gui(XQualifierMask(XQualifierOut));
@@ -191,8 +196,6 @@ void Module::execute(ModuleExecuteStage stage) {
     case ModuleExecuteStageStart:
         //Установить все in и const переменные
         gui_action(GuiStageBeforeStart);
-        //Пометить, что все переменные были изменены
-        interf()->set_changed_at_start();
         //запуск start исполняемой части модуля
         rtmodule_->execute(stage);
         gui_action(GuiStageAfterUpdate);
@@ -203,7 +206,7 @@ void Module::execute(ModuleExecuteStage stage) {
         break;
 
     case ModuleExecuteStageUpdate:
-        //Установить все in переменные
+        //Установить все in переменные, update links and "was_change"
         gui_action(GuiStageBeforeUpdate);
         rtmodule_->execute(stage);
         //Забрать все out переменные

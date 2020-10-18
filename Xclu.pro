@@ -146,12 +146,12 @@ SOURCES += \
     project/project.cpp \
     project/projectproperties.cpp \
     project/projectruntime.cpp \
-    sdk/math/math_types.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/slowbit.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    sdk/types.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
     sdk/types/xlink.cpp \
@@ -159,6 +159,7 @@ SOURCES += \
     sdk/types/xref.cpp \
     sdk/types/xstruct.cpp \
     sdk/types/xtypes.cpp \
+    sdk/types/xwaschanged.cpp \
     sdk/utility/console.cpp \
     sdk/utility/incl_cpp.cpp \
     sdk/utility/incl_h.cpp \
@@ -233,7 +234,6 @@ HEADERS += \
     project/projectproperties.h \
     project/projectruntime.h \
     sdk/math/int2.h \
-    sdk/math/math_types.h \
     sdk/math/math_utils.h \
     sdk/math/slowbit.h \
     modules/exportinterface.h \
@@ -241,6 +241,7 @@ HEADERS += \
     modules/moduleseed.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
+    sdk/types.h \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
     sdk/types/xlink.h \
@@ -248,6 +249,7 @@ HEADERS += \
     sdk/types/xref.h \
     sdk/types/xstruct.h \
     sdk/types/xtypes.h \
+    sdk/types/xwaschanged.h \
     sdk/utility/console.h \
     sdk/utility/incl_cpp.h \
     sdk/utility/incl_h.h \
