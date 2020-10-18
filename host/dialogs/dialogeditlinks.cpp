@@ -134,22 +134,25 @@ void DialogEditLinks::on_button_check_links_clicked()
     else {
         //check resolving links
         bool ok = true;
-        for (auto &link: links.links) {
+        for (int i=0; i<links.links.size(); i++) {
+            auto &link = links.links[i];
             if (link.enabled) {
                 XLinkResolved::CheckLinkResult checking = XLinkResolved::check_link(link.link);
                 if (!checking.ok) {
-                    xclu_console_append("Error: " + checking.error);
+                    xclu_console_append(QString("Error at link `%1`: %2")
+                                        .arg(links.vars[i])
+                                        .arg(checking.error));
                     ok = false;
                 }
             }
         }
         if (ok) {
-            xclu_message_box("Links are correct");
             xclu_console_append("Links are correct");
+            xclu_message_box("Links are correct");
         }
         else {
-            xclu_message_box("There are error(s) in links, see Console");
             xclu_console_append("There are error(s) in links");
+            xclu_message_box("There are error(s) in links, see Console");
         }
     }
 }
