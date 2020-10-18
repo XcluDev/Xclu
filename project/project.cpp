@@ -352,7 +352,7 @@ Module *Project::module_by_index(int i, bool can_return_null) {
     }
     else {
         if (!can_return_null) {
-            xclu_exception(QString("Requested module with bad index '%1'").arg(i));
+            xclu_exception(QString("Bad module index '%1'").arg(i));
         }
         return nullptr;
     }
@@ -360,7 +360,7 @@ Module *Project::module_by_index(int i, bool can_return_null) {
 
 //---------------------------------------------------------------------
 Module *Project::module_by_name(QString name) {
-    xclu_assert(has_module_with_name(name), QString("Requested module with unknown name '%1'").arg(name));
+    xclu_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
     return module_by_index(names_.value(name));
 }
 
@@ -406,7 +406,7 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out) {
 //Also clears console
 bool Project::compile() {
     //clear console
-    CONS_VIEW->clear();
+    xclu_console_clear();
     //compile
     bool ok = true;
     for (auto module: modules_) {

@@ -32,9 +32,6 @@ public:
     QString to_str() const;
 
     bool is_equal(const XLink &link0);
-
-    //Check if link is correct
-    bool check();
 };
 
 //---------------------------------------------------------------------
@@ -67,12 +64,19 @@ protected:
 //---------------------------------------------------------------------
 class XLinkResolved: public XLinkParsed {
 public:
+    struct CheckLinkResult {
+        bool ok = false;
+        QString error;
+    };
+    //Test if link is valid - if not, returns error text
+    static CheckLinkResult check_link(QString link);
+public:
     XLinkResolved(QString link_str0);
     XLinkResolved(const XLinkParsed &link0);
     Module *module_pointer();
 
 protected:
-    void resolve_module();
+    void resolve();
     Module *module_pointer_ = nullptr;
 };
 

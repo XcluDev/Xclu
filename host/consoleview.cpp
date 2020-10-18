@@ -48,7 +48,7 @@ ConsoleView::ConsoleView(QWidget *parent)
 
 //---------------------------------------------------------------------
 //добавить сообщение
-void ConsoleView::log(QString message, bool dirty) {
+void ConsoleView::append(QString message, bool dirty) {
     textArea_->appendPlainText(message);
     //qDebug() << "Appending " << message;
 

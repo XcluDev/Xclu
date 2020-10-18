@@ -2,6 +2,7 @@
 #include "ui_dialogeditlink.h"
 #include "mainwindow.h"
 #include "xitem.h"
+#include "consoleview.h"
 
 DialogEditLink *D_EDIT_LINK = 0;
 
@@ -63,7 +64,12 @@ void DialogEditLink::on_buttonBox_accepted()
 //---------------------------------------------------------------------
 void DialogEditLink::on_button_check_link_clicked()
 {
-
+    XLinkResolved::CheckLinkResult checking = XLinkResolved::check_link(ui->link->text());
+    QString message;
+    if (checking.ok) message = "Link is valid";
+    else message = "Link has error: " + checking.error;
+    xclu_message_box(message);
+    xclu_console_append(message);
 }
 
 //---------------------------------------------------------------------

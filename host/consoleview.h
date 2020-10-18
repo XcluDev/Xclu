@@ -31,7 +31,7 @@ public:
     ConsoleView(QWidget *parent);
 
     //добавить сообщение, dirty - помечать, что консоль не пустая (были ошибки)
-    void log(QString message, bool dirty = true);
+    void append(QString message, bool dirty = true);
 
     //есть ли сообщения (кроме тех, для которых dirty = false)
     bool is_empty();

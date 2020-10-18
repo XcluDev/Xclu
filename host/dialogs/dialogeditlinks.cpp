@@ -5,6 +5,7 @@
 #include "moduleinterface.h"
 #include "xitem.h"
 #include "incl_cpp.h"
+#include "consoleview.h"
 
 DialogEditLinks *D_EDIT_LINKS = 0;
 
@@ -74,19 +75,11 @@ void DialogEditLinks::set_module(Module *module) {
 }
 
 //---------------------------------------------------------------------
-void DialogEditLinks::on_buttonBox_accepted()
-{
-    //at first, clear all links
-    auto items = module_->interf()->items();
-    for (auto item: items) {
-        if (!item->link().is_empty()) {
-            item->clear_link();
-        }
-    }
+DialogEditLinks::Links DialogEditLinks::get_list() {
+    Links result;
+    result.ok = true;
 
-    //now fill user links
     QStringList list = ui->editor->toPlainText().split("\n");
-    //xclu_console_append(QString("lines: %1").arg(list.size()));
 
     for (auto &line0: list) {
         QString line = line0.trimmed();
@@ -101,12 +94,14 @@ void DialogEditLinks::on_buttonBox_accepted()
         QStringList items = line.split("=");
         if (items.size() != 2) {
             xclu_console_append("Error at `" + line + "`, expected item=name");
+            result.ok = false;
             continue;
         }
         QString var = items.at(0);
         QString link = items.at(1);
         if (var.isEmpty()) {
             xclu_console_append("Error at `" + line + "`, empty item name");
+            result.ok = false;
             continue;
         }
         bool enabled = true;
@@ -116,18 +111,80 @@ void DialogEditLinks::on_buttonBox_accepted()
         }
         if (!module_->interf()->has_item(var)) {
             xclu_console_append("Error at `" + line + "`, unknown item");
+            result.ok = false;
             continue;
         }
-        XItem *item = module_->interf()->var(var);
-        item->set_link(enabled, link);
+        result.links.append(XLink(enabled, link));
+        result.vars.append(var);
+        //XItem *item = module_->interf()->var(var);
+        //item->set_link(enabled, link);
     }
 
+    return result;
 }
+
 
 //---------------------------------------------------------------------
 void DialogEditLinks::on_button_check_links_clicked()
 {
+    Links links = DialogEditLinks::get_list();
+    if (!links.ok) {
+        xclu_message_box("There are error(s) in links format");
+    }
+    else {
+        //check resolving links
+        bool ok = true;
+        for (auto &link: links.links) {
+            if (link.enabled) {
+                XLinkResolved::CheckLinkResult checking = XLinkResolved::check_link(link.link);
+                if (!checking.ok) {
+                    xclu_console_append("Error: " + checking.error);
+                    ok = false;
+                }
+            }
+        }
+        if (ok) {
+            xclu_message_box("Links are correct");
+            xclu_console_append("Links are correct");
+        }
+        else {
+            xclu_message_box("There are error(s) in links, see Console");
+            xclu_console_append("There are error(s) in links");
+        }
+    }
+}
 
+//---------------------------------------------------------------------
+void DialogEditLinks::on_button_ok_clicked()
+{
+    Links links = DialogEditLinks::get_list();
+    if (!links.ok) {
+        xclu_message_box("There are error(s) in links format");
+        return;
+    }
+
+    //at first, clear all links
+    auto items = module_->interf()->items();
+    for (auto item: items) {
+        if (!item->link().is_empty()) {
+            item->clear_link();
+        }
+    }
+
+    for (int i=0; i<links.links.size(); i++) {
+        auto &var = links.vars[i];
+        auto &link = links.links[i];
+        XItem *item = module_->interf()->var(var);
+        item->set_link(link);
+    }
+
+    accept();
+}
+
+//---------------------------------------------------------------------
+void DialogEditLinks::on_button_cancel_clicked()
+{
+    reject();
 }
 
 //---------------------------------------------------------------------

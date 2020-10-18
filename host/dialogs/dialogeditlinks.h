@@ -2,6 +2,7 @@
 #define DIALOGEDITLINKS_H
 
 #include <QDialog>
+#include "xlink.h"
 
 namespace Ui {
 class DialogEditLinks;
@@ -26,9 +27,18 @@ private:
     Ui::DialogEditLinks *ui;
     Module *module_ = nullptr;
 
+    struct Links {
+        QVector<XLink> links;
+        QVector<QString> vars;
+        bool ok = false;
+    };
+
+    Links get_list();
+
 private slots:
-    void on_buttonBox_accepted();
     void on_button_check_links_clicked();
+    void on_button_ok_clicked();
+    void on_button_cancel_clicked();
 };
 
 #endif // DIALOGEDITLINKS_H

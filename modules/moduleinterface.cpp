@@ -366,7 +366,7 @@ bool ModuleInterface::compile() {
             item->compile();
         }
         catch(XException& e) {
-            CONS_VIEW->log(e.whatQt());
+            xclu_console_append(e.whatQt());
             ok = false;
         }
     }

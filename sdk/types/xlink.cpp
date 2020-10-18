@@ -72,12 +72,6 @@ bool XLink::is_equal(const XLink &link0) {
 }
 
 //---------------------------------------------------------------------
-//Check if link is correct
-bool XLink::check() {
-    return false;
-}
-
-//---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 XLinkParsed::XLinkParsed(QString module, QString var, int index, int index2) {
@@ -142,21 +136,45 @@ QString XLinkParsed::to_str() const {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
+//Test if link is valid - if not, returns error text
+XLinkResolved::CheckLinkResult XLinkResolved::check_link(QString link) {
+    CheckLinkResult result;
+    result.ok = true;
+    try{
+        XLinkResolved resolved(link);
+    }
+    catch(XException& e) {
+        result.ok = false;
+        result.error = e.whatQt();
+    }
+
+    return result;
+}
+
+
+//---------------------------------------------------------------------
 XLinkResolved::XLinkResolved(QString link_str0)
     : XLinkParsed(link_str0)
 {
-    resolve_module();
+    resolve();
 }
 
 XLinkResolved::XLinkResolved(const XLinkParsed &link0)
     : XLinkParsed(link0)
 {
-    resolve_module();
+    resolve();
 }
 
 //---------------------------------------------------------------------
-void XLinkResolved::resolve_module() {
+void XLinkResolved::resolve() {
+    //resolve module
     module_pointer_ = RUNTIME.get_module(module);
+    //check variable exists
+
+    xclu_assert(module_pointer_->interf()->has_item(var),
+                QString("Source module `%1` has no item `%2`")
+                .arg(module_pointer_->name())
+                .arg(var));
 }
 
 //---------------------------------------------------------------------

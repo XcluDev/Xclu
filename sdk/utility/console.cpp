@@ -35,14 +35,14 @@ void xclu_message_box(QString message) {
 //Вывод в лог ConsoleView
 void xclu_console_warning(QString message, bool dirty) {
     xclu_assert(CONS_VIEW, "CONS_VIEW is not created, can't add log message there");
-    CONS_VIEW->log(message, dirty);
+    CONS_VIEW->append(message, dirty);
     qDebug() << "warning >>" << message;
 }
 
 //---------------------------------------------------------------------
 void xclu_console_append(QString message, bool dirty) {
     xclu_assert(CONS_VIEW, "CONS_VIEW is not created, can't add log message there");
-    CONS_VIEW->log(message, dirty);
+    CONS_VIEW->append(message, dirty);
     qDebug() << ">>" << message;
 }
 
