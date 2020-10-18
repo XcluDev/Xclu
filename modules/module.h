@@ -39,7 +39,7 @@ public:
     XModule *rtmodule();
 
     //Compiling links and other things
-    void compile();
+    bool compile();
 
     //Выполнение
     void execute(ModuleExecuteStage stage);

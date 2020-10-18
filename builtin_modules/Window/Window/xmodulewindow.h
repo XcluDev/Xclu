@@ -110,7 +110,7 @@ protected:
     //запрос виджета из другого модуля
     //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
     //- например, путем установки его в наши layouts и виджеты
-    QWidget *request_widget(QString module_id);
+    QWidget *request_widget(QString module_name);
 };
 
 

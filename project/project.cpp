@@ -76,7 +76,7 @@ bool Project::save_project(QString file_name, SaveFormat format) {
 
         update_project_folder(file_name);
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         xclu_message_box("Can't save the project to '" + file_name + "':\n" + e.whatQt());
         return false;
     }
@@ -116,7 +116,7 @@ Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat f
 
         //Если требуется автоматически запусить проект - это делается из MainWindow
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         xclu_message_box("Can't load a project '" + file_name + "':\n" + e.whatQt());
         close_project();
         return LoadProjectStatusNo;
@@ -186,7 +186,7 @@ void Project::read_json(const QJsonObject &json) {
             //добавляем в список
             modules_.append(module);
         }
-        catch(XCluException& e) {
+        catch(XException& e) {
             xclu_console_warning("Error loading module '" + name + "', class '" + class_name + "':\n    " +  e.whatQt());
         }
     }
@@ -268,7 +268,7 @@ Module *Project::new_module(int i, QString class_name, QString name_hint) {
         module = FACTORY.create_unnamed_module(class_name);
         module->execute(ModuleExecuteStageLoaded);
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         xclu_message_box("Can't create module of class '" + class_name +"':\n" +  e.whatQt());
         return nullptr;
     }
@@ -346,12 +346,6 @@ bool Project::has_module_with_name(QString name) {
 }
 
 //---------------------------------------------------------------------
-bool Project::has_module_with_id(QString name) {
-    return names_.contains(name);
-}
-
-
-//---------------------------------------------------------------------
 Module *Project::module_by_index(int i, bool can_return_null) {
     if (has_module_with_index(i)) {
         return modules_[i];
@@ -367,12 +361,6 @@ Module *Project::module_by_index(int i, bool can_return_null) {
 //---------------------------------------------------------------------
 Module *Project::module_by_name(QString name) {
     xclu_assert(has_module_with_name(name), QString("Requested module with unknown name '%1'").arg(name));
-    return module_by_index(names_.value(name));
-}
-
-//---------------------------------------------------------------------
-Module *Project::module_by_id(QString name) {
-    xclu_assert(has_module_with_id(name), QString("Requested module with unknown name '%1'").arg(name));
     return module_by_index(names_.value(name));
 }
 
@@ -404,7 +392,7 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out) {
                 break;
             }
         }
-        catch(XCluException& e) {
+        catch(XException& e) {
             stop_out = true;
             xclu_message_box("Runtime error in module '" +module->name() + "' at stage '" + ModuleExecuteStage_to_string(stage)
                          + "':\n" +  e.whatQt());
@@ -423,17 +411,8 @@ bool Project::compile() {
     bool ok = true;
     for (auto module: modules_) {
         //захватываем ошибки из модулей
-        try{
-            module->compile();
-        }
-        catch(XCluException& e) {
-            if (ok) {
-                CONS_VIEW->log("Compilation error(s):");
-                ok = false;
-            }
-            CONS_VIEW->log("Module '" +module->name() + "':\n   " +  e.whatQt());
-            break;
-        }
+        bool ok1 = module->compile();
+        if (!ok1) ok = false;
     }
     if (!ok) {
         xclu_message_box("There are compiling error(s), see Console for the details");

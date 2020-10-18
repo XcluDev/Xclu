@@ -42,15 +42,15 @@ QString xclu_clipboard_get_text();
 
 
 //Исключение внутри программы
-struct XCluException: public std::exception {
-    XCluException(const QString &message) {
+struct XException: public std::exception {
+    XException(const QString &message) {
         err_ = ErrorInfo(message);
     }
-    XCluException(const ErrorInfo &err) {
+    XException(const ErrorInfo &err) {
         err_ = err;
     }
     //дописать текст
-    XCluException(const QString &prepend, ErrorInfo err) {
+    XException(const QString &prepend, ErrorInfo err) {
         err_ = ErrorInfo(prepend, err);
     }
 

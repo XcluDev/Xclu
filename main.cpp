@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         result = app.exec();
         //-------------------------------------------
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         except = 1; except_message = QString("XClu exception:\n") +  e.whatQt();
     }
     catch(XCluCriticalException& e) {

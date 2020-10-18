@@ -8,7 +8,11 @@
 //module1->line(1,2) - link to part of component (word) pointed by two indices index
 
 #include "incl_h.h"
+class Module;
 
+//---------------------------------------------------------------------
+//XLink - packed link stored as a string
+//---------------------------------------------------------------------
 //Storing link string and enabled/disabled property
 class XLink {
 public:
@@ -28,17 +32,21 @@ public:
     QString to_str() const;
 
     bool is_equal(const XLink &link0);
+
+    //Check if link is correct
+    bool check();
 };
 
-//Parsing of link string
-class XLinkParser {
+//---------------------------------------------------------------------
+//XLinkParsed - Parsed link
+//---------------------------------------------------------------------
+class XLinkParsed {
 public:
     //Constructor
-    XLinkParser() {}
-    XLinkParser(QString module, QString var, int index = -1, int index2 = -1);
-    XLinkParser(QString link);
-    XLinkParser(const XLink &link);
-
+    XLinkParsed() {}
+    XLinkParsed(QString module, QString var, int index = -1, int index2 = -1);
+    XLinkParsed(QString link);
+    XLinkParsed(const XLink &link);
 
     //String representation of link, such as `webcam1->image`
     QString to_str() const;
@@ -52,7 +60,20 @@ public:
     int index2 = -1; //if index2 >= 0 - interpret as a string separated by "\n" and then spaces 'a b c' and get its line 'index' and item 'index2'
 protected:
     void setup(QString link_str0);
+};
 
+//---------------------------------------------------------------------
+//XLinkResolved - Parsed link with resolved module
+//---------------------------------------------------------------------
+class XLinkResolved: public XLinkParsed {
+public:
+    XLinkResolved(QString link_str0);
+    XLinkResolved(const XLinkParsed &link0);
+    Module *module_pointer();
+
+protected:
+    void resolve_module();
+    Module *module_pointer_ = nullptr;
 };
 
 

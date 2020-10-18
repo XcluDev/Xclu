@@ -40,7 +40,7 @@ public:
     QVector<VisibleGroupBase> &vis_groups();
 
     //Compiling links and other things
-    void compile();
+    bool compile();
 
     //сигнал, что GUI подключен/отключен
     void gui_attached(XGuiEditor *editor);

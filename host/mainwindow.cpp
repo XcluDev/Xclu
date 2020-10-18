@@ -201,7 +201,7 @@ void MainWindow::on_actionUpdate_auto_h_files_for_all_modules_triggered()
         exporter.export_all_builtin_h_files();
         xclu_console_append("Updating finished");
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         xclu_message_box("Error during export: " + e.whatQt());
     }
 }

@@ -212,7 +212,7 @@
                     {
                         "aname": "float1",
                         "avalue": "1.1",
-                        "link": "test2->float2"
+                        "link": "test21->float2"
                     },
                     {
                         "aname": "float2",
@@ -384,15 +384,15 @@
                     },
                     {
                         "aname": "elapsed_time_sec",
-                        "avalue": "6.734"
+                        "avalue": "0.893"
                     },
                     {
                         "aname": "dt",
-                        "avalue": "0.034"
+                        "avalue": "0.033"
                     },
                     {
                         "aname": "measured_frame_rate",
-                        "avalue": "29.4118"
+                        "avalue": "30.303"
                     },
                     {
                         "aname": "Control",

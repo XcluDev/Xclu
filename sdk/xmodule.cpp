@@ -112,7 +112,7 @@ void XModule::execute(ModuleExecuteStage stage) {
             xclu_exception(QString("Unknown execute stage %1").arg(stage));
         }
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         //отлов исключений путем обработки ошибок, и реакция соответственно настройках
         process_error(e.whatQt());
     }
@@ -147,7 +147,7 @@ void XModule::call(QString function, ErrorInfo &err, XStruct *input, XStruct *ou
         impl_call(function, input, output);
         //}
     }
-    catch (XCluException &e) {
+    catch (XException &e) {
         err.prepend(QString("Error during executing function '%1' in module '%2':")
                   .arg(function).arg(name()), e.err());
     }

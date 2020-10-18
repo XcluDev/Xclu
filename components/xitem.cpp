@@ -197,8 +197,8 @@ int XItem::description_count() {
 //Link ----------------------------------------------------------------
 //---------------------------------------------------------------------
 //link to itself
-XLinkParser XItem::get_link_to_itself() {
-    return XLinkParser(interf()->module()->name(), name());
+XLinkParsed XItem::get_link_to_itself() {
+    return XLinkParsed(interf()->module()->name(), name());
 }
 
 //---------------------------------------------------------------------
@@ -253,26 +253,20 @@ void XItem::link_was_changed() {
 //find item corresponding to link
 //called from `compile` and `link_was_changed`
 void XItem::resolve_link() {
-    if (is_linked()) {
-       // XLinkParser parser()
+    try{
+        if (is_linked()) {
+            link_resolved_.reset(new XLinkResolved(link_.link));
+        }
+        else {
+            link_resolved_.reset();
+        }
     }
-    else {
-        linked_item_ = nullptr;
+    catch(XException& e) {
+        throw XException(QString("Error at module '%1' while resolving link for `%2`: %3")
+                         .arg(module()->name())
+                         .arg(title()).arg(e.whatQt()));
     }
-}
 
-//---------------------------------------------------------------------
-//Use this function for resolving link, returns linked_item_
-//Note: it's valid only during runtime
-XItem *XItem::linked_item() {
-    //Check if runtime
-    xclu_assert(module()->is_running(), QString("Internal error: trying access link for `%1`->`%2`, but it's allowed during runtime")
-                .arg(module()->name()).arg(name()));
-    //Check if compiled
-    xclu_assert(linked_item_, QString("Internal error: trying access link for `%1`->`%2`, but it's not compiled")
-                .arg(module()->name()).arg(name()));
-
-    return linked_item_;
 }
 
 //---------------------------------------------------------------------

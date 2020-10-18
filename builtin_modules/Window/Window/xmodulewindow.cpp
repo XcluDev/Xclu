@@ -416,11 +416,11 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
         //для теста создаем просто строку
         //stretch
         int stretch = parse_int(query, 1, 0, line);
-        QString module_id = name;
-        return XModuleWindowStructureItem(request_widget(module_id), stretch);
+        QString module_name = name;
+        return XModuleWindowStructureItem(request_widget(module_name), stretch);
 
     }
-    catch (XCluException& e) {
+    catch (XException& e) {
         xclu_exception(QString("Error (recursive) at line %1 '%2':\n%3")
                        .arg(line_index)
                        .arg(line)
@@ -448,8 +448,8 @@ int XModuleWindow::parse_int(QStringList list, int index, int default_value, QSt
 //запрос виджета из другого модуля
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
-QWidget *XModuleWindow::request_widget(QString module_id) {
-    Module *module = RUNTIME.get_module(module_id);
+QWidget *XModuleWindow::request_widget(QString module_name) {
+    Module *module = RUNTIME.get_module(module_name);
 
     //call create_widget
     //Window calls GUI elements to insert them into itself.

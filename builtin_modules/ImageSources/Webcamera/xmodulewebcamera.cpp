@@ -73,7 +73,7 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
             XStruct &image = data.image;
             XStructImage::create_from_QImage(image, img, data.channels, data.data_type, false, mirrory);
         }
-        catch(XCluException& e) {
+        catch(XException& e) {
             //отправляем информацию об ошибке в модуль
             DataAccess access(data);
             data.err = e.err();

@@ -118,7 +118,7 @@ void DialogTestModuleInterface::pressed_export_h() {
         ExportInterface exporter;
         exporter.export_to_h_file(interf_.data(), folder_);
     }
-    catch(XCluException& e) {
+    catch(XException& e) {
         xclu_message_box("Error during export: " + e.whatQt());
     }
 }
@@ -171,7 +171,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
         bool force_propagate_visibility = true;
         editor_->load_module(module_seed_.data(), interf_.data(), "Name...", force_propagate_visibility);
     }
-    catch (XCluException &e) {
+    catch (XException &e) {
         xclu_message_box(e.whatQt());
         clear();
     }

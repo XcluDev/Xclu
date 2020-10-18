@@ -187,8 +187,8 @@ bool Module::is_running() {
 
 //---------------------------------------------------------------------
 //Compiling links and other things
-void Module::compile() {
-    interf()->compile();
+bool Module::compile() {
+    return interf()->compile();
 }
 
 //---------------------------------------------------------------------

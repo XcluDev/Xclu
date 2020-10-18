@@ -244,7 +244,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
         module_new = new Module(info, rtmodule_new);
         return module_new;
 
-    } catch(XCluException& e) {
+    } catch(XException& e) {
         //в случае ошибки удаляем все, что создали
         if (module_new) {
             delete module_new;

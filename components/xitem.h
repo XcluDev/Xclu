@@ -141,7 +141,7 @@ public:
 
     //Link -------------------------
     //obtain link to itself - for using in "Copy link"
-    XLinkParser get_link_to_itself();
+    XLinkParsed get_link_to_itself();
 
     bool is_link_can_be_used(); //can be link used (for out - no), used for project saving
     bool is_linked() const;     //is using link enabled - works together with 'is_const`, `is_in`, `is_out`
@@ -223,17 +223,11 @@ protected:
     bool was_changed_ = false;  //value changed at each update"
 
     //Link ----------------------------------------
-    //Link info
+    //Link packed in stricg for editing
     XLink link_;
 
-    //Use this function for resolving link, returns linked_item_
-    //Note: it's valid only during runtime
-    XItem *linked_item();
-
-    //Item on which links refers - valid only during runtime!
-    //Is set when compiling and updated on `link_was_changed`
-    //Note: not use this directly, use `linked_item()` instead
-    XItem *linked_item_ = nullptr;
+    //Link, ready to use runtime
+    QScopedPointer<XLinkResolved> link_resolved_;
 
     //find item corresponding to link
     //called from `compile` and `link_was_changed`

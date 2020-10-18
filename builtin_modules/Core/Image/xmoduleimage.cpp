@@ -159,7 +159,7 @@ void XModuleScalar::update_value(bool force) {
     case source_Other_Module_Value:
     {
         //взятие значение из другого модуля
-        XLinkParser link(gets_int_link());
+        XLinkParsed link(gets_int_link());
         Module *module = RUNTIME.get_module(link.module);
         int value = module->geti(link.var);
         set_value(value);

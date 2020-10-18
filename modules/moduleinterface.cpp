@@ -4,7 +4,7 @@
 #include "moduleinterface.h"
 #include "incl_cpp.h"
 #include "xguieditor.h"
-
+#include "consoleview.h"
 
 //---------------------------------------------------------------------
 ModuleInterface::ModuleInterface(const ModuleSeed &info)
@@ -271,7 +271,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             new_item(title, type, collect_description(lines, i),
                         qual, line_to_parse, options, qual_options);
         }
-        catch (XCluException& e) {
+        catch (XException& e) {
             xclu_exception("Parsing error at line '" + line + "':\n" + e.whatQt());
         }
 
@@ -359,10 +359,18 @@ QVector<VisibleGroupBase> &ModuleInterface::vis_groups() {
 
 //---------------------------------------------------------------------
 //Compiling links and other things
-void ModuleInterface::compile() {
+bool ModuleInterface::compile() {
+    bool ok = true;
     for (auto item: items_) {
-        item->compile();
+        try{
+            item->compile();
+        }
+        catch(XException& e) {
+            CONS_VIEW->log(e.whatQt());
+            ok = false;
+        }
     }
+    return ok;
 }
 
 //---------------------------------------------------------------------
@@ -547,7 +555,7 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 
             item->read_json(itemObject);
         }
-        catch(XCluException& e) {
+        catch(XException& e) {
             errors.append(e.whatQt());
         }
     }

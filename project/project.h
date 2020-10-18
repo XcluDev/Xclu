@@ -66,11 +66,9 @@ public:
     //проверка, есть ли запрашиваемый модуль
     bool has_module_with_index(int i);
     bool has_module_with_name(QString name);
-    bool has_module_with_id(QString name);
     //получение модуля
     Module *module_by_index(int i, bool can_return_null = false);
     Module *module_by_name(QString name);
-    Module *module_by_id(QString name);
 
     bool can_rename_module(QString old_name, QString new_name);
 

@@ -16,7 +16,7 @@ void xclu_exception(QString message) {
 
 //---------------------------------------------------------------------
 void xclu_exception(ErrorInfo err) {
-    throw XCluException(err);
+    throw XException(err);
 }
 
 //---------------------------------------------------------------------

@@ -88,8 +88,8 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
             }
         }
     }
-    catch (XCluException &e) {
-        qDebug() << "XCluException exception at request_sound: " << e.whatQt();
+    catch (XException &e) {
+        qDebug() << "XException exception at request_sound: " << e.whatQt();
         DataAccess access(data_);
         data_->err = e.err();
     }
@@ -157,7 +157,7 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
             xclu_exception(QString("SoundUnsupported sound output with bits %1").arg(audioSampleBit));
         }
     }
-    catch (XCluException &e) {
+    catch (XException &e) {
         DataAccess access(data_);
         data_->err = e.err();
     }
@@ -315,7 +315,7 @@ void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
             }
         }
     }
-    catch (XCluException &e) {
+    catch (XException &e) {
         DataAccess access(data_);
         data_.err = e.err();
     }

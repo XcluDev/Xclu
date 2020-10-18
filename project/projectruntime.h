@@ -49,9 +49,9 @@ public:
     //также, может создать эту папку, если это требуется
     QString absolute_path_from_project(QString relative_path, bool create_folder = false);
 
-    //Получение модуля - можно получить к нему доступ, см. класс XLinkParser
+    //Получение модуля - можно получить к нему доступ, см. класс XLinkParsed
     //а затем взять нужную переменную по geti и прочим
-    Module *get_module(QString module_id);
+    Module *get_module(QString module_name);
 
     //Получение переменных по link - то есть по имени модуля и названию в формате webcam1->image//
     //Если link пустой - возвращает def_val

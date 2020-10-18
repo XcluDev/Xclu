@@ -1,7 +1,8 @@
 #include "xlink.h"
 
 #include "incl_cpp.h"
-
+#include "module.h"
+#include "projectruntime.h"
 
 //---------------------------------------------------------------------
 //Clipboard:
@@ -71,9 +72,15 @@ bool XLink::is_equal(const XLink &link0) {
 }
 
 //---------------------------------------------------------------------
+//Check if link is correct
+bool XLink::check() {
+    return false;
+}
+
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XLinkParser::XLinkParser(QString module, QString var, int index, int index2) {
+//---------------------------------------------------------------------
+XLinkParsed::XLinkParsed(QString module, QString var, int index, int index2) {
     this->module = module;
     this->var = var;
     this->index = index;
@@ -81,17 +88,17 @@ XLinkParser::XLinkParser(QString module, QString var, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
-XLinkParser::XLinkParser(const XLink &link) {
+XLinkParsed::XLinkParsed(const XLink &link) {
     setup(link.link);
 }
 
 //---------------------------------------------------------------------
-XLinkParser::XLinkParser(QString link_str0) {
+XLinkParsed::XLinkParsed(QString link_str0) {
     setup(link_str0);
 }
 
 //---------------------------------------------------------------------
-void XLinkParser::setup(QString link_str0) {
+void XLinkParsed::setup(QString link_str0) {
     is_empty = link_str0.isEmpty();
     if (is_empty) {
         return;
@@ -119,7 +126,7 @@ void XLinkParser::setup(QString link_str0) {
 
 //---------------------------------------------------------------------
 //String representation of link, such as `webcam1->image`
-QString XLinkParser::to_str() const {
+QString XLinkParsed::to_str() const {
     QString res;
     res.append(module).append("->").append(var);
     if (index >= 0) {
@@ -130,6 +137,31 @@ QString XLinkParser::to_str() const {
         res.append(")");
     }
     return res;
+}
+
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+XLinkResolved::XLinkResolved(QString link_str0)
+    : XLinkParsed(link_str0)
+{
+    resolve_module();
+}
+
+XLinkResolved::XLinkResolved(const XLinkParsed &link0)
+    : XLinkParsed(link0)
+{
+    resolve_module();
+}
+
+//---------------------------------------------------------------------
+void XLinkResolved::resolve_module() {
+    module_pointer_ = RUNTIME.get_module(module);
+}
+
+//---------------------------------------------------------------------
+Module *XLinkResolved::module_pointer() {
+    return module_pointer_;
 }
 
 //---------------------------------------------------------------------
