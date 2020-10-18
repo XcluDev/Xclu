@@ -14,6 +14,14 @@ public:
     QString value_string() { return value_read().data(); }
     void set_value_string(const QString &value) { value_write().data() = value; }
 
+    bool supports_int() { return true; }
+    int value_int() { return value_string().toInt(); }
+    void set_value_int(int v) { set_value_string(QString::number(v)); }
+
+    bool supports_float() { return true; }
+    float value_float() { return value_string().toFloat(); }
+    void set_value_float(float value) { set_value_string(QString::number(value)); }
+
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
 
@@ -28,6 +36,9 @@ public:
 
 protected:
     QString default_value_;
+
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
 protected:
     //работа с GUI - вызывается когда is_gui_attached

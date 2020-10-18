@@ -43,6 +43,9 @@ protected:
 
     QStringList types_; //список типов, которыми может быть этот объект, например, image, array
 
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
+
 protected:
     //работа с GUI - вызывается когда is_gui_attached
     virtual void gui_to_var_internal(); //получение значения из gui

@@ -1,6 +1,7 @@
 #include "xitemfloat.h"
 #include "incl_cpp.h"
 #include "xguifloat.h"
+#include "module.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemFloat, float)
@@ -43,6 +44,14 @@ float XItemFloat::get_small_step() {
     xclu_assert(slow_steps_ > 0, "XItemFloat - bad slow_steps value, must be greater thatn zero");
     return (max_value_ - min_value_) / slow_steps_;
 
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemFloat::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_float(mod->getf(linkres));
 }
 
 //---------------------------------------------------------------------

@@ -18,6 +18,11 @@ public:
     int value_int() { return value_read().data(); }    //index
     void set_value_int(int index) { value_write().data() = index; }
 
+    //float
+    bool supports_float() { return true; }
+    float value_float() { return value_int(); }
+    void set_value_float(float f)  { set_value_int(int(f)); }
+
     bool supports_value_title() { return true; }
     QString value_title();
     void set_value_title(QString title);  //Внимание, реализована неэффективно!
@@ -39,10 +44,14 @@ protected:
     //int index_ = 0; //inside XItem_
 
     int default_index_ = 0;
+
     QStringList rawtexts_;
     QMap<QString, int> map_index_;
 
     QString units_; //опционально - единицы измерения, которые показываются в виде метки справа от числа
+
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
     int rawtext_to_index(QString rawtext);         //возвращает -1, если не найден
     int rawtext_to_index_safe(QString rawtext);    //возвращает 0, если не найден

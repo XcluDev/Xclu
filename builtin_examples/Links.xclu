@@ -45,6 +45,10 @@
                     },
                     {
                         "aname": "float3",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "float4",
                         "avalue": "3.3"
                     },
                     {
@@ -57,6 +61,10 @@
                     },
                     {
                         "aname": "int3",
+                        "avalue": "3"
+                    },
+                    {
+                        "aname": "int4",
                         "avalue": "3"
                     },
                     {
@@ -212,15 +220,20 @@
                     {
                         "aname": "float1",
                         "avalue": "1.1",
-                        "link": "test21->float2"
+                        "link": "#test2->float7"
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2",
-                        "link": "test2->float1"
+                        "avalue": "0.16",
+                        "link": "#test2->float1"
                     },
                     {
                         "aname": "float3",
+                        "avalue": "0.16",
+                        "link": "test2->float2"
+                    },
+                    {
+                        "aname": "float4",
                         "avalue": "3.3"
                     },
                     {
@@ -230,10 +243,16 @@
                     },
                     {
                         "aname": "int2",
-                        "avalue": "2"
+                        "avalue": "1",
+                        "link": "#test2->float2"
                     },
                     {
                         "aname": "int3",
+                        "avalue": "1",
+                        "link": "test2->int2"
+                    },
+                    {
+                        "aname": "int4",
                         "avalue": "3"
                     },
                     {
@@ -384,15 +403,15 @@
                     },
                     {
                         "aname": "elapsed_time_sec",
-                        "avalue": "0.893"
+                        "avalue": "4.622"
                     },
                     {
                         "aname": "dt",
-                        "avalue": "0.033"
+                        "avalue": "0.034"
                     },
                     {
                         "aname": "measured_frame_rate",
-                        "avalue": "30.303"
+                        "avalue": "29.4118"
                     },
                     {
                         "aname": "Control",

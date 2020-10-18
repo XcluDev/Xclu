@@ -15,7 +15,11 @@ public:
     QString value_string() { return QString::number(value_float()); }
     void set_value_string(const QString &value) { set_value_float(value.toFloat()); }
 
-    virtual bool supports_float() { return true; }
+    bool supports_int() { return true; }
+    int value_int() { return int(value_float()); }
+    void set_value_int(int v) { set_value_float(v); }
+
+    bool supports_float() { return true; }
     float value_float() { return value_read().data(); }
     void set_value_float(float value) { value_write().data() = value; }
 
@@ -43,6 +47,9 @@ protected:
     int fast_steps_ = 10;
 
     QString units_; //опционально - единицы измерения, которые показываются в виде метки справа от числа
+
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
 protected:
     //работа с GUI - вызывается когда is_gui_attached

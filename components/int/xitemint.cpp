@@ -1,7 +1,7 @@
 #include "xitemint.h"
 #include "incl_cpp.h"
 #include "xguiint.h"
-
+#include "module.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemInt, int)
@@ -40,6 +40,14 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
         fast_step_ = parse_int(query_steps.at(1), "fast step must be an integer, expected '... 1,10'");
 
     }
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemInt::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_int(mod->geti(linkres));
 }
 
 //---------------------------------------------------------------------

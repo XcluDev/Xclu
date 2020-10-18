@@ -20,6 +20,11 @@ public:
     int value_int();    //значение - нажатие считывается один раз, затем стирается
     void set_value_int(int) {}
 
+    //float
+    bool supports_float() { return true; }
+    float value_float() { return value_int(); }
+    void set_value_float(float f)  { set_value_int(int(f)); }
+
     virtual bool store_data() { return false; }
 
     //графический интерфейс
@@ -34,6 +39,9 @@ public:
 
 protected:
     //int value_ = 0; //inside XItem_
+
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
     //работа с GUI - вызывается когда is_gui_attached
     virtual void gui_to_var_internal(); //получение значения из gui

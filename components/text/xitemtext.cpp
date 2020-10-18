@@ -1,6 +1,7 @@
 #include "xitemtext.h"
 #include "incl_cpp.h"
 #include "xguitext.h"
+#include "module.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemText, text)
@@ -31,6 +32,14 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
 
     //устанавливаем значение в значение по умолчанию
     set_value_string(default_value());
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemText::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_string(mod->gets(linkres));
 }
 
 //---------------------------------------------------------------------

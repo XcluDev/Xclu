@@ -73,11 +73,11 @@ public:
 public:
     XLinkResolved(QString link_str0);
     XLinkResolved(const XLinkParsed &link0);
-    Module *module_pointer();
+    Module *module_ptr();
 
 protected:
     void resolve();
-    Module *module_pointer_ = nullptr;
+    Module *module_ptr_ = nullptr;
 };
 
 

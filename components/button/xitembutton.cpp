@@ -3,6 +3,7 @@
 #include "incl_cpp.h"
 #include "moduleinterface.h"
 #include "registrarxitem.h"
+#include "module.h"
 
 REGISTER_XITEM(XItemButton, button)
 
@@ -41,6 +42,14 @@ int XItemButton::value_int() {
     int res = v_write.data();
     v_write.data() = 0;
     return res;
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemButton::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_int(mod->geti(linkres));
 }
 
 //---------------------------------------------------------------------

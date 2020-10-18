@@ -113,14 +113,15 @@ void XItem::compile() {
 //and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
 //Note: update should be called after updating value from user GUI to correctly maintain "was changed"
 void XItem::update() {
+
+    //Copy value from link
     if (is_linked()) {
-        if (supports_object()) {
-
-        }
-        else {
-
-        }
+        auto *linkres = link_resolved_.data();
+        xclu_assert(linkres, "XItem::update error for `" + name() + "`: link_resolved_ is nullptr");
+        set_value_from_link(linkres);
     }
+
+    //Update was_changed
     was_changed_ = was_changed(was_changed_checker_);
 }
 
@@ -234,6 +235,13 @@ void XItem::set_link(bool enabled, QString link) {
 //---------------------------------------------------------------------
 void XItem::clear_link() {
     set_link(XLink());
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+//Subclasses must implement it
+void XItem::set_value_from_link(XLinkResolved *linkres) {
+    xclu_exception("set_value_from_link is not implemented for `" + name() + "`");
 }
 
 //---------------------------------------------------------------------

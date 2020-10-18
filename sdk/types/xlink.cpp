@@ -168,18 +168,19 @@ XLinkResolved::XLinkResolved(const XLinkParsed &link0)
 //---------------------------------------------------------------------
 void XLinkResolved::resolve() {
     //resolve module
-    module_pointer_ = RUNTIME.get_module(module);
+    module_ptr_ = RUNTIME.get_module(module);
     //check variable exists
 
-    xclu_assert(module_pointer_->interf()->has_item(var),
+    xclu_assert(module_ptr_->interf()->has_item(var),
                 QString("Source module `%1` has no item `%2`")
-                .arg(module_pointer_->name())
+                .arg(module_ptr_->name())
                 .arg(var));
 }
 
 //---------------------------------------------------------------------
-Module *XLinkResolved::module_pointer() {
-    return module_pointer_;
+Module *XLinkResolved::module_ptr() {
+    xclu_assert(module_ptr_, "XLinkResolved::module_ptr - nullptr for link " + module + "->" + var);
+    return module_ptr_;
 }
 
 //---------------------------------------------------------------------

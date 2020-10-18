@@ -1,6 +1,7 @@
 #include "xitemstring.h"
 #include "incl_cpp.h"
 #include "xguistring.h"
+#include "module.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemString, string)
@@ -59,6 +60,14 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
         //какая-то из опций должна быть включена, если переданы не пустые
         //xclu_assert(options_, "Unknown option, expected 'in string(choose:file)...' or 'in string(choose:folder)...', or not use options: 'in string ...'");
     }
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemString::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_string(mod->gets(linkres));
 }
 
 //---------------------------------------------------------------------

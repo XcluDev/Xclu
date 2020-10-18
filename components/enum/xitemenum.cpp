@@ -1,6 +1,7 @@
 #include "xitemenum.h"
 #include "incl_cpp.h"
 #include "xguienum.h"
+#include "module.h"
 
 #include "registrarxitem.h"
 
@@ -106,6 +107,14 @@ QStringList XItemEnum::titles() {       //все заголовки
 //---------------------------------------------------------------------
 QStringList XItemEnum::names() {       //все заголовки с подчеркиванием - для программирования
     return rawtexts_;
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemEnum::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_int(mod->geti(linkres));
 }
 
 //---------------------------------------------------------------------

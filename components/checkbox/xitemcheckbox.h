@@ -21,6 +21,11 @@ public:
     int value_int() { return value_read().data(); }
     void set_value_int(int value) { value_write().data() = value; }
 
+    //float
+    bool supports_float() { return true; }
+    float value_float() { return value_int(); }
+    void set_value_float(float f)  { set_value_int(int(f)); }
+
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
 
@@ -34,6 +39,9 @@ public:
 protected:
     //int value_ = 0; //inside XItem_
     int default_value_ = 0;
+
+    //Function for setting value using link
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
 protected:
     //работа с GUI - вызывается когда is_gui_attached

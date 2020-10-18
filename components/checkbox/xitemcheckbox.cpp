@@ -1,6 +1,7 @@
 #include "xitemcheckbox.h"
 #include "xguicheckbox.h"
 #include "incl_cpp.h"
+#include "module.h"
 
 #include "registrarxitem.h"
 
@@ -34,6 +35,14 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
     default_value_ = parse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
     set_value_int(default_value_);
 
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemCheckbox::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    set_value_int(mod->geti(linkres));
 }
 
 //---------------------------------------------------------------------

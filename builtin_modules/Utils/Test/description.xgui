@@ -23,24 +23,30 @@ out checkbox Out_Checkbox out_check=1
     //Output value.
 
 separator
-const float Const_Float float1=1.1 0:10 100,10
+const float Const_Float1 float1=1.1 0:10 100,10
     //Constant value.
     //mm
-in float In_Float float2=2.2 -2:2 100,10
+in float In_Float2 float2=2.2 -2:2 100,10
     //Input value.
     //pixels
-out float Out_Float float3=3.3 0:10 100,10
+in float In_Float3 float3=2.2 -2:2 100,10
+    //Input value.
+    //pixels
+out float Out_Float4 float4=3.3 0:10 100,10
     //Output value.
     //meters
 
 separator
-const int Const_Int int1=1 -10:10 1,10
+const int Const_Int1 int1=1 -10:10 1,10
     //Constant value.
     //mm
-in int In_Int int2=2 0:10 1,10
+in int In_Int2 int2=2 0:10 1,10
     //Input value.
     //pixels
-out int Out_Int int3=3 0:10 1,10
+in int In_Int3 int3=2 0:10 1,10
+    //Input value.
+    //pixels
+out int Out_Int4 int4=3 0:10 1,10
     //Output value.
     //meters
 

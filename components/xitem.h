@@ -148,7 +148,7 @@ public:
     const XLink &link() const;
     void set_link(const XLink &link);
     void set_link(bool enabled, QString link);
-    void clear_link();
+    void clear_link();    
 
     //User change link settings - should show it in GUI and switch XRef value_ in XItem_
     virtual void link_was_changed();
@@ -233,6 +233,9 @@ protected:
     //called from `compile` and `link_was_changed`
     void resolve_link();
 
+    //Function for setting value using link
+    //Subclasses must implement it
+    virtual void set_value_from_link(XLinkResolved *linkres);
 
     //Expression ----------------------------------------
     //Выражения (в данный момент не поддерживаются)

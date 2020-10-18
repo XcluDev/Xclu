@@ -294,6 +294,11 @@ QString Module::gets(QString name, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
+QString Module::gets(XLinkParsed *link) {
+    return gets(link->var, link->index, link->index2);
+}
+
+//---------------------------------------------------------------------
 //splits text using "\n"
 QStringList Module::get_strings(QString name) {
     return interf()->get_strings(name);
@@ -328,6 +333,12 @@ int Module::geti(QString name, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
+int Module::geti(XLinkParsed *link) {
+    return geti(link->var, link->index, link->index2);
+}
+
+
+//---------------------------------------------------------------------
 void Module::seti(QString name, int v) { //только out: int, checkbox, enum (index)
     interf()->seti(name, v);
 }
@@ -343,6 +354,11 @@ void Module::increase_int(QString name, int increase) {
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 float Module::getf(QString name, int index, int index2) {
     return interf()->getf(name, index, index2);
+}
+
+//---------------------------------------------------------------------
+float Module::getf(XLinkParsed *link) {
+    return getf(link->var, link->index, link->index2);
 }
 
 //---------------------------------------------------------------------

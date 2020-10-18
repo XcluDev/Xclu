@@ -68,8 +68,8 @@ void DialogEditLink::on_button_check_link_clicked()
     QString message;
     if (checking.ok) message = "Link is valid";
     else message = "Link has error: " + checking.error;
-    xclu_message_box(message);
     xclu_console_append(message);
+    xclu_message_box(message);
 }
 
 //---------------------------------------------------------------------

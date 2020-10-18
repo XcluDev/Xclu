@@ -1,6 +1,7 @@
 #include "xitemobject.h"
 #include "xguiobject.h"
 #include "incl_cpp.h"
+#include "module.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemObject, object)
@@ -32,6 +33,17 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
     //создаем объект
     value_write().reset(new XStruct(XStructTypeEmpty));
 
+}
+
+//---------------------------------------------------------------------
+//Function for setting value using link
+void XItemObject::set_value_from_link(XLinkResolved *linkres) {
+    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    Module *mod = linkres->module_ptr();
+    XProtectedStruct *object = mod->get_object(linkres->var);
+
+    //TODO set to object
+    xclu_exception("XItemObject::set_value_from_link - please finish implementation");
 }
 
 //---------------------------------------------------------------------

@@ -74,6 +74,7 @@ public:
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     QString gets(QString name, int index = -1, int index2 = -1);
+    QString gets(XLinkParsed *link);
 
     //splits text using "\n"
     QStringList get_strings(QString name);
@@ -87,6 +88,7 @@ public:
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     int geti(QString name, int index = -1, int index2 = -1);
+    int geti(XLinkParsed *link);
 
     void seti(QString name, int v); //только out: int, checkbox, enum (index)
     void increase_int(QString name, int increase = 1); //увеличение значения
@@ -95,6 +97,8 @@ public:
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
     float getf(QString name, int index = -1, int index2 = -1);
+    float getf(XLinkParsed *link);
+
 
     void setf(QString name, float v);  //out: float
 
