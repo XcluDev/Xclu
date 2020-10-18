@@ -12,6 +12,12 @@
 //Storing link string and enabled/disabled property
 class XLink {
 public:
+    //Clipboard:
+    static const int Max_Link_Length = 100;   //constant for limiting link length from clibboard to avoit "giant" strings
+    static const int Shorten_Link_Length = 30;   //constant for limiting link length when output at menu
+    static QString get_link_from_clipboard(); //for text longer Max_Link_Length returns empty string
+    static QString shorten_link(QString link); //for text longer Shorten_Link_Length changes end to "..."
+public:
     bool enabled = false;
     QString link;
     XLink() {}
@@ -21,21 +27,18 @@ public:
     void clear();
     QString to_str() const;
 
+    bool is_equal(const XLink &link0);
 };
 
 //Parsing of link string
 class XLinkParser {
 public:
-    //Clipboard:
-    static const int Max_Link_Length = 100;   //constant for limiting link length from clibboard to avoit "giant" strings
-    static const int Shorten_Link_Length = 30;   //constant for limiting link length when output at menu
-    static QString get_link_from_clipboard(); //for text longer Max_Link_Length returns empty string
-    static QString shorten_link(QString link); //for text longer Shorten_Link_Length changes end to "..."
-
     //Constructor
     XLinkParser() {}
     XLinkParser(QString module, QString var, int index = -1, int index2 = -1);
     XLinkParser(QString link);
+    XLinkParser(const XLink &link);
+
 
     //String representation of link, such as `webcam1->image`
     QString to_str() const;
@@ -47,7 +50,8 @@ public:
     QString var;
     int index = -1; //if index >= 0 - interpret as a string separated by spaces 'a b c' and get its item 'index'
     int index2 = -1; //if index2 >= 0 - interpret as a string separated by "\n" and then spaces 'a b c' and get its line 'index' and item 'index2'
-
+protected:
+    void setup(QString link_str0);
 
 };
 

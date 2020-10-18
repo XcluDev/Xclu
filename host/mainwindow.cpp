@@ -433,6 +433,13 @@ void MainWindow::set_current_file(const QString &fileName) {
 
 
 //---------------------------------------------------------------------
+void MainWindow::on_actionCompile_triggered()
+{
+    //compile links and all other needed to check errors
+    PROJ.compile();
+}
+
+//---------------------------------------------------------------------
 void MainWindow::execute_run() {
     qDebug("execute_run");
 

@@ -125,3 +125,9 @@ void DialogEditLinks::on_buttonBox_accepted()
 }
 
 //---------------------------------------------------------------------
+void DialogEditLinks::on_button_check_links_clicked()
+{
+
+}
+
+//---------------------------------------------------------------------

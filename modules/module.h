@@ -38,6 +38,9 @@ public:
     //Исполняемый модуль
     XModule *rtmodule();
 
+    //Compiling links and other things
+    void compile();
+
     //Выполнение
     void execute(ModuleExecuteStage stage);
     bool is_stop_out();

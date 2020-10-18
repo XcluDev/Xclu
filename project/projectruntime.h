@@ -54,7 +54,7 @@ public:
     Module *get_module(QString module_id);
 
     //Получение переменных по link - то есть по имени модуля и названию в формате webcam1->image//
-    //Если link пустой - возвращаеь def_val
+    //Если link пустой - возвращает def_val
     int get_int_by_link(QString link_str, int def_val = 0);
     float get_float_by_link(QString link_str, float def_val = 0);
     QString get_string_by_link(QString link_str, QString def_val = "");

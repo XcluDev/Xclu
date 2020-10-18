@@ -54,6 +54,8 @@
     </property>
     <addaction name="actionRun"/>
     <addaction name="actionStop"/>
+    <addaction name="separator"/>
+    <addaction name="actionCompile"/>
    </widget>
    <widget class="QMenu" name="menuDeveloper">
     <property name="title">
@@ -193,6 +195,11 @@
   <action name="actionLinks_Editor">
    <property name="text">
     <string>Links Editor...</string>
+   </property>
+  </action>
+  <action name="actionCompile">
+   <property name="text">
+    <string>Compile</string>
    </property>
   </action>
  </widget>

@@ -358,6 +358,14 @@ QVector<VisibleGroupBase> &ModuleInterface::vis_groups() {
 }
 
 //---------------------------------------------------------------------
+//Compiling links and other things
+void ModuleInterface::compile() {
+    for (auto item: items_) {
+        item->compile();
+    }
+}
+
+//---------------------------------------------------------------------
 //сигнал, что GUI подключен/отключен
 void ModuleInterface::gui_attached(XGuiEditor *editor) {
     editor_ = editor;

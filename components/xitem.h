@@ -63,6 +63,9 @@ public:
     //access to module
     Module *module();
 
+    //Compiling links and other things
+    virtual void compile();
+
     //update
     //checks changes at current frame
     //and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
@@ -219,9 +222,25 @@ protected:
     XWasChangedChecker was_changed_checker_;
     bool was_changed_ = false;  //value changed at each update"
 
+    //Link ----------------------------------------
     //Link info
     XLink link_;
 
+    //Use this function for resolving link, returns linked_item_
+    //Note: it's valid only during runtime
+    XItem *linked_item();
+
+    //Item on which links refers - valid only during runtime!
+    //Is set when compiling and updated on `link_was_changed`
+    //Note: not use this directly, use `linked_item()` instead
+    XItem *linked_item_ = nullptr;
+
+    //find item corresponding to link
+    //called from `compile` and `link_was_changed`
+    void resolve_link();
+
+
+    //Expression ----------------------------------------
     //Выражения (в данный момент не поддерживаются)
     bool use_expression_ = false;
     QString expression_;

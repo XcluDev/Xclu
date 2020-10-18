@@ -217,7 +217,7 @@
                     {
                         "aname": "float2",
                         "avalue": "2",
-                        "link": "copy test2->float1"
+                        "link": "test2->float1"
                     },
                     {
                         "aname": "float3",
@@ -384,7 +384,7 @@
                     },
                     {
                         "aname": "elapsed_time_sec",
-                        "avalue": "18.087"
+                        "avalue": "6.734"
                     },
                     {
                         "aname": "dt",

@@ -39,6 +39,9 @@ public:
     //группы видимости - для создания дерева управления видимостью на GUI
     QVector<VisibleGroupBase> &vis_groups();
 
+    //Compiling links and other things
+    void compile();
+
     //сигнал, что GUI подключен/отключен
     void gui_attached(XGuiEditor *editor);
     void gui_detached();

@@ -2,6 +2,26 @@
 
 #include "incl_cpp.h"
 
+
+//---------------------------------------------------------------------
+//Clipboard:
+/*static*/ QString XLink::get_link_from_clipboard() {
+    QString text = xclu_clipboard_get_text();
+    if (text.length() < Max_Link_Length) {
+        return text;
+     }
+    return "";
+}
+
+//---------------------------------------------------------------------
+//for text longer Shorten_Link_Length changes end to "..."
+/*static*/ QString XLink::shorten_link(QString link) {
+    if (link.length() > Shorten_Link_Length) {
+        return link.left(Shorten_Link_Length).append("...");
+    }
+    return link;
+}
+
 //---------------------------------------------------------------------
 XLink::XLink(bool enabled, QString link) {
     this->enabled = enabled;
@@ -46,25 +66,12 @@ QString XLink::to_str() const {
 }
 
 //---------------------------------------------------------------------
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-/*static*/ QString XLinkParser::get_link_from_clipboard() {
-    QString text = xclu_clipboard_get_text();
-    if (text.length() < Max_Link_Length) {
-        return text;
-     }
-    return "";
+bool XLink::is_equal(const XLink &link0) {
+    return (enabled == link0.enabled && link == link0.link);
 }
 
 //---------------------------------------------------------------------
-//for text longer Shorten_Link_Length changes end to "..."
-/*static*/ QString XLinkParser::shorten_link(QString link) {
-    if (link.length() > Shorten_Link_Length) {
-        return link.left(Shorten_Link_Length).append("...");
-    }
-    return link;
-}
-
+//---------------------------------------------------------------------
 //---------------------------------------------------------------------
 XLinkParser::XLinkParser(QString module, QString var, int index, int index2) {
     this->module = module;
@@ -74,7 +81,17 @@ XLinkParser::XLinkParser(QString module, QString var, int index, int index2) {
 }
 
 //---------------------------------------------------------------------
+XLinkParser::XLinkParser(const XLink &link) {
+    setup(link.link);
+}
+
+//---------------------------------------------------------------------
 XLinkParser::XLinkParser(QString link_str0) {
+    setup(link_str0);
+}
+
+//---------------------------------------------------------------------
+void XLinkParser::setup(QString link_str0) {
     is_empty = link_str0.isEmpty();
     if (is_empty) {
         return;

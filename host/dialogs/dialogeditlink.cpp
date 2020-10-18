@@ -61,3 +61,9 @@ void DialogEditLink::on_buttonBox_accepted()
 }
 
 //---------------------------------------------------------------------
+void DialogEditLink::on_button_check_link_clicked()
+{
+
+}
+
+//---------------------------------------------------------------------

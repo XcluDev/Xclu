@@ -36,6 +36,10 @@ public:
     LoadProjectStatus load_project(QString file_name, SaveFormat format = Json);
 
 
+    //Compile links and all other needed to check errors
+    //Also clears console
+    bool compile();
+
     //Runtime
     void execute_start(bool &stop_out);
     void execute_update(bool &stop_out);

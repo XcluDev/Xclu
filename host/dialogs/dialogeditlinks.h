@@ -28,6 +28,7 @@ private:
 
 private slots:
     void on_buttonBox_accepted();
+    void on_button_check_links_clicked();
 };
 
 #endif // DIALOGEDITLINKS_H

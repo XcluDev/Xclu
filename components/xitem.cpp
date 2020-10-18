@@ -103,12 +103,23 @@ Module *XItem::module() {
 }
 
 //---------------------------------------------------------------------
+//Compiling links and other things
+void XItem::compile() {
+    resolve_link();
+}
+
+//---------------------------------------------------------------------
 //checks changes at current frame
 //and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
 //Note: update should be called after updating value from user GUI to correctly maintain "was changed"
 void XItem::update() {
     if (is_linked()) {
+        if (supports_object()) {
 
+        }
+        else {
+
+        }
     }
     was_changed_ = was_changed(was_changed_checker_);
 }
@@ -209,8 +220,10 @@ const XLink &XItem::link() const {
 
 //---------------------------------------------------------------------
 void XItem::set_link(const XLink &link) {
-    link_ = link;
-    link_was_changed();
+    if (!link_.is_equal(link)) {
+        link_ = link;
+        link_was_changed();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -230,6 +243,36 @@ void XItem::link_was_changed() {
         gui__->link_was_changed();
     }
     xclu_document_modified();
+    //if running - then resolve link immediately
+    if (module() && module()->is_running()) {
+        resolve_link();
+    }
+}
+
+//---------------------------------------------------------------------
+//find item corresponding to link
+//called from `compile` and `link_was_changed`
+void XItem::resolve_link() {
+    if (is_linked()) {
+       // XLinkParser parser()
+    }
+    else {
+        linked_item_ = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------
+//Use this function for resolving link, returns linked_item_
+//Note: it's valid only during runtime
+XItem *XItem::linked_item() {
+    //Check if runtime
+    xclu_assert(module()->is_running(), QString("Internal error: trying access link for `%1`->`%2`, but it's allowed during runtime")
+                .arg(module()->name()).arg(name()));
+    //Check if compiled
+    xclu_assert(linked_item_, QString("Internal error: trying access link for `%1`->`%2`, but it's not compiled")
+                .arg(module()->name()).arg(name()));
+
+    return linked_item_;
 }
 
 //---------------------------------------------------------------------
@@ -533,7 +576,7 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         break;
     case ComponentContextMenu_paste_link:
     {
-        QString text = XLinkParser::get_link_from_clipboard();
+        QString text = XLink::get_link_from_clipboard();
         if (!text.isEmpty()) {
             set_link(XLink(true, text));
         }

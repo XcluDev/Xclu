@@ -414,6 +414,34 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out) {
 }
 
 //---------------------------------------------------------------------
+//Compile links and all other needed to check errors
+//Also clears console
+bool Project::compile() {
+    //clear console
+    CONS_VIEW->clear();
+    //compile
+    bool ok = true;
+    for (auto module: modules_) {
+        //захватываем ошибки из модулей
+        try{
+            module->compile();
+        }
+        catch(XCluException& e) {
+            if (ok) {
+                CONS_VIEW->log("Compilation error(s):");
+                ok = false;
+            }
+            CONS_VIEW->log("Module '" +module->name() + "':\n   " +  e.whatQt());
+            break;
+        }
+    }
+    if (!ok) {
+        xclu_message_box("There are compiling error(s), see Console for the details");
+    }
+    return ok;
+}
+
+//---------------------------------------------------------------------
 void Project::execute_start(bool &stop_out) {
     stop_out = false;
     if (RUNTIME.is_running()) {
@@ -421,8 +449,13 @@ void Project::execute_start(bool &stop_out) {
         return;
     }
 
-    //очистка консоли
-    CONS_VIEW->clear();
+    //Compile
+    //Also clears console
+    bool compiled = compile();
+    if (!compiled) {
+        stop_out = true;
+        return;
+    }
 
     //начало измерения времени
     RUNTIME.reset_elapsed_timer();
