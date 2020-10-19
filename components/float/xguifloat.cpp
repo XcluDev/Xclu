@@ -14,9 +14,13 @@ XGuiFloat::XGuiFloat(XGuiPageCreator &input, XItemFloat *item)
     spin_->setMinimumWidth(xclu::SPIN_WIDTH);
     spin_->setMaximumWidth(xclu::SPIN_WIDTH);
 
-    spin_->setMinimum(item->min_value());
-    spin_->setMaximum(item->max_value());
-
+    auto range = item->range();
+    if (range.low_enabled) {
+        spin_->setMinimum(range.low);
+    }
+    if (range.high_enabled) {
+        spin_->setMaximum(range.high);
+    }
 
     spin_->setSingleStep(item->get_small_step());
 

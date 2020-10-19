@@ -34,16 +34,15 @@ XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_d
     //количество шагов слайдера
     auto query_steps = query.at(2).split(",");
     xclu_assert(query_range.size()==2, "bad slider settings, expected '... 100,10'");
-    slow_steps_ = parse_int(query_steps.at(0), "number of slow steps must be an integer, expected '... 100,10'");
-    fast_steps_ = parse_int(query_steps.at(1), "number of fast steps must be an integer, expected '... 100,10'");
+    slow_step_ = parse_float(query_steps.at(0), "number of slow steps must be an integer, expected '... 100,10'");
+    fast_step_ = parse_float(query_steps.at(1), "number of fast steps must be an integer, expected '... 100,10'");
 
 }
 
 //---------------------------------------------------------------------
 float XItemFloat::get_small_step() {
-    xclu_assert(slow_steps_ > 0, "XItemFloat - bad slow_steps value, must be greater thatn zero");
-    return (max_value_ - min_value_) / slow_steps_;
-
+    xclu_assert(slow_step_ > 0, "XItemFloat - bad slow_steps value, must be greater thatn zero");
+    return slow_step_;
 }
 
 //---------------------------------------------------------------------

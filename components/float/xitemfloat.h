@@ -11,6 +11,9 @@ class XItemFloat: public XItemScalar_<float>
 public:
     XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
+    //range
+    const XRangeFloat &range() { return range_; }
+
     //string
     bool supports_string() { return true; }
     QString value_string() { return QString::number(value_float()); }
@@ -43,8 +46,8 @@ protected:
 
     XRangeFloat range_;
 
-    int slow_steps_ = 100;
-    int fast_steps_ = 10;
+    float slow_step_ = 0.1f;
+    float fast_step_ = 1.0f;
 
     QString units_; //опционально - единицы измерения, которые показываются в виде метки справа от числа
 
