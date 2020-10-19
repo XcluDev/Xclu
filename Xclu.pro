@@ -155,10 +155,10 @@ SOURCES += \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
     sdk/types/xlink.cpp \
+    sdk/types/xobject.cpp \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
     sdk/types/xref.cpp \
-    sdk/types/xstruct.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/console.cpp \
@@ -247,10 +247,10 @@ HEADERS += \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
     sdk/types/xlink.h \
+    sdk/types/xobject.h \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
     sdk/types/xref.h \
-    sdk/types/xstruct.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/console.h \

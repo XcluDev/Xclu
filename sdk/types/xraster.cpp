@@ -66,7 +66,7 @@ void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
 
     auto format = qimage.format();
     xclu_assert(format == QImage::Format_RGB32,
-                "XStructImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
 
@@ -92,7 +92,7 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
 
     auto format = qimage.format();
     xclu_assert(format == QImage::Format_RGB32,
-                "XStructImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
 

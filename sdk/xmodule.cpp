@@ -2,7 +2,7 @@
 #include "moduleinterface.h"
 #include "module.h"
 #include "incl_cpp.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 //---------------------------------------------------------------------
 XModule::XModule(QString class_name) {
@@ -128,7 +128,7 @@ void XModule::button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает impl_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call(QString function, ErrorInfo &err, XStruct *input, XStruct *output) {
+void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *output) {
     try {
         if (err.is_error()) return;
 
@@ -155,7 +155,7 @@ void XModule::call(QString function, ErrorInfo &err, XStruct *input, XStruct *ou
 
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
-void XModule::create_widget_internal(XStruct *input, XStruct *output) {
+void XModule::create_widget_internal(XObject *input, XObject *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
@@ -184,9 +184,9 @@ void XModule::create_widget_internal(XStruct *input, XStruct *output) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XModule::sound_buffer_add_internal(XStruct *input, XStruct * /*output*/) {
+void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-    XStruct &sound = *input;
+    XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");
     int channels = sound.geti("channels");
@@ -195,7 +195,7 @@ void XModule::sound_buffer_add_internal(XStruct *input, XStruct * /*output*/) {
 }
 
 //---------------------------------------------------------------------
-void XModule::impl_call(QString function, XStruct * /*input*/, XStruct * /*output*/) {
+void XModule::impl_call(QString function, XObject * /*input*/, XObject * /*output*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function '" + function + "', because impl_call() is not implemented");
 }

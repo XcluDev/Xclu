@@ -14,7 +14,7 @@ void CosmoOsc::setup(Module *module, int index) {
  */
 
 #include "incl_h.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 class Module;
 
@@ -50,8 +50,8 @@ public:
     //see https://forum.xclu.dev/t/export-modules-xgui-interface-as-h-file/38
     //----------------------------------------------
     //Check if value was changed
-    //It's important, that for objects this function obtain access using XStructRead,
-    //hence it should not be called for already active XStructRead[Write] for this object
+    //It's important, that for objects this function obtain access using XObjectRead,
+    //hence it should not be called for already active XObjectRead[Write] for this object
     bool was_changed_(QString name, XWasChangedChecker &checker);
 
     //This was_changed is checks changes between `update` calls
@@ -83,8 +83,11 @@ public:
     float getf_(QString name, int index = -1, int index2 = -1);
     void setf_(QString name, float v);  //out: float
 
+    QString getraw_(QString name);  //enum (rawtext)
+    void set_raw_(QString name, QString v); //out: enum (rawtext)
+
     QString get_title_value_(QString name);  //enum (title)
-    void set_title_value_(QString name, QString v); //только out: enum (title)
+    void set_title_value_(QString name, QString v); //out: enum (title)
 
     //доступ к объектам идет только по указателям -
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,

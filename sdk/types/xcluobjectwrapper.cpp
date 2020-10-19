@@ -8,20 +8,20 @@
 
 
 //---------------------------------------------------------------------
-/*static*/ XStructWrapper *XStructWrapper::create_wrapper(const XStruct *object) {
+/*static*/ XObjectWrapper *XObjectWrapper::create_wrapper(const XObject *object) {
     //xclu_assert(object, "Internal error in 'create_wrapper': object is nullptr");
     auto type = object->type();
     switch (type) {
-    case XStructTypeEmpty:
-    case XStructTypeCustom:
-    case XStructTypeSoundBuffer:
-        return new XStructWrapper(object);
+    case XObjectTypeEmpty:
+    case XObjectTypeCustom:
+    case XObjectTypeSoundBuffer:
+        return new XObjectWrapper(object);
         break;
-    case XStructTypeSoundFormat:
-        return new XStructSoundFormat(object);
+    case XObjectTypeSoundFormat:
+        return new XObjectSoundFormat(object);
         break;
-    case XStructTypeImage:
-        return new XStructImage(object);
+    case XObjectTypeImage:
+        return new XObjectImage(object);
         break;
     default:
         xclu_exception(QString("Unknown object type '%1'").arg(type));
@@ -30,18 +30,18 @@
 }
 
 //---------------------------------------------------------------------
-XStructWrapper::XStructWrapper(const XStruct *object) {
+XObjectWrapper::XObjectWrapper(const XObject *object) {
     object_ = object;
 }
 
 //---------------------------------------------------------------------
-const XStruct *XStructWrapper::object() {
+const XObject *XObjectWrapper::object() {
     return object_;
 }
 
 //---------------------------------------------------------------------
 //показать объект в редакторе
-void XStructWrapper::show_object(XGuiObject *item) {
+void XObjectWrapper::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     {
@@ -56,7 +56,7 @@ void XStructWrapper::show_object(XGuiObject *item) {
 
 //---------------------------------------------------------------------
 //показать объект в QLabel
-void XStructWrapper::show_object(QLabel *label, const XStructShowSettings &/*settings*/) {
+void XObjectWrapper::show_object(QLabel *label, const XObjectShowSettings &/*settings*/) {
     label->setText("");
 }
 

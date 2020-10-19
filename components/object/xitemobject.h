@@ -4,12 +4,12 @@
 //Объект
 
 #include "xitem.h"
-#include "xstruct.h"
+#include "xobject.h"
 #include <QScopedPointer>
 
 class ModuleInterface;
 
-class XItemObject: public XItem_<XStruct>
+class XItemObject: public XItem_<XObject>
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -39,7 +39,7 @@ public:
     //-----------------------------
 
 protected:
-    //QScopedPointer<XStruct> object_; //inside XItem_
+    //QScopedPointer<XObject> object_; //inside XItem_
 
     QStringList types_; //список типов, которыми может быть этот объект, например, image, array
 

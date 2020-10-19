@@ -4,7 +4,7 @@
 #include "module.h"
 #include "incl_cpp.h"
 #include "modulesfactory.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 //---------------------------------------------------------------------
 Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
@@ -264,7 +264,7 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
 
 //---------------------------------------------------------------------
 //исключение "записывается" в err
-void Module::access_call_no_exception(QString function, ErrorInfo &err, XStruct *input, XStruct *output) {
+void Module::access_call_no_exception(QString function, ErrorInfo &err, XObject *input, XObject *output) {
     //проверка, что модуль "понимает" запрошенную функцию
     if (!description().accept_calls.accepts(function)) {
         err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
@@ -277,7 +277,7 @@ void Module::access_call_no_exception(QString function, ErrorInfo &err, XStruct 
 
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
-void Module::access_call(QString function, XStruct *input, XStruct *output) {
+void Module::access_call(QString function, XObject *input, XObject *output) {
     ErrorInfo err;
     access_call_no_exception(function, err, input, output);
     err.throw_error();
@@ -286,7 +286,7 @@ void Module::access_call(QString function, XStruct *input, XStruct *output) {
 //---------------------------------------------------------------------
 //Доступ к переменным и запуску из других модулей
 
-//int, checkbox, button, enum (rawtext), string, text
+//int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString Module::gets(QString name, int index, int index2) {
@@ -305,7 +305,7 @@ QStringList Module::get_strings(QString name) {
 }
 
 //---------------------------------------------------------------------
-void Module::sets(QString name, QString v) { //только out: int, checkbox, enum (rawtext), string, text
+void Module::sets(QString name, QString v) { //только out: int, checkbox, enum (index), string, text
     interf()->sets(name, v);
 }
 
@@ -364,6 +364,16 @@ float Module::getf(XLinkParsed *link) {
 //---------------------------------------------------------------------
 void Module::setf(QString name, float v) {  //out: float
     interf()->setf(name, v);
+}
+
+//---------------------------------------------------------------------
+QString Module::getraw(QString name) {  //enum (rawtext)
+     return interf()->getraw(name);
+}
+
+//---------------------------------------------------------------------
+void Module::set_raw(QString name, QString v) { //только out: enum (rawtext)
+    interf()->set_raw(name, v);
 }
 
 //---------------------------------------------------------------------

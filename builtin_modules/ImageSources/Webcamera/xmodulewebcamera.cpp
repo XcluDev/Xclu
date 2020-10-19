@@ -70,8 +70,8 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
             data.captured_frames++;
 
             bool mirrory = true;        //включаем переворот по Y на Windows
-            XStruct &image = data.image;
-            XStructImage::create_from_QImage(image, img, data.channels, data.data_type, false, mirrory);
+            XObject &image = data.image;
+            XObjectImage::create_from_QImage(image, img, data.channels, data.data_type, false, mirrory);
         }
         catch(XException& e) {
             //отправляем информацию об ошибке в модуль
@@ -193,7 +193,7 @@ void XModuleWebcamera::update_camera() {
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
-        XStruct *object = getstruct_image()->write().pointer();
+        XObject *object = getstruct_image()->write().pointer();
 
         DataAccess access(data_);
         data_.image.copy_to(object);

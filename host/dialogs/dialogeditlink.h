@@ -37,6 +37,8 @@ public:
 private slots:
     void on_buttonBox_accepted();
     void on_button_check_link_clicked();
+    void on_button_delete_link_clicked();
+
 private:
     Ui::DialogEditLink *ui;
     XItem *item_ = nullptr;

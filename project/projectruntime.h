@@ -5,7 +5,7 @@
 //такие так время от старта приложения и рабочая папка проекта
 
 #include "incl_h.h"
-#include "xstruct.h"
+#include "xobject.h"
 #include "xlink.h"
 #include <QElapsedTimer>
 class Module;

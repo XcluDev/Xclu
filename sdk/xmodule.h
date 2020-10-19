@@ -20,7 +20,7 @@
 
 class InterfaceItem;
 class Module;
-class XStruct;
+class XObject;
 
 //Runtime module status
 class XModuleStatus {
@@ -76,7 +76,7 @@ public:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    void call(QString function, ErrorInfo &err, XStruct *input, XStruct *output);
+    void call(QString function, ErrorInfo &err, XObject *input, XObject *output);
 
     //------------------------------------------------------------------------
     bool is_running();  //был фактический запуск
@@ -133,7 +133,7 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void impl_call(QString function, XStruct *input, XStruct *output);
+    virtual void impl_call(QString function, XObject *input, XObject *output);
 
     //Concrete call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it
@@ -161,9 +161,9 @@ private:
 
     //Concrete call handlers
     //"create_widget" call, returns QWidget pointer
-    void create_widget_internal(XStruct *input, XStruct *output);
+    void create_widget_internal(XObject *input, XObject *output);
     //"sound_buffer_add" call
-    void sound_buffer_add_internal(XStruct *input, XStruct *output);
+    void sound_buffer_add_internal(XObject *input, XObject *output);
 
 
 };

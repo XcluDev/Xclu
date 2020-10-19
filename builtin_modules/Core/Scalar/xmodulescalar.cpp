@@ -5,7 +5,7 @@
 #include "registrarxmodule.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 #include "xcluspinbox.h"
 

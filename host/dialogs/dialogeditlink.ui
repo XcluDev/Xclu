@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>584</width>
     <height>183</height>
    </rect>
   </property>
@@ -82,6 +82,13 @@
       <widget class="QPushButton" name="button_check_link">
        <property name="text">
         <string>Check Link</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_delete_link">
+       <property name="text">
+        <string>Delete Link</string>
        </property>
       </widget>
      </item>

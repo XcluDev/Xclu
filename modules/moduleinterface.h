@@ -112,6 +112,10 @@ public:
 
     void setf(QString name, float v);  //out: float
 
+    //enum (rawtext)
+    QString getraw(QString name);
+    void set_raw(QString name, QString text); //out: enum
+
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)
 

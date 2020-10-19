@@ -5,7 +5,7 @@
 #include "xcluprotecteddata.h"
 
 class XItemObject;
-class XStruct;
+class XObject;
 class QSpacerItem;
 
 //визуальные компоненты для показа содержимого объекта

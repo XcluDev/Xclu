@@ -10,7 +10,7 @@
 #include "sdk_h.h"
 #include "xmodule.h"
 #include "xcluprotecteddata.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 class QWidget;
 class XcluSpinBox;

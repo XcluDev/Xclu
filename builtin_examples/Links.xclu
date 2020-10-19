@@ -104,7 +104,27 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "object",
+                        "aname": "Objects",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "w",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "h",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "wave",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "object1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "object2",
                         "avalue": ""
                     },
                     {
@@ -198,7 +218,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -219,18 +239,15 @@
                     },
                     {
                         "aname": "float1",
-                        "avalue": "1.1",
-                        "link": "#test2->float7"
+                        "avalue": "1.1"
                     },
                     {
                         "aname": "float2",
-                        "avalue": "1.88",
-                        "link": "#test1->float2"
+                        "avalue": "1.88"
                     },
                     {
                         "aname": "float3",
-                        "avalue": "1.88",
-                        "link": "test2->float2"
+                        "avalue": "1.88"
                     },
                     {
                         "aname": "float4",
@@ -238,18 +255,15 @@
                     },
                     {
                         "aname": "int1",
-                        "avalue": "3",
-                        "link": "test2->int2"
+                        "avalue": "3"
                     },
                     {
                         "aname": "int2",
-                        "avalue": "3",
-                        "link": "#test2->float2"
+                        "avalue": "3"
                     },
                     {
                         "aname": "int3",
-                        "avalue": "3",
-                        "link": "test2->int2"
+                        "avalue": "3"
                     },
                     {
                         "aname": "int4",
@@ -273,8 +287,7 @@
                     },
                     {
                         "aname": "list2",
-                        "avalue": "0",
-                        "link": "#test2->int2"
+                        "avalue": "0"
                     },
                     {
                         "aname": "list3",
@@ -293,8 +306,29 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "object",
+                        "aname": "Objects",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "w",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "h",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "wave",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "object1",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "object2",
+                        "avalue": "",
+                        "link": "test2->object1"
                     },
                     {
                         "aname": "Choose_Files",
@@ -314,8 +348,7 @@
                     },
                     {
                         "aname": "type",
-                        "avalue": "2",
-                        "link": "test2->int2"
+                        "avalue": "2"
                     },
                     {
                         "aname": "numbered",

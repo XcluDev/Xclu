@@ -1,7 +1,7 @@
 #include "xclass.h"
 #include "incl_cpp.h"
 #include "module.h"
-#include "xstruct.h"
+#include "xobject.h"
 #include "projectruntime.h"
 
 //---------------------------------------------------------------------
@@ -44,8 +44,8 @@ Module *XClass::module() {
 
 //---------------------------------------------------------------------
 //Check if value was changed
-//It's important, that for objects this function obtain access using XStructRead,
-//hence it should not be called for already active XStructRead[Write] for this object
+//It's important, that for objects this function obtain access using XObjectRead,
+//hence it should not be called for already active XObjectRead[Write] for this object
 bool XClass::was_changed_(QString name, XWasChangedChecker &checker) {
     return module()->interf()->var(name)->was_changed(checker);
 }
@@ -58,7 +58,7 @@ bool XClass::was_changed_(QString name) {
 
 //---------------------------------------------------------------------
 //Variables access
-//int, checkbox, button, enum (rawtext), string, text
+//int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString XClass::gets_(QString name, int index, int index2) {
@@ -74,7 +74,7 @@ QStringList XClass::get_strings_(QString name) {
 }
 
 //---------------------------------------------------------------------
-//только out: int, checkbox, enum (rawtext), string, text
+//только out: int, checkbox, enum (index), string, text
 void XClass::sets_(QString name, QString v) {
     xclu_assert(module_, "Error at XClass::sets(): module is nullptr");
     module()->sets(name, v);
@@ -139,9 +139,21 @@ void XClass::setf_(QString name, float v) {
 }
 
 //---------------------------------------------------------------------
+QString XClass::getraw_(QString name) {  //enum (rawtext)
+    xclu_assert(module_, "Error at XClass::getraw_(): module is nullptr");
+    return module()->getraw(name);
+}
+
+//---------------------------------------------------------------------
+void XClass::set_raw_(QString name, QString v) { //только out: enum (rawtext)
+    xclu_assert(module_, "Error at XClass::set_raw_(): module is nullptr");
+    module()->set_raw(name, v);
+}
+
+//---------------------------------------------------------------------
 //enum (title)
 QString XClass::get_title_value_(QString name) {
-    xclu_assert(module_, "Error at XClass::get_title_value(): module is nullptr");
+    xclu_assert(module_, "Error at XClass::get_title_value_(): module is nullptr");
     return module()->get_title_value(name);
 
 }
@@ -149,7 +161,7 @@ QString XClass::get_title_value_(QString name) {
 //---------------------------------------------------------------------
 //только out: enum (title)
 void XClass::set_title_value_(QString name, QString v) {
-    xclu_assert(module_, "Error at XClass::set_title_value(): module is nullptr");
+    xclu_assert(module_, "Error at XClass::set_title_value_(): module is nullptr");
     module()->set_title_value(name, v);
 }
 

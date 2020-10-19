@@ -151,18 +151,18 @@ void XModuleSynthFromImage::update_data() {
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    const XStruct &obj = getstruct_image()->read().data();
+    const XObject &obj = getstruct_image()->read().data();
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");
 
         //int channels = obj.geti_channels");
-        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
+        //xclu_assert(channels == 1 || channels == 3 || channels == 4, "XObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
         auto *array = obj.get_array("data");
         //auto data_type = array->data_type();
         //xclu_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
-        //            "XStructImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
+        //            "XObjectImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
         data_.set_image(w, h, array->data_u8());
 
 
@@ -176,9 +176,9 @@ void XModuleSynthFromImage::update_data() {
         {
             int w = data_.w_;
             int h = 200;
-            XStruct &object = getstruct_image_sound()->write().data();
-            XStructImage::allocate(object, XTypeId_u8, 1, w, h);
-            quint8 *data = XStructImage::var_array(object)->data_u8();
+            XObject &object = getstruct_image_sound()->write().data();
+            XObjectImage::allocate(object, XTypeId_u8, 1, w, h);
+            quint8 *data = XObjectImage::var_array(object)->data_u8();
             for (int x=0; x<w; x++) {
                 int y0 = int(mapf_clamped(data_.image_[x],-1,1, h, 0));
                 for (int y=0; y<y0; y++) {

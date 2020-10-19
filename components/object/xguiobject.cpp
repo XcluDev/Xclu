@@ -91,8 +91,8 @@ void XGuiObject::show_object(XProtectedStruct *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
-        QScopedPointer<XStructWrapper> wrapper;
-        wrapper.reset(XStructWrapper::create_wrapper(object->read().pointer()));
+        QScopedPointer<XObjectWrapper> wrapper;
+        wrapper.reset(XObjectWrapper::create_wrapper(object->read().pointer()));
         wrapper->show_object(this);
     }
 }

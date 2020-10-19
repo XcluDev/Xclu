@@ -7,7 +7,7 @@
 #include "registrarxmodule.h"
 #include "projectruntime.h"
 #include "module.h"
-#include "xstruct.h"
+#include "xobject.h"
 
 
 //registering module implementation
@@ -241,14 +241,14 @@ void XModuleWindow::impl_stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleWindow::impl_call(QString /*function*/, XStruct * /*input*/, XStruct * /*output*/) {
+void XModuleWindow::impl_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
         //получаем доступ к данным и звуковому буферу
         //DataAccess access(data_);
         //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        //XStructRead sound(input);
+        //XObjectRead sound(input);
 
         //float sample_rate = sound.var_int("sample_rate");
         //return;
@@ -457,10 +457,10 @@ QWidget *XModuleWindow::request_widget(QString module_name) {
     //out pointer widget_pointer
 
     //формируем запрос
-    XStruct input;
+    XObject input;
     input.sets("parent_id", this->module()->name());
 
-    XStruct output;
+    XObject output;
 
     module->access_call(functions_names::create_widget(), &input, &output);
 

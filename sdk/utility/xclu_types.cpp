@@ -79,7 +79,7 @@ QString GENERAL_PAGE_marker() {
 }
 
 //---------------------------------------------------------------------
-const QString ObjectTypeNames[XStructTypeN] =
+const QString ObjectTypeNames[XObjectTypeN] =
 {
     "empty",
     "custom",
@@ -89,12 +89,12 @@ const QString ObjectTypeNames[XStructTypeN] =
 };
 
 //---------------------------------------------------------------------
-QString object_type_to_string(XStructType type) {
-        return Type_to_string(int(type), XStructTypeN, ObjectTypeNames);
+QString object_type_to_string(XObjectType type) {
+        return Type_to_string(int(type), XObjectTypeN, ObjectTypeNames);
 }
 
-XStructType string_to_object_type(QString type_str) {
-    return XStructType(string_to_Type(type_str, XStructTypeN, ObjectTypeNames));
+XObjectType string_to_object_type(QString type_str) {
+    return XObjectType(string_to_Type(type_str, XObjectTypeN, ObjectTypeNames));
 
 }
 

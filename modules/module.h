@@ -10,7 +10,7 @@
 
 class XGuiEditor;
 class QJsonObject;
-class XStruct;
+class XObject;
 
 class Module
 {
@@ -62,10 +62,10 @@ public:
     //functions_names::sound_buffer_add()
 
     //в случае исключения - оно выдастся
-    void access_call(QString function, XStruct *input = nullptr, XStruct *output = nullptr);
+    void access_call(QString function, XObject *input = nullptr, XObject *output = nullptr);
 
     //исключение "записывается" в err
-    void access_call_no_exception(QString function, ErrorInfo &err, XStruct *input = nullptr, XStruct *output = nullptr);
+    void access_call_no_exception(QString function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
 
 
     //Доступ к переменным и запуску из других модулей
@@ -101,6 +101,10 @@ public:
 
 
     void setf(QString name, float v);  //out: float
+
+    QString getraw(QString name);  //enum (rawtext)
+    void set_raw(QString name, QString v); //только out: enum (rawtext)
+
 
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)

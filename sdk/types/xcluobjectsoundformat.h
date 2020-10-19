@@ -3,17 +3,17 @@
 
 //Звуковой формат - число каналов, частота дискретизации, размер буфера
 
-#include "xstruct.h"
+#include "xobject.h"
 #include "xcluobjectwrapper.h"
 class XGuiObject;
 
 //данные
-class XStructSoundFormatData {
+class XObjectSoundFormatData {
 public:
     int sample_rate = 0;
     int channels = 0;
-    XStructSoundFormatData() {}
-    XStructSoundFormatData(int sample_rate, int channels) {
+    XObjectSoundFormatData() {}
+    XObjectSoundFormatData(int sample_rate, int channels) {
         this->sample_rate = sample_rate;
         this->channels = channels;
     }
@@ -25,18 +25,18 @@ public:
 
 
 //wrapper
-class XStructSoundFormat: public XStructWrapper {
+class XObjectSoundFormat: public XObjectWrapper {
 public:
-    XStructSoundFormat(const XStruct *object);
+    XObjectSoundFormat(const XObject *object);
 
     //показ в GUI
     virtual void show_object(XGuiObject *item);
 
     //создание объекта
-    static void set_to_object(XStruct &object, XStructSoundFormatData &data);
+    static void set_to_object(XObject &object, XObjectSoundFormatData &data);
 
     //получение информации из объекта
-    static XStructSoundFormatData get_data(const XStruct &object);
+    static XObjectSoundFormatData get_data(const XObject &object);
 
 
 };

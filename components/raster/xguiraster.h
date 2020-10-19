@@ -8,7 +8,7 @@
 template<typename T>
 class XItemRaster_;
 
-class XStruct;
+class XObject;
 class QSpacerItem;
 
 //визуальные компоненты для показа содержимого объекта
@@ -48,7 +48,7 @@ public:
     //мы это делаем только по команде извне - так как не знаем,
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
-    void show_object(XStruct *object);
+    void show_object(XObject *object);
 
     //доступ к меткам и другим компонентам для визуализации
     XGuiRasterVisual &visual();

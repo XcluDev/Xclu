@@ -152,6 +152,7 @@ void XItemEnum::var_to_gui_internal() {
     };
     bool was_changed_position() { ... }
     enum_position gete_position() { ... }
+    QString getraw_position() { ... } - current text value
 */
 
 void XItemEnum::export_interface(QStringList &file) {
@@ -172,8 +173,9 @@ void XItemEnum::export_interface(QStringList &file) {
     file.append(QString("bool was_changed_%1() { return was_changed_(\"%1\"); }").arg(nam));
     file.append(QString("%2 gete_%1() { return %2(geti_(\"%1\")); }").arg(nam).arg(cpp_type));
     if (qualifier() == XQualifierOut) {
-        file.append(QString("void sete_%1(%2 value) { seti_(\"%1\", value); }").arg(name()).arg(cpp_type));
+        file.append(QString("void sete_%1(%2 value) { seti_(\"%1\", value); }").arg(nam).arg(cpp_type));
     }
+    file.append(QString("QString getraw_%1() { return getraw_(\"%1\");}").arg(nam));
     file.append("");
 
 }

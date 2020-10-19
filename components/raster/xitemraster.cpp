@@ -41,7 +41,7 @@ XItemRaster_<TRaster>::XItemRaster_(ModuleInterface *interf, const XItemPreDescr
     }
 
     //создаем объект
-    object_.reset(new XStruct(XStructTypeEmpty));
+    object_.reset(new XObject(XObjectTypeEmpty));
 
 }
 
@@ -102,16 +102,16 @@ void XItemRaster_<TRaster>::var_to_gui_internal() {
 template<typename TRaster>
 void XItemRaster_<TRaster>::copy_data_to_internal(XItem *item) {
     xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
-    XStructRead(get_object()).copy_to(item->get_object());
+    XObjectRead(get_object()).copy_to(item->get_object());
 }
 
 //---------------------------------------------------------------------
 //C++
-//original: XStruct *get_object(QString name);
+//original: XObject *get_object(QString name);
 template<typename TRaster>
 void XItemRaster_<TRaster>::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XStruct *", "struct", "get_struct", "");
+                              "XObject *", "struct", "get_struct", "");
 }
 */
 //---------------------------------------------------------------------

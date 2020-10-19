@@ -575,7 +575,7 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 
 //---------------------------------------------------------------------
 //Variables access
-//int, checkbox, button, enum (rawtext), string, text
+//int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString ModuleInterface::gets(QString name, int index, int index2) {
@@ -618,7 +618,7 @@ QStringList ModuleInterface::get_strings(QString name) {
 }
 
 //---------------------------------------------------------------------
-//только out: int, checkbox, enum (rawtext), string, text
+//только out: int, checkbox, enum (index), string, text
 void ModuleInterface::sets(QString name, QString v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
@@ -699,6 +699,22 @@ void ModuleInterface::setf(QString name, float v) {
     xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
     var->set_value_float(v);
+}
+
+//---------------------------------------------------------------------
+//enum
+QString ModuleInterface::getraw(QString name) {
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    xclu_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
+    return var->value_raw();
+}
+
+//---------------------------------------------------------------------
+void ModuleInterface::set_raw(QString name, QString text) {
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xclu_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
+    var->set_value_raw(text);
 }
 
 //---------------------------------------------------------------------

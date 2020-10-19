@@ -7,7 +7,7 @@
 
 #include "incl_h.h"
 #include "xref.h"
-#include "xstruct.h"
+#include "xobject.h"
 #include "xlink.h"
 #include "componentcontextmenu.h"
 #include "xwaschanged.h"

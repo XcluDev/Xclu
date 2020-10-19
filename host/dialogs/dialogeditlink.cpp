@@ -73,3 +73,10 @@ void DialogEditLink::on_button_check_link_clicked()
 }
 
 //---------------------------------------------------------------------
+void DialogEditLink::on_button_delete_link_clicked()
+{
+    ui->link->setText("");
+    ui->link_enabled->setChecked(false);
+}
+
+//---------------------------------------------------------------------

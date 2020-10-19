@@ -17,7 +17,7 @@ object(strings) - массив строк (?) - его можно ставить
 
 
 XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem_<XStruct>(interf, pre_description)
+    : XItem_<XObject>(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -31,7 +31,7 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
     }
 
     //создаем объект
-    value_write().reset(new XStruct(XStructTypeEmpty));
+    value_write().reset(new XObject(XObjectTypeEmpty));
 
 }
 
@@ -81,7 +81,7 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 
 //---------------------------------------------------------------------
 //C++
-//original: XStruct *get_object(QString name);
+//original: XObject *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
                               "XProtectedStruct *", "struct", "get_struct", "");

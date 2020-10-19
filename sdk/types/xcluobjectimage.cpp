@@ -8,8 +8,8 @@
 #include <QImageWriter>
 
 //---------------------------------------------------------------------
-XStructImage::XStructImage(const XStruct *object)
-: XStructWrapper(object)
+XObjectImage::XObjectImage(const XObject *object)
+: XObjectWrapper(object)
 {
 
 }
@@ -17,12 +17,12 @@ XStructImage::XStructImage(const XStruct *object)
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XStructImage::show_object(XGuiObject *item) {
+void XObjectImage::show_object(XGuiObject *item) {
     auto &visual = item->visual();
 
     //описание изображения
-    const XStruct &obj_1 = *object();
-    auto d = XStructImage::get_data(obj_1);
+    const XObject &obj_1 = *object();
+    auto d = XObjectImage::get_data(obj_1);
     QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj_1.type())).arg(obj_1.size_bytes());
 
 
@@ -30,7 +30,7 @@ void XStructImage::show_object(XGuiObject *item) {
     visual.set_text(info_text);
 
     //TODO получение параметров просмотра из item
-    XStructShowSettings settings;
+    XObjectShowSettings settings;
     settings.w = xclu::image_preview_small_w;
     settings.h = xclu::image_preview_small_h;
 
@@ -44,8 +44,8 @@ void XStructImage::show_object(XGuiObject *item) {
 
         QImage img;
         {
-            const XStruct &obj = *object();
-            XStructImage::convert_to_QImage_fast_preview(obj, img, w, h);
+            const XObject &obj = *object();
+            XObjectImage::convert_to_QImage_fast_preview(obj, img, w, h);
         }
 
         visual.set_image(img);
@@ -59,9 +59,9 @@ void XStructImage::show_object(XGuiObject *item) {
 
 //---------------------------------------------------------------------
 //показать объект в QLabel
-void XStructImage::show_object(QLabel *label, const XStructShowSettings &settings) {
-    const XStruct &obj_1 = *object();
-    auto d = XStructImage::get_data(obj_1);
+void XObjectImage::show_object(QLabel *label, const XObjectShowSettings &settings) {
+    const XObject &obj_1 = *object();
+    auto d = XObjectImage::get_data(obj_1);
 
     //описание изображения
     //QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj.type())).arg(obj.size_bytes());
@@ -79,7 +79,7 @@ void XStructImage::show_object(QLabel *label, const XStructShowSettings &setting
 
         QImage img;
         {
-            XStructImage::convert_to_QImage_fast_preview(*object(), img, w, h);
+            XObjectImage::convert_to_QImage_fast_preview(*object(), img, w, h);
         }
 
         QPixmap pix = QPixmap::fromImage(img);
@@ -93,10 +93,10 @@ void XStructImage::show_object(QLabel *label, const XStructShowSettings &setting
 
 //---------------------------------------------------------------------
 //Извлечение всех полей из изображения
-/*static*/ XStructImageData XStructImage::get_data(const XStruct &object) {
-    object.assert_type(XStructTypeImage);
+/*static*/ XObjectImageData XObjectImage::get_data(const XObject &object) {
+    object.assert_type(XObjectTypeImage);
 
-    XStructImageData d;
+    XObjectImageData d;
 
     d.w = object.geti("w");
     d.h = object.geti("h");
@@ -113,8 +113,8 @@ void XcluImage_test() {
     /*qDebug()<< "TEST: XcluImage_test ------------";
     QImageReader reader("D:\\temp\\img.jpg");
     QImage img = reader.read();
-    XStruct obj;
-    XStructWrite object(obj);
+    XObject obj;
+    XObjectWrite object(obj);
 
     QString channels = "RGB";
     //"Grayscale";
@@ -124,11 +124,11 @@ void XcluImage_test() {
 
     QString data_type = //"u8";
                 "float";
-    XStructImage::create_from_QImage(object, img, channels, data_type);
+    XObjectImage::create_from_QImage(object, img, channels, data_type);
     QImage img2;
 
-    //XStructImage::convert_to_QImage(object, img2);
-    XStructImage::convert_to_QImage_fast_preview(object, img2, 100, 100);
+    //XObjectImage::convert_to_QImage(object, img2);
+    XObjectImage::convert_to_QImage_fast_preview(object, img2, 100, 100);
 
     QImageWriter writer("D:\\temp\\img2.jpg");
     writer.write(img2);*/
@@ -246,9 +246,9 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::allocate(XStruct &object, XTypeId data_type, int channels, int w, int h) {
+/*static*/ void XObjectImage::allocate(XObject &object, XTypeId data_type, int channels, int w, int h) {
     object.clear();
-    object.set_type(XStructTypeImage);
+    object.set_type(XObjectTypeImage);
     object.seti("w", w);
     object.seti("h", h);
     object.seti("channels", channels);
@@ -263,7 +263,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_array(XStruct &object, quint8 *data, int channels, int w, int h) {
+/*static*/ void XObjectImage::create_from_array(XObject &object, quint8 *data, int channels, int w, int h) {
     //заполнение полей описания изображения
     allocate(object, XTypeId_u8, channels, w, h);
     //заполнение массива
@@ -275,35 +275,35 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStruct &object, XRaster_u8 &raster) {
+/*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8 &raster) {
     create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_raster(XStruct &object, XRaster_u8c3 &raster) {
+/*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8c3 &raster) {
     create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(const XStruct &object, XRaster_u8 &raster, rect_int rect) {
+/*static*/ void XObjectImage::to_raster(const XObject &object, XRaster_u8 &raster, rect_int rect) {
 
     int w = object.geti("w");
     int h = object.geti("h");
     int channels = object.geti("channels");
-    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::to_raster - only 1,3 channels are supported");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XObjectImage::to_raster - only 1,3 channels are supported");
 
     //прямоугольник
     if (rect.x == -1) {
         rect = rect_int(0,0,w,h);
     }
-    xclu_assert(rect.is_inside(w, h), "Bad rectange in XStructImage::to_raster");
+    xclu_assert(rect.is_inside(w, h), "Bad rectange in XObjectImage::to_raster");
 
     //доступ к пикселям
     XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
     xclu_assert(data_type == XTypeId_u8,
-                "XStructImage::to_raster - only u8 data type is supported");
+                "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(rect.w, rect.h);
 
@@ -329,24 +329,24 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::to_raster(const XStruct &object, XRaster_u8c3 &raster, rect_int rect) {
+/*static*/ void XObjectImage::to_raster(const XObject &object, XRaster_u8c3 &raster, rect_int rect) {
     int w = object.geti("w");
     int h = object.geti("h");
     int channels = object.geti("channels");
-    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::to_raster - only 1,3 channels are supported");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XObjectImage::to_raster - only 1,3 channels are supported");
 
     //прямоугольник
     if (rect.x == -1) {
         rect = rect_int(0,0,w,h);
     }
-    xclu_assert(rect.is_inside(w, h), "Bad rectange in XStructImage::to_raster");
+    xclu_assert(rect.is_inside(w, h), "Bad rectange in XObjectImage::to_raster");
 
     //доступ к пикселям
     XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
     xclu_assert(data_type == XTypeId_u8,
-                "XStructImage::to_raster - only u8 data type is supported");
+                "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(w, h);
 
@@ -373,7 +373,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_QImage(XStruct &object, const QImage &qimage,
+/*static*/ void XObjectImage::create_from_QImage(XObject &object, const QImage &qimage,
                                               QString channels_str, QString data_type_str,
                                               bool mirrorx, bool mirrory) {
     XTypeId data_type = string_to_XTypeId(data_type_str);
@@ -385,13 +385,13 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 #define XcluImage_SCANLINE(H) (qimage.scanLine(mirrory?(H-1-y):y))
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::create_from_QImage(XStruct &object, const QImage &qimage,
+/*static*/ void XObjectImage::create_from_QImage(XObject &object, const QImage &qimage,
                                               QString channels_str, XTypeId data_type,
                                               bool mirrorx, bool mirrory) {
-    xclu_assert(!mirrorx, "XStructImage::create_from_QImage doesn't supports mirrorx");
+    xclu_assert(!mirrorx, "XObjectImage::create_from_QImage doesn't supports mirrorx");
 
     //TODO сейчас поддерживаем на вход только тип RGB32
-    xclu_assert(qimage.format() == QImage::Format_RGB32, "XStructImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+    xclu_assert(qimage.format() == QImage::Format_RGB32, "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     //TODO сейчас поддерживаем на вход только типы u8 и float
     xclu_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
@@ -403,7 +403,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     //заполнение полей описания изображения
     object.clear();
-    object.set_type(XStructTypeImage);
+    object.set_type(XObjectTypeImage);
     object.seti("w", w);
     object.seti("h", h);
     object.seti("channels", channels);
@@ -441,7 +441,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //---------------------------------------------------------------------
 //число каналов по строковому описанию
 //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
-/*static*/ int XStructImage::get_channels_count(QString channels_str) {
+/*static*/ int XObjectImage::get_channels_count(QString channels_str) {
     if (channels_str == "Grayscale") return 1;
     int count = channels_str.length();
     xclu_assert(count>0, "Empty channels string in image creating");
@@ -474,23 +474,23 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Конвертировать изображение в QImage - например, для записи на диск
 //Внимание - не учитывается значение каналов, а только их количество
 //то есть "R" будет выглядет как Grayscale
-/*static*/ void XStructImage::convert_to_QImage(const XStruct &object, QImage &qimage,
+/*static*/ void XObjectImage::convert_to_QImage(const XObject &object, QImage &qimage,
                                              bool mirrorx, bool mirrory) {
 
-    object.assert_type(XStructTypeImage);
+    object.assert_type(XObjectTypeImage);
 
-    xclu_assert(!mirrorx, "XStructImage::convert_to_QImage doesn't supports mirrorx");
+    xclu_assert(!mirrorx, "XObjectImage::convert_to_QImage doesn't supports mirrorx");
 
     int w = object.geti("w");
     int h = object.geti("h");
 
     int channels = object.geti("channels");
-    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::convert_to_QImage - only 1,3,4 channels are supported");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XObjectImage::convert_to_QImage - only 1,3,4 channels are supported");
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
     xclu_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
-                "XStructImage::convert_to_QImage - only u8 and float data types are supported");
+                "XObjectImage::convert_to_QImage - only u8 and float data types are supported");
 
     qimage = QImage(w, h, QImage::Format_RGB32);
 
@@ -522,10 +522,10 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 
 //---------------------------------------------------------------------
-/*static*/ void XStructImage::convert_to_QImage_fast_preview(const XStruct &object, QImage &qimage,
+/*static*/ void XObjectImage::convert_to_QImage_fast_preview(const XObject &object, QImage &qimage,
                                                           int out_w, int out_h,
                                                           bool mirrorx, bool mirrory) {
-    xclu_assert(!mirrorx, "XStructImage::convert_to_QImage_fast_preview doesn't supports mirrorx");
+    xclu_assert(!mirrorx, "XObjectImage::convert_to_QImage_fast_preview doesn't supports mirrorx");
 
     //если входные размеры заданы неверно - выдаем пустое изображение
     if (out_w <= 0 || out_h <= 0) {
@@ -533,18 +533,18 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         return;
     }
 
-    object.assert_type(XStructTypeImage);
+    object.assert_type(XObjectTypeImage);
 
     int w = object.geti("w");
     int h = object.geti("h");
 
     int channels = object.geti("channels");
-    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XStructImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
+    xclu_assert(channels == 1 || channels == 3 || channels == 4, "XObjectImage::convert_to_QImage_fast_preview - only 1,3,4 channels are supported");
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
     xclu_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
-                "XStructImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
+                "XObjectImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
 
     qimage = QImage(out_w, out_h, QImage::Format_RGB32);
 
@@ -583,7 +583,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Загрузка изображения с диска
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-/*static*/ void XStructImage::load(XStruct &object, QString file_name) {
+/*static*/ void XObjectImage::load(XObject &object, QString file_name) {
     QImage qimage;
     xclu_assert(qimage.load(file_name), "Can't load image " + file_name);
     create_from_QImage(object, qimage, "RGB", XTypeId_u8);
@@ -593,7 +593,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Запись на диск
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-/*static*/ void XStructImage::save(const XStruct &object, QString file_name, QString format, int quality) {
+/*static*/ void XObjectImage::save(const XObject &object, QString file_name, QString format, int quality) {
     QImage qimage;
     convert_to_QImage(object, qimage);
     xclu_assert(qimage.save(file_name, format.toStdString().c_str(), quality),

@@ -29,39 +29,49 @@ int geti_out_check() { return geti_("out_check"); }
 void seti_out_check(int value) { seti_("out_check", value); }
 
 
-//Const Float Const Float
+//Const Float Const Float1
 //Constant value.
 bool was_changed_float1() { return was_changed_("float1"); }
 float getf_float1() { return getf_("float1"); }
 
-//Float In Float
+//Float In Float2
 //Input value.
 bool was_changed_float2() { return was_changed_("float2"); }
 float getf_float2() { return getf_("float2"); }
 
-//Out Float Out Float
-//Output value.
+//Float In Float3
+//Input value.
 bool was_changed_float3() { return was_changed_("float3"); }
 float getf_float3() { return getf_("float3"); }
-void setf_float3(float value) { setf_("float3", value); }
+
+//Out Float Out Float4
+//Output value.
+bool was_changed_float4() { return was_changed_("float4"); }
+float getf_float4() { return getf_("float4"); }
+void setf_float4(float value) { setf_("float4", value); }
 
 
-//Const Int Const Int
+//Const Int Const Int1
 //Constant value.
 bool was_changed_int1() { return was_changed_("int1"); }
 int geti_int1() { return geti_("int1"); }
 
-//Int In Int
+//Int In Int2
 //Input value.
 bool was_changed_int2() { return was_changed_("int2"); }
 int geti_int2() { return geti_("int2"); }
 
-//Out Int Out Int
-//Output value.
+//Int In Int3
+//Input value.
 bool was_changed_int3() { return was_changed_("int3"); }
 int geti_int3() { return geti_("int3"); }
-void seti_int3(int value) { seti_("int3", value); }
-void increase_int_int3(int increase = 1) { increase_int_("int3", increase); }
+
+//Out Int Out Int4
+//Output value.
+bool was_changed_int4() { return was_changed_("int4"); }
+int geti_int4() { return geti_("int4"); }
+void seti_int4(int value) { seti_("int4", value); }
+void increase_int_int4(int increase = 1) { increase_int_("int4", increase); }
 
 
 //Const String Const String
@@ -141,11 +151,35 @@ void clear_string_text3() { clear_string_("text3"); }
 void append_string_text3(QString v, int extra_new_lines_count = 0) { append_string_("text3", v, extra_new_lines_count); }
 void append_string_text3(QStringList v, int extra_new_lines_count = 0) { append_string_("text3", v, extra_new_lines_count); }
 
-
-//Object Object
+//----------------------------------------------------
+//Page Objects
 //
-bool was_changed_object() { return was_changed_("object"); }
-XProtectedStruct *getstruct_object() { return get_struct_("object"); }
+
+//Int Width
+//Generated image width.
+bool was_changed_w() { return was_changed_("w"); }
+int geti_w() { return geti_("w"); }
+
+//Int Height
+//Generated image height.
+bool was_changed_h() { return was_changed_("h"); }
+int geti_h() { return geti_("h"); }
+
+//Int Wave
+//Some parameter for contents.
+bool was_changed_wave() { return was_changed_("wave"); }
+int geti_wave() { return geti_("wave"); }
+
+//Out Object Generated Image
+//"out" object is a provider for "in" objects.
+bool was_changed_object1() { return was_changed_("object1"); }
+XProtectedStruct *getstruct_object1() { return get_struct_("object1"); }
+
+
+//Object Input Image
+//"in" object can only receive external object via link.
+bool was_changed_object2() { return was_changed_("object2"); }
+XProtectedStruct *getstruct_object2() { return get_struct_("object2"); }
 
 //----------------------------------------------------
 //Page Choose Files

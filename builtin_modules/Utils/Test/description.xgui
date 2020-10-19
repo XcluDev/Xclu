@@ -77,10 +77,32 @@ in text In_Text text2 3 3
 out text Out_Text text3 3 3
     //Output value.
 
+
+
+#-------------------------------------------------
+page Objects
+
+in int Width w=100 1:1000 1,10
+//Generated image width.
+//pix
+
+in int Height h=100 1:1000 1,10
+//Generated image height.
+//pix
+
+in int Wave wave=1 1:10 1,1
+//Some parameter for contents.
+
+
+out object Generated_Image object1
+//"out" object is a provider for "in" objects.
+
 separator
 
-in object Object object
+in object Input_Image object2
+//"in" object can only receive external object via link.
     
+#-------------------------------------------------
 page Choose_Files
 
 #Строка с кнопкой для выбора файла, затем описание, диалог и фильтр 
@@ -102,7 +124,7 @@ in enum Type type=Int [Int,Float,String]
 
 separator
 
-#----------------
+#-------------------------------------------------
 if type Int,Float
 in string Numbered numbered="1"
 separator

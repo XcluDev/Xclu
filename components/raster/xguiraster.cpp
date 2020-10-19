@@ -92,12 +92,12 @@ XGuiRaster_<T>Visual &XGuiRaster_<T>::visual() {
 //вдруг с объектом проводятся операции
 //при необходимости - можно ввести mutex в объект
 template<typename T>
-void XGuiRaster_<T>::show_object(XStruct *object) {
+void XGuiRaster_<T>::show_object(XObject *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
-        QScopedPointer<XStructWrapper> wrapper;
-        wrapper.reset(XStructWrapper::create_wrapper(object));
+        QScopedPointer<XObjectWrapper> wrapper;
+        wrapper.reset(XObjectWrapper::create_wrapper(object));
         wrapper->show_object(this);
     }
 }

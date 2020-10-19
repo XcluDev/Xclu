@@ -36,7 +36,7 @@ protected:
 struct XModuleWebcameraSurfaceData : public XcluProtectedData
 {
 
-    XStruct image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
+    XObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
 

@@ -36,7 +36,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
         DataAccess access(data_);
         {
             auto write = sound_.write();
-            XStruct &sound = write.data();
+            XObject &sound = write.data();
             sound.clear();
             //создаем массив
             sound.seti("samples", samples);
@@ -52,7 +52,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
         int play_test_sound = data_->play_test_sound_;
         if (play_test_sound) {
             auto write = sound_.write();
-            XStruct &sound = write.data();
+            XObject &sound = write.data();
             float *data = sound.var_array("data")->data_float();
             float freq_Hz = 600;
             float sample_rate = format_.sampleRate();
@@ -463,9 +463,9 @@ void XModuleSoundOut::set_started(bool started) { //ставит camera_started_
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void XModuleSoundOut::set_format(const QAudioFormat &format) {
-    auto format_ = XStructSoundFormatData(format.sampleRate(), format.channelCount());
+    auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
     auto write = getstruct_sound_format()->write();
-    XStructSoundFormat::set_to_object(write.data(), format_);
+    XObjectSoundFormat::set_to_object(write.data(), format_);
 
 }
 

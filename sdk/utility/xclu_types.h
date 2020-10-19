@@ -151,19 +151,19 @@ enum ModuleActionOnError : int {
 };
 
 
-//Типы для объектов XStruct
-//При добавлении новых типов объектов дописывать их визуализацию в систему XStructWrapper
-enum XStructType : int {
-    XStructTypeEmpty = 0,            //пустой объект
-    XStructTypeCustom = 1,           //специальный объект, без определенного типа
-    XStructTypeImage = 2,            //изображение
-    XStructTypeSoundFormat = 3,      //формат звука
-    XStructTypeSoundBuffer = 4,      //звуковой буфер
-    XStructTypeN = 5
+//Типы для объектов XObject
+//При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
+enum XObjectType : int {
+    XObjectTypeEmpty = 0,            //пустой объект
+    XObjectTypeCustom = 1,           //специальный объект, без определенного типа
+    XObjectTypeImage = 2,            //изображение
+    XObjectTypeSoundFormat = 3,      //формат звука
+    XObjectTypeSoundBuffer = 4,      //звуковой буфер
+    XObjectTypeN = 5
 };
 
-QString object_type_to_string(XStructType type);
-XStructType string_to_object_type(QString type_str);
+QString object_type_to_string(XObjectType type);
+XObjectType string_to_object_type(QString type_str);
 
 
 //Тип ошибки
