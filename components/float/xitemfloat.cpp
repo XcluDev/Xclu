@@ -28,8 +28,8 @@ XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_d
     //диапазон
     auto query_range = query.at(1).split(":");
     xclu_assert(query_range.size()==2, "bad range format, expected '... 0:1 ...'");
-    min_value_ = parse_float(query_range.at(0), "min value must be a number, expected '... 0:1 ...'");
-    max_value_ = parse_float(query_range.at(1), "max value must be a number, expected '... 0:1 ...'");
+
+    range_.setup(query_range.at(0), query_range.at(1));
 
     //количество шагов слайдера
     auto query_steps = query.at(2).split(",");

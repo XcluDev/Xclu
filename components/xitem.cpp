@@ -327,23 +327,6 @@ void XItem::set_expression(const QString &expr) {
 }
 
 //---------------------------------------------------------------------
-//парсинг числовых значений
-/*static*/ float XItem::parse_float(QString line, QString error_message) {
-    bool ok;
-    float value = line.toFloat(&ok);
-    xclu_assert(ok, error_message);
-    return value;
-}
-
-//---------------------------------------------------------------------
-/*static*/ int XItem::parse_int(QString line, QString error_message) {
-    bool ok;
-    float value = line.toInt(&ok);
-    xclu_assert(ok, error_message);
-    return value;
-}
-
-//---------------------------------------------------------------------
 //графический интерфейс, он тут создается, но хранится отдельно
 XGui *XItem::create_gui(XGuiPageCreator &input) {
     gui__ = new XGui(input, this);

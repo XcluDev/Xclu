@@ -5,26 +5,12 @@
 
 class ModuleInterface;
 
-class XItemInt: public XItemScalar_<int>
+class XItemInt: public XItemScalarInt
 {
 public:
     //parse_range - мы будем ставить false в checkbox
     XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range = true);
 
-    bool supports_string() { return true; }
-    QString value_string() { return QString::number(value_int()); }
-    void set_value_string(const QString &value) { set_value_int(value.toInt()); }
-
-    bool supports_int() { return true; }
-    int value_int() { return value_read().data(); }
-    void set_value_int(int value) { value_write().data() = value; }
-
-    bool supports_float() { return true; }
-    float value_float() { return value_int(); }
-    void set_value_float(float f)  { set_value_int(int(f)); }
-
-    int min_value() { return min_value_; }
-    int max_value() { return max_value_; }
     int get_small_step() { return slow_step_; }
 
     //графический интерфейс
@@ -41,8 +27,6 @@ protected:
     //int value_ = 0; //inside XItem_
 
     int default_value_ = 0;
-    int min_value_ = 0;
-    int max_value_ = 1;
     int slow_step_ = 1;
     int fast_step_ = 10;
 

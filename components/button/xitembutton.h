@@ -5,6 +5,8 @@
 
 class ModuleInterface;
 
+//Button item
+//It's not regular int-valued class, so derived from XItem_, not XItemScalarInt
 class XItemButton: public XItem_<int>
 {
 public:

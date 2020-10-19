@@ -155,6 +155,7 @@ SOURCES += \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
     sdk/types/xlink.cpp \
+    sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
     sdk/types/xref.cpp \
     sdk/types/xstruct.cpp \
@@ -167,6 +168,7 @@ SOURCES += \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
+    sdk/utility/xparser.cpp \
     sdk/xmodule.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
@@ -245,6 +247,7 @@ HEADERS += \
     sdk/types/xarray.h \
     sdk/types/xarray_multi.h \
     sdk/types/xlink.h \
+    sdk/types/xrange.h \
     sdk/types/xraster.h \
     sdk/types/xref.h \
     sdk/types/xstruct.h \
@@ -258,6 +261,7 @@ HEADERS += \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
+    sdk/utility/xparser.h \
     sdk/xmodule.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \

@@ -248,10 +248,6 @@ protected:
     //парсинг q A B -> name='q', query = 'A','B'
     static void split_spaced(const QString &line, QString &name, QStringList &query);
 
-    //парсинг числовых значений
-    static float parse_float(QString line, QString error_message);
-    static int parse_int(QString line, QString error_message);
-
     //подключен ли GUI
     bool gui_attached_ = false;
 

@@ -1,6 +1,7 @@
 #ifndef INTERFACEITEMFLOAT_H
 #define INTERFACEITEMFLOAT_H
 
+#include "xrange.h"
 #include "xitemscalar.h"
 
 class ModuleInterface;
@@ -23,8 +24,6 @@ public:
     float value_float() { return value_read().data(); }
     void set_value_float(float value) { value_write().data() = value; }
 
-    float min_value() { return min_value_; }
-    float max_value() { return max_value_; }
     float get_small_step();
 
     //графический интерфейс
@@ -41,8 +40,9 @@ protected:
     //float value_ = 0; //inside XItem_
 
     float default_value_ = 0;
-    float min_value_ = 0;
-    float max_value_ = 1;
+
+    XRangeFloat range_;
+
     int slow_steps_ = 100;
     int fast_steps_ = 10;
 

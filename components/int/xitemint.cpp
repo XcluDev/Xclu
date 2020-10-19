@@ -10,7 +10,7 @@ REGISTER_XITEM(XItemInt, int)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
-    : XItemScalar_<int>(interf, pre_description)
+    : XItemScalarInt(interf, pre_description)
 {    
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -24,14 +24,14 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
     //Единицы измерения - вторая строка описания после hint
     units_ = description(1);
 
-    //Диапазон
+    //Range setup
     if (parse_range) {
         xclu_assert(query.size()>=3, "not enough components for range, expected '...q=0 0:1 1,10'");
         //диапазон
         auto query_range = query.at(1).split(":");
         xclu_assert(query_range.size()==2, "bad range format, expected '... 0:1 ...'");
-        min_value_ = parse_int(query_range.at(0), "min value must be an integer, expected '... 0:1 ...'");
-        max_value_ = parse_int(query_range.at(1), "max value must be an integer, expected '... 0:1 ...'");
+
+        range_.setup(query_range.at(0), query_range.at(1));
 
         //количество шагов слайдера
         auto query_steps = query.at(2).split(",");

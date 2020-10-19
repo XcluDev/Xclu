@@ -5,23 +5,10 @@
 
 class ModuleInterface;
 
-class XItemEnum: public XItemScalar_<int>
+class XItemEnum: public XItemScalarInt
 {
 public:
     XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
-
-    bool supports_string() { return true; }
-    QString value_string();    //rawtext, возвращает 'A_B_C'
-    void set_value_string(const QString &rawstring);  //rawtext ожидается 'A_B_C'
-
-    bool supports_int() { return true; }
-    int value_int() { return value_read().data(); }    //index
-    void set_value_int(int index) { value_write().data() = index; }
-
-    //float
-    bool supports_float() { return true; }
-    float value_float() { return value_int(); }
-    void set_value_float(float f)  { set_value_int(int(f)); }
 
     bool supports_value_title() { return true; }
     QString value_title();

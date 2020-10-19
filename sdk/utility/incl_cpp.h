@@ -16,5 +16,6 @@
 #include "jsonutils.h"
 
 #include "xlink.h"
+#include "xparser.h"
 
 #endif // INCL_INCLCPP_H
