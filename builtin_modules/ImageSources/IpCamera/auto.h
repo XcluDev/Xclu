@@ -15,6 +15,7 @@ enum enum_capture_source {
 };
 bool was_changed_capture_source() { return was_changed_("capture_source"); }
 enum_capture_source gete_capture_source() { return enum_capture_source(geti_("capture_source")); }
+QString getraw_capture_source() { return getraw_("capture_source");}
 
 //Const Enum Device
 //Choose the way for selecting webcamera.
@@ -26,6 +27,7 @@ enum enum_select_device {
 };
 bool was_changed_select_device() { return was_changed_("select_device"); }
 enum_select_device gete_select_device() { return enum_select_device(geti_("select_device")); }
+QString getraw_select_device() { return getraw_("select_device");}
 
 //Const Int Device Index
 //Camera index in Operating System.
@@ -69,6 +71,7 @@ enum enum_frame_rate {
 };
 bool was_changed_frame_rate() { return was_changed_("frame_rate"); }
 enum_frame_rate gete_frame_rate() { return enum_frame_rate(geti_("frame_rate")); }
+QString getraw_frame_rate() { return getraw_("frame_rate");}
 
 //Const Int Custom Frame Rate
 //Custom frame rate.
@@ -90,6 +93,7 @@ enum enum_resolution {
 };
 bool was_changed_resolution() { return was_changed_("resolution"); }
 enum_resolution gete_resolution() { return enum_resolution(geti_("resolution")); }
+QString getraw_resolution() { return getraw_("resolution");}
 
 //Const Int Resolution X
 //Custom resolution X.
@@ -116,6 +120,7 @@ enum enum_image_channels {
 };
 bool was_changed_image_channels() { return was_changed_("image_channels"); }
 enum_image_channels gete_image_channels() { return enum_image_channels(geti_("image_channels")); }
+QString getraw_image_channels() { return getraw_("image_channels");}
 
 //Enum Data Type
 //Desired data type of the output image, u8=0..255, float=[0,1].
@@ -126,6 +131,7 @@ enum enum_image_data_type {
 };
 bool was_changed_image_data_type() { return was_changed_("image_data_type"); }
 enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_("image_data_type")); }
+QString getraw_image_data_type() { return getraw_("image_data_type");}
 
 
 //Checkbox Runtime Details

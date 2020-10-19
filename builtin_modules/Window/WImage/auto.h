@@ -27,6 +27,7 @@ enum enum_source {
 };
 bool was_changed_source() { return was_changed_("source"); }
 enum_source gete_source() { return enum_source(geti_("source")); }
+QString getraw_source() { return getraw_("source");}
 
 //String Image Link
 //Link to other module's image.
@@ -99,6 +100,7 @@ enum enum_title_placement {
 };
 bool was_changed_title_placement() { return was_changed_("title_placement"); }
 enum_title_placement gete_title_placement() { return enum_title_placement(geti_("title_placement")); }
+QString getraw_title_placement() { return getraw_("title_placement");}
 
 //Const Enum Alignment
 //Title alignment mode.
@@ -111,6 +113,7 @@ enum enum_title_alignment {
 };
 bool was_changed_title_alignment() { return was_changed_("title_alignment"); }
 enum_title_alignment gete_title_alignment() { return enum_title_alignment(geti_("title_alignment")); }
+QString getraw_title_alignment() { return getraw_("title_alignment");}
 
 //Const Enum Width
 //Width of title.
@@ -121,6 +124,7 @@ enum enum_title_width {
 };
 bool was_changed_title_width() { return was_changed_("title_width"); }
 enum_title_width gete_title_width() { return enum_title_width(geti_("title_width")); }
+QString getraw_title_width() { return getraw_("title_width");}
 
 //Const Int Min
 //Minimal title width.

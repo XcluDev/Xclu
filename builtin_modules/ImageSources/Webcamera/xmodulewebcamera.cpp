@@ -367,7 +367,7 @@ void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
 int2 XModuleWebcamera::get_gui_resolution() {
-    QString res_string = gets_("resolution");
+    QString res_string = getraw_resolution();
     if (res_string == "Camera_Default") {
         return int2(-1, -1);
     }
@@ -388,7 +388,7 @@ int2 XModuleWebcamera::get_gui_resolution() {
 //---------------------------------------------------------------------
 //считать из GUI частоту кадров, -1 - использовать по умолчанию
 int XModuleWebcamera::get_gui_frame_rate() {
-    QString fps_string = gets_("frame_rate");
+    QString fps_string = getraw_frame_rate();
     if (fps_string == "Camera_Default") {
         return -1;
     }
@@ -408,8 +408,8 @@ int XModuleWebcamera::get_gui_frame_rate() {
 //получить из GUI описание данных
 void XModuleWebcamera::read_gui_output_data_format() {
     DataAccess access(data_);
-    data_.channels = gets_("image_channels");
-    data_.data_type = gets_("image_data_type");
+    data_.channels = getraw_image_channels();
+    data_.data_type = getraw_image_data_type();
 }
 
 //---------------------------------------------------------------------

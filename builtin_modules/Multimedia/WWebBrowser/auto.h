@@ -39,6 +39,7 @@ enum enum_source {
 };
 bool was_changed_source() { return was_changed_("source"); }
 enum_source gete_source() { return enum_source(geti_("source")); }
+QString getraw_source() { return getraw_("source");}
 
 //Enum Type
 //Type of value.
@@ -49,6 +50,7 @@ enum enum_type {
 };
 bool was_changed_type() { return was_changed_("type"); }
 enum_type gete_type() { return enum_type(geti_("type")); }
+QString getraw_type() { return getraw_("type");}
 
 //Int Value
 //
@@ -116,6 +118,7 @@ enum enum_title_placement {
 };
 bool was_changed_title_placement() { return was_changed_("title_placement"); }
 enum_title_placement gete_title_placement() { return enum_title_placement(geti_("title_placement")); }
+QString getraw_title_placement() { return getraw_("title_placement");}
 
 //Const Enum Alignment
 //Title alignment mode.
@@ -128,6 +131,7 @@ enum enum_title_alignment {
 };
 bool was_changed_title_alignment() { return was_changed_("title_alignment"); }
 enum_title_alignment gete_title_alignment() { return enum_title_alignment(geti_("title_alignment")); }
+QString getraw_title_alignment() { return getraw_("title_alignment");}
 
 //Const Enum Width
 //Width of title.
@@ -138,6 +142,7 @@ enum enum_title_width {
 };
 bool was_changed_title_width() { return was_changed_("title_width"); }
 enum_title_width gete_title_width() { return enum_title_width(geti_("title_width")); }
+QString getraw_title_width() { return getraw_("title_width");}
 
 //Const Int Min
 //Minimal title width.
@@ -172,6 +177,7 @@ enum enum_units_alignment {
 };
 bool was_changed_units_alignment() { return was_changed_("units_alignment"); }
 enum_units_alignment gete_units_alignment() { return enum_units_alignment(geti_("units_alignment")); }
+QString getraw_units_alignment() { return getraw_("units_alignment");}
 
 //Const Enum Width
 //Width of units.
@@ -182,6 +188,7 @@ enum enum_units_width {
 };
 bool was_changed_units_width() { return was_changed_("units_width"); }
 enum_units_width gete_units_width() { return enum_units_width(geti_("units_width")); }
+QString getraw_units_width() { return getraw_("units_width");}
 
 //Const Int Min
 //Minimal units width.
@@ -214,6 +221,7 @@ enum enum_on_change {
 };
 bool was_changed_on_change() { return was_changed_("on_change"); }
 enum_on_change gete_on_change() { return enum_on_change(geti_("on_change")); }
+QString getraw_on_change() { return getraw_("on_change");}
 
 //String Module Call Link
 //Call other module on value change.

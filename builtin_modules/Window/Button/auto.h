@@ -46,6 +46,7 @@ enum enum_button_width {
 };
 bool was_changed_button_width() { return was_changed_("button_width"); }
 enum_button_width gete_button_width() { return enum_button_width(geti_("button_width")); }
+QString getraw_button_width() { return getraw_("button_width");}
 
 //Const Int Min
 //Minimal button width.
@@ -78,6 +79,7 @@ enum enum_on_click {
 };
 bool was_changed_on_click() { return was_changed_("on_click"); }
 enum_on_click gete_on_click() { return enum_on_click(geti_("on_click")); }
+QString getraw_on_click() { return getraw_("on_click");}
 
 //String Module Call Link
 //Call other module on value change.

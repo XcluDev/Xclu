@@ -24,6 +24,7 @@ enum enum_output_mode {
 };
 bool was_changed_output_mode() { return was_changed_("output_mode"); }
 enum_output_mode gete_output_mode() { return enum_output_mode(geti_("output_mode")); }
+QString getraw_output_mode() { return getraw_("output_mode");}
 
 //Enum Output Format
 //
@@ -34,6 +35,7 @@ enum enum_output_format {
 };
 bool was_changed_output_format() { return was_changed_("output_format"); }
 enum_output_format gete_output_format() { return enum_output_format(geti_("output_format")); }
+QString getraw_output_format() { return getraw_("output_format");}
 
 
 //Checkbox Resize and Crop
@@ -51,6 +53,7 @@ enum enum_resize {
 };
 bool was_changed_resize() { return was_changed_("resize"); }
 enum_resize gete_resize() { return enum_resize(geti_("resize")); }
+QString getraw_resize() { return getraw_("resize");}
 
 //Float Resize Percent
 //
@@ -77,5 +80,6 @@ enum enum_crop {
 };
 bool was_changed_crop() { return was_changed_("crop"); }
 enum_crop gete_crop() { return enum_crop(geti_("crop")); }
+QString getraw_crop() { return getraw_("crop");}
 
 //----------------------------------------------------

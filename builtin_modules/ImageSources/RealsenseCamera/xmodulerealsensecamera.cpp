@@ -260,10 +260,10 @@ RealsenseSettings XModuleRealsenseCamera::get_settings() {
     //RGB
     s.use_rgb = geti_color_stream_enabled();
     if (s.use_rgb) {
-        int2 res = get_res(gets_("color_resolution"));
+        int2 res = get_res(getraw_color_resolution());
         s.rgb_w = res.x;
         s.rgb_h = res.y;
-        s.rgb_fps = get_frame_rate(gets_("color_frame_rate"));
+        s.rgb_fps = get_frame_rate(getraw_color_frame_rate());
     }
 
     //Depth & IR
@@ -272,10 +272,10 @@ RealsenseSettings XModuleRealsenseCamera::get_settings() {
     s.visual_preset = gete_depth_preset();  //TODO convert string->RealsenseSDK enum values
     s.use_emitter = geti_emitter();
     if (s.use_depth || s.use_ir) {
-        int2 res = get_res(gets_("depth_resolution"));
+        int2 res = get_res(getraw_depth_resolution());
         s.depth_w = res.x;
         s.depth_h = res.y;
-        s.depth_fps = get_frame_rate(gets_("depth_frame_rate"));
+        s.depth_fps = get_frame_rate(getraw_depth_frame_rate());
     }
 
     s.align_to_depth = geti_align_to_depth();

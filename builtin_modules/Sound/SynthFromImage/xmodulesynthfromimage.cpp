@@ -117,7 +117,7 @@ void XModuleSynthFromImage::impl_update() {
     }
         break;
      default:
-        xclu_exception("Unknown image_source " + gets_("image_source"));
+        xclu_exception("Unknown image_source " + getraw_image_source());
     }
 
     //считываем данные из GUI и обновляем картинку

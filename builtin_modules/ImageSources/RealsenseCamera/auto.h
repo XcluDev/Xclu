@@ -15,6 +15,7 @@ enum enum_capture_source {
 };
 bool was_changed_capture_source() { return was_changed_("capture_source"); }
 enum_capture_source gete_capture_source() { return enum_capture_source(geti_("capture_source")); }
+QString getraw_capture_source() { return getraw_("capture_source");}
 
 //Const Enum Device
 //Choose the way for selecting the camera.
@@ -26,6 +27,7 @@ enum enum_select_device {
 };
 bool was_changed_select_device() { return was_changed_("select_device"); }
 enum_select_device gete_select_device() { return enum_select_device(geti_("select_device")); }
+QString getraw_select_device() { return getraw_("select_device");}
 
 //Const Int Device Index
 //Camera index in Operating System.
@@ -138,6 +140,7 @@ enum enum_color_resolution {
 };
 bool was_changed_color_resolution() { return was_changed_("color_resolution"); }
 enum_color_resolution gete_color_resolution() { return enum_color_resolution(geti_("color_resolution")); }
+QString getraw_color_resolution() { return getraw_("color_resolution");}
 
 //Const Enum Frame Rate
 //Frame rate for color stream.
@@ -150,6 +153,7 @@ enum enum_color_frame_rate {
 };
 bool was_changed_color_frame_rate() { return was_changed_("color_frame_rate"); }
 enum_color_frame_rate gete_color_frame_rate() { return enum_color_frame_rate(geti_("color_frame_rate")); }
+QString getraw_color_frame_rate() { return getraw_("color_frame_rate");}
 
 //Const Checkbox Aligh to Depth
 //Should color frames to be aligned to depth frames.
@@ -185,6 +189,7 @@ enum enum_depth_preset {
 };
 bool was_changed_depth_preset() { return was_changed_("depth_preset"); }
 enum_depth_preset gete_depth_preset() { return enum_depth_preset(geti_("depth_preset")); }
+QString getraw_depth_preset() { return getraw_("depth_preset");}
 
 //Const Enum Resolution
 //Resolution for Depth/IR stream.
@@ -200,6 +205,7 @@ enum enum_depth_resolution {
 };
 bool was_changed_depth_resolution() { return was_changed_("depth_resolution"); }
 enum_depth_resolution gete_depth_resolution() { return enum_depth_resolution(geti_("depth_resolution")); }
+QString getraw_depth_resolution() { return getraw_("depth_resolution");}
 
 //Const Enum Frame Rate
 //Frame rate for Depth/IR stream.
@@ -214,6 +220,7 @@ enum enum_depth_frame_rate {
 };
 bool was_changed_depth_frame_rate() { return was_changed_("depth_frame_rate"); }
 enum_depth_frame_rate gete_depth_frame_rate() { return enum_depth_frame_rate(geti_("depth_frame_rate")); }
+QString getraw_depth_frame_rate() { return getraw_("depth_frame_rate");}
 
 
 //Const Checkbox Emitter

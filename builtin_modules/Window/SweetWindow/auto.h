@@ -20,6 +20,7 @@ enum enum_screen {
 };
 bool was_changed_screen() { return was_changed_("screen"); }
 enum_screen gete_screen() { return enum_screen(geti_("screen")); }
+QString getraw_screen() { return getraw_("screen");}
 
 //Const Int Screen Index
 //Index of screen.
@@ -41,6 +42,7 @@ enum enum_size {
 };
 bool was_changed_size() { return was_changed_("size"); }
 enum_size gete_size() { return enum_size(geti_("size")); }
+QString getraw_size() { return getraw_("size");}
 
 //Int Size X
 //Width of window.
@@ -62,6 +64,7 @@ enum enum_position {
 };
 bool was_changed_position() { return was_changed_("position"); }
 enum_position gete_position() { return enum_position(geti_("position")); }
+QString getraw_position() { return getraw_("position");}
 
 //Int Pos X
 //X position of window.
@@ -90,6 +93,7 @@ enum enum_mode {
 };
 bool was_changed_mode() { return was_changed_("mode"); }
 enum_mode gete_mode() { return enum_mode(geti_("mode")); }
+QString getraw_mode() { return getraw_("mode");}
 
 //----------------------------------------------------
 //Page Actions
@@ -104,5 +108,6 @@ enum enum_on_close {
 };
 bool was_changed_on_close() { return was_changed_("on_close"); }
 enum_on_close gete_on_close() { return enum_on_close(geti_("on_close")); }
+QString getraw_on_close() { return getraw_("on_close");}
 
 //----------------------------------------------------

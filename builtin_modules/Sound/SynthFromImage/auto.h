@@ -14,6 +14,7 @@ enum enum_image_source {
 };
 bool was_changed_image_source() { return was_changed_("image_source"); }
 enum_image_source gete_image_source() { return enum_image_source(geti_("image_source")); }
+QString getraw_image_source() { return getraw_("image_source");}
 
 //String Image File Name
 //Image File.
@@ -48,6 +49,7 @@ enum enum_scan_shape {
 };
 bool was_changed_scan_shape() { return was_changed_("scan_shape"); }
 enum_scan_shape gete_scan_shape() { return enum_scan_shape(geti_("scan_shape")); }
+QString getraw_scan_shape() { return getraw_("scan_shape");}
 
 //Float Scan X
 //X position of scanning area's center.
@@ -124,6 +126,7 @@ enum enum_method {
 };
 bool was_changed_method() { return was_changed_("method"); }
 enum_method gete_method() { return enum_method(geti_("method")); }
+QString getraw_method() { return getraw_("method");}
 
 //Enum Scan Speed Measure
 //Speed of scanning.
@@ -135,6 +138,7 @@ enum enum_pcm_speed_measure {
 };
 bool was_changed_pcm_speed_measure() { return was_changed_("pcm_speed_measure"); }
 enum_pcm_speed_measure gete_pcm_speed_measure() { return enum_pcm_speed_measure(geti_("pcm_speed_measure")); }
+QString getraw_pcm_speed_measure() { return getraw_("pcm_speed_measure");}
 
 //Float Speed
 //
@@ -155,6 +159,7 @@ enum enum_sono_speed_measure {
 };
 bool was_changed_sono_speed_measure() { return was_changed_("sono_speed_measure"); }
 enum_sono_speed_measure gete_sono_speed_measure() { return enum_sono_speed_measure(geti_("sono_speed_measure")); }
+QString getraw_sono_speed_measure() { return getraw_("sono_speed_measure");}
 
 //Float Speed Seconds
 //
@@ -175,6 +180,7 @@ enum enum_oscillator_shape {
 };
 bool was_changed_oscillator_shape() { return was_changed_("oscillator_shape"); }
 enum_oscillator_shape gete_oscillator_shape() { return enum_oscillator_shape(geti_("oscillator_shape")); }
+QString getraw_oscillator_shape() { return getraw_("oscillator_shape");}
 
 //Int MIDI Note Low
 //Note for setting frequency of low values.

@@ -379,7 +379,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     QAudioFormat format;
 
     //sample rate
-    QString srate_string = gets_("sample_rate");
+    QString srate_string = getraw_sample_rate();
     int sample_rate = 44100;
     if (srate_string == "Default") {
         sample_rate = deviceInfo.preferredFormat().sampleRate();
@@ -433,7 +433,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     connect(m_audioOutput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
 
     //вычисление и установка размера буфера
-    QString buffer_size_str = gets_("buffer_size_desired");
+    QString buffer_size_str = getraw_buffer_size_desired();
     if (buffer_size_str != "Default") {
         int buffer_size = buffer_size_str.toInt();
         xclu_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));

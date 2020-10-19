@@ -189,7 +189,7 @@ void XModuleSerial::open_port() {
     xclu_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
 
     //Скорость подключения
-    int baud_rate = gets_("baud_rate").toInt();
+    int baud_rate = getraw_baud_rate().toInt();
     xclu_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
 
     //Поиск свободного порта

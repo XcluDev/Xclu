@@ -17,6 +17,7 @@ enum enum_source {
 };
 bool was_changed_source() { return was_changed_("source"); }
 enum_source gete_source() { return enum_source(geti_("source")); }
+QString getraw_source() { return getraw_("source");}
 
 //Text Text
 //Input area.
@@ -88,5 +89,6 @@ enum enum_result {
 };
 bool was_changed_result() { return was_changed_("result"); }
 enum_result gete_result() { return enum_result(geti_("result")); }
+QString getraw_result() { return getraw_("result");}
 
 //----------------------------------------------------

@@ -39,6 +39,7 @@ enum enum_select_device {
 };
 bool was_changed_select_device() { return was_changed_("select_device"); }
 enum_select_device gete_select_device() { return enum_select_device(geti_("select_device")); }
+QString getraw_select_device() { return getraw_("select_device");}
 
 //Const Int Device Index
 //Sound device index in Operating System.
@@ -73,6 +74,7 @@ enum enum_sample_rate {
 };
 bool was_changed_sample_rate() { return was_changed_("sample_rate"); }
 enum_sample_rate gete_sample_rate() { return enum_sample_rate(geti_("sample_rate")); }
+QString getraw_sample_rate() { return getraw_("sample_rate");}
 
 //Const Int Custom Sample Rate
 //Custom sample rate
@@ -103,6 +105,7 @@ enum enum_buffer_size_desired {
 };
 bool was_changed_buffer_size_desired() { return was_changed_("buffer_size_desired"); }
 enum_buffer_size_desired gete_buffer_size_desired() { return enum_buffer_size_desired(geti_("buffer_size_desired")); }
+QString getraw_buffer_size_desired() { return getraw_("buffer_size_desired");}
 
 
 //Checkbox Runtime

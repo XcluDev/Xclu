@@ -29,6 +29,7 @@ enum enum_filter {
 };
 bool was_changed_filter() { return was_changed_("filter"); }
 enum_filter gete_filter() { return enum_filter(geti_("filter")); }
+QString getraw_filter() { return getraw_("filter");}
 
 //String Custom Filter
 //Custom filter specification.
@@ -46,6 +47,7 @@ enum enum_run_mode {
 };
 bool was_changed_run_mode() { return was_changed_("run_mode"); }
 enum_run_mode gete_run_mode() { return enum_run_mode(geti_("run_mode")); }
+QString getraw_run_mode() { return getraw_("run_mode");}
 
 //Button Run
 //Press to start scanning.
@@ -65,6 +67,7 @@ enum enum_result_type {
 };
 bool was_changed_result_type() { return was_changed_("result_type"); }
 enum_result_type gete_result_type() { return enum_result_type(geti_("result_type")); }
+QString getraw_result_type() { return getraw_("result_type");}
 
 //Enum On New Data
 //
@@ -75,6 +78,7 @@ enum enum_on_data {
 };
 bool was_changed_on_data() { return was_changed_("on_data"); }
 enum_on_data gete_on_data() { return enum_on_data(geti_("on_data")); }
+QString getraw_on_data() { return getraw_("on_data");}
 
 //Enum On End
 //
@@ -85,6 +89,7 @@ enum enum_on_end {
 };
 bool was_changed_on_end() { return was_changed_("on_end"); }
 enum_on_end gete_on_end() { return enum_on_end(geti_("on_end")); }
+QString getraw_on_end() { return getraw_("on_end");}
 
 
 //Out Int Items Processed

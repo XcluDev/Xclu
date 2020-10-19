@@ -20,6 +20,7 @@ enum enum_select_port {
 };
 bool was_changed_select_port() { return was_changed_("select_port"); }
 enum_select_port gete_select_port() { return enum_select_port(geti_("select_port")); }
+QString getraw_select_port() { return getraw_("select_port");}
 
 //Const Int Port ID From
 //Start of id range, will search to first successful.
@@ -54,6 +55,7 @@ enum enum_baud_rate {
 };
 bool was_changed_baud_rate() { return was_changed_("baud_rate"); }
 enum_baud_rate gete_baud_rate() { return enum_baud_rate(geti_("baud_rate")); }
+QString getraw_baud_rate() { return getraw_("baud_rate");}
 
 
 //Out Checkbox Connected
@@ -94,6 +96,7 @@ enum enum_send_type {
 };
 bool was_changed_send_type() { return was_changed_("send_type"); }
 enum_send_type gete_send_type() { return enum_send_type(geti_("send_type")); }
+QString getraw_send_type() { return getraw_("send_type");}
 
 //String String To Send
 //String for sending.
@@ -130,6 +133,7 @@ enum enum_line_term {
 };
 bool was_changed_line_term() { return was_changed_("line_term"); }
 enum_line_term gete_line_term() { return enum_line_term(geti_("line_term")); }
+QString getraw_line_term() { return getraw_("line_term");}
 
 //Int Send Byte
 //Byte to send.
@@ -153,6 +157,7 @@ enum enum_show_received {
 };
 bool was_changed_show_received() { return was_changed_("show_received"); }
 enum_show_received gete_show_received() { return enum_show_received(geti_("show_received")); }
+QString getraw_show_received() { return getraw_("show_received");}
 
 //Out Text Received Text
 //Received data as text.
@@ -189,6 +194,7 @@ enum enum_auto_clear {
 };
 bool was_changed_auto_clear() { return was_changed_("auto_clear"); }
 enum_auto_clear gete_auto_clear() { return enum_auto_clear(geti_("auto_clear")); }
+QString getraw_auto_clear() { return getraw_("auto_clear");}
 
 //Enum Limit Show
 //
@@ -199,6 +205,7 @@ enum enum_limit_show {
 };
 bool was_changed_limit_show() { return was_changed_("limit_show"); }
 enum_limit_show gete_limit_show() { return enum_limit_show(geti_("limit_show")); }
+QString getraw_limit_show() { return getraw_("limit_show");}
 
 //Int Limit Show Count
 //Limit show by prevent slow down.

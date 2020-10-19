@@ -19,6 +19,7 @@ enum enum_size {
 };
 bool was_changed_size() { return was_changed_("size"); }
 enum_size gete_size() { return enum_size(geti_("size")); }
+QString getraw_size() { return getraw_("size");}
 
 //Const Int Size X
 //Width of FBO.
@@ -48,6 +49,7 @@ enum enum_tex1_source {
 };
 bool was_changed_tex1_source() { return was_changed_("tex1_source"); }
 enum_tex1_source gete_tex1_source() { return enum_tex1_source(geti_("tex1_source")); }
+QString getraw_tex1_source() { return getraw_("tex1_source");}
 
 //String Image File Name
 //Image File.

@@ -106,6 +106,7 @@ enum enum_list1 {
 };
 bool was_changed_list1() { return was_changed_("list1"); }
 enum_list1 gete_list1() { return enum_list1(geti_("list1")); }
+QString getraw_list1() { return getraw_("list1");}
 
 //Enum In List
 //Input value.
@@ -116,6 +117,7 @@ enum enum_list2 {
 };
 bool was_changed_list2() { return was_changed_("list2"); }
 enum_list2 gete_list2() { return enum_list2(geti_("list2")); }
+QString getraw_list2() { return getraw_("list2");}
 
 //Out Enum Out List
 //Output value.
@@ -127,6 +129,7 @@ enum enum_list3 {
 bool was_changed_list3() { return was_changed_("list3"); }
 enum_list3 gete_list3() { return enum_list3(geti_("list3")); }
 void sete_list3(enum_list3 value) { seti_("list3", value); }
+QString getraw_list3() { return getraw_("list3");}
 
 
 //Const Text Const Text
@@ -211,6 +214,7 @@ enum enum_type {
 };
 bool was_changed_type() { return was_changed_("type"); }
 enum_type gete_type() { return enum_type(geti_("type")); }
+QString getraw_type() { return getraw_("type");}
 
 
 //String Numbered

@@ -33,6 +33,7 @@ enum enum_work_mode {
 };
 bool was_changed_work_mode() { return was_changed_("work_mode"); }
 enum_work_mode gete_work_mode() { return enum_work_mode(geti_("work_mode")); }
+QString getraw_work_mode() { return getraw_("work_mode");}
 
 //Checkbox Bang
 //Start execution
