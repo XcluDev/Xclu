@@ -18,8 +18,14 @@ XGuiInt::XGuiInt(XGuiPageCreator &input, XItemInt *item)
     if (range.low_enabled) {
         spin_->setMinimum(range.low);
     }
+    else {
+        spin_->setMinimum(-1000000000);
+    }
     if (range.high_enabled) {
         spin_->setMaximum(range.high);
+    }
+    else {
+        spin_->setMaximum(1000000000);
     }
 
     //шаг

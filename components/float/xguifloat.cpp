@@ -18,8 +18,14 @@ XGuiFloat::XGuiFloat(XGuiPageCreator &input, XItemFloat *item)
     if (range.low_enabled) {
         spin_->setMinimum(range.low);
     }
+    else {
+        spin_->setMinimum(-1000000000);
+    }
     if (range.high_enabled) {
         spin_->setMaximum(range.high);
+    }
+    else {
+        spin_->setMaximum(1000000000);
     }
 
     spin_->setSingleStep(item->get_small_step());

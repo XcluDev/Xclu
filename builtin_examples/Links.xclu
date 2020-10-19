@@ -81,15 +81,15 @@
                     },
                     {
                         "aname": "list1",
-                        "avalue": "By_Id"
+                        "avalue": "0"
                     },
                     {
                         "aname": "list2",
-                        "avalue": "By_Name"
+                        "avalue": "0"
                     },
                     {
                         "aname": "list3",
-                        "avalue": "By_Id"
+                        "avalue": "0"
                     },
                     {
                         "aname": "text1",
@@ -125,7 +125,7 @@
                     },
                     {
                         "aname": "type",
-                        "avalue": "Int"
+                        "avalue": "0"
                     },
                     {
                         "aname": "numbered",
@@ -173,7 +173,7 @@
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
+                        "avalue": "0"
                     },
                     {
                         "aname": "was_error",
@@ -224,12 +224,12 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "0.16",
+                        "avalue": "0.02",
                         "link": "#test2->float1"
                     },
                     {
                         "aname": "float3",
-                        "avalue": "0.16",
+                        "avalue": "0.02",
                         "link": "test2->float2"
                     },
                     {
@@ -243,12 +243,12 @@
                     },
                     {
                         "aname": "int2",
-                        "avalue": "1",
+                        "avalue": "-4",
                         "link": "#test2->float2"
                     },
                     {
                         "aname": "int3",
-                        "avalue": "1",
+                        "avalue": "0",
                         "link": "test2->int2"
                     },
                     {
@@ -269,15 +269,15 @@
                     },
                     {
                         "aname": "list1",
-                        "avalue": "By_Id"
+                        "avalue": "0"
                     },
                     {
                         "aname": "list2",
-                        "avalue": "By_Name"
+                        "avalue": "0"
                     },
                     {
                         "aname": "list3",
-                        "avalue": "By_Id"
+                        "avalue": "0"
                     },
                     {
                         "aname": "text1",
@@ -313,7 +313,7 @@
                     },
                     {
                         "aname": "type",
-                        "avalue": "Int"
+                        "avalue": "0"
                     },
                     {
                         "aname": "numbered",
@@ -361,7 +361,7 @@
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
+                        "avalue": "0"
                     },
                     {
                         "aname": "was_error",
@@ -403,15 +403,15 @@
                     },
                     {
                         "aname": "elapsed_time_sec",
-                        "avalue": "4.622"
+                        "avalue": "0.496"
                     },
                     {
                         "aname": "dt",
-                        "avalue": "0.034"
+                        "avalue": "0.033"
                     },
                     {
                         "aname": "measured_frame_rate",
-                        "avalue": "29.4118"
+                        "avalue": "30.303"
                     },
                     {
                         "aname": "Control",
@@ -435,7 +435,7 @@
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
+                        "avalue": "0"
                     },
                     {
                         "aname": "was_error",
