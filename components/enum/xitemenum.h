@@ -10,6 +10,12 @@ class XItemEnum: public XItemScalarInt
 public:
     XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
+    //raw title value
+    bool supports_value_raw() { return true; }
+    QString value_raw();
+    void set_value_raw(QString rawstring);
+
+    //processed title value, with "_" replaced by " "
     bool supports_value_title() { return true; }
     QString value_title();
     void set_value_title(QString title);  //Внимание, реализована неэффективно!

@@ -41,7 +41,7 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2"
+                        "avalue": "1.89"
                     },
                     {
                         "aname": "float3",
@@ -224,12 +224,12 @@
                     },
                     {
                         "aname": "float2",
-                        "avalue": "0.02",
-                        "link": "#test2->float1"
+                        "avalue": "1.88",
+                        "link": "#test1->float2"
                     },
                     {
                         "aname": "float3",
-                        "avalue": "0.02",
+                        "avalue": "1.88",
                         "link": "test2->float2"
                     },
                     {
@@ -238,17 +238,17 @@
                     },
                     {
                         "aname": "int1",
-                        "avalue": "1",
-                        "link": "#test2->float1"
+                        "avalue": "3",
+                        "link": "test2->int2"
                     },
                     {
                         "aname": "int2",
-                        "avalue": "-4",
+                        "avalue": "3",
                         "link": "#test2->float2"
                     },
                     {
                         "aname": "int3",
-                        "avalue": "0",
+                        "avalue": "3",
                         "link": "test2->int2"
                     },
                     {
@@ -273,7 +273,8 @@
                     },
                     {
                         "aname": "list2",
-                        "avalue": "0"
+                        "avalue": "0",
+                        "link": "#test2->int2"
                     },
                     {
                         "aname": "list3",
@@ -313,7 +314,8 @@
                     },
                     {
                         "aname": "type",
-                        "avalue": "0"
+                        "avalue": "2",
+                        "link": "test2->int2"
                     },
                     {
                         "aname": "numbered",
@@ -403,7 +405,7 @@
                     },
                     {
                         "aname": "elapsed_time_sec",
-                        "avalue": "0.496"
+                        "avalue": "27.73"
                     },
                     {
                         "aname": "dt",

@@ -151,7 +151,7 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         interf()->update();
         break;
     case GuiStageAfterUpdate:    //out -> GUI
-        interf()->vars_to_gui(XQualifierMask(XQualifierOut));
+        interf()->vars_to_gui(XQualifierMask::get_out_link());
         break;
 
     case GuiStageAfterStop:     //GUI -> const, in;  out -> GUI, разблокировка констант

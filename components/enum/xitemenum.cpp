@@ -69,18 +69,18 @@ int XItemEnum::rawtext_to_index_safe(QString rawtext) {
 }
 
 //---------------------------------------------------------------------
-//void XItemEnum::set_value_string(const QString &rawstring) {
-//    set_value_int(rawtext_to_index_safe(rawstring));
-//}
+void XItemEnum::set_value_raw(QString rawstring) {
+    set_value_int(rawtext_to_index_safe(rawstring));
+}
 
 //---------------------------------------------------------------------
-//QString XItemEnum::value_string() {
-//    return rawtexts_.at(value_int());
-//}
+QString XItemEnum::value_raw() {
+    return rawtexts_.at(value_int());
+}
 
 //---------------------------------------------------------------------
 QString XItemEnum::value_title() {
-    return xclu_remove_underscore(value_string());
+    return xclu_remove_underscore(value_raw());
 }
 
 //---------------------------------------------------------------------
