@@ -50,7 +50,7 @@ in checkbox Set_Timeout set_timeout=1
     //Use timeout for stopping execution or wait infinitely
 endif
 if set_timeout 1
-in float Timeout timeout_sec=30 0:1000 10000,100
+in float Timeout timeout_sec=30 0:1000 0.1,10
     //Timeout duration
     //seconds
 endif

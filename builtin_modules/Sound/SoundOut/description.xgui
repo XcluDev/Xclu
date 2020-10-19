@@ -26,12 +26,12 @@ in button Edit... edit_btn
 
 separator
 
-in float_slider Volume volume=1.0 0:10 1000,100
+in float_slider Volume volume=1.0 0:10 0.01,0.1
     //Output sound volume.
     //0..10
 
 
-in float_slider Device_Volume device_volume=0.8 0:1 100,10
+in float_slider Device_Volume device_volume=0.8 0:1 0.01,0.1
     //Output device volume.
     //0..1
     

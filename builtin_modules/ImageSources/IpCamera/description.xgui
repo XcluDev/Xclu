@@ -124,7 +124,7 @@ endif
 #    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
 #if resize Percent
-#in float Resize_Percent resize_percent=100 0:1000 10000,100
+#in float Resize_Percent resize_percent=100 0:1000 0.1,10
 #if resize Pixels
 #in int Resize_X resize_x=1024 0:10000 1,20
 #in int Resize_Y resize_y=768 0:10000 1,20

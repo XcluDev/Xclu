@@ -44,24 +44,24 @@ in enum Scan_Shape scan_shape=Horizontal_Rectangle [Horizontal_Rectangle,Vertica
 
 #TODO option to set in pixels
     
-in float Scan_X scan_x=0.5 0:1 500,50
+in float Scan_X scan_x=0.5 0:1 0.002,0.02
     //X position of scanning area's center.
 
-in float Scan_Y scan_y=0.5 0:1 500,50
+in float Scan_Y scan_y=0.5 0:1 0.002,0.02
     //Y position of scanning area's center.
 
 endif
 
 #-------------- 
 if scan_shape Horizontal_Rectangle,Vertical_Rectangle
-in float Scan_Rad_X rad_x=0.5 0:1 500,50
+in float Scan_Rad_X rad_x=0.5 0:1 0.002,0.02
     //X radius of scanning area.
 
-in float Scan_Rad_Y rad_y=0.5 0:1 500,50
+in float Scan_Rad_Y rad_y=0.5 0:1 0.002,0.02
     //Y radius of scanning area.
     
 if scan_shape Radar
-in float Scan_Rad_X rad=0.5 0:1 500,50
+in float Scan_Rad_X rad=0.5 0:1 0.002,0.02
     //Radius of scanning area.
 endif
    
@@ -77,19 +77,19 @@ if interpr 1
 out object_image Image_Sound image_sound
     //Image depicting the sound values.
 
-out float Min_Brightness min_value=0 0:1 1000,100
+out float Min_Brightness min_value=0 0:1 0.001,0.01
     //Maximal brightness value.
 
-out float Max_Brightness max_value=1 0:1 1000,100
+out float Max_Brightness max_value=1 0:1 0.001,0.01
     //Maximal brightness value.
     
-out float Mean_Brightness center_value=0 0:1 1000,100
+out float Mean_Brightness center_value=0 0:1 0.001,0.01
     //Statistical center.
     
-out float Brightness_Range range_value=1 0:2 1000,100
+out float Brightness_Range range_value=1 0:2 0.001,0.01
     //Statistical range.
     
-in float Contrast contrast=100 0:10000 10000,200
+in float Contrast contrast=100 0:10000 1,50
     //Contrast parameter for converting brightness to sound values. Center is defined automatically.
     //(coefficient)
 endif 
@@ -105,12 +105,12 @@ in enum Scan_Speed_Measure pcm_speed_measure=Hz [Hz,Seconds,MIDI_note]
     //Speed of scanning.
 
 if pcm_speed_measure Hz
-in float Speed pcm_speed_hz=10 0:1000 1000,100
+in float Speed pcm_speed_hz=10 0:1000 0.001,0.01
     //
     //Hz
 
 if pcm_speed_measure Seconds
-in float Speed pcm_speed_sec=1 0:20 1000,100
+in float Speed pcm_speed_sec=1 0:20 0.01,0.1
     //
     //Seconds
 endif
@@ -122,10 +122,10 @@ in enum Scan_Speed_Measure sono_speed_measure=Hz [Seconds,BPM]
     //Speed of scanning.
 
 if sono_speed_measure Seconds
-in float Speed_Seconds sono_speed_sec=5 0:20 1000,100
+in float Speed_Seconds sono_speed_sec=5 0:20 0.020,0.2
 
 if sono_speed_measure BPM
-#in float Speed_Hz speed_hz=10 0:1000 1000,100
+#in float Speed_Hz speed_hz=10 0:1000 1,10
 
 
 if method Sonogram

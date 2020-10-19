@@ -16,7 +16,7 @@ in int Hours hours=0 0:1000 1,10
 in int Minutes minutes=0 0:1000 1,10
     //Delay time in minutes
 
-in float Seconds seconds=0 0:120 1200,120
+in float Seconds seconds=0 0:120 0.1,1
     //Delay time in seconds
 
 
