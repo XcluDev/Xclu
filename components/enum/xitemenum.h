@@ -10,6 +10,10 @@ class XItemEnum: public XItemScalarInt
 public:
     XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
+    //string to write/read json (for enum is custom)
+    virtual QString value_string_json() { return value_raw(); }
+    virtual void set_value_string_json(const QString &v) { set_value_raw(v); }
+
     //raw title value
     bool supports_value_raw() { return true; }
     QString value_raw();

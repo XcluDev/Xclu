@@ -37,7 +37,7 @@
                     },
                     {
                         "aname": "volume",
-                        "avalue": "0.5"
+                        "avalue": "0.2"
                     },
                     {
                         "aname": "volume_mod",
@@ -57,11 +57,11 @@
                     },
                     {
                         "aname": "fm_rate_mod",
-                        "avalue": "0"
+                        "avalue": "0.5"
                     },
                     {
                         "aname": "fm_range_mod",
-                        "avalue": "0"
+                        "avalue": "20"
                     },
                     {
                         "aname": "am_enabled",
@@ -77,11 +77,11 @@
                     },
                     {
                         "aname": "am_rate_mod",
-                        "avalue": "0"
+                        "avalue": "2"
                     },
                     {
                         "aname": "am_range_mod",
-                        "avalue": "0"
+                        "avalue": "0.2"
                     },
                     {
                         "aname": "Modulation_Setup",
@@ -251,7 +251,7 @@
                     },
                     {
                         "aname": "local_console",
-                        "avalue": "Connected Output Audio devices:\n0: Динамики (USB Audio Device)\n1: Динамики (NoMachine Microphone Adapter)\n2: Динамики (NoMachine Microphone Adapter)\n3: Динамики (USB Audio Device)\n\nStarting: Default Output Device\n\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
+                        "avalue": "Connected Output Audio devices:\n0: Динамики (USB Audio Device)\n1: Динамики (NoMachine Microphone Adapter)\n2: Динамики (USB Audio Device)\n3: Динамики (NoMachine Microphone Adapter)\n\nStarting: Default Output Device\n\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
                     },
                     {
                         "aname": "Test_Sound",

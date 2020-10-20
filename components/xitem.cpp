@@ -461,7 +461,7 @@ void XItem::write_json(QJsonObject &json) {
 
     //"a..." - чтобы были в начале списка
     json["aname"] = name_;
-    json["avalue"] = value_string();
+    json["avalue"] = value_string_json();
 
     //link
     if (!link().is_empty()) {
@@ -490,7 +490,7 @@ void XItem::read_json(const QJsonObject &json) {
                 "May be module's version is different");
 
     //значение
-    set_value_string(JsonUtils::json_string(json, "avalue"));
+    set_value_string_json(JsonUtils::json_string(json, "avalue"));
 
     //link
     QString link_str = JsonUtils::json_string(json, "link", "");

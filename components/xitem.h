@@ -108,6 +108,10 @@ public:
     virtual QString value_string() { return ""; }
     virtual void set_value_string(const QString &) {}
 
+    //string to write/read json (for enum is custom)
+    virtual QString value_string_json() { return value_string(); }
+    virtual void set_value_string_json(const QString &v) { set_value_string(v); }
+
     //int
     virtual bool supports_int() { return false; }
     virtual int value_int() { return 0; }
