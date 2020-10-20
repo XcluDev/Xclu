@@ -175,10 +175,18 @@ QString XItem::description(int index) {
 }
 
 //---------------------------------------------------------------------
-//Checking that value was changed
-//works relative to save "change checker", which stores frame fo last check
+//Checking that value was changed -------------------------
+//works relative to save "change chacker", which stores frame fo last check
+//It's really implemented at XItem_<T>
 bool XItem::was_changed(XWasChangedChecker &checker) {
     return false;
+}
+
+//---------------------------------------------------------------------
+//Set "was changed" at start. Really it's implemented in XItem_<T>, but here just reset was_changed_
+void XItem::reset_was_changed_simple() {
+    was_changed_checker_.reset();
+    was_changed_ = true;
 }
 
 //---------------------------------------------------------------------

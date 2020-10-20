@@ -58,7 +58,7 @@ public:
     void unblock_gui(const XQualifierMask &qual);       //разблокировать константы, вызывается после остановки проекта
 
     //пометить, что все элементы были изменены - при старте
-    void set_changed_at_start();
+    void reset_was_changed();
 
     //update before rt-module's update
     void update();

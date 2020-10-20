@@ -140,7 +140,7 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
             set_running(true);
         }
         //Пометить, что все переменные были изменены
-        //interf()->set_changed_at_start();
+        interf()->reset_was_changed();
 
     }
         break;

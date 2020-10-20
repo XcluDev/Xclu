@@ -12,6 +12,8 @@ class XWasChangedChecker
 {
 public:
     void set_frame(XWasChangedFrame frame) { _checker_frame_ = frame; }
+    void reset() { set_frame(0); }
+
     XWasChangedFrame checker_frame() const { return _checker_frame_; }
 protected:
     XWasChangedFrame _checker_frame_ = 0;   //frame which increases when value was changed

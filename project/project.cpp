@@ -424,7 +424,7 @@ bool Project::compile() {
 void Project::execute_start(bool &stop_out) {
     stop_out = false;
     if (RUNTIME.is_running()) {
-        xclu_message_box("Internal error: project starting command, but it's already started");
+        xclu_message_box("Internal error: received project starting command, but it's already started");
         return;
     }
 

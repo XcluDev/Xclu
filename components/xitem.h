@@ -97,8 +97,12 @@ public:
     //It's really implemented at XItem_<T>
     virtual bool was_changed(XWasChangedChecker &checker);
 
+    //Set "was changed" at start. Really it's implemented in XItem_<T>, but here just reset was_changed_
+    void reset_was_changed_simple();
+
     //was changed for one-point access, between "update" calling
-    bool was_changed() { return was_changed_; }
+    bool was_changed_simple() { return was_changed_; }
+
 
     //Доступ к значениям -------------------------
     //Соответствующие типы должны переопределить эти функции

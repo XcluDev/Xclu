@@ -449,10 +449,10 @@ void ModuleInterface::unblock_gui(const XQualifierMask &qual) {
 
 //---------------------------------------------------------------------
 //пометить, что все элементы были изменены - при старте
-void ModuleInterface::set_changed_at_start() {
-    //for (auto &item: items_) {
-    //    item->set_changed();
-    //}
+void ModuleInterface::reset_was_changed() {
+    for (auto &item: items_) {
+        item->reset_was_changed_simple();
+    }
 }
 
 //---------------------------------------------------------------------

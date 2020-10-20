@@ -53,7 +53,7 @@ bool XClass::was_changed_(QString name, XWasChangedChecker &checker) {
 //---------------------------------------------------------------------
 //This was_changed is checks changes between `update` calls
 bool XClass::was_changed_(QString name) {
-    return module()->interf()->var(name)->was_changed();
+    return module()->interf()->var(name)->was_changed_simple();
 }
 
 //---------------------------------------------------------------------
