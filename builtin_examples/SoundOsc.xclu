@@ -28,10 +28,6 @@
                         "avalue": "1"
                     },
                     {
-                        "aname": "mod_enabled",
-                        "avalue": "0"
-                    },
-                    {
                         "aname": "freq",
                         "avalue": "900"
                     },
@@ -41,7 +37,7 @@
                     },
                     {
                         "aname": "volume_mod",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "fm_enabled",
@@ -56,14 +52,6 @@
                         "avalue": "20"
                     },
                     {
-                        "aname": "fm_rate_mod",
-                        "avalue": "0.5"
-                    },
-                    {
-                        "aname": "fm_range_mod",
-                        "avalue": "20"
-                    },
-                    {
                         "aname": "am_enabled",
                         "avalue": "1"
                     },
@@ -74,38 +62,6 @@
                     {
                         "aname": "am_range",
                         "avalue": "0.2"
-                    },
-                    {
-                        "aname": "am_rate_mod",
-                        "avalue": "2"
-                    },
-                    {
-                        "aname": "am_range_mod",
-                        "avalue": "0.2"
-                    },
-                    {
-                        "aname": "Modulation_Setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "volume_link",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "fm_rate_link",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "fm_range_link",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "am_rate_link",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "am_range_link",
-                        "avalue": ""
                     },
                     {
                         "aname": "Setup_Speed",
@@ -141,7 +97,7 @@
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "0"
+                        "avalue": "Ignore"
                     },
                     {
                         "aname": "was_error",
@@ -187,7 +143,7 @@
                     },
                     {
                         "aname": "select_device",
-                        "avalue": "0"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "device_index",
@@ -203,7 +159,7 @@
                     },
                     {
                         "aname": "sample_rate",
-                        "avalue": "0"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "custom_sample_rate",
@@ -215,7 +171,7 @@
                     },
                     {
                         "aname": "buffer_size_desired",
-                        "avalue": "0"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "runtime",
@@ -283,7 +239,7 @@
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "0"
+                        "avalue": "Ignore"
                     },
                     {
                         "aname": "was_error",

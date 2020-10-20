@@ -10,11 +10,6 @@
 bool was_changed_out_enabled() { return was_changed_("out_enabled"); }
 int geti_out_enabled() { return geti_("out_enabled"); }
 
-//Checkbox External Modulation
-//Should apply external modulation for controlling from other modules.
-bool was_changed_mod_enabled() { return was_changed_("mod_enabled"); }
-int geti_mod_enabled() { return geti_("mod_enabled"); }
-
 
 //Float Frequency
 //Oscillator basic frequency.
@@ -27,11 +22,10 @@ float getf_freq() { return getf_("freq"); }
 bool was_changed_volume() { return was_changed_("volume"); }
 float getf_volume() { return getf_("volume"); }
 
-//Out Float vol mod
+//Float Vol mod
 //Modulation value.
 bool was_changed_volume_mod() { return was_changed_("volume_mod"); }
 float getf_volume_mod() { return getf_("volume_mod"); }
-void setf_volume_mod(float value) { setf_("volume_mod", value); }
 
 
 //Checkbox FM
@@ -49,18 +43,6 @@ float getf_fm_rate() { return getf_("fm_rate"); }
 bool was_changed_fm_range() { return was_changed_("fm_range"); }
 float getf_fm_range() { return getf_("fm_range"); }
 
-//Out Float fm rate
-//
-bool was_changed_fm_rate_mod() { return was_changed_("fm_rate_mod"); }
-float getf_fm_rate_mod() { return getf_("fm_rate_mod"); }
-void setf_fm_rate_mod(float value) { setf_("fm_rate_mod", value); }
-
-//Out Float fm range
-//
-bool was_changed_fm_range_mod() { return was_changed_("fm_range_mod"); }
-float getf_fm_range_mod() { return getf_("fm_range_mod"); }
-void setf_fm_range_mod(float value) { setf_("fm_range_mod", value); }
-
 
 //Checkbox AM
 //Is AM enabled.
@@ -76,18 +58,6 @@ float getf_am_rate() { return getf_("am_rate"); }
 //AM range.
 bool was_changed_am_range() { return was_changed_("am_range"); }
 float getf_am_range() { return getf_("am_range"); }
-
-//Out Float am rate
-//
-bool was_changed_am_rate_mod() { return was_changed_("am_rate_mod"); }
-float getf_am_rate_mod() { return getf_("am_rate_mod"); }
-void setf_am_rate_mod(float value) { setf_("am_rate_mod", value); }
-
-//Out Float am range
-//
-bool was_changed_am_range_mod() { return was_changed_("am_range_mod"); }
-float getf_am_range_mod() { return getf_("am_range_mod"); }
-void setf_am_range_mod(float value) { setf_("am_range_mod", value); }
 
 //----------------------------------------------------
 //Page Modulation Setup

@@ -15,9 +15,6 @@ page Main
 #Frequency        
 in checkbox Enabled out_enabled=1
     //Generate output sound.
-
-in checkbox External_Modulation mod_enabled=0
-    //Should apply external modulation for controlling from other modules.
     
 separator
 
@@ -36,11 +33,9 @@ in float Volume volume=0.5 0:1 0.002,0.02
     //Main volume.
     //0..1
 
-if mod_enabled 1
-out float vol_mod volume_mod=0 0:1 0.01,0.1
+in float Vol_mod volume_mod=1 0:1 0.01,0.1
     //Modulation value.    
-endif
-
+    //0..1
 
 #-------------- 
 #FM
@@ -58,10 +53,6 @@ in float Range fm_range=10 0:20000 1,10
     //FM range (instead of index).
     //0..20000 Hz
 
-if mod_enabled 1
-out float fm_rate fm_rate_mod=0 0:20000 1,10
-out float fm_range fm_range_mod=0 0:20000 1,10
-endif
 
 #-------------- 
 #AM
@@ -77,20 +68,6 @@ in float Rate am_rate=5 0:20000 1,10
 in float Range am_range=0.1 0:1 0.001,0.01
     //AM range.
     //0..1
-
-if mod_enabled 1
-out float am_rate am_rate_mod=0 0:20000 20000,2000
-out float am_range am_range_mod=0 0:1 1000,100
-endif
-
-#-------------- 
-page Modulation_Setup
-in string_link_string volume_link volume_link=""
-    //Modulation link, such as module1->volumes(0,2)
-in string_link_string fm_rate_link fm_rate_link=""
-in string_link_string fm_range_link fm_range_link=""
-in string_link_string am_rate_link am_rate_link=""
-in string_link_string am_range_link am_range_link=""
 
 
 #-------------- 

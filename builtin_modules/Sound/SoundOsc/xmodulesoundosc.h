@@ -51,7 +51,6 @@ struct XModuleSoundOscData: public XcluProtectedData
 
     //внешние параметры
     int out_enabled = 0;       //Generate output sound.
-    int mod_enabled = 1;        //Is modulatio enabled
     float volume = 0.5f;        //Main volume.
     float vol_mod=1;            //External modulation
 
