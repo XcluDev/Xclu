@@ -387,7 +387,7 @@ void Module::set_title_value(QString name, QString v) { //только out: enum
 }
 
 //---------------------------------------------------------------------
-XProtectedStruct *Module::get_object(QString name) {
+XProtectedObject *Module::get_object(QString name) {
     return interf()->get_object(name);
 }
 

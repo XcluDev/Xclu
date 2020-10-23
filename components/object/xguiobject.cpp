@@ -87,7 +87,7 @@ XGuiObjectVisual &XGuiObject::visual() {
 //если изображение - то картинкой, если нет - то текстовым описанием
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
-void XGuiObject::show_object(XProtectedStruct *object) {
+void XGuiObject::show_object(XProtectedObject *object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации

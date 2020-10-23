@@ -133,7 +133,7 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XProtectedStruct *object = RUNTIME.get_struct_by_link(image_link);
+    XProtectedObject *object = RUNTIME.get_struct_by_link(image_link);
     object->read().data().copy_to(getstruct_image()->write().pointer());
 }
 

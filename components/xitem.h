@@ -138,7 +138,7 @@ public:
 
     //object
     virtual bool supports_object() { return false; }
-    virtual XProtectedStruct *get_object() { return nullptr; }
+    virtual XProtectedObject *get_object() { return nullptr; }
 
     //Запись, считывание и копирование -------------------------
     //хранит ли данные (или просто интерфейсный элемент, например, сепаратор)

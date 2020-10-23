@@ -40,7 +40,7 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
 void XItemObject::set_value_from_link(XLinkResolved *linkres) {
     xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
-    XProtectedStruct *object = mod->get_object(linkres->var);
+    XProtectedObject *object = mod->get_object(linkres->var);
 
     //TODO set to object
     xclu_exception("XItemObject::set_value_from_link - please finish implementation");
@@ -84,7 +84,7 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 //original: XObject *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XProtectedStruct *", "struct", "get_struct", "");
+                              "XProtectedObject *", "struct", "get_struct", "");
 }
 
 //---------------------------------------------------------------------

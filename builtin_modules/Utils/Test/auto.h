@@ -176,13 +176,13 @@ int geti_wave() { return geti_("wave"); }
 //Out Object Generated Image
 //"out" object is a provider for "in" objects.
 bool was_changed_object1() { return was_changed_("object1"); }
-XProtectedStruct *getstruct_object1() { return get_struct_("object1"); }
+XProtectedObject *getstruct_object1() { return get_struct_("object1"); }
 
 
 //Object Input Image
 //"in" object can only receive external object via link.
 bool was_changed_object2() { return was_changed_("object2"); }
-XProtectedStruct *getstruct_object2() { return get_struct_("object2"); }
+XProtectedObject *getstruct_object2() { return get_struct_("object2"); }
 
 //----------------------------------------------------
 //Page Choose Files

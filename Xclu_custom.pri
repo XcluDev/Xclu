@@ -28,6 +28,7 @@
 
 windows {
     include(../../../../eamuseum/Projects/2020-08-CosmoVibro/Cosmo/Cosmovibro/CosmovibroRt/cosmovibro.pri)
+    include(../../../../eamuseum/Projects/2020-10-ReaDiff/Readiff/ReadiffRt/readiff.pri)
 }
 unix {
     include(../../Cosmo/Cosmovibro/CosmovibroRt/cosmovibro.pri)

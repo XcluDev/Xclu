@@ -109,7 +109,7 @@ QString ProjectRuntime::get_string_by_link(QString link_str, QString def_val) {
 }
 
 //---------------------------------------------------------------------
-XProtectedStruct *ProjectRuntime::get_struct_by_link(QString link_str) {
+XProtectedObject *ProjectRuntime::get_struct_by_link(QString link_str) {
     XLinkParsed link(link_str);
     return RUNTIME.get_module(link.module)->get_object(link.var);
 }

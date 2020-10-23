@@ -92,7 +92,7 @@ public:
     //доступ к объектам идет только по указателям -
     //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
     //без копирования
-    XProtectedStruct *get_struct_(QString name);
+    XProtectedObject *get_struct_(QString name);
 
 protected:
     Module *module_ = nullptr;

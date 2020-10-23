@@ -68,7 +68,7 @@ private:
     //функция создания звука, во float
     //вызывает нужные модули и заполняет тестовым звуком, если требуется
     void request_sound(int samples, int channels); //создать звук в объекте sound_
-    XProtectedStruct sound_;  //звук
+    XProtectedObject sound_;  //звук
 
     //тестовый генератор звука
     qreal test_phase_ = 0;
