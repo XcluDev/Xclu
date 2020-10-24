@@ -121,7 +121,7 @@ protected:
 
 
 //protected XObject
-typedef XProtectedData_<XObject> XProtectedStruct;
+typedef XProtectedData_<XObject> XProtectedObject;
 
 
 

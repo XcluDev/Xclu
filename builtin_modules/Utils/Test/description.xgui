@@ -1,14 +1,15 @@
 #Module Test
 #------------------------------------------
-#module_class=Test
-#module_category=Utils
-module_description=Test module.
+module_description=Test modulewith GUI and objects.
 module_version=1.01
 module_impl=C++
 
+#module_accept_calls=*
+#module_accept_calls=sound_buffer_add
+#module_accept_calls=create_widget
 #------------------------------------------
 
-page Main
+page Gui_Controls
 #group Device_Selection
 
 in button Test button1
@@ -76,8 +77,6 @@ in text In_Text text2 3 3
     //Input value.
 out text Out_Text text3 3 3
     //Output value.
-
-
 
 #-------------------------------------------------
 page Objects

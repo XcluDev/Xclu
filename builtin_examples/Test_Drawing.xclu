@@ -1,0 +1,192 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "TestDrawing",
+                "name": "test_drawing1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Drawing",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "screen_w",
+                        "avalue": "500"
+                    },
+                    {
+                        "aname": "screen_h",
+                        "avalue": "500"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "wwindow1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Window"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "640x480"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "1280"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "720"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "mode",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "theme",
+                        "avalue": "Standard"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "HorizontalLayout\n  test_drawing1"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

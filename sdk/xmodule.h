@@ -138,6 +138,9 @@ protected:
     //Concrete call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it
     virtual void *impl_create_widget(QString parent_id);
+    //resetting created widget (`create_widget` called with empty parent_id)
+    virtual void impl_reset_widget();
+
 
     //`sound_buffer_add` call implementation, fills `data` buffer
     //there are required to fill channels * samples values at data

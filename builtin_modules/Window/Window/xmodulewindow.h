@@ -107,10 +107,20 @@ protected:
     //парсить число, если оно есть, иначе - выдать default_value
     int parse_int(QStringList list, int index, int default_value, QString line);
 
+    //modules list which are involved in widgets creation
+    //it's collected by request_widget and cleared at stop
+    QStringList used_modules_;
+
     //запрос виджета из другого модуля
     //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
     //- например, путем установки его в наши layouts и виджеты
     QWidget *request_widget(QString module_name);
+
+    //remove all requested widgets stored at used_modules_
+    void reset_widgets();
+
+    //remove requested widget from another module - called at stopping
+    void reset_widget(QString module_name);
 };
 
 

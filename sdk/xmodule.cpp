@@ -155,6 +155,7 @@ void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *ou
 
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
+//if parent_id == "", it means need to reset widget pointer (at stop)
 void XModule::create_widget_internal(XObject *input, XObject *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
@@ -166,20 +167,27 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
     xclu_assert(output, "Internal error, output object is nullptr");
 
     //устанавливаем, кто использует
+    //if parent_id is empty - then
     QString parent_id = input->gets("parent_id");
 
-    //проверяем, что еще не стартовали
-    xclu_assert(status().was_started,
-                QString("Can't create widget, because module '%1' was not started yet."
-                        " You need to place it before parent '%2'.")
-                .arg(module_->name())
-                .arg(parent_id));
+    //if parent_id is empty - it means that we need to delete widget
+    if (parent_id.isEmpty()) {
+        impl_create_widget("");
+    }
+    else {
+        //проверяем, что еще не стартовали
+        xclu_assert(status().was_started,
+                    QString("Can't create widget, because module '%1' was not started yet."
+                            " You need to place it before parent '%2'.")
+                    .arg(module_->name())
+                    .arg(parent_id));
 
-    //создаем виджет
-    void* widget = impl_create_widget(parent_id);
+        //создаем виджет
+        void* widget = impl_create_widget(parent_id);
 
-    //ставим его в выходной объект
-    output->set_pointer("widget_pointer", widget);
+        //ставим его в выходной объект
+        output->set_pointer("widget_pointer", widget);
+    }
 }
 
 //---------------------------------------------------------------------
@@ -206,6 +214,13 @@ void *XModule::impl_create_widget(QString /*parent_id*/) {
     xclu_exception("Module '" + name()
                    + "' can't process function 'create_widget', because impl_create_widget() is not implemented");
     return nullptr;
+}
+
+//---------------------------------------------------------------------
+//resetting created widget (`create_widget` called with empty parent_id)
+void XModule::impl_reset_widget() {
+    xclu_exception("Module '" + name()
+                   + "' can't process function 'create_widget', because impl_reset_widget() is not implemented");
 }
 
 //---------------------------------------------------------------------

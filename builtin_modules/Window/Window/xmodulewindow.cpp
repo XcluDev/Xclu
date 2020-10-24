@@ -236,7 +236,12 @@ void XModuleWindow::impl_update() {
 
 //---------------------------------------------------------------------
 void XModuleWindow::impl_stop() {
+    //reset all widgets in modules in order nobody call for it
+    reset_widgets();
+
+    //reset window (also deletes all widgets)
     window_.reset();
+
 }
 
 //---------------------------------------------------------------------
@@ -417,6 +422,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
         //stretch
         int stretch = parse_int(query, 1, 0, line);
         QString module_name = name;
+
         return XModuleWindowStructureItem(request_widget(module_name), stretch);
 
     }
@@ -468,7 +474,38 @@ QWidget *XModuleWindow::request_widget(QString module_name) {
     QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
     xclu_assert(widget, "Returned empty widget");
 
+    //append to list to remove at stop
+    used_modules_.append(module_name);
     return widget;
+}
+
+
+//---------------------------------------------------------------------
+//remove all requested widgets stored at used_modules_
+void XModuleWindow::reset_widgets() {
+    for (auto &module_name: used_modules_) {
+        reset_widget(module_name);
+    }
+    used_modules_.clear();
+}
+
+//---------------------------------------------------------------------
+//remove requested widget from another module - called at stopping
+void XModuleWindow::reset_widget(QString module_name) {
+    Module *module = RUNTIME.get_module(module_name);
+
+    //call create_widget
+    //Window calls GUI elements to insert them into itself.
+    //string parent_id
+    //out pointer widget_pointer
+
+    //формируем запрос
+    XObject input;
+    input.sets("parent_id", "");    //parent_id empty means command to reset widget
+
+    XObject output;
+
+    module->access_call(functions_names::create_widget(), &input, &output);
 }
 
 //---------------------------------------------------------------------

@@ -13,6 +13,9 @@
 #include <QReadWriteLock>
 #include <QScopedPointer>
 
+#include <qmath.h>
+#include <qendian.h>
+
 //Stl - currently commented
 //#include <vector>
 //#include <string>

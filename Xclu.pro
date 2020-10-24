@@ -190,7 +190,9 @@ SOURCES += \
     host/dialogs/dialogaddmodule.cpp \
     host/projectgui.cpp \
     python/pythoncore.cpp \
-    sdk/xclass.cpp
+    sdk/xclass.cpp \
+    sdk/xmodulepainter.cpp \
+    sdk/xmodulepainterwidget.cpp
 
 HEADERS += \
     components/button/xguibutton.h \
@@ -282,7 +284,9 @@ HEADERS += \
     host/dialogs/dialogaddmodule.h \
     host/projectgui.h \
     python/pythoncore.h \
-    sdk/xclass.h
+    sdk/xclass.h \
+    sdk/xmodulepainter.h \
+    sdk/xmodulepainterwidget.h
 
 #--------------------------------------------------------------------------
 #Python
