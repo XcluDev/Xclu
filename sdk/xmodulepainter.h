@@ -33,11 +33,13 @@ public:
     int screen_h();
     int2 screen_size();
     //Change screen size - applied after calling repaint
-    //applied
-    void screen_resize(int2 size);
+    void set_screen_size(int2 size);
 protected:
     //`create_widget` call implementation, creates QWidget and returns pointer on it
     virtual void *impl_create_widget(QString parent_id);
+
+    //reset widget at stop
+    virtual void impl_reset_widget();
 
     //information about parent for rendering
     bool parent_was_set_ = false;

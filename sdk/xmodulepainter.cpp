@@ -50,7 +50,7 @@ int2 XModulePainter::screen_size() {
 //-----------------------------------------------
 //Change screen size - applied after calling repaint
 //applied
-void XModulePainter::screen_resize(int2 size) {
+void XModulePainter::set_screen_size(int2 size) {
     screen_size_ = size;
 }
 
@@ -64,5 +64,14 @@ void *XModulePainter::impl_create_widget(QString parent_id) {
     widget_ = new XModulePainterWidget(nullptr, this);
     return widget_;
 }
+
+//---------------------------------------------------------------------
+//reset widget at stop
+void XModulePainter::impl_reset_widget() {
+    widget_ = nullptr;
+    parent_id_.clear();
+    parent_was_set_ = false;
+}
+
 
 //---------------------------------------------------------------------

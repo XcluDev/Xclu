@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "screen_w",
-                        "avalue": "500"
+                        "avalue": "800"
                     },
                     {
                         "aname": "screen_h",
@@ -78,7 +78,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {

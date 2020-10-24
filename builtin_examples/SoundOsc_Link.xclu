@@ -1,0 +1,366 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "SoundOsc",
+                "name": "sound_osc1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "out_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "freq",
+                        "avalue": "900"
+                    },
+                    {
+                        "aname": "volume",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "volume_mod",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "fm_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "fm_rate",
+                        "avalue": "0.5"
+                    },
+                    {
+                        "aname": "fm_range",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "am_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "am_rate",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "am_range",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "Setup_Speed",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "vol_speed",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "freq_speed",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Ignore"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundOsc",
+                "name": "sound_osc2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "out_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "freq",
+                        "avalue": "900"
+                    },
+                    {
+                        "aname": "volume",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "volume_mod",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "fm_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "fm_rate",
+                        "avalue": "0.5"
+                    },
+                    {
+                        "aname": "fm_range",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "am_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "am_rate",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "am_range",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "Setup_Speed",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "vol_speed",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "freq_speed",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Ignore"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundOut",
+                "name": "sound_out1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "modules_list",
+                        "avalue": "#id of modules to play and optional volumes\nsound_osc1\nsound_osc2"
+                    },
+                    {
+                        "aname": "volume",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "device_volume",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "settings",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "sample_rate",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "custom_sample_rate",
+                        "avalue": "44100"
+                    },
+                    {
+                        "aname": "channels",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "buffer_size_desired",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "runtime",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "avalue": "Default Output Device"
+                    },
+                    {
+                        "aname": "is_started",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "sound_format",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "buffer_size",
+                        "avalue": "35280"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "print_devices",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "print_formats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "local_console",
+                        "avalue": "Connected Output Audio devices:\n0: Динамики (USB Audio Device)\n1: Динамики (NoMachine Microphone Adapter)\n2: Динамики (USB Audio Device)\n3: Динамики (NoMachine Microphone Adapter)\n\nStarting: Default Output Device\n\n\nSupported Formats for 'Default Output Device'\n  Sample rates: 8000, 11025, 16000, 22050, 32000, 44100, 48000, 88200, 96000, 192000\n  Channels: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18\n\n"
+                    },
+                    {
+                        "aname": "Test_Sound",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "gen_test",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Ignore"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

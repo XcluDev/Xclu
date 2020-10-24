@@ -172,7 +172,7 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
 
     //if parent_id is empty - it means that we need to delete widget
     if (parent_id.isEmpty()) {
-        impl_create_widget("");
+        impl_reset_widget();
     }
     else {
         //проверяем, что еще не стартовали
