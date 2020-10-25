@@ -25,7 +25,7 @@ public:
 
     //-----------------------------------------------
     //subclasses must call it for repaing widget image, and to apply size chane
-    void repaint();
+    void screen_repaint();
 
     //-----------------------------------------------
     //Getting current size:

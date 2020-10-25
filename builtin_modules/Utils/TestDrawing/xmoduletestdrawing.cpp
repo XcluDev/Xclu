@@ -30,7 +30,7 @@ void XModuleTestDrawing::impl_start() {
 //---------------------------------------------------------------------
 void XModuleTestDrawing::impl_update() {
     set_screen_size(int2(geti_screen_w(), geti_screen_h()));
-    repaint();
+    screen_repaint();
 }
 
 //---------------------------------------------------------------------

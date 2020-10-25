@@ -14,6 +14,8 @@
 #include "incl_h.h"
 
 #include <QImage>
+//class QPainter;
+#include <QPainter>
 
 //--------------------------------------------------
 //Color pixel type
@@ -47,15 +49,24 @@ class XRaster_ {
 public:
 	int w = 0;
 	int h = 0;
+
     QVector<T> data;
 
     XTypeId type_id();
+
+    uint8 *data_pointer_u8() {
+        return (uint8 *) data_pointer();
+    }
 
 	//useful wrapper that checks if data is empty
 	T* data_pointer() {
 		if (is_empty()) return 0;
 		else return &data[0];
 	}
+
+    int bytesPerLine() {
+        return sizeof(T)*w;
+    }
 
 	//pixel value - not checking boundaries
 	//"unsafe" in name is a remainder that you must be sure that (x,y) is inside raster matrix
@@ -183,7 +194,7 @@ typedef XRaster_<int2> XRaster_int2;
 
 class XRaster {
 public:
-    //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
+    //Convert - copies data
     static void convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster);
     static void convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb);
 
@@ -192,12 +203,55 @@ public:
     static void convert(XRaster_u8 &raster, QImage &qimage);
     static void convert(XRaster_u8c3 &raster, QImage &qimage);
 
+    //Link - create image without copying pixels raster
+    //Much faster than `convert`, but requires care
+    static QImage link(XRaster_u8 &raster);
+    static QImage link(XRaster_u8c3 &raster);
+
+    //Draw raster on painter
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &targetRect, const QRectF &sourceRect) {
+        painter->drawImage(targetRect, link(raster), sourceRect);
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &targetRect, const QRect &sourceRect) {
+        painter->drawImage(targetRect, link(raster), sourceRect);
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p, const QRectF &sr) {
+        painter->drawImage(p, link(raster), sr);
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p, const QRect &sr) {
+        painter->drawImage(p, link(raster), sr);
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
+        painter->drawImage(r, link(raster));
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &r) {
+        painter->drawImage(r, link(raster));
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p) {
+        painter->drawImage(p, link(raster));
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p) {
+        painter->drawImage(p, link(raster));
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
+        painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
+    }
+
+
+    //save and load
+    //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
     static void load(QString file_name, XRaster_u8 &raster);
     static void load(QString file_name, XRaster_u8c3 &raster);
     static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
     static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
-
-
-
 
 };
