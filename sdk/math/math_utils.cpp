@@ -1,5 +1,6 @@
 #include "math_utils.h"
 #include <random>
+#include <QRandomGenerator>
 
 //-------------------------------------------------------
 //x*x
@@ -101,13 +102,22 @@ int mapi_clamped(int x, int a, int b, int A, int B) {
 
 //-------------------------------------------------------
 //https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
+//std::random_device randomi_rd_;  //Will be used to obtain a seed for the random number engine
 
-std::random_device randomi_rd_;  //Will be used to obtain a seed for the random number engine
-
+//https://doc.qt.io/qt-5/qrandomgenerator.html#details
 int randomi(int a, int b) {
-    std::mt19937 gen(randomi_rd_()); //Standard mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> distrib(a, b);
-    return distrib(gen);
+    std::uniform_real_distribution<> dist(a, b);
+    return dist(*QRandomGenerator::global());
+
+    //std::mt19937 gen(randomi_rd_()); //Standard mersenne_twister_engine seeded with rd()
+    //std::uniform_int_distribution<> distrib(a, b);
+    //return distrib(gen);
+}
+
+//-------------------------------------------------------
+float randomf(float a, float b) {
+    std::uniform_real_distribution<> dist(a, b);
+    return dist(*QRandomGenerator::global());
 }
 
 //-------------------------------------------------------

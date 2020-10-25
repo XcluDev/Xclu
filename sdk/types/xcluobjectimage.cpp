@@ -356,7 +356,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
             int k = 0;
             for (int x=0; x<rect.w; x++) {
                 k = (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = u8_rgb(pixels[k]);
+                raster.data[x+rect.w*y] = rgb_u8(pixels[k]);
             }
         }
     }
@@ -365,7 +365,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         for (int y=0; y<rect.h; y++) {
             for (int x=0; x<rect.w; x++) {
                 k = channels * (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = u8_rgb(pixels[k], pixels[k+1], pixels[k+2]);
+                raster.data[x+rect.w*y] = rgb_u8(pixels[k], pixels[k+1], pixels[k+2]);
             }
         }
     }

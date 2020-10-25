@@ -20,26 +20,35 @@
 //--------------------------------------------------
 //Color pixel type
 //--------------------------------------------------
-struct u8_rgb {
-  uint8 v[3];
-  u8_rgb() { v[0] = v[1] = v[2] = 0; }
-  u8_rgb(uint8 val) {
-      v[0] = v[1] = v[2] = val;
-  }
-  u8_rgb(uint8 r, uint8 g, uint8 b) {
-      v[0] = r; v[1] = g; v[2] = b;
-  }
-  void set(uint8 r, uint8 g, uint8 b) {
-      v[0] = r; v[1] = g; v[2] = b;
-  }
-  void set(uint8 val) {
-      v[0] = v[1] = v[2] = val;
-  }
-  uint8 gray() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
-  static uint8 gray(uint8 r, uint8 g, uint8 b) {
-      return (int(r)+int(g)+int(b))/3;
-  }
+template<typename T>
+struct rgb_ {
+    T v[3] = {0,0,0};
+    rgb_() {}
+    rgb_(T val) {
+        v[0] = v[1] = v[2] = val;
+    }
+    rgb_(T r, T g, T b) {
+        v[0] = r; v[1] = g; v[2] = b;
+    }
+    void set(T r, T g, T b) {
+        v[0] = r; v[1] = g; v[2] = b;
+    }
+    void set(T val) {
+        v[0] = v[1] = v[2] = val;
+    }
+    T grayi() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
+    float grayf() { return (float(v[0])+float(v[1])+float(v[2]))/3; }
+    static T grayi(T r, T g, T b) {
+        return (int(r)+int(g)+int(b))/3;
+    }
+    static float grayf(T r, T g, T b) {
+        return (float(r)+float(g)+float(b))/3;
+    }
 };
+
+
+typedef rgb_<uint8> rgb_u8;
+typedef rgb_<float> rgb_float;
 
 //--------------------------------------------------
 //Template raster type
@@ -174,13 +183,14 @@ public:
 //Particular raster types
 //--------------------------------------------------
 typedef XRaster_<uint8> XRaster_u8;
-typedef XRaster_<u8_rgb> XRaster_u8c3;    //color image
+typedef XRaster_<rgb_u8> XRaster_u8c3;    //color image
 typedef XRaster_<sint8> XRaster_s8;
 typedef XRaster_<int16> XRaster_int16;
 typedef XRaster_<u16> XRaster_u16;
 typedef XRaster_<u32> XRaster_u32;
 typedef XRaster_<int32> XRaster_int32;
 typedef XRaster_<float> XRaster_float;
+typedef XRaster_<rgb_float> XRaster_float3; //see XRaster_vec3 below!
 typedef XRaster_<double> XRaster_double;
 typedef XRaster_<glm::vec2> XRaster_vec2;
 typedef XRaster_<glm::vec3> XRaster_vec3;
@@ -210,6 +220,14 @@ public:
 
     //Draw raster on painter
     template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
+        painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
+    }
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
+        painter->drawImage(r, link(raster));
+    }
+    template<typename T>
     static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &targetRect, const QRectF &sourceRect) {
         painter->drawImage(targetRect, link(raster), sourceRect);
     }
@@ -226,10 +244,6 @@ public:
         painter->drawImage(p, link(raster), sr);
     }
     template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
-        painter->drawImage(r, link(raster));
-    }
-    template<typename T>
     static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &r) {
         painter->drawImage(r, link(raster));
     }
@@ -241,10 +255,7 @@ public:
     static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p) {
         painter->drawImage(p, link(raster));
     }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
-        painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
-    }
+
 
 
     //save and load
