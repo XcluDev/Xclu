@@ -35,7 +35,7 @@ XObjectWrapper::XObjectWrapper(const XObject *object) {
 }
 
 //---------------------------------------------------------------------
-const XObject *XObjectWrapper::object() {
+const XObject * XObjectWrapper::object() {
     return object_;
 }
 

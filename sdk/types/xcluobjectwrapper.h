@@ -52,7 +52,7 @@ public:
     virtual void show_object(QLabel *label, const XObjectShowSettings &settings);
 
 protected:
-    const XObject *object_;
+    const XObject *object_ = nullptr;
 };
 
 #endif // XCLUOBJECTWRAPPER_H

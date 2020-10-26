@@ -6,7 +6,7 @@
 //Также, они порождают визуальное представление в виде XGui
 
 #include "incl_h.h"
-#include "xref.h"
+#include "xpointer.h"
 #include "xobject.h"
 #include "xlink.h"
 #include "componentcontextmenu.h"
@@ -163,7 +163,7 @@ public:
     void set_link(bool enabled, QString link);
     void clear_link();    
 
-    //User change link settings - should show it in GUI and switch XRef value_ in XItem_
+    //User change link settings - should show it in GUI and switch value_ in XItem_
     virtual void link_was_changed();
 
     //Expression -------------------------

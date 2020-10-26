@@ -17,7 +17,7 @@ object(strings) - массив строк (?) - его можно ставить
 
 
 XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
-    : XItem_<XObject>(interf, pre_description)
+    : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
     QStringList query;
@@ -26,14 +26,21 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
 
     //опции - типы объектов
     QString options = pre_description.options;
-    if (!options.isEmpty()) {
-        types_ = options.split(",");
-    }
+    //if (!options.isEmpty()) {
+    //    types_ = options.split(",");
+    //}
 
     //создаем объект
-    value_write().reset(new XObject(XObjectTypeEmpty));
+    //value_write().reset(new XObject(XObjectTypeEmpty));
 
+    value_.set_pointer(&default_);
 }
+
+//---------------------------------------------------------------------
+bool XItemObject::was_changed(XWasChangedChecker &checker) {
+    return value_.was_changed(checker);
+}
+
 
 //---------------------------------------------------------------------
 //Function for setting value using link
@@ -42,8 +49,7 @@ void XItemObject::set_value_from_link(XLinkResolved *linkres) {
     Module *mod = linkres->module_ptr();
     XProtectedObject *object = mod->get_object(linkres->var);
 
-    //TODO set to object
-    xclu_exception("XItemObject::set_value_from_link - please finish implementation");
+    value_.set_pointer(object);
 }
 
 //---------------------------------------------------------------------
@@ -75,8 +81,9 @@ void XItemObject::var_to_gui_internal() {
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 void XItemObject::copy_data_to_internal(XItem *item) {
-    xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
-    get_object()->read().data().copy_to(item->get_object()->write().pointer());
+    xclu_exception("XItemObject::copy_data_to_internal is prohibited");
+    //xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
+    //get_object()->read().data().copy_to(item->get_object()->write().pointer());
 }
 
 //---------------------------------------------------------------------

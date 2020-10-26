@@ -19,12 +19,12 @@ XObjectSoundFormat::XObjectSoundFormat(const XObject *object)
 
 //---------------------------------------------------------------------
 //получение информации из объекта
-/*static*/ XObjectSoundFormatData XObjectSoundFormat::get_data(const XObject &object) {
-    object.assert_type(XObjectTypeSoundFormat);
+/*static*/ XObjectSoundFormatData XObjectSoundFormat::get_data(const XObject *object) {
+    object->assert_type(XObjectTypeSoundFormat);
 
     XObjectSoundFormatData data;
-    data.sample_rate = object.geti("sample_rate");
-    data.channels = object.geti("channels");
+    data.sample_rate = object->geti("sample_rate");
+    data.channels = object->geti("channels");
     return data;
 }
 
@@ -32,8 +32,7 @@ XObjectSoundFormat::XObjectSoundFormat(const XObject *object)
 //показ в GUI
 void XObjectSoundFormat::show_object(XGuiObject *item) {
     auto &visual = item->visual();
-    const XObject &obj = *object();
-    auto data = get_data(obj);
+    auto data = get_data(object());
 
     QString line;
     line.append(QString("Sample rate: %1\n").arg(data.sample_rate));

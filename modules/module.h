@@ -109,7 +109,7 @@ public:
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)
     //доступ к объектам идет только по указателям
-    XProtectedObject *get_object(QString name);
+    XProtectedObject * get_object(QString name);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached(XGuiEditor *editor);

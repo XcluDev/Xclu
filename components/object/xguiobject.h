@@ -25,8 +25,6 @@ public:
 
     //TODO сделать рисование через виджет - и не обновлять, если невидимая картинка.
     //это сэкономит ресурсы.
-
-
 };
 
 class XGuiObject : public XGui
@@ -47,7 +45,7 @@ public:
     //мы это делаем только по команде извне - так как не знаем,
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
-    void show_object(XProtectedObject *object);
+    void show_object(XProtectedObject * object);
 
     //доступ к меткам и другим компонентам для визуализации
     XGuiObjectVisual &visual();

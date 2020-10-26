@@ -47,7 +47,7 @@ public:
     //-----------------------------
 
 protected:
-    XRef<XProtectedData_<TRaster>> raster_;
+    XPointer<XProtectedData_<TRaster>> raster_;
 
 
 protected:

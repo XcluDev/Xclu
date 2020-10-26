@@ -92,7 +92,8 @@ void XGuiObject::show_object(XProtectedObject *object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
         QScopedPointer<XObjectWrapper> wrapper;
-        wrapper.reset(XObjectWrapper::create_wrapper(object->read().pointer()));
+        const XObject *obj = object->read().pointer();
+        wrapper.reset(XObjectWrapper::create_wrapper(obj));
         wrapper->show_object(this);
     }
 }

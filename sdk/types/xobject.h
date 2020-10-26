@@ -6,6 +6,7 @@
 #include "incl_h.h"
 #include "xarray.h"
 #include "xcluprotecteddata.h"
+#include "xpointer.h"
 
 
 //Object - complex type which can store many items such as scalars and arrays
@@ -122,6 +123,7 @@ protected:
 
 //protected XObject
 typedef XProtectedData_<XObject> XProtectedObject;
+typedef XPointer<XObject> XObjectPointer;
 
 
 

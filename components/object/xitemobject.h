@@ -1,15 +1,17 @@
 #ifndef INTERFACEITEMOBJECT_H
 #define INTERFACEITEMOBJECT_H
 
-//Объект
+//Object
+//Note, it doesn't store object's value, but only pointer
 
 #include "xitem.h"
 #include "xobject.h"
 #include <QScopedPointer>
+#include "xpointer.h"
 
 class ModuleInterface;
 
-class XItemObject: public XItem_<XObject>
+class XItemObject: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
@@ -23,9 +25,13 @@ public:
 
     bool supports_int() { return false; }
 
-    //доступ к объекту
     virtual bool supports_object() { return true; }
-    virtual XProtectedObject *get_object() { return &value_; }
+    virtual XProtectedObject *get_object() {
+        return value_.pointer();
+    }
+
+    //changes control
+    virtual bool was_changed(XWasChangedChecker &checker);
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
@@ -38,10 +44,10 @@ public:
     virtual void export_interface(QStringList &file);
     //-----------------------------
 
-protected:
-    //QScopedPointer<XObject> object_; //inside XItem_
 
-    QStringList types_; //список типов, которыми может быть этот объект, например, image, array
+protected:
+    XPointer<XObject> value_;
+    XProtectedObject default_;
 
     //Function for setting value using link
     virtual void set_value_from_link(XLinkResolved *linkres);

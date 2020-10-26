@@ -36,7 +36,7 @@ public:
     static void set_to_object(XObject &object, XObjectSoundFormatData &data);
 
     //получение информации из объекта
-    static XObjectSoundFormatData get_data(const XObject &object);
+    static XObjectSoundFormatData get_data(const XObject *object);
 
 
 };
