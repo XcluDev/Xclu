@@ -59,6 +59,6 @@ QString getraw_image_data_type() { return getraw_("image_data_type");}
 //Out Object Fbo
 //output FBO, can be used in Window to draw
 bool was_changed_fbo() { return was_changed_("fbo"); }
-XProtectedObject *getstruct_fbo() { return get_struct_("fbo"); }
+XProtectedObject *getobject_fbo() { return get_object_("fbo"); }
 
 //----------------------------------------------------

@@ -8,7 +8,7 @@
 //Out Object Image
 //Resulted image.
 bool was_changed_image() { return was_changed_("image"); }
-XProtectedObject *getstruct_image() { return get_struct_("image"); }
+XProtectedObject *getobject_image() { return get_object_("image"); }
 
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived during current 'update' step.

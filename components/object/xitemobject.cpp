@@ -84,7 +84,7 @@ void XItemObject::copy_data_to_internal(XItem *item) {
 //original: XObject *get_object(QString name);
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XProtectedObject *", "struct", "get_struct", "");
+                              "XProtectedObject *", "object", "get_object", "");
 }
 
 //---------------------------------------------------------------------

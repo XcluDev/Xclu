@@ -211,7 +211,7 @@ void XModuleSoundOut::impl_start() {
     }
     buffer_size_= 0;
     seti_buffer_size(0);
-    getstruct_sound_format()->write().data().clear();
+    getobject_sound_format()->write().data().clear();
 
     set_started(false); //также ставит gui-элемент is_started
     clear_string_connected_device_name();
@@ -462,7 +462,7 @@ void XModuleSoundOut::set_started(bool started) { //ставит camera_started_
  //печать текущего формата в used_format
 void XModuleSoundOut::set_format(const QAudioFormat &format) {
     auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
-    auto write = getstruct_sound_format()->write();
+    auto write = getobject_sound_format()->write();
     XObjectSoundFormat::set_to_object(write.data(), format_);
 
 }

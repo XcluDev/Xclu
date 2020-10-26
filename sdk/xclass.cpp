@@ -171,8 +171,8 @@ void XClass::set_title_value_(QString name, QString v) {
 //без копирования
 //в объектах пока нет mutex - так как предполагается,
 //что в gui посылается информация об обновлении объектов только из основного потока
-XProtectedObject *XClass::get_struct_(QString name) {
-    xclu_assert(module_, "Error at XClass::get_struct_(): module is nullptr");
+XProtectedObject *XClass::get_object_(QString name) {
+    xclu_assert(module_, "Error at XClass::get_object_(): module is nullptr");
     return module()->get_object(name);
 }
 

@@ -109,7 +109,7 @@ QString ProjectRuntime::get_string_by_link(QString link_str, QString def_val) {
 }
 
 //---------------------------------------------------------------------
-XProtectedObject *ProjectRuntime::get_struct_by_link(QString link_str) {
+XProtectedObject *ProjectRuntime::get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
     return RUNTIME.get_module(link.module)->get_object(link.var);
 }
@@ -129,7 +129,7 @@ void ProjectRuntime::press_button_by_link(QString link_str) {
 }*/
 
 //---------------------------------------------------------------------
-/*XObject *ProjectRuntime::get_struct_by_link(QString link_str) {
+/*XObject *ProjectRuntime::get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
     Module *module = get_module(link.module);
     return module->get_object(link.var);

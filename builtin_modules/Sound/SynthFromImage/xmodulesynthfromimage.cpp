@@ -91,8 +91,8 @@ void XModuleSynthFromImage::impl_start() {
         data_.clear();
     }
 
-    getstruct_image()->write().data().clear();
-    getstruct_image_sound()->write().data().clear();
+    getobject_image()->write().data().clear();
+    getobject_image_sound()->write().data().clear();
 
     update_data();
 }
@@ -131,8 +131,8 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XProtectedObject *object = RUNTIME.get_struct_by_link(image_link);
-    object->read().data().copy_to(getstruct_image()->write().pointer());
+    XProtectedObject *object = RUNTIME.get_object_by_link(image_link);
+    object->read().data().copy_to(getobject_image()->write().pointer());
 }
 
 //---------------------------------------------------------------------
@@ -149,7 +149,7 @@ void XModuleSynthFromImage::update_data() {
 
     //установка картинки для генерации звука
     //TODO не только rgb
-    const XObject &obj = getstruct_image()->read().data();
+    const XObject &obj = getobject_image()->read().data();
     if (obj.has_int("w")) {
         int w = obj.geti("w");
         int h = obj.geti("h");
@@ -174,7 +174,7 @@ void XModuleSynthFromImage::update_data() {
         {
             int w = data_.w_;
             int h = 200;
-            XObject &object = getstruct_image_sound()->write().data();
+            XObject &object = getobject_image_sound()->write().data();
             XObjectImage::allocate(object, XTypeId_u8, 1, w, h);
             quint8 *data = XObjectImage::var_array(object)->data_u8();
             for (int x=0; x<w; x++) {

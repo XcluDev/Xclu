@@ -60,40 +60,6 @@ bool was_changed_am_range() { return was_changed_("am_range"); }
 float getf_am_range() { return getf_("am_range"); }
 
 //----------------------------------------------------
-//Page Modulation Setup
-//
-
-//String volume link
-//Modulation link, such as module1->volumes(0,2)
-bool was_changed_volume_link() { return was_changed_("volume_link"); }
-QString gets_volume_link() { return gets_("volume_link"); }
-QStringList get_strings_volume_link() { return get_strings_("volume_link"); }
-
-//String fm rate link
-//
-bool was_changed_fm_rate_link() { return was_changed_("fm_rate_link"); }
-QString gets_fm_rate_link() { return gets_("fm_rate_link"); }
-QStringList get_strings_fm_rate_link() { return get_strings_("fm_rate_link"); }
-
-//String fm range link
-//
-bool was_changed_fm_range_link() { return was_changed_("fm_range_link"); }
-QString gets_fm_range_link() { return gets_("fm_range_link"); }
-QStringList get_strings_fm_range_link() { return get_strings_("fm_range_link"); }
-
-//String am rate link
-//
-bool was_changed_am_rate_link() { return was_changed_("am_rate_link"); }
-QString gets_am_rate_link() { return gets_("am_rate_link"); }
-QStringList get_strings_am_rate_link() { return get_strings_("am_rate_link"); }
-
-//String am range link
-//
-bool was_changed_am_range_link() { return was_changed_("am_range_link"); }
-QString gets_am_range_link() { return gets_("am_range_link"); }
-QStringList get_strings_am_range_link() { return get_strings_("am_range_link"); }
-
-//----------------------------------------------------
 //Page Setup Speed
 //Updating speed setup.
 

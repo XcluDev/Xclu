@@ -193,7 +193,7 @@ void XModuleWebcamera::update_camera() {
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
-        XObject *object = getstruct_image()->write().pointer();
+        XObject *object = getobject_image()->write().pointer();
 
         DataAccess access(data_);
         data_.image.copy_to(object);

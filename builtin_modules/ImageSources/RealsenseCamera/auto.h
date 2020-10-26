@@ -87,7 +87,7 @@ int geti_show_color() { return geti_("show_color"); }
 //Out Object Color
 //Resulted Color image.
 bool was_changed_color_image() { return was_changed_("color_image"); }
-XProtectedObject *getstruct_color_image() { return get_struct_("color_image"); }
+XProtectedObject *getobject_color_image() { return get_object_("color_image"); }
 
 //Checkbox Show Depth
 //Generate Depth image preview. Please disable is not required for speed optimization.
@@ -97,7 +97,7 @@ int geti_show_depth() { return geti_("show_depth"); }
 //Out Object Depth
 //Resulted Depth image.
 bool was_changed_depth_image() { return was_changed_("depth_image"); }
-XProtectedObject *getstruct_depth_image() { return get_struct_("depth_image"); }
+XProtectedObject *getobject_depth_image() { return get_object_("depth_image"); }
 
 //Checkbox Show IR
 //Generate IR image preview. Please disable is not required for speed optimization.
@@ -107,7 +107,7 @@ int geti_show_ir() { return geti_("show_ir"); }
 //Out Object IR
 //Resulted IR image.
 bool was_changed_ir_image() { return was_changed_("ir_image"); }
-XProtectedObject *getstruct_ir_image() { return get_struct_("ir_image"); }
+XProtectedObject *getobject_ir_image() { return get_object_("ir_image"); }
 
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived.

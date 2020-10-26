@@ -110,9 +110,9 @@ void XModuleWImage::update_value() {
     seti_is_new_frame(new_frame);
 
     if (new_frame) {
-        XProtectedObject *object = RUNTIME.get_struct_by_link(gets_image_link());
+        XProtectedObject *object = RUNTIME.get_object_by_link(gets_image_link());
         {
-            object->read().data().copy_to(getstruct_image()->write().pointer());
+            object->read().data().copy_to(getobject_image()->write().pointer());
         }
 
         if (image_) {
