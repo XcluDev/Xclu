@@ -10,21 +10,21 @@ REGISTER_XITEM(XItemString, string)
 //in string Name name="aa"
 //
 //Строка с кнопкой для выбора файла
-// in string(choose:file) Name name="aa"
+// in string_file Name name="aa"
 //   //File to load - обычное описание
 //   //Choose a file - заголовок окна
 //   //All files (*.*);;Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml) - фильтр
 
 //Строка с кнопкой для выбора папки
-//  in string(choose:folder) Choose_Folder choose_Folder="aa"
+//  in string_folder Choose_Folder choose_Folder="aa"
 //  //Folder to scan - обычное описание
 //  //Choose a file - заголовок окна
 
-//Выбор переменной из другого модуля
-//... string(choose:int)
-//... string(choose:object)
-//...string(choose:object:image)
-//Например: in string(choose:int) Int_Link int_link="module1->value"
+//(не реализовано) Выбор переменной из другого модуля
+//... string_int
+//... string_object
+//...string_image
+//Например: in string_int Int_Link int_link="module1->value"
 
 
 
@@ -55,8 +55,8 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
         //опции выбора файла и папки нельзя применять в случае, если переменная 'out'
         xclu_assert(!is_out(), "Can't apply options for 'out'");
 
-        options_choose_file_ = (options == "choose:file");
-        options_choose_folder_ = (options == "choose:folder");
+        options_choose_file_ = (options == "file");
+        options_choose_folder_ = (options == "folder");
         //какая-то из опций должна быть включена, если переданы не пустые
         //xclu_assert(options_, "Unknown option, expected 'in string(choose:file)...' or 'in string(choose:folder)...', or not use options: 'in string ...'");
     }

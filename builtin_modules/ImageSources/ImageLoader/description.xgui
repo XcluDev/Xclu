@@ -25,10 +25,10 @@ endif
 
 in checkbox_group Show_Image show_image=1
 
+if show_image 1
 out checkbox New_Frame is_new_frame=0
 //1 when image was updated.
 
-if show_image 1
 out object_image Image image
     //Loaded image image.
 endif
