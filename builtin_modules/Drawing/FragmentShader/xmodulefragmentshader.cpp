@@ -4,7 +4,7 @@
 
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 
 //registering module implementation

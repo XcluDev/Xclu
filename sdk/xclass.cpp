@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "module.h"
 #include "xobject.h"
-#include "projectruntime.h"
+#include "xcore.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(Module *module) {
@@ -10,24 +10,24 @@ XClass::XClass(Module *module) {
 }
 
 //---------------------------------------------------------------------
-double XClass::rt_elapsed_time_sec() {
-    return RUNTIME.elapsed_time_sec();
+double XClass::xcore_elapsed_time_sec() {
+    return XCORE.elapsed_time_sec();
 }
 
 //---------------------------------------------------------------------
-float XClass::rt_dt() {
-    return RUNTIME.dt();
+float XClass::xcore_dt() {
+    return XCORE.dt();
 }
 
 //---------------------------------------------------------------------
-QString XClass::rt_project_folder() {   //full path to project folder
-    return RUNTIME.project_folder();
+QString XClass::xcore_project_folder() {   //full path to project folder
+    return XCORE.project_folder();
 }
 
 //---------------------------------------------------------------------
 //get absolute path to folder, given relative to project
-QString XClass::rt_path(QString relative_path, bool create_folder) {
-    return RUNTIME.absolute_path_from_project(relative_path, create_folder);
+QString XClass::xcore_abs_path(QString relative_path, bool create_folder) {
+    return XCORE.absolute_path_from_project(relative_path, create_folder);
 }
 
 //---------------------------------------------------------------------

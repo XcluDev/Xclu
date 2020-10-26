@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "projectruntime.h"
+#include "xcore.h"
 #include <QDateTime>
 //#include <QImageWriter>
 //#include <QImageReader>
@@ -154,7 +154,7 @@ void XModuleRealsenseCamera::impl_update() {
 //запись кадра на диск
 void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //Создаем папку для записи
-    QString folder = rt_path(gets_save_folder(), true /*create_folder*/);
+    QString folder = xcore_abs_path(gets_save_folder(), true /*create_folder*/);
 
     //время
     /*dd.MM.yyyy    21.05.2001

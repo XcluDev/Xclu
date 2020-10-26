@@ -45,7 +45,7 @@ public:
     void execute_update(bool &stop_out);
     void execute_stop();    
 
-    //Runtime-состояние проекта - см. RUNTIME
+    //Runtime-состояние проекта - см. XCORE
 
     //Модули
     //Выбор уникального имени - webcam1, webcam2,...

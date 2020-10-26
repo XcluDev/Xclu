@@ -1,7 +1,7 @@
 #include "xmoduleserial.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include <QtSerialPort/QSerialPortInfo>
 
 REGISTER_XMODULE(Serial)
@@ -68,7 +68,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
         }
         if (button_id == "send_string_link_btn") {
             if (connected_) {
-                QString str = RUNTIME.get_string_by_link(gets_string_link_send());
+                QString str = XCORE.get_string_by_link(gets_string_link_send());
                 send_string(str);
             }
             else {

@@ -5,7 +5,7 @@
 
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 #include "xobject.h"
 
@@ -455,7 +455,7 @@ int XModuleWindow::parse_int(QStringList list, int index, int default_value, QSt
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
 QWidget *XModuleWindow::request_widget(QString module_name) {
-    Module *module = RUNTIME.get_module(module_name);
+    Module *module = XCORE.get_module(module_name);
 
     //call create_widget
     //Window calls GUI elements to insert them into itself.
@@ -492,7 +492,7 @@ void XModuleWindow::reset_widgets() {
 //---------------------------------------------------------------------
 //remove requested widget from another module - called at stopping
 void XModuleWindow::reset_widget(QString module_name) {
-    Module *module = RUNTIME.get_module(module_name);
+    Module *module = XCORE.get_module(module_name);
 
     //call create_widget
     //Window calls GUI elements to insert them into itself.

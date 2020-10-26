@@ -5,7 +5,7 @@
 #include "project.h"
 #include "incl_cpp.h"
 #include "projectgui.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "xcluobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
@@ -123,7 +123,7 @@ void MainWindow::newProjectStartup() {
 
 //---------------------------------------------------------------------
 void MainWindow::closeProject() {
-    if (RUNTIME.is_running()) return;
+    if (XCORE.is_running()) return;
 
     xclu_console_clear();//очистка списка сообщений
 
@@ -131,7 +131,7 @@ void MainWindow::closeProject() {
     PROJ.new_project();
     PROJ_GUI->after_close_project();
 
-    RUNTIME.reset_fps_autostart();  //сброк предыдущего FPS и aurostart
+    XCORE.reset_fps_autostart();  //сброк предыдущего FPS и aurostart
 
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
     set_current_file(""); //поставится в Untitled с новым номером
@@ -350,7 +350,7 @@ void MainWindow::openProject(const QString &fileName) {
         }
 
         //Если требуется - автозапуск проекта
-        if (RUNTIME.get_autostart()) {
+        if (XCORE.get_autostart()) {
             execute_run();
         }
     }
@@ -458,7 +458,7 @@ void MainWindow::execute_run() {
 
         //вычисляем частоту обновления
         //float FPS = PROJ.properties().frame_rate;
-        int frame_rate = RUNTIME.get_frame_rate();
+        int frame_rate = XCORE.get_frame_rate();
         xclu_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
         //запускаем таймер
         int delay = int(1000.0/frame_rate); //TODO вообще, при больших частотах будет вызываться неравномерно.

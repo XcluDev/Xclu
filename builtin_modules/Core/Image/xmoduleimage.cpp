@@ -3,7 +3,7 @@
 
 #include "incl_cpp.h"
 #include "moduleregistrar.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 #include "xdict.h"
 
@@ -160,7 +160,7 @@ void XModuleScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        Module *module = RUNTIME.get_module(link.module);
+        Module *module = XCORE.get_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }

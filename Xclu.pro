@@ -145,7 +145,7 @@ SOURCES += \
     modules/registrarxmodule.cpp \
     project/project.cpp \
     project/projectproperties.cpp \
-    project/projectruntime.cpp \
+    project/xcore.cpp \
     sdk/math/math_utils.cpp \
     sdk/math/slowbit.cpp \
     modules/exportinterface.cpp \
@@ -236,7 +236,7 @@ HEADERS += \
     modules/registrarxmodule.h \
     project/project.h \
     project/projectproperties.h \
-    project/projectruntime.h \
+    project/xcore.h \
     sdk/math/int2.h \
     sdk/math/math_utils.h \
     sdk/math/slowbit.h \

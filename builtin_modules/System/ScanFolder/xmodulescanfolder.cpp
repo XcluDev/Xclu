@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "projectruntime.h"
+#include "xcore.h"
 
 
 //registering module implementation

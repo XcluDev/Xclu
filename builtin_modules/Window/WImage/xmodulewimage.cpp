@@ -3,7 +3,7 @@
 
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 #include "xobject.h"
 #include "xcluobjectwrapper.h"
@@ -106,11 +106,11 @@ void XModuleWImage::update_all(bool force) {
 
 //---------------------------------------------------------------------
 void XModuleWImage::update_value() {
-    int new_frame = RUNTIME.get_int_by_link(gets_is_new_frame_link());
+    int new_frame = XCORE.get_int_by_link(gets_is_new_frame_link());
     seti_is_new_frame(new_frame);
 
     if (new_frame) {
-        XProtectedObject *object = RUNTIME.get_object_by_link(gets_image_link());
+        XProtectedObject *object = XCORE.get_object_by_link(gets_image_link());
         {
             object->read().data().copy_to(getobject_image()->write().pointer());
         }

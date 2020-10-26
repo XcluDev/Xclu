@@ -2,7 +2,7 @@
 #include "xmoduleproject.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 
 
 //Register implementation class
@@ -30,8 +30,8 @@ void XModuleProject::impl_loaded() {
 
 //---------------------------------------------------------------------
 void XModuleProject::apply_control_values() {
-    RUNTIME.set_frame_rate(geti_frame_rate());
-    RUNTIME.set_autostart(geti_autostart());
+    XCORE.set_frame_rate(geti_frame_rate());
+    XCORE.set_autostart(geti_autostart());
 }
 
 //---------------------------------------------------------------------
@@ -41,9 +41,9 @@ void XModuleProject::impl_start() {
 
 //---------------------------------------------------------------------
 void XModuleProject::impl_update() {
-    setf_elapsed_time_sec(rt_elapsed_time_sec());
+    setf_elapsed_time_sec(xcore_elapsed_time_sec());
 
-    float dt = rt_dt();
+    float dt = xcore_dt();
     setf_dt(dt);
 
     float fps = 10000;

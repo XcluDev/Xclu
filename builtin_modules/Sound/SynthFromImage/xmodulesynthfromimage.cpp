@@ -1,7 +1,7 @@
 #include "xmodulesynthfromimage.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 #include "xcluobjectimage.h"
 
@@ -131,7 +131,7 @@ void XModuleSynthFromImage::load_image_file(QString image_file) {
 //загрузка изображения из другого модуля
 //webcam1->image
 void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XProtectedObject *object = RUNTIME.get_object_by_link(image_link);
+    XProtectedObject *object = XCORE.get_object_by_link(image_link);
     object->read().data().copy_to(getobject_image()->write().pointer());
 }
 

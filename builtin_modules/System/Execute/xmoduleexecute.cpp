@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "projectruntime.h"
+#include "xcore.h"
 
 
 //registering module implementation
@@ -56,7 +56,7 @@ void XModuleExecute::impl_update() {
         QString file_name_short = gets_file_name();
 
         //относительный путь
-        folder = rt_project_folder() + "/" + folder;
+        folder = xcore_project_folder() + "/" + folder;
         sets_folder_path(folder);
 
         //построение имени файла
@@ -72,7 +72,7 @@ void XModuleExecute::impl_update() {
         //int wait_finish = geti_wait_finish");
 
         //запоминаем время старта
-        double start_time = rt_elapsed_time_sec();
+        double start_time = xcore_elapsed_time_sec();
         setf_last_time(start_time);
 
         bool success = false;
@@ -122,7 +122,7 @@ void XModuleExecute::impl_update() {
         xclu_assert(success, "Execution error or time is out");
 
         //ставим продолжительность
-        double time = rt_elapsed_time_sec();
+        double time = xcore_elapsed_time_sec();
         setf_last_duration(time - start_time);
     }
 

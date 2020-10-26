@@ -2,7 +2,7 @@
 
 #include "incl_cpp.h"
 #include "module.h"
-#include "projectruntime.h"
+#include "xcore.h"
 
 //---------------------------------------------------------------------
 //Clipboard:
@@ -168,7 +168,7 @@ XLinkResolved::XLinkResolved(const XLinkParsed &link0)
 //---------------------------------------------------------------------
 void XLinkResolved::resolve() {
     //resolve module
-    module_ptr_ = RUNTIME.get_module(module);
+    module_ptr_ = XCORE.get_module(module);
     //check variable exists
 
     xclu_assert(module_ptr_->interf()->has_item(var),

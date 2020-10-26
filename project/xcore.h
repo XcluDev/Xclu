@@ -1,5 +1,5 @@
-#ifndef PROJECTRUNTIME_H
-#define PROJECTRUNTIME_H
+#ifndef XCORE_H
+#define XCORE_H
 
 //Свойства проекта, которые могут быть "интересны" модулям,
 //такие так время от старта приложения и рабочая папка проекта
@@ -12,10 +12,10 @@ class Module;
 class XItem;
 
 
-class ProjectRuntime
+class XCore
 {
 public:
-    ProjectRuntime();
+    XCore();
 
     void reset_fps_autostart();    //установить значения по умолчанию для frate_rate и autostar
 
@@ -92,6 +92,6 @@ protected:
 
 };
 
-extern ProjectRuntime RUNTIME;
+extern XCore XCORE;
 
-#endif // PROJECTRUNTIME_H
+#endif // XCORE_H

@@ -1,7 +1,7 @@
 #include "xmoduletest.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 
 //registering module implementation
 REGISTER_XMODULE(Test)
@@ -31,7 +31,7 @@ void XModuleTest::impl_update() {
     if (geti_("callback")) {
         xclu_console_append(QString("%1 - pressed Callback").arg(name()));
         xclu_message_box("Callbacks are not implemented here");
-        //RUNTIME.execute_callbacks(gets_callback_modules"));
+        //XCORE.execute_callbacks(gets_callback_modules"));
     }
 }
 

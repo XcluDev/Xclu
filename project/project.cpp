@@ -7,7 +7,7 @@
 #include "incl_cpp.h"
 #include "modulesfactory.h"
 #include "module.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "consoleview.h"
 
 Project PROJ;
@@ -28,11 +28,11 @@ ProjectProperties &Project::properties() {
 //если пустая строка - ставит на папку XCLU
 void Project::update_project_folder(QString project_file) {
     if (project_file.isEmpty()) {
-        RUNTIME.set_project_folder("");//qApp->applicationDirPath());
+        XCORE.set_project_folder("");//qApp->applicationDirPath());
     }
     else {
         QFileInfo fileinfo(project_file);
-        RUNTIME.set_project_folder(fileinfo.absolutePath());
+        XCORE.set_project_folder(fileinfo.absolutePath());
     }
 }
 
@@ -87,7 +87,7 @@ bool Project::save_project(QString file_name, SaveFormat format) {
 //---------------------------------------------------------------------
 Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat format) {
     try {
-        xclu_assert(!RUNTIME.is_running(), "Please stop the current project before loading");
+        xclu_assert(!XCORE.is_running(), "Please stop the current project before loading");
         close_project();
 
         //QFile loadFile(format == Json
@@ -196,7 +196,7 @@ void Project::read_json(const QJsonObject &json) {
 
 //---------------------------------------------------------------------
 void Project::clear_modules() {
-    if (RUNTIME.is_running()) {
+    if (XCORE.is_running()) {
         xclu_halt("Internal error - command to clear project, but project is running");
     }
     for (int i=0; i<modules_.size(); i++) {
@@ -423,7 +423,7 @@ bool Project::compile() {
 //---------------------------------------------------------------------
 void Project::execute_start(bool &stop_out) {
     stop_out = false;
-    if (RUNTIME.is_running()) {
+    if (XCORE.is_running()) {
         xclu_message_box("Internal error: received project starting command, but it's already started");
         return;
     }
@@ -437,7 +437,7 @@ void Project::execute_start(bool &stop_out) {
     }
 
     //начало измерения времени
-    RUNTIME.reset_elapsed_timer();
+    XCORE.reset_elapsed_timer();
 
     //Сбор name всех модулей - для парсинга в дальнейшем
     //очень важно это делать до modules_[i]->execute_start();
@@ -454,7 +454,7 @@ void Project::execute_start(bool &stop_out) {
 
     //запустились
     if (!stop_out) {
-        RUNTIME.set_state(ProjectRunStateBinaryRunning);
+        XCORE.set_state(ProjectRunStateBinaryRunning);
     }
 
     //after_start
@@ -465,10 +465,10 @@ void Project::execute_start(bool &stop_out) {
 
 //---------------------------------------------------------------------
 void Project::execute_update(bool &stop_out) {
-    RUNTIME.update_dt();    //update dt counter
+    XCORE.update_dt();    //update dt counter
 
     stop_out = false;
-    xclu_assert(RUNTIME.is_running(), "Internal error: project update command, but not started");
+    xclu_assert(XCORE.is_running(), "Internal error: project update command, but not started");
     execute(ModuleExecuteStageUpdate, stop_out);
 }
 
@@ -476,9 +476,9 @@ void Project::execute_update(bool &stop_out) {
 void Project::execute_stop() {
     //если уже остановлены - все равно считываем значения
     //поэтому это закомментировано:
-    ////if (RUNTIME.is_stopped()) return;
+    ////if (XCORE.is_stopped()) return;
 
-    RUNTIME.set_state(ProjectRunStateBinaryStopped);
+    XCORE.set_state(ProjectRunStateBinaryStopped);
 
     bool stop_out = false;
     execute(ModuleExecuteStageBeforeStop, stop_out);

@@ -1,7 +1,7 @@
 #include "xmodulesoundout.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "projectruntime.h"
+#include "xcore.h"
 #include "module.h"
 
 //registering module implementation
@@ -241,7 +241,7 @@ void XModuleSoundOut::impl_update() {
         DataAccess access(data_);
         data_.play_test_sound_ = geti_gen_test();
         data_.volume_ = getf_volume();
-        data_.modules_ = RUNTIME.get_modules(gets_modules_list());
+        data_.modules_ = XCORE.get_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
         data_.err.throw_error();
@@ -251,7 +251,7 @@ void XModuleSoundOut::impl_update() {
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
-    //RUNTIME.execute_callbacks(gets_callback_modules"));
+    //XCORE.execute_callbacks(gets_callback_modules"));
 }
 
 
