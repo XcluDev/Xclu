@@ -24,13 +24,14 @@ XModuleImageLoader::~XModuleImageLoader()
 
 //---------------------------------------------------------------------
 void XModuleImageLoader::impl_start() {
-    image_file_ = "";
-
-
+    setobject_image(&image_);
+    seti_is_new_frame(false);
 }
 
 //---------------------------------------------------------------------
 void XModuleImageLoader::impl_update() {
+    bool new_frame = false;
+
     auto input_source = gete_image_source();
     QString image_file;
     switch (input_source) {
@@ -39,10 +40,17 @@ void XModuleImageLoader::impl_update() {
     }
         break;
     case image_source_Folder: {
-        update_folder();
+        if (was_changed_folder_name()) {
+            load_folder(gets_folder_name());
+        }
+        int index = geti_folder_index();
+        if (!image_files_.isEmpty()) {
+            int i = index % image_files_.size();
+            if (i >= 0 && i < image_files_.size()) {
+                image_file = image_files_[i];
+            }
+        }
     }
-        break;
-
         break;
      default:
         xclu_exception("Unknown image_source " + getraw_image_source());
@@ -50,54 +58,35 @@ void XModuleImageLoader::impl_update() {
 
     if (image_file != image_file_) {
         load_image_file(image_file);
-        //input_image_ = getobject_input_image();
+        new_frame = true;
     }
+
+    seti_is_new_frame(new_frame);
 
 }
 
 //---------------------------------------------------------------------
 void XModuleImageLoader::load_image_file(QString image_file) {
- /*   image_file_ = image_file;
-
+    image_file_ = image_file;
     QString file_name = rt_path(image_file_);
-    XObjectImage::load(getobject_input_image()->write().data(), file_name);
-*/
+    XObjectImage::load(image_.write().data(), file_name);
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::update_folder() {
- /*   //считываем папку
-    bool updated = false;
-    QString folder = gets_image_folder();
-    if (folder != folder_) {
-        updated = true;
-        folder_ = folder;
-        image_files_.clear();
-        //scan folder for images
-        QDirIterator images_iter(rt_path(folder_),
-                                 QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.tif" << "*.tiff"
-                                 ); //, QDirIterator::Subdirectories);
-        image_files_.clear();
-        while (images_iter.hasNext()) {
-            QString image_path = images_iter.next();
-            image_files_.push_back(image_path);
-            //qDebug() << image_path;
-        }
+void XModuleImageLoader::load_folder(QString folder_name) {
+    image_files_.clear();
+    //scan folder for images
+    QDirIterator images_iter(rt_path(folder_name),
+                             QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.tif" << "*.tiff"
+                             ); //, QDirIterator::Subdirectories);
+    image_files_.clear();
+    while (images_iter.hasNext()) {
+        QString image_path = images_iter.next();
+        image_files_.push_back(image_path);
+        //qDebug() << image_path;
     }
 
-    xclu_assert(!image_files_.isEmpty(), "No images in folder '" + folder_ +"' or folder doesn't exists");
-
-    //считываем картинку
-    if (was_changed_folder_index())
-    int folder_img = geti_folder_img();
-    if (folder_img != folder_img_ || updated) {
-        folder_img_ = folder_img;
-        int i = folder_img_ % image_files_.size();
-        if (i >= 0 && i < image_files_.size()) {
-            load_image_file(image_files_[i]);
-        }
-    }
-    */
+    xclu_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
 }
 
 //---------------------------------------------------------------------

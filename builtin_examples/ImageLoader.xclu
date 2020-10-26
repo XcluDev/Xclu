@@ -29,11 +29,11 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "image.png"
+                        "avalue": "../../../../../eamuseum/Projects/2020-10-ReaDiff/Readiff/input_images/img02.png"
                     },
                     {
                         "aname": "folder_name",
-                        "avalue": "../../../../../eamuseum/Projects/2020-10-ReaDiff/Readiff"
+                        "avalue": "../../../../../eamuseum/Projects/2020-10-ReaDiff/Readiff/input_images"
                     },
                     {
                         "aname": "folder_index",

@@ -26,10 +26,8 @@ protected:
     QString image_file_;
     void load_image_file(QString image_file);
 
-    QString folder_;
     QStringList image_files_;
-    int folder_img_ = -1;
-    void update_folder();
+    void load_folder(QString folder_name);
 
     XProtectedObject image_;
 
