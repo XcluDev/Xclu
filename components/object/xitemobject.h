@@ -26,9 +26,8 @@ public:
     bool supports_int() { return false; }
 
     virtual bool supports_object() { return true; }
-    virtual XProtectedObject *get_object() {
-        return value_.pointer();
-    }
+    virtual XProtectedObject *get_object() { return value_.pointer(); }
+    virtual void set_object(XProtectedObject *object) { value_.set_pointer(object); }
 
     //changes control
     virtual bool was_changed(XWasChangedChecker &checker);

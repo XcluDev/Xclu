@@ -6,7 +6,6 @@
 #include "module.h"
 #include "xcluobjectimage.h"
 
-
 //registering module implementation
 REGISTER_XMODULE(ImageLoader)
 
@@ -26,29 +25,21 @@ XModuleImageLoader::~XModuleImageLoader()
 //---------------------------------------------------------------------
 void XModuleImageLoader::impl_start() {
     image_file_ = "";
-    image_ = 0;
-    need_update_ = false;
+
+
 }
 
 //---------------------------------------------------------------------
 void XModuleImageLoader::impl_update() {
- /*   bool new_frame = 0;
-
     auto input_source = gete_image_source();
+    QString image_file;
     switch (input_source) {
     case image_source_File: {
-        QString image_file = gets_file_name();
-        if (image_file != image_file_) {
-            load_image_file(image_file);
-            //input_image_ = getobject_input_image();
-        }
-        new_frame = 1;
+        image_file = gets_file_name();
     }
         break;
     case image_source_Folder: {
         update_folder();
-        //input_image_ = getobject_input_image();
-        new_frame = 1;
     }
         break;
 
@@ -56,7 +47,12 @@ void XModuleImageLoader::impl_update() {
      default:
         xclu_exception("Unknown image_source " + getraw_image_source());
     }
-*/
+
+    if (image_file != image_file_) {
+        load_image_file(image_file);
+        //input_image_ = getobject_input_image();
+    }
+
 }
 
 //---------------------------------------------------------------------

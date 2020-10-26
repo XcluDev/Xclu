@@ -48,5 +48,6 @@ void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
 //Loaded image image.
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
+void setobject_image(XProtectedObject *value) { set_object_("image", value); }
 
 //----------------------------------------------------

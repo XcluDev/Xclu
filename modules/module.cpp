@@ -392,6 +392,11 @@ XProtectedObject * Module::get_object(QString name) {
 }
 
 //---------------------------------------------------------------------
+void Module::set_object(QString name, XProtectedObject *object) {
+    interf()->set_object(name, object);
+}
+
+//---------------------------------------------------------------------
 //Запись в json
 void Module::write_json(QJsonObject &json) {
     QJsonObject descrObject;

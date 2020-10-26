@@ -736,17 +736,21 @@ void ModuleInterface::set_title_value(QString name, QString v) {
 }
 
 //---------------------------------------------------------------------
-//доступ к объектам идет только по указателям -
-//так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
-//без копирования
-//в объектах пока нет mutex - так как предполагается,
-//что в gui посылается информация об обновлении объектов только из основного потока
-XProtectedObject * ModuleInterface::get_object(QString name) {
+//Access to objects is only by pointers - because we are required not to copy data, it can be large
+XProtectedObject *ModuleInterface::get_object(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     return var->get_object();
 }
 
+//---------------------------------------------------------------------
+//Set pointer to object
+//Note: object must be live, because only pointer to it is stored
+void ModuleInterface::set_object(QString name, XProtectedObject *object) {
+    XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
+    xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
+    var->set_object(object);
+}
 
 //---------------------------------------------------------------------
 

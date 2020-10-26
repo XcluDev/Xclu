@@ -108,8 +108,13 @@ public:
 
     QString get_title_value(QString name);  //enum (title)
     void set_title_value(QString name, QString v); //только out: enum (title)
-    //доступ к объектам идет только по указателям
-    XProtectedObject * get_object(QString name);
+
+    //Access to objects is only by pointers - because we are required not to copy data, it can be large
+    XProtectedObject *get_object(QString name);
+
+    //Set pointer to object
+    //Note: object must be live, because only pointer to it is stored
+    void set_object(QString name, XProtectedObject *object);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached(XGuiEditor *editor);

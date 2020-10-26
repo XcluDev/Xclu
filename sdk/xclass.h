@@ -89,10 +89,11 @@ public:
     QString get_title_value_(QString name);  //enum (title)
     void set_title_value_(QString name, QString v); //out: enum (title)
 
-    //доступ к объектам идет только по указателям -
-    //так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
-    //без копирования
+    //Access to objects is only by pointers - because we are required not to copy data, it can be large
     XProtectedObject *get_object_(QString name);
+    //Set pointer to object
+    //Note: object must be live, because only pointer to it is stored
+    void set_object_(QString name, XProtectedObject *object);
 
 protected:
     Module *module_ = nullptr;

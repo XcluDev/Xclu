@@ -32,6 +32,7 @@ QStringList get_strings_image_link() { return get_strings_("image_link"); }
 //Input image.
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
+void setobject_image(XProtectedObject *value) { set_object_("image", value); }
 
 
 //Checkbox Scan Area Setup
@@ -86,6 +87,7 @@ int geti_interpr() { return geti_("interpr"); }
 //Image depicting the sound values.
 bool was_changed_image_sound() { return was_changed_("image_sound"); }
 XProtectedObject *getobject_image_sound() { return get_object_("image_sound"); }
+void setobject_image_sound(XProtectedObject *value) { set_object_("image_sound", value); }
 
 //Out Float Min Brightness
 //Maximal brightness value.

@@ -166,14 +166,19 @@ void XClass::set_title_value_(QString name, QString v) {
 }
 
 //---------------------------------------------------------------------
-//доступ к объектам идет только по указателям -
-//так как объекты могут быть очень большими, и поэтому с ними работаем непосредтсвенно,
-//без копирования
-//в объектах пока нет mutex - так как предполагается,
-//что в gui посылается информация об обновлении объектов только из основного потока
+//Access to objects is only by pointers - because we are required not to copy data, it can be large
 XProtectedObject *XClass::get_object_(QString name) {
     xclu_assert(module_, "Error at XClass::get_object_(): module is nullptr");
     return module()->get_object(name);
 }
+
+//---------------------------------------------------------------------
+//Set pointer to object
+//Note: object must be live, because only pointer to it is stored
+void XClass::set_object_(QString name, XProtectedObject *object) {
+    xclu_assert(module_, "Error at XClass::set_object_(): module is nullptr");
+    module()->set_object(name, object);
+}
+
 
 //---------------------------------------------------------------------

@@ -31,8 +31,7 @@ protected:
     int folder_img_ = -1;
     void update_folder();
 
-    bool need_update_ = false;
-    XProtectedObject *image_ = nullptr;
+    XProtectedObject image_;
 
 };
 

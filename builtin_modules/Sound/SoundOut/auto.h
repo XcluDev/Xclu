@@ -133,6 +133,7 @@ void seti_is_started(int value) { seti_("is_started", value); }
 //Used sound format
 bool was_changed_sound_format() { return was_changed_("sound_format"); }
 XProtectedObject *getobject_sound_format() { return get_object_("sound_format"); }
+void setobject_sound_format(XProtectedObject *value) { set_object_("sound_format", value); }
 
 //Out Int Buffer Size
 //Buffer size

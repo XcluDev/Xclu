@@ -177,6 +177,7 @@ int geti_wave() { return geti_("wave"); }
 //"out" object is a provider for "in" objects.
 bool was_changed_object1() { return was_changed_("object1"); }
 XProtectedObject *getobject_object1() { return get_object_("object1"); }
+void setobject_object1(XProtectedObject *value) { set_object_("object1", value); }
 
 
 //Object Input Image

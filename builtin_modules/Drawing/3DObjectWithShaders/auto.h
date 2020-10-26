@@ -71,6 +71,7 @@ QStringList get_strings_image1_link() { return get_strings_("image1_link"); }
 //output FBO, can be used in Screen to draw
 bool was_changed_fbo() { return was_changed_("fbo"); }
 XProtectedObject *getobject_fbo() { return get_object_("fbo"); }
+void setobject_fbo(XProtectedObject *value) { set_object_("fbo", value); }
 
 
 //Text Code
