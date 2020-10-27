@@ -4,7 +4,7 @@
 
 //-------------------------------------------------------
 //x*x
-float sqr(float x) {
+float sqrf(float x) {
 	return x * x;
 }
 
@@ -15,7 +15,7 @@ int sqri(int x) {
 
 //-------------------------------------------------------
 //x*x*x
-float pow3(float x) {
+float pow3f(float x) {
 	return x * x*x;
 }
 

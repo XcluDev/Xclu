@@ -13,11 +13,11 @@ const double DEG_TO_RAD_D = PI_D / 180.0;
 //also can use glm::radians(angle_in_degrees)
 
 //x*x
-float sqr(float x);
+float sqrf(float x);
 int sqri(int x);
 
 //x*x*x
-float pow3(float x);
+float pow3f(float x);
 
 //min and max
 float minf(float x, float y);
