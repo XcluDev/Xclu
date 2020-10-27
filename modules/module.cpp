@@ -142,6 +142,8 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         //Пометить, что все переменные были изменены
         interf()->reset_was_changed();
 
+        //update links and "was_changed"
+        interf()->update();
     }
         break;
 

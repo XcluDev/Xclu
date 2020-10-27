@@ -26,6 +26,9 @@ XModuleImageLoader::~XModuleImageLoader()
 void XModuleImageLoader::impl_start() {
     setobject_image(&image_);
     seti_is_new_frame(false);
+
+    //load image immediately ! :)
+    impl_update();
 }
 
 //---------------------------------------------------------------------
