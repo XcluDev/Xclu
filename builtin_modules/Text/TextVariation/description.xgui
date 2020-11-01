@@ -8,7 +8,7 @@ module_impl=C++
 page Main
 
 in text Text input_text 20 25
-    //Text to create variations, such as [A|B|C[D|E]] - will generate A,B,CD,CE.
+    //Text such as [A|B|C[D|E]]. Module will generate randomly A,B,CD,CE.
 
 separator
 

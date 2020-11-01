@@ -130,7 +130,7 @@ void XModule::button_pressed(QString button_id) {
             bang_internal();
         }
         else {
-            xclu_message_box("Cen't bang - please run the project before.");
+            xclu_message_box("Can't bang - please run the project before.");
         }
         return;
     }

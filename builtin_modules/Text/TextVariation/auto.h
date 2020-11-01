@@ -1,67 +1,25 @@
 //----------------------------------------------------
-//Interface for XClassRandom
+//Interface for XClassTextVariation
 //Created automatically.
 //----------------------------------------------------
 //Page Main
 //
 
-//Enum Output Type
-//Output value type.
-enum enum_output_type {
-    output_type_Float = 0,
-    output_type_Int = 1,
-    output_type_String = 2,
-    output_type_N__ = 3
-};
-bool was_changed_output_type() { return was_changed_("output_type"); }
-enum_output_type gete_output_type() { return enum_output_type(geti_("output_type")); }
-QString getraw_output_type() { return getraw_("output_type");}
-
-//Enum Distribution
-//Type of distribution
-enum enum_distr_float {
-    distr_float_Uniform = 0,
-    distr_float_N__ = 1
-};
-bool was_changed_distr_float() { return was_changed_("distr_float"); }
-enum_distr_float gete_distr_float() { return enum_distr_float(geti_("distr_float")); }
-QString getraw_distr_float() { return getraw_("distr_float");}
-
-//Float From
-//Minimum value.
-bool was_changed_from_float() { return was_changed_("from_float"); }
-float getf_from_float() { return getf_("from_float"); }
-
-//Float To Excluded
-//Maximum value (excluded).
-bool was_changed_to_excluded_float() { return was_changed_("to_excluded_float"); }
-float getf_to_excluded_float() { return getf_("to_excluded_float"); }
-
-//Int From
-//Minimum value.
-bool was_changed_from_int() { return was_changed_("from_int"); }
-int geti_from_int() { return geti_("from_int"); }
-
-//Int To
-//Maximum value (included).
-bool was_changed_to_int() { return was_changed_("to_int"); }
-int geti_to_int() { return geti_("to_int"); }
-
-//Text Values
-//String values. Note: empty lines and comments are ignored.
-bool was_changed_values() { return was_changed_("values"); }
-QString gets_values() { return gets_("values"); }
-QStringList get_strings_values() { return get_strings_("values"); }
+//Text Text
+//Text such as [A|B|C[D|E]]. Module will generate randomly A,B,CD,CE.
+bool was_changed_input_text() { return was_changed_("input_text"); }
+QString gets_input_text() { return gets_("input_text"); }
+QStringList get_strings_input_text() { return get_strings_("input_text"); }
 
 
-//Out String Result
-//Resulted value.
-bool was_changed_result() { return was_changed_("result"); }
-QString gets_result() { return gets_("result"); }
-QStringList get_strings_result() { return get_strings_("result"); }
-void sets_result(QString value) { sets_("result", value); }
-void clear_string_result() { clear_string_("result"); }
-void append_string_result(QString v, int extra_new_lines_count = 0) { append_string_("result", v, extra_new_lines_count); }
-void append_string_result(QStringList v, int extra_new_lines_count = 0) { append_string_("result", v, extra_new_lines_count); }
+//Out Text Output
+//Generated text.
+bool was_changed_output_text() { return was_changed_("output_text"); }
+QString gets_output_text() { return gets_("output_text"); }
+QStringList get_strings_output_text() { return get_strings_("output_text"); }
+void sets_output_text(QString value) { sets_("output_text", value); }
+void clear_string_output_text() { clear_string_("output_text"); }
+void append_string_output_text(QString v, int extra_new_lines_count = 0) { append_string_("output_text", v, extra_new_lines_count); }
+void append_string_output_text(QStringList v, int extra_new_lines_count = 0) { append_string_("output_text", v, extra_new_lines_count); }
 
 //----------------------------------------------------

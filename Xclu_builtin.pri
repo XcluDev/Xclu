@@ -18,6 +18,7 @@ SOURCES += \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
     $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.cpp \
     $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.cpp \
+    $$PWD/builtin_modules/Text/TextVariation/xmoduletextvariation.cpp \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.cpp \
     $$PWD/builtin_modules/Utils/TestDrawing/xmoduletestdrawing.cpp \
     $$PWD/builtin_modules/Window/WImage/xmodulewimage.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.h \
     $$PWD/builtin_modules/System/ScanFolder/auto.h \
     $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.h \
+    $$PWD/builtin_modules/Text/TextVariation/xmoduletextvariation.h \
     $$PWD/builtin_modules/Utils/Test/auto.h \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.h \
     $$PWD/builtin_modules/Utils/TestDrawing/xmoduletestdrawing.h \
