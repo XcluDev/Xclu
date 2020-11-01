@@ -1,16 +1,16 @@
-#ifndef XMODULEDELAY_H
-#define XMODULEDELAY_H
+#ifndef XMODULESLEEP_H
+#define XMODULESLEEP_H
 
 //Delay implementation
 
 #include "sdk_h.h"
 #include "xmodule.h"
 
-class XModuleDelay: public XModule
+class XModuleSleep: public XModule
 {
 public:
-    XModuleDelay(QString class_name);
-    ~XModuleDelay();
+    XModuleSleep(QString class_name);
+    ~XModuleSleep();
 #include "auto.h"
 
 protected:
@@ -30,4 +30,4 @@ protected:
 
 
 
-#endif // XMODULEDELAY_H
+#endif // XMODULESLEEP_H

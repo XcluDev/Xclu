@@ -1,8 +1,6 @@
-#Module Delay
+#Module Sleep
 #------------------------------------------
-#module_class=Delay
-#module_category=System
-module_description=Delay fires bangs with given rate or pauses execution by specified time.
+module_description=Sleep module fires bangs with given rate or pauses execution by specified time.
 module_version=1.01
 module_impl=C++
 

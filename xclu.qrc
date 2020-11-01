@@ -318,8 +318,6 @@
         <file>builtin_modules/Sound/TextToSound/description.xgui</file>
         <file>builtin_modules/Sound/VstSendReceiveSound/auto.h</file>
         <file>builtin_modules/Sound/VstSendReceiveSound/description.xgui</file>
-        <file>builtin_modules/System/Delay/auto.h</file>
-        <file>builtin_modules/System/Delay/description.xgui</file>
         <file>builtin_modules/System/Execute/auto.h</file>
         <file>builtin_modules/System/Execute/description.xgui</file>
         <file>builtin_modules/System/Execute/xmoduleexecute.cpp</file>

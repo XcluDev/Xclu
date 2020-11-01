@@ -1,4 +1,4 @@
-#include "xmoduledelay.h"
+#include "xmodulesleep.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QThread>
@@ -6,23 +6,23 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(Delay)
+REGISTER_XMODULE(Sleep)
 
 //---------------------------------------------------------------------
-XModuleDelay::XModuleDelay(QString class_name)
+XModuleSleep::XModuleSleep(QString class_name)
     :XModule(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleDelay::~XModuleDelay()
+XModuleSleep::~XModuleSleep()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleDelay::impl_start() {
+void XModuleSleep::impl_start() {
     //start measure dirst delay
     register_bang_time();
 
@@ -30,7 +30,7 @@ void XModuleDelay::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleDelay::impl_update() {
+void XModuleSleep::impl_update() {
     double delay_sec=0;
     auto period = gete_period();
     switch (period) {
@@ -43,7 +43,7 @@ void XModuleDelay::impl_update() {
     case period_Seconds: delay_sec = getf_seconds();
         break;
     default:
-        xclu_exception("XModuleDelay::impl_update - bad `measure` value");
+        xclu_exception("XModuleSleep::impl_update - bad `measure` value");
     }
 
     //xclu_console_append(QString("delay %1").arg(delay_sec));
@@ -58,7 +58,7 @@ void XModuleDelay::impl_update() {
         update_bang(delay_sec);
         break;
     default:
-        xclu_exception("XModuleDelay::impl_update - bad `working_mode` value");
+        xclu_exception("XModuleSleep::impl_update - bad `working_mode` value");
 
     }
 
@@ -72,21 +72,21 @@ void XModuleDelay::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleDelay::impl_stop() {
+void XModuleSleep::impl_stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleDelay::impl_button_pressed(QString button_id) {
+//void XModuleSleep::impl_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
-void XModuleDelay::register_bang_time() {
+void XModuleSleep::register_bang_time() {
     time_ = xcore_elapsed_time_sec();
 }
 
 //---------------------------------------------------------------------
-void XModuleDelay::update_bang(float delay_sec) {
+void XModuleSleep::update_bang(float delay_sec) {
     double time = xcore_elapsed_time_sec();
 
     float delta = time - time_;
@@ -102,7 +102,7 @@ void XModuleDelay::update_bang(float delay_sec) {
 }
 
 //---------------------------------------------------------------------
-void XModuleDelay::bang() {
+void XModuleSleep::bang() {
     register_bang_time();
 
     //send bangs
