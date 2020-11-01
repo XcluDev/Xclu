@@ -1,0 +1,42 @@
+#Module Random
+#------------------------------------------
+module_description=Generating random float or integer, or get random value from a string list.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+
+in enum Output_Type output_type=Int [Float,Int,String]
+    //Output value type.
+
+if output_type Float
+in enum Distribution distr_float=Uniform [Uniform]
+    //Type of distribution
+    
+in float From from_float=0 *:* 0.1,1
+    //Minimum value.
+in float To_Excluded to_excluded_float=1 *:* 0.1,1
+    //Maximum value (excluded).
+
+    
+if output_type Int
+in int From from_int=0 *:* 1,10
+    //Minimum value.
+in int To to_int=10 *:* 1,10
+    //Maximum value (included).
+
+if output_type String
+in text Values values 10 15
+    //String values. Note: empty lines and comments are ignored.
+    //A
+    //B
+    //C
+    
+endif
+
+separator
+out string Result result=""
+    //Resulted value.
+    
+#----------------------------------

@@ -4,6 +4,7 @@
 
 SOURCES += \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
+    $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
     $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.cpp \
     $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
 HEADERS += \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
+    $$PWD/builtin_modules/Core/Random/auto.h \
+    $$PWD/builtin_modules/Core/Random/xmodulerandom.h \
     $$PWD/builtin_modules/Core/Scalar/auto.h \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.h \
     $$PWD/builtin_modules/Drawing/Fbo/auto.h \

@@ -1,7 +1,7 @@
 #ifndef XMODULESLEEP_H
 #define XMODULESLEEP_H
 
-//Delay implementation
+//Sleep implementation
 
 #include "sdk_h.h"
 #include "xmodule.h"

@@ -106,7 +106,7 @@ int mapi_clamped(int x, int a, int b, int A, int B) {
 
 //https://doc.qt.io/qt-5/qrandomgenerator.html#details
 int randomi(int a, int b) {
-    std::uniform_real_distribution<> dist(a, b);
+    std::uniform_real_distribution<> dist(a, b+1);
     return dist(*QRandomGenerator::global());
 
     //std::mt19937 gen(randomi_rd_()); //Standard mersenne_twister_engine seeded with rd()

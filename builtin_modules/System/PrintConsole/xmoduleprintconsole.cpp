@@ -27,9 +27,18 @@ void XModulePrintConsole::impl_start() {
 
 //---------------------------------------------------------------------
 void XModulePrintConsole::impl_update() {
-    QString s = gets_str();
-    if (geti_time_stamp()) {
-        s = QString("%1 sec: %2").arg(xcore_elapsed_time_sec()).arg(s);
+    QString s;
+    if (geti_add_title()) {
+        s.append(gets_title());
+    }
+    if (geti_add_time_stamp()) {
+        if (!s.isEmpty()) s.append(" ");
+        s.append(QString("(%1 sec)").arg(xcore_elapsed_time_sec()));
+    }
+    QString val = gets_str();
+    if (!val.isEmpty()) {
+        if (!s.isEmpty()) s.append(": ");
+        s.append(val);
     }
     xclu_console_append(s);
 }

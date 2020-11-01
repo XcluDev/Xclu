@@ -119,7 +119,7 @@
                     },
                     {
                         "aname": "time_left_hms",
-                        "avalue": "00:00:01:5"
+                        "avalue": "00:00:01:4"
                     },
                     {
                         "aname": "bang_list",
@@ -184,12 +184,20 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "str",
-                        "avalue": "Bang"
+                        "aname": "add_title",
+                        "avalue": "1"
                     },
                     {
-                        "aname": "time_stamp",
+                        "aname": "title",
+                        "avalue": "Sleep"
+                    },
+                    {
+                        "aname": "add_time_stamp",
                         "avalue": "1"
+                    },
+                    {
+                        "aname": "str",
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",
