@@ -80,7 +80,7 @@ void XGuiEditor::reload_name() { //обновить имя и класс мод�
                 .arg(module_->name()).
                 //arg(module_->name()).
                 arg(module_->description().class_name);
-                //.arg(ModuleRunMode_to_string(module_->rtmodule()->run_mode()));
+                //.arg(ModuleRunMode_to_string(module_->xmodule()->run_mode()));
         editor_label_->setText(title);
 
         //Module description to tip

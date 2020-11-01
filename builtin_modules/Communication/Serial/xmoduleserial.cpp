@@ -54,7 +54,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
         print_devices();
     }
 
-    if (is_enabled()) {
+    if (general_is_enabled()) {
         bool connect_warning = false;
         if (button_id == "send_string_btn") {
             if (connected_) {

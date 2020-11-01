@@ -23,7 +23,7 @@ XModuleProject::~XModuleProject()
 
 //---------------------------------------------------------------------
 void XModuleProject::impl_loaded() {
-    if (is_enabled()) {
+    if (general_is_enabled()) {
         apply_control_values();
     }
 }

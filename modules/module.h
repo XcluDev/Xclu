@@ -36,7 +36,7 @@ public:
     ModuleInterface *interf();
 
     //Исполняемый модуль
-    XModule *rtmodule();
+    XModule *xmodule();
 
     //Compiling links and other things
     bool compile();
@@ -46,6 +46,7 @@ public:
     bool is_stop_out();
     bool is_running();
     void button_pressed(QString button_id);   //нажатие кнопки, даже при редактировании
+    void bang();        //Bang button
 
     //access_call - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
@@ -141,9 +142,9 @@ private:
     ModuleInterface *interf_ = nullptr;
 
     //Исполняемый модуль
-    XModule *rtmodule_ = nullptr;
+    XModule *xmodule_ = nullptr;
 
-    //Сигнал, что был запуск - вне зависимости от того, запустился ли реально rtmodule_
+    //Сигнал, что был запуск - вне зависимости от того, запустился ли реально xmodule_
     bool running_ = false;
     void set_running(bool v);
 

@@ -9,14 +9,57 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in int Hours hours=0 0:1000 1,10
-    //Delay time in hours
+in enum Measure measure=Seconds [HMS,Hours,Minutes,Seconds]
+
+if measure HMS
+in int Hours hms_hours=0 0:1000 1,10
+    //Delay time in hours.
+    //hours
+in int Minutes hms_minutes=0 0:1000 1,10
+    //Delay time in minutes.
+    //minutes
+in float Seconds hms_seconds=0 0:1000 0.1,1
+    //Delay time in seconds.
+    //seconds
+    
+if measure Hours
+in float Hours hours=0 0:1000 0.01,0.1
+    //Delay time in hours.
+    //hours
+
+if measure Minutes
+in float Minutes minutes=0 0:1000 0.01,0.1
+    //Delay time in minutes.
+    //minutes
+
+if measure Seconds
+in float Seconds seconds=1 0:1000 0.01,0.1
+    //Delay time in hours.
+    //seconds
+endif
+
+#----------------------------------
+separator
+
+in enum Working_Mode working_mode=Bang [Pause_Execution,Bang]
+    //Should we wait during delay, or wait and send bang when timer is gone
+
+if working_mode Bang
+
+in button Bang_Now bang_now
+    //Press to banging and restart time counter.
+    
+in button Restart restart
+    //Restart time counter without bang.
+    
+out string Time_Left time_left_hms=""
+    //How much time before next bang.
+    
+in text Modules_To_Bang modules_to_bang 10 15
+    //Modules to send bang on delay. `#` means comment
+
+endif
 
     
-in int Minutes minutes=0 0:1000 1,10
-    //Delay time in minutes
-
-in float Seconds seconds=0 0:120 0.1,1
-    //Delay time in seconds
-
-
+    
+#----------------------------------

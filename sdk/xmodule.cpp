@@ -32,7 +32,7 @@ void XModule::loaded_internal() {     //действия при загрузке
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
 void XModule::update_internal() {
-    if (is_enabled()) {
+    if (general_is_enabled() && general_is_auto_update()) {
         if (!status_.was_started) {
             impl_start();
             status_.was_started = true;
@@ -48,14 +48,13 @@ void XModule::stop_internal() {
         status_.was_started = false;
         impl_stop();
     }
-    status_.enabled__ = false;
+    //status_.enabled__ = false;
 }
 
 //---------------------------------------------------------------------
-//выполнить только один раз - в начале или конце
-void XModule::one_shot_internal() {
+//выполнить только один раз
+void XModule::bang_internal() {
     update_internal();
-    stop_internal();
 }
 
 //---------------------------------------------------------------------
@@ -64,7 +63,7 @@ void XModule::execute(ModuleExecuteStage stage) {
     //отлов исключений путем обработки ошибок, и реакция соответственно настройках
     try {
         //обновление enabled__
-        status_.enabled__ = geti_("enabled");
+        //status_.enabled__ = _is_enabled_();
 
         reset_stop_out();
         reset_error_values();
@@ -76,6 +75,7 @@ void XModule::execute(ModuleExecuteStage stage) {
             loaded_internal();
             break;
         case ModuleExecuteStageStart:
+            status_.running = true;
             //if (enabled && mode == ModuleRunMode_Main_Loop)
             update_internal();
             break;
@@ -97,6 +97,7 @@ void XModule::execute(ModuleExecuteStage stage) {
             break;
 
         case ModuleExecuteStageStop:
+            status_.running = false;
             //останавливаем всегда
             stop_internal();
             break;
@@ -122,6 +123,15 @@ void XModule::execute(ModuleExecuteStage stage) {
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
 void XModule::button_pressed(QString button_id) {
+    if (button_id == general_bang_button_name()) {
+        if (is_running()) {
+            bang_internal();
+        }
+        else {
+            xclu_message_box("Cen't bang - please run the project before.");
+        }
+        return;
+    }
     impl_button_pressed(button_id);
 }
 
@@ -237,9 +247,9 @@ bool XModule::is_running() {
 }
 
 //---------------------------------------------------------------------
-bool XModule::is_enabled() {
-    return status_.enabled__;
-}
+//bool XModule::is_enabled() {
+//    return status_.enabled__;
+//}
 
 //---------------------------------------------------------------------
 void XModule::reset_stop_out() {

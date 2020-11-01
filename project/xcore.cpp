@@ -91,35 +91,54 @@ Module *XCore::get_module(QString module_name) {
 int XCore::get_int_by_link(QString link_str, int def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return XCORE.get_module(link.module)->geti(link.var, link.index, link.index2);
+    return get_module(link.module)->geti(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float XCore::get_float_by_link(QString link_str, float def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return XCORE.get_module(link.module)->getf(link.var, link.index, link.index2);
+    return get_module(link.module)->getf(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString XCore::get_string_by_link(QString link_str, QString def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return XCORE.get_module(link.module)->gets(link.var, link.index, link.index2);
+    return get_module(link.module)->gets(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 XProtectedObject *XCore::get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    return XCORE.get_module(link.module)->get_object(link.var);
+    return get_module(link.module)->get_object(link.var);
 }
 
 //---------------------------------------------------------------------
 //Нажатие кнопки
 void XCore::press_button_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    return XCORE.get_module(link.module)->button_pressed(link.var);
+    return get_module(link.module)->button_pressed(link.var);
 }
+
+//---------------------------------------------------------------------
+//Send bang to module
+void XCore::bang(QString module) {
+    get_module(module)->bang();
+}
+
+//---------------------------------------------------------------------
+//Send bang to modules
+//Empty lines and lines started from "#" - ignored
+void XCore::bang(QStringList modules) {
+    for (auto &line: modules) {
+        QString module = line.trimmed();
+        if (module.isEmpty()) continue;
+        if (module.startsWith("#")) continue;
+        bang(module);
+    }
+}
+
 
 //---------------------------------------------------------------------
 /*XItem *XCore::get_var_by_link(QString link_str) {

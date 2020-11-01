@@ -12,11 +12,11 @@ Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
     info_external_ = info_external;
 
     interf_ = new ModuleInterface(*info_external);
-    rtmodule_ = rtmodule_new;
-    xclu_assert(rtmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
+    xmodule_ = rtmodule_new;
+    xclu_assert(xmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
 
     //установка самого модуля в rt-модуль и интерфейсный модуль, чтобы они могли обмениваться данными
-    rtmodule_->set_module(this);
+    xmodule_->set_module(this);
     interf_->set_module(this);
 
     //также, нужно вызвать событие, что модуль был загружен
@@ -26,8 +26,8 @@ Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
 
 //---------------------------------------------------------------------
 Module::~Module() {
-    if (rtmodule_) {
-        delete rtmodule_;
+    if (xmodule_) {
+        delete xmodule_;
     }
     if (interf_) {
         delete interf_;
@@ -94,8 +94,8 @@ ModuleInterface *Module::interf() {
 
 //---------------------------------------------------------------------
 //Исполняемый модуль
-XModule *Module::rtmodule() {
-    return rtmodule_;
+XModule *Module::xmodule() {
+    return xmodule_;
 }
 
 //---------------------------------------------------------------------
@@ -199,35 +199,35 @@ void Module::execute(ModuleExecuteStage stage) {
     switch (stage) {
     case ModuleExecuteStageLoaded:
         //Выполнить что-то, требуемое самому модулю
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         break;
     case ModuleExecuteStageStart:
         //Установить все in и const переменные
         gui_action(GuiStageBeforeStart);
         //запуск start исполняемой части модуля
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         gui_action(GuiStageAfterUpdate);
         break;
 
     case ModuleExecuteStageAfterStart:
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         break;
 
     case ModuleExecuteStageUpdate:
         //Установить все in переменные, update links and "was_change"
         gui_action(GuiStageBeforeUpdate);
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         //Забрать все out переменные
         gui_action(GuiStageAfterUpdate);
         break;
 
     case ModuleExecuteStageBeforeStop:
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         break;
 
     case ModuleExecuteStageStop:
         gui_action(GuiStageBeforeUpdate);
-        rtmodule_->execute(stage);
+        xmodule_->execute(stage);
         gui_action(GuiStageAfterStop);
         //Забрать все out переменные
         //Запомнить все const, которые мог изменить пользователь во время выполнения
@@ -235,7 +235,7 @@ void Module::execute(ModuleExecuteStage stage) {
         break;
 
     //case ModuleExecuteStageCallback:
-    //    rtmodule_->execute(stage);
+    //    xmodule_->execute(stage);
     //    break;
 
     default:
@@ -245,7 +245,7 @@ void Module::execute(ModuleExecuteStage stage) {
 
 //---------------------------------------------------------------------
 bool Module::is_stop_out() {
-    return rtmodule_->is_stop_out();
+    return xmodule_->is_stop_out();
 }
 
 //---------------------------------------------------------------------
@@ -256,12 +256,17 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
     }
 
     //исполнение нажатия кнопки
-    rtmodule_->button_pressed(button_id);
+    xmodule()->button_pressed(button_id);
 
     //если присоединен GUI и проект не запущен - то обновить GUI
     if (!is_running()) {
         gui_action(GuiStageAfterUpdate, false /*not affect is_running()*/);
     }
+}
+
+//---------------------------------------------------------------------
+void Module::bang() {        //Bang button
+    xmodule()->general_bang();
 }
 
 //---------------------------------------------------------------------
@@ -274,7 +279,7 @@ void Module::access_call_no_exception(QString function, ErrorInfo &err, XObject 
                         .arg(function).arg(name()));
         return;
     }
-    rtmodule()->call(function, err, input, output);
+    xmodule()->call(function, err, input, output);
 }
 
 //---------------------------------------------------------------------

@@ -63,6 +63,12 @@ public:
     //Нажатие кнопки
     void press_button_by_link(QString link_str);
 
+    //Send bang to module
+    void bang(QString module);
+
+    //Send bang to modules
+    //Empty lines and lines started from "#" - ignored
+    void bang(QStringList modules);
 
     //Построение списка модулей по строке, в которой модули разделены \n,
     //а также могут быть пустые строки и комментарии, начинающиеся с #, например:

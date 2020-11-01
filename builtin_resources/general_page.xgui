@@ -7,8 +7,17 @@ GENERAL_PAGE
 page Control
     //Common settings for all modules considering execution and error handling.
     
-in checkbox Enabled enabled=1
-    //Is module working.
+in checkbox Enabled general_enabled_=1
+    //Is module enabled.
+    
+if general_enabled_ 1
+in checkbox Auto_Update general_auto_update_=1
+    //Is module updates on each "update" event.
+
+in button Bang general_bang_
+    //One-time module execution - useful for responding on events.
+    
+endif
     
 #--------------------
 separator

@@ -29,7 +29,7 @@ public:
 
     //запущен ли модуль
     bool running = false;
-    bool enabled__ = false; //значение считывается на каждом update
+    //bool enabled__ = false; //значение считывается на каждом update
 
     //модуль запрашивает остановку выполнения проекта
     bool request_stop_out = false;
@@ -79,6 +79,14 @@ public:
     void call(QString function, ErrorInfo &err, XObject *input, XObject *output);
 
     //------------------------------------------------------------------------
+    //General (Control) page
+    bool general_is_enabled() { return geti_("general_enabled_"); }
+    bool general_is_auto_update() { return geti_("general_auto_update_"); }
+    QString general_bang_button_name() { return "general_bang_"; }
+    //call "bang" of the module
+    void general_bang() { button_pressed(general_bang_button_name()); }
+
+
     bool is_running();  //был фактический запуск
 
     //Если true после start/update - то нужно останавливать запуск
@@ -90,7 +98,7 @@ public:
 
     //обязательные переменные
     //модуль включен
-    bool is_enabled();
+    //bool is_enabled();
     //режим работы модуля - каждый кадр, только в начале или только в конце, callback
     //ModuleRunMode run_mode() { return ModuleRunMode(geti("run_mode")); }
 
@@ -160,7 +168,7 @@ private:
     void loaded_internal();     //действия при загрузке модуля
     void update_internal();     //выполнить update, и если нужно - start
     void stop_internal();       //выполнить stop
-    void one_shot_internal();   //start, update, stop за один раз
+    void bang_internal();       //one-time update
 
     //Concrete call handlers
     //"create_widget" call, returns QWidget pointer
