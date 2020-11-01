@@ -18,6 +18,7 @@ protected:
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
+    //virtual void impl_button_pressed(QString button_id);
 
     void register_bang_time();
     void update_bang(float delay_sec);

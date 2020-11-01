@@ -32,13 +32,13 @@ public:
     void setup(QString low0, QString high0) {
         if (low0 != "*") {
             low_enabled = true;
-            if (IntFloat == 0) low = parse_int(low0, error_message("min value must be int", low0, high0));
-            else low = parse_float(low0, error_message("max value must be an int", low0, high0));
+            if (IntFloat == 0) low = xparse_int(low0, error_message("min value must be int", low0, high0));
+            else low = xparse_float(low0, error_message("max value must be an int", low0, high0));
         }
         if (high0 != "*") {
             high_enabled = true;
-            if (IntFloat == 0) high = parse_int(high0, error_message("min value must be float", low0, high0));
-            else high = parse_float(high0, error_message("max value must be float", low0, high0));
+            if (IntFloat == 0) high = xparse_int(high0, error_message("min value must be float", low0, high0));
+            else high = xparse_float(high0, error_message("max value must be float", low0, high0));
         }
     }
 

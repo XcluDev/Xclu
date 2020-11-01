@@ -1,0 +1,238 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Notes",
+                "name": "readme",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "This example prints line to console each 2 seconds.\n\nNotes:\n1) `print_console1` is included to `delay1`'s bang list, so `delay1` bangs it when required. \n2) `print_console1` has \"Auto update\"=0, so it's not called at each Update.\n"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Delay",
+                "name": "delay1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "period",
+                        "avalue": "Seconds"
+                    },
+                    {
+                        "aname": "hms_hours",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "hms_minutes",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "hms_seconds",
+                        "avalue": "0.4"
+                    },
+                    {
+                        "aname": "hours",
+                        "avalue": "0.01"
+                    },
+                    {
+                        "aname": "minutes",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "seconds",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "working_mode",
+                        "avalue": "Bang"
+                    },
+                    {
+                        "aname": "time_left_hms",
+                        "avalue": "00:00:00:6"
+                    },
+                    {
+                        "aname": "bang_list",
+                        "avalue": "print_console1"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "PrintConsole",
+                "name": "print_console1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "str",
+                        "avalue": "Bang"
+                    },
+                    {
+                        "aname": "time_stamp",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -4,8 +4,11 @@
 //Parsing numbers
 #include <QString>
 
-float parse_float(QString line, QString error_message);
-int parse_int(QString line, QString error_message);
+float xparse_float(QString line, QString error_message);
+int xparse_int(QString line, QString error_message);
 
+
+//seconds -> HMS, that is 00:00:00:0
+QString xparse_seconds_to_hms(double seconds);
 
 #endif // XPARSER_H

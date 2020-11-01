@@ -168,7 +168,7 @@ private:
     void loaded_internal();     //действия при загрузке модуля
     void update_internal();     //выполнить update, и если нужно - start
     void stop_internal();       //выполнить stop
-    void bang_internal();       //one-time update
+    void bang_internal();       //bang: (start) and update if enabled
 
     //Concrete call handlers
     //"create_widget" call, returns QWidget pointer

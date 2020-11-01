@@ -35,7 +35,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
     range_.setup(true, 0, true, 1);
 
     //значение по умолчанию
-    default_value_ = parse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
+    default_value_ = xparse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
     set_value_int(default_value_);
 
 }

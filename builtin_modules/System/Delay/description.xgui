@@ -2,16 +2,17 @@
 #------------------------------------------
 #module_class=Delay
 #module_category=System
-module_description=Delay execution for a specified amount of time.
+module_description=Delay fires bangs with given rate or pauses execution by specified time.
 module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
 page Main
 
-in enum Measure measure=Seconds [HMS,Hours,Minutes,Seconds]
+in enum Period period=Seconds [HMS,Hours,Minutes,Seconds]
+    //Delay period measure unit.
 
-if measure HMS
+if period HMS
 in int Hours hms_hours=0 0:1000 1,10
     //Delay time in hours.
     //hours
@@ -22,17 +23,17 @@ in float Seconds hms_seconds=0 0:1000 0.1,1
     //Delay time in seconds.
     //seconds
     
-if measure Hours
+if period Hours
 in float Hours hours=0 0:1000 0.01,0.1
     //Delay time in hours.
     //hours
 
-if measure Minutes
+if period Minutes
 in float Minutes minutes=0 0:1000 0.01,0.1
     //Delay time in minutes.
     //minutes
 
-if measure Seconds
+if period Seconds
 in float Seconds seconds=1 0:1000 0.01,0.1
     //Delay time in hours.
     //seconds
@@ -55,7 +56,7 @@ in button Restart restart
 out string Time_Left time_left_hms=""
     //How much time before next bang.
     
-in text Modules_To_Bang modules_to_bang 10 15
+in text Bang_List bang_list 10 15
     //Modules to send bang on delay. `#` means comment
 
 endif

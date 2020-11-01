@@ -32,7 +32,15 @@ void XModule::loaded_internal() {     //действия при загрузке
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
 void XModule::update_internal() {
-    if (general_is_enabled() && general_is_auto_update()) {
+    if (general_is_auto_update()) {
+        bang_internal();
+    }
+}
+
+//---------------------------------------------------------------------
+//bang: (start) and update if enabled
+void XModule::bang_internal() {
+    if (general_is_enabled()) {
         if (!status_.was_started) {
             impl_start();
             status_.was_started = true;
@@ -49,12 +57,6 @@ void XModule::stop_internal() {
         impl_stop();
     }
     //status_.enabled__ = false;
-}
-
-//---------------------------------------------------------------------
-//выполнить только один раз
-void XModule::bang_internal() {
-    update_internal();
 }
 
 //---------------------------------------------------------------------

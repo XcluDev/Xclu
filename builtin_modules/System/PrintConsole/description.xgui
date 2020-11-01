@@ -1,0 +1,15 @@
+#Module PrintConsole
+#------------------------------------------
+module_description=Print to console some string.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+in string String str=""
+    //String to print.
+
+in checkbox Time_Stamp time_stamp=1
+    //Add timestamp to output.
+
+

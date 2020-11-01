@@ -5,18 +5,18 @@
 //Page Main
 //
 
-//Enum Measure
-//
-enum enum_measure {
-    measure_HMS = 0,
-    measure_Hours = 1,
-    measure_Minutes = 2,
-    measure_Seconds = 3,
-    measure_N__ = 4
+//Enum Period
+//Delay period measure unit.
+enum enum_period {
+    period_HMS = 0,
+    period_Hours = 1,
+    period_Minutes = 2,
+    period_Seconds = 3,
+    period_N__ = 4
 };
-bool was_changed_measure() { return was_changed_("measure"); }
-enum_measure gete_measure() { return enum_measure(geti_("measure")); }
-QString getraw_measure() { return getraw_("measure");}
+bool was_changed_period() { return was_changed_("period"); }
+enum_period gete_period() { return enum_period(geti_("period")); }
+QString getraw_period() { return getraw_("period");}
 
 //Int Hours
 //Delay time in hours.
@@ -82,10 +82,10 @@ void clear_string_time_left_hms() { clear_string_("time_left_hms"); }
 void append_string_time_left_hms(QString v, int extra_new_lines_count = 0) { append_string_("time_left_hms", v, extra_new_lines_count); }
 void append_string_time_left_hms(QStringList v, int extra_new_lines_count = 0) { append_string_("time_left_hms", v, extra_new_lines_count); }
 
-//Text Modules To Bang
-//Modules to send bang on delay.
-bool was_changed_modules_to_bang() { return was_changed_("modules_to_bang"); }
-QString gets_modules_to_bang() { return gets_("modules_to_bang"); }
-QStringList get_strings_modules_to_bang() { return get_strings_("modules_to_bang"); }
+//Text Bang List
+//Modules to send bang on delay. `#` means comment
+bool was_changed_bang_list() { return was_changed_("bang_list"); }
+QString gets_bang_list() { return gets_("bang_list"); }
+QStringList get_strings_bang_list() { return get_strings_("bang_list"); }
 
 //----------------------------------------------------

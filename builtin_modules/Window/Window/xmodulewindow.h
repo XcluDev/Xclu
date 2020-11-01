@@ -105,7 +105,7 @@ protected:
     XModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
 
     //парсить число, если оно есть, иначе - выдать default_value
-    int parse_int(QStringList list, int index, int default_value, QString line);
+    int xparse_int(QStringList list, int index, int default_value, QString line);
 
     //modules list which are involved in widgets creation
     //it's collected by request_widget and cleared at stop

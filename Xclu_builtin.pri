@@ -15,6 +15,7 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
     $$PWD/builtin_modules/System/Delay/xmoduledelay.cpp \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
+    $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.cpp \
     $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.cpp \
     $$PWD/builtin_modules/Utils/Test/xmoduletest.cpp \
     $$PWD/builtin_modules/Utils/TestDrawing/xmoduletestdrawing.cpp \
@@ -44,6 +45,8 @@ HEADERS += \
     $$PWD/builtin_modules/System/Delay/xmoduledelay.h \
     $$PWD/builtin_modules/System/Execute/auto.h \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.h \
+    $$PWD/builtin_modules/System/PrintConsole/auto.h \
+    $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.h \
     $$PWD/builtin_modules/System/ScanFolder/auto.h \
     $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.h \
     $$PWD/builtin_modules/Utils/Test/auto.h \

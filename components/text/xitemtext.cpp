@@ -27,8 +27,8 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
     xclu_assert(query.size()>=1, "not specified min and max visual lines count, expected '... 10 15'");
     xclu_assert(query.size()>=2, "not specified max visual lines count, expected '... 10 15'");
 
-    lines_count_min_ = parse_int(query.at(0), "min lines count must be an integer, '... 10 15'");
-    lines_count_max_ = parse_int(query.at(1), "max lines count must be an integer, '... 10 15'");
+    lines_count_min_ = xparse_int(query.at(0), "min lines count must be an integer, '... 10 15'");
+    lines_count_max_ = xparse_int(query.at(1), "max lines count must be an integer, '... 10 15'");
 
     //устанавливаем значение в значение по умолчанию
     set_value_string(default_value());

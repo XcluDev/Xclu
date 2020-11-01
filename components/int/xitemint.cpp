@@ -18,7 +18,7 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
     xclu_assert(query.size()>=1, "no default value, expected '...q=0...'");
 
     //значение по умолчанию
-    default_value_ = parse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
+    default_value_ = xparse_int(query.at(0), "default value must be an integer, but is '" + query.at(0) + "'");
     set_value_int(default_value_);
 
     //Единицы измерения - вторая строка описания после hint
@@ -36,8 +36,8 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
         //количество шагов слайдера
         auto query_steps = query.at(2).split(",");
         xclu_assert(query_range.size()==2, "bad slider settings, expected '... 100,10'");
-        slow_step_ = parse_int(query_steps.at(0), "slow step must be an integer, expected '... 1,10'");
-        fast_step_ = parse_int(query_steps.at(1), "fast step must be an integer, expected '... 1,10'");
+        slow_step_ = xparse_int(query_steps.at(0), "slow step must be an integer, expected '... 1,10'");
+        fast_step_ = xparse_int(query_steps.at(1), "fast step must be an integer, expected '... 1,10'");
 
     }
 }

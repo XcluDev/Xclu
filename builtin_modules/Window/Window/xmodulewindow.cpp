@@ -357,7 +357,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
             }
 
             //stretch
-            int stretch = parse_int(query, 1, 0, line);
+            int stretch = xparse_int(query, 1, 0, line);
 
             //добавляем детей
             for (int i=0; i<tree_item.children.size(); i++) {
@@ -374,7 +374,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
             tabs.reset(new QTabWidget);
 
             //stretch
-            int stretch = parse_int(query, 1, 0, line);
+            int stretch = xparse_int(query, 1, 0, line);
 
             //добавляем детей
             for (int i=0; i<tree_item.children.size(); i++) {
@@ -410,7 +410,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
         if (name == "Stretch") {
             //Stretch или Stretch 5
             //stretch
-            int stretch = parse_int(query, 1, 0, line);
+            int stretch = xparse_int(query, 1, 0, line);
             return XModuleWindowStructureItem(stretch);
         }
 
@@ -420,7 +420,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
 
         //для теста создаем просто строку
         //stretch
-        int stretch = parse_int(query, 1, 0, line);
+        int stretch = xparse_int(query, 1, 0, line);
         QString module_name = name;
 
         return XModuleWindowStructureItem(request_widget(module_name), stretch);
@@ -440,7 +440,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
 
 //---------------------------------------------------------------------
 //парсить число, если оно есть, иначе - выдать default_value
-int XModuleWindow::parse_int(QStringList list, int index, int default_value, QString line) {
+int XModuleWindow::xparse_int(QStringList list, int index, int default_value, QString line) {
     if (index >= list.size()) {
         return default_value;
     }
