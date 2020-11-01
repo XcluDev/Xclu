@@ -1,0 +1,18 @@
+#Module TextVariation
+#------------------------------------------
+module_description=Generates random variations of a text: [A|B|C] -> A, B, C.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+
+in text Text input_text 20 25
+    //Text to create variations, such as [A|B|C[D|E]] - will generate A,B,CD,CE.
+
+separator
+
+out text Output output_text 20 25
+    //Generated text.
+
+#----------------------------------
