@@ -3,6 +3,7 @@
 #---------------------------------------------------
 
 SOURCES += \
+    $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp
 
 HEADERS += \
+    $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
+    $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
     $$PWD/builtin_modules/Core/Random/auto.h \

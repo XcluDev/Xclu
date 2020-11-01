@@ -115,30 +115,26 @@ XProtectedObject *XCore::get_object_by_link(QString link_str) {
 }
 
 //---------------------------------------------------------------------
-//Нажатие кнопки
-void XCore::press_button_by_link(QString link_str) {
-    XLinkParsed link(link_str);
-    return get_module(link.module)->button_pressed(link.var);
-}
-
-//---------------------------------------------------------------------
 //Send bang to module
-void XCore::bang(QString module) {
-    get_module(module)->bang();
+//General: module1 or press button: module1->button1
+void XCore::bang(QString module_link) {
+    XLinkParsed link(module_link);
+    if (link.var.isEmpty()) get_module(link.module)->bang();
+    else get_module(link.module)->button_pressed(link.var);
 }
 
 //---------------------------------------------------------------------
 //Send bang to modules
+//General: module1 or press button: module1->button1
 //Empty lines and lines started from "#" - ignored
 void XCore::bang(QStringList modules) {
     for (auto &line: modules) {
-        QString module = line.trimmed();
-        if (module.isEmpty()) continue;
-        if (module.startsWith("#")) continue;
-        bang(module);
+        QString module_link = line.trimmed();
+        if (module_link.isEmpty()) continue;
+        if (module_link.startsWith("#")) continue;
+        bang(module_link);
     }
 }
-
 
 //---------------------------------------------------------------------
 /*XItem *XCore::get_var_by_link(QString link_str) {

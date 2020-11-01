@@ -1,0 +1,16 @@
+#Module TelegramBot
+#------------------------------------------
+module_description=Module for sending data to Telegram chat. Note: bot's token is stored unsecure!
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+
+in checkbox Show_Token show_token=0
+    //Disable this to hide token.
+    
+if show_token 1
+in string Bot_Token bot_token=""
+    //Place bot token here.
+endif

@@ -55,7 +55,7 @@ out string Time_Left time_left_hms=""
     //How much time before next bang.
     
 in text Bang_List bang_list 10 15
-    //Modules to send bang on delay. `#` means comment
+    //Modules to send bang on delay. `#` means comment, can use 'module1' or 'module1->button1'
 
 endif
 

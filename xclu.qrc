@@ -104,18 +104,6 @@
         <file>builtin_modules/AIServices/IBMService/description.xgui</file>
         <file>builtin_modules/AIServices/MicrosoftService/auto.h</file>
         <file>builtin_modules/AIServices/MicrosoftService/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/DialogFlow/auto.h</file>
-        <file>builtin_modules/BotsAssistants/DialogFlow/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/FacebookBot/auto.h</file>
-        <file>builtin_modules/BotsAssistants/FacebookBot/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/Gpt2/auto.h</file>
-        <file>builtin_modules/BotsAssistants/Gpt2/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/OpenNMT/auto.h</file>
-        <file>builtin_modules/BotsAssistants/OpenNMT/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/Rasa/auto.h</file>
-        <file>builtin_modules/BotsAssistants/Rasa/description.xgui</file>
-        <file>builtin_modules/BotsAssistants/TelegramBot/auto.h</file>
-        <file>builtin_modules/BotsAssistants/TelegramBot/description.xgui</file>
         <file>builtin_modules/Communication/MailNotification/auto.h</file>
         <file>builtin_modules/Communication/MailNotification/description.xgui</file>
         <file>builtin_modules/Communication/Midi/auto.h</file>

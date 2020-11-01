@@ -60,15 +60,16 @@ public:
     QString get_string_by_link(QString link_str, QString def_val = "");
     XProtectedObject *get_object_by_link(QString link_str);
 
-    //Нажатие кнопки
-    void press_button_by_link(QString link_str);
 
     //Send bang to module
-    void bang(QString module);
+    //General: module1 or press button: module1->button1
+    void bang(QString module_link);
 
     //Send bang to modules
+    //General: module1 or press button: module1->button1
     //Empty lines and lines started from "#" - ignored
     void bang(QStringList modules);
+
 
     //Построение списка модулей по строке, в которой модули разделены \n,
     //а также могут быть пустые строки и комментарии, начинающиеся с #, например:
