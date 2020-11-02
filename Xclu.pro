@@ -17,6 +17,11 @@
 #ВНИМАНИЕ: На "старом" Qt 5.9 при переименовании или добавлении файлов
 #требуется выполнять команду меню "Запустить qmake", иначе выдает ошибки или не видит файл
 
+#If you get "QSslSocket::connectToHostEncrypted: TLS initialization failed" error on Windows:
+#please check OpenSSL at Qt installer at Developer Tools section, 
+#and copy libcrypto-1_1-x64.dll, libssl-1_1-x64.dll to Xclu bin folder
+#https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
+
 #--------------------------------------------------------------------------
 #General app settings
 #--------------------------------------------------------------------------
@@ -43,10 +48,9 @@ Debug:UI_DIR = debug/.ui
 #TODO enable all exceptions handling in VisualStudio, including division by zero:
 #Project Properties -> C/C++ -> Code Generation -> Modify the Enable C++ Exceptions to "Yes With SEH Exceptions". 
 
-
 QT += core gui
 QT += multimedia multimediawidgets
-QT += serialport
+QT += serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

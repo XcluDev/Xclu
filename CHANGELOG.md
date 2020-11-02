@@ -1,5 +1,16 @@
 Xclu: Changelog 
 
+#### 2020-10-31
+-	Убрана страница «Modulation Setup» в SoundOsc.
+-	Реализован XModulePainter
+-	Реализовано эффективное рисование XRaster_ на painter, без копирования пикселей.
+-	Choose file/folder – восстановлена работа.
+-	XItemObject – хранит всегда указатель. А уже модуль управляет памятью и ставит его, если out.
+-	ProjectRuntime переименован в XCore
+-	Добавлена функция draw растра на painter – для удобства
+-	Заменены id кнопок на их функции button_...
+-	Сделаны модули ImageLoader, Sleep, Random, TextVariation, PrintConsole. 
+
 #### 2020-10-20
 Реализация линков:
 
@@ -290,5 +301,5 @@ v. 122.
 - Module  -  класс модуля, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (RtModule) 
 - FACTORY - список модулей и генератор новых модулей 
 - Таблица модулей 
-#### ...
+
 
