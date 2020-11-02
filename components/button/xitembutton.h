@@ -22,6 +22,9 @@ public:
     int value_int();    //значение - нажатие считывается один раз, затем стирается
     void set_value_int(int) {}
 
+    void hit_value();  //set that button was pressed
+    void reset_value();    //reset that button was pressed
+
     //float
     bool supports_float() { return true; }
     float value_float() { return value_int(); }
@@ -41,6 +44,7 @@ public:
 
 protected:
     //int value_ = 0; //inside XItem_
+
 
     //Function for setting value using link
     virtual void set_value_from_link(XLinkResolved *linkres);

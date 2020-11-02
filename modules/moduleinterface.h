@@ -67,8 +67,11 @@ public:
     void gui_to_state();
     void state_to_gui();
 
-    //callback из GUI
+    //callback from GUI
     void callback_button_pressed(QString button_id);
+
+    //internal calling - user shouldn't call this
+    void _hit_button_(QString button_id);
 
     //редактор
     EditorModuleState editor_state();

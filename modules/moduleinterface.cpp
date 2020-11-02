@@ -5,6 +5,7 @@
 #include "incl_cpp.h"
 #include "xguieditor.h"
 #include "consoleview.h"
+#include "xitembutton.h"
 
 //---------------------------------------------------------------------
 ModuleInterface::ModuleInterface(const ModuleSeed &info)
@@ -485,6 +486,15 @@ void ModuleInterface::state_to_gui() {
 void ModuleInterface::callback_button_pressed(QString button_id) {
     xclu_assert(module(), "Can't process pressing button '" + button_id + "' because module() is nullptr");
     module()->button_pressed(button_id);
+}
+
+
+//---------------------------------------------------------------------
+//internal calling - user shouldn't call this
+void ModuleInterface::_hit_button_(QString button_id) {
+    XItem *item = var(button_id);
+    xclu_assert(item->type() == xitem_button(), "Can't press '" + button_id + "', because it's not button");
+    ((XItemButton *)(item))->hit_value();
 }
 
 //---------------------------------------------------------------------

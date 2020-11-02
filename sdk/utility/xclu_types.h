@@ -37,6 +37,7 @@ public:
 QString xitem_separator();
 QString xitem_line();
 QString xitem_page();
+QString xitem_button();
 QString GENERAL_PAGE_marker();
 
 //Способ использования переменной

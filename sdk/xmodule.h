@@ -128,8 +128,10 @@ protected:
     virtual void impl_update() {}
     virtual void impl_stop() {}
 
-    //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
-    //внимание, обычно вызывается из основного потока как callback
+    //If module want to process button presses while stopped mode,
+    //it should reimplement this function.
+    //Note: if module don't need to process buttons - it may not implement this,
+    //and instead use geti_... function, such as geti_button_start() to check button pressing inside impl_update().
     virtual void impl_button_pressed(QString /*button_id*/) {}
 
     //Universal call handler

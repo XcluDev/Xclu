@@ -74,6 +74,10 @@ QString xitem_page() {
     return "page";
 }
 
+QString xitem_button() {
+    return "button";
+}
+
 QString GENERAL_PAGE_marker() {
     return "GENERAL_PAGE";
 }

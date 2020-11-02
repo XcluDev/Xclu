@@ -32,15 +32,17 @@ void XItemButton::callback_button_pressed() {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xclu_assert(interf(),
                 "Internal error in XItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
+
+    //hit_value() will be called from there
     interf()->callback_button_pressed(name());
+
 }
 
 //---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XItemButton::value_int() {
-    auto v_write = value_write();
-    int res = v_write.data();
-    v_write.data() = 0;
+    int res = value_read().data();
+    reset_value();
     return res;
 }
 
@@ -52,10 +54,27 @@ void XItemButton::set_value_from_link(XLinkResolved *linkres) {
     set_value_int(mod->geti(linkres));
 }
 
+
+//---------------------------------------------------------------------
+void XItemButton::hit_value() {  //set that button was pressed
+    if (value_read().data() == 0) {
+        value_write().data() = 1;
+    }
+}
+
+//---------------------------------------------------------------------
+void XItemButton::reset_value() {    //reset that button was pressed
+    if (value_read().data() != 0) {
+        value_write().data() = 0;
+    }
+}
+
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemButton::gui_to_var_internal() {
-    value_write().data() = ((XGuiButton *)gui__)->value();
+    if (((XGuiButton *)gui__)->value()) {
+        hit_value();
+    }
 }
 
 //---------------------------------------------------------------------

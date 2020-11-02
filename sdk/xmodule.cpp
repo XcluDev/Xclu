@@ -134,6 +134,8 @@ void XModule::button_pressed(QString button_id) {
         }
         return;
     }
+
+    //send as pressed event
     impl_button_pressed(button_id);
 }
 
