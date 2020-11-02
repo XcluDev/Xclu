@@ -20,7 +20,7 @@ in string Chat_Id chat_id="@..."
     
 separator
 
-in string Message message_send=""
+in text Message message_send 10 15
     //Message to send.
 in button Send button_send
     //Press to send.

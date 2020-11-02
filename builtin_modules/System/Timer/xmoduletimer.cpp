@@ -133,7 +133,7 @@ void XModuleTimer::update_bang(float delay_sec) {
 //---------------------------------------------------------------------
 void XModuleTimer::bang() {
     //send bangs
-    XCORE.bang(gets_bang_list());
+    XCORE.bang(get_strings_bang_list());
 }
 
 //---------------------------------------------------------------------

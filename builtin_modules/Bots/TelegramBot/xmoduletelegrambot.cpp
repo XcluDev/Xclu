@@ -46,8 +46,8 @@ void XModuleTelegramBot::impl_stop() {
 
 //---------------------------------------------------------------------
 void XModuleTelegramBot::send_message() {
-    QString token = gets_bot_token();
-    QString chat_id = gets_chat_id();
+    QString token = gets_bot_token().trimmed();
+    QString chat_id = gets_chat_id().trimmed();
     QString message = gets_message_send();
     xclu_assert(!token.isEmpty(), "Bot token is empty");
     xclu_assert(!chat_id.isEmpty(), "Chat id is empty");
