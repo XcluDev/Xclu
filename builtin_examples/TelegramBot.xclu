@@ -87,11 +87,11 @@
                     },
                     {
                         "aname": "show_token",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "bot_token",
-                        "avalue": "1121856722:AAHnHALWgVuJ-l4O-SdDL3Za6cgdsyKd8Io"
+                        "avalue": ""
                     },
                     {
                         "aname": "chat_id",
