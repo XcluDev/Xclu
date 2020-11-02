@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClassDelay
+//Interface for XClassTimer
 //Created automatically.
 //----------------------------------------------------
 //Page Main
@@ -60,17 +60,60 @@ bool was_changed_working_mode() { return was_changed_("working_mode"); }
 enum_working_mode gete_working_mode() { return enum_working_mode(geti_("working_mode")); }
 QString getraw_working_mode() { return getraw_("working_mode");}
 
-//Button Bang Now
-//Press to banging and restart time counter.
-bool was_changed_bang_now() { return was_changed_("bang_now"); }
-int geti_bang_now() { return geti_("bang_now"); }
-QString button_bang_now() { return "bang_now"; }
+//Checkbox Repeating
+//Repeating timer execution.
+bool was_changed_repeating() { return was_changed_("repeating"); }
+int geti_repeating() { return geti_("repeating"); }
 
-//Button Restart
-//Restart time counter without bang.
-bool was_changed_restart() { return was_changed_("restart"); }
-int geti_restart() { return geti_("restart"); }
-QString button_restart() { return "restart"; }
+//Button One Shot
+//Press to start time counter one time.
+bool was_changed_one_shot_button() { return was_changed_("one_shot_button"); }
+int geti_one_shot_button() { return geti_("one_shot_button"); }
+QString button_one_shot_button() { return "one_shot_button"; }
+
+//Button Stop
+//Stop time counter.
+bool was_changed_stop_button() { return was_changed_("stop_button"); }
+int geti_stop_button() { return geti_("stop_button"); }
+QString button_stop_button() { return "stop_button"; }
+
+
+//Out Checkbox Working
+//Is timer working.
+bool was_changed_working() { return was_changed_("working"); }
+int geti_working() { return geti_("working"); }
+void seti_working(int value) { seti_("working", value); }
+
+//Enum Out Time Format
+//Output time format - only for showing, but for programming all are available.
+enum enum_out_time {
+    out_time_Time_Elapsed_sec = 0,
+    out_time_Time_Left_sec = 1,
+    out_time_Time_Uniform = 2,
+    out_time_Time_Left_hms = 3,
+    out_time_N__ = 4
+};
+bool was_changed_out_time() { return was_changed_("out_time"); }
+enum_out_time gete_out_time() { return enum_out_time(geti_("out_time")); }
+QString getraw_out_time() { return getraw_("out_time");}
+
+//Out Float Time Elapsed
+//Time elapsed.
+bool was_changed_time_elapsed_sec() { return was_changed_("time_elapsed_sec"); }
+float getf_time_elapsed_sec() { return getf_("time_elapsed_sec"); }
+void setf_time_elapsed_sec(float value) { setf_("time_elapsed_sec", value); }
+
+//Out Float Time Left
+//Time left.
+bool was_changed_time_left_sec() { return was_changed_("time_left_sec"); }
+float getf_time_left_sec() { return getf_("time_left_sec"); }
+void setf_time_left_sec(float value) { setf_("time_left_sec", value); }
+
+//Out Float Time Uniform
+//Uniform time.
+bool was_changed_time_uniform() { return was_changed_("time_uniform"); }
+float getf_time_uniform() { return getf_("time_uniform"); }
+void setf_time_uniform(float value) { setf_("time_uniform", value); }
 
 //Out String Time Left
 //How much time before next bang.
@@ -82,8 +125,9 @@ void clear_string_time_left_hms() { clear_string_("time_left_hms"); }
 void append_string_time_left_hms(QString v, int extra_new_lines_count = 0) { append_string_("time_left_hms", v, extra_new_lines_count); }
 void append_string_time_left_hms(QStringList v, int extra_new_lines_count = 0) { append_string_("time_left_hms", v, extra_new_lines_count); }
 
+
 //Text Bang List
-//Modules to send bang on delay. `#` means comment
+//Modules to send bang on delay. `#` means comment, can use 'module1' or 'module1->button1'
 bool was_changed_bang_list() { return was_changed_("bang_list"); }
 QString gets_bang_list() { return gets_("bang_list"); }
 QStringList get_strings_bang_list() { return get_strings_("bang_list"); }

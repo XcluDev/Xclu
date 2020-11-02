@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "text_value",
-                        "avalue": "This example prints line to console each 2 seconds.\n\nNotes:\n1) `print_console1` is included to `sleep1`'s bang list, so `sleep1` bangs it when required. \n2) `print_console1` has \"Auto update\"=0, so it's not called at each Update.\n"
+                        "avalue": "This example prints line to console each 2 seconds.\n\nNotes:\n1) `print_console1` is included to `timer1`'s bang list, so `timer1` bangs it when required. \n2) `print_console1` has \"Auto update\"=0, so it's not called at each Update.\n"
                     },
                     {
                         "aname": "Control",
@@ -72,8 +72,8 @@
         },
         {
             "description": {
-                "class": "Sleep",
-                "name": "sleep1",
+                "class": "Timer",
+                "name": "timer1",
                 "version": "1.01"
             },
             "interface": {
@@ -118,8 +118,32 @@
                         "avalue": "Bang"
                     },
                     {
+                        "aname": "repeating",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "working",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "out_time",
+                        "avalue": "Time_Elapsed_sec"
+                    },
+                    {
+                        "aname": "time_elapsed_sec",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "time_left_sec",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "time_uniform",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "time_left_hms",
-                        "avalue": "00:00:01:4"
+                        "avalue": "00:00:00:0"
                     },
                     {
                         "aname": "bang_list",
@@ -189,7 +213,7 @@
                     },
                     {
                         "aname": "title",
-                        "avalue": "Sleep"
+                        "avalue": "Timer"
                     },
                     {
                         "aname": "add_time_stamp",

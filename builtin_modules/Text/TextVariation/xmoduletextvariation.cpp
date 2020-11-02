@@ -36,7 +36,7 @@ void XModuleTextVariation::impl_stop() {
 }
 
 //---------------------------------------------------------------------
-//void XModuleSleep::impl_button_pressed(QString button_id) {
+//void XModuleTimerariation::impl_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

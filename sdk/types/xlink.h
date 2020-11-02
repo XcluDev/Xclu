@@ -2,6 +2,7 @@
 #define XLINK_H
 
 //Working with с links - creating and parsing links as following strings:
+//module1            - link to module
 //webcam1->image     - link to component
 //#module1->var      - disabled link, also empty string means disabled link too
 //module1->line(1)   - link to part of component (word or line) pointed by one index

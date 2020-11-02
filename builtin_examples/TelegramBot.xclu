@@ -72,6 +72,80 @@
         },
         {
             "description": {
+                "class": "TelegramBot",
+                "name": "telegram_bot1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_token",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "bot_token",
+                        "avalue": "1121856722:AAHnHALWgVuJ-l4O-SdDL3Za6cgdsyKd8Io"
+                    },
+                    {
+                        "aname": "chat_id",
+                        "avalue": "@xxxbotfreedom"
+                    },
+                    {
+                        "aname": "message_send",
+                        "avalue": "?????"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
                 "class": "PrintConsole",
                 "name": "print_console1",
                 "version": "1.01"

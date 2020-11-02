@@ -105,15 +105,15 @@ void XLinkParsed::setup(QString link_str0) {
 
     auto query = link.trimmed().split(" ");
     int n = query.size();
-    xclu_assert(n >= 2
-                && !query.at(0).isEmpty()
-                && !query.at(1).isEmpty(),
-                "Bad link '" + link_str0 + "', expected at format webcam1->image or module1->line(0) or module1->line(1,2)");
+    //xclu_assert(n >= 2
+    //            && !query.at(0).isEmpty()
+    //            && !query.at(1).isEmpty(),
+    //            "Bad link '" + link_str0 + "', expected at format webcam1->image or module1->line(0) or module1->line(1,2)");
     xclu_assert(n < 3 || !query.at(2).isEmpty(), "Empty first index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
     xclu_assert(n < 4 || !query.at(3).isEmpty(), "Empty second index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
 
-    module = query.at(0);
-    var = query.at(1);
+    module = (n >= 1) ? query.at(0) : "";
+    var =  (n >= 2) ? query.at(1) : "";
     index = (n >= 3) ? query.at(2).toInt():-1;
     index2 = (n >= 4) ? query.at(3).toInt():-1;
 }

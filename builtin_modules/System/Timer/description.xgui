@@ -1,28 +1,97 @@
 #Module Timer
 #------------------------------------------
-#module_class=Timer
-#module_category=System
-module_description=Fires checkbox 'Bang' in specified periods, can be used for execute other modules.
+module_description=Timer module fires bangs with given delay or pauses execution by a specified time.
 module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
+page Main
 
-out checkbox Bang bang=0 
-//Fact that timer works shown in this checkbox
+in enum Period period=Seconds [HMS,Hours,Minutes,Seconds]
+    //Delay period measure unit.
 
+if period HMS
+in int Hours hms_hours=0 0:1000 1,10
+    //Delay time in hours.
+    //hours
+in int Minutes hms_minutes=0 0:1000 1,10
+    //Delay time in minutes.
+    //minutes
+in float Seconds hms_seconds=0 0:1000 0.1,1
+    //Delay time in seconds.
+    //seconds
+    
+if period Hours
+in float Hours hours=0 0:1000 0.01,0.1
+    //Delay time in hours.
+    //hours
+
+if period Minutes
+in float Minutes minutes=0 0:1000 0.01,0.1
+    //Delay time in minutes.
+    //minutes
+
+if period Seconds
+in float Seconds seconds=1 0:1000 0.01,0.1
+    //Delay time in hours.
+    //seconds
+endif
+
+#----------------------------------
 separator
 
-in enum Period_Mode period_mode=Period [Period,Random_Period]
+in enum Working_Mode working_mode=Bang [Pause_Execution,Bang]
+    //Should we wait during delay, or wait and send bang when timer is gone
 
+if working_mode Bang
 
+in checkbox Repeating repeating=0
+    //Repeating timer execution.
 
-#enum show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]
-#    //Show message box
+in button One_Shot one_shot_button
+    //Press to start time counter one time.
 
-#string message_box_text=Stopping
-#    //Text in message box
+in button Stop stop_button
+    //Stop time counter.
 
-#Stop if frame>...
-#Stop if time>...
+if working_mode Bang
+    
+separator 
 
+out checkbox Working working=0
+    //Is timer working.
+
+in enum Out_Time_Format out_time=Left_hms [Time_Elapsed_sec,Time_Left_sec,Time_Uniform,Time_Left_hms]
+    //Output time format - only for showing, but for programming all are available.
+
+if out_time Time_Elapsed_sec
+out float Time_Elapsed time_elapsed_sec=0 *:* 0.1,1
+    //Time elapsed.
+    //seconds
+
+if out_time Time_Left_sec
+out float Time_Left time_left_sec=0 *:* 0.1,1
+    //Time left.
+    //seconds
+
+if out_time Time_Uniform
+out float Time_Uniform time_uniform=0 0:1 0.01,0.1
+    //Uniform time.
+    //0..1
+    
+if out_time Time_Left_hms
+out string Time_Left time_left_hms=""
+    //How much time before next bang.
+endif
+
+if working_mode Bang
+    
+separator
+in text Bang_List bang_list 10 15
+    //Modules to send bang on delay. `#` means comment, can use 'module1' or 'module1->button1'
+
+endif
+
+    
+    
+#----------------------------------

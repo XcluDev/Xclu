@@ -68,7 +68,7 @@ void XModuleRandom::impl_stop() {
 }
 
 //---------------------------------------------------------------------
-//void XModuleSleep::impl_button_pressed(QString button_id) {
+//void XModuleTimerm::impl_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

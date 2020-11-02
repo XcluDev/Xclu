@@ -1,16 +1,16 @@
 #ifndef XMODULESLEEP_H
 #define XMODULESLEEP_H
 
-//Sleep implementation
+//Timer implementation
 
 #include "sdk_h.h"
 #include "xmodule.h"
 
-class XModuleSleep: public XModule
+class XModuleTimer: public XModule
 {
 public:
-    XModuleSleep(QString class_name);
-    ~XModuleSleep();
+    XModuleTimer(QString class_name);
+    ~XModuleTimer();
 #include "auto.h"
 
 protected:
@@ -23,8 +23,14 @@ protected:
     void register_bang_time();
     void update_bang(float delay_sec);
 
+    bool working_ = false;
+
     double time_ = 0;    //last bang time
+    void one_shot();
+
     void bang();
+
+    void set_working(bool v);
 
 };
 
