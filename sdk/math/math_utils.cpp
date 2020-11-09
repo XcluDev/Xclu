@@ -66,7 +66,7 @@ float lerpf(float A, float B, float x) { //x = 0..1
     return A*(1-x) + B*x;
 }
 
-float lerpd(float A, float B, float x) {
+double lerpd(double A, double B, double x) {
     return A*(1-x) + B*x;
 }
 

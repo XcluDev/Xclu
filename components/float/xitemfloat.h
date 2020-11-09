@@ -27,7 +27,9 @@ public:
     float value_float() { return value_read().data(); }
     void set_value_float(float value) { value_write().data() = value; }
 
+    //increment steps
     float get_small_step();
+    float get_large_step();
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);

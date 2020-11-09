@@ -11,28 +11,28 @@ in enum Period period=Seconds [HMS,Hours,Minutes,Seconds]
     //Delay period measure unit.
 
 if period HMS
-in int Hours hms_hours=0 0:1000 1,10
+in int Hours hms_hours=0 0:* 1,10
     //Delay time in hours.
     //hours
-in int Minutes hms_minutes=0 0:1000 1,10
+in int Minutes hms_minutes=0 0:* 1,10
     //Delay time in minutes.
     //minutes
-in float Seconds hms_seconds=0 0:1000 0.1,1
+in float Seconds hms_seconds=0 0:* 0.1,1
     //Delay time in seconds.
     //seconds
     
 if period Hours
-in float Hours hours=0 0:1000 0.01,0.1
+in float Hours hours=0 0:* 0.01,0.1
     //Delay time in hours.
     //hours
 
 if period Minutes
-in float Minutes minutes=0 0:1000 0.01,0.1
+in float Minutes minutes=0 0:* 0.01,0.1
     //Delay time in minutes.
     //minutes
 
 if period Seconds
-in float Seconds seconds=1 0:1000 0.01,0.1
+in float Seconds seconds=1 0:* 0.01,0.1
     //Delay time in hours.
     //seconds
 endif

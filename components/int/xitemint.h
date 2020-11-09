@@ -11,13 +11,16 @@ public:
     //parse_range - мы будем ставить false в checkbox
     XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range = true);
 
-    int get_small_step() { return slow_step_; }
+    //increment steps
+    int get_small_step();
+    int get_large_step();
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageCreator &input);
 
     //единицы измерения
     QString units() { return units_; }
+
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);

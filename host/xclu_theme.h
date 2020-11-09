@@ -53,9 +53,10 @@ const int COMBO_WIDTH_MIN = 150;  //ширина enum
 const int COMBO_WIDTH_MAX = 300;
 const int BUTTON_WIDTH = 200;      //ширина button
 
-const int SPIN_WIDTH = 120;      //ширина int, float
-
+const int SPIN_WIDTH = 120;      //width of input area for int, float
 const int SEPARATOR_HEIGHT = 15;  //высота сепаратора
+
+const int SLIDER_WIDTH = 200;   //width of slider for int, floar
 
 //Размеры шрифта
 const int main_font_size = 18;       //основной размер шрифта

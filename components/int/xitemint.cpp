@@ -43,6 +43,18 @@ XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_descr
 }
 
 //---------------------------------------------------------------------
+int XItemInt::get_small_step() {
+    xclu_assert(slow_step_ > 0, "XItemInt `" + name() + "` - bad slow_steps value, must be greater than zero");
+    return slow_step_;
+}
+
+//---------------------------------------------------------------------
+int XItemInt::get_large_step() {
+    xclu_assert(fast_step_ > 0, "XItemInt `" + name() + "` - bad fast_step_ value, must be greater than zero");
+    return fast_step_;
+}
+
+//---------------------------------------------------------------------
 //Function for setting value using link
 void XItemInt::set_value_from_link(XLinkResolved *linkres) {
     xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");

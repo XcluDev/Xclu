@@ -29,7 +29,7 @@ XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_d
     auto query_range = query.at(1).split(":");
     xclu_assert(query_range.size()==2, "bad range format, expected '... 0:1 ...'");
 
-    range_.setup(query_range.at(0), query_range.at(1));
+    range_.setup(query_range.at(0), query_range.at(1));    
 
     //количество шагов слайдера
     auto query_steps = query.at(2).split(",");
@@ -41,8 +41,14 @@ XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_d
 
 //---------------------------------------------------------------------
 float XItemFloat::get_small_step() {
-    xclu_assert(slow_step_ > 0, "XItemFloat - bad slow_steps value, must be greater thatn zero");
+    xclu_assert(slow_step_ > 0, "XItemFloat `" + name() + "` - bad slow_steps value, must be greater than zero");
     return slow_step_;
+}
+
+//---------------------------------------------------------------------
+float XItemFloat::get_large_step() {
+    xclu_assert(fast_step_ > 0, "XItemFloat `" + name() + "` - bad fast_step_ value, must be greater than zero");
+    return fast_step_;
 }
 
 //---------------------------------------------------------------------

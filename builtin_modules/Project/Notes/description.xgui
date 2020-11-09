@@ -9,6 +9,6 @@ module_impl=C++
 #------------------------------------------
 page Main
 
-in text Notes text_value 3 20
+in text Notes text_value 30 35
 //Text area for some notes
     

@@ -35,7 +35,7 @@ int clampi(int x, int a, int b);
 
 //Linear interpolation from [0,1]
 float lerpf(float A, float B, float x); //x = 0..1
-float lerpd(float A, float B, float x);
+double lerpd(double A, double B, double x);
 
 //Linear interpolation
 float mapf(float x, float a, float b, float A, float B); //x = a..b

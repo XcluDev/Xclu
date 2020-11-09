@@ -3,6 +3,8 @@
 
 #include "incl_h.h"
 #include "xparser.h"
+#include "math_utils.h"
+#include "console.h"
 
 //---------------------------------------------------------------------
 //Classed for range control of int and float values
@@ -54,6 +56,30 @@ public:
     T low = 0;
     T high = 0;
 
+    //number of ticks for float slider, wihtout counting zero, so really there are ticks+1
+    //0 means that there are no need in slider
+    int ticks(float step) const {
+        xclu_assert(IntFloat == 1, "XRange: ticks() is only float");
+        if (low_enabled && high_enabled && low < high && step>0) {
+            return qMax(int((high - low)/step),2);
+        }
+        return 0;
+    }
+    //tick to value
+    float tick_to_value(int tick, int ticks) const {
+        xclu_assert(IntFloat == 1, "XRange: tick_to_value() is only for float");
+        if (low_enabled && high_enabled && ticks > 0) {
+            return mapf_clamped(tick, 0, ticks, low, high);
+        }
+        return 0;
+    }
+    int value_to_ticks(float value, int ticks) const {
+        xclu_assert(IntFloat == 1, "XRange: value_to_ticks() is only for float");
+        if (low_enabled && high_enabled && ticks > 0 && low < high) {
+            return mapf_clamped(value, low, high, 0, ticks);
+        }
+        return 0;
+    }
 protected:
     QString error_message(QString begin, QString low0, QString high0) {
         return begin + " value or '*', but is `" + low0 + ":" + high0;

@@ -18,7 +18,7 @@ class RecentFiles: public QObject
 public:
     RecentFiles(QMenu *menu);
 
-    enum { MaxRecentFiles = 5 };
+    enum { MaxRecentFiles = 10 };
     QAction *recentFileActs[MaxRecentFiles];
 
     bool hasRecentFiles();
