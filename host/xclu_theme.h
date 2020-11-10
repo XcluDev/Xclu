@@ -73,8 +73,8 @@ const int add_module_categories_list_minimum_width = 150; //ширина спи�
 const int add_module_categories_list_maximum_width = 250;
 
 //максимальный размер для вывода изображения в preview
-const int image_preview_small_w=256; //256;
-const int image_preview_small_h=256; //128;
+const int image_preview_small_w=200; //256;
+const int image_preview_small_h=200; //256;
 const int image_preview_medium_w=384;
 const int image_preview_medium_h=384;
 const int image_preview_large_w=512;

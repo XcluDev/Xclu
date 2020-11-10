@@ -129,15 +129,30 @@ public:
 		//https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
         QVector<T>().swap(data);
 	}
-	bool is_empty() const {
-		return data.empty();
-	}
+    bool is_empty() const {
+        return data.empty();
+    }
     /*bool is_zero() const {
-		for (int i = 0; i < w*h; i++) {
-			if (data[i] != 0) return false;
-		}
-		return true;
+        for (int i = 0; i < w*h; i++) {
+            if (data[i] != 0) return false;
+        }
+        return true;
     }*/
+
+    void set(const T &v) {
+        for (int i=0; i<w*h; i++) {
+            data[i] = v;
+        }
+    }
+
+    template<typename T1>
+    void mult_by(const XRaster_<T1> &r) {
+        xclu_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
+        for (int i=0; i<w*h; i++) {
+            data[i] *= r.pixel_unsafe(i);
+        }
+    }
+
 
 
     //rotate on 0, 90, 180, 270 angles

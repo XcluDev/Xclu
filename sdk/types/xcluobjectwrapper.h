@@ -29,8 +29,8 @@ class XGuiObject;
 //настройки показа объекта
 class XObjectShowSettings {
 public:
-    int w = 256;
-    int h = 256;
+    int w = 200; //256;
+    int h = 200; //256;
 };
 
 //wrapper для работы и показа объекта
