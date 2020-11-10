@@ -26,6 +26,10 @@
 #General app settings
 #--------------------------------------------------------------------------
 
+#Uncomment for deploying mode, that is all modules definitions will be put inside EXE
+DEFINES+=XCLU_DEPLOY
+
+
 Release:TARGET=Xclu
 Release:DESTDIR = ../Xclu-bin
 Release:OBJECTS_DIR = release/.obj

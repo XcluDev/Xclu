@@ -33,10 +33,21 @@ QString xclu_builtin_modules_folder() {
 #ifdef XCLU_DEPLOY
     //в режиме сборки Release-Deploy - это встроенные папки, и требуется добавить все в QRC
     //в в остальных режимах - это путь на диске
-    return  ":/builtin_modules";
+    return  ":/builtin_modules/";
 #else
     QFileInfo file("../Xclu/builtin_modules/");
     return file.canonicalFilePath();
+#endif
+
+}
+
+//---------------------------------------------------------------------
+//transforms folder to modules/{name} folder if deployment mode
+QString xclu_custom_module_folder(QString name, QString folder) {
+#ifdef XCLU_DEPLOY
+    return  xclu_app_folder() + "/Modules/" + name;
+#else
+    return folder;
 #endif
 
 }

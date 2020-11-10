@@ -102,6 +102,10 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
         QString key_folder = QString("%1/module%2_folder").arg(section).arg(i);
         QString name = settings.value(key_name, "").toString();
         QString folder = settings.value(key_folder, "").toString();
+
+        //if deployment mode, then get folder from Modules folder
+        folder = xclu_custom_module_folder(name, folder);
+
         if (!name.isEmpty() && !folder.isEmpty()) {
             names.push_back(name);
             folders.push_back(folder);

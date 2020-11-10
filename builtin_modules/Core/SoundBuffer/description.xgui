@@ -1,0 +1,12 @@
+#Module SoundBuffer
+#------------------------------------------
+module_description=Core sound buffer module.
+module_version=1.01
+module_impl=C++
+
+module_accept_calls=gui_draw
+#------------------------------------------
+int sample_rate=44100 1:*
+int channels=2 1;*
+array data
+

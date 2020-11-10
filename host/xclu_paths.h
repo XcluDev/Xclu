@@ -18,6 +18,9 @@ QString xclu_builtin_resources_folder();
 //папка с описанием встроенных модулей
 QString xclu_builtin_modules_folder();
 
+//transforms folder to modules/{name} folder if deployment mode
+QString xclu_custom_module_folder(QString name, QString folder);
+
 //Файл кастомных модулей
 QString xclu_custom_modules_file();
 
