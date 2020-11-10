@@ -22,11 +22,30 @@ XModuleRandom::~XModuleRandom()
 
 //---------------------------------------------------------------------
 void XModuleRandom::impl_start() {
+    time_ = -1; //implies renew value on first update with Period mode
+
     sets_result("");
 }
 
 //---------------------------------------------------------------------
 void XModuleRandom::impl_update() {
+    switch (gete_update_mode()) {
+    case update_mode_Each_Update: make_new_value();
+        break;
+    case update_mode_Period: {
+        float time = xcore_elapsed_time_sec();
+        if (time_ < 0 || time >= time_ + getf_period_sec()) {
+            time_ = time;
+            make_new_value();
+        }
+    }
+        break;
+    default: xclu_exception("XModuleRandom::impl_update - bad `update_mode` value");
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleRandom::make_new_value() {
     QString value;
 
     auto type = gete_output_type();

@@ -64,4 +64,21 @@ void clear_string_result() { clear_string_("result"); }
 void append_string_result(QString v, int extra_new_lines_count = 0) { append_string_("result", v, extra_new_lines_count); }
 void append_string_result(QStringList v, int extra_new_lines_count = 0) { append_string_("result", v, extra_new_lines_count); }
 
+
+//Enum Update Mode
+//Should we renew value on each update or by specified time.
+enum enum_update_mode {
+    update_mode_Each_Update = 0,
+    update_mode_Period = 1,
+    update_mode_N__ = 2
+};
+bool was_changed_update_mode() { return was_changed_("update_mode"); }
+enum_update_mode gete_update_mode() { return enum_update_mode(geti_("update_mode")); }
+QString getraw_update_mode() { return getraw_("update_mode");}
+
+//Float Period
+//Period in seconds.
+bool was_changed_period_sec() { return was_changed_("period_sec"); }
+float getf_period_sec() { return getf_("period_sec"); }
+
 //----------------------------------------------------

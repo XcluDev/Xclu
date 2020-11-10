@@ -39,4 +39,18 @@ separator
 out string Result result=""
     //Resulted value.
     
+separator
+in enum Update_Mode update_mode=Period [Each_Update,Period]
+    //Should we renew value on each update or by specified time.
+    
+if update_mode Period
+in float Period period_sec=1 0:* 0.01,0.1
+    //Period in seconds.
+    //sec
+
+endif
+
+
+
+
 #----------------------------------

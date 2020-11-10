@@ -22,6 +22,10 @@ protected:
 
 
     QString get_random_string();
+
+    float time_ = -1;
+
+    void make_new_value();
 };
 
 
