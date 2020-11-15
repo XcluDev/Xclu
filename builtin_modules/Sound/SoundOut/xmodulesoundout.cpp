@@ -259,7 +259,7 @@ void XModuleSoundOut::impl_update() {
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
-    //XCORE.execute_callbacks(gets_callback_modules"));
+    //XCORE.execute_callbacks(gets_callback_modules()));
 }
 
 

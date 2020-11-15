@@ -22,6 +22,10 @@
 #and copy libcrypto-1_1-x64.dll, libssl-1_1-x64.dll to Xclu bin folder
 #https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
+#For windows, to collect all required plugins, use:
+#D:\Qt\Qt5_14\5.14.2\msvc2017_64\bin\windeployqt.exe --release ./
+#(set path to your Qt here)
+
 #--------------------------------------------------------------------------
 #General app settings
 #--------------------------------------------------------------------------

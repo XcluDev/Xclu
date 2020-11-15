@@ -17,7 +17,7 @@ in enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
 
 
 #-------- Camera --------------
-const enum Device select_device=Default [Default,By_Index,By_Name]
+const enum Device select_device=Default [Default,By_Index,By_Name,By_Serial]
 	//Choose the way for selecting webcamera.
     
 if select_device By_Index
@@ -27,8 +27,14 @@ endif
 
 if select_device By_Name
 const string Device_Name device_name=""
-	//Name of the camera to connect (or part of the name), go to 'Device Info' to see the list.
+	//Name of the camera to connect (or its part). To see all - go to 'Device Info' and press the button.
 endif	
+
+if select_device By_Serial
+const string Device_Serial device_serial=""
+	//Serial ID of the camera (or its part). To see all - go to 'Device Info', check 'Serial' and press the button.
+endif	
+
 
 out object_image Image image
     //Resulted webcamera image.
@@ -141,11 +147,14 @@ page Device_Info
 in button Print_Devices print_devices
 	//Print list of all connected devices.
 
-in checkbox Print_Formats print_formats=0
+in checkbox Serials print_serials=0
+    //Output serial ID of devices - useful if you connecting several cameras of the same model.
+    
+in checkbox Formats print_formats=0
 	//Print list of supported formats for connected device at start.
 
 
-out text Local_Console local_console 10 15
+out text Local_Console local_console 20 25
     //Console output.
 
 

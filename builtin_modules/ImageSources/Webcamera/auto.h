@@ -23,7 +23,8 @@ enum enum_select_device {
     select_device_Default = 0,
     select_device_By_Index = 1,
     select_device_By_Name = 2,
-    select_device_N__ = 3
+    select_device_By_Serial = 3,
+    select_device_N__ = 4
 };
 bool was_changed_select_device() { return was_changed_("select_device"); }
 enum_select_device gete_select_device() { return enum_select_device(geti_("select_device")); }
@@ -35,10 +36,16 @@ bool was_changed_device_index() { return was_changed_("device_index"); }
 int geti_device_index() { return geti_("device_index"); }
 
 //Const String Device Name
-//Name of the camera to connect (or part of the name), go to 'Device Info' to see the list.
+//Name of the camera to connect (or its part). To see all - go to 'Device Info' and press the button.
 bool was_changed_device_name() { return was_changed_("device_name"); }
 QString gets_device_name() { return gets_("device_name"); }
 QStringList get_strings_device_name() { return get_strings_("device_name"); }
+
+//Const String Device Serial
+//Serial ID of the camera (or its part). To see all - go to 'Device Info', check 'Serial' and press the button.
+bool was_changed_device_serial() { return was_changed_("device_serial"); }
+QString gets_device_serial() { return gets_("device_serial"); }
+QStringList get_strings_device_serial() { return get_strings_("device_serial"); }
 
 //Out Object Image
 //Resulted webcamera image.
@@ -176,8 +183,13 @@ bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
 QString button_print_devices() { return "print_devices"; }
 
+//Checkbox Serials
+//Output serial ID of devices - useful if you connecting several cameras of the same model.
+bool was_changed_print_serials() { return was_changed_("print_serials"); }
+int geti_print_serials() { return geti_("print_serials"); }
+
 //Checkbox Print Formats
-//Print list of supported formats for all devices.
+//Print list of supported formats for connected device at start.
 bool was_changed_print_formats() { return was_changed_("print_formats"); }
 int geti_print_formats() { return geti_("print_formats"); }
 

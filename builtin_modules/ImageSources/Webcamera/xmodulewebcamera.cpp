@@ -108,9 +108,8 @@ void XModuleWebcamera::impl_loaded() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_button_pressed(QString button_id) {
-    if (button_id == button_print_devices()) {
-        //если требуется, напечатать все устройства
+void XModuleWebcamera::impl_button_pressed(QString button) {
+    if (button == button_print_devices()) {
         print_devices();
     }
 }
@@ -221,11 +220,14 @@ void XModuleWebcamera::print_devices() {
     list.append("Connected Web Cameras:");
     //xclu_console_append("Connected Web Cameras:");
 
+    bool print_serials = geti_print_serials();
+
     const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
     for (int i=0; i<cameras.size(); i++) {
         auto &info = cameras.at(i);
         QString camera = QString::number(i) + ": " + info.description();
         list.append(camera);
+        if (print_serials) list.append("  '" + info.deviceName() + "'");
         //xclu_console_append(camera);
     }
     clear_string_local_console();
@@ -295,6 +297,17 @@ void XModuleWebcamera::start_camera() {
             for (int i=0; i<cameras.size(); i++) {
                 auto &info = cameras.at(i);
                 if (info.description().contains(name)) {
+                    start_camera(info);
+                    break;
+                }
+            }
+            break;
+        }
+        case select_device_By_Serial: {
+            QString serial = gets_device_serial();
+            for (int i=0; i<cameras.size(); i++) {
+                auto &info = cameras.at(i);
+                if (info.deviceName().contains(serial)) {
                     start_camera(info);
                     break;
                 }
