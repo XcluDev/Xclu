@@ -85,9 +85,10 @@ private:
     QVector<Module *> modules_;
     void clear_modules();
 
-    //Запуск
-    //выполнить операцию для всех модулей
-    void execute(ModuleExecuteStage stage, bool &stop_out);
+    //Execute operation for all modules
+    //"exception_on_errors" - if true, any module error stops, if false - only prints to console
+    //for example, stopping - always print to console only
+    void execute(ModuleExecuteStage stage, bool &stop_out, bool exception_on_errors = true);
 
     //Запись и считывание проекта через json-объект
     void write_json(QJsonObject &json);

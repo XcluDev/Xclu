@@ -45,6 +45,9 @@ protected:
     //`create_widget` call implementation, creates QWidget and returns pointer on it
     void *impl_create_widget(QString parent_id);
 
+    virtual void impl_reset_widget();
+
+
 protected:
     //QScopedPointer<QWindow> window_;
     QString parent_id_;

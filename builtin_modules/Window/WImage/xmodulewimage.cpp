@@ -87,6 +87,14 @@ void *XModuleWImage::impl_create_widget(QString parent_id) {
 }
 
 //---------------------------------------------------------------------
+//reset widget at stop
+void XModuleWImage::impl_reset_widget() {
+    widget_ = nullptr;
+    parent_id_.clear();
+    parent_was_set_ = false;
+}
+
+//---------------------------------------------------------------------
 void XModuleWImage::update_all(bool force) {
     if (!widget_) {
         return;

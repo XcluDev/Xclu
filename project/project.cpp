@@ -381,7 +381,7 @@ void Project::gui_action(GuiStage stage) {
 
 //---------------------------------------------------------------------
 //выполнить операцию для всех модулей
-void Project::execute(ModuleExecuteStage stage, bool &stop_out) {
+void Project::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_on_errors) {
     for (int i=0; i<modules_count(); i++) {
         auto *module = modules_[i];
         //захватываем ошибки из модулей
@@ -394,9 +394,18 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out) {
         }
         catch(XException& e) {
             stop_out = true;
-            xclu_message_box("Runtime error in module '" +module->name() + "' at stage '" + ModuleExecuteStage_to_string(stage)
-                         + "':\n" +  e.whatQt());
-            break;
+            QString text = "Runtime error in module '" +module->name() + "' at stage '" + ModuleExecuteStage_to_string(stage)
+                    + "':\n" +  e.whatQt();
+            if (exception_on_errors) {
+                //message box and total break
+                xclu_message_box(text);
+                break;
+            }
+            else {
+                //just log to console and continue
+                xclu_console_append(text);
+            }
+
         }
     }
 }
@@ -481,8 +490,9 @@ void Project::execute_stop() {
     XCORE.set_state(ProjectRunStateBinaryStopped);
 
     bool stop_out = false;
-    execute(ModuleExecuteStageBeforeStop, stop_out);
-    execute(ModuleExecuteStageStop, stop_out);
+    bool exception_on_errors = false;   //during stop we don't show message boxes on errors, but only print to console
+    execute(ModuleExecuteStageBeforeStop, stop_out, exception_on_errors);
+    execute(ModuleExecuteStageStop, stop_out, exception_on_errors);
 }
 
 //---------------------------------------------------------------------
