@@ -86,10 +86,11 @@ protected:
 #include "auto.h"
 
     //Выполнение
-    virtual void impl_loaded() {}
+    virtual void impl_loaded();
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
+    virtual void impl_button_pressed(QString button_id);
 
     bool audio_tried_to_start_ = false;
     void start_audio();
@@ -118,11 +119,9 @@ protected:
 
     //печать в консоль доступных устройств
     void print_devices();
-    bool print_devices_worked_ = false;
 
     //печать в консоль поддерживаемых форматов запускаемого устройства
     void print_formats(const QAudioDeviceInfo &deviceInfo);
-    bool print_formats_worked_ = false;
 
     //работа с громкостью
     void check_volume_change();

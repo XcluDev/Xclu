@@ -102,14 +102,26 @@ XModuleWebcamera::~XModuleWebcamera()
 }
 
 //---------------------------------------------------------------------
+void XModuleWebcamera::impl_loaded() {
+    clear_string_frames_captured();
+    clear_string_local_console();
+}
+
+//---------------------------------------------------------------------
+void XModuleWebcamera::impl_button_pressed(QString button_id) {
+    if (button_id == button_print_devices()) {
+        //если требуется, напечатать все устройства
+        print_devices();
+    }
+}
+
+//---------------------------------------------------------------------
 void XModuleWebcamera::impl_start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
     //Очистка переменных
     camera_tried_to_start_ = false;
-    print_devices_worked_ = false;
-    print_formats_worked_ = false;
 
     //данные surface
     {
@@ -123,22 +135,16 @@ void XModuleWebcamera::impl_start() {
 
     clear_string_connected_device_name();
     seti_is_new_frame(0);
-    clear_string_frames_captured();
 
+    clear_string_frames_captured();
     clear_string_local_console();
 
-    //если требуется, напечатать все устройства
-    print_devices();
     //------------------------------------
 
 }
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::impl_update() {
-    //если требуется, напечатать все устройства
-    print_devices();
-    //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
-    print_formats();
 
     //захват с камеры или считывание изображений
     auto source = gete_capture_source();
@@ -211,38 +217,26 @@ void XModuleWebcamera::update_camera() {
 //---------------------------------------------------------------------
 //печать в консоль доступных камер
 void XModuleWebcamera::print_devices() {
-    int print = geti_print_devices();
-    if (!print) {
-        print_devices_worked_ = false;
-    }
-    else {
-        if (!print_devices_worked_) {
-            print_devices_worked_ = true;
-            QStringList list;
-            list.append("Connected Web Cameras:");
-            //xclu_console_append("Connected Web Cameras:");
+    QStringList list;
+    list.append("Connected Web Cameras:");
+    //xclu_console_append("Connected Web Cameras:");
 
-            const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
-            for (int i=0; i<cameras.size(); i++) {
-                auto &info = cameras.at(i);
-                QString camera = QString::number(i) + ": " + info.description();
-                list.append(camera);
-                //xclu_console_append(camera);
-            }
-            append_string_local_console(list, 1);
-        }
+    const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
+    for (int i=0; i<cameras.size(); i++) {
+        auto &info = cameras.at(i);
+        QString camera = QString::number(i) + ": " + info.description();
+        list.append(camera);
+        //xclu_console_append(camera);
     }
+    clear_string_local_console();
+    append_string_local_console(list, 1);
 }
 
 //---------------------------------------------------------------------
 //печать в консоль разрешений запускаемой камеры
 //внимание, эта функция запускает camera_->load()
 void XModuleWebcamera::print_formats() {
-    if (camera_tried_to_start_
-            && !print_formats_worked_
-            && geti_print_formats()) {
-        print_formats_worked_ = true;
-
+    if (geti_print_formats()) {
         QString device_name = gets_connected_device_name();
 
         QStringList list;
@@ -268,7 +262,7 @@ void XModuleWebcamera::print_formats() {
             list.append(line);
             //xclu_console_append(line);
         }
-
+        clear_string_local_console();
         append_string_local_console(list, 1);
     }
 }

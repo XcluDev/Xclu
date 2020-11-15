@@ -194,6 +194,21 @@ XModuleSoundOut::~XModuleSoundOut()
 }
 
 //---------------------------------------------------------------------
+void XModuleSoundOut::impl_loaded() {
+    clear_string_connected_device_name();
+    clear_string_local_console();
+
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundOut::impl_button_pressed(QString button_id) {
+    if (button_id == button_print_devices()) {
+        //если требуется, напечатать все устройства
+        print_devices();
+    }
+}
+
+//---------------------------------------------------------------------
 //Звук в Qt - https://doc.qt.io/qt-5/audiooverview.html
 //Вывод низкоуровневого звука - https://doc.qt.io/qt-5/qaudiooutput.html
 //Пример Qt - Audio Output Example
@@ -201,8 +216,6 @@ XModuleSoundOut::~XModuleSoundOut()
 void XModuleSoundOut::impl_start() {
     //Очистка переменных
     audio_tried_to_start_ = false;
-    print_devices_worked_ = false;
-    print_formats_worked_ = false;
 
     //данные surface
     {
@@ -214,12 +227,10 @@ void XModuleSoundOut::impl_start() {
     getobject_sound_format()->write().data().clear();
 
     set_started(false); //также ставит gui-элемент is_started
-    clear_string_connected_device_name();
 
+    clear_string_connected_device_name();
     clear_string_local_console();
 
-    //если требуется, печать подключенных устройств
-    print_devices();
 
 }
 
@@ -230,9 +241,6 @@ void XModuleSoundOut::impl_update() {
 
     //изменение громкости
     check_volume_change();
-
-    //если требуется, печать подключенных устройств
-    print_devices();
 
     //поставить информацию о том, воспроизводить ли тестовый звук
     //а также, список модулей
@@ -481,38 +489,26 @@ void XModuleSoundOut::set_buffer_size(int buffer_size) {
 //---------------------------------------------------------------------
 //печать в консоль доступных устройств аудиовывода
 void XModuleSoundOut::print_devices() {
-    int print = geti_print_devices();
-    if (!print) {
-        print_devices_worked_ = false;
-    }
-    else {
-        if (!print_devices_worked_) {
-            print_devices_worked_ = true;
-            QStringList list;
-            list.append("Connected Output Audio devices:");
-            //xclu_console_append("Connected Output Audiodevices:");
+    QStringList list;
+    list.append("Connected Output Audio devices:");
+    //xclu_console_append("Connected Output Audiodevices:");
 
-            const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
-            for (int i=0; i<devices.size(); i++) {
-                auto &info = devices.at(i);
-                QString device = QString::number(i) + ": " + info.deviceName();
-                list.append(device);
-                //xclu_console_append(device);
-            }
-            append_string_local_console(list, 1);
-        }
+    const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
+    for (int i=0; i<devices.size(); i++) {
+        auto &info = devices.at(i);
+        QString device = QString::number(i) + ": " + info.deviceName();
+        list.append(device);
+        //xclu_console_append(device);
     }
+    clear_string_local_console();
+    append_string_local_console(list, 1);
 }
 
 //---------------------------------------------------------------------
 //печать в консоль поддерживаемых аудиоформатов запускаемого устройства
 //внимание, эта функция запускает camera_->load()
 void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
-    if (audio_tried_to_start_
-            && !print_formats_worked_
-            && geti_print_formats()) {
-        print_formats_worked_ = true;
-
+    if (audio_tried_to_start_ && geti_print_formats()) {
         QString device_name = deviceInfo.deviceName();
 
         QStringList list;

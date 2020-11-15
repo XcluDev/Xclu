@@ -116,11 +116,11 @@ endif
 page Device_Info
     //Print list of output audio devices and supported formats of the selected device
 
-in checkbox Print_Devices print_devices=1
-	//Print list of all connected output audio devices
+in button Print_Devices print_devices
+	//Print list of all connected devices.
 
-const checkbox Print_Formats print_formats=1
-	//Print once list of supported formats of connected audio device
+in checkbox Print_Formats print_formats=0
+	//Print list of supported formats for connected device at start.
 
 out text Local_Console local_console 10 15
     //Console output

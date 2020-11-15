@@ -146,13 +146,14 @@ void increase_int_buffer_size(int increase = 1) { increase_int_("buffer_size", i
 //Page Device Info
 //Print list of output audio devices and supported formats of the selected device
 
-//Checkbox Print Devices
-//Print list of all connected output audio devices
+//Button Print Devices
+//Print list of all connected devices.
 bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
+QString button_print_devices() { return "print_devices"; }
 
-//Const Checkbox Print Formats
-//Print once list of supported formats of connected audio device
+//Checkbox Print Formats
+//Print list of supported formats for connected device at start.
 bool was_changed_print_formats() { return was_changed_("print_formats"); }
 int geti_print_formats() { return geti_("print_formats"); }
 

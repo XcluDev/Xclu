@@ -27,7 +27,7 @@
 #--------------------------------------------------------------------------
 
 #Uncomment for deploying mode, that is all modules definitions will be put inside EXE
-DEFINES+=XCLU_DEPLOY
+#DEFINES+=XCLU_DEPLOY
 
 
 Release:TARGET=Xclu

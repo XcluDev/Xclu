@@ -71,10 +71,11 @@ protected:
 #include "auto.h"
 
     //Выполнение
-    virtual void impl_loaded() {}
+    virtual void impl_loaded();
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
+    virtual void impl_button_pressed(QString button_id);
 
 protected:
 
@@ -104,12 +105,10 @@ protected:
 
     //печать в консоль доступных камер
     void print_devices();
-    bool print_devices_worked_ = false;
 
     //печать в консоль разрешений запускаемой камеры
     //внимание, эта функция запускает camera_->load()
     void print_formats();
-    bool print_formats_worked_ = false;
 
 protected slots:
     void on_changed_camera_state(QCamera::State state);

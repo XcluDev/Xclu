@@ -170,13 +170,14 @@ void append_string_frames_captured(QStringList v, int extra_new_lines_count = 0)
 //Page Device Info
 //Print list of cameras and supported formats.
 
-//Checkbox Print Devices
-//Print list of all connected webcams.
+//Button Print Devices
+//Print list of all connected devices.
 bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
+QString button_print_devices() { return "print_devices"; }
 
 //Checkbox Print Formats
-//Print once list of supported formats of connected camera.
+//Print list of supported formats for all devices.
 bool was_changed_print_formats() { return was_changed_("print_formats"); }
 int geti_print_formats() { return geti_("print_formats"); }
 
