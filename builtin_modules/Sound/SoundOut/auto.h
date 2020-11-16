@@ -176,4 +176,24 @@ void append_string_local_console(QStringList v, int extra_new_lines_count = 0) {
 bool was_changed_gen_test() { return was_changed_("gen_test"); }
 int geti_gen_test() { return geti_("gen_test"); }
 
+//Checkbox Left Channel
+//Should generate sound for left channel.
+bool was_changed_gen_left() { return was_changed_("gen_left"); }
+int geti_gen_left() { return geti_("gen_left"); }
+
+//Checkbox Right Channel
+//Should generate sound for right channel.
+bool was_changed_gen_right() { return was_changed_("gen_right"); }
+int geti_gen_right() { return geti_("gen_right"); }
+
+//Float Volume
+//Volume of generated sound.
+bool was_changed_gen_volume() { return was_changed_("gen_volume"); }
+float getf_gen_volume() { return getf_("gen_volume"); }
+
+//Int Freq
+//Frequency of generated sinewave.
+bool was_changed_gen_freq() { return was_changed_("gen_freq"); }
+int geti_gen_freq() { return geti_("gen_freq"); }
+
 //----------------------------------------------------

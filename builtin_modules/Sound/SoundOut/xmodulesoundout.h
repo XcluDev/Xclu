@@ -21,7 +21,13 @@ class Module;
 //Данные для обмена с generator, которые защищаются с помощью mutex
 struct XModuleSoundOutData: public XcluProtectedData
 {
-    int play_test_sound_ = 0;   //воспроизводить ли тестовый звук
+    int play_test_sound_ = 0;   //generate test sound
+    int play_left_ = 1;
+    int play_right_ = 1;
+    float play_volume_ = 0.5;
+    float play_freq_ = 440;
+
+
     float volume_ = 1;          //громкость
 
     //список ссылок на другие модули, которым высылать call

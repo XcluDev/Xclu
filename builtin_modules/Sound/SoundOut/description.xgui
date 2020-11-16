@@ -132,5 +132,17 @@ page Test_Sound
 in checkbox Generate_Test_Sound gen_test=0
     //Enable generating the test sinewave sound. Note, other sounds will be muted.
     
+in checkbox Left_Channel gen_left=1
+    //Should generate sound for left channel.
+    
+in checkbox Right_Channel gen_right=1
+    //Should generate sound for right channel.
+
+in float Volume gen_volume=0.5 0:1 0.01,0.1
+    //Volume of generated sound.
+   
+in int Freq gen_freq=440 0:20000 1,100
+    //Frequency of generated sinewave.
+    
 #-----------------------
 

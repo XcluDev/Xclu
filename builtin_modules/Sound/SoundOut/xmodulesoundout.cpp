@@ -52,7 +52,12 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
             auto write = sound_.write();
             XObject &sound = write.data();
             float *data = sound.var_array("data")->data_float();
-            float freq_Hz = 600;
+            float freq_Hz = data_->play_freq_;
+            float volume = data_->play_volume_;
+            QVector<float> channel_vol(channels, volume);
+            if (channels >= 1) channel_vol[0] *= data_->play_left_; //for muting left
+            if (channels >= 2) channel_vol[1] *= data_->play_right_; //for muting right
+
             float sample_rate = format_.sampleRate();
             int k = 0;
 
@@ -62,7 +67,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
                 float v = qSin(test_phase_);
                 test_phase_+=phase_add;
                 for (int u=0; u<channels; u++) {
-                    data[k++] = v;
+                    data[k++] = v * channel_vol[u];
                 }
             }
         }
@@ -248,6 +253,12 @@ void XModuleSoundOut::impl_update() {
     {
         DataAccess access(data_);
         data_.play_test_sound_ = geti_gen_test();
+        data_.play_left_ = geti_gen_left();
+        data_.play_right_ = geti_gen_right();
+        data_.play_volume_ = getf_gen_volume();
+        data_.play_freq_ = geti_gen_freq();
+
+
         data_.volume_ = getf_volume();
         data_.modules_ = XCORE.get_modules(gets_modules_list());
 
