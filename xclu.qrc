@@ -207,12 +207,6 @@
         <file>builtin_modules/Drawing/Shadertoy/description.xgui</file>
         <file>builtin_modules/Drawing/SweetDeferredRender/auto.h</file>
         <file>builtin_modules/Drawing/SweetDeferredRender/description.xgui</file>
-        <file>builtin_modules/Exhibition/KeyboardMouseRecPlay/auto.h</file>
-        <file>builtin_modules/Exhibition/KeyboardMouseRecPlay/description.xgui</file>
-        <file>builtin_modules/Exhibition/ScreenControl/auto.h</file>
-        <file>builtin_modules/Exhibition/ScreenControl/description.xgui</file>
-        <file>builtin_modules/Exhibition/XcluControl/auto.h</file>
-        <file>builtin_modules/Exhibition/XcluControl/description.xgui</file>
         <file>builtin_modules/ImageSources/CCTV/description.xgui</file>
         <file>builtin_modules/ImageSources/ImageConvert/auto.h</file>
         <file>builtin_modules/ImageSources/ImageConvert/description.xgui</file>
@@ -258,10 +252,6 @@
         <file>builtin_modules/KnowledgeGraphs/WikiData/description.xgui</file>
         <file>builtin_modules/Multimedia/OscStudio/auto.h</file>
         <file>builtin_modules/Multimedia/OscStudio/description.xgui</file>
-        <file>builtin_modules/Multimedia/PlaySound/auto.h</file>
-        <file>builtin_modules/Multimedia/PlaySound/description.xgui</file>
-        <file>builtin_modules/Multimedia/RecordSound/auto.h</file>
-        <file>builtin_modules/Multimedia/RecordSound/description.xgui</file>
         <file>builtin_modules/Multimedia/VideoPlayer/description.xgui</file>
         <file>builtin_modules/Multimedia/VideoRecorder/description.xgui</file>
         <file>builtin_modules/Multimedia/WPanoramaView/auto.h</file>
@@ -407,5 +397,10 @@
         <file>builtin_modules/Window/WMenu/description.xgui</file>
         <file>builtin_modules/Window/WSweetArea/auto.h</file>
         <file>builtin_modules/Window/WSweetArea/description.xgui</file>
+        <file>builtin_modules/Sound/PlaySound/description.xgui</file>
+        <file>builtin_modules/Sound/RecordSound/description.xgui</file>
+        <file>builtin_modules/Project/KeyboardMouseRecPlay/description.xgui</file>
+        <file>builtin_modules/Project/ScreenControl/description.xgui</file>
+        <file>builtin_modules/Project/XcluControl/description.xgui</file>
     </qresource>
 </RCC>

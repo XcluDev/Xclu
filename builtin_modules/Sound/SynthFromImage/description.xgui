@@ -89,7 +89,7 @@ out float Mean_Brightness center_value=0 0:1 0.001,0.01
 out float Brightness_Range range_value=1 0:2 0.001,0.01
     //Statistical range.
     
-in float Contrast contrast=100 0:10000 1,50
+in float Contrast contrast=1 0:100 0.1,1
     //Contrast parameter for converting brightness to sound values. Center is defined automatically.
     //(coefficient)
 endif 

@@ -61,21 +61,21 @@ endif
 #Output images
 separator
 in checkbox_group Show_Color show_color=1
-//Generate color image preview. Please disable is not required for speed optimization.
+//Generate color image preview.
 if show_color 1    
 out object_image Color color_image
     //Resulted Color image.
 endif
     
-in checkbox_group Show_Depth show_depth=0
-//Generate Depth image preview. Please disable is not required for speed optimization.
+in checkbox_group Show_Depth show_depth=1
+//Generate Depth image preview.
 if show_depth 1  
 out object_image Depth depth_image
     //Resulted Depth image.
 endif
 
 in checkbox_group Show_IR show_ir=0
-//Generate IR image preview. Please disable is not required for speed optimization.
+//Generate IR image preview. 
 if show_ir 1  
 out object_image IR ir_image
     //Resulted IR image.
@@ -135,7 +135,46 @@ separator
 const checkbox Emitter emitter=1
     //Enabling IR laser emitter.
     
+#--------------------
+page Transform
+    //Transform depth image to grayscale 8 bit and binary image.
 
+in checkbox_group Depth_Grayscale make_depth_grayscale=0
+    //Make depth image to 8 bit grayscale image.
+    
+if make_depth_grayscale 1
+in int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
+    //Near threshold.
+    //mm
+    
+in int Thresh_Far depth_grayscale_thresh_far_mm=10000 0:10000 5,100
+    //Far threshold.
+    //mm
+
+out object_image Grayscale_Image depth_grayscale_image
+    //Depth grayscale image.
+
+    
+endif
+    
+in checkbox_group Depth_Binary make_depth_binary=0
+    //Make depth image to 8 bit grayscale image.
+    
+if make_depth_binary 1
+in int Thresh_Near depth_binary_thresh_near_mm=0 0:10000 5,100
+    //Near threshold.
+    //mm
+    
+in int Thresh_Far depth_binary_thresh_far_mm=10000 0:10000 5,100
+    //Far threshold.
+    //mm
+
+out object_image Binary_Image depth_binary_image
+    //Depth binary image.
+
+endif
+
+    
 #--------------------
 page Devices
     //Here you can get list of connected cameras.
@@ -164,3 +203,5 @@ in string_folder Folder save_folder="realsense_frames"
 
 out text Saved_To saved_to 5 5
     //Path to last saving.
+    
+    

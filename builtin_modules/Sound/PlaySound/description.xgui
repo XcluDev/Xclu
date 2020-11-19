@@ -1,0 +1,36 @@
+#Module PlaySound
+#------------------------------------------
+module_description=Play sound from a memory or a WAV file.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings.
+    
+
+
+#-------------------------------------------
+page Volume
+    //Volume and fading
+    
+    
+in float Volume volume=0.5 0:2 0.01,0.1
+    //Volume.
+    
+in checkbox Left_Channel left_channel=1
+    //Send sound to the left channel.
+    
+in checkbox Right_Channel right_channel=1
+    //Send sound to the right channel.
+    
+separator
+
+in float Fade_In fade_in_sec=0.1 0:5 0.1,1
+    //Fade in.
+    //sec
+    
+in float Fade_Out fade_out_sec=0.1 0:5 0.1,1
+    //Fade iout.
+    //sec
+    
