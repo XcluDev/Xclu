@@ -1,14 +1,61 @@
 #Module PlaySound
 #------------------------------------------
-module_description=Play sound from a memory or a WAV file.
+module_description=Play sound from a WAV file or playlist of WAVs.
 module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
 page Main
     //General settings.
-    
 
+in enum Mode mode=Single_File [Single_File,Playlist]
+    //Single file or playlist.
+    
+in button Play play_button
+    //Start playing.
+
+in button Stop stop_button
+    //Stop playing.
+
+if mode Playlist
+in button Next_File next_file
+    //Play next file.
+endif
+    
+    
+out checkbox Playing playing=0
+    //Playing status.
+
+out string Playing_File playing_file=""
+    //Which file plays now.
+
+#out button Start_play start_play_button
+#out button Stop_play stop_play_button
+    
+separator
+
+    
+if mode Single_File
+in string_file File file_name=""
+    //File to play.
+
+in enum Loop_Mode loop_mode_file=Loop [None,Loop]
+    //Looping mode.
+    
+if mode Playlist
+in text Playlist_Files playlist_files 12 15
+    //Playlist files. '#' means comment.
+
+in enum Loop_Mode loop_mode_playlist=Loop_One [None,Play_Selected,Loop_One_File,Loop_Playlist,Shuffle]
+    //Looping mode.
+    #ПОДУМАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+endif
+
+#if loop_mode_playlist Play_Selected,Loop_One_File
+    #Выбор файла для воспроизведения.
+#endif    
+    
 
 #-------------------------------------------
 page Volume
