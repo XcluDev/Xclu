@@ -110,6 +110,36 @@ bool was_changed_send_string_btn() { return was_changed_("send_string_btn"); }
 int geti_send_string_btn() { return geti_("send_string_btn"); }
 QString button_send_string_btn() { return "send_string_btn"; }
 
+//Checkbox More Strings
+//You can prepare several additional strings to send for convenience.
+bool was_changed_show_additional_strings() { return was_changed_("show_additional_strings"); }
+int geti_show_additional_strings() { return geti_("show_additional_strings"); }
+
+//String String To Send
+//String for sending.
+bool was_changed_send_string2() { return was_changed_("send_string2"); }
+QString gets_send_string2() { return gets_("send_string2"); }
+QStringList get_strings_send_string2() { return get_strings_("send_string2"); }
+
+//Button Send
+//
+bool was_changed_send_string2_btn() { return was_changed_("send_string2_btn"); }
+int geti_send_string2_btn() { return geti_("send_string2_btn"); }
+QString button_send_string2_btn() { return "send_string2_btn"; }
+
+//String String To Send
+//String for sending.
+bool was_changed_send_string3() { return was_changed_("send_string3"); }
+QString gets_send_string3() { return gets_("send_string3"); }
+QStringList get_strings_send_string3() { return get_strings_("send_string3"); }
+
+//Button Send
+//
+bool was_changed_send_string3_btn() { return was_changed_("send_string3_btn"); }
+int geti_send_string3_btn() { return geti_("send_string3_btn"); }
+QString button_send_string3_btn() { return "send_string3_btn"; }
+
+
 //String String Link
 //Link to string for sending.
 bool was_changed_string_link_send() { return was_changed_("string_link_send"); }
@@ -147,7 +177,7 @@ int geti_send_bytes_btn() { return geti_("send_bytes_btn"); }
 QString button_send_bytes_btn() { return "send_bytes_btn"; }
 
 
-//Enum Show Received as
+//Enum Show Received As
 //Show received data as text or bytes.
 enum enum_show_received {
     show_received_None = 0,

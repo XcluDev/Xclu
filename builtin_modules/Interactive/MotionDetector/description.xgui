@@ -22,6 +22,10 @@ out object_image Output_Image output_image
 
 out object_image Background_Image background_image
     //Detected background.
+    
+in button Restore_Backgr restore_now
+    //Restore background immediately.
+
  
 in checkbox_group Detection_Area_Setup detection_area_setup=1
     
@@ -40,7 +44,77 @@ in float Y1 y1=1 0:1 0.01,0.1
     
 endif
 
+out checkbox Event event=0
+    //If detector fires.
+
+separator
+
+const enum Mode mode=Presense [Presense,Motion]
+    //Presense - search objects which are differs from background, Motion - detect instant motion.
+
+if mode Presense
+const int Block_Size block_size=32 1:* 1,10
+    //Block size for analysis.
+    //pix
+
+in float Threshold thresh_in=0.2 0:1 0.01,0.1
+    //Threshold for block detection.
+    //0..1
+
+#in float Threshold_Out thresh_out=0.1 0:1 0.01,0.1
+#    //Threshold for block undetection after detection.
+#    //0..1
+   
+in float Block_Event block_event_sec=0.1 0:* 0.1,1
+    //How much time block event must be to detect it.
+    //sec
+    
+out int Blocks_on blocks_on=0 0:* 1,10
+    //How many blocks fired now.
+    //blocks
+
+in int Blocks_Threshold blocks_threshold=1 0:* 1,10
+    //How many blocks must to fire for event.
+    //blocks
+        
+separator
+in float Background_Restore background_restore_sec=30 1:* 0.1,1
+    //If block image is not changed for this time, then background is restored to that image.
+    //sec
+
+out float Restore_Timer restore_timer=0 0:1 0.01,1
+    //Debug value for restoring.
+    //0..1
+    
+
+        
+endif
+    
+    
+    
 #-------------------------------------------
 page Settings
+
+
+separator
+in float Keep_On keep_on_sec=5 0:* 0.1,1
+    //How much seconds be on.
+    //sec
+    
+in float Keep_Off keep_off_sec=5 0:* 0.1,1
+    //How much seconds be off.
+    //sec
+    
+
+    
+separator
+    
+in text_bang Bang_On bang_on 7 10
+    //What to do on "On" event.
+    //#module1->play_button
+    
+in text_bang Bang_Off bang_off 7 10
+    //What to do on "Off" event.
+    //#module1->stop_button
 
 #-------------------------------------------

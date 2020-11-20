@@ -56,17 +56,35 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
 
     if (general_is_enabled()) {
         bool connect_warning = false;
-        if (button_id == "send_string_btn") {
+        //-----------------------
+        //TODO duplication in code
+        //send string
+        if (button_id == button_send_string_btn()) {
             if (connected_) {
-                QString str = gets_send_string();
-                send_string(str);
+                send_string(gets_send_string());
             }
             else {
                 connect_warning = true;
             }
-
         }
-        if (button_id == "send_string_link_btn") {
+        if (button_id == button_send_string2_btn()) {
+            if (connected_) {
+                send_string(gets_send_string2());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        if (button_id == button_send_string3_btn()) {
+            if (connected_) {
+                send_string(gets_send_string3());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        //-----------------------
+        if (button_id == button_send_string_link_btn()) {
             if (connected_) {
                 QString str = XCORE.get_string_by_link(gets_string_link_send());
                 send_string(str);
@@ -76,7 +94,7 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
             }
         }
 
-        if (button_id == "send_bytes_btn") {
+        if (button_id == button_send_bytes_btn()) {
             if (connected_) {
                 int byte = geti_send_byte();
                 send_byte(byte);

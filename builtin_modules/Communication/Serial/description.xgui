@@ -66,9 +66,23 @@ if send_type String
 in string String_To_Send send_string=""
     //String for sending.    
 in button Send send_string_btn
+
+in checkbox_group More_Strings show_additional_strings=0
+    //You can prepare several additional strings to send for convenience.
+
+if show_additional_strings 1
+in string String_To_Send send_string2=""
+    //String for sending.    
+in button Send send_string2_btn
+
+in string String_To_Send send_string3=""
+    //String for sending.    
+in button Send send_string3_btn
+
 endif
 
 #----------------
+separator
 
 if send_type String_Link
 in string String_Link string_link_send="module1->string"
@@ -97,7 +111,7 @@ endif
 
 separator
 
-in enum Show_Received_as show_received=None [None,Text,Bytes]
+in enum Show_Received_As show_received=None [None,Text,Bytes]
     //Show received data as text or bytes.
 
 #----------------

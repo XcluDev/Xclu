@@ -45,7 +45,7 @@ XTypeId_XRaster_type_id(XRaster_int2, XTypeId_int2)
 
 
 //---------------------------------------------------------------------
-void raster_to_raster(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
+void XRaster::convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
     raster.allocate(raster_rgb.w, raster_rgb.h);
     for (int i=0; i<raster.w*raster.h; i++) {
         raster.data[i] = raster_rgb.data[i].grayi();
@@ -53,7 +53,7 @@ void raster_to_raster(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
 }
 
 //---------------------------------------------------------------------
-void raster_to_raster(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
+void XRaster::convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
     raster_rgb.allocate(raster.w, raster.h);
     for (int i=0; i<raster.w*raster.h; i++) {
         raster_rgb.data[i] = rgb_u8(raster.data[i]);
