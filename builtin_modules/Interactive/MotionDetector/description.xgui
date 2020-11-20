@@ -86,7 +86,6 @@ out float Restore_Timer restore_timer=0 0:1 0.01,1
     //Debug value for restoring.
     //0..1
     
-
         
 endif
     
@@ -94,6 +93,9 @@ endif
     
 #-------------------------------------------
 page Settings
+
+in int Ignore_Start_Frames ignore_start_frames=15 1:* 1,10
+    //How much ignore frames at camera start - to let camera do its brightness adjustments.
 
 
 separator

@@ -41,7 +41,7 @@ public:
             int mean1 = 0;
             int mean2 = 0;
             int area = w_ * h_;
-
+            /* disable mean:
             for (int y=y_; y<y_+h_; y++) {
                 for (int x=x_; x<x_+w_; x++) {
                     mean1 += input.pixel_unsafe(x, y);
@@ -50,7 +50,7 @@ public:
             }
             mean1 /= area;
             mean2 /= area;
-
+            */
             int diff = 0;
             for (int y=y_; y<y_+h_; y++) {
                 for (int x=x_; x<x_+w_; x++) {
@@ -60,7 +60,10 @@ public:
             dist_ = float(diff)/(area*255);
 
             //Update fire
-            fires_ = dist_ > params.thresh_in;
+            int fire = dist_ > params.thresh_in;
+            bit_.update_times(params.block_event_sec);
+            bit_.update(dt, fire);
+            fires_ = bit_.state(); //dist_ > params.thresh_in;
         }
         else {
             dist_  = 0;
@@ -79,6 +82,8 @@ protected:
     float dist_ = 0;
 
     float fire_time_ = 0;   //last time of fire
+
+    SlowBit bit_;
 };
 
 
@@ -111,6 +116,17 @@ protected:
     //state
     int state_ = 0;
     float time_ = -10000;
+
+    //how much ignore frames
+    int ignore_frames_ = 0;
+
+    void bang_on();
+    void bang_off();
+
+    //vector of blocks fires
+    //while not changed - increase timer for background update
+    QVector<int> fires_;
+    float static_time_ = 1000000;   //time when started static behavior of blocks fires
 
 };
 

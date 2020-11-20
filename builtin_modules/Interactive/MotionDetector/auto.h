@@ -120,6 +120,11 @@ void setf_restore_timer(float value) { setf_("restore_timer", value); }
 //Page Settings
 //
 
+//Int Ignore Start Frames
+//How much ignore frames at camera start - to let camera do its brightness adjustments.
+bool was_changed_ignore_start_frames() { return was_changed_("ignore_start_frames"); }
+int geti_ignore_start_frames() { return geti_("ignore_start_frames"); }
+
 
 //Float Keep On
 //How much seconds be on.

@@ -31,6 +31,8 @@ void XModuleMotionDetector::impl_start() {
     //If correlation in some block exceeds threshold, the object is detected.
     //If no changes of "block image" for a minute - then update background.
 
+    out_image_.write().data().clear();
+    out_background_.write().data().clear();
 
     blocks_.clear();
     input_.clear();
@@ -39,6 +41,16 @@ void XModuleMotionDetector::impl_start() {
 
     state_ = 0;
     time_ = -10000;
+
+    static_time_ = 1000000;
+    fires_.clear();
+    setf_restore_timer(0);
+
+    //send "off" at start
+    bang_off();
+
+    ignore_frames_ = geti_ignore_start_frames();
+
 }
 
 //---------------------------------------------------------------------
@@ -50,6 +62,11 @@ void XModuleMotionDetector::impl_update() {
     //no image yet
     if (reader.data().type() != XObjectTypeImage) return;
 
+    //ignore frames at start
+    ignore_frames_--;
+    if (ignore_frames_ > 0) return;
+
+    //read image
     XObjectImage::to_raster(reader.data(), input_);
 
     if (input_.w == 0) return;  //no frames yet
@@ -63,6 +80,7 @@ void XModuleMotionDetector::impl_update() {
     //TODO assuming that image size will not change
     if (blocks_.size() != W*H) {
         blocks_.resize(W*H);
+        fires_.resize(W*H);
         for (int y=0; y<H; y++) {
             for (int x=0; x<W; x++) {
                 blocks_[x+W*y].setup(x*size, y*size, size, size);
@@ -78,7 +96,6 @@ void XModuleMotionDetector::impl_update() {
         background_ = input_;
     }
 
-
     //area
     int X0 = getf_x0() * w;
     int Y0 = getf_y0() * h;
@@ -93,6 +110,7 @@ void XModuleMotionDetector::impl_update() {
 
 
     float dt = xcore_dt();
+    float time = xcore_elapsed_time_sec();
     int nfires = 0;
     int N = 0;
     for (int y=0; y<H; y++) {
@@ -110,23 +128,54 @@ void XModuleMotionDetector::impl_update() {
 
     seti_blocks_on(nfires);
 
+    //check fires to vector
+    bool fires_changed = false;
+    for (int i=0; i<W*H; i++) {
+        int f = blocks_[i].fires();
+        if (f != fires_[i]) {
+            fires_changed = true;
+        }
+        fires_[i] = f;
+    }
+    //if changed - then reset timer for background update
+    if (fires_changed) {
+        static_time_ = time;
+    }
+    //update background
+    float restore_sec = getf_background_restore_sec();
+    if (time - static_time_ >= restore_sec) {
+        background_ = input_;
+        static_time_ = time;
+    }
+    if (restore_sec>0) {
+        setf_restore_timer((time - static_time_) / restore_sec);
+    }
+    else {
+        setf_restore_timer(0);
+    }
+
+
+
+
     //detection result
     int fire = (nfires >= geti_blocks_threshold());
-    float time = xcore_elapsed_time_sec();
     if (!state_) {
         if (fire && time > time_ + getf_keep_off_sec()) {
             state_ = 1;
             time_ = time;
             //Bang on
-            XCORE.bang(get_strings_bang_on());
+            bang_on();
         }
     }
     else {
+        if (fire) {     //update time on fire
+            time_ = time;
+        }
         if (!fire && time > time_ + getf_keep_off_sec()) {
             state_ = 0;
             time_ = time;
             //Bang off
-            XCORE.bang(get_strings_bang_off());
+            bang_off();
         }
     }
 
@@ -159,19 +208,24 @@ void XModuleMotionDetector::impl_update() {
         }
     }
     //border
-    int border_w = 5;
+    int border_w = 10;
     rgb_u8 border_color(0,0,0);
-    if (fire) {
+    if (state_) {
         border_color = rgb_u8(255,0,0);
+        if (fire) {
+            border_color = rgb_u8(255,255,0);
+        }
     }
     else {
-        if (state_) {
-            border_color = rgb_u8(128,128,0);
+        if (fire) {
+            border_color = rgb_u8(0,0,255);
         }
+
     }
     for (int y=0; y<h; y++) {
         for (int x=0; x<border_w; x++) {
             output_.pixel_unsafe(x,y) = border_color;
+            output_.pixel_unsafe(w-1-x,y) = border_color;
         }
     }
 
@@ -183,8 +237,19 @@ void XModuleMotionDetector::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_stop() {
+void XModuleMotionDetector::bang_on() {
+    XCORE.bang(get_strings_bang_on());
+}
 
+//---------------------------------------------------------------------
+void XModuleMotionDetector::bang_off() {
+    XCORE.bang(get_strings_bang_off());
+}
+
+//---------------------------------------------------------------------
+void XModuleMotionDetector::impl_stop() {
+    //send "off" at stop
+    bang_off();
 
 }
 
