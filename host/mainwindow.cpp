@@ -210,8 +210,8 @@ void MainWindow::on_actionUpdate_auto_h_files_for_all_modules_triggered()
 void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About XCLU"),
-                       tr("<b>XCLU</b> is a module-based system for creating production-ready applications"
-                          " for art and technology."));
+                       tr("<b>XCLU</b> is a module-based system for creating applications"
+                          ". Version: ") + XCLU_VERSION);
 }
 
 //---------------------------------------------------------------------

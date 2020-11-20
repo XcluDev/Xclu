@@ -18,6 +18,9 @@ namespace Ui {
 class MainWindow;
 }
 
+#define XCLU_VERSION "1.163"
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

@@ -61,11 +61,11 @@ in float Threshold thresh_in=0.2 0:1 0.01,0.1
     //Threshold for block detection.
     //0..1
 
-#in float Threshold_Out thresh_out=0.1 0:1 0.01,0.1
-#    //Threshold for block undetection after detection.
-#    //0..1
+in float Thresh_Out_Rel thresh_out_rel=0.75 0:1 0.01,0.1
+    //Threshold for block undetection after detection, relative to Threshold.
+    //0..1
    
-in float Block_Event block_event_sec=0.1 0:* 0.1,1
+in float Block_Event block_event_sec=0.2 0:* 0.1,1
     //How much time block event must be to detect it.
     //sec
     
@@ -94,9 +94,13 @@ endif
 #-------------------------------------------
 page Settings
 
+in int Decimate_Input decimate_input=2 1:* 1,10
+    //Decimate input image for improving stability of detection.
+    //pix
+
 in int Ignore_Start_Frames ignore_start_frames=15 1:* 1,10
     //How much ignore frames at camera start - to let camera do its brightness adjustments.
-
+    //frames
 
 separator
 in float Keep_On keep_on_sec=5 0:* 0.1,1

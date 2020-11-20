@@ -13,7 +13,7 @@
 struct XModuleMotionDetectorBlockParams {
     float thresh_in=0.2f; //Threshold for block detection, 0..1
 
-    //float thresh_out=0.1f;   //Threshold for block undetection after detection, 0..1
+    float thresh_out=0.1f;   //Threshold for block undetection after detection, 0..1
 
     float block_event_sec=0.1f; //How much time block event must be to detect it, sec
 };
@@ -41,7 +41,7 @@ public:
             int mean1 = 0;
             int mean2 = 0;
             int area = w_ * h_;
-            /* disable mean:
+            /* mean now is commented:
             for (int y=y_; y<y_+h_; y++) {
                 for (int x=x_; x<x_+w_; x++) {
                     mean1 += input.pixel_unsafe(x, y);
@@ -59,8 +59,14 @@ public:
             }
             dist_ = float(diff)/(area*255);
 
-            //Update fire
-            int fire = dist_ > params.thresh_in;
+            //Update fire            
+            int fire = fires_;
+            if (!fires_) {
+                if (dist_ > params.thresh_in) fire = 1;
+            }
+            else {
+                if (dist_ < params.thresh_out) fire = 0;
+            }
             bit_.update_times(params.block_event_sec);
             bit_.update(dt, fire);
             fires_ = bit_.state(); //dist_ > params.thresh_in;
@@ -106,9 +112,13 @@ protected:
     XProtectedObject out_image_;
     XProtectedObject out_background_;
 
-    XRaster_u8 input_;
+    XRaster_u8 input0_, input_;
     XRaster_u8 background_;
     XRaster_u8c3 output_;
+
+    //decimate inout
+    void decimate_input(XRaster_u8 &input, XRaster_u8 &result);
+
 
     //detection blocks
     QVector<XModuleMotionDetectorBlock> blocks_; //
@@ -127,6 +137,7 @@ protected:
     //while not changed - increase timer for background update
     QVector<int> fires_;
     float static_time_ = 1000000;   //time when started static behavior of blocks fires
+
 
 };
 

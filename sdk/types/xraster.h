@@ -112,9 +112,11 @@ public:
     }*/
 
 	void allocate(int w, int h) {
-		this->w = w;
-		this->h = h;
-		data.resize(w*h);
+        if (this->w != w || this->h != h) {
+            this->w = w;
+            this->h = h;
+            data.resize(w*h);
+        }
 	}
 	void copy_from(T *input_img, int w, int h) {
 		allocate(w, h);

@@ -67,10 +67,14 @@ void XModuleMotionDetector::impl_update() {
     if (ignore_frames_ > 0) return;
 
     //read image
-    XObjectImage::to_raster(reader.data(), input_);
+    XObjectImage::to_raster(reader.data(), input0_);
 
-    if (input_.w == 0) return;  //no frames yet
+    if (input0_.w == 0) return;  //no frames yet
 
+    //decimate input image
+    decimate_input(input0_, input_);
+
+    //parameters
     int w = input_.w;
     int h = input_.h;
     int size = geti_block_size();
@@ -105,7 +109,7 @@ void XModuleMotionDetector::impl_update() {
     //update blocks
     XModuleMotionDetectorBlockParams params;
     params.thresh_in = getf_thresh_in();
-    //params.thresh_out = getf_thresh_out();
+    params.thresh_out = getf_thresh_out_rel() * params.thresh_in;
     params.block_event_sec = getf_block_event_sec();
 
 
@@ -234,6 +238,37 @@ void XModuleMotionDetector::impl_update() {
     //set to images
     XObjectImage::create_from_raster(out_image_.write().data(), output_);
     XObjectImage::create_from_raster(out_background_.write().data(), background_);
+}
+
+//---------------------------------------------------------------------
+//decimate inout
+void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
+    int dec = geti_decimate_input();
+    if (dec <= 1) {
+        result = input;
+        return;
+    }
+    int dec2 = dec*dec;
+    int w = input.w;
+    int h = input.h;
+    result.allocate(w, h);
+    for (int y=0; y+dec<=h; y+=dec) {
+        for (int x=0; x+dec<=w; x+=dec) {
+            int sum = 0;
+            for (int b=0; b<dec; b++) {
+                for (int a=0; a<dec; a++) {
+                    sum += input.pixel_unsafe(x+a, y+b);
+                }
+            }
+            int v = sum / dec2;
+            for (int b=0; b<dec; b++) {
+                for (int a=0; a<dec; a++) {
+                    result.pixel_unsafe(x+a, y+b) = v;
+                }
+            }
+
+        }
+    }
 }
 
 //---------------------------------------------------------------------

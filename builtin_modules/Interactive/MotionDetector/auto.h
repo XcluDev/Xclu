@@ -87,6 +87,11 @@ int geti_block_size() { return geti_("block_size"); }
 bool was_changed_thresh_in() { return was_changed_("thresh_in"); }
 float getf_thresh_in() { return getf_("thresh_in"); }
 
+//Float Thresh Out Rel
+//Threshold for block undetection after detection, relative to Threshold.
+bool was_changed_thresh_out_rel() { return was_changed_("thresh_out_rel"); }
+float getf_thresh_out_rel() { return getf_("thresh_out_rel"); }
+
 //Float Block Event
 //How much time block event must be to detect it.
 bool was_changed_block_event_sec() { return was_changed_("block_event_sec"); }
@@ -119,6 +124,11 @@ void setf_restore_timer(float value) { setf_("restore_timer", value); }
 //----------------------------------------------------
 //Page Settings
 //
+
+//Int Decimate Input
+//Decimate input image for improving stability of detection.
+bool was_changed_decimate_input() { return was_changed_("decimate_input"); }
+int geti_decimate_input() { return geti_("decimate_input"); }
 
 //Int Ignore Start Frames
 //How much ignore frames at camera start - to let camera do its brightness adjustments.
