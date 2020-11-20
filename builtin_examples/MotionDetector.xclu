@@ -1,0 +1,655 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "2"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Project",
+                "name": "project1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "elapsed_time_sec",
+                        "avalue": "15.784"
+                    },
+                    {
+                        "aname": "dt",
+                        "avalue": "0.033"
+                    },
+                    {
+                        "aname": "measured_frame_rate",
+                        "avalue": "30.303"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Webcamera",
+                "name": "webcam1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "capture_source",
+                        "avalue": "Camera"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "By_Index"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "device_serial",
+                        "avalue": "1188e634"
+                    },
+                    {
+                        "aname": "image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "settings",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "custom_frame_rate",
+                        "avalue": "7"
+                    },
+                    {
+                        "aname": "resolution",
+                        "avalue": "320_x_240"
+                    },
+                    {
+                        "aname": "res_x",
+                        "avalue": "1024"
+                    },
+                    {
+                        "aname": "res_y",
+                        "avalue": "768"
+                    },
+                    {
+                        "aname": "image_channels",
+                        "avalue": "RGB"
+                    },
+                    {
+                        "aname": "image_data_type",
+                        "avalue": "u8"
+                    },
+                    {
+                        "aname": "runtime",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "connected_device_name",
+                        "avalue": "Integrated Webcam"
+                    },
+                    {
+                        "aname": "is_started",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frames_captured",
+                        "avalue": "Captured 442, Processed 431, Dropped 11 frame(s)"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "print_serials",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "print_formats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "local_console",
+                        "avalue": "Supported Formats for 'Integrated Webcam'\n  1280x720, 30 FPS\n  960x540, 30 FPS\n  848x480, 30 FPS\n  1280x720, 10 FPS\n  1280x720, 5 FPS\n  640x480, 30 FPS\n  640x360, 30 FPS\n  424x240, 30 FPS\n  320x240, 30 FPS\n  320x180, 30 FPS\n  160x120, 30 FPS\n\n"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "MotionDetector",
+                "name": "motion_detector1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_input_image",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "input_image",
+                        "avalue": "",
+                        "link": "webcam1->image"
+                    },
+                    {
+                        "aname": "output_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "background_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "detection_area_setup",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "x0",
+                        "avalue": "0.24"
+                    },
+                    {
+                        "aname": "x1",
+                        "avalue": "0.76"
+                    },
+                    {
+                        "aname": "y0",
+                        "avalue": "0.06"
+                    },
+                    {
+                        "aname": "y1",
+                        "avalue": "0.76"
+                    },
+                    {
+                        "aname": "event",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "mode",
+                        "avalue": "Presense"
+                    },
+                    {
+                        "aname": "block_size",
+                        "avalue": "32"
+                    },
+                    {
+                        "aname": "thresh_in",
+                        "avalue": "0.18"
+                    },
+                    {
+                        "aname": "thresh_out_rel",
+                        "avalue": "0.75"
+                    },
+                    {
+                        "aname": "block_event_sec",
+                        "avalue": "0.1"
+                    },
+                    {
+                        "aname": "blocks_on",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "blocks_threshold",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "background_restore_sec",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "restore_timer",
+                        "avalue": "0.134167"
+                    },
+                    {
+                        "aname": "Settings",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "decimate_input",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "ignore_start_frames",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "keep_on_sec",
+                        "avalue": "5"
+                    },
+                    {
+                        "aname": "keep_off_sec",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "bang_on",
+                        "avalue": "#sound_play_1->play_button"
+                    },
+                    {
+                        "aname": "bang_off",
+                        "avalue": "#sound_play_1->stop_button"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "WImage",
+                "name": "wimage1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "source",
+                        "avalue": "Link"
+                    },
+                    {
+                        "aname": "image_link",
+                        "avalue": "motion_detector1->output_image"
+                    },
+                    {
+                        "aname": "is_new_frame_link",
+                        "avalue": "webcam1->is_new_frame"
+                    },
+                    {
+                        "aname": "expression",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Visuals",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "parent_id",
+                        "avalue": "wwindow1"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "w",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "h",
+                        "avalue": "220"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title_text",
+                        "avalue": "Image"
+                    },
+                    {
+                        "aname": "title_placement",
+                        "avalue": "Left"
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "wwindow1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Window"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "620"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "480"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "742"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "mode",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "theme",
+                        "avalue": "Standard"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "VerticalLayout\n  HorizontalLayout\n    wimage1\n    #wimage2\n  #HorizontalLayout\n    #wimage3"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "current_preset",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "was_error",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
