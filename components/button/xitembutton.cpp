@@ -17,6 +17,9 @@ XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre
 
     //page Main_page
     name_ = pre_description.line_to_parse;
+
+    //reset value, in opposite case can be "random" value
+    reset_value();
 }
 
 //---------------------------------------------------------------------

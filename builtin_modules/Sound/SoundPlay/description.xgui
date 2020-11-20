@@ -36,21 +36,24 @@ separator
 
     
 if mode Single_File
+
+in enum Loop loop_mode_file=Loop [None,Loop]
+    //Looping mode.
+    
 in string_file File file_name=""
     //File to play.
 
-in enum Loop_Mode loop_mode_file=Loop [None,Loop]
-    //Looping mode.
-    
-if mode Playlist
-in text Playlist_Files playlist_files 12 15
-    //Playlist files. '#' means comment.
 
-in enum Loop_Mode loop_mode_playlist=Loop_One [None,Play_Selected,Loop_One_File,Loop_Playlist,Shuffle]
-    //Looping mode.
+    
+#if mode Playlist
+#in enum Loop loop_mode_playlist=Loop_One [None,Play_Selected,Loop_One_File,Loop_Playlist,Shuffle]
+#    //Looping mode.
     #ПОДУМАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-endif
+#in text Playlist_Files playlist_files 12 15
+#    //Playlist files. '#' means comment.
+
+#endif
 
 #if loop_mode_playlist Play_Selected,Loop_One_File
     #Выбор файла для воспроизведения.
@@ -62,22 +65,22 @@ page Volume
     //Volume and fading
     
     
-in float Volume volume=0.5 0:2 0.01,0.1
+in float Volume volume=0.5 0:1 0.01,0.1
     //Volume.
     
-in checkbox Left_Channel left_channel=1
-    //Send sound to the left channel.
+#in checkbox Left_Channel left_channel=1
+#    //Send sound to the left channel.
     
-in checkbox Right_Channel right_channel=1
-    //Send sound to the right channel.
+#in checkbox Right_Channel right_channel=1
+#    //Send sound to the right channel.
     
 separator
 
-in float Fade_In fade_in_sec=0.1 0:5 0.1,1
-    //Fade in.
-    //sec
+#in float Fade_In fade_in_sec=0.1 0:5 0.1,1
+#    //Fade in.
+#    //sec
     
 in float Fade_Out fade_out_sec=0.1 0:5 0.1,1
-    //Fade iout.
+    //Fade out - only when press "Stop" button.
     //sec
     

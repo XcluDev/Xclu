@@ -397,10 +397,40 @@
         <file>builtin_modules/Window/WMenu/description.xgui</file>
         <file>builtin_modules/Window/WSweetArea/auto.h</file>
         <file>builtin_modules/Window/WSweetArea/description.xgui</file>
-        <file>builtin_modules/Sound/PlaySound/description.xgui</file>
-        <file>builtin_modules/Sound/RecordSound/description.xgui</file>
         <file>builtin_modules/Project/KeyboardMouseRecPlay/description.xgui</file>
         <file>builtin_modules/Project/ScreenControl/description.xgui</file>
         <file>builtin_modules/Project/XcluControl/description.xgui</file>
+        <file>builtin_modules/Sound/SoundPlay/auto.h</file>
+        <file>builtin_modules/Sound/SoundPlay/description.xgui</file>
+        <file>builtin_modules/Sound/SoundRecord/auto.h</file>
+        <file>builtin_modules/Sound/SoundRecord/description.xgui</file>
+        <file>builtin_examples/sounds/freesound474362_loop-by-dsqt.mp3</file>
+        <file>builtin_examples/sounds/freesound474362_loop-by-dsqt.wav</file>
+        <file>builtin_examples/Window/Demo project.xclu</file>
+        <file>builtin_examples/Window/WImage.xclu</file>
+        <file>builtin_examples/Window/Window.xclu</file>
+        <file>builtin_examples/Window/WNumber.xclu</file>
+        <file>builtin_examples/Arduino.xclu</file>
+        <file>builtin_examples/Empty.xclu</file>
+        <file>builtin_examples/ImageLoader.xclu</file>
+        <file>builtin_examples/JSModule.xclu</file>
+        <file>builtin_examples/Links.xclu</file>
+        <file>builtin_examples/Project.xclu</file>
+        <file>builtin_examples/Random.xclu</file>
+        <file>builtin_examples/Realsense.xclu</file>
+        <file>builtin_examples/Realsense_solution.xclu</file>
+        <file>builtin_examples/Realsense_usb2.xclu</file>
+        <file>builtin_examples/Realsense_usb2_sound.xclu</file>
+        <file>builtin_examples/ScanFolder.xclu</file>
+        <file>builtin_examples/Sound.xclu</file>
+        <file>builtin_examples/SoundOsc.xclu</file>
+        <file>builtin_examples/SoundOsc_Link.xclu</file>
+        <file>builtin_examples/SoundPlay.xclu</file>
+        <file>builtin_examples/TelegramBot.xclu</file>
+        <file>builtin_examples/Test.xclu</file>
+        <file>builtin_examples/Test_Drawing.xclu</file>
+        <file>builtin_examples/TextVariation.xclu</file>
+        <file>builtin_examples/Timer.xclu</file>
+        <file>builtin_examples/Webcamera.xclu</file>
     </qresource>
 </RCC>
