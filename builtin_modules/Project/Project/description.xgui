@@ -20,11 +20,11 @@ const checkbox Autostart autostart=0
     
     
 separator
-out float Elapsed_Time elapsed_time_sec=0 0:1000000 1,10
+out float Elapsed_Time elapsed_time_sec=0 0:* 1,10
     //Time in seconds from project start.
     //sec
     
-out float dt dt=0 0:100 0.01,0.1
+out float dt dt=0 0:* 0.01,0.1
     //Time step between frames.
     //sec
     

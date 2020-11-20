@@ -432,5 +432,6 @@
         <file>builtin_examples/TextVariation.xclu</file>
         <file>builtin_examples/Timer.xclu</file>
         <file>builtin_examples/Webcamera.xclu</file>
+        <file>builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp</file>
     </qresource>
 </RCC>

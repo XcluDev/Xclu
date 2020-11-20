@@ -1,6 +1,6 @@
 #Module MotionDetector
 #------------------------------------------
-module_description=Detecting motion in areas of videoframes.
+module_description=Detecting motion in areas of videoframes. Good camera: A4Tech PK-910P.
 module_version=1.01
 module_impl=C++
 
@@ -8,4 +8,39 @@ module_impl=C++
 page Main
     //General settings
 
+in checkbox_group Show_Input_Image show_input_image=1
 
+if show_input_image 1
+in object_image Input_Image input_image
+    //Image for processing.
+endif   
+
+separator
+
+out object_image Output_Image output_image
+    //Image with visualization.
+
+out object_image Background_Image background_image
+    //Detected background.
+ 
+in checkbox_group Detection_Area_Setup detection_area_setup=1
+    
+if detection_area_setup 1
+in float X0 x0=0 0:1 0.01,0.1
+    //Detection area left.
+
+in float X1 x1=1 0:1 0.01,0.1
+    //Detection area right.
+
+in float Y0 y0=0 0:1 0.01,0.1
+    //Detection area top.
+
+in float Y1 y1=1 0:1 0.01,0.1
+    //Detection area bottom.
+    
+endif
+
+#-------------------------------------------
+page Settings
+
+#-------------------------------------------
