@@ -136,13 +136,17 @@ const checkbox Emitter emitter=1
     //Enabling IR laser emitter.
     
 #--------------------
-page Transform
+page 8_Bit
     //Transform depth image to grayscale 8 bit and binary image.
 
 in checkbox_group Depth_Grayscale make_depth_grayscale=0
     //Make depth image to 8 bit grayscale image.
     
 if make_depth_grayscale 1
+
+out object_image Grayscale_Image depth_grayscale_image
+    //Depth grayscale image.
+
 in int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
     //Near threshold.
     //mm
@@ -150,29 +154,45 @@ in int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
 in int Thresh_Far depth_grayscale_thresh_far_mm=10000 0:10000 5,100
     //Far threshold.
     //mm
+    
+in int Output0 depth_grayscale_output0=255 0:255 1,10
+    //Range of output.
+    
+in int Output1 depth_grayscale_output1=0 0:255 1,10
+    //Range of output.
 
-out object_image Grayscale_Image depth_grayscale_image
-    //Depth grayscale image.
+separator
 
+in float X0 depth_grayscale_x0=0 0:1 0.01,0.1
+    //Crop X0.
+
+in float X1 depth_grayscale_x1=1 0:1 0.01,0.1
+    //Crop X1.
+
+in float Y0 depth_grayscale_y0=0 0:1 0.01,0.1
+    //Crop Y0.
+
+in float Y1 depth_grayscale_y1=1 0:1 0.01,0.1
+    //Crop Y1.
     
 endif
     
-in checkbox_group Depth_Binary make_depth_binary=0
-    //Make depth image to 8 bit grayscale image.
+#in checkbox_group Depth_Binary make_depth_binary=0
+#    //Make depth image to 8 bit grayscale image.
     
-if make_depth_binary 1
-in int Thresh_Near depth_binary_thresh_near_mm=0 0:10000 5,100
-    //Near threshold.
-    //mm
+#if make_depth_binary 1
+#in int Thresh_Near depth_binary_thresh_near_mm=0 0:10000 5,100
+#    //Near threshold.
+#    //mm
     
-in int Thresh_Far depth_binary_thresh_far_mm=10000 0:10000 5,100
-    //Far threshold.
-    //mm
+#in int Thresh_Far depth_binary_thresh_far_mm=10000 0:10000 5,100
+#    //Far threshold.
+#    //mm
 
-out object_image Binary_Image depth_binary_image
-    //Depth binary image.
+#out object_image Binary_Image depth_binary_image
+#    //Depth binary image.
 
-endif
+#endif
 
     
 #--------------------

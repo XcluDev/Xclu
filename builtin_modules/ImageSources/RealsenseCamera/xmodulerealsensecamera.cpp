@@ -77,12 +77,29 @@ void XModuleRealsenseCamera::impl_start() {
     getobject_depth_image()->write().data().clear();
     getobject_ir_image()->write().data().clear();
 
+    raster_color_.clear();
+    raster_depth_.clear();
+    raster_ir_.clear();
+
     is_new_frame = 0;
     processed_frames_ = 0;
     wait_save_frames_ = 0;
 
-    //запуск камеры или воспроизведения файла
+    //transform
+    //link images with internal objects
+    setobject_depth_grayscale_image(&out_grayscale_gui_);
+    //setobject_depth_grayscale_image(&out_binary_gui_);
+
+    out_grayscale_gui_.write().data().clear();
+    //out_binary_gui_.write().data().clear();
+
+    raster_depth16_.clear();
+    out_grayscale_.clear();
+    //out_binary_.clear();
+
+    //start camera or BAG file
     start_camera();
+
 }
 
 //---------------------------------------------------------------------
@@ -121,21 +138,18 @@ void XModuleRealsenseCamera::impl_update() {
         bool make_depth = false;
         bool make_ir = false;
         if ((geti_show_color() || wait_save_frames_) && camera_.settings().use_rgb) {
-            XRaster_u8c3 raster_color;
-            xclu_assert(camera_.get_color_pixels_rgb(raster_color), "get_color_pixels_rgb() returned false");
-            XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color);
+            xclu_assert(camera_.get_color_pixels_rgb(raster_color_), "get_color_pixels_rgb() returned false");
+            XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
             make_color = true;
         }
         if ((geti_show_depth() || wait_save_frames_) && camera_.settings().use_depth) {
-            XRaster_u8c3 raster_depth;
-            xclu_assert(camera_.get_depth_pixels_rgb(raster_depth), "get_depth_pixels_rgb() returned false");
-            XObjectImage::create_from_raster(getobject_depth_image()->write().data(), raster_depth);
+            xclu_assert(camera_.get_depth_pixels_rgb(raster_depth_), "get_depth_pixels_rgb() returned false");
+            XObjectImage::create_from_raster(getobject_depth_image()->write().data(), raster_depth_);
             make_depth = true;
         }
         if ((geti_show_ir() || wait_save_frames_) && camera_.settings().use_ir) {
-            XRaster_u8 raster_ir;
-            xclu_assert(camera_.get_ir_pixels8(raster_ir), "get_ir_pixels8() returned false");
-            XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir);
+            xclu_assert(camera_.get_ir_pixels8(raster_ir_), "get_ir_pixels8() returned false");
+            XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir_);
             make_ir = true;
         }
         //если требуется - записать на диск
@@ -144,6 +158,9 @@ void XModuleRealsenseCamera::impl_update() {
         }
 
         wait_save_frames_ = 0;
+
+        //generate transformed images
+        transform();
     }
 
 
@@ -305,6 +322,45 @@ void XModuleRealsenseCamera::set_started(bool started) { //ставит camera_s
     seti_is_started(started);
 }
 
+//---------------------------------------------------------------------
+//compute transformed depth to grayscale 8 bit and binary image
+void XModuleRealsenseCamera::transform() {
+    if (geti_make_depth_grayscale()) {
+        xclu_assert(camera_.get_depth_pixels_mm(raster_depth16_), "get_depth_pixels_mm() returned false");
+        //XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
+
+        //crop
+        auto &input = raster_depth16_;
+        auto &output = out_grayscale_;
+        int w = input.w;
+        int h = input.h;
+        int x0 = int(w * getf_depth_grayscale_x0());
+        int x1 = int(w * getf_depth_grayscale_x1());
+        int y0 = int(h * getf_depth_grayscale_y0());
+        int y1 = int(h * getf_depth_grayscale_y1());
+        if (x0 > x1) qSwap(x0, x1);
+        if (y0 > y1) qSwap(y0, y1);
+        int w1 = x1 - x0;
+        int h1 = y1 - y0;
+
+        int in0 = geti_depth_grayscale_thresh_near_mm();
+        int in1 = geti_depth_grayscale_thresh_far_mm();
+        int out0 = geti_depth_grayscale_output0();
+        int out1 = geti_depth_grayscale_output1();
+
+        output.allocate(w1, h1);
+        for (int y=0; y<h1; y++) {
+            for (int x=0; x<w1; x++) {
+                output.pixel_unsafe(x, y) = mapi_clamped(input.pixel_unsafe(x+x0, y+y0), in0, in1, out0, out1);
+            }
+        }
+
+        //set output
+        XObjectImage::create_from_raster(out_grayscale_gui_.write().data(), output);
+
+    }
+
+}
 
 //---------------------------------------------------------------------
 

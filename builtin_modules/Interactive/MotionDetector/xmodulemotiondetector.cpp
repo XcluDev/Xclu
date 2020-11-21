@@ -51,6 +51,7 @@ void XModuleMotionDetector::impl_start() {
 
     ignore_frames_ = geti_ignore_start_frames();
 
+
 }
 
 //---------------------------------------------------------------------

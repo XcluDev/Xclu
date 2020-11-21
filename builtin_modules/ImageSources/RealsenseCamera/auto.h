@@ -80,7 +80,7 @@ void append_string_frames_captured(QStringList v, int extra_new_lines_count = 0)
 
 
 //Checkbox Show Color
-//Generate color image preview. Please disable is not required for speed optimization.
+//Generate color image preview.
 bool was_changed_show_color() { return was_changed_("show_color"); }
 int geti_show_color() { return geti_("show_color"); }
 
@@ -91,7 +91,7 @@ XProtectedObject *getobject_color_image() { return get_object_("color_image"); }
 void setobject_color_image(XProtectedObject *value) { set_object_("color_image", value); }
 
 //Checkbox Show Depth
-//Generate Depth image preview. Please disable is not required for speed optimization.
+//Generate Depth image preview.
 bool was_changed_show_depth() { return was_changed_("show_depth"); }
 int geti_show_depth() { return geti_("show_depth"); }
 
@@ -102,7 +102,7 @@ XProtectedObject *getobject_depth_image() { return get_object_("depth_image"); }
 void setobject_depth_image(XProtectedObject *value) { set_object_("depth_image", value); }
 
 //Checkbox Show IR
-//Generate IR image preview. Please disable is not required for speed optimization.
+//Generate IR image preview.
 bool was_changed_show_ir() { return was_changed_("show_ir"); }
 int geti_show_ir() { return geti_("show_ir"); }
 
@@ -230,6 +230,62 @@ QString getraw_depth_frame_rate() { return getraw_("depth_frame_rate");}
 //Enabling IR laser emitter.
 bool was_changed_emitter() { return was_changed_("emitter"); }
 int geti_emitter() { return geti_("emitter"); }
+
+//----------------------------------------------------
+//Page 8 Bit
+//Transform depth image to grayscale 8 bit and binary image.
+
+//Checkbox Depth Grayscale
+//Make depth image to 8 bit grayscale image.
+bool was_changed_make_depth_grayscale() { return was_changed_("make_depth_grayscale"); }
+int geti_make_depth_grayscale() { return geti_("make_depth_grayscale"); }
+
+//Out Object Grayscale Image
+//Depth grayscale image.
+bool was_changed_depth_grayscale_image() { return was_changed_("depth_grayscale_image"); }
+XProtectedObject *getobject_depth_grayscale_image() { return get_object_("depth_grayscale_image"); }
+void setobject_depth_grayscale_image(XProtectedObject *value) { set_object_("depth_grayscale_image", value); }
+
+//Int Thresh Near
+//Near threshold.
+bool was_changed_depth_grayscale_thresh_near_mm() { return was_changed_("depth_grayscale_thresh_near_mm"); }
+int geti_depth_grayscale_thresh_near_mm() { return geti_("depth_grayscale_thresh_near_mm"); }
+
+//Int Thresh Far
+//Far threshold.
+bool was_changed_depth_grayscale_thresh_far_mm() { return was_changed_("depth_grayscale_thresh_far_mm"); }
+int geti_depth_grayscale_thresh_far_mm() { return geti_("depth_grayscale_thresh_far_mm"); }
+
+//Int Output0
+//Range of output.
+bool was_changed_depth_grayscale_output0() { return was_changed_("depth_grayscale_output0"); }
+int geti_depth_grayscale_output0() { return geti_("depth_grayscale_output0"); }
+
+//Int Output1
+//Range of output.
+bool was_changed_depth_grayscale_output1() { return was_changed_("depth_grayscale_output1"); }
+int geti_depth_grayscale_output1() { return geti_("depth_grayscale_output1"); }
+
+
+//Float X0
+//Crop X0.
+bool was_changed_depth_grayscale_x0() { return was_changed_("depth_grayscale_x0"); }
+float getf_depth_grayscale_x0() { return getf_("depth_grayscale_x0"); }
+
+//Float X1
+//Crop X1.
+bool was_changed_depth_grayscale_x1() { return was_changed_("depth_grayscale_x1"); }
+float getf_depth_grayscale_x1() { return getf_("depth_grayscale_x1"); }
+
+//Float Y0
+//Crop Y0.
+bool was_changed_depth_grayscale_y0() { return was_changed_("depth_grayscale_y0"); }
+float getf_depth_grayscale_y0() { return getf_("depth_grayscale_y0"); }
+
+//Float Y1
+//Crop Y1.
+bool was_changed_depth_grayscale_y1() { return was_changed_("depth_grayscale_y1"); }
+float getf_depth_grayscale_y1() { return getf_("depth_grayscale_y1"); }
 
 //----------------------------------------------------
 //Page Devices

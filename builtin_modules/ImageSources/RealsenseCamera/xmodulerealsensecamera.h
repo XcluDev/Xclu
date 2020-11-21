@@ -64,7 +64,21 @@ protected:
     int get_frame_rate(QString rate_string);
     RealsenseSettings get_settings();
 
+    XRaster_u8c3 raster_color_;
+    XRaster_u8c3 raster_depth_;
+    XRaster_u8 raster_ir_;
 
+    //compute transformed depth to grayscale 8 bit and binary image
+    void transform();
+
+    //TODO if will be required in other place - do reading carefully, to prevent duplication
+    XRaster_u16 raster_depth16_;
+
+    XProtectedObject out_grayscale_gui_;
+    //XProtectedObject out_binary_gui_;
+
+    XRaster_u8 out_grayscale_;
+    //XRaster_u8 out_binary_;
 };
 
 
