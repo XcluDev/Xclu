@@ -22,158 +22,59 @@ bool was_changed_output_image() { return was_changed_("output_image"); }
 XProtectedObject *getobject_output_image() { return get_object_("output_image"); }
 void setobject_output_image(XProtectedObject *value) { set_object_("output_image", value); }
 
+//Button Freeze
+//Freeze input image.
+bool was_changed_freeze_btn() { return was_changed_("freeze_btn"); }
+int geti_freeze_btn() { return geti_("freeze_btn"); }
+QString button_freeze_btn() { return "freeze_btn"; }
 
-//Checkbox Scan Area Setup
-//Scanning area setup.
-bool was_changed_scan_area_setup() { return was_changed_("scan_area_setup"); }
-int geti_scan_area_setup() { return geti_("scan_area_setup"); }
+//Button Unfreeze
+//Unfreeze input image.
+bool was_changed_unfreeze_btn() { return was_changed_("unfreeze_btn"); }
+int geti_unfreeze_btn() { return geti_("unfreeze_btn"); }
+QString button_unfreeze_btn() { return "unfreeze_btn"; }
 
-//Enum Scan Shape
-//Shape of scanning.
-enum enum_scan_shape {
-    scan_shape_Horizontal_Rectangle = 0,
-    scan_shape_Vertical_Rectangle = 1,
-    scan_shape_Radar = 2,
-    scan_shape_N__ = 3
-};
-bool was_changed_scan_shape() { return was_changed_("scan_shape"); }
-enum_scan_shape gete_scan_shape() { return enum_scan_shape(geti_("scan_shape")); }
-QString getraw_scan_shape() { return getraw_("scan_shape");}
-
-//Float Scan X
-//X position of scanning area's center.
-bool was_changed_scan_x() { return was_changed_("scan_x"); }
-float getf_scan_x() { return getf_("scan_x"); }
 
 //Float Scan Y
 //Y position of scanning area's center.
 bool was_changed_scan_y() { return was_changed_("scan_y"); }
 float getf_scan_y() { return getf_("scan_y"); }
 
-//Float Scan Rad X
-//X radius of scanning area.
-bool was_changed_rad_x() { return was_changed_("rad_x"); }
-float getf_rad_x() { return getf_("rad_x"); }
-
-//Float Scan Rad Y
-//Y radius of scanning area.
-bool was_changed_rad_y() { return was_changed_("rad_y"); }
-float getf_rad_y() { return getf_("rad_y"); }
-
-//Float Scan Rad X
-//Radius of scanning area.
-bool was_changed_rad() { return was_changed_("rad"); }
-float getf_rad() { return getf_("rad"); }
+//Float Scan W
+//Scanning width.
+bool was_changed_scan_w() { return was_changed_("scan_w"); }
+float getf_scan_w() { return getf_("scan_w"); }
 
 
-//Checkbox Interpretation
-//Tools for transforming brightness value to sound value.
-bool was_changed_interpr() { return was_changed_("interpr"); }
-int geti_interpr() { return geti_("interpr"); }
+//Int Sample Rate
+//Sample rate.
+bool was_changed_sample_rate() { return was_changed_("sample_rate"); }
+int geti_sample_rate() { return geti_("sample_rate"); }
 
-//Out Float Min Brightness
-//Maximal brightness value.
-bool was_changed_min_value() { return was_changed_("min_value"); }
-float getf_min_value() { return getf_("min_value"); }
-void setf_min_value(float value) { setf_("min_value", value); }
+//Checkbox Ignore Borders
+//Ignore black borders - affect tone of the line (if shorter - tone is higher). For Realsense using.
+bool was_changed_ignore_borders() { return was_changed_("ignore_borders"); }
+int geti_ignore_borders() { return geti_("ignore_borders"); }
 
-//Out Float Max Brightness
-//Maximal brightness value.
-bool was_changed_max_value() { return was_changed_("max_value"); }
-float getf_max_value() { return getf_("max_value"); }
-void setf_max_value(float value) { setf_("max_value", value); }
+//Checkbox Put To Zero
+//Make boundaries zero-valued, for reducing cracking sound.
+bool was_changed_put_to_zero() { return was_changed_("put_to_zero"); }
+int geti_put_to_zero() { return geti_("put_to_zero"); }
 
-//Out Float Mean Brightness
-//Statistical center.
-bool was_changed_center_value() { return was_changed_("center_value"); }
-float getf_center_value() { return getf_("center_value"); }
-void setf_center_value(float value) { setf_("center_value", value); }
-
-//Out Float Brightness Range
-//Statistical range.
-bool was_changed_range_value() { return was_changed_("range_value"); }
-float getf_range_value() { return getf_("range_value"); }
-void setf_range_value(float value) { setf_("range_value", value); }
-
-//Float Contrast
-//Contrast parameter for converting brightness to sound values. Center is defined automatically.
-bool was_changed_contrast() { return was_changed_("contrast"); }
-float getf_contrast() { return getf_("contrast"); }
-
-
-//Enum Interpretation Method
-//Interpretation method: pixels slices are PCM samples or sonogram.
-enum enum_method {
-    method_PCM = 0,
-    method_Sonogram = 1,
-    method_N__ = 2
+//Enum Loop Mode
+//Loop by repeat or ping-pong.
+enum enum_loop_mode {
+    loop_mode_Repeat = 0,
+    loop_mode_Ping_Pong = 1,
+    loop_mode_N__ = 2
 };
-bool was_changed_method() { return was_changed_("method"); }
-enum_method gete_method() { return enum_method(geti_("method")); }
-QString getraw_method() { return getraw_("method");}
+bool was_changed_loop_mode() { return was_changed_("loop_mode"); }
+enum_loop_mode gete_loop_mode() { return enum_loop_mode(geti_("loop_mode")); }
+QString getraw_loop_mode() { return getraw_("loop_mode");}
 
-//Enum Scan Speed Measure
-//Speed of scanning.
-enum enum_pcm_speed_measure {
-    pcm_speed_measure_Hz = 0,
-    pcm_speed_measure_Seconds = 1,
-    pcm_speed_measure_MIDI_note = 2,
-    pcm_speed_measure_N__ = 3
-};
-bool was_changed_pcm_speed_measure() { return was_changed_("pcm_speed_measure"); }
-enum_pcm_speed_measure gete_pcm_speed_measure() { return enum_pcm_speed_measure(geti_("pcm_speed_measure")); }
-QString getraw_pcm_speed_measure() { return getraw_("pcm_speed_measure");}
-
-//Float Speed
-//
-bool was_changed_pcm_speed_hz() { return was_changed_("pcm_speed_hz"); }
-float getf_pcm_speed_hz() { return getf_("pcm_speed_hz"); }
-
-//Float Speed
-//
-bool was_changed_pcm_speed_sec() { return was_changed_("pcm_speed_sec"); }
-float getf_pcm_speed_sec() { return getf_("pcm_speed_sec"); }
-
-//Enum Scan Speed Measure
-//Speed of scanning.
-enum enum_sono_speed_measure {
-    sono_speed_measure_Seconds = 0,
-    sono_speed_measure_BPM = 1,
-    sono_speed_measure_N__ = 2
-};
-bool was_changed_sono_speed_measure() { return was_changed_("sono_speed_measure"); }
-enum_sono_speed_measure gete_sono_speed_measure() { return enum_sono_speed_measure(geti_("sono_speed_measure")); }
-QString getraw_sono_speed_measure() { return getraw_("sono_speed_measure");}
-
-//Float Speed Seconds
-//
-bool was_changed_sono_speed_sec() { return was_changed_("sono_speed_sec"); }
-float getf_sono_speed_sec() { return getf_("sono_speed_sec"); }
-
-//Int Oscillators
-//Number of oscillators for sound generation.
-bool was_changed_oscillators() { return was_changed_("oscillators"); }
-int geti_oscillators() { return geti_("oscillators"); }
-
-//Enum Oscillator Shape
-//Waveshape of the ocsillator.
-enum enum_oscillator_shape {
-    oscillator_shape_Sine = 0,
-    oscillator_shape_Square = 1,
-    oscillator_shape_N__ = 2
-};
-bool was_changed_oscillator_shape() { return was_changed_("oscillator_shape"); }
-enum_oscillator_shape gete_oscillator_shape() { return enum_oscillator_shape(geti_("oscillator_shape")); }
-QString getraw_oscillator_shape() { return getraw_("oscillator_shape");}
-
-//Int MIDI Note Low
-//Note for setting frequency of low values.
-bool was_changed_note_low() { return was_changed_("note_low"); }
-int geti_note_low() { return geti_("note_low"); }
-
-//Int MIDI Note High
-//Note for setting frequency of high values.
-bool was_changed_note_high() { return was_changed_("note_high"); }
-int geti_note_high() { return geti_("note_high"); }
+//Float Volume
+//Volume of the resulted sound.
+bool was_changed_volume() { return was_changed_("volume"); }
+float getf_volume() { return getf_("volume"); }
 
 //----------------------------------------------------

@@ -24,11 +24,17 @@ separator
 out object_image Output_Image output_image
     //Image with visualization.
     
+in button Freeze freeze_btn
+    //Freeze input image.
+ 
+in button Unfreeze unfreeze_btn
+    //Unfreeze input image.
+    
 #----------------------------------    
 separator
     
-in float Scan_X scan_x=0.5 0:1 0.002,0.02
-    //X position of scanning area's center.
+#in float Scan_X scan_x=0.5 0:1 0.002,0.02
+#    //X position of scanning area's center.
 
 in float Scan_Y scan_y=0.5 0:1 0.002,0.02
     //Y position of scanning area's center.
@@ -40,39 +46,26 @@ in float Scan_W scan_w=0.5 0:1 0.002,0.02
 #----------------------------------   
 separator
 
-out float Min_Brightness min_value=0 0:1 0.001,0.01
-    //Maximal brightness value.
-
-out float Max_Brightness max_value=1 0:1 0.001,0.01
-    //Maximal brightness value.
+in int Sample_Rate sample_rate=1000 1:44100 10,100
+    //Sample rate.
+    //pixels/sec
     
-out float Mean_Brightness center_value=0 0:1 0.001,0.01
-    //Statistical center.
     
-out float Brightness_Range range_value=1 0:2 0.001,0.01
-    //Statistical range.
+in checkbox Ignore_Borders ignore_borders=0
+    //Ignore black borders - affect tone of the line (if shorter - tone is higher). For Realsense using.
     
-in float Contrast contrast=1 0:100 0.1,1
-    //Contrast parameter for converting brightness to sound values. Center is defined automatically.
-    //(coefficient)
-
+in checkbox Put_To_Zero put_to_zero=0
+    //Make boundaries zero-valued, for reducing cracking sound.
+    
+in enum Loop_Mode loop_mode=Repeat [Repeat,Ping_Pong]
+    //Loop by repeat or ping-pong.
+    
+    
+in float Volume volume=1 0:2 0.1,1
+    //Volume of the resulted sound.
+    //0..2
+        
    
-separator
 
-
-#-------------- 
-in enum Scan_Speed_Measure pcm_speed_measure=Hz [Hz,Seconds,MIDI_note]
-    //Speed of scanning.
-
-if pcm_speed_measure Hz
-in float Speed pcm_speed_hz=10 0:1000 0.001,0.01
-    //
-    //Hz
-
-if pcm_speed_measure Seconds
-in float Speed pcm_speed_sec=1 0:20 0.01,0.1
-    //
-    //Seconds
-endif
 #-------------- 
 

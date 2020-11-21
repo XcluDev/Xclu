@@ -349,9 +349,18 @@ void XModuleRealsenseCamera::transform() {
         int out1 = geti_depth_grayscale_output1();
 
         output.allocate(w1, h1);
-        for (int y=0; y<h1; y++) {
-            for (int x=0; x<w1; x++) {
-                output.pixel_unsafe(x, y) = mapi_clamped(input.pixel_unsafe(x+x0, y+y0), in0, in1, out0, out1);
+        if (in1 == in0) {
+            for (int y=0; y<h1; y++) {
+                for (int x=0; x<w1; x++) {
+                    output.pixel_unsafe(x, y) = (out0+out1)/2;
+                }
+            }
+        }
+        else {
+            for (int y=0; y<h1; y++) {
+                for (int x=0; x<w1; x++) {
+                    output.pixel_unsafe(x, y) = mapi_clamped(input.pixel_unsafe(x+x0, y+y0), in0, in1, out0, out1);
+                }
             }
         }
 

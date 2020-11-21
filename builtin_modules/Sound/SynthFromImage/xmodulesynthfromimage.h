@@ -15,43 +15,11 @@
 //Данные для генерации
 struct XModuleSynthFromImageData: public XcluProtectedData
 {
-    int image_background = 0;   //0 - black, 1 - white
-    float pcm_speed_hz = 10;
-    float contrast=100;
+    float sample_rate = 50; //pixels per second
+    float volume=1;         //volume
 
-    float phase_ = 0;
-
-    //установить картинку - схлапывает в однопиксельную float
-    //TODO сейчас только rbg
-    void set_image(int w, int h, const quint8 *rgb);
-
-    //получить значение звука
-    float get_volume(float phase);  //x=0..1
-
-    //параметры оцифровки
-    float min_ = 0;
-    float max_ = 1;
-    float center_ = 0.5;
-    float range_ = 1;
-
-
-    void clear() {
-        image_background = 0;
-        pcm_speed_hz = 0;
-        phase_ = 0;
-
-        w_ = 0;
-        image_.clear();
-
-        min_ = 0;
-        max_ = 1;
-        center_ = 0.5;
-        range_ = 1;
-
-    }
-
-    int w_= 0;
-    QVector<float> image_;  //1-пиксельная картинка
+    //playing line, with sample_rate speed
+    QVector<float> line_;
 };
 
 //Модуль
@@ -78,10 +46,15 @@ protected:
     XRaster_u8 input_;
     XRaster_u8c3 output_;
 
+    bool input_frozen_ = false;
+
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
     XModuleSynthFromImageData data_;
-    void update_data();
+
+    //internal values used for sound generation -----------------------
+    double phase_ = 0;
+    QVector<float> line_;
 
 };
 
