@@ -139,12 +139,12 @@ const checkbox Emitter emitter=1
 page 8_Bit
     //Transform depth image to grayscale 8 bit and binary image.
 
-in checkbox_group Depth_Grayscale make_depth_grayscale=0
+in checkbox_group Depth_8_Bit make_depth_grayscale=0
     //Make depth image to 8 bit grayscale image.
     
 if make_depth_grayscale 1
 
-out object_image Grayscale_Image depth_grayscale_image
+out object_image Depth8_Image depth_grayscale_image
     //Depth grayscale image.
 
 in int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
@@ -216,6 +216,20 @@ page Save_Frames
 
 in button Save_Frames save_frames_button
     //Press the button to save images to a given folder
+    
+#in checkbox Depth save_depth=1
+#    //Should save depth 16 bit.
+    
+in checkbox Color save_color=1
+    //Should save depth 16 bit.
+
+in checkbox IR save_ir=1
+    //Should save depth 16 bit.
+
+
+in checkbox Depth8 save_depth8=1
+    //Should save depth 16 bit.
+
     
 in string_folder Folder save_folder="realsense_frames"
     //Folder for saving frames.

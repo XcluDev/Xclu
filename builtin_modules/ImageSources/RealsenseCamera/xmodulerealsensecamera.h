@@ -74,11 +74,8 @@ protected:
     //TODO if will be required in other place - do reading carefully, to prevent duplication
     XRaster_u16 raster_depth16_;
 
-    XProtectedObject out_grayscale_gui_;
-    //XProtectedObject out_binary_gui_;
-
-    XRaster_u8 out_grayscale_;
-    //XRaster_u8 out_binary_;
+    XProtectedObject depth8_gui_;
+    XRaster_u8 depth8_;
 };
 
 

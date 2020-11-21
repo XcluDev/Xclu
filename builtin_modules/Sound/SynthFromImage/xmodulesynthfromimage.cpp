@@ -113,6 +113,12 @@ void XModuleSynthFromImage::impl_update() {
         }
     }
 
+    //distort
+    float distort = getf_distort();
+    for (int i=0; i<line.size(); i++) {
+        line[i] = clampf(line[i]*distort, -1, 1);
+    }
+
     //duplicate line if loop ping-pong; exclude the beginning and final pixel
     //Note: line will be longer than we draw it
     if (gete_loop_mode() == loop_mode_Ping_Pong && scanw >= 3) {

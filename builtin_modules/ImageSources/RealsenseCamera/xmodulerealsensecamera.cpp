@@ -87,14 +87,14 @@ void XModuleRealsenseCamera::impl_start() {
 
     //transform
     //link images with internal objects
-    setobject_depth_grayscale_image(&out_grayscale_gui_);
+    setobject_depth_grayscale_image(&depth8_gui_);
     //setobject_depth_grayscale_image(&out_binary_gui_);
 
-    out_grayscale_gui_.write().data().clear();
+    depth8_gui_.write().data().clear();
     //out_binary_gui_.write().data().clear();
 
     raster_depth16_.clear();
-    out_grayscale_.clear();
+    depth8_.clear();
     //out_binary_.clear();
 
     //start camera or BAG file
@@ -152,15 +152,17 @@ void XModuleRealsenseCamera::impl_update() {
             XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir_);
             make_ir = true;
         }
+
+        //generate transformed images
+        transform();
+
+
         //если требуется - записать на диск
         if (wait_save_frames_) {
             save_frames(make_color, make_depth, make_ir);
         }
 
         wait_save_frames_ = 0;
-
-        //generate transformed images
-        transform();
     }
 
 
@@ -185,14 +187,18 @@ void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
 
     //запись
     QString path = folder + "/" + time.toString(time_format);
-    if (color) {
-        XObjectImage::save(getobject_color_image()->read().data(), path + "_color.png", "PNG", 100);
+    if (color && geti_save_color()) {
+        XRaster::save(raster_ir_, path + "_color.png", "PNG", 100);
     }
-    if (depth) {
-        XObjectImage::save(getobject_depth_image()->read().data(), path + "_depth.png", "PNG", 100);
+    //TODO save 16 bit
+    //if (depth) {
+    //   XRaster::save(depth_, path + "_depth16.png", "PNG", 100);
+    //}
+    if (ir && geti_save_ir()) {
+        XRaster::save(raster_ir_, path + "_ir.png", "PNG", 100);
     }
-    if (ir) {
-        XObjectImage::save(getobject_ir_image()->read().data(), path + "_ir.png", "PNG", 100);
+    if (!depth8_.is_empty() && geti_save_depth8()) {
+        XRaster::save(depth8_, path + "_depth8.png", "PNG", 100);
     }
     sets_saved_to(path);
 
@@ -331,7 +337,7 @@ void XModuleRealsenseCamera::transform() {
 
         //crop
         auto &input = raster_depth16_;
-        auto &output = out_grayscale_;
+        auto &output = depth8_;
         int w = input.w;
         int h = input.h;
         int x0 = int(w * getf_depth_grayscale_x0());
@@ -365,7 +371,7 @@ void XModuleRealsenseCamera::transform() {
         }
 
         //set output
-        XObjectImage::create_from_raster(out_grayscale_gui_.write().data(), output);
+        XObjectImage::create_from_raster(depth8_gui_.write().data(), output);
 
     }
 

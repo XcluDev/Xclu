@@ -72,6 +72,11 @@ bool was_changed_loop_mode() { return was_changed_("loop_mode"); }
 enum_loop_mode gete_loop_mode() { return enum_loop_mode(geti_("loop_mode")); }
 QString getraw_loop_mode() { return getraw_("loop_mode");}
 
+//Float Distort
+//Multiply and clamp to [-1,1] to distort the sound.
+bool was_changed_distort() { return was_changed_("distort"); }
+float getf_distort() { return getf_("distort"); }
+
 //Float Volume
 //Volume of the resulted sound.
 bool was_changed_volume() { return was_changed_("volume"); }

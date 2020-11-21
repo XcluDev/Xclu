@@ -61,10 +61,13 @@ in enum Loop_Mode loop_mode=Repeat [Repeat,Ping_Pong]
     //Loop by repeat or ping-pong.
     
     
-in float Volume volume=1 0:2 0.1,1
-    //Volume of the resulted sound.
-    //0..2
+in float Distort distort=1 0:10 0.01,0.1
+    //Multiply and clamp to [-1,1] to distort the sound.
+    //0..10
         
+in float Volume volume=1 0:1 0.01,0.1
+    //Volume of the resulted sound.
+    //0..1
    
 
 #-------------- 

@@ -235,12 +235,12 @@ int geti_emitter() { return geti_("emitter"); }
 //Page 8 Bit
 //Transform depth image to grayscale 8 bit and binary image.
 
-//Checkbox Depth Grayscale
+//Checkbox Depth 8 Bit
 //Make depth image to 8 bit grayscale image.
 bool was_changed_make_depth_grayscale() { return was_changed_("make_depth_grayscale"); }
 int geti_make_depth_grayscale() { return geti_("make_depth_grayscale"); }
 
-//Out Object Grayscale Image
+//Out Object Depth8 Image
 //Depth grayscale image.
 bool was_changed_depth_grayscale_image() { return was_changed_("depth_grayscale_image"); }
 XProtectedObject *getobject_depth_grayscale_image() { return get_object_("depth_grayscale_image"); }
@@ -316,6 +316,21 @@ void append_string_device_list(QStringList v, int extra_new_lines_count = 0) { a
 bool was_changed_save_frames_button() { return was_changed_("save_frames_button"); }
 int geti_save_frames_button() { return geti_("save_frames_button"); }
 QString button_save_frames_button() { return "save_frames_button"; }
+
+//Checkbox Color
+//Should save depth 16 bit.
+bool was_changed_save_color() { return was_changed_("save_color"); }
+int geti_save_color() { return geti_("save_color"); }
+
+//Checkbox IR
+//Should save depth 16 bit.
+bool was_changed_save_ir() { return was_changed_("save_ir"); }
+int geti_save_ir() { return geti_("save_ir"); }
+
+//Checkbox Depth8
+//Should save depth 16 bit.
+bool was_changed_save_depth8() { return was_changed_("save_depth8"); }
+int geti_save_depth8() { return geti_("save_depth8"); }
 
 //String Folder
 //Folder for saving frames.
