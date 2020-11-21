@@ -5,34 +5,22 @@
 //Page Main
 //
 
-//Enum Image Source
-//Image source - file or image from other module.
-enum enum_image_source {
-    image_source_Image_File = 0,
-    image_source_Other_Module_Image = 1,
-    image_source_N__ = 2
-};
-bool was_changed_image_source() { return was_changed_("image_source"); }
-enum_image_source gete_image_source() { return enum_image_source(geti_("image_source")); }
-QString getraw_image_source() { return getraw_("image_source");}
+//Checkbox Show Input Image
+//
+bool was_changed_show_input_image() { return was_changed_("show_input_image"); }
+int geti_show_input_image() { return geti_("show_input_image"); }
 
-//String Image File Name
-//Image File.
-bool was_changed_image_file() { return was_changed_("image_file"); }
-QString gets_image_file() { return gets_("image_file"); }
-QStringList get_strings_image_file() { return get_strings_("image_file"); }
+//Object Input Image
+//Image for processing.
+bool was_changed_input_image() { return was_changed_("input_image"); }
+XProtectedObject *getobject_input_image() { return get_object_("input_image"); }
 
-//String Image Link
-//Reference to image in another module.
-bool was_changed_image_link() { return was_changed_("image_link"); }
-QString gets_image_link() { return gets_("image_link"); }
-QStringList get_strings_image_link() { return get_strings_("image_link"); }
 
-//Out Object Image
-//Input image.
-bool was_changed_image() { return was_changed_("image"); }
-XProtectedObject *getobject_image() { return get_object_("image"); }
-void setobject_image(XProtectedObject *value) { set_object_("image", value); }
+//Out Object Output Image
+//Image with visualization.
+bool was_changed_output_image() { return was_changed_("output_image"); }
+XProtectedObject *getobject_output_image() { return get_object_("output_image"); }
+void setobject_output_image(XProtectedObject *value) { set_object_("output_image", value); }
 
 
 //Checkbox Scan Area Setup
@@ -82,12 +70,6 @@ float getf_rad() { return getf_("rad"); }
 //Tools for transforming brightness value to sound value.
 bool was_changed_interpr() { return was_changed_("interpr"); }
 int geti_interpr() { return geti_("interpr"); }
-
-//Out Object Image Sound
-//Image depicting the sound values.
-bool was_changed_image_sound() { return was_changed_("image_sound"); }
-XProtectedObject *getobject_image_sound() { return get_object_("image_sound"); }
-void setobject_image_sound(XProtectedObject *value) { set_object_("image_sound", value); }
 
 //Out Float Min Brightness
 //Maximal brightness value.

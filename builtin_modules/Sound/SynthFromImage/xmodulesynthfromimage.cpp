@@ -83,56 +83,40 @@ XModuleSynthFromImage::~XModuleSynthFromImage()
 
 //---------------------------------------------------------------------
 void XModuleSynthFromImage::impl_start() {
-    //Очистка переменных
-    image_file_ = "";
-
     {
         DataAccess access(data_);
         data_.clear();
     }
 
-    getobject_image()->write().data().clear();
-    getobject_image_sound()->write().data().clear();
+    //link images with internal objects
+    setobject_output_image(&out_image_);
+
+    out_image_.write().data().clear();
+    input_.clear();
+    output_.clear();
 
     update_data();
 }
 
 //---------------------------------------------------------------------
 void XModuleSynthFromImage::impl_update() {
-    //получение картинки - загрузка из файла или взятие из другого модуля
-    auto image_source = gete_image_source();
-    switch (image_source) {
-    case image_source_Image_File: {
-        QString image_file = gets_image_file();
-        if (image_file != image_file_) {
-            load_image_file(image_file);
-        }
-    }
-        break;
-    case image_source_Other_Module_Image: {
-            QString image_link = gets_image_link();
-            load_image_link(image_link);
-    }
-        break;
-     default:
-        xclu_exception("Unknown image_source " + getraw_image_source());
-    }
+    //Read image
+    auto reader = getobject_input_image()->read();
 
-    //считываем данные из GUI и обновляем картинку
+    //no image yet
+    if (reader.data().type() != XObjectTypeImage) return;
+
+    //read image
+    XObjectImage::to_raster(reader.data(), input_);
+
+    int w = input_.w;
+    int h = input_.h;
+
+
     update_data();
-}
 
-//---------------------------------------------------------------------
-void XModuleSynthFromImage::load_image_file(QString image_file) {
-    image_file_ = image_file;
-}
+    XRaster::convert(input_, output_);
 
-//---------------------------------------------------------------------
-//загрузка изображения из другого модуля
-//webcam1->image
-void XModuleSynthFromImage::load_image_link(QString image_link) {    
-    XProtectedObject *object = XCORE.get_object_by_link(image_link);
-    object->read().data().copy_to(getobject_image()->write().pointer());
 }
 
 //---------------------------------------------------------------------
@@ -142,7 +126,7 @@ void XModuleSynthFromImage::impl_stop() {
 
 //---------------------------------------------------------------------
 void XModuleSynthFromImage::update_data() {
-    DataAccess access(data_);
+  /*  DataAccess access(data_);
     //data_.image_background = geti_image_background");
     data_.pcm_speed_hz = getf_pcm_speed_hz();
     data_.contrast = getf_contrast();
@@ -185,7 +169,8 @@ void XModuleSynthFromImage::update_data() {
             }
 
         }
-    }
+    }*/
+
 }
 
 //---------------------------------------------------------------------

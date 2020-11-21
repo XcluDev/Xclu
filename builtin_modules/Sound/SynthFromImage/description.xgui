@@ -1,10 +1,6 @@
 #Module SynthFromImage
 #------------------------------------------
-#module_class=SynthFromImage
-module_name_hint=synthfromimage
-
-#module_category=Sound
-module_description=Sonification by sound synthesis from image, text and binary data. This module should be called by callback from SoundOutput.
+module_description=Sonification by sound synthesis from image, text and binary data. This module should be called by callback from SoundOut.
 module_version=1.01
 module_impl=C++
 #module_default_run_mode=Callback
@@ -15,34 +11,21 @@ module_accept_calls=sound_buffer_add
 #------------------------------------------
 page Main
 
-#---------------------------------- 
-in enum Image_Source image_source=Image_File [Image_File,Other_Module_Image]
-    //Image source - file or image from other module.
+#----------------------------------
+in checkbox_group Show_Input_Image show_input_image=1
 
-if image_source Image_File
-in string_file Image_File_Name image_file=""
-    //Image File.
-    //Choose Image File
-    //Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)
+if show_input_image 1
+in object_image Input_Image input_image
+    //Image for processing.
+endif   
 
-if image_source Other_Module_Image
-in string_link_image Image_Link image_link="webcam1->image"
-    //Reference to image in another module.
-endif
+separator
 
-out object_image Image image
-    //Input image.
+out object_image Output_Image output_image
+    //Image with visualization.
     
 #----------------------------------    
 separator
-in checkbox_group Scan_Area_Setup scan_area_setup=0
-    //Scanning area setup.
-
-if scan_area_setup 1
-in enum Scan_Shape scan_shape=Horizontal_Rectangle [Horizontal_Rectangle,Vertical_Rectangle,Radar]
-    //Shape of scanning.
-
-#TODO option to set in pixels
     
 in float Scan_X scan_x=0.5 0:1 0.002,0.02
     //X position of scanning area's center.
@@ -50,32 +33,12 @@ in float Scan_X scan_x=0.5 0:1 0.002,0.02
 in float Scan_Y scan_y=0.5 0:1 0.002,0.02
     //Y position of scanning area's center.
 
-endif
+in float Scan_W scan_w=0.5 0:1 0.002,0.02
+    //Scanning width.
 
-#-------------- 
-if scan_shape Horizontal_Rectangle,Vertical_Rectangle
-in float Scan_Rad_X rad_x=0.5 0:1 0.002,0.02
-    //X radius of scanning area.
-
-in float Scan_Rad_Y rad_y=0.5 0:1 0.002,0.02
-    //Y radius of scanning area.
-    
-if scan_shape Radar
-in float Scan_Rad_X rad=0.5 0:1 0.002,0.02
-    //Radius of scanning area.
-endif
-   
+       
 #----------------------------------   
 separator
-
-in checkbox_group Interpretation interpr=1
-    //Tools for transforming brightness value to sound value.
-#in enum Image_Background image_background=Black [Black,White]
-#    //Color of background
-
-if interpr 1
-out object_image Image_Sound image_sound
-    //Image depicting the sound values.
 
 out float Min_Brightness min_value=0 0:1 0.001,0.01
     //Maximal brightness value.
@@ -92,15 +55,12 @@ out float Brightness_Range range_value=1 0:2 0.001,0.01
 in float Contrast contrast=1 0:100 0.1,1
     //Contrast parameter for converting brightness to sound values. Center is defined automatically.
     //(coefficient)
-endif 
+
    
 separator
 
-in enum Interpretation_Method method=PCM [PCM,Sonogram]
-    //Interpretation method: pixels slices are PCM samples or sonogram.
 
 #-------------- 
-if method PCM
 in enum Scan_Speed_Measure pcm_speed_measure=Hz [Hz,Seconds,MIDI_note]
     //Speed of scanning.
 
@@ -115,49 +75,4 @@ in float Speed pcm_speed_sec=1 0:20 0.01,0.1
     //Seconds
 endif
 #-------------- 
-
-if method Sonogram
-    
-in enum Scan_Speed_Measure sono_speed_measure=Hz [Seconds,BPM]
-    //Speed of scanning.
-
-if sono_speed_measure Seconds
-in float Speed_Seconds sono_speed_sec=5 0:20 0.020,0.2
-
-if sono_speed_measure BPM
-#in float Speed_Hz speed_hz=10 0:1000 1,10
-
-
-if method Sonogram
-#TODO note/frequency
-in int Oscillators oscillators=64 1:256 1,10
-    //Number of oscillators for sound generation.
-
-in enum Oscillator_Shape oscillator_shape=Sine [Sine,Square]
-    //Waveshape of the ocsillator.
-    
-in int MIDI_Note_Low note_low=20 0:127 1,10
-    //Note for setting frequency of low values.
-
-in int MIDI_Note_High note_high=70 0:127 1,10
-    //Note for setting frequency of high values.
-
-    
-    
-endif
-
-#----------------------------------   
-if method PCM
-
-if pcm_speed_measure BPM
-
-#TODO loop/trigger by note - запуск по кругу или по событию
-#loop sync - синхронизация запуска
-
-#с изображения берем 1,2,3 области и их панорамируем, задаем тон (частоту окна), наложение окон, и панораму.
-#а также режим - PCM или спектрограмма, и какой канал (R,G,B)
-#rectangular/circular
-#start frequency/end frequency
-endif
-
 

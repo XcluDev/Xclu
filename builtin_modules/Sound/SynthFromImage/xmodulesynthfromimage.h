@@ -10,6 +10,7 @@
 #include "xarray.h"
 #include "xcluobjectsoundformat.h"
 #include "xcluprotecteddata.h"
+#include "xraster.h"
 
 //Данные для генерации
 struct XModuleSynthFromImageData: public XcluProtectedData
@@ -72,10 +73,10 @@ protected:
     //there are required to fill channels * samples values at data
     virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
-    QString image_file_;    //файл с последней загруженной картинкой
-    void load_image_file(QString image_file);
-    //загрузка изображения из другого модуля
-    void load_image_link(QString image_link);
+    XProtectedObject out_image_;
+
+    XRaster_u8 input_;
+    XRaster_u8c3 output_;
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
