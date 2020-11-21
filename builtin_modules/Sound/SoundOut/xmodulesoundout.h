@@ -28,7 +28,8 @@ struct XModuleSoundOutData: public XcluProtectedData
     float play_freq_ = 440;
 
 
-    float volume_ = 1;          //громкость
+    float volume_left_ = 1;          //channel volume
+    float volume_right_ = 1;
 
     //список ссылок на другие модули, которым высылать call
     QVector<Module *> modules_;
@@ -41,7 +42,9 @@ struct XModuleSoundOutData: public XcluProtectedData
 
     void clear() {
         play_test_sound_ = 0;
-        volume_ = 1;
+        volume_left_ = 1;
+        volume_right_ = 1;
+
         modules_.clear();
         volumes_.clear();
         err.clear();

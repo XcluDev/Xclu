@@ -169,7 +169,7 @@ void XModuleSynthFromImage::impl_stop() {
 void XModuleSynthFromImage::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     DataAccess access(data_);
 
-    float phase_add = float(sample_rate) / data_.sample_rate;
+    float phase_add = float(data_.sample_rate) / float(sample_rate);
     //double phase_ = 0;
     //QVector<float> line_;
 

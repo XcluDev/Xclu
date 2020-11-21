@@ -81,13 +81,17 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
             }
         }
 
-        //применение громкости
+        //applying volumes
         {
             auto sound_write = sound_.write();
             float *data = sound_write.data().var_array("data")->data_float();
-            float volume = data_->volume_;
-            for (int i=0; i<samples * channels; i++) {
-                data[i] *= volume;
+            for (int c = 0; c<channels; c++) {
+                float volume = (c==0)?data_->volume_left_:data_->volume_right_;
+                int k = c;
+                for (int i=0; i<samples; i++) {
+                    data[k] *= volume;
+                    k+=channels;
+                }
             }
         }
     }
@@ -259,7 +263,8 @@ void XModuleSoundOut::impl_update() {
         data_.play_freq_ = geti_gen_freq();
 
 
-        data_.volume_ = getf_volume();
+        data_.volume_left_ = getf_volume() * getf_volume_ch1();
+        data_.volume_right_ = getf_volume() * getf_volume_ch2();
         data_.modules_ = XCORE.get_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку

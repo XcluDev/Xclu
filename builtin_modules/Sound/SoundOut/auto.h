@@ -5,19 +5,6 @@
 //Page Main
 //General settings
 
-//Text Sound Sources
-//List of modules to which will be sent callback for sound buffer
-bool was_changed_modules_list() { return was_changed_("modules_list"); }
-QString gets_modules_list() { return gets_("modules_list"); }
-QStringList get_strings_modules_list() { return get_strings_("modules_list"); }
-
-//Button Edit...
-//Press to interactively edit sound sources.
-bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
-int geti_edit_btn() { return geti_("edit_btn"); }
-QString button_edit_btn() { return "edit_btn"; }
-
-
 //Float Volume
 //Output sound volume.
 bool was_changed_volume() { return was_changed_("volume"); }
@@ -143,29 +130,35 @@ void seti_buffer_size(int value) { seti_("buffer_size", value); }
 void increase_int_buffer_size(int increase = 1) { increase_int_("buffer_size", increase); }
 
 //----------------------------------------------------
-//Page Device Info
-//Print list of output audio devices and supported formats of the selected device
+//Page Sources
+//
 
-//Button Print Devices
-//Print list of all connected devices.
-bool was_changed_print_devices() { return was_changed_("print_devices"); }
-int geti_print_devices() { return geti_("print_devices"); }
-QString button_print_devices() { return "print_devices"; }
+//Text Sound Sources
+//List of modules to which will be sent callback for sound buffer
+bool was_changed_modules_list() { return was_changed_("modules_list"); }
+QString gets_modules_list() { return gets_("modules_list"); }
+QStringList get_strings_modules_list() { return get_strings_("modules_list"); }
 
-//Checkbox Print Formats
-//Print list of supported formats for connected device at start.
-bool was_changed_print_formats() { return was_changed_("print_formats"); }
-int geti_print_formats() { return geti_("print_formats"); }
+//Button Edit...
+//Press to interactively edit sound sources.
+bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
+int geti_edit_btn() { return geti_("edit_btn"); }
+QString button_edit_btn() { return "edit_btn"; }
 
-//Out Text Local Console
-//Console output
-bool was_changed_local_console() { return was_changed_("local_console"); }
-QString gets_local_console() { return gets_("local_console"); }
-QStringList get_strings_local_console() { return get_strings_("local_console"); }
-void sets_local_console(QString value) { sets_("local_console", value); }
-void clear_string_local_console() { clear_string_("local_console"); }
-void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
-void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
+
+//----------------------------------------------------
+//Page Channels
+//Control channels sound.
+
+//Float Left Volume
+//Volume for the left channel.
+bool was_changed_volume_ch1() { return was_changed_("volume_ch1"); }
+float getf_volume_ch1() { return getf_("volume_ch1"); }
+
+//Float Right Volume
+//Volume for the right channel.
+bool was_changed_volume_ch2() { return was_changed_("volume_ch2"); }
+float getf_volume_ch2() { return getf_("volume_ch2"); }
 
 //----------------------------------------------------
 //Page Test Sound
@@ -195,5 +188,30 @@ float getf_gen_volume() { return getf_("gen_volume"); }
 //Frequency of generated sinewave.
 bool was_changed_gen_freq() { return was_changed_("gen_freq"); }
 int geti_gen_freq() { return geti_("gen_freq"); }
+
+//----------------------------------------------------
+//Page Devices
+//Print list of output audio devices and supported formats of the selected device
+
+//Button Print Devices
+//Print list of all connected devices.
+bool was_changed_print_devices() { return was_changed_("print_devices"); }
+int geti_print_devices() { return geti_("print_devices"); }
+QString button_print_devices() { return "print_devices"; }
+
+//Checkbox Print Formats
+//Print list of supported formats for connected device at start.
+bool was_changed_print_formats() { return was_changed_("print_formats"); }
+int geti_print_formats() { return geti_("print_formats"); }
+
+//Out Text Local Console
+//Console output
+bool was_changed_local_console() { return was_changed_("local_console"); }
+QString gets_local_console() { return gets_("local_console"); }
+QStringList get_strings_local_console() { return get_strings_("local_console"); }
+void sets_local_console(QString value) { sets_("local_console", value); }
+void clear_string_local_console() { clear_string_("local_console"); }
+void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
+void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
 
 //----------------------------------------------------

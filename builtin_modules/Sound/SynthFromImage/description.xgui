@@ -46,7 +46,7 @@ in float Scan_W scan_w=0.5 0:1 0.002,0.02
 #----------------------------------   
 separator
 
-in int Sample_Rate sample_rate=1000 1:44100 10,100
+in int Sample_Rate sample_rate=1000 1:100000 10,100
     //Sample rate.
     //pixels/sec
     

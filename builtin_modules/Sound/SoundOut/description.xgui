@@ -1,5 +1,5 @@
 #Module SoundOut
-#------------------------------------------
+#-----------------------------------------------------------
 #module_class=SoundOut
 #module_category=Sound
 module_description=Send sound stream to output sound device (speakers), and optionally save to disk. It works using callbacks.
@@ -8,23 +8,9 @@ module_impl=C++
 
 module_send_calls=sound_buffer_add
 
-#-------------------------------------------
+#-----------------------------------------------------------
 page Main
     //General settings
-
-#in text Sound_Callback_To callback_modules 5 6
-#    //List of modules which will be called after sound request callback event
-#    //#id of modules to execute
-    
-in text Sound_Sources modules_list 5 6
-    //List of modules to which will be sent callback for sound buffer
-    //#id of modules to play and optional volumes
-    //#for example: synthfromimage1 0.5
-    
-in button Edit... edit_btn
-    //Press to interactively edit sound sources.
-
-separator
 
 in float_slider Volume volume=1.0 0:10 0.01,0.1
     //Output sound volume.
@@ -108,23 +94,33 @@ out int Buffer_Size buffer_size=0 0:100000 1,10
     
 endif
 
-#-----------------------
-#TODO page Record_File
-#   //record output sound to a file
 
-#--------------------
-page Devices
-    //Print list of output audio devices and supported formats of the selected device
+#-----------------------------------------------------------
+page Sources
+#in text Sound_Callback_To callback_modules 5 6
+#    //List of modules which will be called after sound request callback event
+#    //#id of modules to execute
+    
+in text Sound_Sources modules_list 5 6
+    //List of modules to which will be sent callback for sound buffer
+    //#id of modules to play and optional volumes
+    //#for example: synthfromimage1 0.5
+    
+in button Edit... edit_btn
+    //Press to interactively edit sound sources.
 
-in button Print_Devices print_devices
-	//Print list of all connected devices.
-
-in checkbox Print_Formats print_formats=0
-	//Print list of supported formats for connected device at start.
-
-out text Local_Console local_console 10 15
-    //Console output
-
+separator
+    
+#-----------------------------------------------------------
+page Channels
+    //Control channels sound.
+    
+in float Left_Volume volume_ch1=1 0:2 0.01,0.1
+    //Volume for the left channel.
+    
+in float Right_Volume volume_ch2=1 0:2 0.01,0.1
+    //Volume for the right channel.
+    
 #-----------------------
 page Test_Sound
     //Output test sound
@@ -144,5 +140,23 @@ in float Volume gen_volume=0.5 0:1 0.01,0.1
 in int Freq gen_freq=440 0:20000 1,100
     //Frequency of generated sinewave.
     
-#-----------------------
+#-----------------------------------------------------------
+page Devices
+    //Print list of output audio devices and supported formats of the selected device
+
+in button Print_Devices print_devices
+	//Print list of all connected devices.
+
+in checkbox Print_Formats print_formats=0
+	//Print list of supported formats for connected device at start.
+
+out text Local_Console local_console 10 15
+    //Console output
+
+#-----------------------------------------------------------
+#TODO page Record_File
+#   //record output sound to a file
+
+    
+#-----------------------------------------------------------
 
