@@ -80,7 +80,7 @@ void XModuleSynthFromImage::impl_update() {
     int w = input_.w;
     int h = input_.h;
 
-    int scany = h * getf_scan_y();
+    int scany = (h-1) * getf_scan_y();
     int scanw = w * getf_scan_w();
     int x0 = w/2 - scanw/2;
     int x1 = x0 + scanw;    //excluded

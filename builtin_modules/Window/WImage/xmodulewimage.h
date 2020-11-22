@@ -54,7 +54,7 @@ protected:
     bool parent_was_set_ = false;
 
     QWidget *widget_ = nullptr; //весь виджет
-    QLabel *image_ = nullptr;   //изображение
+    QLabel *image_label_ = nullptr;   //изображение
 
     XModuleWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем
 
