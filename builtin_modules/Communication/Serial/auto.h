@@ -177,17 +177,35 @@ int geti_send_bytes_btn() { return geti_("send_bytes_btn"); }
 QString button_send_bytes_btn() { return "send_bytes_btn"; }
 
 
-//Enum Show Received As
-//Show received data as text or bytes.
-enum enum_show_received {
-    show_received_None = 0,
-    show_received_Text = 1,
-    show_received_Bytes = 2,
-    show_received_N__ = 3
+//Checkbox Receive
+//Enable receiving data.
+bool was_changed_receive() { return was_changed_("receive"); }
+int geti_receive() { return geti_("receive"); }
+
+//Enum Receive As
+//Format of working with received data.
+enum enum_receive_as {
+    receive_as_None = 0,
+    receive_as_Last_Line = 1,
+    receive_as_Lines = 2,
+    receive_as_Line_Callback = 3,
+    receive_as_Text = 4,
+    receive_as_Bytes = 5,
+    receive_as_N__ = 6
 };
-bool was_changed_show_received() { return was_changed_("show_received"); }
-enum_show_received gete_show_received() { return enum_show_received(geti_("show_received")); }
-QString getraw_show_received() { return getraw_("show_received");}
+bool was_changed_receive_as() { return was_changed_("receive_as"); }
+enum_receive_as gete_receive_as() { return enum_receive_as(geti_("receive_as")); }
+QString getraw_receive_as() { return getraw_("receive_as");}
+
+//Out String Line
+//Received data as last line, separated by '\n'. '\r' are ignored.
+bool was_changed_received_line() { return was_changed_("received_line"); }
+QString gets_received_line() { return gets_("received_line"); }
+QStringList get_strings_received_line() { return get_strings_("received_line"); }
+void sets_received_line(QString value) { sets_("received_line", value); }
+void clear_string_received_line() { clear_string_("received_line"); }
+void append_string_received_line(QString v, int extra_new_lines_count = 0) { append_string_("received_line", v, extra_new_lines_count); }
+void append_string_received_line(QStringList v, int extra_new_lines_count = 0) { append_string_("received_line", v, extra_new_lines_count); }
 
 //Out Text Received Text
 //Received data as text.

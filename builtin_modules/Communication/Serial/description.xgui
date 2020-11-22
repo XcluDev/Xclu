@@ -110,26 +110,34 @@ endif
 
 
 separator
+in checkbox Receive receive=1
+    //Enable receiving data.
 
-in enum Show_Received_As show_received=None [None,Text,Bytes]
-    //Show received data as text or bytes.
-
+in enum Receive_As receive_as=Last_Line [None,Last_Line,Lines,Line_Callback,Text,Bytes]
+    //Format of working with received data.
+    
 #----------------
-if show_received Text 
+if receive_as Last_Line 
+out string Line received_line=""
+    //Received data as last line, separated by '\n'. '\r' are ignored. Good for continuous sensors.
+endif
+    
+#----------------
+if receive_as Text 
 out text Received_Text received_text 10 25
     //Received data as text.
     //Not yet implemented :)
 
 endif
 #----------------
-if show_received Bytes
+if receive_as Bytes
 out text Received_Bytes received_bytes 10 25
     //Received data as bytes
     //Not yet implemented :)
 
 endif
 #------------------------------------------
-if show_received Text,Bytes
+if receive_as Text,Bytes
 in button Clear clear
     //Clear received data
 

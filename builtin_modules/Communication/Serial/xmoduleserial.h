@@ -51,6 +51,10 @@ protected:
     int total_sent_ = 0;
     void set_total_sent(int t);
 
+    void receive();
+
+    QString in_string_;
+
 };
 
 

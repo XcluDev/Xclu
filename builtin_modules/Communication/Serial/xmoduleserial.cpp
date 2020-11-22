@@ -21,6 +21,12 @@ void XModuleSerial::gui_clear() {
     set_connected(false); //также ставит gui-элемент connected
     port_name_ = "";
     set_total_sent(0);
+
+    clear_string_received_line();
+    clear_string_received_text();
+    clear_string_received_bytes();
+
+    in_string_.clear();
 }
 
 //---------------------------------------------------------------------
@@ -242,8 +248,10 @@ void XModuleSerial::open_port() {
 
 //---------------------------------------------------------------------
 void XModuleSerial::impl_update() {
-   //отработка отправки данных путем нажатия кнопок идет в impl_button_pressed
+    //sending data processes at impl_button_pressed
 
+    //receiving data
+    receive();
 }
 
 //---------------------------------------------------------------------
@@ -301,6 +309,35 @@ void XModuleSerial::impl_stop() {
 }
 
 
+//---------------------------------------------------------------------
+void XModuleSerial::receive() {
+    if (connected_ && geti_receive()) {
+        const int N = 50;
+        char buffer[N];
+        int numReadTotal = 0;
+        for (;;) {
+            int n = serialPort_.read(buffer, N);
+            numReadTotal += n;
+            if (n == 0) {
+                break;
+            }
+
+            //TODO here should be switch of mode
+
+            //scan for "\n", ignore "\r"
+            for (int i=0; i<n; i++) {
+                if (buffer[i] == '\r') continue;
+                if (buffer[i] == '\n') {
+                    sets_received_line(in_string_);
+                    in_string_.clear();
+                    continue;
+                }
+                in_string_.append(buffer[i]);
+            }
+        }
+    }
+
+}
 
 
 //---------------------------------------------------------------------
