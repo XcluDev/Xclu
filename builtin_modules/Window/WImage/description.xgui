@@ -11,46 +11,15 @@ module_accept_calls=create_widget
 #TODO slider representation
 
 #-------------------------------------------
-page Value
-    //Settings of value.
-
-    
-out object_image Image image
-    //Resulted image.
-
-out checkbox Is_New_Frame is_new_frame=0
-    //Flag is true when new frame is arrived during current 'update' step.
+page Main
+    //Input image
    
+in object_image Image image
+    //Input image.
 
-#-------------------------------------------
-separator
-
-in enum Value_Source source=Link [File,Link,Expression]
-    //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
-    
-#in enum Type type=int [int,float]
-#    //Type of value.
+in checkbox Is_New_Frame is_new_frame=0
+    //Flag that image was changed. You may link it to the flag of an image provider module.
  
-#-------------
-if source File
-
-
-if source Link
-in string_link_image Image_Link image_link="webcam1->image"
-    //Link to other module's image.
-
-in string_link_checkbox Is_New_Frame_Link is_new_frame_link="webcam1->is_new_frame"
-    //Link to flag that image was changed.
-
-    
-#in checkbox Use_Value_Properties use_value_properties=0
-#    //If checked, then range, label and units will be used from module's value settings
-
-if source Expression
-in text Expression expression 15 17
-    //JS expression for image source.
-endif
-
 #-------------------------------------------
 page Visuals
     //Visual settings.    

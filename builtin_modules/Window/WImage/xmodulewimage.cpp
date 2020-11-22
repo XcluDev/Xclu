@@ -36,10 +36,7 @@ void XModuleWImage::impl_start() {
     DataAccess access(data_);
     data_.clear();
 
-    seti_is_new_frame(0);
-
     clear_image();
-
 }
 
 //---------------------------------------------------------------------
@@ -55,7 +52,7 @@ void XModuleWImage::impl_stop() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
-    image_ = nullptr;
+    image_label_ = nullptr;
 }
 
 //---------------------------------------------------------------------
@@ -69,8 +66,8 @@ void *XModuleWImage::impl_create_widget(QString parent_id) {
 
     //создаем виджет
     //insert_label(input);
-    image_ = new QLabel();
-    widget_ = image_;
+    image_label_ = new QLabel();
+    widget_ = image_label_;
     //очистка данных - важно чтобы уничтожились перед вызовом update_all()
     {
         DataAccess access(data_);
@@ -114,28 +111,17 @@ void XModuleWImage::update_all(bool force) {
 
 //---------------------------------------------------------------------
 void XModuleWImage::update_value() {
-    int new_frame = XCORE.get_int_by_link(gets_is_new_frame_link());
-    seti_is_new_frame(new_frame);
-
-    if (new_frame) {
-        XProtectedObject *object = XCORE.get_object_by_link(gets_image_link());
-        {
-            object->read().data().copy_to(getobject_image()->write().pointer());
-        }
-
-        if (image_) {
-
+    if (geti_is_new_frame()) {
+        if (image_label_) {
             //устанавливаем настройки показа
             XObjectShowSettings settings;
             settings.w = geti_w();
             settings.h = geti_h();
 
-            //создаем wrapper для объекта, который установится в зависимости от его типа,
-            //и вызываем функцию для его визуализации
             QScopedPointer<XObjectWrapper> wrapper;
-           wrapper.reset(XObjectWrapper::create_wrapper(object->read().pointer()));
+            wrapper.reset(XObjectWrapper::create_wrapper(getobject_image()->read().pointer()));
 
-           wrapper->show_object(image_, settings);
+            wrapper->show_object(image_label_, settings);
         }
     }
 
@@ -144,18 +130,18 @@ void XModuleWImage::update_value() {
 
 //---------------------------------------------------------------------
 void XModuleWImage::set_image(const QImage &image) {
-    if (image_) {
+    if (image_label_) {
         QPixmap pix = QPixmap::fromImage(image);
-        image_->setPixmap(pix);
-        //image_->setVisible(true);
+        image_label_->setPixmap(pix);
+        //image_label_->setVisible(true);
     }
 }
 
 //---------------------------------------------------------------------
 void XModuleWImage::clear_image() {
-    if (image_) {
-        image_->setText("");
-        image_->setVisible(false);
+    if (image_label_) {
+        image_label_->setText("");
+        image_label_->setVisible(false);
         //spacer_->spacerItem()-> setVisible(false);
     }
 }

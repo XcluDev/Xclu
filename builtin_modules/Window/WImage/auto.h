@@ -2,51 +2,18 @@
 //Interface for XClassWImage
 //Created automatically.
 //----------------------------------------------------
-//Page Value
-//Settings of value.
+//Page Main
+//Input image
 
-//Out Object Image
-//Resulted image.
+//Object Image
+//Input image.
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
-void setobject_image(XProtectedObject *value) { set_object_("image", value); }
 
-//Out Checkbox Is New Frame
-//Flag is true when new frame is arrived during current 'update' step.
+//Checkbox Is New Frame
+//Flag that image was changed. You may link it to the flag of an image provider module.
 bool was_changed_is_new_frame() { return was_changed_("is_new_frame"); }
 int geti_is_new_frame() { return geti_("is_new_frame"); }
-void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
-
-
-//Enum Value Source
-//Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
-enum enum_source {
-    source_File = 0,
-    source_Link = 1,
-    source_Expression = 2,
-    source_N__ = 3
-};
-bool was_changed_source() { return was_changed_("source"); }
-enum_source gete_source() { return enum_source(geti_("source")); }
-QString getraw_source() { return getraw_("source");}
-
-//String Image Link
-//Link to other module's image.
-bool was_changed_image_link() { return was_changed_("image_link"); }
-QString gets_image_link() { return gets_("image_link"); }
-QStringList get_strings_image_link() { return get_strings_("image_link"); }
-
-//String Is New Frame Link
-//Link to flag that image was changed.
-bool was_changed_is_new_frame_link() { return was_changed_("is_new_frame_link"); }
-QString gets_is_new_frame_link() { return gets_("is_new_frame_link"); }
-QStringList get_strings_is_new_frame_link() { return get_strings_("is_new_frame_link"); }
-
-//Text Expression
-//JS expression for image source.
-bool was_changed_expression() { return was_changed_("expression"); }
-QString gets_expression() { return gets_("expression"); }
-QStringList get_strings_expression() { return get_strings_("expression"); }
 
 //----------------------------------------------------
 //Page Visuals
