@@ -51,11 +51,14 @@ in int Sample_Rate sample_rate=1000 1:100000 10,100
     //pixels/sec
     
     
-in checkbox Ignore_Borders ignore_borders=0
-    //Ignore black borders - affect tone of the line (if shorter - tone is higher). For Realsense using.
+in checkbox Tone_Black tone_black=0
+    //Make tone by ignoring black borders (if shorter - tone is higher). For Realsense using.
     
-in checkbox Put_To_Zero put_to_zero=0
-    //Make boundaries zero-valued, for reducing cracking sound.
+in float Nonlinear_Tone nonlinear_tone=0 0:5 0.01,0.1
+    //Affect x^pow for tone length, 0 - no change.
+    
+in checkbox Normalize normalize=0
+    //Normalize input sound.
     
 in enum Loop_Mode loop_mode=Repeat [Repeat,Ping_Pong]
     //Loop by repeat or ping-pong.

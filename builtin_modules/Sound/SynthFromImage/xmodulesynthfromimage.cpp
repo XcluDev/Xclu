@@ -88,7 +88,7 @@ void XModuleSynthFromImage::impl_update() {
     x1 = clampi(x1, x0+1, w);
 
     //Ignore black borders - useful for Realsense depth sonification
-    if (geti_ignore_borders()) {
+    if (geti_tone_black()) {
         while (input_.pixel_unsafe(x0,scany) == 0 && x0<w/2) {
             x0++;
         }
@@ -98,18 +98,37 @@ void XModuleSynthFromImage::impl_update() {
         scanw = x1 - x0;
     }
 
+    //line speed - for tone change
+    float line_speed = 1;
+    float nonlinear_tone = getf_nonlinear_tone();
+    if (nonlinear_tone > 0) {
+        float t0 = float(scanw) / w;
+        float t = t0;
+        if (t>0) {
+            t = pow(t, nonlinear_tone);
+        }
+        //xclu_console_append(QString::number(t0) + " " + QString::number(t));
+        line_speed = t;
+    }
+
     //read line
     QVector<float> line(scanw);
     for (int i=0; i<scanw; i++) {
         line[i] = mapf(input_.pixel_unsafe(i+x0, scany), 0, 255, -1, 1);
     }
 
-    //Make boundaries zero-valued, for reducing cracking sound.
-    if (geti_put_to_zero()) {
-        float y0 = line[0];
-        float y1 = line[scanw-1];
+    //Normalize
+    if (geti_normalize()) {
+        float minv = line[0];
+        float maxv = minv;
         for (int i=0; i<scanw; i++) {
-            line[i] += mapf(i,0,scanw-1,-y0,-y1);
+            minv = qMin(line[i], minv);
+            maxv = qMax(line[i], maxv);
+        }
+        if (minv != maxv) {
+            for (int i=0; i<scanw; i++) {
+                line[i] = mapf(line[i],minv,maxv,-1,1);
+            }
         }
     }
 
@@ -130,12 +149,15 @@ void XModuleSynthFromImage::impl_update() {
     }
 
 
-    //set to data_ for sound generation
+    //set values to data_ for sound generation
+    //we do it by locking access, and trying to minimize lock,
+    //that's why we prepare all and set it here at a once.
     {
         DataAccess access(data_);
         data_.sample_rate = geti_sample_rate();
         data_.volume = getf_volume();
         data_.line_ = line;
+        data_.line_speed_ = line_speed;
     }
 
     //generate output
@@ -175,7 +197,7 @@ void XModuleSynthFromImage::impl_stop() {
 void XModuleSynthFromImage::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     DataAccess access(data_);
 
-    float phase_add = float(data_.sample_rate) / float(sample_rate);
+    float phase_add = float(data_.sample_rate) / float(sample_rate) / data_.line_speed_;
     //double phase_ = 0;
     //QVector<float> line_;
 

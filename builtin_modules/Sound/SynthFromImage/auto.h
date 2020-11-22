@@ -51,15 +51,20 @@ float getf_scan_w() { return getf_("scan_w"); }
 bool was_changed_sample_rate() { return was_changed_("sample_rate"); }
 int geti_sample_rate() { return geti_("sample_rate"); }
 
-//Checkbox Ignore Borders
-//Ignore black borders - affect tone of the line (if shorter - tone is higher). For Realsense using.
-bool was_changed_ignore_borders() { return was_changed_("ignore_borders"); }
-int geti_ignore_borders() { return geti_("ignore_borders"); }
+//Checkbox Tone Black
+//Make tone by ignoring black borders (if shorter - tone is higher). For Realsense using.
+bool was_changed_tone_black() { return was_changed_("tone_black"); }
+int geti_tone_black() { return geti_("tone_black"); }
 
-//Checkbox Put To Zero
-//Make boundaries zero-valued, for reducing cracking sound.
-bool was_changed_put_to_zero() { return was_changed_("put_to_zero"); }
-int geti_put_to_zero() { return geti_("put_to_zero"); }
+//Float Nonlinear Tone
+//Affect x^pow for tone length
+bool was_changed_nonlinear_tone() { return was_changed_("nonlinear_tone"); }
+float getf_nonlinear_tone() { return getf_("nonlinear_tone"); }
+
+//Checkbox Normalize
+//Normalize input sound.
+bool was_changed_normalize() { return was_changed_("normalize"); }
+int geti_normalize() { return geti_("normalize"); }
 
 //Enum Loop Mode
 //Loop by repeat or ping-pong.

@@ -20,6 +20,7 @@ struct XModuleSynthFromImageData: public XcluProtectedData
 
     //playing line, with sample_rate speed
     QVector<float> line_;
+    float line_speed_ = 1;  //speed regulation - matter for non-linearity
 };
 
 //Модуль

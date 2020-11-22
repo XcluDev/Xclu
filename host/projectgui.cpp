@@ -21,7 +21,7 @@ ProjectGui::ProjectGui(QWidget *parent, QMenu *modulesMenu)
     //консоль слева внизу
     this->setLayout(xclu::hlayout(0,
                                   xclu::vwidget(0, editor_modules, 10,
-                                                CONS_VIEW, 5), 5,
+                                                CONS_VIEW, 5), 3,
                                  editor_module, 10));
 
     //консоль внизу
