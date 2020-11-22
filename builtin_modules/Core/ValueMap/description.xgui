@@ -1,0 +1,75 @@
+#Module ValueMap
+#------------------------------------------
+module_description=Mapping values.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+
+in int Count count=1 1:8 1,1
+    //Number of variables to show.
+
+if count 1,2,3,4,5,6,7,8
+in checkbox_group Var_1 use_var1=1
+    //Variable 1.
+endif
+
+if use_var1 1    
+in enum Type type1=float [int,float]
+    //Type of variable.
+    
+    
+endif
+
+if type1 int
+in int Value_In value_in1_int=0 *:* 1,10
+    //Input value.
+out int Value_Out value_out1_int=0 *:* 1,10
+    //Output value.
+endif
+
+if type1 float
+in float Value_In value_in1_float=0 *:* 0.01,0.1
+    //Input value.
+out float Value_Out value_out1_float=0 *:* 0.01,0.1
+    //Output value.
+endif
+
+if type1 int,float
+in checkbox Map map1=0
+    //Remap value from a given to an output range.
+
+in checkbox Clamp clamp1=1
+    //Clamp value to an output range.
+endif
+
+if type1 int
+in int Source0 src0_int=0 *:* 1,10
+    //Source range - is used for Map.
+in int Source1 src1_int=0 *:* 1,10
+    //Source range - is used for Map.
+in int Dest0 dest0_int=0 *:* 1,10
+    //Destination range - is used for Map and Clamp.
+in int Dest1 dest1_int=0 *:* 1,10
+    //Destination range - is used for Map and Clamp.
+endif
+
+if type1 float
+in float Source0 src0_float=0 *:* 1,10
+    //Source range - is used for Map.
+in float Source1 src1_float=0 *:* 1,10
+    //Source range - is used for Map.
+in float Dest0 dest0_float=0 *:* 1,10
+    //Destination range - is used for Map and Clamp.
+in float Dest1 dest1_float=0 *:* 1,10
+    //Destination range - is used for Map and Clamp.
+endif
+
+
+    
+#TODO implement more variables
+
+
+
+#----------------------------------
