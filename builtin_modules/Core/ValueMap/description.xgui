@@ -47,22 +47,22 @@ endif
 if type1 int
 in int Source0 src0_int=0 *:* 1,10
     //Source range - is used for Map.
-in int Source1 src1_int=0 *:* 1,10
+in int Source1 src1_int=100 *:* 1,10
     //Source range - is used for Map.
 in int Dest0 dest0_int=0 *:* 1,10
     //Destination range - is used for Map and Clamp.
-in int Dest1 dest1_int=0 *:* 1,10
+in int Dest1 dest1_int=100 *:* 1,10
     //Destination range - is used for Map and Clamp.
 endif
 
 if type1 float
 in float Source0 src0_float=0 *:* 1,10
     //Source range - is used for Map.
-in float Source1 src1_float=0 *:* 1,10
+in float Source1 src1_float=1 *:* 1,10
     //Source range - is used for Map.
 in float Dest0 dest0_float=0 *:* 1,10
     //Destination range - is used for Map and Clamp.
-in float Dest1 dest1_float=0 *:* 1,10
+in float Dest1 dest1_float=1 *:* 1,10
     //Destination range - is used for Map and Clamp.
 endif
 

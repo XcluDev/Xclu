@@ -43,9 +43,9 @@ void XModuleValueMap::impl_update() {
             seti_value_out1_int(v);
         }
         if (gete_type1() == type1_float) {
-            float v = geti_value_in1_int();
-            float dest0 = geti_dest0_int();
-            float dest1 = geti_dest1_int();
+            float v = getf_value_in1_float();
+            float dest0 = getf_dest0_float();
+            float dest1 = getf_dest1_float();
             if (map) {
                 v = mapf(v, getf_src0_float(), getf_src1_float(), dest0, dest1);
             }

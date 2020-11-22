@@ -433,5 +433,6 @@
         <file>builtin_examples/Timer.xclu</file>
         <file>builtin_examples/Webcamera.xclu</file>
         <file>builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp</file>
+        <file>builtin_modules/Core/ValueMap/description.xgui</file>
     </qresource>
 </RCC>
