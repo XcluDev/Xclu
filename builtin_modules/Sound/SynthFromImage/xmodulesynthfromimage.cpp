@@ -80,7 +80,8 @@ void XModuleSynthFromImage::impl_update() {
     int w = input_.w;
     int h = input_.h;
 
-    int scany = (h-1) * getf_scan_y();
+    float ScanY = clampf(getf_scan_y(), 0, 1);
+    int scany = (h-1) * ScanY;
     int scanw = w * getf_scan_w();
     int x0 = w/2 - scanw/2;
     int x1 = x0 + scanw;    //excluded
@@ -175,6 +176,7 @@ void XModuleSynthFromImage::impl_update() {
         for (int y=y0; y<=y1; y++) {
             output_.pixel_unsafe(x, y) = rgb_u8(255,0,0);
         }
+        output_.pixel_unsafe(x, scany) = rgb_u8(255,0,0);
     }
 
 

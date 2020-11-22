@@ -365,7 +365,11 @@ void XModuleRealsenseCamera::transform() {
         else {
             for (int y=0; y<h1; y++) {
                 for (int x=0; x<w1; x++) {
-                    output.pixel_unsafe(x, y) = mapi_clamped(input.pixel_unsafe(x+x0, y+y0), in0, in1, out0, out1);
+                    int v = input.pixel_unsafe(x+x0, y+y0);
+                    //zero depth value means junk pixel
+                    if (v > 0) v = mapi_clamped(v, in0, in1, out0, out1);
+                    else v = out1;
+                    output.pixel_unsafe(x, y) = v;
                 }
             }
         }
