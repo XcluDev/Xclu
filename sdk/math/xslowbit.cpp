@@ -1,7 +1,7 @@
 #include "xslowbit.h"
 
 //--------------------------------------------------------------
-void SlowBit::setup(float time00, float time01, float time10, float time11) {
+void XSlowbit::setup(float time00, float time01, float time10, float time11) {
     
 	update_times(time00, time01, time10, time11);
     _state = 0;
@@ -10,7 +10,7 @@ void SlowBit::setup(float time00, float time01, float time10, float time11) {
 }
 
 //--------------------------------------------------------------
-void SlowBit::update_times( float time00, float time01, float time10, float time11 ) {
+void XSlowbit::update_times( float time00, float time01, float time10, float time11 ) {
     time00 = qMax(time00, 0.000001f);
     time01 = qMax(time01, 0.000001f);
     time10 = qMax(time10, 0.000001f);
@@ -22,23 +22,23 @@ void SlowBit::update_times( float time00, float time01, float time10, float time
 }
 
 //--------------------------------------------------------------
-void SlowBit::update_times(float fade_in_sec, float fade_out_sec) {
+void XSlowbit::update_times(float fade_in_sec, float fade_out_sec) {
     update_times(fade_out_sec, fade_in_sec, fade_out_sec, fade_in_sec);
 }
 
 //--------------------------------------------------------------
-void SlowBit::update_times(float fade_sec) {
+void XSlowbit::update_times(float fade_sec) {
     update_times(fade_sec, fade_sec);
 }
 
 //--------------------------------------------------------------
-void SlowBit::reset0()
+void XSlowbit::reset0()
 {
     reset( 0 );
 }
 
 //--------------------------------------------------------------
-void SlowBit::reset( int value )
+void XSlowbit::reset( int value )
 {
     _state = value;
     _lastState = _state;
@@ -46,7 +46,7 @@ void SlowBit::reset( int value )
 }
 
 //--------------------------------------------------------------
-void SlowBit::update( float dt, int target )
+void XSlowbit::update( float dt, int target )
 {
     _lastState = _state;
     
@@ -68,25 +68,25 @@ void SlowBit::update( float dt, int target )
 }
 
 //--------------------------------------------------------------
-int SlowBit::state()
+int XSlowbit::state()
 {
     return _state;
 }
 
 //--------------------------------------------------------------
-bool SlowBit::became0()     //изменился в 0
+bool XSlowbit::became0()     //изменился в 0
 {
     return ( changed() && _state == 0 );
 }
 
 //--------------------------------------------------------------
-bool SlowBit::became1()     //изменился в 1
+bool XSlowbit::became1()     //изменился в 1
 {
     return ( changed() && _state == 1 );
 }
 
 //--------------------------------------------------------------
-bool SlowBit::changed()     //изменился (сравнивать с предыдущим состоянием)
+bool XSlowbit::changed()     //изменился (сравнивать с предыдущим состоянием)
 {
     return ( _state != _lastState );
 }

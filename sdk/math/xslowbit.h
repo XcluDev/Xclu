@@ -1,12 +1,12 @@
 #pragma once
 
-//SlowBit - slowly switched bit, from ofxKu.
+//XSlowbit - slowly switched bit, from ofxKu.
 //It holds float _value = 0..1, which gradually between from 0 to 1.
 
 #include "incl_h.h"
 
 
-struct SlowBit {
+struct XSlowbit {
     //time00: time for 0->0
     //time01: time for 0->1
     //time10: time for 1->0
