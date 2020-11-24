@@ -113,7 +113,7 @@ void XModuleSoundPlay::update_fade() {
         if (stop_fading_) {
             float time = xcore_elapsed_time_sec();
 
-            float vol = mapf_clamped(time, time_, time_+getf_fade_out_sec(), 1, 0);
+            float vol = xmapf_clamped(time, time_, time_+getf_fade_out_sec(), 1, 0);
             //xclu_console_append(QString("vol %1").arg(vol));
             player_->setVolume(media_volume(vol * getf_volume()));
             if (vol <= 0) {

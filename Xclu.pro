@@ -159,10 +159,10 @@ SOURCES += \
     project/projectproperties.cpp \
     project/xcore.cpp \
     sdk/math/math_utils.cpp \
-    sdk/math/slowbit.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    sdk/math/xslowbit.cpp \
     sdk/types.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
@@ -251,10 +251,10 @@ HEADERS += \
     project/xcore.h \
     sdk/math/int2.h \
     sdk/math/math_utils.h \
-    sdk/math/slowbit.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
+    sdk/math/xslowbit.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
     sdk/types.h \

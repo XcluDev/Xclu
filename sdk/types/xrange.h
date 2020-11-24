@@ -69,14 +69,14 @@ public:
     float tick_to_value(int tick, int ticks) const {
         xclu_assert(IntFloat == 1, "XRange: tick_to_value() is only for float");
         if (low_enabled && high_enabled && ticks > 0) {
-            return mapf_clamped(tick, 0, ticks, low, high);
+            return xmapf_clamped(tick, 0, ticks, low, high);
         }
         return 0;
     }
     int value_to_ticks(float value, int ticks) const {
         xclu_assert(IntFloat == 1, "XRange: value_to_ticks() is only for float");
         if (low_enabled && high_enabled && ticks > 0 && low < high) {
-            return mapf_clamped(value, low, high, 0, ticks);
+            return xmapf_clamped(value, low, high, 0, ticks);
         }
         return 0;
     }

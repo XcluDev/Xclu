@@ -1,4 +1,4 @@
-#include "slowbit.h"
+#include "xslowbit.h"
 
 //--------------------------------------------------------------
 void SlowBit::setup(float time00, float time01, float time10, float time11) {
@@ -64,7 +64,7 @@ void SlowBit::update( float dt, int target )
     if ( _value >= 1 ) { _state = 1; }
     if ( _value <= 0 ) { _state = 0; }
     
-    _value = clampf(_value, 0, 1 );
+    _value = xclampf(_value, 0, 1 );
 }
 
 //--------------------------------------------------------------

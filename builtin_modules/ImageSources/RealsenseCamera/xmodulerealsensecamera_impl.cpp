@@ -414,7 +414,7 @@ bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, XRaster_
         raster.allocate(w, h);
         for (int i = 0; i < w*h; i++) {
             if (data16[i] > 0) {
-                raster.data[i] = mapi_clamped(data16[i] * device_.depth_scale_mm, min_dist, max_dist, 255, 0);
+                raster.data[i] = xmapi_clamped(data16[i] * device_.depth_scale_mm, min_dist, max_dist, 255, 0);
             }
             else {
                 raster.data[i] = 0;

@@ -80,7 +80,7 @@ void XModuleSynthFromImage::impl_update() {
     int w = input_.w;
     int h = input_.h;
 
-    float ScanY = clampf(getf_scan_y(), 0, 1);
+    float ScanY = xclampf(getf_scan_y(), 0, 1);
     int scany = (h-1) * ScanY;
     int scanw = w * getf_scan_w();
     int x0 = w/2 - scanw/2;
@@ -115,7 +115,7 @@ void XModuleSynthFromImage::impl_update() {
     //read line
     QVector<float> line(scanw);
     for (int i=0; i<scanw; i++) {
-        line[i] = mapf(input_.pixel_unsafe(i+x0, scany), 0, 255, -1, 1);
+        line[i] = xmapf(input_.pixel_unsafe(i+x0, scany), 0, 255, -1, 1);
     }
 
     //Normalize
@@ -128,7 +128,7 @@ void XModuleSynthFromImage::impl_update() {
         }
         if (minv != maxv) {
             for (int i=0; i<scanw; i++) {
-                line[i] = mapf(line[i],minv,maxv,-1,1);
+                line[i] = xmapf(line[i],minv,maxv,-1,1);
             }
         }
     }
@@ -136,7 +136,7 @@ void XModuleSynthFromImage::impl_update() {
     //distort
     float distort = getf_distort();
     for (int i=0; i<line.size(); i++) {
-        line[i] = clampf(line[i]*distort, -1, 1);
+        line[i] = xclampf(line[i]*distort, -1, 1);
     }
 
     //duplicate line if loop ping-pong; exclude the beginning and final pixel

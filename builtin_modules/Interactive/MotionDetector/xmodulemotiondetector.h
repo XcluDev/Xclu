@@ -8,7 +8,7 @@
 #include <QMediaPlayer>
 #include <QScopedPointer>
 #include "xraster.h"
-#include "slowbit.h"
+#include "xslowbit.h"
 
 struct XModuleMotionDetectorBlockParams {
     float thresh_in=0.2f; //Threshold for block detection, 0..1
@@ -89,7 +89,7 @@ protected:
 
     float fire_time_ = 0;   //last time of fire
 
-    SlowBit bit_;
+    XSlowbit bit_;
 };
 
 

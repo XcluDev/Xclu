@@ -80,7 +80,7 @@ QString XModuleTextVariation::variate(QString text, int level) {
 
                 //choose random variant
                 if (!variants.isEmpty()) {
-                    result += variants.at(randomi(0, variants.size()-1));
+                    result += variants.at(xrandomi(0, variants.size()-1));
                     variants.clear();
                 }
             }

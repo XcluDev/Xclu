@@ -118,9 +118,9 @@ void XModuleTimer::update_bang(float delay_sec) {
         }
 
         //print time
-        float left_sec = clampf(time_ + delay_sec - time, 0, delay_sec);
-        float uniform = (delay_sec > 0) ? mapf_clamped(delta, 0, delay_sec, 0, 1) : 1;
-        float elapsed_sec = clampf(delta, 0, delay_sec);
+        float left_sec = xclampf(time_ + delay_sec - time, 0, delay_sec);
+        float uniform = (delay_sec > 0) ? xmapf_clamped(delta, 0, delay_sec, 0, 1) : 1;
+        float elapsed_sec = xclampf(delta, 0, delay_sec);
 
         setf_time_left_sec(left_sec);
         setf_time_uniform(uniform);

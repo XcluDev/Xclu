@@ -51,10 +51,10 @@ void XModuleRandom::make_new_value() {
     auto type = gete_output_type();
     switch (type) {
     case output_type_Float:
-        value = QString::number(randomf(getf_from_float(), getf_to_excluded_float()));
+        value = QString::number(xrandomf(getf_from_float(), getf_to_excluded_float()));
         break;
     case output_type_Int:
-        value = QString::number(randomi(geti_from_int(), geti_to_int()));
+        value = QString::number(xrandomi(geti_from_int(), geti_to_int()));
         break;
     case output_type_String:
         value = get_random_string();
@@ -77,7 +77,7 @@ QString XModuleRandom::get_random_string() {
         list.append(line);
     }
     if (list.isEmpty()) return "";
-    int i = randomi(0, list.size()-1);
+    int i = xrandomi(0, list.size()-1);
     return list.at(i);
 }
 

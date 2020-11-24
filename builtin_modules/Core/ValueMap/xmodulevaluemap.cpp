@@ -35,7 +35,7 @@ void XModuleValueMap::impl_update() {
             int dest0 = geti_dest0_int();
             int dest1 = geti_dest1_int();
             if (map) {
-                v = mapi(v, geti_src0_int(), geti_src1_int(), dest0, dest1);
+                v = xmapi(v, geti_src0_int(), geti_src1_int(), dest0, dest1);
             }
             if (clamp) {
                 v = clampi(v, dest0, dest1);
@@ -47,10 +47,10 @@ void XModuleValueMap::impl_update() {
             float dest0 = getf_dest0_float();
             float dest1 = getf_dest1_float();
             if (map) {
-                v = mapf(v, getf_src0_float(), getf_src1_float(), dest0, dest1);
+                v = xmapf(v, getf_src0_float(), getf_src1_float(), dest0, dest1);
             }
             if (clamp) {
-                v = clampf(v, dest0, dest1);
+                v = xclampf(v, dest0, dest1);
             }
             setf_value_out1_float(v);
         }

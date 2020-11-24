@@ -4,54 +4,54 @@
 
 //-------------------------------------------------------
 //x*x
-float sqrf(float x) {
+float xsqrf(float x) {
 	return x * x;
 }
 
-int sqri(int x) {
+int xsqri(int x) {
 	return x * x; 
 }
 
 
 //-------------------------------------------------------
 //x*x*x
-float pow3f(float x) {
+float xpow3f(float x) {
 	return x * x*x;
 }
 
 //-------------------------------------------------------
 //min and max
-float minf(float x, float y) {
+float xminf(float x, float y) {
     return (x < y) ? x : y;
 }
 
-float maxf(float x, float y) {
+float xmaxf(float x, float y) {
     return (x > y) ? x : y;
 }
 
-double mind(double x, double y) {
+double xmind(double x, double y) {
     return (x < y) ? x : y;
 }
 
-double maxd(double x, double y) {
+double xmaxd(double x, double y) {
     return (x > y) ? x : y;
 }
 
-int mini(int x, int y) {
+int xmini(int x, int y) {
     return (x < y) ? x : y;
 }
 
-int maxi(int x, int y) {
+int xmaxi(int x, int y) {
     return (x > y) ? x : y;
 }
 
 //-------------------------------------------------------
 //clamp to range [a,b], including a and b
-float clampf(float x, float a, float b) {
+float xclampf(float x, float a, float b) {
     if (b<a) std::swap(a,b);
     return ((x<a)?a : ((x>b)?b:x));
 }
-double clampd(double x, double a, double b) {
+double xclampd(double x, double a, double b) {
     if (b<a) std::swap(a,b);
     return ((x<a)?a : ((x>b)?b:x));
 }
@@ -62,27 +62,27 @@ int clampi(int x, int a, int b) {
 
 //-------------------------------------------------------
 //Linear interpolation from [0,1]
-float lerpf(float A, float B, float x) { //x = 0..1
+float xlerpf(float A, float B, float x) { //x = 0..1
     return A*(1-x) + B*x;
 }
 
-double lerpd(double A, double B, double x) {
+double xlerpd(double A, double B, double x) {
     return A*(1-x) + B*x;
 }
 
 //-------------------------------------------------------
 //Linear interpolation
-float mapf(float x, float a, float b, float A, float B) {
+float xmapf(float x, float a, float b, float A, float B) {
     if (a==b) return A;
     return (x - a) / (b - a) * (B - A) + A;
 }
 
-double mapd(double x, double a, double b, double A, double B) {
+double xmapd(double x, double a, double b, double A, double B) {
     if (a==b) return A;
     return (x - a) / (b - a) * (B - A) + A;
 }
 
-int mapi(int x, int a, int b, int A, int B) {
+int xmapi(int x, int a, int b, int A, int B) {
     //Need to use "long long..." to avoid overflow.
     //And so we obtain perfect int result of map !
     if (a==b) return A;
@@ -91,16 +91,16 @@ int mapi(int x, int a, int b, int A, int B) {
 
 //-------------------------------------------------------
 //clamped linear interpolation
-float mapf_clamped(float x, float a, float b, float A, float B) {
-    return clampf(mapf(x,a,b,A,B),A,B);
+float xmapf_clamped(float x, float a, float b, float A, float B) {
+    return xclampf(xmapf(x,a,b,A,B),A,B);
 }
 
-double mapd_clamped(double x, double a, double b, double A, double B) {
-    return clampd(mapd(x,a,b,A,B),A,B);
+double xmapd_clamped(double x, double a, double b, double A, double B) {
+    return xclampd(xmapd(x,a,b,A,B),A,B);
 }
 
-int mapi_clamped(int x, int a, int b, int A, int B) {
-    return clampi(mapi(x,a,b,A,B),A,B);
+int xmapi_clamped(int x, int a, int b, int A, int B) {
+    return clampi(xmapi(x,a,b,A,B),A,B);
 }
 
 //-------------------------------------------------------
@@ -108,7 +108,7 @@ int mapi_clamped(int x, int a, int b, int A, int B) {
 //std::random_device randomi_rd_;  //Will be used to obtain a seed for the random number engine
 
 //https://doc.qt.io/qt-5/qrandomgenerator.html#details
-int randomi(int a, int b) {
+int xrandomi(int a, int b) {
     std::uniform_real_distribution<> dist(a, b+1);
     return dist(*QRandomGenerator::global());
 
@@ -118,7 +118,7 @@ int randomi(int a, int b) {
 }
 
 //-------------------------------------------------------
-float randomf(float a, float b) {
+float xrandomf(float a, float b) {
     std::uniform_real_distribution<> dist(a, b);
     return dist(*QRandomGenerator::global());
 }
