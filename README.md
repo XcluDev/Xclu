@@ -26,7 +26,12 @@ Instructions on installing and building:
 * Windows 10: https://forum.xclu.dev/t/setting-up-xclu-on-windows-qt-arduino-realsense/26
 * Jetson Nano: https://forum.xclu.dev/t/setting-up-jetson-nano-for-xclu-qt-realsense-nomachine/25
 
+## Used frameworks and libraries
 
+* Qt
+* glm
+* openFrameworks
+* RealSenseSDK
 
 ## Support the project!
 

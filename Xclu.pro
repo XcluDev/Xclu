@@ -115,6 +115,10 @@ INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
 # GLM
 INCLUDEPATH += ./ libs/glm libs/glm/gtx
 
+# oF
+INCLUDEPATH += libs/of
+
+
 SOURCES += \
     components/button/xguibutton.cpp \
     components/button/xitembutton.cpp \
@@ -158,10 +162,11 @@ SOURCES += \
     project/project.cpp \
     project/projectproperties.cpp \
     project/xcore.cpp \
-    sdk/math/math_utils.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    sdk/math/xmath.cpp \
+    sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
     sdk/types.cpp \
     sdk/types/xarray.cpp \
@@ -245,15 +250,17 @@ HEADERS += \
     host/xclu_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
+    libs/of/ofNoise.h \
     modules/registrarxmodule.h \
     project/project.h \
     project/projectproperties.h \
     project/xcore.h \
     sdk/math/int2.h \
-    sdk/math/math_utils.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
     modules/moduleseed.h \
+    sdk/math/xmath.h \
+    sdk/math/xnoise.h \
     sdk/math/xslowbit.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
