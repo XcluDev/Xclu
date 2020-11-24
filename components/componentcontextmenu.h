@@ -19,7 +19,8 @@
 #include "moduledescription.h"
 
 #include <QWidget>
-class QMenu;
+#include <QMenu>
+//class QMenu;
 class XGui;
 
 

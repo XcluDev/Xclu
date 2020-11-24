@@ -42,6 +42,7 @@ public:
     static XObjectWrapper *create_wrapper(const XObject *object);
 
     XObjectWrapper(const XObject *object);
+    virtual ~XObjectWrapper() {}
 
     const XObject *object();
 

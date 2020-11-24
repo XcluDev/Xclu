@@ -268,7 +268,7 @@ void XModuleSerial::send_string(QString str) {
 
     if (connected_ && !str.isEmpty()) {
         QByteArray writeData;
-        writeData.append(str);
+        writeData.append(str.toLatin1());
 
         qint64 bytesWritten = serialPort_.write(writeData);
         if (bytesWritten == -1) {
