@@ -19,7 +19,7 @@ Forum & docs: https://forum.xclu.dev
 
 ## Supported platforms
 Xclu is written at Qt C++ 5.14.2 (Windows) and 5.9.5 (Ubuntu Jetson Nano). 
-It's tested on Windows 10 and Jetson Nano, but should work on Mac OS and Linux.
+It's tested on Windows 10, Mac OS and Jetson Nano.
 
 Instructions on installing and building: 
 

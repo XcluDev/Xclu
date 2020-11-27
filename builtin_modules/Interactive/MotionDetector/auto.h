@@ -109,18 +109,6 @@ void increase_int_blocks_on(int increase = 1) { increase_int_("blocks_on", incre
 bool was_changed_blocks_threshold() { return was_changed_("blocks_threshold"); }
 int geti_blocks_threshold() { return geti_("blocks_threshold"); }
 
-
-//Float Background Restore
-//If block image is not changed for this time, then background is restored to that image.
-bool was_changed_background_restore_sec() { return was_changed_("background_restore_sec"); }
-float getf_background_restore_sec() { return getf_("background_restore_sec"); }
-
-//Out Float Restore Timer
-//Debug value for restoring.
-bool was_changed_restore_timer() { return was_changed_("restore_timer"); }
-float getf_restore_timer() { return getf_("restore_timer"); }
-void setf_restore_timer(float value) { setf_("restore_timer", value); }
-
 //----------------------------------------------------
 //Page Settings
 //
@@ -158,5 +146,25 @@ QStringList get_strings_bang_on() { return get_strings_("bang_on"); }
 bool was_changed_bang_off() { return was_changed_("bang_off"); }
 QString gets_bang_off() { return gets_("bang_off"); }
 QStringList get_strings_bang_off() { return get_strings_("bang_off"); }
+
+//----------------------------------------------------
+//Page Backgr Restore
+//Settings for restore background automatically
+
+//Float Restore Time
+//If block image is not changed a lot for this time, then background is restored to that image.
+bool was_changed_background_restore_sec() { return was_changed_("background_restore_sec"); }
+float getf_background_restore_sec() { return getf_("background_restore_sec"); }
+
+//Int Allow Flicker
+//How much blocks is allowed to change during waiting.
+bool was_changed_background_restore_flicker() { return was_changed_("background_restore_flicker"); }
+int geti_background_restore_flicker() { return geti_("background_restore_flicker"); }
+
+//Out Float Restore Timer
+//Debug value for restoring.
+bool was_changed_restore_timer() { return was_changed_("restore_timer"); }
+float getf_restore_timer() { return getf_("restore_timer"); }
+void setf_restore_timer(float value) { setf_("restore_timer", value); }
 
 //----------------------------------------------------

@@ -155,6 +155,26 @@ endif
 #----------------
 
 #------------------------------------------
+page Watchdog
+//Saying Arduino that we are live, and receiving from Arduino that it's live.
+
+in checkbox_group Watchdog_Send watchdog_send=1
+    //Should we send something to Arduino with given period to show that we are live.
+
+if watchdog_send 1
+in string Watchdog_Message watchdog_message="."
+    //Sending message.
+    
+in float Send_Period watchdog_send_period=1 0.01:* 0.1,1
+    //Time period for sending watchdog ticks.
+    //sec
+endif
+
+in checkbox_group Watchdog_Receive watchdog_receive=0
+    //Receiving watchdog - TODO not implemented yet!
+
+
+#------------------------------------------
 page Devices
 
 in button Print_Devices print_devices

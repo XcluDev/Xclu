@@ -158,6 +158,9 @@ void XModuleSerial::impl_start() {
 
     //открытие порта
     open_port();
+
+    //watchdog
+    watchdog_sent_ = -100000;
 }
 
 //---------------------------------------------------------------------
@@ -252,6 +255,16 @@ void XModuleSerial::impl_update() {
 
     //receiving data
     receive();
+
+    //watchdog
+    double time = xcore_elapsed_time_sec();
+    if (geti_watchdog_send()) {
+        if (time >= watchdog_sent_ + getf_watchdog_send_period()) {
+            send_string(gets_watchdog_message());
+            watchdog_sent_ = time;
+        }
+
+    }
 }
 
 //---------------------------------------------------------------------

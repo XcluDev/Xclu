@@ -198,7 +198,7 @@ enum_receive_as gete_receive_as() { return enum_receive_as(geti_("receive_as"));
 QString getraw_receive_as() { return getraw_("receive_as");}
 
 //Out String Line
-//Received data as last line, separated by '\n'. '\r' are ignored.
+//Received data as last line, separated by '\n'. '\r' are ignored. Good for continuous sensors.
 bool was_changed_received_line() { return was_changed_("received_line"); }
 QString gets_received_line() { return gets_("received_line"); }
 QStringList get_strings_received_line() { return get_strings_("received_line"); }
@@ -259,6 +259,31 @@ QString getraw_limit_show() { return getraw_("limit_show");}
 //Limit show by prevent slow down.
 bool was_changed_limit_show_count() { return was_changed_("limit_show_count"); }
 int geti_limit_show_count() { return geti_("limit_show_count"); }
+
+//----------------------------------------------------
+//Page Watchdog
+//Saying Arduino that we are live, and receiving from Arduino that it's live.
+
+//Checkbox Watchdog Send
+//Should we send something to Arduino with given period to show that we are live.
+bool was_changed_watchdog_send() { return was_changed_("watchdog_send"); }
+int geti_watchdog_send() { return geti_("watchdog_send"); }
+
+//String Watchdog Message
+//Sending message.
+bool was_changed_watchdog_message() { return was_changed_("watchdog_message"); }
+QString gets_watchdog_message() { return gets_("watchdog_message"); }
+QStringList get_strings_watchdog_message() { return get_strings_("watchdog_message"); }
+
+//Float Send Period
+//Time period for sending watchdog ticks.
+bool was_changed_watchdog_send_period() { return was_changed_("watchdog_send_period"); }
+float getf_watchdog_send_period() { return getf_("watchdog_send_period"); }
+
+//Checkbox Watchdog Receive
+//Receiving watchdog - TODO not implemented yet!
+bool was_changed_watchdog_receive() { return was_changed_("watchdog_receive"); }
+int geti_watchdog_receive() { return geti_("watchdog_receive"); }
 
 //----------------------------------------------------
 //Page Devices

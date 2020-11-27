@@ -76,15 +76,7 @@ out int Blocks_on blocks_on=0 0:* 1,10
 in int Blocks_Threshold blocks_threshold=1 0:* 1,10
     //How many blocks must to fire for event.
     //blocks
-        
-separator
-in float Background_Restore background_restore_sec=30 1:* 0.1,1
-    //If block image is not changed for this time, then background is restored to that image.
-    //sec
-
-out float Restore_Timer restore_timer=0 0:1 0.01,1
-    //Debug value for restoring.
-    //0..1
+       
     
         
 endif
@@ -123,4 +115,20 @@ in text_bang Bang_Off bang_off 7 10
     //What to do on "Off" event.
     //#module1->stop_button
 
+#-------------------------------------------
+page Backgr_Restore
+    //Settings for restore background automatically
+    
+in float Restore_Time background_restore_sec=30 1:* 0.1,1
+    //If block image is not changed a lot for this time, then background is restored to that image.
+    //sec
+
+in int Allow_Flicker background_restore_flicker=1 0:* 1,10
+    //How much blocks is allowed to change during waiting.
+    //blocks
+    
+out float Restore_Timer restore_timer=0 0:1 0.01,1
+    //Debug value for restoring.
+    //0..1
+    
 #-------------------------------------------

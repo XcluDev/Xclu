@@ -1,5 +1,13 @@
 Xclu: Changelog 
 
+#### 2020-11-27
+-   Сделаны слайдеры.
+-   Добавлены модули ValueMap, Random, MotionDetector, SoundPlay.
+-   WImage – обновлено, чтобы было изображение и флажок нового изображения.
+-   Рефакторинг mapf -> xmapf.
+-   Сборка для MacOS.
+
+
 #### 2020-10-31
 -	Убрана страница «Modulation Setup» в SoundOsc.
 -	Реализован XModulePainter

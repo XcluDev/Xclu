@@ -55,6 +55,9 @@ protected:
 
     QString in_string_;
 
+
+    double watchdog_sent_ = 0;  //last time we sent watchdog event
+
 };
 
 

@@ -134,21 +134,24 @@ void XModuleMotionDetector::impl_update() {
     seti_blocks_on(nfires);
 
     //check fires to vector
-    bool fires_changed = false;
+    int fires_changed = 0;
     for (int i=0; i<W*H; i++) {
         int f = blocks_[i].fires();
         if (f != fires_[i]) {
-            fires_changed = true;
+            fires_changed++;
         }
-        fires_[i] = f;
     }
-    //if changed - then reset timer for background update
-    if (fires_changed) {
-        static_time_ = time;
+
+    //if too much changed, then reset timer and store new state
+    if (fires_changed > geti_background_restore_flicker()) {
+        for (int i=0; i<W*H; i++) {
+            fires_[i] = blocks_[i].fires();
+            static_time_ = time;
+        }
     }
-    //update background
+    //restore background
     float restore_sec = getf_background_restore_sec();
-    if (time - static_time_ >= restore_sec) {
+    if (time >= static_time_ + restore_sec) {
         background_ = input_;
         static_time_ = time;
     }
@@ -214,23 +217,18 @@ void XModuleMotionDetector::impl_update() {
     }
     //border
     int border_w = 10;
-    rgb_u8 border_color(0,0,0);
-    if (state_) {
-        border_color = rgb_u8(255,0,0);
-        if (fire) {
-            border_color = rgb_u8(255,255,0);
-        }
-    }
-    else {
-        if (fire) {
-            border_color = rgb_u8(0,0,255);
-        }
-
-    }
+    rgb_u8 border_color = (state_) ? ((fire) ? rgb_u8(255,255,0) : rgb_u8(255,0,0))
+                                   : ((fire) ? rgb_u8(0,0,255) : rgb_u8(0,0,0));
     for (int y=0; y<h; y++) {
         for (int x=0; x<border_w; x++) {
             output_.pixel_unsafe(x,y) = border_color;
             output_.pixel_unsafe(w-1-x,y) = border_color;
+        }
+    }
+    for (int x=0; x<w; x++) {
+        for (int y=0; y<border_w; y++) {
+            output_.pixel_unsafe(x,y) = border_color;
+            output_.pixel_unsafe(x,h-1-y) = border_color;
         }
     }
 
