@@ -61,7 +61,7 @@ class XGui : public QWidget
     Q_OBJECT
 public:
     //item - should not be deleted
-    XGui(XGuiPageBuilder &input, XItem *item);
+    XGui(XGuiPageBuilder &page_builder, XItem *item);
     virtual ~XGui();
 
     //Functions for locking and unlocking editing of constants at project start.
@@ -136,9 +136,13 @@ protected:
 
 protected:
     //Insert to page widgets structure
-    //widgetN can be nullptr - in this case it's omitted and grid just shifted,
+    //widget_marker - is a widget which is decorated when link changes and set bold for constants,
+    //it's just marker and can duplicate with widget1..5.
+    //widget1..5 can be nullptr - in this case it's omitted and grid just shifted,
     //for example for button widget1 == nullptr
+    //Note: each control must finish inserting with newline!
     void insert_widgets(XGuiPageBuilder &page_builder,
+                        QWidget *widget_marker,
                         QWidget *widget1 = nullptr, int spanx1 = 1, int newline1 = false,
                         QWidget *widget2 = nullptr, int spanx2 = 1, int newline2 = false,
                         QWidget *widget3 = nullptr, int spanx3 = 1, int newline3 = false,
@@ -158,20 +162,6 @@ protected:
     object:         0 label                                            4 link label
                     0--------------------2 thumbnail     3-------------4 description
     */
-
-
-    void insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
-                       int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
-
-    //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-    void insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input);
-
-    //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
-    //(int, float, checkbox, object)
-    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
-                                   int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
-    void insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input);
-
 
 protected slots:
     //Track changes

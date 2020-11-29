@@ -13,7 +13,7 @@ public:
     XGuiPage(XGuiPageBuilder &page_builder, XItemPage *item);
     ~XGuiPage();
 
-    //закончить страницу
+    //end the previous page (used also in XGuiEditor)
     static void finalize_page(XGuiPageBuilder &page_builder);
 
     int get_vscroll();

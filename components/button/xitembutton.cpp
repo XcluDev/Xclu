@@ -25,7 +25,7 @@ XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemButton::create_gui(XGuiPageBuilder &page_builder) {
-    gui__ = new XGuiButton(input, this);
+    gui__ = new XGuiButton(page_builder, this);
     return gui__;
 }
 

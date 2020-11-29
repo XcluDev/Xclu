@@ -7,21 +7,21 @@
 /*
 //---------------------------------------------------------------------
 void XGuiRasterVisual::set_text(QString text) {
-    info_label_->setText(text);
+    description_->setText(text);
 
 }
 
 //---------------------------------------------------------------------
 void XGuiRasterVisual::set_image(const QImage &image) {
     QPixmap pix = QPixmap::fromImage(image);
-    preview_label_->setPixmap(pix);
-    preview_label_->setVisible(true);
+    thumbnail_->setPixmap(pix);
+    thumbnail_->setVisible(true);
 }
 
 //---------------------------------------------------------------------
 void XGuiRasterVisual::clear_image() {
-    preview_label_->setText("");
-    preview_label_->setVisible(false);
+    thumbnail_->setText("");
+    thumbnail_->setVisible(false);
     //spacer_->spacerItem()-> setVisible(false);
 }
 
@@ -32,8 +32,8 @@ template<typename T>
 XGuiRaster_<T>::XGuiRaster_(XGuiPageBuilder &page_builder, XItemRaster_<T> *item)
     :XGui(input, item)
 {
-    visual_.preview_label_ = new QLabel("");
-    visual_.info_label_ = new QLabel("");
+    visual_.thumbnail_ = new QLabel("");
+    visual_.description_ = new QLabel("");
     visual_.spacer_ = new QSpacerItem(5,1);
     visual_.clear_image();
 
@@ -42,9 +42,9 @@ XGuiRaster_<T>::XGuiRaster_(XGuiPageBuilder &page_builder, XItemRaster_<T> *item
     object_widget_->setLayout(layout);
     layout->setMargin(0);
 
-    layout->addWidget(visual_.preview_label_);
+    layout->addWidget(visual_.thumbnail_);
     layout->addItem(visual_.spacer_);
-    layout->addWidget(visual_.info_label_);
+    layout->addWidget(visual_.description_);
     //layout->setStretch(0,0);
     //layout->setStretch(1,1);
 
@@ -61,7 +61,7 @@ XGuiRaster_<T>::XGuiRaster_(XGuiPageBuilder &page_builder, XItemRaster_<T> *item
     }
 
 
-    //отслеживание изменений
+    //track changes
     //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));
 }
 

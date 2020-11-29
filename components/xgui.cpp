@@ -17,6 +17,7 @@ void XGuiPageBuilder::insert(QWidget *widget, int spanx, bool new_line) {
     }
     pos.x += spanx;
     if (new_line) {
+        pos.x = 0;
         pos.y++;
     }
 }
@@ -24,11 +25,11 @@ void XGuiPageBuilder::insert(QWidget *widget, int spanx, bool new_line) {
 //---------------------------------------------------------------------
 //XGui
 //---------------------------------------------------------------------
-XGui::XGui(XGuiPageBuilder &input, XItem * item)
-    :QWidget(input.parent)
+XGui::XGui(XGuiPageBuilder &page_builder, XItem * item)
+    :QWidget(page_builder.parent)
 {
     item__ = item;
-    settings_ = input.settings;
+    settings_ = page_builder.settings;
 }
 
 //---------------------------------------------------------------------
@@ -144,6 +145,7 @@ void XGui::on_label_link_right_click(QPoint /*pos*/) {
 //it's just marker and can duplicate with widget1..5.
 //widget1..5 can be nullptr - in this case it's omitted and grid just shifted,
 //for example for button widget1 == nullptr
+//Note: each control must finish inserting with newline!
 void XGui::insert_widgets(XGuiPageBuilder &page_builder,
                           QWidget *widget_marker,
                           QWidget *widget1, int spanx1, int newline1,
@@ -170,48 +172,7 @@ void XGui::insert_widgets(XGuiPageBuilder &page_builder,
 
     //store widget to control its background color and decorate by qualifier,
     //for example, "bolds" on constants and green on linked state
-    widget_marker_ = internal_widget;
-
-    //change font type
-    /*if (internal_widget) {
-        auto font = internal_widget->font();
-        font.setFamily(xclu::font_family_values());
-        internal_widget->setFont(font);
-    }*/
-
-    //const make bold, if widget accepts this by is_const_bold() = true
-    if (item__->is_const() && is_const_bold()) {
-        if (widget_marker_) {
-            auto font = widget_marker_->font();
-            font.setBold(true);
-            widget_marker_->setFont(font);
-        }
-    }
-
-    //out and links - set "read only"
-    on_change_link_readonly();
-}
-
-//---------------------------------------------------------------------
-//вставить на страницу созданный виджет
-void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
-                                 int pos_x, int shift_y, int spanx, int spany) {
-
-    //insert widget
-    input.grid->addWidget(widget, input.y + shift_y, pos_x, spany, spanx);
-
-    input.y += shift_y + spany;
-
-    //collect "widgets_visibility_" - widgets to control their visibility
-    if (label_) {
-        widgets_visibility_.push_back(label_);
-    }
-    widgets_visibility_.push_back(label_link_);
-    widgets_visibility_.push_back(widget);
-
-    //store widget to control its background color and decorate by qualifier,
-    //for example, "bolds" on constants and green on linked state
-    widget_marker_ = internal_widget;
+    widget_marker_ = widget_marker;
 
     //change font type
     /*if (internal_widget) {
@@ -235,36 +196,9 @@ void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageBuil
 
 //---------------------------------------------------------------------
 //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input) {
-    insert_widget(widget, internal_widget, input, 0, 1, 4, 1);
-}
-
-//---------------------------------------------------------------------
-//вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
-//(int, float, checkbox, object)
-void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
-                                             int pos_x, int shift_y, int spanx, int spany) {
-    /*QSpacerItem *spacer = new QSpacerItem(1,1);
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->setMargin(0);
-    layout->addWidget(widget);
-    layout->addItem(spacer);
-    layout->setStretch(0,0);
-    layout->setStretch(1,1);
-    QWidget *holder= new QWidget;
-    attribute_as_GuiEditorPage(holder);  //set background as a whole page
-
-    holder->setLayout(layout);
-    insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
-*/
-    insert_widget(widget, internal_widget, input, pos_x, shift_y, spanx, spany);
-
-}
-
-//---------------------------------------------------------------------
-void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input) {
-     insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 4, 1);
-}
+//void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &page_builder) {
+//    insert_widget(widget, internal_widget, input, 0, 1, 4, 1);
+//}
 
 //---------------------------------------------------------------------
 //set "GuiEditorPage" for QWidget in order QSS set its background darker
@@ -384,6 +318,8 @@ QWidget *XGui::new_label_link() {
                 SLOT(on_label_link_right_click(QPoint)));
 
     //connect(label_link_, SIGNAL(clicked()), SLOT(on_label_link_clicked()));
+
+    return label_link_;
 }
 
 //---------------------------------------------------------------------

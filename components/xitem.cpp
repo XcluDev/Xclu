@@ -337,7 +337,7 @@ void XItem::set_expression(const QString &expr) {
 //---------------------------------------------------------------------
 //графический интерфейс, он тут создается, но хранится отдельно
 XGui *XItem::create_gui(XGuiPageBuilder &page_builder) {
-    gui__ = new XGui(input, this);
+    gui__ = new XGui(page_builder, this);
     return gui__;   //не нужно его удалять
 }
 

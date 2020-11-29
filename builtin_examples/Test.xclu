@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -53,7 +53,7 @@
                     },
                     {
                         "aname": "int1",
-                        "avalue": "1"
+                        "avalue": "10"
                     },
                     {
                         "aname": "int2",
@@ -61,7 +61,7 @@
                     },
                     {
                         "aname": "int3",
-                        "avalue": "2"
+                        "avalue": "0"
                     },
                     {
                         "aname": "int4",
@@ -176,7 +176,11 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "enabled",
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
                         "avalue": "1"
                     },
                     {

@@ -4,18 +4,37 @@
 #include "xguicheckbox.h"
 
 //---------------------------------------------------------------------
+/*
+Widget structures for different controls:
+
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
 XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
-    :XGui(input, item)
+    :XGui(page_builder, item)
 {
     checkbox_ = new QCheckBox("");
 
-    if (!item->is_group_checkbox()) { //обычный чекбокс
-        insert_label(input);
-        //вставка на страницу
-        insert_widget_with_spacer(checkbox_, checkbox_, input);
+    if (!item->is_group_checkbox()) { //normal checkbox
+        //insert to page
+        insert_widgets(page_builder,
+                       checkbox_,
+                       new_label(), 1, false,
+                       checkbox_, 1, false,
+                       nullptr, 2, false,
+                       new_label_link(), 1, true);
     }
     else {
-        //"групповой" чекбокс - то есть просто слева показать, без label
+        //group checkbox - show at left and with horizontl line
         checkbox_->setText(item->title());
         checkbox_->setToolTip(get_tip());
 
@@ -23,12 +42,12 @@ XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
         line_->setFrameShape(QFrame::HLine);
         line_->setFrameShadow(QFrame::Sunken);
 
-        //добавляем на страницу
-        input.grid->addWidget(line_,input.y, 1);
-
-        //вставка на страницу слева, на место label
-        int pos_x = 0;
-        insert_widget(checkbox_, checkbox_, input, pos_x);
+        //insert to page
+        insert_widgets(page_builder,
+                       checkbox_,
+                       checkbox_, 2, false,
+                       line_, 2, false,
+                       new_label_link(), 1, true);
     }
 
     //квалификаторы
@@ -36,7 +55,7 @@ XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
         set_read_only(true);
     }
 
-    //отслеживание изменений
+    //track changes
     connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));
 }
 

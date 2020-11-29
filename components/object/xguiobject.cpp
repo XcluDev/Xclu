@@ -9,21 +9,21 @@
 //XGuiObjectVisual
 //---------------------------------------------------------------------
 void XGuiObjectVisual::set_text(QString text) {
-    info_label_->setText(text);
+    description_->setText(text);
 
 }
 
 //---------------------------------------------------------------------
 void XGuiObjectVisual::set_image(const QImage &image) {
     QPixmap pix = QPixmap::fromImage(image);
-    preview_label_->setPixmap(pix);
-    preview_label_->setVisible(true);
+    thumbnail_->setPixmap(pix);
+    thumbnail_->setVisible(true);
 }
 
 //---------------------------------------------------------------------
 void XGuiObjectVisual::clear_image() {
-    preview_label_->setText("");
-    preview_label_->setVisible(false);
+    thumbnail_->setText("");
+    thumbnail_->setVisible(false);
     //spacer_->spacerItem()-> setVisible(false);
 }
 
@@ -48,34 +48,27 @@ object:         0 label                                            4 link label
 XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
     :XGui(page_builder, item)
 {
-    visual_.preview_label_ = new QLabel("");
-    visual_.info_label_ = new QLabel("");
-    visual_.spacer_ = new QSpacerItem(5,1);
+    visual_.thumbnail_ = new QLabel("");
+    visual_.description_ = new QLabel("");
+    //visual_.spacer_ = new QSpacerItem(5,1);
     visual_.clear_image();
 
-    object_widget_ = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout;
-    object_widget_->setLayout(layout);
-    layout->setMargin(0);
+    //insert to page
+    insert_widgets(page_builder,
+                   visual_.description_,
+                   new_label(), 1, false,
+                   nullptr, 3, false,
+                   new_label_link(), 1, true,
+                   visual_.thumbnail_, 2, false,
+                   visual_.description_, 1, true
+                   );
 
-    layout->addWidget(visual_.preview_label_);
-    layout->addItem(visual_.spacer_);
-    layout->addWidget(visual_.info_label_);
-    //layout->setStretch(0,0);
-    //layout->setStretch(1,1);
-
-    //метка
-    insert_label(input);
-    //вставка на страницу
-    insert_widget_with_spacer_next_line(object_widget_, object_widget_, input);
-
-    //ДОБАВЛЕНИЕ КНОПКИ Inspect
+    //TODO ДОБАВЛЕНИЕ КНОПКИ Inspect
 
     //квалификаторы
     if (item->is_out()) {
         set_read_only(true);
     }
-
 
     //track changes
     //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));*/

@@ -62,7 +62,7 @@ void XItemFloat::set_value_from_link(XLinkResolved *linkres) {
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemFloat::create_gui(XGuiPageBuilder &page_builder) {
-    gui__ = new XGuiFloat(input, this);
+    gui__ = new XGuiFloat(page_builder, this);
     return gui__;
 }
 

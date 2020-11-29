@@ -94,7 +94,7 @@ void *XModuleScalar::impl_create_widget(QString parent_id) {
         data_.clear();
     }
 
-    //отслеживание изменений
+    //track changes
     connect(spin_, QOverload<int>::of(&QSpinBox::valueChanged),
             [=](int /*i*/){ spin_changed(); });
 

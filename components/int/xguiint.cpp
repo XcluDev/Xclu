@@ -5,11 +5,24 @@
 #include "xcluspinbox.h"
 
 //---------------------------------------------------------------------
-XGuiInt::XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item)
-    :XGui(input, item)
-{    
-    insert_label(input);
+/*
+Widget structures for different controls:
 
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiInt::XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item)
+    :XGui(page_builder, item)
+{    
     spin_ = new XcluSpinBox();
     spin_->setMinimumWidth(xclu::SPIN_WIDTH);
     spin_->setMaximumWidth(xclu::SPIN_WIDTH);
@@ -42,28 +55,29 @@ XGuiInt::XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item)
         slider_->setOrientation(Qt::Horizontal);
         slider_->setTickPosition(QSlider::TicksBelow);
         slider_->setMinimumWidth(xclu::SLIDER_WIDTH);
+
+        //disable possibility for accidentally change from the mouse wheel
+        //https://stackoverflow.com/questions/5821802/qspinbox-inside-a-qscrollarea-how-to-prevent-spin-box-from-stealing-focus-when
+        slider_->setFocusPolicy(Qt::StrongFocus);
     }
 
-    //вставка на страницу
-    //если есть единицы измерения - создаем блок с Label
+    //create units label if required
     QString units = item->units();
-
+    QLabel *units_label = nullptr;
     if (!units.isEmpty()) {
-        //qDebug() << "units" << units;
-        insert_widget_with_spacer(xclu::hwidget(0,
-                                                spin_,0,
-                                                new QLabel(units), 0,
-                                                slider_, 0),
-                                  spin_, input);
-    }
-    else {
-        insert_widget_with_spacer(xclu::hwidget(0,
-                                                spin_, 0,
-                                                slider_, 0),
-                                  spin_, input);
+        units_label = new QLabel(units);
     }
 
-    //отслеживание изменений
+    //insert to page
+    insert_widgets(page_builder,
+                   spin_,
+                   new_label(), 1, false,
+                   spin_, 1, false,
+                   units_label, 1, false,
+                   slider_, 1, false,
+                   new_label_link(), 1, true);
+
+    //track changes
     connect(spin_, SIGNAL (valueChanged(int)), this, SLOT (on_value_changed()));
 
     if (slider_) {

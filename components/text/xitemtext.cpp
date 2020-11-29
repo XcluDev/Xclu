@@ -45,7 +45,7 @@ void XItemText::set_value_from_link(XLinkResolved *linkres) {
 //---------------------------------------------------------------------
 //графический интерфейс
 XGui *XItemText::create_gui(XGuiPageBuilder &page_builder) {
-    gui__ = new XGuiText(input, this);
+    gui__ = new XGuiText(page_builder, this);
     return gui__;
 }
 

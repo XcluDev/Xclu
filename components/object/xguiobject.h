@@ -16,12 +16,11 @@ public:
     void clear_image();
 
     //картинка
-    QLabel *preview_label_ = nullptr;   //удалять не надо
+    QLabel *thumbnail_ = nullptr;   //удалять не надо
     //текстовое описание
-    QLabel *info_label_ = nullptr;      //удалять не надо
+    QLabel *description_ = nullptr;      //удалять не надо
     //разделитель
-    QSpacerItem *spacer_ = nullptr;
-
+    //QSpacerItem *spacer_ = nullptr;
 
     //TODO сделать рисование через виджет - и не обновлять, если невидимая картинка.
     //это сэкономит ресурсы.

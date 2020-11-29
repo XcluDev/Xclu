@@ -2,55 +2,50 @@
 #include "xguiseparator.h"
 #include "xitemseparator.h"
 
+//---------------------------------------------------------------------
+/*
+Widget structures for different controls:
+
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
 
 //---------------------------------------------------------------------
 XGuiSeparator::XGuiSeparator(XGuiPageBuilder &page_builder, XItemSeparator *item)
-    :XGui(input, item)
+    :XGui(page_builder, item)
 {
-    is_line_ = item->is_line();
-    is_separator_ = item->is_separator();
+    bool is_line = item->is_line();
+    bool is_separator = item->is_separator();
 
-    if (is_separator_) {
-        visible_size_ = xclu::SEPARATOR_HEIGHT;
-        spacer_ = new QSpacerItem(1,visible_size_);
-        //добавляем на страницу
-        input.grid->addItem(spacer_,input.y,0,1,2);
-        ////input.grid->setRowStretch(input.y,1);
-        input.y++;
+    spacer_ = new QFrame();
+
+    spacer_->resize(1, xclu::SEPARATOR_HEIGHT);
+    //spacer_ = new QSpacerItem(1,xclu::SEPARATOR_HEIGHT);
+
+    if (is_line) {
+        spacer_->setFrameShape(QFrame::HLine);
+        spacer_->setFrameShadow(QFrame::Sunken);
+    }
+    if (is_separator) {
+        spacer_->setFrameShape(QFrame::NoFrame);
+        //spacer_->setFrameShadow(QFrame::Sunken);
     }
 
-    if (is_line_) {
-        line_ = new QFrame();
-        line_->setFrameShape(QFrame::HLine);
-        line_->setFrameShadow(QFrame::Sunken);
-
-        //добавляем на страницу
-        input.grid->addWidget(line_,input.y, 0, 1, 2);
-        input.y++;
-    }
+    //insert to page
+    insert_widgets(page_builder,
+                   spacer_,
+                   spacer_, 5, true);
 }
 
 //---------------------------------------------------------------------
 XGuiSeparator::~XGuiSeparator() {
-
-}
-
-//---------------------------------------------------------------------
-void XGuiSeparator::set_visible(bool visible) {
-    XGui::set_visible(visible);
-
-    if (is_separator_) {
-        if (visible) {
-            spacer_->changeSize(1,visible_size_);
-        }
-        else {
-            spacer_->changeSize(0,0);
-        }
-    }
-
-    if (is_line_) {
-        line_->setVisible(visible);
-    }
 
 }
 

@@ -4,15 +4,35 @@
 #include "xguibutton.h"
 
 //---------------------------------------------------------------------
-XGuiButton::XGuiButton(XGuiPageBuilder &input, XItemButton *item)
-    :XGui(input, item)
+/*
+Widget structures for different controls:
+
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiButton::XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item)
+    :XGui(page_builder, item)
 {
     button_ = new QPushButton(item->title());
     button_->setMaximumWidth(xclu::BUTTON_WIDTH);
     button_->setToolTip(get_tip());
 
-    //вставка на страницу
-    insert_widget(button_, button_, input);
+    //insert to page
+    insert_widgets(page_builder,
+                   button_,
+                   nullptr, 1, false,
+                   button_, 1, false,
+                   nullptr, 2, false,
+                   new_label_link(), 1, true);
 
     connect(button_, SIGNAL (released()), this, SLOT (button_pressed()));
 
