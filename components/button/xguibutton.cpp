@@ -30,8 +30,8 @@ XGuiButton::XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item)
     insert_widgets(page_builder,
                    button_,
                    nullptr, 1, false,
-                   button_, 1, false,
-                   nullptr, 2, false,
+                   button_, 2, false,
+                   nullptr, 1, false,
                    new_label_link(), 1, true);
 
     connect(button_, SIGNAL (released()), this, SLOT (button_pressed()));

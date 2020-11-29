@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
@@ -53,7 +53,7 @@
                     },
                     {
                         "aname": "int1",
-                        "avalue": "10"
+                        "avalue": "1"
                     },
                     {
                         "aname": "int2",

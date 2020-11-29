@@ -45,9 +45,8 @@ XGuiEnum::XGuiEnum(XGuiPageBuilder &page_builder, XItemEnum *item)
     insert_widgets(page_builder,
                    combo_,
                    new_label(), 1, false,
-                   combo_, 1, false,
+                   combo_, 2, false,
                    units_label, 1, false,
-                   nullptr, 1, false,
                    new_label_link(), 1, true);
 
     //track changes

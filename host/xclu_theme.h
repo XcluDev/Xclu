@@ -51,7 +51,7 @@ const int LABEL_WIDTH_MIN = 80;  //ширина label
 const int LINE_EDIT_WIDTH = 200;  //ширина строки
 const int COMBO_WIDTH_MIN = 150;  //ширина enum
 const int COMBO_WIDTH_MAX = 300;
-const int BUTTON_WIDTH = 200;      //ширина button
+const int BUTTON_WIDTH =    200;      //ширина button
 const int BUTTON_CHOOSE_WIDTH = 150;   //width of button for choosing file or folder
 
 

@@ -59,8 +59,8 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
                    new_label(), 1, false,
                    nullptr, 3, false,
                    new_label_link(), 1, true,
-                   visual_.thumbnail_, 2, false,
-                   visual_.description_, 1, true
+                   visual_.thumbnail_, 3, false,
+                   visual_.description_, 2, true
                    );
 
     //TODO ДОБАВЛЕНИЕ КНОПКИ Inspect
