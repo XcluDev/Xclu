@@ -43,8 +43,8 @@ const int H h=480 1:10000 1,10
     
 #---------    
 #Title
-separator
-const checkbox_group Title title=1
+line
+const group Title title=1
     //Title, placed at the left of the value.
     
 if title 1
@@ -69,4 +69,5 @@ const int Max title_width_max=200 0:100000 1,10
     //pixels
 
 endif
+line
 #-------------

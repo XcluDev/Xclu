@@ -47,6 +47,7 @@ ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
     "page",
     "group",
     "separator",
+    "line",
     "float",
     "int",
     "string",
@@ -62,6 +63,10 @@ ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
 
 
 //---------------------------------------------------------------------
+QString xitem_group() {
+    return "group";
+}
+
 QString xitem_separator() {
     return "separator";
 }

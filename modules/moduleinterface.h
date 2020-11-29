@@ -149,7 +149,6 @@ private:
                      QString line_to_parse = "", QString options = "",
                      QString qual_options = "");
     void new_decorate_item(QString name, QString type, const QStringList &description);
-    void new_separator(QString type = xitem_separator(), bool is_line = false);
 
     //создание имен для сепараторов, чтобы их использовать в visibility
     int separator_index_ = 0;

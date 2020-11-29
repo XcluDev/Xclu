@@ -27,7 +27,7 @@ endif
 
 #---------------------------------- 
 page Inputs
-const checkbox_group Texture1 texture1=0
+const group Texture1 texture1=0
     //Use texture 1
     
 if texture1 1

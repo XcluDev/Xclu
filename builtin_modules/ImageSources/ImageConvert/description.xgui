@@ -19,7 +19,7 @@ in enum Output_Format output_format=u8 [u8,float]
 
 #-----------------------------
 separator
-in checkbox_group Resize_and_Crop resize_crop=0
+in group Resize_and_Crop resize_crop=0
 	//Resizing and cropping options
 
 if resize_crop 1

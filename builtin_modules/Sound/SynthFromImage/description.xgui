@@ -12,14 +12,15 @@ module_accept_calls=sound_buffer_add
 page Main
 
 #----------------------------------
-in checkbox_group Show_Input_Image show_input_image=1
+line
+in group Show_Input_Image show_input_image=1
 
 if show_input_image 1
 in object_image Input_Image input_image
     //Image for processing.
 endif   
 
-separator
+line
 
 out object_image Output_Image output_image
     //Image with visualization.

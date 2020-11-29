@@ -50,8 +50,8 @@ XGuiText::XGuiText(XGuiPageBuilder &page_builder, XItemText *item)
     //insert to page
     insert_widgets(page_builder,
                    textEdit_,
-                   new_label(), 1, false,
-                   nullptr, 3, false,
+                   new_label(), 3, false,
+                   nullptr, 1, false,
                    new_label_link(), 1, true,
                    textEdit_, 5, true
                    );

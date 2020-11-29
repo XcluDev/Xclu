@@ -11,7 +11,8 @@ in int Count count=1 1:8 1,1
     //Number of variables to show.
 
 if count 1,2,3,4,5,6,7,8
-in checkbox_group Var_1 use_var1=1
+line
+in group Var_1 use_var1=1
     //Variable 1.
 endif
 
@@ -70,6 +71,6 @@ endif
     
 #TODO implement more variables
 
-
+line
 
 #----------------------------------

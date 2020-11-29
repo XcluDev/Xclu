@@ -1,4 +1,11 @@
 Xclu: Changelog 
+#### 2020-11-29
+-   Выровнен Grid в интерфейсе – то есть, компоненты размещают свои элементы в конкретным местах Grid.
+-   Visible сделан список, поэтому separator и line работают корректно.
+-   В документацию вписал про bang:  XCORE.bang(get_strings_bang_list());
+-   Переименовал #include "xcluobjectimage.h" в xobjectimage.h
+-   Прошелся по модулям и поставить где нужно «line» вместо separator
+
 
 #### 2020-11-27
 -   Сделаны слайдеры.

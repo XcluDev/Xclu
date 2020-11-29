@@ -24,7 +24,7 @@ in checkbox In_Checkbox in_check=0
 out checkbox Out_Checkbox out_check=1
     //Output value.
 
-separator
+line
 const float Const_Float1 float1=1.1 0:10 0.1,1
     //Constant value.
     //mm
@@ -38,7 +38,7 @@ out float Out_Float4 float4=3.3 0:10 0.01,0.1
     //Output value.
     //meters
 
-separator
+line
 const int Const_Int1 int1=1 -10:10 1,10
     //Constant value.
     //mm
@@ -52,7 +52,7 @@ out int Out_Int4 int4=3 0:10 1,10
     //Output value.
     //meters
 
-separator
+line
 const string Const_String string1="Abc"
     //Constant value.
 in string In_String string2="Abc"
@@ -118,6 +118,21 @@ in string_folder Choose_Folder choose_Folder="aa"
     //Choose Floder to scan
 
 page Conditional_GUI
+    //Here is testing GUI elements which visibility depends on other GUI elements.
+
+line
+in group Show_Details show_details=1
+    //Checkbox "group".
+
+if show_details 1
+line
+in checkbox Flag_1 flag1=0
+separator
+in checkbox Flag_2 flag2=0
+
+endif
+
+line
 
 in enum Type type=Int [Int,Float,String]
     //Choose different types to see changed interface.

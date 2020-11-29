@@ -7,6 +7,7 @@ GENERAL_PAGE
 page Control
     //Common settings for all modules considering execution and error handling.
     
+line
 in checkbox Enabled general_enabled_=1
     //Is module enabled.
     
@@ -20,8 +21,8 @@ in button Bang general_bang_
 endif
     
 #--------------------
-separator
-in checkbox_group Presets presets_setup=0
+line
+in group Presets presets_setup=0
     //Setup presets.
 
 if presets_setup 1    
@@ -33,8 +34,8 @@ in button Edit_List... edit_presets
 endif    
 
 #--------------------
-separator
-in checkbox_group Error_Handling error_handling=0
+line
+in group Error_Handling error_handling=0
     //Settings for handling errors.
 
 if error_handling 1
@@ -49,8 +50,8 @@ out text Error_Text error_text 5 7
 endif
 #--------------------
 
-separator
-in checkbox_group Calls calls_info=0
+line
+in group Calls calls_info=0
     //Information about functions which module can call or receive from other modules.
 
 if calls_info 1
@@ -62,4 +63,5 @@ out(not_save) text Accept_Calls accept_calls 3 5
 
 endif
 
+line
 #--------------------

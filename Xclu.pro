@@ -130,7 +130,6 @@ SOURCES += \
     components/enum/xitemenum.cpp \
     components/float/xguifloat.cpp \
     components/float/xitemfloat.cpp \
-    components/group/xitemgroup.cpp \
     components/gui/xcluclickablelabel.cpp \
     components/int/xguiint.cpp \
     components/int/xitemint.cpp \
@@ -222,7 +221,6 @@ HEADERS += \
     components/enum/xitemenum.h \
     components/float/xguifloat.h \
     components/float/xitemfloat.h \
-    components/group/xitemgroup.h \
     components/gui/xcluclickablelabel.h \
     components/int/xguiint.h \
     components/int/xitemint.h \

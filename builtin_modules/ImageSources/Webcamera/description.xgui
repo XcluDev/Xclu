@@ -43,8 +43,8 @@ out checkbox Is_New_Frame is_new_frame=0
     //Flag is true when new frame is arrived.
     
 #-----------------------------
-separator
-in checkbox_group Settings settings=0
+line
+in group Settings settings=0
 	//Setting webcamera parameters.
     
 if settings 1
@@ -98,8 +98,8 @@ in enum Data_Type image_data_type=u8 [u8,float]
 endif
 
 #-----------------------------
-separator
-in checkbox_group Runtime_Details runtime=1
+line
+in group Runtime_Details runtime=1
 	//Runtime variables.
 
 if runtime 1
@@ -115,12 +115,12 @@ out string Frames_Captured frames_captured=""
     
 
 endif
-
+line
 
 #-----------------------------
 #TODO resize & crop
 #separator
-#in checkbox_group Resize_and_Crop resize_crop=0
+#in group Resize_and_Crop resize_crop=0
 #	//Resizing and cropping options
 
 #if resize_crop 1

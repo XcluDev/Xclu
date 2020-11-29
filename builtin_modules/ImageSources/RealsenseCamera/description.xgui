@@ -40,8 +40,8 @@ const string_file Bag_File bag_file=""
 endif
    
 #-----------------------------
-separator
-in checkbox_group Runtime_Details runtime=1
+line
+in group Runtime_Details runtime=1
 	//Runtime variables.
 
 if runtime 1
@@ -59,27 +59,30 @@ endif
 
 #-------------------------------------------
 #Output images
-separator
-in checkbox_group Show_Color show_color=1
+line
+in group Show_Color show_color=1
 //Generate color image preview.
 if show_color 1    
 out object_image Color color_image
     //Resulted Color image.
 endif
     
-in checkbox_group Show_Depth show_depth=1
+line
+in group Show_Depth show_depth=1
 //Generate Depth image preview.
 if show_depth 1  
 out object_image Depth depth_image
     //Resulted Depth image.
 endif
 
-in checkbox_group Show_IR show_ir=0
+line
+in group Show_IR show_ir=0
 //Generate IR image preview. 
 if show_ir 1  
 out object_image IR ir_image
     //Resulted IR image.
 endif
+line
 
 out checkbox Is_New_Frame is_new_frame=0
     //Flag is true when new frame is arrived.
@@ -139,7 +142,8 @@ const checkbox Emitter emitter=1
 page 8_Bit
     //Transform depth image to grayscale 8 bit and binary image.
 
-in checkbox_group Depth_8_Bit make_depth_grayscale=0
+line
+in group Depth_8_Bit make_depth_grayscale=0
     //Make depth image to 8 bit grayscale image.
     
 if make_depth_grayscale 1
@@ -177,7 +181,9 @@ in float Y1 depth_grayscale_y1=1 0:1 0.01,0.1
     
 endif
     
-#in checkbox_group Depth_Binary make_depth_binary=0
+line
+
+#in group Depth_Binary make_depth_binary=0
 #    //Make depth image to 8 bit grayscale image.
     
 #if make_depth_binary 1

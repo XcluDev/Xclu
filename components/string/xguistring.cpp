@@ -60,8 +60,8 @@ XGuiString::XGuiString(XGuiPageBuilder &page_builder, XItemString *item)
     if (button_choosing) {
         insert_widgets(page_builder,
                        lineEdit_,
-                       new_label(), 1, false,
-                       nullptr, 3, false,
+                       new_label(), 3, false,
+                       nullptr, 1, false,
                        new_label_link(), 1, true,
                        lineEdit_, 4, false,
                        button_choosing, 1, true
@@ -70,8 +70,8 @@ XGuiString::XGuiString(XGuiPageBuilder &page_builder, XItemString *item)
     else {
         insert_widgets(page_builder,
                        lineEdit_,
-                       new_label(), 1, false,
-                       nullptr, 3, false,
+                       new_label(), 3, false,
+                       nullptr, 1, false,
                        new_label_link(), 1, true,
                        lineEdit_, 5, true
                        );

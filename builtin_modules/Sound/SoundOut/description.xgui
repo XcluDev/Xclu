@@ -38,8 +38,8 @@ endif
 
         
 #-----------------------------
-separator
-in checkbox_group Settings settings=0
+line
+in group Settings settings=0
 	//Setting sound output parameters
     
 if settings 1
@@ -73,8 +73,8 @@ const enum Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,10
 endif
 
 #-----------------------------
-separator
-in checkbox_group Runtime runtime=0
+line
+in group Runtime runtime=0
 	//Runtime variables
 
 if runtime 1
@@ -88,12 +88,12 @@ out checkbox Is_Started is_started=0
 out object_soundformat Sound_Format sound_format
     //Used sound format
 
-out int Buffer_Size buffer_size=0 0:100000 1,10
+out int Buffer_Size buffer_size=0 0:* 1,10
     //Buffer size
     //samples
     
 endif
-
+line
 
 #-----------------------------------------------------------
 page Sources

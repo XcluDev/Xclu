@@ -67,7 +67,7 @@ page Properties
 
 separator
 #-------------
-in checkbox_group Use_Min use_range_min=0
+in group Use_Min use_range_min=0
     //Clamp value to specified minimal value.
 
 
@@ -77,7 +77,7 @@ endif
 
 #-------------
 separator
-in checkbox_group Use_Max use_range_max=0
+in group Use_Max use_range_max=0
     //Clamp value to specified maxinal value.
     
 if use_range_max 1
@@ -88,7 +88,7 @@ endif
 #---------    
 #Title
 separator
-const checkbox_group Title title=1
+const group Title title=1
     //Title, placed at the left of the value.
     
 if title 1
@@ -117,7 +117,7 @@ endif
 #---------    
 #Units
 separator
-const checkbox_group Units units=0
+const group Units units=0
     //Units, placed at the right of the value.
 
 if units 1

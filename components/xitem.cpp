@@ -4,7 +4,6 @@
 #include "xitem.h"
 #include "incl_cpp.h"
 #include "xitempage.h"
-#include "xitemgroup.h"
 #include "xitemseparator.h"
 #include "xitemfloat.h"
 #include "xitemint.h"
@@ -52,11 +51,19 @@
 }
 
 //---------------------------------------------------------------------
-//separator
-/*static*/ XItem *XItemCreator::new_separator(ModuleInterface *interf, QString name, QString type, bool is_line) {
+//separator, separator_line
+/*static*/ XItem *XItemCreator::new_separator(ModuleInterface *interf, QString name, QString type_raw) {
     QString descr;
-    if (is_line) descr = "line";    //если это линия - то указываем это как дополнительное обозначение в descriptor
-    return new_item(interf, name, type, QStringList(descr), XQualifierIn, name);
+
+    QStringList type_options=type_raw.split("_");
+    xclu_assert(!type_options.isEmpty(), "bad type name for separator '" + type_raw + "'");
+
+    auto type = type_options.at(0);
+    type_options.removeFirst();
+
+    QString options = type_options.join("_");
+
+    return new_item(interf, name, type, QStringList(), XQualifierIn, name, options);
 }
 
 //---------------------------------------------------------------------

@@ -38,15 +38,15 @@ XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
         checkbox_->setText(item->title());
         checkbox_->setToolTip(get_tip());
 
-        QFrame *line_ = new QFrame();
-        line_->setFrameShape(QFrame::HLine);
-        line_->setFrameShadow(QFrame::Sunken);
+        //horizontal line - now commented
+        //QFrame *line_ = new QFrame();
+        //line_->setFrameShape(QFrame::HLine);
+        //line_->setFrameShadow(QFrame::Sunken);
 
         //insert to page
         insert_widgets(page_builder,
                        checkbox_,
-                       checkbox_, 2, false,
-                       line_, 2, false,
+                       checkbox_, 4, false,
                        new_label_link(), 1, true);
     }
 

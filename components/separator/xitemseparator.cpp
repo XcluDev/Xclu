@@ -13,7 +13,7 @@ XItemSeparator::XItemSeparator(ModuleInterface *interf, const XItemPreDescriptio
     name_ = pre_description.line_to_parse; //имя генерируется автоматически
 
     //это line, если описание содержит "line"
-    is_line_ = pre_description.description.contains("line");
+    is_line_ = pre_description.options.contains("line");
 }
 
 //---------------------------------------------------------------------

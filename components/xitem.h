@@ -46,7 +46,7 @@ public:
     //page, group
     static XItem *new_decorate_item(ModuleInterface *interf, QString name, QString type, const QStringList &description);
     //separator
-    static XItem *new_separator(ModuleInterface *interf, QString name, QString type = xitem_separator(), bool is_line = false);
+    static XItem *new_separator(ModuleInterface *interf, QString name, QString type_raw = xitem_separator());
 };
 
 //---------------------------------------------------------------------

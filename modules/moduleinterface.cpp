@@ -202,16 +202,15 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             //line сейчас задан неофициально,  в программе он как тип не обозначен,
             //его обрабатываем только тут и еще в XItem::new_separator
             if (item1 == xitem_separator() || item1 == xitem_line()) {
-                auto type = xitem_separator(); //string_to_interfacetype(item1);
-                bool is_line = (item1 == "line");
-                new_separator(type, is_line);
+                QString type = (item1 == xitem_separator()) ? xitem_separator():"separator_line";
+                push_item(XItemCreator::new_separator(this, generate_separator_name(), type));
                 //collect_description увеличивает i
                 collect_description(lines, i); //считываем описание, но никуда его не используем
                 continue;
             }
 
-            //страница или группа
-            if (item1 == "page" || item1 == "group") {
+            //page
+            if (item1 == xitem_page()) {
                 xclu_assert(n>=2, "bad definiton at line " + line + ", no item title");
                 QString name = query.at(1);
                 xclu_assert(!name.isEmpty(), "empty page name at line " + line);
@@ -225,7 +224,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             }
 
             //переменная
-            //[in/const/out][(options)] type(options) title_gui name, и затем опционально '=' или ' ', var_details
+            //[in/const/out][(options)] type[_option1_...] title_gui name, и затем опционально '=' или ' ', var_details
 
             xclu_assert(n >= 4, "bad variable description at line '" + line + "', expected '[in/const/out] type title_gui name...'");
 
@@ -241,20 +240,25 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             }
 
 
+            //get type
+            QString type_raw = query.at(1);
+            //replace "group" with "checkbox_group"
+            if (type_raw == xitem_group()) {
+                type_raw = "checkbox_group";
+            }
+
+
             //парсим type_attribute1_attribute2_... на тип и атрибуты:
-            //QStringList type_options=query.at(1).split(QRegExp("(\\(|\\))"));
-            QStringList type_options=query.at(1).split("_");
+            //QStringList type_options=type_raw.split(QRegExp("(\\(|\\))"));
+            QStringList type_options=type_raw.split("_");
             xclu_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
 
             auto type = type_options.at(0);
-            //xclu_assert(type != XItemTypeNone, "unknown variable type at line '" + line + "', expected: 'int', 'float', ...");
+            //remove first and join back
+            type_options.removeFirst();
+            QString options = type_options.join("_");
 
-            QString options;
-            if (type_options.size() >= 2) {
-                options = type_options.at(1);
-            }
-
-            //заголовок
+            //title
             QString title = query.at(2);
             //title = xclu_remove_underscore(title);
 
@@ -317,10 +321,6 @@ void ModuleInterface::new_decorate_item(QString name, QString type, const QStrin
     add_to_vis_group();
 }
 
-//---------------------------------------------------------------------
-void ModuleInterface::new_separator(QString type, bool is_line) {
-    push_item(XItemCreator::new_separator(this, generate_separator_name(), type, is_line));
-}
 
 //---------------------------------------------------------------------
 //проверка того, что разные элементы имеют разные имена, и заполнение map для быстрого доступа

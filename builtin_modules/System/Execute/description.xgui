@@ -31,12 +31,9 @@ in checkbox Bang bang_signal=0
 in button Bang bang_button
 	//Start execution
 
-line
-
-
 #--------------------
-separator
-in checkbox_group Settings settings=0
+line
+in group Settings settings=0
     //Settings for timeout
 #    and running in a separate thread
 #if settings 1
@@ -56,8 +53,8 @@ in float Timeout timeout_sec=30 0:1000 0.1,10
 endif
 
 #-----------------------------
-separator
-in checkbox_group Runtime runtime=0
+line
+in group Runtime runtime=0
 	//Runtime variables
 
 if runtime 1
@@ -84,8 +81,8 @@ endif
 
    
 #--------------------
-separator
-in checkbox_group Show_Absolute_Paths show_abs_paths=0
+line
+in group Show_Absolute_Paths show_abs_paths=0
     //Show full path for working folder and file used for execution    
 if show_abs_paths 1
 out text Folder_Path folder_path 4 5
@@ -94,13 +91,10 @@ out text Folder_Path folder_path 4 5
 out text File_Path file_path 4 5
     //Absolute path to the executable file
 endif
-#--------------------
-
 
 #--------------------
-separator
-
-in checkbox_group Show_Local_Console show_console=0
+line
+in group Show_Local_Console show_console=0
     //Show local console for printing there output of executed program
 
 if show_console 1
@@ -108,7 +102,7 @@ out text Local_Console local_console 10 15
     //Console output
 
 endif
-
+line
 #--------------------
 
 

@@ -8,14 +8,13 @@ module_impl=C++
 page Main
     //General settings
 
-in checkbox_group Show_Input_Image show_input_image=1
-
+line
+in group Show_Input_Image show_input_image=1
 if show_input_image 1
 in object_image Input_Image input_image
     //Image for processing.
 endif   
-
-separator
+line
 
 out object_image Output_Image output_image
     //Image with visualization.
@@ -27,8 +26,8 @@ in button Restore_Backgr restore_now
     //Restore background immediately.
 
  
-in checkbox_group Detection_Area_Setup detection_area_setup=1
-    
+line
+in group Detection_Area_Setup detection_area_setup=1    
 if detection_area_setup 1
 in float X0 x0=0 0:1 0.01,0.1
     //Detection area left.
@@ -43,6 +42,7 @@ in float Y1 y1=1 0:1 0.01,0.1
     //Detection area bottom.
     
 endif
+line
 
 out checkbox Event event=0
     //If detector fires.

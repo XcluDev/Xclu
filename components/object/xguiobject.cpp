@@ -56,8 +56,8 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
     //insert to page
     insert_widgets(page_builder,
                    visual_.description_,
-                   new_label(), 1, false,
-                   nullptr, 3, false,
+                   new_label(), 3, false,
+                   nullptr, 1, false,
                    new_label_link(), 1, true,
                    visual_.thumbnail_, 3, false,
                    visual_.description_, 2, true
