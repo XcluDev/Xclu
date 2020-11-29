@@ -73,7 +73,7 @@ void *XModuleWImage::impl_create_widget(QString parent_id) {
         DataAccess access(data_);
         data_.clear();
     }
-    //отслеживание изменений
+    //track changes
     //connect(spin_, QOverload<int>::of(&QSpinBox::valueChanged),
     //      [=](int /*i*/){ spin_changed(); });
 

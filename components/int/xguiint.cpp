@@ -5,7 +5,7 @@
 #include "xcluspinbox.h"
 
 //---------------------------------------------------------------------
-XGuiInt::XGuiInt(XGuiPageCreator &input, XItemInt *item)
+XGuiInt::XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item)
     :XGui(input, item)
 {    
     insert_label(input);

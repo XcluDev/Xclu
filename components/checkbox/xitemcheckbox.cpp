@@ -50,7 +50,7 @@ void XItemCheckbox::set_value_from_link(XLinkResolved *linkres) {
 
 //---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemCheckbox::create_gui(XGuiPageCreator &input) {
+XGui *XItemCheckbox::create_gui(XGuiPageBuilder &page_builder) {
     gui__ = new XGuiCheckbox(input, this);
     return gui__;
 }

@@ -10,7 +10,7 @@ class XGuiButton : public XGui
 {
     Q_OBJECT
 public:
-    XGuiButton(XGuiPageCreator &input, XItemButton *item);
+    XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item);
     ~XGuiButton();
 
     //значение - нажатие считывается один раз, затем стирается

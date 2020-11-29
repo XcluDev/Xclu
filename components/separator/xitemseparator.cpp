@@ -18,7 +18,7 @@ XItemSeparator::XItemSeparator(ModuleInterface *interf, const XItemPreDescriptio
 
 //---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemSeparator::create_gui(XGuiPageCreator &input) {
+XGui *XItemSeparator::create_gui(XGuiPageBuilder &page_builder) {
     return new XGuiSeparator(input, this);
 }
 

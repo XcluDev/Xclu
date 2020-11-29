@@ -4,11 +4,24 @@
 #include "xitemtext.h"
 
 //---------------------------------------------------------------------
-XGuiText::XGuiText(XGuiPageCreator &input, XItemText *item)
-    :XGui(input, item)
-{
-    insert_label(input);
+/*
+Widget structures for different controls:
 
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiText::XGuiText(XGuiPageBuilder &page_builder, XItemText *item)
+    :XGui(page_builder, item)
+{
     //textEdit_ = new QTextEdit;    //- позволяет вставлять картинки и HTML
     textEdit_ = new QPlainTextEdit;
 
@@ -34,10 +47,16 @@ XGuiText::XGuiText(XGuiPageCreator &input, XItemText *item)
         textEdit_->setMaximumHeight(hmax);
     }
 
-    //вставка на страницу, при этом с новой строки и на всю ширину
-    insert_widget_next_line(textEdit_, textEdit_, input);
+    //insert to page
+    insert_widgets(page_builder,
+                   textEdit_,
+                   new_label(), 1, false,
+                   nullptr, 3, false,
+                   new_label_link(), 1, true,
+                   textEdit_, 5, true
+                   );
 
-    //отслеживание изменений
+    //track changes
     connect(textEdit_, SIGNAL (textChanged()), this, SLOT (on_value_changed()));
 }
 

@@ -5,7 +5,8 @@
 #include "xcluobjectimage.h"
 #include "xcluobjectwrapper.h"
 
-
+//---------------------------------------------------------------------
+//XGuiObjectVisual
 //---------------------------------------------------------------------
 void XGuiObjectVisual::set_text(QString text) {
     info_label_->setText(text);
@@ -27,10 +28,25 @@ void XGuiObjectVisual::clear_image() {
 }
 
 //---------------------------------------------------------------------
+//XGuiObject
 //---------------------------------------------------------------------
+/*
+Widget structures for different controls:
+
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
 //---------------------------------------------------------------------
-XGuiObject::XGuiObject(XGuiPageCreator &input, XItemObject *item)
-    :XGui(input, item)
+XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
+    :XGui(page_builder, item)
 {
     visual_.preview_label_ = new QLabel("");
     visual_.info_label_ = new QLabel("");
@@ -61,7 +77,7 @@ XGuiObject::XGuiObject(XGuiPageCreator &input, XItemObject *item)
     }
 
 
-    //отслеживание изменений
+    //track changes
     //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));*/
 }
 

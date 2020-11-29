@@ -5,37 +5,52 @@
 #include "xclucombobox.h"
 
 //---------------------------------------------------------------------
-XGuiEnum::XGuiEnum(XGuiPageCreator &input, XItemEnum *item)
-    :XGui(input, item)
-{
-    insert_label(input);
+/*
+Widget structures for different controls:
 
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiEnum::XGuiEnum(XGuiPageBuilder &page_builder, XItemEnum *item)
+    :XGui(page_builder, item)
+{
     combo_ = new XcluComboBox();
     combo_->addItems(item->titles());
-    names_ = item->names(); //запоминаем исходные имена, чтобы их выдавать при проверке групп видимости
+    names_ = item->names();     //remember the original names to return them when checking visibility groups
 
     combo_->setMinimumWidth(xclu::COMBO_WIDTH_MIN);
     combo_->setMaximumWidth(xclu::COMBO_WIDTH_MAX);
 
-    //отключаем, чтобы случайно не менялся от колесика
+    //disable possibility for accidentally change from the mouse wheel
     //https://stackoverflow.com/questions/5821802/qspinbox-inside-a-qscrollarea-how-to-prevent-spin-box-from-stealing-focus-when
     combo_->setFocusPolicy(Qt::StrongFocus);
 
-    //вставка на страницу
-    //если есть единицы измерения - создаем блок с Label
+    //create units label if required
     QString units = item->units();
+    QLabel *units_label = nullptr;
     if (!units.isEmpty()) {
-        //qDebug() << "units" << units;
-        insert_widget_with_spacer(xclu::hwidget(0,
-                                                combo_,0,
-                                                new QLabel(units), 0),
-                                  combo_, input);
-    }
-    else {
-        insert_widget_with_spacer(combo_, combo_, input);
+        units_label = new QLabel(units);
     }
 
-    //отслеживание изменений
+    //insert to page
+    insert_widgets(page_builder,
+                   combo_,
+                   new_label(), 1, false,
+                   combo_, 1, false,
+                   units_label, 1, false,
+                   nullptr, 1, false,
+                   new_label_link(), 1, true);
+
+    //track changes
     connect(combo_, SIGNAL (currentIndexChanged(int)), this, SLOT (on_value_changed()));
 }
 

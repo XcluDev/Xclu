@@ -1,14 +1,14 @@
 #ifndef INTERFACEITEMGUI_H
 #define INTERFACEITEMGUI_H
 
-//Графический интерфейс для показа или редактирования переменной.
-//Он создает класс, который способен генерировать GUI объект по запросу.
+// A graphical interface for displaying or editing a variable.
+// It creates a class that is capable of generating a GUI object on demand.
 /*
-Константы без expression: ставятся из GUI при start.
-Константы с expression: вычисляются при start.
-Входные без expression: ставятся из GUI перед update.
-Входные с expression: они вычисляются перед каждым update и ставятся в GUI.
-Выходные: модуль их вычисляет, и ставятся в GUI после update.
+Constants without expression: set from the GUI at start.
+Constants with expression: are evaluated at start.
+Input without expression: put from the GUI before update.
+Input with expression: they are evaluated before each update and placed in the GUI.
+Output: the module calculates them, and is set in the GUI after the update.
 */
 
 #include <QWidget>
@@ -35,46 +35,52 @@ class XItem;
 class VisibilityGroupGui;
 //class XcluClickableLabel;
 
+
 //Settings for created GUI
 struct XGuiSettings {
     bool show_names = false;
 };
 
-//данные для создания визуального интерфейса
-struct XGuiPageCreator {
+//Data for build GUI
+struct XGuiPageBuilder {
     QWidget *parent = nullptr;
-    QTabWidget *tabs = nullptr;     //сюда добавляются страницы
-    QGridLayout *grid = nullptr;    //страницы создают новый, а остальные добавляются в него
-    int y = 0;                      //положение в сетке
+    QTabWidget *tabs = nullptr;     //here pages are added
+    QGridLayout *grid = nullptr;    //this is main grid of each page
+    int2 pos = int2(0,0);           //current insert position
 
     XGuiSettings settings;
+
+    //insert new widget to grid
+    //if widget is nullptr, just ignores it, but shifts x and y
+    void insert(QWidget *widget, int spanx, bool new_line);
 };
 
-//Один элемент визуального интерфейса
+//GUI component
 class XGui : public QWidget
 {
     Q_OBJECT
 public:
-    //item - не следует удалять
-    XGui(XGuiPageCreator &input, XItem *item);
+    //item - should not be deleted
+    XGui(XGuiPageBuilder &input, XItem *item);
     virtual ~XGui();
 
-    //Функции для блокировки и разблокировки редактирования констант при запуске проекта.
-    void block_editing_on_running(); //блокирование изменения констант, вызывается перед запуском проекта
-    void unblock_editing_on_stopping(); //разблокирование изменения констант, вызывается после остановки проекта
+    //Functions for locking and unlocking editing of constants at project start.
+    void block_editing_on_running();    //blocking changing constants, called before starting the project
+    void unblock_editing_on_stopping(); //onblocking changing constants, called after stopping the project
 
-    //Работа с видимостью
-    //функция виртуальная - так как, например, у сепаратора нужно делать специальным образом
+    //Work with visibility
+    //virtual function - since, for example, a separator needs to be done in a special way
     virtual void set_visible(bool visible);
-    //Если требуется - добавить группу видимости
-    //групп может быть несколько, их нужно в деструкторе удалить
+
+    //If required, add a visibility group
+    //there can be several groups, they need to be deleted in the destructor
     void add_visibility_group(VisibilityGroupGui *created_group);
 
-    //значение для проверки видимости детей
-    //подклассы должны реализовать ее для участия в условиях видимости
+    //value for checking the visibility of children
+    //subclasses must implement it to participate in visibility conditions
     virtual QString value_string_for_visibility() { return ""; };
 
-    //сигнал послать данные об изменении видимости - высылается после первой установки значения в переменную
+    //signal to send data on visibility change - sent after the first setting of the value in the variable
     void propagate_visibility();
 
     //User change link settings - should show it in GUI
@@ -93,9 +99,9 @@ protected:
 
     //This function controls "read only" and link properties
     //It should be called when changed read_only and link
-    void update_view();
+    void on_change_link_readonly();
 
-    //нужно ли константы делать bold (false для text)
+    //whether constants need to be done bold (false for text)
     virtual bool is_const_bold() { return true; }
 
     //Is running - so need to set "read only" for constants
@@ -113,14 +119,14 @@ protected:
     //Internal function, which can be reimplemented for components
     virtual void set_read_only_(bool read_only);
 
-protected:
-    //Tip control
+    //set "GuiEditorPage" for QWidget in order QSS set its background darker
+    void attribute_as_GuiEditorPage(QWidget *widget);
 
-    //строка-подсказка, может быть разных типов - см. Tip_Style
+    //tip for this control, see Tip_Style
     QString get_tip();
 
-    //тип подсказки - подклассы могут менять get_tip_style, чтобы установить свой тип
-    //например, page использует только описание
+    //type of tip, subclasses can change get_tip_style, to set required type
+    //for example, page uses only description
     enum Tip_Style: int {
         Tip_Full = 0,       //'name - description'
         Tip_Description = 1 //'decription'
@@ -129,51 +135,75 @@ protected:
     virtual Tip_Style get_tip_style() { return Tip_Full; }
 
 protected:
-    //Визуальные элементы
-    //Динамический интерфейс - группы видимости
-    QVector<VisibilityGroupGui *> vis_groups_;
+    //Insert to page widgets structure
+    //widgetN can be nullptr - in this case it's omitted and grid just shifted,
+    //for example for button widget1 == nullptr
+    void insert_widgets(XGuiPageBuilder &page_builder,
+                        QWidget *widget1 = nullptr, int spanx1 = 1, int newline1 = false,
+                        QWidget *widget2 = nullptr, int spanx2 = 1, int newline2 = false,
+                        QWidget *widget3 = nullptr, int spanx3 = 1, int newline3 = false,
+                        QWidget *widget4 = nullptr, int spanx4 = 1, int newline4 = false,
+                        QWidget *widget5 = nullptr, int spanx5 = 1, int newline5 = false
+                        );
+    /*
+    Widget structures for different controls:
 
-    //метка - используется при регуляции visible и блокировке константы
-    QLabel *label_ = nullptr;       //не надо удалять
-    QColor default_label_color_;    //исходный цвет метки - используется, чтобы восстановить исходный цвет после gray
+    float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+    checkbox:       0 label, 1 control                                 4 link label
+    checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+    separator:      0 "control"
+    button:                  1 control                                 4 link label
+    string, text:   0 label                                            4 link label
+                    0 -------------------------------------------------4 control
+    object:         0 label                                            4 link label
+                    0--------------------2 thumbnail     3-------------4 description
+    */
 
-    void update_label_link();       //set label link
-    QLabel *label_link_ = nullptr;  //label for link
 
-    //виджет - используется для регуляции visible
-    QWidget *widget_ = nullptr; //не надо удалять
-    QWidget *internal_widget_ = nullptr;    //виджет для установки read_only
-
-    //создать label
-    void insert_label(XGuiPageCreator &input);
-
-    //вставить на страницу созданный виджет
-    void insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
+    void insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
                        int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
 
     //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-    void insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input);
+    void insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input);
 
     //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
     //(int, float, checkbox, object)
-    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
+    void insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
                                    int pos_x = 1, int shift_y = 0, int spanx=1, int spany=1);
-    void insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input);
+    void insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input);
 
-
-    //запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов
-    //также, вызывается из insert_widget и insert_widget_with_spacer
-    void set_widget(QWidget *widget, QWidget *internal_widget);
-
-    //set "GuiEditorPage" for QWidget in order QSS set its background darker
-    void atribute_as_GuiEditorPage(QWidget *widget);
 
 protected slots:
-    //Отслеживание изменений
-    //Подклассы должны его вызывать, чтобы пометить, что проект был изменен, вот так:
-    //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
-    //также, они могут переопределять их для собственных целей, но обязательно вызывать этот базовый метод
+    //Track changes
+    //Subclasses should call it to indicate that the project has changed, like this:
+    //connect (spin_, SIGNAL (valueChanged (double)), this, SLOT (on_value_changed ()));
+    //also, they can override them for their own purposes, but be sure to call this base method
     virtual void on_value_changed();
+
+protected:
+    //Dynamic interface: visible groups
+    QVector<VisibilityGroupGui *> vis_groups_;
+
+    //widgets to control their visibility - includes label and label_link
+    QVector<QWidget *> widgets_visibility_;
+
+    //widget on which show read_only and link color
+    QWidget *widget_marker_ = nullptr;
+
+    //create label_ and return it for using in insert_widgets
+    QWidget *new_label();
+    //label is used for constant changing color
+    QLabel *label_ = nullptr;
+    QColor default_label_color_;    //original label color - user to restore after gray
+
+    //create label_link_ for showing links and return it for using in insert_widgets
+    QWidget *new_label_link();
+    //update label link decoration when link is changed and also on "show names" command
+    void update_label_link();
+    QLabel *label_link_ = nullptr;  //label for link
+
+    //attach context menu - automatically to label, and manually to button
+    void attach_context_menu(QWidget *widget);
 
 //Context menu
 protected slots:

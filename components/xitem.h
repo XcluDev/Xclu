@@ -12,7 +12,7 @@
 #include "componentcontextmenu.h"
 #include "xwaschanged.h"
 
-struct XGuiPageCreator;
+struct XGuiPageBuilder;
 class XGui;
 class QJsonObject;
 class XItem;
@@ -176,7 +176,7 @@ public:
 
     //GUI -------------------------
     //графический интерфейс, он тут создается, но хранится отдельно
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached();

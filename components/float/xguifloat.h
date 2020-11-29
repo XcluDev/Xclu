@@ -12,7 +12,7 @@ class XGuiFloat : public XGui
 {
     Q_OBJECT
 public:
-    XGuiFloat(XGuiPageCreator &input, XItemFloat *item);
+    XGuiFloat(XGuiPageBuilder &page_builder, XItemFloat *item);
     ~XGuiFloat();
 
     //значение для проверки видимости детей

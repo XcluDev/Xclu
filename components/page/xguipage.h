@@ -10,11 +10,11 @@ class XGuiPage : public XGui
 {
     Q_OBJECT
 public:
-    XGuiPage(XGuiPageCreator &input, XItemPage *item);
+    XGuiPage(XGuiPageBuilder &page_builder, XItemPage *item);
     ~XGuiPage();
 
     //закончить страницу
-    static void finalize_page(XGuiPageCreator &input);
+    static void finalize_page(XGuiPageBuilder &page_builder);
 
     int get_vscroll();
     void set_vscroll(int v);

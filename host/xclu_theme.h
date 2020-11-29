@@ -41,7 +41,7 @@ QString builtin_icons_folder();
 //Update widget style (used for read-only on/off)
 void widget_update_css(QWidget *widget);
 
-const int gui_page_link_column = 3;   //column for link
+const int gui_page_link_column = 4;   //column for link
 
 const int gui_page_grid_margin = -1;     //margin, если -1 - не ставить
 const int gui_page_grid_spacing = 10;    //расстояние между элементами в сетке GUI, -1 - не ставить

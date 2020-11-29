@@ -11,7 +11,7 @@ public:
     XItemPage(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     bool supports_string() { return true; }
     QString value_string() { return QString().setNum(scroll_); }

@@ -41,7 +41,7 @@ ConsoleView::ConsoleView(QWidget *parent)
     //общий layout
     this->setLayout(xclu::vlayout(0, frame, 0));
 
-    //отслеживание изменений
+    //track changes
     connect(buttonClear_, SIGNAL (released()), this, SLOT (clear()));
 
 }

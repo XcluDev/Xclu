@@ -4,29 +4,44 @@
 #include "xcluscrollarea.h"
 
 //---------------------------------------------------------------------
-XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
-    :XGui(input, item)
-{
-    //завершаем предыдущую страницу
-    finalize_page(input);
+/*
+Widget structures for different controls:
 
-    //новая страница:
-    //сетка
-    input.grid = new QGridLayout();
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiPage::XGuiPage(XGuiPageBuilder &page_builder, XItemPage *item)
+    :XGui(page_builder, item)
+{
+    //end the previous page
+    finalize_page(page_builder);
+
+    //new page:
+    //grid
+    page_builder.grid = new QGridLayout();
     if (xclu::gui_page_grid_margin != -1) {
-        input.grid->setMargin(xclu::gui_page_grid_margin);
+        page_builder.grid->setMargin(xclu::gui_page_grid_margin);
     }
     if (xclu::gui_page_grid_spacing != -1) {
-        input.grid->setSpacing(xclu::gui_page_grid_spacing);    //расстояние между элементами
+        page_builder.grid->setSpacing(xclu::gui_page_grid_spacing);    //расстояние между элементами
     }
-    input.grid->setColumnStretch(xclu::gui_page_link_column,1);  //stretch for link column
+    page_builder.grid->setColumnStretch(xclu::gui_page_link_column,1);  //stretch for link column
 
-    //страница, содержащая сетку
+    //page, containing the grid
     QWidget *page = new QWidget;
-    page->setLayout(input.grid);
+    page->setLayout(page_builder.grid);
 
     //Setting up name for using in QSS as `QWidget#GuiEditorPage` and set its background
-    atribute_as_GuiEditorPage(page);  //set background as a whole page
+    attribute_as_GuiEditorPage(page);  //set background as a whole page
 
     //scrollarea
     scrollarea_ = new XcluScroollArea;
@@ -34,19 +49,19 @@ XGuiPage::XGuiPage(XGuiPageCreator &input, XItemPage *item)
     scrollarea_->setWidgetResizable(true);
     //scrollarea_->setBackgroundRole(QPalette::Dark);
 
-    //вставляем в tabs
+    //insert to tabs
     QWidget *scrollWidget = xclu::vwidget(0, scrollarea_, 0);
 
 
-    auto *tabs = input.tabs;
+    auto *tabs = page_builder.tabs;
     tabs->addTab(scrollWidget, item->title());
     //устанавливаем подсказку
     tabs->setTabToolTip(tabs->count()-1, get_tip());
 
-    //начинаем вставлять с верха
-    input.y = 0;
+    //reset position
+    page_builder.pos = int2(0,0);
 
-    //отслеживание изменений области промотки
+    //track changes of scroll area
     connect(scrollarea_->verticalScrollBar(), SIGNAL (valueChanged(int)), this, SLOT (on_vscroll_changed()));
 
 }
@@ -58,13 +73,13 @@ XGuiPage::~XGuiPage() {
 
 //---------------------------------------------------------------------
 //закончить страницу
-/*static*/ void XGuiPage::finalize_page(XGuiPageCreator &input) {
-    if (input.grid) {
-        //вставляем spacer в конце
+/*static*/ void XGuiPage::finalize_page(XGuiPageBuilder &page_builder) {
+    if (page_builder.grid) {
+        //insert spacer at the end
         QSpacerItem *spacer = new QSpacerItem(1,10);
-        input.grid->addItem(spacer,input.y,0,1,2);
-        input.grid->setRowStretch(input.y,1);
-        input.y++;
+        page_builder.grid->addItem(spacer,page_builder.pos.y,0,1,2);
+        page_builder.grid->setRowStretch(page_builder.pos.y,1);
+        page_builder.pos.y++;
     }
 }
 

@@ -11,7 +11,7 @@ class XGuiSeparator : public XGui
 {
     Q_OBJECT
 public:
-    XGuiSeparator(XGuiPageCreator &input, XItemSeparator *item);
+    XGuiSeparator(XGuiPageBuilder &page_builder, XItemSeparator *item);
     ~XGuiSeparator();
 
     //здесь нам нужно кастомно менять размер сепаратора, так как у него нет метода setVisible

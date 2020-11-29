@@ -40,7 +40,7 @@ public:
     //virtual XProtectedObject *get_object() { return value_.data(); }
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);

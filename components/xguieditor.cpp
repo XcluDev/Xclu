@@ -45,7 +45,7 @@ XGuiEditor::XGuiEditor(QWidget *parent)
                                   editor_frame_,10
                                   ));
 
-    //отслеживание изменений
+    //track changes
     connect(tabs, SIGNAL (currentChanged(int)), this, SLOT (on_value_changed()));
 
 }
@@ -166,7 +166,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
     //ModuleDescription &descr = interf->description();
     auto &items = interf->items();
 
-    XGuiPageCreator input;
+    XGuiPageBuilder input;
     input.parent = nullptr;
     input.tabs = tabs;     //сюда добавляются страницы
     input.grid = nullptr;    //страницы создают новый, а остальные добавляются в него

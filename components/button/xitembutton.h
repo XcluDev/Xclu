@@ -33,7 +33,7 @@ public:
     virtual bool store_data() { return false; }
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     //вызывается из gui при нажатии кнопки
     void callback_button_pressed();

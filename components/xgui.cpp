@@ -7,7 +7,24 @@
 //#include "xcluclickablelabel.h"
 
 //---------------------------------------------------------------------
-XGui::XGui(XGuiPageCreator &input, XItem * item)
+//XGuiPageBuilder
+//---------------------------------------------------------------------
+//insert new widget to grid
+//if widget is nullptr, just ignores it, but shifts x and y
+void XGuiPageBuilder::insert(QWidget *widget, int spanx, bool new_line) {
+    if (widget) {
+        grid->addWidget(widget, pos.y, pos.x, 1, spanx);
+    }
+    pos.x += spanx;
+    if (new_line) {
+        pos.y++;
+    }
+}
+
+//---------------------------------------------------------------------
+//XGui
+//---------------------------------------------------------------------
+XGui::XGui(XGuiPageBuilder &input, XItem * item)
     :QWidget(input.parent)
 {
     item__ = item;
@@ -45,18 +62,17 @@ QString XGui::get_tip() {
 }
 
 //---------------------------------------------------------------------
-//создать и вставить label
-void XGui::insert_label(XGuiPageCreator &input) {
-    //запоминаем label_, чтобы управлять ее видимостью
+//create label_ and return it for using in insert_widgets
+QWidget *XGui::new_label() {
     label_ = new QLabel(item__->title());
     label_->setMinimumWidth(xclu::LABEL_WIDTH_MIN);
     //label_->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     label_->setAlignment(Qt::AlignVCenter);
 
-    //Подсказка
+    //hint
     label_->setToolTip(get_tip());
 
-    //оформить label в зависимости от квалификатора
+    //decorate label using qualifier
     //out
     if (item__->is_out()) {
         auto font = label_->font();
@@ -73,15 +89,23 @@ void XGui::insert_label(XGuiPageCreator &input) {
         label_->setFont(font);
     }
 
-    //context menu
-    //https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
-    label_->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(label_, SIGNAL(customContextMenuRequested(QPoint)),
-                SLOT(customMenuRequested(QPoint)));
 
+    //context menu
+    attach_context_menu(label_);
 
     //insert on page
-    input.grid->addWidget(label_, input.y, 0);
+    //input.grid->addWidget(label_, input.y, 0);
+    return label_;
+}
+
+//---------------------------------------------------------------------
+//attach context menu - automatically to label, and manually to button
+void XGui::attach_context_menu(QWidget *widget) {
+    //context menu
+    //https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
+    widget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(label_, SIGNAL(customContextMenuRequested(QPoint)),
+                SLOT(customMenuRequested(QPoint)));
 }
 
 //---------------------------------------------------------------------
@@ -115,42 +139,110 @@ void XGui::on_label_link_right_click(QPoint /*pos*/) {
 }
 
 //---------------------------------------------------------------------
-//вставить на страницу созданный виджет
-void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
-                                 int pos_x, int shift_y, int spanx, int spany) {
+//Insert to page widgets structure
+//widget_marker - is a widget which is decorated when link changes and set bold for constants,
+//it's just marker and can duplicate with widget1..5.
+//widget1..5 can be nullptr - in this case it's omitted and grid just shifted,
+//for example for button widget1 == nullptr
+void XGui::insert_widgets(XGuiPageBuilder &page_builder,
+                          QWidget *widget_marker,
+                          QWidget *widget1, int spanx1, int newline1,
+                          QWidget *widget2, int spanx2, int newline2,
+                          QWidget *widget3, int spanx3, int newline3,
+                          QWidget *widget4, int spanx4, int newline4,
+                          QWidget *widget5, int spanx5, int newline5
+                          ) {
 
-    //create link label always at 3th column, without shift_y
-    {
-        label_link_ = new QLabel("");
-        input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
-        update_label_link();
-        //Show "Edit link" dialog when right-clicked link
-        label_link_->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(label_link_, SIGNAL(customContextMenuRequested(QPoint)),
-                    SLOT(on_label_link_right_click(QPoint)));
+    //insert to page
+    page_builder.insert(widget1, spanx1, newline1);
+    page_builder.insert(widget2, spanx2, newline2);
+    page_builder.insert(widget3, spanx3, newline3);
+    page_builder.insert(widget4, spanx4, newline4);
+    page_builder.insert(widget5, spanx5, newline5);
 
-        //connect(label_link_, SIGNAL(clicked()), SLOT(on_label_link_clicked()));
+    //register visibility
+    if (widget1) widgets_visibility_.push_back(widget1);
+    if (widget2) widgets_visibility_.push_back(widget2);
+    if (widget3) widgets_visibility_.push_back(widget3);
+    if (widget4) widgets_visibility_.push_back(widget4);
+    if (widget5) widgets_visibility_.push_back(widget5);
+
+
+    //store widget to control its background color and decorate by qualifier,
+    //for example, "bolds" on constants and green on linked state
+    widget_marker_ = internal_widget;
+
+    //change font type
+    /*if (internal_widget) {
+        auto font = internal_widget->font();
+        font.setFamily(xclu::font_family_values());
+        internal_widget->setFont(font);
+    }*/
+
+    //const make bold, if widget accepts this by is_const_bold() = true
+    if (item__->is_const() && is_const_bold()) {
+        if (widget_marker_) {
+            auto font = widget_marker_->font();
+            font.setBold(true);
+            widget_marker_->setFont(font);
+        }
     }
+
+    //out and links - set "read only"
+    on_change_link_readonly();
+}
+
+//---------------------------------------------------------------------
+//вставить на страницу созданный виджет
+void XGui::insert_widget(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
+                                 int pos_x, int shift_y, int spanx, int spany) {
 
     //insert widget
     input.grid->addWidget(widget, input.y + shift_y, pos_x, spany, spanx);
 
     input.y += shift_y + spany;
 
-    //запоминаем widget, чтобы управлять его видимостью и цветом фона
-    set_widget(widget, internal_widget);
+    //collect "widgets_visibility_" - widgets to control their visibility
+    if (label_) {
+        widgets_visibility_.push_back(label_);
+    }
+    widgets_visibility_.push_back(label_link_);
+    widgets_visibility_.push_back(widget);
+
+    //store widget to control its background color and decorate by qualifier,
+    //for example, "bolds" on constants and green on linked state
+    widget_marker_ = internal_widget;
+
+    //change font type
+    /*if (internal_widget) {
+        auto font = internal_widget->font();
+        font.setFamily(xclu::font_family_values());
+        internal_widget->setFont(font);
+    }*/
+
+    //const make bold, if widget accepts this by is_const_bold() = true
+    if (item__->is_const() && is_const_bold()) {
+        if (widget_marker_) {
+            auto font = widget_marker_->font();
+            font.setBold(true);
+            widget_marker_->setFont(font);
+        }
+    }
+
+    //out and links - set "read only"
+    on_change_link_readonly();
 }
 
 //---------------------------------------------------------------------
 //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
+void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input) {
     insert_widget(widget, internal_widget, input, 0, 1, 4, 1);
 }
 
 //---------------------------------------------------------------------
 //вставить виджет со спейсером справа, чтобы когда нет широких элементов, он не уезжал вправо
 //(int, float, checkbox, object)
-void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input,
+void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input,
                                              int pos_x, int shift_y, int spanx, int spany) {
     /*QSpacerItem *spacer = new QSpacerItem(1,1);
     QHBoxLayout *layout = new QHBoxLayout;
@@ -160,7 +252,7 @@ void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, 
     layout->setStretch(0,0);
     layout->setStretch(1,1);
     QWidget *holder= new QWidget;
-    atribute_as_GuiEditorPage(holder);  //set background as a whole page
+    attribute_as_GuiEditorPage(holder);  //set background as a whole page
 
     holder->setLayout(layout);
     insert_widget(holder, internal_widget, input, pos_x, shift_y, spanx, spany);
@@ -170,42 +262,14 @@ void XGui::insert_widget_with_spacer(QWidget *widget, QWidget *internal_widget, 
 }
 
 //---------------------------------------------------------------------
-void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageCreator &input) {
+void XGui::insert_widget_with_spacer_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &input) {
      insert_widget_with_spacer(widget, internal_widget, input, 0, 1, 4, 1);
 }
 
 //---------------------------------------------------------------------
 //set "GuiEditorPage" for QWidget in order QSS set its background darker
-void XGui::atribute_as_GuiEditorPage(QWidget *widget) {
+void XGui::attribute_as_GuiEditorPage(QWidget *widget) {
     widget->setObjectName("GuiEditorPage");
-}
-
-//---------------------------------------------------------------------
-//запомнить уже вставленный widget и установить оформление в зависимости от квалификаторов
-//также, вызывается из insert_widget и insert_widget_with_spacer
-void XGui::set_widget(QWidget *widget, QWidget *internal_widget) {
-    widget_ = widget;
-    internal_widget_ = internal_widget;
-
-    //Установка типа шрифта
-    /*if (internal_widget) {
-        auto font = internal_widget->font();
-        font.setFamily(xclu::font_family_values());
-        internal_widget->setFont(font);
-    }*/
-
-    //const - ставим жирным, если виджет не просит этого не делать, установив is_const_bold() = false
-    if (item__->is_const() && is_const_bold()) {
-        if (internal_widget) {
-            auto font = internal_widget_->font();
-            font.setBold(true);
-            internal_widget_->setFont(font);
-        }
-    }
-
-    //out and links - set "read only"
-    update_view();
-
 }
 
 //---------------------------------------------------------------------
@@ -256,14 +320,8 @@ void XGui::unblock_editing_on_stopping() { //разблокирование из
 
 //---------------------------------------------------------------------
 void XGui::set_visible(bool visible) {
-    if (label_) {
-        label_->setVisible(visible);
-    }
-    if (label_link_) {
-        label_link_->setVisible(visible);
-    }
-    if (widget_) {
-        widget_->setVisible(visible);
+    for (auto *widget: widgets_visibility_) {
+        widget->setVisible(visible);
     }
     for (int i=0; i<vis_groups_.size(); i++) {
         vis_groups_[i]->visibility_changed(visible);
@@ -290,22 +348,22 @@ void XGui::propagate_visibility() {
 //---------------------------------------------------------------------
 //User change link settings - should show it in GUI
 void XGui::link_was_changed() {
-    update_view();
+    on_change_link_readonly();
 }
 
 //---------------------------------------------------------------------
 //Controls "read only" and link properties
 //Should be called when changed read_only and link
-void XGui::update_view() {
+void XGui::on_change_link_readonly() {
     bool read_only = item__->is_out() || item__->is_linked() || (item__->is_const() && running_blocked());
     set_read_only(read_only);
 
     //update "is_linked" property in widget, to set its background
-    if (internal_widget_) {
+    if (widget_marker_) {
         if (current_is_linked_ != item__->is_linked()) {
             current_is_linked_ = item__->is_linked();
-            internal_widget_->setProperty("is_link", current_is_linked_);
-            xclu::widget_update_css(internal_widget_);
+            widget_marker_->setProperty("is_link", current_is_linked_);
+            xclu::widget_update_css(widget_marker_);
         }
     }
 
@@ -314,7 +372,23 @@ void XGui::update_view() {
 }
 
 //---------------------------------------------------------------------
-void XGui::update_label_link() {       //set label_link as optional item name and link
+//create label_link_ for showing links and return it for using in insert_widgets
+QWidget *XGui::new_label_link() {
+    label_link_ = new QLabel("");
+    //input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
+    update_label_link();
+
+    //Attach context menu with "Edit link" dialog, when right-clicked link
+    label_link_->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(label_link_, SIGNAL(customContextMenuRequested(QPoint)),
+                SLOT(on_label_link_right_click(QPoint)));
+
+    //connect(label_link_, SIGNAL(clicked()), SLOT(on_label_link_clicked()));
+}
+
+//---------------------------------------------------------------------
+//update label link decoration when link is changed and also on "show names" command
+void XGui::update_label_link() {
     if (label_link_) {
         QString name_text;
         if (settings_.show_names) {

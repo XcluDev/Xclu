@@ -29,7 +29,7 @@ void XGuiRasterVisual::clear_image() {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 template<typename T>
-XGuiRaster_<T>::XGuiRaster_(XGuiPageCreator &input, XItemRaster_<T> *item)
+XGuiRaster_<T>::XGuiRaster_(XGuiPageBuilder &page_builder, XItemRaster_<T> *item)
     :XGui(input, item)
 {
     visual_.preview_label_ = new QLabel("");

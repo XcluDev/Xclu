@@ -122,7 +122,7 @@ void XItemEnum::set_value_from_link(XLinkResolved *linkres) {
 
 //---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemEnum::create_gui(XGuiPageCreator &input) {
+XGui *XItemEnum::create_gui(XGuiPageBuilder &page_builder) {
     gui__ = new XGuiEnum(input, this);
     return gui__;
 }

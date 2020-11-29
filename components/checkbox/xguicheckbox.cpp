@@ -4,7 +4,7 @@
 #include "xguicheckbox.h"
 
 //---------------------------------------------------------------------
-XGuiCheckbox::XGuiCheckbox(XGuiPageCreator &input, XItemCheckbox *item)
+XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
     :XGui(input, item)
 {
     checkbox_ = new QCheckBox("");

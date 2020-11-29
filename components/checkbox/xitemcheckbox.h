@@ -12,7 +12,7 @@ public:
     XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     //это "групповой" чекбокс, который нужно показывать слева, без label, и справа от которого идет линия
     bool is_group_checkbox() { return is_group_checkbox_; }

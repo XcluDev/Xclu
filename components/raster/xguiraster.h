@@ -34,7 +34,7 @@ class XGuiRaster: public XGui
     Q_OBJECT
 public:
     template<typename T>
-    XGuiRaster(XGuiPageCreator &input, XItemRaster_<T> *item);
+    XGuiRaster(XGuiPageBuilder &page_builder, XItemRaster_<T> *item);
     ~XGuiRaster();
 
     //значение для проверки видимости детей

@@ -4,7 +4,7 @@
 
 
 //---------------------------------------------------------------------
-XGuiSeparator::XGuiSeparator(XGuiPageCreator &input, XItemSeparator *item)
+XGuiSeparator::XGuiSeparator(XGuiPageBuilder &page_builder, XItemSeparator *item)
     :XGui(input, item)
 {
     is_line_ = item->is_line();

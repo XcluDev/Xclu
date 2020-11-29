@@ -10,7 +10,7 @@ class XGuiString : public XGui
 {
     Q_OBJECT
 public:
-    XGuiString(XGuiPageCreator &input, XItemString *item);
+    XGuiString(XGuiPageBuilder &page_builder, XItemString *item);
     ~XGuiString();
 
     //значение для проверки видимости детей

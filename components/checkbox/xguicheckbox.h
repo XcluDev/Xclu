@@ -10,7 +10,7 @@ class XGuiCheckbox : public XGui
 {
     Q_OBJECT
 public:
-    XGuiCheckbox(XGuiPageCreator &input, XItemCheckbox *item);
+    XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item);
     ~XGuiCheckbox();
 
     //значение для проверки видимости детей

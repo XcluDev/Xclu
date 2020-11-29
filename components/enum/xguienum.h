@@ -10,7 +10,7 @@ class XGuiEnum : public XGui
 {
     Q_OBJECT
 public:
-    XGuiEnum(XGuiPageCreator &input, XItemEnum *item);
+    XGuiEnum(XGuiPageBuilder &page_builder, XItemEnum *item);
     ~XGuiEnum();
 
     //значение для проверки видимости детей

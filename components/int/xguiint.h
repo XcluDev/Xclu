@@ -12,7 +12,7 @@ class XGuiInt : public XGui
 {
     Q_OBJECT
 public:
-    XGuiInt(XGuiPageCreator &input, XItemInt *item);
+    XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item);
     ~XGuiInt();
 
     //значение для проверки видимости детей

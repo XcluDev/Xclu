@@ -26,7 +26,7 @@ public:
     QString default_value();
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
     int lines_count_min() { return lines_count_min_; }
     int lines_count_max() { return lines_count_max_; }
 

@@ -5,69 +5,79 @@
 #include "xcore.h"
 
 //---------------------------------------------------------------------
-XGuiString::XGuiString(XGuiPageCreator &input, XItemString *item)
-    :XGui(input, item)
+/*
+Widget structures for different controls:
+
+float, int:     0 label, 1 control,  2 measure unit, 3 slider,     4 link label
+checkbox:       0 label, 1 control                                 4 link label
+checkbox_group: 0--------1 control,  2---------------3 horiz.line  4 link label
+separator:      0 "control"
+button:                  1 control                                 4 link label
+string, text:   0 label                                            4 link label
+                0 -------------------------------------------------4 control
+object:         0 label                                            4 link label
+                0--------------------2 thumbnail     3-------------4 description
+*/
+
+//---------------------------------------------------------------------
+XGuiString::XGuiString(XGuiPageBuilder &page_builder, XItemString *item)
+    :XGui(page_builder, item)
 {
-    insert_label(input);
+
 
     lineEdit_ = new QLineEdit(item->value_string());
     lineEdit_->setMinimumWidth(xclu::LINE_EDIT_WIDTH);
 
-    //отслеживание изменений
-    connect(lineEdit_, SIGNAL (textChanged(QString)), this, SLOT (on_value_changed()));
+    //button for choosing file or folder
+    QPushButton *button_choosing = nullptr;
 
-    bool inserted = false;
-    //если нет опций - то вставляем только редактор строки
     if (item->options_choose_filesystem()) {
-         //опции - кнопки выбора файла или папки
-
-        //заголовок диалога - 2-й элемент описания (т.е. index==1)
+        //dialog title - second description item, with index==1
         dialog_title_ = item->description(1);
-        //фильтр файлов - 3-й элемент описания (т.е. index==2)
+        //file filter - third description item, with index==2
         file_filter_ = item->description(2);
 
-        QHBoxLayout *layout = new QHBoxLayout;
-        layout->setMargin(0);
-        layout->addWidget(lineEdit_);
-
-        //создаем кнопку
         QString button_title;
         if (item->options_choose_file()) button_title = tr("File...");
         if (item->options_choose_folder()) button_title = tr("Folder...");
 
-        QPushButton *button = new QPushButton(button_title);
+        button_choosing = new QPushButton(button_title);
         //button->setMaximumWidth(xclu::BUTTON_WIDTH);
         //button->setToolTip(item->description());
-        layout->addWidget(button);
 
-        //реакция на нажатие
+        //reaction on pressing button
         if (item->options_choose_file()) {
-            connect(button, SIGNAL (released()), this, SLOT (choose_file()));
+            connect(button_choosing, SIGNAL (released()), this, SLOT (choose_file()));
         }
         if (item->options_choose_folder()) {
-            connect(button, SIGNAL (released()), this, SLOT (choose_folder()));
+            connect(button_choosing, SIGNAL (released()), this, SLOT (choose_folder()));
         }
-
-        //spacer, чтобы вправо spin не раздвигался
-        /*QSpacerItem *spacer = new QSpacerItem(1,1);
-
-        layout->addWidget(spin);
-        layout->addItem(spacer);
-        layout->setStretch(0,0);
-        layout->setStretch(1,1);*/
-        QWidget *holder = new QWidget;
-        holder->setLayout(layout);
-
-        //вставка на страницу, со сдвигом вниз
-        insert_widget_next_line(holder, lineEdit_, input);
-        inserted = true;
     }
 
-    //просто вставка на страницу
-    if (!inserted) {
-        insert_widget_next_line(lineEdit_, lineEdit_, input);
-        inserted = true;
+    //insert to page
+    if (button_choosing) {
+        insert_widgets(page_builder,
+                       lineEdit_,
+                       new_label(), 1, false,
+                       nullptr, 3, false,
+                       new_label_link(), 1, true,
+                       lineEdit_, 4, false,
+                       button_choosing, 1, true
+                       );
     }
+    else {
+        insert_widgets(page_builder,
+                       lineEdit_,
+                       new_label(), 1, false,
+                       nullptr, 3, false,
+                       new_label_link(), 1, true,
+                       lineEdit_, 5, true
+                       );
+    }
+
+
+    //track changes
+    connect(lineEdit_, SIGNAL (textChanged(QString)), this, SLOT (on_value_changed()));
 
 }
 

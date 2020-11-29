@@ -31,7 +31,7 @@ class XGuiObject : public XGui
 {
     Q_OBJECT
 public:
-    XGuiObject(XGuiPageCreator &input, XItemObject *item);
+    XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item);
     ~XGuiObject();
 
     //значение для проверки видимости детей

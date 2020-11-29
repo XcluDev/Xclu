@@ -11,7 +11,7 @@ public:
     XItemSeparator(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     virtual bool store_data() { return false; }
 

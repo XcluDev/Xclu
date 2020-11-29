@@ -23,7 +23,7 @@ public:
     void set_value_float(float value) { set_value_string(QString::number(value)); }
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageCreator &input);
+    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
     //опциональные элементы
     bool options_choose_filesystem();     //есть ли какие-нибудь опции для файловой системы (file, folder)
