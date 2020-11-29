@@ -7,7 +7,7 @@
 //#include <QImageWriter>
 //#include <QImageReader>
 
-#include "xcluobjectimage.h"
+#include "xobjectimage.h"
 
 //registering module implementation
 REGISTER_XMODULE(RealsenseCamera)

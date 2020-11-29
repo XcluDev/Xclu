@@ -1,4 +1,4 @@
-#include "xcluobjectsoundformat.h"
+#include "xobjectsoundformat.h"
 #include "incl_cpp.h"
 #include "xguiobject.h"
 

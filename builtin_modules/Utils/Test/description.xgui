@@ -15,7 +15,8 @@ page Gui_Controls
 in button Test button1
     //Test button.
 
-separator
+line
+
 const checkbox Const_Checkbox const_check=1
     //Constant value.
 in checkbox In_Checkbox in_check=0

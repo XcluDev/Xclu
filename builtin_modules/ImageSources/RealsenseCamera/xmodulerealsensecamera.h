@@ -6,8 +6,8 @@
 #include <QImage>
 #include "sdk_h.h"
 #include "xmodule.h"
-#include "xcluobjectimage.h"
-#include "xcluprotecteddata.h"
+#include "xobjectimage.h"
+#include "xprotecteddata.h"
 #include "sdk_h.h"
 #include "xmodulerealsensecamera_impl.h"
 //class RealsenseCamera;

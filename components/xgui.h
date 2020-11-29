@@ -143,11 +143,11 @@ protected:
     //Note: each control must finish inserting with newline!
     void insert_widgets(XGuiPageBuilder &page_builder,
                         QWidget *widget_marker,
-                        QWidget *widget1 = nullptr, int spanx1 = 1, int newline1 = false,
-                        QWidget *widget2 = nullptr, int spanx2 = 1, int newline2 = false,
-                        QWidget *widget3 = nullptr, int spanx3 = 1, int newline3 = false,
-                        QWidget *widget4 = nullptr, int spanx4 = 1, int newline4 = false,
-                        QWidget *widget5 = nullptr, int spanx5 = 1, int newline5 = false
+                        QWidget *widget1 = nullptr, int spanx1 = 0, int newline1 = false,
+                        QWidget *widget2 = nullptr, int spanx2 = 0, int newline2 = false,
+                        QWidget *widget3 = nullptr, int spanx3 = 0, int newline3 = false,
+                        QWidget *widget4 = nullptr, int spanx4 = 0, int newline4 = false,
+                        QWidget *widget5 = nullptr, int spanx5 = 0, int newline5 = false
                         );
     /*
     Widget structures for different controls:

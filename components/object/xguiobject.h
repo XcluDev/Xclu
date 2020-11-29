@@ -2,7 +2,7 @@
 #define INTERFACEGUIOBJECT_H
 
 #include "xgui.h"
-#include "xcluprotecteddata.h"
+#include "xprotecteddata.h"
 
 class XItemObject;
 class XObject;

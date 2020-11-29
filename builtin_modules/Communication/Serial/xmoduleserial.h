@@ -7,8 +7,8 @@
 #include <QtSerialPort/QSerialPort>
 #include "sdk_h.h"
 #include "xmodule.h"
-#include "xcluobjectimage.h"
-#include "xcluprotecteddata.h"
+#include "xobjectimage.h"
+#include "xprotecteddata.h"
 #include "sdk_h.h"
 
 //Note: now this module writes warnings and errors to console, without interrupting the project.

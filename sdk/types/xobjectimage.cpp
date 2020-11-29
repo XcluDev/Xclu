@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 
-#include "xcluobjectimage.h"
+#include "xobjectimage.h"
 #include "incl_cpp.h"
 #include "xguiobject.h"
 

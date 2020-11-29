@@ -8,7 +8,7 @@
 
 #include "incl_h.h"
 #include "console.h"
-#include "xcluprotecteddata.h"
+#include "xprotecteddata.h"
 #include "xwaschanged.h"
 
 template<typename T>

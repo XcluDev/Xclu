@@ -4,7 +4,7 @@
 //Звуковой формат - число каналов, частота дискретизации, размер буфера
 
 #include "xobject.h"
-#include "xcluobjectwrapper.h"
+#include "xobjectwrapper.h"
 class XGuiObject;
 
 //данные

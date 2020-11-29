@@ -174,7 +174,11 @@ SOURCES += \
     sdk/types/xarray_multi.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
+    sdk/types/xobjectimage.cpp \
+    sdk/types/xobjectsoundformat.cpp \
+    sdk/types/xobjectwrapper.cpp \
     sdk/types/xpointer.cpp \
+    sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
     sdk/types/xtypes.cpp \
@@ -196,10 +200,6 @@ SOURCES += \
     modules/moduleinterface.cpp \
     modules/modulesfactory.cpp \
     main.cpp \
-    sdk/types/xcluobjectimage.cpp \
-    sdk/types/xcluobjectsoundformat.cpp \
-    sdk/types/xcluobjectwrapper.cpp \
-    sdk/types/xcluprotecteddata.cpp \
     host/consoleview.cpp \
     host/dialogs/dialogmodulename.cpp \
     host/dialogs/dialogrenamemodule.cpp \
@@ -270,7 +270,11 @@ HEADERS += \
     sdk/types/xarray_multi.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
+    sdk/types/xobjectimage.h \
+    sdk/types/xobjectsoundformat.h \
+    sdk/types/xobjectwrapper.h \
     sdk/types/xpointer.h \
+    sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
     sdk/types/xtypes.h \
@@ -292,10 +296,6 @@ HEADERS += \
     modules/module.h \
     modules/moduleinterface.h \
     modules/modulesfactory.h \
-    sdk/types/xcluobjectimage.h \
-    sdk/types/xcluobjectsoundformat.h \
-    sdk/types/xcluobjectwrapper.h \
-    sdk/types/xcluprotecteddata.h \
     host/consoleview.h \
     host/dialogs/dialogmodulename.h \
     host/dialogs/dialogrenamemodule.h \

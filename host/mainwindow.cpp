@@ -6,7 +6,7 @@
 #include "incl_cpp.h"
 #include "projectgui.h"
 #include "xcore.h"
-#include "xcluobjectimage.h"
+#include "xobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
 #include "exportinterface.h"

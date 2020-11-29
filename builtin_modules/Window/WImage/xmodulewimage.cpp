@@ -6,7 +6,7 @@
 #include "xcore.h"
 #include "module.h"
 #include "xobject.h"
-#include "xcluobjectwrapper.h"
+#include "xobjectwrapper.h"
 
 
 

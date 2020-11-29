@@ -9,7 +9,7 @@
 
 #include "sdk_h.h"
 #include "xmodule.h"
-#include "xcluprotecteddata.h"
+#include "xprotecteddata.h"
 
 
 //Модуль

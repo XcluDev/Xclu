@@ -8,8 +8,8 @@
 #include "sdk_h.h"
 #include "xmodule.h"
 #include "xarray.h"
-#include "xcluobjectsoundformat.h"
-#include "xcluprotecteddata.h"
+#include "xobjectsoundformat.h"
+#include "xprotecteddata.h"
 
 //Данные для генерации
 struct XModuleSoundOscData: public XcluProtectedData

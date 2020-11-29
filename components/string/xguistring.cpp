@@ -42,6 +42,8 @@ XGuiString::XGuiString(XGuiPageBuilder &page_builder, XItemString *item)
         if (item->options_choose_folder()) button_title = tr("Folder...");
 
         button_choosing = new QPushButton(button_title);
+        button_choosing->setMaximumWidth(xclu::BUTTON_CHOOSE_WIDTH);
+
         //button->setMaximumWidth(xclu::BUTTON_WIDTH);
         //button->setToolTip(item->description());
 

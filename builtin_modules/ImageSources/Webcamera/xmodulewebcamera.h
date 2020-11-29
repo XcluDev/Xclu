@@ -9,8 +9,8 @@
 #include <QAbstractVideoSurface>
 #include "sdk_h.h"
 #include "xmodule.h"
-#include "xcluobjectimage.h"
-#include "xcluprotecteddata.h"
+#include "xobjectimage.h"
+#include "xprotecteddata.h"
 class QCameraInfo;
 
 class XModuleWebcamera;

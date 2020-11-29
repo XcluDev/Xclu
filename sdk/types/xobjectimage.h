@@ -1,9 +1,9 @@
-#ifndef XCLUIMAGE_H
-#define XCLUIMAGE_H
+#ifndef XOBJECTIMAGE_H
+#define XOBJECTIMAGE_H
 
 #include "xobject.h"
 #include <QImage>
-#include "xcluobjectwrapper.h"
+#include "xobjectwrapper.h"
 #include "xraster.h"
 class QLabel;
 class XArray;
@@ -110,4 +110,4 @@ public:
 
 };
 
-#endif // XCLUIMAGE_H
+#endif // XOBJECTIMAGE_H

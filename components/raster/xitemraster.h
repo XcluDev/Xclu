@@ -5,7 +5,7 @@
 //Raster
 
 #include "incl_h.h"
-#include "xcluprotecteddata.h"
+#include "xprotecteddata.h"
 #include "xitem.h"
 
 /*

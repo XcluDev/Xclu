@@ -2,8 +2,8 @@
 #include "incl_cpp.h"
 #include "xitemobject.h"
 #include "xguiobject.h"
-#include "xcluobjectimage.h"
-#include "xcluobjectwrapper.h"
+#include "xobjectimage.h"
+#include "xobjectwrapper.h"
 
 //---------------------------------------------------------------------
 //XGuiObjectVisual

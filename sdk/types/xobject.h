@@ -5,7 +5,7 @@
 
 #include "incl_h.h"
 #include "xarray.h"
-#include "xcluprotecteddata.h"
+#include "xprotecteddata.h"
 #include "xpointer.h"
 
 

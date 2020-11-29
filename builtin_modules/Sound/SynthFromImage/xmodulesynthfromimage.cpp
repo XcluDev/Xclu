@@ -3,7 +3,7 @@
 #include "registrarxmodule.h"
 #include "xcore.h"
 #include "module.h"
-#include "xcluobjectimage.h"
+#include "xobjectimage.h"
 
 //registering module implementation
 REGISTER_XMODULE(SynthFromImage)

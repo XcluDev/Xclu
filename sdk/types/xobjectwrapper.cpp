@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
-#include "xcluobjectwrapper.h"
+#include "xobjectwrapper.h"
 #include "incl_cpp.h"
 #include "xitemobject.h"
 #include "xguiobject.h"
-#include "xcluobjectimage.h"
-#include "xcluobjectsoundformat.h"
+#include "xobjectimage.h"
+#include "xobjectsoundformat.h"
 
 
 //---------------------------------------------------------------------
