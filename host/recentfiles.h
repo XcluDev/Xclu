@@ -29,6 +29,9 @@ public:
 public slots:
     void updateRecentFileActions();
     void openRecentFile();
+
+protected:
+    QMenu *menu_ = nullptr;
 };
 
 #endif // RECENTFILES_H

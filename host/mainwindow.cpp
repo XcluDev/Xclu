@@ -385,13 +385,17 @@ void MainWindow::writeSettings() {
 void MainWindow::updateMenusVisible() {
     bool visible = is_stopped();
 
-
     ui->actionNew_Project->setVisible(visible);
     ui->actionOpen_Project->setVisible(visible);
 
-    //bool recent_visible = MainWindow::hasRecentFiles() && visible;
-    //ui->menuFile->setVisible(recent_visible);
+    ui->actionExamples->setVisible(visible);
+
+    //Recent files submenu
+    bool recent_visible = recent_->hasRecentFiles() && visible;
+    //hiding doesn't work, so just disable
+    ui->menuRecent_Projects->setEnabled(recent_visible);
     //ui->menuRecent_Projects->setVisible(recent_visible);
+
 }
 
 //---------------------------------------------------------------------

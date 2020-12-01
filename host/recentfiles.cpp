@@ -6,6 +6,7 @@
 //---------------------------------------------------------------------
 RecentFiles::RecentFiles(QMenu *menu)
 {
+    menu_ = menu;
     connect(menu, &QMenu::aboutToShow, this, &RecentFiles::updateRecentFileActions);
 
     for (int i = 0; i < MaxRecentFiles; ++i) {
@@ -29,8 +30,9 @@ void RecentFiles::updateRecentFileActions() {
         recentFileActs[i]->setData(recentFiles.at(i));
         recentFileActs[i]->setVisible(true);
     }
-    for ( ; i < MaxRecentFiles; ++i)
+    for ( ; i < MaxRecentFiles; ++i) {
         recentFileActs[i]->setVisible(false);
+    }
 }
 
 //---------------------------------------------------------------------
