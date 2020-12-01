@@ -21,7 +21,7 @@ void RecentFiles::updateRecentFileActions() {
     XCLU_SETTINGS
 
     const QStringList recentFiles = readRecentFiles(settings);
-    const int count = qMin(int(MaxRecentFiles), recentFiles.size());
+    const int count = qMin(recentFiles.size(), MaxRecentFiles);
     int i = 0;
     for ( ; i < count; ++i) {
         const QString fileName = QFileInfo(recentFiles.at(i)).fileName();
@@ -57,7 +57,7 @@ QStringList RecentFiles::readRecentFiles(QSettings &settings)
 //---------------------------------------------------------------------
 void RecentFiles::writeRecentFiles(const QStringList &files, QSettings &settings)
 {
-    const int count = files.size();
+    const int count = qMin(files.size(), MaxRecentFiles);   //limit saving
     settings.beginWriteArray(Settings::recentProjects());
     for (int i = 0; i < count; ++i) {
         settings.setArrayIndex(i);

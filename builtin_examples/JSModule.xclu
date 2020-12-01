@@ -80,7 +80,11 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "enabled",
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
                         "avalue": "1"
                     },
                     {
@@ -90,18 +94,6 @@
                     {
                         "aname": "current_preset",
                         "avalue": ""
-                    },
-                    {
-                        "aname": "links_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links_enabled",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "links",
-                        "avalue": "# '#' - comment, '-' - deactivated link\n- volume module1->out_value\n- image webcamera1->image"
                     },
                     {
                         "aname": "error_handling",

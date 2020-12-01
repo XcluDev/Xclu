@@ -56,7 +56,11 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "enabled",
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
                         "avalue": "1"
                     },
                     {

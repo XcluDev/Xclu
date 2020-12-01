@@ -46,10 +46,11 @@ XGuiEditor::XGuiEditor(QWidget *parent)
                                   ));
 
     //track changes
-    connect(tabs, SIGNAL (currentChanged(int)), this, SLOT (on_value_changed()));
+    //using tabBarClicked instead currentChanged, because currentChanged fires ad creating project
+    connect(tabs, SIGNAL (tabBarClicked(int)), this, SLOT (on_value_changed()));
+    //connect(tabs, SIGNAL (currentChanged(int)), this, SLOT (on_value_changed()));
 
 }
-
 
 //---------------------------------------------------------------------
 //сигнал, что модуль сменился и нужно загрузить новый модуль
