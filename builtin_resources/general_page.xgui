@@ -55,10 +55,10 @@ in group Calls calls_info=0
     //Information about functions which module can call or receive from other modules.
 
 if calls_info 1
-out(not_save) text Send_Calls send_calls 3 5
+out text Send_Calls send_calls 3 5
     //List of functions which the module can call in other modules.
 
-out(not_save) text Accept_Calls accept_calls 3 5
+out text Accept_Calls accept_calls 3 5
     //List of function which module can receive from other modules.
 
 endif

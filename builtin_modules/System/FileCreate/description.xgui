@@ -1,0 +1,65 @@
+#Module Create
+#------------------------------------------
+module_description=Create big files filled by fixed or random values.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings.
+
+line
+in enum Unit file_size_unit=Bytes [Bytes,Kilobytes,Megabytes,Gigabytes]
+    //Type of size measure
+    
+if file_size_unit Bytes
+in int File_Size file_size_b=1 0:* 1,10
+    //File size.
+    //Bytes
+endif
+if file_size_unit Kilobytes
+in float File_Size file_size_kb=1 0:* 1,10
+    //File size.
+    //Kilobytes
+endif
+if file_size_unit Megabytes
+in float File_Size file_size_mb=1 0:* 1,10
+    //File size.
+    //Megabytes
+endif
+if file_size_unit Gigabytes
+in float File_Size file_size_gb=1 0:* 1,10
+    //File size.
+    //Gigabytes
+endif
+
+line
+
+in enum Contents contents=Fixed_Byte [Fixed_Byte,Random_Bytes]
+    //How to fill the file - fixed byte or random values.
+    
+if contents Fixed
+in int Value fixed_value=0 0:255 1,10
+    //Value which use to fill the file.
+endif
+
+line
+
+
+separator
+    
+in string_file File_Name file_name=""
+    //Output file name.
+
+separator
+
+in button Create create_file_btn
+    //Create button. Works even without running.
+    
+separator
+line
+out string Last_Operation last_operation=""
+    //Outputs last created file size.
+
+
+line

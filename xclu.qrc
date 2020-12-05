@@ -434,5 +434,6 @@
         <file>builtin_examples/Webcamera.xclu</file>
         <file>builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp</file>
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
+        <file>builtin_modules/System/FileCreate/description.xgui</file>
     </qresource>
 </RCC>

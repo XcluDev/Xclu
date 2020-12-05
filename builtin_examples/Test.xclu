@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -36,12 +36,16 @@
                         "avalue": "1"
                     },
                     {
+                        "aname": "check_linked",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "float1",
-                        "avalue": "1.1"
+                        "avalue": "1.3"
                     },
                     {
                         "aname": "float2",
-                        "avalue": "2.2"
+                        "avalue": "2.21"
                     },
                     {
                         "aname": "float3",
@@ -50,6 +54,11 @@
                     {
                         "aname": "float4",
                         "avalue": "3.3"
+                    },
+                    {
+                        "aname": "float_linked",
+                        "avalue": "1.3",
+                        "link": "test1->float1"
                     },
                     {
                         "aname": "int1",
@@ -68,6 +77,10 @@
                         "avalue": "3"
                     },
                     {
+                        "aname": "int_linked",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "string1",
                         "avalue": "Abc"
                     },
@@ -80,6 +93,10 @@
                         "avalue": "Abc"
                     },
                     {
+                        "aname": "string_linked",
+                        "avalue": ""
+                    },
+                    {
                         "aname": "list1",
                         "avalue": "By_Id"
                     },
@@ -90,6 +107,10 @@
                     {
                         "aname": "list3",
                         "avalue": "By_Id"
+                    },
+                    {
+                        "aname": "list_linked",
+                        "avalue": "A"
                     },
                     {
                         "aname": "text1",
@@ -141,6 +162,18 @@
                     },
                     {
                         "aname": "Conditional_GUI",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_details",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "flag1",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "flag2",
                         "avalue": "0"
                     },
                     {

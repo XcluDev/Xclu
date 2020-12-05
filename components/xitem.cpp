@@ -86,9 +86,17 @@ XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description
     qualifier_ = pre_description.qualifier;
     description_ = pre_description.description;
 
-    //опции квалификатора out(not_save)
-    if (pre_description.qualifier_options.contains("not_save")) {
-        save_to_project_ = false;
+    //опции квалификатора, может быть только out(save)
+    auto &options = pre_description.qualifier_options;
+    xclu_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifierOut),
+                "Currently only out(save) option supported, but get other for " + pre_description.line_to_parse);
+
+    //ставим, нужно ли сохранять в проект
+    if (qualifier_ != XQualifierOut) {
+        save_to_project_ = true;
+    }
+    else {
+        save_to_project_ = (options.contains("save"));
     }
 
 }

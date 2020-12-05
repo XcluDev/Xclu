@@ -226,7 +226,10 @@ void XGui::set_read_only_(bool read_only) {
 //Подклассы должны его вызывать, чтобы пометить, что проект был изменен, вот так:
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
 void XGui::on_value_changed() {
-    xclu_document_modified();
+    //mark that documant was changed if item is indented to save to disk
+    if (item__->is_save_to_project()) {
+        xclu_document_modified();
+    }
 
     QString value_string_vis = value_string_for_visibility();
     for (int i=0; i<vis_groups_.size(); i++) {

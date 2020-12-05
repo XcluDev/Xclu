@@ -26,9 +26,9 @@ public:
     QString title;
     QString type = "";
     XQualifier qualifier = XQualifierIn;
-    QString qualifier_options; //опции в квалификаторе, типа out(not_save)
+    QString qualifier_options; //опции в квалификаторе, типа out(save)
     QString options;        //дополнительные опции, типа choose:file, choose:folder для строк string(choose:file)
-    QString line_to_parse;
+    QString line_to_parse;  //полная строка для парсинга: in float ...
     QStringList description;    //строки с описанием
 };
 
@@ -82,7 +82,7 @@ public:
     bool is_const();
     bool is_in();
     bool is_out();
-    bool is_save_to_project();    //в случае out(not_save) ставится false. Это знак, что значение переменной не нужно сохранять в проекте
+    bool is_save_to_project();    //в случае out(save) ставится true. Это знак, что значение переменной нужно сохранять в файле проекта
 
     //Описание добавляется уже после создания, следующей строкой в скрипте GUI
     //может быть несколько строк - например, в string с выбором файла или папки,
@@ -322,7 +322,7 @@ public:
     XProtectedWrite_<T> value_write() { return value_.write(); }
 
     //Checking that value was changed -------------------------
-    //works relative to save "change chacker", which stores frame fo last check
+    //works relative to save "change checker", which stores frame fo last check
     virtual bool was_changed(XWasChangedChecker &checker) {
         return value_.was_changed(checker);
     }

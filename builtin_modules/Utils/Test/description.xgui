@@ -23,6 +23,8 @@ in checkbox In_Checkbox in_check=0
     //Input value.
 out checkbox Out_Checkbox out_check=1
     //Output value.
+in checkbox Linked check_linked=0
+    //Checkbox for testing linking.
 
 line
 const float Const_Float1 float1=1.1 0:10 0.1,1
@@ -36,6 +38,10 @@ in float In_Float3 float3=2.2 -2:2 0.01,0.1
     //pixels
 out float Out_Float4 float4=3.3 0:10 0.01,0.1
     //Output value.
+    //meters
+    
+in float Linked float_linked=0 0:10 0.01,0.1
+    //Float for testing linking.
     //meters
 
 line
@@ -51,6 +57,10 @@ in int In_Int3 int3=2 0:10 1,10
 out int Out_Int4 int4=3 0:10 1,10
     //Output value.
     //meters
+    
+in float Linked int_linked=0 0:10 1,10
+    //Int for testing linking.
+    //meters
 
 line
 const string Const_String string1="Abc"
@@ -59,6 +69,8 @@ in string In_String string2="Abc"
     //Input value.
 out string Out_String string3="Abc"
     //Output value.
+const string Linked string_linked=""
+    //String for testing linking.
 
 separator
 const enum Const_List list1=By_Id [By_Name,By_Id]
@@ -67,6 +79,8 @@ in enum In_List list2=By_Name [By_Name,By_Id]
     //Input value.
 out enum Out_List list3=By_Id [By_Name,By_Id]
     //Output value.
+in enum Linked list_linked=A [A,B,C]
+    //Enum for testing linking.
 
 separator
 const text Const_Text text1 3 3
