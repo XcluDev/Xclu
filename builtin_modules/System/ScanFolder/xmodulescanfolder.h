@@ -1,5 +1,5 @@
-#ifndef RTMODULESCANFOLDER_H
-#define RTMODULESCANFOLDER_H
+#ifndef XMODULESCANFOLDER_H
+#define XMODULESCANFOLDER_H
 
 //ScanFolder implementation
 
@@ -23,4 +23,4 @@ protected:
 
 
 
-#endif // RTMODULESCANFOLDER_H
+#endif // XMODULESCANFOLDER_H

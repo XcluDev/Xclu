@@ -1,5 +1,5 @@
-#ifndef RTMODULEWIMAGE_H
-#define RTMODULEWIMAGE_H
+#ifndef XMODULEWIMAGE_H
+#define XMODULEWIMAGE_H
 
 
 //Реализация модуля WImage - показ изображения в окне
@@ -68,4 +68,4 @@ protected:
 
 
 
-#endif // RTMODULEWIMAGE_H
+#endif // XMODULEWIMAGE_H

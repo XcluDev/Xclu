@@ -1,5 +1,5 @@
-#ifndef RTMODULESYNTHFROMIMAGE_H
-#define RTMODULESYNTHFROMIMAGE_H
+#ifndef XMODULESYNTHFROMIMAGE_H
+#define XMODULESYNTHFROMIMAGE_H
 
 //Реализация модуля SynthFromImage - сонификация картинки
 
@@ -59,4 +59,4 @@ protected:
 
 };
 
-#endif // RTMODULESYNTHFROMIMAGE_H
+#endif // XMODULESYNTHFROMIMAGE_H

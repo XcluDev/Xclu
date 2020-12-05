@@ -1,5 +1,5 @@
-#ifndef RTMODULEREGISTRAR_H
-#define RTMODULEREGISTRAR_H
+#ifndef XMODULEREGISTRAR_H
+#define XMODULEREGISTRAR_H
 
 //Здесь реализована автоматизация регистрации исполняемых модулей
 //Модули с конкретными реализациями должны добавлять в своем CPP-файле строку:
@@ -61,4 +61,4 @@ REGISTER_XMODULE(Execute)
 */
 
 //------------------------------------------------------------------
-#endif // RTMODULEREGISTRAR_H
+#endif // XMODULEREGISTRAR_H

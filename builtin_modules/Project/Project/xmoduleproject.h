@@ -1,5 +1,5 @@
-#ifndef RTMODULEPROJECT_H
-#define RTMODULEPROJECT_H
+#ifndef XMODULEPROJECT_H
+#define XMODULEPROJECT_H
 
 //Control project:
 //FPS
@@ -31,4 +31,4 @@ protected:
 
 };
 
-#endif // RTMODULEPROJECT_H
+#endif // XMODULEPROJECT_H

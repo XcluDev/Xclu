@@ -1,5 +1,5 @@
-#ifndef RTMODULEEXECUTE_H
-#define RTMODULEEXECUTE_H
+#ifndef XMODULEEXECUTE_H
+#define XMODULEEXECUTE_H
 
 //Реализация модуля Execute - запуск программы с диска
 
@@ -23,4 +23,4 @@ protected:
 
 
 
-#endif // RTMODULEEXECUTE_H
+#endif // XMODULEEXECUTE_H

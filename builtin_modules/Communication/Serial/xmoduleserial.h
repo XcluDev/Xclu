@@ -1,5 +1,5 @@
-#ifndef RTMODULESERIAL_H
-#define RTMODULESERIAL_H
+#ifndef XMODULESERIAL_H
+#define XMODULESERIAL_H
 
 //Serial interface with Arduino and other devices
 
@@ -62,4 +62,4 @@ protected:
 
 
 
-#endif // RTMODULESERIAL_H
+#endif // XMODULESERIAL_H

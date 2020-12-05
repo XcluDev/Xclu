@@ -1,5 +1,5 @@
-#ifndef RTMODULETEST_H
-#define RTMODULETEST_H
+#ifndef XMODULETEST_H
+#define XMODULETEST_H
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
@@ -21,4 +21,4 @@ protected:
 
 };
 
-#endif // RTMODULETEST_H
+#endif // XMODULETEST_H

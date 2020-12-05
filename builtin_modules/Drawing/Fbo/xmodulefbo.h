@@ -1,5 +1,5 @@
-#ifndef RTMODULEFBO_H
-#define RTMODULEFBO_H
+#ifndef XMODULEFBO_H
+#define XMODULEFBO_H
 
 //FBO для рисования
 
@@ -35,4 +35,4 @@ protected:
 
 //XModuleFbo
 
-#endif // RTMODULEFBO_H
+#endif // XMODULEFBO_H

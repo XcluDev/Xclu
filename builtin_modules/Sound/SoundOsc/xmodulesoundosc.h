@@ -1,5 +1,5 @@
-#ifndef RTMODULESOUNDOSC_H
-#define RTMODULESOUNDOSC_H
+#ifndef XMODULESOUNDOSC_H
+#define XMODULESOUNDOSC_H
 
 //Реализация модуля SoundOsc - осциллятор с FM и AM модуляциями
 
@@ -97,4 +97,4 @@ protected:
 
 };
 
-#endif // RTMODULESOUNDOSC_H
+#endif // XMODULESOUNDOSC_H

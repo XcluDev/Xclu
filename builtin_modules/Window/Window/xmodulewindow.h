@@ -1,5 +1,5 @@
-#ifndef RTMODULEWINDOW_H
-#define RTMODULEWINDOW_H
+#ifndef XMODULEWINDOW_H
+#define XMODULEWINDOW_H
 
 //Реализация модуля Window - окно на экране
 
@@ -124,4 +124,4 @@ protected:
 };
 
 
-#endif // RTMODULEWINDOW_H
+#endif // XMODULEWINDOW_H

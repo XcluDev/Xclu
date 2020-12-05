@@ -1,5 +1,5 @@
-#ifndef RTMODULEFRAGMENTSHADER_H
-#define RTMODULEFRAGMENTSHADER_H
+#ifndef XMODULEFRAGMENTSHADER_H
+#define XMODULEFRAGMENTSHADER_H
 
 //Реализация модуля FragmentShader - рисование прямоугольника, пропущенного через фрагментный шейдер, в FBO
 //Это FBO можно конвертировать в картинку или использовать как текстуру для вывода в окно
@@ -35,4 +35,4 @@ protected:
 };
 
 
-#endif // RTMODULEFRAGMENTSHADER_H
+#endif // XMODULEFRAGMENTSHADER_H

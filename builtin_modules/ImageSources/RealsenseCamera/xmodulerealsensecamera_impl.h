@@ -1,5 +1,5 @@
-#ifndef RTMODULEREALSENSECAMERAIMPL_H
-#define RTMODULEREALSENSECAMERAIMPL_H
+#ifndef XMODULEREALSENSECAMERAIMPL_H
+#define XMODULEREALSENSECAMERAIMPL_H
 
 //Implementation of working with Realsense camera, based on https://github.com/perevalovds/ofxRealsense
 
@@ -175,4 +175,4 @@ protected:
 };
 
 
-#endif // RTMODULEREALSENSECAMERAIMPL_H
+#endif // XMODULEREALSENSECAMERAIMPL_H

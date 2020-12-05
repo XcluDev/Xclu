@@ -1,5 +1,5 @@
-#ifndef RTMODULEWEBCAMERA_H
-#define RTMODULEWEBCAMERA_H
+#ifndef XMODULEWEBCAMERA_H
+#define XMODULEWEBCAMERA_H
 
 //Реализация модуля Webcamera - получение кадров с вебкамеры
 //Важно, что камера может давать кадры в собственном потоке
@@ -124,4 +124,4 @@ protected:
 };
 
 
-#endif // RTMODULEWEBCAMERA_H
+#endif // XMODULEWEBCAMERA_H
