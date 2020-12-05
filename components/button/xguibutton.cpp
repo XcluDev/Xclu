@@ -52,13 +52,20 @@ int XGuiButton::value() {
 }
 
 //---------------------------------------------------------------------
+//User pressed the button
 void XGuiButton::button_pressed() {
     //запоминаем, что кнопка была нажата, если не read only
     if (!is_read_only()) {
         value_ = 1;
     }
-    //в любом случае - отправляем сигнал в модуль
-    ((XItemButton *)item__)->callback_button_pressed();
+
+    //warp to try/catch, because whole Xclu can crash here
+    try {
+        ((XItemButton *)item__)->callback_button_pressed();
+    }
+    catch (XException &e) {
+        xclu_message_box("Error: " + e.whatQt());
+    }
 }
 
 //---------------------------------------------------------------------
