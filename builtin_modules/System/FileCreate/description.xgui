@@ -9,7 +9,7 @@ page Main
     //General settings.
 
 line
-in enum Unit file_size_unit=Bytes [Bytes,Kilobytes,Megabytes,Gigabytes]
+in enum Unit file_size_unit=Kilobytes [Bytes,Kilobytes,Megabytes,Gigabytes]
     //Type of size measure
     
 if file_size_unit Bytes
@@ -38,7 +38,7 @@ line
 in enum Contents contents=Fixed_Byte [Fixed_Byte,Random_Bytes]
     //How to fill the file - fixed byte or random values.
     
-if contents Fixed
+if contents Fixed_Byte
 in int Value fixed_value=0 0:255 1,10
     //Value which use to fill the file.
 endif
@@ -48,7 +48,7 @@ line
 
 separator
     
-in string_file File_Name file_name=""
+in string_file File_Name file_name="file.raw"
     //Output file name.
 
 separator
