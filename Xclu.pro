@@ -165,6 +165,7 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    sdk/compshaders/xcomputeshader.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
@@ -254,6 +255,7 @@ HEADERS += \
     project/project.h \
     project/projectproperties.h \
     project/xcore.h \
+    sdk/compshaders/xcomputeshader.h \
     sdk/math/int2.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
