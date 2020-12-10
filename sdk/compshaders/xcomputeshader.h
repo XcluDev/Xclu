@@ -34,7 +34,10 @@ protected:
     QOpenGLFunctions_4_3_Core *gl();
 };
 
+//---------------------------------------------------------------------
+//XComputeBuffer
 //Class for warping GPU buffer, will it with values from CPU and load to CPU after computations
+//---------------------------------------------------------------------
 class XComputeBuffer: public XComputeCommon {
 public:
     void setup(XComputeSurface *surface);

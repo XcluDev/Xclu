@@ -110,8 +110,9 @@ INCLUDEPATH += \
     components/string \
     components/text
 
-INCLUDEPATH += project sdk/math modules
-INCLUDEPATH += host host/dialogs sdk sdk/types sdk/utility
+INCLUDEPATH += project modules
+INCLUDEPATH += host host/dialogs
+INCLUDEPATH += sdk sdk/compshaders sdk/math sdk/types sdk/utility
 
 # GLM
 INCLUDEPATH += ./ libs/glm libs/glm/gtx
