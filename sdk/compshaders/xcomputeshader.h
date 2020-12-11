@@ -40,9 +40,31 @@ protected:
 //---------------------------------------------------------------------
 class XComputeBuffer: public XComputeCommon {
 public:
-    void setup(XComputeSurface *surface);
+    explicit XComputeBuffer(XComputeSurface *surface);
+
+    //Put data to GPU
+    //Can use raw pointer or any QVector here
     void allocate(void *data, int size_bytes);
+    template<typename T>
+    void allocate(QVector<T> data) {
+        if (data.isEmpty()) {
+            allocate(nullptr, 0);
+        }
+        else {
+            allocate(&data[0], data.size() * sizeof(T));
+        }
+    }
+
+    //Copy data to CPU
+    //Can use raw pointer or any QVector here
+    //TODO: for faster approach, it may be interfaced using "raw" pointer without copying
     void read_to_cpu(void *data, int size_bytes);
+    template<typename T>
+    void read_to_cpu(QVector<T> &data) { //data must be allocated for required size
+        int size_bytes = data.size() * sizeof(T);
+        read_to_cpu(&data[0], size_bytes);
+    }
+
     void clear();
 
     //Bind buffer to shader by specifying its binding index:
@@ -64,7 +86,7 @@ protected:
 //---------------------------------------------------------------------
 class XComputeShader: public XComputeCommon {
 public:
-    void setup(QString shader_file, XComputeSurface *surface);
+    explicit XComputeShader(QString shader_file, XComputeSurface *surface);
 
     //Call this to set up uniforms
     void begin();
@@ -95,11 +117,9 @@ class XComputeSurface: public QOffscreenSurface, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
+    //Initialize OpenGL context
     explicit XComputeSurface();
     ~XComputeSurface();
-
-    //Initialize OpenGL context and load shader, must be called before computing
-    void setup();
 
     //Switch to OpenGL context - required before most operations
     void activate_context();

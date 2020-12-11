@@ -41,7 +41,7 @@ QOpenGLFunctions_4_3_Core *XComputeCommon::gl() {
 //---------------------------------------------------------------------
 //XComputeBuffer
 //---------------------------------------------------------------------
-void XComputeBuffer::setup(XComputeSurface *surface) {
+XComputeBuffer::XComputeBuffer(XComputeSurface *surface) {
     setup_surface(surface);
 
     activate_context();
@@ -51,6 +51,7 @@ void XComputeBuffer::setup(XComputeSurface *surface) {
 }
 
 //---------------------------------------------------------------------
+ //Put data to GPU
 void XComputeBuffer::allocate(void *data, int size_bytes) {
     activate_context();
     shader_buffer_.allocate(data, size_bytes);
@@ -63,6 +64,7 @@ void XComputeBuffer::clear() {
 }
 
 //---------------------------------------------------------------------
+//Copy data to CPU
 void XComputeBuffer::read_to_cpu(void *data, int size_bytes) {
     activate_context();
     //Read buffer
@@ -90,7 +92,7 @@ void XComputeBuffer::unbind() {
 //XComputeShader
 //---------------------------------------------------------------------
 //Initialize OpenGL context and load shader, must be called before computing
-void XComputeShader::setup(QString shader_file, XComputeSurface *surface) {
+XComputeShader::XComputeShader(QString shader_file, XComputeSurface *surface) {
     setup_surface(surface);
 
     //Not sure if it's required for loading shader...
@@ -138,13 +140,40 @@ void XComputeShader::end() {
 //Note: QOffscreenSurface can work in non-main thread,
 //but its "create" must be called from main thread
 
+//Initialize OpenGL context
 XComputeSurface::XComputeSurface()
     : QOffscreenSurface()
     , m_context(0)
 {
+    QSurfaceFormat format;
+    //Request OpenGL 4.3
+    format.setMajorVersion(4);
+    format.setMinorVersion(3);
+
+    //format.setSamples(16); //antialiasing samples
+    //format.setProfile(QSurfaceFormat::CoreProfile);
+    //format.setOption(QSurfaceFormat::DebugContext);
+    setFormat(format);
+
+    //Create Qt surface
+    create();
+
+    //Create OpenGL context
+    m_context = new QOpenGLContext(this);
+    m_context->setFormat(requestedFormat());  //it's our "format"
+    m_context->create();
+
+    //Switch to OpenGL context
+    activate_context();
+
+    //Initialize OpenGL functions
+    initializeOpenGLFunctions();
+
+    //Get pointer to extra functions of 4.3
+    gl43 = m_context->versionFunctions<QOpenGLFunctions_4_3_Core>();
+    gl_assert("Error creating gl43");
 
 }
-
 //---------------------------------------------------------------------
 XComputeSurface::~XComputeSurface()
 {
@@ -172,41 +201,6 @@ void XComputeSurface::gl_assert(QString message) {
 //Check Qt wrapper error
 void XComputeSurface::xassert(bool condition, QString message) {
     xclu_assert(condition, "XComputeSurface + " + message);
-}
-
-//---------------------------------------------------------------------
-//Initialize OpenGL context and load shader, must be called before computing
-void XComputeSurface::setup() {
-    //Initialize OpenGL context
-    if (!m_context) {
-        QSurfaceFormat format;
-        //Request OpenGL 4.3
-        format.setMajorVersion(4);
-        format.setMinorVersion(3);
-
-        //format.setSamples(16); //antialiasing samples
-        //format.setProfile(QSurfaceFormat::CoreProfile);
-        //format.setOption(QSurfaceFormat::DebugContext);
-        setFormat(format);
-
-        //Create Qt surface
-        create();
-
-        //Create OpenGL context
-        m_context = new QOpenGLContext(this);
-        m_context->setFormat(requestedFormat());  //it's our "format"
-        m_context->create();
-
-        //Switch to OpenGL context
-        activate_context();
-
-        //Initialize OpenGL functions
-        initializeOpenGLFunctions();
-
-        //Get pointer to extra functions of 4.3
-        gl43 = m_context->versionFunctions<QOpenGLFunctions_4_3_Core>();
-        gl_assert("Error creating gl43");
-    }
 }
 
 //---------------------------------------------------------------------
