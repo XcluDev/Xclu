@@ -7,37 +7,37 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
-//XComputeCommon
+//XGlCommon
 //---------------------------------------------------------------------
-void XComputeCommon::setup_surface(XComputeSurface *surface) {
+void XGlCommon::setup_surface(XGlContext *surface) {
     surface_ = surface;
     activate_context();
 }
 
 //---------------------------------------------------------------------
-void XComputeCommon::gl_assert(QString message) { //Check openGL error
+void XGlCommon::gl_assert(QString message) { //Check openGL error
     if (surface_) surface_->gl_assert(message);
 }
 
 //---------------------------------------------------------------------
-void XComputeCommon::xassert(bool condition, QString message) { //Check Qt wrapper error
+void XGlCommon::xassert(bool condition, QString message) { //Check Qt wrapper error
     if (surface_) surface_->xassert(condition, message);
 }
 
 //---------------------------------------------------------------------
-void XComputeCommon::activate_context() {
+void XGlCommon::activate_context() {
     if (surface_) surface_->activate_context();
 }
 
 //---------------------------------------------------------------------
-QOpenGLFunctions_4_3_Core *XComputeCommon::gl() {
+QOpenGLFunctions_4_3_Core *XGlCommon::gl() {
     return surface_->gl();
 }
 
 //---------------------------------------------------------------------
-//XComputeBuffer
+//XShaderBuffer
 //---------------------------------------------------------------------
-XComputeBuffer::XComputeBuffer(XComputeSurface *surface) {
+XShaderBuffer::XShaderBuffer(XGlContext *surface) {
     setup_surface(surface);
 
     activate_context();
@@ -47,18 +47,18 @@ XComputeBuffer::XComputeBuffer(XComputeSurface *surface) {
 }
 
 //---------------------------------------------------------------------
-void XComputeBuffer::bind() {
+void XShaderBuffer::bind() {
     xassert(shader_buffer_.bind(), "Error at shader_buffer_.bind()");
 }
 
 //---------------------------------------------------------------------
-void XComputeBuffer::unbind() {
+void XShaderBuffer::unbind() {
     shader_buffer_.release();
 }
 
 //---------------------------------------------------------------------
  //Put data to GPU
-void XComputeBuffer::allocate(void *data, int size_bytes) {
+void XShaderBuffer::allocate(void *data, int size_bytes) {
     activate_context();
     //we must always bind/unbind buffer for the most operations - it's not made by Qt!
     bind();
@@ -67,26 +67,26 @@ void XComputeBuffer::allocate(void *data, int size_bytes) {
 }
 
 //---------------------------------------------------------------------
-void XComputeBuffer::allocate(int size_bytes) {
+void XShaderBuffer::allocate(int size_bytes) {
     activate_context();
     shader_buffer_.allocate(size_bytes);
 }
 
 //---------------------------------------------------------------------
-void XComputeBuffer::clear() {
+void XShaderBuffer::clear() {
     activate_context();
     shader_buffer_.destroy();
 }
 
 //---------------------------------------------------------------------
 //Copy data to CPU
-void XComputeBuffer::read_to_cpu(void *data, int size_bytes) {
-    xclu_assert(data, "XComputeBuffer::read_to_cpu - bad input pointer");
+void XShaderBuffer::read_to_cpu(void *data, int size_bytes) {
+    xclu_assert(data, "XShaderBuffer::read_to_cpu - bad input pointer");
 
     activate_context();
 
     bind();
-    xclu_assert(shader_buffer_.read(0, data, size_bytes), "XComputeBuffer::read_to_cpu - error reading buffer");
+    xclu_assert(shader_buffer_.read(0, data, size_bytes), "XShaderBuffer::read_to_cpu - error reading buffer");
     unbind();
 }
 
@@ -95,7 +95,7 @@ void XComputeBuffer::read_to_cpu(void *data, int size_bytes) {
 //Shader:
 //    layout(std430, binding = 0) buffer Buf
 //    { float buf[]; };
-void XComputeBuffer::bind_for_shader(int binding_index) {
+void XShaderBuffer::bind_for_shader(int binding_index) {
     activate_context();
     surface_->gl()->glBindBufferBase(GL_SHADER_STORAGE_BUFFER, binding_index, shader_buffer_.bufferId());
     gl_assert("Error at glBindBufferBase");
@@ -105,7 +105,7 @@ void XComputeBuffer::bind_for_shader(int binding_index) {
 //XComputeShader
 //---------------------------------------------------------------------
 //Initialize OpenGL context and load shader, must be called before computing
-XComputeShader::XComputeShader(QString shader_file, XComputeSurface *surface) {
+XComputeShader::XComputeShader(QString shader_file, XGlContext *surface) {
     setup_surface(surface);
 
     activate_context();
@@ -147,13 +147,13 @@ void XComputeShader::end() {
 }
 
 //---------------------------------------------------------------------
-//XComputeSurface
+//XGlContext
 //---------------------------------------------------------------------
 //Note: QOffscreenSurface can work in non-main thread,
 //but its "create" must be called from main thread
 
 //Initialize OpenGL context
-XComputeSurface::XComputeSurface()
+XGlContext::XGlContext()
     : QOffscreenSurface()
     , m_context(0)
 {
@@ -187,14 +187,14 @@ XComputeSurface::XComputeSurface()
 
 }
 //---------------------------------------------------------------------
-XComputeSurface::~XComputeSurface()
+XGlContext::~XGlContext()
 {
 
 }
 
 //---------------------------------------------------------------------
 //Check openGL error
-void XComputeSurface::gl_assert(QString message) {
+void XGlContext::gl_assert(QString message) {
 
     GLenum error = gl43->glGetError();
     if (error != GL_NO_ERROR) {
@@ -204,20 +204,20 @@ void XComputeSurface::gl_assert(QString message) {
             errors.push_back(QString::number(error));
             error = gl43->glGetError();
         } while (error != GL_NO_ERROR);
-        xclu_exception("XComputeSurface " + message + ", OpenGL error code(s): " + errors.join(","));
+        xclu_exception("XGlContext " + message + ", OpenGL error code(s): " + errors.join(","));
     }
 
 }
 
 //---------------------------------------------------------------------
 //Check Qt wrapper error
-void XComputeSurface::xassert(bool condition, QString message) {
-    xclu_assert(condition, "XComputeSurface + " + message);
+void XGlContext::xassert(bool condition, QString message) {
+    xclu_assert(condition, "XGlContext + " + message);
 }
 
 //---------------------------------------------------------------------
 //Switch to OpenGL context - required before most operations
-void XComputeSurface::activate_context() {
+void XGlContext::activate_context() {
     xassert(m_context, "OpenGL context is not inited");
     if (!m_context) return;
     m_context->makeCurrent(this);
