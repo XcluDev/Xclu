@@ -9,41 +9,41 @@
 //---------------------------------------------------------------------
 //XGlCommon
 //---------------------------------------------------------------------
-void XGlCommon::setup_surface(XGlContext *surface) {
-    surface_ = surface;
+void XGlCommon::setup(XGlContext *context) {
+    context_ = context;
     activate_context();
 }
 
 //---------------------------------------------------------------------
 void XGlCommon::gl_assert(QString message) { //Check openGL error
-    if (surface_) surface_->gl_assert(message);
+    if (context_) context_->gl_assert(message);
 }
 
 //---------------------------------------------------------------------
 void XGlCommon::xassert(bool condition, QString message) { //Check Qt wrapper error
-    if (surface_) surface_->xassert(condition, message);
+    if (context_) context_->xassert(condition, message);
 }
 
 //---------------------------------------------------------------------
 void XGlCommon::activate_context() {
-    if (surface_) surface_->activate_context();
+    if (context_) context_->activate_context();
 }
 
 //---------------------------------------------------------------------
 QOpenGLFunctions_4_3_Core *XGlCommon::gl() {
-    return surface_->gl();
+    return context_->gl();
 }
 
 //---------------------------------------------------------------------
 //XShaderBuffer
 //---------------------------------------------------------------------
-XShaderBuffer::XShaderBuffer(XGlContext *surface) {
-    setup_surface(surface);
+XShaderBuffer::XShaderBuffer(XGlContext *context) {
+    setup(context);
 
     activate_context();
     xassert(shader_buffer_.create(), "Error at shader_buffer_.create()");
 
-    shader_buffer_.setUsagePattern(QOpenGLBuffer::DynamicCopy);
+    shader_buffer_.setUsagePattern(QOpenGLBuffer::DynamicDraw); //DynamicCopy);
 }
 
 //---------------------------------------------------------------------
@@ -87,6 +87,12 @@ void XShaderBuffer::read_to_cpu(void *data, int size_bytes) {
 
     bind();
     xclu_assert(shader_buffer_.read(0, data, size_bytes), "XShaderBuffer::read_to_cpu - error reading buffer");
+
+    //void *ptr = shader_buffer_.map(QOpenGLBuffer::ReadOnly);
+    //xclu_assert(ptr, "XShaderBuffer::read_to_cpu - can't map to CPU");
+    //memcpy(data, ptr, size_bytes);
+    //xclu_assert(shader_buffer_.unmap(), "XShaderBuffer::read_to_cpu - can't unmap");
+
     unbind();
 }
 
@@ -97,7 +103,7 @@ void XShaderBuffer::read_to_cpu(void *data, int size_bytes) {
 //    { float buf[]; };
 void XShaderBuffer::bind_for_shader(int binding_index) {
     activate_context();
-    surface_->gl()->glBindBufferBase(GL_SHADER_STORAGE_BUFFER, binding_index, shader_buffer_.bufferId());
+    context_->gl()->glBindBufferBase(GL_SHADER_STORAGE_BUFFER, binding_index, shader_buffer_.bufferId());
     gl_assert("Error at glBindBufferBase");
 }
 
@@ -105,8 +111,8 @@ void XShaderBuffer::bind_for_shader(int binding_index) {
 //XComputeShader
 //---------------------------------------------------------------------
 //Initialize OpenGL context and load shader, must be called before computing
-XComputeShader::XComputeShader(QString shader_file, XGlContext *surface) {
-    setup_surface(surface);
+XComputeShader::XComputeShader(QString shader_file, XGlContext *context) {
+    setup(context);
 
     activate_context();
     //Load compute shader

@@ -11,7 +11,6 @@
 class Module;
 class XItem;
 
-
 class XCore
 {
 public:

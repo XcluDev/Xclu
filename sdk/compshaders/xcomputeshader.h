@@ -1,5 +1,5 @@
-#ifndef COMPUTESURFACE_H
-#define COMPUTESURFACE_H
+#ifndef XCOMPUTESHADER_H
+#define XCOMPUTESHADER_H
 
 /*
 Here are helper classes supporting using compute shaders without graphics rendering.
@@ -16,6 +16,20 @@ so if you need use compute shaders outside Xclu, use this: https://github.com/pe
 
 See more details in Xclu documentation:
 https://forum.xclu.dev/t/using-compute-shaders/44
+
+### Credits
+The code is made using ideas from the following codes:
+*    The basis is "openglwindow" Qt example
+*    Qt and shader connection is based on https://forum.qt.io/topic/104448/about-buffer-for-compute-shader/6
+*    Compute shader text contains fragments from https://github.com/1DIce/Qt3D_compute_particles_cpp
+
+Useful links:
+*    Khronos docs about shader buffers:
+     https://www.khronos.org/opengl/wiki/Shader_Storage_Buffer_Object
+*    Qt QOpenGLBuffer sources which show me that I must use bind/unbind often,
+     because this buffer really doesn't do it (but should...):
+     https://code.woboq.org/qt5/qtbase/src/gui/opengl/qopenglbuffer.cpp.html
+
 
 ### Note about std430 layout specifier in shader
 You may use, for example, array of 23 floats, together with std430 layout specifier
@@ -36,7 +50,7 @@ context.reset(new XGlContext());
 
 //Compute shader
 QString shader_file = ":/shader.csh";
-shader.reset(new XComputeShader(shader_file, surface.data()));
+shader.reset(new XComputeShader(shader_file, context.data()));
 
 int N = 23;
 QVector<float> buf(N);
@@ -44,7 +58,7 @@ for (int i=0; i<N; i++) {
     buf[i] = i;
 }
 
-buffer.reset(new XComputeBuffer(surface.data()));
+buffer.reset(new XComputeBuffer(context.data()));
 buffer->allocate(buf); //can use raw pointer or any QVector here
 
 //Compute
@@ -101,7 +115,7 @@ class XGlContext;
 
 //---------------------------------------------------------------------
 //XGlCommon
-//Class storing GL context and QSurface and manages errors handling.
+//Class storing GL context and QOffscreenSurface and manages errors handling.
 //It's inherited by ShaderBuffer and ComputeShader
 //Used in XShaderBuffer and XComputeShader
 //---------------------------------------------------------------------
@@ -109,8 +123,8 @@ class XGlCommon {
 public:
 
 protected:
-    void setup_surface(XGlContext *surface);
-    XGlContext *surface_ = nullptr;
+    void setup(XGlContext *context);
+    XGlContext *context_ = nullptr;
 
     void gl_assert(QString message); //Check openGL error
     void xassert(bool condition, QString message); //Check Qt wrapper error
@@ -125,7 +139,7 @@ protected:
 //---------------------------------------------------------------------
 class XShaderBuffer: public XGlCommon {
 public:
-    explicit XShaderBuffer(XGlContext *surface);
+    explicit XShaderBuffer(XGlContext *context);
 
     //Put data to GPU
     //Can use raw pointer or any QVector here
@@ -143,7 +157,7 @@ public:
 
     //Copy data to CPU
     //Can use raw pointer or any QVector here
-    //TODO: for faster approach, it may be interfaced using "raw" pointer without copying
+    //TODO: for faster approach, it may be interfaced using map which gives "raw" pointer without copying
     void read_to_cpu(void *data, int size_bytes);
     template<typename T>
     void read_to_cpu(QVector<T> &data) { //data must be allocated for required size
@@ -178,7 +192,7 @@ protected:
 //---------------------------------------------------------------------
 class XComputeShader: public XGlCommon {
 public:
-    explicit XComputeShader(QString shader_file, XGlContext *surface);
+    explicit XComputeShader(QString shader_file, XGlContext *context);
 
     //Call this to set up uniforms
     void begin();
@@ -227,4 +241,4 @@ private:
     QOpenGLFunctions_4_3_Core *gl43 = nullptr;  //should't delete this!
 };
 
-#endif // COMPUTESURFACE_H
+#endif // XCOMPUTESHADER_H

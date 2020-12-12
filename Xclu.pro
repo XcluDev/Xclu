@@ -192,6 +192,7 @@ SOURCES += \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
     sdk/utility/xparser.cpp \
+    sdk/utility/xtimemeasure.cpp \
     sdk/xmodule.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
@@ -289,6 +290,7 @@ HEADERS += \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
     sdk/utility/xparser.h \
+    sdk/utility/xtimemeasure.h \
     sdk/xmodule.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
