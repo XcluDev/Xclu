@@ -26,6 +26,7 @@ The code is made using ideas from the following codes:
 Useful links:
 *    Khronos docs about shader buffers:
      https://www.khronos.org/opengl/wiki/Shader_Storage_Buffer_Object
+     https://www.khronos.org/opengl/wiki/Buffer_Object
 *    Qt QOpenGLBuffer sources which show me that I must use bind/unbind often,
      because this buffer really doesn't do it (but should...):
      https://code.woboq.org/qt5/qtbase/src/gui/opengl/qopenglbuffer.cpp.html
@@ -200,7 +201,8 @@ public:
     //Access this to set up uniforms
     QOpenGLShaderProgram &program();
 
-    //Call this to perform computing
+    //Perform computing with compute shader.
+    //Note: it calls glFinish(), so waits until computing will be finished
     void compute(int NX, int NY = 1, int NZ = 1);   //NX,NY,NZ - number of groups in X,Y,Z dimensions
 
     //Call after computing end
