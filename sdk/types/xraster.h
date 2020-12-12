@@ -8,6 +8,7 @@
 //    XRaster_float - grayscale 1-channel 8-bit image,
 //    XRaster_vec2  - 2-dimensional float vector (glm::vec2) image,
 //    XRaster_vec3  - 3-dimensional float vector (glm::vec3) image,
+//    XRaster_vec4  - 4-dimensional float vector (glm::vec4) image,
 //    XRaster - class containing static functions convert, load, save for converting color
 //              rasters to grayscale and back, to QImage and back, and also save and load rasters to disk.
 
@@ -97,6 +98,10 @@ public:
 	T pixel_unsafe(int i) const {
 		return data[i];
 	}
+
+    //maximal difference between two rasters at some point - used for checking if they are equal or different
+    float distance_C(XRaster_<T> &compare_with);
+
     /*float pixel_bilinear(float x, float y) {
 		alg_assert(x >= 0 && y >= 0 && x <= w - 1 && y <= h - 1, "pixel_bilinear error - bad coords", Alg_Error_Algorithm);
 		int xi = int(x);
@@ -219,6 +224,7 @@ typedef XRaster_<rgb_float> XRaster_float3; //see XRaster_vec3 below!
 typedef XRaster_<double> XRaster_double;
 typedef XRaster_<glm::vec2> XRaster_vec2;
 typedef XRaster_<glm::vec3> XRaster_vec3;
+typedef XRaster_<glm::vec4> XRaster_vec4;
 typedef XRaster_<int2> XRaster_int2;
 
 

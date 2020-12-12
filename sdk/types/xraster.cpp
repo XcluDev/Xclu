@@ -41,8 +41,39 @@ XTypeId_XRaster_type_id(XRaster_float, XTypeId_float)
 XTypeId_XRaster_type_id(XRaster_double, XTypeId_double)
 XTypeId_XRaster_type_id(XRaster_vec2, XTypeId_vec2)
 XTypeId_XRaster_type_id(XRaster_vec3, XTypeId_vec3)
+XTypeId_XRaster_type_id(XRaster_vec4, XTypeId_vec4)
 XTypeId_XRaster_type_id(XRaster_int2, XTypeId_int2)
 
+
+
+//---------------------------------------------------------------------
+//maximal difference between two rasters at some point - used for checking if they are equal or different
+template<>
+float XRaster_<glm::vec2>::distance_C(XRaster_<glm::vec2> &compare_with) {
+    float maxx = 0;
+    for (int i=0; i<w*h; i++) {
+        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+    }
+    return qSqrt(maxx);
+}
+
+template<>
+float XRaster_<glm::vec3>::distance_C(XRaster_<glm::vec3> &compare_with) {
+    float maxx = 0;
+    for (int i=0; i<w*h; i++) {
+        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+    }
+    return qSqrt(maxx);
+}
+
+template<>
+float XRaster_<glm::vec4>::distance_C(XRaster_<glm::vec4> &compare_with) {
+    float maxx = 0;
+    for (int i=0; i<w*h; i++) {
+        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+    }
+    return qSqrt(maxx);
+}
 
 //---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {

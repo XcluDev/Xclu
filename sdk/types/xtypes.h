@@ -17,8 +17,9 @@ enum XTypeId : int {
     XTypeId_double = 9,
     XTypeId_vec2 = 10,
     XTypeId_vec3 = 11,
-    XTypeId_int2 = 12,
-    XTypeId_N = 13
+    XTypeId_vec4 = 12,
+    XTypeId_int2 = 13,
+    XTypeId_N = 14
 };
 
 //size of one element

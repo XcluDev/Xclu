@@ -30,6 +30,8 @@ unsigned int XTypeIdSize(XTypeId type) {
         return sizeof(glm::vec2);
     case XTypeId_vec3:
         return sizeof(glm::vec3);
+    case XTypeId_vec4:
+        return sizeof(glm::vec4);
     case XTypeId_int2:
         return sizeof(int2);
     default:
@@ -66,6 +68,8 @@ QString XTypeId_to_string(XTypeId type) {
         return "vec2";
     case XTypeId_vec3:
         return "vec3";
+    case XTypeId_vec4:
+        return "vec4";
     case XTypeId_int2:
         return "int2";
     default:
@@ -90,6 +94,7 @@ XTypeId string_to_XTypeId(QString type) {
     if (type == "double") return XTypeId_double;
     if (type == "vec2") return XTypeId_vec2;
     if (type == "vec3") return XTypeId_vec3;
+    if (type == "vec4") return XTypeId_vec4;
     if (type == "int2") return XTypeId_int2;
     xclu_exception(QString("Unknown XTypeId '%1'").arg(type));
     return XTypeId_none;
