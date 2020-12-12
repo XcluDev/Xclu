@@ -17,7 +17,8 @@ class XComputeSurface;
 
 //---------------------------------------------------------------------
 //XComputeCommon
-//Some common functions for support surface
+//Class storing GL context and QSurface and manages errors handling.
+//It's inherited by ShaderBuffer and ComputeShader
 //Used in XComputeBuffer and XComputeShader
 //---------------------------------------------------------------------
 class XComputeCommon {
@@ -54,6 +55,7 @@ public:
             allocate(&data[0], data.size() * sizeof(T));
         }
     }
+    void allocate(int size_bytes);
 
     //Copy data to CPU
     //Can use raw pointer or any QVector here
@@ -73,11 +75,17 @@ public:
     //    { float buf[]; };
     void bind_for_shader(int binding_index);
 
-    //Unbind - not tested
-    void unbind();
-
 protected:
     QOpenGLBuffer shader_buffer_;
+
+    //We must always bind/unbind buffer for the most operations - it's not made by Qt!
+    //See the details at Qt code:
+    //https://code.woboq.org/qt5/qtbase/src/gui/opengl/qopenglbuffer.cpp.html
+    //Khronos about shader buffers:
+    //https://www.khronos.org/opengl/wiki/Shader_Storage_Buffer_Object
+
+    void bind();
+    void unbind();
 };
 
 //---------------------------------------------------------------------
