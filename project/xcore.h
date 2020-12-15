@@ -11,23 +11,46 @@
 class Module;
 class XItem;
 
+
+//Properties of the project - controlled mainly by "Project" module
+class XCoreWorkingProperties {
+public:
+    //reset all values to default
+    void reset();
+
+    //Frame rate of the execution
+    //Xclu timer reads this at start
+    void set_frame_rate(int fps);
+    int get_frame_rate();
+
+    //Autostart project:
+    //if some module sets this in its loaded_internal,
+    //then after loading the project it starts
+    void set_autostart (int v); // the command just remembers, and the project itself reads after loading the json of the project
+    bool get_autostart();
+
+    //Don't save at exit - it's useful to disable for read installations working autonomously
+    void set_dont_save_at_exit(int v);
+    bool get_dont_save_at_exit();
+
+protected:
+    int frame_rate_ = 30;
+    int autostart_ = 0;
+    int dont_save_at_exit_ = 1;
+};
+
+
+//Main XCore class
 class XCore
 {
 public:
     XCore();
 
-    void reset_fps_autostart();    //установить значения по умолчанию для frate_rate и autostar
+    //Properties of entire project, such as frame rate, autostart, save at exit
+    //It's controlled mainly by "Project" modile
+    XCoreWorkingProperties &working_properties();
 
-    //Команды для управления проектом - модули могут их посылать
-    //Установка частоты таймера обновления проекта (вызова update)
-    void set_frame_rate(int fps);   //команда просто запоминает, а сам проект уже считывает при старте
-    int get_frame_rate();
-
-    //Автозапуск проекта:
-    //если какой-то модуль устанавливает это в своем loaded_internal,
-    //то после загрузки проекта он стартует
-    void set_autostart(int v);  //команда просто запоминает, а сам проект уже считывает после загрузки json проекта
-    bool get_autostart();
+    //Enable/disable
 
     //Состояние запуска
     void set_state(ProjectRunStateBinary state);
@@ -85,8 +108,7 @@ public:
     //static void execute_callbacks(QVector<Module *> modules_list);
     //static void execute_callbacks(QString modules_list_string);
 protected:
-    int frame_rate_ = 30;
-    int autostart_ = 0;
+    XCoreWorkingProperties running_properties_;
 
     ProjectRunStateBinary state_ = ProjectRunStateBinaryStopped;
 

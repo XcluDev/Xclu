@@ -15,6 +15,11 @@ int geti_frame_rate() { return geti_("frame_rate"); }
 bool was_changed_autostart() { return was_changed_("autostart"); }
 int geti_autostart() { return geti_("autostart"); }
 
+//Const Checkbox Don't Save At Exit
+//Disable "Save changes?" warning at project exit.
+bool was_changed_dont_save_at_exit() { return was_changed_("dont_save_at_exit"); }
+int geti_dont_save_at_exit() { return geti_("dont_save_at_exit"); }
+
 
 //Out Float Elapsed Time
 //Time in seconds from project start.

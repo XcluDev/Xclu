@@ -7,39 +7,56 @@
 XCore XCORE;
 
 //---------------------------------------------------------------------
+//XCoreWorkingProperties
+//---------------------------------------------------------------------
+//установить значения по умолчанию для frate_rate и autostar
+void XCoreWorkingProperties::reset() {
+    frame_rate_ = 30;   //TODO параметр, значение по умолчанию
+    autostart_ = 0;
+    dont_save_at_exit_ = 1;
+}
+
+//---------------------------------------------------------------------
+void XCoreWorkingProperties::set_frame_rate(int fps) {
+    frame_rate_ = fps;
+}
+
+//---------------------------------------------------------------------
+int XCoreWorkingProperties::get_frame_rate() {
+    return frame_rate_;
+}
+
+//---------------------------------------------------------------------
+void XCoreWorkingProperties::set_autostart(int v) {
+    autostart_ = v;
+}
+
+//---------------------------------------------------------------------
+bool XCoreWorkingProperties::get_autostart() {
+    return autostart_;
+}
+
+//---------------------------------------------------------------------
+void XCoreWorkingProperties::set_dont_save_at_exit(int v) {
+    dont_save_at_exit_ = v;
+}
+
+//---------------------------------------------------------------------
+bool XCoreWorkingProperties::get_dont_save_at_exit() {
+    return dont_save_at_exit_;
+}
+
+//---------------------------------------------------------------------
+//XCore
+//---------------------------------------------------------------------
 XCore::XCore()
 {
 
 }
 
 //---------------------------------------------------------------------
-//установить значения по умолчанию для frate_rate и autostar
-void XCore::reset_fps_autostart() {
-    frame_rate_ = 30;   //TODO параметр, значение по умолчанию
-    autostart_ = 0;
-}
-
-//---------------------------------------------------------------------
-void XCore::set_frame_rate(int fps) {
-    frame_rate_ = fps;
-}
-
-//---------------------------------------------------------------------
-int XCore::get_frame_rate() {
-    return frame_rate_;
-}
-
-//---------------------------------------------------------------------
-//Автозапуск проекта:
-//если какой-то модуль устанавливает это в своем loaded_internal,
-//то после загрузки проекта он стартует
-void XCore::set_autostart(int v) {
-    autostart_ = v;
-}
-
-//---------------------------------------------------------------------
-bool XCore::get_autostart() {
-    return autostart_;
+XCoreWorkingProperties &XCore::working_properties() {
+    return running_properties_;
 }
 
 //---------------------------------------------------------------------

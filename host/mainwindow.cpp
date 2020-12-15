@@ -131,7 +131,7 @@ void MainWindow::closeProject() {
     PROJ.new_project();
     PROJ_GUI->after_close_project();
 
-    XCORE.reset_fps_autostart();  //сброк предыдущего FPS и aurostart
+    XCORE.working_properties().reset();  //сброк предыдущего FPS и autostart
 
     //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
     set_current_file(""); //поставится в Untitled с новым номером
@@ -309,6 +309,10 @@ bool MainWindow::maybeSave() {
     if (!is_document_modified()) {
         return true;
     }
+    //if disables saving - ignore
+    if (XCORE.working_properties().get_dont_save_at_exit()) {
+        return true;
+    }
 
     QMessageBox msgBox;
     //msgBox.setText(tr("Xclu"));//setInformativeText
@@ -350,7 +354,7 @@ void MainWindow::openProject(const QString &fileName) {
         }
 
         //Если требуется - автозапуск проекта
-        if (XCORE.get_autostart()) {
+        if (XCORE.working_properties().get_autostart()) {
             execute_run();
         }
     }
@@ -462,7 +466,7 @@ void MainWindow::execute_run() {
 
         //вычисляем частоту обновления
         //float FPS = PROJ.properties().frame_rate;
-        int frame_rate = XCORE.get_frame_rate();
+        int frame_rate = XCORE.working_properties().get_frame_rate();
         xclu_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
         //запускаем таймер
         int delay = int(1000.0/frame_rate); //TODO вообще, при больших частотах будет вызываться неравномерно.

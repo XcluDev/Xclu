@@ -18,7 +18,7 @@ namespace Ui {
 class MainWindow;
 }
 
-#define XCLU_VERSION "1.165"
+#define XCLU_VERSION "1.166"
 
 
 class MainWindow : public QMainWindow
@@ -38,7 +38,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-
 
     void init();
     void setup_internal();   //запуск всех процессов - считывание списка модулей, открытие проекта

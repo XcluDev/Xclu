@@ -30,8 +30,9 @@ void XModuleProject::impl_loaded() {
 
 //---------------------------------------------------------------------
 void XModuleProject::apply_control_values() {
-    XCORE.set_frame_rate(geti_frame_rate());
-    XCORE.set_autostart(geti_autostart());
+    XCORE.working_properties().set_frame_rate(geti_frame_rate());
+    XCORE.working_properties().set_autostart(geti_autostart());
+    XCORE.working_properties().set_dont_save_at_exit(geti_dont_save_at_exit());
 }
 
 //---------------------------------------------------------------------
