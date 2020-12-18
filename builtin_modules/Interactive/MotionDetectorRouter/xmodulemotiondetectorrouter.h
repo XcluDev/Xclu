@@ -1,7 +1,7 @@
 #ifndef XMODULEMOTIONDETECTOR_H
 #define XMODULEMOTIONDETECTOR_H
 
-//MotionDetector implementation
+//MotionDetectorRouter implementation
 
 #include "sdk_h.h"
 #include "xmodule.h"
@@ -10,96 +10,13 @@
 #include "xraster.h"
 #include "xslowbit.h"
 
-struct XModuleMotionDetectorBlockParams {
-    float thresh_in=0.2f; //Threshold for block detection, 0..1
-
-    float thresh_out=0.1f;   //Threshold for block undetection after detection, 0..1
-
-    float block_event_sec=0.1f; //How much time block event must be to detect it, sec
-};
-
-//-------------------------------------------------------------------
-class XModuleMotionDetectorBlock {
-public:
-    void setup(int x, int y, int w, int h) {
-        x_ = x;
-        y_ = y;
-        w_ = w;
-        h_ = h;
-    }
-    int x_ = 0;
-    int y_ = 0;
-    int w_ = 0;
-    int h_ = 0;
-
-    void update(XRaster_u8 &input, XRaster_u8 &background, const XModuleMotionDetectorBlockParams &params,
-                bool enabled, float dt) {
-        enabled_ = enabled;
-        if (enabled) {
-            //Compute distance
-            //TODO now only brightness correction, but can use correlation
-            int mean1 = 0;
-            int mean2 = 0;
-            int area = w_ * h_;
-            /* mean now is commented:
-            for (int y=y_; y<y_+h_; y++) {
-                for (int x=x_; x<x_+w_; x++) {
-                    mean1 += input.pixel_unsafe(x, y);
-                    mean2 += background.pixel_unsafe(x, y);
-                }
-            }
-            mean1 /= area;
-            mean2 /= area;
-            */
-            int diff = 0;
-            for (int y=y_; y<y_+h_; y++) {
-                for (int x=x_; x<x_+w_; x++) {
-                    diff += abs(int(input.pixel_unsafe(x, y))-mean1 - (int(background.pixel_unsafe(x, y)) - mean2));
-                }
-            }
-            dist_ = float(diff)/(area*255);
-
-            //Update fire            
-            int fire = fires_;
-            if (!fires_) {
-                if (dist_ > params.thresh_in) fire = 1;
-            }
-            else {
-                if (dist_ < params.thresh_out) fire = 0;
-            }
-            bit_.update_times(params.block_event_sec);
-            bit_.update(dt, fire);
-            fires_ = bit_.state(); //dist_ > params.thresh_in;
-        }
-        else {
-            dist_  = 0;
-            fires_ = 0;
-        }
-
-    }
-
-    int fires() { return fires_ && enabled_; }
-    int enabled() { return enabled_; }
-protected:
-    int enabled_ = false;
-
-    int fires_ = 0;
-
-    float dist_ = 0;
-
-    float fire_time_ = 0;   //last time of fire
-
-    XSlowbit bit_;
-};
-
-
 //-------------------------------------------------------------------
 
-class XModuleMotionDetector: public XModule
+class XModuleMotionDetectorRouter: public XModule
 {
 public:
-    XModuleMotionDetector(QString class_name);
-    ~XModuleMotionDetector();
+    XModuleMotionDetectorRouter(QString class_name);
+    ~XModuleMotionDetectorRouter();
 #include "auto.h"
 
 protected:
@@ -107,36 +24,26 @@ protected:
     virtual void impl_start();
     virtual void impl_update();
     virtual void impl_stop();
-    //virtual void impl_button_pressed(QString button_id);
+    virtual void impl_button_pressed(QString button_id);
 
-    XProtectedObject out_image_;
-    XProtectedObject out_background_;
+    static const int N = 4; //max number of cameras
 
-    XRaster_u8 input0_, input_;
-    XRaster_u8 background_;
-    XRaster_u8c3 output_;
+    XRaster_u8 input_[N];
+    XRaster_u8 template_[N];
+    XRaster_u8 output_[N];
 
-    //decimate inout
-    void decimate_input(XRaster_u8 &input, XRaster_u8 &result);
+    XProtectedObject output_gui_[N];
+    XProtectedObject template_gui_[N];
 
+  //  resize_shrink
+   // void decimate_input(XRaster_u8 &input, XRaster_u8 &result);
 
-    //detection blocks
-    QVector<XModuleMotionDetectorBlock> blocks_; //
-
-    //state
-    int state_ = 0;
-    float time_ = -10000;
-
-    //how much ignore frames
+    //how much ignore frames before start
     int ignore_frames_ = 0;
+    //are we started?
+    int started_ = 0;
 
-    void bang_on();
-    void bang_off();
 
-    //vector of blocks fires
-    //while not changed - increase timer for background update
-    QVector<int> fires_;
-    float static_time_ = 1000000;   //time when started static behavior of blocks fires
 
 
 };

@@ -1,170 +1,153 @@
 //----------------------------------------------------
-//Interface for XClassMotionDetector
+//Interface for XClassMotionDetectorRouter
 //Created automatically.
 //----------------------------------------------------
 //Page Main
 //General settings
 
-//Checkbox Show Input Image
+//Const Int Inputs
+//How many images use.
+bool was_changed_inputs() { return was_changed_("inputs"); }
+int geti_inputs() { return geti_("inputs"); }
+
+
+//Object Input1
+//Input image.
+bool was_changed_input1() { return was_changed_("input1"); }
+XProtectedObject *getobject_input1() { return get_object_("input1"); }
+//Object Input2
+//Input image.
+bool was_changed_input2() { return was_changed_("input2"); }
+XProtectedObject *getobject_input2() { return get_object_("input2"); }
+//Object Input3
+//Input image.
+bool was_changed_input3() { return was_changed_("input3"); }
+XProtectedObject *getobject_input3() { return get_object_("input3"); }
+//Object Input4
+//Input image.
+bool was_changed_input4() { return was_changed_("input4"); }
+XProtectedObject *getobject_input4() { return get_object_("input4"); }
+
+//----------------------------------------------------
+//Page Output
 //
-bool was_changed_show_input_image() { return was_changed_("show_input_image"); }
-int geti_show_input_image() { return geti_("show_input_image"); }
-
-//Object Input Image
-//Image for processing.
-bool was_changed_input_image() { return was_changed_("input_image"); }
-XProtectedObject *getobject_input_image() { return get_object_("input_image"); }
 
 
-//Out Object Output Image
-//Image with visualization.
-bool was_changed_output_image() { return was_changed_("output_image"); }
-XProtectedObject *getobject_output_image() { return get_object_("output_image"); }
-void setobject_output_image(XProtectedObject *value) { set_object_("output_image", value); }
+//Out Object Output1
+//Output image.
+bool was_changed_output1() { return was_changed_("output1"); }
+XProtectedObject *getobject_output1() { return get_object_("output1"); }
+void setobject_output1(XProtectedObject *value) { set_object_("output1", value); }
+void setobject_output1(XProtectedObject &value) { set_object_("output1", value); }
+//Out Object Output2
+//Output image.
+bool was_changed_output2() { return was_changed_("output2"); }
+XProtectedObject *getobject_output2() { return get_object_("output2"); }
+void setobject_output2(XProtectedObject *value) { set_object_("output2", value); }
+void setobject_output2(XProtectedObject &value) { set_object_("output2", value); }
+//Out Object Output3
+//Output image.
+bool was_changed_output3() { return was_changed_("output3"); }
+XProtectedObject *getobject_output3() { return get_object_("output3"); }
+void setobject_output3(XProtectedObject *value) { set_object_("output3", value); }
+void setobject_output3(XProtectedObject &value) { set_object_("output3", value); }
+//Out Object Output4
+//Output image.
+bool was_changed_output4() { return was_changed_("output4"); }
+XProtectedObject *getobject_output4() { return get_object_("output4"); }
+void setobject_output4(XProtectedObject *value) { set_object_("output4", value); }
+void setobject_output4(XProtectedObject &value) { set_object_("output4", value); }
 
-//Out Object Background Image
-//Detected background.
-bool was_changed_background_image() { return was_changed_("background_image"); }
-XProtectedObject *getobject_background_image() { return get_object_("background_image"); }
-void setobject_background_image(XProtectedObject *value) { set_object_("background_image", value); }
-
-//Button Restore Backgr
-//Restore background immediately.
-bool was_changed_restore_now() { return was_changed_("restore_now"); }
-int geti_restore_now() { return geti_("restore_now"); }
-QString button_restore_now() { return "restore_now"; }
-
-//Checkbox Detection Area Setup
+//----------------------------------------------------
+//Page Routing
 //
-bool was_changed_detection_area_setup() { return was_changed_("detection_area_setup"); }
-int geti_detection_area_setup() { return geti_("detection_area_setup"); }
 
-//Float X0
-//Detection area left.
-bool was_changed_x0() { return was_changed_("x0"); }
-float getf_x0() { return getf_("x0"); }
-
-//Float X1
-//Detection area right.
-bool was_changed_x1() { return was_changed_("x1"); }
-float getf_x1() { return getf_("x1"); }
-
-//Float Y0
-//Detection area top.
-bool was_changed_y0() { return was_changed_("y0"); }
-float getf_y0() { return getf_("y0"); }
-
-//Float Y1
-//Detection area bottom.
-bool was_changed_y1() { return was_changed_("y1"); }
-float getf_y1() { return getf_("y1"); }
-
-//Out Checkbox Event
-//If detector fires.
-bool was_changed_event() { return was_changed_("event"); }
-int geti_event() { return geti_("event"); }
-void seti_event(int value) { seti_("event", value); }
-
-
-//Const Enum Mode
-//Presense - search objects which are differs from background, Motion - detect instant motion.
-enum enum_mode {
-    mode_Presense = 0,
-    mode_Motion = 1,
-    mode_N__ = 2
+//Const Enum Route Method
+//Use manual routing or automatic based on saved tamplate
+enum enum_route_method {
+    route_method_Manual = 0,
+    route_method_Using_Templates = 1,
+    route_method_N__ = 2
 };
-bool was_changed_mode() { return was_changed_("mode"); }
-enum_mode gete_mode() { return enum_mode(geti_("mode")); }
-QString getraw_mode() { return getraw_("mode");}
+bool was_changed_route_method() { return was_changed_("route_method"); }
+enum_route_method gete_route_method() { return enum_route_method(geti_("route_method")); }
+QString getraw_route_method() { return getraw_("route_method");}
 
-//Const Int Block Size
-//Block size for analysis.
-bool was_changed_block_size() { return was_changed_("block_size"); }
-int geti_block_size() { return geti_("block_size"); }
 
-//Float Threshold
-//Threshold for block detection.
-bool was_changed_thresh_in() { return was_changed_("thresh_in"); }
-float getf_thresh_in() { return getf_("thresh_in"); }
+//String Route
+//Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+bool was_changed_route_manual() { return was_changed_("route_manual"); }
+QString gets_route_manual() { return gets_("route_manual"); }
+QStringList get_strings_route_manual() { return get_strings_("route_manual"); }
 
-//Float Thresh Out Rel
-//Threshold for block undetection after detection, relative to Threshold.
-bool was_changed_thresh_out_rel() { return was_changed_("thresh_out_rel"); }
-float getf_thresh_out_rel() { return getf_("thresh_out_rel"); }
+//Out String Route
+//Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+bool was_changed_route_template() { return was_changed_("route_template"); }
+QString gets_route_template() { return gets_("route_template"); }
+QStringList get_strings_route_template() { return get_strings_("route_template"); }
+void sets_route_template(QString value) { sets_("route_template", value); }
+void clear_string_route_template() { clear_string_("route_template"); }
+void append_string_route_template(QString v, int extra_new_lines_count = 0) { append_string_("route_template", v, extra_new_lines_count); }
+void append_string_route_template(QStringList v, int extra_new_lines_count = 0) { append_string_("route_template", v, extra_new_lines_count); }
 
-//Float Block Event
-//How much time block event must be to detect it.
-bool was_changed_block_event_sec() { return was_changed_("block_event_sec"); }
-float getf_block_event_sec() { return getf_("block_event_sec"); }
 
-//Out Int Blocks on
-//How many blocks fired now.
-bool was_changed_blocks_on() { return was_changed_("blocks_on"); }
-int geti_blocks_on() { return geti_("blocks_on"); }
-void seti_blocks_on(int value) { seti_("blocks_on", value); }
-void increase_int_blocks_on(int increase = 1) { increase_int_("blocks_on", increase); }
+//Out Object Template1
+//Output image.
+bool was_changed_template1() { return was_changed_("template1"); }
+XProtectedObject *getobject_template1() { return get_object_("template1"); }
+void setobject_template1(XProtectedObject *value) { set_object_("template1", value); }
+void setobject_template1(XProtectedObject &value) { set_object_("template1", value); }
+//Out Object Template2
+//Output image.
+bool was_changed_template2() { return was_changed_("template2"); }
+XProtectedObject *getobject_template2() { return get_object_("template2"); }
+void setobject_template2(XProtectedObject *value) { set_object_("template2", value); }
+void setobject_template2(XProtectedObject &value) { set_object_("template2", value); }
+//Out Object Template3
+//Output image.
+bool was_changed_template3() { return was_changed_("template3"); }
+XProtectedObject *getobject_template3() { return get_object_("template3"); }
+void setobject_template3(XProtectedObject *value) { set_object_("template3", value); }
+void setobject_template3(XProtectedObject &value) { set_object_("template3", value); }
+//Out Object Template4
+//Output image.
+bool was_changed_template4() { return was_changed_("template4"); }
+XProtectedObject *getobject_template4() { return get_object_("template4"); }
+void setobject_template4(XProtectedObject *value) { set_object_("template4", value); }
+void setobject_template4(XProtectedObject &value) { set_object_("template4", value); }
 
-//Int Blocks Threshold
-//How many blocks must to fire for event.
-bool was_changed_blocks_threshold() { return was_changed_("blocks_threshold"); }
-int geti_blocks_threshold() { return geti_("blocks_threshold"); }
+//Button Save Templates
+//Press the button to save current images to template files.
+bool was_changed_save_templates() { return was_changed_("save_templates"); }
+int geti_save_templates() { return geti_("save_templates"); }
+QString button_save_templates() { return "save_templates"; }
+
+
+//Checkbox Show File Names
+//Show file names for template files images.
+bool was_changed_show_file_names() { return was_changed_("show_file_names"); }
+int geti_show_file_names() { return geti_("show_file_names"); }
+
+//Const Text Template Files
+//Template images file names. The folder will be created automatically if necessary.
+bool was_changed_template_files() { return was_changed_("template_files"); }
+QString gets_template_files() { return gets_("template_files"); }
+QStringList get_strings_template_files() { return get_strings_("template_files"); }
 
 //----------------------------------------------------
 //Page Settings
 //
 
-//Int Decimate Input
-//Decimate input image for improving stability of detection.
-bool was_changed_decimate_input() { return was_changed_("decimate_input"); }
-int geti_decimate_input() { return geti_("decimate_input"); }
-
 //Int Ignore Start Frames
-//How much ignore frames at camera start - to let camera do its brightness adjustments.
+//How much ignore frames at project - to let camera do its brightness adjustments.
 bool was_changed_ignore_start_frames() { return was_changed_("ignore_start_frames"); }
 int geti_ignore_start_frames() { return geti_("ignore_start_frames"); }
 
 
-//Float Keep On
-//How much seconds be on.
-bool was_changed_keep_on_sec() { return was_changed_("keep_on_sec"); }
-float getf_keep_on_sec() { return getf_("keep_on_sec"); }
-
-//Float Keep Off
-//How much seconds be off.
-bool was_changed_keep_off_sec() { return was_changed_("keep_off_sec"); }
-float getf_keep_off_sec() { return getf_("keep_off_sec"); }
-
-
-//Text Bang On
-//What to do on "On" event.
-bool was_changed_bang_on() { return was_changed_("bang_on"); }
-QString gets_bang_on() { return gets_("bang_on"); }
-QStringList get_strings_bang_on() { return get_strings_("bang_on"); }
-
-//Text Bang Off
-//What to do on "Off" event.
-bool was_changed_bang_off() { return was_changed_("bang_off"); }
-QString gets_bang_off() { return gets_("bang_off"); }
-QStringList get_strings_bang_off() { return get_strings_("bang_off"); }
-
-//----------------------------------------------------
-//Page Backgr Restore
-//Settings for restore background automatically
-
-//Float Restore Time
-//If block image is not changed a lot for this time, then background is restored to that image.
-bool was_changed_background_restore_sec() { return was_changed_("background_restore_sec"); }
-float getf_background_restore_sec() { return getf_("background_restore_sec"); }
-
-//Int Allow Flicker
-//How much blocks is allowed to change during waiting.
-bool was_changed_background_restore_flicker() { return was_changed_("background_restore_flicker"); }
-int geti_background_restore_flicker() { return geti_("background_restore_flicker"); }
-
-//Out Float Restore Timer
-//Debug value for restoring.
-bool was_changed_restore_timer() { return was_changed_("restore_timer"); }
-float getf_restore_timer() { return getf_("restore_timer"); }
-void setf_restore_timer(float value) { setf_("restore_timer", value); }
+//Out Checkbox Started
+//Link this value to "Enabled" control of motion detectors, in order they start work only when router is ready.
+bool was_changed_started() { return was_changed_("started"); }
+int geti_started() { return geti_("started"); }
+void seti_started(int value) { seti_("started", value); }
 
 //----------------------------------------------------

@@ -47,7 +47,7 @@ void XModuleSynthFromImage::impl_start() {
     //link images with internal objects
     setobject_output_image(&out_image_);
 
-    out_image_.write().data().clear();
+    out_image_.clear();
     input_.clear();
     output_.clear();
 

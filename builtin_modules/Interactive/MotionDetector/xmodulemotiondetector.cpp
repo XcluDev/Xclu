@@ -31,8 +31,8 @@ void XModuleMotionDetector::impl_start() {
     //If correlation in some block exceeds threshold, the object is detected.
     //If no changes of "block image" for a minute - then update background.
 
-    out_image_.write().data().clear();
-    out_background_.write().data().clear();
+    out_image_.clear();
+    out_background_.clear();
 
     blocks_.clear();
     input_.clear();

@@ -1,39 +1,43 @@
-#include "xmodulemotiondetector.h"
+#include "XModuleMotionDetectorRouter.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include "xcore.h"
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(MotionDetector)
+REGISTER_XMODULE(MotionDetectorRouter)
 
 //---------------------------------------------------------------------
-XModuleMotionDetector::XModuleMotionDetector(QString class_name)
+XModuleMotionDetectorRouter::XModuleMotionDetectorRouter(QString class_name)
     :XModule(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleMotionDetector::~XModuleMotionDetector()
+XModuleMotionDetectorRouter::~XModuleMotionDetectorRouter()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_start() {
+void XModuleMotionDetectorRouter::impl_start() {
     //link images with internal objects
-    setobject_output_image(&out_image_);
-    setobject_background_image(&out_background_);
+    setobject_output1(output_gui_[0]);
+    setobject_output2(output_gui_[1]);
+    setobject_output3(output_gui_[2]);
+    setobject_output4(output_gui_[3]);
 
-    //Human presence detection
-    //Algorithm works using correlation inside smaller pixel blocks of fixed size.
-    //If correlation in some block exceeds threshold, the object is detected.
-    //If no changes of "block image" for a minute - then update background.
+    setobject_template1(template_gui_[0]);
+    setobject_template1(template_gui_[1]);
+    setobject_template1(template_gui_[2]);
+    setobject_template1(template_gui_[3]);
 
-    out_image_.write().data().clear();
-    out_background_.write().data().clear();
-
+    //clear images
+    for (int i=0; i<N; i++) {
+        output_gui_[i].clear();
+    }
+/*
     blocks_.clear();
     input_.clear();
     background_.clear();
@@ -51,12 +55,12 @@ void XModuleMotionDetector::impl_start() {
 
     ignore_frames_ = geti_ignore_start_frames();
 
-
+*/
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_update() {
-
+void XModuleMotionDetectorRouter::impl_update() {
+/*
     //Read image
     auto reader = getobject_input_image()->read();
 
@@ -108,7 +112,7 @@ void XModuleMotionDetector::impl_update() {
     int Y1 = getf_y1() * h;
 
     //update blocks
-    XModuleMotionDetectorBlockParams params;
+    XModuleMotionDetectorRouterBlockParams params;
     params.thresh_in = getf_thresh_in();
     params.thresh_out = getf_thresh_out_rel() * params.thresh_in;
     params.block_event_sec = getf_block_event_sec();
@@ -237,11 +241,12 @@ void XModuleMotionDetector::impl_update() {
     //set to images
     XObjectImage::create_from_raster(out_image_.write().data(), output_);
     XObjectImage::create_from_raster(out_background_.write().data(), background_);
+    */
 }
 
 //---------------------------------------------------------------------
 //decimate inout
-void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
+/*void XModuleMotionDetectorRouter::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
     int dec = geti_decimate_input();
     if (dec <= 1) {
         result = input;
@@ -269,26 +274,17 @@ void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result
         }
     }
 }
+*/
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::bang_on() {
-    XCORE.bang(get_strings_bang_on());
-}
+void XModuleMotionDetectorRouter::impl_stop() {
 
-//---------------------------------------------------------------------
-void XModuleMotionDetector::bang_off() {
-    XCORE.bang(get_strings_bang_off());
-}
-
-//---------------------------------------------------------------------
-void XModuleMotionDetector::impl_stop() {
-    //send "off" at stop
-    bang_off();
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::impl_button_pressed(QString button_id) {
-//}
+void XModuleMotionDetectorRouter::impl_button_pressed(QString button_id) {
+
+}
 
 //---------------------------------------------------------------------

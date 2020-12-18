@@ -46,6 +46,12 @@ public:
         return XProtectedWrite_<T>(this);
     }
 
+    //clear - only for those supports it!
+    //Note: it's uses write(), so use with care - not use if other write() for object created
+    void clear() {
+        write().data().clear();
+    }
+
     //Mechanism for test changing
     //Mark that value was changed - it's done automatically at "write" calling
     //void touch();

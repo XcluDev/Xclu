@@ -174,11 +174,17 @@ XProtectedObject *XClass::get_object_(QString name) {
 
 //---------------------------------------------------------------------
 //Set pointer to object
-//Note: object must be live, because only pointer to it is stored
+//Note: object must be persistent, because only pointer to it is stored
 void XClass::set_object_(QString name, XProtectedObject *object) {
     xclu_assert(module_, "Error at XClass::set_object_(): module is nullptr");
     module()->set_object(name, object);
 }
 
+//---------------------------------------------------------------------
+//Set reference to object
+//Note: object must be persistent, because only pointer to it is stored
+void XClass::set_object_(QString name, XProtectedObject &object) {
+    set_object_(name, &object);
+}
 
 //---------------------------------------------------------------------

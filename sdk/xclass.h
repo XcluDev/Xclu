@@ -91,8 +91,11 @@ public:
     //Access to objects is only by pointers - because we are required not to copy data, it can be large
     XProtectedObject *get_object_(QString name);
     //Set pointer to object
-    //Note: object must be live, because only pointer to it is stored
+    //Note: object must be persistent, because only pointer to it is stored
     void set_object_(QString name, XProtectedObject *object);
+    //Set reference to object
+    //Note: object must be persistent, because only pointer to it is stored
+    void set_object_(QString name, XProtectedObject &object);
 
 protected:
     Module *module_ = nullptr;

@@ -233,7 +233,7 @@ void XModuleSoundOut::impl_start() {
     }
     buffer_size_= 0;
     seti_buffer_size(0);
-    getobject_sound_format()->write().data().clear();
+    getobject_sound_format()->clear();
 
     set_started(false); //также ставит gui-элемент is_started
 

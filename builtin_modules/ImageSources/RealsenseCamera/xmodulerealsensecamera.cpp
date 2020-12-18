@@ -73,9 +73,9 @@ void XModuleRealsenseCamera::impl_start() {
     //Очистка переменных
     gui_clear();
 
-    getobject_color_image()->write().data().clear();
-    getobject_depth_image()->write().data().clear();
-    getobject_ir_image()->write().data().clear();
+    getobject_color_image()->clear();
+    getobject_depth_image()->clear();
+    getobject_ir_image()->clear();
 
     raster_color_.clear();
     raster_depth_.clear();
@@ -90,8 +90,8 @@ void XModuleRealsenseCamera::impl_start() {
     setobject_depth_grayscale_image(&depth8_gui_);
     //setobject_depth_grayscale_image(&out_binary_gui_);
 
-    depth8_gui_.write().data().clear();
-    //out_binary_gui_.write().data().clear();
+    depth8_gui_.clear();
+    //out_binary_gui_.clear();
 
     raster_depth16_.clear();
     depth8_.clear();

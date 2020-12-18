@@ -297,7 +297,8 @@ protected:
                                    QString cpp_setter = "",
                                    bool final_blank = true,
                                    bool is_int = false,
-                                   bool is_string = false
+                                   bool is_string = false,
+                                   bool is_object = false
             );
 };
 

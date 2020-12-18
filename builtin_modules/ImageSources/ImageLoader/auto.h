@@ -33,6 +33,7 @@ QStringList get_strings_folder_name() { return get_strings_("folder_name"); }
 bool was_changed_folder_index() { return was_changed_("folder_index"); }
 int geti_folder_index() { return geti_("folder_index"); }
 
+
 //Checkbox Show Image
 //
 bool was_changed_show_image() { return was_changed_("show_image"); }
@@ -49,5 +50,6 @@ void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
 void setobject_image(XProtectedObject *value) { set_object_("image", value); }
+void setobject_image(XProtectedObject &value) { set_object_("image", value); }
 
 //----------------------------------------------------

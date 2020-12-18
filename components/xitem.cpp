@@ -685,7 +685,8 @@ void XItem::export_interface_template(QStringList &file,
                                       QString cpp_setter,
                                       bool final_blank,
                                       bool is_int,
-                                      bool is_string) {
+                                      bool is_string,
+                                      bool is_object) {
     if (horiz_line) {
         file.append("//----------------------------------------------------");
     }
@@ -709,6 +710,11 @@ void XItem::export_interface_template(QStringList &file,
         if (qualifier() == XQualifierOut
                 && !cpp_setter.isEmpty()) {
             file.append(QString("void set%3_%1(%2value) { %4_(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
+            //additional for object without pointers:
+            if (is_object) {
+                //looks like: void setobject_output1(XProtectedObject *value) { set_object_("output1", value); }
+                file.append(QString("void setobject_%1(XProtectedObject &value) { set_object_(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
+            }
 
             if (is_int) {
                 //increase_int
