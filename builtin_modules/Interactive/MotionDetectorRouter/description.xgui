@@ -56,13 +56,13 @@ const enum Route_Method route_method=Manual [Manual,Using_Templates]
     //Use manual routing or automatic based on saved tamplate
 line
 if route_method Manual
-    in string Route route_manual="1234"
-    //Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+    const string Route route_manual=""
+    //Destination of routing for first, second, third and fourth cameras, such as "1 2 3 4" or "1 3 2 4", and so on.
 endif
     
 if route_method Using_Templates
-    out string Route route_template="1234"
-    //Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+    out string Route route_template=""
+    //Automatically made destination of routing for first, second, third and fourth cameras, such as "1 2 3 4" or "1 3 2 4", and so on.
 line
 out object_image Template1 template1
     //Output image.
@@ -76,8 +76,14 @@ endif
 line
     
 in button Save_Templates save_templates
-    //Press the button to save current images to template files.
+    //Press the button to save current images to template files. Note: you need to create folder by yourself.
     
+line
+
+const int Template_W templ_w=80 2:* 1,10
+    //Width of template match image. Normally 8 times less than original images for robustness.
+const int Template_H templ_h=60 2:* 1,10
+    //Height of template match image. Normally 8 times less than original images for robustness.
 line
 
 in group Show_File_Names show_file_names=0

@@ -45,6 +45,13 @@ double xmaxd(double x, double y);
 int xmini(int x, int y);
 int xmaxi(int x, int y);
 
+//Is value in range
+bool xinrangei(int x, int a, int b);
+bool xinrangei_excl(int x, int a, int b);
+
+bool xinrangef(float x, float a, float b);
+bool xinranged(double x, double a, double b);
+
 
 //Clamp to range [a,b], including a and b
 float xclampf(float x, float a, float b);

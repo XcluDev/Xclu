@@ -74,14 +74,14 @@ enum_route_method gete_route_method() { return enum_route_method(geti_("route_me
 QString getraw_route_method() { return getraw_("route_method");}
 
 
-//String Route
-//Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+//Const String Route
+//Destination of routing for first, second, third and fourth cameras, such as "1 2 3 4" or "1 3 2 4", and so on.
 bool was_changed_route_manual() { return was_changed_("route_manual"); }
 QString gets_route_manual() { return gets_("route_manual"); }
 QStringList get_strings_route_manual() { return get_strings_("route_manual"); }
 
 //Out String Route
-//Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+//Automatically made destination of routing for first, second, third and fourth cameras, such as "1 2 3 4" or "1 3 2 4", and so on.
 bool was_changed_route_template() { return was_changed_("route_template"); }
 QString gets_route_template() { return gets_("route_template"); }
 QStringList get_strings_route_template() { return get_strings_("route_template"); }
@@ -117,10 +117,21 @@ void setobject_template4(XProtectedObject *value) { set_object_("template4", val
 void setobject_template4(XProtectedObject &value) { set_object_("template4", value); }
 
 //Button Save Templates
-//Press the button to save current images to template files.
+//Press the button to save current images to template files. Note: you need to create folder by yourself.
 bool was_changed_save_templates() { return was_changed_("save_templates"); }
 int geti_save_templates() { return geti_("save_templates"); }
 QString button_save_templates() { return "save_templates"; }
+
+
+//Const Int W
+//Width of template match image. Normally 8 times less than original images for robustness.
+bool was_changed_templ_w() { return was_changed_("templ_w"); }
+int geti_templ_w() { return geti_("templ_w"); }
+
+//Const Int H
+//Height of template match image. Normally 8 times less than original images for robustness.
+bool was_changed_templ_h() { return was_changed_("templ_h"); }
+int geti_templ_h() { return geti_("templ_h"); }
 
 
 //Checkbox Show File Names

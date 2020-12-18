@@ -29,256 +29,278 @@ void XModuleMotionDetectorRouter::impl_start() {
     setobject_output4(output_gui_[3]);
 
     setobject_template1(template_gui_[0]);
-    setobject_template1(template_gui_[1]);
-    setobject_template1(template_gui_[2]);
-    setobject_template1(template_gui_[3]);
+    setobject_template2(template_gui_[1]);
+    setobject_template3(template_gui_[2]);
+    setobject_template4(template_gui_[3]);
 
     //clear images
     for (int i=0; i<N; i++) {
+        //input_[i].clear();
+        template_[i].clear();
+        output_[i].clear();
+
         output_gui_[i].clear();
+        template_gui_[i].clear();
     }
-/*
-    blocks_.clear();
-    input_.clear();
-    background_.clear();
-    output_.clear();
-
-    state_ = 0;
-    time_ = -10000;
-
-    static_time_ = 1000000;
-    fires_.clear();
-    setf_restore_timer(0);
-
-    //send "off" at start
-    bang_off();
 
     ignore_frames_ = geti_ignore_start_frames();
+    started_ = 0;
+    seti_started(started_);
 
-*/
+    n_ = geti_inputs();
+}
+
+//---------------------------------------------------------------------
+XProtectedObject *XModuleMotionDetectorRouter::input_image(int i) {
+    xclu_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::input_image");
+    if (i == 0) return getobject_input1();
+    if (i == 1) return getobject_input2();
+    if (i == 2) return getobject_input3();
+    if (i == 3) return getobject_input4();
+    xclu_exception("Internal error - bad index at XModuleMotionDetectorRouter::input_image");
+    return nullptr;
+}
+
+//---------------------------------------------------------------------
+XProtectedObject *XModuleMotionDetectorRouter::output_image(int i) {
+    xclu_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::output_image");
+    if (i == 0) return getobject_output1();
+    if (i == 1) return getobject_output2();
+    if (i == 2) return getobject_output3();
+    if (i == 3) return getobject_output4();
+    xclu_exception("Internal error - bad index at XModuleMotionDetectorRouter::output_image");
+    return nullptr;
+}
+
+//---------------------------------------------------------------------
+XProtectedObject *XModuleMotionDetectorRouter::template_image(int i) {
+    xclu_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::template_image");
+    if (i == 0) return getobject_template1();
+    if (i == 1) return getobject_template2();
+    if (i == 2) return getobject_template3();
+    if (i == 3) return getobject_template4();
+    xclu_exception("Internal error - bad index at XModuleMotionDetectorRouter::template_image");
+    return nullptr;
+}
+
+//---------------------------------------------------------------------
+//automatic route setup if required
+void XModuleMotionDetectorRouter::make_route() {
+    route_scheme_.resize(n_);
+
+    auto route_method = gete_route_method();
+    if (route_method == route_method_Manual) {
+        //parse manual route
+        QString route_str = gets_route_manual();
+        QStringList route = route_str.split(" ");
+        xclu_assert(route.size() >= n_, "Too short route string '" + route_str + "', expected such as '1 2 3 4'");
+        for (int i=0; i<n_; i++) {
+            route_scheme_[i] = route[i].toInt() - 1;
+            xclu_assert(xinrangei_excl(route_scheme_[i],0,n_), "Bad index in route '" + route_str + "', must be 1..Inputs");
+        }
+    }
+    //automatic
+    if (route_method == route_method_Using_Templates) {
+        route_scheme_ = auto_route();
+        //output to interface
+        QString line;
+        for (int i=0; i<n_; i++) {
+            if (!line.isEmpty()) line += " ";
+            line += QString::number(route_scheme_[i]+1);
+        }
+        sets_route_template(line);
+        xclu_console_append("auto route: " + line);
+    }
+
+    //Perform routing
+    for (int i=0; i<n_; i++) {
+        int index = route_scheme_[i];
+        xclu_assert(xinrangei_excl(index, 0, n_), "Internal error, bad index in route");
+
+        if (i == 0) setobject_output1(input_image(index));
+        if (i == 1) setobject_output2(input_image(index));
+        if (i == 2) setobject_output3(input_image(index));
+        if (i == 3) setobject_output4(input_image(index));
+    }
+
 }
 
 //---------------------------------------------------------------------
 void XModuleMotionDetectorRouter::impl_update() {
-/*
-    //Read image
-    auto reader = getobject_input_image()->read();
-
-    //no image yet
-    if (reader.data().type() != XObjectTypeImage) return;
-
-    //ignore frames at start
-    ignore_frames_--;
-    if (ignore_frames_ > 0) return;
-
-    //read image
-    XObjectImage::to_raster(reader.data(), input0_);
-
-    if (input0_.w == 0) return;  //no frames yet
-
-    //decimate input image
-    decimate_input(input0_, input_);
-
-    //parameters
-    int w = input_.w;
-    int h = input_.h;
-    int size = geti_block_size();
-    int W = w / size;
-    int H = h / size;
-    //create blocks
-    //TODO assuming that image size will not change
-    if (blocks_.size() != W*H) {
-        blocks_.resize(W*H);
-        fires_.resize(W*H);
-        for (int y=0; y<H; y++) {
-            for (int x=0; x<W; x++) {
-                blocks_[x+W*y].setup(x*size, y*size, size, size);
-            }
-        }
-
-        //initial setting background
-        background_ = input_;
+    //check starting
+    if (ignore_frames_ > 0) {
+        ignore_frames_--;
+    }
+    if (ignore_frames_ == 0 && !started_) {
+        started_ = 1;
+        seti_started(started_);
+        //automatic route setup if required
+        make_route();
     }
 
-    //background update
-    if (geti_restore_now()) {   //reset by button
-        background_ = input_;
-    }
-
-    //area
-    int X0 = getf_x0() * w;
-    int Y0 = getf_y0() * h;
-    int X1 = getf_x1() * w;
-    int Y1 = getf_y1() * h;
-
-    //update blocks
-    XModuleMotionDetectorRouterBlockParams params;
-    params.thresh_in = getf_thresh_in();
-    params.thresh_out = getf_thresh_out_rel() * params.thresh_in;
-    params.block_event_sec = getf_block_event_sec();
-
-
-    float dt = xcore_dt();
-    float time = xcore_elapsed_time_sec();
-    int nfires = 0;
-    int N = 0;
-    for (int y=0; y<H; y++) {
-        for (int x=0; x<W; x++) {
-            auto &block = blocks_[x+W*y];
-            bool enabled = (block.x_ >= X0 && block.y_ >= Y0
-                            && block.x_ + block.w_ <= X1 && block.y_ + block.h_ <= Y1);
-            block.update(input_, background_, params, enabled, dt);
-            N++;
-            if (block.fires()) {
-                nfires++;
-            }
+    if (started_) {
+        //ready to save templates
+        if (geti_save_templates()) {
+            save_templates();
         }
     }
-
-    seti_blocks_on(nfires);
-
-    //check fires to vector
-    int fires_changed = 0;
-    for (int i=0; i<W*H; i++) {
-        int f = blocks_[i].fires();
-        if (f != fires_[i]) {
-            fires_changed++;
-        }
-    }
-
-    //if too much changed, then reset timer and store new state
-    if (fires_changed > geti_background_restore_flicker()) {
-        for (int i=0; i<W*H; i++) {
-            fires_[i] = blocks_[i].fires();
-            static_time_ = time;
-        }
-    }
-    //restore background
-    float restore_sec = getf_background_restore_sec();
-    if (time >= static_time_ + restore_sec) {
-        background_ = input_;
-        static_time_ = time;
-    }
-    if (restore_sec>0) {
-        setf_restore_timer((time - static_time_) / restore_sec);
-    }
-    else {
-        setf_restore_timer(0);
-    }
-
-
-
-
-    //detection result
-    int fire = (nfires >= geti_blocks_threshold());
-    if (!state_) {
-        if (fire && time > time_ + getf_keep_off_sec()) {
-            state_ = 1;
-            time_ = time;
-            //Bang on
-            bang_on();
-        }
-    }
-    else {
-        if (fire) {     //update time on fire
-            time_ = time;
-        }
-        if (!fire && time > time_ + getf_keep_off_sec()) {
-            state_ = 0;
-            time_ = time;
-            //Bang off
-            bang_off();
-        }
-    }
-
-    seti_event(state_);
-
-    //make output
-    XRaster::convert(input_, output_);
-    for (int Y=0; Y<H; Y++) {
-        for (int X=0; X<W; X++) {
-            auto &block = blocks_[X+W*Y];
-            if (block.enabled()) {
-                if (block.fires()) {
-                    for (int y=block.y_; y<block.y_+block.h_; y++) {
-                        for (int x=block.x_; x<block.x_+block.w_; x++) {
-                            //colorize fires
-                            output_.pixel_unsafe(x,y).v[0] = 255;   //red
-                        }
-                    }
-                }
-            }
-            else {
-                for (int y=block.y_; y<block.y_+block.h_; y++) {
-                    for (int x=block.x_; x<block.x_+block.w_; x++) {
-                        output_.pixel_unsafe(x,y).v[0] /= 3;    //fade brightness
-                        output_.pixel_unsafe(x,y).v[1] /= 3;
-                        output_.pixel_unsafe(x,y).v[2] /= 3;
-                    }
-                }
-            }
-        }
-    }
-    //border
-    int border_w = 10;
-    rgb_u8 border_color = (state_) ? ((fire) ? rgb_u8(255,255,0) : rgb_u8(255,0,0))
-                                   : ((fire) ? rgb_u8(0,0,255) : rgb_u8(0,0,0));
-    for (int y=0; y<h; y++) {
-        for (int x=0; x<border_w; x++) {
-            output_.pixel_unsafe(x,y) = border_color;
-            output_.pixel_unsafe(w-1-x,y) = border_color;
-        }
-    }
-    for (int x=0; x<w; x++) {
-        for (int y=0; y<border_w; y++) {
-            output_.pixel_unsafe(x,y) = border_color;
-            output_.pixel_unsafe(x,h-1-y) = border_color;
-        }
-    }
-
-
-
-    //set to images
-    XObjectImage::create_from_raster(out_image_.write().data(), output_);
-    XObjectImage::create_from_raster(out_background_.write().data(), background_);
-    */
 }
 
 //---------------------------------------------------------------------
-//decimate inout
-/*void XModuleMotionDetectorRouter::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
-    int dec = geti_decimate_input();
-    if (dec <= 1) {
-        result = input;
-        return;
-    }
-    int dec2 = dec*dec;
-    int w = input.w;
-    int h = input.h;
-    result.allocate(w, h);
-    for (int y=0; y+dec<=h; y+=dec) {
-        for (int x=0; x+dec<=w; x+=dec) {
-            int sum = 0;
-            for (int b=0; b<dec; b++) {
-                for (int a=0; a<dec; a++) {
-                    sum += input.pixel_unsafe(x+a, y+b);
-                }
-            }
-            int v = sum / dec2;
-            for (int b=0; b<dec; b++) {
-                for (int a=0; a<dec; a++) {
-                    result.pixel_unsafe(x+a, y+b) = v;
-                }
-            }
+QVector<int> XModuleMotionDetectorRouter::auto_route() {
+    //TODO may load at very start for smoother interface...
+    load_templates();
 
+    //write to route_scheme
+    QVector<int> scheme(n_);
+
+    //default
+    for (int i=0; i<n_; i++) {
+        scheme[i] = i;
+    }
+
+    //build correlation matrix
+    xclu_console_append("Correlations:");
+    QVector<QVector<double>> corr(n_);
+    for (int i=0; i<n_; i++) {
+        corr[i].resize(n_);
+    }
+
+    for (int i=0; i<n_; i++) {
+        XRaster_float input = resize_to_template(input_image(i));
+        for (int j=0; j<n_; j++) {
+            XRaster_float templ = resize_to_template(template_image(j));
+            corr[i][j] = normalized_correlation(input, templ);
+            xclu_console_append(QString("%1->%2:  %3").arg(i+1).arg(j+1).arg(corr[i][j]));
         }
     }
+
+    //create the best, greedy algorithm
+    //TODO can make totl optimum, not greedy
+    QVector<int> free(n_, 1);
+    for (int i=0; i<n_; i++) {
+        double best = -10;
+        int bestj = -1;
+        for (int j=0; j<n_; j++) {
+            if (free[j] && corr[i][j] > best) {
+                best = corr[i][j];
+                bestj = j;
+            }
+        }
+        xclu_assert(bestj >= 0, "Internal error in auto_route");
+        free[bestj] = 0;
+        scheme[i] = bestj;
+    }
+
+
+
+    return scheme;
 }
-*/
+
+
+//---------------------------------------------------------------------
+XRaster_float XModuleMotionDetectorRouter::resize_to_template(XProtectedObject *image) {
+    //no image yet
+    xclu_assert(image->read().data().type() == XObjectTypeImage, "Not image");
+
+    //read image
+    XRaster_u8 raster;
+    XObjectImage::to_raster(image->read().data(), raster);
+
+    int w = raster.w;
+    int h = raster.h;
+
+    int w1 = geti_templ_w();
+    int h1 = geti_templ_h();
+    XRaster_float out;
+    XRaster_int32 counter;
+    out.allocate(w1, h1);
+    counter.allocate(w1, h1);
+
+    //sum
+    for (int y=0; y<h; y++) {
+        for (int x=0; x<w; x++) {
+            int x1 = x * w1 / w;
+            int y1 = y * h1 / h;
+            out.pixel_unsafe(x1, y1) += raster.pixel_unsafe(x, y) / 256.0;
+            counter.pixel_unsafe(x1, y1)++;
+        }
+    }
+
+    //result
+    for (int i=0; i<w1*h1; i++) {
+        int c = counter.pixel_unsafe(i);
+        if (c>0) {
+            out.pixel_unsafe(i) /= c;
+        }
+    }
+
+    return out;
+}
+
+//---------------------------------------------------------------------
+float XModuleMotionDetectorRouter::normalized_correlation(XRaster_float &A, XRaster_float &B) {
+    int w = A.w;
+    int h = A.h;
+    xclu_assert(w == B.w && h == B.h, "normalized_correlation - different sizes");
+    double mA = 0;
+    double mB = 0;
+    for (int i=0; i<w*h; i++) {
+        mA += A.pixel_unsafe(i);
+        mB += B.pixel_unsafe(i);
+    }
+    mA /= w*h;
+    mB /= w*h;
+    double normA = 0;
+    double normB = 0;
+    for (int i=0; i<w*h; i++) {
+        normA += xsqrf(A.pixel_unsafe(i) - mA);
+        normB += xsqrf(B.pixel_unsafe(i) - mB);
+    }
+    normA = sqrt(normA);
+    normB = sqrt(normB);
+
+    double corr = 0;
+    for (int i=0; i<w*h; i++) {
+        corr += (A.pixel_unsafe(i) - mA) * (B.pixel_unsafe(i) - mB);
+    }
+    double mult = normA * normB;
+    if (mult > 0.0001) {
+        corr /= mult;
+    }
+
+    return corr;
+}
+
+//---------------------------------------------------------------------
+void XModuleMotionDetectorRouter::save_templates() {
+    QStringList files = get_strings_template_files();
+    xclu_assert(files.size() >= n_, "Not enough file names");
+
+    for (int i=0; i<n_; i++) {
+        QString file_name = xcore_abs_path(files[i]);
+        XObjectImage::save(output_image(i)->read().data(), file_name);
+    }
+
+    xclu_console_append("Templates are saved");
+    load_templates();
+
+}
+
+//---------------------------------------------------------------------
+void XModuleMotionDetectorRouter::load_templates() {
+    QStringList files = get_strings_template_files();
+    xclu_assert(files.size() >= n_, "Not enough file names");
+    for (int i=0; i<n_; i++) {
+       QString file_name = xcore_abs_path(files[i]);
+       XObjectImage::load(template_image(i)->write().data(), file_name);
+    }
+}
 
 //---------------------------------------------------------------------
 void XModuleMotionDetectorRouter::impl_stop() {
-
+    started_ = 0;
+    seti_started(started_);
 
 }
 

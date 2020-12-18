@@ -28,7 +28,7 @@ protected:
 
     static const int N = 4; //max number of cameras
 
-    XRaster_u8 input_[N];
+    //XRaster_u8 input_[N];
     XRaster_u8 template_[N];
     XRaster_u8 output_[N];
 
@@ -43,9 +43,26 @@ protected:
     //are we started?
     int started_ = 0;
 
+    //number of inputs
+    int n_ = 0;
 
+    //setup route
+    void make_route();
+    QVector<int> route_scheme_;    //scheme of routing
 
+    QVector<int> auto_route();
 
+    XProtectedObject *input_image(int i);
+    XProtectedObject *output_image(int i);
+    XProtectedObject *template_image(int i);
+
+    //save templates
+    void save_templates();
+    void load_templates();
+
+    XRaster_float resize_to_template(XProtectedObject *image);
+
+    float normalized_correlation(XRaster_float &A, XRaster_float &B);
 };
 
 

@@ -46,6 +46,23 @@ int xmaxi(int x, int y) {
 }
 
 //-------------------------------------------------------
+bool xinrangei(int x, int a, int b) {
+    return (x >= a && x <= b);
+}
+
+bool xinrangei_excl(int x, int a, int b) {
+    return (x >= a && x < b);
+}
+
+bool xinrangef(float x, float a, float b) {
+    return (x >= a && x <= b);
+}
+
+bool xinranged(double x, double a, double b) {
+    return (x >= a && x <= b);
+}
+
+//-------------------------------------------------------
 //clamp to range [a,b], including a and b
 float xclampf(float x, float a, float b) {
     if (b<a) std::swap(a,b);
