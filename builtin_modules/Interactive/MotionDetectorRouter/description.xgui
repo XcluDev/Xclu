@@ -1,0 +1,107 @@
+#Module MotionDetector
+#------------------------------------------
+module_description=Module automatically routes cameras using given image templates. Useful if you can distinguish cameras and they shuffled randomly.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings
+
+const int Inputs inputs=1 1:4 1,10
+//How many images use.
+
+line
+in object_image Input1 input1
+    //Input image.
+if inputs 2,3,4
+in object_image Input2 input2
+    //Input image.
+endif
+if inputs 3,4
+in object_image Input3 input3
+    //Input image.
+endif
+if inputs 4
+in object_image Input4 input4
+    //Input image.
+endif
+line
+    
+#-------------------------------------------
+page Output
+
+line
+out object_image Output1 output1
+    //Output image.
+if inputs 2,3,4
+out object_image Output2 output2
+    //Output image.
+endif
+if inputs 3,4
+out object_image Output3 output3
+    //Output image.
+endif
+if inputs 4
+out object_image Output4 output4
+    //Output image.
+endif
+line
+    
+
+#-------------------------------------------
+page Routing
+
+const enum Route_Method route_method=Manual [Manual,Using_Templates]
+    //Use manual routing or automatic based on saved tamplate
+line
+if route_method Manual
+    in string Route route_manual="1234"
+    //Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+endif
+    
+if route_method Using_Templates
+    out string Route route_template="1234"
+    //Scheme of routing for first, second, third and fourth cameras, such as 1234,1324, and so on.
+line
+out object_image Template1 template1
+    //Output image.
+out object_image Template2 template2
+    //Output image.
+out object_image Template3 template3
+    //Output image.
+out object_image Template4 template4
+    //Output image.
+endif
+line
+    
+in button Save_Templates save_templates
+    //Press the button to save current images to template files.
+    
+line
+
+in group Show_File_Names show_file_names=0
+    //Show file names for template files images.
+    
+if show_file_names 1
+const text Template_Files template_files 8 10
+    //Template images file names. The folder will be created automatically if necessary.
+    //route/templ1.png
+    //route/templ2.png
+    //route/templ3.png
+    //route/templ4.png
+endif
+
+#-------------------------------------------
+page Settings
+
+in int Ignore_Start_Frames ignore_start_frames=60 1:* 1,10
+    //How much ignore frames at project - to let camera do its brightness adjustments.
+    //frames
+    
+separator
+
+out checkbox Started started=0
+    //Link this value to "Enabled" control of motion detectors, in order they start work only when router is ready. 
+    
+#-------------------------------------------
