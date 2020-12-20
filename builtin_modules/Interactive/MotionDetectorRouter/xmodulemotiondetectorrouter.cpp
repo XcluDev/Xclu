@@ -167,9 +167,9 @@ QVector<int> XModuleMotionDetectorRouter::auto_route() {
     }
 
     for (int i=0; i<n_; i++) {
-        XRaster_float input = resize_to_template(input_image(i));
         for (int j=0; j<n_; j++) {
-            XRaster_float templ = resize_to_template(template_image(j));
+            XRaster_float templ = resize_to_template(template_image(i));
+            XRaster_float input = resize_to_template(input_image(j));
             corr[i][j] = normalized_correlation(input, templ);
             xclu_console_append(QString("%1->%2:  %3").arg(i+1).arg(j+1).arg(corr[i][j]));
         }
