@@ -20,13 +20,13 @@ XModuleTest::~XModuleTest()
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::impl_start() {
+void XModuleTest::start() {
     xc_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::impl_update() {
+void XModuleTest::update() {
     //xc_console_append(QString("%1 - update").arg(name()));
     if (geti_("callback")) {
         xc_console_append(QString("%1 - pressed Callback").arg(name()));
@@ -36,7 +36,7 @@ void XModuleTest::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::impl_stop() {
+void XModuleTest::stop() {
     xc_console_append(QString("%1 - stop").arg(name()));
 
 

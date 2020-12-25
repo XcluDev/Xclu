@@ -22,7 +22,7 @@ XModuleExecute::~XModuleExecute()
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::impl_start() {
+void XModuleExecute::start() {
     //qDebug() << "start";
     seti_success(0);
     seti_exit_code(0);
@@ -37,7 +37,7 @@ void XModuleExecute::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::impl_update() {
+void XModuleExecute::update() {
     //очищаем флажок success - он действует только в рамках одного кадра
     seti_success(0);
 
@@ -56,7 +56,7 @@ void XModuleExecute::impl_update() {
         QString file_name_short = gets_file_name();
 
         //относительный путь
-        folder = xcore_project_folder() + "/" + folder;
+        folder = xc_project_folder() + "/" + folder;
         sets_folder_path(folder);
 
         //построение имени файла
@@ -72,7 +72,7 @@ void XModuleExecute::impl_update() {
         //int wait_finish = geti_wait_finish");
 
         //запоминаем время старта
-        double start_time = xcore_elapsed_time_sec();
+        double start_time = xc_elapsed_time_sec();
         setf_last_time(start_time);
 
         bool success = false;
@@ -122,7 +122,7 @@ void XModuleExecute::impl_update() {
         xc_assert(success, "Execution error or time is out");
 
         //ставим продолжительность
-        double time = xcore_elapsed_time_sec();
+        double time = xc_elapsed_time_sec();
         setf_last_duration(time - start_time);
     }
 
@@ -130,7 +130,7 @@ void XModuleExecute::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::impl_stop() {
+void XModuleExecute::stop() {
     //qDebug() << "stop";
 
 }

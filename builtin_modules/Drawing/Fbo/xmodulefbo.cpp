@@ -24,7 +24,7 @@ XModuleFbo::~XModuleFbo()
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_start() {
+void XModuleFbo::start() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -33,20 +33,20 @@ void XModuleFbo::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_update() {
+void XModuleFbo::update() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFbo::impl_stop() {
+void XModuleFbo::stop() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleFbo::impl_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
+void XModuleFbo::on_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

@@ -23,7 +23,7 @@ XModuleFileCreate::~XModuleFileCreate()
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::impl_button_pressed(QString button_id) {
+void XModuleFileCreate::on_button_pressed(QString button_id) {
     if (button_id == button_create_file_btn()) {
         //Getting file size
         uint64 size = 0;
@@ -41,13 +41,13 @@ void XModuleFileCreate::impl_button_pressed(QString button_id) {
             size = uint64(getf_file_size_gb() * (1024*1024*1024));
             break;
         default:
-            xc_exception("XModuleFileCreate::impl_button_pressed - bad Unit of file size measure");
+            xc_exception("XModuleFileCreate::on_button_pressed - bad Unit of file size measure");
         }
 
         //Getting file name and checking it's not exists
         QString file_name0 = gets_file_name();
         xc_assert(!file_name0.isEmpty(), "Empty file name");
-        QString file_path = xcore_abs_path(gets_file_name());
+        QString file_path = xc_abs_path(gets_file_name());
         QString short_name = QFileInfo(file_name0).fileName();
 
         //Check file is not exists - currently we support writing only to new files
@@ -103,19 +103,19 @@ void XModuleFileCreate::impl_button_pressed(QString button_id) {
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::impl_start() {
+void XModuleFileCreate::start() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::impl_update() {
+void XModuleFileCreate::update() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::impl_stop() {
+void XModuleFileCreate::stop() {
 
 
 }

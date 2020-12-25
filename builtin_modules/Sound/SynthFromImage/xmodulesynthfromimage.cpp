@@ -38,7 +38,7 @@ XModuleSynthFromImage::~XModuleSynthFromImage()
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::impl_start() {
+void XModuleSynthFromImage::start() {
     {
         DataAccess access(data_);
         data_.line_.clear();
@@ -56,7 +56,7 @@ void XModuleSynthFromImage::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::impl_update() {
+void XModuleSynthFromImage::update() {
     //Freeze/unfreeze buttons
     if (geti_freeze_btn()) {
         input_frozen_ = true;
@@ -187,7 +187,7 @@ void XModuleSynthFromImage::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::impl_stop() {
+void XModuleSynthFromImage::stop() {
 
 }
 
@@ -196,7 +196,7 @@ void XModuleSynthFromImage::impl_stop() {
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSynthFromImage::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+void XModuleSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     DataAccess access(data_);
 
     float phase_add = float(data_.sample_rate) / float(sample_rate) / data_.line_speed_;

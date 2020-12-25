@@ -102,20 +102,20 @@ XModuleWebcamera::~XModuleWebcamera()
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_loaded() {
+void XModuleWebcamera::on_loaded() {
     clear_string_frames_captured();
     clear_string_local_console();
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_button_pressed(QString button) {
+void XModuleWebcamera::on_button_pressed(QString button) {
     if (button == button_print_devices()) {
         print_devices();
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_start() {
+void XModuleWebcamera::start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -143,7 +143,7 @@ void XModuleWebcamera::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_update() {
+void XModuleWebcamera::update() {
 
     //захват с камеры или считывание изображений
     auto source = gete_capture_source();
@@ -162,7 +162,7 @@ void XModuleWebcamera::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::impl_stop() {
+void XModuleWebcamera::stop() {
     //qDebug() << "stop";
     stop_camera();
 

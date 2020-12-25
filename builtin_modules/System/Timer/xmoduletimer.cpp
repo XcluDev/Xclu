@@ -29,7 +29,7 @@ void XModuleTimer::set_working(bool v) {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::impl_start() {
+void XModuleTimer::start() {
     set_working(false);
 
     sets_time_left_hms("");
@@ -39,7 +39,7 @@ void XModuleTimer::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::impl_update() {
+void XModuleTimer::update() {
     double delay_sec=0;
     auto period = gete_period();
     switch (period) {
@@ -52,7 +52,7 @@ void XModuleTimer::impl_update() {
     case period_Seconds: delay_sec = getf_seconds();
         break;
     default:
-        xc_exception("XModuleTimer::impl_update - bad `measure` value");
+        xc_exception("XModuleTimer::update - bad `measure` value");
     }
 
     //xc_console_append(QString("delay %1").arg(delay_sec));
@@ -67,7 +67,7 @@ void XModuleTimer::impl_update() {
         update_bang(delay_sec);
         break;
     default:
-        xc_exception("XModuleTimer::impl_update - bad `working_mode` value");
+        xc_exception("XModuleTimer::update - bad `working_mode` value");
 
     }
 
@@ -86,12 +86,12 @@ void XModuleTimer::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::impl_stop() {
+void XModuleTimer::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimer::impl_button_pressed(QString button_id) {
+//void XModuleTimer::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
@@ -103,13 +103,13 @@ void XModuleTimer::one_shot() {
 
 //---------------------------------------------------------------------
 void XModuleTimer::register_bang_time() {
-    time_ = xcore_elapsed_time_sec();
+    time_ = xc_elapsed_time_sec();
 }
 
 //---------------------------------------------------------------------
 void XModuleTimer::update_bang(float delay_sec) {
     if (working_) {
-        double time = xcore_elapsed_time_sec();
+        double time = xc_elapsed_time_sec();
 
         float delta = time - time_;
         if (delta >= delay_sec) {

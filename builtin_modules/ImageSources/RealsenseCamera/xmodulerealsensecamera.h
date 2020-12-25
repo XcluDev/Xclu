@@ -22,14 +22,14 @@ protected:
 #include "auto.h"
 
     //Выполнение
-    virtual void impl_loaded();
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
+    virtual void on_loaded();
+    virtual void start();
+    virtual void update();
+    virtual void stop();
 
     //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
     //внимание, обычно вызывается из основного потока как callback
-    virtual void impl_button_pressed(QString button_id);
+    virtual void on_button_pressed(QString button_id);
 
 protected:
     void gui_clear();

@@ -21,13 +21,13 @@ public:
 protected:
 #include "auto.h"
 
-    virtual void impl_loaded() {}
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
+    virtual void on_loaded() {}
+    virtual void start();
+    virtual void update();
+    virtual void stop();
 
     //Вызовы
-    virtual void impl_call(QString function, XObject *input, XObject * /*output*/);
+    virtual void on_call(QString function, XObject *input, XObject * /*output*/);
 protected:
     //QScopedPointer<QWindow> window_;
 };

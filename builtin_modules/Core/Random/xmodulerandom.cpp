@@ -21,26 +21,26 @@ XModuleRandom::~XModuleRandom()
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::impl_start() {
+void XModuleRandom::start() {
     time_ = -1; //implies renew value on first update with Period mode
 
     sets_result("");
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::impl_update() {
+void XModuleRandom::update() {
     switch (gete_update_mode()) {
     case update_mode_Each_Update: make_new_value();
         break;
     case update_mode_Period: {
-        float time = xcore_elapsed_time_sec();
+        float time = xc_elapsed_time_sec();
         if (time_ < 0 || time >= time_ + getf_period_sec()) {
             time_ = time;
             make_new_value();
         }
     }
         break;
-    default: xc_exception("XModuleRandom::impl_update - bad `update_mode` value");
+    default: xc_exception("XModuleRandom::update - bad `update_mode` value");
     }
 }
 
@@ -60,7 +60,7 @@ void XModuleRandom::make_new_value() {
         value = get_random_string();
         break;
     default:
-        xc_exception("XModuleRandom::impl_update - bad `output_type` value");
+        xc_exception("XModuleRandom::update - bad `output_type` value");
     }
 
    sets_result(value);
@@ -82,12 +82,12 @@ QString XModuleRandom::get_random_string() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::impl_stop() {
+void XModuleRandom::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::impl_button_pressed(QString button_id) {
+//void XModuleTimerm::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

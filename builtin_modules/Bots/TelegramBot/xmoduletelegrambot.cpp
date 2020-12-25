@@ -23,12 +23,12 @@ XModuleTelegramBot::~XModuleTelegramBot()
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::impl_start() {
+void XModuleTelegramBot::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::impl_update() {
+void XModuleTelegramBot::update() {
     if (geti_button_send()) {
         send_message();
     }
@@ -36,12 +36,12 @@ void XModuleTelegramBot::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::impl_stop() {
+void XModuleTelegramBot::stop() {
     manager_.reset();
 }
 
 //---------------------------------------------------------------------
-//void XModuleTelegramBot::impl_button_pressed(QString button_id) {
+//void XModuleTelegramBot::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

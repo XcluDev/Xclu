@@ -219,7 +219,7 @@ void XModuleWindow::on_visibleChanged(bool /*arg*/) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWindow::impl_start() {
+void XModuleWindow::start() {
     //создание и установка начальных настроек окна
     setup_window();
 
@@ -228,14 +228,14 @@ void XModuleWindow::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWindow::impl_update() {
+void XModuleWindow::update() {
 
     update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleWindow::impl_stop() {
+void XModuleWindow::stop() {
     //reset all widgets in modules in order nobody call for it
     reset_widgets();
 
@@ -246,7 +246,7 @@ void XModuleWindow::impl_stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleWindow::impl_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
+void XModuleWindow::on_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 

@@ -4,9 +4,9 @@
 //Вычислительный модуль (runtime module)
 //Базовый класс для конкретных реализаций модулей
 //каждый модуль должен реализовать следующие виртуальные функции:
-//impl_start()
-//impl_update()
-//impl_stop()
+//start()
+//update()
+//stop()
 // - они работают в основном потоке, и поэтому могут общаться с GUI
 //
 //execute_call_internal()  - опциональная функция, вызов из другого модуля
@@ -57,7 +57,7 @@ public:
     //эта информация передается в конструкторе
     QString class_name();
 
-    //основная функция запуска, вызывает impl_start, impl_update, impl_stop
+    //основная функция запуска, вызывает start, update, stop
     void execute(ModuleExecuteStage stage);
 
     //нажатие кнопки - это можно делать и во время остановки всего
@@ -65,12 +65,12 @@ public:
     void button_pressed(QString button_id);
 
     //------------------------------------------------------------------------
-    //функция вызова между модулями, вызывает impl_call
+    //функция вызова между модулями, вызывает on_call
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //err - информация об ошибках.
     //При call-вызовах модули не должны генерировать исключения, а перехватывать их и писать в err.
-    //Поэтому call перехватывает их, но реализация в impl_call может генерировать исключение
+    //Поэтому call перехватывает их, но реализация в on_call может генерировать исключение
     //То, что модуль может запрашивать у других модулей, определяется свойством
     //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
     //То, что модуль может отдавать другим модулям, определяется свойством
@@ -122,17 +122,17 @@ protected:
 
     //функции исполнения, специфичные для модулей - они должны их переопределить
     //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
-    virtual void impl_loaded() {}
+    virtual void on_loaded() {}
     //эти функции запускаются, только если модуль включен:
-    virtual void impl_start() {}
-    virtual void impl_update() {}
-    virtual void impl_stop() {}
+    virtual void start() {}
+    virtual void update() {}
+    virtual void stop() {}
 
     //If module want to process button presses while stopped mode,
     //it should reimplement this function.
     //Note: if module don't need to process buttons - it may not implement this,
-    //and instead use geti_... function, such as geti_button_start() to check button pressing inside impl_update().
-    virtual void impl_button_pressed(QString /*button_id*/) {}
+    //and instead use geti_... function, such as geti_button_start() to check button pressing inside update().
+    virtual void on_button_pressed(QString /*button_id*/) {}
 
     //Universal call handler
     //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
@@ -143,18 +143,18 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void impl_call(QString function, XObject *input, XObject *output);
+    virtual void on_call(QString function, XObject *input, XObject *output);
 
     //Concrete call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it
-    virtual void *impl_create_widget(QString parent_id);
+    virtual void *on_create_widget(QString parent_id);
     //resetting created widget (`create_widget` called with empty parent_id)
-    virtual void impl_reset_widget();
+    virtual void on_reset_widget();
 
 
     //`sound_buffer_add` call implementation, fills `data` buffer
     //there are required to fill channels * samples values at data
-    virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
+    virtual void on_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
 private:
     //--------------------------------------------------------------

@@ -23,16 +23,16 @@ XModuleImageLoader::~XModuleImageLoader()
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::impl_start() {
+void XModuleImageLoader::start() {
     setobject_image(image_);   //link xgui image with image_
     seti_is_new_frame(false);
 
     //load image immediately ! :)
-    impl_update();
+    update();
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::impl_update() {
+void XModuleImageLoader::update() {
     bool new_frame = false;
 
     auto input_source = gete_image_source();
@@ -71,7 +71,7 @@ void XModuleImageLoader::impl_update() {
 //---------------------------------------------------------------------
 void XModuleImageLoader::load_image_file(QString image_file) {
     image_file_ = image_file;
-    QString file_name = xcore_abs_path(image_file_);
+    QString file_name = xc_abs_path(image_file_);
     XObjectImage::load(image_.write().data(), file_name);
 }
 
@@ -79,7 +79,7 @@ void XModuleImageLoader::load_image_file(QString image_file) {
 void XModuleImageLoader::load_folder(QString folder_name) {
     image_files_.clear();
     //scan folder for images
-    QDirIterator images_iter(xcore_abs_path(folder_name),
+    QDirIterator images_iter(xc_abs_path(folder_name),
                              QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.tif" << "*.tiff"
                              ); //, QDirIterator::Subdirectories);
     image_files_.clear();
@@ -93,7 +93,7 @@ void XModuleImageLoader::load_folder(QString folder_name) {
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::impl_stop() {
+void XModuleImageLoader::stop() {
 
 }
 

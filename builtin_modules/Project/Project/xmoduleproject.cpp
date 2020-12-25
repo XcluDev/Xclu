@@ -22,7 +22,7 @@ XModuleProject::~XModuleProject()
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::impl_loaded() {
+void XModuleProject::on_loaded() {
     if (general_is_enabled()) {
         apply_control_values();
     }
@@ -36,15 +36,15 @@ void XModuleProject::apply_control_values() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::impl_start() {
+void XModuleProject::start() {
     apply_control_values();
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::impl_update() {
-    setf_elapsed_time_sec(xcore_elapsed_time_sec());
+void XModuleProject::update() {
+    setf_elapsed_time_sec(xc_elapsed_time_sec());
 
-    float dt = xcore_dt();
+    float dt = xc_dt();
     setf_dt(dt);
 
     float fps = 10000;
@@ -54,7 +54,7 @@ void XModuleProject::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::impl_stop() {
+void XModuleProject::stop() {
 
 }
 

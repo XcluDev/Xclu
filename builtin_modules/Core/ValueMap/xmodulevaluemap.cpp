@@ -21,12 +21,12 @@ XModuleValueMap::~XModuleValueMap()
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::impl_start() {
+void XModuleValueMap::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::impl_update() {
+void XModuleValueMap::update() {
     if (geti_use_var1()) {
         int clamp = geti_clamp1();
         int map = geti_map1();
@@ -58,12 +58,12 @@ void XModuleValueMap::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::impl_stop() {
+void XModuleValueMap::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::impl_button_pressed(QString button_id) {
+//void XModuleTimerm::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

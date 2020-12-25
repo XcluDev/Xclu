@@ -29,13 +29,13 @@ public:
     //----------------------------------------------
     //Runtime
     //----------------------------------------------
-    static double xcore_elapsed_time_sec();
-    static float xcore_dt();
+    static double xc_elapsed_time_sec();
+    static float xc_dt();
 
-    static QString xcore_project_folder();   //full path to project folder
+    static QString xc_project_folder();   //full path to project folder
 
     //get absolute path to folder, given relative to project
-    static QString xcore_abs_path(QString relative_path, bool create_folder = false);
+    static QString xc_abs_path(QString relative_path, bool create_folder = false);
 
     //----------------------------------------------
     //Underlying module

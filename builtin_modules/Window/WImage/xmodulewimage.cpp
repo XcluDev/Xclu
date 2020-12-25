@@ -27,8 +27,8 @@ XModuleWImage::~XModuleWImage()
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::impl_start() {
-    //сбрасываем родителя - это будет установлено в impl_call, когда родитель запросит
+void XModuleWImage::start() {
+    //сбрасываем родителя - это будет установлено в on_call, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
     clear_string_parent_id();
@@ -40,7 +40,7 @@ void XModuleWImage::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::impl_update() {
+void XModuleWImage::update() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -48,7 +48,7 @@ void XModuleWImage::impl_update() {
 
 
 //---------------------------------------------------------------------
-void XModuleWImage::impl_stop() {
+void XModuleWImage::stop() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -57,7 +57,7 @@ void XModuleWImage::impl_stop() {
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModuleWImage::impl_create_widget(QString parent_id) {
+void *XModuleWImage::on_create_widget(QString parent_id) {
     xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
     parent_id_ = parent_id;
@@ -85,7 +85,7 @@ void *XModuleWImage::impl_create_widget(QString parent_id) {
 
 //---------------------------------------------------------------------
 //reset widget at stop
-void XModuleWImage::impl_reset_widget() {
+void XModuleWImage::on_reset_widget() {
     widget_ = nullptr;
     parent_id_.clear();
     parent_was_set_ = false;

@@ -23,18 +23,18 @@ XModuleRealsenseCamera::XModuleRealsenseCamera(QString class_name)
 //---------------------------------------------------------------------
 XModuleRealsenseCamera::~XModuleRealsenseCamera()
 {
-    impl_stop();
+    stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::impl_loaded() {
+void XModuleRealsenseCamera::on_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleRealsenseCamera::impl_button_pressed(QString button_id) {
+void XModuleRealsenseCamera::on_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -66,7 +66,7 @@ void XModuleRealsenseCamera::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::impl_start() {
+void XModuleRealsenseCamera::start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -103,7 +103,7 @@ void XModuleRealsenseCamera::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::impl_update() {
+void XModuleRealsenseCamera::update() {
     //если нажата кнопка - поставить флажок ожидания записи кадров на диск
     if (geti_save_frames_button()) {
         wait_save_frames_ = 1;
@@ -173,7 +173,7 @@ void XModuleRealsenseCamera::impl_update() {
 //запись кадра на диск
 void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
     //Создаем папку для записи
-    QString folder = xcore_abs_path(gets_save_folder(), true /*create_folder*/);
+    QString folder = xc_abs_path(gets_save_folder(), true /*create_folder*/);
 
     //время
     /*dd.MM.yyyy    21.05.2001
@@ -205,7 +205,7 @@ void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::impl_stop() {
+void XModuleRealsenseCamera::stop() {
     if (camera_started_) {
         camera_.close();
         set_started(false);

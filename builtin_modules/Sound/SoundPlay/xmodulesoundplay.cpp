@@ -22,13 +22,13 @@ XModuleSoundPlay::~XModuleSoundPlay()
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::impl_start() {
+void XModuleSoundPlay::start() {
     stop_fading_ = false;
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::impl_update() {
+void XModuleSoundPlay::update() {
     if (geti_play_button()) {
         play_sound();
     }
@@ -44,14 +44,14 @@ void XModuleSoundPlay::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::impl_stop() {
+void XModuleSoundPlay::stop() {
     player_.reset();
     stop_fading_ = false;
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::impl_button_pressed(QString button_id) {
+//void XModuleTimerm::on_button_pressed(QString button_id) {
 //}
 
 
@@ -63,7 +63,7 @@ int XModuleSoundPlay::media_volume(float v) {
 
 //---------------------------------------------------------------------
 void XModuleSoundPlay::play_sound() {
-    QString file_name = xcore_abs_path(gets_file_name());
+    QString file_name = xc_abs_path(gets_file_name());
 
     QFile file(file_name);
     xc_assert(QFile(file_name).exists(), "XModuleSoundPlay - file not exists: '" + file_name +"'");
@@ -102,7 +102,7 @@ void XModuleSoundPlay::stop_fade() {
         }
         else {
             stop_fading_ = true;
-            time_ = xcore_elapsed_time_sec();
+            time_ = xc_elapsed_time_sec();
         }
     }
 }
@@ -111,7 +111,7 @@ void XModuleSoundPlay::stop_fade() {
 void XModuleSoundPlay::update_fade() {
     if (player_.data()) {
         if (stop_fading_) {
-            float time = xcore_elapsed_time_sec();
+            float time = xc_elapsed_time_sec();
 
             float vol = xmapf_clamped(time, time_, time_+getf_fade_out_sec(), 1, 0);
             //xc_console_append(QString("vol %1").arg(vol));

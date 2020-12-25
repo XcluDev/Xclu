@@ -22,10 +22,10 @@ protected:
 #include "auto.h"
 
     //Выполнение
-    virtual void impl_loaded();
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
+    virtual void on_loaded();
+    virtual void start();
+    virtual void update();
+    virtual void stop();
 
     void apply_control_values();
 

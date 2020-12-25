@@ -95,11 +95,11 @@ protected:
 #include "auto.h"
 
     //Выполнение
-    virtual void impl_loaded();
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
-    virtual void impl_button_pressed(QString button_id);
+    virtual void on_loaded();
+    virtual void start();
+    virtual void update();
+    virtual void stop();
+    virtual void on_button_pressed(QString button_id);
 
     bool audio_tried_to_start_ = false;
     void start_audio();

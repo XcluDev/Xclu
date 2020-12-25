@@ -21,22 +21,22 @@ XModuleTextVariation::~XModuleTextVariation()
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::impl_start() {
+void XModuleTextVariation::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::impl_update() {
+void XModuleTextVariation::update() {
     sets_output_text(variate(gets_input_text(), 0));
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::impl_stop() {
+void XModuleTextVariation::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerariation::impl_button_pressed(QString button_id) {
+//void XModuleTimerariation::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

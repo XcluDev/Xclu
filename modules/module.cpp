@@ -255,7 +255,7 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
         gui_action(GuiStageBeforeStart, false /*not affect is_running()*/);
     }
 
-    //"hit" button in interface - for modules which process pressing inside impl_update
+    //"hit" button in interface - for modules which process pressing inside update
     interf()->_hit_button_(button_id);
 
     //исполнение нажатия кнопки

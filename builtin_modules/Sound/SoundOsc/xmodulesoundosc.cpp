@@ -121,7 +121,7 @@ XModuleSoundOsc::~XModuleSoundOsc()
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::impl_start() {
+void XModuleSoundOsc::start() {
     //Очистка переменных
 
     update_data();
@@ -133,13 +133,13 @@ void XModuleSoundOsc::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::impl_update() {
+void XModuleSoundOsc::update() {
     //считываем данные из GUI
     update_data();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::impl_stop() {
+void XModuleSoundOsc::stop() {
 
 }
 
@@ -174,7 +174,7 @@ void XModuleSoundOsc::update_data() {
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSoundOsc::impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+void XModuleSoundOsc::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     //получаем доступ к данным и звуковому буферу
     DataAccess access(data_);
     if (data_.out_enabled) {

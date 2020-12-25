@@ -21,19 +21,19 @@ XModulePrintConsole::~XModulePrintConsole()
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::impl_start() {
+void XModulePrintConsole::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::impl_update() {
+void XModulePrintConsole::update() {
     QString s;
     if (geti_add_title()) {
         s.append(gets_title());
     }
     if (geti_add_time_stamp()) {
         if (!s.isEmpty()) s.append(" ");
-        s.append(QString("(%1 sec)").arg(xcore_elapsed_time_sec()));
+        s.append(QString("(%1 sec)").arg(xc_elapsed_time_sec()));
     }
     QString val = gets_str();
     if (!val.isEmpty()) {
@@ -44,7 +44,7 @@ void XModulePrintConsole::impl_update() {
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::impl_stop() {
+void XModulePrintConsole::stop() {
 
 }
 

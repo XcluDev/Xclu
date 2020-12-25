@@ -56,7 +56,7 @@ void XModulePainter::set_screen_size(int2 size) {
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModulePainter::impl_create_widget(QString parent_id) {
+void *XModulePainter::on_create_widget(QString parent_id) {
     xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
     parent_id_ = parent_id;
     parent_was_set_ = true;
@@ -67,7 +67,7 @@ void *XModulePainter::impl_create_widget(QString parent_id) {
 
 //---------------------------------------------------------------------
 //reset widget at stop
-void XModulePainter::impl_reset_widget() {
+void XModulePainter::on_reset_widget() {
     widget_ = nullptr;
     parent_id_.clear();
     parent_was_set_ = false;

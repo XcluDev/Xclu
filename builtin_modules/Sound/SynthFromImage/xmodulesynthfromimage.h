@@ -32,15 +32,15 @@ public:
     ~XModuleSynthFromImage();
 protected:
 #include "auto.h"
-    virtual void impl_loaded() {}
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
+    virtual void on_loaded() {}
+    virtual void start();
+    virtual void update();
+    virtual void stop();
 
     //sound generation
     //"sound_buffer_add" call, fills `data` buffer
     //there are required to fill channels * samples values at data
-    virtual void impl_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
+    virtual void on_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
     XProtectedObject out_image_;
 

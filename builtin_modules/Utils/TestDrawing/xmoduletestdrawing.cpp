@@ -22,19 +22,19 @@ XModuleTestDrawing::~XModuleTestDrawing()
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::impl_start() {
+void XModuleTestDrawing::start() {
     //xc_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::impl_update() {
+void XModuleTestDrawing::update() {
     set_screen_size(int2(geti_screen_w(), geti_screen_h()));
     screen_repaint();
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::impl_stop() {
+void XModuleTestDrawing::stop() {
     //xc_console_append(QString("%1 - stop").arg(name()));
 }
 

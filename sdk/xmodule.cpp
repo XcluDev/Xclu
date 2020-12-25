@@ -26,7 +26,7 @@ QString XModule::name() {
 
 //---------------------------------------------------------------------
 void XModule::loaded_internal() {     //действия при загрузке модуля
-    impl_loaded();
+    on_loaded();
 }
 
 //---------------------------------------------------------------------
@@ -42,10 +42,10 @@ void XModule::update_internal() {
 void XModule::bang_internal() {
     if (general_is_enabled()) {
         if (!status_.was_started) {
-            impl_start();
+            start();
             status_.was_started = true;
         }
-        impl_update();
+        update();
     }
 }
 
@@ -54,7 +54,7 @@ void XModule::bang_internal() {
 void XModule::stop_internal() {
     if (status_.was_started) {
         status_.was_started = false;
-        impl_stop();
+        stop();
     }
     //status_.enabled__ = false;
 }
@@ -136,11 +136,11 @@ void XModule::button_pressed(QString button_id) {
     }
 
     //send as pressed event
-    impl_button_pressed(button_id);
+    on_button_pressed(button_id);
 }
 
 //---------------------------------------------------------------------
-//функция вызова между модулями, вызывает impl_call
+//функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
 void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *output) {
     try {
@@ -158,7 +158,7 @@ void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *ou
 
         //process universal function
         //if (is_enabled()) {
-        impl_call(function, input, output);
+        on_call(function, input, output);
         //}
     }
     catch (XException &e) {
@@ -186,7 +186,7 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
 
     //if parent_id is empty - it means that we need to delete widget
     if (parent_id.isEmpty()) {
-        impl_reset_widget();
+        on_reset_widget();
     }
     else {
         //проверяем, что еще не стартовали
@@ -197,7 +197,7 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
                     .arg(parent_id));
 
         //создаем виджет
-        void* widget = impl_create_widget(parent_id);
+        void* widget = on_create_widget(parent_id);
 
         //ставим его в выходной объект
         output->set_pointer("widget_pointer", widget);
@@ -213,36 +213,36 @@ void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
     int samples = sound.geti("samples");
     int channels = sound.geti("channels");
     float *data = sound.var_array("data")->data_float();
-    impl_sound_buffer_add(sample_rate, channels, samples, data);
+    on_sound_buffer_add(sample_rate, channels, samples, data);
 }
 
 //---------------------------------------------------------------------
-void XModule::impl_call(QString function, XObject * /*input*/, XObject * /*output*/) {
+void XModule::on_call(QString function, XObject * /*input*/, XObject * /*output*/) {
     xc_exception("Module '" + name()
-                   + "' can't process function '" + function + "', because impl_call() is not implemented");
+                   + "' can't process function '" + function + "', because on_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModule::impl_create_widget(QString /*parent_id*/) {
+void *XModule::on_create_widget(QString /*parent_id*/) {
     xc_exception("Module '" + name()
-                   + "' can't process function 'create_widget', because impl_create_widget() is not implemented");
+                   + "' can't process function 'create_widget', because on_create_widget() is not implemented");
     return nullptr;
 }
 
 //---------------------------------------------------------------------
 //resetting created widget (`create_widget` called with empty parent_id)
-void XModule::impl_reset_widget() {
+void XModule::on_reset_widget() {
     xc_exception("Module '" + name()
-                   + "' can't process function 'create_widget', because impl_reset_widget() is not implemented");
+                   + "' can't process function 'create_widget', because on_reset_widget() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`sound_buffer_add` call implementation, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModule::impl_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+void XModule::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xc_exception("Module '" + name()
-                   + "' can't process function 'sound_buffer_add', because impl_sound_buffer_add() is not implemented");
+                   + "' can't process function 'sound_buffer_add', because on_sound_buffer_add() is not implemented");
 }
 
 //---------------------------------------------------------------------

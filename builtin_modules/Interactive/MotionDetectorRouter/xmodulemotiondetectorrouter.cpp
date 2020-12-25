@@ -21,7 +21,7 @@ XModuleMotionDetectorRouter::~XModuleMotionDetectorRouter()
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::impl_start() {
+void XModuleMotionDetectorRouter::start() {
     //link images with internal objects
     setobject_output1(output_gui_[0]);
     setobject_output2(output_gui_[1]);
@@ -126,7 +126,7 @@ void XModuleMotionDetectorRouter::make_route() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::impl_update() {
+void XModuleMotionDetectorRouter::update() {
     //check starting
     if (ignore_frames_ > 0) {
         ignore_frames_--;
@@ -278,7 +278,7 @@ void XModuleMotionDetectorRouter::save_templates() {
     xc_assert(files.size() >= n_, "Not enough file names");
 
     for (int i=0; i<n_; i++) {
-        QString file_name = xcore_abs_path(files[i]);
+        QString file_name = xc_abs_path(files[i]);
         XObjectImage::save(output_image(i)->read().data(), file_name);
     }
 
@@ -292,20 +292,20 @@ void XModuleMotionDetectorRouter::load_templates() {
     QStringList files = get_strings_template_files();
     xc_assert(files.size() >= n_, "Not enough file names");
     for (int i=0; i<n_; i++) {
-       QString file_name = xcore_abs_path(files[i]);
+       QString file_name = xc_abs_path(files[i]);
        XObjectImage::load(template_image(i)->write().data(), file_name);
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::impl_stop() {
+void XModuleMotionDetectorRouter::stop() {
     started_ = 0;
     seti_started(started_);
 
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::impl_button_pressed(QString button_id) {
+void XModuleMotionDetectorRouter::on_button_pressed(QString button_id) {
 
 }
 

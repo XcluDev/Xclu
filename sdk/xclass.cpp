@@ -10,23 +10,23 @@ XClass::XClass(Module *module) {
 }
 
 //---------------------------------------------------------------------
-double XClass::xcore_elapsed_time_sec() {
+double XClass::xc_elapsed_time_sec() {
     return XCORE.elapsed_time_sec();
 }
 
 //---------------------------------------------------------------------
-float XClass::xcore_dt() {
+float XClass::xc_dt() {
     return XCORE.dt();
 }
 
 //---------------------------------------------------------------------
-QString XClass::xcore_project_folder() {   //full path to project folder
+QString XClass::xc_project_folder() {   //full path to project folder
     return XCORE.project_folder();
 }
 
 //---------------------------------------------------------------------
 //get absolute path to folder, given relative to project
-QString XClass::xcore_abs_path(QString relative_path, bool create_folder) {
+QString XClass::xc_abs_path(QString relative_path, bool create_folder) {
     return XCORE.absolute_path_from_project(relative_path, create_folder);
 }
 

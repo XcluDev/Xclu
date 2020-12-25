@@ -22,19 +22,19 @@ XModuleScanFolder::~XModuleScanFolder()
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::impl_start() {
+void XModuleScanFolder::start() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::impl_update() {
+void XModuleScanFolder::update() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::impl_stop() {
+void XModuleScanFolder::stop() {
 
 }
 

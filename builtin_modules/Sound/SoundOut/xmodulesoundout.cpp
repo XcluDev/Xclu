@@ -203,14 +203,14 @@ XModuleSoundOut::~XModuleSoundOut()
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::impl_loaded() {
+void XModuleSoundOut::on_loaded() {
     clear_string_connected_device_name();
     clear_string_local_console();
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::impl_button_pressed(QString button_id) {
+void XModuleSoundOut::on_button_pressed(QString button_id) {
     if (button_id == button_print_devices()) {
         //если требуется, напечатать все устройства
         print_devices();
@@ -222,7 +222,7 @@ void XModuleSoundOut::impl_button_pressed(QString button_id) {
 //Вывод низкоуровневого звука - https://doc.qt.io/qt-5/qaudiooutput.html
 //Пример Qt - Audio Output Example
 
-void XModuleSoundOut::impl_start() {
+void XModuleSoundOut::start() {
     //Очистка переменных
     audio_tried_to_start_ = false;
 
@@ -244,7 +244,7 @@ void XModuleSoundOut::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::impl_update() {
+void XModuleSoundOut::update() {
     //запустить устройство, если еще это не делали
     start_audio();
 
@@ -291,7 +291,7 @@ void XModuleSoundOut::check_volume_change() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::impl_stop() {
+void XModuleSoundOut::stop() {
     stop_audio();
 
 }

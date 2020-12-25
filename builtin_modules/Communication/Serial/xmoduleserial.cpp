@@ -44,18 +44,18 @@ void XModuleSerial::set_total_sent(int t) {
 //---------------------------------------------------------------------
 XModuleSerial::~XModuleSerial()
 {
-    impl_stop();
+    stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::impl_loaded() {
+void XModuleSerial::on_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleSerial::impl_button_pressed(QString button_id) {
+void XModuleSerial::on_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -152,7 +152,7 @@ void XModuleSerial::print_devices() {
 
 
 //---------------------------------------------------------------------
-void XModuleSerial::impl_start() {
+void XModuleSerial::start() {
     //Очистка переменных
     gui_clear();
 
@@ -250,14 +250,14 @@ void XModuleSerial::open_port() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::impl_update() {
-    //sending data processes at impl_button_pressed
+void XModuleSerial::update() {
+    //sending data processes at on_button_pressed
 
     //receiving data
     receive();
 
     //watchdog
-    double time = xcore_elapsed_time_sec();
+    double time = xc_elapsed_time_sec();
     if (geti_watchdog_send()) {
         if (time >= watchdog_sent_ + getf_watchdog_send_period()) {
             send_string(gets_watchdog_message());
@@ -314,7 +314,7 @@ void XModuleSerial::send_byte(int byte) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::impl_stop() {
+void XModuleSerial::stop() {
     if (connected_) {
         serialPort_.close();
         set_connected(false);

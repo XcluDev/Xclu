@@ -15,11 +15,11 @@ public:
 #include "auto.h"
 
 protected:
-    virtual void impl_loaded() {}
-    virtual void impl_start();
-    virtual void impl_update();
-    virtual void impl_stop();
-    //virtual void impl_button_pressed(QString button_id);
+    virtual void on_loaded() {}
+    virtual void start();
+    virtual void update();
+    virtual void stop();
+    //virtual void on_button_pressed(QString button_id);
 
     //Recursive function for building variation
     //For [A|B|C[D|E]] input it will generate randomly A,B,CD,CE.

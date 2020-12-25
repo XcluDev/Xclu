@@ -21,7 +21,7 @@ XModuleMotionDetector::~XModuleMotionDetector()
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_start() {
+void XModuleMotionDetector::start() {
     //link images with internal objects
     setobject_output_image(&out_image_);
     setobject_background_image(&out_background_);
@@ -55,7 +55,7 @@ void XModuleMotionDetector::impl_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_update() {
+void XModuleMotionDetector::update() {
 
     //Read image
     auto reader = getobject_input_image()->read();
@@ -114,8 +114,8 @@ void XModuleMotionDetector::impl_update() {
     params.block_event_sec = getf_block_event_sec();
 
 
-    float dt = xcore_dt();
-    float time = xcore_elapsed_time_sec();
+    float dt = xc_dt();
+    float time = xc_elapsed_time_sec();
     int nfires = 0;
     int N = 0;
     for (int y=0; y<H; y++) {
@@ -281,14 +281,14 @@ void XModuleMotionDetector::bang_off() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::impl_stop() {
+void XModuleMotionDetector::stop() {
     //send "off" at stop
     bang_off();
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::impl_button_pressed(QString button_id) {
+//void XModuleTimerm::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
