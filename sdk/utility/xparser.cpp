@@ -5,7 +5,7 @@
 float xparse_float(QString line, QString error_message) {
     bool ok;
     float value = line.toFloat(&ok);
-    xclu_assert(ok, error_message);
+    xc_assert(ok, error_message);
     return value;
 }
 
@@ -13,7 +13,7 @@ float xparse_float(QString line, QString error_message) {
 int xparse_int(QString line, QString error_message) {
     bool ok;
     float value = line.toInt(&ok);
-    xclu_assert(ok, error_message);
+    xc_assert(ok, error_message);
     return value;
 }
 

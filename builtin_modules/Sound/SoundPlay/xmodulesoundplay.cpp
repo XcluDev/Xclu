@@ -66,7 +66,7 @@ void XModuleSoundPlay::play_sound() {
     QString file_name = xcore_abs_path(gets_file_name());
 
     QFile file(file_name);
-    xclu_assert(QFile(file_name).exists(), "XModuleSoundPlay - file not exists: '" + file_name +"'");
+    xc_assert(QFile(file_name).exists(), "XModuleSoundPlay - file not exists: '" + file_name +"'");
     //QSound::play(file_name);
 
     player_.reset(new QMediaPlayer);
@@ -114,7 +114,7 @@ void XModuleSoundPlay::update_fade() {
             float time = xcore_elapsed_time_sec();
 
             float vol = xmapf_clamped(time, time_, time_+getf_fade_out_sec(), 1, 0);
-            //xclu_console_append(QString("vol %1").arg(vol));
+            //xc_console_append(QString("vol %1").arg(vol));
             player_->setVolume(media_volume(vol * getf_volume()));
             if (vol <= 0) {
                 stop_sound();

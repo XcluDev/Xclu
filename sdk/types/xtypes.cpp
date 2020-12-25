@@ -35,7 +35,7 @@ unsigned int XTypeIdSize(XTypeId type) {
     case XTypeId_int2:
         return sizeof(int2);
     default:
-        xclu_exception(QString("Unknown XTypeId %1").arg(type));
+        xc_exception(QString("Unknown XTypeId %1").arg(type));
         break;
     }
     return 0;
@@ -73,7 +73,7 @@ QString XTypeId_to_string(XTypeId type) {
     case XTypeId_int2:
         return "int2";
     default:
-        xclu_exception(QString("Unknown XTypeId %1").arg(type));
+        xc_exception(QString("Unknown XTypeId %1").arg(type));
         break;
     }
     return 0;
@@ -96,7 +96,7 @@ XTypeId string_to_XTypeId(QString type) {
     if (type == "vec3") return XTypeId_vec3;
     if (type == "vec4") return XTypeId_vec4;
     if (type == "int2") return XTypeId_int2;
-    xclu_exception(QString("Unknown XTypeId '%1'").arg(type));
+    xc_exception(QString("Unknown XTypeId '%1'").arg(type));
     return XTypeId_none;
 }
 
@@ -127,7 +127,7 @@ bool is_XTypeId_integer(XTypeId type) {
     case XTypeId_int2:
         return false;
     default:
-        xclu_exception(QString("Unknown XTypeId %1").arg(type));
+        xc_exception(QString("Unknown XTypeId %1").arg(type));
         break;
     }
     return 0;

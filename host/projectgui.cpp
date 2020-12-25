@@ -100,7 +100,7 @@ void ProjectGui::new_module(int i, QString class_name, QString name_hint) {
     if (module) {
         emit editor_modules->inserted_module(i, module->name());
         //Сигнал, что проект был изменен
-        xclu_document_modified();
+        xc_document_modified();
     }
 }
 
@@ -112,7 +112,7 @@ void ProjectGui::rename_module(int i, QString new_name) {
     editor_module->renamed_module();
     selected_module_updated();
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -122,7 +122,7 @@ void ProjectGui::delete_module(int i) {
     PROJ.delete_module(i);
     editor_modules->deleted_module(i);
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -131,7 +131,7 @@ void ProjectGui::duplicate_module(int i) {
     PROJ.duplicate_module(i);
     editor_modules->inserted_module(i+1, PROJ.module_by_index(i+1)->name());
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -140,7 +140,7 @@ void ProjectGui::swap_modules(int i) { //i<->i+1
     PROJ.swap_modules(i);
     editor_modules->swapped_modules(i);
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -149,7 +149,7 @@ void ProjectGui::swap_modules(int i) { //i<->i+1
 void ProjectGui::changed_module_selection(int i) {
     emit editor_module->changed_module_selection(i);
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -158,7 +158,7 @@ void ProjectGui::changed_module_selection(int i) {
 void ProjectGui::selected_module_updated() {
     //emit editor_module->selected_module_updated();
     //Сигнал, что проект был изменен
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------
@@ -172,7 +172,7 @@ void ProjectGui::on_changed_show_components_names(bool show) {
 void ProjectGui::show_links_editor() {
     auto module = editor_module->module();
     if (!module) {
-        xclu_message_box("Can't show Links Editor dialog, because there is no selected module");
+        xc_message_box("Can't show Links Editor dialog, because there is no selected module");
         return;
     }
     DialogEditLinks::call_dialog(module);

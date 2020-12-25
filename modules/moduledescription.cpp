@@ -70,7 +70,7 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
     if (name == field_class_name()) {
         //нельзя перезатереть имя, если оно уже было установлено
         //это важно во встроенных модулях - у них имя берется из названия папки
-        xclu_assert(class_name.isEmpty() || value.isEmpty(),
+        xc_assert(class_name.isEmpty() || value.isEmpty(),
                     QString("Modules loading: Conflicting %1, tries to rewrite '%2' by '%3'")
                     .arg(field_class_name()).arg(class_name).arg(value));
 
@@ -94,7 +94,7 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
     if (name == field_category()) {
         //нельзя перезатереть категорию, если она уже была установлена
         //это важно во встроенных модулях - у них категория берется из названия папки
-        xclu_assert(category.isEmpty() || value.isEmpty(),
+        xc_assert(category.isEmpty() || value.isEmpty(),
                     QString("Modules loading: Conflicting %1, tries to rewrite '%2' by '%3'")
                     .arg(field_class_name()).arg(category).arg(value));
 

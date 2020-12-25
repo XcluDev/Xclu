@@ -12,33 +12,33 @@
 
 //Вызовы исключений:
 //Исключение при парсинге и прочих внутренних операциях
-void xclu_exception(QString message);
+void xc_exception(QString message);
 
-void xclu_exception(ErrorInfo err);
+void xc_exception(ErrorInfo err);
 
 
 //Ошибка, после которой программа завершает работу
-void xclu_halt(QString message);
+void xc_halt(QString message);
 
 //Здесь assert обязательно делать макросом - чтобы если не выполнится, строки не создавались
-#define xclu_assert(cond, message) {if (!(cond)) xclu_exception(message);}
+#define xc_assert(cond, message) {if (!(cond)) xc_exception(message);}
 
 //Показ окна сообщений
-void xclu_message_box(QString message);
+void xc_message_box(QString message);
 
 //Вывод в лог - ConsoleView
-void xclu_console_warning(QString message, bool dirty = true);
-void xclu_console_append(QString message, bool dirty = true);
-void xclu_console_clear();
+void xc_console_warning(QString message, bool dirty = true);
+void xc_console_append(QString message, bool dirty = true);
+void xc_console_clear();
 
 //Сигнал, что проект был изменен
 //обращается прямо в MainWindow
-void xclu_document_modified();
+void xc_document_modified();
 
 //Copy text to clipboard
-void xclu_clipboard_set_text(QString text);
+void xc_clipboard_set_text(QString text);
 //Get text from clipboard
-QString xclu_clipboard_get_text();
+QString xc_clipboard_get_text();
 
 
 //Исключение внутри программы

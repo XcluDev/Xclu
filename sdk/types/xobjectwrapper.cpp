@@ -9,7 +9,7 @@
 
 //---------------------------------------------------------------------
 /*static*/ XObjectWrapper *XObjectWrapper::create_wrapper(const XObject *object) {
-    //xclu_assert(object, "Internal error in 'create_wrapper': object is nullptr");
+    //xc_assert(object, "Internal error in 'create_wrapper': object is nullptr");
     auto type = object->type();
     switch (type) {
     case XObjectTypeEmpty:
@@ -24,7 +24,7 @@
         return new XObjectImage(object);
         break;
     default:
-        xclu_exception(QString("Unknown object type '%1'").arg(type));
+        xc_exception(QString("Unknown object type '%1'").arg(type));
     }
     return nullptr;
 }

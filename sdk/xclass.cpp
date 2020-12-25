@@ -32,7 +32,7 @@ QString XClass::xcore_abs_path(QString relative_path, bool create_folder) {
 
 //---------------------------------------------------------------------
 void XClass::set_module(Module *module) {
-    xclu_assert(module, "Error at XClass::set_module(): module is nullptr");
+    xc_assert(module, "Error at XClass::set_module(): module is nullptr");
     module_ = module;
 }
 
@@ -62,40 +62,40 @@ bool XClass::was_changed_(QString name) {
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString XClass::gets_(QString name, int index, int index2) {
-    xclu_assert(module_, "Error at XClass::gets(): module is nullptr");
+    xc_assert(module_, "Error at XClass::gets(): module is nullptr");
     return module()->gets(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 //splits text using "\n"
 QStringList XClass::get_strings_(QString name) {
-    xclu_assert(module_, "Error at XClass::get_strings(): module is nullptr");
+    xc_assert(module_, "Error at XClass::get_strings(): module is nullptr");
     return module()->get_strings(name);
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index), string, text
 void XClass::sets_(QString name, QString v) {
-    xclu_assert(module_, "Error at XClass::sets(): module is nullptr");
+    xc_assert(module_, "Error at XClass::sets(): module is nullptr");
     module()->sets(name, v);
 }
 
 //---------------------------------------------------------------------
 void XClass::clear_string_(QString name) {
-    xclu_assert(module_, "Error at XClass::clear_string(): module is nullptr");
+    xc_assert(module_, "Error at XClass::clear_string(): module is nullptr");
     module()->clear_string(name);
 }
 
 //---------------------------------------------------------------------
 //дописать к строке, применимо где sets
 void XClass::append_string_(QString name, QString v, int extra_new_lines_count) {
-    xclu_assert(module_, "Error at XClass::append_string(): module is nullptr");
+    xc_assert(module_, "Error at XClass::append_string(): module is nullptr");
     module()->append_string(name, v, extra_new_lines_count);
 }
 
 //---------------------------------------------------------------------
 void XClass::append_string_(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
-    xclu_assert(module_, "Error at XClass::append_string(): module is nullptr");
+    xc_assert(module_, "Error at XClass::append_string(): module is nullptr");
     module()->append_string(name, v, extra_new_lines_count);
 }
 
@@ -104,21 +104,21 @@ void XClass::append_string_(QString name, QStringList v, int extra_new_lines_cou
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 int XClass::geti_(QString name, int index, int index2) {
-    xclu_assert(module_, "Error at XClass::geti(): module is nullptr");
+    xc_assert(module_, "Error at XClass::geti(): module is nullptr");
     return module()->geti(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
 void XClass::seti_(QString name, int v) {
-    xclu_assert(module_, "Error at XClass::seti(): module is nullptr");
+    xc_assert(module_, "Error at XClass::seti(): module is nullptr");
     module()->seti(name, v);
 }
 
 //---------------------------------------------------------------------
 //увеличение значения
 void XClass::increase_int_(QString name, int increase) { //value+=increase
-    xclu_assert(module_, "Error at XClass::increase_int(): module is nullptr");
+    xc_assert(module_, "Error at XClass::increase_int(): module is nullptr");
     module()->increase_int(name, increase);
 }
 
@@ -127,33 +127,33 @@ void XClass::increase_int_(QString name, int increase) { //value+=increase
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 float XClass::getf_(QString name, int index, int index2) {
-    xclu_assert(module_, "Error at XClass::getf(): module is nullptr");
+    xc_assert(module_, "Error at XClass::getf(): module is nullptr");
     return module()->getf(name, index, index2);
 }
 
 //---------------------------------------------------------------------
 //только out: float
 void XClass::setf_(QString name, float v) {
-    xclu_assert(module_, "Error at XClass::setf(): module is nullptr");
+    xc_assert(module_, "Error at XClass::setf(): module is nullptr");
     module()->setf(name, v);
 }
 
 //---------------------------------------------------------------------
 QString XClass::getraw_(QString name) {  //enum (rawtext)
-    xclu_assert(module_, "Error at XClass::getraw_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::getraw_(): module is nullptr");
     return module()->getraw(name);
 }
 
 //---------------------------------------------------------------------
 void XClass::set_raw_(QString name, QString v) { //только out: enum (rawtext)
-    xclu_assert(module_, "Error at XClass::set_raw_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::set_raw_(): module is nullptr");
     module()->set_raw(name, v);
 }
 
 //---------------------------------------------------------------------
 //enum (title)
 QString XClass::get_title_value_(QString name) {
-    xclu_assert(module_, "Error at XClass::get_title_value_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::get_title_value_(): module is nullptr");
     return module()->get_title_value(name);
 
 }
@@ -161,14 +161,14 @@ QString XClass::get_title_value_(QString name) {
 //---------------------------------------------------------------------
 //только out: enum (title)
 void XClass::set_title_value_(QString name, QString v) {
-    xclu_assert(module_, "Error at XClass::set_title_value_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::set_title_value_(): module is nullptr");
     module()->set_title_value(name, v);
 }
 
 //---------------------------------------------------------------------
 //Access to objects is only by pointers - because we are required not to copy data, it can be large
 XProtectedObject *XClass::get_object_(QString name) {
-    xclu_assert(module_, "Error at XClass::get_object_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::get_object_(): module is nullptr");
     return module()->get_object(name);
 }
 
@@ -176,7 +176,7 @@ XProtectedObject *XClass::get_object_(QString name) {
 //Set pointer to object
 //Note: object must be persistent, because only pointer to it is stored
 void XClass::set_object_(QString name, XProtectedObject *object) {
-    xclu_assert(module_, "Error at XClass::set_object_(): module is nullptr");
+    xc_assert(module_, "Error at XClass::set_object_(): module is nullptr");
     module()->set_object(name, object);
 }
 

@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------
 //Clipboard:
 /*static*/ QString XLink::get_link_from_clipboard() {
-    QString text = xclu_clipboard_get_text();
+    QString text = xc_clipboard_get_text();
     if (text.length() < Max_Link_Length) {
         return text;
      }
@@ -105,12 +105,12 @@ void XLinkParsed::setup(QString link_str0) {
 
     auto query = link.trimmed().split(" ");
     int n = query.size();
-    //xclu_assert(n >= 2
+    //xc_assert(n >= 2
     //            && !query.at(0).isEmpty()
     //            && !query.at(1).isEmpty(),
     //            "Bad link '" + link_str0 + "', expected at format webcam1->image or module1->line(0) or module1->line(1,2)");
-    xclu_assert(n < 3 || !query.at(2).isEmpty(), "Empty first index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
-    xclu_assert(n < 4 || !query.at(3).isEmpty(), "Empty second index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
+    xc_assert(n < 3 || !query.at(2).isEmpty(), "Empty first index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
+    xc_assert(n < 4 || !query.at(3).isEmpty(), "Empty second index at link '" + link_str0 + "', expected in format webcam1->image or module1->line(0) or module1->line(1,2)");
 
     module = (n >= 1) ? query.at(0) : "";
     var =  (n >= 2) ? query.at(1) : "";
@@ -171,7 +171,7 @@ void XLinkResolved::resolve() {
     module_ptr_ = XCORE.get_module(module);
     //check variable exists
 
-    xclu_assert(module_ptr_->interf()->has_item(var),
+    xc_assert(module_ptr_->interf()->has_item(var),
                 QString("Source module `%1` has no item `%2`")
                 .arg(module_ptr_->name())
                 .arg(var));
@@ -179,7 +179,7 @@ void XLinkResolved::resolve() {
 
 //---------------------------------------------------------------------
 Module *XLinkResolved::module_ptr() {
-    xclu_assert(module_ptr_, "XLinkResolved::module_ptr - nullptr for link " + module + "->" + var);
+    xc_assert(module_ptr_, "XLinkResolved::module_ptr - nullptr for link " + module + "->" + var);
     return module_ptr_;
 }
 

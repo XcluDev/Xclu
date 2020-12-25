@@ -141,7 +141,7 @@ void XGuiFloat::on_value_changed() {
 //---------------------------------------------------------------------
 void XGuiFloat::on_slider_changed(int v) {
     if (!during_changing_) {
-        //xclu_console_append("slider float " + QString::number(v));
+        //xc_console_append("slider float " + QString::number(v));
         set_value(range_.tick_to_value(v, ticks_));
     }
 }

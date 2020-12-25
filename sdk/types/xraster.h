@@ -154,7 +154,7 @@ public:
 
     template<typename T1>
     void add(const XRaster_<T1> &r) {
-        xclu_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
+        xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
             data[i] += r.pixel_unsafe(i);
         }
@@ -162,7 +162,7 @@ public:
 
     template<typename T1>
     void mult_by(const XRaster_<T1> &r) {
-        xclu_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
+        xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
             data[i] *= r.pixel_unsafe(i);
         }

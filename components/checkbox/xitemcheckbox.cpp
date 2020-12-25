@@ -20,7 +20,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_equal(line, name_, query);
-    xclu_assert(query.size()>=1, "no default value, expected '...q=0...'");
+    xc_assert(query.size()>=1, "no default value, expected '...q=0...'");
 
     //опции - "групповой" чекбокс
     QString options = pre_description.options;
@@ -28,7 +28,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
         //является ли "групповым"
         is_group_checkbox_ = (options == "group");
         //какая-то из опций должна быть включена, если переданы не пустые
-        xclu_assert(is_group_checkbox_, "Unknown option, expected '... checkbox(group)...'");
+        xc_assert(is_group_checkbox_, "Unknown option, expected '... checkbox(group)...'");
     }
 
     //range setup
@@ -43,7 +43,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
 //---------------------------------------------------------------------
 //Function for setting value using link
 void XItemCheckbox::set_value_from_link(XLinkResolved *linkres) {
-    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }

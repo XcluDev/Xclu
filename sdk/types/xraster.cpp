@@ -97,7 +97,7 @@ void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
     int h = qimage.size().height();
 
     auto format = qimage.format();
-    xclu_assert(format == QImage::Format_RGB32,
+    xc_assert(format == QImage::Format_RGB32,
                 "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
@@ -123,7 +123,7 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
     int h = qimage.size().height();
 
     auto format = qimage.format();
-    xclu_assert(format == QImage::Format_RGB32,
+    xc_assert(format == QImage::Format_RGB32,
                 "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
@@ -203,14 +203,14 @@ QImage XRaster::link(XRaster_u8c3 &raster) {
 //---------------------------------------------------------------------
 void XRaster::load(QString file_name, XRaster_u8 &raster) {
     QImage qimage;
-    xclu_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
+    xc_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
 }
 
 //---------------------------------------------------------------------
 void XRaster::load(QString file_name, XRaster_u8c3 &raster) {
     QImage qimage;
-    xclu_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
+    xc_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
 }
 
@@ -218,7 +218,7 @@ void XRaster::load(QString file_name, XRaster_u8c3 &raster) {
 void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int quality) {
     QImage qimage;
     convert(raster, qimage);
-    xclu_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
+    xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
                 "save: Can't save image '" + file_name + "'");
 }
 
@@ -226,7 +226,7 @@ void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int qu
 void XRaster::save(XRaster_u8c3 &raster, QString file_name, QString format, int quality) {
     QImage qimage;
     convert(raster, qimage);
-    xclu_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
+    xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
                 "save: Can't save image '" + file_name + "'");
 }
 

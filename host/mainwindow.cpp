@@ -112,7 +112,7 @@ void MainWindow::on_actionNew_Project_triggered()
 {
     if (!maybeSave()) return;
 
-    xclu_console_append("New project");
+    xc_console_append("New project");
     newProjectStartup();
 }
 
@@ -125,7 +125,7 @@ void MainWindow::newProjectStartup() {
 void MainWindow::closeProject() {
     if (XCORE.is_running()) return;
 
-    xclu_console_clear();//очистка списка сообщений
+    xc_console_clear();//очистка списка сообщений
 
     PROJ_GUI->before_close_project();
     PROJ.new_project();
@@ -196,13 +196,13 @@ void MainWindow::on_actionTest_Module_Interface_triggered()
 void MainWindow::on_actionUpdate_auto_h_files_for_all_modules_triggered()
 {
     try {
-        xclu_console_append("Updating auto.h files for all modules...");
+        xc_console_append("Updating auto.h files for all modules...");
         ExportInterface exporter;
         exporter.export_all_builtin_h_files();
-        xclu_console_append("Updating finished");
+        xc_console_append("Updating finished");
     }
     catch(XException& e) {
-        xclu_message_box("Error during export: " + e.whatQt());
+        xc_message_box("Error during export: " + e.whatQt());
     }
 }
 
@@ -227,7 +227,7 @@ void MainWindow::on_actionStop_triggered()
 }
 
 //---------------------------------------------------------------------
-//сигнал извне, из xclu_document_modified(), что проект был изменен
+//сигнал извне, из xc_document_modified(), что проект был изменен
 void MainWindow::set_document_modified() {
     if (!is_document_modified()) {
         setWindowModified(true);
@@ -340,8 +340,8 @@ bool MainWindow::maybeSave() {
 void MainWindow::openProject(const QString &fileName) {
     closeProject();
     bool dirty = false; //не помечаем, что в консоли есть ошибки, а просто сообщение
-    xclu_console_append("Loading project `" + fileName + "`", dirty);
-    xclu_console_append("", dirty);
+    xc_console_append("Loading project `" + fileName + "`", dirty);
+    xc_console_append("", dirty);
 
     auto load_result = PROJ.load_project(fileName);
     if (load_result != Project::LoadProjectStatusNo) {
@@ -350,7 +350,7 @@ void MainWindow::openProject(const QString &fileName) {
         set_current_file(fileName);
         //если были warnings при загрузке - то, ставим флажок изменения проекта, так как при сохранении он изменится
         if (load_result == Project::LoadProjectStatusWarnings) {
-            xclu_document_modified();
+            xc_document_modified();
         }
 
         //Если требуется - автозапуск проекта
@@ -467,7 +467,7 @@ void MainWindow::execute_run() {
         //вычисляем частоту обновления
         //float FPS = PROJ.properties().frame_rate;
         int frame_rate = XCORE.working_properties().get_frame_rate();
-        xclu_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
+        xc_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
         //запускаем таймер
         int delay = int(1000.0/frame_rate); //TODO вообще, при больших частотах будет вызываться неравномерно.
         timer->start(delay);
@@ -534,7 +534,7 @@ void MainWindow::execute_update() {
 //---------------------------------------------------------------------
 void MainWindow::set_state(ProjectRunState run_state) {
     //Закомментировал проверку - так как при закрытии окна это событие может прийти параллельно с таймером
-    //xclu_assert(run_state != run_state_, "Internal error - MainWindow::set_state the same state");
+    //xc_assert(run_state != run_state_, "Internal error - MainWindow::set_state the same state");
     if (run_state != run_state_) {
         run_state_ = run_state;
         update_window_state();

@@ -129,7 +129,7 @@ void XGuiInt::on_value_changed() {
 //---------------------------------------------------------------------
 void XGuiInt::on_slider_changed(int v) {
     if (!during_changing_) {    //for `int` - that is here - is not required, but nevertheless
-        //xclu_console_append("slider " + QString::number(v));
+        //xc_console_append("slider " + QString::number(v));
         set_value(v);
     }
 }

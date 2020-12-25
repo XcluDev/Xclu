@@ -81,17 +81,17 @@ void XShaderBuffer::clear() {
 //---------------------------------------------------------------------
 //Copy data to CPU
 void XShaderBuffer::read_to_cpu(void *data, int size_bytes) {
-    xclu_assert(data, "XShaderBuffer::read_to_cpu - bad input pointer");
+    xc_assert(data, "XShaderBuffer::read_to_cpu - bad input pointer");
 
     activate_context();
 
     bind();
-    xclu_assert(shader_buffer_.read(0, data, size_bytes), "XShaderBuffer::read_to_cpu - error reading buffer");
+    xc_assert(shader_buffer_.read(0, data, size_bytes), "XShaderBuffer::read_to_cpu - error reading buffer");
 
     //void *ptr = shader_buffer_.map(QOpenGLBuffer::ReadOnly);
-    //xclu_assert(ptr, "XShaderBuffer::read_to_cpu - can't map to CPU");
+    //xc_assert(ptr, "XShaderBuffer::read_to_cpu - can't map to CPU");
     //memcpy(data, ptr, size_bytes);
-    //xclu_assert(shader_buffer_.unmap(), "XShaderBuffer::read_to_cpu - can't unmap");
+    //xc_assert(shader_buffer_.unmap(), "XShaderBuffer::read_to_cpu - can't unmap");
 
     unbind();
 }
@@ -214,7 +214,7 @@ void XGlContext::gl_assert(QString message) {
             errors.push_back(QString::number(error));
             error = gl43->glGetError();
         } while (error != GL_NO_ERROR);
-        xclu_exception("XGlContext " + message + ", OpenGL error code(s): " + errors.join(","));
+        xc_exception("XGlContext " + message + ", OpenGL error code(s): " + errors.join(","));
     }
 
 }
@@ -222,7 +222,7 @@ void XGlContext::gl_assert(QString message) {
 //---------------------------------------------------------------------
 //Check Qt wrapper error
 void XGlContext::xassert(bool condition, QString message) {
-    xclu_assert(condition, "XGlContext + " + message);
+    xc_assert(condition, "XGlContext + " + message);
 }
 
 //---------------------------------------------------------------------

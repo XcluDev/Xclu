@@ -27,7 +27,7 @@ QString font_family_values() {
 
     QString style_file_name = xclu::builtin_theme_folder() + xclu::builtin_theme_name() + ".qss";
     QFile file(style_file_name);
-    xclu_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
+    xc_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
     QString style_sheet = QLatin1String(file.readAll());
 
 
@@ -47,7 +47,7 @@ QString font_family_values() {
 
   /*  QString style_file_name = xclu::builtin_folder() + "/theme.css";
     QFile file(style_file_name);
-    xclu_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
+    xc_assert(file.open(QFile::ReadOnly | QFile::Text), "Can't load theme from '" + style_file_name + "'");
     QString style_sheet = QLatin1String(file.readAll());
 
     window->setStyleSheet(style_sheet);
@@ -123,7 +123,7 @@ void print_fonts() {
 //---------------------------------------------------------------------
 //папка с темами
 QString builtin_themes_folder() {
-    return xclu_builtin_resources_folder() + "themes/";
+    return xc_builtin_resources_folder() + "themes/";
 }
 
 //имя выбранной темы

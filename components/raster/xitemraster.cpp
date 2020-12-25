@@ -29,7 +29,7 @@ XItemRaster_<TRaster>::XItemRaster_(ModuleInterface *interf, const XItemPreDescr
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_spaced(line, name_, query);
-    //xclu_assert(query.size()>=1, "no default value, expected '...q=0...'");
+    //xc_assert(query.size()>=1, "no default value, expected '...q=0...'");
 
     //опции - типы объектов
     QString options = pre_description.options;
@@ -64,7 +64,7 @@ XRaster_<TRaster> *XItemRaster_<TRaster>::get_raster() {
 //raises exception if empty
 template<typename TRaster>
 XRaster_<TRaster> &XItemRaster_<TRaster>::get_raster_ref() {
-    xclu_assert(!is_empty(), "XItemRaster_<TRaster>::get_raster_ref error - raster is empty");
+    xc_assert(!is_empty(), "XItemRaster_<TRaster>::get_raster_ref error - raster is empty");
     return *raster_.data();
 }
 
@@ -101,7 +101,7 @@ void XItemRaster_<TRaster>::var_to_gui_internal() {
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 template<typename TRaster>
 void XItemRaster_<TRaster>::copy_data_to_internal(XItem *item) {
-    xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
+    xc_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
     XObjectRead(get_object()).copy_to(item->get_object());
 }
 

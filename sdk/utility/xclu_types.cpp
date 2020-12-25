@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------
 void ErrorInfo::throw_error() {    //если есть ошибка - сгенерировать исключение
     if (is_error()) {
-        xclu_exception(error_text());
+        xc_exception(error_text());
     }
 }
 
 //---------------------------------------------------------------------
 QString Type_to_string(int i, int N, const QString array[]) {
-    xclu_assert(i >= 0 && i < N, QString("Can't convert type index %1 to string %2")
+    xc_assert(i >= 0 && i < N, QString("Can't convert type index %1 to string %2")
                                          .arg(i).arg(array[0] + "," + array[1] + ",..."));
     return array[i];
 }
@@ -24,7 +24,7 @@ int string_to_Type(const QString &str, int N, const QString array[]) {
     for (int i=0; i<N; i++) {
         if (str == array[i]) return i;
     }
-    xclu_exception(QString("Can't convert string '%1' to type %2")
+    xc_exception(QString("Can't convert string '%1' to type %2")
                    .arg(str).arg(array[0] + "," + array[1] + ",..."));
     return 0;
 }

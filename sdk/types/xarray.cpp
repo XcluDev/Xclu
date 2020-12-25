@@ -33,7 +33,7 @@ void XArray::fill(int v) {
 //---------------------------------------------------------------------
 void XArray::fill(double v) {
     if (is_empty()) return;
-    xclu_assert(is_float() || is_double(), "It's allowed to fill only float and double arrays with floats");
+    xc_assert(is_float() || is_double(), "It's allowed to fill only float and double arrays with floats");
     if (is_float()) {
         for (quint32 i=0; i<size_; i++) {
             setf(i, v);
@@ -49,7 +49,7 @@ void XArray::fill(double v) {
 
 //---------------------------------------------------------------------
 void XArray::allocate(unsigned int size, XTypeId data_type) {
-    xclu_assert(size>=0, QString("Bad total array size %1").arg(size));
+    xc_assert(size>=0, QString("Bad total array size %1").arg(size));
     quint32 elem_size = XTypeIdSize(data_type);
     quint32 size_bytes = elem_size * size;
 
@@ -120,7 +120,7 @@ void const *XArray::item_pointer(qint32 index) const {
 
 //---------------------------------------------------------------------
 int XArray::geti(qint32 index) const {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_u8:
         return data_u8()[index];
@@ -135,7 +135,7 @@ int XArray::geti(qint32 index) const {
     case XTypeId_u32:
         return data_u32()[index];
     default:
-        xclu_exception("Can't get integer value for array");
+        xc_exception("Can't get integer value for array");
         break;
     }
     return 0;
@@ -144,7 +144,7 @@ int XArray::geti(qint32 index) const {
 
 //---------------------------------------------------------------------
 void XArray::seti(qint32 index, int v) {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_u8:
         data_u8()[index] = v;
@@ -165,21 +165,21 @@ void XArray::seti(qint32 index, int v) {
         data_u32()[index] = v;
         break;
     default:
-        xclu_exception("Can't set integer value for array");
+        xc_exception("Can't set integer value for array");
         break;
     }
 }
 
 //---------------------------------------------------------------------
 float XArray::getf(qint32 index) const {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_float:
         return data_float()[index];
     case XTypeId_double:
         return data_double()[index];
     default:
-        xclu_exception("Can't get float value for array");
+        xc_exception("Can't get float value for array");
         break;
     }
     return 0;
@@ -187,7 +187,7 @@ float XArray::getf(qint32 index) const {
 
 //---------------------------------------------------------------------
 void XArray::setf(qint32 index, float v) {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_float:
         data_float()[index] = v;
@@ -196,21 +196,21 @@ void XArray::setf(qint32 index, float v) {
         data_double()[index] = v;
         break;
     default:
-        xclu_exception("Can't set float value for array");
+        xc_exception("Can't set float value for array");
         break;
     }
 }
 
 //---------------------------------------------------------------------
 double XArray::get_double(qint32 index) const {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_float:
         return data_float()[index];
     case XTypeId_double:
         return data_double()[index];
     default:
-        xclu_exception("Can't get double value for array");
+        xc_exception("Can't get double value for array");
         break;
     }
     return 0;
@@ -218,7 +218,7 @@ double XArray::get_double(qint32 index) const {
 
 //---------------------------------------------------------------------
 void XArray::set_double(qint32 index, double v) {
-    xclu_assert(index >= 0 && index < size_, "Bad index for array access");
+    xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
     case XTypeId_float:
         data_float()[index] = v;
@@ -227,7 +227,7 @@ void XArray::set_double(qint32 index, double v) {
         data_double()[index] = v;
         break;
     default:
-        xclu_exception("Can't set double value for array");
+        xc_exception("Can't set double value for array");
         break;
     }
 }
@@ -237,7 +237,7 @@ void XArray::set_double(qint32 index, double v) {
 получение массивов данных для быстрой работы
 quint8* XArray::data_u8() {
     if (size_bytes_ == 0) return nullptr;
-    xclu_assert(data_type_ == XTypeId_u8, "Array has no " "u8" " pointer");
+    xc_assert(data_type_ == XTypeId_u8, "Array has no " "u8" " pointer");
     return (quint8*)(&data_[0]);
 }
 
@@ -245,14 +245,14 @@ quint8* XArray::data_u8() {
 #define XArray_get_data(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE* XArray::data_##TYPE_NAME() { \
         if (size_bytes_ == 0) return nullptr; \
-        xclu_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xc_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 
 #define XArray_get_data_const(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE const* XArray::data_##TYPE_NAME() const { \
         if (size_bytes_ == 0) return nullptr; \
-        xclu_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xc_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 

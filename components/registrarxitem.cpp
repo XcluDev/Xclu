@@ -27,12 +27,12 @@ QMap<QString, XItemCreateFunction> *xitem_registered_classes_ = nullptr;
 //---------------------------------------------------------------------
 //Create item object
 /*static*/ XItem *RegistrarXItem::create_xitem(ModuleInterface *interf, const XItemPreDescription *pre_description) {
-    xclu_assert(xitem_registered_classes_, "No modules classes were added at startup");
+    xc_assert(xitem_registered_classes_, "No modules classes were added at startup");
 
     QString class_name = pre_description->type;
 
     //check the item class is registered
-    xclu_assert(is_xitem_registered(class_name), "Unknown item type " + class_name);
+    xc_assert(is_xitem_registered(class_name), "Unknown item type " + class_name);
 
     XItemCreateFunction creator_fun = (*xitem_registered_classes_)[class_name];
 

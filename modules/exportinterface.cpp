@@ -8,8 +8,8 @@
 ExportInterface::ExportInterface()
 {
     //Reading template
-    QString file_name = xclu_module_h_template_file();
-    templ_ = xclu_read_text_file(file_name);
+    QString file_name = xc_module_h_template_file();
+    templ_ = xc_read_text_file(file_name);
 }
 
 //---------------------------------------------------------------------
@@ -48,7 +48,7 @@ void ExportInterface::export_to_h_file(ModuleInterface *interf, QString folder) 
         //QStringList list = item->generate_cpp_header();
     }
 
-    xclu_write_text_file(file, file_name);
+    xc_write_text_file(file, file_name);
 }
 
 //---------------------------------------------------------------------
@@ -79,7 +79,7 @@ void ExportInterface::export_all_builtin_h_files() {
             export_to_h_file(interf.data(), seed->folder());
         }
         catch(XException& /*e*/) {
-            xclu_console_append("Error at `" + seed->description.class_name + "`");
+            xc_console_append("Error at `" + seed->description.class_name + "`");
         }
     }
 

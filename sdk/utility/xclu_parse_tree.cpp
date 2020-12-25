@@ -44,7 +44,7 @@ void XcluParseTree::parse_internal(const QStringList &lines, int &pos, int index
         new_item.indent = indent;
 
         //родитель
-        xclu_assert(index >= 0, "Parsing error at '" + line0 + "'");
+        xc_assert(index >= 0, "Parsing error at '" + line0 + "'");
         int indent0 = items[index].indent;
         //Помните: нельзя взять ссылку от items[index] и затем ее использовать,
         //так как он меняет себя при вставке new_item, и ссылка становится недействительной!
@@ -64,7 +64,7 @@ void XcluParseTree::parse_internal(const QStringList &lines, int &pos, int index
         if (indent == indent0) {
             //продолжаем
             int parent = items[index].parent;
-            xclu_assert(parent >= 0, "Parsing error, wrong indentation at '" + line0 + "'");
+            xc_assert(parent >= 0, "Parsing error, wrong indentation at '" + line0 + "'");
 
             //вставляем в список
             new_item.parent = parent;

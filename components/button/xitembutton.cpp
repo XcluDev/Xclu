@@ -13,7 +13,7 @@ XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre
     : XItem_<int>(interf, pre_description)
 {
     //Button не может быть out
-    xclu_assert(pre_description.qualifier != XQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
+    xc_assert(pre_description.qualifier != XQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
 
     //page Main_page
     name_ = pre_description.line_to_parse;
@@ -33,7 +33,7 @@ XGui *XItemButton::create_gui(XGuiPageBuilder &page_builder) {
 //вызывается из gui при нажатии кнопки
 void XItemButton::callback_button_pressed() {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
-    xclu_assert(interf(),
+    xc_assert(interf(),
                 "Internal error in XItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
 
     //hit_value() will be called from there
@@ -52,7 +52,7 @@ int XItemButton::value_int() {
 //---------------------------------------------------------------------
 //Function for setting value using link
 void XItemButton::set_value_from_link(XLinkResolved *linkres) {
-    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }

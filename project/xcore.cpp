@@ -92,7 +92,7 @@ QString XCore::absolute_path_from_project(QString relative_path, bool create_fol
     QString path = dir.absoluteFilePath(relative_path);
     if (create_folder) {
         QDir dir;
-        xclu_assert(dir.mkpath(path), "Can't create folder " + path);
+        xc_assert(dir.mkpath(path), "Can't create folder " + path);
     }
     return path;
 }

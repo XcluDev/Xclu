@@ -218,7 +218,7 @@ void XModuleWebcamera::update_camera() {
 void XModuleWebcamera::print_devices() {
     QStringList list;
     list.append("Connected Web Cameras:");
-    //xclu_console_append("Connected Web Cameras:");
+    //xc_console_append("Connected Web Cameras:");
 
     bool print_serials = geti_print_serials();
 
@@ -228,7 +228,7 @@ void XModuleWebcamera::print_devices() {
         QString camera = QString::number(i) + ": " + info.description();
         list.append(camera);
         if (print_serials) list.append("  '" + info.deviceName() + "'");
-        //xclu_console_append(camera);
+        //xc_console_append(camera);
     }
     clear_string_local_console();
     append_string_local_console(list, 1);
@@ -243,7 +243,7 @@ void XModuleWebcamera::print_formats() {
 
         QStringList list;
         list.append("Supported Formats for '" + device_name + "'");
-        //xclu_console_append("Supported Formats for '" + device_name + "'");
+        //xc_console_append("Supported Formats for '" + device_name + "'");
 
         //загружаем камеру, чтобы можно было получить список форматов
         if (!camera_started_) {
@@ -262,7 +262,7 @@ void XModuleWebcamera::print_formats() {
             line = line.arg(s.resolution().width()).arg(s.resolution().height())
                     .arg(fps0).arg(fps1);
             list.append(line);
-            //xclu_console_append(line);
+            //xc_console_append(line);
         }
         clear_string_local_console();
         append_string_local_console(list, 1);
@@ -278,7 +278,7 @@ void XModuleWebcamera::start_camera() {
 
         //выбор устройства
         const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
-        xclu_assert(!cameras.empty(), "No connected devices");
+        xc_assert(!cameras.empty(), "No connected devices");
 
         auto method = gete_select_device();
         switch (method) {
@@ -288,7 +288,7 @@ void XModuleWebcamera::start_camera() {
         }
         case select_device_By_Index: {
                 int name = geti_device_index();
-                xclu_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
+                xc_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
                 start_camera(cameras[name]);
                 break;
         }
@@ -317,7 +317,7 @@ void XModuleWebcamera::start_camera() {
         default:
             //мы здесь не должны быть, так как все методы запуска рассмотренли,
             //поэтому выдаем ошибку
-            xclu_exception(QString("Bad select_device value '%1'").arg(method));
+            xc_exception(QString("Bad select_device value '%1'").arg(method));
         }
     }
 
@@ -385,10 +385,10 @@ int2 XModuleWebcamera::get_gui_resolution() {
     else {
         //требуется распарсить "1280_x_720"
         auto list = res_string.split("_x_");
-        xclu_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
+        xc_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
         res = int2(list.at(0).toInt(), list.at(1).toInt());
     }
-    xclu_assert(res.x > 0 && res.y > 0, QString("Can't start camera, bad resolution %1x%2").arg(res.x).arg(res.y));
+    xc_assert(res.x > 0 && res.y > 0, QString("Can't start camera, bad resolution %1x%2").arg(res.x).arg(res.y));
     return res;
 }
 
@@ -407,7 +407,7 @@ int XModuleWebcamera::get_gui_frame_rate() {
         //FPS записано числом в строке
         fps = fps_string.toInt();
     }
-    xclu_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
+    xc_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
     return fps;
 }
 

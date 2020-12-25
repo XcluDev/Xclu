@@ -37,7 +37,7 @@ void XObject::set_type(XObjectType type) {
 //---------------------------------------------------------------------
 //проверить, что объект имеет конкретный тип, если нет - то выдаст expeption
 void XObject::assert_type(XObjectType expected_type) const {
-    xclu_assert(type() == expected_type,
+    xc_assert(type() == expected_type,
             QString("Expected object of type '%1', but get %2")
                 .arg(object_type_to_string(expected_type))
                 .arg(object_type_to_string(type()))
@@ -95,7 +95,7 @@ void XObject::clear() {
 
 //---------------------------------------------------------------------
 void XObject::copy_to(XObject *object) const {
-    xclu_assert(object, "nullptr in XObject::copy_to");
+    xc_assert(object, "nullptr in XObject::copy_to");
 
     XObject &obj = *object;
 
@@ -153,21 +153,21 @@ XObject_has_(pointer)
 //---------------------------------------------------------------------
 /* Макрос для функций получения значения geti, getf, ...
 QString XObject::var_string(QString name, bool create_if_not_exists) const {
-    xclu_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
+    xc_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
     return string_[name];
 }
 */
 
 #define XObject_get_(SHORT_TYPE, TYPE_NAME, CPP_TYPE, FUN_CONST) \
     CPP_TYPE XObject::get##SHORT_TYPE(QString name) FUN_CONST { \
-        xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
+        xc_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
 #define XObject_get_pointer_(TYPE_NAME, CPP_TYPE, FUN_CONST) \
     CPP_TYPE XObject::get_##TYPE_NAME(QString name) FUN_CONST { \
-        xclu_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
+        xc_assert(has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         auto result = TYPE_NAME##_[name]; \
-        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr during calling 'XObject::get"));\
+        xc_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr during calling 'XObject::get"));\
         return result; \
     }
 
@@ -184,26 +184,26 @@ XObject_get_pointer_(pointer,void *,)
 //---------------------------------------------------------------------
 /* Макрос для функций получения значения var_int, var_float, ...
 QString &XObject::var_string(QString name, bool create_if_not_exists) {
-    xclu_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
+    xc_assert(create_if_not_exists || has_float(name), "Object has no string '" + name + "'");
     return string_[name];
 }
 */
 
 #define XObject_var_(TYPE_NAME, CPP_TYPE) \
     CPP_TYPE XObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
-        xclu_assert(create_if_not_exists || has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
+        xc_assert(create_if_not_exists || has_##TYPE_NAME(name), "Object has no "#TYPE_NAME" '" + name + "'"); \
         return TYPE_NAME##_[name]; \
     }
 
 #define XObject_var_pointer_(TYPE_NAME, CPP_TYPE) \
     CPP_TYPE XObject::var_##TYPE_NAME(QString name, bool create_if_not_exists) { \
         bool has = has_##TYPE_NAME(name); \
-        xclu_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME" '" + name + "'"); \
+        xc_assert(create_if_not_exists || has, "Object has no "#TYPE_NAME" '" + name + "'"); \
         if (!has) { \
             TYPE_NAME##_.insert(name, create_##TYPE_NAME(name));      \
         }           \
         auto result = TYPE_NAME##_[name]; \
-        xclu_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr, during calling 'XObject::var'"));\
+        xc_assert(result != nullptr, QString("Object "#TYPE_NAME" '%1' is nullptr, during calling 'XObject::var'"));\
         return TYPE_NAME##_[name]; \
     }
 
@@ -234,21 +234,21 @@ XObject_set_(s, string, const QString &)
 XObject_set_(_pointer,pointer,void *)
 
 XArray *XObject::create_array(QString name) {
-    xclu_assert(!has_array(name), QString("Array '%1' is already created in object").arg(name));
+    xc_assert(!has_array(name), QString("Array '%1' is already created in object").arg(name));
     XArray *array = new XArray();
     array_[name] = array;
     return array;
 }
 
 QStringList *XObject::create_strings(QString name) {
-    xclu_assert(!has_array(name), QString("Strings '%1' are already created in object").arg(name));
+    xc_assert(!has_array(name), QString("Strings '%1' are already created in object").arg(name));
     QStringList *strings = new QStringList();
     strings_[name] = strings;
     return strings;
 }
 
 XObject *XObject::create_object(QString name, XObjectType type) {
-    xclu_assert(!has_object(name), QString("Subobject '%1' is already created in object").arg(name));
+    xc_assert(!has_object(name), QString("Subobject '%1' is already created in object").arg(name));
     XObject *object = new XObject(type);
     object_[name] = object;
     return object;

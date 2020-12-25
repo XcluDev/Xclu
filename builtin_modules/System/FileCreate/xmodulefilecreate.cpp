@@ -41,22 +41,22 @@ void XModuleFileCreate::impl_button_pressed(QString button_id) {
             size = uint64(getf_file_size_gb() * (1024*1024*1024));
             break;
         default:
-            xclu_exception("XModuleFileCreate::impl_button_pressed - bad Unit of file size measure");
+            xc_exception("XModuleFileCreate::impl_button_pressed - bad Unit of file size measure");
         }
 
         //Getting file name and checking it's not exists
         QString file_name0 = gets_file_name();
-        xclu_assert(!file_name0.isEmpty(), "Empty file name");
+        xc_assert(!file_name0.isEmpty(), "Empty file name");
         QString file_path = xcore_abs_path(gets_file_name());
         QString short_name = QFileInfo(file_name0).fileName();
 
         //Check file is not exists - currently we support writing only to new files
-        xclu_assert(!QFile(file_path).exists(), "File '" + short_name + "' already exists, please choose another");
+        xc_assert(!QFile(file_path).exists(), "File '" + short_name + "' already exists, please choose another");
 
 
         //Creating file
         QFile file(file_path);
-        xclu_assert(file.open(QIODevice::WriteOnly), "Can't create " + short_name);
+        xc_assert(file.open(QIODevice::WriteOnly), "Can't create " + short_name);
 
         //Prepare block for writing
         uint64 block_size = 10*1024*1024;  //we will write file by such blocks
@@ -81,8 +81,8 @@ void XModuleFileCreate::impl_button_pressed(QString button_id) {
 
                 //write
                 qint64 written = file.write((char *)&block[0], toWrite);
-                xclu_assert(written != -1, "Error writing file " + short_name);
-                xclu_assert(written == toWrite, "Error while writing to file " + short_name + ", may be disk is full");
+                xc_assert(written != -1, "Error writing file " + short_name);
+                xc_assert(written == toWrite, "Error while writing to file " + short_name + ", may be disk is full");
 
                 ready += written;
             }
@@ -92,7 +92,7 @@ void XModuleFileCreate::impl_button_pressed(QString button_id) {
         }
 
 
-        xclu_assert(file.flush(), "Error while closing file " + short_name + " after writing");
+        xc_assert(file.flush(), "Error while closing file " + short_name + " after writing");
 
         //Inform user with result
         //TODO Check real file size...

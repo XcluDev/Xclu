@@ -29,9 +29,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    static MainWindow *window();   //эта функция используется для передачи изменений проекта из xclu_document_modified()
+    static MainWindow *window();   //эта функция используется для передачи изменений проекта из xc_document_modified()
 
-    //сигнал извне, из xclu_document_modified(), что проект был изменен
+    //сигнал извне, из xc_document_modified(), что проект был изменен
     void set_document_modified();
     void reset_document_modified();
     bool is_document_modified();

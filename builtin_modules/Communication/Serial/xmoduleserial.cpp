@@ -111,8 +111,8 @@ void XModuleSerial::impl_button_pressed(QString button_id) {
         }
 
         if (connect_warning) {
-            //xclu_message_box("Serial: Port is not connected, may be you need to start the project.");
-            xclu_console_warning("Serial: Port is not connected, may be you need to start the project.");
+            //xc_message_box("Serial: Port is not connected, may be you need to start the project.");
+            xc_console_warning("Serial: Port is not connected, may be you need to start the project.");
         }
     }
 }
@@ -170,7 +170,7 @@ void XModuleSerial::open_port() {
 
     if (n == 0) {
         //TODO сейчас просто игнорируем ошибку
-        xclu_console_append("Error: No Serial devices");
+        xc_console_append("Error: No Serial devices");
         return;
     }
 
@@ -187,8 +187,8 @@ void XModuleSerial::open_port() {
     case select_port_By_Index: {
         index0 = geti_port_index0();
         index1 = geti_port_index1();
-        xclu_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
-        xclu_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
+        xc_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
+        xc_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
     }
         break;
     case select_port_By_Name: {
@@ -203,21 +203,21 @@ void XModuleSerial::open_port() {
             }
             k++;
         }
-        xclu_assert(k >= 0, "No port containing '" + port_name+ "'");
+        xc_assert(k >= 0, "No port containing '" + port_name+ "'");
         index0 = k;
         index1 = k;
     }
         break;
     default:
-        xclu_exception("Bad `select_port` value");
+        xc_exception("Bad `select_port` value");
     }
 
     //Это не должно показываться пользователю, а проверка нашей логики
-    xclu_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
+    xc_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
 
     //Скорость подключения
     int baud_rate = getraw_baud_rate().toInt();
-    xclu_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
+    xc_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
 
     //Поиск свободного порта
     int k = 0;
@@ -227,7 +227,7 @@ void XModuleSerial::open_port() {
                 //подключение
                 serialPort_.setPort(serialPortInfo);
                 serialPort_.setBaudRate(baud_rate);
-                xclu_assert(serialPort_.open(QIODevice::ReadWrite),
+                xc_assert(serialPort_.open(QIODevice::ReadWrite),
                     QString("Failed to open port %1, error: %2")
                             .arg(serialPortInfo.portName()).arg(serialPort_.errorString()));
                 set_connected(true);
@@ -246,7 +246,7 @@ void XModuleSerial::open_port() {
         k++;
     }
 
-    xclu_assert(connected_, "Can't connect, all selected ports are busy");
+    xc_assert(connected_, "Can't connect, all selected ports are busy");
 }
 
 //---------------------------------------------------------------------
@@ -276,7 +276,7 @@ void XModuleSerial::send_string(QString str) {
     if (ts == line_term__r_n) str += "\r\n";
 
     if (geti_debug()) {
-        xclu_console_append("Send string `" + str + "`");
+        xc_console_append("Send string `" + str + "`");
     }
 
     if (connected_ && !str.isEmpty()) {
@@ -285,13 +285,13 @@ void XModuleSerial::send_string(QString str) {
 
         qint64 bytesWritten = serialPort_.write(writeData);
         if (bytesWritten == -1) {
-            xclu_console_append(QString("Failed to write the data to port %1, error: %2")
+            xc_console_append(QString("Failed to write the data to port %1, error: %2")
                                 .arg(port_name_).arg(serialPort_.errorString()));
         }
 
         set_total_sent(total_sent_ + bytesWritten);
         if (bytesWritten != writeData.size()) {
-            xclu_console_append(QString("Failed to write all the data to port %1, error: %2")
+            xc_console_append(QString("Failed to write all the data to port %1, error: %2")
                                 .arg(port_name_).arg(serialPort_.errorString()));
         }
         //else if (!serialPort.waitForBytesWritten(5000)) {
@@ -304,9 +304,9 @@ void XModuleSerial::send_string(QString str) {
 //---------------------------------------------------------------------
 void XModuleSerial::send_byte(int byte) {
     if (geti_debug()) {
-        xclu_console_append("Send byte `" + QString::number(byte) + "`");
+        xc_console_append("Send byte `" + QString::number(byte) + "`");
     }
-    xclu_exception("Sending byte is not implented");
+    xc_exception("Sending byte is not implented");
 
     //Пометить, что отправили
     //set_total_sent(total_sent_ + 1);

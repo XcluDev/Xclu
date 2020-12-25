@@ -35,13 +35,13 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_equal(line, name_, query);
-    xclu_assert(query.size()>=1, "not enough components for string, expected '...q=\"abc\"'");
+    xc_assert(query.size()>=1, "not enough components for string, expected '...q=\"abc\"'");
 
     //значение по умолчанию
     default_value_ = query.at(0);
     //проверяем, что начало и конец - двойные кавычки
-    xclu_assert(!default_value_.isEmpty(), "default value is not filled, but must start and end with '\"', '...\"\"'");
-    xclu_assert(default_value_.startsWith("\"") && default_value_.endsWith("\""), "default value must start and end with '\"', '...\"\"',"
+    xc_assert(!default_value_.isEmpty(), "default value is not filled, but must start and end with '\"', '...\"\"'");
+    xc_assert(default_value_.startsWith("\"") && default_value_.endsWith("\""), "default value must start and end with '\"', '...\"\"',"
                                                                                   "but is `" + default_value_ + "'");
     //удаляем кавычки в начале и конце
     default_value_ = default_value_.mid(1);
@@ -53,19 +53,19 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
     QString options = pre_description.options;
     if (!options.isEmpty()) {
         //опции выбора файла и папки нельзя применять в случае, если переменная 'out'
-        xclu_assert(!is_out(), "Can't apply options for 'out'");
+        xc_assert(!is_out(), "Can't apply options for 'out'");
 
         options_choose_file_ = (options == "file");
         options_choose_folder_ = (options == "folder");
         //какая-то из опций должна быть включена, если переданы не пустые
-        //xclu_assert(options_, "Unknown option, expected 'in string(choose:file)...' or 'in string(choose:folder)...', or not use options: 'in string ...'");
+        //xc_assert(options_, "Unknown option, expected 'in string(choose:file)...' or 'in string(choose:folder)...', or not use options: 'in string ...'");
     }
 }
 
 //---------------------------------------------------------------------
 //Function for setting value using link
 void XItemString::set_value_from_link(XLinkResolved *linkres) {
-    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
     set_value_string(mod->gets(linkres));
 }

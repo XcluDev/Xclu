@@ -48,13 +48,13 @@ QScreen *XModuleWindow::get_screen() {
     case WindowScreen_Custom: {
             int index = i_screen_index");
             auto screens = QGuiApplication::screens();
-            xclu_assert(index>=0 && index<screens.count(),
+            xc_assert(index>=0 && index<screens.count(),
                         QString("Bad screen index %1").arg(index));
             return screens.at(index);
         }
         break;
     default:
-        xclu_exception("XModuleWindow - Unknown screen specifier");
+        xc_exception("XModuleWindow - Unknown screen specifier");
     }
 
     //если что-то пошло не так, возвращаем экран по умолчанию
@@ -114,7 +114,7 @@ void XModuleWindow::update_window() {
                 set_stop_out(); //команда остановки
                 break;
             default:
-                xclu_exception("XModuleWindow - Unknown on_close specifier");
+                xc_exception("XModuleWindow - Unknown on_close specifier");
             }
 
         }
@@ -150,7 +150,7 @@ void XModuleWindow::update_window() {
         case size_1920x1200: set_size(1920,1200);
             break;
         default:
-            xclu_exception("XModuleWindow - Unknown window size specifier");
+            xc_exception("XModuleWindow - Unknown window size specifier");
         }
     }
 
@@ -172,7 +172,7 @@ void XModuleWindow::update_window() {
             }
             break;
         default:
-            xclu_exception("XModuleWindow - Unknown window position specifier");
+            xc_exception("XModuleWindow - Unknown window position specifier");
         }
     }
 
@@ -200,7 +200,7 @@ void XModuleWindow::update_window() {
             case mode_Full_Screen: visibility = QWindow::FullScreen;
                 break;
             default:
-                xclu_exception("XModuleWindow - Unknown window mode specifier");
+                xc_exception("XModuleWindow - Unknown window mode specifier");
             }
             window_->setVisible(visibility);
         }
@@ -293,7 +293,7 @@ void XModuleWindow::create_layouts() {
         window_->setCentralWidget(item.take_widget());
     }
     else {
-        xclu_exception("Error, structure must contains items, not only Stretch!");
+        xc_exception("Error, structure must contains items, not only Stretch!");
     }
 
 }
@@ -389,20 +389,20 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
         if (name == "Tab") {
             //Tab Aaa_bbb
             //считывание имени страницы
-            xclu_assert(query.size() >= 2, "Expected 'Tab Page_Name'");
-            QString tab_title = xclu_remove_underscore(query.at(1));
+            xc_assert(query.size() >= 2, "Expected 'Tab Page_Name'");
+            QString tab_title = xc_remove_underscore(query.at(1));
 
             //добавляем детей
             int n = tree_item.children.size();
             //если n>2 - то выдастся ошибка, так как можем добавлять только один виджет или layout
-            xclu_assert(n <= 1, "Tab must contain not more than one widget or layout");
+            xc_assert(n <= 1, "Tab must contain not more than one widget or layout");
             if (n == 0) {
                 //просто пустой виджет с именем страницы
                 return XModuleWindowStructureItem(new QWidget, tab_title);
             }
             //n == 1
             XModuleWindowStructureItem item = create_layouts_internal(tree, tree_item.children[0]);
-            xclu_assert(item.widget, "Expected widget or layout");
+            xc_assert(item.widget, "Expected widget or layout");
             return XModuleWindowStructureItem(item.take_widget(), tab_title);
         }
 
@@ -427,7 +427,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
 
     }
     catch (XException& e) {
-        xclu_exception(QString("Error (recursive) at line %1 '%2':\n%3")
+        xc_exception(QString("Error (recursive) at line %1 '%2':\n%3")
                        .arg(line_index)
                        .arg(line)
                        .arg(e.whatQt())
@@ -446,7 +446,7 @@ int XModuleWindow::xparse_int(QStringList list, int index, int default_value, QS
     }
     bool ok;
     int v = list.at(index).toInt(&ok);
-    xclu_assert(ok, "Expected integer, but get '" + list.at(index) + "' at '" + line + "'");
+    xc_assert(ok, "Expected integer, but get '" + list.at(index) + "' at '" + line + "'");
     return v;
 }
 
@@ -472,7 +472,7 @@ QWidget *XModuleWindow::request_widget(QString module_name) {
 
     //считываем указатель на виджет
     QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
-    xclu_assert(widget, "Returned empty widget");
+    xc_assert(widget, "Returned empty widget");
 
     //append to list to remove at stop
     used_modules_.append(module_name);
@@ -517,7 +517,7 @@ XModuleWindowStructureItem::XModuleWindowStructureItem() {
 
 
 XModuleWindowStructureItem::XModuleWindowStructureItem(QWidget* widget, int stretch) {
-    xclu_assert(widget, "Empty widget");
+    xc_assert(widget, "Empty widget");
     this->widget = widget;
     this->stretch = stretch;
 }
@@ -529,7 +529,7 @@ XModuleWindowStructureItem::XModuleWindowStructureItem(QLayout *layout, int stre
 }
 
 XModuleWindowStructureItem::XModuleWindowStructureItem(QWidget* widget, QString tab_title) {
-    xclu_assert(widget, "Empty widget");
+    xc_assert(widget, "Empty widget");
     this->widget = widget;
     is_tab = true;
     this->tab_title = tab_title;
@@ -555,7 +555,7 @@ QWidget *XModuleWindowStructureItem::take_widget() {
 void XModuleWindowStructureItem::add_to_layout(QLayout *layout) {    //вставить в layout
     QHBoxLayout *hlayout = qobject_cast<QHBoxLayout *>(layout);
     QVBoxLayout *vlayout = qobject_cast<QVBoxLayout *>(layout);
-    xclu_assert(hlayout || vlayout, "Internal error, unrecognized layout");
+    xc_assert(hlayout || vlayout, "Internal error, unrecognized layout");
 
     if (widget) {
         if (hlayout) hlayout->addWidget(take_widget(), stretch);
@@ -569,8 +569,8 @@ void XModuleWindowStructureItem::add_to_layout(QLayout *layout) {    //вста�
 
 //---------------------------------------------------------------------
 void XModuleWindowStructureItem::add_to_tabs(QTabWidget *tabs) {     //вставить в Tabs - должно быть имя страницы
-    xclu_assert(is_tab, "Tabs contains only Tab items");
-    xclu_assert(widget, "Can't add not widget to Tabs");
+    xc_assert(is_tab, "Tabs contains only Tab items");
+    xc_assert(widget, "Can't add not widget to Tabs");
     tabs->addTab(take_widget(), tab_title);
 }
 

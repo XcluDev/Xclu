@@ -106,13 +106,13 @@ void XModule::execute(ModuleExecuteStage stage) {
 
         /*case ModuleExecuteStageCallback:
             if (enabled) {
-                xclu_assert(mode == ModuleRunMode_Callback, "Module is called by callback, but it's Run Mode is not Callback!");
+                xc_assert(mode == ModuleRunMode_Callback, "Module is called by callback, but it's Run Mode is not Callback!");
                 update_internal();
             }
             break;*/
 
         default:
-            xclu_exception(QString("Unknown execute stage %1").arg(stage));
+            xc_exception(QString("Unknown execute stage %1").arg(stage));
         }
     }
     catch(XException& e) {
@@ -130,7 +130,7 @@ void XModule::button_pressed(QString button_id) {
             bang_internal();
         }
         else {
-            xclu_message_box("Can't bang - please run the project before.");
+            xc_message_box("Can't bang - please run the project before.");
         }
         return;
     }
@@ -177,8 +177,8 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
     //out pointer widget_pointer
 
     //проверка, что оба объекта переданы
-    xclu_assert(input, "Internal error, input object is nullptr");
-    xclu_assert(output, "Internal error, output object is nullptr");
+    xc_assert(input, "Internal error, input object is nullptr");
+    xc_assert(output, "Internal error, output object is nullptr");
 
     //устанавливаем, кто использует
     //if parent_id is empty - then
@@ -190,7 +190,7 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
     }
     else {
         //проверяем, что еще не стартовали
-        xclu_assert(status().was_started,
+        xc_assert(status().was_started,
                     QString("Can't create widget, because module '%1' was not started yet."
                             " You need to place it before parent '%2'.")
                     .arg(module_->name())
@@ -218,14 +218,14 @@ void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
 
 //---------------------------------------------------------------------
 void XModule::impl_call(QString function, XObject * /*input*/, XObject * /*output*/) {
-    xclu_exception("Module '" + name()
+    xc_exception("Module '" + name()
                    + "' can't process function '" + function + "', because impl_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
 void *XModule::impl_create_widget(QString /*parent_id*/) {
-    xclu_exception("Module '" + name()
+    xc_exception("Module '" + name()
                    + "' can't process function 'create_widget', because impl_create_widget() is not implemented");
     return nullptr;
 }
@@ -233,7 +233,7 @@ void *XModule::impl_create_widget(QString /*parent_id*/) {
 //---------------------------------------------------------------------
 //resetting created widget (`create_widget` called with empty parent_id)
 void XModule::impl_reset_widget() {
-    xclu_exception("Module '" + name()
+    xc_exception("Module '" + name()
                    + "' can't process function 'create_widget', because impl_reset_widget() is not implemented");
 }
 
@@ -241,7 +241,7 @@ void XModule::impl_reset_widget() {
 //`sound_buffer_add` call implementation, fills `data` buffer
 //there are required to fill channels * samples values at data
 void XModule::impl_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
-    xclu_exception("Module '" + name()
+    xc_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_add', because impl_sound_buffer_add() is not implemented");
 }
 
@@ -300,7 +300,7 @@ void XModule::process_error(QString message) {
         send_stop = true;
         break;
     default:
-        xclu_exception("Internal error: unknown action_on_error in module " + module()->name());
+        xc_exception("Internal error: unknown action_on_error in module " + module()->name());
         break;
     }
 
@@ -314,12 +314,12 @@ void XModule::process_error(QString message) {
 
     //вывод в консоль
     if (print_console) {
-        xclu_console_warning(message);
+        xc_console_warning(message);
     }
 
     //показ сообщения
     if (show_message) {
-        xclu_message_box(message);
+        xc_message_box(message);
     }
     if (send_stop) {
         set_stop_out();

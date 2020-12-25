@@ -5,33 +5,33 @@
 #include <QString>
 
 //Папка приложения
-QString xclu_app_folder();
+QString xc_app_folder();
 
 //Путь к файлу настроек
-QString xclu_settings_file();
+QString xc_settings_file();
 
 //корневая папка со встроенными ресурсами - например, Xclu_custom.ini
-QString xclu_root_resources_folder();
+QString xc_root_resources_folder();
 
 //папка со встроенными ресурсами - темы, общие XGUI
-QString xclu_builtin_resources_folder();
+QString xc_builtin_resources_folder();
 //папка с описанием встроенных модулей
-QString xclu_builtin_modules_folder();
+QString xc_builtin_modules_folder();
 
 //transforms folder to modules/{name} folder if deployment mode
-QString xclu_custom_module_folder(QString name, QString folder);
+QString xc_custom_module_folder(QString name, QString folder);
 
 //Файл кастомных модулей
-QString xclu_custom_modules_file();
+QString xc_custom_modules_file();
 
 //h file template for modules
-QString xclu_module_h_template_file();
+QString xc_module_h_template_file();
 
 
 //Файл с описанием интерфейса страницы General - добавляется во все модули
-QString xclu_general_page_file();
+QString xc_general_page_file();
 
 //Расширение файлов для описания интерфейса
-QString xclu_XGUI_ext();
+QString xc_XGUI_ext();
 
 #endif // XCLU_PATHS_H

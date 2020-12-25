@@ -108,7 +108,7 @@ void ModuleInterface::add_to_vis_group() {
 void ModuleInterface::parse_trimmed(const QStringList &lines) {
     //При ошибке парсинга - можно генерировать исключение, которое перехватывает FACTORY:
     //например, CONS.throw_exception("Test parsing exception");
-    //или xclu_assert(...)
+    //или xc_assert(...)
 
     items_.clear();
 
@@ -146,9 +146,9 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //описание - его не должно быть, так как мы их сразу считываем
             if (line.startsWith("//")) {
-                xclu_exception("Description '" + line + "' is not related to some item");
+                xc_exception("Description '" + line + "' is not related to some item");
                 //QString descr = line.mid(2);
-                //xclu_assert(!items_.isEmpty(), "can't use description '" + descr + "', because there are no objects yet");
+                //xc_assert(!items_.isEmpty(), "can't use description '" + descr + "', because there are no objects yet");
                 //items_.last()->add_description(descr);
                 continue;
             }
@@ -163,7 +163,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             if (item1 == "if") {
                 //начать новую группу
                 //if mode 3,4
-                xclu_assert(n >= 3, "not enough parameters, expected 'if mode 3,4'");
+                xc_assert(n >= 3, "not enough parameters, expected 'if mode 3,4'");
                 QString item_name = query.at(1);
                 QStringList variants = query.at(2).split(",");
 
@@ -177,7 +177,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                         break;
                     }
                 }
-                xclu_assert(found, "item '" + item_name + "' is not found - it must be declared before 'if'");
+                xc_assert(found, "item '" + item_name + "' is not found - it must be declared before 'if'");
                 vis_groups_.push_back(VisibleGroupBase(item_name, variants));
                 //помечаем, что группа для заполнения открыта
                 vis_group_opened_ = true;
@@ -188,7 +188,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //конец группы видимости
             if (item1 == "endif") {
-                xclu_assert(vis_group_opened_, "'endif' without opening 'if'");
+                xc_assert(vis_group_opened_, "'endif' without opening 'if'");
                 //завершение группы видимости
                 //помечаем, что группа для заполнения закрыта
                 vis_group_opened_ = false;
@@ -211,12 +211,12 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //page
             if (item1 == xitem_page()) {
-                xclu_assert(n>=2, "bad definiton at line " + line + ", no item title");
+                xc_assert(n>=2, "bad definiton at line " + line + ", no item title");
                 QString name = query.at(1);
-                xclu_assert(!name.isEmpty(), "empty page name at line " + line);
+                xc_assert(!name.isEmpty(), "empty page name at line " + line);
 
                 auto type = item1;
-                //xclu_assert(!type.isEmpty(), "internal error: empty type at line " + line);
+                //xc_assert(!type.isEmpty(), "internal error: empty type at line " + line);
 
                 //collect_description увеличивает i
                 new_decorate_item(name, type, collect_description(lines, i));
@@ -226,14 +226,14 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             //переменная
             //[in/const/out][(options)] type[_option1_...] title_gui name, и затем опционально '=' или ' ', var_details
 
-            xclu_assert(n >= 4, "bad variable description at line '" + line + "', expected '[in/const/out] type title_gui name...'");
+            xc_assert(n >= 4, "bad variable description at line '" + line + "', expected '[in/const/out] type title_gui name...'");
 
             //парсинг квалификатора и опций out(not_save)
             QStringList qual_list=item1.split(QRegExp("(\\(|\\))"));
-            xclu_assert(!qual_list.isEmpty(), "bad qualifiers string at line '" + line + "'");
+            xc_assert(!qual_list.isEmpty(), "bad qualifiers string at line '" + line + "'");
 
             auto qual = string_to_xqualifier(qual_list.at(0));
-            xclu_assert(qual != XQualifierNone, "unknown variable qualifier at line '" + line + "', expected: 'in', 'out', 'const'");
+            xc_assert(qual != XQualifierNone, "unknown variable qualifier at line '" + line + "', expected: 'in', 'out', 'const'");
             QString qual_options;
             if (qual_list.size() >= 2) {
                 qual_options = qual_list.at(1);
@@ -251,7 +251,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
             //парсим type_attribute1_attribute2_... на тип и атрибуты:
             //QStringList type_options=type_raw.split(QRegExp("(\\(|\\))"));
             QStringList type_options=type_raw.split("_");
-            xclu_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
+            xc_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
 
             auto type = type_options.at(0);
             //remove first and join back
@@ -260,7 +260,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //title
             QString title = query.at(2);
-            //title = xclu_remove_underscore(title);
+            //title = xc_remove_underscore(title);
 
             //qDebug() << "var " << line << ":" << qual << "," << type << "," << title;
             //удаляем первые элементы, чтобы потом остаток соединить и допарсить в конкретных элементах
@@ -277,7 +277,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                         qual, line_to_parse, options, qual_options);
         }
         catch (XException& e) {
-            xclu_exception("Parsing error at line '" + line + "':\n" + e.whatQt());
+            xc_exception("Parsing error at line '" + line + "':\n" + e.whatQt());
         }
 
     }
@@ -290,7 +290,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     }
 
     //Проверяем, что интерфейс начался с создания страницы
-    xclu_assert(items_[0]->type() == xitem_page(), "Interface description must start with a page");
+    xc_assert(items_[0]->type() == xitem_page(), "Interface description must start with a page");
 
 }
 
@@ -331,10 +331,10 @@ void ModuleInterface::update_maps() {
         XItem *item = items_[i];
         QString name = item->name();
 
-        xclu_assert(!name.isEmpty(), "Item name can't be empty, title: '" + item->title() + "'");
-        xclu_assert(!item->title().isEmpty(), "Item title can't be empty, name: '" + name + "'");
+        xc_assert(!name.isEmpty(), "Item name can't be empty, title: '" + item->title() + "'");
+        xc_assert(!item->title().isEmpty(), "Item title can't be empty, name: '" + name + "'");
 
-        xclu_assert(!items_by_name_.contains(name), "Duplicated item '" + name + "'");
+        xc_assert(!items_by_name_.contains(name), "Duplicated item '" + name + "'");
         items_by_name_[name] = item;
     }
 }
@@ -348,7 +348,7 @@ bool ModuleInterface::has_item(QString name) {
 //---------------------------------------------------------------------
 //элемент по имени - кроме сепараторов
 XItem *ModuleInterface::var(QString name) {
-    xclu_assert(has_item(name), "Unknown item '" + name + "'");
+    xc_assert(has_item(name), "Unknown item '" + name + "'");
     return items_by_name_[name];
 }
 
@@ -367,7 +367,7 @@ bool ModuleInterface::compile() {
             item->compile();
         }
         catch(XException& e) {
-            xclu_console_append(e.whatQt());
+            xc_console_append(e.whatQt());
             ok = false;
         }
     }
@@ -468,7 +468,7 @@ void ModuleInterface::update() {
 //запомнить/восстановить состояние GUI (страницу, промотку)
 void ModuleInterface::gui_to_state() {
     if (is_gui_attached()) {
-        //xclu_assert(editor_, "Internal error - ModuleInterface::gui_to_state is called, but editor_ == nullptr");
+        //xc_assert(editor_, "Internal error - ModuleInterface::gui_to_state is called, but editor_ == nullptr");
         editor_state_ = editor_->state();
     }
 }
@@ -476,7 +476,7 @@ void ModuleInterface::gui_to_state() {
 //---------------------------------------------------------------------
 void ModuleInterface::state_to_gui() {
     if (is_gui_attached()) {
-        //xclu_assert(editor_, "Internal error - ModuleInterface::state_to_gui is called, but editor_ == nullptr");
+        //xc_assert(editor_, "Internal error - ModuleInterface::state_to_gui is called, but editor_ == nullptr");
         editor_->set_state(editor_state_);
     }
 }
@@ -484,7 +484,7 @@ void ModuleInterface::state_to_gui() {
 //---------------------------------------------------------------------
 //callback из GUI
 void ModuleInterface::callback_button_pressed(QString button_id) {
-    xclu_assert(module(), "Can't process pressing button '" + button_id + "' because module() is nullptr");
+    xc_assert(module(), "Can't process pressing button '" + button_id + "' because module() is nullptr");
     module()->button_pressed(button_id);
 }
 
@@ -493,7 +493,7 @@ void ModuleInterface::callback_button_pressed(QString button_id) {
 //internal calling - user shouldn't call this
 void ModuleInterface::_hit_button_(QString button_id) {
     XItem *item = var(button_id);
-    xclu_assert(item->type() == xitem_button(), "Can't press '" + button_id + "', because it's not button");
+    xc_assert(item->type() == xitem_button(), "Can't press '" + button_id + "', because it's not button");
     ((XItemButton *)(item))->hit_value();
 }
 
@@ -510,14 +510,14 @@ void ModuleInterface::set_editor_state(EditorModuleState editor_state) {
 //---------------------------------------------------------------------
 //дублирование данных переменных и состояние редактора, используется при дублировании модулей
 void ModuleInterface::copy_data_to(ModuleInterface *interf) {
-    xclu_assert(interf, "Internal error in ModuleInterface::copy_data_to: interface to copy is nullptr");
+    xc_assert(interf, "Internal error in ModuleInterface::copy_data_to: interface to copy is nullptr");
     interf->set_editor_state(editor_state());
     for (int i=0; i<items_.size(); i++) {
         auto *item = items_[i];
         if (item->store_data()) {
             QString name = item->name();
             auto *item1 = interf->var(name);
-            xclu_assert(item1, "Internal error in ModuleInterface::copy_data_to: no item '"
+            xc_assert(item1, "Internal error in ModuleInterface::copy_data_to: no item '"
                         + name + "' in the destination interface");
             item->copy_data_to(item1);
         }
@@ -576,9 +576,9 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 
     //выдача ошибок в консоль про даннный модуль
     if (!errors.isEmpty()) {
-        xclu_console_warning("Error(s) loading module '" + description().class_name + "':");
+        xc_console_warning("Error(s) loading module '" + description().class_name + "':");
         for (int i=0; i<errors.size(); i++) {
-            xclu_console_warning("   " + errors.at(i));
+            xc_console_warning("   " + errors.at(i));
         }
     }
 }
@@ -590,7 +590,7 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
 QString ModuleInterface::gets(QString name, int index, int index2) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
+    xc_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
     if (index2 == -1) {
         if (index == -1) {  //plain string: "aaa"
@@ -631,8 +631,8 @@ QStringList ModuleInterface::get_strings(QString name) {
 //только out: int, checkbox, enum (index), string, text
 void ModuleInterface::sets(QString name, QString v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
-    xclu_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
+    xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xc_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     var->set_value_string(v);
 }
 
@@ -664,7 +664,7 @@ void ModuleInterface::append_string(QString name, QStringList v, int extra_new_l
 int ModuleInterface::geti(QString name, int index, int index2) {
     if (index == -1) {
         XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-        xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
+        xc_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
         return var->value_int();
     }
     else {
@@ -676,8 +676,8 @@ int ModuleInterface::geti(QString name, int index, int index2) {
 //только out: int, checkbox, enum (index)
 void ModuleInterface::seti(QString name, int v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
-    xclu_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
+    xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xc_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
     var->set_value_int(v);
 }
 
@@ -694,7 +694,7 @@ void ModuleInterface::increase_int(QString name, int increase) { //value+=increa
 float ModuleInterface::getf(QString name, int index, int index2) {
     if (index == -1) {
         XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-        xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
+        xc_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
         return var->value_float();
     }
     else {
@@ -706,8 +706,8 @@ float ModuleInterface::getf(QString name, int index, int index2) {
 //только out: float
 void ModuleInterface::setf(QString name, float v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
-    xclu_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
+    xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xc_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
     var->set_value_float(v);
 }
 
@@ -715,15 +715,15 @@ void ModuleInterface::setf(QString name, float v) {
 //enum
 QString ModuleInterface::getraw(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
+    xc_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
     return var->value_raw();
 }
 
 //---------------------------------------------------------------------
 void ModuleInterface::set_raw(QString name, QString text) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
-    xclu_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
+    xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xc_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
     var->set_value_raw(text);
 }
 
@@ -731,7 +731,7 @@ void ModuleInterface::set_raw(QString name, QString text) {
 //enum (title)
 QString ModuleInterface::get_title_value(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
+    xc_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     return var->value_title();
 
 }
@@ -740,8 +740,8 @@ QString ModuleInterface::get_title_value(QString name) {
 //только out: enum (title)
 void ModuleInterface::set_title_value(QString name, QString v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
-    xclu_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
+    xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
+    xc_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     var->set_value_title(v);
 }
 
@@ -749,7 +749,7 @@ void ModuleInterface::set_title_value(QString name, QString v) {
 //Access to objects is only by pointers - because we are required not to copy data, it can be large
 XProtectedObject *ModuleInterface::get_object(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
+    xc_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     return var->get_object();
 }
 
@@ -758,7 +758,7 @@ XProtectedObject *ModuleInterface::get_object(QString name) {
 //Note: object must be live, because only pointer to it is stored
 void ModuleInterface::set_object(QString name, XProtectedObject *object) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
-    xclu_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
+    xc_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     var->set_object(object);
 }
 

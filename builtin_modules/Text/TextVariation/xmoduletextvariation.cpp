@@ -58,7 +58,7 @@ QString XModuleTextVariation::variate(QString text, int level) {
             continue;
         }
         if (c == QLatin1Char('|')) {
-            xclu_assert(state >= 1, "Can't parse '" + text + "': '|' is not inside [...]");
+            xc_assert(state >= 1, "Can't parse '" + text + "': '|' is not inside [...]");
 
             if (state == 1) {
                 //add variant; note recursive call to resolve it totally
@@ -72,7 +72,7 @@ QString XModuleTextVariation::variate(QString text, int level) {
         }
         if (c == QLatin1Char(']')) {
             state--;
-            xclu_assert(state >= 0, "Can't parse '" + text + "': extra ']'");
+            xc_assert(state >= 0, "Can't parse '" + text + "': extra ']'");
             if (state == 0) {
                 //add variant; note recursive call to resolve it totally
                 variants.append(variate(collect, level+1));
@@ -96,12 +96,12 @@ QString XModuleTextVariation::variate(QString text, int level) {
             collect += c;
         }
     }
-    xclu_assert(state==0,  "Can't parse '" + text + "': no closing ']'");
+    xc_assert(state==0,  "Can't parse '" + text + "': no closing ']'");
 
     //----- debug
-    //xclu_console_append(QString("LEVEL %1").arg(level));
-    //xclu_console_append(QString("IN: %1").arg(text));
-    //xclu_console_append(QString("OUT: %1").arg(result));
+    //xc_console_append(QString("LEVEL %1").arg(level));
+    //xc_console_append(QString("IN: %1").arg(text));
+    //xc_console_append(QString("OUT: %1").arg(result));
     //-----
 
     return result;

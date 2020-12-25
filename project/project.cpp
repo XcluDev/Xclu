@@ -64,7 +64,7 @@ bool Project::save_project(QString file_name, SaveFormat format) {
         //               : QStringLiteral("save.dat"));
 
         if (!saveFile.open(QIODevice::WriteOnly)) {
-            xclu_exception("Couldn't open file for saving");
+            xc_exception("Couldn't open file for saving");
         }
 
         QJsonObject gameObject;
@@ -77,7 +77,7 @@ bool Project::save_project(QString file_name, SaveFormat format) {
         update_project_folder(file_name);
     }
     catch(XException& e) {
-        xclu_message_box("Can't save the project to '" + file_name + "':\n" + e.whatQt());
+        xc_message_box("Can't save the project to '" + file_name + "':\n" + e.whatQt());
         return false;
     }
     return true;
@@ -87,7 +87,7 @@ bool Project::save_project(QString file_name, SaveFormat format) {
 //---------------------------------------------------------------------
 Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat format) {
     try {
-        xclu_assert(!XCORE.is_running(), "Please stop the current project before loading");
+        xc_assert(!XCORE.is_running(), "Please stop the current project before loading");
         close_project();
 
         //QFile loadFile(format == Json
@@ -96,7 +96,7 @@ Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat f
         QFile loadFile(file_name);
 
         if (!loadFile.open(QIODevice::ReadOnly)) {
-            xclu_exception("Couldn't open file");
+            xc_exception("Couldn't open file");
         }
 
         QByteArray saveData = loadFile.readAll();
@@ -105,7 +105,7 @@ Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat f
                               ? QJsonDocument::fromJson(saveData)
                               : QJsonDocument::fromBinaryData(saveData));
 
-        xclu_assert(!loadDoc.isNull(), "Error parsing file");
+        xc_assert(!loadDoc.isNull(), "Error parsing file");
 
         read_json(loadDoc.object());
 
@@ -117,14 +117,14 @@ Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat f
         //Если требуется автоматически запусить проект - это делается из MainWindow
     }
     catch(XException& e) {
-        xclu_message_box("Can't load a project '" + file_name + "':\n" + e.whatQt());
+        xc_message_box("Can't load a project '" + file_name + "':\n" + e.whatQt());
         close_project();
         return LoadProjectStatusNo;
     }
 
     //Если успено загрузили - то, если были ошибки в консоли, то предупредим об этом
     if (!CONS_VIEW->is_empty()) {
-        xclu_message_box("Some problems occured during loading the project.\nPlease see Console view for the details.");
+        xc_message_box("Some problems occured during loading the project.\nPlease see Console view for the details.");
         //возвращаем, что были warnings - чтобы PROJ поставил пометку, что проект был изменен - так как при сохранении он изменится
         return LoadProjectStatusWarnings;
     }
@@ -187,7 +187,7 @@ void Project::read_json(const QJsonObject &json) {
             modules_.append(module);
         }
         catch(XException& e) {
-            xclu_console_warning("Error loading module '" + name + "', class '" + class_name + "':\n    " +  e.whatQt());
+            xc_console_warning("Error loading module '" + name + "', class '" + class_name + "':\n    " +  e.whatQt());
         }
     }
     update_names();
@@ -197,7 +197,7 @@ void Project::read_json(const QJsonObject &json) {
 //---------------------------------------------------------------------
 void Project::clear_modules() {
     if (XCORE.is_running()) {
-        xclu_halt("Internal error - command to clear project, but project is running");
+        xc_halt("Internal error - command to clear project, but project is running");
     }
     for (int i=0; i<modules_.size(); i++) {
         delete modules_[i];
@@ -213,11 +213,11 @@ bool Project::update_names() {  //обновить все name - вызывае�
     for (int i=0; i<modules_.size(); i++) {
         QString name = modules_[i]->name();
         if (name.isEmpty()) {
-            xclu_message_box("Empty 'name' in module '" + modules_[i]->name() + "'");
+            xc_message_box("Empty 'name' in module '" + modules_[i]->name() + "'");
             return false;
         }
         if (names_.contains(name)) {
-            xclu_message_box("Duplicated 'name' in modules '" + modules_[i]->name() + "' and '" + modules_[names_[name]]->name() + "'");
+            xc_message_box("Duplicated 'name' in modules '" + modules_[i]->name() + "' and '" + modules_[names_[name]]->name() + "'");
             return false;
         }
         names_[name] = i;
@@ -269,7 +269,7 @@ Module *Project::new_module(int i, QString class_name, QString name_hint) {
         module->execute(ModuleExecuteStageLoaded);
     }
     catch(XException& e) {
-        xclu_message_box("Can't create module of class '" + class_name +"':\n" +  e.whatQt());
+        xc_message_box("Can't create module of class '" + class_name +"':\n" +  e.whatQt());
         return nullptr;
     }
 
@@ -316,7 +316,7 @@ void Project::delete_module(int i) {
 void Project::rename_module(int i, QString new_name) {
     auto *modul = module_by_index(i);
     if (!modul) {
-        xclu_halt("Can't rename module " + new_name);
+        xc_halt("Can't rename module " + new_name);
         return;
     }
     modul->set_name(new_name);
@@ -325,7 +325,7 @@ void Project::rename_module(int i, QString new_name) {
 
 //---------------------------------------------------------------------
 void Project::swap_modules(int i) {   //i<->i+1
-    xclu_assert(i>=0 && i+1<modules_count(), "Internal error, Project::swap_modules - bad index '" + QString::number(i) + "'");
+    xc_assert(i>=0 && i+1<modules_count(), "Internal error, Project::swap_modules - bad index '" + QString::number(i) + "'");
     qSwap(modules_[i], modules_[i+1]);
     update_names();
 }
@@ -352,7 +352,7 @@ Module *Project::module_by_index(int i, bool can_return_null) {
     }
     else {
         if (!can_return_null) {
-            xclu_exception(QString("Bad module index '%1'").arg(i));
+            xc_exception(QString("Bad module index '%1'").arg(i));
         }
         return nullptr;
     }
@@ -360,7 +360,7 @@ Module *Project::module_by_index(int i, bool can_return_null) {
 
 //---------------------------------------------------------------------
 Module *Project::module_by_name(QString name) {
-    xclu_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
+    xc_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
     return module_by_index(names_.value(name));
 }
 
@@ -369,7 +369,7 @@ Module *Project::module_by_name(QString name) {
 //тут можно вызывать только GuiStageProjectAfterLoading и GuiStageProjectBeforeSaving
 void Project::gui_action(GuiStage stage) {
     if (stage != GuiStageProjectAfterLoading && stage != GuiStageProjectBeforeSaving) {
-        xclu_message_box("Internal error: Project::gui_action can be used only with project-related stages");
+        xc_message_box("Internal error: Project::gui_action can be used only with project-related stages");
         return;
     }
 
@@ -398,12 +398,12 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_o
                     + "':\n" +  e.whatQt();
             if (exception_on_errors) {
                 //message box and total break
-                xclu_message_box(text);
+                xc_message_box(text);
                 break;
             }
             else {
                 //just log to console and continue
-                xclu_console_append(text);
+                xc_console_append(text);
             }
 
         }
@@ -415,7 +415,7 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_o
 //Also clears console
 bool Project::compile() {
     //clear console
-    xclu_console_clear();
+    xc_console_clear();
     //compile
     bool ok = true;
     for (auto module: modules_) {
@@ -424,7 +424,7 @@ bool Project::compile() {
         if (!ok1) ok = false;
     }
     if (!ok) {
-        xclu_message_box("There are compiling error(s), see Console for the details");
+        xc_message_box("There are compiling error(s), see Console for the details");
     }
     return ok;
 }
@@ -433,7 +433,7 @@ bool Project::compile() {
 void Project::execute_start(bool &stop_out) {
     stop_out = false;
     if (XCORE.is_running()) {
-        xclu_message_box("Internal error: received project starting command, but it's already started");
+        xc_message_box("Internal error: received project starting command, but it's already started");
         return;
     }
 
@@ -477,7 +477,7 @@ void Project::execute_update(bool &stop_out) {
     XCORE.update_dt();    //update dt counter
 
     stop_out = false;
-    xclu_assert(XCORE.is_running(), "Internal error: project update command, but not started");
+    xc_assert(XCORE.is_running(), "Internal error: project update command, but not started");
     execute(ModuleExecuteStageUpdate, stop_out);
 }
 

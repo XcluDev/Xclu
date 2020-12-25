@@ -64,7 +64,7 @@ void XGuiButton::button_pressed() {
         ((XItemButton *)item__)->callback_button_pressed();
     }
     catch (XException &e) {
-        xclu_message_box("Error: " + e.whatQt());
+        xc_message_box("Error: " + e.whatQt());
     }
 }
 

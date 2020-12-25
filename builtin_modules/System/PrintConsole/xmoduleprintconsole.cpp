@@ -40,7 +40,7 @@ void XModulePrintConsole::impl_update() {
         if (!s.isEmpty()) s.append(": ");
         s.append(val);
     }
-    xclu_console_append(s);
+    xc_console_append(s);
 }
 
 //---------------------------------------------------------------------

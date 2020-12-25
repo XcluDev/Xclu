@@ -176,7 +176,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
     for (int i=0; i<items.size(); i++) {
         auto *item = items.at(i);
         XGui *itemgui = item->create_gui(input);
-        xclu_assert(itemgui, "Internal error loading module " + module_name + ": can't create GUI for '" + item->title() + "'");
+        xc_assert(itemgui, "Internal error loading module " + module_name + ": can't create GUI for '" + item->title() + "'");
         items_.push_back(itemgui);
         items_by_name_[item->name()] = itemgui;
     }
@@ -200,7 +200,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
         //получаем родителя
         VisibleGroupBase &group = vis_groups[i];
         QString item_name = group.item_name();
-        xclu_assert(items_by_name_.contains(item_name), "No GUI item '" + item_name + "' for using as a parent of visibility group");
+        xc_assert(items_by_name_.contains(item_name), "No GUI item '" + item_name + "' for using as a parent of visibility group");
         XGui *parent = items_by_name_[item_name];
 
         //создаем и заполняем GUI-группу
@@ -209,7 +209,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
         QStringList affected_items = group.affected_items();
         for (int i=0; i<affected_items.size(); i++) {
             QString name = affected_items.at(i);
-            xclu_assert(items_by_name_.contains(name), "No GUI item '" + item_name + "' inside created visibility group");
+            xc_assert(items_by_name_.contains(name), "No GUI item '" + item_name + "' inside created visibility group");
             new_gui_group->add_affected_item(items_by_name_[name]);
         }
         //добавляем ее в родителя
@@ -243,7 +243,7 @@ void XGuiEditor::set_state(EditorModuleState state) {
 //Отслеживание изменений, чтобы пометить, что проект был изменен
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
 void XGuiEditor::on_value_changed() {
-    xclu_document_modified();
+    xc_document_modified();
 }
 
 //---------------------------------------------------------------------

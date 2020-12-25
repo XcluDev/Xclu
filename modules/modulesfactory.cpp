@@ -28,7 +28,7 @@ void ModulesFactory::setup() {
     //qDebug("Listing modules:");
 
     //собираем встроенные модули
-    QDirIterator categories(xclu_builtin_modules_folder()); //, QDirIterator::Subdirectories);
+    QDirIterator categories(xc_builtin_modules_folder()); //, QDirIterator::Subdirectories);
     while (categories.hasNext()) {
         QString category_folder = categories.next();
         QString category_name = categories.fileName();
@@ -79,8 +79,8 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
     names.clear();
     folders.clear();
 
-    QString file_name = xclu_custom_modules_file();
-    xclu_assert(QFileInfo::exists(file_name), "Can't find list of custom modules `" + file_name + "`");
+    QString file_name = xc_custom_modules_file();
+    xc_assert(QFileInfo::exists(file_name), "Can't find list of custom modules `" + file_name + "`");
 
     QSettings settings(file_name, QSettings::IniFormat);
 
@@ -104,7 +104,7 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
         QString folder = settings.value(key_folder, "").toString();
 
         //if deployment mode, then get folder from Modules folder
-        folder = xclu_custom_module_folder(name, folder);
+        folder = xc_custom_module_folder(name, folder);
 
         if (!name.isEmpty() && !folder.isEmpty()) {
             names.push_back(name);
@@ -123,7 +123,7 @@ void ModulesFactory::add_module(QString module_name, QString module_folder, QStr
         //qDebug() << "--- " << name;
         //Если модуль с таким именем уже есть - предупредить
         if (modules_.contains(name)) {
-            xclu_console_warning("Warning: duplicated module '" + name + "'.");
+            xc_console_warning("Warning: duplicated module '" + name + "'.");
         }
         else {
             modules_.insert(name, module);
@@ -147,7 +147,7 @@ ModuleSeed *ModulesFactory::get_module(int i) {
 
 //---------------------------------------------------------------------
 ModuleSeed *ModulesFactory::get_module(QString class_name) {
-    xclu_assert(modules_.contains(class_name), "Internal error at ModulesFactory::get_module, unknown module class '" + class_name + "'");
+    xc_assert(modules_.contains(class_name), "Internal error at ModulesFactory::get_module, unknown module class '" + class_name + "'");
     return modules_.value(class_name, nullptr);
 }
 
@@ -188,7 +188,7 @@ void ModulesFactory::update_categories() {
         QString cat_name = i.key();
         if (cat_name != All) {
             //заменяем подчеркивания на пробел "AI_Services" -> "AI Services"
-            QString cat_name_with_spaces = xclu_remove_underscore(cat_name);
+            QString cat_name_with_spaces = xc_remove_underscore(cat_name);
             categories_.push_back(cat_name_with_spaces);
         }
     }
@@ -238,11 +238,11 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
     try {
         //Получение информации
         info = get_module(class_name);
-        xclu_assert(info, "Module class is unknown");
+        xc_assert(info, "Module class is unknown");
 
         //Загрузка
         rtmodule_new = RegistrarXModule::create_rt_module(info->description);
-        xclu_assert(rtmodule_new, "Internal error: module implementation is not created");
+        xc_assert(rtmodule_new, "Internal error: module implementation is not created");
 
         //Создание модуля
         module_new = new Module(info, rtmodule_new);
@@ -260,7 +260,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
         //info удалять не надо, так как мы его не создавали
 
         //перенаправляем ошибку дальше
-        xclu_exception(e.whatQt());
+        xc_exception(e.whatQt());
     }
     return nullptr;
 }

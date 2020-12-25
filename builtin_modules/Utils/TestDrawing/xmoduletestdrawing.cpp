@@ -23,7 +23,7 @@ XModuleTestDrawing::~XModuleTestDrawing()
 
 //---------------------------------------------------------------------
 void XModuleTestDrawing::impl_start() {
-    //xclu_console_append(QString("%1 - start").arg(name()));
+    //xc_console_append(QString("%1 - start").arg(name()));
 
 }
 
@@ -35,7 +35,7 @@ void XModuleTestDrawing::impl_update() {
 
 //---------------------------------------------------------------------
 void XModuleTestDrawing::impl_stop() {
-    //xclu_console_append(QString("%1 - stop").arg(name()));
+    //xc_console_append(QString("%1 - stop").arg(name()));
 }
 
 //---------------------------------------------------------------------

@@ -19,7 +19,7 @@ XModulePainter::~XModulePainter()
 //---------------------------------------------------------------------
 //subclasses must reimplement this for drawing
 void XModulePainter::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
-    xclu_exception("draw() is not implemented for class `" + class_name() + "`");
+    xc_exception("draw() is not implemented for class `" + class_name() + "`");
 }
 
 //-----------------------------------------------
@@ -57,7 +57,7 @@ void XModulePainter::set_screen_size(int2 size) {
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
 void *XModulePainter::impl_create_widget(QString parent_id) {
-    xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
+    xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
     parent_id_ = parent_id;
     parent_was_set_ = true;
 

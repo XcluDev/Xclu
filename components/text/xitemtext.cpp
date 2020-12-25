@@ -24,8 +24,8 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_spaced(line, name_, query);
-    xclu_assert(query.size()>=1, "not specified min and max visual lines count, expected '... 10 15'");
-    xclu_assert(query.size()>=2, "not specified max visual lines count, expected '... 10 15'");
+    xc_assert(query.size()>=1, "not specified min and max visual lines count, expected '... 10 15'");
+    xc_assert(query.size()>=2, "not specified max visual lines count, expected '... 10 15'");
 
     lines_count_min_ = xparse_int(query.at(0), "min lines count must be an integer, '... 10 15'");
     lines_count_max_ = xparse_int(query.at(1), "max lines count must be an integer, '... 10 15'");
@@ -37,7 +37,7 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
 //---------------------------------------------------------------------
 //Function for setting value using link
 void XItemText::set_value_from_link(XLinkResolved *linkres) {
-    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
     set_value_string(mod->gets(linkres));
 }

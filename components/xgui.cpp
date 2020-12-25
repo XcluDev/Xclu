@@ -57,7 +57,7 @@ QString XGui::get_tip() {
         break;
     }
     default:
-        xclu_exception("Bad tip style of '" + item__->name() + "'");
+        xc_exception("Bad tip style of '" + item__->name() + "'");
     }
     return tip;
 }
@@ -112,7 +112,7 @@ void XGui::attach_context_menu(QWidget *widget) {
 //---------------------------------------------------------------------
 //show popup menu
 void XGui::customMenuRequested(QPoint pos){
-    xclu_assert(label_, "XGui::customMenuRequested - empty label_, can't compute menu position");
+    xc_assert(label_, "XGui::customMenuRequested - empty label_, can't compute menu position");
     //Get information about menu
     ComponentContextMenu::COMP_MENU()->setup(item__->context_menu_info());
     //Start menu async.
@@ -127,7 +127,7 @@ void XGui::on_component_popup_action() {
         item__->context_menu_on_action(id, action->text());
     }
     else {
-      xclu_exception("Error casting action at XGui::on_component_popup_action");
+      xc_exception("Error casting action at XGui::on_component_popup_action");
     }
 }
 
@@ -228,7 +228,7 @@ void XGui::set_read_only_(bool read_only) {
 void XGui::on_value_changed() {
     //mark that documant was changed if item is indented to save to disk
     if (item__->is_save_to_project()) {
-        xclu_document_modified();
+        xc_document_modified();
     }
 
     QString value_string_vis = value_string_for_visibility();

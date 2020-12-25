@@ -22,7 +22,7 @@ XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre
     QString line = pre_description.line_to_parse;
     QStringList query;
     split_spaced(line, name_, query);
-    //xclu_assert(query.size()>=1, "no default value, expected '...q=0...'");
+    //xc_assert(query.size()>=1, "no default value, expected '...q=0...'");
 
     //опции - типы объектов
     QString options = pre_description.options;
@@ -45,7 +45,7 @@ bool XItemObject::was_changed(XWasChangedChecker &checker) {
 //---------------------------------------------------------------------
 //Function for setting value using link
 void XItemObject::set_value_from_link(XLinkResolved *linkres) {
-    xclu_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
+    xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
     Module *mod = linkres->module_ptr();
     XProtectedObject *object = mod->get_object(linkres->var);
 
@@ -81,8 +81,8 @@ void XItemObject::var_to_gui_internal() {
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
 void XItemObject::copy_data_to_internal(XItem *item) {
-    xclu_exception("XItemObject::copy_data_to_internal is prohibited");
-    //xclu_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
+    xc_exception("XItemObject::copy_data_to_internal is prohibited");
+    //xc_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
     //get_object()->read().data().copy_to(item->get_object()->write().pointer());
 }
 

@@ -58,7 +58,7 @@ void XModuleWImage::impl_stop() {
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
 void *XModuleWImage::impl_create_widget(QString parent_id) {
-    xclu_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
+    xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
     parent_id_ = parent_id;
     sets_parent_id(parent_id_);

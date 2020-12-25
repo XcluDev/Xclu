@@ -52,10 +52,10 @@ void XModuleTimer::impl_update() {
     case period_Seconds: delay_sec = getf_seconds();
         break;
     default:
-        xclu_exception("XModuleTimer::impl_update - bad `measure` value");
+        xc_exception("XModuleTimer::impl_update - bad `measure` value");
     }
 
-    //xclu_console_append(QString("delay %1").arg(delay_sec));
+    //xc_console_append(QString("delay %1").arg(delay_sec));
 
     auto working_mode = gete_working_mode();
     switch (working_mode) {
@@ -67,7 +67,7 @@ void XModuleTimer::impl_update() {
         update_bang(delay_sec);
         break;
     default:
-        xclu_exception("XModuleTimer::impl_update - bad `working_mode` value");
+        xc_exception("XModuleTimer::impl_update - bad `working_mode` value");
 
     }
 

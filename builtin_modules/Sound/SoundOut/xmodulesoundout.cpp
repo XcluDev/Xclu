@@ -11,7 +11,7 @@ REGISTER_XMODULE(SoundOut)
 XModuleSoundOutGenerator::XModuleSoundOutGenerator(const QAudioFormat &format,
                                                      XModuleSoundOutData *data)
 {
-    xclu_assert(format.isValid(), "Not valid sound format");
+    xc_assert(format.isValid(), "Not valid sound format");
     format_ = format;
     data_ = data;
 }
@@ -161,7 +161,7 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
             }
         }
         else {
-            xclu_exception(QString("SoundUnsupported sound output with bits %1").arg(audioSampleBit));
+            xc_exception(QString("SoundUnsupported sound output with bits %1").arg(audioSampleBit));
         }
     }
     catch (XException &e) {
@@ -320,19 +320,19 @@ void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
                 break;
             case QAudio::IOError:
                 set_started(false);
-                xclu_exception("QAudio::IOError");
+                xc_exception("QAudio::IOError");
                 break;
             case QAudio::OpenError:
                 set_started(false);
-                xclu_exception("QAudio::OpenError");
+                xc_exception("QAudio::OpenError");
                 break;
             case QAudio::UnderrunError:
                 //TODO some text to console!
-                //xclu_exception("QAudio::UnderrunError");
+                //xc_exception("QAudio::UnderrunError");
                 break;
             case QAudio::FatalError:
                 set_started(false);
-                xclu_exception("QAudio::FatalError");
+                xc_exception("QAudio::FatalError");
                 break;
             }
         }
@@ -361,7 +361,7 @@ void XModuleSoundOut::start_audio() {
 
         //выбор устройства
         const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
-        xclu_assert(!devices.empty(), "No connected devices");
+        xc_assert(!devices.empty(), "No connected devices");
 
         auto method = gete_select_device();
         switch (method) {
@@ -371,7 +371,7 @@ void XModuleSoundOut::start_audio() {
         }
         case select_device_By_Index: {
                 int name = geti_device_index();
-                xclu_assert(name >= 0 && name < devices.size(), "Bad device index " + QString::number(name));
+                xc_assert(name >= 0 && name < devices.size(), "Bad device index " + QString::number(name));
                 start_audio(devices[name]);
                 break;
         }
@@ -389,7 +389,7 @@ void XModuleSoundOut::start_audio() {
         default:
             //мы здесь не должны быть, так как все методы запуска рассмотренли,
             //поэтому выдаем ошибку
-            xclu_exception(QString("Bad select_device specifier '%1'").arg(method));
+            xc_exception(QString("Bad select_device specifier '%1'").arg(method));
         }
     }
 
@@ -413,7 +413,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
         else {
             bool ok;
             sample_rate = srate_string.toInt(&ok);
-            xclu_assert(ok, "Bad sample rate");
+            xc_assert(ok, "Bad sample rate");
         }
     }
     format.setSampleRate(sample_rate);
@@ -430,7 +430,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     format.setSampleType(QAudioFormat::SignedInt);
 
     if (!deviceInfo.isFormatSupported(format)) {
-        xclu_message_box(QString("Sound output module '%1': format not supported, trying to use nearest")
+        xc_message_box(QString("Sound output module '%1': format not supported, trying to use nearest")
                          .arg(name()));
         format = deviceInfo.nearestFormat(format);
     }
@@ -458,7 +458,7 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     QString buffer_size_str = getraw_buffer_size_desired();
     if (buffer_size_str != "Default") {
         int buffer_size = buffer_size_str.toInt();
-        xclu_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));
+        xc_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));
         m_audioOutput->setBufferSize(buffer_size);
     }
 
@@ -507,14 +507,14 @@ void XModuleSoundOut::set_buffer_size(int buffer_size) {
 void XModuleSoundOut::print_devices() {
     QStringList list;
     list.append("Connected Output Audio devices:");
-    //xclu_console_append("Connected Output Audiodevices:");
+    //xc_console_append("Connected Output Audiodevices:");
 
     const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
     for (int i=0; i<devices.size(); i++) {
         auto &info = devices.at(i);
         QString device = QString::number(i) + ": " + info.deviceName();
         list.append(device);
-        //xclu_console_append(device);
+        //xc_console_append(device);
     }
     clear_string_local_console();
     append_string_local_console(list, 1);
@@ -529,7 +529,7 @@ void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
 
         QStringList list;
         list.append("Supported Formats for '" + device_name + "'");
-        //xclu_console_append("Supported Formats for '" + device_name + "'");
+        //xc_console_append("Supported Formats for '" + device_name + "'");
 
         //Sample rates
         QString sample_rates_str = "  Sample rates: ";
@@ -541,7 +541,7 @@ void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
             sample_rates_str.append(QString::number(sample_rates.at(i)));
         }
         list.append(sample_rates_str);
-        //xclu_console_append(sample_rates_str);
+        //xc_console_append(sample_rates_str);
 
         //Channels
         QString channels_str = "  Channels: ";
@@ -553,7 +553,7 @@ void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
             channels_str.append(QString::number(channels.at(i)));
         }
         list.append(channels_str);
-        //xclu_console_append(channels_str);
+        //xc_console_append(channels_str);
 
         //Печать
         append_string_local_console(list, 1);

@@ -152,7 +152,7 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
         device_.connected = true;
     }
     catch (std::exception &error) {
-        xclu_exception(
+        xc_exception(
                     QString("Realsense connect error at stage %1. Error text: %2")
                  .arg(stage, error.what()));
     }
@@ -186,7 +186,7 @@ void RealsenseCamera::setup(rs2::device &dev, const RealsenseSettings &settings)
 
 //---------------------------------------------------------------------
 bool RealsenseCamera::start_camera(int device_index, const RealsenseSettings &settings) {	    //start camera
-    xclu_assert(!connected(), "Can't start Realsense, because it's already connected");
+    xc_assert(!connected(), "Can't start Realsense, because it's already connected");
 
     auto &ctx = Realsense_ctx;
 

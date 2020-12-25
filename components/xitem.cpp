@@ -31,7 +31,7 @@
                                                      QString qual_options
                                                      ) {
     XItemPreDescription descr;
-    descr.title = xclu_remove_underscore(title_underscored);
+    descr.title = xc_remove_underscore(title_underscored);
     descr.type = type;
     descr.qualifier = qual;
     descr.qualifier_options = qual_options;
@@ -46,7 +46,7 @@
 /*static*/ XItem *XItemCreator::new_decorate_item(ModuleInterface *interf,
                                                               QString name,
                                                               QString type, const QStringList &description) {
-    //QString title = xclu_remove_underscore(name);
+    //QString title = xc_remove_underscore(name);
     return new_item(interf, name, type, description, XQualifierIn, name);
 }
 
@@ -56,7 +56,7 @@
     QString descr;
 
     QStringList type_options=type_raw.split("_");
-    xclu_assert(!type_options.isEmpty(), "bad type name for separator '" + type_raw + "'");
+    xc_assert(!type_options.isEmpty(), "bad type name for separator '" + type_raw + "'");
 
     auto type = type_options.at(0);
     type_options.removeFirst();
@@ -78,7 +78,7 @@
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
 XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {
     //Проверка, что interf не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
-    xclu_assert(interf,
+    xc_assert(interf,
                 "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
     interf_ = interf;
     title_ = pre_description.title;
@@ -88,7 +88,7 @@ XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description
 
     //опции квалификатора, может быть только out(save)
     auto &options = pre_description.qualifier_options;
-    xclu_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifierOut),
+    xc_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifierOut),
                 "Currently only out(save) option supported, but get other for " + pre_description.line_to_parse);
 
     //ставим, нужно ли сохранять в проект
@@ -113,7 +113,7 @@ ModuleInterface *XItem::interf() {
 
 //---------------------------------------------------------------------
 Module *XItem::module() {
-    xclu_assert(interf(), "XItem::module() error: empty interf()");
+    xc_assert(interf(), "XItem::module() error: empty interf()");
     return interf()->module();
 }
 
@@ -132,7 +132,7 @@ void XItem::update() {
     //Copy value from link
     if (is_linked()) {
         auto *linkres = link_resolved_.data();
-        xclu_assert(linkres, "XItem::update error for `" + name() + "`: link_resolved_ is nullptr");
+        xc_assert(linkres, "XItem::update error for `" + name() + "`: link_resolved_ is nullptr");
         set_value_from_link(linkres);
     }
 
@@ -211,7 +211,7 @@ int XItem::description_count() {
 
 //---------------------------------------------------------------------
 /*void XItem::add_description(QString description) {
-    //xclu_assert(description_.isEmpty(), "non-empty description for variable '" + name_ + "' is already set, but trying to set another '" + description + "'");
+    //xc_assert(description_.isEmpty(), "non-empty description for variable '" + name_ + "' is already set, but trying to set another '" + description + "'");
     //description_ = description;
     description_.append(description);
 }
@@ -264,7 +264,7 @@ void XItem::clear_link() {
 //Function for setting value using link
 //Subclasses must implement it
 void XItem::set_value_from_link(XLinkResolved *linkres) {
-    xclu_exception("set_value_from_link is not implemented for `" + name() + "`");
+    xc_exception("set_value_from_link is not implemented for `" + name() + "`");
 }
 
 //---------------------------------------------------------------------
@@ -273,7 +273,7 @@ void XItem::link_was_changed() {
     if (is_gui_attached() && gui__) {
         gui__->link_was_changed();
     }
-    xclu_document_modified();
+    xc_document_modified();
     //if running - then resolve link immediately
     if (module() && module()->is_running()) {
         resolve_link();
@@ -331,12 +331,12 @@ void XItem::set_expression(const QString &expr) {
 //парсинг q=0 0:1 100,10 -> name='q', query = '0','0:1','100,10'
 /*static*/ void XItem::split_equal(const QString &line, QString &name, QStringList &query) {
     int equal = line.indexOf('=');
-    xclu_assert(equal != -1, "no '=', expect 'some_name=...'");
-    xclu_assert(equal != 0, "empty variable name, expect 'some_name=...'");
+    xc_assert(equal != -1, "no '=', expect 'some_name=...'");
+    xc_assert(equal != 0, "empty variable name, expect 'some_name=...'");
     name = line.left(equal);
     QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
     query = QString(line.mid(equal+1)).split(rx);
-    xclu_assert(!query.isEmpty(), "expected something after '='");
+    xc_assert(!query.isEmpty(), "expected something after '='");
 }
 
 //---------------------------------------------------------------------
@@ -344,7 +344,7 @@ void XItem::set_expression(const QString &expr) {
 /*static*/ void XItem::split_spaced(const QString &line, QString &name, QStringList &query) {
     QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
     query = line.split(rx);
-    xclu_assert(!query.isEmpty(), "empty name, expected ... q ...");
+    xc_assert(!query.isEmpty(), "empty name, expected ... q ...");
     name = query.at(0);
     query.removeFirst();
 }
@@ -451,9 +451,9 @@ void XItem::copy_data_to(XItem *item) {
     //если для данного типа не надо копировать - то ничего не делаем
     if (!store_data()) return;
 
-    xclu_assert(name() == item->name(), "Internal error XItem::copy_data_to: different items names '"
+    xc_assert(name() == item->name(), "Internal error XItem::copy_data_to: different items names '"
                 + name() + "' and '" + item->name() + "'");
-    xclu_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
+    xc_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
                 + type() + "' and '" + item->type() + "'");
 
     item->set_use_expression(is_use_expression());
@@ -472,7 +472,7 @@ void XItem::copy_data_to(XItem *item) {
 
 //---------------------------------------------------------------------
 void XItem::copy_data_to_internal(XItem *) {
-    xclu_halt("Internal error: copy_data_to_internal is not implemented for type '" + type() + "'");
+    xc_halt("Internal error: copy_data_to_internal is not implemented for type '" + type() + "'");
 }
 
 //---------------------------------------------------------------------
@@ -480,7 +480,7 @@ void XItem::copy_data_to_internal(XItem *) {
 void XItem::write_json(QJsonObject &json) {
     if (!is_save_to_project()) return;
     if (!store_data()) return;
-    xclu_assert(supports_string(), "Can't write item '" + name_ + "' to json");
+    xc_assert(supports_string(), "Can't write item '" + name_ + "' to json");
 
     //"a..." - чтобы были в начале списка
     json["aname"] = name_;
@@ -489,7 +489,7 @@ void XItem::write_json(QJsonObject &json) {
     //link
     if (!link().is_empty()) {
         json["link"] = link().to_str();
-        xclu_console_append(link().to_str());
+        xc_console_append(link().to_str());
     }
 
     //json["atitle"] = title_;
@@ -505,11 +505,11 @@ void XItem::write_json(QJsonObject &json) {
 void XItem::read_json(const QJsonObject &json) {
     if (!is_save_to_project()) return;
     if (!store_data()) return;
-    xclu_assert(supports_string(), "Can't read item '" + name_ + "' from json, because it's has 'out' (that means read-only) qualifier.\n"
+    xc_assert(supports_string(), "Can't read item '" + name_ + "' from json, because it's has 'out' (that means read-only) qualifier.\n"
                 "May be module's version is different");
     //проверяем, что имя совпадает
     QString name = JsonUtils::json_string(json, "aname");
-    xclu_assert(name == name_, "Different name for '" + name_ + "'.\n"
+    xc_assert(name == name_, "Different name for '" + name_ + "'.\n"
                 "May be module's version is different");
 
     //значение
@@ -526,7 +526,7 @@ void XItem::read_json(const QJsonObject &json) {
 
     //проверяем, что тип совпадает
     //QString type_str = JsonUtils::json_string(json, "atype");
-    //xclu_assert(type_str == interfacetype_to_string(type_), "Different type for '" + name_ + "'.\n"
+    //xc_assert(type_str == interfacetype_to_string(type_), "Different type for '" + name_ + "'.\n"
     //            "May be module's version is different");
 
 
@@ -553,7 +553,7 @@ bool XItem::belongs_general_page() {
 //---------------------------------------------------------------------
 //Context menu
 ComponentContextMenuInfo XItem::context_menu_info() {
-    //xclu_console_append(get_link_to_itself);
+    //xc_console_append(get_link_to_itself);
     return ComponentContextMenuInfo(
                 get_link_to_itself().to_str(), link().link,
                 is_link_can_be_used(), is_linked(),
@@ -592,17 +592,17 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         break;
     case ComponentContextMenu_copy_link: {
         QString link = get_link_to_itself().to_str();
-        xclu_clipboard_set_text(link);
-        xclu_console_append("Clipboard: `" + link + "'");
+        xc_clipboard_set_text(link);
+        xc_console_append("Clipboard: `" + link + "'");
     }
         break;
     //this cases must be implemented in subclasses
     case ComponentContextMenu_reset_default_value:
     case ComponentContextMenu_set_size:
-        xclu_exception(QString("XGui::on_component_popup_action - not implemented response to `%1`").arg(action_text));
+        xc_exception(QString("XGui::on_component_popup_action - not implemented response to `%1`").arg(action_text));
         break;
     default:
-        xclu_exception(QString("XGui::on_component_popup_action error - bad action `%1`").arg(action_text));
+        xc_exception(QString("XGui::on_component_popup_action error - bad action `%1`").arg(action_text));
     }
 
 }
@@ -645,7 +645,7 @@ Also are defined the following functions:
  */
 
 void XItem::export_interface(QStringList & /*file*/) {
-    xclu_exception("Can't generate C++ header for interface element of type `" + type() + "'");
+    xc_exception("Can't generate C++ header for interface element of type `" + type() + "'");
 }
 
 //---------------------------------------------------------------------

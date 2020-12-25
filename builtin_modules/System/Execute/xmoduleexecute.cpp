@@ -60,7 +60,7 @@ void XModuleExecute::impl_update() {
         sets_folder_path(folder);
 
         //построение имени файла
-        xclu_assert(!file_name_short.isEmpty(), "File Name is empty");
+        xc_assert(!file_name_short.isEmpty(), "File Name is empty");
         QString file_name = folder + "/" + file_name_short;
         //проверяем - если имя файла абсолютное (то есть с folder файла не существует), то используем краткое имя
         if (!QFileInfo::exists(file_name)) {
@@ -77,8 +77,8 @@ void XModuleExecute::impl_update() {
 
         bool success = false;
 
-        xclu_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
-        xclu_assert(QFileInfo::exists(file_name), "File '" + file_name + "' doesn't exists");
+        xc_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
+        xc_assert(QFileInfo::exists(file_name), "File '" + file_name + "' doesn't exists");
 
         //qDebug() << "execute...";
 
@@ -119,7 +119,7 @@ void XModuleExecute::impl_update() {
         }
 
         //если ошибка - выдаем это
-        xclu_assert(success, "Execution error or time is out");
+        xc_assert(success, "Execution error or time is out");
 
         //ставим продолжительность
         double time = xcore_elapsed_time_sec();

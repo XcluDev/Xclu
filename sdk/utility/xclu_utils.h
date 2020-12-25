@@ -5,9 +5,9 @@
 
 
 //замена подчеркивания на пробел в заголовках: Abc_Def -> "Abc Def"
-QString xclu_remove_underscore(QString title);
+QString xc_remove_underscore(QString title);
 
-QStringList xclu_read_text_file(QString file_name);
-void xclu_write_text_file(QStringList list, QString file_name);
+QStringList xc_read_text_file(QString file_name);
+void xc_write_text_file(QStringList list, QString file_name);
 
 #endif // XCLU_UTILS_H

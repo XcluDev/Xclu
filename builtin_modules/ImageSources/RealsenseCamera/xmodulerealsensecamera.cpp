@@ -138,17 +138,17 @@ void XModuleRealsenseCamera::impl_update() {
         bool make_depth = false;
         bool make_ir = false;
         if ((geti_show_color() || wait_save_frames_) && camera_.settings().use_rgb) {
-            xclu_assert(camera_.get_color_pixels_rgb(raster_color_), "get_color_pixels_rgb() returned false");
+            xc_assert(camera_.get_color_pixels_rgb(raster_color_), "get_color_pixels_rgb() returned false");
             XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
             make_color = true;
         }
         if ((geti_show_depth() || wait_save_frames_) && camera_.settings().use_depth) {
-            xclu_assert(camera_.get_depth_pixels_rgb(raster_depth_), "get_depth_pixels_rgb() returned false");
+            xc_assert(camera_.get_depth_pixels_rgb(raster_depth_), "get_depth_pixels_rgb() returned false");
             XObjectImage::create_from_raster(getobject_depth_image()->write().data(), raster_depth_);
             make_depth = true;
         }
         if ((geti_show_ir() || wait_save_frames_) && camera_.settings().use_ir) {
-            xclu_assert(camera_.get_ir_pixels8(raster_ir_), "get_ir_pixels8() returned false");
+            xc_assert(camera_.get_ir_pixels8(raster_ir_), "get_ir_pixels8() returned false");
             XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir_);
             make_ir = true;
         }
@@ -221,12 +221,12 @@ void XModuleRealsenseCamera::start_camera() {
     if (capture_source == capture_source_Disable) return;
     if (capture_source == capture_source_Bag_File) {
         //TODO реализовать считывание bag-файла
-        xclu_exception("RealsenseCamera: loading bag files are not implemented");
+        xc_exception("RealsenseCamera: loading bag files are not implemented");
     }
     if (capture_source == capture_source_Camera) {
         //выбор устройства
         QVector<RealsenseCameraInfo> cameras = RealsenseCamera::get_connected_devices_info();
-        xclu_assert(!cameras.empty(), "No connected devices");
+        xc_assert(!cameras.empty(), "No connected devices");
 
         int device_index = -1;
         auto method = gete_select_device();
@@ -236,7 +236,7 @@ void XModuleRealsenseCamera::start_camera() {
             break;
         case select_device_By_Index:
             device_index = geti_device_index();
-            xclu_assert(device_index >= 0 && device_index < cameras.size(), "Bad device index " + QString::number(device_index));
+            xc_assert(device_index >= 0 && device_index < cameras.size(), "Bad device index " + QString::number(device_index));
             break;
         case select_device_By_Serial: {
             QString serial = gets_device_serial();
@@ -246,13 +246,13 @@ void XModuleRealsenseCamera::start_camera() {
                     break;
                 }
             }
-            xclu_assert(device_index >= 0, "No device with serial '" + serial + "'");
+            xc_assert(device_index >= 0, "No device with serial '" + serial + "'");
             break;
         }
         default:
             //мы здесь не должны быть, так как все методы запуска рассмотренли,
             //поэтому выдаем ошибку
-            xclu_exception(QString("Internal error, bad select_device value '%1'").arg(method));
+            xc_exception(QString("Internal error, bad select_device value '%1'").arg(method));
         }
         //TODO может быть нюанс, что список камер изменится пока мы ищем индекс.
 
@@ -309,16 +309,16 @@ RealsenseSettings XModuleRealsenseCamera::get_settings() {
 //---------------------------------------------------------------------
 int2 XModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,240 {
     auto list = res_string.split("_x_");
-    xclu_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
+    xc_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
     int2 res(list.at(0).toInt(), list.at(1).toInt());
-    xclu_assert(res.x > 0 && res.y > 0, QString("Can't start camera, bad resolution %1x%2").arg(res.x).arg(res.y));
+    xc_assert(res.x > 0 && res.y > 0, QString("Can't start camera, bad resolution %1x%2").arg(res.x).arg(res.y));
     return res;
 }
 
 //---------------------------------------------------------------------
 int XModuleRealsenseCamera::get_frame_rate(QString rate_string) {
     int fps = rate_string.toInt();
-    xclu_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
+    xc_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
     return fps;
 }
 
@@ -332,7 +332,7 @@ void XModuleRealsenseCamera::set_started(bool started) { //ставит camera_s
 //compute transformed depth to grayscale 8 bit and binary image
 void XModuleRealsenseCamera::transform() {
     if (geti_make_depth_grayscale()) {
-        xclu_assert(camera_.get_depth_pixels_mm(raster_depth16_), "get_depth_pixels_mm() returned false");
+        xc_assert(camera_.get_depth_pixels_mm(raster_depth16_), "get_depth_pixels_mm() returned false");
         //XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
 
         //crop

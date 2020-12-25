@@ -45,13 +45,13 @@ public:
 
 };
 
-//Настройки приложения из файла xclu_settings_file()
+//Настройки приложения из файла xc_settings_file()
 //В документации указано, что создание Settings происходит мгновенно
 //Хотя у нас сохранение в кастомный файл.
 //Также, важно что для мгновенного сброса настроек можно использовать метод sync()
 //Мы сейчас делаем макрос, который создает локально QSettings settings
 //Использование: XCLU_SETTINGS
-#define XCLU_SETTINGS QSettings settings(xclu_settings_file(), QSettings::IniFormat);
+#define XCLU_SETTINGS QSettings settings(xc_settings_file(), QSettings::IniFormat);
 
 
 #endif // SETTINGSKEYS_H

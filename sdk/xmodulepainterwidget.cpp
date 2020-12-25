@@ -11,7 +11,7 @@ XModulePainterWidget::XModulePainterWidget(QWidget *parent, XModulePainter *xmod
 {
     //setFixedSize(1280, 720);
 
-    xclu_assert(xmodule, "XModulePainterWidget constructor error - xmodule is nullptr");
+    xc_assert(xmodule, "XModulePainterWidget constructor error - xmodule is nullptr");
     xmodule_ = xmodule;
 
     //QLinearGradient gradient(QPointF(50, -20), QPointF(80, 20));

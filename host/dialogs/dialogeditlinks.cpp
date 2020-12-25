@@ -41,7 +41,7 @@ DialogEditLinks::~DialogEditLinks()
 
 //---------------------------------------------------------------------
 void DialogEditLinks::set_module(Module *module) {
-    xclu_assert(module, "DialogEditLinks::set_module - passed module==nullptr");
+    xc_assert(module, "DialogEditLinks::set_module - passed module==nullptr");
     module_ = module;
     ui->module_name->setText(module_->name());
 
@@ -93,14 +93,14 @@ DialogEditLinks::Links DialogEditLinks::get_list() {
         line.remove('\t');
         QStringList items = line.split("=");
         if (items.size() != 2) {
-            xclu_console_append("Error at `" + line + "`, expected item=name");
+            xc_console_append("Error at `" + line + "`, expected item=name");
             result.ok = false;
             continue;
         }
         QString var = items.at(0);
         QString link = items.at(1);
         if (var.isEmpty()) {
-            xclu_console_append("Error at `" + line + "`, empty item name");
+            xc_console_append("Error at `" + line + "`, empty item name");
             result.ok = false;
             continue;
         }
@@ -110,7 +110,7 @@ DialogEditLinks::Links DialogEditLinks::get_list() {
             var.remove(0,1);
         }
         if (!module_->interf()->has_item(var)) {
-            xclu_console_append("Error at `" + line + "`, unknown item");
+            xc_console_append("Error at `" + line + "`, unknown item");
             result.ok = false;
             continue;
         }
@@ -129,7 +129,7 @@ void DialogEditLinks::on_button_check_links_clicked()
 {
     Links links = DialogEditLinks::get_list();
     if (!links.ok) {
-        xclu_message_box("There are error(s) in links format");
+        xc_message_box("There are error(s) in links format");
     }
     else {
         //check resolving links
@@ -139,7 +139,7 @@ void DialogEditLinks::on_button_check_links_clicked()
             if (link.enabled) {
                 XLinkResolved::CheckLinkResult checking = XLinkResolved::check_link(link.link);
                 if (!checking.ok) {
-                    xclu_console_append(QString("Error at link `%1`: %2")
+                    xc_console_append(QString("Error at link `%1`: %2")
                                         .arg(links.vars[i])
                                         .arg(checking.error));
                     ok = false;
@@ -147,12 +147,12 @@ void DialogEditLinks::on_button_check_links_clicked()
             }
         }
         if (ok) {
-            xclu_console_append("Links are correct");
-            xclu_message_box("Links are correct");
+            xc_console_append("Links are correct");
+            xc_message_box("Links are correct");
         }
         else {
-            xclu_console_append("There are error(s) in links");
-            xclu_message_box("There are error(s) in links, see Console");
+            xc_console_append("There are error(s) in links");
+            xc_message_box("There are error(s) in links, see Console");
         }
     }
 }
@@ -162,7 +162,7 @@ void DialogEditLinks::on_button_ok_clicked()
 {
     Links links = DialogEditLinks::get_list();
     if (!links.ok) {
-        xclu_message_box("There are error(s) in links format");
+        xc_message_box("There are error(s) in links format");
         return;
     }
 

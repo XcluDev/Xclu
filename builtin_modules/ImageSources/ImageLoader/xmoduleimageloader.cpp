@@ -56,7 +56,7 @@ void XModuleImageLoader::impl_update() {
     }
         break;
      default:
-        xclu_exception("Unknown image_source " + getraw_image_source());
+        xc_exception("Unknown image_source " + getraw_image_source());
     }
 
     if (image_file != image_file_) {
@@ -89,7 +89,7 @@ void XModuleImageLoader::load_folder(QString folder_name) {
         //qDebug() << image_path;
     }
 
-    xclu_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
+    xc_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
 }
 
 //---------------------------------------------------------------------

@@ -59,7 +59,7 @@ public:
     //number of ticks for float slider, wihtout counting zero, so really there are ticks+1
     //0 means that there are no need in slider
     int ticks(float step) const {
-        xclu_assert(IntFloat == 1, "XRange: ticks() is only float");
+        xc_assert(IntFloat == 1, "XRange: ticks() is only float");
         if (low_enabled && high_enabled && low < high && step>0) {
             return qMax(int((high - low)/step),2);
         }
@@ -67,14 +67,14 @@ public:
     }
     //tick to value
     float tick_to_value(int tick, int ticks) const {
-        xclu_assert(IntFloat == 1, "XRange: tick_to_value() is only for float");
+        xc_assert(IntFloat == 1, "XRange: tick_to_value() is only for float");
         if (low_enabled && high_enabled && ticks > 0) {
             return xmapf_clamped(tick, 0, ticks, low, high);
         }
         return 0;
     }
     int value_to_ticks(float value, int ticks) const {
-        xclu_assert(IntFloat == 1, "XRange: value_to_ticks() is only for float");
+        xc_assert(IntFloat == 1, "XRange: value_to_ticks() is only for float");
         if (low_enabled && high_enabled && ticks > 0 && low < high) {
             return xmapf_clamped(value, low, high, 0, ticks);
         }

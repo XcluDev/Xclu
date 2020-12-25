@@ -49,9 +49,9 @@ void XModuleTelegramBot::send_message() {
     QString token = gets_bot_token().trimmed();
     QString chat_id = gets_chat_id().trimmed();
     QString message = gets_message_send();
-    xclu_assert(!token.isEmpty(), "Bot token is empty");
-    xclu_assert(!chat_id.isEmpty(), "Chat id is empty");
-    xclu_assert(!message.isEmpty(), "Message is empty");
+    xc_assert(!token.isEmpty(), "Bot token is empty");
+    xc_assert(!chat_id.isEmpty(), "Chat id is empty");
+    xc_assert(!message.isEmpty(), "Message is empty");
 
 
     //https://stackoverflow.com/questions/13302236/qt-simple-post-request
@@ -105,7 +105,7 @@ void XModuleTelegramBot::handleNetworkData(QNetworkReply *networkReply) {
         //}
     }
     else {
-        xclu_exception(QString("Network error: %1").arg(networkReply->error()));
+        xc_exception(QString("Network error: %1").arg(networkReply->error()));
     }
 
     //Why?
@@ -116,15 +116,15 @@ void XModuleTelegramBot::handleNetworkData(QNetworkReply *networkReply) {
 //---------------------------------------------------------------------
 void XModuleTelegramBot::slotError() {
     //Can't do exception here, so just put to console
-    xclu_console_append(QString("XModuleTelegramBot - network error"));
-    //xclu_exception(QString("XModuleTelegramBot - network error"));
+    xc_console_append(QString("XModuleTelegramBot - network error"));
+    //xc_exception(QString("XModuleTelegramBot - network error"));
 }
 
 //---------------------------------------------------------------------
 void XModuleTelegramBot::slotSslErrors() {
     //Can't do exception here, so just put to console
-    xclu_console_append(QString("XModuleTelegramBot - network SSL error"));
-    //xclu_exception(QString("XModuleTelegramBot - network SSL error"));
+    xc_console_append(QString("XModuleTelegramBot - network SSL error"));
+    //xc_exception(QString("XModuleTelegramBot - network SSL error"));
 
 }
 

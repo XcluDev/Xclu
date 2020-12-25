@@ -113,13 +113,13 @@ void DialogTestModuleInterface::pressed_reload() {
 //---------------------------------------------------------------------
 void DialogTestModuleInterface::pressed_export_h() {
     try {
-        xclu_assert(interf_.data(), "No module loaded");
-        xclu_console_append("Exporting to `" + folder_ + "`");
+        xc_assert(interf_.data(), "No module loaded");
+        xc_console_append("Exporting to `" + folder_ + "`");
         ExportInterface exporter;
         exporter.export_to_h_file(interf_.data(), folder_);
     }
     catch(XException& e) {
-        xclu_message_box("Error during export: " + e.whatQt());
+        xc_message_box("Error during export: " + e.whatQt());
     }
 }
 
@@ -144,12 +144,12 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
 
     folder_ = folder_edit_->toPlainText();
     if (folder_.isEmpty()) {
-        xclu_message_box("Please choose module folder");
+        xc_message_box("Please choose module folder");
         return;
     }
     QDir dir(folder_);
     if (!dir.exists()) {
-        xclu_message_box("Folder doesn't exists: '" + folder_ + "'");
+        xc_message_box("Folder doesn't exists: '" + folder_ + "'");
         return;
     }
 
@@ -172,7 +172,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
         editor_->load_module(module_seed_.data(), interf_.data(), "Name...", force_propagate_visibility);
     }
     catch (XException &e) {
-        xclu_message_box(e.whatQt());
+        xc_message_box(e.whatQt());
         clear();
     }
 }

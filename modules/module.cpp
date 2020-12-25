@@ -13,7 +13,7 @@ Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
 
     interf_ = new ModuleInterface(*info_external);
     xmodule_ = rtmodule_new;
-    xclu_assert(xmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
+    xc_assert(xmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
 
     //установка самого модуля в rt-модуль и интерфейсный модуль, чтобы они могли обмениваться данными
     xmodule_->set_module(this);
@@ -172,7 +172,7 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         break;
 
     default:
-        xclu_halt("Internal error: Module::gui_action - not implemented rule for GuiStage " + QString::number(stage));
+        xc_halt("Internal error: Module::gui_action - not implemented rule for GuiStage " + QString::number(stage));
     }
 
 }
@@ -239,7 +239,7 @@ void Module::execute(ModuleExecuteStage stage) {
     //    break;
 
     default:
-        xclu_exception(QString("Unknown execute stage %1").arg(stage));
+        xc_exception(QString("Unknown execute stage %1").arg(stage));
     }
 }
 

@@ -108,7 +108,7 @@ void XModuleSynthFromImage::impl_update() {
         if (t>0) {
             t = pow(t, nonlinear_tone);
         }
-        //xclu_console_append(QString::number(t0) + " " + QString::number(t));
+        //xc_console_append(QString::number(t0) + " " + QString::number(t));
         line_speed = t;
     }
 

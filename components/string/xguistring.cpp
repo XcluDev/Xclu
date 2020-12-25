@@ -113,11 +113,11 @@ void XGuiString::set_value(QString v) {
 void XGuiString::choose_file() {
     //запрашиваем и вычисляем относительный путь относительно пути к проекту
     //а если пустой - сказать про это
-    //при этом, тут нельзя использовать xclu_assert - так как выпадет вся программа
+    //при этом, тут нельзя использовать xc_assert - так как выпадет вся программа
     //ведь это идет обработка по нажатию кнопки, прямо в GUI
     QString proj_folder = XCORE.project_folder();
     if (proj_folder.isEmpty()) {
-        xclu_message_box("To compute relative path for a file we will need the project path.\nPlease save a project before choosing a file");
+        xc_message_box("To compute relative path for a file we will need the project path.\nPlease save a project before choosing a file");
         return;
     }
 
@@ -134,11 +134,11 @@ void XGuiString::choose_file() {
 void XGuiString::choose_folder() {
     //запрашиваем и вычисляем относительный путь относительно пути к проекту, если он не пустой
     //а если пустой - сказать про это
-    //при этом, тут нельзя использовать xclu_assert - так как выпадет вся программа
+    //при этом, тут нельзя использовать xc_assert - так как выпадет вся программа
     //ведь это идет обработка по нажатию кнопки, прямо в GUI
     QString proj_folder = XCORE.project_folder();
     if (proj_folder.isEmpty()) {
-        xclu_message_box("To compute relative path for a folder we will need the project path.\nPlease save a project before choosing a folder");
+        xc_message_box("To compute relative path for a folder we will need the project path.\nPlease save a project before choosing a folder");
         return;
     }
 

@@ -40,7 +40,7 @@ void XModuleRandom::impl_update() {
         }
     }
         break;
-    default: xclu_exception("XModuleRandom::impl_update - bad `update_mode` value");
+    default: xc_exception("XModuleRandom::impl_update - bad `update_mode` value");
     }
 }
 
@@ -60,7 +60,7 @@ void XModuleRandom::make_new_value() {
         value = get_random_string();
         break;
     default:
-        xclu_exception("XModuleRandom::impl_update - bad `output_type` value");
+        xc_exception("XModuleRandom::impl_update - bad `output_type` value");
     }
 
    sets_result(value);
