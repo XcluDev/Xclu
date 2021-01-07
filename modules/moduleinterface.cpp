@@ -134,6 +134,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
         //...
         //endif (или снова if)
 
+        const QString &line_raw = lines[i];
         QString line = lines[i];
         //будем отлавливать исключение и добавлять к нему информацию, какую строку парсим
         try {
@@ -153,9 +154,35 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
                 continue;
             }
 
+
+            //--------------------------------------------
+            //Fixing problem with default value for string, to be able parse values with spaces:
+            //in string Name name="aaa bbb"
+            //For this, we capture "...." value and append it to last item to query value below
+
+            //find position of = and first " and last " after = for using in string parsing
+            int eq_index = line.indexOf('=');
+            int quot1 = (eq_index>=0) ? line.indexOf('"', eq_index+1) : -1;
+            int quot2 = (quot1>=0) ? line.lastIndexOf('"') : -1;
+            //compute def value - if all this components exists
+            QString def_value_string;
+            if (eq_index >= 0 && quot1 >= 0 && quot2 > quot1) {
+                def_value_string = line.mid(quot1, quot2-quot1+1);
+
+                //remove from original string - we will add it to last item of query value
+                line = line.left(eq_index+1);
+            }
+
+            //--------------------------------------------
+            //split by spaces and tabs
             QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
             QStringList query = line.split(rx);
 
+            xc_assert(!query.isEmpty(), "Internal error: empty query while parsing '" + line_raw + "'");
+
+            //now if we shorten line - add def_value_string to the last item
+            query[query.size()-1] += def_value_string;
+            //--------------------------------------------
             int n = query.size();
             QString item1 = query.at(0);
 

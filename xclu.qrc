@@ -188,8 +188,6 @@
         <file>builtin_modules/Databases/DB_RDF/description.xgui</file>
         <file>builtin_modules/Databases/XcluDBAccess/auto.h</file>
         <file>builtin_modules/Databases/XcluDBAccess/description.xgui</file>
-        <file>builtin_modules/DeepLearning/UpAIRunner/auto.h</file>
-        <file>builtin_modules/DeepLearning/UpAIRunner/description.xgui</file>
         <file>builtin_modules/Drawing/3DObjectWithShaders/auto.h</file>
         <file>builtin_modules/Drawing/3DObjectWithShaders/description.xgui</file>
         <file>builtin_modules/Drawing/Fbo/auto.h</file>
@@ -436,5 +434,6 @@
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
         <file>builtin_modules/System/FileCreate/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>
+        <file>builtin_modules/System/ExecutePersistent/description.xgui</file>
     </qresource>
 </RCC>

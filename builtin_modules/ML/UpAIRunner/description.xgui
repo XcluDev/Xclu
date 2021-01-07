@@ -1,7 +1,5 @@
 #Module UpAIRunner
 #------------------------------------------
-#module_class=UpAIRunner
-#module_category=DeepLearning
 module_description=Request to WikiData knowledge database.
 module_version=1.01
 module_impl=C++

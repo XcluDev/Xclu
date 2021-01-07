@@ -22,14 +22,14 @@
 
 //---------------------------------------------------------------------
 /*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf,
-                                                     QString title_underscored,
-                                                     QString type,
-                                                     const QStringList &description,
-                                                     XQualifier qual,
-                                                     QString line_to_parse,
-                                                     QString options,
-                                                     QString qual_options
-                                                     ) {
+                                         QString title_underscored,
+                                         QString type,
+                                         const QStringList &description,
+                                         XQualifier qual,
+                                         QString line_to_parse,
+                                         QString options,
+                                         QString qual_options
+                                         ) {
     XItemPreDescription descr;
     descr.title = xc_remove_underscore(title_underscored);
     descr.type = type;
@@ -44,8 +44,8 @@
 //---------------------------------------------------------------------
 //page, group
 /*static*/ XItem *XItemCreator::new_decorate_item(ModuleInterface *interf,
-                                                              QString name,
-                                                              QString type, const QStringList &description) {
+                                                  QString name,
+                                                  QString type, const QStringList &description) {
     //QString title = xc_remove_underscore(name);
     return new_item(interf, name, type, description, XQualifierIn, name);
 }
@@ -79,7 +79,7 @@
 XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {
     //Проверка, что interf не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xc_assert(interf,
-                "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
+              "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
     interf_ = interf;
     title_ = pre_description.title;
     type_ = pre_description.type;
@@ -89,7 +89,7 @@ XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description
     //опции квалификатора, может быть только out(save)
     auto &options = pre_description.qualifier_options;
     xc_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifierOut),
-                "Currently only out(save) option supported, but get other for " + pre_description.line_to_parse);
+              "Currently only out(save) option supported, but get other for " + pre_description.line_to_parse);
 
     //ставим, нужно ли сохранять в проект
     if (qualifier_ != XQualifierOut) {
@@ -329,14 +329,27 @@ void XItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //парсинг q=0 0:1 100,10 -> name='q', query = '0','0:1','100,10'
+//        v="aaa bbb" -> name='v', query = "aaa bbb"
 /*static*/ void XItem::split_equal(const QString &line, QString &name, QStringList &query) {
     int equal = line.indexOf('=');
     xc_assert(equal != -1, "no '=', expect 'some_name=...'");
     xc_assert(equal != 0, "empty variable name, expect 'some_name=...'");
     name = line.left(equal);
-    QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
-    query = QString(line.mid(equal+1)).split(rx);
-    xc_assert(!query.isEmpty(), "expected something after '='");
+
+    QString right = line.mid(equal+1);
+    query.clear();
+    if (!right.isEmpty()) {
+        //"aaa bbb"
+        if (right.startsWith('"')) {
+            query.push_back(right);
+        }
+        else {
+            //0 0:1 100,10
+            QRegExp rx("(\\ |\\t)"); //RegEx for ' ' or '\t'
+            query = QString(line.mid(equal+1)).split(rx);
+        }
+    }
+    //xc_assert(!query.isEmpty(), "expected something after '='");
 }
 
 //---------------------------------------------------------------------
@@ -380,17 +393,17 @@ bool XItem::is_matches_qual_mask(const XQualifierMask &qual) {
     }
     else {
         return (
-            (qual.qual_const && is_const())
-            || (qual.qual_in && is_in())
-            || (qual.qual_out && is_out())
-            );
+                    (qual.qual_const && is_const())
+                    || (qual.qual_in && is_in())
+                    || (qual.qual_out && is_out())
+                    );
     }
 
 }
 
 //---------------------------------------------------------------------
 void XItem::gui_to_var(const XQualifierMask &qual, bool evaluate_expr) { //вычисление expression и получение значения из gui
-     if (is_gui_attached() && is_matches_qual_mask(qual)) {
+    if (is_gui_attached() && is_matches_qual_mask(qual)) {
         if (is_use_expression()) {
             if (evaluate_expr) {
                 //... expression()
@@ -410,7 +423,7 @@ void XItem::gui_to_var(const XQualifierMask &qual, bool evaluate_expr) { //вы�
 //---------------------------------------------------------------------
 void XItem::var_to_gui(const XQualifierMask &qual) { //установка значения в gui, также отправляет сигнал о видимости
     //if (!is_use_expression()) {
-     if (is_gui_attached() && is_matches_qual_mask(qual)) {
+    if (is_gui_attached() && is_matches_qual_mask(qual)) {
         var_to_gui_internal();
         //отправляем сигнал о видимости
         propagate_visibility();
@@ -452,9 +465,9 @@ void XItem::copy_data_to(XItem *item) {
     if (!store_data()) return;
 
     xc_assert(name() == item->name(), "Internal error XItem::copy_data_to: different items names '"
-                + name() + "' and '" + item->name() + "'");
+              + name() + "' and '" + item->name() + "'");
     xc_assert(type() == item->type(), "Internal error XItem::copy_data_to: different items types '"
-                + type() + "' and '" + item->type() + "'");
+              + type() + "' and '" + item->type() + "'");
 
     item->set_use_expression(is_use_expression());
     item->set_expression(expression());
@@ -496,9 +509,9 @@ void XItem::write_json(QJsonObject &json) {
     //json["atype"] = interfacetype_to_string(type_);  //записываем, чтобы отловить ошибки при изменении интерфейса
 
     //if (is_expression_can_be_used()) {
-        //json["expr_use"] = use_expression_;
-        //json["expr"] = expression_;
-   // }
+    //json["expr_use"] = use_expression_;
+    //json["expr"] = expression_;
+    // }
 }
 
 //---------------------------------------------------------------------
@@ -506,11 +519,11 @@ void XItem::read_json(const QJsonObject &json) {
     if (!is_save_to_project()) return;
     if (!store_data()) return;
     xc_assert(supports_string(), "Can't read item '" + name_ + "' from json, because it's has 'out' (that means read-only) qualifier.\n"
-                "May be module's version is different");
+                                                               "May be module's version is different");
     //проверяем, что имя совпадает
     QString name = JsonUtils::json_string(json, "aname");
     xc_assert(name == name_, "Different name for '" + name_ + "'.\n"
-                "May be module's version is different");
+                                                              "May be module's version is different");
 
     //значение
     set_value_string_json(JsonUtils::json_string(json, "avalue"));
@@ -573,10 +586,10 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
     }
         break;
     case ComponentContextMenu_use_link: {
-            XLink link1 = link();
-            link1.enabled = true;
-            set_link(link1);
-        }
+        XLink link1 = link();
+        link1.enabled = true;
+        set_link(link1);
+    }
         break;
     case ComponentContextMenu_edit_link: {
         DialogEditLink::call_dialog(DialogEditLinkData(module()->name(), this));
@@ -596,7 +609,7 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         xc_console_append("Clipboard: `" + link + "'");
     }
         break;
-    //this cases must be implemented in subclasses
+        //this cases must be implemented in subclasses
     case ComponentContextMenu_reset_default_value:
     case ComponentContextMenu_set_size:
         xc_exception(QString("XGui::on_component_popup_action - not implemented response to `%1`").arg(action_text));

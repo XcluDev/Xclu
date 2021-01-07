@@ -7,7 +7,10 @@
 REGISTER_XITEM(XItemString, string)
 //---------------------------------------------------------------------
 //Строка
-//in string Name name="aa"
+//in string Name name="aa bb"
+//   This is object name   - описание
+//
+//значение по умолчанию может содержать пробелы и кавычки - просто убираются первая и последняя.
 //
 //Строка с кнопкой для выбора файла
 // in string_file Name name="aa"

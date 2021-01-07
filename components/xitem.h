@@ -257,6 +257,7 @@ protected:
     QString expression_;
 
     //парсинг q=0 0:1 100,10 -> name='q', query = '0','0:1','100,10'
+    //        v="aaa bbb" -> name='v', query = "aaa bbb"
     static void split_equal(const QString &line, QString &name, QStringList &query);
 
     //парсинг q A B -> name='q', query = 'A','B'

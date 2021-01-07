@@ -19,6 +19,7 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
     $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.cpp \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
+    $$PWD/builtin_modules/System/ExecutePersistent/xmoduleexecutepersistent.cpp \
     $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.cpp \
     $$PWD/builtin_modules/System/Timer/xmoduletimer.cpp \
     $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
@@ -62,6 +63,8 @@ HEADERS += \
     $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
+    $$PWD/builtin_modules/System/ExecutePersistent/auto.h \
+    $$PWD/builtin_modules/System/ExecutePersistent/xmoduleexecutepersistent.h \
     $$PWD/builtin_modules/System/FileCreate/auto.h \
     $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.h \
     $$PWD/builtin_modules/System/Timer/xmoduletimer.h \

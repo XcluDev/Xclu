@@ -1,8 +1,6 @@
-#Module Execute
+#Module ExecutePersistent
 #------------------------------------------
-#module_class=Execute
-#module_category=System
-module_description=Execute external file.
+module_description=Execute program with persistent data exchange using console.
 module_version=1.01
 module_impl=C++
 
@@ -12,21 +10,15 @@ page Main
 in string_folder Working_Folder folder_name=""
     //Folder for running the file.
     
-in string_file File_Name file_name=""
-    //File to execute.
-    //Choose File to execute
-    //Executables (*.exe *.bat *.sh);; All files (*.*)
-
-in string Arguments args=""
-    //Optional command line arguments
+in string Run_Command run_command="python code.py"
+    //Command to execute. Can connect command line arguments too.
 
 line
     
-in enum Working_Mode work_mode=On_Bang [Each_Frame,On_Bang]
+in enum Exec_Mode exec_mode=On_Bang [Each_Frame,On_Bang]
     //Should we execute file at each frame or on Bang signal
         
-in checkbox Bang bang_signal=0
-    //Start execution
+if exec_mode On_Band
 
 in button Bang bang_button
 	//Start execution
@@ -75,7 +67,7 @@ out float Last_Execute_Time last_time=0 0:* 1,10
     //seconds
     
 out float Last_Duration last_duration=0 0:* 1,10
-    //Last duration of the execution
+    //Last duration of the execution.
     //seconds
 endif    
 
