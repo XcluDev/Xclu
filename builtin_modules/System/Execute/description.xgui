@@ -22,14 +22,14 @@ in string Arguments args=""
 
 line
     
-in enum Working_Mode work_mode=On_Bang [Each_Frame,On_Bang]
-    //Should we execute file at each frame or on Bang signal
+in enum Execute execute=At_Start [At_Start,Each_Frame,On_Button]
+    //When start execution.
         
-in checkbox Bang bang_signal=0
-    //Start execution
-
-in button Bang bang_button
-	//Start execution
+in enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
+    //Should we wait for execution finish or run in a separate thread.
+        
+in button Run run_button
+	//Run execution immediately.
 
 #--------------------
 line
@@ -43,11 +43,11 @@ in group Settings settings=0
 #endif
    
 if settings 1
-in checkbox Set_Timeout set_timeout=1
+in checkbox Enable_Timeout enable_timeout=1
     //Use timeout for stopping execution or wait infinitely
 endif
-if set_timeout 1
-in float Timeout timeout_sec=30 0:* 0.1,10
+if enable_timeout 1
+in float Timeout timeout_sec=5 0:* 0.1,1
     //Timeout duration
     //seconds
 endif
@@ -93,7 +93,41 @@ out text File_Path file_path 4 5
 endif
 
 #--------------------
-line
+page Console
+    //Exhange data using console. It's a way to use Python programs for ML processing in realtime.
+
+
+       
+#---- write ----    
+in enum Write write=Disabled [Disabled,Each_Frame,On_Button]
+    //When write data to console.
+    
+if write Each_Frame,On_Button
+in button Write write_button
+    //Write to process console right now.
+in enum Data_Type write_type=String [String,Image]
+    //Data type for console write.
+endif
+
+if write_type String
+in string String string_write=""
+    //String to write to process console.
+endif
+
+
+if write_type Image
+in object_image Image image_write
+    //Object to write to process console.
+    
+    
+endif
+
+#---- read ----    
+
+
+
+separator
+line  
 in group Show_Local_Console show_console=0
     //Show local console for printing there output of executed program
 

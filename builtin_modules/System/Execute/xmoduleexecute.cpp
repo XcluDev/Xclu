@@ -34,6 +34,8 @@ void XModuleExecute::start() {
     clear_string_folder_path();
     clear_string_file_path();
 
+    subprocess_.reset();
+
 }
 
 //---------------------------------------------------------------------
@@ -131,7 +133,19 @@ void XModuleExecute::update() {
 
 //---------------------------------------------------------------------
 void XModuleExecute::stop() {
-    //qDebug() << "stop";
+    process_stop();
+
+}
+
+//---------------------------------------------------------------------
+void XModuleExecute::process_run() {
+    subprocess_.reset(new QProcess);
+
+}
+
+//---------------------------------------------------------------------
+void XModuleExecute::process_stop() {
+    subprocess_.reset();
 
 }
 

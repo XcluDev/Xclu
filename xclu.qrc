@@ -434,6 +434,5 @@
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
         <file>builtin_modules/System/FileCreate/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>
-        <file>builtin_modules/System/ExecutePersistent/description.xgui</file>
     </qresource>
 </RCC>
