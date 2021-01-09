@@ -52,8 +52,7 @@ protected:
     virtual void update();
     virtual void stop();
 
-    void process_run();
-    void process_stop();
+    void run();
 
     QScopedPointer<QProcess> subprocess_;
 

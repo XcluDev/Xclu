@@ -22,7 +22,7 @@ in string Arguments args=""
 
 line
     
-in enum Execute execute=At_Start [At_Start,Each_Frame,On_Button]
+in enum Execute execute=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
     //When start execution.
         
 in enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
@@ -32,9 +32,8 @@ in button Run run_button
 	//Run execution immediately.
 
 #--------------------
-line
-in group Settings settings=0
-    //Settings for timeout
+page Settings
+
 #    and running in a separate thread
 #if settings 1
 #TODO параллельный поток
@@ -42,19 +41,80 @@ in group Settings settings=0
 #    //Wait while program finished, if unckecked, then run in a separate thread and not wait for finishing
 #endif
    
-if settings 1
 in checkbox Enable_Timeout enable_timeout=1
     //Use timeout for stopping execution or wait infinitely
-endif
+
 if enable_timeout 1
 in float Timeout timeout_sec=5 0:* 0.1,1
     //Timeout duration
     //seconds
 endif
 
-#-----------------------------
+#--------------------
+page Console
+    //Exhange data using console. It's a way to use Python programs for ML processing in realtime.
+
+
+       
+#---- write ----    
+in enum Write write=Disabled [Disabled,Each_Frame,On_Button]
+    //When write data to process console.
+    
+if write Each_Frame,On_Button
+in button Write write_button
+    //Write to process console right now.
+in enum Data_Type write_type=String [String,Text,Image]
+    //Data type for console write.
+endif
+
+if write_type String
+in string String string_write=""
+    //String to write to process console.
+endif
+
+if write_type Text
+in text Text text_write 10 12
+    //Text to write to process console.
+endif
+
+if write_type Image
+in object_image Image image_write
+    //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+endif
+
+separator
 line
-in group Runtime runtime=0
+
+#---- read ----    
+in enum Read read=Disabled [Disabled,Each_Frame,On_Button]
+    //When read data from process console.
+    
+if read Each_Frame,On_Button
+in button Read read_button
+    //Read from process console right now.
+in enum Data_Type read_type=Text [String,Text,Image]
+    //Data type for console read.
+endif
+
+if read_type String
+in string String string_read=""
+    //String to write to process console.
+endif
+
+if read_type Text
+in text Text text_read 10 12
+    //Text to write to process console.
+endif
+
+if read_type Image
+out object_image Image image_read
+    //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
+endif
+
+
+#-----------------------------
+page Details
+in group Runtime runtime=1
 	//Runtime variables
 
 if runtime 1
@@ -67,7 +127,7 @@ out int Exit_Code exit_code=0 *:* 1,10
     
 #TODO можно выдать тип ошибки - enum QProcess::ProcessError
 
-out checkbox Last_Success last_success=0
+out checkbox Last_Success last_success=1
     //Success of last execution, stored here until next execution
     
 out float Last_Execute_Time last_time=0 0:* 1,10
@@ -91,53 +151,6 @@ out text Folder_Path folder_path 4 5
 out text File_Path file_path 4 5
     //Absolute path to the executable file
 endif
-
-#--------------------
-page Console
-    //Exhange data using console. It's a way to use Python programs for ML processing in realtime.
-
-
-       
-#---- write ----    
-in enum Write write=Disabled [Disabled,Each_Frame,On_Button]
-    //When write data to console.
-    
-if write Each_Frame,On_Button
-in button Write write_button
-    //Write to process console right now.
-in enum Data_Type write_type=String [String,Image]
-    //Data type for console write.
-endif
-
-if write_type String
-in string String string_write=""
-    //String to write to process console.
-endif
-
-
-if write_type Image
-in object_image Image image_write
-    //Object to write to process console.
-    
-    
-endif
-
-#---- read ----    
-
-
-
-separator
-line  
-in group Show_Local_Console show_console=0
-    //Show local console for printing there output of executed program
-
-if show_console 1
-out text Local_Console local_console 10 15
-    //Console output
-
-endif
-line
-#--------------------
 
 
 
