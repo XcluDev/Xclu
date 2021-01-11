@@ -57,10 +57,10 @@ page Console
 
        
 #---- write ----    
-in enum Write write=Disabled [Disabled,Each_Frame,On_Button]
+in enum Write write=After_Run [Disabled,After_Run,Each_Frame,On_Button]
     //When write data to process console.
     
-if write Each_Frame,On_Button
+if write After_Run,Each_Frame,On_Button
 in button Write write_button
     //Write to process console right now.
 in enum Data_Type write_type=String [String,Text,Image]
@@ -86,10 +86,10 @@ separator
 line
 
 #---- read ----    
-in enum Read read=Disabled [Disabled,Each_Frame,On_Button]
+in enum Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
     //When read data from process console.
     
-if read Each_Frame,On_Button
+if read After_Run,Each_Frame,On_Button
 in button Read read_button
     //Read from process console right now.
 in enum Data_Type read_type=Text [String,Text,Image]
@@ -112,6 +112,18 @@ out object_image Image image_read
 endif
 
 
+separator
+line
+
+#---- errors ----    
+in checkbox_group Show_Errors show_errors=0
+    //When read data from process console.
+    
+if show_errors 1
+in text Errors text_errors 10 12
+    //Errors.
+endif
+
 #-----------------------------
 page Details
 in group Runtime runtime=1
@@ -130,13 +142,13 @@ out int Exit_Code exit_code=0 *:* 1,10
 out checkbox Last_Success last_success=1
     //Success of last execution, stored here until next execution
     
-out float Last_Execute_Time last_time=0 0:* 1,10
-    //Last time of the execution start measured from the project start
-    //seconds
+#out float Last_Execute_Time last_time=0 0:* 1,10
+#    //Last time of the execution start measured from the project start
+#    //seconds
     
-out float Last_Duration last_duration=0 0:* 1,10
-    //Last duration of the execution
-    //seconds
+#out float Last_Duration last_duration=0 0:* 1,10
+#    //Last duration of the execution
+#    //seconds
 endif    
 
    

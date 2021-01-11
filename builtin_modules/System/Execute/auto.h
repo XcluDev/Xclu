@@ -75,9 +75,10 @@ float getf_timeout_sec() { return getf_("timeout_sec"); }
 //When write data to process console.
 enum enum_write {
     write_Disabled = 0,
-    write_Each_Frame = 1,
-    write_On_Button = 2,
-    write_N__ = 3
+    write_After_Run = 1,
+    write_Each_Frame = 2,
+    write_On_Button = 3,
+    write_N__ = 4
 };
 bool was_changed_write() { return was_changed_("write"); }
 enum_write gete_write() { return enum_write(geti_("write")); }
@@ -123,9 +124,10 @@ XProtectedObject *getobject_image_write() { return get_object_("image_write"); }
 //When read data from process console.
 enum enum_read {
     read_Disabled = 0,
-    read_Each_Frame = 1,
-    read_On_Button = 2,
-    read_N__ = 3
+    read_After_Run = 1,
+    read_Each_Frame = 2,
+    read_On_Button = 3,
+    read_N__ = 4
 };
 bool was_changed_read() { return was_changed_("read"); }
 enum_read gete_read() { return enum_read(geti_("read")); }
@@ -194,18 +196,6 @@ void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", incre
 bool was_changed_last_success() { return was_changed_("last_success"); }
 int geti_last_success() { return geti_("last_success"); }
 void seti_last_success(int value) { seti_("last_success", value); }
-
-//Out Float Last Execute Time
-//Last time of the execution start measured from the project start
-bool was_changed_last_time() { return was_changed_("last_time"); }
-float getf_last_time() { return getf_("last_time"); }
-void setf_last_time(float value) { setf_("last_time", value); }
-
-//Out Float Last Duration
-//Last duration of the execution
-bool was_changed_last_duration() { return was_changed_("last_duration"); }
-float getf_last_duration() { return getf_("last_duration"); }
-void setf_last_duration(float value) { setf_("last_duration", value); }
 
 
 //Checkbox Show Absolute Paths
