@@ -86,7 +86,6 @@ void XModuleExecute::run() {
     //double start_time = xc_elapsed_time_sec();
     //setf_last_time(start_time);
 
-    bool success = false;
 
     //qDebug() << "execute...";
 
@@ -112,7 +111,6 @@ void XModuleExecute::run() {
     subprocess.setReadChannel(QProcess::StandardOutput);
     subprocess.setProcessChannelMode(QProcess::SeparateChannels);
     //subprocess.setProcessChannelMode(QProcess::MergedChannels);
-
 
     QObject::connect( &subprocess,SIGNAL(readyReadStandardOutput()),this,SLOT(onReadyReadStandardOutput()) );
     QObject::connect( &subprocess,SIGNAL(readyReadStandardError()),this,SLOT(onReadyReadStandardError()) );
@@ -154,12 +152,13 @@ void XModuleExecute::onReadyReadStandardError() {
 
 //---------------------------------------------------------------------
 void XModuleExecute::finished(int, QProcess::ExitStatus) {
+
     //exit code
     int exit_code = subprocess.exitCode();
     seti_exit_code(exit_code);
 
     //проверяем результат
-    success = result && (subprocess.exitStatus() == QProcess::NormalExit)
+    bool success = result && (subprocess.exitStatus() == QProcess::NormalExit)
             && (exit_code == 0);
     if (success) {
         seti_success(1);

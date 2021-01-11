@@ -52,9 +52,17 @@ protected:
     virtual void update();
     virtual void stop();
 
+    QScopedPointer<QProcess> subprocess_;
+
     void run();
 
-    QScopedPointer<QProcess> subprocess_;
+    void console_read();
+    void console_write();
+protected slots:
+    void onReadyReadStandardOutput();
+    void onReadyReadStandardError();
+    void finished(int, QProcess::ExitStatus);
+    void crashed(QProcess::ProcessError);
 
 };
 
