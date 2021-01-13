@@ -169,6 +169,23 @@ bool was_changed_image_read() { return was_changed_("image_read"); }
 XProtectedObject *getobject_image_read() { return get_object_("image_read"); }
 void setobject_image_read(XProtectedObject *value) { set_object_("image_read", value); }
 void setobject_image_read(XProtectedObject &value) { set_object_("image_read", value); }
+
+
+//Checkbox Show Errors
+//When read data from process console.
+bool was_changed_show_errors() { return was_changed_("show_errors"); }
+int geti_show_errors() { return geti_("show_errors"); }
+
+//Out Text Errors
+//Errors.
+bool was_changed_text_errors() { return was_changed_("text_errors"); }
+QString gets_text_errors() { return gets_("text_errors"); }
+QStringList get_strings_text_errors() { return get_strings_("text_errors"); }
+void sets_text_errors(QString value) { sets_("text_errors", value); }
+void clear_string_text_errors() { clear_string_("text_errors"); }
+void append_string_text_errors(QString v, int extra_new_lines_count = 0) { append_string_("text_errors", v, extra_new_lines_count); }
+void append_string_text_errors(QStringList v, int extra_new_lines_count = 0) { append_string_("text_errors", v, extra_new_lines_count); }
+
 //----------------------------------------------------
 //Page Details
 //
@@ -179,7 +196,7 @@ bool was_changed_runtime() { return was_changed_("runtime"); }
 int geti_runtime() { return geti_("runtime"); }
 
 //Out Checkbox Success
-//Momentary value which is set to 1 if executiion was successful in the current frame
+//Momentary value which is set to 1 if executiion was successful at the current frame
 bool was_changed_success() { return was_changed_("success"); }
 int geti_success() { return geti_("success"); }
 void seti_success(int value) { seti_("success", value); }
@@ -190,12 +207,6 @@ bool was_changed_exit_code() { return was_changed_("exit_code"); }
 int geti_exit_code() { return geti_("exit_code"); }
 void seti_exit_code(int value) { seti_("exit_code", value); }
 void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", increase); }
-
-//Out Checkbox Last Success
-//Success of last execution, stored here until next execution
-bool was_changed_last_success() { return was_changed_("last_success"); }
-int geti_last_success() { return geti_("last_success"); }
-void seti_last_success(int value) { seti_("last_success", value); }
 
 
 //Checkbox Show Absolute Paths

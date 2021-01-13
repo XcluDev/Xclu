@@ -26,9 +26,9 @@ void XModuleExecute::start() {
     //qDebug() << "start";
     seti_success(0);
     seti_exit_code(0);
-    seti_last_success(0);
-    setf_last_time(0);
-    setf_last_duration(0);
+    //seti_last_success(0);
+    //setf_last_time(0);
+    //setf_last_duration(0);
 
     clear_string_folder_path();
     clear_string_file_path();
@@ -53,10 +53,7 @@ void XModuleExecute::update() {
 //---------------------------------------------------------------------
 void XModuleExecute::stop() {
     subprocess_.reset();
-
-
 }
-
 
 //---------------------------------------------------------------------
 void XModuleExecute::run() {
@@ -109,67 +106,81 @@ void XModuleExecute::run() {
     //run
 
     subprocess.setReadChannel(QProcess::StandardOutput);
-    subprocess.setProcessChannelMode(QProcess::SeparateChannels);
+    subprocess.setProcessChannelMode(QProcess::SeparateChannels); //separate output and error to process them differently
     //subprocess.setProcessChannelMode(QProcess::MergedChannels);
 
-    QObject::connect( &subprocess,SIGNAL(readyReadStandardOutput()),this,SLOT(onReadyReadStandardOutput()) );
-    QObject::connect( &subprocess,SIGNAL(readyReadStandardError()),this,SLOT(onReadyReadStandardError()) );
-    QObject::connect( &subprocess,SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(finished(int,QProcess::ExitStatus)) );
-    QObject::connect( &subprocess,SIGNAL(error(QProcess::ProcessError)),this,SLOT(crashed(QProcess::ProcessError)) );
+    connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
+    connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleExecute::onReadyReadStandardError);
+
+    connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleExecute::finished);
+    connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XModuleExecute::crashed);
+
+
     subprocess.start(QProcess::Unbuffered | QProcess::ReadWrite );
 
-
+    //decide - wait finishing or work async
     auto thread_mode = gete_thread_mode();
 
     if (thread_mode == thread_mode_Wait_Finishing) {
         //sync run
         subprocess.start(QProcess::Unbuffered | QProcess::ReadWrite );
         console_write();
-        bool result = subprocess.waitForFinished(timeout);
+        bool success = subprocess.waitForFinished(timeout);
         console_read();
-
+        if (!success) {
+            xc_assert(success, "Timeout");
+        }
+        check_error();
     }
     else {
         //async run
     }
 
-
-
-    //ставим продолжительность
     //double time = xc_elapsed_time_sec();
     //setf_last_duration(time - start_time);
 }
 
 //---------------------------------------------------------------------
+void XModuleExecute::check_error() {
+    if (subprocess_.data()) {
+        QProcess &subprocess = *subprocess_;
+        //exit code
+        int exit_code = subprocess.exitCode();
+        seti_exit_code(exit_code);
+
+        bool success = /*result && */(subprocess.exitStatus() == QProcess::NormalExit)
+                && (exit_code == 0);
+        seti_success(success);
+
+        //read all data from console anyway
+        //QByteArray error = subprocess.readAll(); //readAllStandardError();
+        //sets_text_errors(error);
+
+        xc_assert(success, "Execution error, see Console - Errors");
+
+    }
+}
+
+//---------------------------------------------------------------------
 void XModuleExecute::onReadyReadStandardOutput() {
-    console_read();
+    //Note, this is async callback
+    //console_read();
+    qDebug() << "Standard" << subprocess_.data()->readAllStandardOutput();
 }
 
 //---------------------------------------------------------------------
 void XModuleExecute::onReadyReadStandardError() {
-    //...
+    //Note, this is async callback
+
+    QString text = subprocess_.data()->readAllStandardError();
+    //qDebug() << "Error" << text;
+    //QByteArray error = subprocess_.data()->readAll(); //readAllStandardError();
+    sets_text_errors(text);
 }
 
 //---------------------------------------------------------------------
 void XModuleExecute::finished(int, QProcess::ExitStatus) {
 
-    //exit code
-    int exit_code = subprocess.exitCode();
-    seti_exit_code(exit_code);
-
-    //проверяем результат
-    bool success = result && (subprocess.exitStatus() == QProcess::NormalExit)
-            && (exit_code == 0);
-    if (success) {
-        seti_success(1);
-    }
-    //запоминаем результат
-    seti_last_success(success);
-
-
-
-    //если ошибка - выдаем это
-    xc_assert(success, "Execution error or time is out");
 }
 
 //---------------------------------------------------------------------
@@ -179,9 +190,17 @@ void XModuleExecute::crashed(QProcess::ProcessError) {
 
 //---------------------------------------------------------------------
 void XModuleExecute::console_read() {
-    //Пишем в консоль
-    if (geti_show_console()) {
-        sets_local_console(subprocess.readAll());
+    if (subprocess_.data()) {
+        QProcess &subprocess = *subprocess_;
+
+        QByteArray output = subprocess.readAllStandardOutput();
+        QByteArray error = subprocess.readAllStandardError();
+
+
+       /* if (geti_show_console()) {
+
+            sets_local_console();
+        }*/
     }
 }
 

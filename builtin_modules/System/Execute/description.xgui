@@ -28,21 +28,10 @@ in enum Execute execute=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
 in enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
     //Should we wait for execution finish or run in a separate thread.
         
-in button Run run_button
-	//Run execution immediately.
-
-#--------------------
-page Settings
-
-#    and running in a separate thread
-#if settings 1
-#TODO параллельный поток
-#in checkbox Wait_While_Finished wait_finish=1
-#    //Wait while program finished, if unckecked, then run in a separate thread and not wait for finishing
-#endif
-   
+if thread_mode Wait_Finishing
 in checkbox Enable_Timeout enable_timeout=1
     //Use timeout for stopping execution or wait infinitely
+endif
 
 if enable_timeout 1
 in float Timeout timeout_sec=5 0:* 0.1,1
@@ -50,14 +39,43 @@ in float Timeout timeout_sec=5 0:* 0.1,1
     //seconds
 endif
 
+
+    
+
 #--------------------
-page Console
-    //Exhange data using console. It's a way to use Python programs for ML processing in realtime.
+page Runtime
 
+in button Run run_button
+	//Run execution immediately.
 
-       
+in button Stop stop_button
+	//Stop execution immediately.
+
+    
+out enum Status status=Nothing [Nothing,Working,Finished,Error]
+    //Momentary value which is set to 1 if executiion was successful at the current frame
+
+out int Exit_Code exit_code=0 *:* 1,10
+    //The code returned by program, '0' means no error
+    
+#TODO можно выдать тип ошибки - enum QProcess::ProcessError
+
+#out checkbox Last_Success last_success=1
+#    //Success of last execution, stored here until next execution
+    
+#out float Last_Execute_Time last_time=0 0:* 1,10
+#    //Last time of the execution start measured from the project start
+#    //seconds
+    
+#out float Last_Duration last_duration=0 0:* 1,10
+#    //Last duration of the execution
+#    //seconds
+    
+separator
+line
+   
 #---- write ----    
-in enum Write write=After_Run [Disabled,After_Run,Each_Frame,On_Button]
+in enum Console_Write write=After_Run [Disabled,After_Run,Each_Frame,On_Button]
     //When write data to process console.
     
 if write After_Run,Each_Frame,On_Button
@@ -86,7 +104,7 @@ separator
 line
 
 #---- read ----    
-in enum Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
+in enum Console_Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
     //When read data from process console.
     
 if read After_Run,Each_Frame,On_Button
@@ -116,53 +134,26 @@ separator
 line
 
 #---- errors ----    
-in checkbox_group Show_Errors show_errors=0
-    //When read data from process console.
+in checkbox_group Errors_Console show_errors=0
+    //Show errors output from process console.
     
 if show_errors 1
-in text Errors text_errors 10 12
-    //Errors.
+out text Errors text_errors 10 12
+    //Errors output from process console.
 endif
 
 #-----------------------------
 page Details
-in group Runtime runtime=1
-	//Runtime variables
-
-if runtime 1
-
-out checkbox Success success=0
-    //Momentary value which is set to 1 if executiion was successful in the current frame
-
-out int Exit_Code exit_code=0 *:* 1,10
-    //The code returned by program, '0' means no error
-    
-#TODO можно выдать тип ошибки - enum QProcess::ProcessError
-
-out checkbox Last_Success last_success=1
-    //Success of last execution, stored here until next execution
-    
-#out float Last_Execute_Time last_time=0 0:* 1,10
-#    //Last time of the execution start measured from the project start
-#    //seconds
-    
-#out float Last_Duration last_duration=0 0:* 1,10
-#    //Last duration of the execution
-#    //seconds
-endif    
-
    
-#--------------------
-line
-in group Show_Absolute_Paths show_abs_paths=0
-    //Show full path for working folder and file used for execution    
-if show_abs_paths 1
-out text Folder_Path folder_path 4 5
+#in group Show_Absolute_Paths show_abs_paths=0
+#    //Show full path for working folder and file used for execution    
+#if show_abs_paths 1
+out text Working_Folder_Abs_Path folder_path 4 5
     //Absolute path to the working folder
     
-out text File_Path file_path 4 5
+out text File_Name_Abs_Path file_path 4 5
     //Absolute path to the executable file
-endif
+#endif
 
 
 
