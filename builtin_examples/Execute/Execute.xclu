@@ -1,0 +1,146 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Execute",
+                "name": "execute1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "2"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "folder_name",
+                        "avalue": "."
+                    },
+                    {
+                        "aname": "file_name",
+                        "avalue": "run_error.bat"
+                    },
+                    {
+                        "aname": "args",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "execute",
+                        "avalue": "At_First_Frame"
+                    },
+                    {
+                        "aname": "thread_mode",
+                        "avalue": "Wait_Finishing"
+                    },
+                    {
+                        "aname": "Settings",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "enable_timeout",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "timeout_sec",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "Console",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write",
+                        "avalue": "After_Run"
+                    },
+                    {
+                        "aname": "write_type",
+                        "avalue": "String"
+                    },
+                    {
+                        "aname": "string_write",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "text_write",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "image_write",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "read",
+                        "avalue": "After_Run"
+                    },
+                    {
+                        "aname": "read_type",
+                        "avalue": "Text"
+                    },
+                    {
+                        "aname": "string_read",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "text_read",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "show_errors",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Details",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "runtime",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_abs_paths",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
