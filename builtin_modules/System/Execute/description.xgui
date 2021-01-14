@@ -22,7 +22,7 @@ in string Arguments args=""
 
 line
     
-in enum Execute execute=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
+in enum Execute execute_event=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
     //When start execution.
         
 in enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
@@ -52,11 +52,11 @@ in button Stop stop_button
 	//Stop execution immediately.
 
     
-out enum Status status=Nothing [Nothing,Working,Finished,Error]
-    //Momentary value which is set to 1 if executiion was successful at the current frame
+out enum Status status=Not_Started [Not_Started,Running,Success,Error,Timeout]
+    //Status of the current execution.
 
 out int Exit_Code exit_code=0 *:* 1,10
-    //The code returned by program, '0' means no error
+    //The code returned by program, '0' means no error.
     
 #TODO можно выдать тип ошибки - enum QProcess::ProcessError
 
@@ -73,6 +73,19 @@ out int Exit_Code exit_code=0 *:* 1,10
     
 separator
 line
+
+#---- errors ----    
+in enum Console_Errors console_errors=Show [Ignore,Show]
+    //When read data from process console.
+#,Show_And_Stop]
+    
+if console_errors Show
+out text Text console_errors_text 10 12
+    //Errors output from process console.
+endif
+
+separator
+line
    
 #---- write ----    
 in enum Console_Write write=After_Run [Disabled,After_Run,Each_Frame,On_Button]
@@ -86,17 +99,17 @@ in enum Data_Type write_type=String [String,Text,Image]
 endif
 
 if write_type String
-in string String string_write=""
+in string String console_write_string=""
     //String to write to process console.
 endif
 
 if write_type Text
-in text Text text_write 10 12
+in text Text console_write_text 10 12
     //Text to write to process console.
 endif
 
 if write_type Image
-in object_image Image image_write
+in object_image Image console_write_image
     //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
 endif
 
@@ -115,32 +128,22 @@ in enum Data_Type read_type=Text [String,Text,Image]
 endif
 
 if read_type String
-in string String string_read=""
+out string String console_read_string=""
     //String to write to process console.
 endif
 
 if read_type Text
-in text Text text_read 10 12
+out text Text console_read_text 10 12
     //Text to write to process console.
 endif
 
 if read_type Image
-out object_image Image image_read
+out object_image Image console_read_image
     //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
 endif
 
 
-separator
-line
 
-#---- errors ----    
-in checkbox_group Errors_Console show_errors=0
-    //Show errors output from process console.
-    
-if show_errors 1
-out text Errors text_errors 10 12
-    //Errors output from process console.
-endif
 
 #-----------------------------
 page Details

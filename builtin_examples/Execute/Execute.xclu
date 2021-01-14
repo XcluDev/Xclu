@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -36,16 +36,12 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "execute",
+                        "aname": "execute_event",
                         "avalue": "At_First_Frame"
                     },
                     {
                         "aname": "thread_mode",
                         "avalue": "Wait_Finishing"
-                    },
-                    {
-                        "aname": "Settings",
-                        "avalue": "0"
                     },
                     {
                         "aname": "enable_timeout",
@@ -56,7 +52,7 @@
                         "avalue": "30"
                     },
                     {
-                        "aname": "Console",
+                        "aname": "Runtime",
                         "avalue": "0"
                     },
                     {
@@ -68,15 +64,15 @@
                         "avalue": "String"
                     },
                     {
-                        "aname": "string_write",
+                        "aname": "console_write_string",
                         "avalue": ""
                     },
                     {
-                        "aname": "text_write",
+                        "aname": "console_write_text",
                         "avalue": ""
                     },
                     {
-                        "aname": "image_write",
+                        "aname": "console_write_image",
                         "avalue": ""
                     },
                     {
@@ -88,27 +84,11 @@
                         "avalue": "Text"
                     },
                     {
-                        "aname": "string_read",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "text_read",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "show_errors",
-                        "avalue": "1"
+                        "aname": "console_errors",
+                        "avalue": "Show"
                     },
                     {
                         "aname": "Details",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "runtime",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "show_abs_paths",
                         "avalue": "0"
                     },
                     {

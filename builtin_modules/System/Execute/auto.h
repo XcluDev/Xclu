@@ -26,15 +26,15 @@ QStringList get_strings_args() { return get_strings_("args"); }
 
 //Enum Execute
 //When start execution.
-enum enum_execute {
-    execute_At_First_Frame = 0,
-    execute_Each_Frame = 1,
-    execute_On_Button = 2,
-    execute_N__ = 3
+enum enum_execute_event {
+    execute_event_At_First_Frame = 0,
+    execute_event_Each_Frame = 1,
+    execute_event_On_Button = 2,
+    execute_event_N__ = 3
 };
-bool was_changed_execute() { return was_changed_("execute"); }
-enum_execute gete_execute() { return enum_execute(geti_("execute")); }
-QString getraw_execute() { return getraw_("execute");}
+bool was_changed_execute_event() { return was_changed_("execute_event"); }
+enum_execute_event gete_execute_event() { return enum_execute_event(geti_("execute_event")); }
+QString getraw_execute_event() { return getraw_("execute_event");}
 
 //Enum Thread Mode
 //Should we wait for execution finish or run in a separate thread.
@@ -47,16 +47,6 @@ bool was_changed_thread_mode() { return was_changed_("thread_mode"); }
 enum_thread_mode gete_thread_mode() { return enum_thread_mode(geti_("thread_mode")); }
 QString getraw_thread_mode() { return getraw_("thread_mode");}
 
-//Button Run
-//Run execution immediately.
-bool was_changed_run_button() { return was_changed_("run_button"); }
-int geti_run_button() { return geti_("run_button"); }
-QString button_run_button() { return "run_button"; }
-
-//----------------------------------------------------
-//Page Settings
-//
-
 //Checkbox Enable Timeout
 //Use timeout for stopping execution or wait infinitely
 bool was_changed_enable_timeout() { return was_changed_("enable_timeout"); }
@@ -68,10 +58,69 @@ bool was_changed_timeout_sec() { return was_changed_("timeout_sec"); }
 float getf_timeout_sec() { return getf_("timeout_sec"); }
 
 //----------------------------------------------------
-//Page Console
-//Exhange data using console. It's a way to use Python programs for ML processing in realtime.
+//Page Runtime
+//
 
-//Enum Write
+//Button Run
+//Run execution immediately.
+bool was_changed_run_button() { return was_changed_("run_button"); }
+int geti_run_button() { return geti_("run_button"); }
+QString button_run_button() { return "run_button"; }
+
+//Button Stop
+//Stop execution immediately.
+bool was_changed_stop_button() { return was_changed_("stop_button"); }
+int geti_stop_button() { return geti_("stop_button"); }
+QString button_stop_button() { return "stop_button"; }
+
+//Out Enum Status
+//Status of the current execution.
+enum enum_status {
+    status_Not_Started = 0,
+    status_Running = 1,
+    status_Success = 2,
+    status_Error = 3,
+    status_Timeout = 4,
+    status_N__ = 5
+};
+bool was_changed_status() { return was_changed_("status"); }
+enum_status gete_status() { return enum_status(geti_("status")); }
+void sete_status(enum_status value) { seti_("status", value); }
+QString getraw_status() { return getraw_("status");}
+
+//Out Int Exit Code
+//The code returned by program, '0' means no error.
+bool was_changed_exit_code() { return was_changed_("exit_code"); }
+int geti_exit_code() { return geti_("exit_code"); }
+void seti_exit_code(int value) { seti_("exit_code", value); }
+void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", increase); }
+
+
+
+//Enum Console Errors
+//When read data from process console.
+enum enum_console_errors {
+    console_errors_Ignore = 0,
+    console_errors_Show = 1,
+    console_errors_N__ = 2
+};
+bool was_changed_console_errors() { return was_changed_("console_errors"); }
+enum_console_errors gete_console_errors() { return enum_console_errors(geti_("console_errors")); }
+QString getraw_console_errors() { return getraw_("console_errors");}
+
+//Out Text Text
+//Errors output from process console.
+bool was_changed_console_errors_text() { return was_changed_("console_errors_text"); }
+QString gets_console_errors_text() { return gets_("console_errors_text"); }
+QStringList get_strings_console_errors_text() { return get_strings_("console_errors_text"); }
+void sets_console_errors_text(QString value) { sets_("console_errors_text", value); }
+void clear_string_console_errors_text() { clear_string_("console_errors_text"); }
+void append_string_console_errors_text(QString v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
+void append_string_console_errors_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
+
+
+
+//Enum Console Write
 //When write data to process console.
 enum enum_write {
     write_Disabled = 0,
@@ -104,23 +153,23 @@ QString getraw_write_type() { return getraw_("write_type");}
 
 //String String
 //String to write to process console.
-bool was_changed_string_write() { return was_changed_("string_write"); }
-QString gets_string_write() { return gets_("string_write"); }
-QStringList get_strings_string_write() { return get_strings_("string_write"); }
+bool was_changed_console_write_string() { return was_changed_("console_write_string"); }
+QString gets_console_write_string() { return gets_("console_write_string"); }
+QStringList get_strings_console_write_string() { return get_strings_("console_write_string"); }
 
 //Text Text
 //Text to write to process console.
-bool was_changed_text_write() { return was_changed_("text_write"); }
-QString gets_text_write() { return gets_("text_write"); }
-QStringList get_strings_text_write() { return get_strings_("text_write"); }
+bool was_changed_console_write_text() { return was_changed_("console_write_text"); }
+QString gets_console_write_text() { return gets_("console_write_text"); }
+QStringList get_strings_console_write_text() { return get_strings_("console_write_text"); }
 
 //Object Image
 //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
-bool was_changed_image_write() { return was_changed_("image_write"); }
-XProtectedObject *getobject_image_write() { return get_object_("image_write"); }
+bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
+XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
 
 
-//Enum Read
+//Enum Console Read
 //When read data from process console.
 enum enum_read {
     read_Disabled = 0,
@@ -151,70 +200,37 @@ bool was_changed_read_type() { return was_changed_("read_type"); }
 enum_read_type gete_read_type() { return enum_read_type(geti_("read_type")); }
 QString getraw_read_type() { return getraw_("read_type");}
 
-//String String
+//Out String String
 //String to write to process console.
-bool was_changed_string_read() { return was_changed_("string_read"); }
-QString gets_string_read() { return gets_("string_read"); }
-QStringList get_strings_string_read() { return get_strings_("string_read"); }
+bool was_changed_console_read_string() { return was_changed_("console_read_string"); }
+QString gets_console_read_string() { return gets_("console_read_string"); }
+QStringList get_strings_console_read_string() { return get_strings_("console_read_string"); }
+void sets_console_read_string(QString value) { sets_("console_read_string", value); }
+void clear_string_console_read_string() { clear_string_("console_read_string"); }
+void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
+void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
 
-//Text Text
+//Out Text Text
 //Text to write to process console.
-bool was_changed_text_read() { return was_changed_("text_read"); }
-QString gets_text_read() { return gets_("text_read"); }
-QStringList get_strings_text_read() { return get_strings_("text_read"); }
+bool was_changed_console_read_text() { return was_changed_("console_read_text"); }
+QString gets_console_read_text() { return gets_("console_read_text"); }
+QStringList get_strings_console_read_text() { return get_strings_("console_read_text"); }
+void sets_console_read_text(QString value) { sets_("console_read_text", value); }
+void clear_string_console_read_text() { clear_string_("console_read_text"); }
+void append_string_console_read_text(QString v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
+void append_string_console_read_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
 
 //Out Object Image
 //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
-bool was_changed_image_read() { return was_changed_("image_read"); }
-XProtectedObject *getobject_image_read() { return get_object_("image_read"); }
-void setobject_image_read(XProtectedObject *value) { set_object_("image_read", value); }
-void setobject_image_read(XProtectedObject &value) { set_object_("image_read", value); }
-
-
-//Checkbox Show Errors
-//When read data from process console.
-bool was_changed_show_errors() { return was_changed_("show_errors"); }
-int geti_show_errors() { return geti_("show_errors"); }
-
-//Out Text Errors
-//Errors.
-bool was_changed_text_errors() { return was_changed_("text_errors"); }
-QString gets_text_errors() { return gets_("text_errors"); }
-QStringList get_strings_text_errors() { return get_strings_("text_errors"); }
-void sets_text_errors(QString value) { sets_("text_errors", value); }
-void clear_string_text_errors() { clear_string_("text_errors"); }
-void append_string_text_errors(QString v, int extra_new_lines_count = 0) { append_string_("text_errors", v, extra_new_lines_count); }
-void append_string_text_errors(QStringList v, int extra_new_lines_count = 0) { append_string_("text_errors", v, extra_new_lines_count); }
-
+bool was_changed_console_read_image() { return was_changed_("console_read_image"); }
+XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
+void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
+void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
 //----------------------------------------------------
 //Page Details
 //
 
-//Checkbox Runtime
-//Runtime variables
-bool was_changed_runtime() { return was_changed_("runtime"); }
-int geti_runtime() { return geti_("runtime"); }
-
-//Out Checkbox Success
-//Momentary value which is set to 1 if executiion was successful at the current frame
-bool was_changed_success() { return was_changed_("success"); }
-int geti_success() { return geti_("success"); }
-void seti_success(int value) { seti_("success", value); }
-
-//Out Int Exit Code
-//The code returned by program, '0' means no error
-bool was_changed_exit_code() { return was_changed_("exit_code"); }
-int geti_exit_code() { return geti_("exit_code"); }
-void seti_exit_code(int value) { seti_("exit_code", value); }
-void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", increase); }
-
-
-//Checkbox Show Absolute Paths
-//Show full path for working folder and file used for execution
-bool was_changed_show_abs_paths() { return was_changed_("show_abs_paths"); }
-int geti_show_abs_paths() { return geti_("show_abs_paths"); }
-
-//Out Text Folder Path
+//Out Text Working Folder Abs Path
 //Absolute path to the working folder
 bool was_changed_folder_path() { return was_changed_("folder_path"); }
 QString gets_folder_path() { return gets_("folder_path"); }
@@ -224,7 +240,7 @@ void clear_string_folder_path() { clear_string_("folder_path"); }
 void append_string_folder_path(QString v, int extra_new_lines_count = 0) { append_string_("folder_path", v, extra_new_lines_count); }
 void append_string_folder_path(QStringList v, int extra_new_lines_count = 0) { append_string_("folder_path", v, extra_new_lines_count); }
 
-//Out Text File Path
+//Out Text File Name Abs Path
 //Absolute path to the executable file
 bool was_changed_file_path() { return was_changed_("file_path"); }
 QString gets_file_path() { return gets_("file_path"); }

@@ -54,17 +54,20 @@ protected:
 
     QScopedPointer<QProcess> subprocess_;
 
-    void run();
+    void process_run();
+    void process_stop();
 
+    void console_clear();
     void console_read();
     void console_write();
+    void on_finish(int exit_code, QProcess::ExitStatus exit_status, bool timeout = false);
+
 protected slots:
     void onReadyReadStandardOutput();
     void onReadyReadStandardError();
-    void finished(int, QProcess::ExitStatus);
-    void crashed(QProcess::ProcessError);
+    void finished(int exit_code, QProcess::ExitStatus exit_status);
+    void crashed(QProcess::ProcessError error);
 
-    void check_error();
 };
 
 
