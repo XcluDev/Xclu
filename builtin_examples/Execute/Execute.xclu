@@ -29,7 +29,7 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "run_error.bat"
+                        "avalue": "run_input.bat"
                     },
                     {
                         "aname": "args",
@@ -49,11 +49,23 @@
                     },
                     {
                         "aname": "timeout_sec",
-                        "avalue": "30"
+                        "avalue": "3"
                     },
                     {
                         "aname": "Runtime",
-                        "avalue": "0"
+                        "avalue": "259"
+                    },
+                    {
+                        "aname": "console_errors",
+                        "avalue": "Show"
+                    },
+                    {
+                        "aname": "read",
+                        "avalue": "After_Run"
+                    },
+                    {
+                        "aname": "read_type",
+                        "avalue": "Text"
                     },
                     {
                         "aname": "write",
@@ -65,7 +77,11 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": ""
+                        "avalue": "qq"
+                    },
+                    {
+                        "aname": "line_term",
+                        "avalue": "\\r\\n"
                     },
                     {
                         "aname": "console_write_text",
@@ -74,18 +90,6 @@
                     {
                         "aname": "console_write_image",
                         "avalue": ""
-                    },
-                    {
-                        "aname": "read",
-                        "avalue": "After_Run"
-                    },
-                    {
-                        "aname": "read_type",
-                        "avalue": "Text"
-                    },
-                    {
-                        "aname": "console_errors",
-                        "avalue": "Show"
                     },
                     {
                         "aname": "Details",

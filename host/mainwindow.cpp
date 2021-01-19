@@ -449,7 +449,7 @@ void MainWindow::on_actionCompile_triggered()
 
 //---------------------------------------------------------------------
 void MainWindow::execute_run() {
-    qDebug("execute_run");
+    qDebug("Project run");
 
     if (run_state_ == ProjectRunStateStopped) {
         set_state(ProjectRunStateStarting);
@@ -476,7 +476,7 @@ void MainWindow::execute_run() {
 
 //---------------------------------------------------------------------
 void MainWindow::execute_stop() {
-    qDebug("execute_stop");
+    qDebug("Project stop");
     if (run_state_ == ProjectRunStateStarting || run_state_ == ProjectRunStateRunning) {
         set_state(ProjectRunStateStopping);
     }

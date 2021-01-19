@@ -52,11 +52,15 @@ in button Stop stop_button
 	//Stop execution immediately.
 
     
-out enum Status status=Not_Started [Not_Started,Running,Success,Error,Timeout]
+out enum Status status=Not_Started [Not_Started,Running,Success,Error,Timeout,Crashed]
     //Status of the current execution.
 
 out int Exit_Code exit_code=0 *:* 1,10
     //The code returned by program, '0' means no error.
+    
+    
+out string Error_Details error_details=""
+    //Details about Crash
     
 #TODO можно выдать тип ошибки - enum QProcess::ProcessError
 
@@ -82,35 +86,6 @@ in enum Console_Errors console_errors=Show [Ignore,Show]
 if console_errors Show
 out text Text console_errors_text 10 12
     //Errors output from process console.
-endif
-
-separator
-line
-   
-#---- write ----    
-in enum Console_Write write=After_Run [Disabled,After_Run,Each_Frame,On_Button]
-    //When write data to process console.
-    
-if write After_Run,Each_Frame,On_Button
-in button Write write_button
-    //Write to process console right now.
-in enum Data_Type write_type=String [String,Text,Image]
-    //Data type for console write.
-endif
-
-if write_type String
-in string String console_write_string=""
-    //String to write to process console.
-endif
-
-if write_type Text
-in text Text console_write_text 10 12
-    //Text to write to process console.
-endif
-
-if write_type Image
-in object_image Image console_write_image
-    //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
 endif
 
 separator
@@ -142,7 +117,35 @@ out object_image Image console_read_image
     //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
 endif
 
+separator
+line
+   
+#---- write ----    
+in enum Console_Write write=Disabled [Disabled,After_Run,Each_Frame,On_Button]
+    //When write data to process console.
+    
+if write After_Run,Each_Frame,On_Button
+in button Write write_button
+    //Write to process console right now.
+in enum Data_Type write_type=String [String,Text,Image]
+    //Data type for console write.
+endif
 
+if write_type String
+in string String console_write_string=""
+    //String to write to process console.
+in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
+endif
+
+if write_type Text
+in text Text console_write_text 10 12
+    //Text to write to process console.
+endif
+
+if write_type Image
+in object_image Image console_write_image
+    //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+endif
 
 
 #-----------------------------

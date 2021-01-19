@@ -28,10 +28,14 @@ void XModuleExecute::start() {
 
     clear_string_folder_path();
     clear_string_file_path();
+    clear_string_error_details();
+
 
     console_clear();
 
     subprocess_.reset();
+
+    crashed_ = false;
 
     if (gete_execute_event() == execute_event_At_First_Frame) {
         process_run();
@@ -133,18 +137,17 @@ void XModuleExecute::process_run() {
     arguments << gets_args();
     subprocess.setArguments(arguments);
 
+    //variables
     //timeout - if -1, then wait infinite
     int timeout = (geti_enable_timeout()) ? int(getf_timeout_sec()*1000): -1;
+
+    crashed_ = false;
 
     //connect events listeners
     subprocess.setReadChannel(QProcess::StandardOutput);
     subprocess.setProcessChannelMode(QProcess::SeparateChannels); //separate output and error to process them differently
     //subprocess.setProcessChannelMode(QProcess::MergedChannels);
 
-    connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
-    connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleExecute::onReadyReadStandardError);
-
-    connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleExecute::finished);
     connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XModuleExecute::crashed);
 
     //run
@@ -156,16 +159,23 @@ void XModuleExecute::process_run() {
 
     if (thread_mode == thread_mode_Wait_Finishing) {
         //sync run
-        console_write();
+        if (gete_write() == write_After_Run) {
+            console_write();
+        }
         bool no_timeout = subprocess.waitForFinished(timeout);
-        console_read();
         int exit_code = subprocess.exitCode();
         auto exit_status = subprocess.exitStatus();
+
+        //process finish code and also read console
         on_finish(exit_code, exit_status, !no_timeout);
     }
     else {
         //async run
-        //nothing to do here :)
+        //implement async events
+        connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
+        connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleExecute::onReadyReadStandardError);
+
+        connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleExecute::finished);
     }
 
     //double time = xc_elapsed_time_sec();
@@ -177,7 +187,9 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
     if (subprocess_.data()) {
         if (gete_status() == status_Running) {
             //read console
-            console_read();
+            if (gete_read() == read_After_Run) {
+                console_read();
+            }
 
             //exit code
             seti_exit_code(exit_code);
@@ -185,8 +197,15 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
             //exit status
             bool success = (exit_status == QProcess::NormalExit) && (exit_code == 0);
             enum_status status = (timeout) ? status_Timeout : (success?status_Success:status_Error);
-
             sete_status(status);
+
+            QString error_details;
+            if (!timeout && crashed_) {
+                error_details = crash_text_;
+                status = status_Crashed;
+            }
+            sets_error_details(error_details);
+
 
             //delete process
             subprocess_.reset();
@@ -204,7 +223,16 @@ void XModuleExecute::onReadyReadStandardOutput() {
     //Note, this is async callback
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
-        qDebug() << "Standard" << subprocess->readAllStandardOutput();
+        auto read_type = gete_read_type();
+        if (read_type == read_type_String) {
+            sets_console_read_string(subprocess->readAllStandardOutput());
+        }
+        if (read_type == read_type_Text) {
+            sets_console_read_text(subprocess->readAllStandardOutput());
+        }
+        if (read_type == read_type_Image) {
+            //TODO
+        }
     }
 }
 
@@ -233,8 +261,23 @@ void XModuleExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
 //---------------------------------------------------------------------
 void XModuleExecute::crashed(QProcess::ProcessError error) {
     //Note, this is can be async callback
-    //TODO async process - inform main thread...
-    xc_exception("Execute Crashed");
+
+    //async process - inform main thread:
+    crashed_ = true;
+
+    switch (error) {
+    case QProcess::FailedToStart:  crash_text_ = "File not found, resource error"; break;
+    case QProcess::Crashed: crash_text_ = "Crashed"; break;
+    case QProcess::Timedout: crash_text_ = "Timedout"; break;
+    case QProcess::ReadError: crash_text_ = "ReadError"; break;
+    case QProcess::WriteError: crash_text_ = "WriteError"; break;
+    case QProcess::UnknownError: crash_text_ = "UnknownError"; break;
+    default: crash_text_ = "Unknown reason";
+    }
+
+    crash_text_ = "Process crashed, the reason: " + crash_text_;
+
+    //xc_exception("Execute Crashed");
 }
 
 //---------------------------------------------------------------------
@@ -245,6 +288,29 @@ void XModuleExecute::console_read() {
 
 //---------------------------------------------------------------------
 void XModuleExecute::console_write() {
+    if (gete_status() != status_Running) {
+        return;
+    }
+
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        auto write_type = gete_write_type();
+        if (write_type == write_type_String) {
+            QString str = gets_console_write_string();
+            auto ts = gete_line_term(); //None,\n,\r,\r\n
+            if (ts == line_term__n) str += "\n";
+            if (ts == line_term__r) str += "\r";
+            if (ts == line_term__r_n) str += "\r\n";
+            subprocess->write(str.toLatin1());
+        }
+        if (write_type == write_type_Text) {
+            subprocess->write(gets_console_write_text().toLatin1());
+        }
+        if (write_type == write_type_Image) {
+            //TODO
+            //console_write_image
+        }
+    }
 
 }
 

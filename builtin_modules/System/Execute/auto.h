@@ -81,7 +81,8 @@ enum enum_status {
     status_Success = 2,
     status_Error = 3,
     status_Timeout = 4,
-    status_N__ = 5
+    status_Crashed = 5,
+    status_N__ = 6
 };
 bool was_changed_status() { return was_changed_("status"); }
 enum_status gete_status() { return enum_status(geti_("status")); }
@@ -94,6 +95,16 @@ bool was_changed_exit_code() { return was_changed_("exit_code"); }
 int geti_exit_code() { return geti_("exit_code"); }
 void seti_exit_code(int value) { seti_("exit_code", value); }
 void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", increase); }
+
+//Out String Error Details
+//Details about Crash
+bool was_changed_error_details() { return was_changed_("error_details"); }
+QString gets_error_details() { return gets_("error_details"); }
+QStringList get_strings_error_details() { return get_strings_("error_details"); }
+void sets_error_details(QString value) { sets_("error_details", value); }
+void clear_string_error_details() { clear_string_("error_details"); }
+void append_string_error_details(QString v, int extra_new_lines_count = 0) { append_string_("error_details", v, extra_new_lines_count); }
+void append_string_error_details(QStringList v, int extra_new_lines_count = 0) { append_string_("error_details", v, extra_new_lines_count); }
 
 
 
@@ -118,55 +129,6 @@ void clear_string_console_errors_text() { clear_string_("console_errors_text"); 
 void append_string_console_errors_text(QString v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 void append_string_console_errors_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 
-
-
-//Enum Console Write
-//When write data to process console.
-enum enum_write {
-    write_Disabled = 0,
-    write_After_Run = 1,
-    write_Each_Frame = 2,
-    write_On_Button = 3,
-    write_N__ = 4
-};
-bool was_changed_write() { return was_changed_("write"); }
-enum_write gete_write() { return enum_write(geti_("write")); }
-QString getraw_write() { return getraw_("write");}
-
-//Button Write
-//Write to process console right now.
-bool was_changed_write_button() { return was_changed_("write_button"); }
-int geti_write_button() { return geti_("write_button"); }
-QString button_write_button() { return "write_button"; }
-
-//Enum Data Type
-//Data type for console write.
-enum enum_write_type {
-    write_type_String = 0,
-    write_type_Text = 1,
-    write_type_Image = 2,
-    write_type_N__ = 3
-};
-bool was_changed_write_type() { return was_changed_("write_type"); }
-enum_write_type gete_write_type() { return enum_write_type(geti_("write_type")); }
-QString getraw_write_type() { return getraw_("write_type");}
-
-//String String
-//String to write to process console.
-bool was_changed_console_write_string() { return was_changed_("console_write_string"); }
-QString gets_console_write_string() { return gets_("console_write_string"); }
-QStringList get_strings_console_write_string() { return get_strings_("console_write_string"); }
-
-//Text Text
-//Text to write to process console.
-bool was_changed_console_write_text() { return was_changed_("console_write_text"); }
-QString gets_console_write_text() { return gets_("console_write_text"); }
-QStringList get_strings_console_write_text() { return get_strings_("console_write_text"); }
-
-//Object Image
-//Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
-bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
-XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
 
 
 //Enum Console Read
@@ -226,6 +188,68 @@ bool was_changed_console_read_image() { return was_changed_("console_read_image"
 XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
 void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
 void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
+
+
+//Enum Console Write
+//When write data to process console.
+enum enum_write {
+    write_Disabled = 0,
+    write_After_Run = 1,
+    write_Each_Frame = 2,
+    write_On_Button = 3,
+    write_N__ = 4
+};
+bool was_changed_write() { return was_changed_("write"); }
+enum_write gete_write() { return enum_write(geti_("write")); }
+QString getraw_write() { return getraw_("write");}
+
+//Button Write
+//Write to process console right now.
+bool was_changed_write_button() { return was_changed_("write_button"); }
+int geti_write_button() { return geti_("write_button"); }
+QString button_write_button() { return "write_button"; }
+
+//Enum Data Type
+//Data type for console write.
+enum enum_write_type {
+    write_type_String = 0,
+    write_type_Text = 1,
+    write_type_Image = 2,
+    write_type_N__ = 3
+};
+bool was_changed_write_type() { return was_changed_("write_type"); }
+enum_write_type gete_write_type() { return enum_write_type(geti_("write_type")); }
+QString getraw_write_type() { return getraw_("write_type");}
+
+//String String
+//String to write to process console.
+bool was_changed_console_write_string() { return was_changed_("console_write_string"); }
+QString gets_console_write_string() { return gets_("console_write_string"); }
+QStringList get_strings_console_write_string() { return get_strings_("console_write_string"); }
+
+//Enum Line Terminator
+//
+enum enum_line_term {
+    line_term_None = 0,
+    line_term__n = 1,
+    line_term__r = 2,
+    line_term__r_n = 3,
+    line_term_N__ = 4
+};
+bool was_changed_line_term() { return was_changed_("line_term"); }
+enum_line_term gete_line_term() { return enum_line_term(geti_("line_term")); }
+QString getraw_line_term() { return getraw_("line_term");}
+
+//Text Text
+//Text to write to process console.
+bool was_changed_console_write_text() { return was_changed_("console_write_text"); }
+QString gets_console_write_text() { return gets_("console_write_text"); }
+QStringList get_strings_console_write_text() { return get_strings_("console_write_text"); }
+
+//Object Image
+//Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
+XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
 //----------------------------------------------------
 //Page Details
 //

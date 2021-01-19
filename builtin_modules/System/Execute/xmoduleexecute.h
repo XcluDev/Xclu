@@ -68,6 +68,8 @@ protected slots:
     void finished(int exit_code, QProcess::ExitStatus exit_status);
     void crashed(QProcess::ProcessError error);
 
+    bool crashed_ = false;
+    QString crash_text_;
 };
 
 
