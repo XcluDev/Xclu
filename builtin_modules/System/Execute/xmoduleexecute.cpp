@@ -71,9 +71,12 @@ void XModuleExecute::update() {
         process_run();
     }
 
-    //read console if required
+    //read and write to console if required
     if (gete_read() == read_Each_Frame) {
         console_read();
+    }
+    if (gete_write() == write_Each_Frame) {
+        console_write();
     }
 
 }
@@ -107,8 +110,6 @@ void XModuleExecute::process_run() {
         return;
     }
 
-    //clear console
-    console_clear();
 
     //compute paths
     QString folder = gets_folder_name();
@@ -298,21 +299,37 @@ void XModuleExecute::console_read_error() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_read() {
+void XModuleExecute::console_read(bool on_update) {
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
         auto data = subprocess->readAllStandardOutput();
-        if (!data.isEmpty()) {
+        bool is_new_data = !data.isEmpty();
+        seti_console_read_received(is_new_data);
+        if (is_new_data) {
             auto read_type = gete_read_type();
 
             if (read_type == read_type_String) {
                 sets_console_read_string(data);
             }
             if (read_type == read_type_Text) {
-                sets_console_read_text(data);
+                //append or replace
+                if (geti_console_read_text_append()) {
+                    append_string_console_read_text(data);
+                }
+                else {
+                    sets_console_read_text(data);
+                }
             }
             if (read_type == read_type_Image) {
-                //TODO
+                xc_exception("Reading image from process console is not implemented yet");
+            }
+
+            //Send bang
+            XCORE.bang(get_strings_console_bang_on_received());
+
+            //Write if required
+            if (gete_write() == write_On_Receive) {
+                console_write();
             }
         }
     }

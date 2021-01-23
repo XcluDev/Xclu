@@ -173,15 +173,10 @@ int geti_console_read_received() { return geti_("console_read_received"); }
 void seti_console_read_received(int value) { seti_("console_read_received", value); }
 
 //Text Bang On Received
-//List of actions which should be performed when data is received. Current implementation runs this only in the main thread.
+//List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
 bool was_changed_console_bang_on_received() { return was_changed_("console_bang_on_received"); }
 QString gets_console_bang_on_received() { return gets_("console_bang_on_received"); }
 QStringList get_strings_console_bang_on_received() { return get_strings_("console_bang_on_received"); }
-
-//Checkbox Wait Data
-//Should we wait input data.
-bool was_changed_console_wait_data() { return was_changed_("console_wait_data"); }
-int geti_console_wait_data() { return geti_("console_wait_data"); }
 
 //Out String String
 //String to write to process console.
@@ -193,11 +188,10 @@ void clear_string_console_read_string() { clear_string_("console_read_string"); 
 void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
 void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
 
-//String Marker
-//Marker denoting the end of text packet from the process.
-bool was_changed_console_read_text_marker() { return was_changed_("console_read_text_marker"); }
-QString gets_console_read_text_marker() { return gets_("console_read_text_marker"); }
-QStringList get_strings_console_read_text_marker() { return get_strings_("console_read_text_marker"); }
+//Checkbox Append
+//If enabled, append all input text. If disables - clear each frame.
+bool was_changed_console_read_text_append() { return was_changed_("console_read_text_append"); }
+int geti_console_read_text_append() { return geti_("console_read_text_append"); }
 
 //Out Text Text
 //Text to write to process console.
@@ -225,8 +219,9 @@ enum enum_write {
     write_Disabled = 0,
     write_After_Finished = 1,
     write_Each_Frame = 2,
-    write_On_Button = 3,
-    write_N__ = 4
+    write_On_Receive = 3,
+    write_On_Button = 4,
+    write_N__ = 5
 };
 bool was_changed_write() { return was_changed_("write"); }
 enum_write gete_write() { return enum_write(geti_("write")); }

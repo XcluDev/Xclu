@@ -107,10 +107,7 @@ out checkbox Received console_read_received=0
     //Flag that data is received. Note, for multiple data it stores only the last data
 
 in text Bang_On_Received console_bang_on_received 3 5
-    //List of actions which should be performed when data is received. Current implementation runs this only in the main thread.
-
-in checkbox Wait_Data console_wait_data=0 
-    //Should we wait input data.
+    //List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
 
 endif
 
@@ -120,8 +117,11 @@ out string String console_read_string=""
 endif
 
 if read_type Text
-in string Marker console_read_text_marker="###"
-    //Marker denoting the end of text packet from the process. 
+in checkbox Append console_read_text_append=1
+    //If enabled, append all input text. If disables - clear each frame.
+
+#in string Marker console_read_text_marker="###"
+#    //Marker denoting the end of text packet from the process. 
 
 out text Text console_read_text 10 12
     //Text to write to process console.
@@ -140,7 +140,7 @@ page Write
     //Writing to the process console.
    
 #---- write ----    
-in enum Console_Write write=Disabled [Disabled,After_Finished,Each_Frame,On_Button]
+in enum Console_Write write=Disabled [Disabled,After_Finished,Each_Frame,On_Receive,On_Button]
     //When write data to process console.
     
 if write After_Finished,Each_Frame,On_Button

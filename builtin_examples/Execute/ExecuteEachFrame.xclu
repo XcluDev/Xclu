@@ -87,7 +87,7 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "run_loop.bat"
+                        "avalue": "run_input.bat"
                     },
                     {
                         "aname": "args",
@@ -99,11 +99,11 @@
                     },
                     {
                         "aname": "execute_event",
-                        "avalue": "At_First_Frame"
+                        "avalue": "Each_Frame"
                     },
                     {
                         "aname": "thread_mode",
-                        "avalue": "Run_At_Separate_Thread"
+                        "avalue": "Wait_Finishing"
                     },
                     {
                         "aname": "enable_timeout",
@@ -123,11 +123,11 @@
                     },
                     {
                         "aname": "read",
-                        "avalue": "Each_Frame"
+                        "avalue": "After_Run"
                     },
                     {
                         "aname": "read_type",
-                        "avalue": "String"
+                        "avalue": "Text"
                     },
                     {
                         "aname": "console_bang_on_received",
@@ -143,7 +143,7 @@
                     },
                     {
                         "aname": "write",
-                        "avalue": "Each_Frame"
+                        "avalue": "After_Finished"
                     },
                     {
                         "aname": "write_type",
@@ -151,7 +151,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "86",
+                        "avalue": "19",
                         "link": "project1->frame"
                     },
                     {
