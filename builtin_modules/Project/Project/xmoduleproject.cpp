@@ -37,7 +37,11 @@ void XModuleProject::apply_control_values() {
 
 //---------------------------------------------------------------------
 void XModuleProject::start() {
+
     apply_control_values();
+
+    //frame number
+    seti_frame(0);
 }
 
 //---------------------------------------------------------------------
@@ -50,6 +54,9 @@ void XModuleProject::update() {
     float fps = 10000;
     if (dt > 0) fps = 1.0 / dt;
     setf_measured_frame_rate(fps);
+
+    //frame number
+    increase_int_frame();
 
 }
 

@@ -39,4 +39,12 @@ bool was_changed_measured_frame_rate() { return was_changed_("measured_frame_rat
 float getf_measured_frame_rate() { return getf_("measured_frame_rate"); }
 void setf_measured_frame_rate(float value) { setf_("measured_frame_rate", value); }
 
+
+//Out Int Frame Number
+//Number of frame from start.
+bool was_changed_frame() { return was_changed_("frame"); }
+int geti_frame() { return geti_("frame"); }
+void seti_frame(int value) { seti_("frame", value); }
+void increase_int_frame(int increase = 1) { increase_int_("frame", increase); }
+
 //----------------------------------------------------

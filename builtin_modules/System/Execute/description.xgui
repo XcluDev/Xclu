@@ -20,7 +20,10 @@ in string_file File_Name file_name=""
 in string Arguments args=""
     //Optional command line arguments
 
-line
+
+#--------------------
+page Run
+    //Running controls and error output.
     
 in enum Execute execute_event=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
     //When start execution.
@@ -39,11 +42,8 @@ in float Timeout timeout_sec=5 0:* 0.1,1
     //seconds
 endif
 
-
-    
-
-#--------------------
-page Runtime
+separator
+line
 
 in button Run run_button
 	//Run execution immediately.
@@ -79,17 +79,18 @@ separator
 line
 
 #---- errors ----    
-in enum Console_Errors console_errors=Show [Ignore,Show]
+in enum Console_Errors console_errors=Show [Ignore,Show,Show_And_Stop]
     //When read data from process console.
 #,Show_And_Stop]
     
-if console_errors Show
+if console_errors Show,Show_And_Stop
 out text Text console_errors_text 10 12
     //Errors output from process console.
 endif
 
-separator
-line
+#--------------------
+page Read
+    //Reading from the process console.
 
 #---- read ----    
 in enum Console_Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
@@ -98,8 +99,19 @@ in enum Console_Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
 if read After_Run,Each_Frame,On_Button
 in button Read read_button
     //Read from process console right now.
+    
 in enum Data_Type read_type=Text [String,Text,Image]
     //Data type for console read.
+    
+out checkbox Received console_read_received=0
+    //Flag that data is received. Note, for multiple data it stores only the last data
+
+in text Bang_On_Received console_bang_on_received 3 5
+    //List of actions which should be performed when data is received. Current implementation runs this only in the main thread.
+
+in checkbox Wait_Data console_wait_data=0 
+    //Should we wait input data.
+
 endif
 
 if read_type String
@@ -108,23 +120,30 @@ out string String console_read_string=""
 endif
 
 if read_type Text
+in string Marker console_read_text_marker="###"
+    //Marker denoting the end of text packet from the process. 
+
 out text Text console_read_text 10 12
     //Text to write to process console.
+    
 endif
+
 
 if read_type Image
 out object_image Image console_read_image
     //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
+    
 endif
 
-separator
-line
+#--------------------
+page Write
+    //Writing to the process console.
    
 #---- write ----    
-in enum Console_Write write=Disabled [Disabled,After_Run,Each_Frame,On_Button]
+in enum Console_Write write=Disabled [Disabled,After_Finished,Each_Frame,On_Button]
     //When write data to process console.
     
-if write After_Run,Each_Frame,On_Button
+if write After_Finished,Each_Frame,On_Button
 in button Write write_button
     //Write to process console right now.
 in enum Data_Type write_type=String [String,Text,Image]
@@ -149,7 +168,10 @@ endif
 
 
 #-----------------------------
-page Details
+page Debug
+
+out int Executed_Times executed_times=0 0:* 1,10
+    //How much times process was executed.
    
 #in group Show_Absolute_Paths show_abs_paths=0
 #    //Show full path for working folder and file used for execution    

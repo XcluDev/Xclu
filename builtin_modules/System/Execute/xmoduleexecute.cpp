@@ -23,20 +23,27 @@ XModuleExecute::~XModuleExecute()
 
 //---------------------------------------------------------------------
 void XModuleExecute::start() {
+    //run
     sete_status(status_Not_Started);
     seti_exit_code(0);
 
-    clear_string_folder_path();
-    clear_string_file_path();
     clear_string_error_details();
 
-
+    //read, write
     console_clear();
 
+    //debug
+    seti_executed_times(0);
+    clear_string_folder_path();
+    clear_string_file_path();
+
+
+    //process
     subprocess_.reset();
 
     crashed_ = false;
 
+    //run at first frame
     if (gete_execute_event() == execute_event_At_First_Frame) {
         process_run();
     }
@@ -62,6 +69,11 @@ void XModuleExecute::update() {
     //run if required
     if (need_run) {
         process_run();
+    }
+
+    //read console if required
+    if (gete_read() == read_Each_Frame) {
+        console_read();
     }
 
 }
@@ -150,16 +162,19 @@ void XModuleExecute::process_run() {
 
     connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XModuleExecute::crashed);
 
-    //run
+    //start process
     sete_status(status_Running);
     subprocess.start(QProcess::Unbuffered | QProcess::ReadWrite );
+
+    //increase counter
+    increase_int_executed_times();
 
     //decide - wait finishing or work async
     auto thread_mode = gete_thread_mode();
 
     if (thread_mode == thread_mode_Wait_Finishing) {
         //sync run
-        if (gete_write() == write_After_Run) {
+        if (gete_write() == write_After_Finished) {
             console_write();
         }
         bool no_timeout = subprocess.waitForFinished(timeout);
@@ -172,7 +187,7 @@ void XModuleExecute::process_run() {
     else {
         //async run
         //implement async events
-        connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
+        //connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
         connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleExecute::onReadyReadStandardError);
 
         connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleExecute::finished);
@@ -187,9 +202,12 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
     if (subprocess_.data()) {
         if (gete_status() == status_Running) {
             //read console
-            if (gete_read() == read_After_Run) {
+            if (gete_read() != read_Disabled) {
                 console_read();
             }
+
+            //read console error
+            console_read_error();
 
             //exit code
             seti_exit_code(exit_code);
@@ -219,38 +237,16 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::onReadyReadStandardOutput() {
-    //Note, this is async callback
-    QProcess *subprocess = subprocess_.data();
-    if (subprocess) {
-        auto read_type = gete_read_type();
-        if (read_type == read_type_String) {
-            sets_console_read_string(subprocess->readAllStandardOutput());
-        }
-        if (read_type == read_type_Text) {
-            sets_console_read_text(subprocess->readAllStandardOutput());
-        }
-        if (read_type == read_type_Image) {
-            //TODO
-        }
-    }
+void XModuleExecute::onReadyReadStandardError() {
+    //Note, this is can be async callback
+    console_read_error();
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::onReadyReadStandardError() {
-    //Note, this is can be async callback
-    QProcess *subprocess = subprocess_.data();
-    if (subprocess) {
-        if (gete_console_errors() == console_errors_Show) {
-            QString text = subprocess->readAllStandardError();
-            if (!text.isEmpty()) {
-                qDebug() << "Append error" << text;
-                append_string_console_errors_text(text);
-                qDebug() << "Append result" << get_strings_console_errors_text();
-            }
-        }
-    }
-}
+//void XModuleExecute::onReadyReadStandardOutput() {
+    //Note, this is async callback
+
+//}
 
 //---------------------------------------------------------------------
 void XModuleExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
@@ -280,10 +276,47 @@ void XModuleExecute::crashed(QProcess::ProcessError error) {
     //xc_exception("Execute Crashed");
 }
 
+
+//---------------------------------------------------------------------
+void XModuleExecute::console_read_error() {
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        auto console_errors = gete_console_errors();
+        if (console_errors != console_errors_Ignore) {
+            QString text = subprocess->readAllStandardError();
+            if (!text.isEmpty()) {
+                append_string_console_errors_text(text);
+
+                //stop process if required
+                if (console_errors == console_errors_Show_And_Stop) {
+                    crashed_ = true;
+                    crash_text_ = "Process printed something to Error Console";
+                }
+            }
+        }
+    }
+}
+
 //---------------------------------------------------------------------
 void XModuleExecute::console_read() {
-    onReadyReadStandardOutput();
-    onReadyReadStandardError();
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        auto data = subprocess->readAllStandardOutput();
+        if (!data.isEmpty()) {
+            auto read_type = gete_read_type();
+
+            if (read_type == read_type_String) {
+                sets_console_read_string(data);
+            }
+            if (read_type == read_type_Text) {
+                sets_console_read_text(data);
+            }
+            if (read_type == read_type_Image) {
+                //TODO
+            }
+        }
+    }
+
 }
 
 //---------------------------------------------------------------------

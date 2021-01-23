@@ -59,11 +59,13 @@ protected:
 
     void console_clear();
     void console_read();
+    void console_read_error();
+
     void console_write();
     void on_finish(int exit_code, QProcess::ExitStatus exit_status, bool timeout = false);
 
 protected slots:
-    void onReadyReadStandardOutput();
+    //void onReadyReadStandardOutput();
     void onReadyReadStandardError();
     void finished(int exit_code, QProcess::ExitStatus exit_status);
     void crashed(QProcess::ProcessError error);

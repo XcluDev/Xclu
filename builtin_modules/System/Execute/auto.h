@@ -23,6 +23,9 @@ bool was_changed_args() { return was_changed_("args"); }
 QString gets_args() { return gets_("args"); }
 QStringList get_strings_args() { return get_strings_("args"); }
 
+//----------------------------------------------------
+//Page Run
+//Running controls and error output.
 
 //Enum Execute
 //When start execution.
@@ -57,9 +60,7 @@ int geti_enable_timeout() { return geti_("enable_timeout"); }
 bool was_changed_timeout_sec() { return was_changed_("timeout_sec"); }
 float getf_timeout_sec() { return getf_("timeout_sec"); }
 
-//----------------------------------------------------
-//Page Runtime
-//
+
 
 //Button Run
 //Run execution immediately.
@@ -113,7 +114,8 @@ void append_string_error_details(QStringList v, int extra_new_lines_count = 0) {
 enum enum_console_errors {
     console_errors_Ignore = 0,
     console_errors_Show = 1,
-    console_errors_N__ = 2
+    console_errors_Show_And_Stop = 2,
+    console_errors_N__ = 3
 };
 bool was_changed_console_errors() { return was_changed_("console_errors"); }
 enum_console_errors gete_console_errors() { return enum_console_errors(geti_("console_errors")); }
@@ -129,7 +131,9 @@ void clear_string_console_errors_text() { clear_string_("console_errors_text"); 
 void append_string_console_errors_text(QString v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 void append_string_console_errors_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 
-
+//----------------------------------------------------
+//Page Read
+//Reading from the process console.
 
 //Enum Console Read
 //When read data from process console.
@@ -162,6 +166,23 @@ bool was_changed_read_type() { return was_changed_("read_type"); }
 enum_read_type gete_read_type() { return enum_read_type(geti_("read_type")); }
 QString getraw_read_type() { return getraw_("read_type");}
 
+//Out Checkbox Received
+//Flag that data is received. Note, for multiple data it stores only the last data
+bool was_changed_console_read_received() { return was_changed_("console_read_received"); }
+int geti_console_read_received() { return geti_("console_read_received"); }
+void seti_console_read_received(int value) { seti_("console_read_received", value); }
+
+//Text Bang On Received
+//List of actions which should be performed when data is received. Current implementation runs this only in the main thread.
+bool was_changed_console_bang_on_received() { return was_changed_("console_bang_on_received"); }
+QString gets_console_bang_on_received() { return gets_("console_bang_on_received"); }
+QStringList get_strings_console_bang_on_received() { return get_strings_("console_bang_on_received"); }
+
+//Checkbox Wait Data
+//Should we wait input data.
+bool was_changed_console_wait_data() { return was_changed_("console_wait_data"); }
+int geti_console_wait_data() { return geti_("console_wait_data"); }
+
 //Out String String
 //String to write to process console.
 bool was_changed_console_read_string() { return was_changed_("console_read_string"); }
@@ -171,6 +192,12 @@ void sets_console_read_string(QString value) { sets_("console_read_string", valu
 void clear_string_console_read_string() { clear_string_("console_read_string"); }
 void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
 void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
+
+//String Marker
+//Marker denoting the end of text packet from the process.
+bool was_changed_console_read_text_marker() { return was_changed_("console_read_text_marker"); }
+QString gets_console_read_text_marker() { return gets_("console_read_text_marker"); }
+QStringList get_strings_console_read_text_marker() { return get_strings_("console_read_text_marker"); }
 
 //Out Text Text
 //Text to write to process console.
@@ -188,13 +215,15 @@ bool was_changed_console_read_image() { return was_changed_("console_read_image"
 XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
 void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
 void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
-
+//----------------------------------------------------
+//Page Write
+//Writing to the process console.
 
 //Enum Console Write
 //When write data to process console.
 enum enum_write {
     write_Disabled = 0,
-    write_After_Run = 1,
+    write_After_Finished = 1,
     write_Each_Frame = 2,
     write_On_Button = 3,
     write_N__ = 4
@@ -251,8 +280,15 @@ QStringList get_strings_console_write_text() { return get_strings_("console_writ
 bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
 XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
 //----------------------------------------------------
-//Page Details
+//Page Debug
 //
+
+//Out Int Executed Times
+//How much times process was executed.
+bool was_changed_executed_times() { return was_changed_("executed_times"); }
+int geti_executed_times() { return geti_("executed_times"); }
+void seti_executed_times(int value) { seti_("executed_times", value); }
+void increase_int_executed_times(int increase = 1) { increase_int_("executed_times", increase); }
 
 //Out Text Working Folder Abs Path
 //Absolute path to the working folder

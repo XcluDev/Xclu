@@ -8,7 +8,7 @@ module_impl=C++
 page Main
     //General settings.
 
-const int Frame_Rate frame_rate=30 1:120 1,10
+const int Frame_Rate frame_rate=30 1:* 1,10
     //Project frame rate.
     //fps
     
@@ -31,13 +31,17 @@ out float dt dt=0 0:* 0.01,0.1
     //Time step between frames.
     //sec
     
-out float Measured_Fr_Rate measured_frame_rate=0 0:120 1,10
+out float Measured_Fr_Rate measured_frame_rate=0 0:* 1,10
     //Measured frame rate.
     //fps
 
+separator
+
+out int Frame_Number frame=0 0:* 1,10
+    //Number of frame from start.
+
     
 #TODO:
-#Номер кадра
 #время от 1970
 #дата-время в числах и в виде строки с настраиваемым параметром
 #- то, что также может быть доступно и через встроенные переменные. Но тут лучше, WYSIWYG.
