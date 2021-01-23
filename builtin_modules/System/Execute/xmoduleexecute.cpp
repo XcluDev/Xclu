@@ -75,7 +75,7 @@ void XModuleExecute::update() {
     if (gete_read() == read_Each_Frame) {
         console_read();
     }
-    if (gete_write() == write_Each_Frame) {
+    if (geti_write_each_frame()) {
         console_write();
     }
 
@@ -175,7 +175,7 @@ void XModuleExecute::process_run() {
 
     if (thread_mode == thread_mode_Wait_Finishing) {
         //sync run
-        if (gete_write() == write_After_Finished) {
+        if (geti_write_at_start()) {
             console_write();
         }
         bool no_timeout = subprocess.waitForFinished(timeout);
@@ -299,7 +299,7 @@ void XModuleExecute::console_read_error() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_read(bool on_update) {
+void XModuleExecute::console_read() {
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
         auto data = subprocess->readAllStandardOutput();
@@ -328,7 +328,7 @@ void XModuleExecute::console_read(bool on_update) {
             XCORE.bang(get_strings_console_bang_on_received());
 
             //Write if required
-            if (gete_write() == write_On_Receive) {
+            if (geti_write_on_receive()) {
                 console_write();
             }
         }

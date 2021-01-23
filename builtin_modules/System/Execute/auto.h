@@ -139,8 +139,8 @@ void append_string_console_errors_text(QStringList v, int extra_new_lines_count 
 //When read data from process console.
 enum enum_read {
     read_Disabled = 0,
-    read_After_Run = 1,
-    read_Each_Frame = 2,
+    read_Each_Frame = 1,
+    read_After_Finished = 2,
     read_On_Button = 3,
     read_N__ = 4
 };
@@ -213,19 +213,20 @@ void setobject_console_read_image(XProtectedObject &value) { set_object_("consol
 //Page Write
 //Writing to the process console.
 
-//Enum Console Write
-//When write data to process console.
-enum enum_write {
-    write_Disabled = 0,
-    write_After_Finished = 1,
-    write_Each_Frame = 2,
-    write_On_Receive = 3,
-    write_On_Button = 4,
-    write_N__ = 5
-};
-bool was_changed_write() { return was_changed_("write"); }
-enum_write gete_write() { return enum_write(geti_("write")); }
-QString getraw_write() { return getraw_("write");}
+//Checkbox Write At Start
+//Write data to process console at process start.
+bool was_changed_write_at_start() { return was_changed_("write_at_start"); }
+int geti_write_at_start() { return geti_("write_at_start"); }
+
+//Checkbox Write Each Frame
+//Write data to process console each frame.
+bool was_changed_write_each_frame() { return was_changed_("write_each_frame"); }
+int geti_write_each_frame() { return geti_("write_each_frame"); }
+
+//Checkbox Write On Receive
+//Write data to process console after receiving answer.
+bool was_changed_write_on_receive() { return was_changed_("write_on_receive"); }
+int geti_write_on_receive() { return geti_("write_on_receive"); }
 
 //Button Write
 //Write to process console right now.
@@ -274,6 +275,49 @@ QStringList get_strings_console_write_text() { return get_strings_("console_writ
 //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
 bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
 XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
+//Checkbox Transform Image
+//Convert to grayscale or resize image.
+bool was_changed_console_write_image_transform() { return was_changed_("console_write_image_transform"); }
+int geti_console_write_image_transform() { return geti_("console_write_image_transform"); }
+
+//Checkbox To Grayscale
+//Convert image to grayscale.
+bool was_changed_console_write_image_to_grayscale() { return was_changed_("console_write_image_to_grayscale"); }
+int geti_console_write_image_to_grayscale() { return geti_("console_write_image_to_grayscale"); }
+
+//Enum Resize
+//Resize mode.
+enum enum_console_write_image_resize {
+    console_write_image_resize_No = 0,
+    console_write_image_resize_Rescale = 1,
+    console_write_image_resize_Pixel_Size = 2,
+    console_write_image_resize_N__ = 3
+};
+bool was_changed_console_write_image_resize() { return was_changed_("console_write_image_resize"); }
+enum_console_write_image_resize gete_console_write_image_resize() { return enum_console_write_image_resize(geti_("console_write_image_resize")); }
+QString getraw_console_write_image_resize() { return getraw_("console_write_image_resize");}
+
+//Float Scale
+//Scale of output image, 1 - don't rescale.
+bool was_changed_console_write_image_resize_scale() { return was_changed_("console_write_image_resize_scale"); }
+float getf_console_write_image_resize_scale() { return getf_("console_write_image_resize_scale"); }
+
+//Int Size X
+//X-size of output image.
+bool was_changed_console_write_image_sizex() { return was_changed_("console_write_image_sizex"); }
+int geti_console_write_image_sizex() { return geti_("console_write_image_sizex"); }
+
+//Int Size Y
+//Y-size of output image.
+bool was_changed_console_write_image_sizey() { return was_changed_("console_write_image_sizey"); }
+int geti_console_write_image_sizey() { return geti_("console_write_image_sizey"); }
+
+//Out Object Transformed
+//Transformed image.
+bool was_changed_console_write_image_transformed() { return was_changed_("console_write_image_transformed"); }
+XProtectedObject *getobject_console_write_image_transformed() { return get_object_("console_write_image_transformed"); }
+void setobject_console_write_image_transformed(XProtectedObject *value) { set_object_("console_write_image_transformed", value); }
+void setobject_console_write_image_transformed(XProtectedObject &value) { set_object_("console_write_image_transformed", value); }
 //----------------------------------------------------
 //Page Debug
 //

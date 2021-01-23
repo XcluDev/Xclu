@@ -58,7 +58,7 @@ protected:
     void process_stop();
 
     void console_clear();
-    void console_read(bool on_update=false);
+    void console_read();
     void console_read_error();
 
     void console_write();

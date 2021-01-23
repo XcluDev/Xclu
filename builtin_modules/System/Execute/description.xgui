@@ -93,7 +93,7 @@ page Read
     //Reading from the process console.
 
 #---- read ----    
-in enum Console_Read read=After_Run [Disabled,After_Run,Each_Frame,On_Button]
+in enum Console_Read read=After_Run [Disabled,Each_Frame,After_Finished,On_Button]
     //When read data from process console.
     
 if read After_Run,Each_Frame,On_Button
@@ -139,16 +139,21 @@ endif
 page Write
     //Writing to the process console.
    
-#---- write ----    
-in enum Console_Write write=Disabled [Disabled,After_Finished,Each_Frame,On_Receive,On_Button]
-    //When write data to process console.
+#---- write ----   
+in checkbox Write_At_Start write_at_start=0
+    //Write data to process console at process start.
+
+in checkbox Write_Each_Frame write_each_frame=0
+    //Write data to process console each frame.
+
+in checkbox Write_On_Receive write_on_receive=0
+    //Write data to process console after receiving answer.
+
     
-if write After_Finished,Each_Frame,On_Button
 in button Write write_button
     //Write to process console right now.
 in enum Data_Type write_type=String [String,Text,Image]
     //Data type for console write.
-endif
 
 if write_type String
 in string String console_write_string=""
@@ -160,13 +165,45 @@ if write_type Text
 in text Text console_write_text 10 12
     //Text to write to process console.
 endif
-
+    
 if write_type Image
 in object_image Image console_write_image
     //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+    
+in checkbox Transform_Image console_write_image_transform=0
+    //Convert to grayscale or resize image.
 endif
 
+#--- transform image
+if console_write_image_transform 1
 
+in checkbox To_Grayscale console_write_image_to_grayscale=0
+    //Convert image to grayscale.
+
+in enum Resize console_write_image_resize=No [No,Rescale,Pixel_Size]    
+    //Resize mode.
+endif
+    
+if console_write_image_resize Rescale
+in float Scale console_write_image_resize_scale=1 0:* 0.01,0.1
+    //Scale of output image, 1 - don't rescale.
+endif
+
+if console_write_image_resize Pixel_Size
+in int Size_X console_write_image_sizex=100 1:* 1,10
+    //X-size of output image.
+    //pix
+
+in int Size_Y console_write_image_sizey=100 1:* 1,10
+    //Y-size of output image.     
+    //pix
+endif
+
+if console_write_image_transform 1
+out object_image Transformed console_write_image_transformed
+    //Transformed image.
+endif
+    
 #-----------------------------
 page Debug
 
