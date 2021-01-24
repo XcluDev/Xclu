@@ -89,6 +89,7 @@ int geti_show_color() { return geti_("show_color"); }
 bool was_changed_color_image() { return was_changed_("color_image"); }
 XProtectedObject *getobject_color_image() { return get_object_("color_image"); }
 void setobject_color_image(XProtectedObject *value) { set_object_("color_image", value); }
+void setobject_color_image(XProtectedObject &value) { set_object_("color_image", value); }
 
 //Checkbox Show Depth
 //Generate Depth image preview.
@@ -100,6 +101,7 @@ int geti_show_depth() { return geti_("show_depth"); }
 bool was_changed_depth_image() { return was_changed_("depth_image"); }
 XProtectedObject *getobject_depth_image() { return get_object_("depth_image"); }
 void setobject_depth_image(XProtectedObject *value) { set_object_("depth_image", value); }
+void setobject_depth_image(XProtectedObject &value) { set_object_("depth_image", value); }
 
 //Checkbox Show IR
 //Generate IR image preview.
@@ -111,6 +113,7 @@ int geti_show_ir() { return geti_("show_ir"); }
 bool was_changed_ir_image() { return was_changed_("ir_image"); }
 XProtectedObject *getobject_ir_image() { return get_object_("ir_image"); }
 void setobject_ir_image(XProtectedObject *value) { set_object_("ir_image", value); }
+void setobject_ir_image(XProtectedObject &value) { set_object_("ir_image", value); }
 
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived.
@@ -235,6 +238,7 @@ int geti_emitter() { return geti_("emitter"); }
 //Page 8 Bit
 //Transform depth image to grayscale 8 bit and binary image.
 
+
 //Checkbox Depth 8 Bit
 //Make depth image to 8 bit grayscale image.
 bool was_changed_make_depth_grayscale() { return was_changed_("make_depth_grayscale"); }
@@ -245,7 +249,7 @@ int geti_make_depth_grayscale() { return geti_("make_depth_grayscale"); }
 bool was_changed_depth_grayscale_image() { return was_changed_("depth_grayscale_image"); }
 XProtectedObject *getobject_depth_grayscale_image() { return get_object_("depth_grayscale_image"); }
 void setobject_depth_grayscale_image(XProtectedObject *value) { set_object_("depth_grayscale_image", value); }
-
+void setobject_depth_grayscale_image(XProtectedObject &value) { set_object_("depth_grayscale_image", value); }
 //Int Thresh Near
 //Near threshold.
 bool was_changed_depth_grayscale_thresh_near_mm() { return was_changed_("depth_grayscale_thresh_near_mm"); }
@@ -287,6 +291,7 @@ float getf_depth_grayscale_y0() { return getf_("depth_grayscale_y0"); }
 bool was_changed_depth_grayscale_y1() { return was_changed_("depth_grayscale_y1"); }
 float getf_depth_grayscale_y1() { return getf_("depth_grayscale_y1"); }
 
+
 //----------------------------------------------------
 //Page Devices
 //Here you can get list of connected cameras.
@@ -308,14 +313,20 @@ void append_string_device_list(QString v, int extra_new_lines_count = 0) { appen
 void append_string_device_list(QStringList v, int extra_new_lines_count = 0) { append_string_("device_list", v, extra_new_lines_count); }
 
 //----------------------------------------------------
-//Page Save Frames
-//Saving frames to disk
+//Page Save Images
+//Saving images to disk.
 
-//Button Save Frames
-//Press the button to save images to a given folder
+//Button Save Images
+//Press the button to save images to a given folder with file name as timestamp.
 bool was_changed_save_frames_button() { return was_changed_("save_frames_button"); }
 int geti_save_frames_button() { return geti_("save_frames_button"); }
 QString button_save_frames_button() { return "save_frames_button"; }
+
+//Checkbox Save Each Frame
+//Save images to a given folder with file name as color_00001.png and so on.
+bool was_changed_save_each_frame() { return was_changed_("save_each_frame"); }
+int geti_save_each_frame() { return geti_("save_each_frame"); }
+
 
 //Checkbox Color
 //Should save depth 16 bit.
@@ -333,7 +344,7 @@ bool was_changed_save_depth8() { return was_changed_("save_depth8"); }
 int geti_save_depth8() { return geti_("save_depth8"); }
 
 //String Folder
-//Folder for saving frames.
+//Folder for saving images.
 bool was_changed_save_folder() { return was_changed_("save_folder"); }
 QString gets_save_folder() { return gets_("save_folder"); }
 QStringList get_strings_save_folder() { return get_strings_("save_folder"); }

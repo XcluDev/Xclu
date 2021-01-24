@@ -137,84 +137,6 @@ void append_string_console_errors_text(QString v, int extra_new_lines_count = 0)
 void append_string_console_errors_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 
 //----------------------------------------------------
-//Page Read
-//Reading from the process console.
-
-//Enum Console Read
-//When read data from process console.
-enum enum_read {
-    read_Disabled = 0,
-    read_Each_Frame = 1,
-    read_After_Finished = 2,
-    read_On_Button = 3,
-    read_N__ = 4
-};
-bool was_changed_read() { return was_changed_("read"); }
-enum_read gete_read() { return enum_read(geti_("read")); }
-QString getraw_read() { return getraw_("read");}
-
-//Button Read
-//Read from process console right now.
-bool was_changed_read_button() { return was_changed_("read_button"); }
-int geti_read_button() { return geti_("read_button"); }
-QString button_read_button() { return "read_button"; }
-
-//Enum Data Type
-//Data type for console read.
-enum enum_read_type {
-    read_type_String = 0,
-    read_type_Text = 1,
-    read_type_Image = 2,
-    read_type_N__ = 3
-};
-bool was_changed_read_type() { return was_changed_("read_type"); }
-enum_read_type gete_read_type() { return enum_read_type(geti_("read_type")); }
-QString getraw_read_type() { return getraw_("read_type");}
-
-//Out Checkbox Received
-//Flag that data is received. Note, for multiple data it stores only the last data
-bool was_changed_console_read_received() { return was_changed_("console_read_received"); }
-int geti_console_read_received() { return geti_("console_read_received"); }
-void seti_console_read_received(int value) { seti_("console_read_received", value); }
-
-//Text Bang On Received
-//List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
-bool was_changed_console_bang_on_received() { return was_changed_("console_bang_on_received"); }
-QString gets_console_bang_on_received() { return gets_("console_bang_on_received"); }
-QStringList get_strings_console_bang_on_received() { return get_strings_("console_bang_on_received"); }
-
-//Out String String
-//String to write to process console.
-bool was_changed_console_read_string() { return was_changed_("console_read_string"); }
-QString gets_console_read_string() { return gets_("console_read_string"); }
-QStringList get_strings_console_read_string() { return get_strings_("console_read_string"); }
-void sets_console_read_string(QString value) { sets_("console_read_string", value); }
-void clear_string_console_read_string() { clear_string_("console_read_string"); }
-void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
-void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
-
-//Checkbox Append
-//If enabled, append all input text. If disables - clear each frame.
-bool was_changed_console_read_text_append() { return was_changed_("console_read_text_append"); }
-int geti_console_read_text_append() { return geti_("console_read_text_append"); }
-
-//Out Text Text
-//Text to write to process console.
-bool was_changed_console_read_text() { return was_changed_("console_read_text"); }
-QString gets_console_read_text() { return gets_("console_read_text"); }
-QStringList get_strings_console_read_text() { return get_strings_("console_read_text"); }
-void sets_console_read_text(QString value) { sets_("console_read_text", value); }
-void clear_string_console_read_text() { clear_string_("console_read_text"); }
-void append_string_console_read_text(QString v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
-void append_string_console_read_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
-
-//Out Object Image
-//Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
-bool was_changed_console_read_image() { return was_changed_("console_read_image"); }
-XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
-void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
-void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
-//----------------------------------------------------
 //Page Write
 //Writing to the process console.
 
@@ -323,6 +245,84 @@ bool was_changed_console_write_image_transformed() { return was_changed_("consol
 XProtectedObject *getobject_console_write_image_transformed() { return get_object_("console_write_image_transformed"); }
 void setobject_console_write_image_transformed(XProtectedObject *value) { set_object_("console_write_image_transformed", value); }
 void setobject_console_write_image_transformed(XProtectedObject &value) { set_object_("console_write_image_transformed", value); }
+//----------------------------------------------------
+//Page Read
+//Reading from the process console.
+
+//Enum Console Read
+//When read data from process console.
+enum enum_read {
+    read_Disabled = 0,
+    read_Each_Frame = 1,
+    read_After_Finished = 2,
+    read_On_Button = 3,
+    read_N__ = 4
+};
+bool was_changed_read() { return was_changed_("read"); }
+enum_read gete_read() { return enum_read(geti_("read")); }
+QString getraw_read() { return getraw_("read");}
+
+//Button Read
+//Read from process console right now.
+bool was_changed_read_button() { return was_changed_("read_button"); }
+int geti_read_button() { return geti_("read_button"); }
+QString button_read_button() { return "read_button"; }
+
+//Enum Data Type
+//Data type for console read.
+enum enum_read_type {
+    read_type_String = 0,
+    read_type_Text = 1,
+    read_type_Image = 2,
+    read_type_N__ = 3
+};
+bool was_changed_read_type() { return was_changed_("read_type"); }
+enum_read_type gete_read_type() { return enum_read_type(geti_("read_type")); }
+QString getraw_read_type() { return getraw_("read_type");}
+
+//Out Checkbox Received
+//Flag that data is received. Note, for multiple data it stores only the last data
+bool was_changed_console_read_received() { return was_changed_("console_read_received"); }
+int geti_console_read_received() { return geti_("console_read_received"); }
+void seti_console_read_received(int value) { seti_("console_read_received", value); }
+
+//Text Bang On Received
+//List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
+bool was_changed_console_bang_on_received() { return was_changed_("console_bang_on_received"); }
+QString gets_console_bang_on_received() { return gets_("console_bang_on_received"); }
+QStringList get_strings_console_bang_on_received() { return get_strings_("console_bang_on_received"); }
+
+//Out String String
+//String to write to process console.
+bool was_changed_console_read_string() { return was_changed_("console_read_string"); }
+QString gets_console_read_string() { return gets_("console_read_string"); }
+QStringList get_strings_console_read_string() { return get_strings_("console_read_string"); }
+void sets_console_read_string(QString value) { sets_("console_read_string", value); }
+void clear_string_console_read_string() { clear_string_("console_read_string"); }
+void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
+void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
+
+//Checkbox Append
+//If enabled, append all input text. If disables - clear each frame.
+bool was_changed_console_read_text_append() { return was_changed_("console_read_text_append"); }
+int geti_console_read_text_append() { return geti_("console_read_text_append"); }
+
+//Out Text Text
+//Text to write to process console.
+bool was_changed_console_read_text() { return was_changed_("console_read_text"); }
+QString gets_console_read_text() { return gets_("console_read_text"); }
+QStringList get_strings_console_read_text() { return get_strings_("console_read_text"); }
+void sets_console_read_text(QString value) { sets_("console_read_text", value); }
+void clear_string_console_read_text() { clear_string_("console_read_text"); }
+void append_string_console_read_text(QString v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
+void append_string_console_read_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
+
+//Out Object Image
+//Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
+bool was_changed_console_read_image() { return was_changed_("console_read_image"); }
+XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
+void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
+void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
 //----------------------------------------------------
 //Page Debug
 //

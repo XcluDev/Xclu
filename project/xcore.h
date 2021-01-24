@@ -62,6 +62,7 @@ public:
     double elapsed_time_sec();
     void update_dt();    //вызывается для обновления dt, в начале работы кадра
     float dt();
+    int frame();         //current frame
 
     //Папка проекта
     void set_project_folder(QString project_folder);
@@ -117,6 +118,7 @@ protected:
     QElapsedTimer elapsed_timer_;
     double last_time_for_dt_ = 0;   //используется для вычисления dt
     float dt_ = 0;
+    int frame_ = 0;
 
 };
 

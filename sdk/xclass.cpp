@@ -20,6 +20,11 @@ float XClass::xc_dt() {
 }
 
 //---------------------------------------------------------------------
+int XClass::xc_frame() {  //frame number
+    return XCORE.frame();
+}
+
+//---------------------------------------------------------------------
 QString XClass::xc_project_folder() {   //full path to project folder
     return XCORE.project_folder();
 }

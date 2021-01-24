@@ -91,52 +91,7 @@ out text Text console_errors_text 10 12
     //Errors output from process console.
 endif
 
-#--------------------
-page Read
-    //Reading from the process console.
 
-#---- read ----    
-in enum Console_Read read=After_Finished [Disabled,Each_Frame,After_Finished,On_Button]
-    //When read data from process console.
-    
-if read Each_Frame,After_Finished,On_Button
-in button Read read_button
-    //Read from process console right now.
-    
-in enum Data_Type read_type=Text [String,Text,Image]
-    //Data type for console read.
-    
-out checkbox Received console_read_received=0
-    //Flag that data is received. Note, for multiple data it stores only the last data
-
-in text Bang_On_Received console_bang_on_received 3 5
-    //List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
-
-endif
-
-if read_type String
-out string String console_read_string=""
-    //String to write to process console.
-endif
-
-if read_type Text
-in checkbox Append console_read_text_append=1
-    //If enabled, append all input text. If disables - clear each frame.
-
-#in string Marker console_read_text_marker="###"
-#    //Marker denoting the end of text packet from the process. 
-
-out text Text console_read_text 10 12
-    //Text to write to process console.
-    
-endif
-
-
-if read_type Image
-out object_image Image console_read_image
-    //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
-    
-endif
 
 #--------------------
 page Write
@@ -207,6 +162,54 @@ out object_image Transformed console_write_image_transformed
     //Transformed image.
 endif
     
+    
+    #--------------------
+page Read
+    //Reading from the process console.
+
+#---- read ----    
+in enum Console_Read read=After_Finished [Disabled,Each_Frame,After_Finished,On_Button]
+    //When read data from process console.
+    
+if read Each_Frame,After_Finished,On_Button
+in button Read read_button
+    //Read from process console right now.
+    
+in enum Data_Type read_type=Text [String,Text,Image]
+    //Data type for console read.
+    
+out checkbox Received console_read_received=0
+    //Flag that data is received. Note, for multiple data it stores only the last data
+
+in text Bang_On_Received console_bang_on_received 3 5
+    //List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
+
+endif
+
+if read_type String
+out string String console_read_string=""
+    //String to write to process console.
+endif
+
+if read_type Text
+in checkbox Append console_read_text_append=1
+    //If enabled, append all input text. If disables - clear each frame.
+
+#in string Marker console_read_text_marker="###"
+#    //Marker denoting the end of text packet from the process. 
+
+out text Text console_read_text 10 12
+    //Text to write to process console.
+    
+endif
+
+
+if read_type Image
+out object_image Image console_read_image
+    //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
+    
+endif
+
 #-----------------------------
 page Debug
 

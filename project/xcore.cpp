@@ -209,6 +209,8 @@ void XCore::reset_elapsed_timer() {
     elapsed_timer_.start();
     last_time_for_dt_ = elapsed_time_sec();
     dt_ = 0;
+
+    frame_ = 0;
 }
 
 //---------------------------------------------------------------------
@@ -221,11 +223,18 @@ void XCore::update_dt() {    //вызывается для обновления 
     double time = elapsed_time_sec();
     dt_ = time - last_time_for_dt_;
     last_time_for_dt_ = time;
+
+    frame_++;
 }
 
 //---------------------------------------------------------------------
 float XCore::dt() {
     return dt_;
+}
+
+//---------------------------------------------------------------------
+int XCore::frame() {         //current frame
+    return frame_;
 }
 
 //---------------------------------------------------------------------

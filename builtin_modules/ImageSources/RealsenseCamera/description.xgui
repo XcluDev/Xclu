@@ -217,12 +217,17 @@ out text Device_list device_list 10 15
     
 
 #--------------------
-page Save_Frames
-    //Saving frames to disk
+page Save_Images
+    //Saving images to disk.
 
-in button Save_Frames save_frames_button
-    //Press the button to save images to a given folder
-    
+in button Save_Images save_frames_button
+    //Press the button to save images to a given folder with file name as timestamp.
+
+in checkbox Save_Each_Frame save_each_frame=0
+    //Save images to a given folder with file name as color_00001.png and so on.
+
+line
+     
 #in checkbox Depth save_depth=1
 #    //Should save depth 16 bit.
     
@@ -237,9 +242,9 @@ in checkbox Depth8 save_depth8=1
     //Should save depth 16 bit.
 
     
-in string_folder Folder save_folder="realsense_frames"
-    //Folder for saving frames.
-    //Choose folder to save frames.
+in string_folder Folder save_folder="realsense_images"
+    //Folder for saving images.
+    //Choose folder to save images.
 
 out text Saved_To saved_to 5 5
     //Path to last saving.

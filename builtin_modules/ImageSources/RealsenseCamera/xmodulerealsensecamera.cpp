@@ -108,6 +108,9 @@ void XModuleRealsenseCamera::update() {
     if (geti_save_frames_button()) {
         wait_save_frames_ = 1;
     }
+    bool save_each_frame = geti_save_each_frame();
+
+    bool need_save = wait_save_frames_ || save_each_frame;
 
     //TODO сделать возможность обработки кадров по callback
     //- а сейчас реализовано из основного потока
@@ -137,17 +140,17 @@ void XModuleRealsenseCamera::update() {
         bool make_color = false;
         bool make_depth = false;
         bool make_ir = false;
-        if ((geti_show_color() || wait_save_frames_) && camera_.settings().use_rgb) {
+        if ((geti_show_color() || need_save) && camera_.settings().use_rgb) {
             xc_assert(camera_.get_color_pixels_rgb(raster_color_), "get_color_pixels_rgb() returned false");
             XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
             make_color = true;
         }
-        if ((geti_show_depth() || wait_save_frames_) && camera_.settings().use_depth) {
+        if ((geti_show_depth() || need_save) && camera_.settings().use_depth) {
             xc_assert(camera_.get_depth_pixels_rgb(raster_depth_), "get_depth_pixels_rgb() returned false");
             XObjectImage::create_from_raster(getobject_depth_image()->write().data(), raster_depth_);
             make_depth = true;
         }
-        if ((geti_show_ir() || wait_save_frames_) && camera_.settings().use_ir) {
+        if ((geti_show_ir() || need_save) && camera_.settings().use_ir) {
             xc_assert(camera_.get_ir_pixels8(raster_ir_), "get_ir_pixels8() returned false");
             XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir_);
             make_ir = true;
@@ -159,48 +162,75 @@ void XModuleRealsenseCamera::update() {
 
         //если требуется - записать на диск
         if (wait_save_frames_) {
-            save_frames(make_color, make_depth, make_ir);
+            bool timestamp = true;
+            save_frames(make_color, make_depth, make_ir, timestamp);
+            wait_save_frames_ = 0;
+        }
+        if (save_each_frame) {
+            bool timestamp = false;
+            save_frames(make_color, make_depth, make_ir, timestamp);
         }
 
-        wait_save_frames_ = 0;
     }
-
-
 
 }
 
 //---------------------------------------------------------------------
 //запись кадра на диск
-void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir) {
+void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool use_timestamp) {
     //Создаем папку для записи
     QString folder = xc_abs_path(gets_save_folder(), true /*create_folder*/);
 
-    //время
-    /*dd.MM.yyyy    21.05.2001
-    ddd MMMM d yy     Tue May 21 01
-    hh:mm:ss.zzz    14:13:09.120
-    hh:mm:ss.z     14:13:09.12
-    h:m:s ap    2:13:9 pm*/
+    //Create file names
+    QString file_color, file_ir, file_depth;
+    QString saved_to;
 
-    QString time_format = "yy_MM_dd_hh_mm_ss_zzz";
-    auto time = QDateTime::currentDateTime();
+    if (use_timestamp) {
+        //[timestamp]_color.png
+
+        //время
+        /*dd.MM.yyyy    21.05.2001
+        ddd MMMM d yy     Tue May 21 01
+        hh:mm:ss.zzz    14:13:09.120
+        hh:mm:ss.z     14:13:09.12
+        h:m:s ap    2:13:9 pm*/
+
+        QString time_format = "yy_MM_dd_hh_mm_ss_zzz";
+        auto time = QDateTime::currentDateTime();
+
+        QString path = folder + "/" + time.toString(time_format);
+
+        file_color = path + "_color.png";
+        file_ir = path + "_ir.png";
+        file_depth = path + "_depth8.png";
+
+        saved_to = path;
+    }
+    else {
+        //color_00001.png and so on.
+        QString frame = QString::number(processed_frames_).rightJustified(5, '0');
+        file_color = QString("%1/color_%2.png").arg(folder).arg(frame);
+        file_ir = QString("%1/ir_%2.png").arg(folder).arg(frame);
+        file_depth = QString("%1/depth_%2.png").arg(folder).arg(frame);
+
+        saved_to = folder + " " + frame;
+    }
 
     //запись
-    QString path = folder + "/" + time.toString(time_format);
     if (color && geti_save_color()) {
-        XRaster::save(raster_ir_, path + "_color.png", "PNG", 100);
+        XRaster::save(raster_color_, file_color, "PNG", 100);
     }
     //TODO save 16 bit
     //if (depth) {
     //   XRaster::save(depth_, path + "_depth16.png", "PNG", 100);
     //}
     if (ir && geti_save_ir()) {
-        XRaster::save(raster_ir_, path + "_ir.png", "PNG", 100);
+        XRaster::save(raster_ir_, file_ir, "PNG", 100);
     }
     if (!depth8_.is_empty() && geti_save_depth8()) {
-        XRaster::save(depth8_, path + "_depth8.png", "PNG", 100);
+        XRaster::save(depth8_, file_depth, "PNG", 100);
     }
-    sets_saved_to(path);
+    sets_saved_to(saved_to);
 
 }
 

@@ -52,7 +52,7 @@ protected:
     int wait_save_frames_ = 0;
 
     //запись кадра на диск
-    void save_frames(bool color, bool depth, bool ir);
+    void save_frames(bool color, bool depth, bool ir, bool use_timestamp);
 
 
 protected slots:

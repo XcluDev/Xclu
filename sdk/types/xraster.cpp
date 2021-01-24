@@ -216,6 +216,7 @@ void XRaster::load(QString file_name, XRaster_u8c3 &raster) {
 
 //-----------------------------------------------------------------------------------
 void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int quality) {
+    xc_assert(!raster.is_empty(), "Error saving image, because raster is empty: '" + file_name + "' ");
     QImage qimage;
     convert(raster, qimage);
     xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
@@ -224,6 +225,7 @@ void XRaster::save(XRaster_u8 &raster, QString file_name, QString format, int qu
 
 //-----------------------------------------------------------------------------------
 void XRaster::save(XRaster_u8c3 &raster, QString file_name, QString format, int quality) {
+    xc_assert(!raster.is_empty(), "Error saving image, because raster is empty: '" + file_name + "' ");
     QImage qimage;
     convert(raster, qimage);
     xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),

@@ -31,6 +31,7 @@ public:
     //----------------------------------------------
     static double xc_elapsed_time_sec();
     static float xc_dt();
+    static int xc_frame();  //frame number
 
     static QString xc_project_folder();   //full path to project folder
 
