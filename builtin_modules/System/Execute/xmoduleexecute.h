@@ -38,6 +38,7 @@ https://data2.lact.ru/f1/s/0/299/basic/1605/976/vasev-4.doc
 #include "sdk_h.h"
 #include "xmodule.h"
 #include <QProcess>
+#include "xraster.h"
 
 class XModuleExecute: public XModule
 {
@@ -77,6 +78,10 @@ protected:
     bool finished_ = false;
     int exit_code_ = 0;
     int exit_status_ = 0;
+
+    void console_write_image();
+    XRaster_u8c3 image_write_input_;
+
 
 
 };

@@ -168,8 +168,6 @@ public:
         }
     }
 
-
-
     //rotate on 0, 90, 180, 270 angles
     //TODO only works with 1-channel images (?)
     void rotate(int angle) {
@@ -243,6 +241,29 @@ public:
     static void convert(QImage qimage, XRaster_u8c3 &raster);
     static void convert(XRaster_u8 &raster, QImage &qimage);
     static void convert(XRaster_u8c3 &raster, QImage &qimage);
+
+    //Resize
+    template<typename T>
+    static void resize_nearest(XRaster_<T> &input, XRaster_<T> &output, int new_w, int new_h) {
+        int w = input.w;
+        int h = input.h;
+        xc_assert(input.data_pointer() != output.data_pointer(), "resize_nearest, input and output must be different images");
+        xc_assert(w > 0 && h > 0, "resize_nearest error, input image must have positive size");
+        xc_assert(new_w > 0 && new_h > 0, "resize_nearest error, resized image must have positive size");
+        output.allocate(new_w, new_h);
+        for (int y=0; y<new_h; y++) {
+            for (int x=0; x<new_w; x++) {
+                output.pixel_unsafe(x, y) = input.pixel_unsafe(x * w / new_w, y * h / new_h);
+            }
+        }
+    }
+
+    template<typename T>
+    static void resize_nearest(XRaster_<T> &input, XRaster_<T> &output, float scale) {
+        int new_w = int(input.w * scale);
+        int new_h = int(input.h * scale);
+        resize_nearest(input, output, new_w, new_h);
+    }
 
     //Link - create image without copying pixels raster
     //Much faster than `convert`, but requires care

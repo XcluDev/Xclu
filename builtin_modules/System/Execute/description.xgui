@@ -126,7 +126,7 @@ endif
     
 if write_type Image
 in object_image Image console_write_image
-    //Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+    //Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as uint16: w,h,channels, and then data array as uint8.
     
 in checkbox Transform_Image console_write_image_transform=0
     //Convert to grayscale or resize image.

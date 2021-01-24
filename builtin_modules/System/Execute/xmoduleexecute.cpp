@@ -3,6 +3,7 @@
 #include "registrarxmodule.h"
 #include <QProcess>
 #include "xcore.h"
+#include "xobjectimage.h"
 
 
 //registering module implementation
@@ -378,9 +379,56 @@ void XModuleExecute::console_write() {
             subprocess->write(gets_console_write_text().toLatin1());
         }
         if (write_type == write_type_Image) {
-            //TODO
-            //console_write_image
+            console_write_image();
         }
+    }
+
+}
+
+//---------------------------------------------------------------------
+void XModuleExecute::console_write_image() {
+    //Read image
+    auto reader = getobject_console_write_image()->read();
+
+    //no image yet
+    if (reader.data().type() != XObjectTypeImage) return;
+
+    //read image
+    //TODO optimize, may receive and grayscale!
+    //but now converts to u8 rgb.
+    XObjectImage::to_raster(reader.data(), image_write_input_);
+
+    //transform
+    if (geti_console_write_image_transform()) {
+        XRaster_u8c3 *img = &image_write_input_;
+
+        XRaster_u8c3 image_resized;// = image_write_input_;
+        auto resize = gete_console_write_image_resize();
+        if (resize == console_write_image_resize_Pixel_Size) {
+            XRaster::resize_nearest(image_write_input_, image_resized, geti_console_write_image_sizex(), geti_console_write_image_sizey());
+            img = &image_resized;
+        }
+        if (resize == console_write_image_resize_Rescale) {
+            XRaster::resize_nearest(image_write_input_, image_resized, getf_console_write_image_resize_scale());
+            img = &image_resized;
+        }
+        //now img contains current image, resized if necessary
+        //convert to grayscale if required, or sent rgb8
+        if (geti_console_write_image_to_grayscale()) {
+            XRaster_u8 image;
+            XRaster::convert(*img, image);
+
+            //set to gui image
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+        }
+        else {
+            XRaster_u8c3 &image = *img;
+            //set to gui image
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+
+        }
+
+
     }
 
 }
