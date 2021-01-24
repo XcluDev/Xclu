@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "text_value",
-                        "avalue": "This project runs bat file each frame, writes there some data and reads back."
+                        "avalue": "This example runs python script in a separate thread, and at each frame writes some data and reads answer."
                     },
                     {
                         "aname": "Control",
@@ -124,7 +124,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -137,15 +137,15 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "run_input.bat"
+                        "avalue": "python"
                     },
                     {
                         "aname": "file_must_exists",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "args",
-                        "avalue": ""
+                        "avalue": "python_loop.py"
                     },
                     {
                         "aname": "Run",
@@ -153,11 +153,11 @@
                     },
                     {
                         "aname": "execute_event",
-                        "avalue": "Each_Frame"
+                        "avalue": "At_First_Frame"
                     },
                     {
                         "aname": "thread_mode",
-                        "avalue": "Wait_Finishing"
+                        "avalue": "Run_At_Separate_Thread"
                     },
                     {
                         "aname": "enable_timeout",
@@ -177,7 +177,7 @@
                     },
                     {
                         "aname": "read",
-                        "avalue": "Disabled"
+                        "avalue": "Each_Frame"
                     },
                     {
                         "aname": "read_type",
@@ -197,11 +197,11 @@
                     },
                     {
                         "aname": "write_at_start",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "write_each_frame",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "write_on_receive",
@@ -213,7 +213,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "55",
+                        "avalue": "244",
                         "link": "project1->frame"
                     },
                     {

@@ -70,8 +70,15 @@ protected slots:
     void finished(int exit_code, QProcess::ExitStatus exit_status);
     void crashed(QProcess::ProcessError error);
 
+protected:
     bool crashed_ = false;
     QString crash_text_;
+
+    bool finished_ = false;
+    int exit_code_ = 0;
+    int exit_status_ = 0;
+
+
 };
 
 

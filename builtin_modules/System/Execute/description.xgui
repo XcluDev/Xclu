@@ -12,11 +12,14 @@ page Main
 in string_folder Working_Folder folder_name=""
     //Folder for running the file.
     
-in string_file File_Name file_name=""
-    //File to execute.
+in string_file Command_Or_File file_name=""
+    //Command or file to execute.
     //Choose File to execute
     //Executables (*.exe *.bat *.sh);; All files (*.*)
 
+in checkbox File_Must_Exists file_must_exists=1
+    //This is file name and it's must exists. Uncheck for running commands such as 'python' or similar.
+    
 in string Arguments args=""
     //Optional command line arguments
 
@@ -93,10 +96,10 @@ page Read
     //Reading from the process console.
 
 #---- read ----    
-in enum Console_Read read=After_Run [Disabled,Each_Frame,After_Finished,On_Button]
+in enum Console_Read read=After_Finished [Disabled,Each_Frame,After_Finished,On_Button]
     //When read data from process console.
     
-if read After_Run,Each_Frame,On_Button
+if read Each_Frame,After_Finished,On_Button
 in button Read read_button
     //Read from process console right now.
     
@@ -140,7 +143,7 @@ page Write
     //Writing to the process console.
    
 #---- write ----   
-in checkbox Write_At_Start write_at_start=0
+in checkbox Write_At_Process_Start write_at_start=0
     //Write data to process console at process start.
 
 in checkbox Write_Each_Frame write_each_frame=0

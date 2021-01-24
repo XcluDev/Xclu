@@ -11,11 +11,16 @@ bool was_changed_folder_name() { return was_changed_("folder_name"); }
 QString gets_folder_name() { return gets_("folder_name"); }
 QStringList get_strings_folder_name() { return get_strings_("folder_name"); }
 
-//String File Name
-//File to execute.
+//String Command Or File
+//Command or file to execute.
 bool was_changed_file_name() { return was_changed_("file_name"); }
 QString gets_file_name() { return gets_("file_name"); }
 QStringList get_strings_file_name() { return get_strings_("file_name"); }
+
+//Checkbox File Must Exists
+//This is file name and it's must exists. Uncheck for running commands such as 'python' or similar.
+bool was_changed_file_must_exists() { return was_changed_("file_must_exists"); }
+int geti_file_must_exists() { return geti_("file_must_exists"); }
 
 //String Arguments
 //Optional command line arguments
@@ -213,7 +218,7 @@ void setobject_console_read_image(XProtectedObject &value) { set_object_("consol
 //Page Write
 //Writing to the process console.
 
-//Checkbox Write At Start
+//Checkbox Write At Process Start
 //Write data to process console at process start.
 bool was_changed_write_at_start() { return was_changed_("write_at_start"); }
 int geti_write_at_start() { return geti_("write_at_start"); }

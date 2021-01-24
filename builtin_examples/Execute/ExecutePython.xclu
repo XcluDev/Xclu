@@ -25,65 +25,7 @@
                     },
                     {
                         "aname": "text_value",
-                        "avalue": "This project runs bat file each frame, writes there some data and reads back."
-                    },
-                    {
-                        "aname": "Control",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "general_enabled_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "general_auto_update_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "presets_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "error_handling",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
-                    },
-                    {
-                        "aname": "calls_info",
-                        "avalue": "0"
-                    }
-                ]
-            }
-        },
-        {
-            "description": {
-                "class": "Project",
-                "name": "project1",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "0"
-                },
-                "items": [
-                    {
-                        "aname": "Main",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "frame_rate",
-                        "avalue": "30"
-                    },
-                    {
-                        "aname": "autostart",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "dont_save_at_exit",
-                        "avalue": "0"
+                        "avalue": "This example runs python script and reads an answer."
                     },
                     {
                         "aname": "Control",
@@ -124,7 +66,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -137,15 +79,15 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "run_input.bat"
+                        "avalue": "python"
                     },
                     {
                         "aname": "file_must_exists",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "args",
-                        "avalue": ""
+                        "avalue": "python_print.py"
                     },
                     {
                         "aname": "Run",
@@ -153,7 +95,7 @@
                     },
                     {
                         "aname": "execute_event",
-                        "avalue": "Each_Frame"
+                        "avalue": "At_First_Frame"
                     },
                     {
                         "aname": "thread_mode",
@@ -177,7 +119,7 @@
                     },
                     {
                         "aname": "read",
-                        "avalue": "Disabled"
+                        "avalue": "After_Finished"
                     },
                     {
                         "aname": "read_type",
@@ -189,7 +131,7 @@
                     },
                     {
                         "aname": "console_read_text_append",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "Write",
@@ -197,7 +139,7 @@
                     },
                     {
                         "aname": "write_at_start",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "write_each_frame",
@@ -213,8 +155,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "55",
-                        "link": "project1->frame"
+                        "avalue": "qq"
                     },
                     {
                         "aname": "line_term",

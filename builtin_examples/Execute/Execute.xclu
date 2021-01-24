@@ -10,13 +10,63 @@
     "modules": [
         {
             "description": {
+                "class": "Notes",
+                "name": "notes1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "This example runs bat file, writes there some string and reads answer."
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
                 "class": "Execute",
                 "name": "execute1",
                 "version": "1.01"
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -32,8 +82,16 @@
                         "avalue": "run_input.bat"
                     },
                     {
+                        "aname": "file_must_exists",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "args",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "Run",
+                        "avalue": "0"
                     },
                     {
                         "aname": "execute_event",
@@ -52,24 +110,44 @@
                         "avalue": "3"
                     },
                     {
-                        "aname": "Runtime",
-                        "avalue": "0"
-                    },
-                    {
                         "aname": "console_errors",
                         "avalue": "Show"
                     },
                     {
+                        "aname": "Read",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "read",
-                        "avalue": "After_Run"
+                        "avalue": "After_Finished"
                     },
                     {
                         "aname": "read_type",
                         "avalue": "Text"
                     },
                     {
-                        "aname": "write",
-                        "avalue": "After_Run"
+                        "aname": "console_bang_on_received",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "console_read_text_append",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Write",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_at_start",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "write_each_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_on_receive",
+                        "avalue": "0"
                     },
                     {
                         "aname": "write_type",
@@ -92,7 +170,31 @@
                         "avalue": ""
                     },
                     {
-                        "aname": "Details",
+                        "aname": "console_write_image_transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_to_grayscale",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_resize",
+                        "avalue": "No"
+                    },
+                    {
+                        "aname": "console_write_image_resize_scale",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "console_write_image_sizex",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "console_write_image_sizey",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "Debug",
                         "avalue": "0"
                     },
                     {

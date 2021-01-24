@@ -43,6 +43,8 @@ void XModuleExecute::start() {
 
     crashed_ = false;
 
+    finished_ = false;
+
     //run at first frame
     if (gete_execute_event() == execute_event_At_First_Frame) {
         process_run();
@@ -66,18 +68,27 @@ void XModuleExecute::update() {
         need_run = true;
     }
 
+    //process if finished
+    if (finished_) {
+        on_finish(exit_code_, QProcess::ExitStatus(exit_status_));
+    }
+
+
+    //write to console if required
+    if (geti_write_each_frame()) {
+        console_write();
+    }
+
     //run if required
     if (need_run) {
         process_run();
     }
 
-    //read and write to console if required
+    //read from console if required
     if (gete_read() == read_Each_Frame) {
         console_read();
     }
-    if (geti_write_each_frame()) {
-        console_write();
-    }
+
 
 }
 
@@ -110,6 +121,7 @@ void XModuleExecute::process_run() {
         return;
     }
 
+    finished_ = false;
 
     //compute paths
     QString folder = gets_folder_name();
@@ -127,9 +139,13 @@ void XModuleExecute::process_run() {
     }
     sets_file_path(file_name);
 
-    //check that folder and file exist
+    //check that folder exists
     xc_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
-    xc_assert(QFileInfo::exists(file_name), "File '" + file_name + "' doesn't exists");
+
+    //check that file exists if required
+    if (geti_file_must_exists()) {
+        xc_assert(QFileInfo::exists(file_name), "File '" + file_name + "' doesn't exists");
+    }
 
     //starting time
     //double start_time = xc_elapsed_time_sec();
@@ -231,7 +247,7 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
 
             //error handling
             if (status == status_Timeout) xc_exception("Timeout");
-            if (status == status_Error) xc_exception("Execution error");
+            if (status == status_Error) xc_exception("Execution error, see Run page for console error output");
 
         }
     }
@@ -250,9 +266,14 @@ void XModuleExecute::onReadyReadStandardError() {
 //}
 
 //---------------------------------------------------------------------
+//slot
 void XModuleExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
     //Note, this is can be async callback
-    on_finish(exit_code, exit_status, false);
+    finished_ = true;
+    exit_code_ = exit_code;
+    exit_status_ = exit_status;
+    //on_finish will be called on the next update:
+    //on_finish(exit_code, exit_status, false);
 }
 
 //---------------------------------------------------------------------

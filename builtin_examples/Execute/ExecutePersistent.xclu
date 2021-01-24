@@ -5,9 +5,59 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
+        {
+            "description": {
+                "class": "Notes",
+                "name": "notes1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "This example runs bat file in a separate thread, and at each frame writes some data and reads answer."
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
         {
             "description": {
                 "class": "Project",
@@ -74,7 +124,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -88,6 +138,10 @@
                     {
                         "aname": "file_name",
                         "avalue": "run_loop.bat"
+                    },
+                    {
+                        "aname": "file_must_exists",
+                        "avalue": "1"
                     },
                     {
                         "aname": "args",
@@ -143,11 +197,11 @@
                     },
                     {
                         "aname": "write_at_start",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "write_each_frame",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "write_on_receive",
@@ -159,7 +213,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "103",
+                        "avalue": "40",
                         "link": "project1->frame"
                     },
                     {
@@ -173,6 +227,30 @@
                     {
                         "aname": "console_write_image",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "console_write_image_transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_to_grayscale",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_resize",
+                        "avalue": "No"
+                    },
+                    {
+                        "aname": "console_write_image_resize_scale",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "console_write_image_sizex",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "console_write_image_sizey",
+                        "avalue": "100"
                     },
                     {
                         "aname": "Debug",
