@@ -140,10 +140,10 @@ void append_string_console_errors_text(QStringList v, int extra_new_lines_count 
 //Page Write
 //Writing to the process console.
 
-//Checkbox Write At Process Start
-//Write data to process console at process start.
-bool was_changed_write_at_start() { return was_changed_("write_at_start"); }
-int geti_write_at_start() { return geti_("write_at_start"); }
+//Checkbox Write At Least Once
+//Write data to process console at process start. If no data is to send - then repeat again and again at each frame. Has meaning for images - waiting for ready.
+bool was_changed_write_at_least_once() { return was_changed_("write_at_least_once"); }
+int geti_write_at_least_once() { return geti_("write_at_least_once"); }
 
 //Checkbox Write Each Frame
 //Write data to process console each frame.
@@ -199,9 +199,14 @@ QString gets_console_write_text() { return gets_("console_write_text"); }
 QStringList get_strings_console_write_text() { return get_strings_("console_write_text"); }
 
 //Object Image
-//Image to write to process console. It's sent as uint16: w,h,channels, and then data array as uint8.
+//Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as header (see below) and data array.
 bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
 XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
+//Checkbox Send Header
+//Send or not header: uint16 w, uint16 h, uint8 channels.
+bool was_changed_console_write_image_header() { return was_changed_("console_write_image_header"); }
+int geti_console_write_image_header() { return geti_("console_write_image_header"); }
+
 //Checkbox Transform Image
 //Convert to grayscale or resize image.
 bool was_changed_console_write_image_transform() { return was_changed_("console_write_image_transform"); }
@@ -329,29 +334,44 @@ void setobject_console_read_image(XProtectedObject &value) { set_object_("consol
 
 //Out Int Executed Times
 //How much times process was executed.
-bool was_changed_executed_times() { return was_changed_("executed_times"); }
-int geti_executed_times() { return geti_("executed_times"); }
-void seti_executed_times(int value) { seti_("executed_times", value); }
-void increase_int_executed_times(int increase = 1) { increase_int_("executed_times", increase); }
+bool was_changed_debug_executed_times() { return was_changed_("debug_executed_times"); }
+int geti_debug_executed_times() { return geti_("debug_executed_times"); }
+void seti_debug_executed_times(int value) { seti_("debug_executed_times", value); }
+void increase_int_debug_executed_times(int increase = 1) { increase_int_("debug_executed_times", increase); }
+
+//Out Int Write Times
+//How much times we write data to process.
+bool was_changed_debug_write_times() { return was_changed_("debug_write_times"); }
+int geti_debug_write_times() { return geti_("debug_write_times"); }
+void seti_debug_write_times(int value) { seti_("debug_write_times", value); }
+void increase_int_debug_write_times(int increase = 1) { increase_int_("debug_write_times", increase); }
+
+//Out Int Read Times
+//How much times we read data from process.
+bool was_changed_debug_read_times() { return was_changed_("debug_read_times"); }
+int geti_debug_read_times() { return geti_("debug_read_times"); }
+void seti_debug_read_times(int value) { seti_("debug_read_times", value); }
+void increase_int_debug_read_times(int increase = 1) { increase_int_("debug_read_times", increase); }
+
 
 //Out Text Working Folder Abs Path
 //Absolute path to the working folder
-bool was_changed_folder_path() { return was_changed_("folder_path"); }
-QString gets_folder_path() { return gets_("folder_path"); }
-QStringList get_strings_folder_path() { return get_strings_("folder_path"); }
-void sets_folder_path(QString value) { sets_("folder_path", value); }
-void clear_string_folder_path() { clear_string_("folder_path"); }
-void append_string_folder_path(QString v, int extra_new_lines_count = 0) { append_string_("folder_path", v, extra_new_lines_count); }
-void append_string_folder_path(QStringList v, int extra_new_lines_count = 0) { append_string_("folder_path", v, extra_new_lines_count); }
+bool was_changed_debug_folder_path() { return was_changed_("debug_folder_path"); }
+QString gets_debug_folder_path() { return gets_("debug_folder_path"); }
+QStringList get_strings_debug_folder_path() { return get_strings_("debug_folder_path"); }
+void sets_debug_folder_path(QString value) { sets_("debug_folder_path", value); }
+void clear_string_debug_folder_path() { clear_string_("debug_folder_path"); }
+void append_string_debug_folder_path(QString v, int extra_new_lines_count = 0) { append_string_("debug_folder_path", v, extra_new_lines_count); }
+void append_string_debug_folder_path(QStringList v, int extra_new_lines_count = 0) { append_string_("debug_folder_path", v, extra_new_lines_count); }
 
 //Out Text File Name Abs Path
 //Absolute path to the executable file
-bool was_changed_file_path() { return was_changed_("file_path"); }
-QString gets_file_path() { return gets_("file_path"); }
-QStringList get_strings_file_path() { return get_strings_("file_path"); }
-void sets_file_path(QString value) { sets_("file_path", value); }
-void clear_string_file_path() { clear_string_("file_path"); }
-void append_string_file_path(QString v, int extra_new_lines_count = 0) { append_string_("file_path", v, extra_new_lines_count); }
-void append_string_file_path(QStringList v, int extra_new_lines_count = 0) { append_string_("file_path", v, extra_new_lines_count); }
+bool was_changed_debug_file_path() { return was_changed_("debug_file_path"); }
+QString gets_debug_file_path() { return gets_("debug_file_path"); }
+QStringList get_strings_debug_file_path() { return get_strings_("debug_file_path"); }
+void sets_debug_file_path(QString value) { sets_("debug_file_path", value); }
+void clear_string_debug_file_path() { clear_string_("debug_file_path"); }
+void append_string_debug_file_path(QString v, int extra_new_lines_count = 0) { append_string_("debug_file_path", v, extra_new_lines_count); }
+void append_string_debug_file_path(QStringList v, int extra_new_lines_count = 0) { append_string_("debug_file_path", v, extra_new_lines_count); }
 
 //----------------------------------------------------

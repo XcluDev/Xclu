@@ -79,7 +79,10 @@ protected:
     int exit_code_ = 0;
     int exit_status_ = 0;
 
-    void console_write_image();
+    bool was_written_ = false;  //was something was written to console or not
+    //it's meaningful for sending images - often they are empty at start
+
+    bool console_write_image();
     XRaster_u8c3 image_write_input_;
     void console_write_image(int w, int h, int channels, uint8 *data);
 

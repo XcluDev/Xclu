@@ -172,40 +172,20 @@
                         "avalue": "Show"
                     },
                     {
-                        "aname": "Read",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "read",
-                        "avalue": "Each_Frame"
-                    },
-                    {
-                        "aname": "read_type",
-                        "avalue": "String"
-                    },
-                    {
-                        "aname": "console_bang_on_received",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "console_read_text_append",
-                        "avalue": "0"
-                    },
-                    {
                         "aname": "Write",
                         "avalue": "0"
                     },
                     {
-                        "aname": "write_at_start",
+                        "aname": "write_at_least_once",
                         "avalue": "1"
                     },
                     {
                         "aname": "write_each_frame",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "write_on_receive",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "write_type",
@@ -213,7 +193,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "40",
+                        "avalue": "120",
                         "link": "project1->frame"
                     },
                     {
@@ -227,6 +207,10 @@
                     {
                         "aname": "console_write_image",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "console_write_image_header",
+                        "avalue": "0"
                     },
                     {
                         "aname": "console_write_image_transform",
@@ -251,6 +235,26 @@
                     {
                         "aname": "console_write_image_sizey",
                         "avalue": "100"
+                    },
+                    {
+                        "aname": "Read",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "read",
+                        "avalue": "Each_Frame"
+                    },
+                    {
+                        "aname": "read_type",
+                        "avalue": "String"
+                    },
+                    {
+                        "aname": "console_bang_on_received",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "console_read_text_append",
+                        "avalue": "0"
                     },
                     {
                         "aname": "Debug",

@@ -180,7 +180,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "3"
                 },
                 "items": [
                     {
@@ -232,16 +232,16 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "write_at_start",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "write_each_frame",
+                        "aname": "write_at_least_once",
                         "avalue": "1"
                     },
                     {
-                        "aname": "write_on_receive",
+                        "aname": "write_each_frame",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "write_on_receive",
+                        "avalue": "1"
                     },
                     {
                         "aname": "write_type",
@@ -263,6 +263,10 @@
                         "aname": "console_write_image",
                         "avalue": "",
                         "link": "webcam1->image"
+                    },
+                    {
+                        "aname": "console_write_image_header",
+                        "avalue": "0"
                     },
                     {
                         "aname": "console_write_image_transform",

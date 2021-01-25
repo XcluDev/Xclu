@@ -34,9 +34,11 @@ void XModuleExecute::start() {
     console_clear();
 
     //debug
-    seti_executed_times(0);
-    clear_string_folder_path();
-    clear_string_file_path();
+    seti_debug_executed_times(0);
+    seti_debug_write_times(0);
+    seti_debug_read_times(0);
+    clear_string_debug_folder_path();
+    clear_string_debug_file_path();
 
 
     //process
@@ -45,6 +47,8 @@ void XModuleExecute::start() {
     crashed_ = false;
 
     finished_ = false;
+
+    was_written_ = false;
 
     //run at first frame
     if (gete_execute_event() == execute_event_At_First_Frame) {
@@ -76,7 +80,10 @@ void XModuleExecute::update() {
 
 
     //write to console if required
-    if (geti_write_each_frame()) {
+    //if "geti_write_at_least_once" - then checks if we sent something
+    //it's meaningful for sending images - often they are empty at start
+    bool need_write = geti_write_each_frame() || (geti_write_at_least_once() && !was_written_);
+    if (need_write) {
         console_write();
     }
 
@@ -129,7 +136,7 @@ void XModuleExecute::process_run() {
     QString file_name_short = gets_file_name();
 
     folder = xc_project_folder() + "/" + folder;
-    sets_folder_path(folder);
+    sets_debug_folder_path(folder);
 
     //file name
     xc_assert(!file_name_short.isEmpty(), "File Name is empty");
@@ -138,7 +145,7 @@ void XModuleExecute::process_run() {
     if (!QFileInfo::exists(file_name)) {
         file_name = file_name_short;
     }
-    sets_file_path(file_name);
+    sets_debug_file_path(file_name);
 
     //check that folder exists
     xc_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
@@ -185,14 +192,14 @@ void XModuleExecute::process_run() {
     subprocess.start(QProcess::Unbuffered | QProcess::ReadWrite );
 
     //increase counter
-    increase_int_executed_times();
+    increase_int_debug_executed_times();
 
     //decide - wait finishing or work async
     auto thread_mode = gete_thread_mode();
 
     if (thread_mode == thread_mode_Wait_Finishing) {
         //sync run
-        if (geti_write_at_start()) {
+        if (geti_write_at_least_once()) {
             console_write();
         }
         bool no_timeout = subprocess.waitForFinished(timeout);
@@ -325,6 +332,9 @@ void XModuleExecute::console_read() {
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
         auto data = subprocess->readAllStandardOutput();
+        //increase counter
+        increase_int_debug_read_times();
+
         bool is_new_data = !data.isEmpty();
         seti_console_read_received(is_new_data);
         if (is_new_data) {
@@ -366,6 +376,8 @@ void XModuleExecute::console_write() {
 
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
+        bool written = false;
+
         auto write_type = gete_write_type();
         if (write_type == write_type_String) {
             QString str = gets_console_write_string();
@@ -374,24 +386,33 @@ void XModuleExecute::console_write() {
             if (ts == line_term__r) str += "\r";
             if (ts == line_term__r_n) str += "\r\n";
             subprocess->write(str.toLatin1());
+            written = true;
         }
         if (write_type == write_type_Text) {
             subprocess->write(gets_console_write_text().toLatin1());
+            written = true;
         }
         if (write_type == write_type_Image) {
-            console_write_image();
+            written = console_write_image();   //If no image ready, then skip
+        }
+
+        if (written) {
+            was_written_ = true;
+            //increase counter
+            increase_int_debug_write_times();
+
         }
     }
 
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_write_image() {
+bool XModuleExecute::console_write_image() {
     //Read image
     auto reader = getobject_console_write_image()->read();
 
     //no image yet
-    if (reader.data().type() != XObjectTypeImage) return;
+    if (reader.data().type() != XObjectTypeImage) return false;
 
     //read image
     //TODO optimize, may receive and grayscale!
@@ -437,21 +458,37 @@ void XModuleExecute::console_write_image() {
         }
 
     }
+    return true;
 
 }
 
 //---------------------------------------------------------------------
 void XModuleExecute::console_write_image(int w, int h, int channels, uint8 *data) {
-    uint8 header[5];
-
-    *(uint16 *)header = w;
-    *(uint16 *)(header+2) = h;
-    *(uint8 *)(header+4) = channels;
-
     QProcess *subprocess = subprocess_.data();
+    int data_size = w*h*channels;
 
-    subprocess->write((char *)header, 5);
-    subprocess->write((char *)data, w*h*channels);
+    //send header or not
+    if (geti_console_write_image_header()) {
+        //send data and header
+        //make single array
+        int header_size = 5;
+        QVector<uint8> buffer(header_size + data_size);
+
+        uint8* bufp = &buffer[0];
+
+        *(uint16 *)bufp = w;
+        *(uint16 *)(bufp+2) = h;
+        *(uint8 *)(bufp+4) = channels;
+        for (int i=0; i<data_size; i++) {
+            bufp[i+header_size] = data[i];  //TODO use memcpy
+        }
+
+        subprocess->write((char *)bufp, buffer.size());
+    }
+    else {
+        //only data without header
+        subprocess->write((char *)data, data_size);
+    }
 }
 
 //---------------------------------------------------------------------

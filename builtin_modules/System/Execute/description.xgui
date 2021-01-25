@@ -98,14 +98,14 @@ page Write
     //Writing to the process console.
    
 #---- write ----   
-in checkbox Write_At_Process_Start write_at_start=0
-    //Write data to process console at process start.
+in checkbox Write_At_Least_Once write_at_least_once=0
+    //Write data to process console at process start. If no data is to send - then repeat again and again at each frame. Has meaning for images - waiting for ready.
 
 in checkbox Write_Each_Frame write_each_frame=0
-    //Write data to process console each frame.
+    //Write data to process console each frame. Normally we shouldn't do so if run the process in second thread ("Run At Separate Thread"), and should use "Write On Receive" to protect from buffer overflow.
 
 in checkbox Write_On_Receive write_on_receive=0
-    //Write data to process console after receiving answer.
+    //Write data to process console after receiving answer. Useful for interaction with the process working in the second thread ("Run At Separate Thread").
 
     
 in button Write write_button
@@ -126,7 +126,10 @@ endif
     
 if write_type Image
 in object_image Image console_write_image
-    //Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as uint16: w,h,channels, and then data array as uint8.
+    //Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as header (see below) and data array.
+    
+in checkbox Send_Header console_write_image_header=0
+    //Send or not header: uint16 w, uint16 h, uint8 channels. 
     
 in checkbox Transform_Image console_write_image_transform=0
     //Convert to grayscale or resize image.
@@ -213,19 +216,26 @@ endif
 #-----------------------------
 page Debug
 
-out int Executed_Times executed_times=0 0:* 1,10
+out int Executed_Times debug_executed_times=0 0:* 1,10
     //How much times process was executed.
-   
+
+out int Write_Times debug_write_times=0 0:* 1,10
+    //How much times we write data to process.
+    
+out int Read_Times debug_read_times=0 0:* 1,10
+    //How much times we read data from process.
+
+line
+    
 #in group Show_Absolute_Paths show_abs_paths=0
 #    //Show full path for working folder and file used for execution    
 #if show_abs_paths 1
-out text Working_Folder_Abs_Path folder_path 4 5
+out text Working_Folder_Abs_Path debug_folder_path 4 5
     //Absolute path to the working folder
     
-out text File_Name_Abs_Path file_path 4 5
+out text File_Name_Abs_Path debug_file_path 4 5
     //Absolute path to the executable file
 #endif
-
 
 
 
