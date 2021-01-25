@@ -4,8 +4,8 @@
 //Classes for checking that value was changed
 #include "types.h"
 
-//Type for storing frame number. I use u32 instead u16 just to be absolutely sure it's enough
-typedef u32 XWasChangedFrame;
+//Type for storing frame number. I use uint32 instead uint16 just to be absolutely sure it's enough
+typedef uint32 XWasChangedFrame;
 
 //Class which used for check if the original value was changed
 class XWasChangedChecker

@@ -128,12 +128,12 @@ int XArray::geti(qint32 index) const {
         return data_s8()[index];
     case XTypeId_int16:
         return data_int16()[index];
-    case XTypeId_u16:
-        return data_u16()[index];
+    case XTypeId_uint16:
+        return data_uint16()[index];
     case XTypeId_int32:
         return data_int32()[index];
-    case XTypeId_u32:
-        return data_u32()[index];
+    case XTypeId_uint32:
+        return data_uint32()[index];
     default:
         xc_exception("Can't get integer value for array");
         break;
@@ -155,14 +155,14 @@ void XArray::seti(qint32 index, int v) {
     case XTypeId_int16:
         data_int16()[index] = v;
         break;
-    case XTypeId_u16:
-        data_u16()[index] = v;
+    case XTypeId_uint16:
+        data_uint16()[index] = v;
         break;
     case XTypeId_int32:
         data_int32()[index] = v;
         break;
-    case XTypeId_u32:
-        data_u32()[index] = v;
+    case XTypeId_uint32:
+        data_uint32()[index] = v;
         break;
     default:
         xc_exception("Can't set integer value for array");
@@ -259,9 +259,9 @@ quint8* XArray::data_u8() {
 XArray_get_data(u8, quint8)
 XArray_get_data(s8, qint8)
 XArray_get_data(int16, qint16)
-XArray_get_data(u16, quint16)
+XArray_get_data(uint16, quint16)
 XArray_get_data(int32, qint32)
-XArray_get_data(u32, quint32)
+XArray_get_data(uint32, quint32)
 XArray_get_data(float, float)
 XArray_get_data(double, double)
 
@@ -269,9 +269,9 @@ XArray_get_data(double, double)
 XArray_get_data_const(u8, quint8)
 XArray_get_data_const(s8, qint8)
 XArray_get_data_const(int16, qint16)
-XArray_get_data_const(u16, quint16)
+XArray_get_data_const(uint16, quint16)
 XArray_get_data_const(int32, qint32)
-XArray_get_data_const(u32, quint32)
+XArray_get_data_const(uint32, quint32)
 XArray_get_data_const(float, float)
 XArray_get_data_const(double, double)
 

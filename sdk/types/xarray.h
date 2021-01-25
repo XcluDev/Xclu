@@ -56,14 +56,14 @@ public:
     qint16* data_int16();
     qint16 const* data_int16() const;
 
-    quint16* data_u16();
-    quint16 const* data_u16() const;
+    quint16* data_uint16();
+    quint16 const* data_uint16() const;
 
     qint32* data_int32();
     qint32 const* data_int32() const;
 
-    quint32* data_u32();
-    quint32 const* data_u32() const;
+    quint32* data_uint32();
+    quint32 const* data_uint32() const;
 
     float* data_float();
     float const* data_float() const;

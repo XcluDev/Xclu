@@ -10,6 +10,6 @@ int w=0 0:*
 int h=0 0:*
 int channels=0 0:*
 #string channels_str=""
-#enum data_type=u8 [u8,s8,int16,u16,int32,u32,float,double]
+#enum data_type=u8 [u8,s8,int16,uint16,int32,uint32,float,double]
 array data
 

@@ -414,23 +414,44 @@ void XModuleExecute::console_write_image() {
         }
         //now img contains current image, resized if necessary
         //convert to grayscale if required, or sent rgb8
+
         if (geti_console_write_image_to_grayscale()) {
             XRaster_u8 image;
-            XRaster::convert(*img, image);
+            XRaster::convert(*img, image);            
+
+            //send to console
+            console_write_image(image.w, image.h, 1, image.data_pointer_u8());
 
             //set to gui image
             XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+
         }
         else {
             XRaster_u8c3 &image = *img;
+
+            //send to console
+            console_write_image(image.w, image.h, 3, image.data_pointer_u8());
+
             //set to gui image
             XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
-
         }
-
 
     }
 
+}
+
+//---------------------------------------------------------------------
+void XModuleExecute::console_write_image(int w, int h, int channels, uint8 *data) {
+    uint8 header[5];
+
+    *(uint16 *)header = w;
+    *(uint16 *)(header+2) = h;
+    *(uint8 *)(header+4) = channels;
+
+    QProcess *subprocess = subprocess_.data();
+
+    subprocess->write((char *)header, 5);
+    subprocess->write((char *)data, w*h*channels);
 }
 
 //---------------------------------------------------------------------

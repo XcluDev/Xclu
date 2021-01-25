@@ -212,10 +212,10 @@ public:
 //--------------------------------------------------
 typedef XRaster_<uint8> XRaster_u8;
 typedef XRaster_<rgb_u8> XRaster_u8c3;    //color image
-typedef XRaster_<sint8> XRaster_s8;
+typedef XRaster_<int8> XRaster_s8;
 typedef XRaster_<int16> XRaster_int16;
-typedef XRaster_<u16> XRaster_u16;
-typedef XRaster_<u32> XRaster_u32;
+typedef XRaster_<uint16> XRaster_u16;
+typedef XRaster_<uint32> XRaster_u32;
 typedef XRaster_<int32> XRaster_int32;
 typedef XRaster_<float> XRaster_float;
 typedef XRaster_<rgb_float> XRaster_float3; //see XRaster_vec3 below!
