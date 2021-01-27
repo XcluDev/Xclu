@@ -52,7 +52,7 @@ QStringList get_strings_device_serial() { return get_strings_("device_serial"); 
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
 void setobject_image(XProtectedObject *value) { set_object_("image", value); }
-
+void setobject_image(XProtectedObject &value) { set_object_("image", value); }
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived.
 bool was_changed_is_new_frame() { return was_changed_("is_new_frame"); }
@@ -141,11 +141,80 @@ bool was_changed_image_data_type() { return was_changed_("image_data_type"); }
 enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_("image_data_type")); }
 QString getraw_image_data_type() { return getraw_("image_data_type");}
 
+//----------------------------------------------------
+//Page Transform
+//
 
-//Checkbox Runtime Details
-//Runtime variables.
-bool was_changed_runtime() { return was_changed_("runtime"); }
-int geti_runtime() { return geti_("runtime"); }
+//Checkbox Transform
+//Crop and mirror the image.
+bool was_changed_transform() { return was_changed_("transform"); }
+int geti_transform() { return geti_("transform"); }
+
+
+//Out Object Transformed Image
+//Transformed image.
+bool was_changed_image_transformed() { return was_changed_("image_transformed"); }
+XProtectedObject *getobject_image_transformed() { return get_object_("image_transformed"); }
+void setobject_image_transformed(XProtectedObject *value) { set_object_("image_transformed", value); }
+void setobject_image_transformed(XProtectedObject &value) { set_object_("image_transformed", value); }
+
+//Checkbox Crop To Square
+//Crop to square.
+bool was_changed_crop_to_square() { return was_changed_("crop_to_square"); }
+int geti_crop_to_square() { return geti_("crop_to_square"); }
+
+//Checkbox Mirror X
+//Mirror by horizontal.
+bool was_changed_mirror_x() { return was_changed_("mirror_x"); }
+int geti_mirror_x() { return geti_("mirror_x"); }
+
+//Enum Rotate
+//Rotation.
+enum enum_rotate {
+    rotate_0 = 0,
+    rotate_90 = 1,
+    rotate_180 = 2,
+    rotate_270 = 3,
+    rotate_N__ = 4
+};
+bool was_changed_rotate() { return was_changed_("rotate"); }
+enum_rotate gete_rotate() { return enum_rotate(geti_("rotate")); }
+QString getraw_rotate() { return getraw_("rotate");}
+
+
+//----------------------------------------------------
+//Page Device Info
+//Print list of cameras and supported formats.
+
+//Button Print Devices
+//Print list of all connected devices.
+bool was_changed_print_devices() { return was_changed_("print_devices"); }
+int geti_print_devices() { return geti_("print_devices"); }
+QString button_print_devices() { return "print_devices"; }
+
+//Checkbox Serials
+//Output serial ID of devices - useful if you connecting several cameras of the same model.
+bool was_changed_print_serials() { return was_changed_("print_serials"); }
+int geti_print_serials() { return geti_("print_serials"); }
+
+//Checkbox Formats
+//Print list of supported formats for connected device at start.
+bool was_changed_print_formats() { return was_changed_("print_formats"); }
+int geti_print_formats() { return geti_("print_formats"); }
+
+//Out Text Local Console
+//Console output.
+bool was_changed_local_console() { return was_changed_("local_console"); }
+QString gets_local_console() { return gets_("local_console"); }
+QStringList get_strings_local_console() { return get_strings_("local_console"); }
+void sets_local_console(QString value) { sets_("local_console", value); }
+void clear_string_local_console() { clear_string_("local_console"); }
+void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
+void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
+
+//----------------------------------------------------
+//Page Debug
+//Debug information.
 
 //Out String Device Name
 //Name of the connected camera.
@@ -172,35 +241,5 @@ void sets_frames_captured(QString value) { sets_("frames_captured", value); }
 void clear_string_frames_captured() { clear_string_("frames_captured"); }
 void append_string_frames_captured(QString v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
 void append_string_frames_captured(QStringList v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
-
-//----------------------------------------------------
-//Page Device Info
-//Print list of cameras and supported formats.
-
-//Button Print Devices
-//Print list of all connected devices.
-bool was_changed_print_devices() { return was_changed_("print_devices"); }
-int geti_print_devices() { return geti_("print_devices"); }
-QString button_print_devices() { return "print_devices"; }
-
-//Checkbox Serials
-//Output serial ID of devices - useful if you connecting several cameras of the same model.
-bool was_changed_print_serials() { return was_changed_("print_serials"); }
-int geti_print_serials() { return geti_("print_serials"); }
-
-//Checkbox Print Formats
-//Print list of supported formats for connected device at start.
-bool was_changed_print_formats() { return was_changed_("print_formats"); }
-int geti_print_formats() { return geti_("print_formats"); }
-
-//Out Text Local Console
-//Console output.
-bool was_changed_local_console() { return was_changed_("local_console"); }
-QString gets_local_console() { return gets_("local_console"); }
-QStringList get_strings_local_console() { return get_strings_("local_console"); }
-void sets_local_console(QString value) { sets_("local_console", value); }
-void clear_string_local_console() { clear_string_("local_console"); }
-void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
-void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
 
 //----------------------------------------------------

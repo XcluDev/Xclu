@@ -83,6 +83,13 @@ protected:
     void update_camera();
     void stop_camera();
 
+    //transformation - crop, mirror
+    void transform();
+    XProtectedObject transformed_image_gui_;
+    XRaster_u8c3 input_image_;  //used for reading for transformation
+    XRaster_u8c3 transformed_image_;
+
+
     QScopedPointer<QCamera> camera_;
     bool camera_tried_to_start_ = false;
     void start_camera();

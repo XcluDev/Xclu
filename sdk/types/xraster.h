@@ -168,6 +168,26 @@ public:
         }
     }
 
+    //mirror
+    void mirror(bool mirrorx, bool mirrory = false) {
+        if (mirrorx) {
+            int w2 = w/2;
+            for (int y=0; y<h; y++) {
+                for (int x=0; x<w2; x++) {
+                    qSwap(pixel_unsafe(x,y), pixel_unsafe(w-1-x,y));
+                }
+            }
+        }
+        if (mirrory) {
+            int h2 = h/2;
+            for (int y=0; y<h/2; y++) {
+                for (int x=0; x<w; x++) {
+                    qSwap(pixel_unsafe(x,y), pixel_unsafe(x,h-1-y));
+                }
+            }
+        }
+    }
+
     //rotate on 0, 90, 180, 270 angles
     //TODO only works with 1-channel images (?)
     void rotate(int angle) {
@@ -204,6 +224,22 @@ public:
             }
         }
 
+    }
+
+    //Crop to square
+    XRaster_<T> crop_to_square() const {
+        int w1 = qMin(w,h);
+        int h1 = w1;
+        XRaster_<T> image;
+        image.allocate(w1, h1);
+        int x0 = (w-w1)/2;
+        int y0 = (h-h1)/2;
+        for (int y1 = 0; y1 < w1; y1++) {
+            for (int x1 = 0; x1 < h1; x1++) {
+                image.pixel_unsafe(x1, y1) = pixel_unsafe(x0+x1, y0+y1);
+            }
+        }
+        return image;
     }
 };
 

@@ -128,6 +128,10 @@ void XModuleWebcamera::start() {
         data_.clear();
     }
 
+    //link transformed image
+    transformed_image_gui_.clear();
+    setobject_image_transformed(&transformed_image_gui_);
+
     processed_frames_ = 0;
 
     set_started(false); //также ставит gui-элемент is_started
@@ -198,10 +202,16 @@ void XModuleWebcamera::update_camera() {
         processed_frames_++;
 
         //копируем изображение для использования вовне и показа в GUI
-        XObject *object = getobject_image()->write().pointer();
+        {
+            auto image_write = getobject_image()->write();
+            XObject *object = image_write.pointer();
 
-        DataAccess access(data_);
-        data_.image.copy_to(object);
+            DataAccess access(data_);
+            data_.image.copy_to(object);
+        }
+
+        //if transformation is required - do it
+        transform();
     }
 
     //метка числа обработанных кадров
@@ -209,9 +219,39 @@ void XModuleWebcamera::update_camera() {
             .arg(data_.captured_frames).arg(processed_frames_).arg(data_.captured_frames-processed_frames_);
     sets_frames_captured(processed);
 
-
 }
 
+
+//---------------------------------------------------------------------
+//transformation - crop, mirror
+void XModuleWebcamera::transform() {
+    if (geti_transform()) {
+        auto image_read = getobject_image()->read();
+        if (image_read.data().type() == XObjectTypeImage)  {
+            //read
+            XObjectImage::to_raster(image_read.data(), input_image_);
+
+            //crop to square
+            transformed_image_ = (geti_crop_to_square()) ? input_image_.crop_to_square() : input_image_;
+
+            //mirror
+            if (geti_mirror_x()) {
+                transformed_image_.mirror(true,false);
+            }
+
+            //rotate
+            auto rotate = gete_rotate();
+            if (rotate == rotate_90) transformed_image_.rotate(90);
+            if (rotate == rotate_180) transformed_image_.rotate(180);
+            if (rotate == rotate_270) transformed_image_.rotate(270);
+
+            //set to gui image
+            XObjectImage::create_from_raster(transformed_image_gui_.write().data(), transformed_image_);
+
+        }
+
+    }
+}
 
 //---------------------------------------------------------------------
 //печать в консоль доступных камер

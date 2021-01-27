@@ -20,12 +20,12 @@ public:
     virtual ~XModulePainter();
 
     //-----------------------------------------------
-    //subclasses must reimplement this for drawing
+    //subclasses MUST reimplement this for drawing
     virtual void draw(QPainter &painter, int w, int h);
 
     //-----------------------------------------------
-    //subclasses must call it for repaing widget image, and to apply size chane
-    void screen_repaint();
+    //subclasses MUST call it for repaing widget image, and to apply size change - normally, in update
+    void refresh();
 
     //-----------------------------------------------
     //Getting current size:

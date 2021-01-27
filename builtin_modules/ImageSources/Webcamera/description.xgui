@@ -97,32 +97,35 @@ in enum Data_Type image_data_type=u8 [u8,float]
     
 endif
 
+
 #-----------------------------
+page Transform
+
+in checkbox_group Transform transform=0
+    //Crop, mirror and rotate the image.
+    
 line
-in group Runtime_Details runtime=1
-	//Runtime variables.
 
-if runtime 1
+if transform 1
+out object_image Transformed_Image image_transformed
+    //Transformed image.
 
-out string Device_Name connected_device_name=""
-	//Name of the connected camera.
+line
+in checkbox Crop_To_Square crop_to_square=0
+    //Crop to square.
 
-out checkbox Is_Started is_started=0
-    //Does capture started.
-	
-out string Frames_Captured frames_captured=""
-    //How much frames were captured and processed after last start.
+in checkbox Mirror_X mirror_x=0
+    //Mirror by horizontal.
+    
+in enum Rotate rotate=0 [0,90,180,270]
+    //Rotation.
+    //deg
     
 
-endif
 line
+endif
 
-#-----------------------------
-#TODO resize & crop
-#separator
-#in group Resize_and_Crop resize_crop=0
-#	//Resizing and cropping options
-
+    
 #if resize_crop 1
 #in enum Resize resize=No [No,Percent,Pixels]
 #    //Resize image
@@ -140,7 +143,7 @@ line
 #    
 #endif
 
-#--------------------
+#-----------------------------
 page Device_Info
     //Print list of cameras and supported formats.
 
@@ -156,6 +159,24 @@ in checkbox Formats print_formats=0
 
 out text Local_Console local_console 20 25
     //Console output.
+
+    
+    
+    
+#-----------------------------
+page Debug
+    //Debug information.
+
+
+out string Device_Name connected_device_name=""
+	//Name of the connected camera.
+
+out checkbox Is_Started is_started=0
+    //Does capture started.
+	
+out string Frames_Captured frames_captured=""
+    //How much frames were captured and processed after last start.
+    
 
 
 #--------------------
