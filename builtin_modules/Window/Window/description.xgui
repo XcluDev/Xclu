@@ -81,12 +81,34 @@ page Content
     //Window content consisting of layouts and widgets, such as WNumber.
     
 const text Content content 20 20
-    //Description of layouts and widgets.
-//HorizontalLayout
-//  #wnumber1
+    //Description of layouts and widgets. 
+//#Keywords:  HorizontalLayout, VerticalLayout, Tab, Stretch
+//#the number means stretching, indentation may be any, just consistent
+//#    Simple layout of single widget:
+//#VerticalLayout 1
+//#  wimage1 1
+//#
+//#    Advanced layout:
+//#HorizontalLayout
+//#  Tabs 5
+//#    Tab Settings
+//#      HorizontalLayout
+//#        wnumber1
+//#        wnumber2
+//#      Tab Values
+//#      Tab Something_Else
+//#  VerticalLayout 0
+//#    wbutton1 0
+//#    wbutton2 0
+//#    Stretch 1
 
-#TODO margins, spacing
+const int Margin global_margin=0 0:* 1,10
+    //Margin for layouts.
 
+const int Spacing global_spacing=0 0:* 1,10
+    //Spacing for layouts.
+
+line
 in button Edit... edit_btn
     //Press to interactively edit window content.
 

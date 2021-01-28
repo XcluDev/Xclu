@@ -32,8 +32,8 @@ public:
     int screen_w();
     int screen_h();
     int2 screen_size();
-    //Change screen size - applied after calling repaint
-    void set_screen_size(int2 size);
+    //Change screen size
+    void set_fixed_size(int2 size);
 protected:
     //`create_widget` call implementation, creates QWidget and returns pointer on it
     virtual void *on_create_widget(QString parent_id);
@@ -45,7 +45,7 @@ protected:
     bool parent_was_set_ = false;
     QString parent_id_ = "";
 
-    int2 screen_size_ = int2(100,100);
+    //int2 screen_size_ = int2(100,100);
     XModulePainterWidget *widget_ = nullptr;
 
 };

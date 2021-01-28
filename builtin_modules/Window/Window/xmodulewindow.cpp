@@ -345,7 +345,7 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
         if (name == "HorizontalLayout" || name == "VerticalLayout") {
             //HorizontalLayout, либо HorizontalLayout 5
 
-            //Делаем так, чтобы чтобы созданные объекты уничтожились при исключении
+            //Делаем так, чтобы чтобы созданные объекты уничтожились, если возникнет exception
             QScopedPointer<QLayout> layout;
 
             if (name == "HorizontalLayout") {
@@ -353,8 +353,11 @@ XModuleWindowStructureItem XModuleWindow::create_layouts_internal(const XcluPars
             }
             else {
                 layout.reset(new QVBoxLayout());
-                //layout.reset(new QHBoxLayout());
             }
+
+            //margin and cpacing
+            layout->setMargin(geti_global_margin());
+            layout->setSpacing(geti_global_spacing());
 
             //stretch
             int stretch = xparse_int(query, 1, 0, line);

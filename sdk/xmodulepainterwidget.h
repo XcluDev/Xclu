@@ -18,10 +18,10 @@ class XModulePainterWidget : public QWidget
 public:
     XModulePainterWidget(QWidget *parent, XModulePainter *xmodule);
 
-    void set_size(int2 size);
+    void set_fixed_size(int2 size);
 
-    int w() { return w_; }
-    int h() { return h_; }
+    int w() { return width(); }
+    int h() { return height(); }
 
 protected:
     //drawing function
@@ -33,8 +33,9 @@ protected:
 private:
     XModulePainter *xmodule_ = nullptr;
 
-    int w_ = 1;
-    int h_ = 1;
+    //bool fixed_size_ = false;
+    //int w_ = 100;
+    //int h_ = 100;
 };
 
 

@@ -311,6 +311,8 @@ public:
     static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
         painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
     }
+
+    //draw to a given rectangle
     template<typename T>
     static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
         painter->drawImage(r, link(raster));

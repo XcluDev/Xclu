@@ -19,14 +19,14 @@ XModulePainter::~XModulePainter()
 //---------------------------------------------------------------------
 //subclasses must reimplement this for drawing
 void XModulePainter::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
-    xc_exception("draw() is not implemented for class `" + class_name() + "`");
+    xc_exception("draw() is not yet implemented for class `" + class_name() + "`");
 }
 
 //-----------------------------------------------
 //subclasses must call it for update widget image, an apply update size
 void XModulePainter::refresh() {
     if (widget_) {
-        widget_->set_size(screen_size_);
+        //widget_->set_size(screen_size_);
         widget_->update();
     }
 }
@@ -34,24 +34,33 @@ void XModulePainter::refresh() {
 //-----------------------------------------------
 //Resizing widget and getting its current size:
 int XModulePainter::screen_w() {
-    return screen_size_.x;
+    if (widget_) {
+        return widget_->width();
+    }
+    return 0;
+    //return screen_size_.x;
 }
 
 //-----------------------------------------------
 int XModulePainter::screen_h() {
-    return screen_size_.y;
+    if (widget_) {
+        return widget_->height();
+    }
+    return 0;
+
+    //return screen_size_.y;
 }
 
 //-----------------------------------------------
 int2 XModulePainter::screen_size() {
-    return screen_size_;
+    return int2(screen_w(), screen_h());
 }
 
 //-----------------------------------------------
-//Change screen size - applied after calling repaint
-//applied
-void XModulePainter::set_screen_size(int2 size) {
-    screen_size_ = size;
+//Change screen size
+void XModulePainter::set_fixed_size(int2 size) {
+    widget_->set_fixed_size(size);
+    //screen_size_ = size;
 }
 
 //---------------------------------------------------------------------

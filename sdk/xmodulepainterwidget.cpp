@@ -27,11 +27,9 @@ XModulePainterWidget::XModulePainterWidget(QWidget *parent, XModulePainter *xmod
 }
 
 //---------------------------------------------------------------------
-void XModulePainterWidget::set_size(int2 size) {
-    if (size.x != w_ || size.y != h_) {
-        w_ = size.x;
-        h_ = size.y;
-        setFixedSize(w_, h_);
+void XModulePainterWidget::set_fixed_size(int2 size) {
+    if (size.x != w() || size.y != h()) {
+        setFixedSize(size.x, size.y);
     }
 }
 
@@ -45,11 +43,12 @@ void XModulePainterWidget::set_size(int2 size) {
 //---------------------------------------------------------------------
 //drawing function
 //call update(); to repaint widget
-void XModulePainterWidget::paintEvent(QPaintEvent * /*event*/)
+void XModulePainterWidget::paintEvent(QPaintEvent * event)
 {
+
     QPainter painter;
     painter.begin(this);
-    xmodule_->draw(painter, w_, h_);
+    xmodule_->draw(painter, w(), h());
     painter.end();
 }
 

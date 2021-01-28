@@ -29,7 +29,7 @@ void XModuleTestDrawing::start() {
 
 //---------------------------------------------------------------------
 void XModuleTestDrawing::update() {
-    set_screen_size(int2(geti_screen_w(), geti_screen_h()));
+    set_fixed_size(int2(geti_screen_w(), geti_screen_h()));
     refresh();
 }
 

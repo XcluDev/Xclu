@@ -117,6 +117,17 @@ bool was_changed_content() { return was_changed_("content"); }
 QString gets_content() { return gets_("content"); }
 QStringList get_strings_content() { return get_strings_("content"); }
 
+//Const Int Margin
+//Margin for layouts.
+bool was_changed_global_margin() { return was_changed_("global_margin"); }
+int geti_global_margin() { return geti_("global_margin"); }
+
+//Const Int Spacing
+//Spacing for layouts.
+bool was_changed_global_spacing() { return was_changed_("global_spacing"); }
+int geti_global_spacing() { return geti_("global_spacing"); }
+
+
 //Button Edit...
 //Press to interactively edit window content.
 bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
