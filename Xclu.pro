@@ -191,6 +191,7 @@ SOURCES += \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
+    sdk/utility/ximageeffect.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xtimemeasure.cpp \
     sdk/xmodule.cpp \
@@ -289,6 +290,7 @@ HEADERS += \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
+    sdk/utility/ximageeffect.h \
     sdk/utility/xparser.h \
     sdk/utility/xtimemeasure.h \
     sdk/xmodule.h \

@@ -17,6 +17,7 @@
 #include <QImage>
 //class QPainter;
 #include <QPainter>
+#include "ximageeffect.h"
 
 //--------------------------------------------------
 //Color pixel type
@@ -346,8 +347,6 @@ public:
         painter->drawImage(p, link(raster));
     }
 
-
-
     //save and load
     //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
     static void load(QString file_name, XRaster_u8 &raster);
@@ -355,4 +354,13 @@ public:
     static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
     static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
 
+    //blur
+    //Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
+    template<typename T>
+    static void blur(XRaster_<T> &raster, XRaster_<T> &result, float blur_radius) {
+        QImage img;
+        convert(raster, img);
+        img = XImageEffect::blur(img, blur_radius);
+        convert(img, result);
+    }
 };
