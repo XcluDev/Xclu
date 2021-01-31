@@ -233,8 +233,8 @@ public:
                   "XRaster_<T> crop - bad arguments");
         XRaster_<T> image;
         image.allocate(w0, h0);
-        for (int y = 0; y < w0; y++) {
-            for (int x = 0; x < h0; x++) {
+        for (int y = 0; y < h0; y++) {
+            for (int x = 0; x < w0; x++) {
                 image.pixel_unsafe(x, y) = pixel_unsafe(x0+x, y0+y);
             }
         }
