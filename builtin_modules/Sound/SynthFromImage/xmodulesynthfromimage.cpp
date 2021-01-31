@@ -85,8 +85,8 @@ void XModuleSynthFromImage::update() {
     int scanw = w * getf_scan_w();
     int x0 = w/2 - scanw/2;
     int x1 = x0 + scanw;    //excluded
-    x0 = clampi(x0, 0, w-1);
-    x1 = clampi(x1, x0+1, w);
+    x0 = xclampi(x0, 0, w-1);
+    x1 = xclampi(x1, x0+1, w);
 
     //Ignore black borders - useful for Realsense depth sonification
     if (geti_tone_black()) {
@@ -171,8 +171,8 @@ void XModuleSynthFromImage::update() {
         int y0 = scany;
         int y1 = y0 - deltay*line[x-x0];
         if (y0 > y1) qSwap(y0, y1);
-        y0 = clampi(y0, 0, h-1);
-        y1 = clampi(y1, 0, h-1);
+        y0 = xclampi(y0, 0, h-1);
+        y1 = xclampi(y1, 0, h-1);
         for (int y=y0; y<=y1; y++) {
             output_.pixel_unsafe(x, y) = rgb_u8(255,0,0);
         }
@@ -227,7 +227,7 @@ void XModuleSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, i
         }
 
         //read value
-        int i = clampi(int(phase_), 0, n-1);
+        int i = xclampi(int(phase_), 0, n-1);
         float v = line_[i] * data_.volume; //qSin(data_.phase_);
 
         phase_ += phase_add;

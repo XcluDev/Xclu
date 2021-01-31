@@ -38,7 +38,7 @@ void XModuleValueMap::update() {
                 v = xmapi(v, geti_src0_int(), geti_src1_int(), dest0, dest1);
             }
             if (clamp) {
-                v = clampi(v, dest0, dest1);
+                v = xclampi(v, dest0, dest1);
             }
             seti_value_out1_int(v);
         }

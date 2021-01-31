@@ -56,7 +56,7 @@ bool xinranged(double x, double a, double b);
 //Clamp to range [a,b], including a and b
 float xclampf(float x, float a, float b);
 double xclampd(double x, double a, double b);
-int clampi(int x, int a, int b);
+int xclampi(int x, int a, int b);
 
 //Linear interpolation from [0,1]
 float xlerpf(float A, float B, float x); //x = 0..1

@@ -72,7 +72,7 @@ double xclampd(double x, double a, double b) {
     if (b<a) std::swap(a,b);
     return ((x<a)?a : ((x>b)?b:x));
 }
-int clampi(int x, int a, int b) {
+int xclampi(int x, int a, int b) {
     if (b<a) std::swap(a,b);
     return ((x<a)?a : ((x>b)?b:x));
 }
@@ -117,7 +117,7 @@ double xmapd_clamped(double x, double a, double b, double A, double B) {
 }
 
 int xmapi_clamped(int x, int a, int b, int A, int B) {
-    return clampi(xmapi(x,a,b,A,B),A,B);
+    return xclampi(xmapi(x,a,b,A,B),A,B);
 }
 
 //-------------------------------------------------------

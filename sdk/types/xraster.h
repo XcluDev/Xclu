@@ -228,19 +228,27 @@ public:
     }
 
     //Crop to square
-    XRaster_<T> crop_to_square() const {
-        int w1 = qMin(w,h);
-        int h1 = w1;
+    XRaster_<T> crop(int x0, int y0, int w0, int h0) const {
+        xc_assert(x0 >= 0 && y0 >= 0 && w0 >= 0 && h0 >= 0 && x0+w0 <= w && y0+h0 <= h,
+                  "XRaster_<T> crop - bad arguments");
         XRaster_<T> image;
-        image.allocate(w1, h1);
-        int x0 = (w-w1)/2;
-        int y0 = (h-h1)/2;
-        for (int y1 = 0; y1 < w1; y1++) {
-            for (int x1 = 0; x1 < h1; x1++) {
-                image.pixel_unsafe(x1, y1) = pixel_unsafe(x0+x1, y0+y1);
+        image.allocate(w0, h0);
+        for (int y = 0; y < w0; y++) {
+            for (int x = 0; x < h0; x++) {
+                image.pixel_unsafe(x, y) = pixel_unsafe(x0+x, y0+y);
             }
         }
         return image;
+    }
+
+
+    //Crop to square
+    XRaster_<T> crop_to_square() const {
+        int w0 = qMin(w,h);
+        int h0 = w0;
+        int x0 = (w-w0)/2;
+        int y0 = (h-h0)/2;
+        return crop(x0,y0,w0,h0);
     }
 };
 
@@ -355,9 +363,12 @@ public:
     static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
 
     //blur
+    //Works in-place!
     //Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
     template<typename T>
     static void blur(XRaster_<T> &raster, XRaster_<T> &result, float blur_radius) {
+        xc_assert(!raster.is_empty(), "XRaster::blur - input raster is empty");
+        xc_assert(blur_radius>=0, "XRaster::blur - blur radius must be non-negative");
         QImage img;
         convert(raster, img);
         img = XImageEffect::blur(img, blur_radius);
