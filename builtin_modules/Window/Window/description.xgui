@@ -57,8 +57,8 @@ separator
 in checkbox Visible visible=1
     //Is window visible.
 
-const enum Starting_Mode starting_mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
-    //Mode at atsrt - normal, full screen, minimized or maximized.
+const enum Initial_State initial_state=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
+    //State at start - normal, full screen, minimized or maximized.
     
     
 separator

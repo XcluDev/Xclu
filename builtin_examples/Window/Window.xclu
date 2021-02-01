@@ -29,7 +29,7 @@
                     },
                     {
                         "aname": "size",
-                        "avalue": "640x480"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "size_x",
@@ -56,8 +56,8 @@
                         "avalue": "1"
                     },
                     {
-                        "aname": "starting_mode",
-                        "avalue": "Full_Screen"
+                        "aname": "initial_state",
+                        "avalue": "Maximized"
                     },
                     {
                         "aname": "theme",

@@ -94,7 +94,7 @@ void XModuleWindow::setup_window() {
     create_layouts();
 
     //need apply value of starting_mode
-    need_apply_starting_mode_ = true;
+    need_apply_initial_state_ = true;
 
 }
 
@@ -182,32 +182,34 @@ void XModuleWindow::update_window() {
     //Visibility, fullscreen
 
     int visible = geti_visible();
-    if (was_changed_visible() || (visible && need_apply_starting_mode_)) {
+    if (was_changed_visible() || (visible && need_apply_initial_state_)) {
         if (!visible) {
             window_->setVisible(false);
         }
         else {
             window_->setVisible(true);
 
-            if (need_apply_starting_mode_) {
-                need_apply_starting_mode_ = false;
+            if (need_apply_initial_state_) {
+                need_apply_initial_state_ = false;
 
                 //minimized,maximized,fullscreen
-                QWindow::Visibility visibility = QWindow::Windowed;
+                Qt::WindowStates state = 0;
+                //NOTE: also can make active: Qt::WindowActive
 
-                auto mode = gete_starting_mode();
+                auto mode = gete_initial_state();
                 switch (mode) {
-                case starting_mode_Minimized: visibility = QWindow::Minimized;
+                case initial_state_Minimized: state = Qt::WindowMinimized;
                     break;
-                case starting_mode_Normal_Window: visibility = QWindow::Windowed;
+                case initial_state_Normal_Window: state = 0;
                     break;
-                case starting_mode_Maximized: visibility = QWindow::Maximized;
+                case initial_state_Maximized: state = Qt::WindowMaximized;
                     break;
-                case starting_mode_Full_Screen: visibility = QWindow::FullScreen;
+                case initial_state_Full_Screen: state = Qt::WindowFullScreen;
                     break;
                 default:
-                    xc_exception("XModuleWindow - Unknown window mode specifier");
+                    xc_exception("XModuleWindow - Unknown window initial state specifier");
                 }
+                window_->setWindowState(state);
             }
         }
     }
