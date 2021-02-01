@@ -146,12 +146,12 @@ bool was_changed_write_at_least_once() { return was_changed_("write_at_least_onc
 int geti_write_at_least_once() { return geti_("write_at_least_once"); }
 
 //Checkbox Write Each Frame
-//Write data to process console each frame.
+//Write data to process console each frame. Normally we shouldn't do so if run the process in second thread ("Run At Separate Thread"), and should use "Write On Receive" to protect from buffer overflow.
 bool was_changed_write_each_frame() { return was_changed_("write_each_frame"); }
 int geti_write_each_frame() { return geti_("write_each_frame"); }
 
 //Checkbox Write On Receive
-//Write data to process console after receiving answer.
+//Write data to process console after receiving answer. Useful for interaction with the process working in the second thread ("Run At Separate Thread").
 bool was_changed_write_on_receive() { return was_changed_("write_on_receive"); }
 int geti_write_on_receive() { return geti_("write_on_receive"); }
 
@@ -329,8 +329,8 @@ XProtectedObject *getobject_console_read_image() { return get_object_("console_r
 void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
 void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
 //----------------------------------------------------
-//Page Debug
-//
+//Page Details
+//Some statistics and full paths.
 
 //Out Int Executed Times
 //How much times process was executed.
@@ -346,12 +346,19 @@ int geti_debug_write_times() { return geti_("debug_write_times"); }
 void seti_debug_write_times(int value) { seti_("debug_write_times", value); }
 void increase_int_debug_write_times(int increase = 1) { increase_int_("debug_write_times", increase); }
 
-//Out Int Read Times
-//How much times we read data from process.
+//Out Int Try Read Times
+//How much times we try to read data from process.
 bool was_changed_debug_read_times() { return was_changed_("debug_read_times"); }
 int geti_debug_read_times() { return geti_("debug_read_times"); }
 void seti_debug_read_times(int value) { seti_("debug_read_times", value); }
 void increase_int_debug_read_times(int increase = 1) { increase_int_("debug_read_times", increase); }
+
+//Out Int Received Times
+//How much times we read some data from process.
+bool was_changed_debug_received_times() { return was_changed_("debug_received_times"); }
+int geti_debug_received_times() { return geti_("debug_received_times"); }
+void seti_debug_received_times(int value) { seti_("debug_received_times", value); }
+void increase_int_debug_received_times(int increase = 1) { increase_int_("debug_received_times", increase); }
 
 
 //Out Text Working Folder Abs Path

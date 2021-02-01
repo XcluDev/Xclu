@@ -29,7 +29,7 @@
                     },
                     {
                         "aname": "size",
-                        "avalue": "0"
+                        "avalue": "640x480"
                     },
                     {
                         "aname": "size_x",
@@ -41,7 +41,7 @@
                     },
                     {
                         "aname": "position",
-                        "avalue": "0"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "pos_x",
@@ -56,16 +56,16 @@
                         "avalue": "1"
                     },
                     {
-                        "aname": "mode",
-                        "avalue": "0"
+                        "aname": "starting_mode",
+                        "avalue": "Full_Screen"
                     },
                     {
                         "aname": "theme",
-                        "avalue": "0"
+                        "avalue": "Standard"
                     },
                     {
                         "aname": "font_size",
-                        "avalue": "0"
+                        "avalue": "Default"
                     },
                     {
                         "aname": "font_size_pix",
@@ -80,19 +80,31 @@
                         "avalue": "HorizontalLayout\n  #wnumber1"
                     },
                     {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "Actions",
                         "avalue": "0"
                     },
                     {
                         "aname": "on_close",
-                        "avalue": "0"
+                        "avalue": "Ignore"
                     },
                     {
                         "aname": "Control",
                         "avalue": "0"
                     },
                     {
-                        "aname": "enabled",
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
                         "avalue": "1"
                     },
                     {
@@ -100,24 +112,12 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "current_preset",
-                        "avalue": ""
-                    },
-                    {
                         "aname": "error_handling",
                         "avalue": "0"
                     },
                     {
                         "aname": "action_on_error",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "was_error",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "error_text",
-                        "avalue": ""
+                        "avalue": "Ignore"
                     },
                     {
                         "aname": "calls_info",

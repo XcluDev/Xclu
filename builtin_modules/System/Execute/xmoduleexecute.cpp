@@ -37,6 +37,7 @@ void XModuleExecute::start() {
     seti_debug_executed_times(0);
     seti_debug_write_times(0);
     seti_debug_read_times(0);
+    seti_debug_received_times(0);
     clear_string_debug_folder_path();
     clear_string_debug_file_path();
 
@@ -337,7 +338,7 @@ void XModuleExecute::console_read() {
 
         bool is_new_data = !data.isEmpty();
         seti_console_read_received(is_new_data);
-        if (is_new_data) {
+        if (is_new_data) {            
             auto read_type = gete_read_type();
 
             if (read_type == read_type_String) {
@@ -355,6 +356,9 @@ void XModuleExecute::console_read() {
             if (read_type == read_type_Image) {
                 xc_exception("Reading image from process console is not implemented yet");
             }
+
+            //increase counter
+            increase_int_debug_received_times();
 
             //Send bang
             XCORE.bang(get_strings_console_bang_on_received());

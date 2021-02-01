@@ -214,7 +214,8 @@ out object_image Image console_read_image
 endif
 
 #-----------------------------
-page Debug
+page Details
+    //Some statistics and full paths.
 
 out int Executed_Times debug_executed_times=0 0:* 1,10
     //How much times process was executed.
@@ -222,9 +223,13 @@ out int Executed_Times debug_executed_times=0 0:* 1,10
 out int Write_Times debug_write_times=0 0:* 1,10
     //How much times we write data to process.
     
-out int Read_Times debug_read_times=0 0:* 1,10
-    //How much times we read data from process.
+out int Try_Read_Times debug_read_times=0 0:* 1,10
+    //How much times we try to read data from process.
 
+out int Received_Times debug_received_times=0 0:* 1,10
+    //How much times we read some data from process.
+
+    
 line
     
 #in group Show_Absolute_Paths show_abs_paths=0

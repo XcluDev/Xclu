@@ -87,6 +87,7 @@ protected slots:
 protected:
     bool notify_visible_change_ = false;    //нотификация, что изменилось visibility окна
                                             //TODO по-хорошему, надо сделать с mutex, но делаем просто так )
+    bool need_apply_starting_mode_ = false;
 
     void create_layouts();  //создать структуру окна - при этом, запрашиваются виджеты из соответствующих модулей
 

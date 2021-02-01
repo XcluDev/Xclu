@@ -93,6 +93,8 @@ void XModuleWindow::setup_window() {
     //Структура окна
     create_layouts();
 
+    //need apply value of starting_mode
+    need_apply_starting_mode_ = true;
 
 }
 
@@ -178,31 +180,35 @@ void XModuleWindow::update_window() {
 
 
     //Visibility, fullscreen
-    if (was_changed_visible() || was_changed_mode()) {
-        int visible = geti_visible();
+
+    int visible = geti_visible();
+    if (was_changed_visible() || (visible && need_apply_starting_mode_)) {
         if (!visible) {
             window_->setVisible(false);
         }
         else {
             window_->setVisible(true);
 
-            //minimized,maximized,fullscreen
-            QWindow::Visibility visibility = QWindow::Windowed;
+            if (need_apply_starting_mode_) {
+                need_apply_starting_mode_ = false;
 
-            auto mode = gete_mode();
-            switch (mode) {
-            case mode_Minimized: visibility = QWindow::Minimized;
-                break;
-            case mode_Normal_Window: visibility = QWindow::Windowed;
-                break;
-            case mode_Maximized: visibility = QWindow::Maximized;
-                break;
-            case mode_Full_Screen: visibility = QWindow::FullScreen;
-                break;
-            default:
-                xc_exception("XModuleWindow - Unknown window mode specifier");
+                //minimized,maximized,fullscreen
+                QWindow::Visibility visibility = QWindow::Windowed;
+
+                auto mode = gete_starting_mode();
+                switch (mode) {
+                case starting_mode_Minimized: visibility = QWindow::Minimized;
+                    break;
+                case starting_mode_Normal_Window: visibility = QWindow::Windowed;
+                    break;
+                case starting_mode_Maximized: visibility = QWindow::Maximized;
+                    break;
+                case starting_mode_Full_Screen: visibility = QWindow::FullScreen;
+                    break;
+                default:
+                    xc_exception("XModuleWindow - Unknown window mode specifier");
+                }
             }
-            window_->setVisible(visibility);
         }
     }
 }

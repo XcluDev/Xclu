@@ -66,18 +66,18 @@ int geti_pos_y() { return geti_("pos_y"); }
 bool was_changed_visible() { return was_changed_("visible"); }
 int geti_visible() { return geti_("visible"); }
 
-//Enum Mode
-//Full screen, minimized and maximized settings.
-enum enum_mode {
-    mode_Minimized = 0,
-    mode_Normal_Window = 1,
-    mode_Maximized = 2,
-    mode_Full_Screen = 3,
-    mode_N__ = 4
+//Const Enum Starting Mode
+//Mode at atsrt - normal, full screen, minimized or maximized.
+enum enum_starting_mode {
+    starting_mode_Minimized = 0,
+    starting_mode_Normal_Window = 1,
+    starting_mode_Maximized = 2,
+    starting_mode_Full_Screen = 3,
+    starting_mode_N__ = 4
 };
-bool was_changed_mode() { return was_changed_("mode"); }
-enum_mode gete_mode() { return enum_mode(geti_("mode")); }
-QString getraw_mode() { return getraw_("mode");}
+bool was_changed_starting_mode() { return was_changed_("starting_mode"); }
+enum_starting_mode gete_starting_mode() { return enum_starting_mode(geti_("starting_mode")); }
+QString getraw_starting_mode() { return getraw_("starting_mode");}
 
 
 //Const Enum Theme
