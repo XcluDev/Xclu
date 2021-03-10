@@ -2,3 +2,4 @@ temp-build
 Xclu-bin
 Xclu-bin-portable
 linuxdeployqt-continuous-x86_64.AppImage
+*.zip
