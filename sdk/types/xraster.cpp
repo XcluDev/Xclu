@@ -1,3 +1,4 @@
+#include "./../utility/console.h"
 #include "xraster.h"
 #include "incl_cpp.h"
 #include <QImage>
