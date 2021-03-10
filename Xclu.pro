@@ -33,6 +33,8 @@
 #Uncomment for deploying mode, that is all modules definitions will be put inside EXE
 DEFINES+=XCLU_DEPLOY
 
+# resolves this problem: https://www.cyberforum.ru/ubuntu-linux/thread2262844.html
+QMAKE_LFLAGS += -no-pie
 
 Release:TARGET=Xclu
 Release:DESTDIR = ../Xclu-bin
