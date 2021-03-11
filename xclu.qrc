@@ -284,8 +284,8 @@
         <file>builtin_modules/Programming/JsModule/description.xgui</file>
         <file>builtin_modules/Programming/PythonCode/auto.h</file>
         <file>builtin_modules/Programming/PythonCode/description.xgui</file>
-        <file>builtin_modules/Programming/СppCode/auto.h</file>
-        <file>builtin_modules/Programming/СppCode/description.xgui</file>
+        <file>builtin_modules/Programming/CppCode/auto.h</file>
+        <file>builtin_modules/Programming/CppCode/description.xgui</file>
         <file>builtin_modules/Project/Notes/auto.h</file>
         <file>builtin_modules/Project/Notes/description.xgui</file>
         <file>builtin_modules/Project/Presets/auto.h</file>

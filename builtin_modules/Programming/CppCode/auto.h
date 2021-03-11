@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClass—ppCode
+//Interface for XClassCppCode
 //Created automatically.
 //----------------------------------------------------
 //Page Main
