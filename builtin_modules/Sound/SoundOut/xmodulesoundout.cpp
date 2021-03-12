@@ -280,6 +280,9 @@ void XModuleSoundOut::update() {
 
 
 //---------------------------------------------------------------------
+
+#if QT_VERSION >= 0x050800
+
 void XModuleSoundOut::check_volume_change() {
     if (audio_started_) {
         if (was_changed_device_volume()) {
@@ -289,6 +292,20 @@ void XModuleSoundOut::check_volume_change() {
         }
     }
 }
+
+#else
+
+void XModuleSoundOut::check_volume_change() {
+    if (audio_started_) {
+        if (was_changed_device_volume()) {
+            float volume = getf_device_volume();
+            qreal linearVolume = volume; // todo: scale somehow using just math
+            m_audioOutput->setVolume(linearVolume);
+        }
+    }
+}
+
+#endif
 
 //---------------------------------------------------------------------
 void XModuleSoundOut::stop() {
