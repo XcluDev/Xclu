@@ -1,0 +1,40 @@
+name: Windows generate release zip
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-2019
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.2'
+    - name: setup_system
+      shell: cmd
+      run: ./build/windows/10_setup_system.cmd
+    - name: compile
+      shell: cmd
+      run: ./build/windows/20_build.cmd
+    - name: portable
+      shell: cmd
+      run: ./build/windows/30_portable.cmd
+
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      shell: bash
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./build/windows/xclu-bin-windows-portable.zip
+        asset_name: xclu-bin-windows-portable-${{ steps.get_version.outputs.VERSION }}.zip
+        tag: ${{ github.ref }}
+
