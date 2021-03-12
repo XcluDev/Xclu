@@ -28,3 +28,12 @@ jobs:
       run: ./build/ubuntu/20_build.sh
     - name: portable
       run: ./build/ubuntu/30_portable.sh
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: xclu-bin
+        path: build/ubuntu/Xclu-bin/**/*
+    - uses: actions/upload-artifact@v2
+      with:
+        name: portable
+        path: build/ubuntu/xclu-bin-ubuntu-portable.zip

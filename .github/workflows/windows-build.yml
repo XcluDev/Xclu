@@ -36,3 +36,12 @@ jobs:
     - name: portable
       shell: cmd
       run: ./build/windows/30_portable.cmd
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: xclu-bin
+        path: build/windows/Xclu-bin/**/*
+    - uses: actions/upload-artifact@v2
+      with:
+        name: portable
+        path: build/windows/xclu-bin-windows-portable.zip

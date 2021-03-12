@@ -69,3 +69,8 @@ and release is started on tags push.
 
 It is interesting that windows and ubuntu release scripts run simultaneously, and they will both try to create release pages in github, but it
 seems to be ok, because https://github.com/svenstaro/upload-release-action creates release page if it doesn't exist and re-uses if one exist.
+
+# Upload artifacts note
+
+As a test, we upload portable versions generated during non-release ubuntu and windows builds as artifacts using https://github.com/actions/upload-artifact
+Note, GA always compresses artifact files as zip, so to avoid double zips we pack directories using GA, avoiding our normal zipping using scripts.
