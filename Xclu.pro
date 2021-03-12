@@ -34,6 +34,7 @@
 DEFINES+=XCLU_DEPLOY
 
 
+
 Release:TARGET=Xclu
 Release:DESTDIR = ../Xclu-bin
 Release:OBJECTS_DIR = release/.obj
@@ -327,6 +328,9 @@ windows {
 }
 
 unix {
+  # resolves this problem: https://www.cyberforum.ru/ubuntu-linux/thread2262844.html
+  # (and this problem is only in linux)
+  QMAKE_LFLAGS += -no-pie
 }
 #--------------------------------------------------------------------------
 #Built-in and custom modules

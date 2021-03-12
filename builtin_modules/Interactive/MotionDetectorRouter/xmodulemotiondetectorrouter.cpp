@@ -1,4 +1,4 @@
-#include "XModuleMotionDetectorRouter.h"
+#include "xmodulemotiondetectorrouter.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include "xcore.h"
