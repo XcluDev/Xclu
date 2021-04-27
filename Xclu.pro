@@ -26,6 +26,11 @@
 #D:\Qt\Qt5_14\5.14.2\msvc2017_64\bin\windeployqt.exe --release ./
 #(set path to your Qt here)
 
+
+#SSL on Windows:
+#Copy libcrypto-1_1-x64.dll and libssl-1_1-x64.dll from Qt\Tools\OpenSSL\Win_x64\bin
+#to Xclu binary path
+
 #--------------------------------------------------------------------------
 #General app settings
 #--------------------------------------------------------------------------
