@@ -1,0 +1,33 @@
+name: Ubuntu generate release zip
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup_system
+      run: ./build/ubuntu/10_setup_system.sh
+    - name: compile
+      run: ./build/ubuntu/20_build.sh
+    - name: portable
+      run: ./build/ubuntu/30_portable.sh
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      shell: bash
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./build/ubuntu/xclu-bin-ubuntu-portable.zip
+        asset_name: xclu-bin-ubuntu-portable-${{ steps.get_version.outputs.VERSION }}.zip
+        tag: ${{ github.ref }}
+        overwrite: true
+#        body: "This is auto-generated ubuntu zip with Xclu"
+#       release_name: "This is release name"
