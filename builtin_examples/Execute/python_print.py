@@ -4,10 +4,21 @@
 import sys
 #import os
 
-print ('python print test')
 
-sys.stdout.write('python write test\n')
-sys.stdout.flush()
-#os.write(1, b'line 3 to stdout  ')
+#use for output for using
+def print_xclu(s):
+    sys.stdout.write(s + '\n')
+    sys.stdout.flush()
 
-#sys.stderr.write('python stderr write test\n') ; sys.stderr.flush()
+#use for informing
+def print_xclu_err(s):
+    sys.stderr.write(s + '\n')
+    sys.stderr.flush()
+    
+
+#just inform to xclu execute console
+print_xclu_err('Executing Python write test')
+
+#value for using in xclu
+print_xclu('This is Python result'); 
+

@@ -124,7 +124,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "2"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -193,7 +193,7 @@
                     },
                     {
                         "aname": "console_write_string",
-                        "avalue": "113",
+                        "avalue": "70",
                         "link": "project1->frame"
                     },
                     {
@@ -257,7 +257,7 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "Debug",
+                        "aname": "Details",
                         "avalue": "0"
                     },
                     {

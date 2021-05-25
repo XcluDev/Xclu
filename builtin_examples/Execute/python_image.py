@@ -9,26 +9,31 @@ import sys
 import os
 
 
+#use for output for using
+def print_xclu(s):
+    sys.stdout.write(s + '\n')
+    sys.stdout.flush()
+
+#use for informing
+def print_xclu_err(s):
+    sys.stderr.write(s + '\n')
+    sys.stderr.flush()
+ 
+
+ 
+w = 100
+h = 100
+ch = 3
+
+print_xclu_err('Starting Python loop program, it expects images ' + str(w) + 'x' + str(h) + 'x' + str(ch))
+
 i = 0
 
 while 1:
-    #val = input()
-    #print('python putput', val)
-
-    #sys.stdout.write('python write test\n')
-    #sys.stdout.flush()
-
-    #break
-
-    w = 100
-    h = 100
-    ch = 3
     n = w*h*ch
-    #print("expect",n)
     
     #buf = sys.stdin.read()
     buf = os.read(0,40000)
-    print(i,len(buf))
+    print_xclu(str(i) + " " + str(len(buf)))
     i = i+1
-    #sys.stdout.write('python write test\n')
-    sys.stdout.flush()
+ 

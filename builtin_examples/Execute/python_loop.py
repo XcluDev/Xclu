@@ -4,13 +4,33 @@
 #to run execute "python python_loop.py"
 
 import sys
+import time
 #import os
 
+#use for output for using
+def print_xclu(s):
+    sys.stdout.write(s + '\n')
+    sys.stdout.flush()
+
+#use for informing
+def print_xclu_err(s):
+    sys.stderr.write(s + '\n')
+    sys.stderr.flush()
+    
+    
+#Just inform
+print_xclu_err("Python program started, it expects some values...");
+
 while 1:
+    #Read input
     val = input()
-    print('python putput', val)
-
-    #sys.stdout.write('python write test\n')
-    #sys.stdout.flush()
-
+    
+    #Output for using
+    print_xclu('Python outputs input: ' + val)
+    
+    #time.sleep(1)
+    
     #break
+    
+    
+
