@@ -17,6 +17,8 @@
 #ВНИМАНИЕ: На "старом" Qt 5.9 при переименовании или добавлении файлов
 #требуется выполнять команду меню "Запустить qmake", иначе выдает ошибки или не видит файл
 
+
+#SSL on Windows:
 #If you get "QSslSocket::connectToHostEncrypted: TLS initialization failed" error on Windows:
 #please check OpenSSL at Qt installer at Developer Tools section, 
 #and copy libcrypto-1_1-x64.dll, libssl-1_1-x64.dll to Xclu bin folder
@@ -27,9 +29,6 @@
 #(set path to your Qt here)
 
 
-#SSL on Windows:
-#Copy libcrypto-1_1-x64.dll and libssl-1_1-x64.dll from Qt\Tools\OpenSSL\Win_x64\bin
-#to Xclu binary path
 
 #--------------------------------------------------------------------------
 #General app settings

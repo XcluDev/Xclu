@@ -59,6 +59,7 @@ int2 XModulePainter::screen_size() {
 //-----------------------------------------------
 //Change screen size
 void XModulePainter::set_fixed_size(int2 size) {
+    xc_assert(widget_, "Internal error at XModulePainter::set_fixed_size() - widget is not created yet");
     widget_->set_fixed_size(size);
     //screen_size_ = size;
 }
