@@ -423,8 +423,14 @@ bool XModuleExecute::console_write_image() {
     //but now converts to u8 rgb.
     XObjectImage::to_raster(reader.data(), image_write_input_);
 
-    //transform
-    if (geti_console_write_image_transform()) {
+    //no transform
+    if (!geti_console_write_image_transform()) {
+        int ch = 3;
+        console_write_image(image_write_input_.w, image_write_input_.h, ch, image_write_input_.data_pointer_u8());
+    }
+    else
+    {
+        //transform
         XRaster_u8c3 *img = &image_write_input_;
 
         XRaster_u8c3 image_resized;// = image_write_input_;
