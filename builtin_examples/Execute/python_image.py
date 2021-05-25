@@ -33,7 +33,7 @@ while 1:
     n = w*h*ch
     
     #buf = sys.stdin.read()
-    buf = os.read(0,40000)
+    buf = os.read(0,n+1000)
     print_xclu(str(i) + " " + str(len(buf)))
     i = i+1
  
