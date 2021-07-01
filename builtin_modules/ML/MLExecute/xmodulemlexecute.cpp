@@ -1,358 +1,505 @@
-#include "xmoduleserial.h"
+#include "xmodulemlexecute.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
+#include <QProcess>
 #include "xcore.h"
-#include <QtSerialPort/QSerialPortInfo>
 
-REGISTER_XMODULE(Serial)
+
+//registering module implementation
+REGISTER_XMODULE(MLExecute)
 
 //---------------------------------------------------------------------
-XModuleSerial::XModuleSerial(QString class_name)
+XModuleMLExecute::XModuleMLExecute(QString class_name)
     :XModule(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::gui_clear() {
-    seti_total_sent(0);
-    clear_string_device_list();
-    clear_string_port_info();
-    set_connected(false); //также ставит gui-элемент connected
-    port_name_ = "";
-    set_total_sent(0);
-
-    clear_string_received_line();
-    clear_string_received_text();
-    clear_string_received_bytes();
-
-    in_string_.clear();
-}
-
-//---------------------------------------------------------------------
-void XModuleSerial::set_connected(bool connected) {
-  connected_ = connected;
-  seti_connected(connected);
-}
-
-//---------------------------------------------------------------------
-void XModuleSerial::set_total_sent(int t) {
-    total_sent_ = t;
-    seti_total_sent(t);
-}
-
-//---------------------------------------------------------------------
-XModuleSerial::~XModuleSerial()
+XModuleMLExecute::~XModuleMLExecute()
 {
-    stop();
+
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::on_loaded() {
-    gui_clear();
+void XModuleMLExecute::start() {
+ /*   //run
+    sete_status(status_Not_Started);
+    seti_exit_code(0);
+
+    clear_string_error_details();
+
+    //read, write
+    console_clear();
+
+    //debug
+    seti_debug_executed_times(0);
+    seti_debug_write_times(0);
+    seti_debug_read_times(0);
+    seti_debug_received_times(0);
+    clear_string_debug_folder_path();
+    clear_string_debug_file_path();
+
+
+    //process
+    subprocess_.reset();
+
+    crashed_ = false;
+
+    finished_ = false;
+
+    was_written_ = false;
+
+    //run at first frame
+    if (gete_execute_event() == execute_event_At_First_Frame) {
+        process_run();
+    }
+    */
 }
 
 //---------------------------------------------------------------------
-//нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
-//внимание, обычно вызывается из основного потока как callback
-void XModuleSerial::on_button_pressed(QString button_id) {
-    if (button_id == "print_devices") {
-        print_devices();
+void XModuleMLExecute::update() {
+ /*   bool need_run = false;
+    //buttons
+    if (geti_run_button()) {
+        need_run = true;
+    }
+    if (geti_stop_button()) {
+        process_stop();
     }
 
-    if (general_is_enabled()) {
-        bool connect_warning = false;
-        //-----------------------
-        //TODO duplication in code
-        //send string
-        if (button_id == button_send_string_btn()) {
-            if (connected_) {
-                send_string(gets_send_string());
-            }
-            else {
-                connect_warning = true;
-            }
-        }
-        if (button_id == button_send_string2_btn()) {
-            if (connected_) {
-                send_string(gets_send_string2());
-            }
-            else {
-                connect_warning = true;
-            }
-        }
-        if (button_id == button_send_string3_btn()) {
-            if (connected_) {
-                send_string(gets_send_string3());
-            }
-            else {
-                connect_warning = true;
-            }
-        }
-        //-----------------------
-        if (button_id == button_send_string_link_btn()) {
-            if (connected_) {
-                QString str = XCORE.get_string_by_link(gets_string_link_send());
-                send_string(str);
-            }
-            else {
-                connect_warning = true;
-            }
-        }
+    //events
+    auto execute_event = gete_execute_event();
+    if (execute_event == execute_event_Each_Frame) {
+        need_run = true;
+    }
 
-        if (button_id == button_send_bytes_btn()) {
-            if (connected_) {
-                int byte = geti_send_byte();
-                send_byte(byte);
-            }
-            else {
-                connect_warning = true;
-            }
-        }
+    //process if finished
+    if (finished_) {
+        on_finish(exit_code_, QProcess::ExitStatus(exit_status_));
+    }
 
-        if (connect_warning) {
-            //xc_message_box("Serial: Port is not connected, may be you need to start the project.");
-            xc_console_warning("Serial: Port is not connected, may be you need to start the project.");
+
+    //write to console if required
+    //if "geti_write_at_least_once" - then checks if we sent something
+    //it's meaningful for sending images - often they are empty at start
+    bool need_write = geti_write_each_frame() || (geti_write_at_least_once() && !was_written_);
+    if (need_write) {
+        console_write();
+    }
+
+    //run if required
+    if (need_run) {
+        process_run();
+    }
+
+    //read from console if required
+    if (gete_read() == read_Each_Frame) {
+        console_read();
+    }
+
+*/
+}
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::stop() {
+  /*  subprocess_.reset();*/
+}
+
+//---------------------------------------------------------------------
+/*
+void XModuleMLExecute::process_stop() {
+    if (subprocess_.data()) {
+        if (gete_status() == status_Running) {
+            subprocess_->terminate();
+            //on_finish(); //TODO I think it's not needed
         }
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::print_devices() {
-    const auto serialPortInfos = QSerialPortInfo::availablePorts();
+void XModuleMLExecute::console_clear() {
+    clear_string_console_errors_text();
+    clear_string_console_read_string();
+    clear_string_console_read_text();
 
-    QStringList out;
-    out.append(QString("Serial ports available: %1").arg(serialPortInfos.count()));
-
-    const QString blankString = QObject::tr("N/A");
-    QString description;
-    QString manufacturer;
-    QString serialNumber;
-
-    int k = 0;
-    for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
-        description = serialPortInfo.description();
-        manufacturer = serialPortInfo.manufacturer();
-        serialNumber = serialPortInfo.serialNumber();
-
-        out.append(QString("  Port: %1").arg(k++));
-        out.append(QString("  Name: %1").arg(serialPortInfo.portName()));
-        out.append(QString("  Location: %1").arg(serialPortInfo.systemLocation()));
-        out.append(QString("  Description: %1").arg((!description.isEmpty() ? description : blankString)));
-        out.append(QString("  Manufacturer: %1").arg((!manufacturer.isEmpty() ? manufacturer : blankString)));
-        out.append(QString("  Serial number: %1").arg((!serialNumber.isEmpty() ? serialNumber : blankString)));
-        out.append(QString("  Vendor Identifier: %1").arg((serialPortInfo.hasVendorIdentifier() ? QByteArray::number(serialPortInfo.vendorIdentifier(), 16) : blankString)));
-        out.append(QString("  Product Identifier: %1").arg((serialPortInfo.hasProductIdentifier() ? QByteArray::number(serialPortInfo.productIdentifier(), 16) : blankString)));
-        out.append(QString("  Busy: %1").arg((serialPortInfo.isBusy() ? "Yes" : "No")));
-    }
-    clear_string_device_list();
-    append_string_device_list(out, 1);
-}
-
-
-
-//---------------------------------------------------------------------
-void XModuleSerial::start() {
-    //Очистка переменных
-    gui_clear();
-
-    //открытие порта
-    open_port();
-
-    //watchdog
-    watchdog_sent_ = -100000;
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::open_port() {
-    const auto serialPortInfos = QSerialPortInfo::availablePorts();
-    int n = serialPortInfos.count();
-
-    if (n == 0) {
-        //TODO сейчас просто игнорируем ошибку
-        xc_console_append("Error: No Serial devices");
+void XModuleMLExecute::process_run() {
+    if (gete_status() == status_Running)  {
         return;
     }
 
-    int index0 = -1;
-    int index1 = -1;
+    finished_ = false;
 
-    auto select_port = gete_select_port();
-    switch (select_port) {
-    case select_port_Default: {
-        index0 = 0;
-        index1 = 0;
+    //compute paths
+    QString folder = gets_folder_name();
+    QString file_name_short = gets_file_name();
+
+    folder = xc_project_folder() + "/" + folder;
+    sets_debug_folder_path(folder);
+
+    //file name
+    xc_assert(!file_name_short.isEmpty(), "File Name is empty");
+    QString file_name = folder + "/" + file_name_short;
+    //if user provided absolute path - then use it - we detect it as if file_name doesn't extsts
+    if (!QFileInfo::exists(file_name)) {
+        file_name = file_name_short;
     }
-        break;
-    case select_port_By_Index: {
-        index0 = geti_port_index0();
-        index1 = geti_port_index1();
-        xc_assert(index0 >= 0 && index1 >= index0, QString("Bad port index range %1-%2").arg(index0).arg(index1));
-        xc_assert(index1 < n, QString("Bad port 'to' index %1, because connected devices: ").arg(index1));
+    sets_debug_file_path(file_name);
+
+    //check that folder exists
+    xc_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
+
+    //check that file exists if required
+    if (geti_file_must_exists()) {
+        xc_assert(QFileInfo::exists(file_name), "File '" + file_name + "' doesn't exists");
     }
-        break;
-    case select_port_By_Name: {
-        QString port_name = gets_port_name();
-        int k = 0;
-        for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
-            QString name = serialPortInfo.portName();
-            if (name.contains(port_name)) {
-               index0 = k;
-               index1 = k;
-               break;
-            }
-            k++;
+
+    //starting time
+    //double start_time = xc_elapsed_time_sec();
+    //setf_last_time(start_time);
+
+    //qDebug() << "execute...";
+
+    //create process
+    //Note: this stops current process if exists - don't know, should we manage this additionally
+    subprocess_.reset(new QProcess);
+
+    QProcess &subprocess = *subprocess_;
+    subprocess.setWorkingDirectory(folder);
+    subprocess.setProgram(file_name);
+
+    //arguments
+    QStringList arguments;
+    arguments << gets_args();
+    subprocess.setArguments(arguments);
+
+    //variables
+    //timeout - if -1, then wait infinite
+    int timeout = (geti_enable_timeout()) ? int(getf_timeout_sec()*1000): -1;
+
+    crashed_ = false;
+
+    //connect events listeners
+    subprocess.setReadChannel(QProcess::StandardOutput);
+    subprocess.setProcessChannelMode(QProcess::SeparateChannels); //separate output and error to process them differently
+    //subprocess.setProcessChannelMode(QProcess::MergedChannels);
+
+    connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XModuleMLExecute::crashed);
+
+    //start process
+    sete_status(status_Running);
+    subprocess.start(QProcess::Unbuffered | QProcess::ReadWrite );
+
+    //increase counter
+    increase_int_debug_executed_times();
+
+    //decide - wait finishing or work async
+    auto thread_mode = gete_thread_mode();
+
+    if (thread_mode == thread_mode_Wait_Finishing) {
+        //sync run
+        if (geti_write_at_least_once()) {
+            console_write();
         }
-        xc_assert(k >= 0, "No port containing '" + port_name+ "'");
-        index0 = k;
-        index1 = k;
+        bool no_timeout = subprocess.waitForFinished(timeout);
+        int exit_code = subprocess.exitCode();
+        auto exit_status = subprocess.exitStatus();
+
+        //process finish code and also read console
+        on_finish(exit_code, exit_status, !no_timeout);
     }
-        break;
-    default:
-        xc_exception("Bad `select_port` value");
-    }
+    else {
+        //async run
+        //implement async events
+        //connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleMLExecute::onReadyReadStandardOutput);
+        connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleMLExecute::onReadyReadStandardError);
 
-    //Это не должно показываться пользователю, а проверка нашей логики
-    xc_assert(index0 >= 0 && index1 >= 0, "Internal error: No port to connect");
-
-    //Скорость подключения
-    int baud_rate = getraw_baud_rate().toInt();
-    xc_assert(baud_rate>0, QString("Bad baud rate %1").arg(baud_rate));
-
-    //Поиск свободного порта
-    int k = 0;
-    for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
-        if (k >= index0 && k <= index1) {
-            if (!serialPortInfo.isBusy()) {
-                //подключение
-                serialPort_.setPort(serialPortInfo);
-                serialPort_.setBaudRate(baud_rate);
-                xc_assert(serialPort_.open(QIODevice::ReadWrite),
-                    QString("Failed to open port %1, error: %2")
-                            .arg(serialPortInfo.portName()).arg(serialPort_.errorString()));
-                set_connected(true);
-
-                port_name_ = serialPortInfo.portName();
-
-                QString port_info = "port_info";
-                clear_string_port_info();
-                append_string_port_info(QString("Port: %1").arg(k));
-                append_string_port_info(QString("Name: %1").arg(serialPortInfo.portName()));
-                append_string_port_info(QString("Location: %1").arg(serialPortInfo.systemLocation()));
-                append_string_port_info(QString("Description: %1").arg((!serialPortInfo.description().isEmpty() ? serialPortInfo.description() : "N/A")));
-                break;
-            }
-        }
-        k++;
+        connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleMLExecute::finished);
     }
 
-    xc_assert(connected_, "Can't connect, all selected ports are busy");
+    //double time = xc_elapsed_time_sec();
+    //setf_last_duration(time - start_time);
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::update() {
-    //sending data processes at on_button_pressed
-
-    //receiving data
-    receive();
-
-    //watchdog
-    double time = xc_elapsed_time_sec();
-    if (geti_watchdog_send()) {
-        if (time >= watchdog_sent_ + getf_watchdog_send_period()) {
-            send_string(gets_watchdog_message());
-            watchdog_sent_ = time;
-        }
-
-    }
-}
-
-//---------------------------------------------------------------------
-void XModuleSerial::send_string(QString str) {
-    //добавляем завершение строки
-    auto ts = gete_line_term(); //None,\n,\r,\r\n
-    if (ts == line_term__n) str += "\n";
-    if (ts == line_term__r) str += "\r";
-    if (ts == line_term__r_n) str += "\r\n";
-
-    if (geti_debug()) {
-        xc_console_append("Send string `" + str + "`");
-    }
-
-    if (connected_ && !str.isEmpty()) {
-        QByteArray writeData;
-        writeData.append(str.toLatin1());
-
-        qint64 bytesWritten = serialPort_.write(writeData);
-        if (bytesWritten == -1) {
-            xc_console_append(QString("Failed to write the data to port %1, error: %2")
-                                .arg(port_name_).arg(serialPort_.errorString()));
-        }
-
-        set_total_sent(total_sent_ + bytesWritten);
-        if (bytesWritten != writeData.size()) {
-            xc_console_append(QString("Failed to write all the data to port %1, error: %2")
-                                .arg(port_name_).arg(serialPort_.errorString()));
-        }
-        //else if (!serialPort.waitForBytesWritten(5000)) {
-        //    standardOutput << QObject::tr("Operation timed out or an error occurred for port %1, error: %2").arg(serialPortName).arg(serialPort.errorString()) << endl;
-        //    return 1;
-        //}
-    }
-}
-
-//---------------------------------------------------------------------
-void XModuleSerial::send_byte(int byte) {
-    if (geti_debug()) {
-        xc_console_append("Send byte `" + QString::number(byte) + "`");
-    }
-    xc_exception("Sending byte is not implented");
-
-    //Пометить, что отправили
-    //set_total_sent(total_sent_ + 1);
-
-}
-
-//---------------------------------------------------------------------
-void XModuleSerial::stop() {
-    if (connected_) {
-        serialPort_.close();
-        set_connected(false);
-    }
-}
-
-
-//---------------------------------------------------------------------
-void XModuleSerial::receive() {
-    if (connected_ && geti_receive()) {
-        const int N = 50;
-        char buffer[N];
-        int numReadTotal = 0;
-        for (;;) {
-            int n = serialPort_.read(buffer, N);
-            numReadTotal += n;
-            if (n == 0) {
-                break;
+void XModuleMLExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, bool timeout) {
+    if (subprocess_.data()) {
+        if (gete_status() == status_Running) {
+            //read console
+            if (gete_read() != read_Disabled) {
+                console_read();
             }
 
-            //TODO here should be switch of mode
+            //read console error
+            console_read_error();
 
-            //scan for "\n", ignore "\r"
-            for (int i=0; i<n; i++) {
-                if (buffer[i] == '\r') continue;
-                if (buffer[i] == '\n') {
-                    sets_received_line(in_string_);
-                    in_string_.clear();
-                    continue;
+            //exit code
+            seti_exit_code(exit_code);
+
+            //exit status
+            bool success = (exit_status == QProcess::NormalExit) && (exit_code == 0);
+            enum_status status = (timeout) ? status_Timeout : (success?status_Success:status_Error);
+            sete_status(status);
+
+            QString error_details;
+            if (!timeout && crashed_) {
+                error_details = crash_text_;
+                status = status_Crashed;
+            }
+            sets_error_details(error_details);
+
+
+            //delete process
+            subprocess_.reset();
+
+            //error handling
+            if (status == status_Timeout) xc_exception("Timeout");
+            if (status == status_Error) xc_exception("Execution error, see Run page for console error output");
+
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::onReadyReadStandardError() {
+    //Note, this is can be async callback
+    console_read_error();
+}
+
+//---------------------------------------------------------------------
+//void XModuleMLExecute::onReadyReadStandardOutput() {
+    //Note, this is async callback
+
+//}
+
+//---------------------------------------------------------------------
+//slot
+void XModuleMLExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
+    //Note, this is can be async callback
+    finished_ = true;
+    exit_code_ = exit_code;
+    exit_status_ = exit_status;
+    //on_finish will be called on the next update:
+    //on_finish(exit_code, exit_status, false);
+}
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::crashed(QProcess::ProcessError error) {
+    //Note, this is can be async callback
+
+    //async process - inform main thread:
+    crashed_ = true;
+
+    switch (error) {
+    case QProcess::FailedToStart:  crash_text_ = "File not found, resource error"; break;
+    case QProcess::Crashed: crash_text_ = "Crashed"; break;
+    case QProcess::Timedout: crash_text_ = "Timedout"; break;
+    case QProcess::ReadError: crash_text_ = "ReadError"; break;
+    case QProcess::WriteError: crash_text_ = "WriteError"; break;
+    case QProcess::UnknownError: crash_text_ = "UnknownError"; break;
+    default: crash_text_ = "Unknown reason";
+    }
+
+    crash_text_ = "Process crashed, the reason: " + crash_text_;
+
+    //xc_exception("Execute Crashed");
+}
+
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::console_read_error() {
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        auto console_errors = gete_console_errors();
+        if (console_errors != console_errors_Ignore) {
+            QString text = subprocess->readAllStandardError();
+            if (!text.isEmpty()) {
+                append_string_console_errors_text(text);
+
+                //stop process if required
+                if (console_errors == console_errors_Show_And_Stop) {
+                    crashed_ = true;
+                    crash_text_ = "Process printed something to Error Console";
                 }
-                in_string_.append(buffer[i]);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::console_read() {
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        auto data = subprocess->readAllStandardOutput();
+        //increase counter
+        increase_int_debug_read_times();
+
+        bool is_new_data = !data.isEmpty();
+        seti_console_read_received(is_new_data);
+        if (is_new_data) {            
+            auto read_type = gete_read_type();
+
+            if (read_type == read_type_String) {
+                sets_console_read_string(data);
+            }
+            if (read_type == read_type_Text) {
+                //append or replace
+                if (geti_console_read_text_append()) {
+                    append_string_console_read_text(data);
+                }
+                else {
+                    sets_console_read_text(data);
+                }
+            }
+            if (read_type == read_type_Image) {
+                xc_exception("Reading image from process console is not implemented yet");
+            }
+
+            //increase counter
+            increase_int_debug_received_times();
+
+            //Send bang
+            XCORE.bang(get_strings_console_bang_on_received());
+
+            //Write if required
+            if (geti_write_on_receive()) {
+                console_write();
             }
         }
     }
 
 }
 
+//---------------------------------------------------------------------
+void XModuleMLExecute::console_write() {
+    if (gete_status() != status_Running) {
+        return;
+    }
+
+    QProcess *subprocess = subprocess_.data();
+    if (subprocess) {
+        bool written = false;
+
+        auto write_type = gete_write_type();
+        if (write_type == write_type_String) {
+            QString str = gets_console_write_string();
+            auto ts = gete_line_term(); //None,\n,\r,\r\n
+            if (ts == line_term__n) str += "\n";
+            if (ts == line_term__r) str += "\r";
+            if (ts == line_term__r_n) str += "\r\n";
+            subprocess->write(str.toLatin1());
+            written = true;
+        }
+        if (write_type == write_type_Text) {
+            subprocess->write(gets_console_write_text().toLatin1());
+            written = true;
+        }
+        if (write_type == write_type_Image) {
+            written = console_write_image();   //If no image ready, then skip
+        }
+
+        if (written) {
+            was_written_ = true;
+            //increase counter
+            increase_int_debug_write_times();
+
+        }
+    }
+
+}
 
 //---------------------------------------------------------------------
+bool XModuleMLExecute::console_write_image() {
+    //Read image
+    auto reader = getobject_console_write_image()->read();
 
+    //no image yet
+    if (reader.data().type() != XObjectTypeImage) return false;
 
+    //read image
+    //TODO optimize, may receive and grayscale!
+    //but now converts to u8 rgb.
+    XObjectImage::to_raster(reader.data(), image_write_input_);
+
+    //no transform
+    if (!geti_console_write_image_transform()) {
+        int ch = 3;
+        console_write_image(image_write_input_.w, image_write_input_.h, ch, image_write_input_.data_pointer_u8());
+    }
+    else
+    {
+        //transform
+        XRaster_u8c3 *img = &image_write_input_;
+
+        XRaster_u8c3 image_resized;// = image_write_input_;
+        auto resize = gete_console_write_image_resize();
+        if (resize == console_write_image_resize_Pixel_Size) {
+            XRaster::resize_nearest(image_write_input_, image_resized, geti_console_write_image_sizex(), geti_console_write_image_sizey());
+            img = &image_resized;
+        }
+        if (resize == console_write_image_resize_Rescale) {
+            XRaster::resize_nearest(image_write_input_, image_resized, getf_console_write_image_resize_scale());
+            img = &image_resized;
+        }
+        //now img contains current image, resized if necessary
+        //convert to grayscale if required, or sent rgb8
+
+        if (geti_console_write_image_to_grayscale()) {
+            XRaster_u8 image;
+            XRaster::convert(*img, image);            
+
+            //send to console
+            console_write_image(image.w, image.h, 1, image.data_pointer_u8());
+
+            //set to gui image
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+
+        }
+        else {
+            XRaster_u8c3 &image = *img;
+
+            //send to console
+            console_write_image(image.w, image.h, 3, image.data_pointer_u8());
+
+            //set to gui image
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+        }
+
+    }
+    return true;
+
+}
+
+//---------------------------------------------------------------------
+void XModuleMLExecute::console_write_image(int w, int h, int channels, uint8 *data) {
+    QProcess *subprocess = subprocess_.data();
+    int data_size = w*h*channels;
+
+    //send header or not
+    if (geti_console_write_image_header()) {
+        //send data and header
+        //make single array
+        int header_size = 5;
+        QVector<uint8> buffer(header_size + data_size);
+
+        uint8* bufp = &buffer[0];
+
+        *(uint16 *)bufp = w;
+        *(uint16 *)(bufp+2) = h;
+        *(uint8 *)(bufp+4) = channels;
+        for (int i=0; i<data_size; i++) {
+            bufp[i+header_size] = data[i];  //TODO use memcpy
+        }
+
+        subprocess->write((char *)bufp, buffer.size());
+    }
+    else {
+        //only data without header
+        subprocess->write((char *)data, data_size);
+    }
+}
+*/
+//---------------------------------------------------------------------

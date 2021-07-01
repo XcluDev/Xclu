@@ -14,6 +14,7 @@ SOURCES += \
     $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.cpp \
+    $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.cpp \
     $$PWD/builtin_modules/Project/Project/xmoduleproject.cpp \
     $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
@@ -52,6 +53,8 @@ HEADERS += \
     $$PWD/builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.h \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/auto.h \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.h \
+    $$PWD/builtin_modules/ML/MLExecute/auto.h \
+    $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xmoduleproject.h \
     $$PWD/builtin_modules/Sound/SoundOsc/auto.h \
@@ -111,3 +114,4 @@ HEADERS +=    \
 
 
 #--------------------------------------------------------------------------
+
