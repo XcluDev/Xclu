@@ -1,0 +1,32 @@
+#Module MLExecute
+#------------------------------------------
+module_description=Universal ML train and running operations using bat/bash scripts, provided by user.
+module_version=1.01
+module_impl=C++
+
+#------------------------------------------
+page Prepare_Dataset
+    //Create dataset from images folder - required for Tensor Flow, and can crop/resize images as well.
+
+in string_folder Images_Folder images_folder="D:\Images\MySequence1"  
+    //Folder with input images. 
+    //Choose an images folder.
+    
+in string_folder Datasets_Folder datasets_folder="D:\Datasets"  
+    //Folder with datasets. 
+    //Choose an datasets folder.
+
+in string Dataset_Name dataset_name="Trees_1024"  
+    //Folder with datasets. 
+    //Choose an datasets folder.
+
+line 
+
+in text Script prepare_dataset_script 10 10
+    //Bat/bash commands for running preparing dataset. They are started by writing temporary bat file.
+
+in button Run prepare_dataset_run
+    //Start dataset preparing
+    
+#--------------------
+
