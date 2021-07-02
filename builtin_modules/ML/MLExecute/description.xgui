@@ -53,10 +53,13 @@ in text Create_Dataset_Script create_dataset_script 10 10
     //Bat/bash commands for creating dataset. Use {dataset_name} for variables.
     //@rem Bat/bash commands for creating dataset. 
     //@rem Use {dataset_name} and so on for variables.
-    //python dataset_tool.py create_from_images ../TrainDatasets/Deer_1024 ../TrainVideo/Deer_1024
+    //python dataset_tool.py create_from_images {datasets} ../TrainVideo/Deer_1024
 
 in button Run create_dataset_button
     //Start creating dataset.
+    
+in text Comments create_dataset_comments 7 7
+    //Comments for usage, for example, 'Images must be 1024x1024'.
     
 line 
 in string_file Create_Dataset_Script_File create_dataset_script_file="_prepare_dataset.bat"

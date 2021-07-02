@@ -5,8 +5,86 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "-1"
+        "selected_module": "0"
     },
     "modules": [
+        {
+            "description": {
+                "class": "MLExecute",
+                "name": "ml_execute1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Folders",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "datasets_folder",
+                        "avalue": "Datasets"
+                    },
+                    {
+                        "aname": "train_folder",
+                        "avalue": "Train"
+                    },
+                    {
+                        "aname": "scripts_folder",
+                        "avalue": "stylegan2-colab"
+                    },
+                    {
+                        "aname": "Create_Dataset",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "images_folder",
+                        "avalue": "Images\\MySequence1"
+                    },
+                    {
+                        "aname": "dataset_name",
+                        "avalue": "Trees_1024"
+                    },
+                    {
+                        "aname": "create_dataset_script",
+                        "avalue": "@rem Bat/bash commands for creating dataset.\n@rem Use {dataset_name} and so on for variables.\npython dataset_tool.py create_from_images ../TrainDatasets/Deer_1024 ../TrainVideo/Deer_1024"
+                    },
+                    {
+                        "aname": "create_dataset_script_file",
+                        "avalue": "_prepare_dataset.bat"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
     ]
 }

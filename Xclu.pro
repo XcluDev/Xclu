@@ -193,6 +193,7 @@ SOURCES += \
     sdk/utility/incl_cpp.cpp \
     sdk/utility/incl_h.cpp \
     sdk/utility/jsonutils.cpp \
+    sdk/utility/xc_exec_batch.cpp \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
     sdk/utility/xclu_utils.cpp \
@@ -292,6 +293,7 @@ HEADERS += \
     sdk/utility/incl_h.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
+    sdk/utility/xc_exec_batch.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/xclu_utils.h \
