@@ -6,28 +6,62 @@ module_impl=C++
 module_name_hint=ml_execute
 
 #------------------------------------------
-page Prepare_Dataset
+page Folders
+    //Folders setup.
+    
+in string_folder Datasets datasets="Datasets"  
+    //Folder for datasets. 
+    //Choose a datasets folder.
+    
+in checkbox Use_Absolute_Path datasets_folder_use_abs=1
+    //Use absolute path to this folder in scripts. 
+
+line
+
+in string_folder Train_Output train="Train"  
+    //Folder for training results. 
+    //Choose a folder for training results.
+
+in checkbox Use_Absolute_Path train_folder_use_abs=1
+    //Use absolute path to this folder in scripts. 
+
+line 
+    
+in string_folder Scripts_Folder scripts="stylegan2-colab"  
+    //Temporary folder for writing bat/bash scripts - scripts are created by Xclu. Can be folder with Python code.
+    //Choose a folder for writing scripts.
+
+in checkbox Use_Absolute_Path scripts_folder_use_abs=1
+    //Use absolute path to this folder in scripts. 
+
+line    
+        
+#------------------------------------------
+page Create_Dataset
     //Create dataset from images folder - required for Tensor Flow, and can crop/resize images as well.
 
-in string_folder Images_Folder images_folder="D:\Images\MySequence1"  
+in string_folder Input_Images images_folder="Images\MySequence1"  
     //Folder with input images. 
     //Choose an images folder.
     
-in string_folder Datasets_Folder datasets_folder="D:\Datasets"  
-    //Folder with datasets. 
-    //Choose an datasets folder.
-
 in string Dataset_Name dataset_name="Trees_1024"  
     //Folder with datasets. 
     //Choose an datasets folder.
+        
+    
+in text Create_Dataset_Script create_dataset_script 10 10
+    //Bat/bash commands for creating dataset. Use {dataset_name} for variables.
+    //@rem Bat/bash commands for creating dataset. 
+    //@rem Use {dataset_name} and so on for variables.
+    //python dataset_tool.py create_from_images ../TrainDatasets/Deer_1024 ../TrainVideo/Deer_1024
 
+in button Run create_dataset_button
+    //Start creating dataset.
+    
 line 
-
-in text Script prepare_dataset_script 10 10
-    //Bat/bash commands for running preparing dataset. They are started by writing temporary bat file.
-
-in button Run prepare_dataset_run
-    //Start dataset preparing
+in string_file Create_Dataset_Script_File create_dataset_script_file="_prepare_dataset.bat"
+    //File name for creating dataset.
+    //Choose a file for script for creating a dataset.
     
 #--------------------
 
