@@ -13,8 +13,10 @@ Step scripts:
 
 * The idea was to use these scripts both for manual start by developer and by Github Actions for automation.
 * These scripts work OK within Ubuntu and thus may be used for github actions.
+* linuxdeployqt used for generating portable zip in Ubuntu works only in Ubuntu 18 bionic and doesnt work in Ubuntu 20. In debian it works ok.
 
 # References
 
 * https://github.com/probonopd/linuxdeployqt - linux portable generator being used.
+* https://github.com/probonopd/linuxdeployqt/issues/340 - a note about Ubuntu 18+.
 * https://github.com/QuasarApp/CQtDeployer - multi-platform portable generator (I checked it and seems it is so-so).
