@@ -1,6 +1,6 @@
 # Ubuntu compilation scripts for Xclu project
 
-This is almost same as [../debian](debian) scripts, but adpoted to run inside Github Actions ubuntu-16 environment.
+This is almost same as [../debian](debian) scripts, but adopted to run inside Github Actions ubuntu-16 environment.
 
 * Based on Qt from https://launchpad.net/~beineri packages.
 * As a result of using beineri, we have to call `source /opt/qt59/bin/qt59-env.sh` to set the correct environment in build scripts.
@@ -22,4 +22,4 @@ Step scripts:
 * ubuntu 20 focal  =~ debian buster(?)
 * ubuntu 21 Hirsute Hippo
 
-I noted that program compiled in Ubuntu 16+ works in Debian stretch.
+I noted that program compiled for Ubuntu 16+ works in Debian stretch.

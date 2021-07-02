@@ -12,7 +12,7 @@ Auto-compile project to be sure it compiles.
 
 ## Ubuntu build
 
-Auto-compile project to be sure it compiles + try generate release portable zips (this workflow does not uploads these zips).
+Auto-compile project to be sure it compiles + try generate release portable zips (ubunto-build workflow does not uploads these zips).
 
 * Uses [build/ubuntu](../../build/ubuntu) scripts
 * Runs in GA ubuntu-16
@@ -64,7 +64,7 @@ Works same as ubuntu release.
 # Notes
 
 It is possible to run `build` and `generate-release-zip` steps of same architecture together in one workflow, but I decided to left them separate
-because it is clear where each code is located. BTW, these scripts currently do not run simlutaneously - build is started on normal code push,
+because it is clear where each code is located. BTW, these scripts currently do not run simultaneously - build is started on normal code push,
 and release is started on tags push.
 
 It is interesting that windows and ubuntu release scripts run simultaneously, and they will both try to create release pages in github, but it
