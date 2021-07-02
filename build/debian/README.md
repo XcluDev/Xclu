@@ -15,8 +15,8 @@ The idea was to use these scripts both for manual start by developer and by Gith
 
 In reality, `debian/30_portable.sh` works in well Debian Stretch, but it doesn't work in Github Actions Ubuntu environment. The reason is:
 
-* We cannot use Ubuntu 18+ in GA, because in conflicta with `linuxdeployqt` used by script.
-* Ubuntu 16 has very old packages for qt - 5.3,
+* We cannot use Ubuntu 18+ in GA, because it conflicts with `linuxdeployqt` used by script.
+* Ubuntu 16 has very old packages for qt - 5.3.
 
 That's why we created separate ubuntu build scripts, which are designed for Ubuntu 16 but uses newer Qt.
 
