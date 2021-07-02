@@ -20,6 +20,8 @@ LSB_RELEASE=$(lsb_release -cs)
 echo "SETUP_SYSTEM: lsb_release = $LSB_RELEASE"
 if [ "$LSB_RELEASE" = "stretch" ]; then
     echo "SETUP_SYSTEM: in debian stretch we skip libqt5gamepad5 libqt5gamepad5-dev"
+elif [ "$LSB_RELEASE" = "bionic" ]; then
+    echo "SETUP_SYSTEM: in ubuntu bionic we skip libqt5gamepad5 libqt5gamepad5-dev"
 else
     sudo apt-get install -y libqt5gamepad5 libqt5gamepad5-dev
 fi
