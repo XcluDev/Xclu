@@ -1,4 +1,4 @@
-name: Debian build
+name: Ubuntu-latest build
 
 on:
   push:
@@ -14,14 +14,26 @@ on:
         # Default value if no value is explicitly provided
         default: 'Hello World'
         # Input has to be provided for the workflow to run
-        required: false    
+        required: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     steps:
     - uses: actions/checkout@v2
     - name: setup_system
       run: ./build/debian/10_setup_system.sh
     - name: compile
       run: ./build/debian/20_build.sh
+    - name: portable
+      run: ./build/debian/30_portable.sh
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: xclu-bin
+        path: build/debian/Xclu-bin/**/*
+    - uses: actions/upload-artifact@v2
+      with:
+        name: portable
+        path: build/debian/xclu-bin-debian-portable.zip

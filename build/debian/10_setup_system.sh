@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Purpose: install packages required for compilation (Qt, Realsense, etc)
-# Notes. Current method is to get Qt from official repos. That is Qt 5.7 for Stretch, Qt 5.11 for Buster.
+# Notes. Current method is to get Qt from official repos. That is Qt 5.7 for Debian Stretch, Qt 5.11 for Debian Buster.
 # Todo: add if-statement and in debian stetch: bypass gamepad packages, use xenial 
 
 ################################### primary things
