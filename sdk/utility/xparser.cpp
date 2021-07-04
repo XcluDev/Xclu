@@ -1,6 +1,9 @@
 #include "xparser.h"
 #include "incl_cpp.h"
 
+//replace "_" to " ", used in interpreting XGUI: Abc_Def -> "Abc Def"
+QString xc_remove_underscore(QString title);
+
 //---------------------------------------------------------------------
 float xparse_float(QString line, QString error_message) {
     bool ok;
@@ -15,6 +18,12 @@ int xparse_int(QString line, QString error_message) {
     float value = line.toInt(&ok);
     xc_assert(ok, error_message);
     return value;
+}
+
+//---------------------------------------------------------------------
+//Replace "_" to " ", used in interpreting XGUI: Abc_Def -> "Abc Def"
+QString xc_remove_underscore(QString title) {
+    return title.replace('_', ' ');
 }
 
 //---------------------------------------------------------------------

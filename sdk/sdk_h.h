@@ -6,7 +6,7 @@
 #include "console.h"
 
 #include "xclu_theme.h"
-#include "xclu_utils.h"
+#include "xc_files.h"
 #include "xclu_paths.h"
 #include "xclass.h"
 

@@ -194,9 +194,9 @@ SOURCES += \
     sdk/utility/incl_h.cpp \
     sdk/utility/jsonutils.cpp \
     sdk/utility/xc_exec_batch.cpp \
+    sdk/utility/xc_files.cpp \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
-    sdk/utility/xclu_utils.cpp \
     sdk/utility/ximageeffect.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xtimemeasure.cpp \
@@ -294,9 +294,9 @@ HEADERS += \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
     sdk/utility/xc_exec_batch.h \
+    sdk/utility/xc_files.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
-    sdk/utility/xclu_utils.h \
     sdk/utility/ximageeffect.h \
     sdk/utility/xparser.h \
     sdk/utility/xtimemeasure.h \

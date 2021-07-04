@@ -1,12 +1,6 @@
-#include "xclu_utils.h"
+#include "xc_files.h"
 #include "incl_cpp.h"
 #include <QtGlobal>
-
-//---------------------------------------------------------------------
-//замена подчеркивания на пробел в заголовках: Abc_Def -> "Abc Def"
-QString xc_remove_underscore(QString title) {
-    return title.replace('_', ' ');
-}
 
 //---------------------------------------------------------------------
 QStringList xc_read_text_file(QString file_name) {
