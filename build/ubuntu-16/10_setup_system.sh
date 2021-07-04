@@ -15,7 +15,7 @@ sudo apt-get update
 
 sudo apt-get install -y qt59-meta-full
 
-# need this to run in guthub actions server:
+# need this to run in github actions server:
 sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
 # also need this, see https://stackoverflow.com/questions/42141004/qt-multimedia-cannot-find-lpulse
 sudo apt-get install libpulse-dev

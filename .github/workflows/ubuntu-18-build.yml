@@ -1,4 +1,4 @@
-name: Ubuntu build
+name: Ubuntu-18 build
 
 on:
   push:
@@ -18,22 +18,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     steps:
     - uses: actions/checkout@v2
     - name: setup_system
-      run: ./build/ubuntu/10_setup_system.sh
+      run: ./build/debian/10_setup_system.sh
     - name: compile
-      run: ./build/ubuntu/20_build.sh
+      run: ./build/debian/20_build.sh
     - name: portable
-      run: ./build/ubuntu/30_portable.sh
+      run: ./build/debian/30_portable.sh
 
     - uses: actions/upload-artifact@v2
       with:
         name: xclu-bin
-        path: build/ubuntu/Xclu-bin/**/*
+        path: build/debian/Xclu-bin/**/*
     - uses: actions/upload-artifact@v2
       with:
         name: portable
-        path: build/ubuntu/xclu-bin-ubuntu-portable.zip
+        path: build/debian/xclu-bin-debian-portable.zip

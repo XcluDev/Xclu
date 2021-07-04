@@ -2,26 +2,28 @@
 
 These files configures https://docs.github.com/en/actions cloud engine to compile project when code is pushed to repository.
 
-## Debian build
+## Ubuntu 18 build
 
-Auto-compile project to be sure it compiles.
+Auto-compile project in release mode + generate portable zip.
 
-* Uses [build/debian](../../build/debian) scripts
-* Runs in GA ubuntu-latest
+* Uses [build/debian](../../build/debian) scripts.
+* Runs in GA ubuntu-18.04.
 * Uses system os packages to get Qt.
 
-## Ubuntu build
+## Ubuntu-latest build
 
-Auto-compile project to be sure it compiles + try generate release portable zips (ubunto-build workflow does not uploads these zips).
+Auto-compile project in release mode. Does not generates portable zip.
 
-* Uses [build/ubuntu](../../build/ubuntu) scripts
-* Runs in GA ubuntu-16
-* Uses https://launchpad.net/~beineri to get Qt.
+* Uses [build/debian](../../build/debian) scripts.
+* Runs in GA ubuntu-20.04.
+* Uses system os packages to get Qt.
 
-## Windows build
+## Windows 2019 build
 
-* Uses [build/windows](../../build/windows) scripts
-* Runs in GA windows-latest
+Auto-compile project in release mode + generate portable zip.
+
+* Uses [build/windows](../../build/windows) scripts.
+* Runs in GA windows-2019.
 * Uses VC 2019 and Qt 5.15.2
 * Qt is installed using Github action https://github.com/jurplel/
 * VC2019 is pre-installed in github actions windows-latest runner.
@@ -34,7 +36,7 @@ Links:
 
 ## Ubuntu generate release zip
 
-When git tag is created starting with "v" (for example "v1.0.1"), generate and publish portable zip to release page.
+GA is configured in that way: when git tag in project is created, starting with "v" (for example "v1.0.1"), generate and publish portable zip to release page.
 
 How to use:
 ```
@@ -43,12 +45,12 @@ git push origin --tags
 ```
 
 After this, a script `ubuntu-generate-release-zip.yml` will be run by GA, and
-1) generate github release page for this tag,
+1) it will generate github release page for this tag,
 2) generate Xclu ubuntu build, generate zip, and attach zip to that release.
 
 Based on https://github.com/svenstaro/upload-release-action
 
-* Alternatively, releases could be made in github browser interface.
+* Alternatively, releases could be made in github browser interface by manually creating git tags.
 
 ## Windows generate release zip
 
@@ -74,3 +76,8 @@ seems to be ok, because https://github.com/svenstaro/upload-release-action creat
 
 As a test, we upload portable versions generated during non-release ubuntu and windows builds as artifacts using https://github.com/actions/upload-artifact
 Note, GA always compresses artifact files as zip, so to avoid double zips we pack directories using GA, avoiding our normal zipping using scripts.
+
+# Portable zip note for Ubuntu-20
+
+`linuxdeployqt` used for generating portable zip in Ubuntu works only in Ubuntu 18 bionic and doesn't work in Ubuntu 20, see https://github.com/probonopd/linuxdeployqt/issues/340.
+This prevents us from both generating portable zip and github releases in Ubuntu-20. Thus we use Ubuntu 18 for that purpose.

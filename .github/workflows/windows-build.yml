@@ -1,4 +1,4 @@
-name: Windows build
+name: Windows 2019 build
 
 on:
   push:
