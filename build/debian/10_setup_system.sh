@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Purpose: install packages required for compilation (Qt, Realsense, etc)
-# Notes. Current method is to get Qt from official repos. That is Qt 5.7 for Stretch, Qt 5.11 for Buster.
+# Notes. Current method is to get Qt from official repos. That is Qt 5.7 for Debian Stretch, Qt 5.11 for Debian Buster.
 # Todo: add if-statement and in debian stetch: bypass gamepad packages, use xenial 
 
 ################################### primary things
@@ -20,6 +20,8 @@ LSB_RELEASE=$(lsb_release -cs)
 echo "SETUP_SYSTEM: lsb_release = $LSB_RELEASE"
 if [ "$LSB_RELEASE" = "stretch" ]; then
     echo "SETUP_SYSTEM: in debian stretch we skip libqt5gamepad5 libqt5gamepad5-dev"
+elif [ "$LSB_RELEASE" = "bionic" ]; then
+    echo "SETUP_SYSTEM: in ubuntu bionic we skip libqt5gamepad5 libqt5gamepad5-dev"
 else
     sudo apt-get install -y libqt5gamepad5 libqt5gamepad5-dev
 fi

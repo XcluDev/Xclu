@@ -1,4 +1,9 @@
-# Ubuntu compilation scripts for Xclu project
+# WARNING. 
+
+This is old, obsolete scripts, kept alive for case if we will need to compile for qt59 env / xenial libs
+and thus achieve debian-stretch compatibility inside github actions.
+
+# Ubuntu 16 compilation scripts for Xclu project
 
 This is almost same as [../debian](debian) scripts, but adopted to run inside Github Actions ubuntu-16 environment.
 

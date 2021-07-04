@@ -1,4 +1,4 @@
-name: Windows generate release zip
+name: Windows 2019 generate release zip
 
 on:
   push:
