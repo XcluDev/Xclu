@@ -147,7 +147,7 @@ endif
 page Device_Info
     //Print list of cameras and supported formats.
 
-in button Print_Devices print_devices
+in button_always Print_Devices print_devices
 	//Print list of all connected devices.
 
 in checkbox Serials print_serials=0

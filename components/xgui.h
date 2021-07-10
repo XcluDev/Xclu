@@ -64,6 +64,12 @@ public:
     XGui(XGuiPageBuilder &page_builder, XItem *item);
     virtual ~XGui();
 
+    //called at start, used for enabling buttons
+    virtual void start() {}
+
+    //called at stop, used for disabling buttons
+    virtual void stop() {}
+
     //Functions for locking and unlocking editing of constants at project start.
     void block_editing_on_running();    //blocking changing constants, called before starting the project
     void unblock_editing_on_stopping(); //onblocking changing constants, called after stopping the project

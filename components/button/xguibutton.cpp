@@ -44,6 +44,13 @@ XGuiButton::~XGuiButton() {
 }
 
 //---------------------------------------------------------------------
+void XGuiButton::set_running(bool running) {  //switch enabled/disabled
+    if (!((XItemButton *)item__)->is_always_enabled()) {
+        button_->setEnabled(running);
+    }
+}
+
+//---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XGuiButton::value() {
     int res = value_;

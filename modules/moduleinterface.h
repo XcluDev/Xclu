@@ -47,6 +47,10 @@ public:
     void gui_detached();
     bool is_gui_attached();
 
+    //called at start, stop and attach interface - enable/disable buttons
+    void update_is_running(bool running);
+
+
     //установить видимость элементов - используется при тестировании интерфейса,
     //а так, это делают сами переменные и поэтому в обычном применении модуля вызывать это не нужно
     void propagate_visibility();

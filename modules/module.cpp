@@ -131,6 +131,8 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         if (is_running()) {
             interf()->block_gui(XQualifierMask(XQualifierConst));
         }
+        //enable buttons
+        interf()->update_is_running(is_running());
     break;
 
     case GuiStageBeforeStart: {   //GUI -> const и in, блокировка констант
@@ -144,6 +146,9 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
 
         //update links and "was_changed"
         interf()->update();
+
+        //enable buttons
+        interf()->update_is_running(true);
     }
         break;
 
@@ -157,6 +162,9 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         break;
 
     case GuiStageAfterStop:     //GUI -> const, in;  out -> GUI, разблокировка констант
+        //disable buttons
+        interf()->update_is_running(false);
+
         interf()->gui_to_vars(XQualifierMask::get_const_in());
         interf()->vars_to_gui(XQualifierMask::get_out_link());
         if (affect_is_running) {
@@ -205,7 +213,7 @@ void Module::execute(ModuleExecuteStage stage) {
         //Установить все in и const переменные
         gui_action(GuiStageBeforeStart);
         //запуск start исполняемой части модуля
-        xmodule_->execute(stage);
+        xmodule_->execute(stage);    
         gui_action(GuiStageAfterUpdate);
         break;
 

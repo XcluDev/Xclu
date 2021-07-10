@@ -66,11 +66,18 @@ public:
     //Compiling links and other things
     virtual void compile();
 
+    //called at start, stop and attached interface - used for buttons
+    virtual void update_is_running(bool running){}
+
+    //status of run - get from parent module
+    bool is_running();
+
     //update
     //checks changes at current frame
     //and maintains "link" copying (for scalars and objects) or sets pointer (for objects optionally)
     //Note: update should be called after updating value from user GUI to correctly maintain "was changed"
     virtual void update();
+
 
     //Имя и тип, а также информация для создания GUI  -------------------------
     QString name();

@@ -8,15 +8,30 @@
 REGISTER_XITEM(XItemButton, button)
 
 //---------------------------------------------------------------------
+//Button, working only runtime:
 //in button Execute execute
+//    //Execute command.
+
+//Button, working always:
+//in button_always Print_Devices print_devices
+//    //Print Available devices.
+
+
+
 XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem_<int>(interf, pre_description)
 {
     //Button не может быть out
     xc_assert(pre_description.qualifier != XQualifierOut, "button can't have 'out' qualifier, '" + pre_description.title + "'");
 
-    //page Main_page
     name_ = pre_description.line_to_parse;
+
+    QString options = pre_description.options;
+    if (!options.isEmpty()) {
+        is_always_enabled_ = (options == "always");
+        xc_assert(is_always_enabled_, "Unknown button option, expected '... button_always...'");
+    }
+
 
     //reset value, in opposite case can be "random" value
     reset_value();
@@ -30,15 +45,26 @@ XGui *XItemButton::create_gui(XGuiPageBuilder &page_builder) {
 }
 
 //---------------------------------------------------------------------
+//called at start, stop and attached interface - used for buttons
+void XItemButton::update_is_running(bool running) {
+    XItem_<int>::update_is_running(running);
+    if (is_gui_attached()) {
+        ((XGuiButton *)gui__)->set_running(running);
+    }
+
+}
+
+//---------------------------------------------------------------------
 //вызывается из gui при нажатии кнопки
 void XItemButton::callback_button_pressed() {
     //Проверка, что parent не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xc_assert(interf(),
                 "Internal error in XItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
 
+    //Check can we press this button not in runtime
+    xc_assert(is_always_enabled() || is_running(), "Internal error - this button must be disabled during edit mode");
     //hit_value() will be called from there
     interf()->callback_button_pressed(name());
-
 }
 
 //---------------------------------------------------------------------

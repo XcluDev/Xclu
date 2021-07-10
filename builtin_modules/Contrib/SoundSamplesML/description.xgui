@@ -1,0 +1,30 @@
+#Module SoundSamplesML
+#------------------------------------------
+module_description=ML exploration of sound samples - used as a part of project Endless Instruments.
+module_version=1.01
+module_impl=C++
+#module_name_hint=sound_samples_ml
+
+#------------------------------------------
+page Wav_To_Bin
+    //Convert folder with equal-length WAV files into a single binary file and text file with the details.
+    
+in string_folder Input_Folder join_input_folder=""  
+    //Folder for input wav files. 
+    //Choose a datasets folder.
+    
+line
+
+in string_folder Output_Folder join_output_folder=""  
+    //Folder for output data - binary file and text file with description. 
+    //Choose a folder for training results.
+
+in checkbox Use_Absolute_Path train_folder_use_abs=1
+    //Use absolute path to this folder in scripts. 
+
+line 
+in button Convert join_convert
+    //Join WAVs to a binary file.
+
+
+#------------------------------------------

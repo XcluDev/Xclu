@@ -13,9 +13,10 @@ public:
     XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item);
     ~XGuiButton();
 
-    //значение - нажатие считывается один раз, затем стирается
+    //value - pressing is read once and cleared
     int value();
 
+    void set_running(bool running);  //switch enabled at start, disabled at stop
 protected:
     QPushButton *button_ = nullptr;
     int value_ = 0;

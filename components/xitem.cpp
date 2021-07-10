@@ -275,10 +275,19 @@ void XItem::link_was_changed() {
     }
     xc_document_modified();
     //if running - then resolve link immediately
-    if (module() && module()->is_running()) {
+    if (is_running()) {
         resolve_link();
     }
 }
+
+//---------------------------------------------------------------------
+//status of run - get from parent module
+bool XItem::is_running() {
+    return (module() && module()->is_running());
+}
+
+//---------------------------------------------------------------------
+
 
 //---------------------------------------------------------------------
 //find item corresponding to link

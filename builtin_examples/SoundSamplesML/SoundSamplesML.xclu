@@ -5,75 +5,93 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
             "description": {
-                "class": "MLExecute",
-                "name": "ml_execute1",
+                "class": "SoundSamplesML",
+                "name": "sound_samples_ml1",
                 "version": "1.01"
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
-                        "aname": "Folders",
+                        "aname": "Wav_To_Bin",
                         "avalue": "0"
                     },
                     {
-                        "aname": "datasets_folder",
-                        "avalue": "Datasets"
+                        "aname": "join_input_folder",
+                        "avalue": ""
                     },
                     {
-                        "aname": "datasets_folder_use_abs",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "train",
-                        "avalue": "Train"
+                        "aname": "join_output_folder",
+                        "avalue": ""
                     },
                     {
                         "aname": "train_folder_use_abs",
                         "avalue": "1"
                     },
                     {
-                        "aname": "scripts",
-                        "avalue": "stylegan2-colab"
-                    },
-                    {
-                        "aname": "scripts_folder_use_abs",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "Create_Dataset",
+                        "aname": "Control",
                         "avalue": "0"
                     },
                     {
-                        "aname": "images_folder",
-                        "avalue": "Images\\MySequence1"
-                    },
-                    {
-                        "aname": "images_folder_use_abs",
+                        "aname": "general_enabled_",
                         "avalue": "1"
                     },
                     {
-                        "aname": "dataset_name",
-                        "avalue": "Trees_1024"
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
                     },
                     {
-                        "aname": "create_dataset_script",
-                        "avalue": "@rem Bat/bash commands for creating dataset.\n@rem Use {dataset_name} and so on for variables.\npython dataset_tool.py create_from_images ../TrainDatasets/Deer_1024 ../TrainVideo/Deer_1024"
+                        "aname": "presets_setup",
+                        "avalue": "0"
                     },
                     {
-                        "aname": "create_dataset_comments",
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundSamplesML",
+                "name": "sound_samples_ml2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Wav_To_Bin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "join_input_folder",
                         "avalue": ""
                     },
                     {
-                        "aname": "create_dataset_script_file",
-                        "avalue": "_prepare_dataset.bat"
+                        "aname": "join_output_folder",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "train_folder_use_abs",
+                        "avalue": "1"
                     },
                     {
                         "aname": "Control",

@@ -182,6 +182,6 @@ line
 #------------------------------------------
 page Devices
 
-in button Print_Devices print_devices
+in button_always Print_Devices print_devices
 
 out text Device_List device_list 7 20

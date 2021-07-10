@@ -35,8 +35,14 @@ public:
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageBuilder &page_builder);
 
+    //flag that button works always - at edit mode and runtime, not only runtime
+    bool is_always_enabled() { return is_always_enabled_; }
+
     //вызывается из gui при нажатии кнопки
     void callback_button_pressed();
+
+    //called at start, stop and attached interface - used for buttons
+    virtual void update_is_running(bool running);
 
     //C++ -------------------------
     virtual void export_interface(QStringList &file);
@@ -45,6 +51,7 @@ public:
 protected:
     //int value_ = 0; //inside XItem_
 
+    bool is_always_enabled_ = false;   //flag that button works always - at edit mode and runtime, not only runtime
 
     //Function for setting value using link
     virtual void set_value_from_link(XLinkResolved *linkres);

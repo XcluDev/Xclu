@@ -5,6 +5,7 @@
 SOURCES += \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
+    $$PWD/builtin_modules/Contrib/SoundSamplesML/xmodulessoundsamplesml.cpp \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
     $$PWD/builtin_modules/Core/ValueMap/xmodulevaluemap.cpp \
@@ -36,6 +37,8 @@ HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
+    $$PWD/builtin_modules/Contrib/SoundSamplesML/auto.h \
+    $$PWD/builtin_modules/Contrib/SoundSamplesML/xmodulessoundsamplesml.h \
     $$PWD/builtin_modules/Core/Random/auto.h \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.h \
     $$PWD/builtin_modules/Core/Scalar/auto.h \

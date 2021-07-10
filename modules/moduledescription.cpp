@@ -40,13 +40,16 @@ QString ModuleRegisteredCalls::to_string_gui() {        //конвертация
 
 //---------------------------------------------------------------------
 QString ModuleDescription::generate_name_hint(QString class_name) { //GuiWindow -> gui_window
-    //поиск больших букв
+    //поиск больших букв, при этом если две подряд - то не надо подчерк
     QString lower = class_name.toLower();
     QString name;
+    bool was_upper = false;
     for (int i=0; i<class_name.length(); i++) {
-        if (i > 0 && class_name.at(i) != lower.at(i)) {
+        bool is_upper = class_name.at(i) != lower.at(i);
+        if (i > 0 && is_upper && !was_upper) {
             name += "_";
         }
+        was_upper = is_upper;
         name += lower.at(i);
     }
     return name;

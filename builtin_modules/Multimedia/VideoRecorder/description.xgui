@@ -61,7 +61,7 @@ const string Device_Name device_name=""
 endif	
 
 separator
-in button Print_Devices print_devices
+in button_always Print_Devices print_devices
 	//Show all connected webcams to local console
 
 #-----------------------------

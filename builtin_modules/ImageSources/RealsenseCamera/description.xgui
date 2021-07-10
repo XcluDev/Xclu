@@ -205,7 +205,7 @@ line
 page Devices
     //Here you can get list of connected cameras.
 
-in button Print_Devices print_devices
+in button_always Print_Devices print_devices
 	//Print list of all connected devices
 
 #in checkbox Print_Formats print_formats=1

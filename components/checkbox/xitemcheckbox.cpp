@@ -11,8 +11,8 @@ REGISTER_XITEM(XItemCheckbox, checkbox)
 //in checkbox Active active=0
 //      //Length of the object.    описание
 
-//in checkbox(group) Details show_details=0
-//- показ чеббокса слева, для обозначения группы элементов GUI, и еще справа строка
+//in checkbox_group Details show_details=0
+//- показ чекбокса слева, для обозначения группы элементов GUI, и еще справа дорисовывается горизонтальная линия
 
 XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalarInt(interf, pre_description)
@@ -28,7 +28,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
         //является ли "групповым"
         is_group_checkbox_ = (options == "group");
         //какая-то из опций должна быть включена, если переданы не пустые
-        xc_assert(is_group_checkbox_, "Unknown option, expected '... checkbox(group)...'");
+        xc_assert(is_group_checkbox_, "Unknown checkbox option, expected '... checkbox_group...'");
     }
 
     //range setup

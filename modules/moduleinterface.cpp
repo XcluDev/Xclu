@@ -402,6 +402,19 @@ bool ModuleInterface::compile() {
 }
 
 //---------------------------------------------------------------------
+//called at start - enable buttons
+void on_start() {
+}
+
+//---------------------------------------------------------------------
+//called at start, stop and attach interface - enable/disable buttons
+void ModuleInterface::update_is_running(bool running) {
+    for (auto item: items_) {
+        item->update_is_running(running);
+    }
+}
+
+//---------------------------------------------------------------------
 //сигнал, что GUI подключен/отключен
 void ModuleInterface::gui_attached(XGuiEditor *editor) {
     editor_ = editor;
