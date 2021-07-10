@@ -13,7 +13,7 @@ XCore XCORE;
 void XCoreWorkingProperties::reset() {
     frame_rate_ = 30;   //TODO параметр, значение по умолчанию
     autostart_ = 0;
-    dont_save_at_exit_ = 1;
+    dont_save_at_exit_ = 0;
 }
 
 //---------------------------------------------------------------------

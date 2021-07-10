@@ -36,7 +36,7 @@ public:
 protected:
     int frame_rate_ = 30;
     int autostart_ = 0;
-    int dont_save_at_exit_ = 1;
+    int dont_save_at_exit_ = 0;
 };
 
 
