@@ -28,7 +28,7 @@ protected slots:
 
 protected:
     void join_wavs(QString input_folder, QString output_folder);
-
+    void join_wav(QString file);
 };
 
 

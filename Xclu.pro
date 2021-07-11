@@ -171,6 +171,8 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    sdk/audio/audio_utils.cpp \
+    sdk/audio/audio_wavfile.cpp \
     sdk/compshaders/xcomputeshader.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
@@ -264,6 +266,8 @@ HEADERS += \
     project/project.h \
     project/projectproperties.h \
     project/xcore.h \
+    sdk/audio/audio_utils.h \
+    sdk/audio/audio_wavfile.h \
     sdk/compshaders/xcomputeshader.h \
     sdk/math/int2.h \
     modules/exportinterface.h \

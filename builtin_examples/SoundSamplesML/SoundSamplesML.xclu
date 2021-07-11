@@ -25,15 +25,11 @@
                     },
                     {
                         "aname": "join_input_folder",
-                        "avalue": ""
+                        "avalue": "../../../../../../Endless Instruments/ML_Sound_Gen/Drum_Slices_Wav"
                     },
                     {
                         "aname": "join_output_folder",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "train_folder_use_abs",
-                        "avalue": "1"
+                        "avalue": "../../../../../../Endless Instruments/ML_Sound_Gen/Drum_Database"
                     },
                     {
                         "aname": "Control",
@@ -88,10 +84,6 @@
                     {
                         "aname": "join_output_folder",
                         "avalue": ""
-                    },
-                    {
-                        "aname": "train_folder_use_abs",
-                        "avalue": "1"
                     },
                     {
                         "aname": "Control",

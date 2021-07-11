@@ -19,12 +19,12 @@ in string_folder Output_Folder join_output_folder=""
     //Folder for output data - binary file and text file with description. 
     //Choose a folder for training results.
 
-in checkbox Use_Absolute_Path train_folder_use_abs=1
-    //Use absolute path to this folder in scripts. 
-
 line 
-in button Convert join_convert
+in button Convert join_convert 
     //Join WAVs to a binary file.
 
+separator
+out text Console join_console 10 10
+    //Conversion details.
 
 #------------------------------------------

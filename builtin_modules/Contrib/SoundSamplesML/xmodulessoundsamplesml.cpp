@@ -24,15 +24,7 @@ XModuleSoundSamplesML::~XModuleSoundSamplesML()
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::start() {
-   //run
- /*   sete_status(status_Not_Started);
-    seti_exit_code(0);
-
-    clear_string_error_details();
-
-    //read, write
-    console_clear();
-*/
+    clear_string_join_console();
 }
 
 //---------------------------------------------------------------------
@@ -66,10 +58,19 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     xc_assert(input_iter.hasNext(), "No wav or aiff files in folder '" + input_folder +"'");
 
+    int n = 0;
     while (input_iter.hasNext()) {
         QString path = input_iter.next();
-        xc_console_append(path);
+        join_wav(path);
+        n++;
     }
+    append_string_join_console(QString("Processed input audio files: %1").arg(n));
 
 }
+
+//---------------------------------------------------------------------
+void XModuleSoundSamplesML::join_wav(QString file) {
+
+}
+
 //---------------------------------------------------------------------
