@@ -3,6 +3,7 @@
 #include <QString>
 #include <QClipboard>
 #include <QApplication>
+#include <QThread>
 #include "console.h"
 #include "mainwindow.h"
 #include "consoleview.h"
@@ -45,11 +46,20 @@ void xc_console_append(QString message, bool dirty) {
     xc_assert(CONS_VIEW, "CONS_VIEW is not created, can't add log message there");
     CONS_VIEW->append(message, dirty);
     qDebug() << ">>" << message;
+
+    //qApp->processEvents();  //update view
+    //int sleep_ms = 1;     //need to sleep to process this ???????
+    //QThread::msleep(sleep_ms);
+
 }
 
 //---------------------------------------------------------------------
 void xc_console_clear() {
     CONS_VIEW->clear();
+
+    //qApp->processEvents();  //update view
+    //int sleep_ms = 1;     //need to sleep to process this ????????
+    //QThread::msleep(sleep_ms);
 }
 
 //---------------------------------------------------------------------

@@ -4,6 +4,10 @@
 #include <QProcess>
 #include <QDirIterator>
 #include "xcore.h"
+#include "xaudio_wavfile.h"
+#include "xaudio_utils.h"
+#include <QApplication>
+#include <QThread>
 
 
 //registering module implementation
@@ -53,7 +57,7 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     //scan folder for wavs
     QDirIterator input_iter(input_folder,//xc_abs_path(folder_name),
-                             QStringList() << "*.wav" << "*.aiff"
+                             QStringList() << "*.wav"// << "*.aiff"
                              ); //, QDirIterator::Subdirectories);
 
     xc_assert(input_iter.hasNext(), "No wav or aiff files in folder '" + input_folder +"'");
@@ -69,7 +73,28 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::join_wav(QString file) {
+void XModuleSoundSamplesML::join_wav(QString wav_file) {            
+    xc_audio::WavFile wav;
+
+    //The code of loading WAV is based on the "Spectrum" Qt example
+    xc_assert(wav.open(wav_file), "Could not open WAV file '" + wav_file + "'");
+    auto &format = wav.fileFormat();
+    xc_assert(xc_audio::isPCMS16LE(format),
+              "Audio format '" + xc_audio::formatToString(format) + "' not supported");
+
+    int sample_rate = format.sampleRate();
+    int channels = format.channelCount();
+    int sample_size = format.sampleSize();
+    int size = wav.size();
+
+    QByteArray bytes = wav.readAll();
+    //append_string_join_console(QString("sample rate %1, channels %2, sample_size %3")
+    //        .arg(sample_rate).arg(channels).arg(sample_size));
+    append_string_join_console(QString("file size %1, read %2")
+            .arg(size).arg(bytes.size()));
+    repaint_join_console();
+
+
 
 }
 

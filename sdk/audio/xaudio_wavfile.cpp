@@ -49,7 +49,7 @@
 ****************************************************************************/
 
 #include <qendian.h>
-#include "audio_wavfile.h"
+#include "xaudio_wavfile.h"
 
 //--------------------------------------------------
 namespace xc_audio {

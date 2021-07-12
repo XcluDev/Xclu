@@ -1,4 +1,4 @@
-//Original: "wavfile" from Qt "Spectrum Example"
+//Original: "utils" from Qt "Spectrum Example"
 /****************************************************************************
 **
 ** Copyright (C) 2017 The Qt Company Ltd.
@@ -49,40 +49,51 @@
 **
 ****************************************************************************/
 
+#ifndef XAUDIO_UTILS_H
+#define XAUDIO_UTILS_H
 
-#ifndef WAVFILE_H
-#define WAVFILE_H
+#include <QtCore/qglobal.h>
+#include <QDebug>
 
+QT_FORWARD_DECLARE_CLASS(QAudioFormat)
 
-#include <QObject>
-#include <QFile>
-#include <QAudioFormat>
+//-----------------------------------------------------------------------------
+// Miscellaneous utility functions
+//-----------------------------------------------------------------------------
 
 //--------------------------------------------------
 namespace xc_audio {
 //--------------------------------------------------
 
-class WavFile : public QFile
-{
-public:
-    WavFile(QObject *parent = 0);
+qint64 audioDuration(const QAudioFormat &format, qint64 bytes);
+qint64 audioLength(const QAudioFormat &format, qint64 microSeconds);
 
-    using QFile::open;
-    bool open(const QString &fileName);
-    const QAudioFormat &fileFormat() const;
-    qint64 headerLength() const;
+QString formatToString(const QAudioFormat &format);
 
-private:
-    bool readHeader();
+qreal nyquistFrequency(const QAudioFormat &format);
 
-private:
-    QAudioFormat m_fileFormat;
-    qint64 m_headerLength;
-};
+// Scale PCM value to [-1.0, 1.0]
+qreal pcmToReal(qint16 pcm);
+
+// Scale real value in [-1.0, 1.0] to PCM
+qint16 realToPcm(qreal real);
+
+// Check whether the audio format is PCM
+bool isPCM(const QAudioFormat &format);
+
+// Check whether the audio format is signed, little-endian, 16-bit PCM
+bool isPCMS16LE(const QAudioFormat &format);
+
+// Compile-time calculation of powers of two
+
+template<int N> class PowerOfTwo
+{ public: static const int Result = PowerOfTwo<N-1>::Result * 2; };
+
+template<> class PowerOfTwo<0>
+{ public: static const int Result = 1; };
 
 //--------------------------------------------------
 } //namespace
 //--------------------------------------------------
 
-
-#endif // WAVFILE_H
+#endif // XAUDIO_UTILS_H

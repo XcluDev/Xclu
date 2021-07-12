@@ -457,6 +457,18 @@ void XItem::block_gui_editing(const XQualifierMask &qual) {
 }
 
 //---------------------------------------------------------------------
+//force GUI element to update - useful at long operations for updating texts/numbers, calls repaint_internal()
+void XItem::repaint() {
+    if (is_gui_attached()) {
+        var_to_gui_internal();
+        //propagate_visibility();
+
+        bool force_process_events = true;
+        gui__->repaint_(force_process_events);  //NOTE: forcing qApp to process events!
+    }
+}
+
+//---------------------------------------------------------------------
 //разрешить редактирование
 void XItem::unblock_gui_editing(const XQualifierMask &qual) {
     if (is_matches_qual_mask(qual) && is_gui_attached()) {
@@ -654,20 +666,25 @@ enum_position gete_position() { ... }
 
 Function names begin with prefix denoting type of the item as the following:
 
-* `geti_...`, `seti_...` - int, button, checkbox
-* `gete_...`, `sete_...` - enum
-* `getf_...`,`setf_...` - float
-* `gets_...`, `sets_...` - string, text
-* `getobject_...` - object
+    geti_..., seti_... - int, button, checkbox
+    gete_..., sete_..., gets_... - enum
+    getf_...,setf_... - float
+    gets_..., sets_... - string, text
+    getstruct_... - structure
 
-Also are defined the following functions:
-* `was_changed_...` - all items,
-* `clear_string_...`, `append_string_...` - out string, out text,
-* `increase_int_...` - out int
+Also are defined the following useful functions:
+
+    was_changed_... - all items,
+    get_strings_... - string, text
+    clear_string_..., append_string_... - out string, out text,
+    increase_int_... - out int,
+    QString button_... - button, for using in impl_button_pressed()
+    repaint_... - applicable to all out items, it refreshes the associated GUI widget; applied for out variables for informing user about status during long operations.
+
  */
 
 void XItem::export_interface(QStringList & /*file*/) {
-    xc_exception("Can't generate C++ header for interface element of type `" + type() + "'");
+    xc_exception("Can't generate C++ header for interface element of type `" + type() + "' - not implemented yet!");
 }
 
 //---------------------------------------------------------------------
@@ -750,6 +767,8 @@ void XItem::export_interface_template(QStringList &file,
                 file.append(QString("void append_string_%1(QStringList v, int extra_new_lines_count = 0) { append_string_(\"%1\", v, extra_new_lines_count); }").arg(name()));
             }
         }
+        //repaint
+        file.append(QString("void repaint_%1() { repaint_(\"%1\"); }").arg(name()));
     }
     if (final_blank) {
         file.append("");

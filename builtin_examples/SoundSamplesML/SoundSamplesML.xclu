@@ -61,60 +61,6 @@
                     }
                 ]
             }
-        },
-        {
-            "description": {
-                "class": "SoundSamplesML",
-                "name": "sound_samples_ml2",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "0"
-                },
-                "items": [
-                    {
-                        "aname": "Wav_To_Bin",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "join_input_folder",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "join_output_folder",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "Control",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "general_enabled_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "general_auto_update_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "presets_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "error_handling",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
-                    },
-                    {
-                        "aname": "calls_info",
-                        "avalue": "0"
-                    }
-                ]
-            }
         }
     ]
 }

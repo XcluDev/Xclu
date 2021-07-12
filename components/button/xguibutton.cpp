@@ -50,6 +50,7 @@ void XGuiButton::set_running(bool running) {  //switch enabled/disabled
     }
 }
 
+
 //---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XGuiButton::value() {

@@ -57,6 +57,9 @@ public:
     //This was_changed is checks changes between `update` calls
     bool was_changed_(QString name);
 
+    //Repaint - force GUI widget to refresh, useful for long operations for updating numbers/texts
+    void repaint_(QString name);
+
     //int, checkbox, button, enum (rawtext), string, text
     //index>=0: string, text separated by ' ' - no error if no such string!
     //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!

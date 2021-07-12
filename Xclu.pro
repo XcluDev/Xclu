@@ -117,7 +117,7 @@ INCLUDEPATH += \
 
 INCLUDEPATH += project modules
 INCLUDEPATH += host host/dialogs
-INCLUDEPATH += sdk sdk/compshaders sdk/math sdk/types sdk/utility
+INCLUDEPATH += sdk sdk/compshaders sdk/math sdk/types sdk/utility sdk/audio
 
 # GLM
 INCLUDEPATH += ./ libs/glm libs/glm/gtx
@@ -171,8 +171,8 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
-    sdk/audio/audio_utils.cpp \
-    sdk/audio/audio_wavfile.cpp \
+    sdk/audio/xaudio_utils.cpp \
+    sdk/audio/xaudio_wavfile.cpp \
     sdk/compshaders/xcomputeshader.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
@@ -266,8 +266,8 @@ HEADERS += \
     project/project.h \
     project/projectproperties.h \
     project/xcore.h \
-    sdk/audio/audio_utils.h \
-    sdk/audio/audio_wavfile.h \
+    sdk/audio/xaudio_utils.h \
+    sdk/audio/xaudio_wavfile.h \
     sdk/compshaders/xcomputeshader.h \
     sdk/math/int2.h \
     modules/exportinterface.h \

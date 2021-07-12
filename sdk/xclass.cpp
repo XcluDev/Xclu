@@ -62,6 +62,14 @@ bool XClass::was_changed_(QString name) {
 }
 
 //---------------------------------------------------------------------
+//Repaint - force GUI widget to refresh, useful for long operations for updating numbers/texts
+//TODO: check it's called from proper thread, and emit message if from another
+
+void XClass::repaint_(QString name) {
+    module()->interf()->var(name)->repaint();
+}
+
+//---------------------------------------------------------------------
 //Variables access
 //int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!

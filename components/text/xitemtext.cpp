@@ -52,13 +52,17 @@ XGui *XItemText::create_gui(XGuiPageBuilder &page_builder) {
 //---------------------------------------------------------------------
 //получение значения из gui
 void XItemText::gui_to_var_internal() {
-    set_value_string(((XGuiText *)gui__)->value());
+    if (gui__) {
+        set_value_string(((XGuiText *)gui__)->value());
+    }
 }
 
 //---------------------------------------------------------------------
 //установка значения в gui
 void XItemText::var_to_gui_internal() {
-    ((XGuiText *)gui__)->set_value(value_string());
+    if (gui__) {
+        ((XGuiText *)gui__)->set_value(value_string());
+    }
 }
 
 //---------------------------------------------------------------------

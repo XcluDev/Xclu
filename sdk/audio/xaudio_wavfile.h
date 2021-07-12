@@ -1,3 +1,4 @@
+//Original: "wavfile" from Qt "Spectrum Example"
 /****************************************************************************
 **
 ** Copyright (C) 2017 The Qt Company Ltd.
@@ -48,110 +49,42 @@
 **
 ****************************************************************************/
 
+
+#ifndef XAUDIO_WAVFILE_H
+#define XAUDIO_WAVFILE_H
+
+
+#include <QObject>
+#include <QFile>
 #include <QAudioFormat>
-#include "audio_utils.h"
 
 //--------------------------------------------------
 namespace xc_audio {
 //--------------------------------------------------
 
-qint64 audioDuration(const QAudioFormat &format, qint64 bytes)
+class WavFile : public QFile
 {
-    return (bytes * 1000000) /
-            (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8));
-}
+public:
+    WavFile(QObject *parent = 0);
 
-qint64 audioLength(const QAudioFormat &format, qint64 microSeconds)
-{
-    qint64 result = (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8))
-            * microSeconds / 1000000;
-    result -= result % (format.channelCount() * format.sampleSize());
-    return result;
-}
+    using QFile::open;
+    bool open(const QString &fileName);
+    const QAudioFormat &fileFormat() const;
+    qint64 headerLength() const;
 
-qreal nyquistFrequency(const QAudioFormat &format)
-{
-    return format.sampleRate() / 2;
-}
+    //derived: size(),
 
-QString formatToString(const QAudioFormat &format)
-{
-    QString result;
+private:
+    bool readHeader();
 
-    if (QAudioFormat() != format) {
-        if (format.codec() == "audio/pcm") {
-            Q_ASSERT(format.sampleType() == QAudioFormat::SignedInt);
-
-            const QString formatEndian = (format.byteOrder() == QAudioFormat::LittleEndian)
-                    ?   QString("LE") : QString("BE");
-
-            QString formatType;
-            switch (format.sampleType()) {
-            case QAudioFormat::SignedInt:
-                formatType = "signed";
-                break;
-            case QAudioFormat::UnSignedInt:
-                formatType = "unsigned";
-                break;
-            case QAudioFormat::Float:
-                formatType = "float";
-                break;
-            case QAudioFormat::Unknown:
-                formatType = "unknown";
-                break;
-            }
-
-            QString formatChannels = QString("%1 channels").arg(format.channelCount());
-            switch (format.channelCount()) {
-            case 1:
-                formatChannels = "mono";
-                break;
-            case 2:
-                formatChannels = "stereo";
-                break;
-            }
-
-            result = QString("%1 Hz %2 bit %3 %4 %5")
-                    .arg(format.sampleRate())
-                    .arg(format.sampleSize())
-                    .arg(formatType)
-                    .arg(formatEndian)
-                    .arg(formatChannels);
-        } else {
-            result = format.codec();
-        }
-    }
-
-    return result;
-}
-
-bool isPCM(const QAudioFormat &format)
-{
-    return (format.codec() == "audio/pcm");
-}
-
-
-bool isPCMS16LE(const QAudioFormat &format)
-{
-    return isPCM(format) &&
-            format.sampleType() == QAudioFormat::SignedInt &&
-            format.sampleSize() == 16 &&
-            format.byteOrder() == QAudioFormat::LittleEndian;
-}
-
-const qint16  PCMS16MaxValue     =  32767;
-const quint16 PCMS16MaxAmplitude =  32768; // because minimum is -32768
-
-qreal pcmToReal(qint16 pcm)
-{
-    return qreal(pcm) / PCMS16MaxAmplitude;
-}
-
-qint16 realToPcm(qreal real)
-{
-    return real * PCMS16MaxValue;
-}
+private:
+    QAudioFormat m_fileFormat;
+    qint64 m_headerLength;
+};
 
 //--------------------------------------------------
 } //namespace
 //--------------------------------------------------
+
+
+#endif // XAUDIO_WAVFILE_H

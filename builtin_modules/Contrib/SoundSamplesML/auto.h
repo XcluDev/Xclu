@@ -10,6 +10,7 @@
 bool was_changed_join_input_folder() { return was_changed_("join_input_folder"); }
 QString gets_join_input_folder() { return gets_("join_input_folder"); }
 QStringList get_strings_join_input_folder() { return get_strings_("join_input_folder"); }
+void repaint_join_input_folder() { repaint_("join_input_folder"); }
 
 
 //String Output Folder
@@ -17,12 +18,14 @@ QStringList get_strings_join_input_folder() { return get_strings_("join_input_fo
 bool was_changed_join_output_folder() { return was_changed_("join_output_folder"); }
 QString gets_join_output_folder() { return gets_("join_output_folder"); }
 QStringList get_strings_join_output_folder() { return get_strings_("join_output_folder"); }
+void repaint_join_output_folder() { repaint_("join_output_folder"); }
 
 
 //Button Convert
 //Join WAVs to a binary file.
 bool was_changed_join_convert() { return was_changed_("join_convert"); }
 int geti_join_convert() { return geti_("join_convert"); }
+void repaint_join_convert() { repaint_("join_convert"); }
 QString button_join_convert() { return "join_convert"; }
 
 
@@ -35,5 +38,6 @@ void sets_join_console(QString value) { sets_("join_console", value); }
 void clear_string_join_console() { clear_string_("join_console"); }
 void append_string_join_console(QString v, int extra_new_lines_count = 0) { append_string_("join_console", v, extra_new_lines_count); }
 void append_string_join_console(QStringList v, int extra_new_lines_count = 0) { append_string_("join_console", v, extra_new_lines_count); }
+void repaint_join_console() { repaint_("join_console"); }
 
 //----------------------------------------------------

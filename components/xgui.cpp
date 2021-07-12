@@ -40,6 +40,16 @@ XGui::~XGui() {
 }
 
 //---------------------------------------------------------------------
+//repaint - forces qApp->processEvents() if required.
+//NOTE: please not force for bulk updates!
+void XGui::repaint_(bool force_qapp_process_events) {
+    repaint();
+    if (force_qapp_process_events) {
+        qApp->processEvents();
+    }
+}
+
+//---------------------------------------------------------------------
 //строка-подсказка, может быть разных типов - см. Tip_Style
 QString XGui::get_tip() {
     QString tip;
