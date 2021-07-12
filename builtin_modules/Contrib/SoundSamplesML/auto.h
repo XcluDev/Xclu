@@ -33,6 +33,12 @@ bool was_changed_join_discard_empty() { return was_changed_("join_discard_empty"
 int geti_join_discard_empty() { return geti_("join_discard_empty"); }
 void repaint_join_discard_empty() { repaint_("join_discard_empty"); }
 
+//Int Input Sample Rate
+//Expected WAVs sample rate.
+bool was_changed_join_sample_rate() { return was_changed_("join_sample_rate"); }
+int geti_join_sample_rate() { return geti_("join_sample_rate"); }
+void repaint_join_sample_rate() { repaint_("join_sample_rate"); }
+
 
 //Button Convert
 //Join WAVs to a binary file.

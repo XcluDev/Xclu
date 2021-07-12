@@ -23,6 +23,9 @@ in int WAV_Parts join_wav_parts=64 1:* 1,10
     //Number of parts in each WAV.
 in checkbox Discard_Silence join_discard_empty=1
     //Discard silent sound parts.
+in int Input_Sample_Rate join_sample_rate=44100 1:* 1,10
+    //Expected WAVs sample rate.
+    //Hz
     
 line 
 in button Convert join_convert 

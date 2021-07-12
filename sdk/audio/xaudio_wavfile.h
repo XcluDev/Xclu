@@ -61,6 +61,44 @@
 //--------------------------------------------------
 namespace xc_audio {
 //--------------------------------------------------
+//WavFile class for loading WAV files.
+//It's derived from QFile, so can use QFile methods for loading
+
+//Example of usage (see more at XModuleSoundSamplesML):
+/*
+    xc_audio::WavFile wav;
+
+    //The code of loading WAV is based on the "Spectrum" Qt example
+    xc_assert(wav.open(wav_file), "Could not open WAV file '" + wav_file + "'");
+    auto &format = wav.fileFormat();
+
+    //We support only 16 bit signed, Little Endian
+    xc_assert(xc_audio::isPCMS16LE(format),
+              "Audio format '" + xc_audio::formatToString(format) + "' not supported, expected signed int16, Little Endian");
+
+    //Actually we don't need 44100, but just fixed sample rate
+    int sample_rate = format.sampleRate();
+    xc_assert(sample_rate == geti_join_sample_rate(),
+              QString("Bad sample rate in '" + wav_file + "': %1, but expected %2 Hz")
+              .arg(sample_rate).arg(geti_join_sample_rate()));
+
+    int channels = format.channelCount();
+    xc_assert(channels <= 2, "Only 1 and 2 channels are supported, but '" + wav_file + "' is multi-channel");
+
+    QByteArray bytes = wav.readAll();
+    int size = bytes.size() / (2*channels);
+    xc_assert(bytes.size() > 0, "Empty WAV file '" + wav_file + "'");
+
+    int16* data = (int16 *)bytes.constData();
+    //now use data - packed channel1, channel2, channel1, channel2...
+
+    //Useful functions for int16 <-> real:
+    xc_audio::pcmToReal(qint16 pcm);
+    xc_audio::realToPcm(qreal real);
+
+*/
+
+
 
 class WavFile : public QFile
 {
@@ -71,8 +109,6 @@ public:
     bool open(const QString &fileName);
     const QAudioFormat &fileFormat() const;
     qint64 headerLength() const;
-
-    //derived: size(),
 
 private:
     bool readHeader();

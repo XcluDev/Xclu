@@ -42,7 +42,7 @@ void XModuleSoundSamplesML::update() {
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::stop() {
-  /*  subprocess_.reset();*/
+    /*  subprocess_.reset();*/
 }
 
 //---------------------------------------------------------------------
@@ -57,49 +57,105 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     //scan folder for wavs
     QDirIterator input_iter(input_folder,//xc_abs_path(folder_name),
-                             QStringList() << "*.wav"// << "*.aiff"
-                             ); //, QDirIterator::Subdirectories);
+                            QStringList() << "*.wav"// << "*.aiff"
+                            ); //, QDirIterator::Subdirectories);
 
     xc_assert(input_iter.hasNext(), "No wav or aiff files in folder '" + input_folder +"'");
 
+    int total_parts = 0;
     int n = 0;
     while (input_iter.hasNext()) {
-        append_string_join_console(QString("Procssing %1")
-                .arg(n+1));
+        append_string_join_console(QString("Processing %1")
+                                   .arg(n+1));
         repaint_join_console();
 
         QString path = input_iter.next();
-        join_wav(path);
+        int parts = join_wav(path);
+        total_parts += parts;
         n++;
     }
     append_string_join_console(QString("Processed input audio files: %1").arg(n));
+    append_string_join_console(QString("Collected fragments: %1").arg(total_parts));
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::join_wav(QString wav_file) {            
+//returns number of used parts
+int XModuleSoundSamplesML::join_wav(QString wav_file) {
     xc_audio::WavFile wav;
 
     //The code of loading WAV is based on the "Spectrum" Qt example
     xc_assert(wav.open(wav_file), "Could not open WAV file '" + wav_file + "'");
     auto &format = wav.fileFormat();
-    xc_assert(xc_audio::isPCMS16LE(format),
-              "Audio format '" + xc_audio::formatToString(format) + "' not supported");
 
+    //We support only 16 bit signed, Little Endian
+    xc_assert(xc_audio::isPCMS16LE(format),
+              "Audio format '" + xc_audio::formatToString(format) + "' not supported, expected signed int16, Little Endian");
+
+    //Actually we don't need 44100, but just fixed sample rate
     int sample_rate = format.sampleRate();
+    xc_assert(sample_rate == geti_join_sample_rate(),
+              QString("Bad sample rate in '" + wav_file + "': %1, but expected %2 Hz")
+              .arg(sample_rate).arg(geti_join_sample_rate()));
+
     int channels = format.channelCount();
-    int sample_size = format.sampleSize();
-    int size = wav.size();
+    xc_assert(channels <= 2, "Only 1 and 2 channels are supported, but '" + wav_file + "' is multi-channel");
 
     QByteArray bytes = wav.readAll();
-    //append_string_join_console(QString("sample rate %1, channels %2, sample_size %3")
-    //        .arg(sample_rate).arg(channels).arg(sample_size));
-    //append_string_join_console(QString("file size %1, read %2")
-    //        .arg(size).arg(bytes.size()));
-    //repaint_join_console();
+    int size = bytes.size() / (2*channels);
+    xc_assert(bytes.size() > 0, "Empty WAV file '" + wav_file + "'");
+
+    const int16* data = (int16 *)bytes.constData();
 
 
+    //scan parts
+    int discard_empty = geti_join_discard_empty();
 
+    //usage statistics
+    int used_parts = 0;
+    int skipped_parts = 0;
+
+    int n = geti_join_wav_parts();
+    for (int k=0; k<n; k++) {
+        int i0 = k * size / n;
+        int i1 = (k+1) * size / n;
+        int n_samples = (i1 - i0);      //Use that it's S16LE format
+        if (n_samples == 0) {
+            skipped_parts++;  //Note: silent scikkping of very short wavs
+            continue;
+        }
+        //collect sample and check if it's not empty
+        QVector<int16> sample(n_samples);
+        int smp = 0;
+        bool is_empty = true;
+        for (int i=0; i<n_samples; i++) {
+            if (channels == 1) {
+                smp = data[i + i0];
+            }
+            if (channels == 2) {
+                //join channels
+                int ind = 2*(i + i0);
+                smp = (int(data[ind]) + int(int(data[ind+1])))/2;
+            }
+            if (smp != 0) {
+                is_empty = false;
+            }
+        }
+        if (is_empty && discard_empty) {
+            skipped_parts++;
+            continue;
+        }
+        //Add collected sample to database
+        used_parts++;
+        //...
+    }
+
+    //info about skipping
+    append_string_join_console(QString("  used parts: %1")
+                               .arg(used_parts));
+    repaint_join_console();
+
+    return used_parts;
 }
 
 //---------------------------------------------------------------------
