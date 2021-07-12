@@ -32,3 +32,16 @@ void xc_write_text_file(QStringList list, QString file_name) {
 }
 
 //---------------------------------------------------------------------
+void xc_write_binary_file(const void *data, int n, QString file_name, bool append) {
+    QFile file(file_name);
+    xc_assert(file.open( (append)?
+                             (QIODevice::WriteOnly | QIODevice::Append)
+                             : QIODevice::WriteOnly),
+              "Can't create file for writing: '" + file_name + "'");
+    int written = file.write((const char *)data, n);
+    xc_assert(n == written, QString("Not all data is written to file, want to write %1, but written %2")
+              .arg(n).arg(written));
+    file.close();
+}
+
+//---------------------------------------------------------------------

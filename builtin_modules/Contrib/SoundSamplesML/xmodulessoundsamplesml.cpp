@@ -60,7 +60,12 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     xc_assert(input_iter.hasNext(), "No wav or aiff files in folder '" + input_folder +"'");
 
+    //Create database
     SoundSamplesDatabase database;
+
+    int channels = 1;
+    database.set_params(geti_join_sample_rate(), channels);
+
 
     int n = 0;
     while (input_iter.hasNext()) {
@@ -74,13 +79,29 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
         if (n % 10 == 0) {
             repaint_join_console();
         }
-
-
         n++;
     }
     append_string_join_console(QString("Processed input audio files: %1").arg(n));
     append_string_join_console(QString("Collected fragments: %1").arg(database.size()));
 
+
+    //if (database.is_equal_length()) append_string_join_console("All samples have equal length");
+    //else append_string_join_console("Samples have different length");
+
+    //truncate
+    int len = database.truncate_to_equal_length();
+    append_string_join_console(QString("Samples truncated to length %1").arg(len));
+
+    //save database
+    QString database_file_bin = gets_join_output_folder() + "/database.bin";
+    QString database_file_ini = gets_join_output_folder() + "/database.ini";
+    append_string_join_console(QString("Save to: %1, %2").arg(database_file_bin, database_file_ini));
+    repaint_join_console();
+
+
+    database.save(database_file_bin, database_file_ini);
+    append_string_join_console("Finished!");
+    repaint_join_console();
 }
 
 //---------------------------------------------------------------------
@@ -123,7 +144,7 @@ int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &data
     for (int k=0; k<n; k++) {
         int i0 = k * size / n;
         int i1 = (k+1) * size / n;
-        int n_samples = (i1 - i0);      //Use that it's S16LE format
+        int n_samples = i1 - i0;      //Use that it's S16LE format
         if (n_samples == 0) {
             skipped_parts++;  //Note: silent scikkping of very short wavs
             continue;
