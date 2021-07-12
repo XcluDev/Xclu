@@ -18,7 +18,12 @@ line
 in string_folder Output_Folder join_output_folder=""  
     //Folder for output data - binary file and text file with description. 
     //Choose a folder for training results.
-
+line
+in int WAV_Parts join_wav_parts=64 1:* 1,10
+    //Number of parts in each WAV.
+in checkbox Discard_Silence join_discard_empty=1
+    //Discard silent sound parts.
+    
 line 
 in button Convert join_convert 
     //Join WAVs to a binary file.

@@ -21,6 +21,19 @@ QStringList get_strings_join_output_folder() { return get_strings_("join_output_
 void repaint_join_output_folder() { repaint_("join_output_folder"); }
 
 
+//Int WAV Parts
+//Number of parts in each WAV.
+bool was_changed_join_wav_parts() { return was_changed_("join_wav_parts"); }
+int geti_join_wav_parts() { return geti_("join_wav_parts"); }
+void repaint_join_wav_parts() { repaint_("join_wav_parts"); }
+
+//Checkbox Discard Silence
+//Discard silent sound parts.
+bool was_changed_join_discard_empty() { return was_changed_("join_discard_empty"); }
+int geti_join_discard_empty() { return geti_("join_discard_empty"); }
+void repaint_join_discard_empty() { repaint_("join_discard_empty"); }
+
+
 //Button Convert
 //Join WAVs to a binary file.
 bool was_changed_join_convert() { return was_changed_("join_convert"); }

@@ -96,6 +96,9 @@ void XGuiText::set_value(QString v) {
         value_ = v;
         textEdit_->setPlainText(v);
         dirty_ = false;
+
+        //scroll to botton
+        textEdit_->verticalScrollBar()->setValue(textEdit_->verticalScrollBar()->maximum());
     }
 }
 

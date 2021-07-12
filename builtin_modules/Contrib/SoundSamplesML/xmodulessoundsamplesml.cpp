@@ -64,6 +64,10 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     int n = 0;
     while (input_iter.hasNext()) {
+        append_string_join_console(QString("Procssing %1")
+                .arg(n+1));
+        repaint_join_console();
+
         QString path = input_iter.next();
         join_wav(path);
         n++;
@@ -90,9 +94,9 @@ void XModuleSoundSamplesML::join_wav(QString wav_file) {
     QByteArray bytes = wav.readAll();
     //append_string_join_console(QString("sample rate %1, channels %2, sample_size %3")
     //        .arg(sample_rate).arg(channels).arg(sample_size));
-    append_string_join_console(QString("file size %1, read %2")
-            .arg(size).arg(bytes.size()));
-    repaint_join_console();
+    //append_string_join_console(QString("file size %1, read %2")
+    //        .arg(size).arg(bytes.size()));
+    //repaint_join_console();
 
 
 
