@@ -8,6 +8,7 @@ ML exploration of sound samples - used as a part of project Endless Instruments.
 
 #include "sdk_h.h"
 #include "xmodule.h"
+#include "soundsamplesdatabase.h"
 
 class XModuleSoundSamplesML: public XModule
 {
@@ -28,7 +29,7 @@ protected slots:
 
 protected:
     void join_wavs(QString input_folder, QString output_folder);
-    int join_wav(QString wav_file); //returns number of used parts
+    int join_wav(QString wav_file, SoundSamplesDatabase &database);
 };
 
 

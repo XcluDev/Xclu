@@ -6,9 +6,7 @@
 #include "xcore.h"
 #include "xaudio_wavfile.h"
 #include "xaudio_utils.h"
-#include <QApplication>
-#include <QThread>
-
+#include "soundsamplesdatabase.h"
 
 //registering module implementation
 REGISTER_XMODULE(SoundSamplesML)
@@ -62,26 +60,32 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     xc_assert(input_iter.hasNext(), "No wav or aiff files in folder '" + input_folder +"'");
 
-    int total_parts = 0;
+    SoundSamplesDatabase database;
+
     int n = 0;
     while (input_iter.hasNext()) {
         append_string_join_console(QString("Processing %1")
                                    .arg(n+1));
-        repaint_join_console();
 
         QString path = input_iter.next();
-        int parts = join_wav(path);
-        total_parts += parts;
+        join_wav(path, database);
+
+        //refresh console - not each sample for speedup
+        if (n % 10 == 0) {
+            repaint_join_console();
+        }
+
+
         n++;
     }
     append_string_join_console(QString("Processed input audio files: %1").arg(n));
-    append_string_join_console(QString("Collected fragments: %1").arg(total_parts));
+    append_string_join_console(QString("Collected fragments: %1").arg(database.size()));
 
 }
 
 //---------------------------------------------------------------------
 //returns number of used parts
-int XModuleSoundSamplesML::join_wav(QString wav_file) {
+int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &database) {
     xc_audio::WavFile wav;
 
     //The code of loading WAV is based on the "Spectrum" Qt example
@@ -147,13 +151,13 @@ int XModuleSoundSamplesML::join_wav(QString wav_file) {
         }
         //Add collected sample to database
         used_parts++;
-        //...
+        database.add(sample);
     }
 
     //info about skipping
     append_string_join_console(QString("  used parts: %1")
                                .arg(used_parts));
-    repaint_join_console();
+    //repaint_join_console();   //will call not each frame
 
     return used_parts;
 }
