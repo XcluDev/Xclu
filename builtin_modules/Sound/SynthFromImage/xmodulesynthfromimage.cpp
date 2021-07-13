@@ -181,7 +181,7 @@ void XModuleSynthFromImage::update() {
 
 
     //set to GUI
-    XObjectImage::create_from_raster(out_image_.write().data(), output_);
+    XObjectImage::create_from_raster(out_image_, output_);
 
 
 }

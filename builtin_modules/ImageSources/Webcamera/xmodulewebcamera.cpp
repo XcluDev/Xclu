@@ -226,11 +226,9 @@ void XModuleWebcamera::update_camera() {
 //transformation - crop, mirror
 void XModuleWebcamera::transform() {
     if (geti_transform()) {
-        auto image_read = getobject_image()->read();
-        if (image_read.data().type() == XObjectTypeImage)  {
-            //read
-            XObjectImage::to_raster(image_read.data(), input_image_);
-
+        //read
+        XObjectImage::to_raster(getobject_image(), input_image_);
+        if (!input_image_.is_empty())  {
             //crop to square
             transformed_image_ = (geti_crop_to_square()) ? input_image_.crop_to_square() : input_image_;
 
@@ -246,7 +244,7 @@ void XModuleWebcamera::transform() {
             if (rotate == rotate_270) transformed_image_.rotate(270);
 
             //set to gui image
-            XObjectImage::create_from_raster(transformed_image_gui_.write().data(), transformed_image_);
+            XObjectImage::create_from_raster(transformed_image_gui_, transformed_image_);
 
         }
 

@@ -67,13 +67,52 @@ public:
     static int get_channels_count(QString channels_str);
 
 
-    //Создание из XRaster_... и обратно
+    //Creating object from XRaster
+    //Simple function which directly creates image at GUI object
+    //Usage: XObjectImage::create_from_raster(getobject_color_image(), raster);
+    template<typename color_type>
+    static void create_from_raster(XProtectedObject *object, XRaster_<color_type> &raster) {
+        xc_assert(object, "NULL object at calling XObjectImage::create_from_raster");
+        create_from_raster(object->write().data(), raster);
+    }
+    template<typename color_type>
+    static void create_from_raster(XProtectedObject &object, XRaster_<color_type> &raster) {
+        create_from_raster(object.write().data(), raster);
+    }
+
+    //Advanced function which works with internal object
+    //Usage: XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster);
     static void create_from_raster(XObject &object, XRaster_u8 &raster);
     static void create_from_raster(XObject &object, XRaster_u8c3 &raster);
 
+    //Copy object to raster
+    //Usage:
+    //  XRaster_u8c3 raster;
+    //  to_raster(getobject_image(), raster);
+    //Simple function which not generates error if object is NULL or not image
+    template<typename color_type>
+    static void to_raster(XProtectedObject *image_object, XRaster_<color_type> &raster, rect_int rect = rect_int(-1,-1,-1,-1)) {
+        if (!image_object) {
+            raster.clear();
+            return;
+        }
+        auto &data = image_object->read().data();
+
+        //no image
+        if (data.type() != XObjectTypeImage) {
+            raster.clear();
+            return;
+        }
+
+        //read image
+        //TODO optimize, may receive and grayscale!
+        //but now converts to u8 rgb.
+        XObjectImage::to_raster(data, raster, rect);
+    }
+
+    //Advanced function, used with guiobject->read().data()
     static void to_raster(const XObject &object, XRaster_u8 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
     static void to_raster(const XObject &object, XRaster_u8c3 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
-
 
     //Создание из QImage
     //TODO mirrorx не реализована

@@ -413,15 +413,10 @@ void XModuleExecute::console_write() {
 //---------------------------------------------------------------------
 bool XModuleExecute::console_write_image() {
     //Read image
-    auto reader = getobject_console_write_image()->read();
+    XObjectImage::to_raster(getobject_console_write_image(), image_write_input_);
 
     //no image yet
-    if (reader.data().type() != XObjectTypeImage) return false;
-
-    //read image
-    //TODO optimize, may receive and grayscale!
-    //but now converts to u8 rgb.
-    XObjectImage::to_raster(reader.data(), image_write_input_);
+    if (image_write_input_.is_empty()) return false;
 
     //no transform
     if (!geti_console_write_image_transform()) {
@@ -454,7 +449,7 @@ bool XModuleExecute::console_write_image() {
             console_write_image(image.w, image.h, 1, image.data_pointer_u8());
 
             //set to gui image
-            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);
 
         }
         else {
@@ -464,7 +459,7 @@ bool XModuleExecute::console_write_image() {
             console_write_image(image.w, image.h, 3, image.data_pointer_u8());
 
             //set to gui image
-            XObjectImage::create_from_raster(getobject_console_write_image_transformed()->write().data(), image);
+            XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);
         }
 
     }

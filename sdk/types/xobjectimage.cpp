@@ -275,6 +275,8 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
+//Advanced function which works with internal object
+//Usage: XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color);
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8 &raster) {
     create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
 }
@@ -285,6 +287,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 }
 
 //---------------------------------------------------------------------
+//Advanced function, used with guiobject->read().data()
 /*static*/ void XObjectImage::to_raster(const XObject &object, XRaster_u8 &raster, rect_int rect) {
 
     int w = object.geti("w");

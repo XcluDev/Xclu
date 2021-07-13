@@ -142,17 +142,17 @@ void XModuleRealsenseCamera::update() {
         bool make_ir = false;
         if ((geti_show_color() || need_save) && camera_.settings().use_rgb) {
             xc_assert(camera_.get_color_pixels_rgb(raster_color_), "get_color_pixels_rgb() returned false");
-            XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
+            XObjectImage::create_from_raster(getobject_color_image(), raster_color_);
             make_color = true;
         }
         if ((geti_show_depth() || need_save) && camera_.settings().use_depth) {
             xc_assert(camera_.get_depth_pixels_rgb(raster_depth_), "get_depth_pixels_rgb() returned false");
-            XObjectImage::create_from_raster(getobject_depth_image()->write().data(), raster_depth_);
+            XObjectImage::create_from_raster(getobject_depth_image(), raster_depth_);
             make_depth = true;
         }
         if ((geti_show_ir() || need_save) && camera_.settings().use_ir) {
             xc_assert(camera_.get_ir_pixels8(raster_ir_), "get_ir_pixels8() returned false");
-            XObjectImage::create_from_raster(getobject_ir_image()->write().data(), raster_ir_);
+            XObjectImage::create_from_raster(getobject_ir_image(), raster_ir_);
             make_ir = true;
         }
 
@@ -363,7 +363,7 @@ void XModuleRealsenseCamera::set_started(bool started) { //ставит camera_s
 void XModuleRealsenseCamera::transform() {
     if (geti_make_depth_grayscale()) {
         xc_assert(camera_.get_depth_pixels_mm(raster_depth16_), "get_depth_pixels_mm() returned false");
-        //XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color_);
+        //XObjectImage::create_from_raster(getobject_color_image(), raster_color_);
 
         //crop
         auto &input = raster_depth16_;
@@ -405,7 +405,7 @@ void XModuleRealsenseCamera::transform() {
         }
 
         //set output
-        XObjectImage::create_from_raster(depth8_gui_.write().data(), output);
+        XObjectImage::create_from_raster(depth8_gui_, output);
 
     }
 

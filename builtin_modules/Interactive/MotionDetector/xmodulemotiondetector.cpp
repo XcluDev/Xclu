@@ -58,19 +58,13 @@ void XModuleMotionDetector::start() {
 void XModuleMotionDetector::update() {
 
     //Read image
-    auto reader = getobject_input_image()->read();
-
+    XObjectImage::to_raster(getobject_input_image(), input0_);
     //no image yet
-    if (reader.data().type() != XObjectTypeImage) return;
+    if (input0_.is_empty()) return;
 
     //ignore frames at start
     ignore_frames_--;
     if (ignore_frames_ > 0) return;
-
-    //read image
-    XObjectImage::to_raster(reader.data(), input0_);
-
-    if (input0_.w == 0) return;  //no frames yet
 
     //decimate input image
     decimate_input(input0_, input_);
@@ -235,8 +229,8 @@ void XModuleMotionDetector::update() {
 
 
     //set to images
-    XObjectImage::create_from_raster(out_image_.write().data(), output_);
-    XObjectImage::create_from_raster(out_background_.write().data(), background_);
+    XObjectImage::create_from_raster(out_image_, output_);
+    XObjectImage::create_from_raster(out_background_, background_);
 }
 
 //---------------------------------------------------------------------

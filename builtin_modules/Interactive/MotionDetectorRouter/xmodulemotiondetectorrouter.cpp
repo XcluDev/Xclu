@@ -200,12 +200,12 @@ QVector<int> XModuleMotionDetectorRouter::auto_route() {
 
 //---------------------------------------------------------------------
 XRaster_float XModuleMotionDetectorRouter::resize_to_template(XProtectedObject *image) {
-    //no image yet
-    xc_assert(image->read().data().type() == XObjectTypeImage, "Not image");
-
     //read image
     XRaster_u8 raster;
-    XObjectImage::to_raster(image->read().data(), raster);
+    XObjectImage::to_raster(image, raster);
+
+    //no image yet
+    xc_assert(!raster.is_empty(), "XModuleMotionDetectorRouter::resize_to_template: Input is not image");
 
     int w = raster.w;
     int h = raster.h;
