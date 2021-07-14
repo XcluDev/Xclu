@@ -1,3 +1,4 @@
+#include "qt_widgets.h"
 #include "xmodulessoundsamplesml.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
@@ -13,7 +14,7 @@ REGISTER_XMODULE(SoundSamplesML)
 
 //---------------------------------------------------------------------
 XModuleSoundSamplesML::XModuleSoundSamplesML(QString class_name)
-    :XModule(class_name)
+    :XModulePainter(class_name)
 {
 
 }
@@ -41,6 +42,73 @@ void XModuleSoundSamplesML::update() {
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::stop() {
     /*  subprocess_.reset();*/
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
+
+    //Antialiasing
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    //Draw background
+    painter.setBrush(QColor(0, 0, 0));
+    painter.setPen(Qt::PenStyle::NoPen);
+    painter.drawRect(0, 0, outw, outh);
+
+  /*  //Compute translate and scale
+    //Note: we use scaling to have independence of lines width from screen resolution
+    int spacing = geti_spacing();
+
+    float w = 300;  //base size
+    float h = 300;
+    float wsp = w + spacing;
+
+    float scrw = 3*w + 2*spacing;
+    float scrh = h;
+
+    float scl = qMin(outw/scrw, outh/scrh);
+    float outw1 = scrw*scl;
+    float outh1 = scrh*scl;
+
+    int x0 = (outw-outw1)/2;
+    int y0 = (outh-outh1)/2;
+
+    painter.save();
+    painter.translate(x0, y0);
+    painter.scale(scl, scl);
+
+    //------------------------
+    //Actual drawing
+
+    //Face
+    face_draw(painter, w, h);
+
+    //Vector field - attractors
+    painter.save();
+    painter.translate(wsp, 0);
+    //painter.setPen(QColor(255,255,255));
+    //painter.setBrush(Qt::BrushStyle::NoBrush);
+    //painter.drawRect(0,0,w,h);
+    attr_draw(painter, w, h);
+
+    painter.restore();
+
+    //Morph
+    painter.save();
+    painter.translate(2*wsp, 0);
+    morph_draw(painter, w, h);
+    painter.restore();
+
+    //border
+    painter.setPen(get_col(getf_border_color()));
+    painter.setBrush(Qt::BrushStyle::NoBrush);
+    painter.drawRect(0,0,scrw,scrh);
+    painter.drawLine(w,0,w,h);
+    painter.drawLine(scrw-w,0,scrw-w,h);
+
+
+    //------------------------
+    painter.restore();*/
 }
 
 //---------------------------------------------------------------------

@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -30,6 +30,18 @@
                     {
                         "aname": "join_output_folder",
                         "avalue": "../../../../../../Endless Instruments/ML_Sound_Gen/Drum_Database"
+                    },
+                    {
+                        "aname": "join_wav_parts",
+                        "avalue": "64"
+                    },
+                    {
+                        "aname": "join_discard_empty",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "join_sample_rate",
+                        "avalue": "44100"
                     },
                     {
                         "aname": "Control",
@@ -58,6 +70,124 @@
                     {
                         "aname": "calls_info",
                         "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "window1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Window"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "1280"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "720"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "initial_state",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "theme",
+                        "avalue": "Standard"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "sound_samples_ml1"
+                    },
+                    {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "1"
                     }
                 ]
             }

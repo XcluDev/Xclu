@@ -3,7 +3,7 @@
 module_description=ML exploration of sound samples - used as a part of project Endless Instruments.
 module_version=1.01
 module_impl=C++
-#module_name_hint=sound_samples_ml
+module_accept_calls=create_widget
 
 #------------------------------------------
 page Wav_To_Bin
