@@ -1,7 +1,7 @@
 #ifndef XMODULEPAINTERWIDGET_H
 #define XMODULEPAINTERWIDGET_H
 
-//Helper class for XModulePainter, implementing custom drawing widget
+//Helper class for XModuleVisual, implementing custom drawing widget
 #include <QWidget>
 #include <QBrush>
 #include <QFont>
@@ -9,14 +9,14 @@
 #include <QPaintEvent>
 #include "sdk_h.h"
 
-class XModulePainter;
+class XModuleVisual;
 
-class XModulePainterWidget : public QWidget
+class XModuleVisualWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    XModulePainterWidget(QWidget *parent, XModulePainter *xmodule);
+    XModuleVisualWidget(QWidget *parent, XModuleVisual *xmodule);
 
     void set_fixed_size(int2 size);
 
@@ -31,7 +31,7 @@ protected:
     //void mouseDoubleClickEvent(QMouseEvent *event);
 
 private:
-    XModulePainter *xmodule_ = nullptr;
+    XModuleVisual *xmodule_ = nullptr;
 
     //bool fixed_size_ = false;
     //int w_ = 100;

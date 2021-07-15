@@ -10,7 +10,7 @@ REGISTER_XMODULE(TestDrawing)
 
 //---------------------------------------------------------------------
 XModuleTestDrawing::XModuleTestDrawing(QString class_name)
-    :XModulePainter(class_name)
+    :XModuleVisual(class_name)
 {
 
 }

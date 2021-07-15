@@ -10,14 +10,14 @@ class InterfaceItem;
 class Module;
 class XObject;
 class QPainter;
-class XModulePainterWidget;
+class XModuleVisualWidget;
 
-class XModulePainter : public XModule
+class XModuleVisual : public XModule
 {
     Q_OBJECT
 public:
-    XModulePainter(QString class_name);
-    virtual ~XModulePainter();
+    XModuleVisual(QString class_name);
+    virtual ~XModuleVisual();
 
     //-----------------------------------------------
     //subclasses MUST reimplement this for drawing
@@ -46,7 +46,7 @@ protected:
     QString parent_id_ = "";
 
     //int2 screen_size_ = int2(100,100);
-    XModulePainterWidget *widget_ = nullptr;
+    XModuleVisualWidget *widget_ = nullptr;
 
 };
 

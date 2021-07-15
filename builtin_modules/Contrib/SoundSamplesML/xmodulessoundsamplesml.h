@@ -7,10 +7,10 @@ ML exploration of sound samples - used as a part of project Endless Instruments.
 
 
 #include "sdk_h.h"
-#include "xmodulepainter.h"
+#include "xmodulevisual.h"
 #include "soundsamplesdatabase.h"
 
-class XModuleSoundSamplesML: public XModulePainter
+class XModuleSoundSamplesML: public XModuleVisual
 {
 public:
     XModuleSoundSamplesML(QString class_name);

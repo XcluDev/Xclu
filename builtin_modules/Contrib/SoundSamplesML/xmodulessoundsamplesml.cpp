@@ -14,7 +14,7 @@ REGISTER_XMODULE(SoundSamplesML)
 
 //---------------------------------------------------------------------
 XModuleSoundSamplesML::XModuleSoundSamplesML(QString class_name)
-    :XModulePainter(class_name)
+    :XModuleVisual(class_name)
 {
 
 }

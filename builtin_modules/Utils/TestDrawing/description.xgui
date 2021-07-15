@@ -1,6 +1,6 @@
 #Module Test
 #------------------------------------------
-module_description=Test module for drawing, inherited from XModulePainter.
+module_description=Test module for drawing, inherited from XModuleVisual.
 module_version=1.01
 module_impl=C++
 

@@ -220,8 +220,8 @@ SOURCES += \
     host/projectgui.cpp \
     python/pythoncore.cpp \
     sdk/xclass.cpp \
-    sdk/xmodulepainter.cpp \
-    sdk/xmodulepainterwidget.cpp
+    sdk/xmodulevisual.cpp \
+    sdk/xmodulevisualwidget.cpp
 
 HEADERS += \
     components/button/xguibutton.h \
@@ -321,8 +321,8 @@ HEADERS += \
     host/projectgui.h \
     python/pythoncore.h \
     sdk/xclass.h \
-    sdk/xmodulepainter.h \
-    sdk/xmodulepainterwidget.h
+    sdk/xmodulevisual.h \
+    sdk/xmodulevisualwidget.h
 
 #--------------------------------------------------------------------------
 #Python

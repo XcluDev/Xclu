@@ -1,17 +1,17 @@
-#include "xmodulepainterwidget.h"
+#include "xmodulevisualwidget.h"
 
 #include "incl_cpp.h"
 #include <QPainter>
 #include <QTimer>
-#include "xmodulepainter.h"
+#include "xmodulevisual.h"
 
 //---------------------------------------------------------------------
-XModulePainterWidget::XModulePainterWidget(QWidget *parent, XModulePainter *xmodule)
+XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XModuleVisual *xmodule)
     : QWidget(parent)
 {
     //setFixedSize(1280, 720);
 
-    xc_assert(xmodule, "XModulePainterWidget constructor error - xmodule is nullptr");
+    xc_assert(xmodule, "XModuleVisualWidget constructor error - xmodule is nullptr");
     xmodule_ = xmodule;
 
     //QLinearGradient gradient(QPointF(50, -20), QPointF(80, 20));
@@ -27,7 +27,7 @@ XModulePainterWidget::XModulePainterWidget(QWidget *parent, XModulePainter *xmod
 }
 
 //---------------------------------------------------------------------
-void XModulePainterWidget::set_fixed_size(int2 size) {
+void XModuleVisualWidget::set_fixed_size(int2 size) {
     if (size.x != w() || size.y != h()) {
         setFixedSize(size.x, size.y);
     }
@@ -43,7 +43,7 @@ void XModulePainterWidget::set_fixed_size(int2 size) {
 //---------------------------------------------------------------------
 //drawing function
 //call update(); to repaint widget
-void XModulePainterWidget::paintEvent(QPaintEvent * event)
+void XModuleVisualWidget::paintEvent(QPaintEvent * event)
 {
 
     QPainter painter;
