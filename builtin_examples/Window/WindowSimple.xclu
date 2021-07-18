@@ -1,0 +1,224 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "WImage",
+                "name": "wimage1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "is_new_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Visuals",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "w",
+                        "avalue": "640"
+                    },
+                    {
+                        "aname": "h",
+                        "avalue": "480"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title_text",
+                        "avalue": "Image"
+                    },
+                    {
+                        "aname": "title_placement",
+                        "avalue": "Left"
+                    },
+                    {
+                        "aname": "title_alignment",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "title_width_min",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "title_width_max",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "window1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Window"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "640x480"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "1280"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "720"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "initial_state",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "wimage1"
+                    },
+                    {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
