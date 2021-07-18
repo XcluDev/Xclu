@@ -34,11 +34,54 @@ void XModuleVisualWidget::set_fixed_size(int2 size) {
 }
 
 //---------------------------------------------------------------------
-//double click to set detection center
-//void DrawingWidget::mouseDoubleClickEvent(QMouseEvent *event) {
-//    auto pos = event->pos(); //localPos();
-//    SETTINGS.set_seed_pos(glm::vec2(pos.x(), pos.y()));
-//}
+XMouseButton qtmousebutton_to_xmousebutton(Qt::MouseButton btn) {
+    if (btn == Qt::LeftButton) return XMouseButton_left;
+    if (btn == Qt::MiddleButton) return XMouseButton_middle;
+    if (btn == Qt::RightButton) return XMouseButton_right;
+
+    //Note: there are much more buttons available at Qt::MouseButton
+    return XMouseButton_none;
+}
+
+//---------------------------------------------------------------------
+//Mouse events
+void XModuleVisualWidget::add_mouse_event(int type, QMouseEvent *event) {
+    xmodule_->add_mouse_event(XWidgetEvent_Type(type), int2(event->x(), event->y()),
+                              qtmousebutton_to_xmousebutton(event->button()));
+}
+
+//---------------------------------------------------------------------
+void XModuleVisualWidget::mousePressEvent(QMouseEvent *event) {
+    add_mouse_event(XWidgetEvent_mouse_pressed, event);
+}
+
+//---------------------------------------------------------------------
+//Note: for tracking mouse moves without pressing, required to call setMouseTracking(bool enable);
+void XModuleVisualWidget::mouseMoveEvent(QMouseEvent *event) {
+    add_mouse_event(XWidgetEvent_mouse_moved, event);
+}
+
+//---------------------------------------------------------------------
+void XModuleVisualWidget::mouseReleaseEvent(QMouseEvent *event) {
+    add_mouse_event(XWidgetEvent_mouse_released, event);
+}
+
+//---------------------------------------------------------------------
+void XModuleVisualWidget::mouseDoubleClickEvent(QMouseEvent *event) {
+    add_mouse_event(XWidgetEvent_mouse_double_clicked, event);
+}
+
+//---------------------------------------------------------------------
+//Keyboard events
+void XModuleVisualWidget::keyPressEvent(QKeyEvent *event) {
+    xmodule_->add_keyboard_event(XWidgetEvent_key_pressed, event->key());
+}
+
+//---------------------------------------------------------------------
+void XModuleVisualWidget::keyReleaseEvent(QKeyEvent *event) {
+    xmodule_->add_keyboard_event(XWidgetEvent_key_released, event->key());
+}
+
 
 //---------------------------------------------------------------------
 //drawing function

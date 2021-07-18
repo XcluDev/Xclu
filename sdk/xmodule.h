@@ -125,6 +125,7 @@ protected:
     virtual void on_loaded() {}
     //эти функции запускаются, только если модуль включен:
     virtual void start() {}
+    virtual void process_events() {}   //used for processing mouse/keyboard events in at XModuleVisual
     virtual void update() {}
     virtual void stop() {}
 
@@ -170,7 +171,9 @@ private:
     void loaded_internal();     //действия при загрузке модуля
     void update_internal();     //выполнить update, и если нужно - start
     void stop_internal();       //выполнить stop
-    void bang_internal();       //bang: (start) and update if enabled
+
+    //Main caller for start(), update()
+    void bang_internal();       //bang: (start) and update if enabled, also calls process_events
 
     //Concrete call handlers
     //"create_widget" call, returns QWidget pointer

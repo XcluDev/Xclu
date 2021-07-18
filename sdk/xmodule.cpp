@@ -45,6 +45,7 @@ void XModule::bang_internal() {
             start();
             status_.was_started = true;
         }
+        process_events();   //mouse/keyboard events in XModuleVisual
         update();
     }
 }
