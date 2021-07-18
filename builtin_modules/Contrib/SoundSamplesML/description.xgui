@@ -6,18 +6,18 @@ module_impl=C++
 module_accept_calls=create_widget
 
 #------------------------------------------
-page Wav_To_Bin
-    //Convert folder with equal-length WAV files into a single binary file and text file with the details.
+page Make_Database
+    //Create database from folder containing equal-length WAV files into a single binary file and text file with the details.
     
-in string_folder Input_Folder join_input_folder=""  
+in string_folder Input_WAVs_Folder join_input_folder=""  
     //Folder for input wav files. 
     //Choose a datasets folder.
     
 line
 
-in string_folder Output_Folder join_output_folder=""  
-    //Folder for output data - binary file and text file with description. 
-    //Choose a folder for training results.
+in string_folder Resulted_Database_Folder join_output_folder=""  
+    //Folder for created database - binary file and text file with description. 
+    //Choose a folder for database.
 line
 in int WAV_Parts join_wav_parts=64 1:* 1,10
     //Number of parts in each WAV.
@@ -35,4 +35,42 @@ separator
 out text Console join_console 10 10
     //Conversion details.
 
+#------------------------------------------
+page Load_Database
+    //Load database (created on the prevoius page).
+    
+in string_folder Database_Folder db_folder=""  
+    //Folder for input database binary file and text file with description. 
+    //Choose a folder for database.
+
+in button Load db_load
+    //Load database.
+    
+in checkbox Autoload db_autoload=0
+    //Autoload database at start, if exists.
+    
+line 
+out int Sounds db_sounds=0 0:* 1,10
+    //Number of sounds.
+    
+out int Length db_length=0 0:* 1,10
+    //Audio samples in one sound.
+    //Audio samples
+    
+out int Sample_Rate db_sample_rate=0 0:* 1,10
+    //Sample Rate.
+    //Hz
+    
+out int Channels db_channels=0 0:* 1,10
+    //Audio samples in one sound.
+    
+#------------------------------------------
+page Visualize
+    //Analyze and draw sounds using various methods, and play them by mouse clicking.
+
+in enum Method draw_method=File_Order [File_Order,Simple,tSNE]
+    //Drawing method
+
+    
+    
 #------------------------------------------

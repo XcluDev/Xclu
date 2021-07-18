@@ -26,7 +26,7 @@
             <Keywords name="Folders in comment, close"></Keywords>
             <Keywords name="Keywords1">in out const out(not_save)</Keywords>
             <Keywords name="Keywords2">page separator line group</Keywords>
-            <Keywords name="Keywords3">int float string text stringlist checkbox button object array</Keywords>
+            <Keywords name="Keywords3">int float string text enum checkbox button object array</Keywords>
             <Keywords name="Keywords4">[</Keywords>
             <Keywords name="Keywords5">if endif</Keywords>
             <Keywords name="Keywords6"></Keywords>

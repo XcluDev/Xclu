@@ -62,7 +62,7 @@ void XItemButton::callback_button_pressed() {
                 "Internal error in XItemButton::callback_button_pressed, empty 'interf()' at '" + name() + "'");
 
     //Check can we press this button not in runtime
-    xc_assert(is_always_enabled() || is_running(), "Internal error - this button must be disabled during edit mode");
+    xc_assert(is_always_enabled() || is_running(), "This button is processed only at running mode");
     //hit_value() will be called from there
     interf()->callback_button_pressed(name());
 }

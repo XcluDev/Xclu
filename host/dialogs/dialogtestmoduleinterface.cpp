@@ -147,8 +147,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
         xc_message_box("Please choose module folder");
         return;
     }
-    QDir dir(folder_);
-    if (!dir.exists()) {
+    if (!xc_folder_exists(folder_)) {
         xc_message_box("Folder doesn't exists: '" + folder_ + "'");
         return;
     }

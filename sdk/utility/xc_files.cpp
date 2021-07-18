@@ -3,6 +3,17 @@
 #include <QtGlobal>
 
 //---------------------------------------------------------------------
+bool xc_file_exists(QString file_name) {
+    return QFileInfo::exists(file_name);
+    //return QFile(file_name).exists();
+}
+
+//---------------------------------------------------------------------
+bool xc_folder_exists(QString folder_name) {
+    return QDir(folder_name).exists();
+}
+
+//---------------------------------------------------------------------
 QStringList xc_read_text_file(QString file_name) {
     xc_assert(QFileInfo(file_name).exists(), "xclu_read_text_file: file doesn't exists, `" + file_name + "`");
     QFile textFile(file_name);

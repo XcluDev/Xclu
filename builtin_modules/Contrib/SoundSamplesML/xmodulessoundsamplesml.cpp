@@ -28,6 +28,10 @@ XModuleSoundSamplesML::~XModuleSoundSamplesML()
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::start() {
     clear_string_join_console();
+
+    if (geti_db_autoload()) {
+        load_database();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -36,79 +40,15 @@ void XModuleSoundSamplesML::update() {
     if (geti_join_convert()) {
         join_wavs(gets_join_input_folder(), gets_join_output_folder());
     }
+    if (geti_db_load()) {
+        load_database();
+    }
 
 }
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::stop() {
-    /*  subprocess_.reset();*/
-}
 
-//---------------------------------------------------------------------
-void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
-
-    //Antialiasing
-    painter.setRenderHint(QPainter::Antialiasing);
-
-    //Draw background
-    painter.setBrush(QColor(0, 0, 0));
-    painter.setPen(Qt::PenStyle::NoPen);
-    painter.drawRect(0, 0, outw, outh);
-
-  /*  //Compute translate and scale
-    //Note: we use scaling to have independence of lines width from screen resolution
-    int spacing = geti_spacing();
-
-    float w = 300;  //base size
-    float h = 300;
-    float wsp = w + spacing;
-
-    float scrw = 3*w + 2*spacing;
-    float scrh = h;
-
-    float scl = qMin(outw/scrw, outh/scrh);
-    float outw1 = scrw*scl;
-    float outh1 = scrh*scl;
-
-    int x0 = (outw-outw1)/2;
-    int y0 = (outh-outh1)/2;
-
-    painter.save();
-    painter.translate(x0, y0);
-    painter.scale(scl, scl);
-
-    //------------------------
-    //Actual drawing
-
-    //Face
-    face_draw(painter, w, h);
-
-    //Vector field - attractors
-    painter.save();
-    painter.translate(wsp, 0);
-    //painter.setPen(QColor(255,255,255));
-    //painter.setBrush(Qt::BrushStyle::NoBrush);
-    //painter.drawRect(0,0,w,h);
-    attr_draw(painter, w, h);
-
-    painter.restore();
-
-    //Morph
-    painter.save();
-    painter.translate(2*wsp, 0);
-    morph_draw(painter, w, h);
-    painter.restore();
-
-    //border
-    painter.setPen(get_col(getf_border_color()));
-    painter.setBrush(Qt::BrushStyle::NoBrush);
-    painter.drawRect(0,0,scrw,scrh);
-    painter.drawLine(w,0,w,h);
-    painter.drawLine(scrw-w,0,scrw-w,h);
-
-
-    //------------------------
-    painter.restore();*/
 }
 
 //---------------------------------------------------------------------
@@ -161,13 +101,12 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
     append_string_join_console(QString("Samples truncated to length %1").arg(len));
 
     //save database
-    QString database_file_bin = gets_join_output_folder() + "/database.bin";
-    QString database_file_ini = gets_join_output_folder() + "/database.ini";
-    append_string_join_console(QString("Save to: %1, %2").arg(database_file_bin, database_file_ini));
+    QString folder = gets_join_output_folder();
+    append_string_join_console(QString("Save to: %1").arg(folder));
     repaint_join_console();
 
 
-    database.save(database_file_bin, database_file_ini);
+    database.save(folder);
     append_string_join_console("Finished!");
     repaint_join_console();
 }
@@ -249,6 +188,80 @@ int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &data
     //repaint_join_console();   //will call not each frame
 
     return used_parts;
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundSamplesML::load_database() {
+    database_.load(gets_db_folder());
+
+
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
+
+    //Antialiasing
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    //Draw background
+    painter.setBrush(QColor(0, 0, 0));
+    painter.setPen(Qt::PenStyle::NoPen);
+    painter.drawRect(0, 0, outw, outh);
+
+  /*  //Compute translate and scale
+    //Note: we use scaling to have independence of lines width from screen resolution
+    int spacing = geti_spacing();
+
+    float w = 300;  //base size
+    float h = 300;
+    float wsp = w + spacing;
+
+    float scrw = 3*w + 2*spacing;
+    float scrh = h;
+
+    float scl = qMin(outw/scrw, outh/scrh);
+    float outw1 = scrw*scl;
+    float outh1 = scrh*scl;
+
+    int x0 = (outw-outw1)/2;
+    int y0 = (outh-outh1)/2;
+
+    painter.save();
+    painter.translate(x0, y0);
+    painter.scale(scl, scl);
+
+    //------------------------
+    //Actual drawing
+
+    //Face
+    face_draw(painter, w, h);
+
+    //Vector field - attractors
+    painter.save();
+    painter.translate(wsp, 0);
+    //painter.setPen(QColor(255,255,255));
+    //painter.setBrush(Qt::BrushStyle::NoBrush);
+    //painter.drawRect(0,0,w,h);
+    attr_draw(painter, w, h);
+
+    painter.restore();
+
+    //Morph
+    painter.save();
+    painter.translate(2*wsp, 0);
+    morph_draw(painter, w, h);
+    painter.restore();
+
+    //border
+    painter.setPen(get_col(getf_border_color()));
+    painter.setBrush(Qt::BrushStyle::NoBrush);
+    painter.drawRect(0,0,scrw,scrh);
+    painter.drawLine(w,0,w,h);
+    painter.drawLine(scrw-w,0,scrw-w,h);
+
+
+    //------------------------
+    painter.restore();*/
 }
 
 //---------------------------------------------------------------------

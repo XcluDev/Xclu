@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -16,11 +16,11 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
-                        "aname": "Wav_To_Bin",
+                        "aname": "Make_Database",
                         "avalue": "0"
                     },
                     {
@@ -42,6 +42,26 @@
                     {
                         "aname": "join_sample_rate",
                         "avalue": "44100"
+                    },
+                    {
+                        "aname": "Load_Database",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "db_folder",
+                        "avalue": "../../../../../../Endless Instruments/ML_Sound_Gen/Drum_Database"
+                    },
+                    {
+                        "aname": "db_autoload",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Visualize",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw_method",
+                        "avalue": "File_Order"
                     },
                     {
                         "aname": "Control",

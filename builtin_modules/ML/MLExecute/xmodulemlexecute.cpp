@@ -150,7 +150,7 @@ void XModuleMLExecute::process_run() {
     sets_debug_file_path(file_name);
 
     //check that folder exists
-    xc_assert(QDir(folder).exists(), "Folder '" + folder + "' doesn't exists");
+    xc_assert(xc_folder_exists(folder), "Folder '" + folder + "' doesn't exists");
 
     //check that file exists if required
     if (geti_file_must_exists()) {

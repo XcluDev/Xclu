@@ -66,7 +66,7 @@ void XModuleSoundPlay::play_sound() {
     QString file_name = xc_abs_path(gets_file_name());
 
     QFile file(file_name);
-    xc_assert(QFile(file_name).exists(), "XModuleSoundPlay - file not exists: '" + file_name +"'");
+    xc_assert(xc_file_exists(file_name), "XModuleSoundPlay - file not exists: '" + file_name +"'");
     //QSound::play(file_name);
 
     player_.reset(new QMediaPlayer);

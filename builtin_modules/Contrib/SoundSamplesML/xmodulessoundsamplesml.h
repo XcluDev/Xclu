@@ -31,6 +31,10 @@ protected slots:
 protected:
     void join_wavs(QString input_folder, QString output_folder);
     int join_wav(QString wav_file, SoundSamplesDatabase &database);
+
+    void load_database();
+    SoundSamplesDatabase database_;
+
 };
 
 

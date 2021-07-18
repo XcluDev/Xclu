@@ -51,7 +51,7 @@ void XModuleFileCreate::on_button_pressed(QString button_id) {
         QString short_name = QFileInfo(file_name0).fileName();
 
         //Check file is not exists - currently we support writing only to new files
-        xc_assert(!QFile(file_path).exists(), "File '" + short_name + "' already exists, please choose another");
+        xc_assert(!xc_file_exists(file_path), "File '" + short_name + "' already exists, please choose another");
 
 
         //Creating file
