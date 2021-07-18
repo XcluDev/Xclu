@@ -25,7 +25,7 @@ in string Title title="Window"
     
 #-------------
 in enum Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
-    //Size of the window.
+    //Initial size of the window.
 
 if size Custom
 in int Size_X size_x=1280 1:20000 1,10
@@ -39,7 +39,7 @@ endif
 #-------------
 
 in enum Position position=Automatic [Default,Custom,Screen_Center]
-    //Position of the window.
+    //Initial position of the window.
 
 #-------------
 if position Custom
@@ -60,18 +60,17 @@ in checkbox Visible visible=1
 const enum Initial_State initial_state=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
     //State at start - normal, full screen, minimized or maximized.
     
-    
-separator
+line
 
-const enum Theme theme=Standard [Standard,Dark]
-    //Theme of design.
+#const enum Theme theme=Standard [Standard,Dark]
+#    //Theme of design.
 
 #--------
 const enum Font_Size font_size=Custom [Default,Custom]
     //Font size for elements.
 
 if font_size Custom
-const int Font_Size font_size_pix=18 1:1000 1,10
+const int Font_Size font_size_pix=18 1:* 1,10
     //Custom font size.
     //pixels
 endif

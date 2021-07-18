@@ -95,7 +95,7 @@
                     },
                     {
                         "aname": "size",
-                        "avalue": "Default"
+                        "avalue": "640x480"
                     },
                     {
                         "aname": "size_x",
@@ -124,10 +124,6 @@
                     {
                         "aname": "initial_state",
                         "avalue": "Normal_Window"
-                    },
-                    {
-                        "aname": "theme",
-                        "avalue": "Standard"
                     },
                     {
                         "aname": "font_size",

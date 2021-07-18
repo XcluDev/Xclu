@@ -24,8 +24,8 @@ public:
     void set_value_int(int v) { set_value_float(v); }
 
     bool supports_float() { return true; }
-    float value_float() { return value_read().data(); }
-    void set_value_float(float value) { value_write().data() = value; }
+    float value_float() { return value_read(); }
+    void set_value_float(float value) { value_write(value); }
 
     //increment steps
     float get_small_step();

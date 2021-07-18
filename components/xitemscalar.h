@@ -46,10 +46,10 @@ public:
 
     //int
     bool supports_int() { return true; }
-    int value_int() { return value_read().data(); }
+    int value_int() { return value_read(); }
 
     //set value using range control
-    void set_value_int(int value) { value_write().data() = range_.constrain(value); }
+    void set_value_int(int value) { value_write(range_.constrain(value)); }
 
     //float
     bool supports_float() { return true; }

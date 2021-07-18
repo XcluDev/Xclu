@@ -190,9 +190,9 @@ QString XItem::description(int index) {
 }
 
 //---------------------------------------------------------------------
-//Checking that value was changed -------------------------
+//Checking that value was changed
 //works relative to save "change chacker", which stores frame fo last check
-//It's really implemented at XItem_<T>
+//It's really implemented at XItem_<T>, so here just returns "false"
 bool XItem::was_changed(XWasChangedChecker &checker) {
     return false;
 }

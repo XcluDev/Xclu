@@ -67,7 +67,7 @@ public:
     virtual void compile();
 
     //called at start, stop and attached interface - used for buttons
-    virtual void update_is_running(bool running){}
+    virtual void update_is_running(bool /*running*/){}
 
     //status of run - get from parent module
     bool is_running();
@@ -244,10 +244,10 @@ protected:
 
     //Was changed checker
     XWasChangedChecker was_changed_checker_;
-    bool was_changed_ = false;  //value changed at each update"
+    bool was_changed_ = false;  //value changed at each update()
 
     //Link ----------------------------------------
-    //Link packed in stricg for editing
+    //Link packed in string for editing
     XLink link_;
 
     //Link, ready to use runtime
@@ -326,12 +326,16 @@ public:
 
     }
 
-    //Access for read and write value
-    //for one-time access of scalars,
-    //can use `value_read().data()`, `value_.data()->write().data() = value`
-    //Note: each "value_write" calling calls increasing frame for "was changed keeper"
-    XProtectedRead_<T> value_read() { return value_.read(); }
-    XProtectedWrite_<T> value_write() { return value_.write(); }
+    //Access for read for one-time access of scalars
+    T value_read() { return value_.read().data(); }
+
+    //Update scalar value - it checks if it's changed and calls "touch" of changed checker
+    void value_write(T new_val) {
+        if (value_read() != new_val) {
+            value_.write().data() = new_val;
+        }
+    }
+    //XProtectedWrite_<T> value_write() { return value_.write(); }
 
     //Checking that value was changed -------------------------
     //works relative to save "change checker", which stores frame fo last check

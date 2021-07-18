@@ -11,8 +11,8 @@ public:
     XItemString(ModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
-    QString value_string() { return value_read().data(); }
-    void set_value_string(const QString &value) { value_write().data() = value; }
+    QString value_string() { return value_read(); }
+    void set_value_string(const QString &value) { value_write(value); }
 
     bool supports_int() { return true; }
     int value_int() { return value_string().toInt(); }

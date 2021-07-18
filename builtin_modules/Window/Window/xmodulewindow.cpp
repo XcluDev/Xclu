@@ -33,7 +33,8 @@ void XModuleWindow::set_size(int w, int h) {
 
 //---------------------------------------------------------------------
 void XModuleWindow::set_position(int x, int y) {
-    window_->setGeometry(x, y, window_->width(), window_->height());
+    //window_->setGeometry(x, y, window_->width(), window_->height());
+    window_->move(x, y);
 }
 
 //---------------------------------------------------------------------

@@ -70,7 +70,7 @@ void XItemButton::callback_button_pressed() {
 //---------------------------------------------------------------------
 //значение - нажатие считывается один раз, затем стирается
 int XItemButton::value_int() {
-    int res = value_read().data();
+    int res = value_read();
     reset_value();
     return res;
 }
@@ -86,16 +86,12 @@ void XItemButton::set_value_from_link(XLinkResolved *linkres) {
 
 //---------------------------------------------------------------------
 void XItemButton::hit_value() {  //set that button was pressed
-    if (value_read().data() == 0) {
-        value_write().data() = 1;
-    }
+    value_write(1);
 }
 
 //---------------------------------------------------------------------
 void XItemButton::reset_value() {    //reset that button was pressed
-    if (value_read().data() != 0) {
-        value_write().data() = 0;
-    }
+    value_write(0);
 }
 
 //---------------------------------------------------------------------

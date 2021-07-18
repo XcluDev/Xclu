@@ -68,8 +68,8 @@ void XModule::execute(ModuleExecuteStage stage) {
         //обновление enabled__
         //status_.enabled__ = _is_enabled_();
 
+        //Clear stop values
         reset_stop_out();
-        reset_error_values();
 
         //auto mode = run_mode();
         //bool enabled = is_enabled();
@@ -78,6 +78,9 @@ void XModule::execute(ModuleExecuteStage stage) {
             loaded_internal();
             break;
         case ModuleExecuteStageStart:
+            //Clear errors
+            reset_error_values();
+
             status_.running = true;
             //if (enabled && mode == ModuleRunMode_Main_Loop)
             update_internal();
