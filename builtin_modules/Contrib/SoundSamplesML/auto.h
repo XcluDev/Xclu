@@ -121,7 +121,7 @@ void repaint_db_channels() { repaint_("db_channels"); }
 //Analyze and draw sounds using various methods, and play them by mouse clicking.
 
 //Enum Method
-//Drawing method
+//Drawing method.
 enum enum_draw_method {
     draw_method_File_Order = 0,
     draw_method_Simple = 1,
@@ -131,5 +131,12 @@ enum enum_draw_method {
 bool was_changed_draw_method() { return was_changed_("draw_method"); }
 enum_draw_method gete_draw_method() { return enum_draw_method(geti_("draw_method")); }
 QString getraw_draw_method() { return getraw_("draw_method");}
+
+
+//Int Thumb Rad
+//Radius of sound's thumbnail.
+bool was_changed_thumb_rad() { return was_changed_("thumb_rad"); }
+int geti_thumb_rad() { return geti_("thumb_rad"); }
+void repaint_thumb_rad() { repaint_("thumb_rad"); }
 
 //----------------------------------------------------

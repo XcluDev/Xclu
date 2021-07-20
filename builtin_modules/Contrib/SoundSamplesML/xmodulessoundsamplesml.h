@@ -5,10 +5,10 @@
 ML exploration of sound samples - used as a part of project Endless Instruments.
 */
 
-
 #include "sdk_h.h"
 #include "xmodulevisual.h"
 #include "soundsamplesdatabase.h"
+#include "soundsamplesanalyze.h"
 
 class XModuleSoundSamplesML: public XModuleVisual
 {
@@ -25,6 +25,10 @@ protected:
 
     virtual void draw(QPainter &painter, int w, int h);
 
+    //click mouse to play the sound
+    virtual void mouse_pressed(int2 pos, XMouseButton button);
+
+
 protected slots:
 
 
@@ -35,6 +39,12 @@ protected:
     void load_database();
     SoundSamplesDatabase db_;
 
+    SoundSamplesAnalyze analyze_;
+    void analyze_reload();
+    int w_ = 1;
+    int h_ = 1;
+
+    int selected_ = -1;
 };
 
 

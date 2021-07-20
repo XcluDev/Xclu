@@ -27,6 +27,10 @@ XModuleSoundSamplesML::~XModuleSoundSamplesML()
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::start() {
+    //Analyze
+    analyze_.clear();
+
+
     //Create database
     clear_string_join_console();
 
@@ -35,6 +39,8 @@ void XModuleSoundSamplesML::start() {
     seti_db_length(0);
     seti_db_sample_rate(0);
     seti_db_channels(0);
+
+
 
     //autoload
     if (geti_db_autoload()) {
@@ -53,6 +59,13 @@ void XModuleSoundSamplesML::update() {
         load_database();
     }
 
+    //changes
+    if (was_changed_draw_method()) {
+        analyze_reload();
+    }
+    if (was_changed_thumb_rad()) {
+        refresh();
+    }
 }
 
 //---------------------------------------------------------------------
@@ -208,6 +221,26 @@ void XModuleSoundSamplesML::load_database() {
     seti_db_sample_rate(db_.sample_rate());
     seti_db_channels(db_.channels());
 
+    analyze_reload();
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundSamplesML::analyze_reload() {
+    selected_ = -1;
+
+    switch (gete_draw_method()) {
+    case draw_method_File_Order:
+        analyze_.method_natural_order(db_);
+        break;
+    case draw_method_Simple:
+        break;
+    case draw_method_tSNE:
+        break;
+    default:
+        xc_exception(QString("XModuleSoundSamplesML::analyze_reload - unknown method %1").arg(gete_draw_method()));
+    }
+
+    refresh();
 }
 
 //---------------------------------------------------------------------
@@ -221,60 +254,23 @@ void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
     painter.setPen(Qt::PenStyle::NoPen);
     painter.drawRect(0, 0, outw, outh);
 
-  /*  //Compute translate and scale
-    //Note: we use scaling to have independence of lines width from screen resolution
-    int spacing = geti_spacing();
+    analyze_.draw(painter, outw, outh, selected_, geti_thumb_rad());
 
-    float w = 300;  //base size
-    float h = 300;
-    float wsp = w + spacing;
+    //store size to use in mouse_pressed
+    w_ = qMax(outw, 1);
+    h_ = qMax(outh, 1);
+}
 
-    float scrw = 3*w + 2*spacing;
-    float scrh = h;
-
-    float scl = qMin(outw/scrw, outh/scrh);
-    float outw1 = scrw*scl;
-    float outh1 = scrh*scl;
-
-    int x0 = (outw-outw1)/2;
-    int y0 = (outh-outh1)/2;
-
-    painter.save();
-    painter.translate(x0, y0);
-    painter.scale(scl, scl);
-
-    //------------------------
-    //Actual drawing
-
-    //Face
-    face_draw(painter, w, h);
-
-    //Vector field - attractors
-    painter.save();
-    painter.translate(wsp, 0);
-    //painter.setPen(QColor(255,255,255));
-    //painter.setBrush(Qt::BrushStyle::NoBrush);
-    //painter.drawRect(0,0,w,h);
-    attr_draw(painter, w, h);
-
-    painter.restore();
-
-    //Morph
-    painter.save();
-    painter.translate(2*wsp, 0);
-    morph_draw(painter, w, h);
-    painter.restore();
-
-    //border
-    painter.setPen(get_col(getf_border_color()));
-    painter.setBrush(Qt::BrushStyle::NoBrush);
-    painter.drawRect(0,0,scrw,scrh);
-    painter.drawLine(w,0,w,h);
-    painter.drawLine(scrw-w,0,scrw-w,h);
-
-
-    //------------------------
-    painter.restore();*/
+//---------------------------------------------------------------------
+//click mouse to play the sound
+void XModuleSoundSamplesML::mouse_pressed(int2 pos, XMouseButton /*button*/) {
+    //xc_console_append(QString("mouse %1 %2").arg(pos.x).arg(pos.y));
+    int id = analyze_.find_by_mouse(glm::vec2(float(pos.x)/w_, float(pos.y)/h_));
+    if (id >= 0) {
+        //Play
+        selected_ = id;
+        refresh();  //repaint
+    }
 }
 
 //---------------------------------------------------------------------

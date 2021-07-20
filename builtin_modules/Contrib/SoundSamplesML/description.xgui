@@ -69,8 +69,13 @@ page Visualize
     //Analyze and draw sounds using various methods, and play them by mouse clicking.
 
 in enum Method draw_method=File_Order [File_Order,Simple,tSNE]
-    //Drawing method
+    //Drawing method.
+    
+line
 
+in int Thumb_Rad thumb_rad=5 1:* 1,10
+    //Radius of sound's thumbnail.
+    //pix
     
     
 #------------------------------------------

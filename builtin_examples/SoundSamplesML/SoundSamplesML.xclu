@@ -64,6 +64,10 @@
                         "avalue": "File_Order"
                     },
                     {
+                        "aname": "thumb_rad",
+                        "avalue": "4"
+                    },
+                    {
                         "aname": "Control",
                         "avalue": "0"
                     },
@@ -115,15 +119,15 @@
                     },
                     {
                         "aname": "size",
-                        "avalue": "640x480"
+                        "avalue": "Custom"
                     },
                     {
                         "aname": "size_x",
-                        "avalue": "1280"
+                        "avalue": "1300"
                     },
                     {
                         "aname": "size_y",
-                        "avalue": "720"
+                        "avalue": "900"
                     },
                     {
                         "aname": "position",
