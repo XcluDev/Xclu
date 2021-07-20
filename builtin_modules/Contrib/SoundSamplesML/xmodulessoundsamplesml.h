@@ -33,7 +33,7 @@ protected:
     int join_wav(QString wav_file, SoundSamplesDatabase &database);
 
     void load_database();
-    SoundSamplesDatabase database_;
+    SoundSamplesDatabase db_;
 
 };
 

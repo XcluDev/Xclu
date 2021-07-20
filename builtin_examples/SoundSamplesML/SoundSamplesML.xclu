@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -53,7 +53,7 @@
                     },
                     {
                         "aname": "db_autoload",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "Visualize",
@@ -111,7 +111,7 @@
                     },
                     {
                         "aname": "title",
-                        "avalue": "Window"
+                        "avalue": "Sound samples explorer"
                     },
                     {
                         "aname": "size",
@@ -127,11 +127,11 @@
                     },
                     {
                         "aname": "position",
-                        "avalue": "Default"
+                        "avalue": "Custom"
                     },
                     {
                         "aname": "pos_x",
-                        "avalue": "50"
+                        "avalue": "1200"
                     },
                     {
                         "aname": "pos_y",

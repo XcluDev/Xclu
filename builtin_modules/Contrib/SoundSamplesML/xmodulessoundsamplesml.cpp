@@ -27,11 +27,20 @@ XModuleSoundSamplesML::~XModuleSoundSamplesML()
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::start() {
+    //Create database
     clear_string_join_console();
 
+    //Load database
+    seti_db_sounds(0);
+    seti_db_length(0);
+    seti_db_sample_rate(0);
+    seti_db_channels(0);
+
+    //autoload
     if (geti_db_autoload()) {
         load_database();
     }
+
 }
 
 //---------------------------------------------------------------------
@@ -77,7 +86,7 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
     int n = 0;
     while (input_iter.hasNext()) {
-        append_string_join_console(QString("Processing %1")
+        append_string_join_console(QString("Processing WAV: %1")
                                    .arg(n+1));
 
         QString path = input_iter.next();
@@ -192,8 +201,12 @@ int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &data
 
 //---------------------------------------------------------------------
 void XModuleSoundSamplesML::load_database() {
-    database_.load(gets_db_folder());
+    db_.load(gets_db_folder());
 
+    seti_db_sounds(db_.size());
+    seti_db_length(db_.length());
+    seti_db_sample_rate(db_.sample_rate());
+    seti_db_channels(db_.channels());
 
 }
 

@@ -13,10 +13,10 @@ void SoundSamplesDatabase::set_params(int sample_rate, int channels) {
 
 //---------------------------------------------------------------------
 void SoundSamplesDatabase::clear() {
-    sample_rate_ = 0;
-    channels_ = 0;
-
     sounds_.clear();
+    length_ = 0;
+    sample_rate_ = 0;
+    channels_ = 0;        
 }
 
 //---------------------------------------------------------------------
@@ -93,10 +93,60 @@ void SoundSamplesDatabase::load(QString folder) {
     QString file_bin = folder + "/database.bin";
     QString file_ini = folder + "/database.ini";
 
+    xc_assert(xc_file_exists(file_bin), QString("File '%1' doesn't exists").arg(file_bin));
+    xc_assert(xc_file_exists(file_ini), QString("File '%1' doesn't exists").arg(file_ini));
 
-    auto ini = xc_read_text_file(file_bin);
+    clear();
 
+    //Ini
+    auto ini = xc_read_text_file(file_ini);
 
+    int count = 0;
+    for (auto &s: ini) {
+        auto item = s.split("=");
+        if (item.length()==2) {
+            QString name = item[0];
+            int value = item[1].toInt();
+            if (name == "sounds") {
+                count = value;
+                xc_assert(count>0, QString("Bad number of sounds specified in ini, %1").arg(count));
+            }
+            if (name == "length") {
+                length_ = value;
+                xc_assert(length_>0, QString("Bad length of sound specified in ini, %1").arg(length_));
+            }
+            if (name == "sample_rate") {
+                sample_rate_ = value;
+                xc_assert(sample_rate_>0, QString("Bad sample rate specified in ini, %1").arg(sample_rate_));
+            }
+            if (name == "channels") {
+                channels_ = value;
+                xc_assert(channels_>0, QString("Bad number of channels specified in ini, %1").arg(sample_rate_));
+                //Currently we accept only mono sounds.
+                xc_assert(channels_ == 1, QString("Only mono-sound databases are currently supported"));
+            }
+        }
+    }
+    //Data
+    //expected size
+    int file_size = count * length_ * channels_;
+
+    //load
+    //we load whole file into memory //TODO may work poor for small computers, double memory allocation - whole and for each sound
+    auto data = xc_read_binary_file(file_bin);
+    xc_assert(data.size() == file_size,
+              QString("Bad database binary file size, expected %1 bytes, but get %2 bytes")
+              .arg(file_size).arg(data.size()));
+
+    sounds_.resize(count);
+    int k = 0;
+    int sound_bytes = length_ * channels_;
+    for (int i=0; i<count; i++) {
+        auto &sound = sounds_[i];
+        sound.resize(length_);
+        memcpy(&sound[0], data.data() + k, sound_bytes);
+        k += sound_bytes;
+    }
 }
 
 //---------------------------------------------------------------------
