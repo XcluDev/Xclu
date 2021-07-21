@@ -1,6 +1,6 @@
-#Module SoundSamplesML
+#Module SoundDatabaseAnalyze
 #------------------------------------------
-module_description=ML exploration of sound samples - used as a part of project Endless Instruments.
+module_description=Given set of sound samples module allows to plot them at 2D and play by mouse click.
 module_version=1.01
 module_impl=C++
 module_accept_calls=create_widget
