@@ -1,9 +1,9 @@
 #Module SoundDatabaseAnalyze
 #------------------------------------------
-module_description=By given set of sound samples module arranges them at 2D and plays by mouse click.
+module_description=By given set of sound samples, module arranges them at 2D and plays by mouse click.
 module_version=1.01
 module_impl=C++
-module_accept_calls=create_widget
+module_accept_calls=create_widget,sound_buffer_add
 
 #------------------------------------------
 page Make_Database
@@ -77,5 +77,9 @@ in int Thumb_Rad thumb_rad=5 1:* 1,10
     //Radius of sound's thumbnail.
     //pix
     
+   
+in float Volume volume=0.3 0:1 0.01,0.1
+    //Volume to play sound.
+    //0..1
     
 #------------------------------------------

@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClassSoundSamplesML
+//Interface for XClassSoundsDatabaseAnalyze
 //Created automatically.
 //----------------------------------------------------
 //Page Make Database
@@ -138,5 +138,11 @@ QString getraw_draw_method() { return getraw_("draw_method");}
 bool was_changed_thumb_rad() { return was_changed_("thumb_rad"); }
 int geti_thumb_rad() { return geti_("thumb_rad"); }
 void repaint_thumb_rad() { repaint_("thumb_rad"); }
+
+//Float Volume
+//Volume to play sound.
+bool was_changed_volume() { return was_changed_("volume"); }
+float getf_volume() { return getf_("volume"); }
+void repaint_volume() { repaint_("volume"); }
 
 //----------------------------------------------------

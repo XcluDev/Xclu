@@ -118,6 +118,10 @@ protected:
 //DataAccess access(data); - создаст блокировку данных
 //Это должны делать все, кто работают с данными
 
+//---------------------------------------
+//Don't use it, we planning to remove this soon;
+//use XProtectedData_<> instead
+//---------------------------------------
 class DataAccess;
 
 //класс данных - их можно наследовать

@@ -47,6 +47,9 @@ void XModuleSoundsDatabaseAnalyze::start() {
         load_database();
     }
 
+    //play sound
+    player_.write().data().clear();
+
 }
 
 //---------------------------------------------------------------------
@@ -175,14 +178,14 @@ int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabas
         int i1 = (k+1) * size / n;
         int n_samples = i1 - i0;      //Use that it's S16LE format
         if (n_samples == 0) {
-            skipped_parts++;  //Note: silent scikkping of very short wavs
+            skipped_parts++;  //Note: silent scipping of very short wavs
             continue;
         }
         //collect sample and check if it's not empty
         QVector<int16> sample(n_samples);
-        int smp = 0;
         bool is_empty = true;
         for (int i=0; i<n_samples; i++) {
+            int16 &smp = sample[i];
             if (channels == 1) {
                 smp = data[i + i0];
             }
@@ -270,6 +273,27 @@ void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button
         //Play
         selected_ = id;
         refresh();  //repaint
+        //start to play
+        player_.write().data().play(db_.sounds()[id], getf_volume());
+    }
+}
+
+//---------------------------------------------------------------------
+//sound generation
+//"sound_buffer_add" call, fills `data` buffer
+//there are required to fill channels * samples values at data
+void XModuleSoundsDatabaseAnalyze::on_sound_buffer_add(int /*sample_rate*/, int channels, int samples, float *data) {
+    auto writer = player_.write(); //create locking object - will be unlocked when reader will be destroyed
+    auto &player = writer.data();
+    float vol = player.volume / 32768.0; //16bit->float
+    int k = 0;
+    for (int i=0; i<samples; i++) {
+        if (player.pos < player.sound.size()) {
+            float v = player.sound[player.pos++] * vol;
+            for (int u=0; u<channels; u++) {
+                data[k++] += v;
+            }
+        }
     }
 }
 
