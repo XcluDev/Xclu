@@ -1,8 +1,8 @@
-#ifndef XMODULESOUNDSAMPLESML_H
-#define XMODULESOUNDSAMPLESML_H
+#ifndef XModuleSoundsDatabaseAnalyze_H
+#define XModuleSoundsDatabaseAnalyze_H
 
 /*
-ML exploration of sound samples - used as a part of project Endless Instruments.
+By given set of sound samples module arranges them at 2D and plays by mouse click.
 */
 
 #include "sdk_h.h"
@@ -10,11 +10,11 @@ ML exploration of sound samples - used as a part of project Endless Instruments.
 #include "soundsamplesdatabase.h"
 #include "soundsamplesanalyze.h"
 
-class XModuleSoundSamplesML: public XModuleVisual
+class XModuleSoundsDatabaseAnalyze: public XModuleVisual
 {
 public:
-    XModuleSoundSamplesML(QString class_name);
-    ~XModuleSoundSamplesML();
+    XModuleSoundsDatabaseAnalyze(QString class_name);
+    ~XModuleSoundsDatabaseAnalyze();
 protected:
 #include "auto.h"
 
@@ -49,4 +49,4 @@ protected:
 
 
 
-#endif // XMODULESOUNDSAMPLESML_H
+#endif // XModuleSoundsDatabaseAnalyze_H

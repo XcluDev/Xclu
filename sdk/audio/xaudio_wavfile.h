@@ -64,7 +64,7 @@ namespace xc_audio {
 //WavFile class for loading WAV files.
 //It's derived from QFile, so can use QFile methods for loading
 
-//Example of usage (see more at XModuleSoundSamplesML):
+//Example of usage (see more at XModuleSoundsDatabaseAnalyze):
 /*
     xc_audio::WavFile wav;
 

@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmodulessoundsamplesml.h"
+#include "xmodulessoundsdatabaseanalyze.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
@@ -10,23 +10,23 @@
 #include "soundsamplesdatabase.h"
 
 //registering module implementation
-REGISTER_XMODULE(SoundSamplesML)
+REGISTER_XMODULE(SoundsDatabaseAnalyze)
 
 //---------------------------------------------------------------------
-XModuleSoundSamplesML::XModuleSoundSamplesML(QString class_name)
+XModuleSoundsDatabaseAnalyze::XModuleSoundsDatabaseAnalyze(QString class_name)
     :XModuleVisual(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundSamplesML::~XModuleSoundSamplesML()
+XModuleSoundsDatabaseAnalyze::~XModuleSoundsDatabaseAnalyze()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::start() {
+void XModuleSoundsDatabaseAnalyze::start() {
     //Analyze
     analyze_.clear();
 
@@ -50,7 +50,7 @@ void XModuleSoundSamplesML::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::update() {
+void XModuleSoundsDatabaseAnalyze::update() {
     //buttons
     if (geti_join_convert()) {
         join_wavs(gets_join_input_folder(), gets_join_output_folder());
@@ -69,12 +69,12 @@ void XModuleSoundSamplesML::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::stop() {
+void XModuleSoundsDatabaseAnalyze::stop() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folder) {
+void XModuleSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString output_folder) {
     xc_assert(!input_folder.isEmpty(), "Input folder is empty");
     xc_assert(!output_folder.isEmpty(), "Output folder is empty");
 
@@ -135,7 +135,7 @@ void XModuleSoundSamplesML::join_wavs(QString input_folder, QString output_folde
 
 //---------------------------------------------------------------------
 //returns number of used parts
-int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &database) {
+int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabase &database) {
     xc_audio::WavFile wav;
 
     //The code of loading WAV is based on the "Spectrum" Qt example
@@ -213,7 +213,7 @@ int XModuleSoundSamplesML::join_wav(QString wav_file, SoundSamplesDatabase &data
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::load_database() {
+void XModuleSoundsDatabaseAnalyze::load_database() {
     db_.load(gets_db_folder());
 
     seti_db_sounds(db_.size());
@@ -225,7 +225,7 @@ void XModuleSoundSamplesML::load_database() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::analyze_reload() {
+void XModuleSoundsDatabaseAnalyze::analyze_reload() {
     selected_ = -1;
 
     switch (gete_draw_method()) {
@@ -237,14 +237,14 @@ void XModuleSoundSamplesML::analyze_reload() {
     case draw_method_tSNE:
         break;
     default:
-        xc_exception(QString("XModuleSoundSamplesML::analyze_reload - unknown method %1").arg(gete_draw_method()));
+        xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_draw_method()));
     }
 
     refresh();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
+void XModuleSoundsDatabaseAnalyze::draw(QPainter &painter, int outw, int outh) {
 
     //Antialiasing
     painter.setRenderHint(QPainter::Antialiasing);
@@ -263,7 +263,7 @@ void XModuleSoundSamplesML::draw(QPainter &painter, int outw, int outh) {
 
 //---------------------------------------------------------------------
 //click mouse to play the sound
-void XModuleSoundSamplesML::mouse_pressed(int2 pos, XMouseButton /*button*/) {
+void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button*/) {
     //xc_console_append(QString("mouse %1 %2").arg(pos.x).arg(pos.y));
     int id = analyze_.find_by_mouse(glm::vec2(float(pos.x)/w_, float(pos.y)/h_));
     if (id >= 0) {

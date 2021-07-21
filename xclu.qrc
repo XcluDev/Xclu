@@ -435,6 +435,6 @@
         <file>builtin_modules/System/FileCreate/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>
         <file>builtin_modules/ML/MLExecute/description.xgui</file>
-        <file>builtin_modules/Contrib/SoundSamplesML/description.xgui</file>
+        <file>builtin_modules/Sound/SoundsDatabaseAnalyze/description.xgui</file>
     </qresource>
 </RCC>

@@ -5,9 +5,6 @@
 SOURCES += \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/soundsamplesanalyze.cpp \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/soundsamplesdatabase.cpp \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/xmodulessoundsamplesml.cpp \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
     $$PWD/builtin_modules/Core/ValueMap/xmodulevaluemap.cpp \
@@ -22,6 +19,9 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
     $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.cpp \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.cpp \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.cpp \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.cpp \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
     $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.cpp \
     $$PWD/builtin_modules/System/Timer/xmoduletimer.cpp \
@@ -39,10 +39,6 @@ HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/auto.h \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/soundsamplesanalyze.h \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/soundsamplesdatabase.h \
-    $$PWD/builtin_modules/Contrib/SoundSamplesML/xmodulessoundsamplesml.h \
     $$PWD/builtin_modules/Core/Random/auto.h \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.h \
     $$PWD/builtin_modules/Core/Scalar/auto.h \
@@ -70,6 +66,10 @@ HEADERS += \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.h \
     $$PWD/builtin_modules/Sound/SoundPlay/auto.h \
     $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/auto.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
     $$PWD/builtin_modules/System/FileCreate/auto.h \
