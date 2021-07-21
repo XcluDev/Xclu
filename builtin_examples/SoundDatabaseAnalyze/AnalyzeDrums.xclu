@@ -10,8 +10,58 @@
     "modules": [
         {
             "description": {
-                "class": "SoundSamplesML",
-                "name": "sound_samples_ml1",
+                "class": "Notes",
+                "name": "readme",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "This example shows analyzing database of WAV files with SoundsDatabaseAnalyze module.\nModule allows the following:\n- join equal-length WAVs into a single binary file, and small ini file - they are called \"database\",\n- arrange them at 2D using several algorithms and draw,\n- play samples by mouse click.\n\n\nCurrently only 16bit PCM 1 or 2 channels WAVs are supported, \nand database converts 2 channel files into 1 channel."
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "SoundsDatabaseAnalyze",
+                "name": "sounds_database",
                 "version": "1.01"
             },
             "interface": {
@@ -106,7 +156,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -163,7 +213,7 @@
                     },
                     {
                         "aname": "content",
-                        "avalue": "sound_samples_ml1"
+                        "avalue": "sounds_database\n"
                     },
                     {
                         "aname": "global_margin",
