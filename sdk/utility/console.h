@@ -10,30 +10,27 @@
 #include "incl_h.h"
 
 
-//Вызовы исключений:
-//Исключение при парсинге и прочих внутренних операциях
+//Exceptions
 void xc_exception(QString message);
-
 void xc_exception(ErrorInfo err);
 
 
-//Ошибка, после которой программа завершает работу
+//Xclu-level critical exception with stopping Xclu
 void xc_halt(QString message);
 
-//Здесь assert обязательно делать макросом - чтобы если не выполнится, строки не создавались
+//Check condition, if false - eЗдесь assert обязательно делать макросом - чтобы если не выполнится, строки не создавались
 #define xc_assert(cond, message) {if (!(cond)) xc_exception(message);}
 
-//Показ окна сообщений
+//Message box
 void xc_message_box(QString message);
 
-//Вывод в лог - ConsoleView
-void xc_console_warning(QString message, bool dirty = true);
+//Console output
+void xc_console_warning(QString message, bool dirty = true); //TODO output in other color to mark it's warning
 void xc_console_append(QString message, bool dirty = true);
 void xc_console_clear();
 void xc_console_refresh();  //force repaint, use for showing progress in long operations
 
-//Сигнал, что проект был изменен
-//обращается прямо в MainWindow
+//Signal that project was modified, calls directly to MainWindow
 void xc_document_modified();
 
 //Copy text to clipboard
@@ -42,7 +39,7 @@ void xc_clipboard_set_text(QString text);
 QString xc_clipboard_get_text();
 
 
-//Исключение внутри программы
+//Exception class
 struct XException: public std::exception {
     XException(const QString &message) {
         err_ = ErrorInfo(message);
@@ -67,7 +64,7 @@ private:
    ErrorInfo err_;
 };
 
-//Критическое исключение
+//Xclu-level critical exception class
 struct XCluCriticalException: public std::exception {
     XCluCriticalException(const QString &message) {
         message_ = message;
