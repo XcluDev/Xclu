@@ -56,13 +56,14 @@
 namespace xc_audio {
 //--------------------------------------------------
 
-qint64 audioDuration(const QAudioFormat &format, qint64 bytes)
+qint64 audio_duration(const QAudioFormat &format, qint64 bytes)
 {
     return (bytes * 1000000) /
             (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8));
 }
 
-qint64 audioLength(const QAudioFormat &format, qint64 microSeconds)
+//--------------------------------------------------
+qint64 audio_length(const QAudioFormat &format, qint64 microSeconds)
 {
     qint64 result = (format.sampleRate() * format.channelCount() * (format.sampleSize() / 8))
             * microSeconds / 1000000;
@@ -70,12 +71,14 @@ qint64 audioLength(const QAudioFormat &format, qint64 microSeconds)
     return result;
 }
 
-qreal nyquistFrequency(const QAudioFormat &format)
+//--------------------------------------------------
+qreal nyquist_frequency(const QAudioFormat &format)
 {
     return format.sampleRate() / 2;
 }
 
-QString formatToString(const QAudioFormat &format)
+//--------------------------------------------------
+QString format_to_string(const QAudioFormat &format)
 {
     QString result;
 
@@ -126,31 +129,47 @@ QString formatToString(const QAudioFormat &format)
     return result;
 }
 
-bool isPCM(const QAudioFormat &format)
+//--------------------------------------------------
+bool is_PCM(const QAudioFormat &format)
 {
     return (format.codec() == "audio/pcm");
 }
 
-
-bool isPCMS16LE(const QAudioFormat &format)
+//--------------------------------------------------
+bool is_PCMS16LE(const QAudioFormat &format)
 {
-    return isPCM(format) &&
+    return is_PCM(format) &&
             format.sampleType() == QAudioFormat::SignedInt &&
             format.sampleSize() == 16 &&
             format.byteOrder() == QAudioFormat::LittleEndian;
 }
 
+//--------------------------------------------------
 const qint16  PCMS16MaxValue     =  32767;
 const quint16 PCMS16MaxAmplitude =  32768; // because minimum is -32768
 
-qreal pcmToReal(qint16 pcm)
+qreal pcm_to_real(qint16 pcm)
 {
     return qreal(pcm) / PCMS16MaxAmplitude;
 }
 
-qint16 realToPcm(qreal real)
+//--------------------------------------------------
+qint16 real_to_pcm(qreal real)
 {
     return real * PCMS16MaxValue;
+}
+
+//--------------------------------------------------
+//TODO not optimal - because allocates temporary envelope int16
+QVector<float> make_float_envelope(const QVector<int16> &sound, int decimate, int size) {
+    auto env16 = make_envelope(sound, decimate, size);
+    int m = env16.size();
+    QVector<float> env;
+    env.resize(m);
+    for (int i=0; i<m; i++) {
+        env[i] = xc_audio::pcm_to_real(env16[i]);
+    }
+    return env;
 }
 
 

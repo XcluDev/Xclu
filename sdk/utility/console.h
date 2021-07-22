@@ -30,6 +30,7 @@ void xc_message_box(QString message);
 void xc_console_warning(QString message, bool dirty = true);
 void xc_console_append(QString message, bool dirty = true);
 void xc_console_clear();
+void xc_console_refresh();  //force repaint, use for showing progress in long operations
 
 //Сигнал, что проект был изменен
 //обращается прямо в MainWindow

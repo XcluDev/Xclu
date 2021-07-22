@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "2"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -111,7 +111,7 @@
                     },
                     {
                         "aname": "an_method",
-                        "avalue": "File_Order"
+                        "avalue": "tSNE"
                     },
                     {
                         "aname": "an_envelope_size",

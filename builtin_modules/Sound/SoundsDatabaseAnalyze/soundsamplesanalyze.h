@@ -20,6 +20,9 @@ public:
     //method of placing sounds in a square just as they are in the database
     void method_natural_order(SoundSamplesDatabase &db);
 
+    //using t-sne
+    void method_tsne(SoundSamplesDatabase &db);
+
     //draw
     void draw(QPainter &painter, int w, int h, int selected_index, int thumb_rad);
     void draw_sound(QPainter &painter, int w, int h, const QVector<int16> &sound);
@@ -30,9 +33,8 @@ protected:
     //positions of samples obtained during analysis, 0..1
     QVector<glm::vec2> pos_;
 
-    QVector<int16> make_envelope(const QVector<int16> &sound);
-
     int env_size = 512; //envelope size used for analysis
+    QVector<QVector<float>> make_float_envelopes(SoundSamplesDatabase &db);
 };
 
 

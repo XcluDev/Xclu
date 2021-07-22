@@ -68,7 +68,7 @@ out int Channels db_channels=0 0:* 1,10
 page Analyze
     //Analyze and draw sounds using various methods, and play them by mouse clicking.
 
-in enum Method an_method=File_Order [File_Order,Simple,tSNE]
+in enum Method an_method=File_Order [File_Order,tSNE]
     //Drawing method.
 
 line

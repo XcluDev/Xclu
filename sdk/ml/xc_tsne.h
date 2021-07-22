@@ -3,7 +3,7 @@
 //t-SNE algorithm packs multidimensional vectors into 2D or 3D space, trying to keep original metrics.
 //Usage:
 //    Include header #include "xc_tsne.h"
-//    Use class xc_ml:tsne
+//    Use class xc_ml::tsne
 //Xclu uses original Laurens van der Maaten (Delft University of Technology) implementation:
 //    https://github.com/lvdmaaten/bhtsne/
 //together with adoptation of Gene Kogan’s code for openFrameworks addon:
@@ -17,6 +17,9 @@
 //---------------------------------------------------------------------
 namespace xc_ml {
 //---------------------------------------------------------------------
+
+//CPU t-SNE implementation
+//TODO: there is CUDA t-SNE implementation.
 
 class xTSNE
 {
@@ -44,14 +47,17 @@ public:
     };
 
     //2D embedding
-    QVector<glm::vec2> run_2d(QVector<QVector<float>> &data, const Params &params);
+    QVector<glm::vec2> run_2d(const QVector<QVector<float>> &data, const Params &params);
+    QVector<glm::vec2> result_2d();
 
     //3D embedding
-    QVector<glm::vec3> run_3d(QVector<QVector<float>> &data, const Params &params);
+    QVector<glm::vec3> run_3d(const QVector<QVector<float>> &data, const Params &params);
+    QVector<glm::vec3> result_3d();
 
     //Universal callers for other dimensions
-    const QVector<QVector<double>> &run(QVector<QVector<float>> &data, const Params &params, int dims=2);
-    const QVector<QVector<double>> &iterate();
+    const QVector<QVector<double>> &run(const QVector<QVector<float>> &data, const Params &params, int dims=2);
+    const QVector<QVector<double>> &iterate();    
+    QVector<QVector<double>> &result();
 
 private:
     void finish();

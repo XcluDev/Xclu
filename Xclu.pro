@@ -110,9 +110,18 @@ INCLUDEPATH += \
     components/text
 
 # SDK
-INCLUDEPATH += project modules
-INCLUDEPATH += host host/dialogs
-INCLUDEPATH += sdk sdk/math sdk/types sdk/utility sdk/audio
+INCLUDEPATH += project \
+               modules
+
+INCLUDEPATH += host \
+               host/dialogs
+
+INCLUDEPATH += sdk \
+               sdk/audio \
+               sdk/math \
+               sdk/ml \
+               sdk/types \
+               sdk/utility
 
 # Compute shaders
 INCLUDEPATH += sdk/compshaders

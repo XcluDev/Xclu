@@ -2,41 +2,11 @@
 #include "incl_cpp.h"
 #include "xcore.h"
 #include "xc_audio.h"
+#include "xc_tsne.h"
 
 //---------------------------------------------------------------------
 void SoundSamplesAnalyze::clear() {
     pos_.clear();
-}
-
-//---------------------------------------------------------------------
-//set envelope size for analysis
-void SoundSamplesAnalyze::set_envelope_size(int size) {
-    env_size = size;
-}
-
-//---------------------------------------------------------------------
-QVector<int16> SoundSamplesAnalyze::make_envelope(const QVector<int16> &sound) {
-    return xc_audio::make_envelope(sound, -1, env_size);
-}
-
-//---------------------------------------------------------------------
-//method of placing sounds in a square just as they are in the database
-void SoundSamplesAnalyze::method_natural_order(SoundSamplesDatabase &db) {
-    int n = db.size();
-    pos_.resize(n);
-
-    //compute square size
-    int m = int(sqrt(n));
-    if (n > m*m) {
-        m++;
-    }
-    if (m < 2) m = 2;
-    //place
-    for (int i=0; i<n; i++) {
-        int x = i % m;
-        int y = i / m;
-        pos_[i] = glm::vec2(xmapf(x, 0, m-1, 0, 1), xmapf(y, 0, m-1, 0, 1));
-    }
 }
 
 //---------------------------------------------------------------------
@@ -71,7 +41,7 @@ void SoundSamplesAnalyze::draw_sound(QPainter &painter, int w, int h, const QVec
     painter.setBrush(brush);
 
     //Draw envelope
-    auto env = make_envelope(sound);
+    auto env = xc_audio::make_envelope(sound, -1, env_size);
     int n = env.size();
     if (n == 0) return;
     for (int x=0; x < n; x++) {
@@ -96,6 +66,71 @@ int SoundSamplesAnalyze::find_by_mouse(glm::vec2 pos) {
         }
     }
     return k;
+}
+
+//---------------------------------------------------------------------
+//set envelope size for analysis
+void SoundSamplesAnalyze::set_envelope_size(int size) {
+    env_size = size;
+}
+
+//---------------------------------------------------------------------
+QVector<QVector<float>> SoundSamplesAnalyze::make_float_envelopes(SoundSamplesDatabase &db) {
+    int n = db.size();
+    auto &sounds = db.sounds();
+    QVector<QVector<float>> envelopes(n);
+    for (int k=0; k<n; k++) {
+        envelopes[k] = xc_audio::make_float_envelope(sounds[k], -1, env_size);
+    }
+    return envelopes;
+}
+
+//---------------------------------------------------------------------
+//method of placing sounds in a square just as they are in the database
+void SoundSamplesAnalyze::method_natural_order(SoundSamplesDatabase &db) {
+    int n = db.size();
+    pos_.resize(n);
+
+    //compute square size
+    int m = int(sqrt(n));
+    if (n > m*m) {
+        m++;
+    }
+    if (m < 2) m = 2;
+    //place
+    for (int i=0; i<n; i++) {
+        int x = i % m;
+        int y = i / m;
+        pos_[i] = glm::vec2(xmapf(x, 0, m-1, 0, 1), xmapf(y, 0, m-1, 0, 1));
+    }
+}
+
+
+//---------------------------------------------------------------------
+//using t-sne
+void SoundSamplesAnalyze::method_tsne(SoundSamplesDatabase &db) {
+    int n = db.size();
+    pos_.resize(n);
+
+    //compute envelopes
+    auto envs = make_float_envelopes(db);
+
+    //t-SNE
+    xc_ml::xTSNE tsne;
+    xc_ml::xTSNE::Params params;
+    params.runManually = true; //will call iterations manually
+    params.iterations = 1000;   //PARAM
+
+    xc_console_append("t-Sne starting...");
+    xc_console_refresh();
+    tsne.run_2d(envs, params);
+
+    for (int i=0; i<params.iterations; i++) {
+        xc_console_append(QString("  iteration %1 / %2").arg(i).arg(params.iterations));
+        xc_console_refresh();
+        tsne.iterate();
+    }
+    pos_ = tsne.result_2d();
 }
 
 //---------------------------------------------------------------------

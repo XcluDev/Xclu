@@ -5,7 +5,7 @@ namespace xc_ml {
 
 //---------------------------------------------------------------------
 //2D embedding
-QVector<glm::vec2> xTSNE::run_2d(QVector<QVector<float>> &data, const Params &params) {
+QVector<glm::vec2> xTSNE::run_2d(const QVector<QVector<float>> &data, const Params &params) {
     int dim = 2;
     auto &v = run(data, params, dim);
     int n = v.size();
@@ -21,7 +21,7 @@ QVector<glm::vec2> xTSNE::run_2d(QVector<QVector<float>> &data, const Params &pa
 
 //---------------------------------------------------------------------
 //3D embedding
-QVector<glm::vec3> xTSNE::run_3d(QVector<QVector<float>> &data, const Params &params) {
+QVector<glm::vec3> xTSNE::run_3d(const QVector<QVector<float>> &data, const Params &params) {
     int dim = 3;
     auto &v = run(data, params, dim);
     int n = v.size();
@@ -35,8 +35,38 @@ QVector<glm::vec3> xTSNE::run_3d(QVector<QVector<float>> &data, const Params &pa
     return res;
 }
 
+
 //---------------------------------------------------------------------
-const QVector<QVector<double>> &xTSNE::run(QVector<QVector<float>> &data, const Params &params, int dims) {
+QVector<glm::vec2> xTSNE::result_2d() {
+    auto &v = result();
+    if (v.isEmpty()) return QVector<glm::vec2>();
+    xc_assert(v[0].size() == 2, "xTSNE::result_2d() error");
+    QVector<glm::vec2> v2(v.size());
+    for (int i=0; i<v.size(); i++) {
+        v2[i] = glm::vec2(v[i][0], v[i][1]);
+    }
+    return v2;
+}
+
+//---------------------------------------------------------------------
+QVector<glm::vec3> xTSNE::result_3d() {
+    auto &v = result();
+    if (v.isEmpty()) return QVector<glm::vec3>();
+    xc_assert(v[0].size() == 3, "xTSNE::result_3d() error");
+    QVector<glm::vec3> v3(v.size());
+    for (int i=0; i<v.size(); i++) {
+        v3[i] = glm::vec3(v[i][0], v[i][1], v[i][2]);
+    }
+    return v3;
+}
+
+//---------------------------------------------------------------------
+QVector<QVector<double>> &xTSNE::result() {
+    return tsnePoints;
+}
+
+//---------------------------------------------------------------------
+const QVector<QVector<double>> &xTSNE::run(const QVector<QVector<float>> &data, const Params &params, int dims) {
     params_ = params;
     this->dims = dims;
     

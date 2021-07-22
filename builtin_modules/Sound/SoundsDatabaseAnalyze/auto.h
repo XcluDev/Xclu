@@ -124,9 +124,8 @@ void repaint_db_channels() { repaint_("db_channels"); }
 //Drawing method.
 enum enum_an_method {
     an_method_File_Order = 0,
-    an_method_Simple = 1,
-    an_method_tSNE = 2,
-    an_method_N__ = 3
+    an_method_tSNE = 1,
+    an_method_N__ = 2
 };
 bool was_changed_an_method() { return was_changed_("an_method"); }
 enum_an_method gete_an_method() { return enum_an_method(geti_("an_method")); }

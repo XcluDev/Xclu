@@ -47,10 +47,12 @@ void xc_console_append(QString message, bool dirty) {
     CONS_VIEW->append(message, dirty);
     qDebug() << ">>" << message;
 
-    //qApp->processEvents();  //update view
-    //int sleep_ms = 1;     //need to sleep to process this ???????
-    //QThread::msleep(sleep_ms);
+}
 
+//---------------------------------------------------------------------
+void xc_console_refresh() {  //force repaint
+    CONS_VIEW->update();
+    qApp->processEvents();
 }
 
 //---------------------------------------------------------------------

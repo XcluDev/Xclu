@@ -151,8 +151,8 @@ int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabas
     auto &format = wav.fileFormat();
 
     //We support only 16 bit signed, Little Endian
-    xc_assert(xc_audio::isPCMS16LE(format),
-              "Audio format '" + xc_audio::formatToString(format) + "' not supported, expected signed int16, Little Endian");
+    xc_assert(xc_audio::is_PCMS16LE(format),
+              "Audio format '" + xc_audio::format_to_string(format) + "' not supported, expected signed int16, Little Endian");
 
     //Actually we don't need 44100, but just fixed sample rate
     int sample_rate = format.sampleRate();
@@ -240,9 +240,8 @@ void XModuleSoundsDatabaseAnalyze::analyze_reload() {
     case an_method_File_Order:
         analyze_.method_natural_order(db_);
         break;
-    case an_method_Simple:
-        break;
     case an_method_tSNE:
+        analyze_.method_tsne(db_);
         break;
     default:
         xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));

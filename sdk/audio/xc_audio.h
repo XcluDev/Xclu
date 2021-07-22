@@ -69,24 +69,24 @@ QT_FORWARD_DECLARE_CLASS(QAudioFormat)
 namespace xc_audio {
 //--------------------------------------------------
 
-qint64 audioDuration(const QAudioFormat &format, qint64 bytes);
-qint64 audioLength(const QAudioFormat &format, qint64 microSeconds);
+qint64 audio_duration(const QAudioFormat &format, qint64 bytes);
+qint64 audio_length(const QAudioFormat &format, qint64 microSeconds);
 
-QString formatToString(const QAudioFormat &format);
+QString format_to_string(const QAudioFormat &format);
 
-qreal nyquistFrequency(const QAudioFormat &format);
+qreal nyquist_frequency(const QAudioFormat &format);
 
 // Scale PCM value to [-1.0, 1.0]
-qreal pcmToReal(qint16 pcm);
+qreal pcm_to_real(qint16 pcm);
 
 // Scale real value in [-1.0, 1.0] to PCM
-qint16 realToPcm(qreal real);
+qint16 real_to_pcm(qreal real);
 
 // Check whether the audio format is PCM
-bool isPCM(const QAudioFormat &format);
+bool is_PCM(const QAudioFormat &format);
 
 // Check whether the audio format is signed, little-endian, 16-bit PCM
-bool isPCMS16LE(const QAudioFormat &format);
+bool is_PCMS16LE(const QAudioFormat &format);
 
 // Compile-time calculation of powers of two
 
@@ -121,6 +121,9 @@ QVector<T> make_envelope(const QVector<T> &sound, int decimate = 64, int size = 
     }
     return env;
 }
+
+QVector<float> make_float_envelope(const QVector<int16> &sound, int decimate = 64, int size = -1);
+
 
 //--------------------------------------------------
 } //namespace
