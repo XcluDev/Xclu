@@ -89,15 +89,9 @@ unix {
 
 
 #--------------------------------------------------------------------------
-#Common source, headers and forms files
+#Paths
 #--------------------------------------------------------------------------
-
-FORMS += \
-    host/dialogs/dialogeditlink.ui \
-    host/dialogs/dialogeditlinks.ui \
-    host/dialogs/dialogmodulename.ui \
-    host/mainwindow.ui
-
+# Components
 INCLUDEPATH += \
     components \
     components/gui \
@@ -115,15 +109,28 @@ INCLUDEPATH += \
     components/string \
     components/text
 
+# SDK
 INCLUDEPATH += project modules
 INCLUDEPATH += host host/dialogs
-INCLUDEPATH += sdk sdk/compshaders sdk/math sdk/types sdk/utility sdk/audio
+INCLUDEPATH += sdk sdk/math sdk/types sdk/utility sdk/audio
 
-# GLM
-INCLUDEPATH += ./ libs/glm libs/glm/gtx
+# Compute shaders
+INCLUDEPATH += sdk/compshaders
 
-# oF
+# Libs
+INCLUDEPATH += libs/glm libs/glm/gtx
 INCLUDEPATH += libs/of
+INCLUDEPATH += libs/tsne
+
+#--------------------------------------------------------------------------
+#Common source, headers and forms files
+#--------------------------------------------------------------------------
+FORMS += \
+    host/dialogs/dialogeditlink.ui \
+    host/dialogs/dialogeditlinks.ui \
+    host/dialogs/dialogmodulename.ui \
+    host/mainwindow.ui
+
 
 
 SOURCES += \
@@ -164,6 +171,8 @@ SOURCES += \
     host/xclu_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
+    libs/tsne/sptree.cpp \
+    libs/tsne/tsne.cpp \
     modules/registrarxmodule.cpp \
     project/project.cpp \
     project/projectproperties.cpp \
@@ -177,6 +186,7 @@ SOURCES += \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
+    sdk/ml/xc_tsne.cpp \
     sdk/types.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
@@ -262,6 +272,9 @@ HEADERS += \
     host/xclu_settings.h \
     host/xclu_theme.h \
     libs/of/ofNoise.h \
+    libs/tsne/sptree.h \
+    libs/tsne/tsne.h \
+    libs/tsne/vptree.h \
     modules/registrarxmodule.h \
     project/project.h \
     project/projectproperties.h \
@@ -276,6 +289,7 @@ HEADERS += \
     sdk/math/xmath.h \
     sdk/math/xnoise.h \
     sdk/math/xslowbit.h \
+    sdk/ml/xc_tsne.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
     sdk/types.h \

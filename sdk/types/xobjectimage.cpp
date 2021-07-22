@@ -278,12 +278,12 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Advanced function which works with internal object
 //Usage: XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color);
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8 &raster) {
-    create_from_array(object, &raster.data[0], 1, raster.w, raster.h);
+    create_from_array(object, raster.data.data(), 1, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8c3 &raster) {
-    create_from_array(object, (quint8 *)(&raster.data[0]), 3, raster.w, raster.h);
+    create_from_array(object, (quint8 *)(raster.data.data()), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------

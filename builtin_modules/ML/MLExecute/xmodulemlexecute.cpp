@@ -484,7 +484,7 @@ void XModuleMLExecute::console_write_image(int w, int h, int channels, uint8 *da
         int header_size = 5;
         QVector<uint8> buffer(header_size + data_size);
 
-        uint8* bufp = &buffer[0];
+        uint8* bufp = &buffer.data();
 
         *(uint16 *)bufp = w;
         *(uint16 *)(bufp+2) = h;

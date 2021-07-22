@@ -56,7 +56,7 @@ void XArray::allocate(unsigned int size, XTypeId data_type) {
     //data
     if (size_bytes != size_bytes_) {
         data_.resize(size_bytes);
-        data_ptr_ = &data_[0];
+        data_ptr_ = data_.data();
     }
 
     //parameters
@@ -238,7 +238,7 @@ void XArray::set_double(qint32 index, double v) {
 quint8* XArray::data_u8() {
     if (size_bytes_ == 0) return nullptr;
     xc_assert(data_type_ == XTypeId_u8, "Array has no " "u8" " pointer");
-    return (quint8*)(&data_[0]);
+    return (quint8*)(data_.data());
 }
 
 */

@@ -80,7 +80,7 @@ void XModuleFileCreate::on_button_pressed(QString button_id) {
                 }
 
                 //write
-                qint64 written = file.write((char *)&block[0], toWrite);
+                qint64 written = file.write((char *)block.data(), toWrite);
                 xc_assert(written != -1, "Error writing file " + short_name);
                 xc_assert(written == toWrite, "Error while writing to file " + short_name + ", may be disk is full");
 

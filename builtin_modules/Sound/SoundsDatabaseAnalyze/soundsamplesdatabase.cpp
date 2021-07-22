@@ -71,7 +71,7 @@ void SoundSamplesDatabase::save(QString folder) {
     for (int i=0; i<size(); i++) {
         auto &sample = sounds_[i];
         int n = sample.size();
-        int written = file.write((const char *)&sample[0], n);
+        int written = file.write((const char *)sample.data(), n);
         xc_assert(n == written, QString("Not all data is written to file, want to write %1, but written %2")
               .arg(n).arg(written));
     }

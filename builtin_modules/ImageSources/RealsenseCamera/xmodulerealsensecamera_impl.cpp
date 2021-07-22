@@ -358,7 +358,7 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, XRaster
         return true;
     }
     if (format == RS2_FORMAT_RGB8) {
-        memcpy(&data[0], input, w*h * 3);
+        memcpy(data.data(), input, w*h*3);
         //__log__("RS2_FORMAT_RGB8 ok");
         return true;
     }

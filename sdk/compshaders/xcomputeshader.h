@@ -151,7 +151,7 @@ public:
             allocate(nullptr, 0);
         }
         else {
-            allocate(&data[0], data.size() * sizeof(T));
+            allocate(data.data(), data.size() * sizeof(T));
         }
     }
     void allocate(int size_bytes);
@@ -163,7 +163,7 @@ public:
     template<typename T>
     void read_to_cpu(QVector<T> &data) { //data must be allocated for required size
         int size_bytes = data.size() * sizeof(T);
-        read_to_cpu(&data[0], size_bytes);
+        read_to_cpu(data.data(), size_bytes);
     }
 
     void clear();
