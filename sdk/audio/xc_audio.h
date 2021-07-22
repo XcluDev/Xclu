@@ -55,10 +55,14 @@
 #include <QtCore/qglobal.h>
 #include <QDebug>
 
+#include "sdk_h.h"
+
 QT_FORWARD_DECLARE_CLASS(QAudioFormat)
 
 //-----------------------------------------------------------------------------
-// Miscellaneous utility functions
+// Miscellaneous utility functions aboud audio:
+//- QAudioFormat workaround,
+//- computing sound envelope
 //-----------------------------------------------------------------------------
 
 //--------------------------------------------------
@@ -91,6 +95,32 @@ template<int N> class PowerOfTwo
 
 template<> class PowerOfTwo<0>
 { public: static const int Result = 1; };
+
+//Envelope for 1-channel sound
+//set decimate to -1 and size to >0 to obtain envelope of the fixed size
+template<typename T>
+QVector<T> make_envelope(const QVector<T> &sound, int decimate = 64, int size = -1) {
+
+    if (sound.isEmpty()) {
+        return QVector<T>();
+    }
+    int n = sound.size();
+    int m;  //size of the envelope
+    if (decimate > 0) {
+        m = qMax(n / decimate, 1);
+    }
+    else {
+        xc_assert(size > 0, "xc_audio::envelope - if 'decimate' <= 0, then used 'size', which must be >0");
+        m = size;
+    }
+
+    QVector<T> env(m, 0);
+    for (int i=0; i<n; i++) {
+        auto &v = env[i*m/n];
+        v = qMax(v, qAbs(sound[i]));
+    }
+    return env;
+}
 
 //--------------------------------------------------
 } //namespace

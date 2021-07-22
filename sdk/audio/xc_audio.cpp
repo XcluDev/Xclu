@@ -49,7 +49,8 @@
 ****************************************************************************/
 
 #include <QAudioFormat>
-#include "xaudio_utils.h"
+#include "incl_cpp.h"
+#include "xc_audio.h"
 
 //--------------------------------------------------
 namespace xc_audio {
@@ -151,6 +152,7 @@ qint16 realToPcm(qreal real)
 {
     return real * PCMS16MaxValue;
 }
+
 
 //--------------------------------------------------
 } //namespace

@@ -117,32 +117,43 @@ void increase_int_db_channels(int increase = 1) { increase_int_("db_channels", i
 void repaint_db_channels() { repaint_("db_channels"); }
 
 //----------------------------------------------------
-//Page Visualize
+//Page Analyze
 //Analyze and draw sounds using various methods, and play them by mouse clicking.
 
 //Enum Method
 //Drawing method.
-enum enum_draw_method {
-    draw_method_File_Order = 0,
-    draw_method_Simple = 1,
-    draw_method_tSNE = 2,
-    draw_method_N__ = 3
+enum enum_an_method {
+    an_method_File_Order = 0,
+    an_method_Simple = 1,
+    an_method_tSNE = 2,
+    an_method_N__ = 3
 };
-bool was_changed_draw_method() { return was_changed_("draw_method"); }
-enum_draw_method gete_draw_method() { return enum_draw_method(geti_("draw_method")); }
-QString getraw_draw_method() { return getraw_("draw_method");}
+bool was_changed_an_method() { return was_changed_("an_method"); }
+enum_an_method gete_an_method() { return enum_an_method(geti_("an_method")); }
+QString getraw_an_method() { return getraw_("an_method");}
 
+
+//Int Envelope Size
+//Size of envelope for sound analysis.
+bool was_changed_an_envelope_size() { return was_changed_("an_envelope_size"); }
+int geti_an_envelope_size() { return geti_("an_envelope_size"); }
+void repaint_an_envelope_size() { repaint_("an_envelope_size"); }
+
+//----------------------------------------------------
+//Page Visualize
+//Setting for visualizing and sound playing
 
 //Int Thumb Rad
 //Radius of sound's thumbnail.
-bool was_changed_thumb_rad() { return was_changed_("thumb_rad"); }
-int geti_thumb_rad() { return geti_("thumb_rad"); }
-void repaint_thumb_rad() { repaint_("thumb_rad"); }
+bool was_changed_vis_thumb_rad() { return was_changed_("vis_thumb_rad"); }
+int geti_vis_thumb_rad() { return geti_("vis_thumb_rad"); }
+void repaint_vis_thumb_rad() { repaint_("vis_thumb_rad"); }
+
 
 //Float Volume
 //Volume to play sound.
-bool was_changed_volume() { return was_changed_("volume"); }
-float getf_volume() { return getf_("volume"); }
-void repaint_volume() { repaint_("volume"); }
+bool was_changed_play_volume() { return was_changed_("play_volume"); }
+float getf_play_volume() { return getf_("play_volume"); }
+void repaint_play_volume() { repaint_("play_volume"); }
 
 //----------------------------------------------------

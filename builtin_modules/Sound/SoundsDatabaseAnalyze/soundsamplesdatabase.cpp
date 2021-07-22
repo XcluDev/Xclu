@@ -1,8 +1,8 @@
 #include "soundsamplesdatabase.h"
 #include "incl_cpp.h"
 #include "xcore.h"
-#include "xaudio_wavfile.h"
-#include "xaudio_utils.h"
+#include "xc_audio_wavfile.h"
+#include "xc_audio.h"
 #include "xc_files.h"
 
 //---------------------------------------------------------------------

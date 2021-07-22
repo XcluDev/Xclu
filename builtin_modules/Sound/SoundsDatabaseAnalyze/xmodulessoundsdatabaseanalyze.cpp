@@ -5,8 +5,8 @@
 #include <QProcess>
 #include <QDirIterator>
 #include "xcore.h"
-#include "xaudio_wavfile.h"
-#include "xaudio_utils.h"
+#include "xc_audio_wavfile.h"
+#include "xc_audio.h"
 #include "soundsamplesdatabase.h"
 
 //registering module implementation
@@ -63,10 +63,15 @@ void XModuleSoundsDatabaseAnalyze::update() {
     }
 
     //changes
-    if (was_changed_draw_method()) {
+
+    //envelope size must be set first before further analysis
+    if (was_changed_an_envelope_size()) {
+        analyze_.set_envelope_size(geti_an_envelope_size());
+    }
+    if (was_changed_an_method()) {
         analyze_reload();
     }
-    if (was_changed_thumb_rad()) {
+    if (was_changed_vis_thumb_rad()) {
         refresh();
     }
 }
@@ -231,16 +236,16 @@ void XModuleSoundsDatabaseAnalyze::load_database() {
 void XModuleSoundsDatabaseAnalyze::analyze_reload() {
     selected_ = -1;
 
-    switch (gete_draw_method()) {
-    case draw_method_File_Order:
+    switch (gete_an_method()) {
+    case an_method_File_Order:
         analyze_.method_natural_order(db_);
         break;
-    case draw_method_Simple:
+    case an_method_Simple:
         break;
-    case draw_method_tSNE:
+    case an_method_tSNE:
         break;
     default:
-        xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_draw_method()));
+        xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));
     }
 
     refresh();
@@ -257,7 +262,8 @@ void XModuleSoundsDatabaseAnalyze::draw(QPainter &painter, int outw, int outh) {
     painter.setPen(Qt::PenStyle::NoPen);
     painter.drawRect(0, 0, outw, outh);
 
-    analyze_.draw(painter, outw, outh, selected_, geti_thumb_rad());
+    analyze_.draw(painter, outw, outh, selected_, geti_vis_thumb_rad());
+    analyze_.draw_sound(painter, outw, outh, player_.write().data().sound);
 
     //store size to use in mouse_pressed
     w_ = qMax(outw, 1);
@@ -274,7 +280,7 @@ void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button
         selected_ = id;
         refresh();  //repaint
         //start to play
-        player_.write().data().play(db_.sounds()[id], getf_volume());
+        player_.write().data().play(db_.sounds()[id], getf_play_volume());
     }
 }
 

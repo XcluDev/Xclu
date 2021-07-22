@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -106,20 +106,28 @@
                         "avalue": "1"
                     },
                     {
+                        "aname": "Analyze",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "an_method",
+                        "avalue": "File_Order"
+                    },
+                    {
+                        "aname": "an_envelope_size",
+                        "avalue": "100"
+                    },
+                    {
                         "aname": "Visualize",
                         "avalue": "0"
                     },
                     {
-                        "aname": "draw_method",
-                        "avalue": "File_Order"
+                        "aname": "vis_thumb_rad",
+                        "avalue": "5"
                     },
                     {
-                        "aname": "thumb_rad",
-                        "avalue": "4"
-                    },
-                    {
-                        "aname": "volume",
-                        "avalue": "1"
+                        "aname": "play_volume",
+                        "avalue": "0.3"
                     },
                     {
                         "aname": "Control",
@@ -160,7 +168,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -189,7 +197,7 @@
                     },
                     {
                         "aname": "pos_x",
-                        "avalue": "1200"
+                        "avalue": "600"
                     },
                     {
                         "aname": "pos_y",
