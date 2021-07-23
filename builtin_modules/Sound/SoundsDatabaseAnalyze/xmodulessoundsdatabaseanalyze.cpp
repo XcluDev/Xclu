@@ -62,15 +62,19 @@ void XModuleSoundsDatabaseAnalyze::update() {
         load_database();
     }
 
+    if (geti_an_compute()) {    //start analyze
+        analyze_reload();
+    }
+
     //changes
 
     //envelope size must be set first before further analysis
     if (was_changed_an_envelope_size()) {
         analyze_.set_envelope_size(geti_an_envelope_size());
     }
-    if (was_changed_an_method()) {
-        analyze_reload();
-    }
+    //if (was_changed_an_method()) {
+    //    analyze_reload();
+    //}
     if (was_changed_vis_thumb_rad()) {
         refresh();
     }
@@ -222,14 +226,19 @@ int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabas
 
 //---------------------------------------------------------------------
 void XModuleSoundsDatabaseAnalyze::load_database() {
-    db_.load(gets_db_folder());
+    // limiting count
+    int limit_count = -1;
+    if (geti_db_limit()) {
+        limit_count = geti_db_limit_count();
+    }
+    // loading
+    db_.load(gets_db_folder(), limit_count);
 
+    // set params to interface
     seti_db_sounds(db_.size());
     seti_db_length(db_.length());
     seti_db_sample_rate(db_.sample_rate());
     seti_db_channels(db_.channels());
-
-    analyze_reload();
 }
 
 //---------------------------------------------------------------------

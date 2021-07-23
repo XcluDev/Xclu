@@ -43,11 +43,23 @@ in string_folder Database_Folder db_folder=""
     //Folder for input database binary file and text file with description. 
     //Choose a folder for database.
 
+      
+in group Limit db_limit=0
+    //Limit number of loaded sounds by specified number - used for speed up during testing.
+
+if db_limit 1
+in int Count db_limit_count=10000 1:* 1,10
+    //Maximal number of sounds to load.
+endif  
+
+line
+ 
 in button Load db_load
     //Load database.
     
 in checkbox Autoload db_autoload=0
     //Autoload database at start, if exists.
+   
     
 line 
 out int Sounds db_sounds=0 0:* 1,10
@@ -70,7 +82,10 @@ page Analyze
 
 in enum Method an_method=File_Order [File_Order,tSNE]
     //Drawing method.
-
+    
+in button Compute an_compute
+    //Start analyzing.
+    
 line
 in int Envelope_Size an_envelope_size=100 1:* 1,10
     //Size of envelope for sound analysis.

@@ -89,7 +89,7 @@ void SoundSamplesDatabase::save(QString folder) {
 }
 
 //---------------------------------------------------------------------
-void SoundSamplesDatabase::load(QString folder) {
+void SoundSamplesDatabase::load(QString folder, int limit_max_count) {
     QString file_bin = folder + "/database.bin";
     QString file_ini = folder + "/database.ini";
 
@@ -137,6 +137,11 @@ void SoundSamplesDatabase::load(QString folder) {
     xc_assert(data.size() == file_size,
               QString("Bad database binary file size, expected %1 bytes, but get %2 bytes")
               .arg(file_size).arg(data.size()));
+
+    //Limit count if required //TODO we actually read more than required - not optimal
+    if (limit_max_count >= 0) {
+        count = qMin(count, limit_max_count);
+    }
 
     sounds_.resize(count);
     int k = 0;

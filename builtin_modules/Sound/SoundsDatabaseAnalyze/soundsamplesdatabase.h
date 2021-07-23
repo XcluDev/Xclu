@@ -14,7 +14,7 @@ public:
     void clear();
     void add(QVector<int16> sound);
     void save(QString folder);
-    void load(QString folder);
+    void load(QString folder, int limit_max_count = -1);
 
     //sounds
     QVector<QVector<int16>> &sounds() { return sounds_; }

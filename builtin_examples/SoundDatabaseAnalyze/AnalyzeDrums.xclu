@@ -102,6 +102,14 @@
                         "avalue": "../../../../../../Endless Instruments/ML_Sound_Gen/Drum_Database"
                     },
                     {
+                        "aname": "db_limit",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "db_limit_count",
+                        "avalue": "100"
+                    },
+                    {
                         "aname": "db_autoload",
                         "avalue": "1"
                     },
@@ -111,7 +119,7 @@
                     },
                     {
                         "aname": "an_method",
-                        "avalue": "tSNE"
+                        "avalue": "File_Order"
                     },
                     {
                         "aname": "an_envelope_size",

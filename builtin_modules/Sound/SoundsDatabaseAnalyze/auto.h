@@ -70,6 +70,19 @@ QString gets_db_folder() { return gets_("db_folder"); }
 QStringList get_strings_db_folder() { return get_strings_("db_folder"); }
 void repaint_db_folder() { repaint_("db_folder"); }
 
+//Checkbox Limit
+//Limit number of loaded sounds by specified number - used for speed up during testing.
+bool was_changed_db_limit() { return was_changed_("db_limit"); }
+int geti_db_limit() { return geti_("db_limit"); }
+void repaint_db_limit() { repaint_("db_limit"); }
+
+//Int Count
+//Maximal number of sounds to load.
+bool was_changed_db_limit_count() { return was_changed_("db_limit_count"); }
+int geti_db_limit_count() { return geti_("db_limit_count"); }
+void repaint_db_limit_count() { repaint_("db_limit_count"); }
+
+
 //Button Load
 //Load database.
 bool was_changed_db_load() { return was_changed_("db_load"); }
@@ -130,6 +143,13 @@ enum enum_an_method {
 bool was_changed_an_method() { return was_changed_("an_method"); }
 enum_an_method gete_an_method() { return enum_an_method(geti_("an_method")); }
 QString getraw_an_method() { return getraw_("an_method");}
+
+//Button Compute
+//Start analyzing.
+bool was_changed_an_compute() { return was_changed_("an_compute"); }
+int geti_an_compute() { return geti_("an_compute"); }
+void repaint_an_compute() { repaint_("an_compute"); }
+QString button_an_compute() { return "an_compute"; }
 
 
 //Int Envelope Size
