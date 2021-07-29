@@ -11,6 +11,15 @@
 
 
 /*
+ For converting BAGs to 3D files and images, use Intel Realsense SDK's
+ rs-convert.
+ On Linux it runs just as rs-convert,
+ on Windows it's at C:\Program Files (x86)\Intel RealSense SDK 2.0\tools>
+ For example, to extract PNGs to 'png' folder (create it first):
+ rs-convert -i MadRobot_20210703.bag -p png/
+*/
+
+/*
     Available resolutions and framerates:
     Depth/IR:
     424x240

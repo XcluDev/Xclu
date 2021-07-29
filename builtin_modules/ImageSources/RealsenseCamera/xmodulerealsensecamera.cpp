@@ -178,6 +178,8 @@ void XModuleRealsenseCamera::update() {
 //---------------------------------------------------------------------
 //запись кадра на диск
 void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool use_timestamp) {
+    xc_assert(!depth, "XModuleRealsenseCamera::save_frames - saving depth is not implemented");
+
     //Создаем папку для записи
     QString folder = xc_abs_path(gets_save_folder(), true /*create_folder*/);
 
@@ -250,11 +252,14 @@ void XModuleRealsenseCamera::start_camera() {
     auto capture_source = gete_capture_source();
     if (capture_source == capture_source_Disable) return;
     if (capture_source == capture_source_Bag_File) {
-        //TODO реализовать считывание bag-файла
-        xc_exception("RealsenseCamera: loading bag files are not implemented");
+        //Load BAG file
+        QString file_name = xc_abs_path(gets_bag_file());
+        xc_assert(xc_file_exists(file_name), "File '" + file_name + "' doesn't exists");
+        camera_.start_bag(file_name);
+        sets_connected_device_info("Playing BAG file '" + file_name + "'");
     }
     if (capture_source == capture_source_Camera) {
-        //выбор устройства
+        //Start Realsense Camera
         QVector<RealsenseCameraInfo> cameras = RealsenseCamera::get_connected_devices_info();
         xc_assert(!cameras.empty(), "No connected devices");
 

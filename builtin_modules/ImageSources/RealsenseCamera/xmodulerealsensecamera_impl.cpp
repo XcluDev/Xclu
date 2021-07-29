@@ -208,6 +208,7 @@ bool RealsenseCamera::start_camera(int device_index, const RealsenseSettings &se
 void RealsenseCamera::start_bag(QString fileName) {       //play BAG file
     //https://github.com/IntelRealSense/librealsense/issues/2749
 
+    //Also see notes at H file of this CPP file.
 
     rs2::config cfg;
     cfg.enable_device_from_file(fileName.toStdString());

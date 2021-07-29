@@ -35,7 +35,8 @@ public:
 
     static QString xc_project_folder();   //full path to project folder
 
-    //get absolute path to folder, given relative to project
+    //Get absolute path to folder, given relative to project
+    //For example, use for loading files specified related to the project
     static QString xc_abs_path(QString relative_path, bool create_folder = false);
 
     //----------------------------------------------

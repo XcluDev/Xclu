@@ -30,7 +30,8 @@ QString XClass::xc_project_folder() {   //full path to project folder
 }
 
 //---------------------------------------------------------------------
-//get absolute path to folder, given relative to project
+//Get absolute path to folder, given relative to project
+//For example, use it for loading files specified related to the project
 QString XClass::xc_abs_path(QString relative_path, bool create_folder) {
     return XCORE.absolute_path_from_project(relative_path, create_folder);
 }

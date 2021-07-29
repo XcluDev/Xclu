@@ -82,15 +82,36 @@ page Analyze
 
 in enum Method an_method=File_Order [File_Order,tSNE]
     //Drawing method.
+
+if an_method tSNE
+in int Envelope_Size an_envelope_size=100 1:* 1,10
+    //Size of envelope for sound analysis.
+endif
     
 in button Compute an_compute
     //Start analyzing.
     
-line
-in int Envelope_Size an_envelope_size=100 1:* 1,10
-    //Size of envelope for sound analysis.
     
 
+line    
+in group Analyze_Save an_save_group=1
+
+if an_save_group 1
+in string_file File an_file="analyze.txt"  
+    //File for loading analyze results.
+    //Choose existing analyze file.
+    //Text (*.txt);; All files (*.*)
+    
+in button Load an_load
+    //Load analyze results.
+
+in checkbox Autoload an_autoload=0
+    //Autoload analyze results.
+
+in button Save_As... an_save_as
+    //Save analyze results.
+endif
+line 
     
 #------------------------------------------
 page Visualize

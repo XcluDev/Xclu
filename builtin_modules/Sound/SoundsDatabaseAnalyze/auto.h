@@ -144,6 +144,12 @@ bool was_changed_an_method() { return was_changed_("an_method"); }
 enum_an_method gete_an_method() { return enum_an_method(geti_("an_method")); }
 QString getraw_an_method() { return getraw_("an_method");}
 
+//Int Envelope Size
+//Size of envelope for sound analysis.
+bool was_changed_an_envelope_size() { return was_changed_("an_envelope_size"); }
+int geti_an_envelope_size() { return geti_("an_envelope_size"); }
+void repaint_an_envelope_size() { repaint_("an_envelope_size"); }
+
 //Button Compute
 //Start analyzing.
 bool was_changed_an_compute() { return was_changed_("an_compute"); }
@@ -152,11 +158,39 @@ void repaint_an_compute() { repaint_("an_compute"); }
 QString button_an_compute() { return "an_compute"; }
 
 
-//Int Envelope Size
-//Size of envelope for sound analysis.
-bool was_changed_an_envelope_size() { return was_changed_("an_envelope_size"); }
-int geti_an_envelope_size() { return geti_("an_envelope_size"); }
-void repaint_an_envelope_size() { repaint_("an_envelope_size"); }
+//Checkbox Analyze Save
+//
+bool was_changed_an_save_group() { return was_changed_("an_save_group"); }
+int geti_an_save_group() { return geti_("an_save_group"); }
+void repaint_an_save_group() { repaint_("an_save_group"); }
+
+//String File
+//File for loading analyze results.
+bool was_changed_an_file() { return was_changed_("an_file"); }
+QString gets_an_file() { return gets_("an_file"); }
+QStringList get_strings_an_file() { return get_strings_("an_file"); }
+void repaint_an_file() { repaint_("an_file"); }
+
+//Button Load
+//Load analyze results.
+bool was_changed_an_load() { return was_changed_("an_load"); }
+int geti_an_load() { return geti_("an_load"); }
+void repaint_an_load() { repaint_("an_load"); }
+QString button_an_load() { return "an_load"; }
+
+//Checkbox Autoload
+//Autoload analyze results.
+bool was_changed_an_autoload() { return was_changed_("an_autoload"); }
+int geti_an_autoload() { return geti_("an_autoload"); }
+void repaint_an_autoload() { repaint_("an_autoload"); }
+
+//Button Save As...
+//Save analyze results.
+bool was_changed_an_save_as() { return was_changed_("an_save_as"); }
+int geti_an_save_as() { return geti_("an_save_as"); }
+void repaint_an_save_as() { repaint_("an_save_as"); }
+QString button_an_save_as() { return "an_save_as"; }
+
 
 //----------------------------------------------------
 //Page Visualize
