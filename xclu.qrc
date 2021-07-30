@@ -436,6 +436,6 @@
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>
         <file>builtin_modules/ML/MLExecute/description.xgui</file>
         <file>builtin_modules/Sound/SoundsDatabaseAnalyze/description.xgui</file>
-        <file>builtin_modules/Contrib/description.xgui</file>
+        <file>builtin_modules/Contrib/MadRobot/description.xgui</file>
     </qresource>
 </RCC>

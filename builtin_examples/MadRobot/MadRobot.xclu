@@ -1,0 +1,461 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "RealsenseCamera",
+                "name": "realsense_camera1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "capture_source",
+                        "avalue": "Camera"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_serial",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "bag_file",
+                        "avalue": "MadRobot_20210703.bag"
+                    },
+                    {
+                        "aname": "runtime",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "show_color",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "show_depth",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_ir",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Color",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "color_stream_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "color_resolution",
+                        "avalue": "640_x_480"
+                    },
+                    {
+                        "aname": "color_frame_rate",
+                        "avalue": "15"
+                    },
+                    {
+                        "aname": "align_to_depth",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Depth_+_IR",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_stream_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "ir_stream_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_preset",
+                        "avalue": "High_Density"
+                    },
+                    {
+                        "aname": "depth_resolution",
+                        "avalue": "640_x_480"
+                    },
+                    {
+                        "aname": "depth_frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "emitter",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "8_Bit",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "make_depth_grayscale",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_grayscale_thresh_near_mm",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_grayscale_thresh_far_mm",
+                        "avalue": "10000"
+                    },
+                    {
+                        "aname": "depth_grayscale_output0",
+                        "avalue": "255"
+                    },
+                    {
+                        "aname": "depth_grayscale_output1",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_grayscale_x0",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_grayscale_x1",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "depth_grayscale_y0",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "depth_grayscale_y1",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Devices",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Save_Images",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "save_each_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "save_color",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "save_ir",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "save_depth8",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "save_folder",
+                        "avalue": "realsense_images"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "MadRobot",
+                "name": "mad_robot1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "input_image",
+                        "avalue": "",
+                        "link": "realsense_camera1->color_image"
+                    },
+                    {
+                        "aname": "python_string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "python_received",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "image_face_w",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "image_face_h",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "emotions_list",
+                        "avalue": "angry disgust scared happy sad surprised neutral"
+                    },
+                    {
+                        "aname": "Global",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "spacing",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "border_color",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "track_red",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "track_green",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "track_blue",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "attr_field_size",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "attr_points",
+                        "avalue": "angry 0.121056 0.091772\ndisgust 0.502222 0.072354\nscared 0.51119 0.931578\nhappy 0.910293 0.091772\nsad 0.12554 0.892743\nsurprised 0.905809 0.91216\nneutral 0.5 0.5"
+                    },
+                    {
+                        "aname": "Vector_Field",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "attr_r0",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "attr_r1",
+                        "avalue": "8"
+                    },
+                    {
+                        "aname": "attr_color",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "attr_font_color",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "attr_font_size",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "attr_font_y",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "vf_n",
+                        "avalue": "11"
+                    },
+                    {
+                        "aname": "vf_len",
+                        "avalue": "0.05"
+                    },
+                    {
+                        "aname": "vf_color",
+                        "avalue": "0.8"
+                    },
+                    {
+                        "aname": "vf_base_rad",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "vf_safe",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Point",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "pnt_rad",
+                        "avalue": "5"
+                    },
+                    {
+                        "aname": "pnt_color",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "pnt_force",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "pnt_friction",
+                        "avalue": "0.05"
+                    },
+                    {
+                        "aname": "Morph",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "morph_global_setup",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "morph_crop_speed",
+                        "avalue": "0.1"
+                    },
+                    {
+                        "aname": "morph_size",
+                        "avalue": "400"
+                    },
+                    {
+                        "aname": "morph_brightness_slider",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "morph_use_presets",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "morph_blur",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "morph_flow0",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "morph_flow1",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "morph_flow_blend0",
+                        "avalue": "0.3"
+                    },
+                    {
+                        "aname": "morph_flow_blend1",
+                        "avalue": "0.3"
+                    },
+                    {
+                        "aname": "morph_brightness",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "morph_contrast",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "morph_saturation",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "test_emotion",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "test_emotion_choose",
+                        "avalue": "neutral"
+                    },
+                    {
+                        "aname": "morph_presets",
+                        "avalue": "#flow0 flow1 blend0 blend1 bright contrast saturation\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
+                    },
+                    {
+                        "aname": "Sound",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "sound_presets1",
+                        "avalue": "#     freq vol fmrate fmrange amrate amrange\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
+                    },
+                    {
+                        "aname": "sound_presets2",
+                        "avalue": "#     freq vol fmrate fmrange amrate amrange\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
