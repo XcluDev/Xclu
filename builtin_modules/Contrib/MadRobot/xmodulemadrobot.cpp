@@ -28,6 +28,10 @@ XModuleMadRobot::~XModuleMadRobot()
 void XModuleMadRobot::start() {
     webcam_.clear();
 
+    //link yolo image to GUI
+    image_gui_.clear();
+    setobject_yolo_image(&image_gui_);
+
     received_state_ = ReceivedStateStarted;
 
 }
@@ -37,6 +41,18 @@ void XModuleMadRobot::update() {
     //Read image
     XObjectImage::to_raster(getobject_input_image(), webcam_);
     if (webcam_.w == 0) return;
+
+    //transform
+    int w = webcam_.w;
+    int h = webcam_.h;
+    int x0 = geti_crop_x0() * w / 100;
+    int y0 = geti_crop_y0() * h / 100;
+    int x1 = geti_crop_x1() * w / 100;
+    int y1 = geti_crop_y1() * h / 100;
+
+    auto cropped = webcam_.crop(x0, y0, x1-x0, y1-y0);
+    XRaster::resize_nearest(cropped, image_,geti_resize_x(), geti_resize_y());
+    XObjectImage::create_from_raster(image_gui_, image_);
 
     //parse python string
     parse_python();

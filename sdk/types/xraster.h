@@ -53,7 +53,10 @@ typedef rgb_<uint8> rgb_u8;
 typedef rgb_<float> rgb_float;
 
 //--------------------------------------------------
-//Template raster type
+//Template raster type XRaster_
+//It contains very little operations,
+//for more functions see at XRaster:: below
+//- it contains functions for convert, load, save, resize, blur
 //--------------------------------------------------
 template<typename T>
 class XRaster_ {
@@ -227,7 +230,7 @@ public:
 
     }
 
-    //Crop to square
+    //Crop
     XRaster_<T> crop(int x0, int y0, int w0, int h0) const {
         xc_assert(x0 >= 0 && y0 >= 0 && w0 >= 0 && h0 >= 0 && x0+w0 <= w && y0+h0 <= h,
                   "XRaster_<T> crop - bad arguments");
@@ -250,6 +253,8 @@ public:
         int y0 = (h-h0)/2;
         return crop(x0,y0,w0,h0);
     }
+
+    //More raster functions - convert, load, save, resize, blur - see at XRaster:: below
 };
 
 //--------------------------------------------------

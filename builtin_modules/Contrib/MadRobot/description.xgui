@@ -11,289 +11,62 @@ module_accept_calls=create_widget
 
 
 #---------------------------------------------------------------------
-page Main
+page YOLO
 
+in group Input_Image show_input_image=1
+if show_input_image 1
 in object_image Image input_image
-    //Webcamera image.
+    //Input webcamera image.
+endif 
+
+#--------------------------------------
+line
+in group Cropping_Setup show_cropping=1
+if show_cropping 1
+
+in int crop_x0 crop_x0=0 0:100 1,10
+    //
+    //%
+in int crop_y0 crop_y0=0 0:100 1,10
+    //
+    //%
+in int crop_x1 crop_x1=100 0:100 1,10
+    //
+    //%
+in int crop_y1 crop_y1=100 0:100 1,10
+    //
+    //%
+
+separator
+in int resize_x resize_x=100 1:* 1,10   
+    //
+    //pix
+in int resize_y resize_y=100 1:* 1,10    
+    //
+    //pix
+endif
+
+#--------------------------------------
+line    
+in group YOLO_Image show_yolo_image=1
+if show_yolo_image 1
+out object_image Image yolo_image
+//Image for sending to YOLO.
+endif
+
+#--------------------------------------
+line
+in group YOLO_Setup show_yolo_setup=1
+if show_yolo_setup 1
 
 in string Python_String python_string=""
-    //Data from Python with face position and emotions array.
+    //Data from Python with YOLO positions.
 
 in int Python_Received python_received=0 0:* 1,10
     //Number of data packets received from Python - used for writing "Running..." while waiting.
     //times
-    
-line
-    
-in int Image_Face_W image_face_w=300 1:* 1,10
-    //Width of image sent to python for processing.
-    
-in int Image_FaceH image_face_h=300 1:* 1,10
-    //Height of image sent to python for processing.
+endif 
 
 line
 
-const string Emotions_List emotions_list="angry disgust scared happy sad surprised neutral"
-    //List of emotions.
-    
-out int Num_Emotions num_emotions=7 1:* 1,10
-    //Number of emotions.
-
-#---------------------------------------------------------------------
-page Global
-
-in int Spacing spacing=10 0:200 1,10
-    //Spacing between squares.
-
-in float Border_Color border_color=0.8 0:1 0.01,0.1
-    //Color of border.
-    //0..1
-
-line
-
-in float Track_Red track_red=0.8 0:1 0.01,0.1
-    //Red component for face track.
-    //0..1
-in float Track_Green track_green=0.8 0:1 0.01,0.1
-    //Green component for face track.
-    //0..1
-in float Track_Blue track_blue=0.8 0:1 0.01,0.1
-    //Blue component for face track.
-    //0..1
-
-    
-line
-in float Field_Size attr_field_size=0.8 0:1 0.01,0.1
-    //Relative size of attractor field.
-    //0..1
-    
-line
-in text Attr_Points attr_points 10 12
-    //Positions of emotions on attractor plane, [0..1]
-    //angry 0.121056 0.091772
-    //disgust 0.502222 0.072354
-    //scared 0.51119 0.931578
-    //happy 0.910293 0.091772
-    //sad 0.12554 0.892743
-    //surprised 0.905809 0.91216
-    //neutral 0.5 0.5    
-    
-#---------------------------------------------------------------------
-page Vector_Field
-    
-
-in float Attr_R0 attr_r0=1 0:40 0.01,0.1
-    //Minimal radius of attractor point.
-    //0..20
-    
-in float Attr_R1 attr_r1=8 0:40 0.01,0.1
-    //Maximal radius of attractor point.
-    //0..20
-
-in float Attr_Color attr_color=0.8 0:1 0.01,0.1
-    //Color of attractor point.
-    //0..1
-    
-in float Label_Color attr_font_color=0.8 0:1 0.01,0.1
-    //Color of attractor label.
-    //0..1
-    
-in int Label_Font attr_font_size=10 0:40 1,10
-    //Attractor label font size.
-    
-in float Label_Y attr_font_y=10 -40:40 0.1,1
-    //Attractor label position.
-
-    
-line
-in int Vector_Grid vf_n=11 2:50 1,10      
-    //Number of grid points of vector field.
-    
-in float Vector_Len vf_len=0.05 0:0.5 0.001,0.01 
-    //Drawing length of vector.
-    
-in float Vector_Color vf_color=0.8 0:1 0.01,0.1
-    //Vector color.
-    //0..1
-    
-in float Vector_Base_R vf_base_rad=2 0:2 0.01,0.1
-    //Vector base radius.
-    
-
-separator
-line
-in float vf_safe vf_safe=1 0.001:* 0.01,0.1
-    //Denominator adder.
-    
-    
-    
-#---------------------------------------------------------------------
-page Point
-    //Flying point.
-    
-in float Pnt_Rad pnt_rad=5 0:40 0.01,0.1
-    //Radius of flying point.
-    //0..20
-    
-in float Pnt_Color pnt_color=1 0:1 0.01,0.1
-    //Color of flying point.
-    //0..1
-
-separator
-line
-in float Force pnt_force=1 0:20 0.1,1
-    //Force coefficient.
-    
-in float Friction pnt_friction=0.05 0:0.2 0.001,0.1
-    //Friction coefficient.
-
-    
-
-
-#---------------------------------------------------------------------
-page Morph
-    //Morphing - third square.
-    
-in group Main_Settings morph_global_setup=1
-    //Global morph settings - normally not need to change.
-    
-if morph_global_setup 1
-line
-    
-in float Crop_Speed morph_crop_speed=0.1 0.001:1 0.001,0.01
-    //Moving of cropped image.
-    
-const int morph_image_size morph_size=400 1:* 1,10
-    //Size of image for morphing.
-
-endif    
-
-line
-
-in float Bright_Slider morph_brightness_slider=1 0:3 0.01,0.1
-    //Additional brightness regulator.
-    
-in checkbox Use_Presets morph_use_presets=0
-    //Use presets or manual control.
-    
-line
-
-#----------------------
-#input values
-if morph_use_presets 0
-
-in float Blur morph_blur=10 0:100 1,10
-    //Blurring webcam image.
-
-in float Flow0 morph_flow0=10 -50:50 0.1,1
-    //Motion of old image.
-
-in float Flow1 morph_flow1=10 -50:50 0.1,1
-    //Motion of old image.
-
-in float Flow_Blend0 morph_flow_blend0=0.3 0:1 0.01,0.1
-    //Blending of moved old image.
-
-in float Flow_Blend1 morph_flow_blend1=0.3 0:1 0.01,0.1
-    //Blending of new image.
-    
-line
-
-in float Brightness morph_brightness=1 0:3 0.01,0.1
-    //Tool for increasing the brightness.
-
-in float Contrast morph_contrast=1 0:2 0.01,0.1
-    //Tool for changing contrast.
-    
-in float Saturation morph_saturation=1 -1:2 0.01,0.1
-    //Tool for changing saturation.
-line
-endif
-#----------------------
-#output values
-if morph_use_presets 1
-
-out float Blur morph_blur_=10 0:100 1,10
-    //Blurring webcam image.
-
-out float Flow0 morph_flow0_=10 -50:50 0.1,1
-    //Motion of old image.
-
-out float Flow1 morph_flow1_=10 -50:50 0.1,1
-    //Motion of old image.
-
-out float Flow_Blend0 morph_flow_blend0_=0.3 0:1 0.01,0.1
-    //Blending of moved old image.
-
-out float Flow_Blend1 morph_flow_blend1_=0.3 0:1 0.01,0.1
-    //Blending of new image.
-    
-line
-
-out float Brightness morph_brightness_=1 0:3 0.01,0.1
-    //Tool for increasing the brightness.
-
-out float Contrast morph_contrast_=1 0:2 0.01,0.1
-    //Tool for changing contrast.
-    
-out float Saturation morph_saturation_=1 -1:2 0.01,0.1
-    //Tool for changing saturation.
-    
-line
-
-in checkbox Test_Emotion test_emotion=0
-    //Should we run test emotion.
-endif
-
-if test_emotion 1
-in enum Emotion test_emotion_choose=neutral [angry,disgust,scared,happy,sad,surprised,neutral]
-    //Choosen emotion for testing
-endif
-    
-line
-
-in text Presets morph_presets 10 12
-    //Presets for morph.
-    //#flow0 flow1 blend0 blend1 bright contrast saturation
-    //angry 
-    //disgust 
-    //scared 
-    //happy 
-    //sad 
-    //surprised 
-    //neutral
-    
-#---------------------------------------------------------------------
-page Sound
-    //Sound synth.
-    
-in text Presets1 sound_presets1 10 12
-    //Presets for the first generator.
-    //#     freq vol fmrate fmrange amrate amrange
-    //angry 
-    //disgust 
-    //scared 
-    //happy 
-    //sad 
-    //surprised 
-    //neutral
-
-in text Presets2 sound_presets2 10 12
-    //Presets for the second generator.
-    //#     freq vol fmrate fmrange amrate amrange
-    //angry 
-    //disgust 
-    //scared 
-    //happy 
-    //sad 
-    //surprised 
-    //neutral
-    
-line
-out string Sound1 sound_data1=""
-    //Data for the first sound. Depends on Morph->Emotion.
-
-out string Sound2 sound_data2=""
-    //Data for the second sound. Depends on Morph->Emotion.
-    
 #---------------------------------------------------------------------

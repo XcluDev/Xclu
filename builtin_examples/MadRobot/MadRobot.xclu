@@ -218,7 +218,11 @@
                 },
                 "items": [
                     {
-                        "aname": "Main",
+                        "aname": "YOLO",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "show_input_image",
                         "avalue": "0"
                     },
                     {
@@ -227,204 +231,48 @@
                         "link": "realsense_camera->color_image"
                     },
                     {
+                        "aname": "show_cropping",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "crop_x0",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "crop_y0",
+                        "avalue": "33"
+                    },
+                    {
+                        "aname": "crop_x1",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "crop_y1",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "resize_x",
+                        "avalue": "320"
+                    },
+                    {
+                        "aname": "resize_y",
+                        "avalue": "320"
+                    },
+                    {
+                        "aname": "show_yolo_image",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "show_yolo_setup",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "python_string",
                         "avalue": ""
                     },
                     {
                         "aname": "python_received",
                         "avalue": "0"
-                    },
-                    {
-                        "aname": "image_face_w",
-                        "avalue": "300"
-                    },
-                    {
-                        "aname": "image_face_h",
-                        "avalue": "300"
-                    },
-                    {
-                        "aname": "emotions_list",
-                        "avalue": "angry disgust scared happy sad surprised neutral"
-                    },
-                    {
-                        "aname": "Global",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "spacing",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "border_color",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "track_red",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "track_green",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "track_blue",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "attr_field_size",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "attr_points",
-                        "avalue": "angry 0.121056 0.091772\ndisgust 0.502222 0.072354\nscared 0.51119 0.931578\nhappy 0.910293 0.091772\nsad 0.12554 0.892743\nsurprised 0.905809 0.91216\nneutral 0.5 0.5"
-                    },
-                    {
-                        "aname": "Vector_Field",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "attr_r0",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "attr_r1",
-                        "avalue": "8"
-                    },
-                    {
-                        "aname": "attr_color",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "attr_font_color",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "attr_font_size",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "attr_font_y",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "vf_n",
-                        "avalue": "11"
-                    },
-                    {
-                        "aname": "vf_len",
-                        "avalue": "0.05"
-                    },
-                    {
-                        "aname": "vf_color",
-                        "avalue": "0.8"
-                    },
-                    {
-                        "aname": "vf_base_rad",
-                        "avalue": "2"
-                    },
-                    {
-                        "aname": "vf_safe",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "Point",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "pnt_rad",
-                        "avalue": "5"
-                    },
-                    {
-                        "aname": "pnt_color",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "pnt_force",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "pnt_friction",
-                        "avalue": "0.05"
-                    },
-                    {
-                        "aname": "Morph",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "morph_global_setup",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "morph_crop_speed",
-                        "avalue": "0.1"
-                    },
-                    {
-                        "aname": "morph_size",
-                        "avalue": "400"
-                    },
-                    {
-                        "aname": "morph_brightness_slider",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "morph_use_presets",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "morph_blur",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "morph_flow0",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "morph_flow1",
-                        "avalue": "10"
-                    },
-                    {
-                        "aname": "morph_flow_blend0",
-                        "avalue": "0.3"
-                    },
-                    {
-                        "aname": "morph_flow_blend1",
-                        "avalue": "0.3"
-                    },
-                    {
-                        "aname": "morph_brightness",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "morph_contrast",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "morph_saturation",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "test_emotion",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "test_emotion_choose",
-                        "avalue": "neutral"
-                    },
-                    {
-                        "aname": "morph_presets",
-                        "avalue": "#flow0 flow1 blend0 blend1 bright contrast saturation\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
-                    },
-                    {
-                        "aname": "Sound",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "sound_presets1",
-                        "avalue": "#     freq vol fmrate fmrange amrate amrange\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
-                    },
-                    {
-                        "aname": "sound_presets2",
-                        "avalue": "#     freq vol fmrate fmrange amrate amrange\nangry\ndisgust\nscared\nhappy\nsad\nsurprised\nneutral"
                     },
                     {
                         "aname": "Control",
@@ -459,8 +307,182 @@
         },
         {
             "description": {
+                "class": "Execute",
+                "name": "python",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "5"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "folder_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "file_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "file_must_exists",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "args",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Run",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "execute_event",
+                        "avalue": "At_First_Frame"
+                    },
+                    {
+                        "aname": "thread_mode",
+                        "avalue": "Wait_Finishing"
+                    },
+                    {
+                        "aname": "enable_timeout",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "timeout_sec",
+                        "avalue": "5"
+                    },
+                    {
+                        "aname": "console_errors",
+                        "avalue": "Show"
+                    },
+                    {
+                        "aname": "Write",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_at_least_once",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_each_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_on_receive",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "write_type",
+                        "avalue": "Image"
+                    },
+                    {
+                        "aname": "console_write_string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "line_term",
+                        "avalue": "\\r\\n"
+                    },
+                    {
+                        "aname": "console_write_text",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "console_write_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "console_write_image_header",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_to_grayscale",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "console_write_image_resize",
+                        "avalue": "No"
+                    },
+                    {
+                        "aname": "console_write_image_resize_scale",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "console_write_image_sizex",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "console_write_image_sizey",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "Read",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "read",
+                        "avalue": "After_Finished"
+                    },
+                    {
+                        "aname": "read_type",
+                        "avalue": "Text"
+                    },
+                    {
+                        "aname": "console_bang_on_received",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "console_read_text_append",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Details",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
                 "class": "Serial",
-                "name": "serial",
+                "name": "arduino",
                 "version": "1.01"
             },
             "interface": {
