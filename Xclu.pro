@@ -124,7 +124,12 @@ INCLUDEPATH += sdk \
                sdk/utility
 
 # Compute shaders
-INCLUDEPATH += sdk/compshaders
+# TODO Jetson Nano gives compiling errors with compute shaders - resolve
+windows {
+    INCLUDEPATH += sdk/compshaders
+    SOURCES += sdk/compshaders/xcomputeshader.cpp
+    HEADERS += sdk/compshaders/xcomputeshader.h
+}
 
 # Libs
 INCLUDEPATH += libs/glm libs/glm/gtx
@@ -191,7 +196,6 @@ SOURCES += \
     modules/moduleseed.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
-    sdk/compshaders/xcomputeshader.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
@@ -290,7 +294,6 @@ HEADERS += \
     project/xcore.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
-    sdk/compshaders/xcomputeshader.h \
     sdk/math/int2.h \
     modules/exportinterface.h \
     modules/moduledescription.h \
