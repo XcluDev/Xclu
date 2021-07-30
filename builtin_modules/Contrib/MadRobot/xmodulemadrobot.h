@@ -5,7 +5,6 @@
 #include "sdk_h.h"
 #include "xraster.h"
 #include "xmodulevisual.h"
-#include "xcomputeshader.h"
 
 
 class XModuleMadRobot: public XModuleVisual

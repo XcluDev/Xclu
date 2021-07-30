@@ -11,7 +11,7 @@
         {
             "description": {
                 "class": "RealsenseCamera",
-                "name": "realsense_camera1",
+                "name": "realsense_camera",
                 "version": "1.01"
             },
             "interface": {
@@ -209,7 +209,7 @@
         {
             "description": {
                 "class": "MadRobot",
-                "name": "mad_robot1",
+                "name": "mad_robot",
                 "version": "1.01"
             },
             "interface": {
@@ -224,7 +224,7 @@
                     {
                         "aname": "input_image",
                         "avalue": "",
-                        "link": "realsense_camera1->color_image"
+                        "link": "realsense_camera->color_image"
                     },
                     {
                         "aname": "python_string",
@@ -433,6 +433,156 @@
                     {
                         "aname": "general_enabled_",
                         "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Serial",
+                "name": "serial",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "debug",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "select_port",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "port_index0",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "port_index1",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "port_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "baud_rate",
+                        "avalue": "9600"
+                    },
+                    {
+                        "aname": "Console",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_type",
+                        "avalue": "String"
+                    },
+                    {
+                        "aname": "send_string",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "show_additional_strings",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_string2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "send_string3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "string_link_send",
+                        "avalue": "module1->string"
+                    },
+                    {
+                        "aname": "line_term",
+                        "avalue": "\\r\\n"
+                    },
+                    {
+                        "aname": "send_byte",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "receive",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "receive_as",
+                        "avalue": "Last_Line"
+                    },
+                    {
+                        "aname": "auto_clear",
+                        "avalue": "On"
+                    },
+                    {
+                        "aname": "limit_show",
+                        "avalue": "On"
+                    },
+                    {
+                        "aname": "limit_show_count",
+                        "avalue": "100"
+                    },
+                    {
+                        "aname": "Watchdog",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_send",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_message",
+                        "avalue": "."
+                    },
+                    {
+                        "aname": "watchdog_send_period",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_receive",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Devices",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "0"
                     },
                     {
                         "aname": "general_auto_update_",
