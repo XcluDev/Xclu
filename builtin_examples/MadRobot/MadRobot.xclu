@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "2"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "text_value",
-                        "avalue": "-------------- Running YOLO\n1) Change darknet sources:\n   at detector.c, void test_detector:\n  After:\n      while (1) {\n        if (filename) {\n          ...\n        }\n  Put:\n\t//Waiting that somebody erases _image.txt   //DENIS\n\t//add #include <unistd.h> if required\n\tchar labelpath[4096];\n        replace_image_to_label(input, labelpath);\n\n\tbool printed = false;\n\twhile (1) {\n          FILE* fr = fopen(labelpath, \"rb\");\n          if (fr) {\n            fclose(fr);\n            if (!printed) {\n printf(\"    waiting when you delete %s...\\n\", labelpath);\n              printed = true;\n            }\t\n            usleep(50);\n            continue;\n          }\n          else {\n            break;  \n          }\n\t}\n\n\n  Comment this line:\n        //if (filename) break; //LOOP!!!! DENIS\n   \n  Open terminal and call \"make\" to build darknet.\n\n  Now YOLO will process images endlessly and will \n  wait while you delete _images.txt.\n\n\n2) Create _image_yolov3.sh file - and run it to start YOLO:\n\n./darknet detector test ./data/_obj_head.data _yolov3-tiny.cfg _yolov3-tiny_2675.weights ../Desktop/_image.jpg -i 0 -thresh 0.15 -save_labels 1 -dont_show 1\n\n3) Mark it as executable: chmod +x *.sh \n\n4) Now can start start YOLO by running \n./_image_yolov3.sh\nIt will read _image.jpg and write _image.txt, without exiting,\n- we will use it by writing images and reading text from Xclu.\n\nAlso YOLO will deleting _images.txt before processing - for sync."
+                        "avalue": "MadRobot installation by Endless Attractions Museum\n\nXclu runs on Jetson Nano with Realsense camera and Arduino,\nand controls robot collecting garbage.\nGarbage is detected using YOLO v.3 tiny.\n\n\n-------------- Running YOLO\n1) Change darknet sources:\n   at detector.c, void test_detector:\n  After:\n      while (1) {\n        if (filename) {\n          ...\n        }\n  Put:\n\t//Waiting that somebody erases _image.txt   //DENIS\n\t//add #include <unistd.h> if required\n\tchar labelpath[4096];\n        replace_image_to_label(input, labelpath);\n\n\tbool printed = false;\n\twhile (1) {\n          FILE* fr = fopen(labelpath, \"rb\");\n          if (fr) {\n            fclose(fr);\n            if (!printed) {\n printf(\"    waiting when you delete %s...\\n\", labelpath);\n              printed = true;\n            }\t\n            usleep(50);\n            continue;\n          }\n          else {\n            break;  \n          }\n\t}\n\n\n  Comment this line:\n        //if (filename) break; //LOOP!!!! DENIS\n   \n  Open terminal and call \"make\" to build darknet.\n\n  Now YOLO will process images endlessly and will \n  wait while you delete _images.txt.\n\n\n2) Create _image_yolov3.sh file - and run it to start YOLO:\n\n./darknet detector test ./data/_obj_head.data _yolov3-tiny.cfg _yolov3-tiny_2675.weights ../Desktop/_image.jpg -i 0 -thresh 0.15 -save_labels 1 -dont_show 1\n\n3) Mark it as executable: chmod +x *.sh \n\n4) Now can start start YOLO by running \n./_image_yolov3.sh\nIt will read _image.jpg and write _image.txt, without exiting,\n- we will use it by writing images and reading text from Xclu.\n\nAlso YOLO will deleting _images.txt before processing - for sync."
                     },
                     {
                         "aname": "Control",
@@ -326,7 +326,7 @@
                     },
                     {
                         "aname": "Robot",
-                        "avalue": "87"
+                        "avalue": "0"
                     },
                     {
                         "aname": "show_pick_up",
