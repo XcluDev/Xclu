@@ -72,13 +72,33 @@ in group More_Strings show_additional_strings=0
     //You can prepare several additional strings to send for convenience.
 
 if show_additional_strings 1
-in string String_To_Send send_string2=""
+in string String_To_Send2 send_string2=""
     //String for sending.    
 in button Send send_string2_btn
 
-in string String_To_Send send_string3=""
+in string String_To_Send3 send_string3=""
     //String for sending.    
 in button Send send_string3_btn
+
+in string String_To_Send4 send_string4=""
+    //String for sending.    
+in button Send send_string4_btn
+
+in string String_To_Send5 send_string5=""
+    //String for sending.    
+in button Send send_string5_btn
+
+in string String_To_Send6 send_string6=""
+    //String for sending.    
+in button Send send_string6_btn
+
+in string String_To_Send7 send_string7=""
+    //String for sending.    
+in button Send send_string7_btn
+
+in string String_To_Send8 send_string8=""
+    //String for sending.    
+in button Send send_string8_btn
 
 endif
 

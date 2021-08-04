@@ -89,6 +89,46 @@ void XModuleSerial::on_button_pressed(QString button_id) {
                 connect_warning = true;
             }
         }
+        if (button_id == button_send_string4_btn()) {
+            if (connected_) {
+                send_string(gets_send_string4());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        if (button_id == button_send_string5_btn()) {
+            if (connected_) {
+                send_string(gets_send_string5());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        if (button_id == button_send_string6_btn()) {
+            if (connected_) {
+                send_string(gets_send_string6());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        if (button_id == button_send_string7_btn()) {
+            if (connected_) {
+                send_string(gets_send_string7());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
+        if (button_id == button_send_string8_btn()) {
+            if (connected_) {
+                send_string(gets_send_string8());
+            }
+            else {
+                connect_warning = true;
+            }
+        }
         //-----------------------
         if (button_id == button_send_string_link_btn()) {
             if (connected_) {

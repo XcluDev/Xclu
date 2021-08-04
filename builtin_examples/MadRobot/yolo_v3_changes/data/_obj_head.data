@@ -1,0 +1,6 @@
+classes= 1
+train  = data/_train_head.txt
+valid  = data/_test.txt
+names = data/_obj_head.names
+backup = backup/
+

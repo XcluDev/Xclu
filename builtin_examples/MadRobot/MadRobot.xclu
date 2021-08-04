@@ -5,9 +5,59 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
+        {
+            "description": {
+                "class": "Notes",
+                "name": "readme",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "-------------- Running YOLO\n1) Change darknet sources:\n   at detector.c, void test_detector:\n  After:\n      while (1) {\n        if (filename) {\n          ...\n        }\n  Put:\n\t//Waiting that somebody erases _image.txt   //DENIS\n\t//add #include <unistd.h> if required\n\tchar labelpath[4096];\n        replace_image_to_label(input, labelpath);\n\n\tbool printed = false;\n\twhile (1) {\n          FILE* fr = fopen(labelpath, \"rb\");\n          if (fr) {\n            fclose(fr);\n            if (!printed) {\n printf(\"    waiting when you delete %s...\\n\", labelpath);\n              printed = true;\n            }\t\n            usleep(50);\n            continue;\n          }\n          else {\n            break;  \n          }\n\t}\n\n\n  Comment this line:\n        //if (filename) break; //LOOP!!!! DENIS\n   \n  Open terminal and call \"make\" to build darknet.\n\n  Now YOLO will process images endlessly and will \n  wait while you delete _images.txt.\n\n\n2) Create _image_yolov3.sh file - and run it to start YOLO:\n\n./darknet detector test ./data/_obj_head.data _yolov3-tiny.cfg _yolov3-tiny_2675.weights ../Desktop/_image.jpg -i 0 -thresh 0.15 -save_labels 1 -dont_show 1\n\n3) Mark it as executable: chmod +x *.sh \n\n4) Now can start start YOLO by running \n./_image_yolov3.sh\nIt will read _image.jpg and write _image.txt, without exiting,\n- we will use it by writing images and reading text from Xclu.\n\nAlso YOLO will deleting _images.txt before processing - for sync."
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
         {
             "description": {
                 "class": "RealsenseCamera",
@@ -16,7 +66,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -73,7 +123,7 @@
                     },
                     {
                         "aname": "color_frame_rate",
-                        "avalue": "15"
+                        "avalue": "6"
                     },
                     {
                         "aname": "align_to_depth",
@@ -214,7 +264,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -240,7 +290,7 @@
                     },
                     {
                         "aname": "crop_y0",
-                        "avalue": "33"
+                        "avalue": "20"
                     },
                     {
                         "aname": "crop_x1",
@@ -264,14 +314,74 @@
                     },
                     {
                         "aname": "show_yolo_setup",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "yolo_write_image",
+                        "avalue": "../_image.jpg"
+                    },
+                    {
+                        "aname": "yolo_read_TXT",
+                        "avalue": "../_image.txt"
+                    },
+                    {
+                        "aname": "Robot",
+                        "avalue": "87"
+                    },
+                    {
+                        "aname": "show_pick_up",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "cross_x",
+                        "avalue": "0.61"
+                    },
+                    {
+                        "aname": "cross_y",
+                        "avalue": "0.64"
+                    },
+                    {
+                        "aname": "cross_w",
+                        "avalue": "0.38"
+                    },
+                    {
+                        "aname": "cross_h",
+                        "avalue": "0.49"
+                    },
+                    {
+                        "aname": "cross_cover",
+                        "avalue": "54"
+                    },
+                    {
+                        "aname": "show_arduino",
                         "avalue": "0"
                     },
                     {
-                        "aname": "python_string",
+                        "aname": "ard_pick_up",
+                        "avalue": "arduino->send_string5_btn"
+                    },
+                    {
+                        "aname": "ard_forw",
+                        "avalue": "arduino->send_string2_btn"
+                    },
+                    {
+                        "aname": "ard_back",
                         "avalue": ""
                     },
                     {
-                        "aname": "python_received",
+                        "aname": "ard_left",
+                        "avalue": "arduino->send_string3_btn"
+                    },
+                    {
+                        "aname": "ard_right",
+                        "avalue": "arduino->send_string4_btn"
+                    },
+                    {
+                        "aname": "ard_stop",
+                        "avalue": "arduino->send_string_btn"
+                    },
+                    {
+                        "aname": "auto_start",
                         "avalue": "0"
                     },
                     {
@@ -281,180 +391,6 @@
                     {
                         "aname": "general_enabled_",
                         "avalue": "1"
-                    },
-                    {
-                        "aname": "general_auto_update_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "presets_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "error_handling",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
-                    },
-                    {
-                        "aname": "calls_info",
-                        "avalue": "0"
-                    }
-                ]
-            }
-        },
-        {
-            "description": {
-                "class": "Execute",
-                "name": "python",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "5"
-                },
-                "items": [
-                    {
-                        "aname": "Main",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "folder_name",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "file_name",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "file_must_exists",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "args",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "Run",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "execute_event",
-                        "avalue": "At_First_Frame"
-                    },
-                    {
-                        "aname": "thread_mode",
-                        "avalue": "Wait_Finishing"
-                    },
-                    {
-                        "aname": "enable_timeout",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "timeout_sec",
-                        "avalue": "5"
-                    },
-                    {
-                        "aname": "console_errors",
-                        "avalue": "Show"
-                    },
-                    {
-                        "aname": "Write",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "write_at_least_once",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "write_each_frame",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "write_on_receive",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "write_type",
-                        "avalue": "Image"
-                    },
-                    {
-                        "aname": "console_write_string",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "line_term",
-                        "avalue": "\\r\\n"
-                    },
-                    {
-                        "aname": "console_write_text",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "console_write_image",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "console_write_image_header",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "console_write_image_transform",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "console_write_image_to_grayscale",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "console_write_image_resize",
-                        "avalue": "No"
-                    },
-                    {
-                        "aname": "console_write_image_resize_scale",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "console_write_image_sizex",
-                        "avalue": "100"
-                    },
-                    {
-                        "aname": "console_write_image_sizey",
-                        "avalue": "100"
-                    },
-                    {
-                        "aname": "Read",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "read",
-                        "avalue": "After_Finished"
-                    },
-                    {
-                        "aname": "read_type",
-                        "avalue": "Text"
-                    },
-                    {
-                        "aname": "console_bang_on_received",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "console_read_text_append",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "Details",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "Control",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "general_enabled_",
-                        "avalue": "0"
                     },
                     {
                         "aname": "general_auto_update_",
@@ -487,7 +423,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -500,7 +436,7 @@
                     },
                     {
                         "aname": "select_port",
-                        "avalue": "Default"
+                        "avalue": "By_Name"
                     },
                     {
                         "aname": "port_index0",
@@ -512,7 +448,7 @@
                     },
                     {
                         "aname": "port_name",
-                        "avalue": ""
+                        "avalue": "ttyUSB"
                     },
                     {
                         "aname": "baud_rate",
@@ -528,19 +464,39 @@
                     },
                     {
                         "aname": "send_string",
-                        "avalue": ""
+                        "avalue": "s"
                     },
                     {
                         "aname": "show_additional_strings",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "send_string2",
-                        "avalue": ""
+                        "avalue": "w"
                     },
                     {
                         "aname": "send_string3",
-                        "avalue": ""
+                        "avalue": "a"
+                    },
+                    {
+                        "aname": "send_string4",
+                        "avalue": "d"
+                    },
+                    {
+                        "aname": "send_string5",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_string6",
+                        "avalue": "3"
+                    },
+                    {
+                        "aname": "send_string7",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "send_string8",
+                        "avalue": "5"
                     },
                     {
                         "aname": "string_link_send",
@@ -556,7 +512,7 @@
                     },
                     {
                         "aname": "receive",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "receive_as",
@@ -604,7 +560,179 @@
                     },
                     {
                         "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "window",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Window"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "720"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "initial_state",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "mad_robot"
+                    },
+                    {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Project",
+                "name": "project",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "dont_save_at_exit",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
                     },
                     {
                         "aname": "general_auto_update_",

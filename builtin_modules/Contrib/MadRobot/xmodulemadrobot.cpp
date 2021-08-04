@@ -32,12 +32,33 @@ void XModuleMadRobot::start() {
     image_gui_.clear();
     setobject_yolo_image(&image_gui_);
 
-    received_state_ = ReceivedStateStarted;
+    set_state("---");
+
+    //auto start mind
+    if (geti_auto_start()) {
+        mind_start();
+    }
 
 }
 
 //---------------------------------------------------------------------
+void XModuleMadRobot::set_state(QString state) {
+    state_ = state;
+    xc_console_append(state_);
+}
+
+//---------------------------------------------------------------------
 void XModuleMadRobot::update() {
+    //Buttons
+    if (geti_btn_mind_start()) mind_start();
+    if (geti_btn_mind_stop()) mind_stop();
+    if (geti_btn_pick_up()) move_pickup();
+    if (geti_btn_forw()) move_forward();
+    //if (geti_btn_back()) move_backward();
+    if (geti_btn_left()) move_left();
+    if (geti_btn_right()) move_right();
+    if (geti_btn_stop()) move_stop();
+
     //Read image
     XObjectImage::to_raster(getobject_input_image(), webcam_);
     if (webcam_.w == 0) return;
@@ -54,67 +75,283 @@ void XModuleMadRobot::update() {
     XRaster::resize_nearest(cropped, image_,geti_resize_x(), geti_resize_y());
     XObjectImage::create_from_raster(image_gui_, image_);
 
-    //parse python string
-    parse_python();
+    //write to yolo
+    XRaster::save(image_, gets_yolo_write_image(), "JPG");
+
+    //parse yolo
+    parse_yolo();
+
+    //robot
+    mind_update();
 
     refresh();   //call to update screen
 }
 
-//---------------------------------------------------------------------
-void XModuleMadRobot::parse_python() {
-    //face 1 90 127 114 114 emotions 0.10962291 0.0005123505 0.13974306 0.070729405 0.051511575 0.11338797 0.51449275
-    QString python_string = gets_python_string();
 
-    if (python_string.isEmpty()) {
-        if (received_state_ != ReceivedStateWaiting) {
-            xc_console_append("Waiting Python answer...");
-            received_state_ = ReceivedStateWaiting;
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_pickup() {
+    set_state("pick up");
+    XCORE.bang(gets_ard_pick_up());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_forward() {
+    set_state("forward");
+    XCORE.bang(gets_ard_forw());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_backward() {
+    set_state("backward");
+    XCORE.bang(gets_ard_back());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_left() {
+    set_state("left");
+    XCORE.bang(gets_ard_left());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_right() {
+    set_state("right");
+    XCORE.bang(gets_ard_right());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::move_stop() {
+    set_state("stop");
+    XCORE.bang(gets_ard_stop());
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::parse_yolo() {
+
+    /*
+    0 0.2100 0.3200 0.0895 0.0971
+    0 0.5285 0.3169 0.1411 0.1377
+    0 0.2900 0.2750 0.0286 0.0533
+    */
+    QString yolo_file = gets_yolo_read_TXT();
+
+    //we need to delete this file because YOLO waits while we delete it
+    QFile(yolo_file).remove();
+
+    //wait while this file will be created
+    int max_wait = 1000;    //milliseconds
+    int one_wait = 20;
+    int final_wait = 10;
+    int waited = 0;
+    bool found = false;
+    while (waited < max_wait) {
+        QThread::msleep(one_wait);
+        waited += one_wait;
+        if (xc_file_exists(yolo_file)) {
+            //wait a while to finish writing file
+            QThread::msleep(final_wait);
+                found = true;
+                break;
         }
+    }
+    if (!found) {
+        xc_console_append("YOLO timeout...");
         return;
     }
 
-    /*QStringList list = python_string.split(" ");
-    is_face_ = 0;
-    if (list.size() == 2 + 5 + n_) {
-        int k = 0;
-        //"face"
-        k++;
-        //is face
-        is_face_ = list[k++].toInt();
-        //face position
-        float w = geti_image_face_w();
-        float h = geti_image_face_h();
+    //reading and parsing
+    auto file = xc_read_text_file(yolo_file);
+    sets_yolo_data(file.join("\n"));
 
-        face_rect_u_.setLeft(list[k++].toInt()/w); //it's important to fill field by field, for correct k increasing
-        face_rect_u_.setTop(list[k++].toInt()/h);
-        face_rect_u_.setWidth(list[k++].toInt()/w);
-        face_rect_u_.setHeight(list[k++].toInt()/h);
-
-        //emotions
-        k++;
-
-        //emotions vector
-        for (int i=0; i<n_; i++) {
-            emovec_[i] = list[k++].toFloat();
+    int n = file.size();
+    pnt_.resize(n);
+    size_.resize(n);
+    for (int i=0; i<n; i++) {
+        QStringList list = file[i].split(" ");
+        if (list.size() == 5) {
+            pnt_[i].x = list[1].toFloat();
+            pnt_[i].y = list[2].toFloat();
+            size_[i].x = list[3].toFloat();
+            size_[i].y = list[4].toFloat();
         }
-        //if not face - discard readed values
-        if (!is_face_) {
-            for (int i=0; i<n_; i++) {
-                emovec_[i] = 0;
-            }
-        }
+    }
 
-        xc_assert(k == list.size(), "Internal error at parse_python: not all string is parsed" + python_string);
+}
 
-        if (received_state_ != ReceivedStateParsed) {
-            xc_console_append("Python data received and parsed");
-            received_state_ = ReceivedStateParsed;
+//---------------------------------------------------------------------
+void XModuleMadRobot::mind_start() {
+    xc_console_append("mind_start");
+    mind_on_ = true;
+
+    target_ = glm::vec2(xrandomf(-0.3,0.3), xrandomf(-0.3,0.3));//glm::vec2(0,1000);
+    target_size_ = glm::vec2(0,0);
+
+    last_pickup = 0;
+
+    queue_.clear();
+
+    no_targets_ = 0;
+    walking_ = false;
+}
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::mind_stop() {
+    xc_console_append("mind_stop");
+    mind_on_ = false;
+}
+
+
+//---------------------------------------------------------------------
+void XModuleMadRobot::mind_update() {
+    if (!mind_on_) return;
+
+    //search target
+    bool is_target = false;
+
+    float dist = 100000;
+    int k = -1;
+    target_ = glm::vec2(0,1000);
+    target_size_ = glm::vec2(0,0);
+
+    glm::vec2 cross = glm::vec2(getf_cross_x(), getf_cross_y());
+    for (int i=0; i<pnt_.size(); i++) {
+        float d = glm::distance(pnt_[i], cross);
+        if (d < dist) {
+            dist = d;
+            k = i;
         }
+    }
+    if (k >= 0) {
+        target_ = pnt_[k] - cross;
+        target_size_ = size_[k];
+        no_targets_=0;
+        is_target = true;
     }
     else {
-        xc_console_append("Bad python string, not consistent with number of emotions: " + python_string);
+        no_targets_++;
+        xc_console_append(QString("Waiting targets %1...").arg(no_targets_));
     }
-    */
+
+    //if we are walking - then stop walk and move to target
+    if (walking_ && is_target) {
+        walking_ = false;
+        queue_.clear();
+        xc_console_append("Found target, stop walking");
+    }
+
+    float time = xc_elapsed_time_sec();
+    //qDebug() << time << queue_.size();
+    //apply queue
+    bool is_queue = false;
+    while (!queue_.isEmpty()) {
+        is_queue = true;
+        auto &a = queue_[0];
+        //qDebug() << "action " << a.action << " time " << time;
+        if (time < a.end_time) return;  //waiting...
+
+        //time is over, delete and perform next
+        queue_.erase(queue_.begin());
+        if (!queue_.isEmpty()) {
+            auto &a = queue_[0];
+            //perform
+            int act = a.action;
+            if (act == Pickup) move_pickup();
+            if (act == Forward) move_forward();
+            if (act == Backward) move_backward();
+            if (act == Left) move_left();
+            if (act == Right) move_right();
+            if (act == Stop) move_stop();
+        }
+    }
+    if (is_queue) return; //nothing to do now!!!
+
+
+
+
+    //if no targets for long time - run random walk for a while
+    int max_no_targets = 12;    //PARAM
+    if (no_targets_>=max_no_targets) {
+        no_targets_ = 0;
+        walking_ = true;
+        //random walk
+        float t = xc_elapsed_time_sec();
+        for (int i=0; i<2; i++) {
+            t+= 2;
+            put_action(Action(Forward,t));
+             if (xrandomf(-1,1)>0) {
+                 for (int i=0; i<8; i++) {
+                     t += 0.3;
+                     put_action(Action(Right,t));
+                 }
+             }
+             else {
+                 for (int i=0; i<8; i++) {
+                 t += 0.3;
+                 put_action(Action(Left,t));
+                 }
+             }
+        }
+        return; //nothing to  do now, we are pickuping!
+    }
+
+    //pickup
+    float w = getf_cross_w();
+    float h = getf_cross_h();
+    float x0 = qMax(target_.x-target_size_.x/2,-w/2);
+    float x1 = qMin(target_.x+target_size_.x/2,w/2);
+    float y0 = qMax(target_.y-target_size_.y/2,-h/2);
+    float y1 = qMin(target_.y+target_size_.y/2,h/2);
+
+//    bool inside = (fabs(target_.x) <= getf_cross_w()/2 && fabs(target_.y) <= getf_cross_h()/2);
+
+    //qDebug() << "area " << x1-x0 << " " << y1-y0 << " " << (x1-x0)*(y1-y0) << " >? " << w*h/4;
+    float cover = w*h*geti_cross_cover()/100.f; //how much need to cover for pickup
+
+    bool inside = (x1-x0 >0 && y1-y0>0 && (x1-x0)*(y1-y0) > cover); //area is big enough
+
+    if (inside) {
+        xc_console_append("--- Pick up ---");
+        float t = xc_elapsed_time_sec();
+
+        //target_ = glm::vec2(xrandomf(-0.3,0.3), xrandomf(-0.3,0.3));
+        //target_size_ = glm::vec2(0,0);
+
+        t+= 0.5;
+        put_action(Action(Stop,t));
+
+        t+=13;
+        put_action(Action(Pickup,t));
+
+        if (xrandomf(-1,1)>0) {
+            for (int i=0; i<15; i++) {
+            t += 0.3;
+            put_action(Action(Right,t));
+            }
+        }
+        else {
+            for (int i=0; i<15; i++) {
+            t += 0.3;
+            put_action(Action(Left,t));
+            }
+        }
+        t+= 4;
+        put_action(Action(Forward,t));
+
+        return; //nothing to  do now, we are pickuping!
+    }
+
+    //move to target
+    //below or rotated - then rotate, else move forward
+    float perspective_correction = 1; //0.7; //TODO PARAM
+
+    if (!no_targets_) {
+        if (target_.y > 0 || fabs(target_.x) > fabs(target_.y)*perspective_correction) {
+            if (target_.x > 0) move_right();
+            else move_left();
+            return;
+        }
+        move_forward();
+    }
 
 }
 
@@ -134,8 +371,46 @@ void XModuleMadRobot::draw(QPainter &painter, int outw, int outh) {
     painter.setPen(Qt::PenStyle::NoPen);
     painter.drawRect(0, 0, outw, outh);
 
-    XRaster::draw(&painter, webcam_, QRectF(0,0,320,320));
+    //Image
+    XRaster::draw(&painter, image_, QRectF(0,0,outw,outh));
 
+    //YOLO
+    for (int i=0; i<pnt_.size(); i++) {
+        QPen pen(QColor(255,255,0));
+        pen.setWidth(2);
+        painter.setPen(pen);
+        painter.setBrush(Qt::BrushStyle::NoBrush);
+        painter.drawRect((pnt_[i].x-size_[i].x/2)*outw, (pnt_[i].y-size_[i].y/2)*outh,
+                         size_[i].x*outw, size_[i].y*outh);
+    }
+
+    //Cross
+    bool pickup  = !queue_.isEmpty();
+
+    QPen pen(QColor(0,255,255));
+    if (pickup) pen.setColor(QColor(255,0,0));
+    if (walking_) pen.setColor(QColor(0,0,255));
+
+    pen.setWidth(2);
+    painter.setPen(pen);
+    painter.setBrush(Qt::BrushStyle::NoBrush);
+    glm::vec2 cross = glm::vec2(getf_cross_x(),getf_cross_y());
+    glm::vec2 size = glm::vec2(getf_cross_w(),getf_cross_h());
+    painter.drawRect((cross.x-size.x/2)*outw, (cross.y-size.y/2)*outh,
+                     size.x*outw, size.y*outh);
+    painter.drawLine((cross.x-size.x/4)*outw, (cross.y)*outh,
+                     (cross.x+size.x/4)*outw, (cross.y)*outh);
+    painter.drawLine((cross.x)*outw, (cross.y-size.y/4)*outh,
+                     (cross.x)*outw, (cross.y+size.y/4)*outh);
+
+    //Target
+    if (!pickup) {
+        QPen pen(QColor(0,0,255));
+        pen.setWidth(2);
+        painter.setPen(pen);
+        painter.drawLine((cross.x)*outw, (cross.y)*outh,
+                         (cross.x+target_.x)*outw, (cross.y+target_.y)*outh);
+    }
 /*    //Compute translate and scale
     //Note: we use scaling to have independence of lines width from screen resolution
     int spacing = geti_spacing();

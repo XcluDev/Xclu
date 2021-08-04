@@ -383,8 +383,6 @@
         <file>builtin_modules/Window/WDrawingJS/description.xgui</file>
         <file>builtin_modules/Window/WImage/auto.h</file>
         <file>builtin_modules/Window/WImage/description.xgui</file>
-        <file>builtin_modules/Window/WImage/xmodulewimage.cpp</file>
-        <file>builtin_modules/Window/WImage/xmodulewimage.h</file>
         <file>builtin_modules/Window/Window/auto.h</file>
         <file>builtin_modules/Window/Window/description.xgui</file>
         <file>builtin_modules/Window/Window/help.md</file>
@@ -430,7 +428,6 @@
         <file>builtin_examples/TextVariation.xclu</file>
         <file>builtin_examples/Timer.xclu</file>
         <file>builtin_examples/Webcamera.xclu</file>
-        <file>builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp</file>
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
         <file>builtin_modules/System/FileCreate/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>

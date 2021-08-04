@@ -9,6 +9,7 @@
 //Debug output to console.
 bool was_changed_debug() { return was_changed_("debug"); }
 int geti_debug() { return geti_("debug"); }
+void repaint_debug() { repaint_("debug"); }
 
 //Const Enum Port
 //Method of choosing the port.
@@ -26,17 +27,20 @@ QString getraw_select_port() { return getraw_("select_port");}
 //Start of id range, will search to first successful.
 bool was_changed_port_index0() { return was_changed_("port_index0"); }
 int geti_port_index0() { return geti_("port_index0"); }
+void repaint_port_index0() { repaint_("port_index0"); }
 
 //Const Int Port ID To
 //End of id range
 bool was_changed_port_index1() { return was_changed_("port_index1"); }
 int geti_port_index1() { return geti_("port_index1"); }
+void repaint_port_index1() { repaint_("port_index1"); }
 
 //Const String Port Name
 //Name of the device (may be specified only part, will be search for the first successful match).
 bool was_changed_port_name() { return was_changed_("port_name"); }
 QString gets_port_name() { return gets_("port_name"); }
 QStringList get_strings_port_name() { return get_strings_("port_name"); }
+void repaint_port_name() { repaint_("port_name"); }
 
 
 //Const Enum Baud Rate
@@ -63,6 +67,7 @@ QString getraw_baud_rate() { return getraw_("baud_rate");}
 bool was_changed_connected() { return was_changed_("connected"); }
 int geti_connected() { return geti_("connected"); }
 void seti_connected(int value) { seti_("connected", value); }
+void repaint_connected() { repaint_("connected"); }
 
 //Out Text Port Info
 //Information about connected port.
@@ -73,6 +78,7 @@ void sets_port_info(QString value) { sets_("port_info", value); }
 void clear_string_port_info() { clear_string_("port_info"); }
 void append_string_port_info(QString v, int extra_new_lines_count = 0) { append_string_("port_info", v, extra_new_lines_count); }
 void append_string_port_info(QStringList v, int extra_new_lines_count = 0) { append_string_("port_info", v, extra_new_lines_count); }
+void repaint_port_info() { repaint_("port_info"); }
 
 
 //Out Int Total Sent
@@ -81,6 +87,7 @@ bool was_changed_total_sent() { return was_changed_("total_sent"); }
 int geti_total_sent() { return geti_("total_sent"); }
 void seti_total_sent(int value) { seti_("total_sent", value); }
 void increase_int_total_sent(int increase = 1) { increase_int_("total_sent", increase); }
+void repaint_total_sent() { repaint_("total_sent"); }
 
 //----------------------------------------------------
 //Page Console
@@ -90,7 +97,7 @@ void increase_int_total_sent(int increase = 1) { increase_int_("total_sent", inc
 //Choose what to send manually.
 enum enum_send_type {
     send_type_String = 0,
-    send_type_Bytes = 1,
+    send_type_Byte = 1,
     send_type_String_Link = 2,
     send_type_N__ = 3
 };
@@ -103,54 +110,134 @@ QString getraw_send_type() { return getraw_("send_type");}
 bool was_changed_send_string() { return was_changed_("send_string"); }
 QString gets_send_string() { return gets_("send_string"); }
 QStringList get_strings_send_string() { return get_strings_("send_string"); }
+void repaint_send_string() { repaint_("send_string"); }
 
 //Button Send
 //
 bool was_changed_send_string_btn() { return was_changed_("send_string_btn"); }
 int geti_send_string_btn() { return geti_("send_string_btn"); }
+void repaint_send_string_btn() { repaint_("send_string_btn"); }
 QString button_send_string_btn() { return "send_string_btn"; }
+
 
 //Checkbox More Strings
 //You can prepare several additional strings to send for convenience.
 bool was_changed_show_additional_strings() { return was_changed_("show_additional_strings"); }
 int geti_show_additional_strings() { return geti_("show_additional_strings"); }
+void repaint_show_additional_strings() { repaint_("show_additional_strings"); }
 
-//String String To Send
+//String String To Send2
 //String for sending.
 bool was_changed_send_string2() { return was_changed_("send_string2"); }
 QString gets_send_string2() { return gets_("send_string2"); }
 QStringList get_strings_send_string2() { return get_strings_("send_string2"); }
+void repaint_send_string2() { repaint_("send_string2"); }
 
 //Button Send
 //
 bool was_changed_send_string2_btn() { return was_changed_("send_string2_btn"); }
 int geti_send_string2_btn() { return geti_("send_string2_btn"); }
+void repaint_send_string2_btn() { repaint_("send_string2_btn"); }
 QString button_send_string2_btn() { return "send_string2_btn"; }
 
-//String String To Send
+//String String To Send3
 //String for sending.
 bool was_changed_send_string3() { return was_changed_("send_string3"); }
 QString gets_send_string3() { return gets_("send_string3"); }
 QStringList get_strings_send_string3() { return get_strings_("send_string3"); }
+void repaint_send_string3() { repaint_("send_string3"); }
 
 //Button Send
 //
 bool was_changed_send_string3_btn() { return was_changed_("send_string3_btn"); }
 int geti_send_string3_btn() { return geti_("send_string3_btn"); }
+void repaint_send_string3_btn() { repaint_("send_string3_btn"); }
 QString button_send_string3_btn() { return "send_string3_btn"; }
 
+//String String To Send4
+//String for sending.
+bool was_changed_send_string4() { return was_changed_("send_string4"); }
+QString gets_send_string4() { return gets_("send_string4"); }
+QStringList get_strings_send_string4() { return get_strings_("send_string4"); }
+void repaint_send_string4() { repaint_("send_string4"); }
+
+//Button Send
+//
+bool was_changed_send_string4_btn() { return was_changed_("send_string4_btn"); }
+int geti_send_string4_btn() { return geti_("send_string4_btn"); }
+void repaint_send_string4_btn() { repaint_("send_string4_btn"); }
+QString button_send_string4_btn() { return "send_string4_btn"; }
+
+//String String To Send5
+//String for sending.
+bool was_changed_send_string5() { return was_changed_("send_string5"); }
+QString gets_send_string5() { return gets_("send_string5"); }
+QStringList get_strings_send_string5() { return get_strings_("send_string5"); }
+void repaint_send_string5() { repaint_("send_string5"); }
+
+//Button Send
+//
+bool was_changed_send_string5_btn() { return was_changed_("send_string5_btn"); }
+int geti_send_string5_btn() { return geti_("send_string5_btn"); }
+void repaint_send_string5_btn() { repaint_("send_string5_btn"); }
+QString button_send_string5_btn() { return "send_string5_btn"; }
+
+//String String To Send6
+//String for sending.
+bool was_changed_send_string6() { return was_changed_("send_string6"); }
+QString gets_send_string6() { return gets_("send_string6"); }
+QStringList get_strings_send_string6() { return get_strings_("send_string6"); }
+void repaint_send_string6() { repaint_("send_string6"); }
+
+//Button Send
+//
+bool was_changed_send_string6_btn() { return was_changed_("send_string6_btn"); }
+int geti_send_string6_btn() { return geti_("send_string6_btn"); }
+void repaint_send_string6_btn() { repaint_("send_string6_btn"); }
+QString button_send_string6_btn() { return "send_string6_btn"; }
+
+//String String To Send7
+//String for sending.
+bool was_changed_send_string7() { return was_changed_("send_string7"); }
+QString gets_send_string7() { return gets_("send_string7"); }
+QStringList get_strings_send_string7() { return get_strings_("send_string7"); }
+void repaint_send_string7() { repaint_("send_string7"); }
+
+//Button Send
+//
+bool was_changed_send_string7_btn() { return was_changed_("send_string7_btn"); }
+int geti_send_string7_btn() { return geti_("send_string7_btn"); }
+void repaint_send_string7_btn() { repaint_("send_string7_btn"); }
+QString button_send_string7_btn() { return "send_string7_btn"; }
+
+//String String To Send8
+//String for sending.
+bool was_changed_send_string8() { return was_changed_("send_string8"); }
+QString gets_send_string8() { return gets_("send_string8"); }
+QStringList get_strings_send_string8() { return get_strings_("send_string8"); }
+void repaint_send_string8() { repaint_("send_string8"); }
+
+//Button Send
+//
+bool was_changed_send_string8_btn() { return was_changed_("send_string8_btn"); }
+int geti_send_string8_btn() { return geti_("send_string8_btn"); }
+void repaint_send_string8_btn() { repaint_("send_string8_btn"); }
+QString button_send_string8_btn() { return "send_string8_btn"; }
 
 //String String Link
 //Link to string for sending.
 bool was_changed_string_link_send() { return was_changed_("string_link_send"); }
 QString gets_string_link_send() { return gets_("string_link_send"); }
 QStringList get_strings_string_link_send() { return get_strings_("string_link_send"); }
+void repaint_string_link_send() { repaint_("string_link_send"); }
 
 //Button Send
 //
 bool was_changed_send_string_link_btn() { return was_changed_("send_string_link_btn"); }
 int geti_send_string_link_btn() { return geti_("send_string_link_btn"); }
+void repaint_send_string_link_btn() { repaint_("send_string_link_btn"); }
 QString button_send_string_link_btn() { return "send_string_link_btn"; }
+
 
 //Enum Line Terminator
 //
@@ -169,18 +256,22 @@ QString getraw_line_term() { return getraw_("line_term");}
 //Byte to send.
 bool was_changed_send_byte() { return was_changed_("send_byte"); }
 int geti_send_byte() { return geti_("send_byte"); }
+void repaint_send_byte() { repaint_("send_byte"); }
 
 //Button Send
 //
 bool was_changed_send_bytes_btn() { return was_changed_("send_bytes_btn"); }
 int geti_send_bytes_btn() { return geti_("send_bytes_btn"); }
+void repaint_send_bytes_btn() { repaint_("send_bytes_btn"); }
 QString button_send_bytes_btn() { return "send_bytes_btn"; }
+
 
 
 //Checkbox Receive
 //Enable receiving data.
 bool was_changed_receive() { return was_changed_("receive"); }
 int geti_receive() { return geti_("receive"); }
+void repaint_receive() { repaint_("receive"); }
 
 //Enum Receive As
 //Format of working with received data.
@@ -206,6 +297,7 @@ void sets_received_line(QString value) { sets_("received_line", value); }
 void clear_string_received_line() { clear_string_("received_line"); }
 void append_string_received_line(QString v, int extra_new_lines_count = 0) { append_string_("received_line", v, extra_new_lines_count); }
 void append_string_received_line(QStringList v, int extra_new_lines_count = 0) { append_string_("received_line", v, extra_new_lines_count); }
+void repaint_received_line() { repaint_("received_line"); }
 
 //Out Text Received Text
 //Received data as text.
@@ -216,6 +308,7 @@ void sets_received_text(QString value) { sets_("received_text", value); }
 void clear_string_received_text() { clear_string_("received_text"); }
 void append_string_received_text(QString v, int extra_new_lines_count = 0) { append_string_("received_text", v, extra_new_lines_count); }
 void append_string_received_text(QStringList v, int extra_new_lines_count = 0) { append_string_("received_text", v, extra_new_lines_count); }
+void repaint_received_text() { repaint_("received_text"); }
 
 //Out Text Received Bytes
 //Received data as bytes
@@ -226,11 +319,13 @@ void sets_received_bytes(QString value) { sets_("received_bytes", value); }
 void clear_string_received_bytes() { clear_string_("received_bytes"); }
 void append_string_received_bytes(QString v, int extra_new_lines_count = 0) { append_string_("received_bytes", v, extra_new_lines_count); }
 void append_string_received_bytes(QStringList v, int extra_new_lines_count = 0) { append_string_("received_bytes", v, extra_new_lines_count); }
+void repaint_received_bytes() { repaint_("received_bytes"); }
 
 //Button Clear
 //Clear received data
 bool was_changed_clear() { return was_changed_("clear"); }
 int geti_clear() { return geti_("clear"); }
+void repaint_clear() { repaint_("clear"); }
 QString button_clear() { return "clear"; }
 
 //Enum Auto Clear
@@ -259,31 +354,39 @@ QString getraw_limit_show() { return getraw_("limit_show");}
 //Limit show by prevent slow down.
 bool was_changed_limit_show_count() { return was_changed_("limit_show_count"); }
 int geti_limit_show_count() { return geti_("limit_show_count"); }
+void repaint_limit_show_count() { repaint_("limit_show_count"); }
 
 //----------------------------------------------------
 //Page Watchdog
 //Saying Arduino that we are live, and receiving from Arduino that it's live.
 
+
 //Checkbox Watchdog Send
 //Should we send something to Arduino with given period to show that we are live.
 bool was_changed_watchdog_send() { return was_changed_("watchdog_send"); }
 int geti_watchdog_send() { return geti_("watchdog_send"); }
+void repaint_watchdog_send() { repaint_("watchdog_send"); }
 
 //String Watchdog Message
 //Sending message.
 bool was_changed_watchdog_message() { return was_changed_("watchdog_message"); }
 QString gets_watchdog_message() { return gets_("watchdog_message"); }
 QStringList get_strings_watchdog_message() { return get_strings_("watchdog_message"); }
+void repaint_watchdog_message() { repaint_("watchdog_message"); }
 
 //Float Send Period
 //Time period for sending watchdog ticks.
 bool was_changed_watchdog_send_period() { return was_changed_("watchdog_send_period"); }
 float getf_watchdog_send_period() { return getf_("watchdog_send_period"); }
+void repaint_watchdog_send_period() { repaint_("watchdog_send_period"); }
+
 
 //Checkbox Watchdog Receive
 //Receiving watchdog - TODO not implemented yet!
 bool was_changed_watchdog_receive() { return was_changed_("watchdog_receive"); }
 int geti_watchdog_receive() { return geti_("watchdog_receive"); }
+void repaint_watchdog_receive() { repaint_("watchdog_receive"); }
+
 
 //----------------------------------------------------
 //Page Devices
@@ -293,6 +396,7 @@ int geti_watchdog_receive() { return geti_("watchdog_receive"); }
 //
 bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
+void repaint_print_devices() { repaint_("print_devices"); }
 QString button_print_devices() { return "print_devices"; }
 
 //Out Text Device List
@@ -304,5 +408,6 @@ void sets_device_list(QString value) { sets_("device_list", value); }
 void clear_string_device_list() { clear_string_("device_list"); }
 void append_string_device_list(QString v, int extra_new_lines_count = 0) { append_string_("device_list", v, extra_new_lines_count); }
 void append_string_device_list(QStringList v, int extra_new_lines_count = 0) { append_string_("device_list", v, extra_new_lines_count); }
+void repaint_device_list() { repaint_("device_list"); }
 
 //----------------------------------------------------
