@@ -1,4 +1,4 @@
-#include "xclu_paths.h"
+#include "xc_paths.h"
 #include <QCoreApplication>
 #include <QApplication>
 #include "incl_cpp.h"

@@ -84,7 +84,7 @@ void XModuleMadRobot::update() {
     //robot
     mind_update();
 
-    refresh();   //call to update screen
+    repaint();   //call to update screen
 }
 
 

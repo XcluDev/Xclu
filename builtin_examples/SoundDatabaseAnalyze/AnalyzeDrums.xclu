@@ -127,11 +127,11 @@
                     },
                     {
                         "aname": "an_file",
-                        "avalue": "analyze.txt"
+                        "avalue": "100.txt"
                     },
                     {
                         "aname": "an_autoload",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "Visualize",
@@ -201,7 +201,7 @@
                     },
                     {
                         "aname": "size_x",
-                        "avalue": "1300"
+                        "avalue": "1000"
                     },
                     {
                         "aname": "size_y",
@@ -213,7 +213,7 @@
                     },
                     {
                         "aname": "pos_x",
-                        "avalue": "600"
+                        "avalue": "900"
                     },
                     {
                         "aname": "pos_y",

@@ -47,6 +47,10 @@ void XModuleSoundsDatabaseAnalyze::start() {
         load_database();
     }
 
+    if (geti_an_autoload()) {
+        analyze_load();
+    }
+
     //play sound
     player_.write().data().clear();
 
@@ -65,6 +69,9 @@ void XModuleSoundsDatabaseAnalyze::update() {
     if (geti_an_compute()) {    //start analyze
         analyze_compute();
     }
+    if (geti_an_load()) analyze_load();
+
+    if (geti_an_save_as()) analyze_save();
 
     //changes
 
@@ -73,7 +80,7 @@ void XModuleSoundsDatabaseAnalyze::update() {
         analyze_.set_envelope_size(geti_an_envelope_size());
     }
     if (was_changed_vis_thumb_rad()) {
-        refresh();
+        repaint();
     }
 }
 
@@ -253,21 +260,18 @@ void XModuleSoundsDatabaseAnalyze::analyze_compute() {
         xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));
     }
 
-    refresh();
+    repaint();
 }
 
 //---------------------------------------------------------------------
 void XModuleSoundsDatabaseAnalyze::analyze_load() {
-    analyze_.load_from_file(gets_an_file());
+    analyze_.load_from_file(gets_an_file(), db_.size());
+    repaint();
 }
 
 //---------------------------------------------------------------------
 void XModuleSoundsDatabaseAnalyze::analyze_save() {
-
-
-
-    //analyze_.save_to_file()
-
+    analyze_.save_to_file(xc_dialog_save_as("Save analyze results", "*.txt"));
 }
 
 //---------------------------------------------------------------------
@@ -297,7 +301,7 @@ void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button
     if (id >= 0) {
         //Play
         selected_ = id;
-        refresh();  //repaint
+        repaint();  //repaint
         //start to play
         player_.write().data().play(db_.sounds()[id], getf_play_volume());
     }

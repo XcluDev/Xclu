@@ -72,16 +72,31 @@ int SoundSamplesAnalyze::find_by_mouse(glm::vec2 pos) {
 //save to file
 void SoundSamplesAnalyze::save_to_file(QString file_name) {
     QStringList file;
-
-  //  write_text_file(list, file_name);
-
-
+    for (auto &p: pos_) {
+        file.push_back(QString("%1 %2").arg(p.x).arg(p.y));
+    }
+    xc_write_text_file(file, file_name);
 }
 
 //---------------------------------------------------------------------
 //load from file
-void SoundSamplesAnalyze::load_from_file(QString file_name) {
+void SoundSamplesAnalyze::load_from_file(QString file_name, int database_size) {
+    file_name = xc_absolute_path_from_project(file_name);
+    if (!xc_file_exists(file_name)) {
+        xc_message_box("File '" + file_name + "' doesn't exists");
+    }
+    auto file = xc_read_text_file(file_name);
 
+    int n = database_size;
+    xc_assert(n == file.size(),
+              QString("SoundSamplesAnalyze::load_from_file - number of samples %1 and file records %2 are different")
+              .arg(n).arg(file.size()));
+    pos_.resize(n);
+    for (int i=0; i<n; i++) {
+        auto list = file[i].split(" ");
+        xc_assert(list.size() == 2, QString("SoundSamplesAnalyze::load_from_file - bad line %1").arg(i+1));
+        pos_[i] = glm::vec2(list[0].toFloat(), list[1].toFloat());
+    }
 }
 
 //---------------------------------------------------------------------

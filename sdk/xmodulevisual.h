@@ -47,12 +47,12 @@ public:
 
     //-----------------------------------------------
     //subclasses MUST reimplement this for drawing
-    //and call refresh() for repainting!
+    //and call repaint() for repainting!
     virtual void draw(QPainter &painter, int w, int h);
 
     //-----------------------------------------------
     //subclasses MUST call it for repaing widget image, and to apply size change - normally, inside update()
-    void refresh();
+    void repaint();
 
     //-----------------------------------------------
     //Getting current size:

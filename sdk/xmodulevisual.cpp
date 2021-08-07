@@ -24,7 +24,8 @@ void XModuleVisual::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
 
 //-----------------------------------------------
 //subclasses must call it for update widget image, an apply update size
-void XModuleVisual::refresh() {
+//refresh - it was called before
+void XModuleVisual::repaint() {
     if (widget_) {
         //widget_->set_size(screen_size_);
         widget_->update();

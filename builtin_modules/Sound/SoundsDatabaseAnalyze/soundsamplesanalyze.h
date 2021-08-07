@@ -27,7 +27,7 @@ public:
     void save_to_file(QString file_name);
 
     //load from file
-    void load_from_file(QString file_name);
+    void load_from_file(QString file_name, int database_size);
 
     //draw
     void draw(QPainter &painter, int w, int h, int selected_index, int thumb_rad);
