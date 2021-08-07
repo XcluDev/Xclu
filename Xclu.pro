@@ -182,7 +182,7 @@ SOURCES += \
     host/dialogs/dialogeditlinks.cpp \
     host/mainwindow.cpp \
     host/recentfiles.cpp \
-    host/xclu_paths.cpp \
+    host/xc_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
     libs/tsne/sptree.cpp \
@@ -281,7 +281,7 @@ HEADERS += \
     host/dialogs/dialogeditlinks.h \
     host/mainwindow.h \
     host/recentfiles.h \
-    host/xclu_paths.h \
+    host/xc_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
     libs/of/ofNoise.h \

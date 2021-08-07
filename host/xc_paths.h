@@ -1,5 +1,5 @@
-#ifndef XCLU_PATHS_H
-#define XCLU_PATHS_H
+#ifndef XC_PATHS_H
+#define XC_PATHS_H
 
 //Пути к папке приложения, файл настроек
 #include <QString>
@@ -34,4 +34,4 @@ QString xc_general_page_file();
 //Расширение файлов для описания интерфейса
 QString xc_XGUI_ext();
 
-#endif // XCLU_PATHS_H
+#endif // XC_PATHS_H

@@ -4,7 +4,7 @@
 //Настройки приложения и ключи для записи настроек
 #include <QString>
 #include <QSettings>
-#include "xclu_paths.h"
+#include "xc_paths.h"
 
 class QWindow;
 class QMainWindow;
