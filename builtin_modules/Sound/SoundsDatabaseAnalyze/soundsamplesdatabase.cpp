@@ -1,6 +1,6 @@
 #include "soundsamplesdatabase.h"
 #include "incl_cpp.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "xc_audio_wavfile.h"
 #include "xc_audio.h"
 #include "xc_files.h"

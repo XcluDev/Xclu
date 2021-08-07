@@ -2,7 +2,7 @@
 #include "xmoduletestdrawing.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 
 
 //registering module implementation

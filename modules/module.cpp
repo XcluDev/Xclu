@@ -52,7 +52,7 @@ void Module::set_name(QString name) {
 //---------------------------------------------------------------------
 /*QString Module::name() {
     //name нужно не просто считать, а сделать gui_to_var,
-    //так как это значение используется в Project::update_names(),
+    //так как это значение используется в ProjectCore::update_names(),
     //а оно вызывается до BeforeStarting,
     //так как name могут понадобиться в вычислении expression
     auto *var = interf_->var("name");

@@ -81,7 +81,7 @@ XGuiObject::~XGuiObject() {
 
 //---------------------------------------------------------------------
 //установка режима read_only - для out и блокировки констант при запуске проекта
-void XGuiObject::set_read_only_(bool read_only) {
+void XGuiObject::set_read_only_(bool /*read_only*/) {
     //xclu::widget_update_css(spin_);
 }
 

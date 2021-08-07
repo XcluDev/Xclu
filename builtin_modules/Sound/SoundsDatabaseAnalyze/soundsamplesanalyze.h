@@ -23,6 +23,12 @@ public:
     //using t-sne
     void method_tsne(SoundSamplesDatabase &db);
 
+    //save to file
+    void save_to_file(QString file_name);
+
+    //load from file
+    void load_from_file(QString file_name);
+
     //draw
     void draw(QPainter &painter, int w, int h, int selected_index, int thumb_rad);
     void draw_sound(QPainter &painter, int w, int h, const QVector<int16> &sound);

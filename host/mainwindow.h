@@ -100,7 +100,7 @@ private:
     //Recent files
     QScopedPointer<RecentFiles> recent_;
 
-    //Project name
+    //ProjectCore name
     QString projectFile;
     bool isUntitled = true;
 

@@ -67,15 +67,15 @@ public:
     //I use "openFrameworks style"
     //They are called automatically at process_events() - before update()
     //But queued asyncronically by widget calls of add_mouse_event(), add_keyboard_event()
-    virtual void mouse_moved(int2 pos) {}
-    virtual void mouse_pressed(int2 pos, XMouseButton button) {}
-    virtual void mouse_dragged(int2 pos, XMouseButton button) {}
-    virtual void mouse_released(int2 pos, XMouseButton button) {}
-    virtual void mouse_double_clicked(int2 pos, XMouseButton button) {}
+    virtual void mouse_moved(int2 /*pos*/) {}
+    virtual void mouse_pressed(int2 /*pos*/, XMouseButton /*button*/) {}
+    virtual void mouse_dragged(int2 /*pos*/, XMouseButton /*button*/) {}
+    virtual void mouse_released(int2 /*pos*/, XMouseButton /*button*/) {}
+    virtual void mouse_double_clicked(int2 /*pos*/, XMouseButton /*button*/) {}
 
     //Note: Currently keyboard events are not sent. May be need set focus on the widget?
-    virtual void key_pressed(int key) {}
-    virtual void key_released(int key) {}
+    virtual void key_pressed(int /*key*/) {}
+    virtual void key_released(int /*key*/) {}
 
     //----------------------------------------------
     //Queuing mouse/keyboard events by widget

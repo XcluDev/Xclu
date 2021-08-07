@@ -2,7 +2,7 @@
 #include "xmodulemadrobot.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "module.h"
 #include "xobjectimage.h"
 
@@ -92,37 +92,37 @@ void XModuleMadRobot::update() {
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_pickup() {
     set_state("pick up");
-    XCORE.bang(gets_ard_pick_up());
+    xc_bang(gets_ard_pick_up());
 }
 
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_forward() {
     set_state("forward");
-    XCORE.bang(gets_ard_forw());
+    xc_bang(gets_ard_forw());
 }
 
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_backward() {
     set_state("backward");
-    XCORE.bang(gets_ard_back());
+    xc_bang(gets_ard_back());
 }
 
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_left() {
     set_state("left");
-    XCORE.bang(gets_ard_left());
+    xc_bang(gets_ard_left());
 }
 
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_right() {
     set_state("right");
-    XCORE.bang(gets_ard_right());
+    xc_bang(gets_ard_right());
 }
 
 //---------------------------------------------------------------------
 void XModuleMadRobot::move_stop() {
     set_state("stop");
-    XCORE.bang(gets_ard_stop());
+    xc_bang(gets_ard_stop());
 }
 
 //---------------------------------------------------------------------
@@ -183,7 +183,7 @@ void XModuleMadRobot::mind_start() {
     xc_console_append("mind_start");
     mind_on_ = true;
 
-    target_ = glm::vec2(xrandomf(-0.3,0.3), xrandomf(-0.3,0.3));//glm::vec2(0,1000);
+    target_ = glm::vec2(xrandomf(-0.3f,0.3f), xrandomf(-0.3f,0.3f));//glm::vec2(0,1000);
     target_size_ = glm::vec2(0,0);
 
     last_pickup = 0;
@@ -280,13 +280,13 @@ void XModuleMadRobot::mind_update() {
             put_action(Action(Forward,t));
              if (xrandomf(-1,1)>0) {
                  for (int i=0; i<8; i++) {
-                     t += 0.3;
+                     t += 0.3f;
                      put_action(Action(Right,t));
                  }
              }
              else {
                  for (int i=0; i<8; i++) {
-                 t += 0.3;
+                 t += 0.3f;
                  put_action(Action(Left,t));
                  }
              }
@@ -324,13 +324,13 @@ void XModuleMadRobot::mind_update() {
 
         if (xrandomf(-1,1)>0) {
             for (int i=0; i<15; i++) {
-            t += 0.3;
+            t += 0.3f;
             put_action(Action(Right,t));
             }
         }
         else {
             for (int i=0; i<15; i++) {
-            t += 0.3;
+            t += 0.3f;
             put_action(Action(Left,t));
             }
         }

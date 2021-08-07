@@ -193,7 +193,7 @@ QString XItem::description(int index) {
 //Checking that value was changed
 //works relative to save "change chacker", which stores frame fo last check
 //It's really implemented at XItem_<T>, so here just returns "false"
-bool XItem::was_changed(XWasChangedChecker &checker) {
+bool XItem::was_changed(XWasChangedChecker & /*checker*/) {
     return false;
 }
 
@@ -263,7 +263,7 @@ void XItem::clear_link() {
 //---------------------------------------------------------------------
 //Function for setting value using link
 //Subclasses must implement it
-void XItem::set_value_from_link(XLinkResolved *linkres) {
+void XItem::set_value_from_link(XLinkResolved * /*linkres*/) {
     xc_exception("set_value_from_link is not implemented for `" + name() + "`");
 }
 

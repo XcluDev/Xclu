@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "xcore.h"
+#include "xc_project.h"
 #include <QDateTime>
 //#include <QImageWriter>
 //#include <QImageReader>
@@ -181,7 +181,7 @@ void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool u
     xc_assert(!depth, "XModuleRealsenseCamera::save_frames - saving depth is not implemented");
 
     //Создаем папку для записи
-    QString folder = xc_abs_path(gets_save_folder(), true /*create_folder*/);
+    QString folder = xc_absolute_path_from_project(gets_save_folder(), true /*create_folder*/);
 
     //Create file names
     QString file_color, file_ir, file_depth;
@@ -253,7 +253,7 @@ void XModuleRealsenseCamera::start_camera() {
     if (capture_source == capture_source_Disable) return;
     if (capture_source == capture_source_Bag_File) {
         //Load BAG file
-        QString file_name = xc_abs_path(gets_bag_file());
+        QString file_name = xc_absolute_path_from_project(gets_bag_file());
         xc_assert(xc_file_exists(file_name), "File '" + file_name + "' doesn't exists");
         camera_.start_bag(file_name);
         sets_connected_device_info("Playing BAG file '" + file_name + "'");

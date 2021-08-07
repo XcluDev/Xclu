@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 
 #include "dialogrenamemodule.h"
-#include "project.h"
+#include "projectcore.h"
 
 DialogRenameModule *D_RENAME_MODULE;
 
@@ -63,8 +63,8 @@ QString DialogRenameModule::get_name() {
 
 //---------------------------------------------------------------------
 void DialogRenameModule::pressed_ok() {
-    //закрываем диалог, если PROJ разрешает такое переименование
-    if (PROJ.can_rename_module(name_,get_name())) {
+    //закрываем диалог, если PROJ_CORE разрешает такое переименование
+    if (PROJ_CORE.can_rename_module(name_,get_name())) {
         emit accept();
     }
 }

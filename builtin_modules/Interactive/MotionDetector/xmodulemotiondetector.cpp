@@ -1,7 +1,7 @@
 #include "xmodulemotiondetector.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "xobjectimage.h"
 
 //registering module implementation
@@ -266,12 +266,12 @@ void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result
 
 //---------------------------------------------------------------------
 void XModuleMotionDetector::bang_on() {
-    XCORE.bang(get_strings_bang_on());
+    xc_bang(get_strings_bang_on());
 }
 
 //---------------------------------------------------------------------
 void XModuleMotionDetector::bang_off() {
-    XCORE.bang(get_strings_bang_off());
+    xc_bang(get_strings_bang_off());
 }
 
 //---------------------------------------------------------------------

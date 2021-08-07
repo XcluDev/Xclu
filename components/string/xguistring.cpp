@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "xguistring.h"
 #include "xitemstring.h"
-#include "xcore.h"
+#include "xc_project.h"
 
 //---------------------------------------------------------------------
 /*
@@ -115,7 +115,7 @@ void XGuiString::choose_file() {
     //а если пустой - сказать про это
     //при этом, тут нельзя использовать xc_assert - так как выпадет вся программа
     //ведь это идет обработка по нажатию кнопки, прямо в GUI
-    QString proj_folder = XCORE.project_folder();
+    QString proj_folder = xc_project_folder();
     if (proj_folder.isEmpty()) {
         xc_message_box("To compute relative path for a file we will need the project path.\nPlease save a project before choosing a file");
         return;
@@ -136,7 +136,7 @@ void XGuiString::choose_folder() {
     //а если пустой - сказать про это
     //при этом, тут нельзя использовать xc_assert - так как выпадет вся программа
     //ведь это идет обработка по нажатию кнопки, прямо в GUI
-    QString proj_folder = XCORE.project_folder();
+    QString proj_folder = xc_project_folder();
     if (proj_folder.isEmpty()) {
         xc_message_box("To compute relative path for a folder we will need the project path.\nPlease save a project before choosing a folder");
         return;

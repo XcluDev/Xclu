@@ -91,12 +91,14 @@ endif
 in button Compute an_compute
     //Start analyzing.
     
+in button Save_As... an_save_as
+    //Save analyze results.
     
 
 line    
-in group Analyze_Save an_save_group=1
+#in group Analyze_Save an_save_group=1
 
-if an_save_group 1
+#if an_save_group 1
 in string_file File an_file="analyze.txt"  
     //File for loading analyze results.
     //Choose existing analyze file.
@@ -108,9 +110,7 @@ in button Load an_load
 in checkbox Autoload an_autoload=0
     //Autoload analyze results.
 
-in button Save_As... an_save_as
-    //Save analyze results.
-endif
+#endif
 line 
     
 #------------------------------------------

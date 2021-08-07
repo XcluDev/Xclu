@@ -119,11 +119,19 @@
                     },
                     {
                         "aname": "an_method",
-                        "avalue": "File_Order"
+                        "avalue": "tSNE"
                     },
                     {
                         "aname": "an_envelope_size",
                         "avalue": "100"
+                    },
+                    {
+                        "aname": "an_file",
+                        "avalue": "analyze.txt"
+                    },
+                    {
+                        "aname": "an_autoload",
+                        "avalue": "0"
                     },
                     {
                         "aname": "Visualize",

@@ -27,19 +27,6 @@ public:
     XClass(Module *module);
 
     //----------------------------------------------
-    //Runtime
-    //----------------------------------------------
-    static double xc_elapsed_time_sec();
-    static float xc_dt();
-    static int xc_frame();  //frame number
-
-    static QString xc_project_folder();   //full path to project folder
-
-    //Get absolute path to folder, given relative to project
-    //For example, use for loading files specified related to the project
-    static QString xc_abs_path(QString relative_path, bool create_folder = false);
-
-    //----------------------------------------------
     //Underlying module
     //----------------------------------------------
     void set_module(Module *module);

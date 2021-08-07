@@ -1,7 +1,7 @@
 #include "xmodulesoundout.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "module.h"
 
 //registering module implementation
@@ -265,7 +265,7 @@ void XModuleSoundOut::update() {
 
         data_.volume_left_ = getf_volume() * getf_volume_ch1();
         data_.volume_right_ = getf_volume() * getf_volume_ch2();
-        data_.modules_ = XCORE.get_modules(gets_modules_list());
+        data_.modules_ = xc_get_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
         data_.err.throw_error();
@@ -275,7 +275,7 @@ void XModuleSoundOut::update() {
 
     //Callback:
     //вызывать только если размер буфера уже ненулевой
-    //XCORE.execute_callbacks(gets_callback_modules()));
+    //xc_execute_callbacks(gets_callback_modules()));
 }
 
 

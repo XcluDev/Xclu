@@ -227,7 +227,7 @@ void XGui::set_read_only(bool read_only) {
 
 //---------------------------------------------------------------------
 //Internal function, which should be reimplemented for components
-void XGui::set_read_only_(bool read_only) {
+void XGui::set_read_only_(bool /*read_only*/) {
 
 }
 

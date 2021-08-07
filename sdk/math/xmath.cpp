@@ -151,7 +151,7 @@ int xrandomi(int a, int b) {
 float xrandomf(float a, float b) {
     std::mt19937 gen(randomi_rd_()); //Standard mersenne_twister_engine seeded with rd()
     std::uniform_real_distribution<> distrib(a, b);
-    return distrib(gen);
+    return float(distrib(gen));
 }
 
 #endif

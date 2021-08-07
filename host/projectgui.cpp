@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "modulesfactory.h"
-#include "project.h"
+#include "projectcore.h"
 #include "projectgui.h"
 #include "incl_cpp.h"
 #include "consoleview.h"
@@ -45,13 +45,13 @@ void ProjectGui::set_editable(bool editable) {
 //---------------------------------------------------------------------
 void ProjectGui::properties_from_gui() {
     //запоминаем выбранный модуль
-    PROJ.properties().selected_module = editor_modules->current_index();
+    PROJ_CORE.properties().selected_module = editor_modules->current_index();
 }
 
 //---------------------------------------------------------------------
 void ProjectGui::properties_to_gui() {
     //выбор модуля
-    int i = PROJ.properties().selected_module;
+    int i = PROJ_CORE.properties().selected_module;
     editor_modules->select_item(i);
 }
 
@@ -95,8 +95,8 @@ void ProjectGui::update_module_list() {
 //сигнал от списка модулей, что добавился новый модуль
 void ProjectGui::new_module(int i, QString class_name, QString name_hint) {
     //из редактора списка модулей пришел сигнал, что требуется создать модуль типа type
-    //генерируем его в PROJ, и там ему присваивается уникальное имя
-    Module *module = PROJ.new_module(i, class_name, name_hint);
+    //генерируем его в PROJ_CORE, и там ему присваивается уникальное имя
+    Module *module = PROJ_CORE.new_module(i, class_name, name_hint);
     if (module) {
         emit editor_modules->inserted_module(i, module->name());
         //Сигнал, что проект был изменен
@@ -107,7 +107,7 @@ void ProjectGui::new_module(int i, QString class_name, QString name_hint) {
 //---------------------------------------------------------------------
 //сигнал, что модуль нужно переименовать
 void ProjectGui::rename_module(int i, QString new_name) {
-    PROJ.rename_module(i, new_name);
+    PROJ_CORE.rename_module(i, new_name);
     editor_modules->renamed_module(i, new_name);
     editor_module->renamed_module();
     selected_module_updated();
@@ -119,7 +119,7 @@ void ProjectGui::rename_module(int i, QString new_name) {
 //сигнал, что модуль нужно удалить
 void ProjectGui::delete_module(int i) {
     editor_module->detach();
-    PROJ.delete_module(i);
+    PROJ_CORE.delete_module(i);
     editor_modules->deleted_module(i);
     //Сигнал, что проект был изменен
     xc_document_modified();
@@ -128,8 +128,8 @@ void ProjectGui::delete_module(int i) {
 //---------------------------------------------------------------------
 //сигнал, что модуль нужно сдублировать
 void ProjectGui::duplicate_module(int i) {
-    PROJ.duplicate_module(i);
-    editor_modules->inserted_module(i+1, PROJ.module_by_index(i+1)->name());
+    PROJ_CORE.duplicate_module(i);
+    editor_modules->inserted_module(i+1, PROJ_CORE.module_by_index(i+1)->name());
     //Сигнал, что проект был изменен
     xc_document_modified();
 }
@@ -137,7 +137,7 @@ void ProjectGui::duplicate_module(int i) {
 //---------------------------------------------------------------------
 //сигнал, что модули нужно поменять местами
 void ProjectGui::swap_modules(int i) { //i<->i+1
-    PROJ.swap_modules(i);
+    PROJ_CORE.swap_modules(i);
     editor_modules->swapped_modules(i);
     //Сигнал, что проект был изменен
     xc_document_modified();

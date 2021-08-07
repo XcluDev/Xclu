@@ -160,7 +160,7 @@ void XModuleScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        Module *module = XCORE.get_module(link.module);
+        Module *module = xc_get_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }

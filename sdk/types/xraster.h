@@ -184,7 +184,7 @@ public:
         }
         if (mirrory) {
             int h2 = h/2;
-            for (int y=0; y<h/2; y++) {
+            for (int y=0; y<h2; y++) {
                 for (int x=0; x<w; x++) {
                     qSwap(pixel_unsafe(x,y), pixel_unsafe(x,h-1-y));
                 }

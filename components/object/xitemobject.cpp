@@ -80,7 +80,7 @@ void XItemObject::var_to_gui_internal() {
 //---------------------------------------------------------------------
 //копирование данных - для duplicate; предполагается, что имя и тип - одинаковые
 //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
-void XItemObject::copy_data_to_internal(XItem *item) {
+void XItemObject::copy_data_to_internal(XItem * /*item*/) {
     xc_exception("XItemObject::copy_data_to_internal is prohibited");
     //xc_assert(item->supports_object(), "Can't copy object data, because destination item doesn't support object");
     //get_object()->read().data().copy_to(item->get_object()->write().pointer());

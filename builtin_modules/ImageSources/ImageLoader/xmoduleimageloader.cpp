@@ -2,7 +2,7 @@
 #include "xmoduleimageloader.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "module.h"
 #include "xobjectimage.h"
 
@@ -71,7 +71,7 @@ void XModuleImageLoader::update() {
 //---------------------------------------------------------------------
 void XModuleImageLoader::load_image_file(QString image_file) {
     image_file_ = image_file;
-    QString file_name = xc_abs_path(image_file_);
+    QString file_name = xc_absolute_path_from_project(image_file_);
     XObjectImage::load(image_.write().data(), file_name);
 }
 
@@ -79,7 +79,7 @@ void XModuleImageLoader::load_image_file(QString image_file) {
 void XModuleImageLoader::load_folder(QString folder_name) {
     image_files_.clear();
     //scan folder for images
-    QDirIterator images_iter(xc_abs_path(folder_name),
+    QDirIterator images_iter(xc_absolute_path_from_project(folder_name),
                              QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.tif" << "*.tiff"
                              ); //, QDirIterator::Subdirectories);
     image_files_.clear();

@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QThread>
-#include "xcore.h"
+#include "xc_project.h"
 
 
 //registering module implementation
@@ -133,7 +133,7 @@ void XModuleTimer::update_bang(float delay_sec) {
 //---------------------------------------------------------------------
 void XModuleTimer::bang() {
     //send bangs
-    XCORE.bang(get_strings_bang_list());
+    xc_bang(get_strings_bang_list());
 }
 
 //---------------------------------------------------------------------

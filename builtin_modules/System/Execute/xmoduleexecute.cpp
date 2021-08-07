@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "xcore.h"
+#include "xc_project.h"
 #include "xobjectimage.h"
 
 
@@ -361,7 +361,7 @@ void XModuleExecute::console_read() {
             increase_int_debug_received_times();
 
             //Send bang
-            XCORE.bang(get_strings_console_bang_on_received());
+            xc_bang(get_strings_console_bang_on_received());
 
             //Write if required
             if (geti_write_on_receive()) {

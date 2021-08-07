@@ -157,12 +157,13 @@ int geti_an_compute() { return geti_("an_compute"); }
 void repaint_an_compute() { repaint_("an_compute"); }
 QString button_an_compute() { return "an_compute"; }
 
+//Button Save As...
+//Save analyze results.
+bool was_changed_an_save_as() { return was_changed_("an_save_as"); }
+int geti_an_save_as() { return geti_("an_save_as"); }
+void repaint_an_save_as() { repaint_("an_save_as"); }
+QString button_an_save_as() { return "an_save_as"; }
 
-//Checkbox Analyze Save
-//
-bool was_changed_an_save_group() { return was_changed_("an_save_group"); }
-int geti_an_save_group() { return geti_("an_save_group"); }
-void repaint_an_save_group() { repaint_("an_save_group"); }
 
 //String File
 //File for loading analyze results.
@@ -183,13 +184,6 @@ QString button_an_load() { return "an_load"; }
 bool was_changed_an_autoload() { return was_changed_("an_autoload"); }
 int geti_an_autoload() { return geti_("an_autoload"); }
 void repaint_an_autoload() { repaint_("an_autoload"); }
-
-//Button Save As...
-//Save analyze results.
-bool was_changed_an_save_as() { return was_changed_("an_save_as"); }
-int geti_an_save_as() { return geti_("an_save_as"); }
-void repaint_an_save_as() { repaint_("an_save_as"); }
-QString button_an_save_as() { return "an_save_as"; }
 
 
 //----------------------------------------------------

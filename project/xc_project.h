@@ -1,8 +1,7 @@
-#ifndef XCORE_H
-#define XCORE_H
+#ifndef XC_PROJECT_H
+#define XC_PROJECT_H
 
-//Свойства проекта, которые могут быть "интересны" модулям,
-//такие так время от старта приложения и рабочая папка проекта
+//Properties of a project for access from modules
 
 #include "incl_h.h"
 #include "xobject.h"
@@ -12,8 +11,9 @@ class Module;
 class XItem;
 
 
-//Properties of the project - controlled mainly by "Project" module
-class XCoreWorkingProperties {
+//Properties of the project class - controlled mainly by "ProjectCore" module
+
+class ProjectAccessWorkingProperties {
 public:
     //reset all values to default
     void reset();
@@ -40,58 +40,60 @@ protected:
 };
 
 
-//Main XCore class
-class XCore
-{
-public:
-    XCore();
-
     //Properties of entire project, such as frame rate, autostart, save at exit
-    //It's controlled mainly by "Project" modile
-    XCoreWorkingProperties &working_properties();
+    //It's controlled mainly by "ProjectCore" modile
+    ProjectAccessWorkingProperties &xc_working_properties();
 
     //Enable/disable
 
     //Состояние запуска
-    void set_state(ProjectRunStateBinary state);
-    bool is_running();
-    bool is_stopped();
+    void xc_set_state(ProjectRunStateBinary state);
+    bool xc_is_running();
+    bool xc_is_stopped();
 
     //Измерение времени, прошедшего от запуска проекта
-    void reset_elapsed_timer();
-    double elapsed_time_sec();
-    void update_dt();    //вызывается для обновления dt, в начале работы кадра
-    float dt();
-    int frame();         //current frame
+    void xc_reset_elapsed_timer();
+    double xc_elapsed_time_sec();
+    void xc_update_dt();    //вызывается для обновления dt, в начале работы кадра
+    float xc_dt();
+    int xc_frame();         //current frame
 
     //Папка проекта
-    void set_project_folder(QString project_folder);
-    QString project_folder();   //папка проекта - полный путь
+    void xc_set_project_folder(QString project_folder);
+    QString xc_project_folder();   //папка проекта - полный путь
+
+    //"Save as" dialog
+    //filter examples: "Txt (*.txt)", "Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)"
+    QString xc_dialog_save_as(QString title, QString extensions_filter, QString folder="");
+
+    //"Load" dialog
+    //filter examples: "Txt (*.txt)", "Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)"
+    //QString dialog_load(QString title, QString extensions_filter, QString folder="");
 
     //возвращает абсолютный путь для папки, заданной относительно проекта
     //также, может создать эту папку, если это требуется
-    QString absolute_path_from_project(QString relative_path, bool create_folder = false);
+    QString xc_absolute_path_from_project(QString relative_path, bool create_folder = false);
 
     //Получение модуля - можно получить к нему доступ, см. класс XLinkParsed
     //а затем взять нужную переменную по geti и прочим
-    Module *get_module(QString module_name);
+    Module *xc_get_module(QString module_name);
 
     //Получение переменных по link - то есть по имени модуля и названию в формате webcam1->image//
     //Если link пустой - возвращает def_val
-    int get_int_by_link(QString link_str, int def_val = 0);
-    float get_float_by_link(QString link_str, float def_val = 0);
-    QString get_string_by_link(QString link_str, QString def_val = "");
-    XProtectedObject *get_object_by_link(QString link_str);
+    int xc_get_int_by_link(QString link_str, int def_val = 0);
+    float xc_get_float_by_link(QString link_str, float def_val = 0);
+    QString xc_get_string_by_link(QString link_str, QString def_val = "");
+    XProtectedObject *xc_get_object_by_link(QString link_str);
 
 
     //Send bang to module
     //General: module1 or press button: module1->button1
-    void bang(QString module_link);
+    void xc_bang(QString module_link);
 
     //Send bang to modules
     //General: module1 or press button: module1->button1
     //Empty lines and lines started from "#" - ignored
-    void bang(QStringList modules);
+    void xc_bang(QStringList modules);
 
 
     //Построение списка модулей по строке, в которой модули разделены \n,
@@ -101,27 +103,12 @@ public:
     //    Synth2
     //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
     //для воспроизведения
-    static QVector<Module *> get_modules(QString modules_list);
+    QVector<Module *> xc_get_modules(QString modules_list);
 
     //Выполнение Callbacks
     //список name модулей может быть разделен \n, TAB, пробелами
     //то есть идти из text или string
     //static void execute_callbacks(QVector<Module *> modules_list);
     //static void execute_callbacks(QString modules_list_string);
-protected:
-    XCoreWorkingProperties running_properties_;
 
-    ProjectRunStateBinary state_ = ProjectRunStateBinaryStopped;
-
-    QString project_folder_;
-
-    QElapsedTimer elapsed_timer_;
-    double last_time_for_dt_ = 0;   //используется для вычисления dt
-    float dt_ = 0;
-    int frame_ = 0;
-
-};
-
-extern XCore XCORE;
-
-#endif // XCORE_H
+#endif // XC_PROJECT_H

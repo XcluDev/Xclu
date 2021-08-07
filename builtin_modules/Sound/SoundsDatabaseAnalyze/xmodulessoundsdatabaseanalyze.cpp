@@ -4,7 +4,7 @@
 #include "registrarxmodule.h"
 #include <QProcess>
 #include <QDirIterator>
-#include "xcore.h"
+#include "xc_project.h"
 #include "xc_audio_wavfile.h"
 #include "xc_audio.h"
 #include "soundsamplesdatabase.h"
@@ -63,7 +63,7 @@ void XModuleSoundsDatabaseAnalyze::update() {
     }
 
     if (geti_an_compute()) {    //start analyze
-        analyze_reload();
+        analyze_compute();
     }
 
     //changes
@@ -72,9 +72,6 @@ void XModuleSoundsDatabaseAnalyze::update() {
     if (was_changed_an_envelope_size()) {
         analyze_.set_envelope_size(geti_an_envelope_size());
     }
-    //if (was_changed_an_method()) {
-    //    analyze_reload();
-    //}
     if (was_changed_vis_thumb_rad()) {
         refresh();
     }
@@ -96,7 +93,7 @@ void XModuleSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString outpu
     xc_assert(QDir().mkpath(output_folder), "Can't create folder '" + output_folder + "'");
 
     //scan folder for wavs
-    QDirIterator input_iter(input_folder,//xc_abs_path(folder_name),
+    QDirIterator input_iter(input_folder,//xc_absolute_path_from_project(folder_name),
                             QStringList() << "*.wav"// << "*.aiff"
                             ); //, QDirIterator::Subdirectories);
 
@@ -242,7 +239,7 @@ void XModuleSoundsDatabaseAnalyze::load_database() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::analyze_reload() {
+void XModuleSoundsDatabaseAnalyze::analyze_compute() {
     selected_ = -1;
 
     switch (gete_an_method()) {
@@ -257,6 +254,20 @@ void XModuleSoundsDatabaseAnalyze::analyze_reload() {
     }
 
     refresh();
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundsDatabaseAnalyze::analyze_load() {
+    analyze_.load_from_file(gets_an_file());
+}
+
+//---------------------------------------------------------------------
+void XModuleSoundsDatabaseAnalyze::analyze_save() {
+
+
+
+    //analyze_.save_to_file()
+
 }
 
 //---------------------------------------------------------------------

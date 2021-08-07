@@ -1,6 +1,6 @@
 #include "soundsamplesanalyze.h"
 #include "incl_cpp.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include "xc_audio.h"
 #include "xc_tsne.h"
 
@@ -66,6 +66,22 @@ int SoundSamplesAnalyze::find_by_mouse(glm::vec2 pos) {
         }
     }
     return k;
+}
+
+//---------------------------------------------------------------------
+//save to file
+void SoundSamplesAnalyze::save_to_file(QString file_name) {
+    QStringList file;
+
+  //  write_text_file(list, file_name);
+
+
+}
+
+//---------------------------------------------------------------------
+//load from file
+void SoundSamplesAnalyze::load_from_file(QString file_name) {
+
 }
 
 //---------------------------------------------------------------------

@@ -1,8 +1,7 @@
-#ifndef PROJECT_H
-#define PROJECT_H
+#ifndef PROJECTCORE_H
+#define PROJECTCORE_H
 
-//Проект - работает с инстансами модулей и вычислениями,
-//без графического интерфейса.
+//Project core - set of modules and properties.
 
 #include <QJsonObject>
 #include "incl_h.h"
@@ -11,10 +10,10 @@
 
 
 
-class Project
+class ProjectCore
 {
 public:
-    Project();
+    ProjectCore();
 
     //Свойства проекта
     ProjectProperties &properties();
@@ -110,6 +109,6 @@ private:
 
 };
 
-extern Project PROJ;
+extern ProjectCore PROJ_CORE;
 
-#endif
+#endif //PROJECTCORE_H

@@ -2,7 +2,7 @@
 #include "xmoduleproject.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 
 
 //Register implementation class
@@ -30,9 +30,9 @@ void XModuleProject::on_loaded() {
 
 //---------------------------------------------------------------------
 void XModuleProject::apply_control_values() {
-    XCORE.working_properties().set_frame_rate(geti_frame_rate());
-    XCORE.working_properties().set_autostart(geti_autostart());
-    XCORE.working_properties().set_dont_save_at_exit(geti_dont_save_at_exit());
+    xc_working_properties().set_frame_rate(geti_frame_rate());
+    xc_working_properties().set_autostart(geti_autostart());
+    xc_working_properties().set_dont_save_at_exit(geti_dont_save_at_exit());
 }
 
 //---------------------------------------------------------------------

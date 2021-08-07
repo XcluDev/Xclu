@@ -1,94 +1,116 @@
-#include "xcore.h"
+#include "xc_project.h"
+#include <QFileDialog>
 #include "incl_cpp.h"
-#include "project.h"
+#include "projectcore.h"
 #include "xitem.h"
 #include "xobject.h"
+#include "mainwindow.h"
 
-XCore XCORE;
+
+struct ProjectAccessData {
+    ProjectAccessWorkingProperties running_properties_;
+
+    ProjectRunStateBinary state_ = ProjectRunStateBinaryStopped;
+
+    QString project_folder_;
+
+    QElapsedTimer elapsed_timer_;
+    double last_time_for_dt_ = 0;   //используется для вычисления dt
+    float dt_ = 0;
+    int frame_ = 0;
+};
+
+ProjectAccessData access_;
 
 //---------------------------------------------------------------------
-//XCoreWorkingProperties
+//ProjectAccessWorkingProperties
 //---------------------------------------------------------------------
 //установить значения по умолчанию для frate_rate и autostar
-void XCoreWorkingProperties::reset() {
+void ProjectAccessWorkingProperties::reset() {
     frame_rate_ = 30;   //TODO параметр, значение по умолчанию
     autostart_ = 0;
     dont_save_at_exit_ = 0;
 }
 
 //---------------------------------------------------------------------
-void XCoreWorkingProperties::set_frame_rate(int fps) {
+void ProjectAccessWorkingProperties::set_frame_rate(int fps) {
     frame_rate_ = fps;
 }
 
 //---------------------------------------------------------------------
-int XCoreWorkingProperties::get_frame_rate() {
+int ProjectAccessWorkingProperties::get_frame_rate() {
     return frame_rate_;
 }
 
 //---------------------------------------------------------------------
-void XCoreWorkingProperties::set_autostart(int v) {
+void ProjectAccessWorkingProperties::set_autostart(int v) {
     autostart_ = v;
 }
 
 //---------------------------------------------------------------------
-bool XCoreWorkingProperties::get_autostart() {
+bool ProjectAccessWorkingProperties::get_autostart() {
     return autostart_;
 }
 
 //---------------------------------------------------------------------
-void XCoreWorkingProperties::set_dont_save_at_exit(int v) {
+void ProjectAccessWorkingProperties::set_dont_save_at_exit(int v) {
     dont_save_at_exit_ = v;
 }
 
 //---------------------------------------------------------------------
-bool XCoreWorkingProperties::get_dont_save_at_exit() {
+bool ProjectAccessWorkingProperties::get_dont_save_at_exit() {
     return dont_save_at_exit_;
 }
 
 //---------------------------------------------------------------------
-//XCore
+//ProjectAccess
 //---------------------------------------------------------------------
-XCore::XCore()
-{
-
+ProjectAccessWorkingProperties &xc_working_properties() {
+    return access_.running_properties_;
 }
 
 //---------------------------------------------------------------------
-XCoreWorkingProperties &XCore::working_properties() {
-    return running_properties_;
+bool xc_is_running() {
+    return (access_.state_ == ProjectRunStateBinaryRunning);
 }
 
 //---------------------------------------------------------------------
-bool XCore::is_running() {
-    return (state_ == ProjectRunStateBinaryRunning);
+bool xc_is_stopped() {
+    return (access_.state_ == ProjectRunStateBinaryStopped);
 }
 
 //---------------------------------------------------------------------
-bool XCore::is_stopped() {
-    return (state_ == ProjectRunStateBinaryStopped);
+void xc_set_state(ProjectRunStateBinary state) {
+    access_.state_ = state;
 }
 
 //---------------------------------------------------------------------
-void XCore::set_state(ProjectRunStateBinary state) {
-    state_ = state;
+void xc_set_project_folder(QString project_folder) {
+    access_.project_folder_ = project_folder;
 }
 
 //---------------------------------------------------------------------
-void XCore::set_project_folder(QString project_folder) {
-    project_folder_ = project_folder;
+QString xc_project_folder() {   //папка проекта - полный путь
+    return access_.project_folder_;
 }
 
+
 //---------------------------------------------------------------------
-QString XCore::project_folder() {   //папка проекта - полный путь
-    return project_folder_;
+//"Save as" dialog
+//filter examples: "Txt (*.txt)", "Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)"
+QString xc_dialog_save_as(QString title, QString extensions_filter, QString folder) {
+    if (folder.isEmpty()) folder = xc_project_folder();
+
+    return QFileDialog::getSaveFileName(MainWindow::window(), title,
+                                 folder,
+                                 extensions_filter);
 }
 
 //---------------------------------------------------------------------
 //возвращает абсолютный путь для папки, заданной относительно проекта
 //также, может создать эту папку, если это требуется
-QString XCore::absolute_path_from_project(QString relative_path, bool create_folder) {
-    QDir dir(project_folder());
+QString xc_absolute_path_from_project(QString relative_path, bool create_folder) {
+    QDir dir(xc_project_folder());
     QString path = dir.absoluteFilePath(relative_path);
     if (create_folder) {
         QDir dir;
@@ -99,69 +121,69 @@ QString XCore::absolute_path_from_project(QString relative_path, bool create_fol
 
 //---------------------------------------------------------------------
 //Получение модуля
-Module *XCore::get_module(QString module_name) {
-    return PROJ.module_by_name(module_name);
+Module *xc_get_module(QString module_name) {
+    return PROJ_CORE.module_by_name(module_name);
 }
 
 //---------------------------------------------------------------------
 //Получение переменных по link
-int XCore::get_int_by_link(QString link_str, int def_val) {
+int xc_get_int_by_link(QString link_str, int def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return get_module(link.module)->geti(link.var, link.index, link.index2);
+    return xc_get_module(link.module)->geti(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
-float XCore::get_float_by_link(QString link_str, float def_val) {
+float xc_get_float_by_link(QString link_str, float def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return get_module(link.module)->getf(link.var, link.index, link.index2);
+    return xc_get_module(link.module)->getf(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
-QString XCore::get_string_by_link(QString link_str, QString def_val) {
+QString xc_get_string_by_link(QString link_str, QString def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return get_module(link.module)->gets(link.var, link.index, link.index2);
+    return xc_get_module(link.module)->gets(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
-XProtectedObject *XCore::get_object_by_link(QString link_str) {
+XProtectedObject *xc_get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    return get_module(link.module)->get_object(link.var);
+    return xc_get_module(link.module)->get_object(link.var);
 }
 
 //---------------------------------------------------------------------
 //Send bang to module
 //General: module1 or press button: module1->button1
-void XCore::bang(QString module_link) {
+void xc_bang(QString module_link) {
     XLinkParsed link(module_link);
-    if (link.var.isEmpty()) get_module(link.module)->bang();
-    else get_module(link.module)->button_pressed(link.var);
+    if (link.var.isEmpty()) xc_get_module(link.module)->bang();
+    else xc_get_module(link.module)->button_pressed(link.var);
 }
 
 //---------------------------------------------------------------------
 //Send bang to modules
 //General: module1 or press button: module1->button1
 //Empty lines and lines started from "#" - ignored
-void XCore::bang(QStringList modules) {
+void xc_bang(QStringList modules) {
     for (auto &line: modules) {
         QString module_link = line.trimmed();
         if (module_link.isEmpty()) continue;
         if (module_link.startsWith("#")) continue;
-        bang(module_link);
+        xc_bang(module_link);
     }
 }
 
 //---------------------------------------------------------------------
-/*XItem *XCore::get_var_by_link(QString link_str) {
+/*XItem *xc_get_var_by_link(QString link_str) {
     XLinkParsed link(link_str);
     Module *module = get_module(link.module);
     return module->interf()->var(link.var);
 }*/
 
 //---------------------------------------------------------------------
-/*XObject *XCore::get_object_by_link(QString link_str) {
+/*XObject *xc_get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
     Module *module = get_module(link.module);
     return module->get_object(link.var);
@@ -175,14 +197,14 @@ void XCore::bang(QStringList modules) {
 //    Synth2
 //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
 //для воспроизведения
-/*static*/ QVector<Module *> XCore::get_modules(QString modules_list) {
+/*static*/ QVector<Module *> xc_get_modules(QString modules_list) {
     QStringList list = QString(modules_list).split("\n");
     QVector<Module *> out_list;
 
     for (int i=0; i<list.size(); i++) {
         QString name = list.at(i).trimmed();
         if (!name.isEmpty() && !name.startsWith("#")) {
-            out_list.push_back(PROJ.module_by_name(name));
+            out_list.push_back(PROJ_CORE.module_by_name(name));
         }
     }
     return out_list;
@@ -192,49 +214,49 @@ void XCore::bang(QStringList modules) {
 //Выполнение Callbacks
 //список name модулей может быть разделен \n, TAB, пробелами
 //то есть идти из text или string
-/*static*/ /*void XCore::execute_callbacks(QVector<Module *> modules_list) {
+/*static*/ /*void xc_execute_callbacks(QVector<Module *> modules_list) {
     for (int i=0; i<modules_list.size(); i++) {
         modules_list[i]->execute(ModuleExecuteStageCallback);
     }
 }*/
 
 //---------------------------------------------------------------------
-/*static*//* void XCore::execute_callbacks(QString modules_list_string) {
+/*static*//* void xc_execute_callbacks(QString modules_list_string) {
     execute_callbacks(get_modules(modules_list_string));
 }*/
 
 //---------------------------------------------------------------------
 //Измерение времени от начала проекта
-void XCore::reset_elapsed_timer() {
-    elapsed_timer_.start();
-    last_time_for_dt_ = elapsed_time_sec();
-    dt_ = 0;
+void xc_reset_elapsed_timer() {
+    access_.elapsed_timer_.start();
+    access_.last_time_for_dt_ = xc_elapsed_time_sec();
+    access_.dt_ = 0;
 
-    frame_ = 0;
+    access_.frame_ = 0;
 }
 
 //---------------------------------------------------------------------
-double XCore::elapsed_time_sec() {   //время в секундах, прошедшее от запуска проекта
-    return elapsed_timer_.elapsed() * 0.001;
+double xc_elapsed_time_sec() {   //время в секундах, прошедшее от запуска проекта
+    return access_.elapsed_timer_.elapsed() * 0.001;
 }
 
 //---------------------------------------------------------------------
-void XCore::update_dt() {    //вызывается для обновления dt, в начале работы кадра
-    double time = elapsed_time_sec();
-    dt_ = time - last_time_for_dt_;
-    last_time_for_dt_ = time;
+void xc_update_dt() {    //вызывается для обновления dt, в начале работы кадра
+    double time = xc_elapsed_time_sec();
+    access_.dt_ = time - access_.last_time_for_dt_;
+    access_.last_time_for_dt_ = time;
 
-    frame_++;
+    access_.frame_++;
 }
 
 //---------------------------------------------------------------------
-float XCore::dt() {
-    return dt_;
+float xc_dt() {
+    return access_.dt_;
 }
 
 //---------------------------------------------------------------------
-int XCore::frame() {         //current frame
-    return frame_;
+int xc_frame() {         //current frame
+    return access_.frame_;
 }
 
 //---------------------------------------------------------------------

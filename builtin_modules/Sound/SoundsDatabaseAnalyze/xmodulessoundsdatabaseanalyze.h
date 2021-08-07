@@ -44,7 +44,10 @@ protected:
     SoundSamplesDatabase db_;
 
     SoundSamplesAnalyze analyze_;
-    void analyze_reload();
+    void analyze_compute();
+    void analyze_load();
+    void analyze_save();
+
     int w_ = 1;
     int h_ = 1;
 

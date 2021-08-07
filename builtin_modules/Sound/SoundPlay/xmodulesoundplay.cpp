@@ -1,7 +1,7 @@
 #include "xmodulesoundplay.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xcore.h"
+#include "xc_project.h"
 #include <QSound>
 
 
@@ -63,7 +63,7 @@ int XModuleSoundPlay::media_volume(float v) {
 
 //---------------------------------------------------------------------
 void XModuleSoundPlay::play_sound() {
-    QString file_name = xc_abs_path(gets_file_name());
+    QString file_name = xc_absolute_path_from_project(gets_file_name());
 
     QFile file(file_name);
     xc_assert(xc_file_exists(file_name), "XModuleSoundPlay - file not exists: '" + file_name +"'");

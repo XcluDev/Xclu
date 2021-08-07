@@ -2,38 +2,11 @@
 #include "incl_cpp.h"
 #include "module.h"
 #include "xobject.h"
-#include "xcore.h"
+#include "xc_project.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(Module *module) {
     set_module(module);
-}
-
-//---------------------------------------------------------------------
-double XClass::xc_elapsed_time_sec() {
-    return XCORE.elapsed_time_sec();
-}
-
-//---------------------------------------------------------------------
-float XClass::xc_dt() {
-    return XCORE.dt();
-}
-
-//---------------------------------------------------------------------
-int XClass::xc_frame() {  //frame number
-    return XCORE.frame();
-}
-
-//---------------------------------------------------------------------
-QString XClass::xc_project_folder() {   //full path to project folder
-    return XCORE.project_folder();
-}
-
-//---------------------------------------------------------------------
-//Get absolute path to folder, given relative to project
-//For example, use it for loading files specified related to the project
-QString XClass::xc_abs_path(QString relative_path, bool create_folder) {
-    return XCORE.absolute_path_from_project(relative_path, create_folder);
 }
 
 //---------------------------------------------------------------------
