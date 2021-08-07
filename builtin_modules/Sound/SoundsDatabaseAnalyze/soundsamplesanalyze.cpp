@@ -153,12 +153,12 @@ void SoundSamplesAnalyze::method_tsne(SoundSamplesDatabase &db) {
     params.iterations = 1000;   //PARAM
 
     xc_console_append("t-Sne starting...");
-    xc_console_refresh();
+    xc_console_repaint();
     tsne.run_2d(envs, params);
 
     for (int i=0; i<params.iterations; i++) {
         xc_console_append(QString("  iteration %1 / %2").arg(i).arg(params.iterations));
-        xc_console_refresh();
+        xc_console_repaint();
         tsne.iterate();
     }
     pos_ = tsne.result_2d();

@@ -28,7 +28,7 @@ void xc_message_box(QString message);
 void xc_console_warning(QString message, bool dirty = true); //TODO output in other color to mark it's warning
 void xc_console_append(QString message, bool dirty = true);
 void xc_console_clear();
-void xc_console_refresh();  //force repaint, use for showing progress in long operations
+void xc_console_repaint();  //force repaint, use for showing progress in long operations
 
 //Signal that project was modified, calls directly to MainWindow
 void xc_document_modified();
