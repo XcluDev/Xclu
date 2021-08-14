@@ -103,7 +103,7 @@
                     },
                     {
                         "aname": "db_limit",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "db_limit_count",
@@ -127,7 +127,7 @@
                     },
                     {
                         "aname": "an_file",
-                        "avalue": "100.txt"
+                        "avalue": "t-sne.txt"
                     },
                     {
                         "aname": "an_autoload",

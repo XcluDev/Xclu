@@ -159,8 +159,6 @@
         <file>builtin_modules/Core/Array/auto.h</file>
         <file>builtin_modules/Core/Array/description.xgui</file>
         <file>builtin_modules/Core/Image/description.xgui</file>
-        <file>builtin_modules/Core/Image/xmoduleimage.cpp</file>
-        <file>builtin_modules/Core/Image/xmoduleimage.h</file>
         <file>builtin_modules/Core/Object/auto.h</file>
         <file>builtin_modules/Core/Object/description.xgui</file>
         <file>builtin_modules/Core/Random/auto.h</file>
@@ -434,5 +432,6 @@
         <file>builtin_modules/ML/MLExecute/description.xgui</file>
         <file>builtin_modules/Sound/SoundsDatabaseAnalyze/description.xgui</file>
         <file>builtin_modules/Contrib/MadRobot/description.xgui</file>
+        <file>builtin_modules/Sound/SoundsSeaOfWords/description.xgui</file>
     </qresource>
 </RCC>

@@ -23,6 +23,7 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.cpp \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xmodulessoundseaofwords.cpp \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
     $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.cpp \
     $$PWD/builtin_modules/System/Timer/xmoduletimer.cpp \
@@ -73,6 +74,8 @@ HEADERS += \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.h \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/auto.h \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xmodulessoundseaofwords.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
     $$PWD/builtin_modules/System/FileCreate/auto.h \

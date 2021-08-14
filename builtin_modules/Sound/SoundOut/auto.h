@@ -9,11 +9,13 @@
 //Output sound volume.
 bool was_changed_volume() { return was_changed_("volume"); }
 float getf_volume() { return getf_("volume"); }
+void repaint_volume() { repaint_("volume"); }
 
 //Float Device Volume
 //Output device volume.
 bool was_changed_device_volume() { return was_changed_("device_volume"); }
 float getf_device_volume() { return getf_("device_volume"); }
+void repaint_device_volume() { repaint_("device_volume"); }
 
 
 //Const Enum Sound Device
@@ -32,18 +34,21 @@ QString getraw_select_device() { return getraw_("select_device");}
 //Sound device index in Operating System.
 bool was_changed_device_index() { return was_changed_("device_index"); }
 int geti_device_index() { return geti_("device_index"); }
+void repaint_device_index() { repaint_("device_index"); }
 
 //Const String Device Name
 //Name of the sound output device to connect (or part of the name), press 'Show Devices' to see the list
 bool was_changed_device_name() { return was_changed_("device_name"); }
 QString gets_device_name() { return gets_("device_name"); }
 QStringList get_strings_device_name() { return get_strings_("device_name"); }
+void repaint_device_name() { repaint_("device_name"); }
 
 
 //Checkbox Settings
 //Setting sound output parameters
 bool was_changed_settings() { return was_changed_("settings"); }
 int geti_settings() { return geti_("settings"); }
+void repaint_settings() { repaint_("settings"); }
 
 //Const Enum Sample Rate
 //Frame rate
@@ -67,11 +72,13 @@ QString getraw_sample_rate() { return getraw_("sample_rate");}
 //Custom sample rate
 bool was_changed_custom_sample_rate() { return was_changed_("custom_sample_rate"); }
 int geti_custom_sample_rate() { return geti_("custom_sample_rate"); }
+void repaint_custom_sample_rate() { repaint_("custom_sample_rate"); }
 
 //Const Int Channels
 //Number of output channels
 bool was_changed_channels() { return was_changed_("channels"); }
 int geti_channels() { return geti_("channels"); }
+void repaint_channels() { repaint_("channels"); }
 
 //Const Enum Buffer Size
 //Desired buffer size for sound generation. Larger values increase stability but decrease response time.
@@ -99,6 +106,7 @@ QString getraw_buffer_size_desired() { return getraw_("buffer_size_desired");}
 //Runtime variables
 bool was_changed_runtime() { return was_changed_("runtime"); }
 int geti_runtime() { return geti_("runtime"); }
+void repaint_runtime() { repaint_("runtime"); }
 
 //Out String Connected Device Name
 //Name of the connected camera
@@ -109,25 +117,30 @@ void sets_connected_device_name(QString value) { sets_("connected_device_name", 
 void clear_string_connected_device_name() { clear_string_("connected_device_name"); }
 void append_string_connected_device_name(QString v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
 void append_string_connected_device_name(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
+void repaint_connected_device_name() { repaint_("connected_device_name"); }
 
 //Out Checkbox Is Started
 //Does capture started
 bool was_changed_is_started() { return was_changed_("is_started"); }
 int geti_is_started() { return geti_("is_started"); }
 void seti_is_started(int value) { seti_("is_started", value); }
+void repaint_is_started() { repaint_("is_started"); }
 
 //Out Object Sound Format
 //Used sound format
 bool was_changed_sound_format() { return was_changed_("sound_format"); }
 XProtectedObject *getobject_sound_format() { return get_object_("sound_format"); }
 void setobject_sound_format(XProtectedObject *value) { set_object_("sound_format", value); }
-
+void setobject_sound_format(XProtectedObject &value) { set_object_("sound_format", value); }
+void repaint_sound_format() { repaint_("sound_format"); }
 //Out Int Buffer Size
 //Buffer size
 bool was_changed_buffer_size() { return was_changed_("buffer_size"); }
 int geti_buffer_size() { return geti_("buffer_size"); }
 void seti_buffer_size(int value) { seti_("buffer_size", value); }
 void increase_int_buffer_size(int increase = 1) { increase_int_("buffer_size", increase); }
+void repaint_buffer_size() { repaint_("buffer_size"); }
+
 
 //----------------------------------------------------
 //Page Sources
@@ -138,11 +151,13 @@ void increase_int_buffer_size(int increase = 1) { increase_int_("buffer_size", i
 bool was_changed_modules_list() { return was_changed_("modules_list"); }
 QString gets_modules_list() { return gets_("modules_list"); }
 QStringList get_strings_modules_list() { return get_strings_("modules_list"); }
+void repaint_modules_list() { repaint_("modules_list"); }
 
 //Button Edit...
 //Press to interactively edit sound sources.
 bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
 int geti_edit_btn() { return geti_("edit_btn"); }
+void repaint_edit_btn() { repaint_("edit_btn"); }
 QString button_edit_btn() { return "edit_btn"; }
 
 
@@ -154,11 +169,13 @@ QString button_edit_btn() { return "edit_btn"; }
 //Volume for the left channel.
 bool was_changed_volume_ch1() { return was_changed_("volume_ch1"); }
 float getf_volume_ch1() { return getf_("volume_ch1"); }
+void repaint_volume_ch1() { repaint_("volume_ch1"); }
 
 //Float Right Volume
 //Volume for the right channel.
 bool was_changed_volume_ch2() { return was_changed_("volume_ch2"); }
 float getf_volume_ch2() { return getf_("volume_ch2"); }
+void repaint_volume_ch2() { repaint_("volume_ch2"); }
 
 //----------------------------------------------------
 //Page Test Sound
@@ -168,26 +185,31 @@ float getf_volume_ch2() { return getf_("volume_ch2"); }
 //Enable generating the test sinewave sound. Note, other sounds will be muted.
 bool was_changed_gen_test() { return was_changed_("gen_test"); }
 int geti_gen_test() { return geti_("gen_test"); }
+void repaint_gen_test() { repaint_("gen_test"); }
 
 //Checkbox Left Channel
 //Should generate sound for left channel.
 bool was_changed_gen_left() { return was_changed_("gen_left"); }
 int geti_gen_left() { return geti_("gen_left"); }
+void repaint_gen_left() { repaint_("gen_left"); }
 
 //Checkbox Right Channel
 //Should generate sound for right channel.
 bool was_changed_gen_right() { return was_changed_("gen_right"); }
 int geti_gen_right() { return geti_("gen_right"); }
+void repaint_gen_right() { repaint_("gen_right"); }
 
 //Float Volume
 //Volume of generated sound.
 bool was_changed_gen_volume() { return was_changed_("gen_volume"); }
 float getf_gen_volume() { return getf_("gen_volume"); }
+void repaint_gen_volume() { repaint_("gen_volume"); }
 
 //Int Freq
 //Frequency of generated sinewave.
 bool was_changed_gen_freq() { return was_changed_("gen_freq"); }
 int geti_gen_freq() { return geti_("gen_freq"); }
+void repaint_gen_freq() { repaint_("gen_freq"); }
 
 //----------------------------------------------------
 //Page Devices
@@ -197,12 +219,14 @@ int geti_gen_freq() { return geti_("gen_freq"); }
 //Print list of all connected devices.
 bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
+void repaint_print_devices() { repaint_("print_devices"); }
 QString button_print_devices() { return "print_devices"; }
 
 //Checkbox Print Formats
 //Print list of supported formats for connected device at start.
 bool was_changed_print_formats() { return was_changed_("print_formats"); }
 int geti_print_formats() { return geti_("print_formats"); }
+void repaint_print_formats() { repaint_("print_formats"); }
 
 //Out Text Local Console
 //Console output
@@ -213,5 +237,6 @@ void sets_local_console(QString value) { sets_("local_console", value); }
 void clear_string_local_console() { clear_string_("local_console"); }
 void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
 void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
+void repaint_local_console() { repaint_("local_console"); }
 
 //----------------------------------------------------

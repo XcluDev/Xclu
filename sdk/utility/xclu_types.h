@@ -211,8 +211,9 @@ protected:
 //functions_names::sound_buffer_add()
 class functions_names {
 public:
-    static QString sound_buffer_add() { return "sound_buffer_add"; }
     static QString create_widget() { return "create_widget";}
+    static QString sound_buffer_add() { return "sound_buffer_add"; }
+    static QString sound_buffer_received() { return "sound_buffer_received"; }
 };
 
 

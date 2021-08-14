@@ -159,6 +159,10 @@ void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *ou
             sound_buffer_add_internal(input, output);
             return;
         }
+        if (function == functions_names::sound_buffer_received()) {
+            sound_buffer_received_internal(input, output);
+            return;
+        }
 
         //process universal function
         //if (is_enabled()) {
@@ -221,6 +225,17 @@ void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
 }
 
 //---------------------------------------------------------------------
+//"sound_buffer_received" call
+void XModule::sound_buffer_received_internal(XObject *input, XObject *output) {
+    XObject &sound = *input;
+    int sample_rate = sound.geti("sample_rate");
+    int samples = sound.geti("samples");
+    int channels = sound.geti("channels");
+    float *data = sound.var_array("data")->data_float();
+    on_sound_buffer_received(sample_rate, channels, samples, data);
+}
+
+//---------------------------------------------------------------------
 void XModule::on_call(QString function, XObject * /*input*/, XObject * /*output*/) {
     xc_exception("Module '" + name()
                    + "' can't process function '" + function + "', because on_call() is not implemented");
@@ -247,6 +262,14 @@ void XModule::on_reset_widget() {
 void XModule::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xc_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_add', because on_sound_buffer_add() is not implemented");
+}
+
+//---------------------------------------------------------------------
+//`sound_buffer_received` call implementation, processes input `data` buffer
+//there are channels * samples values at `data`
+void XModule::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float */*data*/) {
+    xc_exception("Module '" + name()
+                   + "' can't process function 'sound_buffer_received', because on_sound_buffer_received() is not implemented");
 }
 
 //---------------------------------------------------------------------

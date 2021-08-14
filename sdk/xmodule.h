@@ -157,6 +157,11 @@ protected:
     //there are required to fill channels * samples values at data
     virtual void on_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
+
+    //`sound_buffer_received` call implementation, processes input `data` buffer
+    //there are channels * samples values at `data`
+    virtual void on_sound_buffer_received(int sample_rate, int channels, int samples, float *data);
+
 private:
     //--------------------------------------------------------------
     //Private members
@@ -180,6 +185,8 @@ private:
     void create_widget_internal(XObject *input, XObject *output);
     //"sound_buffer_add" call
     void sound_buffer_add_internal(XObject *input, XObject *output);
+    //"sound_buffer_received" call
+    void sound_buffer_received_internal(XObject *input, XObject *output);
 
 
 };
