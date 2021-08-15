@@ -109,7 +109,7 @@ int geti_runtime() { return geti_("runtime"); }
 void repaint_runtime() { repaint_("runtime"); }
 
 //Out String Connected Device Name
-//Name of the connected camera
+//Name of the connected sound device.
 bool was_changed_connected_device_name() { return was_changed_("connected_device_name"); }
 QString gets_connected_device_name() { return gets_("connected_device_name"); }
 QStringList get_strings_connected_device_name() { return get_strings_("connected_device_name"); }
@@ -120,21 +120,21 @@ void append_string_connected_device_name(QStringList v, int extra_new_lines_coun
 void repaint_connected_device_name() { repaint_("connected_device_name"); }
 
 //Out Checkbox Is Started
-//Does capture started
+//Does sound output started.
 bool was_changed_is_started() { return was_changed_("is_started"); }
 int geti_is_started() { return geti_("is_started"); }
 void seti_is_started(int value) { seti_("is_started", value); }
 void repaint_is_started() { repaint_("is_started"); }
 
 //Out Object Sound Format
-//Used sound format
+//Used sound format.
 bool was_changed_sound_format() { return was_changed_("sound_format"); }
 XProtectedObject *getobject_sound_format() { return get_object_("sound_format"); }
 void setobject_sound_format(XProtectedObject *value) { set_object_("sound_format", value); }
 void setobject_sound_format(XProtectedObject &value) { set_object_("sound_format", value); }
 void repaint_sound_format() { repaint_("sound_format"); }
 //Out Int Buffer Size
-//Buffer size
+//Buffer size.
 bool was_changed_buffer_size() { return was_changed_("buffer_size"); }
 int geti_buffer_size() { return geti_("buffer_size"); }
 void seti_buffer_size(int value) { seti_("buffer_size", value); }
@@ -152,13 +152,6 @@ bool was_changed_modules_list() { return was_changed_("modules_list"); }
 QString gets_modules_list() { return gets_("modules_list"); }
 QStringList get_strings_modules_list() { return get_strings_("modules_list"); }
 void repaint_modules_list() { repaint_("modules_list"); }
-
-//Button Edit...
-//Press to interactively edit sound sources.
-bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
-int geti_edit_btn() { return geti_("edit_btn"); }
-void repaint_edit_btn() { repaint_("edit_btn"); }
-QString button_edit_btn() { return "edit_btn"; }
 
 
 //----------------------------------------------------

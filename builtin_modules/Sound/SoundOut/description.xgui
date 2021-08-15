@@ -2,11 +2,11 @@
 #-----------------------------------------------------------
 #module_class=SoundOut
 #module_category=Sound
-module_description=Send sound stream to output sound device (speakers), and optionally save to disk. It works using callbacks.
+module_description=Send sound stream to output sound device (speakers). It works using callbacks.
 module_version=1.01
 module_impl=C++
 
-module_send_calls=sound_buffer_add,sound_buffer_received
+module_send_calls=sound_buffer_add
 
 #-----------------------------------------------------------
 page Main
@@ -80,16 +80,16 @@ in group Runtime runtime=0
 if runtime 1
 
 out string Connected_Device_Name connected_device_name=""
-	//Name of the connected camera
+	//Name of the connected sound device.
 
 out checkbox Is_Started is_started=0
-    //Does capture started
+    //Does sound output started.
 	    
 out object_soundformat Sound_Format sound_format
-    //Used sound format
+    //Used sound format.
 
 out int Buffer_Size buffer_size=0 0:* 1,10
-    //Buffer size
+    //Buffer size.
     //samples
     
 endif
@@ -106,8 +106,8 @@ in text Sound_Sources modules_list 5 6
     //#id of modules to play and optional volumes
     //#for example: synthfromimage1 0.5
     
-in button Edit... edit_btn
-    //Press to interactively edit sound sources.
+#in button Edit... edit_btn
+#    //Press to interactively edit sound sources.
 
 separator
     
@@ -150,7 +150,7 @@ in button_always Print_Devices print_devices
 in checkbox Print_Formats print_formats=0
 	//Print list of supported formats for connected device at start.
 
-out text Local_Console local_console 10 15
+out text Local_Console local_console 15 20
     //Console output
 
 #-----------------------------------------------------------
