@@ -17,6 +17,7 @@ SOURCES += \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.cpp \
     $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.cpp \
     $$PWD/builtin_modules/Project/Project/xmoduleproject.cpp \
+    $$PWD/builtin_modules/Sound/SoundIn/xmodulesoundin.cpp \
     $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp \
     $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
     $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.cpp \
@@ -64,6 +65,8 @@ HEADERS += \
     $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xmoduleproject.h \
+    $$PWD/builtin_modules/Sound/SoundIn/auto.h \
+    $$PWD/builtin_modules/Sound/SoundIn/xmodulesoundin.h \
     $$PWD/builtin_modules/Sound/SoundOsc/auto.h \
     $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.h \
     $$PWD/builtin_modules/Sound/SoundOut/auto.h \

@@ -1,15 +1,15 @@
-#include "xmodulesoundout.h"
+#include "xmodulesoundin.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include "xc_project.h"
 #include "module.h"
 
 //registering module implementation
-REGISTER_XMODULE(SoundOut)
+REGISTER_XMODULE(SoundIn)
 
 //---------------------------------------------------------------------
-XModuleSoundOutGenerator::XModuleSoundOutGenerator(const QAudioFormat &format,
-                                                     XModuleSoundOutData *data)
+XModuleSoundInGenerator::XModuleSoundInGenerator(const QAudioFormat &format,
+                                                     XProtectedData_<XModuleSoundInData> *data)
 {
     xc_assert(format.isValid(), "Not valid sound format");
     format_ = format;
@@ -17,72 +17,30 @@ XModuleSoundOutGenerator::XModuleSoundOutGenerator(const QAudioFormat &format,
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOutGenerator::start()
+void XModuleSoundInGenerator::start()
 {
-    open(QIODevice::ReadOnly);
+    open(QIODevice::WriteOnly);
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOutGenerator::stop()
+void XModuleSoundInGenerator::stop()
 {
     close();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //создать звук в объекте sound_
+void XModuleSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
     try {
-        DataAccess access(data_);
-        {
-            auto write = sound_.write();
-            XObject &sound = write.data();
-            sound.clear();
-            //создаем массив
-            sound.seti("samples", samples);
-            sound.seti("channels", channels);
-            sound.seti("sample_rate", format_.sampleRate());
-            XArray *arr = sound.var_array("data", true);
-            arr->allocate(samples*channels, XTypeId_float);
-        }
+        auto sound_write = sound_.write();
 
-        //заполнение массива
-
-        //тестовый звук или остальные модули
-        int play_test_sound = data_->play_test_sound_;
-        if (play_test_sound) {
-            auto write = sound_.write();
-            XObject &sound = write.data();
-            float *data = sound.var_array("data")->data_float();
-            float freq_Hz = data_->play_freq_;
-            float volume = data_->play_volume_;
-            QVector<float> channel_vol(channels, volume);
-            if (channels >= 1) channel_vol[0] *= data_->play_left_; //for muting left
-            if (channels >= 2) channel_vol[1] *= data_->play_right_; //for muting right
-
-            float sample_rate = format_.sampleRate();
-            int k = 0;
-
-            qreal phase_add = 2 * M_PI * freq_Hz / sample_rate;
-            test_phase_ = fmod(test_phase_, 2*M_PI);
-            for (int i=0; i<samples; i++) {
-                float v = qSin(test_phase_);
-                test_phase_+=phase_add;
-                for (int u=0; u<channels; u++) {
-                    data[k++] = v * channel_vol[u];
-                }
-            }
-        }
-        else {
-            //вызов генерации звуков у остальных модулей
-            auto sound_write = sound_.write();
-
-            for (int i=0; i<data_->modules_.size(); i++) {
-                //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-                data_->modules_[i]->access_call(functions_names::sound_buffer_add(), sound_write.pointer());
-            }
+        auto data_read = data_->read();
+        for (int i=0; i<data_read.data().modules_.size(); i++) {
+            //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
+            data_read.data().modules_[i]->access_call(functions_names::sound_buffer_received(), sound_write.pointer());
         }
 
         //applying volumes
-        {
+        /*{
             auto sound_write = sound_.write();
             float *data = sound_write.data().var_array("data")->data_float();
             for (int c = 0; c<channels; c++) {
@@ -93,25 +51,30 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
                     k+=channels;
                 }
             }
-        }
+        }*/
     }
     catch (XException &e) {
-        qDebug() << "XException exception at request_sound: " << e.whatQt();
-        DataAccess access(data_);
-        data_->err = e.err();
+        qDebug() << "XException exception at send_sound_in: " << e.whatQt();
+        data_->write().data().err = e.err();
     }
     catch(std::exception& e) {
-        qDebug() << QString("Exception at request_sound: ") + e.what();
+        qDebug() << QString("Exception at send_sound_in: ") + e.what();
         throw e;
     }
     catch(...) {
-        qDebug() << QString("Unhandled exception at request_sound");
+        qDebug() << QString("Unhandled exception at send_sound_in");
     }
 }
 
 
 //---------------------------------------------------------------------
-qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
+qint64 XModuleSoundInGenerator::readData(char * /*data*/, qint64 /*len*/)
+{
+   return 0;
+}
+
+//---------------------------------------------------------------------
+qint64 XModuleSoundInGenerator::writeData(const char *data, qint64 len)
 {
     qint64 total = 0;
     try {
@@ -119,70 +82,72 @@ qint64 XModuleSoundOutGenerator::readData(char *data, qint64 len)
         const int audioSampleBit = format_.sampleSize();
         const int channelBytes = audioSampleBit / 8;
         const int sampleBytes = channels * channelBytes;
-        //qint64 length = (format_.sampleRate() * format_.channelCount() * (format_.sampleSize() / 8))
-        //                    * durationUs / 1000000;
 
-        //m_buffer.resize(length);
-
-        //создаем звук
         int samples = len / sampleBytes;
-        request_sound(samples, channels);
 
-        //считываем звук
-        auto sound_read = sound_.read();
-        XArray const *arr = sound_read.data().get_array("data");
-        float const *data_float = arr->data_float();
+        //fill sound buffer
+        {
+            auto write = sound_.write();
+            XObject &sound = write.data();
+            sound.clear();
+            //create array
+            sound.seti("samples", samples);
+            sound.seti("channels", channels);
+            sound.seti("sample_rate", format_.sampleRate());
+            XArray *arr = sound.var_array("data", true);
+            arr->allocate(samples*channels, XTypeId_float);
+            float *data_float = arr->data_float();
 
-        //записываем его в буфер звуковой карты
-        unsigned char *ptr = reinterpret_cast<unsigned char *>(data);
+            const unsigned char *ptr = reinterpret_cast<const unsigned char *>(data);
 
-        if (audioSampleBit == 16) {
-            for (int i=0; i<samples*channels; i++) {
+            if (audioSampleBit == 16) {
                 if (format_.sampleType() == QAudioFormat::UnSignedInt) {
-                    quint16 value = quint16((1.0 + data_float[i]) / 2 * 65535);
                     if (format_.byteOrder() == QAudioFormat::LittleEndian) {
-                        qToLittleEndian<quint16>(value, ptr);
+                        for (int i=0; i<samples*channels; i++) {
+                            data_float[i] = float(qFromLittleEndian<quint16>(ptr))/32768.0f-1.0f;   //TODO differs from that at SoundOut
+                            ptr += channelBytes; total += channelBytes;
+                        }
                     }
                     else {
-                        qToBigEndian<quint16>(value, ptr);
+                        for (int i=0; i<samples*channels; i++) {
+                            data_float[i] = float(qFromBigEndian<quint16>(ptr))/32768.0f-1.0f; //TODO differs from that at SoundOut
+                            ptr += channelBytes; total += channelBytes;
+                        }
                     }
                 }
                 if (format_.sampleType() == QAudioFormat::SignedInt) {
-                    qint16 value = static_cast<qint16>(data_float[i] * 32767);
                     if (format_.byteOrder() == QAudioFormat::LittleEndian) {
-                        qToLittleEndian<qint16>(value, ptr);
+                        for (int i=0; i<samples*channels; i++) {
+                            data_float[i] = float(qFromLittleEndian<qint16>(ptr)) / 32768;
+                            ptr += channelBytes; total += channelBytes;
+                        }
                     }
                     else {
-                        qToBigEndian<qint16>(value, ptr);
+                        for (int i=0; i<samples*channels; i++) {
+                            data_float[i] = float(qFromBigEndian<qint16>(ptr)) / 32768;
+                            ptr += channelBytes; total += channelBytes;
+                        }
                     }
                 }
-                ptr += channelBytes;
-                total += channelBytes;
+            }
+            else {
+                xc_exception(QString("SoundIn unsupported sound output with bits %1").arg(audioSampleBit));
             }
         }
-        else {
-            xc_exception(QString("SoundUnsupported sound output with bits %1").arg(audioSampleBit));
-        }
+
+        send_sound_in();
+
+
     }
     catch (XException &e) {
-        DataAccess access(data_);
-        data_->err = e.err();
+        data_->write().data().err = e.err();
     }
 
     return total;
 }
 
 //---------------------------------------------------------------------
-qint64 XModuleSoundOutGenerator::writeData(const char *data, qint64 len)
-{
-    Q_UNUSED(data);
-    Q_UNUSED(len);
-
-    return 0;
-}
-
-//---------------------------------------------------------------------
-qint64 XModuleSoundOutGenerator::bytesAvailable() const
+qint64 XModuleSoundInGenerator::bytesAvailable() const
 {
     return /*m_buffer.size() + */QIODevice::bytesAvailable();
 }
@@ -190,27 +155,27 @@ qint64 XModuleSoundOutGenerator::bytesAvailable() const
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XModuleSoundOut::XModuleSoundOut(QString class_name)
+XModuleSoundIn::XModuleSoundIn(QString class_name)
     :XModule(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundOut::~XModuleSoundOut()
+XModuleSoundIn::~XModuleSoundIn()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::on_loaded() {
+void XModuleSoundIn::on_loaded() {
     clear_string_connected_device_name();
     clear_string_local_console();
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::on_button_pressed(QString button_id) {
+void XModuleSoundIn::on_button_pressed(QString button_id) {
     if (button_id == button_print_devices()) {
         //если требуется, напечатать все устройства
         print_devices();
@@ -218,19 +183,18 @@ void XModuleSoundOut::on_button_pressed(QString button_id) {
 }
 
 //---------------------------------------------------------------------
-//Звук в Qt - https://doc.qt.io/qt-5/audiooverview.html
-//Вывод низкоуровневого звука - https://doc.qt.io/qt-5/qaudiooutput.html
-//Пример Qt - Audio Output Example
+//Sound in Qt - https://doc.qt.io/qt-5/audiooverview.html
+//See Qt's Audio Input Example
 
-void XModuleSoundOut::start() {
-    //Очистка переменных
+void XModuleSoundIn::start() {
     audio_tried_to_start_ = false;
 
-    {
-        DataAccess access(data_);
-        data_.clear();
-        data_.modules_ = xc_get_modules(gets_modules_list());
-    }
+    data_.write().data().clear();
+
+    //set modules list
+    data_.write().data().modules_ = xc_get_modules(gets_modules_list());
+
+
     buffer_size_= 0;
     seti_buffer_size(0);
     getobject_sound_format()->clear();
@@ -244,31 +208,16 @@ void XModuleSoundOut::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::update() {
+void XModuleSoundIn::update() {
     //запустить устройство, если еще это не делали
     start_audio();
 
     //изменение громкости
     check_volume_change();
 
-    //поставить информацию о том, воспроизводить ли тестовый звук
-    //также проверить - если есть ошибка, то остановиться
-    {
-        DataAccess access(data_);
-        data_.play_test_sound_ = geti_gen_test();
-        data_.play_left_ = geti_gen_left();
-        data_.play_right_ = geti_gen_right();
-        data_.play_volume_ = getf_gen_volume();
-        data_.play_freq_ = geti_gen_freq();
+    //process error if required
+    data_.write().data().err.throw_error();
 
-
-        data_.volume_left_ = getf_volume() * getf_volume_ch1();
-        data_.volume_right_ = getf_volume() * getf_volume_ch2();
-        data_.modules_ = xc_get_modules(gets_modules_list());
-
-        //если ошибка - обработать ошибку
-        data_.err.throw_error();
-    }
     //показ размера буфера
     seti_buffer_size(buffer_size_);
 
@@ -282,24 +231,24 @@ void XModuleSoundOut::update() {
 
 #if QT_VERSION >= 0x050800
 
-void XModuleSoundOut::check_volume_change() {
+void XModuleSoundIn::check_volume_change() {
     if (audio_started_) {
         if (was_changed_device_volume()) {
             float volume = getf_device_volume();
             qreal linearVolume = QAudio::convertVolume(volume, QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
-            m_audioOutput->setVolume(linearVolume);
+            m_audioInput->setVolume(linearVolume);
         }
     }
 }
 
 #else
 
-void XModuleSoundOut::check_volume_change() {
+void XModuleSoundIn::check_volume_change() {
     if (audio_started_) {
         if (was_changed_device_volume()) {
             float volume = getf_device_volume();
             qreal linearVolume = volume; // todo: scale somehow using just math
-            m_audioOutput->setVolume(linearVolume);
+            m_audioInput->setVolume(linearVolume);
         }
     }
 }
@@ -307,20 +256,20 @@ void XModuleSoundOut::check_volume_change() {
 #endif
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::stop() {
+void XModuleSoundIn::stop() {
     stop_audio();
 
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
+void XModuleSoundIn::on_changed_audio_state(QAudio::State state) {
     try {
         switch (state) {
         case QAudio::ActiveState:
             set_started(true);
             //запрос и выдача размера буфера - до запуска он неактуален
-            set_buffer_size(m_audioOutput->bufferSize());
+            set_buffer_size(m_audioInput->bufferSize());
             break;
         case QAudio::SuspendedState:
         case QAudio::StoppedState:
@@ -330,7 +279,7 @@ void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
             //default used for handling Qt 5.13:
             //case QAudio::InterruptedState:
         default:
-            QAudio::Error error = m_audioOutput->error();
+            QAudio::Error error = m_audioInput->error();
             switch (error) {
             case QAudio::NoError:                
                 break;
@@ -354,22 +303,21 @@ void XModuleSoundOut::on_changed_audio_state(QAudio::State state) {
         }
     }
     catch (XException &e) {
-        DataAccess access(data_);
-        data_.err = e.err();
+        data_.write().data().err = e.err();
     }
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::stop_audio() {
-    if (m_audioOutput.data()) {
-        //m_audioOutput.stop - возможно, не полная остановка
-        m_audioOutput.reset();
+void XModuleSoundIn::stop_audio() {
+    if (m_audioInput.data()) {
+        //m_audioInput.stop - возможно, не полная остановка
+        m_audioInput.reset();
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::start_audio() {
+void XModuleSoundIn::start_audio() {
     //запустить устройство, если еще это не делали
     if (!audio_tried_to_start_) {
         //пытаемся стартовать устройство
@@ -412,7 +360,7 @@ void XModuleSoundOut::start_audio() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
+void XModuleSoundIn::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //сбор значений параметров
     QAudioFormat format;
 
@@ -465,17 +413,17 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //-------------------------------------------
 
     //создание объектов для генерации и вывода звука
-    m_generator.reset(new XModuleSoundOutGenerator(format, &data_));
-    m_audioOutput.reset(new QAudioOutput(deviceInfo, format));
+    m_generator.reset(new XModuleSoundInGenerator(format, &data_));
+    m_audioInput.reset(new QAudioInput(deviceInfo, format));
 
-    connect(m_audioOutput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
+    connect(m_audioInput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
 
     //вычисление и установка размера буфера
     QString buffer_size_str = getraw_buffer_size_desired();
     if (buffer_size_str != "Default") {
         int buffer_size = buffer_size_str.toInt();
         xc_assert(buffer_size > 0, QString("Bad buffer size %1").arg(buffer_size));
-        m_audioOutput->setBufferSize(buffer_size);
+        m_audioInput->setBufferSize(buffer_size);
     }
 
 
@@ -488,19 +436,19 @@ void XModuleSoundOut::start_audio(const QAudioDeviceInfo &deviceInfo) {
     print_formats(deviceInfo);
 
     m_generator->start();
-    m_audioOutput->start(m_generator.data());
+    m_audioInput->start(m_generator.data());
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundOut::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XModuleSoundIn::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     audio_started_ = started;
     seti_is_started(started);
 }
 
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
-void XModuleSoundOut::set_format(const QAudioFormat &format) {
+void XModuleSoundIn::set_format(const QAudioFormat &format) {
     auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
     auto write = getobject_sound_format()->write();
     XObjectSoundFormat::set_to_object(write.data(), format_);
@@ -509,7 +457,7 @@ void XModuleSoundOut::set_format(const QAudioFormat &format) {
 
 //---------------------------------------------------------------------
 //печать размера буфера при подключении устройства (запрашивается у устройства) в used_format
-void XModuleSoundOut::set_buffer_size(int buffer_size) {
+void XModuleSoundIn::set_buffer_size(int buffer_size) {
     buffer_size_ = buffer_size;
     //DataAccess access(data_);
     //data_.buffer_size = buffer_size;
@@ -519,13 +467,12 @@ void XModuleSoundOut::set_buffer_size(int buffer_size) {
 }
 
 //---------------------------------------------------------------------
-//печать в консоль доступных устройств аудиовывода
-void XModuleSoundOut::print_devices() {
+//Print to console available input audio devices
+void XModuleSoundIn::print_devices() {
     QStringList list;
-    list.append("Connected Output Audio devices:");
-    //xc_console_append("Connected Output Audiodevices:");
+    list.append("Connected Input Audio devices:");
 
-    const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioOutput);
+    const QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::AudioInput);
     for (int i=0; i<devices.size(); i++) {
         auto &info = devices.at(i);
         QString device = QString::number(i) + ": " + info.deviceName();
@@ -539,7 +486,7 @@ void XModuleSoundOut::print_devices() {
 //---------------------------------------------------------------------
 //печать в консоль поддерживаемых аудиоформатов запускаемого устройства
 //внимание, эта функция запускает camera_->load()
-void XModuleSoundOut::print_formats(const QAudioDeviceInfo &deviceInfo) {
+void XModuleSoundIn::print_formats(const QAudioDeviceInfo &deviceInfo) {
     if (audio_tried_to_start_ && geti_print_formats()) {
         QString device_name = deviceInfo.deviceName();
 

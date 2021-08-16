@@ -1,25 +1,25 @@
 //----------------------------------------------------
-//Interface for XClassSoundOut
+//Interface for XClassSoundIn
 //Created automatically.
 //----------------------------------------------------
 //Page Main
 //General settings
 
 //Float Volume
-//Output sound volume.
+//Input sound volume.
 bool was_changed_volume() { return was_changed_("volume"); }
 float getf_volume() { return getf_("volume"); }
 void repaint_volume() { repaint_("volume"); }
 
 //Float Device Volume
-//Output device volume.
+//Input device volume.
 bool was_changed_device_volume() { return was_changed_("device_volume"); }
 float getf_device_volume() { return getf_("device_volume"); }
 void repaint_device_volume() { repaint_("device_volume"); }
 
 
 //Const Enum Sound Device
-//Choose the way for selecting sound output device
+//Choose the way for selecting sound input  device.
 enum enum_select_device {
     select_device_Default = 0,
     select_device_By_Index = 1,
@@ -37,7 +37,7 @@ int geti_device_index() { return geti_("device_index"); }
 void repaint_device_index() { repaint_("device_index"); }
 
 //Const String Device Name
-//Name of the sound output device to connect (or part of the name), press 'Show Devices' to see the list
+//Name of the sound input device to connect (or part of the name), press 'Show Devices' to see the list.
 bool was_changed_device_name() { return was_changed_("device_name"); }
 QString gets_device_name() { return gets_("device_name"); }
 QStringList get_strings_device_name() { return get_strings_("device_name"); }
@@ -75,13 +75,13 @@ int geti_custom_sample_rate() { return geti_("custom_sample_rate"); }
 void repaint_custom_sample_rate() { repaint_("custom_sample_rate"); }
 
 //Const Int Channels
-//Number of output channels
+//Number of input channels.
 bool was_changed_channels() { return was_changed_("channels"); }
 int geti_channels() { return geti_("channels"); }
 void repaint_channels() { repaint_("channels"); }
 
 //Const Enum Buffer Size
-//Desired buffer size for sound generation. Larger values increase stability but decrease response time.
+//Desired buffer size for sound receiving. Larger values increase stability but decrease response time.
 enum enum_buffer_size_desired {
     buffer_size_desired_Default = 0,
     buffer_size_desired_32 = 1,
@@ -143,10 +143,10 @@ void repaint_buffer_size() { repaint_("buffer_size"); }
 
 
 //----------------------------------------------------
-//Page Sources
+//Page Receivers
 //
 
-//Const Text Source Modules
+//Const Text Receivers Modules
 //List of modules to which will be sent callback for sound buffer
 bool was_changed_modules_list() { return was_changed_("modules_list"); }
 QString gets_modules_list() { return gets_("modules_list"); }
@@ -155,24 +155,8 @@ void repaint_modules_list() { repaint_("modules_list"); }
 
 
 //----------------------------------------------------
-//Page Channels
-//Control channels sound.
-
-//Float Left Volume
-//Volume for the left channel.
-bool was_changed_volume_ch1() { return was_changed_("volume_ch1"); }
-float getf_volume_ch1() { return getf_("volume_ch1"); }
-void repaint_volume_ch1() { repaint_("volume_ch1"); }
-
-//Float Right Volume
-//Volume for the right channel.
-bool was_changed_volume_ch2() { return was_changed_("volume_ch2"); }
-float getf_volume_ch2() { return getf_("volume_ch2"); }
-void repaint_volume_ch2() { repaint_("volume_ch2"); }
-
-//----------------------------------------------------
 //Page Test Sound
-//Output test sound
+//Input test sound.
 
 //Checkbox Generate Test Sound
 //Enable generating the test sinewave sound. Note, other sounds will be muted.
@@ -206,7 +190,7 @@ void repaint_gen_freq() { repaint_("gen_freq"); }
 
 //----------------------------------------------------
 //Page Devices
-//Print list of output audio devices and supported formats of the selected device
+//Print list of input audio devices and supported formats of the selected device.
 
 //Button Print Devices
 //Print list of all connected devices.
@@ -222,7 +206,7 @@ int geti_print_formats() { return geti_("print_formats"); }
 void repaint_print_formats() { repaint_("print_formats"); }
 
 //Out Text Local Console
-//Console output
+//Console output.
 bool was_changed_local_console() { return was_changed_("local_console"); }
 QString gets_local_console() { return gets_("local_console"); }
 QStringList get_strings_local_console() { return get_strings_("local_console"); }

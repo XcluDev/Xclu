@@ -433,5 +433,6 @@
         <file>builtin_modules/Sound/SoundsDatabaseAnalyze/description.xgui</file>
         <file>builtin_modules/Contrib/MadRobot/description.xgui</file>
         <file>builtin_modules/Sound/SoundsSeaOfWords/description.xgui</file>
+        <file>builtin_modules/Sound/SoundIn/description.xgui</file>
     </qresource>
 </RCC>

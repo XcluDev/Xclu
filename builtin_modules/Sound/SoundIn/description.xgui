@@ -1,30 +1,28 @@
-#Module SoundOut
+#Module SoundIn
 #-----------------------------------------------------------
-#module_class=SoundOut
-#module_category=Sound
-module_description=Send sound stream to output sound device (speakers). It works using callbacks.
+module_description=Receive sound stream from input sound device (mic). It works using callbacks.
 module_version=1.01
 module_impl=C++
 
-module_send_calls=sound_buffer_add
+module_send_calls=sound_buffer_received
 
 #-----------------------------------------------------------
 page Main
     //General settings
 
 in float_slider Volume volume=1.0 0:10 0.01,0.1
-    //Output sound volume.
+    //Input sound volume.
     //0..10
 
 
 in float_slider Device_Volume device_volume=0.8 0:1 0.01,0.1
-    //Output device volume.
+    //Input device volume.
     //0..1
     
 #-------- Sound device  --------------
 separator
 const enum Sound_Device select_device=Default [Default,By_Index,By_Name]
-	//Choose the way for selecting sound output device
+	//Choose the way for selecting sound input  device.
     
 if select_device By_Index
 const int Device_Index device_index=0 0:100 1,10
@@ -33,7 +31,7 @@ endif
 
 if select_device By_Name
 const string Device_Name device_name=""
-	//Name of the sound output device to connect (or part of the name), press 'Show Devices' to see the list
+	//Name of the sound input device to connect (or part of the name), press 'Show Devices' to see the list.
 endif	
 
         
@@ -58,10 +56,10 @@ endif
 if settings 1
 
 const int Channels channels=2 1:16 1,10
-    //Number of output channels 
+    //Number of input channels. 
     
 const enum Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,1024,2048,4096,8192,16384,32768]
-    //Desired buffer size for sound generation. Larger values increase stability but decrease response time.
+    //Desired buffer size for sound receiving. Larger values increase stability but decrease response time.
 #    Numberofbuffers 
  
 #TODO choose format
@@ -96,14 +94,14 @@ endif
 line
 
 #-----------------------------------------------------------
-page Sources
+page Receivers
 #in text Sound_Callback_To callback_modules 5 6
 #    //List of modules which will be called after sound request callback event
 #    //#id of modules to execute
     
-const text Source_Modules modules_list 5 6
+const text Receivers_Modules modules_list 5 6
     //List of modules to which will be sent callback for sound buffer
-    //#id's of modules generating sound
+    //#id's of modules to receive sound
     //#some_module1
     
 #in button Edit... edit_btn
@@ -111,19 +109,9 @@ const text Source_Modules modules_list 5 6
 
 separator
     
-#-----------------------------------------------------------
-page Channels
-    //Control channels sound.
-    
-in float Left_Volume volume_ch1=1 0:2 0.01,0.1
-    //Volume for the left channel.
-    
-in float Right_Volume volume_ch2=1 0:2 0.01,0.1
-    //Volume for the right channel.
-    
 #-----------------------
 page Test_Sound
-    //Output test sound
+    //Input test sound.
     
 in checkbox Generate_Test_Sound gen_test=0
     //Enable generating the test sinewave sound. Note, other sounds will be muted.
@@ -142,7 +130,7 @@ in int Freq gen_freq=440 0:20000 1,100
     
 #-----------------------------------------------------------
 page Devices
-    //Print list of output audio devices and supported formats of the selected device
+    //Print list of input audio devices and supported formats of the selected device.
 
 in button_always Print_Devices print_devices
 	//Print list of all connected devices.
@@ -151,7 +139,7 @@ in checkbox Print_Formats print_formats=0
 	//Print list of supported formats for connected device at start.
 
 out text Local_Console local_console 15 20
-    //Console output
+    //Console output.
 
 #-----------------------------------------------------------
 #TODO page Record_File
