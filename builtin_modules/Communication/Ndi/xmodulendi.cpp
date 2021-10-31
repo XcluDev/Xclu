@@ -79,10 +79,16 @@ void XModuleNdi::send_frame() {
     auto source = gete_send_image_source();
     if (source == send_image_source_Image) {
         XProtectedObject *image = getobject_send_image();
-        XRaster_u8c3 raster;
-        if (image->read().data().type() == XObjectTypeImage) {
-            XObjectImage::to_raster(image, raster);
-            //...
+        auto read = image->read();
+        if (read.data().type() == XObjectTypeImage) {
+            auto info = XObjectImage::get_data(read.data());
+            xc_assert(info.data_type == "u8" || info.channels == 4,
+                     "XModuleNdi::send_frame - only u8, 4 channels are supported");
+            auto *array = XObjectImage::get_array(read.data());
+            const unsigned char *u8 = array->data_u8();
+            xc_assert(u8, "XModuleNdi::send_frame - Empty image array 'u8'");
+
+            ndi_send_image(u8, info.w, info.h);
         }
     }
     if (source == send_image_source_Test_Image) {
@@ -146,7 +152,7 @@ void XModuleNdi::ndi_init() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::ndi_send_image(unsigned char *data_rgba, int w, int h) {
+void XModuleNdi::ndi_send_image(const unsigned char *data_rgba, int w, int h) {
     if (!ndi_inited_) {
         return;
     }
@@ -156,7 +162,7 @@ void XModuleNdi::ndi_send_image(unsigned char *data_rgba, int w, int h) {
     NDI_video_frame.xres = w;
     NDI_video_frame.yres = h;
     NDI_video_frame.FourCC = NDIlib_FourCC_type_RGBA;
-    NDI_video_frame.p_data = data_rgba;
+    NDI_video_frame.p_data = (unsigned char *)data_rgba;
 
     //-----------------------
     //We disabled clocking "params.clock_video = false", so may be this not occur:

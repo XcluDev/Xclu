@@ -39,7 +39,7 @@ protected:
 
     bool ndi_inited_ = false;
     void ndi_init();
-    void ndi_send_image(unsigned char *data_rgba, int w, int h);
+    void ndi_send_image(const unsigned char *data_rgba, int w, int h);
     void ndi_stop();
 
     void* pNDI_send_ = nullptr;
