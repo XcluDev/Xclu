@@ -30,17 +30,13 @@ protected:
     virtual void on_button_pressed(QString button_id);
 
 protected:
-    void gui_clear();
+    bool ndi_inited_ = false;
+    void ndi_init();
+    void ndi_stop();
+    void send_frame();
 
-    void print_devices();
-
-    bool connected_ = false;
-    void set_connected(bool connected);
-
-protected:
-
-
-
+    int  sent_frames_ = 0;
+    void* pNDI_send_ = nullptr;
 
 };
 

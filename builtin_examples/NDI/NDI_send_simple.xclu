@@ -1,0 +1,82 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Ndi",
+                "name": "ndi1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Send",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_image_source",
+                        "avalue": "Image"
+                    },
+                    {
+                        "aname": "send_image",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "sender_name",
+                        "avalue": "NDI_Xclu_Sender"
+                    },
+                    {
+                        "aname": "send_mode",
+                        "avalue": "Each_Frame"
+                    },
+                    {
+                        "aname": "send_new_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Receive",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

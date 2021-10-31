@@ -5,7 +5,6 @@
 SOURCES += \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp \
     $$PWD/builtin_modules/Contrib/MadRobot/xmodulemadrobot.cpp \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
@@ -41,8 +40,6 @@ SOURCES += \
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
-    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
     $$PWD/builtin_modules/Contrib/MadRobot/auto.h \
@@ -131,6 +128,29 @@ HEADERS +=    \
     $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
     $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
 
+#--------------------------------------------------------------------------
+#NDI
+#Comment this block if NDI is not required
+#--------------------------------------------------------------------------
+unix {
+}
+
+#windows 32 bit
+#windows {
+#}
+
+#windows 64 bit
+windows {
+    INCLUDEPATH += $$PWD/libs/NDI/Include
+    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
+}
+
+SOURCES +=    \
+    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
+
+HEADERS +=    \
+    $$PWD/builtin_modules/Communication/Ndi/auto.h \
+    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
 
 #--------------------------------------------------------------------------
 

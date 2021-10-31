@@ -7,9 +7,31 @@ module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
-page Main
-    //General settings
+page Send
+    //NDI Sender. Initializes the size of the image when the first frame is arrived.
+
+const enum Image_Source send_image_source=Image [Image,Test_Image]
+    //Should we use real image or test image.
+    
+in object_image Input_Image send_image
+    //Image size must be fixed after running.
+    
+const string Sender_Name sender_name="NDI_Xclu_Sender"
+    //NDI sender name.
+
+const enum Send_Mode send_mode=Off [Off,Each_Frame,On_Checkbox]
+    //Sending mode.
+if send_mode On_Checkbox
+in checkbox New_Frame send_new_frame=0
+    //Usually you should link it with the image update flag.
+endif
+line
+
+out string Send_Status send_status=""
+    //Current sending status.
 
 
 
+page Receive
+    //Not implemented.
 
