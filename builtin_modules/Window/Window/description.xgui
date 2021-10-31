@@ -1,7 +1,7 @@
 #Module Window
 #------------------------------------------
 #module_name_hint=wwindow
-module_description=Window for placing GUI components and OpenGL view.
+module_description=Window for placing widgets. Allows to grab content and send by NDI etc.
 module_version=1.01
 module_impl=C++
 
@@ -136,13 +136,27 @@ in button Edit... edit_btn
 #---------------------------------------------------
 #Actions
 page Actions
-    //Action on closing window
+    //Action on closing window.
 
 in enum On_Close on_close=Stop [Ignore,Stop]
    //What to do when user closes the window.
 #,Custom_Action]
 
+#---------------------------------------------------
+#Grab
+page Grab
+    //Grab window.
 
+in checkbox Grab_CPU grab_cpu=0
+    //Grab window to the raster.
+    
+#if grab_cpu 1
+out object_image Image_CPU image_cpu
+    //Grabber image.
+
+#endif
+ 
+    
 #---------------------------------------------------
 
     

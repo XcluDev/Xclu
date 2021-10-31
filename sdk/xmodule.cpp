@@ -267,7 +267,7 @@ void XModule::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*s
 //---------------------------------------------------------------------
 //`sound_buffer_received` call implementation, processes input `data` buffer
 //there are channels * samples values at `data`
-void XModule::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float */*data*/) {
+void XModule::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xc_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_received', because on_sound_buffer_received() is not implemented");
 }

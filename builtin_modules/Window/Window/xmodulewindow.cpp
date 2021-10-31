@@ -8,6 +8,7 @@
 #include "xc_project.h"
 #include "module.h"
 #include "xobject.h"
+#include "xraster.h"
 
 
 //registering module implementation
@@ -240,6 +241,9 @@ void XModuleWindow::start() {
 void XModuleWindow::update() {
 
     update_window();   //обновляем данные
+
+    //grab window, if required
+    grab_window();
 }
 
 
@@ -521,7 +525,30 @@ void XModuleWindow::reset_widget(QString module_name) {
 }
 
 //---------------------------------------------------------------------
+//Grab window
+void XModuleWindow::grab_window() {
+    if (geti_grab_cpu()) {
+        auto size = window_->size();
+        int w = size.width();
+        int h = size.height();
+        QImage img(w,h,QImage::Format_ARGB32);
+        img.fill(Qt::transparent);
+        {
+            QPainter ptr(&img);
+            window_->render(&ptr);
+            //img.save("D:\\temp.png");
+        }
+        //XRaster_u8c4 bgra;
+        //XRaster::convert_bgra(img, bgra);
+
+
+    }
+}
+
+
+//---------------------------------------------------------------------
 //Структура для создания layouts
+//---------------------------------------------------------------------
 
 XModuleWindowStructureItem::XModuleWindowStructureItem() {
 

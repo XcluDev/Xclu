@@ -62,11 +62,14 @@ for (int i=0; i<N; i++) {
 buffer.reset(new XComputeBuffer(context.data()));
 buffer->allocate(buf); //can use raw pointer or any QVector here
 
+xcassert(N /% 64 == 0, "To use GPU potential, you need at least 64 local groups, so N must be visible by 64);
+int Nuse = N / 64;
+
 //Compute
 buffer->bind_for_shader(0); //bind buffer, 0 - index in shader's buffer binding
 shader->begin(); //bind
 shader->program().setUniformValue("coeff", 0.5f); //set uniforms
-shader->compute(N); //compute
+shader->compute(Nuse); //compute N/64, to fast compations!
 shader->end(); //unbind
 
 //Download result to CPU
@@ -88,7 +91,10 @@ uniform float coeff=1;
 layout(std430, binding = 0) buffer Buf
 { float buf[]; };
 
-layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
+//Note: we use local size x 64 to speedup!
+//https://stackoverflow.com/questions/62598804/slow-compute-shader-global-vs-local-work-groups
+layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
 void main(void)
 {
@@ -202,7 +208,9 @@ public:
     QOpenGLShaderProgram &program();
 
     //Perform computing with compute shader.
-    //Note: it calls glFinish(), so waits until computing will be finished
+    //Note 1: it calls glFinish(), so waits until computing will be finished
+    //Note 2: please use local groups divisible by 64 to use GPU speedup, and so NX/64, and check NX % 64 == 0
+    //        https://stackoverflow.com/questions/62598804/slow-compute-shader-global-vs-local-work-groups
     void compute(int NX, int NY = 1, int NZ = 1);   //NX,NY,NZ - number of groups in X,Y,Z dimensions
 
     //Call after computing end

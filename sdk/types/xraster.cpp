@@ -145,6 +145,50 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
 }
 
 //---------------------------------------------------------------------
+//TODO duplication of previous function except withing with alpha
+void XRaster::convert_rgba(QImage qimage, XRaster_u8c4 &raster) {
+    int w = qimage.size().width();
+    int h = qimage.size().height();
+
+    auto format = qimage.format();
+    xc_assert(format == QImage::Format_RGB32,
+                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+
+    raster.allocate(w, h);
+
+    int mirrory = 0;
+    for (int y=0; y<h; y++) {
+        const uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
+        int k = 0;
+        for (int x=0; x<w; x++) {
+            uchar b = line[k++];
+            uchar g = line[k++];
+            uchar r = line[k++];
+            uchar a = line[k++];
+            raster.data[x+w*y] = rgba_u8(r,g,b,a);
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+//Fast, expected QImage img(w,h,QImage::Format_ARGB32);
+void XRaster::convert_bgra(QImage qimage, XRaster_u8c4 &raster) {
+    int w = qimage.size().width();
+    int h = qimage.size().height();
+
+    auto format = qimage.format();
+    xc_assert(format == QImage::Format_RGB32,
+                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+
+    raster.allocate(w, h);
+
+    for (int y=0; y<h; y++) {
+        const uchar *line = qimage.scanLine(y);
+        memcpy(&(raster.data[w*y]), line, w*4);
+    }
+}
+
+//---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8 &raster, QImage &qimage) {
     int w = raster.w;
     int h = raster.h;

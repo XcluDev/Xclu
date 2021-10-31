@@ -136,7 +136,7 @@ QString button_edit_btn() { return "edit_btn"; }
 
 //----------------------------------------------------
 //Page Actions
-//Action on closing window
+//Action on closing window.
 
 //Enum On Close
 //What to do when user closes the window.
@@ -149,4 +149,21 @@ bool was_changed_on_close() { return was_changed_("on_close"); }
 enum_on_close gete_on_close() { return enum_on_close(geti_("on_close")); }
 QString getraw_on_close() { return getraw_("on_close");}
 
+//----------------------------------------------------
+//Page Grab
+//Grab window.
+
+//Checkbox Grab CPU
+//Grab window to the raster.
+bool was_changed_grab_cpu() { return was_changed_("grab_cpu"); }
+int geti_grab_cpu() { return geti_("grab_cpu"); }
+void repaint_grab_cpu() { repaint_("grab_cpu"); }
+
+//Out Object Image CPU
+//Grabber image.
+bool was_changed_image_cpu() { return was_changed_("image_cpu"); }
+XProtectedObject *getobject_image_cpu() { return get_object_("image_cpu"); }
+void setobject_image_cpu(XProtectedObject *value) { set_object_("image_cpu", value); }
+void setobject_image_cpu(XProtectedObject &value) { set_object_("image_cpu", value); }
+void repaint_image_cpu() { repaint_("image_cpu"); }
 //----------------------------------------------------

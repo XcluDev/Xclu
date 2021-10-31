@@ -122,6 +122,10 @@ protected:
 
     //remove requested widget from another module - called at stopping
     void reset_widget(QString module_name);
+
+protected:
+    //Grab window
+    void grab_window();
 };
 
 
