@@ -115,7 +115,7 @@ void XModuleNdi::send_test_frame(int frame) {
     }
 
     // send
-    ndi_send_image(test_raster_);
+    ndi_send_image(test_raster_.data_pointer_u8(), w, h);
 
 }
 
@@ -146,17 +146,17 @@ void XModuleNdi::ndi_init() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::ndi_send_image(XRaster_u8c4 &raster) {
+void XModuleNdi::ndi_send_image(unsigned char *data_rgba, int w, int h) {
     if (!ndi_inited_) {
         return;
     }
-    xc_assert(raster.is_valid(), "XModuleNdi::ndi_send_image - not valid input raster");
+    xc_assert(data_rgba && w > 0 && h > 0, "XModuleNdi::ndi_send_image - bad input raster");
 
     NDIlib_video_frame_v2_t NDI_video_frame;
-    NDI_video_frame.xres = raster.w;
-    NDI_video_frame.yres = raster.h;
+    NDI_video_frame.xres = w;
+    NDI_video_frame.yres = h;
     NDI_video_frame.FourCC = NDIlib_FourCC_type_RGBA;
-    NDI_video_frame.p_data = raster.data_pointer_u8();
+    NDI_video_frame.p_data = data_rgba;
 
     //-----------------------
     //We disabled clocking "params.clock_video = false", so may be this not occur:

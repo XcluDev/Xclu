@@ -234,7 +234,7 @@ void XRaster::convert(XRaster_u8c3 &raster, QImage &qimage) {
 QImage XRaster::link(XRaster_u8 &raster) {
     int w = raster.w;
     int h = raster.h;
-    return QImage(raster.data_pointer_u8(), w, h, raster.bytesPerLine(), QImage::Format_Grayscale8);
+    return QImage((const unsigned char*)raster.data_pointer_u8(), w, h, raster.bytesPerLine(), QImage::Format_Grayscale8);
 
 }
 
@@ -242,7 +242,7 @@ QImage XRaster::link(XRaster_u8 &raster) {
 QImage XRaster::link(XRaster_u8c3 &raster) {
     int w = raster.w;
     int h = raster.h;
-    return QImage(raster.data_pointer_u8(), w, h, raster.bytesPerLine(), QImage::Format_RGB888);
+    return QImage((const unsigned char*)raster.data_pointer_u8(), w, h, raster.bytesPerLine(), QImage::Format_RGB888);
 }
 
 //---------------------------------------------------------------------

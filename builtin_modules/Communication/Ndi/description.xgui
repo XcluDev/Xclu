@@ -15,9 +15,13 @@ page Send
 const enum Image_Source send_image_source=Image [Image,Test_Image]
     //Should we use real image or test image.
     
+if send_image_source Image
 in object_image Input_Image send_image
     //Image size must be fixed after running.
-    
+endif    
+
+line 
+
 const string Sender_Name sender_name="NDI_Xclu_Sender"
     //NDI sender name.
 
