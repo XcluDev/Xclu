@@ -2,6 +2,7 @@
 #define XMODULENDI_H
 
 //NDI interface
+//To check sender working - run "VB NDI Receive Example.exe" from NDI/Examples/Bin/x64/Release
 
 #include <QImage>
 #include <QtSerialPort/QSerialPort>
@@ -30,12 +31,17 @@ protected:
     virtual void on_button_pressed(QString button_id);
 
 protected:
+    void send_frame();
+    void send_test_frame(int frame);
+    XRaster_u8c4 test_raster_;
+    int  sent_frames_ = 0;
+
+
     bool ndi_inited_ = false;
     void ndi_init();
+    void ndi_send_image(XRaster_u8c4 &raster);
     void ndi_stop();
-    void send_frame();
 
-    int  sent_frames_ = 0;
     void* pNDI_send_ = nullptr;
 
 };

@@ -66,6 +66,7 @@ void XModuleNdi::update() {
 void XModuleNdi::stop() {
     ndi_stop();
 
+    test_raster_.clear();
 
 }
 
@@ -75,10 +76,49 @@ void XModuleNdi::send_frame() {
         return;
     }
 
-    sent_frames_++;
-    sets_send_status(QString("Sending frame: %1").arg(sent_frames_));
+    auto source = gete_send_image_source();
+    if (source == send_image_source_Image) {
+        XProtectedObject *image = getobject_send_image();
+        XRaster_u8c3 raster;
+        if (image->read().data().type() == XObjectTypeImage) {
+            XObjectImage::to_raster(image, raster);
+            //...
+        }
+    }
+    if (source == send_image_source_Test_Image) {
+        send_test_frame(sent_frames_);
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleNdi::send_test_frame(int frame) {
+    if (!ndi_inited_) {
+        return;
+    }
+    int w = 512;
+    int h = 256;
+
+    // allocate
+    if (test_raster_.is_empty()) {
+        test_raster_.allocate(w, h);
+    }
+
+    // fill
+    for (int y=0; y<h; y++) {
+        for (int x=0; x<w; x++) {
+            test_raster_.data[x + w*y] = rgba_u8(
+                        ((x + frame) * 256 / w) % 256,
+                        x * 256 / w,
+                        y * 256 / h,
+                        255);
+        }
+    }
+
+    // send
+    ndi_send_image(test_raster_);
 
 }
+
 
 //---------------------------------------------------------------------
 void XModuleNdi::ndi_init() {
@@ -88,13 +128,29 @@ void XModuleNdi::ndi_init() {
         if (!result) return;
 
         // We create the NDI sender
-        pNDI_send_ = NDIlib_send_create();
+        NDIlib_send_create_t params;
+        params.clock_audio = false;
+        params.clock_video = false;
+        params.p_groups = nullptr;
+        params.p_ndi_name = gets_sender_name().toStdString().c_str();
+
+        //TODO for unknown reason setting "p_ndi_name" not have effect when running "VB NDI Receive Example.exe"
+        pNDI_send_ = NDIlib_send_create(&params);
+
         xc_assert(pNDI_send_, "Can't initialize NDI: error creating sender");
         if (!pNDI_send_) return;
 
         sets_send_status("NDI started");
         ndi_inited_ = true;
     }
+}
+
+//---------------------------------------------------------------------
+void XModuleNdi::ndi_send_image(XRaster_u8c4 &raster) {
+
+    sent_frames_++;
+    sets_send_status(QString("Sending frame: %1").arg(sent_frames_));
+
 }
 
 //---------------------------------------------------------------------

@@ -48,9 +48,38 @@ struct rgb_ {
     }
 };
 
+template<typename T>
+struct rgba_ {
+    T v[4] = {0,0,0,0};
+    rgba_() {}
+    rgba_(T val, T a) {
+        v[0] = v[1] = v[2] = val;
+        v[3] = a;
+    }
+    rgba_(T r, T g, T b, T a) {
+        v[0] = r; v[1] = g; v[2] = b; v[3] = a;
+    }
+    void set(T r, T g, T b, T a) {
+        v[0] = r; v[1] = g; v[2] = b; v[3] = a;
+    }
+    void set(T val, T a) {
+        v[0] = v[1] = v[2] = v[3] = val; v[4] = a;
+    }
+    T grayi() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
+    float grayf() { return (float(v[0])+float(v[1])+float(v[2]))/3; }
+    static T grayi(T r, T g, T b) {
+        return (int(r)+int(g)+int(b))/3;
+    }
+    static float grayf(T r, T g, T b) {
+        return (float(r)+float(g)+float(b))/3;
+    }
+};
 
 typedef rgb_<uint8> rgb_u8;
 typedef rgb_<float> rgb_float;
+typedef rgba_<uint8> rgba_u8;
+typedef rgba_<float> rgba_float;
+
 
 //--------------------------------------------------
 //Template raster type XRaster_
@@ -261,7 +290,8 @@ public:
 //Particular raster types
 //--------------------------------------------------
 typedef XRaster_<uint8> XRaster_u8;
-typedef XRaster_<rgb_u8> XRaster_u8c3;    //color image
+typedef XRaster_<rgb_u8> XRaster_u8c3;    //color RGB image
+typedef XRaster_<rgba_u8> XRaster_u8c4;    //color RGBA image
 typedef XRaster_<int8> XRaster_s8;
 typedef XRaster_<int16> XRaster_int16;
 typedef XRaster_<uint16> XRaster_u16;

@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "send_image_source",
-                        "avalue": "Image"
+                        "avalue": "Test_Image"
                     },
                     {
                         "aname": "send_image",
