@@ -252,7 +252,11 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     object.seti("w", w);
     object.seti("h", h);
     object.seti("channels", channels);
-    QString channels_str = (channels==1) ? "Grayscale" : "RGB"; //TODO если каналов не 1 или 3, то будет пустое описание
+    QString channels_str = "?";
+    if (channels==1) channels_str = "Grayscale";
+    if (channels == 3) channels_str = "RGB";
+    if (channels == 4) channels_str = "RGBA?";
+
     object.sets("channels_description", channels_str);
 
     object.sets("data_type", XTypeId_to_string(data_type));
@@ -394,11 +398,14 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     xc_assert(!mirrorx, "XObjectImage::create_from_QImage doesn't supports mirrorx");
 
     //TODO сейчас поддерживаем на вход только тип RGB32
-    xc_assert(qimage.format() == QImage::Format_RGB32, "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
+    auto fmt = qimage.format();
+    xc_assert(fmt == QImage::Format_RGB32
+              || fmt == QImage::Format_ARGB32
+              , "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 and Format_ARGB32 are supported");
 
     //TODO сейчас поддерживаем на вход только типы u8 и float
     xc_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
-                "Only u8 and float types for images are supported");
+                "XObjectImage::create_from_QImage - Only u8 and float types for images are supported");
 
     int w = qimage.size().width();
     int h = qimage.size().height();

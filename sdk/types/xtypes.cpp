@@ -12,6 +12,8 @@ unsigned int XTypeIdSize(XTypeId type) {
         return 1;
     case XTypeId_u8c3:
         return 3;
+    case XTypeId_u8c4:
+        return 4;
     case XTypeId_s8:
         return 1;
     case XTypeId_int16:
@@ -50,6 +52,8 @@ QString XTypeId_to_string(XTypeId type) {
         return "u8";
     case XTypeId_u8c3:
         return "u8c3";
+    case XTypeId_u8c4:
+        return "u8c4";
     case XTypeId_s8:
         return "s8";
     case XTypeId_int16:
@@ -85,6 +89,7 @@ XTypeId string_to_XTypeId(QString type) {
     if (type == "none") return XTypeId_none;
     if (type == "u8") return XTypeId_u8;
     if (type == "u8c3") return XTypeId_u8c3;
+    if (type == "u8c4") return XTypeId_u8c4;
     if (type == "s8") return XTypeId_s8;
     if (type == "int16") return XTypeId_int16;
     if (type == "uint16") return XTypeId_uint16;
@@ -108,6 +113,8 @@ bool is_XTypeId_integer(XTypeId type) {
     case XTypeId_u8:
         return true;
     case XTypeId_u8c3:
+        return false;
+    case XTypeId_u8c4:
         return false;
     case XTypeId_s8:
         return true;

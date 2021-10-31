@@ -9,7 +9,7 @@
 #include "module.h"
 #include "xobject.h"
 #include "xraster.h"
-
+#include "xobjectimage.h"
 
 //registering module implementation
 REGISTER_XMODULE(Window)
@@ -230,6 +230,9 @@ void XModuleWindow::on_visibleChanged(bool /*arg*/) {
 
 //---------------------------------------------------------------------
 void XModuleWindow::start() {
+    //Clear grab image
+    getobject_image_cpu()->clear();
+
     //создание и установка начальных настроек окна
     setup_window();
 
@@ -538,8 +541,13 @@ void XModuleWindow::grab_window() {
             window_->render(&ptr);
             //img.save("D:\\temp.png");
         }
-        //XRaster_u8c4 bgra;
-        //XRaster::convert_bgra(img, bgra);
+        {
+            auto write = getobject_image_cpu()->write();
+            XObjectImage::create_from_QImage(write.data(), img, "RGBA", "u8");
+        }
+       // XRaster_u8c4 bgra;
+       // XRaster::convert_bgra(img, bgra);   //fast
+
 
 
     }

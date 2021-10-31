@@ -8,18 +8,19 @@ enum XTypeId : int {
     XTypeId_none = 0,
     XTypeId_u8 = 1,
     XTypeId_u8c3 = 2,
-    XTypeId_s8 = 3,
-    XTypeId_int16 = 4,
-    XTypeId_uint16 = 5,
-    XTypeId_int32 = 6,
-    XTypeId_uint32 = 7,
-    XTypeId_float = 8,
-    XTypeId_double = 9,
-    XTypeId_vec2 = 10,
-    XTypeId_vec3 = 11,
-    XTypeId_vec4 = 12,
-    XTypeId_int2 = 13,
-    XTypeId_N = 14
+    XTypeId_u8c4 = 3,
+    XTypeId_s8 = 4,
+    XTypeId_int16 = 5,
+    XTypeId_uint16 = 6,
+    XTypeId_int32 = 7,
+    XTypeId_uint32 = 8,
+    XTypeId_float = 9,
+    XTypeId_double = 10,
+    XTypeId_vec2 = 11,
+    XTypeId_vec3 = 12,
+    XTypeId_vec4 = 13,
+    XTypeId_int2 = 14,
+    XTypeId_N = 15
 };
 
 //size of one element
