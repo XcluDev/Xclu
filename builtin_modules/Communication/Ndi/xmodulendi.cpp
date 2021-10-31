@@ -147,7 +147,25 @@ void XModuleNdi::ndi_init() {
 
 //---------------------------------------------------------------------
 void XModuleNdi::ndi_send_image(XRaster_u8c4 &raster) {
+    if (!ndi_inited_) {
+        return;
+    }
+    xc_assert(raster.is_valid(), "XModuleNdi::ndi_send_image - not valid input raster");
 
+    NDIlib_video_frame_v2_t NDI_video_frame;
+    NDI_video_frame.xres = raster.w;
+    NDI_video_frame.yres = raster.h;
+    NDI_video_frame.FourCC = NDIlib_FourCC_type_RGBA;
+    NDI_video_frame.p_data = raster.data_pointer_u8();
+
+    //-----------------------
+    //We disabled clocking "params.clock_video = false", so may be this not occur:
+    //??? "Note that this call will be clocked so that we end up submitting at exactly 29.97fps."
+    //-----------------------
+    //Sending the frame.
+    NDIlib_send_send_video_v2(pNDI_send_, &NDI_video_frame);
+
+    // updating status
     sent_frames_++;
     sets_send_status(QString("Sending frame: %1").arg(sent_frames_));
 

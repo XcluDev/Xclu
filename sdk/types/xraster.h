@@ -170,7 +170,10 @@ public:
         QVector<T>().swap(data);
 	}
     bool is_empty() const {
-        return data.empty();
+        return data.empty() || w <= 0 || h <= 0;
+    }
+    bool is_valid() const {
+        return !is_empty() && data.size() == w * h;
     }
     /*bool is_zero() const {
         for (int i = 0; i < w*h; i++) {

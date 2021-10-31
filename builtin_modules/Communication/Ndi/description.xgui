@@ -10,6 +10,8 @@ module_impl=C++
 page Send
     //NDI Sender. Initializes the size of the image when the first frame is arrived.
 
+#TODO add clocking "params.clock_video" and FPS 
+    
 const enum Image_Source send_image_source=Image [Image,Test_Image]
     //Should we use real image or test image.
     
