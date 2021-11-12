@@ -18,7 +18,7 @@ in object_image Image image
     //Input image.
 
 in checkbox Is_New_Frame is_new_frame=0
-    //Flag that image was changed. You may link it to the flag of an image provider module.
+    //If checked, image will be redrawn each frame. To optimize, link it to the flag of an image provider module.
  
 #-------------------------------------------
 page Visuals

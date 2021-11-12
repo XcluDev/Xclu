@@ -101,56 +101,64 @@ HEADERS += \
 
 #--------------------------------------------------------------------------
 #Realsense camera support
-#Comment this block if Realsense camera is not required
 #--------------------------------------------------------------------------
-unix {
-    INCLUDEPATH += ~/librealsense/include
-    LIBS += -lrealsense2
-}
-
-#windows 32 bit
+#Comment this line to exclude REalsense from build
+##CONFIG += REALSENSE
+#--------------------------------------------------------------------------
+#REALSENSE {
+#unix {
+#    INCLUDEPATH += ~/librealsense/include
+#    LIBS += -lrealsense2
+#}
+#
+##windows 32 bit
+##windows {
+##    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+##    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
+##}
+#
+##windows 64 bit
 #windows {
 #    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
+#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
 #}
-
-#windows 64 bit
-windows {
-    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
-}
-
-SOURCES +=    \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
-
-HEADERS +=    \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+#
+#SOURCES +=    \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
+#
+#HEADERS +=    \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+#}
 
 #--------------------------------------------------------------------------
 #NDI
-#Comment this block if NDI is not required
 #--------------------------------------------------------------------------
-unix {
-}
+#Comment this line to exclude NDI from build
+#CONFIG += NDI - not works...
+#--------------------------------------------------------------------------
 
-#windows 32 bit
-#windows {
+#NDI {
+#
+#unix {
 #}
-
-#windows 64 bit
-windows {
-    INCLUDEPATH += $$PWD/libs/NDI/Include
-    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
-}
-
-SOURCES +=    \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
-
-HEADERS +=    \
-    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
+#
+#
+##windows 64 bit
+#windows {
+#    INCLUDEPATH += $$PWD/libs/NDI/Include
+#    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
+#}
+#
+#SOURCES +=    \
+#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
+#
+#HEADERS +=    \
+#    $$PWD/builtin_modules/Communication/Ndi/auto.h \
+#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
+#
+#}
 
 #--------------------------------------------------------------------------
 
