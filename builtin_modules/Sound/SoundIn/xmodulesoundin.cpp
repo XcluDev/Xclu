@@ -36,7 +36,7 @@ void XModuleSoundInGenerator::send_sound_in() { //создать звук в о�
         auto data_read = data_->read();
         for (int i=0; i<data_read.data().modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-            data_read.data().modules_[i]->access_call(functions_names::sound_buffer_received(), sound_write.pointer());
+            data_read.data().modules_[i]->access_call(XCallTypeSoundBufferReceived, sound_write.pointer());
         }
 
         //applying volumes

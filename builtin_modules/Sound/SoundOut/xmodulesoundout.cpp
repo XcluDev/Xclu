@@ -77,7 +77,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
 
             for (int i=0; i<data_->modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-                data_->modules_[i]->access_call(functions_names::sound_buffer_add(), sound_write.pointer());
+                data_->modules_[i]->access_call(XCallTypeSoundBufferAdd, sound_write.pointer());
             }
         }
 

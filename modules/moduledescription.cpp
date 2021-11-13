@@ -11,14 +11,15 @@ ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {
     else {
         QStringList list = line.split(",");
         for (int i=0; i<list.size(); i++) {
-            functions_[list[i].trimmed()] = 1;
+            auto fun = xstring_to_calltype(list[i].trimmed());
+            functions_[fun] = 1;
         }
     }
 }
 
 
 //---------------------------------------------------------------------
-bool ModuleRegisteredCalls::accepts(QString function) {
+bool ModuleRegisteredCalls::accepts(XCallType function) {
     if (any_) return true;
     return functions_.contains(function);
 }
@@ -28,10 +29,10 @@ QString ModuleRegisteredCalls::to_string_gui() {        //конвертация
     if (any_) return "*";
     QString s;
     if (!functions_.isEmpty()) {
-        QMapIterator<QString, int> i(functions_);
+        QMapIterator<XCallType, int> i(functions_);
         while (i.hasNext()) {
             i.next();
-            s.append(i.key());
+            s.append(xcalltype_to_string_for_user(i.key()));
             s.append("\n");
         }
     }

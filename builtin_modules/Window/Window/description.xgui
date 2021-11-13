@@ -77,8 +77,19 @@ endif
 
 #------------------------------------------
 page Content
-    //Window content consisting of layouts and widgets, such as WNumber.
+    //Window content can be a single rendering area, or layouts and widgets, such as WNumber.
     
+const enum Type content_type=Rendering_Area [Rendering_Area,Layout]
+
+if content_type Rendering_Area
+	
+out text Used_Modules single_widget_used_modules 20 20
+	//This list is populated by modules to which the module will send "Draw" and mouse commands.
+
+
+endif
+
+if content_type Layout
 const text Content content 20 20
     //Description of layouts and widgets. 
 //#Keywords:  HorizontalLayout, VerticalLayout, Tab, Stretch
@@ -110,6 +121,8 @@ const int Spacing global_spacing=0 0:* 1,10
 line
 in button Edit... edit_btn
     //Press to interactively edit window content.
+
+#endif
 
 #---------------------------------------------------
 #TODO Menu

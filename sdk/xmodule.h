@@ -76,7 +76,7 @@ public:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    void call(QString function, ErrorInfo &err, XObject *input, XObject *output);
+    void call(XCallType function, ErrorInfo &err, XObject *input, XObject *output);
 
     //------------------------------------------------------------------------
     //General (Control) page
@@ -136,7 +136,8 @@ protected:
     virtual void on_button_pressed(QString /*button_id*/) {}
 
     //Universal call handler
-    //по договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
+    //По договоренности, можно задавать имя или номер функции в input
+    //По договоренности, модуль может писать результат прямо в input, например, добавлять в звуковой буфер
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //То, что модуль может запрашивать у других модулей, определяется свойством
@@ -144,7 +145,7 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void on_call(QString function, XObject *input, XObject *output);
+    virtual void on_call(XObject *input, XObject *output);
 
     //Concrete call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it

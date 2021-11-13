@@ -282,12 +282,12 @@ void Module::bang() {        //Bang button
 
 //---------------------------------------------------------------------
 //исключение "записывается" в err
-void Module::access_call_no_exception(QString function, ErrorInfo &err, XObject *input, XObject *output) {
+void Module::access_call_no_exception(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
     //проверка, что модуль "понимает" запрошенную функцию
     if (!description().accept_calls.accepts(function)) {
         err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
                                 "because it's unregistered in its accepted calls")
-                        .arg(function).arg(name()));
+                        .arg(xcalltype_to_string_for_user(function)).arg(name()));
         return;
     }
     xmodule()->call(function, err, input, output);
@@ -295,7 +295,7 @@ void Module::access_call_no_exception(QString function, ErrorInfo &err, XObject 
 
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
-void Module::access_call(QString function, XObject *input, XObject *output) {
+void Module::access_call(XCallType function, XObject *input, XObject *output) {
     ErrorInfo err;
     access_call_no_exception(function, err, input, output);
     err.throw_error();

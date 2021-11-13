@@ -99,13 +99,40 @@ const QString ObjectTypeNames[XObjectTypeN] =
 
 //---------------------------------------------------------------------
 QString object_type_to_string(XObjectType type) {
-        return Type_to_string(int(type), XObjectTypeN, ObjectTypeNames);
+    return Type_to_string(int(type), XObjectTypeN, ObjectTypeNames);
 }
 
 XObjectType string_to_object_type(QString type_str) {
     return XObjectType(string_to_Type(type_str, XObjectTypeN, ObjectTypeNames));
 
 }
+
+//---------------------------------------------------------------------
+const QString XCallTypeNames[XCallTypeN] =
+{
+    "none",
+    "custom",
+    "create_widget",
+    "paint",
+    "sound_buffer_add",
+    "sound_buffer_received"
+};
+
+
+QString xcalltype_to_string(XCallType type) {
+    return Type_to_string(int(type), XCallTypeN, XCallTypeNames);
+}
+
+//not generates exception
+QString xcalltype_to_string_for_user(XCallType type) {
+    if (type < 0 || type >= XCallTypeN) return QString("unknown:%1").arg(type);
+    return xcalltype_to_string(type);
+}
+
+XCallType xstring_to_calltype(QString type_str) {
+    return XCallType(string_to_Type(type_str, XCallTypeN, XCallTypeNames));
+}
+
 
 //---------------------------------------------------------------------
 const QString XQualifierNames[XQualifierN] = {"?", "in", "out", "const"};

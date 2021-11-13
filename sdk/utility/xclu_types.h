@@ -168,6 +168,21 @@ QString object_type_to_string(XObjectType type);
 XObjectType string_to_object_type(QString type_str);
 
 
+//Types of intermodules calls
+enum XCallType : int {
+    XCallTypeNone           = 0,
+    XCallTypeCustom         = 1,
+    XCallTypeCreateWidget   = 2,
+    XCallTypePaint          = 3,
+    XCallTypeSoundBufferAdd = 4,
+    XCallTypeSoundBufferReceived = 5,
+    XCallTypeN              = 6
+};
+QString xcalltype_to_string(XCallType type);
+QString xcalltype_to_string_for_user(XCallType type);   //not generates exception
+XCallType xstring_to_calltype(QString type_str);
+
+
 //Тип ошибки
 struct ErrorInfo {
     ErrorInfo() {}
@@ -206,15 +221,6 @@ protected:
 
 };
 
-//Популярные названия для call-функций
-//вызов:
-//functions_names::sound_buffer_add()
-class functions_names {
-public:
-    static QString create_widget() { return "create_widget";}
-    static QString sound_buffer_add() { return "sound_buffer_add"; }
-    static QString sound_buffer_received() { return "sound_buffer_received"; }
-};
 
 
 

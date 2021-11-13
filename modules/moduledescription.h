@@ -17,10 +17,10 @@ class ModuleRegisteredCalls {
 public:
     ModuleRegisteredCalls() {}
     ModuleRegisteredCalls(QString line);
-    bool accepts(QString function);     //разрешен ли вызов функции
+    bool accepts(XCallType function);     //разрешен ли вызов функции
     QString to_string_gui();        //конвертация в строку для выдачи в text
 protected:
-    QMap<QString, int> functions_;   //делаем QMap, чтобы было упорядоченно
+    QMap<XCallType, int> functions_;   //делаем QMap, чтобы было упорядоченно
     bool any_ = false;
 };
 

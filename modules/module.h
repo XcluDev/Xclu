@@ -63,10 +63,10 @@ public:
     //functions_names::sound_buffer_add()
 
     //в случае исключения - оно выдастся
-    void access_call(QString function, XObject *input = nullptr, XObject *output = nullptr);
+    void access_call(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
 
     //исключение "записывается" в err
-    void access_call_no_exception(QString function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
+    void access_call_no_exception(XCallType function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
 
 
     //Доступ к переменным и запуску из других модулей

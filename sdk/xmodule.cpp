@@ -146,32 +146,34 @@ void XModule::button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call(QString function, ErrorInfo &err, XObject *input, XObject *output) {
+void XModule::call(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
     try {
         if (err.is_error()) return;
 
         //process predefined functions
-        if (function == functions_names::create_widget()) {
-            create_widget_internal(input, output);
-            return;
-        }
-        if (function == functions_names::sound_buffer_add()) {
+        switch (function) {
+        case XCallTypeNone: xc_exception("Function type is not specified");
+            break;
+        //process universal function
+        case XCallTypeCustom: on_call(input, output);
+            break;
+        case XCallTypeCreateWidget: create_widget_internal(input, output);
+            break;
+        case XCallTypeSoundBufferAdd:
             sound_buffer_add_internal(input, output);
-            return;
-        }
-        if (function == functions_names::sound_buffer_received()) {
+            break;
+
+        case XCallTypeSoundBufferReceived:
             sound_buffer_received_internal(input, output);
-            return;
+            break;
+        default:
+            xc_exception("Unknnown function type");
         }
 
-        //process universal function
-        //if (is_enabled()) {
-        on_call(function, input, output);
-        //}
     }
     catch (XException &e) {
         err.prepend(QString("Error during executing function '%1' in module '%2':")
-                  .arg(function).arg(name()), e.err());
+                  .arg(xcalltype_to_string_for_user(function)).arg(name()), e.err());
     }
 }
 
@@ -236,9 +238,9 @@ void XModule::sound_buffer_received_internal(XObject *input, XObject *output) {
 }
 
 //---------------------------------------------------------------------
-void XModule::on_call(QString function, XObject * /*input*/, XObject * /*output*/) {
+void XModule::on_call(XObject * /*input*/, XObject * /*output*/) {
     xc_exception("Module '" + name()
-                   + "' can't process function '" + function + "', because on_call() is not implemented");
+                   + "' can't process custom call, because on_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
