@@ -12,32 +12,6 @@ class XObject;
 class QPainter;
 class XModuleVisualWidget;
 
-//Types of mouse/keyboard events
-enum XWidgetEvent_Type : int {
-    XWidgetEvent_none = 0,
-    XWidgetEvent_mouse_moved = 1,
-    XWidgetEvent_mouse_pressed = 2,
-    XWidgetEvent_mouse_dragged = 3,
-    XWidgetEvent_mouse_released = 4,
-    XWidgetEvent_mouse_double_clicked = 5,
-    XWidgetEvent_key_pressed = 6,
-    XWidgetEvent_key_released = 7
-};
-enum XMouseButton : int {
-    XMouseButton_none = -1,
-    XMouseButton_left = 0,
-    XMouseButton_middle = 1,
-    XMouseButton_right = 2
-};
-struct XWidgetEvent {
-    XWidgetEvent_Type type = XWidgetEvent_none;
-    int2 pos = int2(0,0);
-    XMouseButton button = XMouseButton_none;
-    int key = -1;
-};
-
-
-
 class XModuleVisual : public XModule
 {
     Q_OBJECT

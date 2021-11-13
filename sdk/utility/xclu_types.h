@@ -1,11 +1,10 @@
 #ifndef XCLUTYPES_H
 #define XCLUTYPES_H
 
-//Описание констант для типов переменных, модулей,
-//и их преобразование в строки и обратно - для парсинга
-//также, см. типы объектов в "xclu_types_objects.h"
+//Xclu enums and converting to string and back.
 
 #include <QString>
+#include "int2.h"
 
 //универсальная конвертация
 QString Type_to_string(int i, int N, const QString array[]);
@@ -183,7 +182,32 @@ QString xcalltype_to_string_for_user(XCallType type);   //not generates exceptio
 XCallType xstring_to_calltype(QString type_str);
 
 
-//Тип ошибки
+//Mouse and keyboard events
+enum XWidgetEvent_Type : int {
+    XWidgetEvent_none = 0,
+    XWidgetEvent_mouse_moved = 1,
+    XWidgetEvent_mouse_pressed = 2,
+    XWidgetEvent_mouse_dragged = 3,
+    XWidgetEvent_mouse_released = 4,
+    XWidgetEvent_mouse_double_clicked = 5,
+    XWidgetEvent_key_pressed = 6,
+    XWidgetEvent_key_released = 7
+};
+enum XMouseButton : int {
+    XMouseButton_none = -1,
+    XMouseButton_left = 0,
+    XMouseButton_middle = 1,
+    XMouseButton_right = 2
+};
+struct XWidgetEvent {
+    XWidgetEvent_Type type = XWidgetEvent_none;
+    int2 pos = int2(0,0);
+    XMouseButton button = XMouseButton_none;
+    int key = -1;
+};
+
+
+//Error type
 struct ErrorInfo {
     ErrorInfo() {}
 
