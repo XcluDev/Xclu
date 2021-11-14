@@ -1,7 +1,7 @@
-#Module WRenderArea
+#Module RenderArea
 #------------------------------------------
 module_name_hint=renderarea
-module_description=RenderArea is a widget which is placed on Window and renders other modules, and send them mouse and keyboard events.
+module_description=RenderArea is a widget which is placed on Window and renders other modules, and sends them mouse and keyboard events.
 module_version=1.01
 module_impl=C++
 

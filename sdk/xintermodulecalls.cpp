@@ -1,4 +1,4 @@
-#include "xintermodulecalls.h".h"
+#include "xintermodulecalls.h"
 
 //---------------------------------------------------------------------
 void XIntermodule::call_on_render(Module *module, const RenderCallData &data) {

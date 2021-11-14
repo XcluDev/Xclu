@@ -10,13 +10,71 @@
     "modules": [
         {
             "description": {
+                "class": "RenderArea",
+                "name": "renderarea1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "size_mode",
+                        "avalue": "Maximize"
+                    },
+                    {
+                        "aname": "fixed_w",
+                        "avalue": "256"
+                    },
+                    {
+                        "aname": "fixed_h",
+                        "avalue": "256"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
                 "class": "Window",
                 "name": "window1",
                 "version": "1.01"
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -73,11 +131,11 @@
                     },
                     {
                         "aname": "content_mode",
-                        "avalue": "Auto_Vertical"
+                        "avalue": "Manual"
                     },
                     {
                         "aname": "content",
-                        "avalue": "#Keywords:  HorizontalLayout, VerticalLayout, Tab, Stretch\n#the number means stretching, indentation may be any, just consistent\n#    Simple layout of single widget:\n#VerticalLayout 1\n#  wimage1 1\n#\n#    Advanced layout:\n#HorizontalLayout\n#  Tabs 5\n#    Tab Settings\n#      HorizontalLayout\n#        wnumber1\n#        wnumber2\n#      Tab Values\n#      Tab Something_Else\n#  VerticalLayout 0\n#    wbutton1 0\n#    wbutton2 0\n#    Stretch 1"
+                        "avalue": "renderarea1"
                     },
                     {
                         "aname": "global_margin",

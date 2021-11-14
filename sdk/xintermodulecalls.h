@@ -28,14 +28,14 @@ public:
             w = input->geti("w");
             h = input->geti("h");
         }
-        void set_to(XObject *input) {
+        void set_to(XObject *input) const {
             input->clear();
             input->set_type(XObjectIntermoduleCallRender);
             input->set_pointer("painter", painter);
             input->seti("w", w);
             input->seti("h", h);
         }
-        void set_to(XObject &input) {
+        void set_to(XObject &input) const {
             set_to(&input);
         }
     };
