@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "module.h"
 #include "xobject.h"
-#include "xc_project.h"
+#include "project_props.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(Module *module) {

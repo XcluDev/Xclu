@@ -1,107 +1,105 @@
 //----------------------------------------------------
-//Interface for XClassWImage
+//Interface for XClassRenderArea
 //Created automatically.
 //----------------------------------------------------
 //Page Main
-//Input image
+//
 
-//Object Image
-//Input image.
-bool was_changed_image() { return was_changed_("image"); }
-XProtectedObject *getobject_image() { return get_object_("image"); }
+//Const Enum Size
+//Size mode.
+enum enum_size_mode {
+    size_mode_Maximize = 0,
+    size_mode_Fixed = 1,
+    size_mode_N__ = 2
+};
+bool was_changed_size_mode() { return was_changed_("size_mode"); }
+enum_size_mode gete_size_mode() { return enum_size_mode(geti_("size_mode")); }
+QString getraw_size_mode() { return getraw_("size_mode");}
 
-//Checkbox Is New Frame
-//Flag that image was changed. You may link it to the flag of an image provider module.
-bool was_changed_is_new_frame() { return was_changed_("is_new_frame"); }
-int geti_is_new_frame() { return geti_("is_new_frame"); }
-
-//----------------------------------------------------
-//Page Visuals
-//Visual settings.
-
-//Out String Parent
-//Parent module name (Window or WLayout) at which this element is placed.
-bool was_changed_parent_id() { return was_changed_("parent_id"); }
-QString gets_parent_id() { return gets_("parent_id"); }
-QStringList get_strings_parent_id() { return get_strings_("parent_id"); }
-void sets_parent_id(QString value) { sets_("parent_id", value); }
-void clear_string_parent_id() { clear_string_("parent_id"); }
-void append_string_parent_id(QString v, int extra_new_lines_count = 0) { append_string_("parent_id", v, extra_new_lines_count); }
-void append_string_parent_id(QStringList v, int extra_new_lines_count = 0) { append_string_("parent_id", v, extra_new_lines_count); }
-
-//Checkbox Visible
-//Is visible.
-bool was_changed_visible() { return was_changed_("visible"); }
-int geti_visible() { return geti_("visible"); }
-
-
-//Const Int W
-//Width of image.
+//Out Int Width
+//Width of widget.
 bool was_changed_w() { return was_changed_("w"); }
 int geti_w() { return geti_("w"); }
+void seti_w(int value) { seti_("w", value); }
+void increase_int_w(int increase = 1) { increase_int_("w", increase); }
+void repaint_w() { repaint_("w"); }
 
-//Const Int H
-//Height of image.
+//Out Int Height
+//Height of widget.
 bool was_changed_h() { return was_changed_("h"); }
 int geti_h() { return geti_("h"); }
+void seti_h(int value) { seti_("h", value); }
+void increase_int_h(int increase = 1) { increase_int_("h", increase); }
+void repaint_h() { repaint_("h"); }
+
+//Const Int Width
+//Width of widget.
+bool was_changed_fixed_w() { return was_changed_("fixed_w"); }
+int geti_fixed_w() { return geti_("fixed_w"); }
+void repaint_fixed_w() { repaint_("fixed_w"); }
+
+//Const Int Height
+//Height of widget.
+bool was_changed_fixed_h() { return was_changed_("fixed_h"); }
+int geti_fixed_h() { return geti_("fixed_h"); }
+void repaint_fixed_h() { repaint_("fixed_h"); }
 
 
-//Const Checkbox Title
-//Title, placed at the left of the value.
-bool was_changed_title() { return was_changed_("title"); }
-int geti_title() { return geti_("title"); }
+//Out Text Connected Modules
+//Here is populated list of connected modules.
+bool was_changed_connected_modules() { return was_changed_("connected_modules"); }
+QString gets_connected_modules() { return gets_("connected_modules"); }
+QStringList get_strings_connected_modules() { return get_strings_("connected_modules"); }
+void sets_connected_modules(QString value) { sets_("connected_modules", value); }
+void clear_string_connected_modules() { clear_string_("connected_modules"); }
+void append_string_connected_modules(QString v, int extra_new_lines_count = 0) { append_string_("connected_modules", v, extra_new_lines_count); }
+void append_string_connected_modules(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_modules", v, extra_new_lines_count); }
+void repaint_connected_modules() { repaint_("connected_modules"); }
 
-//String Title
-//Text of title.
-bool was_changed_title_text() { return was_changed_("title_text"); }
-QString gets_title_text() { return gets_("title_text"); }
-QStringList get_strings_title_text() { return get_strings_("title_text"); }
+//----------------------------------------------------
+//Page Rendering
+//Measurement settings and background.
 
-//Const Enum Placement
-//Title placement position.
-enum enum_title_placement {
-    title_placement_Left = 0,
-    title_placement_Right = 1,
-    title_placement_Top = 2,
-    title_placement_Bottom = 3,
-    title_placement_N__ = 4
+//Const Enum Measurement
+//how to measure positions - relative to a fixed value or in pixels.
+enum enum_measurement {
+    measurement_Scaling = 0,
+    measurement_Pixels = 1,
+    measurement_N__ = 2
 };
-bool was_changed_title_placement() { return was_changed_("title_placement"); }
-enum_title_placement gete_title_placement() { return enum_title_placement(geti_("title_placement")); }
-QString getraw_title_placement() { return getraw_("title_placement");}
+bool was_changed_measurement() { return was_changed_("measurement"); }
+enum_measurement gete_measurement() { return enum_measurement(geti_("measurement")); }
+QString getraw_measurement() { return getraw_("measurement");}
 
-//Const Enum Alignment
-//Title alignment mode.
-enum enum_title_alignment {
-    title_alignment_Default = 0,
-    title_alignment_Left = 1,
-    title_alignment_Center = 2,
-    title_alignment_Right = 3,
-    title_alignment_N__ = 4
-};
-bool was_changed_title_alignment() { return was_changed_("title_alignment"); }
-enum_title_alignment gete_title_alignment() { return enum_title_alignment(geti_("title_alignment")); }
-QString getraw_title_alignment() { return getraw_("title_alignment");}
+//Const Int ScalingX
+//Base size for vector rescaling.
+bool was_changed_scaling_x() { return was_changed_("scaling_x"); }
+int geti_scaling_x() { return geti_("scaling_x"); }
+void repaint_scaling_x() { repaint_("scaling_x"); }
 
-//Const Enum Width
-//Width of title.
-enum enum_title_width {
-    title_width_Default = 0,
-    title_width_Custom_Range = 1,
-    title_width_N__ = 2
-};
-bool was_changed_title_width() { return was_changed_("title_width"); }
-enum_title_width gete_title_width() { return enum_title_width(geti_("title_width")); }
-QString getraw_title_width() { return getraw_("title_width");}
+//Const Int ScalingY
+//Base size for vector rescaling.
+bool was_changed_scaling_y() { return was_changed_("scaling_y"); }
+int geti_scaling_y() { return geti_("scaling_y"); }
+void repaint_scaling_y() { repaint_("scaling_y"); }
 
-//Const Int Min
-//Minimal title width.
-bool was_changed_title_width_min() { return was_changed_("title_width_min"); }
-int geti_title_width_min() { return geti_("title_width_min"); }
 
-//Const Int Max
-//Maximal title width.
-bool was_changed_title_width_max() { return was_changed_("title_width_max"); }
-int geti_title_width_max() { return geti_("title_width_max"); }
+//Int Back Red
+//Background red component.
+bool was_changed_back_red() { return was_changed_("back_red"); }
+int geti_back_red() { return geti_("back_red"); }
+void repaint_back_red() { repaint_("back_red"); }
+
+//Int Back Green
+//Background green component.
+bool was_changed_back_green() { return was_changed_("back_green"); }
+int geti_back_green() { return geti_("back_green"); }
+void repaint_back_green() { repaint_("back_green"); }
+
+//Int Back Blue
+//Background blue component.
+bool was_changed_back_blue() { return was_changed_("back_blue"); }
+int geti_back_blue() { return geti_("back_blue"); }
+void repaint_back_blue() { repaint_("back_blue"); }
 
 //----------------------------------------------------

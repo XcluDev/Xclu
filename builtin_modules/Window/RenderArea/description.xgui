@@ -11,6 +11,7 @@ module_accept_calls=create_widget
 page Main
 
 const enum Size size_mode=Maximize [Maximize,Fixed]
+	//Size mode.
 
 if size_mode Maximize
 out int Width w=0 0:* 1,10
@@ -39,4 +40,28 @@ out text Connected_Modules connected_modules 20 20
 	//Here is populated list of connected modules.
 
 
+#-------------------------------------------
+page Rendering
+	//Measurement settings and background.
+	
+const enum Measurement measurement=Scaling [Scaling,Pixels]
+	//how to measure positions - relative to a fixed value or in pixels.
+
+if measurement Scaling
+const int ScalingX scaling_x=1000 1:* 1,10
+	//Base size for vector rescaling.
+	//abstr.unit
+const int ScalingY scaling_y=1000 1:* 1,10
+	//Base size for vector rescaling.
+	//abstr.unit
+endif
+	
+line
+in int Back_Red back_red=128 0:255 1,10
+	//Background red component.
+in int Back_Green back_green=128 0:255 1,10
+	//Background green component.
+in int Back_Blue back_blue=128 0:255 1,10
+	//Background blue component.
+	
 #-------------

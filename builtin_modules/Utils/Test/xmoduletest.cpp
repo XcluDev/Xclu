@@ -1,7 +1,7 @@
 #include "xmoduletest.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xc_project.h"
+#include "project_props.h"
 
 //registering module implementation
 REGISTER_XMODULE(Test)

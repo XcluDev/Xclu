@@ -94,7 +94,7 @@ enum ProjectRunStateBinary: int {
 
 //Этап работы программы, используется для установки значений переменных в GUI и обратно
 enum GuiStage : int {
-    GuiStageProjectAfterLoading = 0,    //ProjectCore properties -> GUI
+    GuiStageProjectAfterLoading = 0,    //Project properties -> GUI
 
     GuiStageAfterGuiAttached = 1,       //const, in, out -> GUI
 

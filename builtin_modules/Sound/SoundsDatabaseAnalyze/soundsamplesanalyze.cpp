@@ -1,6 +1,6 @@
 #include "soundsamplesanalyze.h"
 #include "incl_cpp.h"
-#include "xc_project.h"
+#include "project_props.h"
 #include "xc_audio.h"
 #include "xc_tsne.h"
 

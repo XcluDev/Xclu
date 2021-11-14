@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "xguistring.h"
 #include "xitemstring.h"
-#include "xc_project.h"
+#include "project_props.h"
 
 //---------------------------------------------------------------------
 /*

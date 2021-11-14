@@ -4,7 +4,7 @@
 #include "registrarxmodule.h"
 #include <QProcess>
 #include <QDirIterator>
-#include "xc_project.h"
+#include "project_props.h"
 #include "xc_audio_wavfile.h"
 #include "xc_audio.h"
 

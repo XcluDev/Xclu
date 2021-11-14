@@ -45,7 +45,7 @@ void XModuleRenderArea::draw(QPainter &painter, int outw, int outh) {
     painter.setRenderHint(QPainter::Antialiasing);
 
     //Draw background
-    painter.setBrush(QColor(0, 128, 0));
+    painter.setBrush(QColor(geti_back_red(), geti_back_green(), geti_back_blue()));
     painter.setPen(Qt::PenStyle::NoPen);
     painter.drawRect(0, 0, outw, outh);
 }

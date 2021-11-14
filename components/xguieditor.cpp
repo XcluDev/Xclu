@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "xguieditor.h"
-#include "projectcore.h"
+#include "project.h"
 #include "incl_cpp.h"
 #include "xguipage.h"
 #include "visibilitygroups.h"
@@ -56,7 +56,7 @@ XGuiEditor::XGuiEditor(QWidget *parent)
 //сигнал, что модуль сменился и нужно загрузить новый модуль
 void XGuiEditor::changed_module_selection(int i) {
     bool can_return_null = true;
-    Module *module = PROJ_CORE.find_module_by_index(i, can_return_null);
+    Module *module = PROJECT.find_module_by_index(i, can_return_null);
     if (module != module_) {
         //qDebug() << "Load params editor for module " << i;
         load_module(module);

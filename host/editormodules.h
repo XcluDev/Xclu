@@ -59,7 +59,7 @@ private:
 protected:
     void new_action(QAction *&action, QString title, QString icon_file, QMenu *modulesMenu);
 
-//Нажатия на кнопки - они сами список не изменяют, а отправляют запрос в ProjectCore
+//Нажатия на кнопки - они сами список не изменяют, а отправляют запрос в Project
 private slots:
     void module_selected();
     void module_double_clicked(QListWidgetItem *item);

@@ -2,10 +2,10 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "projectcore.h"
+#include "project.h"
 #include "incl_cpp.h"
 #include "projectgui.h"
-#include "xc_project.h"
+#include "project_props.h"
 #include "xobjectimage.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
@@ -128,7 +128,7 @@ void MainWindow::closeProject() {
     xc_console_clear();//очистка списка сообщений
 
     PROJ_GUI->before_close_project();
-    PROJ_CORE.new_project();
+    PROJECT.new_project();
     PROJ_GUI->after_close_project();
 
     xc_working_properties().reset();  //сброк предыдущего FPS и autostart
@@ -148,7 +148,7 @@ void MainWindow::on_actionOpen_Project_triggered()
     QString folder = open_projects_folder_;
     open_projects_folder_ = "";
 
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Open ProjectCore"), folder, "*.xclu");
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Open Project"), folder, "*.xclu");
     if (!fileName.isEmpty()) {
         openProject(fileName);
     }
@@ -343,13 +343,13 @@ void MainWindow::openProject(const QString &fileName) {
     xc_console_append("Loading project `" + fileName + "`", dirty);
     xc_console_append("", dirty);
 
-    auto load_result = PROJ_CORE.load_project(fileName);
-    if (load_result != ProjectCore::LoadProjectStatusNo) {
+    auto load_result = PROJECT.load_project(fileName);
+    if (load_result != Project::LoadProjectStatusNo) {
         PROJ_GUI->after_load_project();
         //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
         set_current_file(fileName);
         //если были warnings при загрузке - то, ставим флажок изменения проекта, так как при сохранении он изменится
-        if (load_result == ProjectCore::LoadProjectStatusWarnings) {
+        if (load_result == Project::LoadProjectStatusWarnings) {
             xc_document_modified();
         }
 
@@ -363,7 +363,7 @@ void MainWindow::openProject(const QString &fileName) {
 //---------------------------------------------------------------------
 bool MainWindow::saveProject(const QString &fileName) {
     PROJ_GUI->before_save_project();
-    if (PROJ_CORE.save_project(fileName)) {
+    if (PROJECT.save_project(fileName)) {
         //устанавливает текущий файл в заголовок, а также сбрасывает флажок изменения проекта
         set_current_file(fileName);
         //statusBar()->showMessage(tr("File saved"), 2000);
@@ -419,7 +419,7 @@ void MainWindow::set_current_file(const QString &fileName) {
         //запомнить файл проекта, чтобы его потом открыть
         Settings::sets(Settings::lastProjectFile(), projectFile);
 
-        //запомнить папку проекта, чтобы от нее затем начинать Open ProjectCore
+        //запомнить папку проекта, чтобы от нее затем начинать Open Project
         QString folder = QFileInfo(projectFile).canonicalPath();
         Settings::sets(Settings::lastProjectFolder(), folder);
 
@@ -444,12 +444,12 @@ void MainWindow::set_current_file(const QString &fileName) {
 void MainWindow::on_actionCompile_triggered()
 {
     //compile links and all other needed to check errors
-    PROJ_CORE.compile();
+    PROJECT.compile();
 }
 
 //---------------------------------------------------------------------
 void MainWindow::execute_run() {
-    qDebug("ProjectCore run");
+    qDebug("Project run");
 
     if (run_state_ == ProjectRunStateStopped) {
         set_state(ProjectRunStateStarting);
@@ -465,7 +465,7 @@ void MainWindow::execute_run() {
         }
 
         //вычисляем частоту обновления
-        //float FPS = PROJ_CORE.properties().frame_rate;
+        //float FPS = PROJECT.properties().frame_rate;
         int frame_rate = xc_working_properties().get_frame_rate();
         xc_assert(frame_rate>1 && frame_rate<120, QString("Bad frame rate %1").arg(frame_rate));
         //запускаем таймер
@@ -476,7 +476,7 @@ void MainWindow::execute_run() {
 
 //---------------------------------------------------------------------
 void MainWindow::execute_stop() {
-    qDebug("ProjectCore stop");
+    qDebug("Project stop");
     if (run_state_ == ProjectRunStateStarting || run_state_ == ProjectRunStateRunning) {
         set_state(ProjectRunStateStopping);
     }
@@ -488,7 +488,7 @@ void MainWindow::immediate_stop() {
     if (run_state_ != ProjectRunStateStopped) {
         timer->stop();
         //остановка вычислений
-        PROJ_CORE.execute_stop();
+        PROJECT.execute_stop();
         set_state(ProjectRunStateStopped);
     }
 }
@@ -500,7 +500,7 @@ void MainWindow::execute_update() {
     if (run_state_ == ProjectRunStateStarting) {
         bool stopped;
         //пробуем стартовать программу
-        PROJ_CORE.execute_start(stopped);
+        PROJECT.execute_start(stopped);
 
         if (!stopped) {
             //запуск успешный, продолжаем работу
@@ -523,7 +523,7 @@ void MainWindow::execute_update() {
     //осуществление вычислений
     if (run_state_ == ProjectRunStateRunning) {
         bool stopped;
-        PROJ_CORE.execute_update(stopped);
+        PROJECT.execute_update(stopped);
         //если по какой-то причине останов - то посылаем сигнал остановки
         if (stopped) {
             emit execute_stop();

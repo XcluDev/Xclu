@@ -1,7 +1,7 @@
 #include "xtimemeasure.h"
 
 #include "incl_cpp.h"
-#include "xc_project.h"
+#include "project_props.h"
 
 //---------------------------------------------------------------------
 XTimeMeasure::XTimeMeasure()

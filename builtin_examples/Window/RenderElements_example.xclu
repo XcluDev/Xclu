@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -16,7 +16,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -34,6 +34,34 @@
                     {
                         "aname": "fixed_h",
                         "avalue": "256"
+                    },
+                    {
+                        "aname": "Rendering",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "measurement",
+                        "avalue": "Scaling"
+                    },
+                    {
+                        "aname": "scaling_x",
+                        "avalue": "1000"
+                    },
+                    {
+                        "aname": "scaling_y",
+                        "avalue": "1000"
+                    },
+                    {
+                        "aname": "back_red",
+                        "avalue": "128"
+                    },
+                    {
+                        "aname": "back_green",
+                        "avalue": "128"
+                    },
+                    {
+                        "aname": "back_blue",
+                        "avalue": "128"
                     },
                     {
                         "aname": "Control",
@@ -74,7 +102,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -87,7 +115,7 @@
                     },
                     {
                         "aname": "size",
-                        "avalue": "640x480"
+                        "avalue": "Custom"
                     },
                     {
                         "aname": "size_x",

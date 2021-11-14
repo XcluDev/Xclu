@@ -2,7 +2,7 @@
 
 #include "dialogtestmoduleinterface.h"
 #include "incl_cpp.h"
-#include "projectcore.h"
+#include "project.h"
 #include "moduleseed.h"
 #include "moduleinterface.h"
 #include "xguieditor.h"

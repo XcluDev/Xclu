@@ -6,17 +6,17 @@
 #include <QJsonObject>
 #include "incl_h.h"
 #include "module.h"
-#include "projectproperties.h"
+#include "projecteditorprops.h"
 
 
 
-class ProjectCore
+class Project
 {
 public:
-    ProjectCore();
+    Project();
 
     //Свойства проекта
-    ProjectProperties &properties();
+    ProjectEditorProperties &properties();
 
     //Создание, запись и загрузка проекта
     enum SaveFormat {
@@ -78,7 +78,7 @@ public:
 
 private:
     //Свойства проекта
-    ProjectProperties properties_;
+    ProjectEditorProperties properties_;
 
     //Модули
     QVector<Module *> modules_;
@@ -92,8 +92,6 @@ private:
     //Запись и считывание проекта через json-объект
     void write_json(QJsonObject &json);
     void read_json(const QJsonObject &json);
-
-
 
     //обновить имена - следует делать после загрузки проекта и добавления/удаления/переименования/изменения порядка модулей
     QMap<QString, int> names_;
@@ -109,6 +107,6 @@ private:
 
 };
 
-extern ProjectCore PROJ_CORE;
+extern Project PROJECT;
 
 #endif //PROJECTCORE_H

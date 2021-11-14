@@ -1,7 +1,7 @@
 #include "xmodulesoundosc.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xc_project.h"
+#include "project_props.h"
 #include "module.h"
 #include "xobjectimage.h"
 

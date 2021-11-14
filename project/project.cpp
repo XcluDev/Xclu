@@ -3,30 +3,30 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
-#include "projectcore.h"
+#include "project.h"
 #include "incl_cpp.h"
 #include "modulesfactory.h"
 #include "module.h"
-#include "xc_project.h"
+#include "project_props.h"
 #include "consoleview.h"
 
-ProjectCore PROJ_CORE;
+Project PROJECT;
 
 //---------------------------------------------------------------------
-ProjectCore::ProjectCore()
+Project::Project()
 {
 
 }
 
 //---------------------------------------------------------------------
-ProjectProperties &ProjectCore::properties() {
+ProjectEditorProperties &Project::properties() {
     return properties_;
 }
 
 //---------------------------------------------------------------------
 //Файл проекта был изменен - обновить рабочую папку для запуска
 //если пустая строка - ставит на папку XCLU
-void ProjectCore::update_project_folder(QString project_file) {
+void Project::update_project_folder(QString project_file) {
     if (project_file.isEmpty()) {
         xc_set_project_folder("");//qApp->applicationDirPath());
     }
@@ -39,19 +39,19 @@ void ProjectCore::update_project_folder(QString project_file) {
 
 
 //---------------------------------------------------------------------
-void ProjectCore::new_project() {
+void Project::new_project() {
     close_project();
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::close_project() {
+void Project::close_project() {
     properties().reset_name();
     update_project_folder("");
     clear_modules();
 }
 
 //---------------------------------------------------------------------
-bool ProjectCore::save_project(QString file_name, SaveFormat format) {
+bool Project::save_project(QString file_name, SaveFormat format) {
     try {
         //записываем значения переменных из GUI
         gui_action(GuiStageProjectBeforeSaving);
@@ -85,7 +85,7 @@ bool ProjectCore::save_project(QString file_name, SaveFormat format) {
 }
 
 //---------------------------------------------------------------------
-ProjectCore::LoadProjectStatus ProjectCore::load_project(QString file_name, SaveFormat format) {
+Project::LoadProjectStatus Project::load_project(QString file_name, SaveFormat format) {
     try {
         xc_assert(!xc_is_running(), "Please stop the current project before loading");
         close_project();
@@ -125,7 +125,7 @@ ProjectCore::LoadProjectStatus ProjectCore::load_project(QString file_name, Save
     //Если успено загрузили - то, если были ошибки в консоли, то предупредим об этом
     if (!CONS_VIEW->is_empty()) {
         xc_message_box("Some problems occured during loading the project.\nPlease see Console view for the details.");
-        //возвращаем, что были warnings - чтобы PROJ_CORE поставил пометку, что проект был изменен - так как при сохранении он изменится
+        //возвращаем, что были warnings - чтобы PROJECT поставил пометку, что проект был изменен - так как при сохранении он изменится
         return LoadProjectStatusWarnings;
     }
     return LoadProjectStatusOk;
@@ -134,7 +134,7 @@ ProjectCore::LoadProjectStatus ProjectCore::load_project(QString file_name, Save
 
 //---------------------------------------------------------------------
 //Запись и считывание проекта через json-объект
-void ProjectCore::write_json(QJsonObject &json) {
+void Project::write_json(QJsonObject &json) {
     //Описание приложения
     QJsonObject appObject;
     appObject["name"] = QCoreApplication::instance()->applicationName();
@@ -157,7 +157,7 @@ void ProjectCore::write_json(QJsonObject &json) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::read_json(const QJsonObject &json) {
+void Project::read_json(const QJsonObject &json) {
     //Описание приложения - сейчас не нужно
 
     //Свойства проекта
@@ -195,7 +195,7 @@ void ProjectCore::read_json(const QJsonObject &json) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::clear_modules() {
+void Project::clear_modules() {
     if (xc_is_running()) {
         xc_halt("Internal error - command to clear project, but project is running");
     }
@@ -207,7 +207,7 @@ void ProjectCore::clear_modules() {
 }
 
 //---------------------------------------------------------------------
-bool ProjectCore::update_names() {  //обновить все name - вызывается перед стартом проекта
+bool Project::update_names() {  //обновить все name - вызывается перед стартом проекта
     names_.clear();
 
     for (int i=0; i<modules_.size(); i++) {
@@ -227,7 +227,7 @@ bool ProjectCore::update_names() {  //обновить все name - вызыв�
 
 //---------------------------------------------------------------------
 //Выбор уникального имени - webcam1, webcam2,...
-QString ProjectCore::generate_unique_name(QString name_hint, bool dont_change_if_ok) {
+QString Project::generate_unique_name(QString name_hint, bool dont_change_if_ok) {
     update_names();
 
     if (dont_change_if_ok && !names_.contains(name_hint)) {
@@ -246,14 +246,14 @@ QString ProjectCore::generate_unique_name(QString name_hint, bool dont_change_if
 }
 
 //---------------------------------------------------------------------
-QString ProjectCore::generate_unique_name_by_class_name(QString class_name) {
+QString Project::generate_unique_name_by_class_name(QString class_name) {
     auto *seed = FACTORY.get_module(class_name);
     return generate_unique_name(seed->description.name_hint);
 }
 
 //---------------------------------------------------------------------
 //Cгенерировать модуль данного типа и сгенерировать ему уникальное имя type1, type2,...
-Module *ProjectCore::new_module(int i, QString class_name, QString name_hint) {
+Module *Project::new_module(int i, QString class_name, QString name_hint) {
     if (class_name.isEmpty()) {
         return nullptr;
     }
@@ -281,7 +281,7 @@ Module *ProjectCore::new_module(int i, QString class_name, QString name_hint) {
 }
 
 //---------------------------------------------------------------------
-bool ProjectCore::can_rename_module(QString old_name, QString new_name) {
+bool Project::can_rename_module(QString old_name, QString new_name) {
     if (new_name.isEmpty()) return false;
     if (new_name == old_name) {
         return true;
@@ -291,7 +291,7 @@ bool ProjectCore::can_rename_module(QString old_name, QString new_name) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::duplicate_module(int i) {
+void Project::duplicate_module(int i) {
     QString new_nameid = generate_unique_name(modules_[i]->name());
     Module *module = modules_[i]->duplicate(new_nameid);
     if (!module) {
@@ -303,7 +303,7 @@ void ProjectCore::duplicate_module(int i) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::delete_module(int i) {
+void Project::delete_module(int i) {
     //к этому моменту модуль уже отсоединен от GUI
     auto *module = modules_[i];
     modules_.remove(i);
@@ -313,7 +313,7 @@ void ProjectCore::delete_module(int i) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::rename_module(int i, QString new_name) {
+void Project::rename_module(int i, QString new_name) {
     auto *modul = find_module_by_index(i);
     if (!modul) {
         xc_halt("Can't rename module " + new_name);
@@ -324,29 +324,29 @@ void ProjectCore::rename_module(int i, QString new_name) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::swap_modules(int i) {   //i<->i+1
-    xc_assert(i>=0 && i+1<modules_count(), "Internal error, ProjectCore::swap_modules - bad index '" + QString::number(i) + "'");
+void Project::swap_modules(int i) {   //i<->i+1
+    xc_assert(i>=0 && i+1<modules_count(), "Internal error, Project::swap_modules - bad index '" + QString::number(i) + "'");
     qSwap(modules_[i], modules_[i+1]);
     update_names();
 }
 
 //---------------------------------------------------------------------
-int ProjectCore::modules_count() {
+int Project::modules_count() {
     return modules_.size();
 }
 
 //---------------------------------------------------------------------
-bool ProjectCore::has_module_with_index(int i) {
+bool Project::has_module_with_index(int i) {
     return i >= 0 && i < modules_count();
 }
 
 //---------------------------------------------------------------------
-bool ProjectCore::has_module_with_name(QString name) {
+bool Project::has_module_with_name(QString name) {
     return names_.contains(name);
 }
 
 //---------------------------------------------------------------------
-Module *ProjectCore::find_module_by_index(int i, bool can_return_null) {
+Module *Project::find_module_by_index(int i, bool can_return_null) {
     if (has_module_with_index(i)) {
         return modules_[i];
     }
@@ -359,7 +359,7 @@ Module *ProjectCore::find_module_by_index(int i, bool can_return_null) {
 }
 
 //---------------------------------------------------------------------
-Module *ProjectCore::find_module_by_name(QString name) {
+Module *Project::find_module_by_name(QString name) {
     xc_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
     return find_module_by_index(names_.value(name));
 }
@@ -367,9 +367,9 @@ Module *ProjectCore::find_module_by_name(QString name) {
 //---------------------------------------------------------------------
 //вычисление expressions и работа с GUI, см. определение GuiStage
 //тут можно вызывать только GuiStageProjectAfterLoading и GuiStageProjectBeforeSaving
-void ProjectCore::gui_action(GuiStage stage) {
+void Project::gui_action(GuiStage stage) {
     if (stage != GuiStageProjectAfterLoading && stage != GuiStageProjectBeforeSaving) {
-        xc_message_box("Internal error: ProjectCore::gui_action can be used only with project-related stages");
+        xc_message_box("Internal error: Project::gui_action can be used only with project-related stages");
         return;
     }
 
@@ -381,7 +381,7 @@ void ProjectCore::gui_action(GuiStage stage) {
 
 //---------------------------------------------------------------------
 //выполнить операцию для всех модулей
-void ProjectCore::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_on_errors) {
+void Project::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_on_errors) {
     for (int i=0; i<modules_count(); i++) {
         auto *module = modules_[i];
         //захватываем ошибки из модулей
@@ -413,7 +413,7 @@ void ProjectCore::execute(ModuleExecuteStage stage, bool &stop_out, bool excepti
 //---------------------------------------------------------------------
 //Compile links and all other needed to check errors
 //Also clears console
-bool ProjectCore::compile() {
+bool Project::compile() {
     //clear console
     xc_console_clear();
     //compile
@@ -430,7 +430,7 @@ bool ProjectCore::compile() {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::execute_start(bool &stop_out) {
+void Project::execute_start(bool &stop_out) {
     stop_out = false;
     if (xc_is_running()) {
         xc_message_box("Internal error: received project starting command, but it's already started");
@@ -473,7 +473,7 @@ void ProjectCore::execute_start(bool &stop_out) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::execute_update(bool &stop_out) {
+void Project::execute_update(bool &stop_out) {
     xc_update_dt();    //update dt counter
 
     stop_out = false;
@@ -482,7 +482,7 @@ void ProjectCore::execute_update(bool &stop_out) {
 }
 
 //---------------------------------------------------------------------
-void ProjectCore::execute_stop() {
+void Project::execute_stop() {
     //если уже остановлены - все равно считываем значения
     //поэтому это закомментировано:
     ////if (xc_is_stopped()) return;

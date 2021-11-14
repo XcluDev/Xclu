@@ -1,14 +1,14 @@
-#include "xc_project.h"
+#include "project_props.h"
 #include <QFileDialog>
 #include "incl_cpp.h"
-#include "projectcore.h"
+#include "project.h"
 #include "xitem.h"
 #include "xobject.h"
 #include "mainwindow.h"
 
 
 struct ProjectAccessData {
-    ProjectAccessWorkingProperties running_properties_;
+    ProjectRtProperties running_properties_;
 
     ProjectRunStateBinary state_ = ProjectRunStateBinaryStopped;
 
@@ -23,49 +23,49 @@ struct ProjectAccessData {
 ProjectAccessData access_;
 
 //---------------------------------------------------------------------
-//ProjectAccessWorkingProperties
+//ProjectRtProperties
 //---------------------------------------------------------------------
 //установить значения по умолчанию для frate_rate и autostar
-void ProjectAccessWorkingProperties::reset() {
+void ProjectRtProperties::reset() {
     frame_rate_ = 30;   //TODO параметр, значение по умолчанию
     autostart_ = 0;
     dont_save_at_exit_ = 0;
 }
 
 //---------------------------------------------------------------------
-void ProjectAccessWorkingProperties::set_frame_rate(int fps) {
+void ProjectRtProperties::set_frame_rate(int fps) {
     frame_rate_ = fps;
 }
 
 //---------------------------------------------------------------------
-int ProjectAccessWorkingProperties::get_frame_rate() {
+int ProjectRtProperties::get_frame_rate() {
     return frame_rate_;
 }
 
 //---------------------------------------------------------------------
-void ProjectAccessWorkingProperties::set_autostart(int v) {
+void ProjectRtProperties::set_autostart(int v) {
     autostart_ = v;
 }
 
 //---------------------------------------------------------------------
-bool ProjectAccessWorkingProperties::get_autostart() {
+bool ProjectRtProperties::get_autostart() {
     return autostart_;
 }
 
 //---------------------------------------------------------------------
-void ProjectAccessWorkingProperties::set_dont_save_at_exit(int v) {
+void ProjectRtProperties::set_dont_save_at_exit(int v) {
     dont_save_at_exit_ = v;
 }
 
 //---------------------------------------------------------------------
-bool ProjectAccessWorkingProperties::get_dont_save_at_exit() {
+bool ProjectRtProperties::get_dont_save_at_exit() {
     return dont_save_at_exit_;
 }
 
 //---------------------------------------------------------------------
 //ProjectAccess
 //---------------------------------------------------------------------
-ProjectAccessWorkingProperties &xc_working_properties() {
+ProjectRtProperties &xc_working_properties() {
     return access_.running_properties_;
 }
 
@@ -121,8 +121,8 @@ QString xc_absolute_path_from_project(QString relative_path, bool create_folder)
 
 //---------------------------------------------------------------------
 //Получение модуля
-Module *xc_get_module(QString module_name) {
-    return PROJ_CORE.module_by_name(module_name);
+Module *xc_find_module(QString module_name) {
+    return PROJECT.find_module_by_name(module_name);
 }
 
 //---------------------------------------------------------------------
@@ -130,27 +130,27 @@ Module *xc_get_module(QString module_name) {
 int xc_get_int_by_link(QString link_str, int def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return xc_get_module(link.module)->geti(link.var, link.index, link.index2);
+    return xc_find_module(link.module)->geti(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 float xc_get_float_by_link(QString link_str, float def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return xc_get_module(link.module)->getf(link.var, link.index, link.index2);
+    return xc_find_module(link.module)->getf(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 QString xc_get_string_by_link(QString link_str, QString def_val) {
     XLinkParsed link(link_str);
     if (link.is_empty) return def_val;
-    return xc_get_module(link.module)->gets(link.var, link.index, link.index2);
+    return xc_find_module(link.module)->gets(link.var, link.index, link.index2);
 }
 
 //---------------------------------------------------------------------
 XProtectedObject *xc_get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    return xc_get_module(link.module)->get_object(link.var);
+    return xc_find_module(link.module)->get_object(link.var);
 }
 
 //---------------------------------------------------------------------
@@ -158,8 +158,8 @@ XProtectedObject *xc_get_object_by_link(QString link_str) {
 //General: module1 or press button: module1->button1
 void xc_bang(QString module_link) {
     XLinkParsed link(module_link);
-    if (link.var.isEmpty()) xc_get_module(link.module)->bang();
-    else xc_get_module(link.module)->button_pressed(link.var);
+    if (link.var.isEmpty()) xc_find_module(link.module)->bang();
+    else xc_find_module(link.module)->button_pressed(link.var);
 }
 
 //---------------------------------------------------------------------
@@ -197,14 +197,14 @@ void xc_bang(QStringList modules) {
 //    Synth2
 //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
 //для воспроизведения
-/*static*/ QVector<Module *> xc_get_modules(QString modules_list) {
+/*static*/ QVector<Module *> xc_find_modules(QString modules_list) {
     QStringList list = QString(modules_list).split("\n");
     QVector<Module *> out_list;
 
     for (int i=0; i<list.size(); i++) {
         QString name = list.at(i).trimmed();
         if (!name.isEmpty() && !name.startsWith("#")) {
-            out_list.push_back(PROJ_CORE.module_by_name(name));
+            out_list.push_back(PROJECT.find_module_by_name(name));
         }
     }
     return out_list;

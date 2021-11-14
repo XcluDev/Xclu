@@ -4,7 +4,7 @@
 #include "projectgui.h"
 #include "dialogrenamemodule.h"
 #include "dialogaddmodule.h"
-#include "projectcore.h"
+#include "project.h"
 #include "dialogmodulename.h"
 
 //---------------------------------------------------------------------
@@ -91,8 +91,8 @@ void EditorModules::after_close_project() {
 //пересчитать список модулей из проекта
 void EditorModules::update_module_list() {
     moduleListWidget->clear();
-    for (int i=0; i<PROJ_CORE.modules_count(); i++) {
-        inserted_module(i, PROJ_CORE.find_module_by_index(i)->name());
+    for (int i=0; i<PROJECT.modules_count(); i++) {
+        inserted_module(i, PROJECT.find_module_by_index(i)->name());
     }
     update_buttons();
 }
@@ -114,7 +114,7 @@ void EditorModules::emit_selection_changed() {  //послать сигнал, �
     int i = moduleListWidget->currentRow();
     if (i >= 0 && i < modules_count()) {
         //qDebug() << QString("module_selected %1").arg(i);
-        //auto *interf = PROJ_CORE.modules.get_interface(i);
+        //auto *interf = PROJECT.modules.get_interface(i);
 
         emit PROJ_GUI->changed_module_selection(i);
     }
@@ -152,7 +152,7 @@ void EditorModules::add_module_click() {
     if (!dialog) return;
     //подбор имени
     QString class_name = dialog->selected_type;
-    auto name_hint = PROJ_CORE.generate_unique_name_by_class_name(class_name);
+    auto name_hint = PROJECT.generate_unique_name_by_class_name(class_name);
 
     //диалог выбора имени
     auto *name_dialog = DialogModuleName::call_dialog(this, name_hint);
@@ -210,8 +210,8 @@ void EditorModules::delete_module_click() {
     //qDebug("delete_module_click");
 
     int index = current_index();
-    if (index < 0 || index > PROJ_CORE.modules_count()) return;
-    Module *module = PROJ_CORE.find_module_by_index(index);
+    if (index < 0 || index > PROJECT.modules_count()) return;
+    Module *module = PROJECT.find_module_by_index(index);
     if (!module) return;
 
     QMessageBox msgBox;
@@ -258,7 +258,7 @@ void EditorModules::up_module_click() {
 void EditorModules::down_module_click() {
     //qDebug("down_module_click");
     int index = current_index();
-    if (index >= 0 && index + 1< PROJ_CORE.modules_count()) {
+    if (index >= 0 && index + 1< PROJECT.modules_count()) {
         PROJ_GUI->swap_modules(index);
     }
 }

@@ -188,12 +188,9 @@ SOURCES += \
     libs/tsne/sptree.cpp \
     libs/tsne/tsne.cpp \
     modules/registrarxmodule.cpp \
-    project/projectcore.cpp \
-    project/projectproperties.cpp \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
-    project/xc_project.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/math/xmath.cpp \
@@ -245,7 +242,10 @@ SOURCES += \
     python/pythoncore.cpp \
     sdk/xclass.cpp \
     sdk/xmodulevisualwidget.cpp \
-    sdk/xmodulewidget.cpp
+    sdk/xmodulewidget.cpp \
+    project/project_props.cpp \
+    project/project.cpp \
+    project/projecteditorprops.cpp
 
 HEADERS += \
     components/button/xguibutton.h \
@@ -290,9 +290,6 @@ HEADERS += \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
     modules/registrarxmodule.h \
-    project/projectcore.h \
-    project/projectproperties.h \
-    project/xc_project.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
     sdk/math/int2.h \
@@ -350,7 +347,10 @@ HEADERS += \
     python/pythoncore.h \
     sdk/xclass.h \
     sdk/xmodulevisualwidget.h \
-    sdk/xmodulewidget.h
+    sdk/xmodulewidget.h \
+    project/project_props.h \
+    project/project.h \
+    project/projecteditorprops.h
 
 #--------------------------------------------------------------------------
 #Python
