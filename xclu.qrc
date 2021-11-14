@@ -435,5 +435,6 @@
         <file>builtin_modules/Sound/SoundsSeaOfWords/description.xgui</file>
         <file>builtin_modules/Sound/SoundIn/description.xgui</file>
         <file>builtin_modules/Window/RenderArea/description.xgui</file>
+        <file>builtin_modules/Window/RenderElement/description.xgui</file>
     </qresource>
 </RCC>

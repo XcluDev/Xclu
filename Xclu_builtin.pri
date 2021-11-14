@@ -37,7 +37,8 @@ SOURCES += \
     $$PWD/builtin_modules/Window/WImage/xmodulewimage.cpp \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp \
     $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.cpp \
-    $$PWD/builtin_modules/Project/Notes/xmodulenotes.cpp
+    $$PWD/builtin_modules/Project/Notes/xmodulenotes.cpp \
+    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp
 
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
@@ -103,7 +104,9 @@ HEADERS += \
     $$PWD/builtin_modules/Window/RenderArea/auto.h \
     $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.h \
     $$PWD/builtin_modules/Project/Notes/auto.h \
-    $$PWD/builtin_modules/Project/Notes/xmodulenotes.h
+    $$PWD/builtin_modules/Project/Notes/xmodulenotes.h \
+    $$PWD/builtin_modules/Window/RenderElement/auto.h \
+    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h
 
 #--------------------------------------------------------------------------
 #Realsense camera support

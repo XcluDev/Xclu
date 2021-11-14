@@ -1,0 +1,50 @@
+#Module RenderArea
+#------------------------------------------
+module_name_hint=renderarea
+module_description=Buttons, sliders, circles, lines, etc. drawn on RenderArea.
+module_version=1.01
+module_impl=C++
+
+module_accept_calls=render
+
+#-------------------------------------------
+page Main
+
+const enum Type type=Button [Button,Slider,Fader,Image,Circle,Rectangle,Line]
+	//Type of element.
+
+const checkbox Repeats repeats=0
+	//Repeating the element, if enabled - see Repeats page.
+
+in string Title title=""
+	//Title of element.
+
+	
+	
+line
+#in enum Position_Range measure_type=int2000 [int1000,int2000]
+#	//Position measurement range.
+in int X x_int2000=0 0:2000 1,10
+in int Y y_int2000=0 0:2000 1,10
+in int W w_int2000=0 0:2000 1,10
+in int H h_int2000=0 0:2000 1,10
+
+	
+line
+in int Border_Width border_width=1 0:* 1,10
+	//Border width.
+	//pix
+	
+#-------------------------------------------
+page Repeats
+	//Setting repeating the element.
+
+const int Repeat_X repeat_x=1 1:* 1,10
+const int Repeat_Y repeat_y=1 1:* 1,10
+const int Step_X step_x=1 1:* 1,10
+const int Step_Y step_y=1 1:* 1,10
+
+	
+const text Titles titles 20 20
+	//Titles of elements.
+#-------------------------------------------
