@@ -226,6 +226,7 @@ SOURCES += \
     sdk/utility/xparser.cpp \
     sdk/utility/xtimemeasure.cpp \
     sdk/xmodule.cpp \
+    sdk/xintermodulecalls.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
@@ -331,6 +332,7 @@ HEADERS += \
     sdk/utility/xparser.h \
     sdk/utility/xtimemeasure.h \
     sdk/xmodule.h \
+    sdk/xintermodulecalls.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \

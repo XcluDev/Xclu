@@ -94,7 +94,8 @@ const QString ObjectTypeNames[XObjectTypeN] =
     "custom",
     "image",
     "sound_format",
-    "sound_buffer"
+    "sound_buffer",
+    "intermodule_call_render_data"
 };
 
 //---------------------------------------------------------------------
@@ -113,7 +114,7 @@ const QString XCallTypeNames[XCallTypeN] =
     "none",
     "custom",
     "create_widget",
-    "paint",
+    "render",
     "sound_buffer_add",
     "sound_buffer_received"
 };

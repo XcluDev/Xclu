@@ -7,6 +7,7 @@
 #include "moduleseed.h"
 #include "moduleinterface.h"
 #include "xmodule.h"
+#include "xintermodulecalls.h"
 
 class XGuiEditor;
 class QJsonObject;
@@ -48,7 +49,7 @@ public:
     void button_pressed(QString button_id);   //нажатие кнопки, даже при редактировании
     void bang();        //Bang button
 
-    //access_call - Запуск функции из других модулей
+    //call_function - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //err - информация об ошибках.
@@ -58,15 +59,15 @@ public:
     //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
-    //
-    //Популярные call-имена для function в классе functions_names:
-    //functions_names::sound_buffer_add()
+
+    //Note: Use XIntermoduleCalls helper class for specific calls (render, create_widget, etc)
+
 
     //в случае исключения - оно выдастся
-    void access_call(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
+    void call_function(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
 
     //исключение "записывается" в err
-    void access_call_no_exception(XCallType function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
+    void call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
 
 
     //Доступ к переменным и запуску из других модулей

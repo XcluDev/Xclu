@@ -160,7 +160,8 @@ enum XObjectType : int {
     XObjectTypeImage = 2,            //изображение
     XObjectTypeSoundFormat = 3,      //формат звука
     XObjectTypeSoundBuffer = 4,      //звуковой буфер
-    XObjectTypeN = 5
+    XObjectIntermoduleCallRender = 5, //"render" event
+    XObjectTypeN = 6
 };
 
 QString object_type_to_string(XObjectType type);
@@ -172,7 +173,7 @@ enum XCallType : int {
     XCallTypeNone           = 0,
     XCallTypeCustom         = 1,
     XCallTypeCreateWidget   = 2,
-    XCallTypePaint          = 3,
+    XCallTypeRender          = 3,
     XCallTypeSoundBufferAdd = 4,
     XCallTypeSoundBufferReceived = 5,
     XCallTypeN              = 6

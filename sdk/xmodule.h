@@ -16,6 +16,7 @@
 
 #include "sdk_h.h"
 #include <QObject>
+#include <QPainter>
 #include "xclass.h"
 
 class InterfaceItem;
@@ -76,7 +77,7 @@ public:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    void call(XCallType function, ErrorInfo &err, XObject *input, XObject *output);
+    void call_function(XCallType function, ErrorInfo &err, XObject *input, XObject *output);
 
     //------------------------------------------------------------------------
     //General (Control) page
@@ -145,14 +146,16 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void on_call(XObject *input, XObject *output);
+    virtual void on_custom_call(XObject *input, XObject *output);
 
-    //Concrete call handlers
+    //Specific call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it
     virtual void *on_create_widget(QString parent_id);
     //resetting created widget (`create_widget` called with empty parent_id)
     virtual void on_reset_widget();
 
+    //`render` call implementation
+    virtual void on_render(QPainter &painter, int w, int h);
 
     //`sound_buffer_add` call implementation, fills `data` buffer
     //there are required to fill channels * samples values at data
@@ -181,13 +184,13 @@ private:
     //Main caller for start(), update()
     void bang_internal();       //bang: (start) and update if enabled, also calls process_events
 
-    //Concrete call handlers
-    //"create_widget" call, returns QWidget pointer
-    void create_widget_internal(XObject *input, XObject *output);
-    //"sound_buffer_add" call
-    void sound_buffer_add_internal(XObject *input, XObject *output);
-    //"sound_buffer_received" call
-    void sound_buffer_received_internal(XObject *input, XObject *output);
+    // Concrete call handlers
+    // "create_widget" call, returns QWidget pointer
+    void on_create_widget_internal(XObject *input, XObject *output);
+    // "sound_buffer_add" call
+    void on_sound_buffer_add_internal(XObject *input, XObject *output);
+    // "sound_buffer_received" call
+    void on_sound_buffer_received_internal(XObject *input, XObject *output);
 
 
 };

@@ -46,7 +46,7 @@ void XModuleFragmentShader::stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleFragmentShader::on_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
+/*void XModuleFragmentShader::on_custom_call(QString function, XObject *input, XObject *output) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -59,6 +59,6 @@ void XModuleFragmentShader::on_call(QString /*function*/, XObject * /*input*/, X
         //return;
     //}
 
-}
+}*/
 
 //---------------------------------------------------------------------

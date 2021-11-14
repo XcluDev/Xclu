@@ -3,6 +3,7 @@
 #include "module.h"
 #include "incl_cpp.h"
 #include "xobject.h"
+#include "xintermodulecalls.h"
 
 //---------------------------------------------------------------------
 XModule::XModule(QString class_name) {
@@ -146,7 +147,7 @@ void XModule::button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
+void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
     try {
         if (err.is_error()) return;
 
@@ -155,16 +156,21 @@ void XModule::call(XCallType function, ErrorInfo &err, XObject *input, XObject *
         case XCallTypeNone: xc_exception("Function type is not specified");
             break;
         //process universal function
-        case XCallTypeCustom: on_call(input, output);
+        case XCallTypeCustom: on_custom_call(input, output);
             break;
-        case XCallTypeCreateWidget: create_widget_internal(input, output);
+        case XCallTypeCreateWidget: on_create_widget_internal(input, output);
             break;
+        case XCallTypeRender: {
+            XIntermodule::RenderCallData data(input);
+            on_render(*data.painter, data.w, data.h);
+            break;
+        }
         case XCallTypeSoundBufferAdd:
-            sound_buffer_add_internal(input, output);
+            on_sound_buffer_add_internal(input, output);
             break;
 
         case XCallTypeSoundBufferReceived:
-            sound_buffer_received_internal(input, output);
+            on_sound_buffer_received_internal(input, output);
             break;
         default:
             xc_exception("Unknnown function type");
@@ -180,7 +186,7 @@ void XModule::call(XCallType function, ErrorInfo &err, XObject *input, XObject *
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
-void XModule::create_widget_internal(XObject *input, XObject *output) {
+void XModule::on_create_widget_internal(XObject *input, XObject *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
@@ -216,7 +222,7 @@ void XModule::create_widget_internal(XObject *input, XObject *output) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
+void XModule::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
     XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
@@ -228,7 +234,7 @@ void XModule::sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_received" call
-void XModule::sound_buffer_received_internal(XObject *input, XObject *output) {
+void XModule::on_sound_buffer_received_internal(XObject *input, XObject *output) {
     XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");
@@ -238,9 +244,9 @@ void XModule::sound_buffer_received_internal(XObject *input, XObject *output) {
 }
 
 //---------------------------------------------------------------------
-void XModule::on_call(XObject * /*input*/, XObject * /*output*/) {
+void XModule::on_custom_call(XObject * /*input*/, XObject * /*output*/) {
     xc_exception("Module '" + name()
-                   + "' can't process custom call, because on_call() is not implemented");
+                   + "' can't process custom call, because on_custom_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
@@ -256,6 +262,13 @@ void *XModule::on_create_widget(QString /*parent_id*/) {
 void XModule::on_reset_widget() {
     xc_exception("Module '" + name()
                    + "' can't process function 'create_widget', because on_reset_widget() is not implemented");
+}
+
+//---------------------------------------------------------------------
+//`render` call implementation
+void XModule::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
+    xc_exception("Module '" + name()
+                   + "' can't process Paint call, because on_paint() is not implemented");
 }
 
 //---------------------------------------------------------------------

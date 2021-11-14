@@ -1,7 +1,11 @@
 #ifndef XSTRUCT_H
 #define XSTRUCT_H
 
-//XObject - Structure - basic Xclu type
+// XObject - basic Xclu type for passing data between modules;
+// use only when you are sure in that; normally use its safe wrapper XProtectedObject.
+
+// XProtectedObject - thread-safe object wrapper on XObject.
+// It applies mutexes for safe write and read operations.
 
 #include "incl_h.h"
 #include "xarray.h"

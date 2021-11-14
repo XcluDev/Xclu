@@ -46,7 +46,7 @@ void XModuleFbo::stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleFbo::on_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
+/*void XModuleFbo::on_custom_call(QString function, XObject *input, XObject *output) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -59,7 +59,7 @@ void XModuleFbo::on_call(QString /*function*/, XObject * /*input*/, XObject * /*
         //return;
     //}
 
-}
+}*/
 
 //---------------------------------------------------------------------
 

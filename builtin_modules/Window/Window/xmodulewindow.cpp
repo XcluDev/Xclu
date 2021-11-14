@@ -262,7 +262,7 @@ void XModuleWindow::stop() {
 
 //---------------------------------------------------------------------
 //Вызов
-void XModuleWindow::on_call(QString /*function*/, XObject * /*input*/, XObject * /*output*/) {
+/*void XModuleWindow::on_custom_call(QString function, XObject *input, XObject *output) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -275,7 +275,7 @@ void XModuleWindow::on_call(QString /*function*/, XObject * /*input*/, XObject *
         //return;
     //}
 
-}
+}*/
 
 //---------------------------------------------------------------------
 /*
@@ -487,7 +487,7 @@ QWidget *XModuleWindow::request_widget(QString module_name) {
 
     XObject output;
 
-    module->access_call(XCallTypeCreateWidget, &input, &output);
+    module->call_function(XCallTypeCreateWidget, &input, &output);
 
     //считываем указатель на виджет
     QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
@@ -524,7 +524,7 @@ void XModuleWindow::reset_widget(QString module_name) {
 
     XObject output;
 
-    module->access_call(XCallTypeCreateWidget, &input, &output);
+    module->call_function(XCallTypeCreateWidget, &input, &output);
 }
 
 //---------------------------------------------------------------------

@@ -1,9 +1,9 @@
 #ifndef XCLASS_H
 #define XCLASS_H
 
-//XClass - Xclu base class for implementing stuff for modules.
-//It provides access for runtime information and module's values
-//So XClass is not module itself, but some "helper" class.
+//XClass - a base class for XModule.
+//It provides access to Module (that is UI values) and for runtime information
+//So XClass is not module itself, but a helper class.
 /* Usage: you need to specify Module in constructor or later, by calling set_module(module) or set_module(this):
 
   ...

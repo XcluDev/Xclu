@@ -58,7 +58,7 @@ protected:
     virtual void stop();
 
     //Вызовы
-    virtual void on_call(QString function, XObject *input, XObject * /*output*/);
+    //virtual void on_custom_call(QString function, XObject *input, XObject * /*output*/);
 protected:
 #include "auto.h"
 
