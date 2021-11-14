@@ -10,16 +10,28 @@ module_accept_calls=render
 #-------------------------------------------
 page Main
 
-const enum Type type=Button [Button,Slider,Fader,Image,Circle,Rectangle,Line]
+const enum Type type=Button [Text,Button,Slider,Fader,Image,Circle,Rectangle,Line]
 	//Type of element.
 
 const checkbox Repeats repeats=0
 	//Repeating the element, if enabled - see Repeats page.
 
+if repeats 0
 in string Title title=""
 	//Title of element.
+endif	
 
+line
+in group Title_Setup title_setup=0
+if title_setup 1
+in int Title_Size title_size=12 1:* 1,10
+	//Title font size.
 	
+in int Title_Red title_red=0 0:255 1,10
+in int Title_Green title_green=0 0:255 1,10
+in int Title_Blue title_blue=0 0:255 1,10
+	
+endif
 	
 line
 #in enum Position_Range measure_type=int2000 [int1000,int2000]
@@ -37,8 +49,9 @@ in int Border_Width border_width=1 0:* 1,10
 	
 #-------------------------------------------
 page Repeats
-	//Setting repeating the element.
+	//Setting repeating the element. To edit, enable "Repeats" at Main page.
 
+if repeats 1
 const int Repeat_X repeat_x=1 1:* 1,10
 const int Repeat_Y repeat_y=1 1:* 1,10
 const int Step_X step_x=1 1:* 1,10
@@ -47,4 +60,5 @@ const int Step_Y step_y=1 1:* 1,10
 	
 const text Titles titles 20 20
 	//Titles of elements.
+endif
 #-------------------------------------------
