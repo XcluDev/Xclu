@@ -13,7 +13,7 @@ REGISTER_XMODULE(SoundSeaOfWords)
 
 //---------------------------------------------------------------------
 XModuleSoundSeaOfWords::XModuleSoundSeaOfWords(QString class_name)
-    :XModuleVisual(class_name)
+    :XModuleWidget(class_name)
 {
 
 }

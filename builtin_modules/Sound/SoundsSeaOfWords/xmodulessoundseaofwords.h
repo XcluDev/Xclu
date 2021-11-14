@@ -6,9 +6,9 @@ By given set of sound samples, module arranges them at 2D and plays by mouse cli
 */
 
 #include "sdk_h.h"
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 
-class XModuleSoundSeaOfWords: public XModuleVisual
+class XModuleSoundSeaOfWords: public XModuleWidget
 {
 public:
     XModuleSoundSeaOfWords(QString class_name);

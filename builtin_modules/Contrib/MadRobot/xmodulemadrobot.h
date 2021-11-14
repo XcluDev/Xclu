@@ -4,7 +4,7 @@
 //EmoAI
 #include "sdk_h.h"
 #include "xraster.h"
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 
 /*
 
@@ -65,7 +65,7 @@ Also YOLO will deleting _images.txt before processing - for sync.
 
   */
 
-class XModuleMadRobot: public XModuleVisual
+class XModuleMadRobot: public XModuleWidget
 {
     Q_OBJECT
 public:

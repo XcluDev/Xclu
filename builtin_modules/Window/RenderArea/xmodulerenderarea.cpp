@@ -10,7 +10,7 @@ REGISTER_XMODULE(RenderArea)
 
 //---------------------------------------------------------------------
 XModuleRenderArea::XModuleRenderArea(QString class_name)
-    :XModuleVisual(class_name)
+    :XModuleWidget(class_name)
 {
 
 }

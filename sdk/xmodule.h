@@ -126,7 +126,7 @@ protected:
     virtual void on_loaded() {}
     //эти функции запускаются, только если модуль включен:
     virtual void start() {}
-    virtual void process_events() {}   //used for processing mouse/keyboard events in at XModuleVisual
+    virtual void process_events() {}   //used for processing mouse/keyboard events in at XModuleWidget
     virtual void update() {}
     virtual void stop() {}
 

@@ -6,11 +6,11 @@ By given set of sound samples, module arranges them at 2D and plays by mouse cli
 */
 
 #include "sdk_h.h"
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 #include "soundsamplesdatabase.h"
 #include "soundsamplesanalyze.h"
 
-class XModuleSoundsDatabaseAnalyze: public XModuleVisual
+class XModuleSoundsDatabaseAnalyze: public XModuleWidget
 {
 public:
     XModuleSoundsDatabaseAnalyze(QString class_name);

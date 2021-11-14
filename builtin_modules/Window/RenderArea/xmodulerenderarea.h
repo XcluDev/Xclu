@@ -7,10 +7,10 @@
 #include <QWindow>
 
 #include "sdk_h.h"
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 
 
-class XModuleRenderArea: public XModuleVisual
+class XModuleRenderArea: public XModuleWidget
 {
     Q_OBJECT
 public:

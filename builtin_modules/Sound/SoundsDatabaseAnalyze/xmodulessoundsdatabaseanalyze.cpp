@@ -14,7 +14,7 @@ REGISTER_XMODULE(SoundsDatabaseAnalyze)
 
 //---------------------------------------------------------------------
 XModuleSoundsDatabaseAnalyze::XModuleSoundsDatabaseAnalyze(QString class_name)
-    :XModuleVisual(class_name)
+    :XModuleWidget(class_name)
 {
 
 }

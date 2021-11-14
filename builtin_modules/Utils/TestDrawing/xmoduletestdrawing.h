@@ -4,9 +4,9 @@
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
 #include "sdk_h.h"
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 
-class XModuleTestDrawing: public XModuleVisual
+class XModuleTestDrawing: public XModuleWidget
 {
 public:
     XModuleTestDrawing(QString class_name);

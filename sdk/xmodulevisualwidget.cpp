@@ -3,10 +3,10 @@
 #include "incl_cpp.h"
 #include <QPainter>
 #include <QTimer>
-#include "xmodulevisual.h"
+#include "xmodulewidget.h"
 
 //---------------------------------------------------------------------
-XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XModuleVisual *xmodule)
+XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XModuleWidget *xmodule)
     : QWidget(parent)
 {
     //setFixedSize(1280, 720);

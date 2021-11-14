@@ -12,7 +12,7 @@ REGISTER_XMODULE(MadRobot)
 
 //---------------------------------------------------------------------
 XModuleMadRobot::XModuleMadRobot(QString class_name)
-    :XModuleVisual(class_name)
+    :XModuleWidget(class_name)
 {
 
 }

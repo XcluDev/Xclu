@@ -1,5 +1,5 @@
-#ifndef XMODULEPAINTER_H
-#define XMODULEPAINTER_H
+#ifndef XMODULEWIDGET_H
+#define XMODULEWIDGET_H
 
 //Runtime module class with drawing to widget capability
 
@@ -12,12 +12,12 @@ class XObject;
 class QPainter;
 class XModuleVisualWidget;
 
-class XModuleVisual : public XModule
+class XModuleWidget : public XModule
 {
     Q_OBJECT
 public:
-    XModuleVisual(QString class_name);
-    virtual ~XModuleVisual();
+    XModuleWidget(QString class_name);
+    virtual ~XModuleWidget();
 
     //-----------------------------------------------
     //subclasses MUST reimplement this for drawing
@@ -81,4 +81,4 @@ protected:
 
 };
 
-#endif // XMODULEPAINTER_H
+#endif // XMODULEWIDGET_H
