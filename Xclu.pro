@@ -382,3 +382,6 @@ include(Xclu_custom.pri)
 
 #--------------------------------------------------------------------------
 
+DISTFILES += \
+    builtin_modules/Window/WRenderArea/description.xgui
+

@@ -1,0 +1,42 @@
+#Module WRenderArea
+#------------------------------------------
+module_name_hint=renderarea
+module_description=RenderArea is a widget which is placed on Window and renders other modules, and send them mouse and keyboard events.
+module_version=1.01
+module_impl=C++
+
+module_accept_calls=create_widget
+
+#-------------------------------------------
+page Main
+
+const enum Size size_mode=Maximize [Maximize,Fixed]
+
+if size_mode Maximize
+out int Width w=0 0:* 1,10
+	//Width of widget.
+	//pix
+
+out int Height h=0 0:* 1,10
+	//Height of widget.
+	//pix
+endif
+
+if size_mode Fixed
+const int Width fixed_w=256 0:* 1,10
+	//Width of widget.
+	//pix
+
+const int Height fixed_h=256 0:* 1,10
+	//Height of widget.
+	//pix
+endif
+
+
+line
+
+out text Connected_Modules connected_modules 20 20
+	//Here is populated list of connected modules.
+
+
+#-------------
