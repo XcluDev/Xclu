@@ -17,7 +17,7 @@ class XModuleProject: public XModule
     Q_OBJECT
 public:
     XModuleProject(QString class_name);
-    ~XModuleProject();
+    virtual ~XModuleProject();
 protected:
 #include "auto.h"
 

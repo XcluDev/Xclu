@@ -56,7 +56,7 @@ public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
     XItem(ModuleInterface *interf, const XItemPreDescription &pre_description);
-    virtual ~XItem();
+    virtual virtual ~XItem();
 
     //access to interface
     ModuleInterface *interf();

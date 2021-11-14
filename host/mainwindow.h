@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    virtual ~MainWindow();
 
     static MainWindow *window();   //эта функция используется для передачи изменений проекта из xc_document_modified()
 

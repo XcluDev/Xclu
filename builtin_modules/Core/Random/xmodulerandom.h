@@ -10,7 +10,7 @@ class XModuleRandom: public XModule
 {
 public:
     XModuleRandom(QString class_name);
-    ~XModuleRandom();
+    virtual ~XModuleRandom();
 #include "auto.h"
 
 protected:

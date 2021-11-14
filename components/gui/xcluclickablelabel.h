@@ -13,7 +13,7 @@ class XcluClickableLabel: public QLabel
 Q_OBJECT
 public:
     explicit XcluClickableLabel(const QString& text="", QWidget* parent=0);
-    ~XcluClickableLabel();
+    virtual ~XcluClickableLabel();
 signals:
     void clicked();
 protected:

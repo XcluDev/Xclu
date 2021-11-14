@@ -15,7 +15,7 @@ class XModuleRenderArea: public XModuleWidget
     Q_OBJECT
 public:
     XModuleRenderArea(QString class_name);
-    ~XModuleRenderArea();
+    virtual ~XModuleRenderArea();
 protected:
 #include "auto.h"
 

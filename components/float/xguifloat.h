@@ -13,7 +13,7 @@ class XGuiFloat : public XGui
     Q_OBJECT
 public:
     XGuiFloat(XGuiPageBuilder &page_builder, XItemFloat *item);
-    ~XGuiFloat();
+    virtual ~XGuiFloat();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

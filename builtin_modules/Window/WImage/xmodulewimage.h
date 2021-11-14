@@ -33,7 +33,7 @@ class XModuleWImage: public XModule
     Q_OBJECT
 public:
     XModuleWImage(QString class_name);
-    ~XModuleWImage();
+    virtual ~XModuleWImage();
 protected:
 #include "auto.h"
 

@@ -120,7 +120,7 @@ public:
     static QStringList get_connected_devices_list();
 
     RealsenseCamera();
-    ~RealsenseCamera();
+    virtual ~RealsenseCamera();
 
     bool start_camera(int device_index, const RealsenseSettings &settings);	    //start camera
     void start_bag(QString fileName);       //play BAG file

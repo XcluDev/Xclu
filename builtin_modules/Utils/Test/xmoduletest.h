@@ -10,7 +10,7 @@ class XModuleTest: public XModule
 {
 public:
     XModuleTest(QString class_name);
-    ~XModuleTest();
+    virtual ~XModuleTest();
 protected:
     //Выполнение
     virtual void on_loaded() {}

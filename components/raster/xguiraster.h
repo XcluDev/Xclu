@@ -35,7 +35,7 @@ class XGuiRaster: public XGui
 public:
     template<typename T>
     XGuiRaster(XGuiPageBuilder &page_builder, XItemRaster_<T> *item);
-    ~XGuiRaster();
+    virtual ~XGuiRaster();
 
     //значение для проверки видимости детей
     //QString value_string_for_visibility() { return QString::number(value()); };

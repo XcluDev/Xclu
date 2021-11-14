@@ -31,7 +31,7 @@ class XGuiObject : public XGui
     Q_OBJECT
 public:
     XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item);
-    ~XGuiObject();
+    virtual ~XGuiObject();
 
     //значение для проверки видимости детей
     //QString value_string_for_visibility() { return QString::number(value()); };

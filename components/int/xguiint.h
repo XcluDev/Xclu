@@ -13,7 +13,7 @@ class XGuiInt : public XGui
     Q_OBJECT
 public:
     XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item);
-    ~XGuiInt();
+    virtual ~XGuiInt();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

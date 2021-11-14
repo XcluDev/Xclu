@@ -235,7 +235,7 @@ class XGlContext: public QOffscreenSurface, protected QOpenGLFunctions
 public:
     //Initialize OpenGL context
     explicit XGlContext();
-    ~XGlContext();
+    virtual ~XGlContext();
 
     //Switch to OpenGL context - required before most operations
     void activate_context();

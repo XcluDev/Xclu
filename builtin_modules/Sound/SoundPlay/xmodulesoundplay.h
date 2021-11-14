@@ -12,7 +12,7 @@ class XModuleSoundPlay: public XModule
 {
 public:
     XModuleSoundPlay(QString class_name);
-    ~XModuleSoundPlay();
+    virtual ~XModuleSoundPlay();
 #include "auto.h"
 
 protected:

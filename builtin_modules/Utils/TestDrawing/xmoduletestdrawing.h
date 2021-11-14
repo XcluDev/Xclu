@@ -10,7 +10,7 @@ class XModuleTestDrawing: public XModuleWidget
 {
 public:
     XModuleTestDrawing(QString class_name);
-    ~XModuleTestDrawing();
+    virtual ~XModuleTestDrawing();
 protected:
 #include "auto.h"
 

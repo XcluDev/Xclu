@@ -16,7 +16,7 @@ class XModuleMotionDetectorRouter: public XModule
 {
 public:
     XModuleMotionDetectorRouter(QString class_name);
-    ~XModuleMotionDetectorRouter();
+    virtual ~XModuleMotionDetectorRouter();
 #include "auto.h"
 
 protected:

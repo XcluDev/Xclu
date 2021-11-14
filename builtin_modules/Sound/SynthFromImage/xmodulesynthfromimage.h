@@ -29,7 +29,7 @@ class XModuleSynthFromImage: public XModule
     Q_OBJECT
 public:
     XModuleSynthFromImage(QString class_name);
-    ~XModuleSynthFromImage();
+    virtual ~XModuleSynthFromImage();
 protected:
 #include "auto.h"
     virtual void on_loaded() {}

@@ -10,7 +10,7 @@ class XModulePrintConsole: public XModule
 {
 public:
     XModulePrintConsole(QString class_name);
-    ~XModulePrintConsole();
+    virtual ~XModulePrintConsole();
 #include "auto.h"
 
 protected:

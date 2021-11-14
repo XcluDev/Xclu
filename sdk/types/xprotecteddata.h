@@ -73,7 +73,7 @@ class XProtectedRead_ {
 public:
     XProtectedRead_(XProtectedData_<T> *value) { lock(value); }
     XProtectedRead_(XProtectedData_<T> &value) { lock(&value); }
-    ~XProtectedRead_() { unlock(); }
+    virtual ~XProtectedRead_() { unlock(); }
     const T &data() { return *value_->data_.data(); }
     const T *pointer() { return value_->data_.data(); }
 protected:
@@ -93,7 +93,7 @@ public:
     XProtectedWrite_(XProtectedData_<T> *value) { lock(value); }
     XProtectedWrite_(XProtectedData_<T> &value) { lock(&value); }
 
-    ~XProtectedWrite_() { unlock(); }
+    virtual ~XProtectedWrite_() { unlock(); }
     T &data() { return *value_->data_.data(); }
     T *pointer() { return value_->data_.data(); }
     void reset(T *data) { value_->data_.reset(data); }
@@ -148,7 +148,7 @@ public:
         data_->lock();
     }
 
-    ~DataAccess() {
+    virtual ~DataAccess() {
         data_->unlock();
     }
 

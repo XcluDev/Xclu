@@ -12,7 +12,7 @@ class XGuiSeparator : public XGui
     Q_OBJECT
 public:
     XGuiSeparator(XGuiPageBuilder &page_builder, XItemSeparator *item);
-    ~XGuiSeparator();
+    virtual ~XGuiSeparator();
 
 protected:
     QFrame *spacer_ = nullptr;

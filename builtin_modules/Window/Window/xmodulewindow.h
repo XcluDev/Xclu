@@ -26,7 +26,7 @@ struct XModuleWindowStructureItem {
     XModuleWindowStructureItem(QWidget* widget, QString tab_title);
     XModuleWindowStructureItem(int stretch);
 
-    ~XModuleWindowStructureItem();
+    virtual ~XModuleWindowStructureItem();
 
     QWidget *take_widget();         //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
 
@@ -49,7 +49,7 @@ class XModuleWindow: public XModule
     Q_OBJECT
 public:
     XModuleWindow(QString class_name);
-    ~XModuleWindow();
+    virtual ~XModuleWindow();
 protected:
     //Выполнение
     virtual void on_loaded() {}

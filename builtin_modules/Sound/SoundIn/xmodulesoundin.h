@@ -66,7 +66,7 @@ class XModuleSoundIn: public XModule
     Q_OBJECT
 public:
     XModuleSoundIn(QString class_name);
-    ~XModuleSoundIn();
+    virtual ~XModuleSoundIn();
 protected:
 #include "auto.h"
 

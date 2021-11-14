@@ -34,7 +34,7 @@ class XModuleScalar: public XModule
     Q_OBJECT
 public:
     XModuleScalar(QString class_name);
-    ~XModuleScalar();
+    virtual ~XModuleScalar();
 protected:
 #include "auto.h"
 

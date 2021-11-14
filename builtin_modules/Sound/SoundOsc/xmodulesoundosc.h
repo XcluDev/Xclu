@@ -76,7 +76,7 @@ class XModuleSoundOsc: public XModule
     Q_OBJECT
 public:
     XModuleSoundOsc(QString class_name);
-    ~XModuleSoundOsc();
+    virtual ~XModuleSoundOsc();
 protected:
 #include "auto.h"
 

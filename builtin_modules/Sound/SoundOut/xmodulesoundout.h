@@ -90,7 +90,7 @@ class XModuleSoundOut: public XModule
     Q_OBJECT
 public:
     XModuleSoundOut(QString class_name);
-    ~XModuleSoundOut();
+    virtual ~XModuleSoundOut();
 protected:
 #include "auto.h"
 

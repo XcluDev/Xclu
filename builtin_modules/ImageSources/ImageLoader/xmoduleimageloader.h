@@ -13,7 +13,7 @@ class XModuleImageLoader: public XModule
     Q_OBJECT
 public:
     XModuleImageLoader(QString class_name);
-    ~XModuleImageLoader();
+    virtual ~XModuleImageLoader();
 
 protected:
 #include "auto.h"

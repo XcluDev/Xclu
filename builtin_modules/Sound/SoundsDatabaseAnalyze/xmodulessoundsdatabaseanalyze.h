@@ -14,7 +14,7 @@ class XModuleSoundsDatabaseAnalyze: public XModuleWidget
 {
 public:
     XModuleSoundsDatabaseAnalyze(QString class_name);
-    ~XModuleSoundsDatabaseAnalyze();
+    virtual ~XModuleSoundsDatabaseAnalyze();
 protected:
 #include "auto.h"
 

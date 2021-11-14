@@ -12,7 +12,7 @@ class XModuleSoundSeaOfWords: public XModuleWidget
 {
 public:
     XModuleSoundSeaOfWords(QString class_name);
-    ~XModuleSoundSeaOfWords();
+    virtual ~XModuleSoundSeaOfWords();
 protected:
 #include "auto.h"
 

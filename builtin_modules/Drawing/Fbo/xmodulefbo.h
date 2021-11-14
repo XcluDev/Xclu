@@ -17,7 +17,7 @@ class XModuleFbo: public XModule
     Q_OBJECT
 public:
     XModuleFbo(QString class_name);
-    ~XModuleFbo();
+    virtual ~XModuleFbo();
 protected:
 #include "auto.h"
 

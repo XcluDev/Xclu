@@ -11,7 +11,7 @@ class ModulesFactory
 {
 public:
     ModulesFactory();
-    ~ModulesFactory();
+    virtual ~ModulesFactory();
 
     //Имя категории All - используется как Default-значение при считывании настроек
     static QString All_Category_Name() { return "All"; }

@@ -14,7 +14,7 @@ class XModuleMLExecute: public XModule
 {
 public:
     XModuleMLExecute(QString class_name);
-    ~XModuleMLExecute();
+    virtual ~XModuleMLExecute();
 protected:
 #include "auto.h"
 

@@ -99,7 +99,7 @@ class XModuleMotionDetector: public XModule
 {
 public:
     XModuleMotionDetector(QString class_name);
-    ~XModuleMotionDetector();
+    virtual ~XModuleMotionDetector();
 #include "auto.h"
 
 protected:

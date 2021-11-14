@@ -10,7 +10,7 @@ class XModuleScanFolder: public XModule
 {
 public:
     XModuleScanFolder(QString class_name);
-    ~XModuleScanFolder();
+    virtual ~XModuleScanFolder();
 #include "auto.h"
 
 protected:

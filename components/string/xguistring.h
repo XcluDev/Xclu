@@ -11,7 +11,7 @@ class XGuiString : public XGui
     Q_OBJECT
 public:
     XGuiString(XGuiPageBuilder &page_builder, XItemString *item);
-    ~XGuiString();
+    virtual ~XGuiString();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return value(); }

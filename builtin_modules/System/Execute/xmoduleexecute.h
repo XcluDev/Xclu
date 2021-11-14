@@ -44,7 +44,7 @@ class XModuleExecute: public XModule
 {
 public:
     XModuleExecute(QString class_name);
-    ~XModuleExecute();
+    virtual ~XModuleExecute();
 protected:
 #include "auto.h"
 

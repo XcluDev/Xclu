@@ -10,7 +10,7 @@ class XModuleTimer: public XModule
 {
 public:
     XModuleTimer(QString class_name);
-    ~XModuleTimer();
+    virtual ~XModuleTimer();
 #include "auto.h"
 
 protected:

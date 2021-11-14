@@ -19,7 +19,7 @@ class XModuleSerial: public XModule
 {
 public:
     XModuleSerial(QString class_name);
-    ~XModuleSerial();
+    virtual ~XModuleSerial();
 protected:
 #include "auto.h"
     //Выполнение

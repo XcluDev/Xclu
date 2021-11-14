@@ -20,7 +20,7 @@ public:
     static void call_dialog(Module *module);
 
     explicit DialogEditLinks(QWidget *parent = nullptr);
-    ~DialogEditLinks();
+    virtual ~DialogEditLinks();
 
     void set_module(Module *module);
 private:

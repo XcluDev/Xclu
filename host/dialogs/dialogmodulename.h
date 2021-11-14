@@ -17,7 +17,7 @@ public:
     static DialogModuleName* call_dialog(QWidget *parent, QString name_hint);
 
     explicit DialogModuleName(QWidget *parent = nullptr);
-    ~DialogModuleName();
+    virtual ~DialogModuleName();
 
     void set_name_hint(QString name_hint);
     QString name_hint();

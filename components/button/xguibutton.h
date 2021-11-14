@@ -11,7 +11,7 @@ class XGuiButton : public XGui
     Q_OBJECT
 public:
     XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item);
-    ~XGuiButton();
+    virtual ~XGuiButton();
 
     //value - pressing is read once and cleared
     int value();

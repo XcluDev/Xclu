@@ -63,7 +63,7 @@ class XModuleWebcamera: public XModule
 {
 public:
     XModuleWebcamera(QString class_name);
-    ~XModuleWebcamera();
+    virtual ~XModuleWebcamera();
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение
     XModuleWebcameraSurfaceData &surface_data();
 

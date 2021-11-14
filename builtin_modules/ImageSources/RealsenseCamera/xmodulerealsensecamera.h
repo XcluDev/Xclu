@@ -17,7 +17,7 @@ class XModuleRealsenseCamera: public XModule
 {
 public:
     XModuleRealsenseCamera(QString class_name);
-    ~XModuleRealsenseCamera();
+    virtual ~XModuleRealsenseCamera();
 protected:
 #include "auto.h"
 

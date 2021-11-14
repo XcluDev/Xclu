@@ -11,7 +11,7 @@ class XGuiPage : public XGui
     Q_OBJECT
 public:
     XGuiPage(XGuiPageBuilder &page_builder, XItemPage *item);
-    ~XGuiPage();
+    virtual ~XGuiPage();
 
     //end the previous page (used also in XGuiEditor)
     static void finalize_page(XGuiPageBuilder &page_builder);

@@ -10,7 +10,7 @@ class XModuleValueMap: public XModule
 {
 public:
     XModuleValueMap(QString class_name);
-    ~XModuleValueMap();
+    virtual ~XModuleValueMap();
 #include "auto.h"
 
 protected:

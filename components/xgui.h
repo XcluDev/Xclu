@@ -62,7 +62,7 @@ class XGui : public QWidget
 public:
     //item - should not be deleted
     XGui(XGuiPageBuilder &page_builder, XItem *item);
-    virtual ~XGui();
+    virtual virtual ~XGui();
 
     //repaint - forces qApp->processEvents() if required
     //NOTE: please not force for bulk updates!

@@ -28,7 +28,7 @@ public:
     static void call_dialog(const DialogEditLinkData &data);
 
     explicit DialogEditLink(QWidget *parent = nullptr);
-    ~DialogEditLink();
+    virtual ~DialogEditLink();
 
     void set_data(const DialogEditLinkData &data);
     bool link_enabled();

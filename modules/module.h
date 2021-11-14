@@ -18,7 +18,7 @@ class Module
 public:
     //ModuleSeed парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
     Module(ModuleSeed *info_external, XModule *rtmodule_new);
-    ~Module();
+    virtual ~Module();
 
     //Описание типа модуля
     ModuleDescription &description();

@@ -20,7 +20,7 @@ class XObject
 public:
     //создает объект заданного типа, по описанию из object_types
     XObject(XObjectType type = XObjectTypeEmpty);
-    virtual ~XObject();
+    virtual virtual ~XObject();
 
     //void begin_access();
     //void end_access();

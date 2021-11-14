@@ -11,7 +11,7 @@ class XGuiCheckbox : public XGui
     Q_OBJECT
 public:
     XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item);
-    ~XGuiCheckbox();
+    virtual ~XGuiCheckbox();
 
     //значение для проверки видимости детей
     QString value_string_for_visibility() { return QString::number(value()); };

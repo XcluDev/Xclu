@@ -11,7 +11,7 @@ class XModuleTextVariation: public XModule
 {
 public:
     XModuleTextVariation(QString class_name);
-    ~XModuleTextVariation();
+    virtual ~XModuleTextVariation();
 #include "auto.h"
 
 protected:

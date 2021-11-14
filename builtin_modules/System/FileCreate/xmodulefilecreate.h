@@ -10,7 +10,7 @@ class XModuleFileCreate: public XModule
 {
 public:
     XModuleFileCreate(QString class_name);
-    ~XModuleFileCreate();
+    virtual ~XModuleFileCreate();
 protected:
 #include "auto.h"
 

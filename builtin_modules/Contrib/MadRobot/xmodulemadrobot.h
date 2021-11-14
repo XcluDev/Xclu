@@ -70,7 +70,7 @@ class XModuleMadRobot: public XModuleWidget
     Q_OBJECT
 public:
     XModuleMadRobot(QString class_name);
-    ~XModuleMadRobot();
+    virtual ~XModuleMadRobot();
 
 protected:
 #include "auto.h"

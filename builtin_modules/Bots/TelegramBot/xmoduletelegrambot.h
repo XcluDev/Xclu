@@ -19,7 +19,7 @@ class XModuleTelegramBot: public XModule
 {
 public:
     XModuleTelegramBot(QString class_name);
-    ~XModuleTelegramBot();
+    virtual ~XModuleTelegramBot();
 #include "auto.h"
 
 protected:

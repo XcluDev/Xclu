@@ -19,7 +19,7 @@ class ModuleInterface
 {
 public:
     ModuleInterface(const ModuleSeed &info);
-    ~ModuleInterface();
+    virtual ~ModuleInterface();
 
     ModuleDescription &description();
 
