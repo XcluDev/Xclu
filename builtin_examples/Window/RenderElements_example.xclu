@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -188,6 +188,108 @@
                     {
                         "aname": "grab_cpu",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "renderarea2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "Play"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "333"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "344"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "591"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "409"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "8"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "40"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "40"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": "Pad 1\nPad 2\nPad 3\nPad 4\nPad 5\nPad 6\nPad 7\nPad 8\nPad 9\nPad 10\nPad 11\nPad 12\nPad 13\nPad 14\nPad 15\nPad 16"
                     },
                     {
                         "aname": "Control",
