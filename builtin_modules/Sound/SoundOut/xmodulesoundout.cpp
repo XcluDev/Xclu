@@ -229,7 +229,7 @@ void XModuleSoundOut::start() {
     {
         DataAccess access(data_);
         data_.clear();
-        data_.modules_ = xc_get_modules(gets_modules_list());
+        data_.modules_ = xc_find_modules(gets_modules_list());
     }
     buffer_size_= 0;
     seti_buffer_size(0);
@@ -264,7 +264,7 @@ void XModuleSoundOut::update() {
 
         data_.volume_left_ = getf_volume() * getf_volume_ch1();
         data_.volume_right_ = getf_volume() * getf_volume_ch2();
-        data_.modules_ = xc_get_modules(gets_modules_list());
+        data_.modules_ = xc_find_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
         data_.err.throw_error();

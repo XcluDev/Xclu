@@ -4,11 +4,13 @@
 #include "xobject.h"
 #include "module.h"
 
-//Helper class for specific intermodules calls
+//Helper class for specific intermodules calls and search modules by name, type, accepted/send calls
 //TODO it can be automated as XGUI!
 
 class XIntermodule {
 public:
+
+
 
     //----------------------------------------------------------
     //Render

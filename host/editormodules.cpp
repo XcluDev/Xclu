@@ -92,7 +92,7 @@ void EditorModules::after_close_project() {
 void EditorModules::update_module_list() {
     moduleListWidget->clear();
     for (int i=0; i<PROJ_CORE.modules_count(); i++) {
-        inserted_module(i, PROJ_CORE.module_by_index(i)->name());
+        inserted_module(i, PROJ_CORE.find_module_by_index(i)->name());
     }
     update_buttons();
 }
@@ -211,7 +211,7 @@ void EditorModules::delete_module_click() {
 
     int index = current_index();
     if (index < 0 || index > PROJ_CORE.modules_count()) return;
-    Module *module = PROJ_CORE.module_by_index(index);
+    Module *module = PROJ_CORE.find_module_by_index(index);
     if (!module) return;
 
     QMessageBox msgBox;

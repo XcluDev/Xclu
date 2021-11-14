@@ -129,7 +129,7 @@ void ProjectGui::delete_module(int i) {
 //сигнал, что модуль нужно сдублировать
 void ProjectGui::duplicate_module(int i) {
     PROJ_CORE.duplicate_module(i);
-    editor_modules->inserted_module(i+1, PROJ_CORE.module_by_index(i+1)->name());
+    editor_modules->inserted_module(i+1, PROJ_CORE.find_module_by_index(i+1)->name());
     //Сигнал, что проект был изменен
     xc_document_modified();
 }

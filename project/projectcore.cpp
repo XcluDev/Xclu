@@ -314,7 +314,7 @@ void ProjectCore::delete_module(int i) {
 
 //---------------------------------------------------------------------
 void ProjectCore::rename_module(int i, QString new_name) {
-    auto *modul = module_by_index(i);
+    auto *modul = find_module_by_index(i);
     if (!modul) {
         xc_halt("Can't rename module " + new_name);
         return;
@@ -346,7 +346,7 @@ bool ProjectCore::has_module_with_name(QString name) {
 }
 
 //---------------------------------------------------------------------
-Module *ProjectCore::module_by_index(int i, bool can_return_null) {
+Module *ProjectCore::find_module_by_index(int i, bool can_return_null) {
     if (has_module_with_index(i)) {
         return modules_[i];
     }
@@ -359,9 +359,9 @@ Module *ProjectCore::module_by_index(int i, bool can_return_null) {
 }
 
 //---------------------------------------------------------------------
-Module *ProjectCore::module_by_name(QString name) {
+Module *ProjectCore::find_module_by_name(QString name) {
     xc_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
-    return module_by_index(names_.value(name));
+    return find_module_by_index(names_.value(name));
 }
 
 //---------------------------------------------------------------------
