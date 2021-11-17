@@ -1,7 +1,7 @@
 #ifndef XMODULERENDERAREA_H
 #define XMODULERENDERAREA_H
 
-//XUI image
+//Renderer area module. It renders itself to Window, and controls RenderElements - buttons, faders, etc.
 
 #include <QObject>
 #include <QWindow>
@@ -27,6 +27,9 @@ protected:
     virtual void draw(QPainter &painter, int w, int h);
 
 protected:
+    //Collect modules to render from
+    void collect_modules();
+    QVector<Module *> modules_;
 
 
 };

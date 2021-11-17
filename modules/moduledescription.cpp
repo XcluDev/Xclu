@@ -21,7 +21,23 @@ ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {
 //---------------------------------------------------------------------
 bool ModuleRegisteredCalls::accepts(XCallType function) {
     if (any_) return true;
+    if (function == XCallTypeNone) return true;
     return functions_.contains(function);
+}
+
+//---------------------------------------------------------------------
+bool ModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
+    if (any_) return true;
+    if (filter.isEmpty()) return true;
+    QMapIterator<XCallType, int> i(functions_);
+    while (i.hasNext()) {
+        i.next();
+        QString name = xcalltype_to_string(i.key());
+        if (name.contains(filter)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------

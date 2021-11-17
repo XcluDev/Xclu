@@ -1,6 +1,6 @@
-#Module RenderArea
+#Module RenderElement
 #------------------------------------------
-module_name_hint=renderarea
+module_name_hint=element
 module_description=Buttons, sliders, circles, lines, etc. drawn on RenderArea.
 module_version=1.01
 module_impl=C++
@@ -13,6 +13,11 @@ page Main
 const enum Type type=Button [Text,Button,Slider,Fader,Image,Circle,Rectangle,Line]
 	//Type of element.
 
+if type Button
+const enum Shape button_shape=Rectangle [Rectangle,Circle]
+	//Shape of the button.
+	
+line
 const checkbox Repeats repeats=0
 	//Repeating the element, if enabled - see Repeats page.
 
@@ -46,6 +51,10 @@ line
 in int Border_Width border_width=1 0:* 1,10
 	//Border width.
 	//pix
+in int Border_Red border_red=0 0:255 1,10
+in int Border_Green border_green=0 0:255 1,10
+in int Border_Blue border_blue=0 0:255 1,10
+	
 	
 #-------------------------------------------
 page Repeats

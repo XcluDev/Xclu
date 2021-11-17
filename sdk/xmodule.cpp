@@ -234,7 +234,7 @@ void XModule::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/)
 
 //---------------------------------------------------------------------
 //"sound_buffer_received" call
-void XModule::on_sound_buffer_received_internal(XObject *input, XObject *output) {
+void XModule::on_sound_buffer_received_internal(XObject *input, XObject * /*output*/) {
     XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");

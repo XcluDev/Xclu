@@ -23,7 +23,18 @@ XModuleRenderArea::~XModuleRenderArea()
 
 //---------------------------------------------------------------------
 void XModuleRenderArea::start() {
+    collect_modules();
+}
 
+//---------------------------------------------------------------------
+//Collect modules to render from
+void XModuleRenderArea::collect_modules() {
+    modules_ = XIntermodule::find_modules_by_filter(XCallTypeRender);
+    QStringList list;
+    for (auto m: modules_) {
+        list.append(m->name());
+    }
+    append_string_connected_modules(list);
 }
 
 //---------------------------------------------------------------------

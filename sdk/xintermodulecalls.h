@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QPainter>
+#include <QVector>
+#include <QString>
 #include "xobject.h"
 #include "module.h"
 
@@ -9,11 +11,17 @@
 
 class XIntermodule {
 public:
-
-
+    //----------------------------------------------------------
+    //Find modules by a filter
+    //----------------------------------------------------------
+    // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
+    // if XCallTypeNone or if empty - it means "all" for a given filter
+    static QVector<Module *> find_modules_by_filter(XCallType accept_calls_filter = XCallTypeNone,
+                                             XCallType send_calls_filter = XCallTypeNone,
+                                             QString class_filter = "");
 
     //----------------------------------------------------------
-    //Render
+    //"render" call
     //----------------------------------------------------------
     struct RenderCallData {
         QPainter *painter = nullptr;

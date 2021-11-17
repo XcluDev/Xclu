@@ -65,9 +65,17 @@ public:
     //проверка, есть ли запрашиваемый модуль
     bool has_module_with_index(int i);
     bool has_module_with_name(QString name);
-    //получение модуля
+
+    // Search module by index or name
     Module *find_module_by_index(int i, bool can_return_null = false);
     Module *find_module_by_name(QString name);
+
+    // Find modules by a filter
+    // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
+    // if XCallTypeNone or if empty - it means "all" for a given filter
+    QVector<Module *> find_modules_by_filter(XCallType accept_calls_filter = XCallTypeNone,
+                                             XCallType send_calls_filter = XCallTypeNone,
+                                             QString class_filter = "");
 
     bool can_rename_module(QString old_name, QString new_name);
 

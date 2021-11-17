@@ -1,107 +1,166 @@
 //----------------------------------------------------
-//Interface for XClassWImage
+//Interface for XClassRenderElement
 //Created automatically.
 //----------------------------------------------------
 //Page Main
-//Input image
+//
 
-//Object Image
-//Input image.
-bool was_changed_image() { return was_changed_("image"); }
-XProtectedObject *getobject_image() { return get_object_("image"); }
+//Const Enum Type
+//Type of element.
+enum enum_type {
+    type_Text = 0,
+    type_Button = 1,
+    type_Slider = 2,
+    type_Fader = 3,
+    type_Image = 4,
+    type_Circle = 5,
+    type_Rectangle = 6,
+    type_Line = 7,
+    type_N__ = 8
+};
+bool was_changed_type() { return was_changed_("type"); }
+enum_type gete_type() { return enum_type(geti_("type")); }
+QString getraw_type() { return getraw_("type");}
 
-//Checkbox Is New Frame
-//Flag that image was changed. You may link it to the flag of an image provider module.
-bool was_changed_is_new_frame() { return was_changed_("is_new_frame"); }
-int geti_is_new_frame() { return geti_("is_new_frame"); }
-
-//----------------------------------------------------
-//Page Visuals
-//Visual settings.
-
-//Out String Parent
-//Parent module name (Window or WLayout) at which this element is placed.
-bool was_changed_parent_id() { return was_changed_("parent_id"); }
-QString gets_parent_id() { return gets_("parent_id"); }
-QStringList get_strings_parent_id() { return get_strings_("parent_id"); }
-void sets_parent_id(QString value) { sets_("parent_id", value); }
-void clear_string_parent_id() { clear_string_("parent_id"); }
-void append_string_parent_id(QString v, int extra_new_lines_count = 0) { append_string_("parent_id", v, extra_new_lines_count); }
-void append_string_parent_id(QStringList v, int extra_new_lines_count = 0) { append_string_("parent_id", v, extra_new_lines_count); }
-
-//Checkbox Visible
-//Is visible.
-bool was_changed_visible() { return was_changed_("visible"); }
-int geti_visible() { return geti_("visible"); }
-
-
-//Const Int W
-//Width of image.
-bool was_changed_w() { return was_changed_("w"); }
-int geti_w() { return geti_("w"); }
-
-//Const Int H
-//Height of image.
-bool was_changed_h() { return was_changed_("h"); }
-int geti_h() { return geti_("h"); }
+//Const Enum Shape
+//Shape of the button.
+enum enum_button_shape {
+    button_shape_Rectangle = 0,
+    button_shape_Circle = 1,
+    button_shape_N__ = 2
+};
+bool was_changed_button_shape() { return was_changed_("button_shape"); }
+enum_button_shape gete_button_shape() { return enum_button_shape(geti_("button_shape")); }
+QString getraw_button_shape() { return getraw_("button_shape");}
 
 
-//Const Checkbox Title
-//Title, placed at the left of the value.
-bool was_changed_title() { return was_changed_("title"); }
-int geti_title() { return geti_("title"); }
+//Const Checkbox Repeats
+//Repeating the element, if enabled - see Repeats page.
+bool was_changed_repeats() { return was_changed_("repeats"); }
+int geti_repeats() { return geti_("repeats"); }
+void repaint_repeats() { repaint_("repeats"); }
 
 //String Title
-//Text of title.
-bool was_changed_title_text() { return was_changed_("title_text"); }
-QString gets_title_text() { return gets_("title_text"); }
-QStringList get_strings_title_text() { return get_strings_("title_text"); }
+//Title of element.
+bool was_changed_title() { return was_changed_("title"); }
+QString gets_title() { return gets_("title"); }
+QStringList get_strings_title() { return get_strings_("title"); }
+void repaint_title() { repaint_("title"); }
 
-//Const Enum Placement
-//Title placement position.
-enum enum_title_placement {
-    title_placement_Left = 0,
-    title_placement_Right = 1,
-    title_placement_Top = 2,
-    title_placement_Bottom = 3,
-    title_placement_N__ = 4
-};
-bool was_changed_title_placement() { return was_changed_("title_placement"); }
-enum_title_placement gete_title_placement() { return enum_title_placement(geti_("title_placement")); }
-QString getraw_title_placement() { return getraw_("title_placement");}
 
-//Const Enum Alignment
-//Title alignment mode.
-enum enum_title_alignment {
-    title_alignment_Default = 0,
-    title_alignment_Left = 1,
-    title_alignment_Center = 2,
-    title_alignment_Right = 3,
-    title_alignment_N__ = 4
-};
-bool was_changed_title_alignment() { return was_changed_("title_alignment"); }
-enum_title_alignment gete_title_alignment() { return enum_title_alignment(geti_("title_alignment")); }
-QString getraw_title_alignment() { return getraw_("title_alignment");}
+//Checkbox Title Setup
+//
+bool was_changed_title_setup() { return was_changed_("title_setup"); }
+int geti_title_setup() { return geti_("title_setup"); }
+void repaint_title_setup() { repaint_("title_setup"); }
 
-//Const Enum Width
-//Width of title.
-enum enum_title_width {
-    title_width_Default = 0,
-    title_width_Custom_Range = 1,
-    title_width_N__ = 2
-};
-bool was_changed_title_width() { return was_changed_("title_width"); }
-enum_title_width gete_title_width() { return enum_title_width(geti_("title_width")); }
-QString getraw_title_width() { return getraw_("title_width");}
+//Int Title Size
+//Title font size.
+bool was_changed_title_size() { return was_changed_("title_size"); }
+int geti_title_size() { return geti_("title_size"); }
+void repaint_title_size() { repaint_("title_size"); }
 
-//Const Int Min
-//Minimal title width.
-bool was_changed_title_width_min() { return was_changed_("title_width_min"); }
-int geti_title_width_min() { return geti_("title_width_min"); }
+//Int Title Red
+//
+bool was_changed_title_red() { return was_changed_("title_red"); }
+int geti_title_red() { return geti_("title_red"); }
+void repaint_title_red() { repaint_("title_red"); }
 
-//Const Int Max
-//Maximal title width.
-bool was_changed_title_width_max() { return was_changed_("title_width_max"); }
-int geti_title_width_max() { return geti_("title_width_max"); }
+//Int Title Green
+//
+bool was_changed_title_green() { return was_changed_("title_green"); }
+int geti_title_green() { return geti_("title_green"); }
+void repaint_title_green() { repaint_("title_green"); }
+
+//Int Title Blue
+//
+bool was_changed_title_blue() { return was_changed_("title_blue"); }
+int geti_title_blue() { return geti_("title_blue"); }
+void repaint_title_blue() { repaint_("title_blue"); }
+
+
+//Int X
+//
+bool was_changed_x_int2000() { return was_changed_("x_int2000"); }
+int geti_x_int2000() { return geti_("x_int2000"); }
+void repaint_x_int2000() { repaint_("x_int2000"); }
+
+//Int Y
+//
+bool was_changed_y_int2000() { return was_changed_("y_int2000"); }
+int geti_y_int2000() { return geti_("y_int2000"); }
+void repaint_y_int2000() { repaint_("y_int2000"); }
+
+//Int W
+//
+bool was_changed_w_int2000() { return was_changed_("w_int2000"); }
+int geti_w_int2000() { return geti_("w_int2000"); }
+void repaint_w_int2000() { repaint_("w_int2000"); }
+
+//Int H
+//
+bool was_changed_h_int2000() { return was_changed_("h_int2000"); }
+int geti_h_int2000() { return geti_("h_int2000"); }
+void repaint_h_int2000() { repaint_("h_int2000"); }
+
+
+//Int Border Width
+//Border width.
+bool was_changed_border_width() { return was_changed_("border_width"); }
+int geti_border_width() { return geti_("border_width"); }
+void repaint_border_width() { repaint_("border_width"); }
+
+//Int Border Red
+//
+bool was_changed_border_red() { return was_changed_("border_red"); }
+int geti_border_red() { return geti_("border_red"); }
+void repaint_border_red() { repaint_("border_red"); }
+
+//Int Border Green
+//
+bool was_changed_border_green() { return was_changed_("border_green"); }
+int geti_border_green() { return geti_("border_green"); }
+void repaint_border_green() { repaint_("border_green"); }
+
+//Int Border Blue
+//
+bool was_changed_border_blue() { return was_changed_("border_blue"); }
+int geti_border_blue() { return geti_("border_blue"); }
+void repaint_border_blue() { repaint_("border_blue"); }
+
+//----------------------------------------------------
+//Page Repeats
+//Setting repeating the element. To edit, enable "Repeats" at Main page.
+
+//Const Int Repeat X
+//
+bool was_changed_repeat_x() { return was_changed_("repeat_x"); }
+int geti_repeat_x() { return geti_("repeat_x"); }
+void repaint_repeat_x() { repaint_("repeat_x"); }
+
+//Const Int Repeat Y
+//
+bool was_changed_repeat_y() { return was_changed_("repeat_y"); }
+int geti_repeat_y() { return geti_("repeat_y"); }
+void repaint_repeat_y() { repaint_("repeat_y"); }
+
+//Const Int Step X
+//
+bool was_changed_step_x() { return was_changed_("step_x"); }
+int geti_step_x() { return geti_("step_x"); }
+void repaint_step_x() { repaint_("step_x"); }
+
+//Const Int Step Y
+//
+bool was_changed_step_y() { return was_changed_("step_y"); }
+int geti_step_y() { return geti_("step_y"); }
+void repaint_step_y() { repaint_("step_y"); }
+
+//Const Text Titles
+//Titles of elements.
+bool was_changed_titles() { return was_changed_("titles"); }
+QString gets_titles() { return gets_("titles"); }
+QStringList get_strings_titles() { return get_strings_("titles"); }
+void repaint_titles() { repaint_("titles"); }
 
 //----------------------------------------------------
