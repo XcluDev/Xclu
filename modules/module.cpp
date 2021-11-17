@@ -281,6 +281,12 @@ void Module::bang() {        //Bang button
 }
 
 //---------------------------------------------------------------------
+// Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea
+void Module::draw(QPainter &painter, int w, int h) {
+    xmodule()->draw(painter, w, h);
+}
+
+//---------------------------------------------------------------------
 //исключение "записывается" в err
 void Module::call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
     //проверка, что модуль "понимает" запрошенную функцию

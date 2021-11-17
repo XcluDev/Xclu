@@ -5,7 +5,7 @@ module_description=Buttons, sliders, circles, lines, etc. drawn on RenderArea.
 module_version=1.01
 module_impl=C++
 
-module_accept_calls=render
+module_accept_calls=draw
 
 #-------------------------------------------
 page Main
@@ -41,10 +41,10 @@ endif
 line
 #in enum Position_Range measure_type=int2000 [int1000,int2000]
 #	//Position measurement range.
-in int X x_int2000=0 0:2000 1,10
-in int Y y_int2000=0 0:2000 1,10
-in int W w_int2000=0 0:2000 1,10
-in int H h_int2000=0 0:2000 1,10
+in int X x_int2000=100 0:2000 1,10
+in int Y y_int2000=100 0:2000 1,10
+in int W w_int2000=100 0:2000 1,10
+in int H h_int2000=100 0:2000 1,10
 
 	
 line
@@ -63,8 +63,8 @@ page Repeats
 if repeats 1
 const int Repeat_X repeat_x=1 1:* 1,10
 const int Repeat_Y repeat_y=1 1:* 1,10
-const int Step_X step_x=1 1:* 1,10
-const int Step_Y step_y=1 1:* 1,10
+in int Step_X step_x=1 1:* 1,10
+in int Step_Y step_y=1 1:* 1,10
 
 	
 const text Titles titles 20 20

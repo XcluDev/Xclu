@@ -5,9 +5,1113 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "3"
     },
     "modules": [
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Vol",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Circle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "97"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "43"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Ctrl1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Circle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "226"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "43"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Screen",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Image"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Rectangle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "473"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "161"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "323"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "215"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Pads",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Rectangle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "129"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "419"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "75"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "75"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "8"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "EfctsLeft",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Rectangle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "65"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "108"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "45"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "25"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "EfctsRight",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Rectangle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "677"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "108"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "45"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "25"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Player",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Rectangle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "65"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "172"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "45"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "25"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderElement",
+                "name": "Solo",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "type",
+                        "avalue": "Button"
+                    },
+                    {
+                        "aname": "button_shape",
+                        "avalue": "Circle"
+                    },
+                    {
+                        "aname": "repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "title_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_size",
+                        "avalue": "12"
+                    },
+                    {
+                        "aname": "title_red",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "x_int2000",
+                        "avalue": "237"
+                    },
+                    {
+                        "aname": "y_int2000",
+                        "avalue": "323"
+                    },
+                    {
+                        "aname": "w_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "h_int2000",
+                        "avalue": "55"
+                    },
+                    {
+                        "aname": "border_width",
+                        "avalue": "8"
+                    },
+                    {
+                        "aname": "border_red",
+                        "avalue": "200"
+                    },
+                    {
+                        "aname": "border_green",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "border_blue",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Repeats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "repeat_x",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "repeat_y",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "step_x",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "step_y",
+                        "avalue": "20"
+                    },
+                    {
+                        "aname": "titles",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
         {
             "description": {
                 "class": "RenderArea",
@@ -16,7 +1120,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -53,153 +1157,15 @@
                     },
                     {
                         "aname": "back_red",
-                        "avalue": "128"
+                        "avalue": "255"
                     },
                     {
                         "aname": "back_green",
-                        "avalue": "128"
+                        "avalue": "255"
                     },
                     {
                         "aname": "back_blue",
-                        "avalue": "128"
-                    },
-                    {
-                        "aname": "Control",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "general_enabled_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "general_auto_update_",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "presets_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "error_handling",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "avalue": "Show_Message_Box_and_Stop"
-                    },
-                    {
-                        "aname": "calls_info",
-                        "avalue": "0"
-                    }
-                ]
-            }
-        },
-        {
-            "description": {
-                "class": "RenderElement",
-                "name": "element1",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "0"
-                },
-                "items": [
-                    {
-                        "aname": "Main",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "type",
-                        "avalue": "Button"
-                    },
-                    {
-                        "aname": "button_shape",
-                        "avalue": "Rectangle"
-                    },
-                    {
-                        "aname": "repeats",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "title",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "title_setup",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "title_size",
-                        "avalue": "12"
-                    },
-                    {
-                        "aname": "title_red",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "title_green",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "title_blue",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "x_int2000",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "y_int2000",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "w_int2000",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "h_int2000",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "border_width",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "border_red",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "border_green",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "border_blue",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "Repeats",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "repeat_x",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "repeat_y",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "step_x",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "step_y",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "titles",
-                        "avalue": ""
+                        "avalue": "255"
                     },
                     {
                         "aname": "Control",
@@ -257,11 +1223,11 @@
                     },
                     {
                         "aname": "size_x",
-                        "avalue": "1280"
+                        "avalue": "900"
                     },
                     {
                         "aname": "size_y",
-                        "avalue": "720"
+                        "avalue": "600"
                     },
                     {
                         "aname": "position",

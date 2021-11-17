@@ -43,7 +43,7 @@ XGui::~XGui() {
 //redraw - forces qApp->processEvents() if required.
 //NOTE: please not force for bulk updates!
 void XGui::repaint_(bool force_qapp_process_events) {
-    redraw();
+    repaint();
     if (force_qapp_process_events) {
         qApp->processEvents();
     }

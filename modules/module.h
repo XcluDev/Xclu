@@ -49,6 +49,12 @@ public:
     void button_pressed(QString button_id);   //нажатие кнопки, даже при редактировании
     void bang();        //Bang button
 
+
+    //-----------------------------------------------
+    // Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea
+    void draw(QPainter &painter, int w, int h);
+
+    //-----------------------------------------------
     //call_function - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)

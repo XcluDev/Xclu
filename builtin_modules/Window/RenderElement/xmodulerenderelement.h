@@ -22,6 +22,8 @@ protected:
     virtual void update();
     virtual void stop();
 
+    virtual void draw(QPainter &painter, int w, int h);
+
 };
 
 #endif // XMODULERENDERELEMENT_H
