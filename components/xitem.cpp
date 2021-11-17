@@ -458,7 +458,7 @@ void XItem::block_gui_editing(const XQualifierMask &qual) {
 
 //---------------------------------------------------------------------
 //force GUI element to update - useful at long operations for updating texts/numbers, calls repaint_internal()
-void XItem::repaint() {
+void XItem::redraw() {
     if (is_gui_attached()) {
         var_to_gui_internal();
         //propagate_visibility();
@@ -767,7 +767,7 @@ void XItem::export_interface_template(QStringList &file,
                 file.append(QString("void append_string_%1(QStringList v, int extra_new_lines_count = 0) { append_string_(\"%1\", v, extra_new_lines_count); }").arg(name()));
             }
         }
-        //repaint
+        //redraw
         file.append(QString("void repaint_%1() { repaint_(\"%1\"); }").arg(name()));
     }
     if (final_blank) {

@@ -25,7 +25,7 @@ public:
 
 protected:
     //drawing function
-    //call update(); to repaint widget
+    //call update(); to redraw widget
     void paintEvent(QPaintEvent *event) override;
 
     //Mouse events - will be added to module's events queue

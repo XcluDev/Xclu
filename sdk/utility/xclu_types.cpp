@@ -114,7 +114,7 @@ const QString XCallTypeNames[XCallTypeN] =
     "none",
     "custom",
     "create_widget",
-    "render",
+    "draw",
     "sound_buffer_add",
     "sound_buffer_received"
 };

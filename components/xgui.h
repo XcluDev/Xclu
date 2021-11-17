@@ -64,7 +64,7 @@ public:
     XGui(XGuiPageBuilder &page_builder, XItem *item);
     virtual ~XGui();
 
-    //repaint - forces qApp->processEvents() if required
+    //redraw - forces qApp->processEvents() if required
     //NOTE: please not force for bulk updates!
     void repaint_(bool force_qapp_process_events);
 

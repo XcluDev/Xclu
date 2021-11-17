@@ -50,7 +50,7 @@ void xc_console_append(QString message, bool dirty) {
 }
 
 //---------------------------------------------------------------------
-void xc_console_repaint() {  //force repaint
+void xc_console_repaint() {  //force redraw
     CONS_VIEW->update();
     qApp->processEvents();
 }

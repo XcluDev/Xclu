@@ -16,16 +16,10 @@ XModuleWidget::~XModuleWidget()
 
 }
 
-//---------------------------------------------------------------------
-//subclasses must reimplement this for drawing
-void XModuleWidget::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
-    xc_exception("draw() is not yet implemented for class `" + class_name() + "`");
-}
-
 //-----------------------------------------------
 //subclasses must call it for update widget image, an apply update size
-//"refresh()" - old name of "repaint()"
-void XModuleWidget::repaint() {
+//"refresh()" - old name of "redraw()"
+void XModuleWidget::redraw() {
     if (widget_) {
         //widget_->set_size(screen_size_);
         widget_->update();

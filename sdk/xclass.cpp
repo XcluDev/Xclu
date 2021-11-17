@@ -40,7 +40,7 @@ bool XClass::was_changed_(QString name) {
 //TODO: check it's called from proper thread, and emit message if from another
 
 void XClass::repaint_(QString name) {
-    module()->interf()->var(name)->repaint();
+    module()->interf()->var(name)->redraw();
 }
 
 //---------------------------------------------------------------------

@@ -85,7 +85,7 @@ void XModuleVisualWidget::keyReleaseEvent(QKeyEvent *event) {
 
 //---------------------------------------------------------------------
 //drawing function
-//call update(); to repaint widget
+//call update(); to redraw widget
 void XModuleVisualWidget::paintEvent(QPaintEvent * /*event*/)
 {
 

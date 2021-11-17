@@ -80,7 +80,7 @@ void XModuleSoundsDatabaseAnalyze::update() {
         analyze_.set_envelope_size(geti_an_envelope_size());
     }
     if (was_changed_vis_thumb_rad()) {
-        repaint();
+        redraw();
     }
 }
 
@@ -260,13 +260,13 @@ void XModuleSoundsDatabaseAnalyze::analyze_compute() {
         xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));
     }
 
-    repaint();
+    redraw();
 }
 
 //---------------------------------------------------------------------
 void XModuleSoundsDatabaseAnalyze::analyze_load() {
     analyze_.load_from_file(gets_an_file(), db_.size());
-    repaint();
+    redraw();
 }
 
 //---------------------------------------------------------------------
@@ -301,7 +301,7 @@ void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button
     if (id >= 0) {
         //Play
         selected_ = id;
-        repaint();  //repaint
+        redraw();  //redraw
         //start to play
         player_.write().data().play(db_.sounds()[id], getf_play_volume());
     }

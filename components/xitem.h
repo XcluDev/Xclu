@@ -195,7 +195,7 @@ public:
     void gui_to_var(const XQualifierMask &qual, bool evaluate_expr); //вычисление expression и получение значения из gui
     void var_to_gui(const XQualifierMask &qual); //установка значения в gui, также отправляет сигнал о видимости
 
-    void repaint(); //force GUI element to update - useful at long operations for updating texts/numbers
+    void redraw(); //force GUI element to update - useful at long operations for updating texts/numbers
 
     void block_gui_editing(const XQualifierMask &qual);       //запретить редактирование - всегда для out и после запуска для const
     void unblock_gui_editing(const XQualifierMask &qual);     //разрешить редактирование

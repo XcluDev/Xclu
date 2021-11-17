@@ -145,6 +145,12 @@ void XModule::button_pressed(QString button_id) {
 }
 
 //---------------------------------------------------------------------
+// Subclasses must reimplement this for drawing
+void XModule::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
+    xc_exception("draw() is not yet implemented for class `" + class_name() + "`");
+}
+
+//---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
 void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
@@ -160,7 +166,7 @@ void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, 
             break;
         case XCallTypeCreateWidget: on_create_widget_internal(input, output);
             break;
-        case XCallTypeRender: {
+        case XCallTypeDraw: {
             XIntermodule::RenderCallData data(input);
             on_render(*data.painter, data.w, data.h);
             break;

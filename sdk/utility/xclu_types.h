@@ -173,7 +173,7 @@ enum XCallType : int {
     XCallTypeNone           = 0,
     XCallTypeCustom         = 1,
     XCallTypeCreateWidget   = 2,
-    XCallTypeRender          = 3,
+    XCallTypeDraw          = 3,
     XCallTypeSoundBufferAdd = 4,
     XCallTypeSoundBufferReceived = 5,
     XCallTypeN              = 6

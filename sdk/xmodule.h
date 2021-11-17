@@ -65,6 +65,13 @@ public:
     //внимание, обычно вызывается из основного потока как callback
     void button_pressed(QString button_id);
 
+
+
+    //-----------------------------------------------
+    // Subclasses MUST reimplement this for drawing,
+    // as XModuleWidget called by Window, or as rendering subclass called by RenderArea
+    virtual void draw(QPainter &painter, int w, int h);
+
     //------------------------------------------------------------------------
     //функция вызова между модулями, вызывает on_call
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы

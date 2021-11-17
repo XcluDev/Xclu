@@ -40,7 +40,7 @@ void XModuleSoundSeaOfWords::update() {
 
     //envelope size must be set first before further analysis
     //if (was_changed_vis_thumb_rad()) {
-    //    repaint();
+    //    redraw();
     //}
 }
 
@@ -74,7 +74,7 @@ void XModuleSoundSeaOfWords::mouse_pressed(int2 pos, XMouseButton /*button*/) {
     //if (id >= 0) {
     //    //Play
     //    selected_ = id;
-    //    repaint();  //repaint
+    //    redraw();  //redraw
     //    //start to play
     //    player_.write().data().play(db_.sounds()[id], getf_play_volume());
     //}
