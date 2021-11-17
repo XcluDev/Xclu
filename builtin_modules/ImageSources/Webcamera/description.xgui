@@ -44,7 +44,7 @@ out checkbox Is_New_Frame is_new_frame=0
     
 #-----------------------------
 line
-in group Settings settings=0
+in group Settings settings=1
 	//Setting webcamera parameters.
     
 if settings 1
@@ -142,27 +142,7 @@ endif
 #    //Crop...
 #    
 #endif
-
-#-----------------------------
-page Device_Info
-    //Print list of cameras and supported formats.
-
-in button_always Print_Devices print_devices
-	//Print list of all connected devices.
-
-in checkbox Serials print_serials=0
-    //Output serial ID of devices - useful if you connecting several cameras of the same model.
-    
-in checkbox Formats print_formats=0
-	//Print list of supported formats for connected device at start.
-
-
-out text Local_Console local_console 20 25
-    //Console output.
-
-    
-    
-    
+        
 #-----------------------------
 page Debug
     //Debug information.
@@ -177,8 +157,103 @@ out checkbox Is_Started is_started=0
 out string Frames_Captured frames_captured=""
     //How much frames were captured and processed after last start.
     
+#-----------------------------
+page Device_Info
+    //Print list of cameras and supported formats.
+
+in button_always Print_Devices print_devices
+	//Print list of all connected devices.
+
+#in button_always Print_USB print_usb
+#	//Print USB ports details (Windows only).
+# Commented, because currently Qt's cameras ID's doesn't coincide with Windows USB enumeration.
+	
+in checkbox Serials print_serials=1
+    //Output serial ID of devices - useful if you connecting several cameras of the same model.
+    
+in checkbox Formats print_formats=0
+	//Print list of supported formats for connected device at start.
 
 
+out text Local_Console local_console 20 25
+    //Console output.
+
+	
+#-----------------------------
+page Resolver
+    //This is capability for properly assigning several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
+	
+const checkbox Enabled resolver_enabled=0
+	//Is Resolver enabled.
+	
+line
+if resolver_enabled 1
+const int Cameras resolver_cameras=1 1:4 1,10
+	//Number of connected cameras to resolve.
+line
+endif	
+
+#Resolver results 
+if resolver_cameras 1,2,3,4
+out int Camera_1_Resulted_Index resolver_resulted_index1=0 0:* 1,10
+	//Deduced index. Connect it to the index of the first Webcamera module.
+endif
+if resolver_cameras 2,3,4
+out int Camera_2_Resulted_Index resolver_resulted_index2=0 0:* 1,10
+	//Deduced index. Connect it to the index of the second Webcamera module.
+endif
+if resolver_cameras 3,4
+out int Camera_3_Resulted_Index resolver_resulted_index3=0 0:* 1,10
+	//Deduced index. Connect it to the index of the third Webcamera module.
+endif
+if resolver_cameras 4
+out int Camera_4_Resulted_Index resolver_resulted_index34=0 0:* 1,10
+	//Deduced index. Connect it to the index of the fourth Webcamera module.
+endif
+
+line
+
+#---- Camera 1 ----
+if resolver_cameras 1,2,3,4
+const string Camera_1_Name_Part resolver_name1=""
+	//Part of name of the camera 1.
+
+const string Camera_1_Serials_Parts resolver_serials1=""
+	//Part of serials of the camera 1, connected to different USB, with computer restarting, such as 14de4f85 2798002a 2249ee0.
+line
+
+endif
+
+#---- Camera 2 ----
+if resolver_cameras 2,3,4
+const string Camera_2_Name_Part resolver_name2=""
+	//Part of name of the camera 2.
+const string Camera_2_Serials_Parts resolver_serials2=""
+	//Part of serials of the camera 2.
+line
+
+endif
+
+#---- Camera 3 ----
+if resolver_cameras 3,4
+const string Camera_3_Name_Part resolver_name3=""
+	//Part of name of the camera 3.
+const string Camera_3_Serials_Parts resolver_serials3=""
+	//Part of serials of the camera 3.
+line
+
+endif
+	
+#---- Camera 4 ----
+if resolver_cameras 4
+const string Camera_4_Name_Part resolver_name4=""
+	//Part of name of the camera 4.
+const string Camera_4_Serials_Parts resolver_serials4=""
+	//Part of serials of the camera 4.
+line
+
+endif
+	
 #--------------------
 #TODO Load frames
 #Load Frames --------------------------------------

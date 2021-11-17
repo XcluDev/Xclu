@@ -5,6 +5,32 @@
 //Важно, что камера может давать кадры в собственном потоке
 //но внутреннее состояние изображения в модуле меняется ТОЛЬКО при update
 
+
+/*
+----------------------------------------------------------------------
+Notes about properly assigning several similar cameras using
+"Resolver" capability of Webcamera module.
+----------------------------------------------------------------------
+Do the following:
+1. Activate the Resolver at the first camera in Xclu project's list
+2. Connect each camera to different USB ports (and also restart computs), and press "Print Devices" to identify its serials.
+Write there camera's part of the name, and parts of the serials.
+
+For example, for camera USB2.0 PC CAMERA
+\usb#vid_1908&pid_2310&mi_00#6&14de4f85&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global'
+
+Store name as PC CAMERA
+and serials as:
+   14de4f85           - this in our example
+   2798002a           - appears in other connections
+   2249ee0
+3. Link the Resolver's outputs to all webcams input Index values.
+Then after starting, Resolver will analyze all connected devices and conclude how to assign each physical camera to each Webcamera's module.
+
+For the more details see Xclu's example Webcamera/Webcams_resolve.
+*/
+
+
 #include <QCamera>
 #include <QAbstractVideoSurface>
 #include "sdk_h.h"
@@ -112,6 +138,9 @@ protected:
 
     //печать в консоль доступных камер
     void print_devices();
+
+    // Print USB ports details (Windows only)
+    //void print_usb();
 
     //печать в консоль разрешений запускаемой камеры
     //внимание, эта функция запускает camera_->load()

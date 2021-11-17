@@ -109,9 +109,19 @@ HEADERS += \
     $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h
 
 #--------------------------------------------------------------------------
+#Windows, USB enumeration for Webcamera module
+#--------------------------------------------------------------------------
+#windows 64 bit
+#windows {
+    #Not used, so commented for now:
+    #LIBS += User32.lib
+#}
+
+
+#--------------------------------------------------------------------------
 #Realsense camera support
 #--------------------------------------------------------------------------
-#Comment this line to exclude REalsense from build
+#Comment this line to exclude Realsense from build
 ##CONFIG += REALSENSE
 #--------------------------------------------------------------------------
 #REALSENSE {

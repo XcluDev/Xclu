@@ -1,4 +1,11 @@
 #include "xmodulewebcamera.h"
+
+#ifdef XCLU_WINDOWS
+//For show USB devices, https://www.cyberforum.ru/win-api/thread2806892.html
+//#include <windows.h>
+//#include <iostream>
+#endif
+
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
@@ -112,6 +119,9 @@ void XModuleWebcamera::on_button_pressed(QString button) {
     if (button == button_print_devices()) {
         print_devices();
     }
+    //if (button == button_print_usb()) {
+    //    print_usb();
+    //}
 }
 
 //---------------------------------------------------------------------
@@ -271,6 +281,8 @@ void XModuleWebcamera::print_devices() {
     clear_string_local_console();
     append_string_local_console(list, 1);
 }
+
+
 
 //---------------------------------------------------------------------
 //печать в консоль разрешений запускаемой камеры
@@ -509,4 +521,185 @@ void XModuleWebcamera::update_save_frames() {
     //проверить, что пришел новый кадр
 }
 
+
+//---------------------------------------------------------------------
+// Show USB devices
+// https://www.cyberforum.ru/win-api/thread2806892.html
+// It appears that QT's cameras IDs not related to USB IDs, so commented this
+//---------------------------------------------------------------------
+// Print USB ports details (Windows only)
+/*void XModuleWebcamera::print_usb() {
+    // Program
+       std::cout << "USB Device Lister." << std::endl;
+
+       // Get Number Of Devices
+       UINT nDevices = 0;
+       GetRawInputDeviceList(NULL, &nDevices, sizeof(RAWINPUTDEVICELIST));
+
+       // Got Any?
+       if (nDevices < 1)
+       {
+           // Exit
+           std::cout << "ERR: 0 Devices?";
+           //cin.get();
+           return;
+       }
+
+       // Allocate Memory For Device List
+       PRAWINPUTDEVICELIST pRawInputDeviceList;
+       pRawInputDeviceList = new RAWINPUTDEVICELIST[sizeof(RAWINPUTDEVICELIST) * nDevices];
+
+       // Got Memory?
+       if (pRawInputDeviceList == NULL)
+       {
+           // Error
+           std::cout << "ERR: Could not allocate memory for Device List.";
+           return;
+       }
+
+       // Fill Device List Buffer
+       int nResult;
+       nResult = GetRawInputDeviceList(pRawInputDeviceList, &nDevices, sizeof(RAWINPUTDEVICELIST));
+
+       // Got Device List?
+       if (nResult < 0)
+       {
+           // Clean Up
+           delete[] pRawInputDeviceList;
+
+           // Error
+           std::cout << "ERR: Could not get device list.";
+           //cin.get();
+           return;
+       }
+
+       // Loop Through Device List
+       for (UINT i = 0; i < nDevices; i++)
+       {
+           // Get Character Count For Device Name
+           UINT nBufferSize = 0;
+           nResult = GetRawInputDeviceInfo(pRawInputDeviceList[i].hDevice, // Device
+               RIDI_DEVICENAME,                // Get Device Name
+               NULL,                           // NO Buff, Want Count!
+               &nBufferSize);                 // Char Count Here!
+
+                                              // Got Device Name?
+           if (nResult < 0)
+           {
+               // Error
+               std::cout << "ERR: Unable to get Device Name character count.. Moving to next device." << std::endl << std::endl;
+
+               // Next
+               continue;
+           }
+
+           // Allocate Memory For Device Name
+           WCHAR* wcDeviceName = new WCHAR[nBufferSize + 1];
+
+           // Got Memory
+           if (wcDeviceName == NULL)
+           {
+               // Error
+               std::cout << "ERR: Unable to allocate memory for Device Name.. Moving to next device." << std::endl << std::endl;
+
+               // Next
+               continue;
+           }
+
+           // Get Name
+           nResult = GetRawInputDeviceInfo(pRawInputDeviceList[i].hDevice, // Device
+               RIDI_DEVICENAME,                // Get Device Name
+               wcDeviceName,                   // Get Name!
+               &nBufferSize);                 // Char Count
+
+                                              // Got Device Name?
+           if (nResult < 0)
+           {
+               // Error
+               std::cout << "ERR: Unable to get Device Name.. Moving to next device." << std::endl << std::endl;
+
+               // Clean Up
+               delete[] wcDeviceName;
+
+               // Next
+               continue;
+           }
+
+           // Set Device Info & Buffer Size
+           RID_DEVICE_INFO rdiDeviceInfo;
+           rdiDeviceInfo.cbSize = sizeof(RID_DEVICE_INFO);
+           nBufferSize = rdiDeviceInfo.cbSize;
+
+           // Get Device Info
+           nResult = GetRawInputDeviceInfo(pRawInputDeviceList[i].hDevice,
+               RIDI_DEVICEINFO,
+               &rdiDeviceInfo,
+               &nBufferSize);
+
+           // Got All Buffer?
+           if (nResult < 0)
+           {
+               // Error
+               std::cout << "ERR: Unable to read Device Info.. Moving to next device." << std::endl << std::endl;
+
+               // Next
+               continue;
+           }
+
+           // Mouse
+           if (rdiDeviceInfo.dwType == RIM_TYPEMOUSE)
+           {
+               // Current Device
+               std::cout << std::endl << "Displaying device " << i + 1 << " information. (MOUSE)" << std::endl;
+               std::wcout << L"Device Name: " << wcDeviceName << std::endl;
+               std::cout << "Mouse ID: " << rdiDeviceInfo.mouse.dwId << std::endl;
+               std::cout << "Mouse buttons: " << rdiDeviceInfo.mouse.dwNumberOfButtons << std::endl;
+               std::cout << "Mouse sample rate (Data Points): " << rdiDeviceInfo.mouse.dwSampleRate << std::endl;
+               if (rdiDeviceInfo.mouse.fHasHorizontalWheel)
+               {
+                   std::cout << "Mouse has horizontal wheel" << std::endl;
+               }
+               else
+               {
+                   std::cout << "Mouse does not have horizontal wheel" << std::endl;
+               }
+           }
+
+           // Keyboard
+           else if (rdiDeviceInfo.dwType == RIM_TYPEKEYBOARD)
+           {
+               // Current Device
+               std::cout << std::endl << "Displaying device " << i + 1 << " information. (KEYBOARD)" << std::endl;
+               std::wcout << L"Device Name: " << wcDeviceName << std::endl;
+               std::cout << "Keyboard mode: " << rdiDeviceInfo.keyboard.dwKeyboardMode << std::endl;
+               std::cout << "Number of function keys: " << rdiDeviceInfo.keyboard.dwNumberOfFunctionKeys << std::endl;
+               std::cout << "Number of indicators: " << rdiDeviceInfo.keyboard.dwNumberOfIndicators << std::endl;
+               std::cout << "Number of keys total: " << rdiDeviceInfo.keyboard.dwNumberOfKeysTotal << std::endl;
+               std::cout << "Type of the keyboard: " << rdiDeviceInfo.keyboard.dwType << std::endl;
+               std::cout << "Subtype of the keyboard: " << rdiDeviceInfo.keyboard.dwSubType << std::endl;
+           }
+
+           // Some HID
+           else // (rdi.dwType == RIM_TYPEHID)
+           {
+               // Current Device
+               std::cout << std::endl << "Displaying device " << i + 1 << " information. (HID)" << std::endl;
+               std::wcout << L"Device Name: " << wcDeviceName << std::endl;
+               std::cout << "Vendor Id:" << rdiDeviceInfo.hid.dwVendorId << std::endl;
+               std::cout << "Product Id:" << rdiDeviceInfo.hid.dwProductId << std::endl;
+               std::cout << "Version No:" << rdiDeviceInfo.hid.dwVersionNumber << std::endl;
+               std::cout << "Usage for the device: " << rdiDeviceInfo.hid.usUsage << std::endl;
+               std::cout << "Usage Page for the device: " << rdiDeviceInfo.hid.usUsagePage << std::endl;
+           }
+
+           // Delete Name Memory!
+           delete[] wcDeviceName;
+       }
+
+       // Clean Up - Free Memory
+       delete[] pRawInputDeviceList;
+
+       // Exit
+       std::cout << std::endl << "Finished." << std::endl;
+}*/
 //---------------------------------------------------------------------

@@ -425,7 +425,6 @@
         <file>builtin_examples/Test_Drawing.xclu</file>
         <file>builtin_examples/TextVariation.xclu</file>
         <file>builtin_examples/Timer.xclu</file>
-        <file>builtin_examples/Webcamera.xclu</file>
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
         <file>builtin_modules/System/FileCreate/description.xgui</file>
         <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>

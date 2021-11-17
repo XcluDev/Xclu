@@ -81,7 +81,7 @@ RC_ICONS = builtin_resources/images/appicon.ico
 
 #define to know which OS
 windows {
-    DEFINES += XCLU_WIN
+    DEFINES += XCLU_WINDOWS
 }
 unix {
     DEFINES += XCLU_LINUX

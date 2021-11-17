@@ -87,7 +87,7 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
     int max_n = 100;    //Параметр, сколько кастомных файлов
 
     //определение секции по ОС
-#ifdef XCLU_WIN
+#ifdef XCLU_WINDOWS
     QString section = "windows";
 #endif
 #ifdef XCLU_LINUX

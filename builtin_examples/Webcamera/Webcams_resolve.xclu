@@ -1,0 +1,330 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Notes",
+                "name": "readme",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "This example shows how to use \"Resolver\" capability of Webcamera module for choosing a proper camera for case when several similar cameras are connected.\n\nNamely, we should do the following:\n1. Activate the Resolver at the first camera in Xclu project's list\n2. Connect each camera to different USB ports (and also restart computs), and press \"Print Devices\" to identify its serials.\nWrite there camera's part of the name, and parts of the serials.\n\nFor example, for camera USB2.0 PC CAMERA\n\\usb#vid_1908&pid_2310&mi_00#6&14de4f85&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global'\n\nSet to Resolver name part as PC CAMERA\nand observed serials parts separated by space:\n14de4f85 2798002a 2249ee0           \n- the first is in our example, and others appear in other connections.\n   \n3. Link the Resolver's outputs to all webcams input Index values.\nThen after starting, Resolver will analyze all connected devices and conclude how to assign each physical camera to each Webcamera's module.\n"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Webcamera",
+                "name": "webcam1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "3"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "capture_source",
+                        "avalue": "Camera"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "By_Serial"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "device_serial",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "settings",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "Camera_Default"
+                    },
+                    {
+                        "aname": "custom_frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "resolution",
+                        "avalue": "Camera_Default"
+                    },
+                    {
+                        "aname": "res_x",
+                        "avalue": "1024"
+                    },
+                    {
+                        "aname": "res_y",
+                        "avalue": "768"
+                    },
+                    {
+                        "aname": "image_channels",
+                        "avalue": "RGB"
+                    },
+                    {
+                        "aname": "image_data_type",
+                        "avalue": "u8"
+                    },
+                    {
+                        "aname": "Transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "crop_to_square",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "mirror_x",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "rotate",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Debug",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "print_serials",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "print_formats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Webcamera",
+                "name": "webcam2",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "capture_source",
+                        "avalue": "Camera"
+                    },
+                    {
+                        "aname": "select_device",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "device_index",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "device_name",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "device_serial",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "settings",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "Camera_Default"
+                    },
+                    {
+                        "aname": "custom_frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "resolution",
+                        "avalue": "Camera_Default"
+                    },
+                    {
+                        "aname": "res_x",
+                        "avalue": "1024"
+                    },
+                    {
+                        "aname": "res_y",
+                        "avalue": "768"
+                    },
+                    {
+                        "aname": "image_channels",
+                        "avalue": "RGB"
+                    },
+                    {
+                        "aname": "image_data_type",
+                        "avalue": "u8"
+                    },
+                    {
+                        "aname": "Transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "crop_to_square",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "mirror_x",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "rotate",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Debug",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "print_serials",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "print_formats",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
