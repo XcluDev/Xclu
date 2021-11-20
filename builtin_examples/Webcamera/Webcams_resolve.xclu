@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -66,7 +66,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "3"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
@@ -160,6 +160,50 @@
                     {
                         "aname": "print_formats",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "Resolver",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "resolver_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "resolver_cameras",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "resolver_name1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name4",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials4",
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",
@@ -294,6 +338,50 @@
                     {
                         "aname": "print_formats",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "Resolver",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "resolver_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "resolver_cameras",
+                        "avalue": "4"
+                    },
+                    {
+                        "aname": "resolver_name1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name4",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials4",
+                        "avalue": ""
                     },
                     {
                         "aname": "Control",

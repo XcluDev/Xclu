@@ -151,11 +151,14 @@ protected slots:
     void on_camera_error();
 
 protected:
-    //загрузка кадров
+    // Load frames
     void update_load_frames();
 
-    //запись кадров
+    // Save frames
     void update_save_frames();
+
+    // Resolver working
+    void resolver_work();
 
 };
 

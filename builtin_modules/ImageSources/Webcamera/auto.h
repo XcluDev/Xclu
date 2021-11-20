@@ -30,8 +30,8 @@ bool was_changed_select_device() { return was_changed_("select_device"); }
 enum_select_device gete_select_device() { return enum_select_device(geti_("select_device")); }
 QString getraw_select_device() { return getraw_("select_device");}
 
-//Const Int Device Index
-//Camera index in Operating System.
+//Int Device Index
+//Camera index in Operating System. Really it functioning as "const", but because it can be set from Resolver, it's made non-const input.
 bool was_changed_device_index() { return was_changed_("device_index"); }
 int geti_device_index() { return geti_("device_index"); }
 void repaint_device_index() { repaint_("device_index"); }
@@ -261,5 +261,164 @@ void clear_string_local_console() { clear_string_("local_console"); }
 void append_string_local_console(QString v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
 void append_string_local_console(QStringList v, int extra_new_lines_count = 0) { append_string_("local_console", v, extra_new_lines_count); }
 void repaint_local_console() { repaint_("local_console"); }
+
+//----------------------------------------------------
+//Page Resolver
+//This is capability for properly assigning several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
+
+//Const Checkbox Enabled
+//Is Resolver enabled.
+bool was_changed_resolver_enabled() { return was_changed_("resolver_enabled"); }
+int geti_resolver_enabled() { return geti_("resolver_enabled"); }
+void repaint_resolver_enabled() { repaint_("resolver_enabled"); }
+
+
+//Const Int Cameras
+//Number of connected cameras to resolve.
+bool was_changed_resolver_cameras() { return was_changed_("resolver_cameras"); }
+int geti_resolver_cameras() { return geti_("resolver_cameras"); }
+void repaint_resolver_cameras() { repaint_("resolver_cameras"); }
+
+
+//Out Enum Presence 1
+//Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the first Webcamera module.
+enum enum_resolver_resulted_presence1 {
+    resolver_resulted_presence1_None = 0,
+    resolver_resulted_presence1_Presented = 1,
+    resolver_resulted_presence1_N__ = 2
+};
+bool was_changed_resolver_resulted_presence1() { return was_changed_("resolver_resulted_presence1"); }
+enum_resolver_resulted_presence1 gete_resolver_resulted_presence1() { return enum_resolver_resulted_presence1(geti_("resolver_resulted_presence1")); }
+void sete_resolver_resulted_presence1(enum_resolver_resulted_presence1 value) { seti_("resolver_resulted_presence1", value); }
+QString getraw_resolver_resulted_presence1() { return getraw_("resolver_resulted_presence1");}
+
+//Out Int Index 1
+//Deduced index. Connect it to the Index of the first Webcamera module.
+bool was_changed_resolver_resulted_index1() { return was_changed_("resolver_resulted_index1"); }
+int geti_resolver_resulted_index1() { return geti_("resolver_resulted_index1"); }
+void seti_resolver_resulted_index1(int value) { seti_("resolver_resulted_index1", value); }
+void increase_int_resolver_resulted_index1(int increase = 1) { increase_int_("resolver_resulted_index1", increase); }
+void repaint_resolver_resulted_index1() { repaint_("resolver_resulted_index1"); }
+
+//Out Enum Presence 2
+//Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the second Webcamera module.
+enum enum_resolver_resulted_presence2 {
+    resolver_resulted_presence2_None = 0,
+    resolver_resulted_presence2_Presented = 1,
+    resolver_resulted_presence2_N__ = 2
+};
+bool was_changed_resolver_resulted_presence2() { return was_changed_("resolver_resulted_presence2"); }
+enum_resolver_resulted_presence2 gete_resolver_resulted_presence2() { return enum_resolver_resulted_presence2(geti_("resolver_resulted_presence2")); }
+void sete_resolver_resulted_presence2(enum_resolver_resulted_presence2 value) { seti_("resolver_resulted_presence2", value); }
+QString getraw_resolver_resulted_presence2() { return getraw_("resolver_resulted_presence2");}
+
+//Out Int Index 2
+//Deduced index. Connect it to the Index of the second Webcamera module.
+bool was_changed_resolver_resulted_index2() { return was_changed_("resolver_resulted_index2"); }
+int geti_resolver_resulted_index2() { return geti_("resolver_resulted_index2"); }
+void seti_resolver_resulted_index2(int value) { seti_("resolver_resulted_index2", value); }
+void increase_int_resolver_resulted_index2(int increase = 1) { increase_int_("resolver_resulted_index2", increase); }
+void repaint_resolver_resulted_index2() { repaint_("resolver_resulted_index2"); }
+
+//Out Enum Presence 3
+//Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the third Webcamera module.
+enum enum_resolver_resulted_presence3 {
+    resolver_resulted_presence3_None = 0,
+    resolver_resulted_presence3_Presented = 1,
+    resolver_resulted_presence3_N__ = 2
+};
+bool was_changed_resolver_resulted_presence3() { return was_changed_("resolver_resulted_presence3"); }
+enum_resolver_resulted_presence3 gete_resolver_resulted_presence3() { return enum_resolver_resulted_presence3(geti_("resolver_resulted_presence3")); }
+void sete_resolver_resulted_presence3(enum_resolver_resulted_presence3 value) { seti_("resolver_resulted_presence3", value); }
+QString getraw_resolver_resulted_presence3() { return getraw_("resolver_resulted_presence3");}
+
+//Out Int Index 3
+//Deduced index. Connect it to the Index of the third Webcamera module.
+bool was_changed_resolver_resulted_index3() { return was_changed_("resolver_resulted_index3"); }
+int geti_resolver_resulted_index3() { return geti_("resolver_resulted_index3"); }
+void seti_resolver_resulted_index3(int value) { seti_("resolver_resulted_index3", value); }
+void increase_int_resolver_resulted_index3(int increase = 1) { increase_int_("resolver_resulted_index3", increase); }
+void repaint_resolver_resulted_index3() { repaint_("resolver_resulted_index3"); }
+
+//Out Enum Presence 4
+//Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the fourth Webcamera module.
+enum enum_resolver_resulted_presence4 {
+    resolver_resulted_presence4_None = 0,
+    resolver_resulted_presence4_Presented = 1,
+    resolver_resulted_presence4_N__ = 2
+};
+bool was_changed_resolver_resulted_presence4() { return was_changed_("resolver_resulted_presence4"); }
+enum_resolver_resulted_presence4 gete_resolver_resulted_presence4() { return enum_resolver_resulted_presence4(geti_("resolver_resulted_presence4")); }
+void sete_resolver_resulted_presence4(enum_resolver_resulted_presence4 value) { seti_("resolver_resulted_presence4", value); }
+QString getraw_resolver_resulted_presence4() { return getraw_("resolver_resulted_presence4");}
+
+//Out Int Index 4
+//Deduced index. Connect it to the Index of the fourth Webcamera module.
+bool was_changed_resolver_resulted_index4() { return was_changed_("resolver_resulted_index4"); }
+int geti_resolver_resulted_index4() { return geti_("resolver_resulted_index4"); }
+void seti_resolver_resulted_index4(int value) { seti_("resolver_resulted_index4", value); }
+void increase_int_resolver_resulted_index4(int increase = 1) { increase_int_("resolver_resulted_index4", increase); }
+void repaint_resolver_resulted_index4() { repaint_("resolver_resulted_index4"); }
+
+
+//Const String Camera 1 Name Part
+//Part of name of the camera 1.
+bool was_changed_resolver_name1() { return was_changed_("resolver_name1"); }
+QString gets_resolver_name1() { return gets_("resolver_name1"); }
+QStringList get_strings_resolver_name1() { return get_strings_("resolver_name1"); }
+void repaint_resolver_name1() { repaint_("resolver_name1"); }
+
+//Const String Camera 1 Serials Parts
+//Part of serials of the camera 1, connected to different USB, with computer restarting, such as 14de4f85 2798002a 2249ee0.
+bool was_changed_resolver_serials1() { return was_changed_("resolver_serials1"); }
+QString gets_resolver_serials1() { return gets_("resolver_serials1"); }
+QStringList get_strings_resolver_serials1() { return get_strings_("resolver_serials1"); }
+void repaint_resolver_serials1() { repaint_("resolver_serials1"); }
+
+
+//Const String Camera 2 Name Part
+//Part of name of the camera 2.
+bool was_changed_resolver_name2() { return was_changed_("resolver_name2"); }
+QString gets_resolver_name2() { return gets_("resolver_name2"); }
+QStringList get_strings_resolver_name2() { return get_strings_("resolver_name2"); }
+void repaint_resolver_name2() { repaint_("resolver_name2"); }
+
+//Const String Camera 2 Serials Parts
+//Part of serials of the camera 2.
+bool was_changed_resolver_serials2() { return was_changed_("resolver_serials2"); }
+QString gets_resolver_serials2() { return gets_("resolver_serials2"); }
+QStringList get_strings_resolver_serials2() { return get_strings_("resolver_serials2"); }
+void repaint_resolver_serials2() { repaint_("resolver_serials2"); }
+
+
+//Const String Camera 3 Name Part
+//Part of name of the camera 3.
+bool was_changed_resolver_name3() { return was_changed_("resolver_name3"); }
+QString gets_resolver_name3() { return gets_("resolver_name3"); }
+QStringList get_strings_resolver_name3() { return get_strings_("resolver_name3"); }
+void repaint_resolver_name3() { repaint_("resolver_name3"); }
+
+//Const String Camera 3 Serials Parts
+//Part of serials of the camera 3.
+bool was_changed_resolver_serials3() { return was_changed_("resolver_serials3"); }
+QString gets_resolver_serials3() { return gets_("resolver_serials3"); }
+QStringList get_strings_resolver_serials3() { return get_strings_("resolver_serials3"); }
+void repaint_resolver_serials3() { repaint_("resolver_serials3"); }
+
+
+//Const String Camera 4 Name Part
+//Part of name of the camera 4.
+bool was_changed_resolver_name4() { return was_changed_("resolver_name4"); }
+QString gets_resolver_name4() { return gets_("resolver_name4"); }
+QStringList get_strings_resolver_name4() { return get_strings_("resolver_name4"); }
+void repaint_resolver_name4() { repaint_("resolver_name4"); }
+
+//Const String Camera 4 Serials Parts
+//Part of serials of the camera 4.
+bool was_changed_resolver_serials4() { return was_changed_("resolver_serials4"); }
+QString gets_resolver_serials4() { return gets_("resolver_serials4"); }
+QStringList get_strings_resolver_serials4() { return get_strings_("resolver_serials4"); }
+void repaint_resolver_serials4() { repaint_("resolver_serials4"); }
+
 
 //----------------------------------------------------

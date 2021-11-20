@@ -126,8 +126,10 @@ void XModuleWebcamera::on_button_pressed(QString button) {
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::start() {
-    //здесь мы не стартуем камеру, так как делаем это в update
-    //в зависимости от capture_source
+    // Here we don't start the camera, and do it at the first update,
+    // depending on capture_source.
+    // So we perform "Resolver" computations.
+    resolver_work();
 
     //Очистка переменных
     camera_tried_to_start_ = false;
@@ -155,6 +157,153 @@ void XModuleWebcamera::start() {
     //------------------------------------
 
 }
+
+//---------------------------------------------------------------------
+// Resolver working
+// Resolve cameras indices based on given parts of serial number (higher priority) and names (lower priority).
+void XModuleWebcamera::resolver_work() {
+    if (!geti_resolver_enabled()) return;
+    const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
+    int in_n = cameras.size();
+    int out_n = geti_resolver_cameras();
+
+
+    // First pass - collect independent scores
+    QVector<int> scores(in_n * out_n);
+    for (int y=0; y<out_n; y++) {
+        QString name;
+        QStringList serials;
+        switch (y) {
+        case 0: name = gets_resolver_name1(); serials = get_strings_resolver_serials1();
+            break;
+        case 1: name = gets_resolver_name2(); serials = get_strings_resolver_serials2();
+            break;
+        case 2: name = gets_resolver_name3(); serials = get_strings_resolver_serials3();
+            break;
+        case 3: name = gets_resolver_name4(); serials = get_strings_resolver_serials4();
+            break;
+        }
+        for (int x=0; x<in_n; x++) {
+            QString Name = cameras.at(x).description();     // Human readable
+            QString Serial = cameras.at(x).deviceName();    // Unique ID
+            bool found_name = false;
+            bool found_serial = false;
+            if (!name.isEmpty() && Name.contains(name)) {
+                found_name = true;
+            }
+            if (!serials.isEmpty()) {
+                for (auto s: serials) {
+                    if (Serial.contains(s)) {
+                        found_serial = true;
+                        break;
+                    }
+                }
+            }
+            scores[x + in_n*y] = 2*found_serial + 1*found_name;
+        }
+    }
+    // Second pass - find unique best matches for each real camera.
+    // It can repeats many times.
+    QVector<int> match(out_n);
+    match.fill(-1);
+    while (true) {
+        bool found = false;
+        for (int x=0; x<in_n; x++) {
+            int bestv = -1;
+            int besty = -1;
+            int count = 0;
+            for (int y=0; y<out_n; y++) {
+                int v = scores[x + in_n*y];
+                if (v == -1) continue;
+                if (v == bestv) {
+                    count++;
+                }
+                else {
+                    if (v > bestv) {
+                        bestv = v;
+                        besty = y;
+                        count = 1;
+                    }
+                }
+            }
+            if (count == 1) {   // We are interested in unique matches
+                match[besty] = x;
+                // Set scores for camera x in all y to -1 to prevent double selection
+                for (int y=0; y<out_n; y++) {
+                    scores[x + in_n*y] = -1;
+                }
+                found = true;
+            }
+        }
+        if (!found) {   // No more unique matches
+            break;
+        }
+    }
+
+    // Now we just found the best match, and choose the first in case of ambiguity
+    for (int y=0; y<out_n; y++) {
+        if (match[y] == -1) {
+            int bestv = -1;
+            int bestx = -1;
+            int count = 0;
+            for (int x=0; x<in_n; x++) {
+                int v = scores[x + in_n*y];
+                if (v == -1) continue;
+                if (v == bestv) {
+                    count++;
+                }
+                if (v > bestv) {
+                    bestv = v;
+                    bestx = x;
+                    count = 1;
+                }
+
+            }
+            if (count > 0) {
+                //Warn if ambiguity
+                if (count > 1) {
+                    xc_console_append(QString("Webcamera Resolver ambiguity: physical camera %1 has several variants").arg(bestx));
+                }
+                // Set match
+                match[y] = bestx;
+                // Clear x in other cameras
+                for (int y1=0; y1<out_n; y1++) {
+                    scores[bestx + in_n*y1] = -1;
+                }
+            }
+        }
+    }
+
+    // Warn if no matches
+    for (int y=0; y<out_n; y++) {
+        if (match[y] == -1) {
+            xc_console_append(QString("Webcamera Resolver warning: no camera for slot %1").arg(y+1));
+        }
+    }
+
+    // Now we define matches, set them to UI
+    if (out_n >= 1) {
+        sete_resolver_resulted_presence1(enum_resolver_resulted_presence1(match[0] >= 0));
+        seti_resolver_resulted_index1((match[0] >= 0)?match[0]:1000);
+    }
+    if (out_n >= 2) {
+        sete_resolver_resulted_presence2(enum_resolver_resulted_presence2(match[1] >= 0));
+        seti_resolver_resulted_index2((match[1] >= 0)?match[1]:1000);
+    }
+
+    if (out_n >= 3) {
+        sete_resolver_resulted_presence3(enum_resolver_resulted_presence3(match[2] >= 0));
+        seti_resolver_resulted_index3((match[2] >= 0)?match[2]:1000);
+    }
+
+    if (out_n >= 4) {
+        sete_resolver_resulted_presence4(enum_resolver_resulted_presence4(match[3] >= 0));
+        seti_resolver_resulted_index4((match[3] >= 0)?match[3]:1000);
+    }
+
+
+}
+
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::update() {

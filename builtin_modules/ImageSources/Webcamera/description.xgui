@@ -21,8 +21,8 @@ const enum Device select_device=Default [Default,By_Index,By_Name,By_Serial]
 	//Choose the way for selecting webcamera.
     
 if select_device By_Index
-const int Device_Index device_index=0 0:100 1,10
-    //Camera index in Operating System.
+in int Device_Index device_index=0 0:100 1,10
+    //Camera index in Operating System. Really it functioning as "const", but because it can be set from Resolver, it's made non-const input.
 endif
 
 if select_device By_Name
@@ -195,20 +195,28 @@ endif
 
 #Resolver results 
 if resolver_cameras 1,2,3,4
-out int Camera_1_Resulted_Index resolver_resulted_index1=0 0:* 1,10
-	//Deduced index. Connect it to the index of the first Webcamera module.
+out enum Presence_1 resolver_resulted_presence1=Camera [None,Presented]
+    //Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the first Webcamera module.
+out int Index_1 resolver_resulted_index1=0 0:* 1,10
+	//Deduced index. Connect it to the Index of the first Webcamera module.
 endif
 if resolver_cameras 2,3,4
-out int Camera_2_Resulted_Index resolver_resulted_index2=0 0:* 1,10
-	//Deduced index. Connect it to the index of the second Webcamera module.
+out enum Presence_2 resolver_resulted_presence2=Camera [None,Presented]
+    //Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the second Webcamera module.
+out int Index_2 resolver_resulted_index2=0 0:* 1,10
+	//Deduced index. Connect it to the Index of the second Webcamera module.
 endif
 if resolver_cameras 3,4
-out int Camera_3_Resulted_Index resolver_resulted_index3=0 0:* 1,10
-	//Deduced index. Connect it to the index of the third Webcamera module.
+out enum Presence_3 resolver_resulted_presence3=Camera [None,Presented]
+    //Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the third Webcamera module.
+out int Index_3 resolver_resulted_index3=0 0:* 1,10
+	//Deduced index. Connect it to the Index of the third Webcamera module.
 endif
 if resolver_cameras 4
-out int Camera_4_Resulted_Index resolver_resulted_index34=0 0:* 1,10
-	//Deduced index. Connect it to the index of the fourth Webcamera module.
+out enum Presence_4 resolver_resulted_presence4=Camera [None,Presented]
+    //Deduced presence of the camera, "Presented" or "None". Connect it to Capture_Source of the fourth Webcamera module.
+out int Index_4 resolver_resulted_index4=0 0:* 1,10
+	//Deduced index. Connect it to the Index of the fourth Webcamera module.
 endif
 
 line
