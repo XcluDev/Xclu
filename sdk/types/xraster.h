@@ -147,6 +147,30 @@ public:
 			+ pixel_unsafe(xi, yi1) * (1 - tx) * (ty);
     }*/
 
+    //----------------------------------------------------------------------------
+    // Linking - using external source of pixels, not copying it.
+    // Use this mode carefully and control the source data exists while this XRaster is used!
+    //----------------------------------------------------------------------------
+    void link(int w, int h, T* data) {
+        xc_assert(w <= 0 || h <= 0 || data != nullptr, "Error XRaster::link(), data is nullptr, but w > 0 and h > 0");
+        clear();
+        is_external = true;
+        this->w = w;
+        this->h = h;
+        data_pointer_ = data;
+    }
+    void link(int w, int h, void* data) {
+        link(w, h, (T*) data);
+    }
+    void link(int w, int h, QVector<T> &data) {
+        xc_assert(w*h == data.size(), "Error XRaster::link(), bad QVector size");
+        link(w, h, data.data());
+    }
+
+    //----------------------------------------------------------------------------
+    // Allocating - allocate own memory for raster
+    //----------------------------------------------------------------------------
+
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
     void allocate(int w, int h, bool reallocate = false) {
