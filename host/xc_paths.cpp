@@ -9,7 +9,7 @@ QString xc_app_folder() {
 }
 
 QString xc_settings_file() {
-    return xc_app_folder() + "/Xclu_settings.ini";
+    return xc_app_folder() + "/Config/Xclu_settings.ini";
 }
 
 
