@@ -86,43 +86,48 @@ public:
 	int w = 0;
 	int h = 0;
 
-    QVector<T> data;
+protected:
+    bool is_external = false;   // Does raster hold its own memory, or use external source
+    T *data_pointer_ = nullptr;
+    QVector<T> internal_data_;        // Internal storage
 
+public:
     XTypeId type_id();
 
     uint8 *data_pointer_u8() {
-        return (uint8 *) data_pointer();
+        return (uint8 *) data_pointer_;
     }
 
-	//useful wrapper that checks if data is empty
+    // Useful wrapper that checks if data is empty
+    // Note: it's invalidates and updates after re-allocation, so you must care of it and not use old pointer.
 	T* data_pointer() {
-		if (is_empty()) return 0;
-		else return &data[0];
+        if (is_empty()) return nullptr;
+        return data_pointer_;
 	}
 
     int bytesPerLine() {
         return sizeof(T)*w;
     }
 
-	//pixel value - not checking boundaries
-	//"unsafe" in name is a remainder that you must be sure that (x,y) is inside raster matrix
+    // pixel value - not checking boundaries
+    // "unsafe" in name is a remainder that you must be sure that (x,y) is inside raster matrix
 	T &pixel_unsafe(int x, int y) {
-		return data[x + w * y];
+        return data_pointer_[x + w * y];
 	}
 	T pixel_unsafe(int x, int y) const {
-		return data[x + w * y];
+        return data_pointer_[x + w * y];
 	}
 	T &pixel_unsafe(const int2 &p) {
-		return data[p.x + w * p.y];
+        return data_pointer_[p.x + w * p.y];
 	}
 	T pixel_unsafe(const int2 &p) const {
-		return data[p.x + w * p.y];
+        return data_pointer_[p.x + w * p.y];
 	}	
 	T &pixel_unsafe(int i) {
-		return data[i];
+        return data_pointer_[i];
 	}
 	T pixel_unsafe(int i) const {
-		return data[i];
+        return data_pointer_[i];
 	}
 
     //maximal difference between two rasters at some point - used for checking if they are equal or different
@@ -142,31 +147,47 @@ public:
 			+ pixel_unsafe(xi, yi1) * (1 - tx) * (ty);
     }*/
 
-	void allocate(int w, int h) {
-        if (this->w != w || this->h != h) {
-            this->w = w;
-            this->h = h;
-            data.resize(w*h);
+    // If 'reallocate is true - then old vector will be cleared.
+    // It's useful for clearing memory when image size if significantly reduced, but works slower.
+    void allocate(int w, int h, bool reallocate = false) {
+        if (!is_external && this->w == w && this->h == h) {
+            return;
         }
+        if (reallocate) {
+            clear();
+        }
+        internal_data_.resize(w*h);
+        data_pointer_ = internal_data_.data();
+        this->w = w;
+        this->h = h;
+        is_external = false;
 	}
 	void copy_from(T *input_img, int w, int h) {
 		allocate(w, h);
 		for (int i = 0; i < w*h; i++) {
-			data[i] = input_img[i];		//TODO can use memcpy
+            data_pointer_[i] = input_img[i];		//TODO can use memcpy
 		}
 	}
 
 	void clear() {		
 		w = h = 0;
-		//clear data (note: data.clear() does not!) 
-		//https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
-        QVector<T>().swap(data);
+        data_pointer_ = nullptr;
+
+        if (!is_external) {
+            //clear data (note: data.clear() does not!)
+            //https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
+            QVector<T>().swap(internal_data_);
+        }
 	}
     bool is_empty() const {
-        return data.empty() || w <= 0 || h <= 0;
+        return data_pointer_ == nullptr || w <= 0 || h <= 0;
     }
+
+    // Checks only internal images
     bool is_valid() const {
-        return !is_empty() && data.size() == w * h;
+        if (is_empty()) return false;
+        if (is_external) return true;
+        return internal_data_.size() == w * h;
     }
     /*bool is_zero() const {
         for (int i = 0; i < w*h; i++) {
@@ -177,7 +198,7 @@ public:
 
     void set(const T &v) {
         for (int i=0; i<w*h; i++) {
-            data[i] = v;
+            data_pointer_[i] = v;
         }
     }
 
@@ -185,7 +206,7 @@ public:
     void add(const XRaster_<T1> &r) {
         xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
-            data[i] += r.pixel_unsafe(i);
+            data_pointer_[i] += r.pixel_unsafe(i);
         }
     }
 
@@ -193,7 +214,7 @@ public:
     void mult_by(const XRaster_<T1> &r) {
         xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
-            data[i] *= r.pixel_unsafe(i);
+            data_pointer_[i] *= r.pixel_unsafe(i);
         }
     }
 
@@ -219,23 +240,30 @@ public:
 
     //rotate on 0, 90, 180, 270 angles
     //TODO only works with 1-channel images (?)
+    // works only with internal images
     void rotate(int angle) {
+        xc_assert(!is_external, "XRaster::rotate() is implemented only for internal rasters");
         if (angle == 90) {
             int w0 = w;
             int h0 = h;
-            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; // Copy. TODO can be made with swap more effectively...
+            auto *temp_data = temp.data_pointer();
             this->allocate(h0,w0);
             for (int y=0; y<h0; y++) {
                 for (int x=0; x<w0; x++) {
-                    data[(h0-1-y) + h0*x] = temp.data[x+w0*y];
+                    data_pointer_[(h0-1-y) + h0*x] = temp_data[x+w0*y];
                 }
             }
         }
         if (angle == 180) {
-            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; // Copy. TODO can be made with swap more effectively...
+            auto *temp_data = temp.data_pointer();
+
+            auto *data = data_pointer();
+
             for (int y=0; y<h; y++) {
                 for (int x=0; x<w; x++) {
-                    data[(w-1-x) + w*(h-1-y)] = temp.data[x+w*y];
+                    data[(w-1-x) + w*(h-1-y)] = temp_data[x+w*y];
                 }
             }
         }
@@ -244,11 +272,15 @@ public:
             //rotate(180);
             int w0 = w;
             int h0 = h;
-            XRaster_<T> temp = *this; //TODO can be made with swap more effectively...
+            XRaster_<T> temp = *this; // Copy. TODO can be made with swap more effectively...
+            auto *temp_data = temp.data_pointer();
             this->allocate(h0,w0);
+
+            auto *data = data_pointer();
+
             for (int y=0; y<h0; y++) {
                 for (int x=0; x<w0; x++) {
-                    data[y + h0*(w0-1-x)] = temp.data[x+w0*y];
+                    data[y + h0*(w0-1-x)] = temp_data[x+w0*y];
                 }
             }
         }

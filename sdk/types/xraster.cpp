@@ -79,16 +79,20 @@ float XRaster_<glm::vec4>::distance_C(XRaster_<glm::vec4> &compare_with) {
 //---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
     raster.allocate(raster_rgb.w, raster_rgb.h);
+    auto *raster_data = raster.data_pointer();
+    auto *raster_rgb_data = raster_rgb.data_pointer();
     for (int i=0; i<raster.w*raster.h; i++) {
-        raster.data[i] = raster_rgb.data[i].grayi();
+        raster_data[i] = raster_rgb_data[i].grayi();
     }
 }
 
 //---------------------------------------------------------------------
 void XRaster::convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
     raster_rgb.allocate(raster.w, raster.h);
+    auto *raster_data = raster.data_pointer();
+    auto *raster_rgb_data = raster_rgb.data_pointer();
     for (int i=0; i<raster.w*raster.h; i++) {
-        raster_rgb.data[i] = rgb_u8(raster.data[i]);
+        raster_rgb_data[i] = rgb_u8(raster_data[i]);
     }
 }
 
@@ -103,6 +107,8 @@ void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
 
     raster.allocate(w, h);
 
+    auto *raster_data = raster.data_pointer();
+
     int mirrory = 0;
     for (int y=0; y<h; y++) {
         const uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
@@ -112,7 +118,7 @@ void XRaster::convert(QImage qimage, XRaster_u8 &raster) {
             uchar g = line[k++];
             uchar r = line[k++];
             k++;
-            raster.data[x+w*y] = rgb_u8::grayi(r,g,b);
+            raster_data[x+w*y] = rgb_u8::grayi(r,g,b);
         }
     }
 }
@@ -128,6 +134,7 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
                 "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
+    auto *raster_data = raster.data_pointer();
 
     int mirrory = 0;
     for (int y=0; y<h; y++) {
@@ -138,7 +145,7 @@ void XRaster::convert(QImage qimage, XRaster_u8c3 &raster) {
             uchar g = line[k++];
             uchar r = line[k++];
             k++;
-            raster.data[x+w*y] = rgb_u8(r,g,b);
+            raster_data[x+w*y] = rgb_u8(r,g,b);
         }
     }
 
@@ -155,6 +162,7 @@ void XRaster::convert_rgba(QImage qimage, XRaster_u8c4 &raster) {
                 "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
+    auto *raster_data = raster.data_pointer();
 
     int mirrory = 0;
     for (int y=0; y<h; y++) {
@@ -165,7 +173,7 @@ void XRaster::convert_rgba(QImage qimage, XRaster_u8c4 &raster) {
             uchar g = line[k++];
             uchar r = line[k++];
             uchar a = line[k++];
-            raster.data[x+w*y] = rgba_u8(r,g,b,a);
+            raster_data[x+w*y] = rgba_u8(r,g,b,a);
         }
     }
 }
@@ -181,10 +189,11 @@ void XRaster::convert_bgra(QImage qimage, XRaster_u8c4 &raster) {
                 "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
 
     raster.allocate(w, h);
+    auto *raster_data = raster.data_pointer();
 
     for (int y=0; y<h; y++) {
         const uchar *line = qimage.scanLine(y);
-        memcpy(&(raster.data[w*y]), line, w*4);
+        memcpy(&(raster_data[w*y]), line, w*4);
     }
 }
 
@@ -194,12 +203,14 @@ void XRaster::convert(XRaster_u8 &raster, QImage &qimage) {
     int h = raster.h;
     qimage = QImage(w, h, QImage::Format_RGB32);
 
+    auto *raster_data = raster.data_pointer();
+
     int mirrory = 0;
     for (int y=0; y<h; y++) {
         uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
         int k = 0;
         for (int x=0; x<w; x++) {
-            auto &v = raster.data[x+w*y];
+            auto &v = raster_data[x+w*y];
             line[k+2] = v;
             line[k+1] = v;
             line[k] = v;
@@ -215,12 +226,14 @@ void XRaster::convert(XRaster_u8c3 &raster, QImage &qimage) {
     int h = raster.h;
     qimage = QImage(w, h, QImage::Format_RGB32);
 
+    auto *raster_data = raster.data_pointer();
+
     int mirrory = 0;
     for (int y=0; y<h; y++) {
         uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
         int k = 0;
         for (int x=0; x<w; x++) {
-            auto &v = raster.data[x+w*y];
+            auto &v = raster_data[x+w*y];
             line[k+2] = v.v[0];
             line[k+1] = v.v[1];
             line[k] = v.v[2];

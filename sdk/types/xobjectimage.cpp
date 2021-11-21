@@ -282,12 +282,12 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //Advanced function which works with internal object
 //Usage: XObjectImage::create_from_raster(getobject_color_image()->write().data(), raster_color);
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8 &raster) {
-    create_from_array(object, raster.data.data(), 1, raster.w, raster.h);
+    create_from_array(object, raster.data_pointer(), 1, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8c3 &raster) {
-    create_from_array(object, (quint8 *)(raster.data.data()), 3, raster.w, raster.h);
+    create_from_array(object, raster.data_pointer_u8(), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
@@ -313,6 +313,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
                 "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(rect.w, rect.h);
+    auto *raster_data = raster.data_pointer();
 
     quint8 const *pixels = array->data_u8();
     if (channels == 1) {
@@ -320,7 +321,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
             int k = 0;
             for (int x=0; x<rect.w; x++) {
                 k = (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = pixels[k];
+                raster_data[x+rect.w*y] = pixels[k];
             }
         }
     }
@@ -329,7 +330,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         for (int y=0; y<rect.h; y++) {
             for (int x=0; x<rect.w; x++) {
                 k = channels * (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = (int(pixels[k]) + int(pixels[k+1]) + int(pixels[k+2]))/3;
+                raster_data[x+rect.w*y] = (int(pixels[k]) + int(pixels[k+1]) + int(pixels[k+2]))/3;
             }
         }
     }
@@ -356,6 +357,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
                 "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(w, h);
+    auto *raster_data = raster.data_pointer();
 
     quint8 const *pixels = array->data_u8();
     if (channels == 1) {
@@ -363,7 +365,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
             int k = 0;
             for (int x=0; x<rect.w; x++) {
                 k = (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = rgb_u8(pixels[k]);
+                raster_data[x+rect.w*y] = rgb_u8(pixels[k]);
             }
         }
     }
@@ -372,7 +374,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         for (int y=0; y<rect.h; y++) {
             for (int x=0; x<rect.w; x++) {
                 k = channels * (rect.x+x+w*(rect.y+y));
-                raster.data[x+rect.w*y] = rgb_u8(pixels[k], pixels[k+1], pixels[k+2]);
+                raster_data[x+rect.w*y] = rgb_u8(pixels[k], pixels[k+1], pixels[k+2]);
             }
         }
     }

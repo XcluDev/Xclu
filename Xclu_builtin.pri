@@ -108,6 +108,89 @@ HEADERS += \
     $$PWD/builtin_modules/Window/RenderElement/auto.h \
     $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h
 
+
+#--------------------------------------------------------------------------
+# OpenCV
+#--------------------------------------------------------------------------
+# windows 64 bit
+windows {
+    INCLUDEPATH += \
+        libs/opencv \
+        libs/opencv/include \
+        libs/opencv/include/opencv \
+        libs/opencv/include/opencv2 \
+        libs/opencv/include/opencv2/calib3d \
+        libs/opencv/include/opencv2/core \
+        libs/opencv/include/opencv2/core/cuda \
+        libs/opencv/include/opencv2/core/cuda/detail \
+        libs/opencv/include/opencv2/core/hal \
+        libs/opencv/include/opencv2/core/opencl \
+        libs/opencv/include/opencv2/core/opencl/runtime \
+        libs/opencv/include/opencv2/features2d \
+        libs/opencv/include/opencv2/flann \
+        libs/opencv/include/opencv2/highgui \
+        libs/opencv/include/opencv2/imgcodecs \
+        libs/opencv/include/opencv2/imgproc \
+        libs/opencv/include/opencv2/imgproc/detail \
+        libs/opencv/include/opencv2/ml \
+        libs/opencv/include/opencv2/objdetect \
+        libs/opencv/include/opencv2/photo \
+        libs/opencv/include/opencv2/shape \
+        libs/opencv/include/opencv2/stitching \
+        libs/opencv/include/opencv2/stitching/detail \
+        libs/opencv/include/opencv2/superres \
+        libs/opencv/include/opencv2/ts \
+        libs/opencv/include/opencv2/video \
+        libs/opencv/include/opencv2/videoio \
+        libs/opencv/include/opencv2/videostab
+
+    # TODO debug/release, 32bit,64bit.
+
+    CONFIG(release, debug|release) {
+        LIBS += -Llibs/opencv/lib/vs/x64/Release \
+        -lopencv_core310.lib \
+        -lopencv_videostab310.lib \
+        -lopencv_stitching310.lib \
+        -lopencv_features2d310.lib \
+        -lopencv_superres310.lib \
+        -lopencv_video310.lib \
+        -lopencv_highgui310.lib \
+        -lopencv_imgcodecs310.lib \
+        -lopencv_videoio310.lib \
+        -lopencv_objdetect310.lib \
+        -lopencv_shape310.lib \
+        -lopencv_calib3d310.lib \
+        -lopencv_imgproc310.lib \
+        -lopencv_ml310.lib \
+        -lopencv_flann310.lib \
+        -lopencv_photo310.lib \
+        -zlib.lib
+    }
+    CONFIG(debug, debug|release) {
+        LIBS += -Llibs/opencv/lib/vs/x64/Debug \
+        -lopencv_core310d.lib \
+        -lopencv_videostab310d.lib \
+        -lopencv_stitching310d.lib \
+        -lopencv_features2d310d.lib \
+        -lopencv_superres310d.lib \
+        -lopencv_video310d.lib \
+        -lopencv_highgui310d.lib \
+        -lopencv_imgcodecs310d.lib \
+        -lopencv_videoio310d.lib \
+        -lopencv_objdetect310d.lib \
+        -lopencv_shape310d.lib \
+        -lopencv_calib3d310d.lib \
+        -lopencv_imgproc310d.lib \
+        -lopencv_ml310d.lib \
+        -lopencv_flann310d.lib \
+        -lopencv_photo310d.lib \
+        -zlibd.lib
+    }
+
+
+}
+
+
 #--------------------------------------------------------------------------
 #Windows, USB enumeration for Webcamera module
 #--------------------------------------------------------------------------
