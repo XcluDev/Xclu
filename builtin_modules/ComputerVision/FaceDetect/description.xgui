@@ -1,0 +1,41 @@
+#Module FadeDetect
+#------------------------------------------
+#module_name_hint=facedetect
+module_description=Viola-Jones algorithm for face detection.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    
+const enum Image_Source send_image_source=Image [Image,Test_Image]
+    //Should we use real image or test image.
+    
+if send_image_source Image
+in object_image Input_Image send_image
+    //Image size must be fixed after running.
+endif    
+
+line 
+
+in enum Processing processing_mode=Off [Off,Each_Frame,On_Checkbox]
+    //Processing mode.
+if processing_mode On_Checkbox
+in checkbox New_Frame process_new_frame=0
+    //Usually you should link it with the image update flag.
+endif
+line
+
+out int Face_Count face_count0=0 0:* 1,10
+    //Number of faces detected.
+
+line 
+
+in checkbox Filter_By_Size filter_by_size=0
+	//Apply size filter.
+if filter_by_size 1
+in float Min_Size filter_by_size_min=0.5 0:1 0.01,0.1
+in float Max_Size filter_by_size_max=0.5 0:1 0.01,0.1
+endif
+
+line

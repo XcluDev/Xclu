@@ -22,7 +22,6 @@ public:
     virtual ~XModuleSerial();
 protected:
 #include "auto.h"
-    //Выполнение
     virtual void on_loaded();
     virtual void start();
     virtual void update();

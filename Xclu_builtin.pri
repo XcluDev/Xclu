@@ -38,7 +38,8 @@ SOURCES += \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp \
     $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.cpp \
     $$PWD/builtin_modules/Project/Notes/xmodulenotes.cpp \
-    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp
+    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp \
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/xmodulefacedetect.cpp
 
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
@@ -106,7 +107,9 @@ HEADERS += \
     $$PWD/builtin_modules/Project/Notes/auto.h \
     $$PWD/builtin_modules/Project/Notes/xmodulenotes.h \
     $$PWD/builtin_modules/Window/RenderElement/auto.h \
-    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h
+    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h \
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/auto.h \
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/xmodulefacedetect.h
 
 
 #--------------------------------------------------------------------------
@@ -147,44 +150,44 @@ windows {
     # TODO debug/release, 32bit,64bit.
 
     CONFIG(release, debug|release) {
-        LIBS += -Llibs/opencv/lib/vs/x64/Release \
-        -lopencv_core310.lib \
-        -lopencv_videostab310.lib \
-        -lopencv_stitching310.lib \
-        -lopencv_features2d310.lib \
-        -lopencv_superres310.lib \
-        -lopencv_video310.lib \
-        -lopencv_highgui310.lib \
-        -lopencv_imgcodecs310.lib \
-        -lopencv_videoio310.lib \
-        -lopencv_objdetect310.lib \
-        -lopencv_shape310.lib \
-        -lopencv_calib3d310.lib \
-        -lopencv_imgproc310.lib \
-        -lopencv_ml310.lib \
-        -lopencv_flann310.lib \
-        -lopencv_photo310.lib \
-        -zlib.lib
+        LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Release \
+        -lopencv_core310 \
+        -lopencv_videostab310 \
+        -lopencv_stitching310 \
+        -lopencv_features2d310 \
+        -lopencv_superres310 \
+        -lopencv_video310 \
+        -lopencv_highgui310 \
+        -lopencv_imgcodecs310 \
+        -lopencv_videoio310 \
+        -lopencv_objdetect310 \
+        -lopencv_shape310 \
+        -lopencv_calib3d310 \
+        -lopencv_imgproc310 \
+        -lopencv_ml310 \
+        -lopencv_flann310 \
+        -lopencv_photo310 \
+        -lzlib
     }
     CONFIG(debug, debug|release) {
         LIBS += -Llibs/opencv/lib/vs/x64/Debug \
-        -lopencv_core310d.lib \
-        -lopencv_videostab310d.lib \
-        -lopencv_stitching310d.lib \
-        -lopencv_features2d310d.lib \
-        -lopencv_superres310d.lib \
-        -lopencv_video310d.lib \
-        -lopencv_highgui310d.lib \
-        -lopencv_imgcodecs310d.lib \
-        -lopencv_videoio310d.lib \
-        -lopencv_objdetect310d.lib \
-        -lopencv_shape310d.lib \
-        -lopencv_calib3d310d.lib \
-        -lopencv_imgproc310d.lib \
-        -lopencv_ml310d.lib \
-        -lopencv_flann310d.lib \
-        -lopencv_photo310d.lib \
-        -zlibd.lib
+        -lopencv_core310d \
+        -lopencv_videostab310d \
+        -lopencv_stitching310d \
+        -lopencv_features2d310d \
+        -lopencv_superres310d \
+        -lopencv_video310d \
+        -lopencv_highgui310d \
+        -lopencv_imgcodecs310d \
+        -lopencv_videoio310d \
+        -lopencv_objdetect310d \
+        -lopencv_shape310d \
+        -lopencv_calib3d310d \
+        -lopencv_imgproc310d \
+        -lopencv_ml310d \
+        -lopencv_flann310d \
+        -lopencv_photo310d \
+        -lzlibd
     }
 
 
@@ -247,20 +250,19 @@ windows {
 #}
 #
 #
-##windows 64 bit
-#windows {
-#    INCLUDEPATH += $$PWD/libs/NDI/Include
-#    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
-#}
-#
-#SOURCES +=    \
-#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
-#
-#HEADERS +=    \
-#    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
-#
-#}
+#windows 64 bit
+windows {
+    INCLUDEPATH += $$PWD/libs/NDI/Include
+    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
+
+SOURCES +=    \
+    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
+
+HEADERS +=    \
+    $$PWD/builtin_modules/Communication/Ndi/auto.h \
+    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
+
+}
 
 #--------------------------------------------------------------------------
 

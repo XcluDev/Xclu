@@ -1,7 +1,7 @@
 #include "xmodulendi.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
-#include "xc_project.h"
+#include "project_props.h"
 #include <Processing.NDI.Lib.h>
  
 
@@ -33,7 +33,6 @@ void XModuleNdi::on_button_pressed(QString button_id) {
 
     }
 
-  //xc_console_warning("Serial: Port is not connected, may be you need to start the project.");
 }
 
 
@@ -110,9 +109,10 @@ void XModuleNdi::send_test_frame(int frame) {
     }
 
     // fill
+    auto test_raster_data = test_raster_.data_pointer();
     for (int y=0; y<h; y++) {
         for (int x=0; x<w; x++) {
-            test_raster_.data[x + w*y] = rgba_u8(
+            test_raster_data[x + w*y] = rgba_u8(
                         ((x + frame) * 256 / w) % 256,
                         x * 256 / w,
                         y * 256 / h,
