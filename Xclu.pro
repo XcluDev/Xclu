@@ -14,21 +14,21 @@
 #ВАЖНО: Установить каталог сборки D:\perevalovds.com\_2020\Xclu\temp-build
 #тогда все промежуточные файлы будут в папке temp-build, а результат в Xclu-bin
 
-#ВНИМАНИЕ: На "старом" Qt 5.9 при переименовании или добавлении файлов
-#требуется выполнять команду меню "Запустить qmake", иначе выдает ошибки или не видит файл
+# Qt:
+#    5.9.5:  https://download.qt.io/archive/qt/5.9/5.9.5/
+#    5.14.2: https://download.qt.io/archive/qt/5.14/5.14.2/
 
-
-#SSL on Windows:
-#If you get "QSslSocket::connectToHostEncrypted: TLS initialization failed" error on Windows:
-#please check OpenSSL at Qt installer at Developer Tools section, 
-#and copy libcrypto-1_1-x64.dll, libssl-1_1-x64.dll to Xclu bin folder
-#https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
-
-#For windows, to collect all required plugins, use:
-#D:\Qt\Qt5_14\5.14.2\msvc2017_64\bin\windeployqt.exe --release ./
-#(set path to your Qt here)
-
-
+# Notes: 
+# - On "old" Qt 5.9 please call "Run qmake" after adding or renaming files.
+#    Also sometimes it's required to delete Build folders and recompile the project.
+# - SSL on Windows:
+#    If you get "QSslSocket::connectToHostEncrypted: TLS initialization failed" error,
+#    please enable "OpenSSL" at Qt installer at Developer Tools section, 
+#    and copy libcrypto-1_1-x64.dll, libssl-1_1-x64.dll to Xclu bin folder
+#    https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
+# - Collect plugins on Windows:
+#    D:\Qt\Qt5_14\5.14.2\msvc2017_64\bin\windeployqt.exe --release ./
+#    (set path to your Qt here)
 
 #--------------------------------------------------------------------------
 #General app settings

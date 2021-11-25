@@ -3,6 +3,8 @@
 #include "registrarxmodule.h"
 #include "project_props.h"
  
+#include <cv.h>
+#include <opencv2/imgcodecs.hpp>
 
 REGISTER_XMODULE(FaceDetect)
 
@@ -38,7 +40,8 @@ void XModuleFaceDetect::on_button_pressed(QString button_id) {
 //---------------------------------------------------------------------
 void XModuleFaceDetect::start() {
 
-
+    cv::Mat mat(100,100,CV_8UC3);
+    cv::imwrite("d:\\Image.jpg", mat);
 }
 
 //---------------------------------------------------------------------
