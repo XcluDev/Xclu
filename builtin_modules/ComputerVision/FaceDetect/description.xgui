@@ -6,7 +6,7 @@ module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
-page Main
+page Face_Detection
     
 const enum Image_Source send_image_source=Image [Image,Test_Image]
     //Should we use real image or test image.
@@ -18,7 +18,7 @@ endif
 
 line 
 
-in enum Processing processing_mode=Off [Off,Each_Frame,On_Checkbox]
+in enum Search_Faces processing_mode=Off [Off,Each_Frame,On_Checkbox]
     //Processing mode.
 if processing_mode On_Checkbox
 in checkbox New_Frame process_new_frame=0
@@ -39,3 +39,21 @@ in float Max_Size filter_by_size_max=0.5 0:1 0.01,0.1
 endif
 
 line
+
+#-------------------------------------------
+page Draw
+    //Draw results at RenderArea.
+    
+in checkbox Draw draw=1
+    //Enable drawing
+   
+separator
+in float X draw_x=0 0:1 0.001,0.01
+    //Drawing X position.
+    //0..1
+in float Y draw_y=0 0:1 0.001,0.01
+    //Drawing Y position.
+    //0..1
+
+in float Size draw_size=0.5 0:2 0.001,0.01
+    //Size of drawing, 1 means fit to area
