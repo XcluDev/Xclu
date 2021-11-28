@@ -641,7 +641,8 @@ void XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
 //быстрее через OpenCV или FreeImage или TurboJpeg
 /*static*/ void XObjectImage::save(const XObject &object, QString file_name, QString format, int quality) {
     QImage qimage;
-    convert_to_QImage(object, qimage);
+    link_to_QImage(object, qimage);
+    xc_assert(!qimage.isNull(), "XObjectImage::save - null resulted QImage");
     xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
                 "Can't save image " + file_name);
 }

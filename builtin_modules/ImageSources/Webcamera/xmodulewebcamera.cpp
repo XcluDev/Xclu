@@ -338,6 +338,21 @@ void XModuleWebcamera::update() {
         DataAccess access(data_);
         data_.err.throw_error();
     }
+
+    // Save image button
+    if (geti_save_image()) {
+        QString file_name = xc_absolute_path_from_project(gets_save_image_file_name());
+
+        if (geti_transform()) {
+            auto read = getobject_image_transformed()->read();
+            XObjectImage::save(read.data(), file_name);
+        }
+        else {
+            auto read = getobject_image()->read();
+            XObjectImage::save(read.data(), file_name);
+        }
+        xc_console_append("Saved `" + file_name + "`");
+    }
 }
 
 //---------------------------------------------------------------------
