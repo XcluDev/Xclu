@@ -5,9 +5,67 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "2"
+        "selected_module": "3"
     },
     "modules": [
+        {
+            "description": {
+                "class": "Project",
+                "name": "project1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "dont_save_at_exit",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
         {
             "description": {
                 "class": "ImageLoader",
@@ -29,7 +87,7 @@
                     },
                     {
                         "aname": "file_name",
-                        "avalue": "FaceDetect/wabcam2.png"
+                        "avalue": "Images/webcam2.png"
                     },
                     {
                         "aname": "folder_name",
@@ -82,7 +140,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "6"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -151,7 +209,7 @@
                     },
                     {
                         "aname": "draw_enabled",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "draw_x",
@@ -251,7 +309,7 @@
                     },
                     {
                         "aname": "general_enabled_",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "general_auto_update_",
@@ -284,11 +342,11 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
-                        "aname": "Face_Detection",
+                        "aname": "Main",
                         "avalue": "0"
                     },
                     {
@@ -296,36 +354,36 @@
                         "avalue": "Image"
                     },
                     {
-                        "aname": "send_image",
+                        "aname": "input_image",
                         "avalue": "",
-                        "link": "image_loader1->image"
+                        "link": "webcam1->image"
                     },
                     {
                         "aname": "processing_mode",
-                        "avalue": "Off"
+                        "avalue": "Each_Frame"
                     },
                     {
                         "aname": "process_new_frame",
                         "avalue": "0"
                     },
                     {
-                        "aname": "filter_by_size",
+                        "aname": "Setup",
                         "avalue": "0"
                     },
                     {
-                        "aname": "filter_by_size_min",
-                        "avalue": "0.5"
+                        "aname": "cascade_file",
+                        "avalue": "HaarCascades/haarcascade_frontalface_default.xml"
                     },
                     {
-                        "aname": "filter_by_size_max",
-                        "avalue": "0.5"
+                        "aname": "filter_by_size_min",
+                        "avalue": "0.178"
                     },
                     {
                         "aname": "Draw",
                         "avalue": "0"
                     },
                     {
-                        "aname": "draw",
+                        "aname": "draw_enabled",
                         "avalue": "1"
                     },
                     {
@@ -338,7 +396,7 @@
                     },
                     {
                         "aname": "draw_size",
-                        "avalue": "0.5"
+                        "avalue": "1"
                     },
                     {
                         "aname": "Control",

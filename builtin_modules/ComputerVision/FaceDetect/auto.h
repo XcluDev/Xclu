@@ -18,11 +18,11 @@ QString getraw_send_image_source() { return getraw_("send_image_source");}
 
 //Object Input Image
 //Image size must be fixed after running.
-bool was_changed_send_image() { return was_changed_("send_image"); }
-XProtectedObject *getobject_send_image() { return get_object_("send_image"); }
-void repaint_send_image() { repaint_("send_image"); }
+bool was_changed_input_image() { return was_changed_("input_image"); }
+XProtectedObject *getobject_input_image() { return get_object_("input_image"); }
+void repaint_input_image() { repaint_("input_image"); }
 
-//Enum Processing
+//Enum Search Faces
 //Processing mode.
 enum enum_processing_mode {
     processing_mode_Off = 0,
@@ -43,18 +43,25 @@ void repaint_process_new_frame() { repaint_("process_new_frame"); }
 
 //Out Int Face Count
 //Number of faces detected.
-bool was_changed_face_count0() { return was_changed_("face_count0"); }
-int geti_face_count0() { return geti_("face_count0"); }
-void seti_face_count0(int value) { seti_("face_count0", value); }
-void increase_int_face_count0(int increase = 1) { increase_int_("face_count0", increase); }
-void repaint_face_count0() { repaint_("face_count0"); }
+bool was_changed_face_count() { return was_changed_("face_count"); }
+int geti_face_count() { return geti_("face_count"); }
+void seti_face_count(int value) { seti_("face_count", value); }
+void increase_int_face_count(int increase = 1) { increase_int_("face_count", increase); }
+void repaint_face_count() { repaint_("face_count"); }
 
 
-//Checkbox Filter By Size
-//Apply size filter.
-bool was_changed_filter_by_size() { return was_changed_("filter_by_size"); }
-int geti_filter_by_size() { return geti_("filter_by_size"); }
-void repaint_filter_by_size() { repaint_("filter_by_size"); }
+//----------------------------------------------------
+//Page Setup
+//
+
+//String Cascade File
+//Cascade XML file.
+bool was_changed_cascade_file() { return was_changed_("cascade_file"); }
+QString gets_cascade_file() { return gets_("cascade_file"); }
+QStringList get_strings_cascade_file() { return get_strings_("cascade_file"); }
+void repaint_cascade_file() { repaint_("cascade_file"); }
+
+
 
 //Float Min Size
 //
@@ -62,11 +69,34 @@ bool was_changed_filter_by_size_min() { return was_changed_("filter_by_size_min"
 float getf_filter_by_size_min() { return getf_("filter_by_size_min"); }
 void repaint_filter_by_size_min() { repaint_("filter_by_size_min"); }
 
-//Float Max Size
-//
-bool was_changed_filter_by_size_max() { return was_changed_("filter_by_size_max"); }
-float getf_filter_by_size_max() { return getf_("filter_by_size_max"); }
-void repaint_filter_by_size_max() { repaint_("filter_by_size_max"); }
 
+//----------------------------------------------------
+//Page Draw
+//Draw results at RenderArea.
+
+//Checkbox Draw
+//
+bool was_changed_draw_enabled() { return was_changed_("draw_enabled"); }
+int geti_draw_enabled() { return geti_("draw_enabled"); }
+void repaint_draw_enabled() { repaint_("draw_enabled"); }
+
+
+//Float X
+//Drawing X position.
+bool was_changed_draw_x() { return was_changed_("draw_x"); }
+float getf_draw_x() { return getf_("draw_x"); }
+void repaint_draw_x() { repaint_("draw_x"); }
+
+//Float Y
+//Drawing Y position.
+bool was_changed_draw_y() { return was_changed_("draw_y"); }
+float getf_draw_y() { return getf_("draw_y"); }
+void repaint_draw_y() { repaint_("draw_y"); }
+
+//Float Size
+//Size of drawing, 1 means fit to area
+bool was_changed_draw_size() { return was_changed_("draw_size"); }
+float getf_draw_size() { return getf_("draw_size"); }
+void repaint_draw_size() { repaint_("draw_size"); }
 
 //----------------------------------------------------

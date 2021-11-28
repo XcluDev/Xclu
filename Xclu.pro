@@ -118,6 +118,7 @@ INCLUDEPATH += host \
 
 INCLUDEPATH += sdk \
                sdk/audio \
+               sdk/cv \
                sdk/draw \
                sdk/math \
                sdk/ml \
@@ -194,6 +195,7 @@ SOURCES += \
     modules/moduleseed.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
+    sdk/cv/xcvhelper.cpp \
     sdk/draw/xdrawhelper.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
@@ -294,6 +296,7 @@ HEADERS += \
     modules/registrarxmodule.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
+    sdk/cv/xcvhelper.h \
     sdk/draw/xdrawhelper.h \
     sdk/math/int2.h \
     modules/exportinterface.h \

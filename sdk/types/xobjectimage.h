@@ -41,7 +41,8 @@ public:
 };
 
 
-//класс для работы с объектами-изображениями
+// Helper class for working with XObject-images.
+// See also XCvHelper class for working with OpenCV images.
 class XObjectImage: public XObjectWrapper {
 public:
     XObjectImage(const XObject *object);
@@ -145,7 +146,7 @@ public:
 
     // Linking dosn't copies raster, so resulted QImage must be used only for short action,
     // such as draw or save to screen
-    static void link_to_QImage(const XObject &object, QImage &qimage);
+    static bool link_to_QImage(const XObject &object, QImage &qimage);
 
     //Загрузка изображения с диска
     //TODO выполняется через QImage, поэтому не очень быстрая

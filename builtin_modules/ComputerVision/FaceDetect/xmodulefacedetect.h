@@ -10,7 +10,9 @@
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
-#include "cv.h"
+
+#include <cv.h>
+#include "opencv2/objdetect.hpp"
 
 class XModuleFaceDetect: public XModule
 {
@@ -33,14 +35,20 @@ protected:
 
     void haar_search();
 
-    // The default value is 1.2. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
-    void haar_set_scale(float scaleHaar);
-    // How many neighbors can be grouped into a face? Default value is 2. If set to 0, no grouping will be done.
-    void haar_set_neighbors(int neighbors);
+    //https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html
+    cv::CascadeClassifier face_cascade_;
 
-    CvHaarClassifierCascade* haar_cascade_ = nullptr;
-    float haar_scale_ = 1.2;
-    int haar_neighbors = 2;
+
+    struct FaceBlob {
+        FaceBlob() {}
+        FaceBlob(const QRectF &rect0) {
+            rect = rect0;
+        }
+        QRectF rect = QRectF(0,0,0,0);
+        float area() const { return rect.width() * rect.height(); }
+        glm::vec2 center() const { return glm::vec2(rect.x() + rect.width()/2, rect.y() + rect.height()/2); }
+    };
+    QVector<FaceBlob> blobs_;
 };
 
 

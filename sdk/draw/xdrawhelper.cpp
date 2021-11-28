@@ -20,21 +20,22 @@ QRectF XDrawHelper::fit_rect(float areaw, float areah, float posx_u, float posy_
 }
 
 //---------------------------------------------------------------------
-void XDrawHelper::draw_QImage_fit(QImage &qimage, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h) {
+QRectF XDrawHelper::draw_QImage_fit(QImage &qimage, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h) {
     if (qimage.isNull()) {
-        return;
+        return QRectF();
     }
-    painter.drawImage(fit_rect(qimage.width(), qimage.height(), posx_u, posy_u, size_u, w, h),
-                      qimage);
+    QRectF rect = fit_rect(qimage.width(), qimage.height(), posx_u, posy_u, size_u, w, h);
+    painter.drawImage(rect, qimage);
+    return rect;
 
 }
 
 //---------------------------------------------------------------------
-void XDrawHelper::draw_XObject_fit(const XObject* object, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h) {
+QRectF XDrawHelper::draw_XObject_fit(const XObject* object, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h) {
     xc_assert(object, "XDrawHelper::draw_XObject_fit - null object");
     QImage qimage;
     XObjectImage::link_to_QImage(*object,qimage);
-    draw_QImage_fit(qimage, posx_u, posy_u, size_u, painter, w, h);
+    return draw_QImage_fit(qimage, posx_u, posy_u, size_u, painter, w, h);
 }
 
 //---------------------------------------------------------------------

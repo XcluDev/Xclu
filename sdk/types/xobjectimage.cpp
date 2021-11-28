@@ -601,17 +601,18 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //---------------------------------------------------------------------
 // Linking dosn't copies raster, so resulted QImage must be used only for short action,
 // such as draw or save to screen
-void XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
+bool XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
     if (!is_image(object)) {
         qimage = QImage();
-        return;
+        return false;
     }
     XObjectImageData image_data = get_data(object);
     if (image_data.is_empty()) {
         qimage = QImage();
-        return;
+        return false;
     }
     xc_assert(image_data.channels == 3, "XObjectImage::link_to_QImage() - only images with 3 channels are supported");
+    auto qt_format = QImage::Format_RGB888;      //TODO implement more formats
 
     const XArray *array = get_array(object);
 
@@ -622,7 +623,8 @@ void XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
     quint8 const *pixels = array->data_u8();
 
     int bytes_per_line = 1 * image_data.channels * image_data.w;
-    qimage = QImage(pixels, image_data.w, image_data.h, bytes_per_line, QImage::Format_RGB888);
+    qimage = QImage(pixels, image_data.w, image_data.h, bytes_per_line, qt_format);
+    return true;
 }
 
 //---------------------------------------------------------------------

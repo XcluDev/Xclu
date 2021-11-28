@@ -5,20 +5,22 @@ module_description=Viola-Jones algorithm for face detection.
 module_version=1.01
 module_impl=C++
 
+module_accept_calls=draw
+
 #-------------------------------------------
-page Face_Detection
-    
+page Main    
+
 const enum Image_Source send_image_source=Image [Image,Test_Image]
     //Should we use real image or test image.
     
 if send_image_source Image
-in object_image Input_Image send_image
+in object_image Input_Image input_image
     //Image size must be fixed after running.
 endif    
 
 line 
 
-in enum Search_Faces processing_mode=Off [Off,Each_Frame,On_Checkbox]
+in enum Search_Faces processing_mode=Each_Frame [Off,Each_Frame,On_Checkbox]
     //Processing mode.
 if processing_mode On_Checkbox
 in checkbox New_Frame process_new_frame=0
@@ -26,26 +28,33 @@ in checkbox New_Frame process_new_frame=0
 endif
 line
 
-out int Face_Count face_count0=0 0:* 1,10
+out int Face_Count face_count=0 0:* 1,10
     //Number of faces detected.
 
 line 
 
-in checkbox Filter_By_Size filter_by_size=0
-	//Apply size filter.
-if filter_by_size 1
-in float Min_Size filter_by_size_min=0.5 0:1 0.01,0.1
-in float Max_Size filter_by_size_max=0.5 0:1 0.01,0.1
-endif
 
+#-------------------------------------------
+page Setup
+
+in string_file Cascade_File cascade_file="HaarCascades/haarcascade_frontalface_default.xml"
+    //Cascade XML file.
+    //Choose Haar Cascade xml-file
+    //XML (*.xml);; All files (*.*)
+
+separator
+
+
+    
+line
+in float Min_Size filter_by_size_min=0.01 0:1 0.001,0.01
 line
 
 #-------------------------------------------
 page Draw
     //Draw results at RenderArea.
     
-in checkbox Draw draw=1
-    //Enable drawing
+in checkbox Draw draw_enabled=1
    
 separator
 in float X draw_x=0 0:1 0.001,0.01
@@ -55,5 +64,5 @@ in float Y draw_y=0 0:1 0.001,0.01
     //Drawing Y position.
     //0..1
 
-in float Size draw_size=0.5 0:2 0.001,0.01
+in float Size draw_size=0.5 0:1 0.001,0.01
     //Size of drawing, 1 means fit to area

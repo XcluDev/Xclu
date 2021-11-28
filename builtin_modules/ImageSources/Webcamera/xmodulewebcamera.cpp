@@ -127,6 +127,10 @@ void XModuleWebcamera::on_button_pressed(QString button) {
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::draw(QPainter &painter, int w, int h) {
+    if (!geti_draw_enabled()) {
+        return;
+    }
+
     if (geti_transform()) {
         auto image_read = getobject_image_transformed()->read();
         const XObject *object = image_read.pointer();

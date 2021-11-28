@@ -15,7 +15,7 @@ public:
     // Used for draw images and other rectangular areas to RenderArea.
     static QRectF fit_rect(float areaw, float areah, float posx_u, float posy_u, float size_u, float w, float h);
 
-    static void draw_QImage_fit(QImage &qimage, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h);
+    static QRectF draw_QImage_fit(QImage &qimage, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h);
 
     // draw_XObject_fit() draws object, it it's image
     // Usage:
@@ -23,7 +23,7 @@ public:
     // const XObject *object = image_read.pointer();
     // XDrawHelper::draw_XObject_fit(...);
 
-    static void draw_XObject_fit(const XObject* object, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h);
+    static QRectF draw_XObject_fit(const XObject* object, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h);
 
 };
 
