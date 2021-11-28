@@ -39,9 +39,10 @@ void XModuleFaceDetect::on_button_pressed(QString button_id) {
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::start() {
+    //haar_load(...);
 
-    cv::Mat mat(100,100,CV_8UC3);
-    cv::imwrite("d:\\Image.jpg", mat);
+    //cv::Mat mat(100,100,CV_8UC3);
+    //cv::imwrite("d:\\Image.jpg", mat);
 }
 
 //---------------------------------------------------------------------
@@ -56,7 +57,34 @@ void XModuleFaceDetect::update() {
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::stop() {
+    haar_unload();
 
+}
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::haar_load(QString file_name) {
+
+}
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::haar_unload() {
+
+}
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::haar_search() {
+
+}
+
+//---------------------------------------------------------------------
+// The default value is 1.2. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
+void XModuleFaceDetect::haar_set_scale(float scaleHaar) {
+
+}
+
+//---------------------------------------------------------------------
+// How many neighbors can be grouped into a face? Default value is 2. If set to 0, no grouping will be done.
+void XModuleFaceDetect::haar_set_neighbors(int neighbors) {
 
 }
 

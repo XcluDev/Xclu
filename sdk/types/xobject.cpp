@@ -45,6 +45,11 @@ void XObject::assert_type(XObjectType expected_type) const {
 }
 
 //---------------------------------------------------------------------
+bool XObject::has_type(XObjectType expected_type) const {
+    return (type() == expected_type);
+}
+
+//---------------------------------------------------------------------
 //размер данных, в байтах
 quint32 XObject::size_bytes() const {
     quint32 size = 0;

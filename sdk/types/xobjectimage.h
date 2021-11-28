@@ -35,6 +35,9 @@ public:
     int channels = 0;
     QString channels_description;
     QString data_type;
+
+    bool is_empty() { return w <= 0 || h <= 0 || channels <= 0;}
+    //int bytes_per_line() { return w * channels; } - for proper implementation need to store data_type not as string, but as id, and comput lenght.
 };
 
 
@@ -49,8 +52,12 @@ public:
     //показать объект в QLabel
     virtual void show_object(QLabel *label, const XObjectShowSettings &settings);
 
+    // Check that object is already image
+    static bool is_image(const XObject &object);
+
     //Извлечение всех полей из изображения
     static XObjectImageData get_data(const XObject &object);
+
 
 
     //создание изображения - выделение памяти и заполнение из массива
@@ -135,6 +142,10 @@ public:
     //то есть "R" будет выглядет как Grayscale
     static void convert_to_QImage_fast_preview(const XObject &object, QImage &qimage, int out_w, int out_h,
                                                bool mirrorx=false, bool mirrory=false);
+
+    // Linking dosn't copies raster, so resulted QImage must be used only for short action,
+    // such as draw or save to screen
+    static void link_to_QImage(const XObject &object, QImage &qimage);
 
     //Загрузка изображения с диска
     //TODO выполняется через QImage, поэтому не очень быстрая

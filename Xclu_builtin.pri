@@ -161,7 +161,7 @@ windows {
         LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
     }
     CONFIG(debug, debug|release) {
-        LIBS += -Llibs/opencv/lib/vs/x64/Debug \
+        LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Debug \
         -llibwebpd -lopencv_imgproc310d -lopencv_shape310d -lopencv_superres310d -lopencv_videoio310d \
         -lopencv_stitching310d -lopencv_flann310d -lopencv_calib3d310d -lopencv_videostab310d \
         -lopencv_features2d310d -lopencv_ml310d -lopencv_core310d -lopencv_imgcodecs310d -lopencv_objdetect310d \

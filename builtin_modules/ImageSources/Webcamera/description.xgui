@@ -7,6 +7,8 @@ module_description=Capture frames from a webcamera.
 module_version=1.01
 module_impl=C++
 
+module_accept_calls=draw
+
 #-------------------------------------------
 page Main
     //General settings
@@ -97,14 +99,31 @@ in enum Data_Type image_data_type=u8 [u8,float]
     
 endif
 
+line
+in button Save_Image save_image
+    //Press to save the image to a specified file.
+in string File_To_Save save_image_file_name="wabcam.png"
+    //File to save the image.
 
+
+#-----------------------------
+page Draw
+    //Draw to RenderArea.
+    
+in checkbox Draw draw_enabled=1
+
+in float X draw_x=0 0:1 0.001,0.01
+in float Y draw_y=0 0:1 0.001,0.01
+in float Size draw_size=0.5 0:1 0.001,0.01
+    
+    
 #-----------------------------
 page Transform
 
+line
 in checkbox_group Transform transform=0
     //Crop, mirror and rotate the image.
     
-line
 
 if transform 1
 out object_image Transformed_Image image_transformed
@@ -121,9 +140,8 @@ in enum Rotate rotate=0 [0,90,180,270]
     //Rotation.
     //deg
     
-
-line
 endif
+line
 
     
 #if resize_crop 1
@@ -181,7 +199,7 @@ out text Local_Console local_console 20 25
 	
 #-----------------------------
 page Resolver
-    //This is capability for properly assigning several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
+    //This is capability to properly assign several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
 	
 const checkbox Enabled resolver_enabled=0
 	//Is Resolver enabled.

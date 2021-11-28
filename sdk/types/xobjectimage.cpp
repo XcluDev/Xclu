@@ -91,6 +91,13 @@ void XObjectImage::show_object(QLabel *label, const XObjectShowSettings &setting
     }
 }
 
+
+//---------------------------------------------------------------------
+// Check that object is already image
+bool XObjectImage::is_image(const XObject &object) {
+    return object.has_type(XObjectTypeImage);
+}
+
 //---------------------------------------------------------------------
 //Извлечение всех полей из изображения
 /*static*/ XObjectImageData XObjectImage::get_data(const XObject &object) {
@@ -590,6 +597,33 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 }
 
+
+//---------------------------------------------------------------------
+// Linking dosn't copies raster, so resulted QImage must be used only for short action,
+// such as draw or save to screen
+void XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
+    if (!is_image(object)) {
+        qimage = QImage();
+        return;
+    }
+    XObjectImageData image_data = get_data(object);
+    if (image_data.is_empty()) {
+        qimage = QImage();
+        return;
+    }
+    xc_assert(image_data.channels == 3, "XObjectImage::link_to_QImage() - only images with 3 channels are supported");
+
+    const XArray *array = get_array(object);
+
+    auto data_type = array->data_type();
+    xc_assert(data_type == XTypeId_u8,
+              "XObjectImage::link_to_QImage() - only u8 data type is supported");
+
+    quint8 const *pixels = array->data_u8();
+
+    int bytes_per_line = 1 * image_data.channels * image_data.w;
+    qimage = QImage(pixels, image_data.w, image_data.h, bytes_per_line, QImage::Format_RGB888);
+}
 
 //---------------------------------------------------------------------
 //Загрузка изображения с диска

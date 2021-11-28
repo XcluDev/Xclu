@@ -30,6 +30,8 @@ public:
     void set_type(XObjectType);
     //проверить, что объект имеет конкретный тип, если нет - то выдаст exception
     void assert_type(XObjectType expected_type) const;
+    bool has_type(XObjectType expected_type) const;
+
 
     //размер данных, в байтах
     quint32 size_bytes() const;

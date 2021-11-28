@@ -125,6 +125,22 @@ void XModuleWebcamera::on_button_pressed(QString button) {
 }
 
 //---------------------------------------------------------------------
+void XModuleWebcamera::draw(QPainter &painter, int w, int h) {
+    //TODO currently draw only current image, not transformed - it seems locks mechanics works wrons with such "if" expressions
+    auto image_read = getobject_image()->read(); //(geti_transform())?getobject_image_transformed()->read():getobject_image()->read();
+    const XObject *object = image_read.pointer();
+    QImage qimage;
+    XObjectImage::link_to_QImage(*object,qimage);
+    if (!qimage.isNull()) {
+        float imgw = qimage.width();
+        float imgh = qimage.height();
+        float scl = qMin(w / imgw, h / imgh) * getf_draw_size();
+        QRectF rect(getf_draw_x() * w, getf_draw_y() * h, imgw * scl, imgh * scl);
+        painter.drawImage(rect, qimage);
+    }
+}
+
+//---------------------------------------------------------------------
 void XModuleWebcamera::start() {
     // Here we don't start the camera, and do it at the first update,
     // depending on capture_source.

@@ -150,16 +150,59 @@ bool was_changed_image_data_type() { return was_changed_("image_data_type"); }
 enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_("image_data_type")); }
 QString getraw_image_data_type() { return getraw_("image_data_type");}
 
+
+//Button Save Image
+//Press to save the image to a specified file.
+bool was_changed_save_image() { return was_changed_("save_image"); }
+int geti_save_image() { return geti_("save_image"); }
+void repaint_save_image() { repaint_("save_image"); }
+QString button_save_image() { return "save_image"; }
+
+//String File To Save
+//File to save the image.
+bool was_changed_save_image_file_name() { return was_changed_("save_image_file_name"); }
+QString gets_save_image_file_name() { return gets_("save_image_file_name"); }
+QStringList get_strings_save_image_file_name() { return get_strings_("save_image_file_name"); }
+void repaint_save_image_file_name() { repaint_("save_image_file_name"); }
+
+//----------------------------------------------------
+//Page Draw
+//Draw to RenderArea.
+
+//Checkbox Draw
+//
+bool was_changed_draw_enabled() { return was_changed_("draw_enabled"); }
+int geti_draw_enabled() { return geti_("draw_enabled"); }
+void repaint_draw_enabled() { repaint_("draw_enabled"); }
+
+//Float X
+//
+bool was_changed_draw_x() { return was_changed_("draw_x"); }
+float getf_draw_x() { return getf_("draw_x"); }
+void repaint_draw_x() { repaint_("draw_x"); }
+
+//Float Y
+//
+bool was_changed_draw_y() { return was_changed_("draw_y"); }
+float getf_draw_y() { return getf_("draw_y"); }
+void repaint_draw_y() { repaint_("draw_y"); }
+
+//Float Size
+//
+bool was_changed_draw_size() { return was_changed_("draw_size"); }
+float getf_draw_size() { return getf_("draw_size"); }
+void repaint_draw_size() { repaint_("draw_size"); }
+
 //----------------------------------------------------
 //Page Transform
 //
+
 
 //Checkbox Transform
 //Crop, mirror and rotate the image.
 bool was_changed_transform() { return was_changed_("transform"); }
 int geti_transform() { return geti_("transform"); }
 void repaint_transform() { repaint_("transform"); }
-
 
 //Out Object Transformed Image
 //Transformed image.
@@ -264,7 +307,7 @@ void repaint_local_console() { repaint_("local_console"); }
 
 //----------------------------------------------------
 //Page Resolver
-//This is capability for properly assigning several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
+//This is capability to properly assign several similar webcameras. See Webcamera/Webcams_resolve example for the more details.
 
 //Const Checkbox Enabled
 //Is Resolver enabled.

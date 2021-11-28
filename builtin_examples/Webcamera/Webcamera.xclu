@@ -4,9 +4,8 @@
         "version": "1.150"
     },
     "aproject_properties": {
-        "frame_rate": "30",
         "name": "",
-        "selected_module": "2"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -17,240 +16,204 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
                         "aname": "Main",
-                        "atitle": "Main",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "capture_source",
-                        "atitle": "Capture Source",
-                        "atype": "enum",
-                        "avalue": "Camera",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Camera"
                     },
                     {
                         "aname": "select_device",
-                        "atitle": "Device",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Default"
                     },
                     {
                         "aname": "device_index",
-                        "atitle": "Device Index",
-                        "atype": "int",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "device_name",
-                        "atitle": "Device Name",
-                        "atype": "string",
-                        "avalue": "",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "image",
-                        "atitle": "Image",
-                        "atype": "object",
                         "avalue": ""
                     },
                     {
-                        "aname": "is_new_frame",
-                        "atitle": "Is New Frame",
-                        "atype": "checkbox",
-                        "avalue": "0"
+                        "aname": "device_serial",
+                        "avalue": ""
                     },
                     {
                         "aname": "settings",
-                        "atitle": "Settings",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "frame_rate",
-                        "atitle": "Frame Rate",
-                        "atype": "enum",
-                        "avalue": "Camera_Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "custom_frame_rate",
-                        "atitle": "Custom Frame Rate",
-                        "atype": "int",
-                        "avalue": "30",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "resolution",
-                        "atitle": "Resolution",
-                        "atype": "enum",
-                        "avalue": "Camera_Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "res_x",
-                        "atitle": "Resolution X",
-                        "atype": "int",
-                        "avalue": "1024",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "res_y",
-                        "atitle": "Resolution Y",
-                        "atype": "int",
-                        "avalue": "768",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "image_channels",
-                        "atitle": "Channels",
-                        "atype": "enum",
-                        "avalue": "RGB",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "image_data_type",
-                        "atitle": "Data Type",
-                        "atype": "enum",
-                        "avalue": "u8bit",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "runtime",
-                        "atitle": "Runtime Details",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "connected_device_name",
-                        "atitle": "Device Name",
-                        "atype": "string",
-                        "avalue": "Microsoft® LifeCam Cinema(TM)"
-                    },
-                    {
-                        "aname": "is_started",
-                        "atitle": "Is Started",
-                        "atype": "checkbox",
                         "avalue": "1"
                     },
                     {
-                        "aname": "frames_captured",
-                        "atitle": "Frames Captured",
-                        "atype": "string",
-                        "avalue": "Captured 97, Processed 97, Dropped 0 frame(s)"
+                        "aname": "frame_rate",
+                        "avalue": "Camera_Default"
                     },
                     {
-                        "aname": "Device_Info",
-                        "atitle": "Device Info",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "custom_frame_rate",
+                        "avalue": "30"
                     },
                     {
-                        "aname": "print_devices",
-                        "atitle": "Print Devices",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "resolution",
+                        "avalue": "Camera_Default"
                     },
                     {
-                        "aname": "print_formats",
-                        "atitle": "Print Formats",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "res_x",
+                        "avalue": "1024"
                     },
                     {
-                        "aname": "local_console",
-                        "atitle": "Local Console",
-                        "atype": "text",
-                        "avalue": "Connected Web Cameras:\n0: Microsoft® LifeCam Cinema(TM)\n1: Integrated Webcam\n2: THETA UVC FullHD Blender\n3: THETA UVC HD Blender\n\nStarting: Microsoft® LifeCam Cinema(TM)\n\nSupported Formats for 'Microsoft® LifeCam Cinema(TM)'\n  640x480, 30 FPS\n  640x480, 20 FPS\n  640x480, 14 FPS\n  640x480, 10 FPS\n  640x480, 7 FPS\n  640x360, 30 FPS\n  640x360, 20 FPS\n  640x360, 14 FPS\n  640x360, 10 FPS\n  640x360, 7 FPS\n  424x240, 30 FPS\n  424x240, 20 FPS\n  424x240, 14 FPS\n  424x240, 10 FPS\n  424x240, 7 FPS\n  352x288, 30 FPS\n  352x288, 20 FPS\n  352x288, 14 FPS\n  352x288, 10 FPS\n  352x288, 7 FPS\n  320x240, 30 FPS\n  320x240, 20 FPS\n  320x240, 14 FPS\n  320x240, 10 FPS\n  320x240, 7 FPS\n  176x144, 30 FPS\n  176x144, 20 FPS\n  176x144, 14 FPS\n  176x144, 10 FPS\n  176x144, 7 FPS\n  160x120, 30 FPS\n  160x120, 20 FPS\n  160x120, 14 FPS\n  160x120, 10 FPS\n  160x120, 7 FPS\n  1280x720, 30 FPS\n  1280x720, 20 FPS\n  1280x720, 14 FPS\n  1280x720, 10 FPS\n  1280x720, 7 FPS\n  960x544, 30 FPS\n  960x544, 20 FPS\n  960x544, 14 FPS\n  960x544, 10 FPS\n  960x544, 7 FPS\n  800x448, 30 FPS\n  800x448, 20 FPS\n  800x448, 14 FPS\n  800x448, 10 FPS\n  800x448, 7 FPS\n  800x600, 30 FPS\n  800x600, 20 FPS\n  800x600, 14 FPS\n  800x600, 10 FPS\n  800x600, 7 FPS\n\n"
+                        "aname": "res_y",
+                        "avalue": "768"
                     },
                     {
-                        "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "image_channels",
+                        "avalue": "RGB"
                     },
                     {
-                        "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "image_data_type",
+                        "avalue": "u8"
                     },
                     {
-                        "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "save_image_file_name",
+                        "avalue": "wabcam.png"
                     },
                     {
-                        "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "enum",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
+                        "aname": "Draw",
                         "avalue": "0"
                     },
                     {
-                        "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
+                        "aname": "draw_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "draw_x",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw_y",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw_size",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "transform",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "crop_to_square",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "mirror_x",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "rotate",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Debug",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Device_Info",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "print_serials",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "print_formats",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Resolver",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "resolver_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "resolver_cameras",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "resolver_name1",
                         "avalue": ""
                     },
                     {
+                        "aname": "resolver_serials1",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials2",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials3",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_name4",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "resolver_serials4",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
                         "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     }
                 ]
             }
         },
         {
             "description": {
-                "class": "WImage",
-                "name": "wimage1",
+                "class": "RenderArea",
+                "name": "renderarea1",
                 "version": "1.01"
             },
             "interface": {
@@ -259,202 +222,76 @@
                 },
                 "items": [
                     {
-                        "aname": "Value",
-                        "atitle": "Value",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "image",
-                        "atitle": "Image",
-                        "atype": "object",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "is_updated",
-                        "atitle": "Is Updated",
-                        "atype": "checkbox",
+                        "aname": "Main",
                         "avalue": "0"
                     },
                     {
-                        "aname": "source",
-                        "atitle": "Value Source",
-                        "atype": "enum",
-                        "avalue": "Link",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "size_mode",
+                        "avalue": "Maximize"
                     },
                     {
-                        "aname": "image_link",
-                        "atitle": "Image Link",
-                        "atype": "string",
-                        "avalue": "webcam1->image",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "fixed_w",
+                        "avalue": "256"
                     },
                     {
-                        "aname": "is_new_frame_link",
-                        "atitle": "Is New Frame Link",
-                        "atype": "string",
-                        "avalue": "webcam1->is_new_frame",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "fixed_h",
+                        "avalue": "256"
                     },
                     {
-                        "aname": "expression",
-                        "atitle": "Expression",
-                        "atype": "text",
-                        "avalue": "",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "Rendering",
+                        "avalue": "0"
                     },
                     {
-                        "aname": "Visuals",
-                        "atitle": "Visuals",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "measurement",
+                        "avalue": "Scaling"
                     },
                     {
-                        "aname": "parent_id",
-                        "atitle": "Parent",
-                        "atype": "string",
-                        "avalue": "wwindow1"
+                        "aname": "scaling_x",
+                        "avalue": "1000"
                     },
                     {
-                        "aname": "visible",
-                        "atitle": "Visible",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "scaling_y",
+                        "avalue": "1000"
                     },
                     {
-                        "aname": "w",
-                        "atitle": "W",
-                        "atype": "int",
-                        "avalue": "1280",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "back_red",
+                        "avalue": "128"
                     },
                     {
-                        "aname": "h",
-                        "atitle": "H",
-                        "atype": "int",
-                        "avalue": "720",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "back_green",
+                        "avalue": "128"
                     },
                     {
-                        "aname": "title",
-                        "atitle": "Title",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_text",
-                        "atitle": "Title",
-                        "atype": "string",
-                        "avalue": "Image",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_placement",
-                        "atitle": "Placement",
-                        "atype": "enum",
-                        "avalue": "Left",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_alignment",
-                        "atitle": "Alignment",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width",
-                        "atitle": "Width",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width_min",
-                        "atitle": "Min",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width_max",
-                        "atitle": "Max",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "back_blue",
+                        "avalue": "128"
                     },
                     {
                         "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "enum",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
                         "avalue": "0"
                     },
                     {
-                        "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
-                        "avalue": ""
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
                     },
                     {
                         "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     }
                 ]
             }
@@ -467,512 +304,120 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
                         "aname": "Properties",
-                        "atitle": "Properties",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "title",
-                        "atitle": "Title",
-                        "atype": "string",
-                        "avalue": "Window",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Window"
                     },
                     {
                         "aname": "size",
-                        "atitle": "Size",
-                        "atype": "enum",
-                        "avalue": "640x480",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "640x480"
                     },
                     {
                         "aname": "size_x",
-                        "atitle": "Size X",
-                        "atype": "int",
-                        "avalue": "1280",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "1280"
                     },
                     {
                         "aname": "size_y",
-                        "atitle": "Size Y",
-                        "atype": "int",
-                        "avalue": "720",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "720"
                     },
                     {
                         "aname": "position",
-                        "atitle": "Position",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Default"
                     },
                     {
                         "aname": "pos_x",
-                        "atitle": "Pos X",
-                        "atype": "int",
-                        "avalue": "50",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "50"
                     },
                     {
                         "aname": "pos_y",
-                        "atitle": "Pos Y",
-                        "atype": "int",
-                        "avalue": "50",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "50"
                     },
                     {
                         "aname": "visible",
-                        "atitle": "Visible",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "1"
                     },
                     {
-                        "aname": "mode",
-                        "atitle": "Mode",
-                        "atype": "enum",
-                        "avalue": "Normal_Window",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "theme",
-                        "atitle": "Theme",
-                        "atype": "enum",
-                        "avalue": "Standard",
-                        "expr": "",
-                        "expr_use": false
+                        "aname": "initial_state",
+                        "avalue": "Normal_Window"
                     },
                     {
                         "aname": "font_size",
-                        "atitle": "Font Size",
-                        "atype": "enum",
-                        "avalue": "Custom",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Custom"
                     },
                     {
                         "aname": "font_size_pix",
-                        "atitle": "Font Size",
-                        "atype": "int",
-                        "avalue": "18",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "18"
                     },
                     {
                         "aname": "Content",
-                        "atitle": "Content",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content_mode",
+                        "avalue": "Manual"
                     },
                     {
                         "aname": "content",
-                        "atitle": "Content",
-                        "atype": "text",
-                        "avalue": "HorizontalLayout\n  #wnumber1",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "renderarea1"
+                    },
+                    {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
                     },
                     {
                         "aname": "Actions",
-                        "atitle": "Actions",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
                         "aname": "on_close",
-                        "atitle": "On Close",
-                        "atype": "enum",
-                        "avalue": "Stop",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "Stop"
                     },
                     {
-                        "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "enum",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
-                        "avalue": "1"
-                    },
-                    {
-                        "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    }
-                ]
-            }
-        },
-        {
-            "description": {
-                "class": "Scalar",
-                "name": "scalar1",
-                "version": "1.01"
-            },
-            "interface": {
-                "editor_state": {
-                    "tab_index": "0"
-                },
-                "items": [
-                    {
-                        "aname": "Value",
-                        "atitle": "Value",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "value",
-                        "atitle": "Resulted Value",
-                        "atype": "int",
+                        "aname": "Grab",
                         "avalue": "0"
                     },
                     {
-                        "aname": "type",
-                        "atitle": "Type",
-                        "atype": "enum",
-                        "avalue": "int",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "source",
-                        "atitle": "Value Source",
-                        "atype": "enum",
-                        "avalue": "GUI",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "fixed_value",
-                        "atitle": "Value",
-                        "atype": "int",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "int_link",
-                        "atitle": "Int Link",
-                        "atype": "string",
-                        "avalue": "module1->value",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "expression",
-                        "atitle": "Expression",
-                        "atype": "text",
-                        "avalue": "",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "Visuals",
-                        "atitle": "Visuals",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "parent_id",
-                        "atitle": "Parent",
-                        "atype": "string",
-                        "avalue": ""
-                    },
-                    {
-                        "aname": "visible",
-                        "atitle": "Visible",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "use_range_min",
-                        "atitle": "Use Min",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "min_value",
-                        "atitle": "Min",
-                        "atype": "int",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "use_range_max",
-                        "atitle": "Use Max",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "max_value",
-                        "atitle": "Max",
-                        "atype": "int",
-                        "avalue": "100",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title",
-                        "atitle": "Title",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_text",
-                        "atitle": "Title",
-                        "atype": "string",
-                        "avalue": "Int",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_placement",
-                        "atitle": "Placement",
-                        "atype": "enum",
-                        "avalue": "Left",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_alignment",
-                        "atitle": "Alignment",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width",
-                        "atitle": "Width",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width_min",
-                        "atitle": "Min",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "title_width_max",
-                        "atitle": "Max",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units",
-                        "atitle": "Units",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units_text",
-                        "atitle": "Units",
-                        "atype": "string",
-                        "avalue": "pixels",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units_alignment",
-                        "atitle": "Alignment",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units_width",
-                        "atitle": "Width",
-                        "atype": "enum",
-                        "avalue": "Default",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units_width_min",
-                        "atitle": "Min",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "units_width_max",
-                        "atitle": "Max",
-                        "atype": "int",
-                        "avalue": "200",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "Actions",
-                        "atitle": "Actions",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_changed",
-                        "atitle": "Was Changed",
-                        "atype": "checkbox",
+                        "aname": "grab_cpu",
                         "avalue": "0"
                     },
                     {
-                        "aname": "on_change",
-                        "atitle": "On Change",
-                        "atype": "enum",
-                        "avalue": "Do_Nothing",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "on_change_module_call_link",
-                        "atitle": "Module Call Link",
-                        "atype": "string",
-                        "avalue": "module1->execute",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "on_change_script",
-                        "atitle": "Script",
-                        "atype": "text",
-                        "avalue": "",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
                         "aname": "Control",
-                        "atitle": "Control",
-                        "atype": "page",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     },
                     {
-                        "aname": "enabled",
-                        "atitle": "Enabled",
-                        "atype": "checkbox",
-                        "avalue": "1",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "error_handling",
-                        "atitle": "Error Handling",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "action_on_error",
-                        "atitle": "Action On Error",
-                        "atype": "enum",
-                        "avalue": "Show_Message_Box_and_Stop",
-                        "expr": "",
-                        "expr_use": false
-                    },
-                    {
-                        "aname": "was_error",
-                        "atitle": "Was Error",
-                        "atype": "checkbox",
+                        "aname": "general_enabled_",
                         "avalue": "1"
                     },
                     {
-                        "aname": "error_text",
-                        "atitle": "Error Text",
-                        "atype": "text",
-                        "avalue": ""
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
                     },
                     {
                         "aname": "calls_info",
-                        "atitle": "Calls",
-                        "atype": "checkbox",
-                        "avalue": "0",
-                        "expr": "",
-                        "expr_use": false
+                        "avalue": "0"
                     }
                 ]
             }

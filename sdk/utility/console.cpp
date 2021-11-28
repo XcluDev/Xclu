@@ -17,7 +17,7 @@ void xc_exception(QString message) {
 
 //---------------------------------------------------------------------
 void xc_exception(ErrorInfo err) {
-    qDebug() << "Exception:" << err.error_text();
+    qDebug() << "xc_exception:" << err.error_text();
     throw XException(err);
 }
 
