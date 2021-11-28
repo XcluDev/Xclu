@@ -47,7 +47,39 @@ separator
 
     
 line
-in float Min_Size filter_by_size_min=0.01 0:1 0.001,0.01
+in float Min_Size face_min_size=0.01 0:1 0.001,0.01
+    //Low boundary for the size of smallest detected face, 0 - not use the boundary.
+    //0..1
+
+separator 
+in checkbox Canny_Pruning haar_canny_pruning=1
+   //Regions without edges are ignored.
+   
+in checkbox Scale_Image haar_scale_image=0
+   //Scale the image rather than the detector (sometimes yields speed increases).
+   
+in checkbox Only_Biggest_Face haar_only_biggest_face=0
+   //Only return the largest result.
+   
+if haar_only_biggest_face 1
+in checkbox Rough_Search haar_rough_search=1
+   //When Only Biggest Face is enabled, stop at the first scale for which multiple results are found.
+endif
+   
+separator
+in float Haar_Scale haar_scale=1.1 1.01:2 0.001,0.01
+    //The default value is 1.1. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
+
+line
+in int Haar_Neighbors haar_neighbors=0 0:5 1,10
+    //How many neighbors can be grouped into a face, 0 means no grouping, and can use Threshold.
+ 
+if haar_neighbors 0
+separator 
+in int Haar_Threshold haar_threshold=2 1:10 1,10
+    //How much rectangles must cover a pixel to treat it as a face. Used when "Haar neighbors" is 0.
+endif
+
 line
 
 #-------------------------------------------

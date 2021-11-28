@@ -40,13 +40,7 @@ void XModuleFaceDetect::on_button_pressed(QString /*button_id*/) {
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::start() {
-
-
     haar_load(xc_absolute_path_from_project(gets_cascade_file()));
-
-
-    //cv::Mat mat(100,100,CV_8UC3);
-    //cv::imwrite("d:\\Image.jpg", mat);
 }
 
 //---------------------------------------------------------------------
@@ -57,7 +51,6 @@ void XModuleFaceDetect::update() {
         haar_search();
     }
 }
-
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::stop() {
@@ -138,10 +131,10 @@ void XModuleFaceDetect::haar_search() {
     // Parameters
 
     // The default value is 1.2. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
-    float haar_scale = 1.1f; //1.2;
+    float haar_scale = getf_haar_scale(); //1.1f; //1.2;
 
     // How many neighbors can be grouped into a face? Default value is 2. If set to 0, no grouping will be done.
-    int haar_neighbors = 3; //2;
+    int haar_neighbors = geti_haar_neighbors(); //3; //2;
 
     // Flags
     /*
@@ -151,10 +144,13 @@ void XModuleFaceDetect::haar_search() {
     CV_HAAR_FIND_BIGGEST_OBJECT    Only return the largest result.
     CV_HAAR_DO_ROUGH_SEARCH       When BIGGEST_OBJECT is enabled, stop at the first scale for which multiple results are found.
     */
-    int flags = CV_HAAR_DO_CANNY_PRUNING;
+    int flags = CV_HAAR_DO_CANNY_PRUNING * geti_haar_canny_pruning()
+            + CV_HAAR_SCALE_IMAGE * geti_haar_scale_image()
+            + CV_HAAR_FIND_BIGGEST_OBJECT * geti_haar_only_biggest_face()
+            + CV_HAAR_DO_ROUGH_SEARCH * geti_haar_only_biggest_face() * geti_haar_rough_search();
 
-    int min_width =  getf_filter_by_size_min() * w;
-    int min_height =  getf_filter_by_size_min() * h;
+    int min_width =  getf_face_min_size() * w;
+    int min_height =  getf_face_min_size() * h;
 
     //max size - now not using
 

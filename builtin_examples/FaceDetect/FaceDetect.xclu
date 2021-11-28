@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "3"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -342,7 +342,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -375,8 +375,36 @@
                         "avalue": "HaarCascades/haarcascade_frontalface_default.xml"
                     },
                     {
-                        "aname": "filter_by_size_min",
-                        "avalue": "0.178"
+                        "aname": "face_min_size",
+                        "avalue": "0.162"
+                    },
+                    {
+                        "aname": "haar_canny_pruning",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "haar_scale_image",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "haar_only_biggest_face",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "haar_rough_search",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "haar_scale",
+                        "avalue": "1.087"
+                    },
+                    {
+                        "aname": "haar_neighbors",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "haar_threshold",
+                        "avalue": "2"
                     },
                     {
                         "aname": "Draw",

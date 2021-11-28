@@ -64,10 +64,56 @@ void repaint_cascade_file() { repaint_("cascade_file"); }
 
 
 //Float Min Size
-//
-bool was_changed_filter_by_size_min() { return was_changed_("filter_by_size_min"); }
-float getf_filter_by_size_min() { return getf_("filter_by_size_min"); }
-void repaint_filter_by_size_min() { repaint_("filter_by_size_min"); }
+//Low boundary for the size of smallest detected face, 0 - not use the boundary.
+bool was_changed_face_min_size() { return was_changed_("face_min_size"); }
+float getf_face_min_size() { return getf_("face_min_size"); }
+void repaint_face_min_size() { repaint_("face_min_size"); }
+
+
+//Checkbox Canny Pruning
+//Regions without edges are ignored.
+bool was_changed_haar_canny_pruning() { return was_changed_("haar_canny_pruning"); }
+int geti_haar_canny_pruning() { return geti_("haar_canny_pruning"); }
+void repaint_haar_canny_pruning() { repaint_("haar_canny_pruning"); }
+
+//Checkbox Scale Image
+//Scale the image rather than the detector (sometimes yields speed increases).
+bool was_changed_haar_scale_image() { return was_changed_("haar_scale_image"); }
+int geti_haar_scale_image() { return geti_("haar_scale_image"); }
+void repaint_haar_scale_image() { repaint_("haar_scale_image"); }
+
+//Checkbox Only Biggest Face
+//Only return the largest result.
+bool was_changed_haar_only_biggest_face() { return was_changed_("haar_only_biggest_face"); }
+int geti_haar_only_biggest_face() { return geti_("haar_only_biggest_face"); }
+void repaint_haar_only_biggest_face() { repaint_("haar_only_biggest_face"); }
+
+//Checkbox Rough Search
+//When Only Biggest Face is enabled, stop at the first scale for which multiple results are found.
+bool was_changed_haar_rough_search() { return was_changed_("haar_rough_search"); }
+int geti_haar_rough_search() { return geti_("haar_rough_search"); }
+void repaint_haar_rough_search() { repaint_("haar_rough_search"); }
+
+
+//Float Haar Scale
+//The default value is 1.1. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
+bool was_changed_haar_scale() { return was_changed_("haar_scale"); }
+float getf_haar_scale() { return getf_("haar_scale"); }
+void repaint_haar_scale() { repaint_("haar_scale"); }
+
+
+//Int Haar Neighbors
+//How many neighbors can be grouped into a face, 0 means no grouping, and can use Threshold.
+bool was_changed_haar_neighbors() { return was_changed_("haar_neighbors"); }
+int geti_haar_neighbors() { return geti_("haar_neighbors"); }
+void repaint_haar_neighbors() { repaint_("haar_neighbors"); }
+
+
+//Int Haar Threshold
+//How much rectangles must cover a pixel to treat it as a face. Used when "Haar neighbors" is 0.
+bool was_changed_haar_threshold() { return was_changed_("haar_threshold"); }
+int geti_haar_threshold() { return geti_("haar_threshold"); }
+void repaint_haar_threshold() { repaint_("haar_threshold"); }
 
 
 //----------------------------------------------------
