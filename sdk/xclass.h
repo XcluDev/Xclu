@@ -32,6 +32,11 @@ public:
     void set_module(Module *module);
     Module *module();
 
+
+    //General (Control) page
+    bool is_enabled();
+    bool is_auto_update();
+
     //----------------------------------------------
     //Variables access
     //they are marked with "_" at end, because it's proposed use them using "auto.h" file,

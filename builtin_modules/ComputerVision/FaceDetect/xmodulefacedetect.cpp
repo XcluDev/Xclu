@@ -2,7 +2,9 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include "project_props.h"
- 
+#include "xobjectimage.h"
+#include "xdrawhelper.h"
+
 #include <cv.h>
 #include <opencv2/imgcodecs.hpp>
 
@@ -58,6 +60,22 @@ void XModuleFaceDetect::update() {
 //---------------------------------------------------------------------
 void XModuleFaceDetect::stop() {
     haar_unload();
+
+}
+
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::draw(QPainter &painter, int w, int h) {
+    /*if (geti_transform()) {
+        auto image_read = getobject_image_transformed()->read();
+        const XObject *object = image_read.pointer();
+        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
+    }
+    else {
+        auto image_read = getobject_image()->read();
+        const XObject *object = image_read.pointer();
+        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
+    }*/
 
 }
 

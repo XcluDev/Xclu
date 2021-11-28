@@ -25,6 +25,8 @@ protected:
     virtual void stop();
     virtual void on_button_pressed(QString button_id);
 
+    virtual void draw(QPainter &painter, int w, int h);
+
 protected:
     void haar_load(QString file_name);
     void haar_unload();

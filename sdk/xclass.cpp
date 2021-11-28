@@ -20,6 +20,16 @@ Module *XClass::module() {
     return module_;
 }
 
+//---------------------------------------------------------------------
+//General (Control) page
+bool XClass::is_enabled() {
+    return module()->is_enabled();
+}
+
+//---------------------------------------------------------------------
+bool XClass::is_auto_update() {
+    return module()->is_auto_update();
+}
 
 //---------------------------------------------------------------------
 //Check if value was changed

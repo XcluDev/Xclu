@@ -5,13 +5,13 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "2"
     },
     "modules": [
         {
             "description": {
-                "class": "FaceDetect",
-                "name": "face_detect1",
+                "class": "ImageLoader",
+                "name": "image_loader1",
                 "version": "1.01"
             },
             "interface": {
@@ -20,56 +20,28 @@
                 },
                 "items": [
                     {
-                        "aname": "Face_Detection",
+                        "aname": "Main",
                         "avalue": "0"
                     },
                     {
-                        "aname": "send_image_source",
-                        "avalue": "Test_Image"
+                        "aname": "image_source",
+                        "avalue": "File"
                     },
                     {
-                        "aname": "send_image",
-                        "avalue": ""
+                        "aname": "file_name",
+                        "avalue": "FaceDetect/wabcam2.png"
                     },
                     {
-                        "aname": "processing_mode",
-                        "avalue": "Off"
+                        "aname": "folder_name",
+                        "avalue": "folder"
                     },
                     {
-                        "aname": "process_new_frame",
+                        "aname": "folder_index",
                         "avalue": "0"
                     },
                     {
-                        "aname": "filter_by_size",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "filter_by_size_min",
-                        "avalue": "0.5"
-                    },
-                    {
-                        "aname": "filter_by_size_max",
-                        "avalue": "0.5"
-                    },
-                    {
-                        "aname": "Draw",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "draw",
+                        "aname": "show_image",
                         "avalue": "1"
-                    },
-                    {
-                        "aname": "draw_x",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "draw_y",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "draw_size",
-                        "avalue": "0.5"
                     },
                     {
                         "aname": "Control",
@@ -110,7 +82,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "6"
                 },
                 "items": [
                     {
@@ -279,7 +251,7 @@
                     },
                     {
                         "aname": "general_enabled_",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "general_auto_update_",
@@ -306,38 +278,67 @@
         },
         {
             "description": {
-                "class": "ImageLoader",
-                "name": "image_loader1",
+                "class": "FaceDetect",
+                "name": "face_detect1",
                 "version": "1.01"
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
-                        "aname": "Main",
+                        "aname": "Face_Detection",
                         "avalue": "0"
                     },
                     {
-                        "aname": "image_source",
-                        "avalue": "File"
+                        "aname": "send_image_source",
+                        "avalue": "Image"
                     },
                     {
-                        "aname": "file_name",
-                        "avalue": "image.png"
+                        "aname": "send_image",
+                        "avalue": "",
+                        "link": "image_loader1->image"
                     },
                     {
-                        "aname": "folder_name",
-                        "avalue": "folder"
+                        "aname": "processing_mode",
+                        "avalue": "Off"
                     },
                     {
-                        "aname": "folder_index",
+                        "aname": "process_new_frame",
                         "avalue": "0"
                     },
                     {
-                        "aname": "show_image",
+                        "aname": "filter_by_size",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "filter_by_size_min",
+                        "avalue": "0.5"
+                    },
+                    {
+                        "aname": "filter_by_size_max",
+                        "avalue": "0.5"
+                    },
+                    {
+                        "aname": "Draw",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw",
                         "avalue": "1"
+                    },
+                    {
+                        "aname": "draw_x",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw_y",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "draw_size",
+                        "avalue": "0.5"
                     },
                     {
                         "aname": "Control",
@@ -345,7 +346,7 @@
                     },
                     {
                         "aname": "general_enabled_",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "general_auto_update_",

@@ -277,7 +277,7 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
 
 //---------------------------------------------------------------------
 void Module::bang() {        //Bang button
-    xmodule()->general_bang();
+    xmodule()->module_bang();
 }
 
 //---------------------------------------------------------------------

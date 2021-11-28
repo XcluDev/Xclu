@@ -328,10 +328,6 @@ void XModuleWebcamera::update() {
     auto source = gete_capture_source();
     if (source == capture_source_Camera) update_camera();
     if (source == capture_source_Load_Frames) update_load_frames();
-    //запись кадров - внутри проверяется, что новый кадр
-    //if (geti_save_frames")) {
-    //    update_save_frames();
-    //}
 
     //обработка ошибки
     {

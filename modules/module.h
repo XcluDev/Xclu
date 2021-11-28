@@ -49,6 +49,10 @@ public:
     void button_pressed(QString button_id);   //нажатие кнопки, даже при редактировании
     void bang();        //Bang button
 
+    //-----------------------------------------------
+    //General (Control) page
+    bool is_enabled() { return geti("general_enabled_"); }
+    bool is_auto_update() { return geti("general_auto_update_"); }
 
     //-----------------------------------------------
     // Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea

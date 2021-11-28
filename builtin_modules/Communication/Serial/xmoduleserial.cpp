@@ -60,7 +60,7 @@ void XModuleSerial::on_button_pressed(QString button_id) {
         print_devices();
     }
 
-    if (general_is_enabled()) {
+    if (is_enabled()) {
         bool connect_warning = false;
         //-----------------------
         //TODO duplication in code

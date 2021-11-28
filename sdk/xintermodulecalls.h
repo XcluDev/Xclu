@@ -18,7 +18,8 @@ public:
     // if XCallTypeNone or if empty - it means "all" for a given filter
     static QVector<Module *> find_modules_by_filter(XCallType accept_calls_filter = XCallTypeNone,
                                              XCallType send_calls_filter = XCallTypeNone,
-                                             QString class_filter = "");
+                                             QString class_filter = "",
+                                             bool require_enabled = true);
 
     //----------------------------------------------------------
     //"render" call

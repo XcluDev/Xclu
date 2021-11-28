@@ -33,7 +33,7 @@ void XModule::loaded_internal() {     //действия при загрузке
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
 void XModule::update_internal() {
-    if (general_is_auto_update()) {
+    if (is_auto_update()) {
         bang_internal();
     }
 }
@@ -41,7 +41,7 @@ void XModule::update_internal() {
 //---------------------------------------------------------------------
 //bang: (start) and update if enabled
 void XModule::bang_internal() {
-    if (general_is_enabled()) {
+    if (is_enabled()) {
         if (!status_.was_started) {
             start();
             status_.was_started = true;
@@ -130,7 +130,7 @@ void XModule::execute(ModuleExecuteStage stage) {
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
 void XModule::button_pressed(QString button_id) {
-    if (button_id == general_bang_button_name()) {
+    if (button_id == module_bang_button_name()) {
         if (is_running()) {
             bang_internal();
         }

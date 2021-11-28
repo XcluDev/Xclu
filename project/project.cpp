@@ -370,13 +370,15 @@ Module *Project::find_module_by_name(QString name) {
 // if XCallTypeNone or if empty - it means "all" for a given filter
 QVector<Module *> Project::find_modules_by_filter(XCallType accept_calls_filter,
                                          XCallType send_calls_filter,
-                                         QString class_filter) {
+                                         QString class_filter,
+                                         bool require_enabled) {
     QVector<Module *> list;
     for (Module *module: modules_) {
         ModuleDescription &d = module->description();
         if ((d.accept_calls.accepts(accept_calls_filter))
                 && (d.send_calls.accepts(send_calls_filter))
                 && (class_filter.isEmpty() || d.class_name.contains(class_filter))
+                && (!require_enabled || module->is_enabled())
                     ) {
             list.append(module);
         }

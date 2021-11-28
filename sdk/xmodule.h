@@ -88,11 +88,9 @@ public:
 
     //------------------------------------------------------------------------
     //General (Control) page
-    bool general_is_enabled() { return geti_("general_enabled_"); }
-    bool general_is_auto_update() { return geti_("general_auto_update_"); }
-    QString general_bang_button_name() { return "general_bang_"; }
+    QString module_bang_button_name() { return "general_bang_"; }
     //call "bang" of the module
-    void general_bang() { button_pressed(general_bang_button_name()); }
+    void module_bang() { button_pressed(module_bang_button_name()); }
 
 
     bool is_running();  //был фактический запуск
