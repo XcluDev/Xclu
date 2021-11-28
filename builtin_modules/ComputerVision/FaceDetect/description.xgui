@@ -30,6 +30,12 @@ line
 
 out int Face_Count face_count=0 0:* 1,10
     //Number of faces detected.
+out float Biggest_CX biggest_cx=0.5 0:1 0.01,0.1
+    //Center X position of the biggest found face.
+    //0..1
+out float Biggest_CY biggest_cy=0.5 0:1 0.01,0.1
+    //Center Y position of the biggest found face.
+    //0..1
 
 line 
 

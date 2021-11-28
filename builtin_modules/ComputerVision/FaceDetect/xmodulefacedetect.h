@@ -49,6 +49,8 @@ protected:
         glm::vec2 center() const { return glm::vec2(rect.x() + rect.width()/2, rect.y() + rect.height()/2); }
     };
     QVector<FaceBlob> blobs_;
+
+    void update_biggest();
 };
 
 

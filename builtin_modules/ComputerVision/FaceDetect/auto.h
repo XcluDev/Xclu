@@ -49,6 +49,20 @@ void seti_face_count(int value) { seti_("face_count", value); }
 void increase_int_face_count(int increase = 1) { increase_int_("face_count", increase); }
 void repaint_face_count() { repaint_("face_count"); }
 
+//Out Float Biggest CX
+//Center X position of the biggest found face.
+bool was_changed_biggest_cx() { return was_changed_("biggest_cx"); }
+float getf_biggest_cx() { return getf_("biggest_cx"); }
+void setf_biggest_cx(float value) { setf_("biggest_cx", value); }
+void repaint_biggest_cx() { repaint_("biggest_cx"); }
+
+//Out Float Biggest CY
+//Center Y position of the biggest found face.
+bool was_changed_biggest_cy() { return was_changed_("biggest_cy"); }
+float getf_biggest_cy() { return getf_("biggest_cy"); }
+void setf_biggest_cy(float value) { setf_("biggest_cy", value); }
+void repaint_biggest_cy() { repaint_("biggest_cy"); }
+
 
 //----------------------------------------------------
 //Page Setup

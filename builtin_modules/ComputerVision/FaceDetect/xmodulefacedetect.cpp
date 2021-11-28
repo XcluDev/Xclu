@@ -58,6 +58,7 @@ void XModuleFaceDetect::stop() {
 
     seti_face_count(0);
     blobs_.clear();
+    update_biggest();
 }
 
 
@@ -170,6 +171,30 @@ void XModuleFaceDetect::haar_search() {
     //}
 
     seti_face_count(n);
+    update_biggest();
+}
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::update_biggest() {
+    int n = blobs_.size();
+    if (n == 0) {
+        setf_biggest_cx(0.5);
+        setf_biggest_cy(0.5);
+        return;
+    }
+    float barea = -1;
+    int besti = 0;
+    for (int i=0; i<n; i++) {
+        float area = blobs_[i].area();
+        if (area > barea) {
+            barea = area;
+            besti = i;
+        }
+    }
+    auto pos = blobs_[besti].center();
+    setf_biggest_cx(pos.x);
+    setf_biggest_cy(pos.y);
+
 }
 
 
