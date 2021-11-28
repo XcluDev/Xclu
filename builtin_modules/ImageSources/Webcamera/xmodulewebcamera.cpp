@@ -127,20 +127,17 @@ void XModuleWebcamera::on_button_pressed(QString button) {
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::draw(QPainter &painter, int w, int h) {
-    //TODO currently draw only current image, not transformed - it seems locks mechanics works wrons with such "if" expressions
-    auto image_read = getobject_image()->read(); //(geti_transform())?getobject_image_transformed()->read():getobject_image()->read();
-    const XObject *object = image_read.pointer();
-    XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
+    if (geti_transform()) {
+        auto image_read = getobject_image_transformed()->read();
+        const XObject *object = image_read.pointer();
+        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
+    }
+    else {
+        auto image_read = getobject_image()->read();
+        const XObject *object = image_read.pointer();
+        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
+    }
 
-  /*  QImage qimage;
-    XObjectImage::link_to_QImage(*object,qimage);
-    if (!qimage.isNull()) {
-        float imgw = qimage.width();
-        float imgh = qimage.height();
-        float scl = qMin(w / imgw, h / imgh) * getf_draw_size();
-        QRectF rect( * w, getf_draw_y() * h, imgw * scl, imgh * scl);
-        painter.drawImage(rect, qimage);
-    }*/
 }
 
 //---------------------------------------------------------------------
