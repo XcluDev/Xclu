@@ -11,6 +11,10 @@ page Main
 in checkbox Debug debug=0
     //Debug output to console.
 
+const float Wait_At_Start wait_at_start_sec=1.5 0:* 0.1,1
+    //Wait at start in order Arduino Mega connected correctly.
+    //sec
+
 const enum Port select_port=Default [Default,By_Index,By_Name]
     //Method of choosing the port.
 
@@ -66,6 +70,8 @@ if send_type String
 in string String_To_Send send_string=""
     //String for sending.    
 in button Send send_string_btn
+in checkbox Send send_string_checkbox=0
+    //Check to send each frame or link to other value.
 
 line
 in group More_Strings show_additional_strings=0

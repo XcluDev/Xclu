@@ -11,6 +11,12 @@ bool was_changed_debug() { return was_changed_("debug"); }
 int geti_debug() { return geti_("debug"); }
 void repaint_debug() { repaint_("debug"); }
 
+//Const Float Wait At Start
+//Wait at start in order Arduino Mega connected correctly.
+bool was_changed_wait_at_start_sec() { return was_changed_("wait_at_start_sec"); }
+float getf_wait_at_start_sec() { return getf_("wait_at_start_sec"); }
+void repaint_wait_at_start_sec() { repaint_("wait_at_start_sec"); }
+
 //Const Enum Port
 //Method of choosing the port.
 enum enum_select_port {
@@ -118,6 +124,12 @@ bool was_changed_send_string_btn() { return was_changed_("send_string_btn"); }
 int geti_send_string_btn() { return geti_("send_string_btn"); }
 void repaint_send_string_btn() { repaint_("send_string_btn"); }
 QString button_send_string_btn() { return "send_string_btn"; }
+
+//Checkbox Send
+//Check to send each frame or link to other value.
+bool was_changed_send_string_checkbox() { return was_changed_("send_string_checkbox"); }
+int geti_send_string_checkbox() { return geti_("send_string_checkbox"); }
+void repaint_send_string_checkbox() { repaint_("send_string_checkbox"); }
 
 
 //Checkbox More Strings

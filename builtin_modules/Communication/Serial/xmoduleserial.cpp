@@ -3,6 +3,7 @@
 #include "registrarxmodule.h"
 #include "project_props.h"
 #include <QtSerialPort/QSerialPortInfo>
+#include <QThread>
 
 REGISTER_XMODULE(Serial)
 
@@ -272,6 +273,9 @@ void XModuleSerial::open_port() {
                             .arg(serialPortInfo.portName()).arg(serialPort_.errorString()));
                 set_connected(true);
 
+                // Wait in order Arduino Mega starts correctly
+                QThread::msleep(int(getf_wait_at_start_sec()*1000));
+
                 port_name_ = serialPortInfo.portName();
 
                 QString port_info = "port_info";
@@ -291,7 +295,12 @@ void XModuleSerial::open_port() {
 
 //---------------------------------------------------------------------
 void XModuleSerial::update() {
-    //sending data processes at on_button_pressed
+    //sending data
+    if (geti_send_string_checkbox()) {
+        if (connected_) {
+            send_string(gets_send_string());
+        }
+    }
 
     //receiving data
     receive();
