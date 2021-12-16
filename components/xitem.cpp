@@ -132,8 +132,11 @@ void XItem::update() {
     //Copy value from link
     if (is_linked()) {
         auto *linkres = link_resolved_.data();
-        xc_assert(linkres, "XItem::update error for `" + name() + "`: link_resolved_ is nullptr");
-        set_value_from_link(linkres);
+        // If nullptr - then may be we just starting, so omit assert
+        //xc_assert(linkres, "XItem::update error for `" + name() + "`: link_resolved_ is nullptr");
+        if (linkres) {
+            set_value_from_link(linkres);
+        }
     }
 
     //Update was_changed

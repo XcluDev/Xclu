@@ -107,8 +107,9 @@ private:
     //Execution
     void execute_run();
     void execute_stop();    //остановка, но когда вызовет таймер
+public:
     void immediate_stop();    //немедленная остановка таймера и проекта
-
+private:
     ProjectRunState run_state_ = ProjectRunStateLoading;
     void set_state(ProjectRunState run_state);
     bool is_stopped();

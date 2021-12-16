@@ -211,12 +211,10 @@ void XModuleWebcamera::resolver_work() {
             if (!name.isEmpty() && Name.contains(name)) {
                 found_name = true;
             }
-            if (!serials.isEmpty()) {
-                for (auto s: serials) {
-                    if (Serial.contains(s)) {
-                        found_serial = true;
-                        break;
-                    }
+            for (auto s: serials) {
+                if (!s.isEmpty() && Serial.contains(s)) {
+                    found_serial = true;
+                    break;
                 }
             }
             scores[x + in_n*y] = 2*found_serial + 1*found_name;
@@ -251,6 +249,10 @@ void XModuleWebcamera::resolver_work() {
                 // Set scores for camera x in all y to -1 to prevent double selection
                 for (int y=0; y<out_n; y++) {
                     scores[x + in_n*y] = -1;
+                }
+                // Set scores for resolver to prevent double checking
+                for (int j=0; j<in_n; j++) {
+                    scores[j + in_n*besty] = -1;
                 }
                 found = true;
             }
