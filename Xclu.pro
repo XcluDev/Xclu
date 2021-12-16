@@ -221,6 +221,7 @@ SOURCES += \
     sdk/utility/jsonutils.cpp \
     sdk/utility/xc_exec_batch.cpp \
     sdk/utility/xc_files.cpp \
+    sdk/utility/xc_sysutils.cpp \
     sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xclu_types.cpp \
     sdk/utility/ximageeffect.cpp \
@@ -329,6 +330,7 @@ HEADERS += \
     sdk/utility/qt_widgets.h \
     sdk/utility/xc_exec_batch.h \
     sdk/utility/xc_files.h \
+    sdk/utility/xc_sysutils.h \
     sdk/utility/xclu_parse_tree.h \
     sdk/utility/xclu_types.h \
     sdk/utility/ximageeffect.h \
