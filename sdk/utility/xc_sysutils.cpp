@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------
 //Shutdown computer
 void xc_system_shutdown() {
-#ifdef XCLU_WIN
+#ifdef XCLU_WINDOWS
         system("shutdown /s");
 #endif
 #ifdef XCLU_LINUX
