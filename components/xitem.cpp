@@ -526,7 +526,7 @@ void XItem::write_json(QJsonObject &json) {
     //link
     if (!link().is_empty()) {
         json["link"] = link().to_str();
-        xc_console_append(link().to_str());
+        //xc_console_append(link().to_str());
     }
 
     //json["atitle"] = title_;
