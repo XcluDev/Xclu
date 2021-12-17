@@ -65,7 +65,7 @@ void repaint_biggest_cy() { repaint_("biggest_cy"); }
 
 
 //----------------------------------------------------
-//Page Setup
+//Page Settings
 //
 
 //String Cascade File
@@ -85,7 +85,7 @@ void repaint_face_min_size() { repaint_("face_min_size"); }
 
 
 //Checkbox Canny Pruning
-//Regions without edges are ignored.
+//Regions without edges are ignored. Disable to fastening computing.
 bool was_changed_haar_canny_pruning() { return was_changed_("haar_canny_pruning"); }
 int geti_haar_canny_pruning() { return geti_("haar_canny_pruning"); }
 void repaint_haar_canny_pruning() { repaint_("haar_canny_pruning"); }
@@ -123,11 +123,24 @@ int geti_haar_neighbors() { return geti_("haar_neighbors"); }
 void repaint_haar_neighbors() { repaint_("haar_neighbors"); }
 
 
+
+//Checkbox Apply Threshold
+//Enable thresholding - required several rectangles cover face. Used when "Haar neighbors" is 0. Returns only one biggest face.
+bool was_changed_haar_apply_threshold() { return was_changed_("haar_apply_threshold"); }
+int geti_haar_apply_threshold() { return geti_("haar_apply_threshold"); }
+void repaint_haar_apply_threshold() { repaint_("haar_apply_threshold"); }
+
 //Int Haar Threshold
-//How much rectangles must cover a pixel to treat it as a face. Used when "Haar neighbors" is 0.
+//How much rectangles must cover a pixel to treat it as a face.
 bool was_changed_haar_threshold() { return was_changed_("haar_threshold"); }
 int geti_haar_threshold() { return geti_("haar_threshold"); }
 void repaint_haar_threshold() { repaint_("haar_threshold"); }
+
+//Int Shrink Res
+//How much shrink resolution for thresholding. Used for balancing between computing speed and face position accuracy.
+bool was_changed_haar_shrink_res() { return was_changed_("haar_shrink_res"); }
+int geti_haar_shrink_res() { return geti_("haar_shrink_res"); }
+void repaint_haar_shrink_res() { repaint_("haar_shrink_res"); }
 
 
 //----------------------------------------------------
@@ -158,5 +171,12 @@ void repaint_draw_y() { repaint_("draw_y"); }
 bool was_changed_draw_size() { return was_changed_("draw_size"); }
 float getf_draw_size() { return getf_("draw_size"); }
 void repaint_draw_size() { repaint_("draw_size"); }
+
+
+//Checkbox Draw Raw Blobs
+//Should we draw raw blobs for debugging purposes.
+bool was_changed_draw_raw_blobs() { return was_changed_("draw_raw_blobs"); }
+int geti_draw_raw_blobs() { return geti_("draw_raw_blobs"); }
+void repaint_draw_raw_blobs() { repaint_("draw_raw_blobs"); }
 
 //----------------------------------------------------

@@ -41,16 +41,24 @@ protected:
 
     struct FaceBlob {
         FaceBlob() {}
-        FaceBlob(const QRectF &rect0) {
-            rect = rect0;
+        FaceBlob(const QRect &face, int w, int h) {
+            rect = QRectF(float(face.x())/w, float(face.y())/h,
+                          float(face.width())/w, float(face.height())/h);
+            recti = face;
         }
         QRectF rect = QRectF(0,0,0,0);
+        QRect recti = QRect(0,0,0,0);
         float area() const { return rect.width() * rect.height(); }
         glm::vec2 center() const { return glm::vec2(rect.x() + rect.width()/2, rect.y() + rect.height()/2); }
     };
     QVector<FaceBlob> blobs_;
 
     void update_biggest();
+
+    // Apply threshold and create only one blob; all blobs_ are copyed to raw_blobs_ for debug drawing.
+    void apply_thresholding(int w, int h);
+    QVector<FaceBlob> raw_blobs_;       // Used when thresholding on
+    QVector<int> accum_image_;          // Accumulator image
 };
 
 

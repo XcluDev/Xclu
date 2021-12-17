@@ -72,12 +72,29 @@ void XModuleFaceDetect::draw(QPainter &painter, int w, int h) {
     const XObject *object = image_read.pointer();
     auto rect = XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
 
-    QPen pen(QColor(255,255,0));
-    pen.setWidth(3);
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
 
     if (!rect.isEmpty()) {
+        {   // raw blobs
+            QPen pen(QColor(0,255,0));
+            pen.setWidth(1);
+            painter.setPen(pen);
+            painter.setBrush(Qt::NoBrush);
+            if (geti_draw_raw_blobs()) {
+                for (auto &b: raw_blobs_) {
+                    auto &r = b.rect;
+                    painter.drawRect(QRectF(r.x() * rect.width() + rect.x(),
+                                            r.y() * rect.height() + rect.y(),
+                                            r.width() * rect.width(),
+                                            r.height() * rect.height()));
+
+                }
+            }
+        }
+
+        QPen pen(QColor(255,255,0));
+        pen.setWidth(3);
+        painter.setPen(pen);
+        painter.setBrush(Qt::NoBrush);
         for (auto &b: blobs_) {
             auto &r = b.rect;
             painter.drawRect(QRectF(r.x() * rect.width() + rect.x(),
@@ -159,18 +176,22 @@ void XModuleFaceDetect::haar_search() {
     face_cascade_.detectMultiScale(gray, faces, haar_scale, haar_neighbors, flags, cv::Size(min_width, min_height));
     int n = faces.size();
     blobs_.resize(n);
+    raw_blobs_.clear(); // Used for thresholding as debug blobs
     for (int i = 0; i < n; i++) {
         auto &face = faces[i];
-        blobs_[i] = FaceBlob(QRectF(float(face.x)/w, float(face.y)/h,
-                                    float(face.width)/w, float(face.height)/h));
+        blobs_[i] = FaceBlob(QRect(face.x, face.y, face.width, face.height), w, h);
     }
+
+
+    //Thresholding
+    apply_thresholding(w, h);
 
     // sort the pointers based on size
     //if( blobs.size() > 1 ) {
     //    sort( blobs.begin(), blobs.end(), sort_carea_compare );
     //}
 
-    seti_face_count(n);
+    seti_face_count(blobs_.size());
     update_biggest();
 }
 
@@ -197,6 +218,61 @@ void XModuleFaceDetect::update_biggest() {
 
 }
 
+//---------------------------------------------------------------------
+// Apply threshold and create only one blob; all blobs_ are copyed to raw_blobs_ for debug drawing.
+void XModuleFaceDetect::apply_thresholding(int w0, int h0) {
+    if (blobs_.isEmpty()) return;
+    if (!(geti_haar_neighbors() == 0 && geti_haar_apply_threshold())) return;
+
+    int shrink = geti_haar_shrink_res();
+    int w = w0 / shrink;
+    int h = h0 / shrink;
+    xc_assert(w > 0 && h > 0, "Too much shrinking in face detection");
+
+    raw_blobs_ = blobs_;
+    blobs_.clear();
+
+    accum_image_.resize(w*h);
+    accum_image_.fill(0);
+    for (auto &b: raw_blobs_) {
+        auto &r = b.recti;
+        int x0 = xclampi(r.x()/shrink, 0, w-1);
+        int y0 = xclampi(r.y()/shrink, 0, h-1);
+        int x1 = xclampi((r.x()+r.width())/shrink, 0, w);
+        int y1 = xclampi((r.y()+r.height())/shrink, 0, h);
+        for (int y=y0; y<y1; y++) {
+            for (int x=x0; x<x1; x++) {
+                accum_image_[x + w*y]++;
+            }
+        }
+    }
+
+    // Search boundary box exceeding threshold
+    int thresh = geti_haar_threshold();
+    int bx0 = w;
+    int by0 = h;
+    int bx1 = 0;
+    int by1 = 0;
+    for (int y=0; y<h; y++) {
+        for (int x=0; x<w; x++) {
+            if (accum_image_[x+w*y] >= thresh) {
+                bx0 = qMin(bx0, x);
+                by0 = qMin(by0, y);
+                bx1 = qMax(bx1, x);
+                by1 = qMax(by1, y);
+            }
+        }
+    }
+    // Something is found
+    if (bx0 <= bx1 && by0 <= by1) {
+        int x0 = xclampi(bx0*shrink, 0, w0-1);
+        int y0 = xclampi(by0*shrink, 0, h0-1);
+        int x1 = xclampi(bx1*shrink, 0, w0-1);
+        int y1 = xclampi(by1*shrink, 0, h0-1);
+        FaceBlob blob(QRect(x0, y0, x1-x0+1, y1-y0+1), w0, h0);
+        blobs_.append(blob);
+    }
+}
 
 //---------------------------------------------------------------------
 

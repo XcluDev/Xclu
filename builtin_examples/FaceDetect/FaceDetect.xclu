@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "2"
+        "selected_module": "3"
     },
     "modules": [
         {
@@ -140,7 +140,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -342,7 +342,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -367,7 +367,7 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "Setup",
+                        "aname": "Settings",
                         "avalue": "0"
                     },
                     {
@@ -380,7 +380,7 @@
                     },
                     {
                         "aname": "haar_canny_pruning",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "haar_scale_image",
@@ -403,8 +403,16 @@
                         "avalue": "0"
                     },
                     {
+                        "aname": "haar_apply_threshold",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "haar_threshold",
-                        "avalue": "2"
+                        "avalue": "7"
+                    },
+                    {
+                        "aname": "haar_shrink_res",
+                        "avalue": "4"
                     },
                     {
                         "aname": "Draw",
@@ -424,6 +432,10 @@
                     },
                     {
                         "aname": "draw_size",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "draw_raw_blobs",
                         "avalue": "1"
                     },
                     {

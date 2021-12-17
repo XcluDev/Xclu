@@ -41,7 +41,7 @@ line
 
 
 #-------------------------------------------
-page Setup
+page Settings
 
 in string_file Cascade_File cascade_file="HaarCascades/haarcascade_frontalface_default.xml"
     //Cascade XML file.
@@ -59,7 +59,7 @@ in float Min_Size face_min_size=0.01 0:1 0.001,0.01
 
 separator 
 in checkbox Canny_Pruning haar_canny_pruning=1
-   //Regions without edges are ignored.
+   //Regions without edges are ignored. Disable to fastening computing.
    
 in checkbox Scale_Image haar_scale_image=0
    //Scale the image rather than the detector (sometimes yields speed increases).
@@ -80,10 +80,17 @@ line
 in int Haar_Neighbors haar_neighbors=0 0:5 1,10
     //How many neighbors can be grouped into a face, 0 means no grouping, and can use Threshold.
  
+separator
 if haar_neighbors 0
-separator 
-in int Haar_Threshold haar_threshold=2 1:10 1,10
-    //How much rectangles must cover a pixel to treat it as a face. Used when "Haar neighbors" is 0.
+line
+in checkbox Apply_Threshold haar_apply_threshold=0
+    //Enable thresholding - required several rectangles cover face. Used when "Haar neighbors" is 0. Returns only one biggest "face" - bounding box.
+endif
+if haar_apply_threshold 1
+in int Haar_Threshold haar_threshold=2 1:30 1,10
+    //How much rectangles must cover a pixel to treat it as a face. 
+in int Shrink_Res haar_shrink_res=4 1:32 1,10
+    //How much shrink resolution for thresholding. Used for balancing between computing speed and face position accuracy. 
 endif
 
 line
@@ -104,3 +111,7 @@ in float Y draw_y=0 0:1 0.001,0.01
 
 in float Size draw_size=0.5 0:1 0.001,0.01
     //Size of drawing, 1 means fit to area
+    
+line
+in checkbox Draw_Raw_Blobs draw_raw_blobs=1
+    //Should we draw raw blobs for debugging purposes.
