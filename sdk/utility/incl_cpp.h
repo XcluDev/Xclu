@@ -18,5 +18,6 @@
 #include "xlink.h"
 #include "xparser.h"
 #include "xtimemeasure.h"
+#include "project_props.h"
 
 #endif // INCL_INCLCPP_H
