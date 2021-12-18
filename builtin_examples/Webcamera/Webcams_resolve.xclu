@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -25,7 +25,7 @@
                     },
                     {
                         "aname": "text_value",
-                        "avalue": "This example shows how to use \"Resolver\" capability of Webcamera module for choosing a proper camera for case when several similar cameras are connected.\n\nNamely, we should do the following:\n1. Activate the Resolver at the first camera in Xclu project's list\n2. Connect each camera to different USB ports (and also restart computs), and press \"Print Devices\" to identify its serials.\nWrite there camera's part of the name, and parts of the serials.\n\nFor example, for camera USB2.0 PC CAMERA\n\\usb#vid_1908&pid_2310&mi_00#6&14de4f85&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global'\n\nSet to Resolver name part as PC CAMERA\nand observed serials parts separated by space:\n14de4f85 2798002a 2249ee0           \n- the first is in our example, and others appear in other connections.\n   \n3. Link the Resolver's outputs to all webcams input Index values.\nThen after starting, Resolver will analyze all connected devices and conclude how to assign each physical camera to each Webcamera's module.\n"
+                        "avalue": "This example shows how to use \"Resolver\" capability of Webcamera module for choosing a proper camera for case when several similar cameras are connected.\n\nNamely, we should do the following:\n1. Activate the Resolver at the first camera in Xclu project's list\n2. Connect each camera to different USB ports (and also restart computs), and press \"Print Devices\" to identify its serials.\nWrite there camera's part of the name, and parts of the serials.\n\nFor example, for camera USB2.0 PC CAMERA\n\\usb#vid_1908&pid_2310&mi_00#6&14de4f85&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global'\n\nSet to Resolver name part as PC CAMERA\nand observed serials parts separated by space:\n14de4f85 2798002a 2249ee0           \n- the first is in our example, and others appear in other connections.\n   \n3. Link the Resolver's outputs \"Index 1,2,...\" to Webcams input \"Index\" values.\n\n4. Link the Resolver's outputs \"Presence 1,2,...\" to Webcams \"Capture Source\" values.\n\nAfter project starting, Resolver will analyze all connected devices and conclude how to assign each physical camera to each Webcamera's module.\n\n"
                     },
                     {
                         "aname": "Control",
@@ -66,7 +66,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "4"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -75,15 +75,17 @@
                     },
                     {
                         "aname": "capture_source",
-                        "avalue": "Camera"
+                        "avalue": "Camera",
+                        "link": "webcam1->resolver_resulted_presence1"
                     },
                     {
                         "aname": "select_device",
-                        "avalue": "By_Serial"
+                        "avalue": "By_Index"
                     },
                     {
                         "aname": "device_index",
-                        "avalue": "0"
+                        "avalue": "0",
+                        "link": "webcam1->resolver_resulted_index1"
                     },
                     {
                         "aname": "device_name",
@@ -277,15 +279,17 @@
                     },
                     {
                         "aname": "capture_source",
-                        "avalue": "Camera"
+                        "avalue": "Disable",
+                        "link": "webcam1->resolver_resulted_presence2"
                     },
                     {
                         "aname": "select_device",
-                        "avalue": "Default"
+                        "avalue": "By_Index"
                     },
                     {
                         "aname": "device_index",
-                        "avalue": "0"
+                        "avalue": "100",
+                        "link": "webcam1->resolver_resulted_index2"
                     },
                     {
                         "aname": "device_name",
