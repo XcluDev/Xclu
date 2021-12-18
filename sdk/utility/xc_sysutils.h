@@ -3,7 +3,11 @@
 
 #include "incl_h.h"
 
-//Shutdown computer
+// Sleep in the current thread
+void xc_sleep_sec(float sec);
+void xc_sleep_ms(int ms);
+
+// Shutdown computer
 void xc_system_shutdown();
 
 

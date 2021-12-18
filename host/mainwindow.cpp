@@ -355,6 +355,12 @@ void MainWindow::openProject(const QString &fileName) {
 
         //Если требуется - автозапуск проекта
         if (xc_working_properties().get_autostart()) {
+            // Wait
+            int wait_sec = xc_working_properties().get_autostart_wait_sec();
+            if (wait_sec > 0) {
+                xc_sleep_sec(wait_sec);
+            }
+            // Run
             execute_run();
         }
     }

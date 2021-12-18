@@ -43,13 +43,19 @@ int ProjectRtProperties::get_frame_rate() {
 }
 
 //---------------------------------------------------------------------
-void ProjectRtProperties::set_autostart(int v) {
+void ProjectRtProperties::set_autostart(int v, int wait_sec) {
     autostart_ = v;
+    wait_sec_ = wait_sec;
 }
 
 //---------------------------------------------------------------------
 bool ProjectRtProperties::get_autostart() {
     return autostart_;
+}
+
+//---------------------------------------------------------------------
+int ProjectRtProperties::get_autostart_wait_sec() {
+    return wait_sec_;
 }
 
 //---------------------------------------------------------------------

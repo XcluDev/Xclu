@@ -25,8 +25,9 @@ public:
     //Autostart project:
     //if some module sets this in its loaded_internal,
     //then after loading the project it starts
-    void set_autostart (int v); // the command just remembers, and the project itself reads after loading the json of the project
+    void set_autostart(int v, int wait_sec=0); // the command just remembers, and the project itself reads after loading the json of the project
     bool get_autostart();
+    int get_autostart_wait_sec();
 
     //Don't save at exit - it's useful to disable for read installations working autonomously
     void set_dont_save_at_exit(int v);
@@ -35,6 +36,7 @@ public:
 protected:
     int frame_rate_ = 30;
     int autostart_ = 0;
+    int wait_sec_ = 0;          // Wait seconds after autostart
     int dont_save_at_exit_ = 0;
 };
 

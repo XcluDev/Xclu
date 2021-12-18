@@ -274,7 +274,7 @@ void XModuleSerial::open_port() {
                 set_connected(true);
 
                 // Wait in order Arduino Mega starts correctly
-                QThread::msleep(int(getf_wait_at_start_sec()*1000));
+                xc_sleep_sec(int(getf_wait_at_start_sec()));
 
                 port_name_ = serialPortInfo.portName();
 

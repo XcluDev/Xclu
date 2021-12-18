@@ -31,7 +31,7 @@ void XModuleProject::on_loaded() {
 //---------------------------------------------------------------------
 void XModuleProject::apply_control_values() {
     xc_working_properties().set_frame_rate(geti_frame_rate());
-    xc_working_properties().set_autostart(geti_autostart());
+    xc_working_properties().set_autostart(geti_autostart(), geti_autostart_wait_sec());
     xc_working_properties().set_dont_save_at_exit(geti_dont_save_at_exit());
 }
 

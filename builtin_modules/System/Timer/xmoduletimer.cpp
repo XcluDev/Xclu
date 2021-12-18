@@ -61,7 +61,7 @@ void XModuleTimer::update() {
     switch (working_mode) {
     case working_mode_Pause_Execution:
         register_bang_time();
-        QThread::msleep(delay_sec*1000);
+        xc_sleep_sec(delay_sec);
         break;
     case working_mode_Bang:
         update_bang(delay_sec);
