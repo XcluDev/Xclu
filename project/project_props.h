@@ -56,7 +56,7 @@ bool xc_is_stopped();
 void xc_reset_elapsed_timer();
 double xc_elapsed_time_sec();
 void xc_update_dt();    //вызывается для обновления dt, в начале работы кадра
-float xc_dt();
+float xc_dt(float clamp_0 = 0, float clamp_1 = 1);
 int xc_frame();         //current frame
 
 //Папка проекта

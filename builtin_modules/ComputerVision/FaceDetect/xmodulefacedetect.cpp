@@ -41,24 +41,55 @@ void XModuleFaceDetect::on_button_pressed(QString /*button_id*/) {
 //---------------------------------------------------------------------
 void XModuleFaceDetect::start() {
     haar_load(xc_absolute_path_from_project(gets_cascade_file()));
+    clear_results();
+}
+
+
+//---------------------------------------------------------------------
+void XModuleFaceDetect::clear_results() {
+    seti_face_count(0);
+    blobs_.clear();
+    raw_blobs_.clear();
+    update_biggest();
+    last_time_ = 0;
 }
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::update() {
     auto mode = gete_processing_mode();
+    bool new_image =
+            (mode == processing_mode_On_Checkbox && geti_process_new_frame())
+            || (mode == processing_mode_On_Change && input_image_was_changed());
+
+    // processing
     if (mode == processing_mode_Each_Frame
-            || (mode == processing_mode_On_Checkbox && geti_process_new_frame())) {
+            || new_image) {
         haar_search();
+        last_time_ = 0;
     }
+    else {
+        last_time_ += xc_dt();
+    }
+
+    // if no new image - clear results
+    if ((mode == processing_mode_On_Checkbox || mode == processing_mode_On_Change)
+            && geti_auto_clear_if_no_data()
+            && last_time_ >= geti_auto_clear_sec()) {
+        clear_results();
+    }
+
+}
+
+//---------------------------------------------------------------------
+bool XModuleFaceDetect::input_image_was_changed() {
+    return getobject_input_image()->was_changed(image_changed_checker_);
 }
 
 //---------------------------------------------------------------------
 void XModuleFaceDetect::stop() {
     haar_unload();
 
-    seti_face_count(0);
-    blobs_.clear();
-    update_biggest();
+    clear_results();
 }
 
 

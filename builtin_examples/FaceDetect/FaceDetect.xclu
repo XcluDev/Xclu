@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "3"
+        "selected_module": "2"
     },
     "modules": [
         {
@@ -29,6 +29,10 @@
                     },
                     {
                         "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "autostart_wait_sec",
                         "avalue": "0"
                     },
                     {
@@ -265,7 +269,7 @@
                     },
                     {
                         "aname": "resolver_enabled",
-                        "avalue": "0"
+                        "avalue": "1"
                     },
                     {
                         "aname": "resolver_cameras",
@@ -342,7 +346,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -360,11 +364,19 @@
                     },
                     {
                         "aname": "processing_mode",
-                        "avalue": "Each_Frame"
+                        "avalue": "On_Change"
                     },
                     {
                         "aname": "process_new_frame",
                         "avalue": "0"
+                    },
+                    {
+                        "aname": "auto_clear_if_no_data",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "auto_clear_sec",
+                        "avalue": "5"
                     },
                     {
                         "aname": "Settings",

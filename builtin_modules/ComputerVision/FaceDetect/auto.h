@@ -26,9 +26,10 @@ void repaint_input_image() { repaint_("input_image"); }
 //Processing mode.
 enum enum_processing_mode {
     processing_mode_Off = 0,
-    processing_mode_Each_Frame = 1,
+    processing_mode_On_Change = 1,
     processing_mode_On_Checkbox = 2,
-    processing_mode_N__ = 3
+    processing_mode_Each_Frame = 3,
+    processing_mode_N__ = 4
 };
 bool was_changed_processing_mode() { return was_changed_("processing_mode"); }
 enum_processing_mode gete_processing_mode() { return enum_processing_mode(geti_("processing_mode")); }
@@ -39,6 +40,19 @@ QString getraw_processing_mode() { return getraw_("processing_mode");}
 bool was_changed_process_new_frame() { return was_changed_("process_new_frame"); }
 int geti_process_new_frame() { return geti_("process_new_frame"); }
 void repaint_process_new_frame() { repaint_("process_new_frame"); }
+
+
+//Checkbox Auto Clear
+//Clear search results if no new frame was passed for several seconds.
+bool was_changed_auto_clear_if_no_data() { return was_changed_("auto_clear_if_no_data"); }
+int geti_auto_clear_if_no_data() { return geti_("auto_clear_if_no_data"); }
+void repaint_auto_clear_if_no_data() { repaint_("auto_clear_if_no_data"); }
+
+//Int Wait Seconds
+//How much wait before resetting results.
+bool was_changed_auto_clear_sec() { return was_changed_("auto_clear_sec"); }
+int geti_auto_clear_sec() { return geti_("auto_clear_sec"); }
+void repaint_auto_clear_sec() { repaint_("auto_clear_sec"); }
 
 
 //Out Int Face Count
@@ -125,7 +139,7 @@ void repaint_haar_neighbors() { repaint_("haar_neighbors"); }
 
 
 //Checkbox Apply Threshold
-//Enable thresholding - required several rectangles cover face. Used when "Haar neighbors" is 0. Returns only one biggest face.
+//Enable thresholding - required several rectangles cover face. Used when "Haar neighbors" is 0. Returns only one biggest "face" - bounding box.
 bool was_changed_haar_apply_threshold() { return was_changed_("haar_apply_threshold"); }
 int geti_haar_apply_threshold() { return geti_("haar_apply_threshold"); }
 void repaint_haar_apply_threshold() { repaint_("haar_apply_threshold"); }

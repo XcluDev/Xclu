@@ -256,8 +256,8 @@ void xc_update_dt() {    //вызывается для обновления dt, 
 }
 
 //---------------------------------------------------------------------
-float xc_dt() {
-    return access_.dt_;
+float xc_dt(float clamp_0, float clamp_1) {
+    return xclampf(access_.dt_, clamp_0, clamp_1);
 }
 
 //---------------------------------------------------------------------

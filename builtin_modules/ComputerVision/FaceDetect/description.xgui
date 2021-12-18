@@ -20,12 +20,23 @@ endif
 
 line 
 
-in enum Search_Faces processing_mode=Each_Frame [Off,Each_Frame,On_Checkbox]
+in enum Search_Faces processing_mode=On_Change [Off,On_Change,On_Checkbox,Each_Frame]
     //Processing mode.
 if processing_mode On_Checkbox
 in checkbox New_Frame process_new_frame=0
     //Usually you should link it with the image update flag.
 endif
+if processing_mode On_Change,On_Checkbox
+separator
+in checkbox Auto_Clear auto_clear_if_no_data=1
+    //Clear search results if no new frame was passed for several seconds.    
+endif
+if auto_clear_if_no_data 1
+in int Wait_Seconds auto_clear_sec=5 1:* 1,10
+    //How much wait before resetting results.
+    //sec
+endif
+
 line
 
 out int Face_Count face_count=0 0:* 1,10
@@ -58,7 +69,7 @@ in float Min_Size face_min_size=0.01 0:1 0.001,0.01
     //0..1
 
 separator 
-in checkbox Canny_Pruning haar_canny_pruning=1
+in checkbox Canny_Pruning haar_canny_pruning=0
    //Regions without edges are ignored. Disable to fastening computing.
    
 in checkbox Scale_Image haar_scale_image=0

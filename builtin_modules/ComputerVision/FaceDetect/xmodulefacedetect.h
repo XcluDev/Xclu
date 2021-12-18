@@ -59,6 +59,13 @@ protected:
     void apply_thresholding(int w, int h);
     QVector<FaceBlob> raw_blobs_;       // Used when thresholding on
     QVector<int> accum_image_;          // Accumulator image
+
+
+    void clear_results();
+    bool input_image_was_changed();
+    XWasChangedChecker image_changed_checker_;
+
+    float last_time_ = 0;       // Time of last processing
 };
 
 
