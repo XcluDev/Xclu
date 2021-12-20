@@ -96,6 +96,10 @@
                         "avalue": ""
                     },
                     {
+                        "aname": "runtime_info",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "settings",
                         "avalue": "1"
                     },
@@ -126,6 +130,18 @@
                     {
                         "aname": "image_data_type",
                         "avalue": "u8"
+                    },
+                    {
+                        "aname": "ignore_error_on_start",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "auto_restart",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "auto_restart_wait_seconds",
+                        "avalue": "5"
                     },
                     {
                         "aname": "save_image_file_name",
@@ -169,10 +185,6 @@
                     },
                     {
                         "aname": "rotate",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "Debug",
                         "avalue": "0"
                     },
                     {
@@ -300,6 +312,10 @@
                         "avalue": ""
                     },
                     {
+                        "aname": "runtime_info",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "settings",
                         "avalue": "1"
                     },
@@ -330,6 +346,18 @@
                     {
                         "aname": "image_data_type",
                         "avalue": "u8"
+                    },
+                    {
+                        "aname": "ignore_error_on_start",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "auto_restart",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "auto_restart_wait_seconds",
+                        "avalue": "5"
                     },
                     {
                         "aname": "save_image_file_name",
@@ -373,10 +401,6 @@
                     },
                     {
                         "aname": "rotate",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "Debug",
                         "avalue": "0"
                     },
                     {

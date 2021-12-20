@@ -111,7 +111,8 @@ XModuleWebcamera::~XModuleWebcamera()
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::on_loaded() {
-    clear_string_frames_captured();
+    seti_frames_captured(0);
+    seti_frames_dropped(0);
     clear_string_local_console();
 }
 
@@ -154,6 +155,8 @@ void XModuleWebcamera::start() {
     //Очистка переменных
     camera_tried_to_start_ = false;
 
+    last_frame_time_ = 0;
+
     //данные surface
     {
         DataAccess access(data_);
@@ -169,9 +172,11 @@ void XModuleWebcamera::start() {
     set_started(false); //также ставит gui-элемент is_started
 
     clear_string_connected_device_name();
+    clear_string_connected_device_serial();
     seti_is_new_frame(0);
 
-    clear_string_frames_captured();
+    seti_frames_captured(0);
+    seti_frames_dropped(0);
     clear_string_local_console();
 
     //------------------------------------
@@ -192,17 +197,18 @@ void XModuleWebcamera::resolver_work() {
     QVector<int> scores(in_n * out_n);
     for (int y=0; y<out_n; y++) {
         QString name;
-        QStringList serials;
+        QString serials_str;
         switch (y) {
-        case 0: name = gets_resolver_name1(); serials = get_strings_resolver_serials1();
+        case 0: name = gets_resolver_name1(); serials_str = gets_resolver_serials1();
             break;
-        case 1: name = gets_resolver_name2(); serials = get_strings_resolver_serials2();
+        case 1: name = gets_resolver_name2(); serials_str = gets_resolver_serials2();
             break;
-        case 2: name = gets_resolver_name3(); serials = get_strings_resolver_serials3();
+        case 2: name = gets_resolver_name3(); serials_str = gets_resolver_serials3();
             break;
-        case 3: name = gets_resolver_name4(); serials = get_strings_resolver_serials4();
+        case 3: name = gets_resolver_name4(); serials_str = gets_resolver_serials4();
             break;
         }
+        auto serials = serials_str.split(" ");
         for (int x=0; x<in_n; x++) {
             QString Name = cameras.at(x).description();     // Human readable
             QString Serial = cameras.at(x).deviceName();    // Unique ID
@@ -338,7 +344,9 @@ void XModuleWebcamera::update() {
     //обработка ошибки
     {
         DataAccess access(data_);
-        data_.err.throw_error();
+        if (!geti_ignore_error_on_start()) {
+            data_.err.throw_error();
+        }
     }
 
     // Save image button
@@ -369,8 +377,19 @@ void XModuleWebcamera::update_camera() {
     //запуск камеры, если еще не запущена
     start_camera();
 
-    //если камера не стартовала - то делать нечего
-    //TODO возможно стоит попробовать запустить камеру снова через некоторое время
+    last_frame_time_ += xc_dt();
+
+    // If camera not started or not long time the frame - try to restart
+    bool auto_restart = geti_auto_restart();
+    if (auto_restart) {
+        if (last_frame_time_ >= geti_auto_restart_wait_seconds()) {
+            xc_console_append("Restarting camera " + name());
+            stop_camera();
+            start_camera();
+            last_frame_time_ = 0;
+
+        }
+    }
     if (!camera_started_) return;
 
     //на всякий случай ставим, что нет новых кадров
@@ -392,6 +411,7 @@ void XModuleWebcamera::update_camera() {
     if (is_new_frame) {
         seti_is_new_frame(is_new_frame);
         processed_frames_++;
+        last_frame_time_ = 0;       // Reset timer of last frame received
 
         //копируем изображение для использования вовне и показа в GUI
         {
@@ -407,9 +427,8 @@ void XModuleWebcamera::update_camera() {
     }
 
     //метка числа обработанных кадров
-    QString processed = QString("Captured %1, Processed %2, Dropped %3 frame(s)")
-            .arg(data_.captured_frames).arg(processed_frames_).arg(data_.captured_frames-processed_frames_);
-    sets_frames_captured(processed);
+    seti_frames_captured(processed_frames_);
+    seti_frames_dropped(data_.captured_frames-processed_frames_);
 
 }
 
@@ -508,9 +527,11 @@ void XModuleWebcamera::start_camera() {
         //пытаемся стартовать камеру
         camera_tried_to_start_ = true;
 
+        bool ignore_error = geti_ignore_error_on_start();
+
         //выбор устройства
         const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
-        xc_assert(!cameras.empty(), "No connected devices");
+        xc_assert_ignore(!cameras.empty(), "No connected devices", ignore_error);
 
         auto method = gete_select_device();
         switch (method) {
@@ -520,7 +541,7 @@ void XModuleWebcamera::start_camera() {
         }
         case select_device_By_Index: {
                 int name = geti_device_index();
-                xc_assert(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name));
+                xc_assert_ignore(name >= 0 && name < cameras.size(), "Bad device index " + QString::number(name), ignore_error);
                 start_camera(cameras[name]);
                 break;
         }
@@ -593,6 +614,7 @@ void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 
     QString device_name = cameraInfo.description();
     sets_connected_device_name(device_name);
+    sets_connected_device_serial(cameraInfo.deviceName());
     append_string_local_console("Starting: " + device_name, 1);
 
     //если требуется, вывести в консоль поддерживаемые разрешения и частоты кадров
@@ -678,11 +700,13 @@ void XModuleWebcamera::on_camera_error() {
 
 //---------------------------------------------------------------------
 void XModuleWebcamera::stop_camera() {
+    set_started(false);
     if (camera_.data()) {
         //camera_->stop();  //Это не полная остановка, камера продолжает потреблять энергию
         camera_->unload();    //Остановка камеры
         camera_.reset();
     }
+    camera_tried_to_start_ = false;
 }
 
 //---------------------------------------------------------------------

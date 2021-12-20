@@ -20,6 +20,12 @@ void xc_halt(QString message);
 
 //Check condition, if false - eЗдесь assert обязательно делать макросом - чтобы если не выполнится, строки не создавались
 #define xc_assert(cond, message) {if (!(cond)) xc_exception(message);}
+#define xc_assert_ignore(cond, message, ignore) { \
+    if (!(cond)) { \
+        if (!(ignore)) xc_exception(message); \
+        else { xc_console_append(message); return; } \
+    }\
+}
 
 //Message box
 void xc_message_box(QString message);

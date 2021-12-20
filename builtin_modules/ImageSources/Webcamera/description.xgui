@@ -44,6 +44,28 @@ out object_image Image image
 out checkbox Is_New_Frame is_new_frame=0
     //Flag is true when new frame is arrived.
     
+    
+#-----------------------------
+line
+in group Runtime runtime_info=1
+    //Runtime information
+
+if runtime_info 1
+out string Device_Name connected_device_name=""
+	//Name of the connected camera.
+
+out string Device_Serial connected_device_serial=""
+	//Name of the connected camera.    
+    
+out checkbox Is_Started is_started=0
+    //Does capture started.
+	
+out int Frames_Captured frames_captured=0 0:* 1,10
+    //How much frames were captured.
+out int Frames_Dropped frames_dropped=0 0:* 1,10
+    //How much frames were dropped.
+endif
+    
 #-----------------------------
 line
 in group Settings settings=1
@@ -87,6 +109,19 @@ in enum Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
 in enum Data_Type image_data_type=u8 [u8,float]
     //Desired data type of the output image, u8=0..255, float=[0,1].
 
+    
+separator
+in checkbox Ignore_Error ignore_error_on_start=1
+    //Ignore error with starting.
+    
+in checkbox Auto_Restart auto_restart=1
+    //Autorestart if no new frames for a long time.
+    
+in int Wait_Seconds auto_restart_wait_seconds=5 1:* 1,10
+    //How much secodsn wait to restart the camera.
+    //sec
+    
+    
 #TODO wait_frame
 #in checkbox Wait_New_Frames wait_frame=0
 #    //Wait while new frame arrived
@@ -160,21 +195,7 @@ line
 #    //Crop...
 #    
 #endif
-        
-#-----------------------------
-page Debug
-    //Debug information.
-
-
-out string Device_Name connected_device_name=""
-	//Name of the connected camera.
-
-out checkbox Is_Started is_started=0
-    //Does capture started.
-	
-out string Frames_Captured frames_captured=""
-    //How much frames were captured and processed after last start.
-    
+            
 #-----------------------------
 page Device_Info
     //Print list of cameras and supported formats.

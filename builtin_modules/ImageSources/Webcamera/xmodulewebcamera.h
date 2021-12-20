@@ -162,6 +162,9 @@ protected:
     // Resolver working
     void resolver_work();
 
+    // auto restart
+    float last_frame_time_ = 1000;
+
 };
 
 

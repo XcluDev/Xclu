@@ -65,6 +65,58 @@ void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
 void repaint_is_new_frame() { repaint_("is_new_frame"); }
 
 
+//Checkbox Runtime
+//Runtime information
+bool was_changed_runtime_info() { return was_changed_("runtime_info"); }
+int geti_runtime_info() { return geti_("runtime_info"); }
+void repaint_runtime_info() { repaint_("runtime_info"); }
+
+//Out String Device Name
+//Name of the connected camera.
+bool was_changed_connected_device_name() { return was_changed_("connected_device_name"); }
+QString gets_connected_device_name() { return gets_("connected_device_name"); }
+QStringList get_strings_connected_device_name() { return get_strings_("connected_device_name"); }
+void sets_connected_device_name(QString value) { sets_("connected_device_name", value); }
+void clear_string_connected_device_name() { clear_string_("connected_device_name"); }
+void append_string_connected_device_name(QString v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
+void append_string_connected_device_name(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
+void repaint_connected_device_name() { repaint_("connected_device_name"); }
+
+//Out String Device Serial
+//Name of the connected camera.
+bool was_changed_connected_device_serial() { return was_changed_("connected_device_serial"); }
+QString gets_connected_device_serial() { return gets_("connected_device_serial"); }
+QStringList get_strings_connected_device_serial() { return get_strings_("connected_device_serial"); }
+void sets_connected_device_serial(QString value) { sets_("connected_device_serial", value); }
+void clear_string_connected_device_serial() { clear_string_("connected_device_serial"); }
+void append_string_connected_device_serial(QString v, int extra_new_lines_count = 0) { append_string_("connected_device_serial", v, extra_new_lines_count); }
+void append_string_connected_device_serial(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_device_serial", v, extra_new_lines_count); }
+void repaint_connected_device_serial() { repaint_("connected_device_serial"); }
+
+//Out Checkbox Is Started
+//Does capture started.
+bool was_changed_is_started() { return was_changed_("is_started"); }
+int geti_is_started() { return geti_("is_started"); }
+void seti_is_started(int value) { seti_("is_started", value); }
+void repaint_is_started() { repaint_("is_started"); }
+
+//Out Int Frames Captured
+//How much frames were captured.
+bool was_changed_frames_captured() { return was_changed_("frames_captured"); }
+int geti_frames_captured() { return geti_("frames_captured"); }
+void seti_frames_captured(int value) { seti_("frames_captured", value); }
+void increase_int_frames_captured(int increase = 1) { increase_int_("frames_captured", increase); }
+void repaint_frames_captured() { repaint_("frames_captured"); }
+
+//Out Int Frames Dropped
+//How much frames were dropped.
+bool was_changed_frames_dropped() { return was_changed_("frames_dropped"); }
+int geti_frames_dropped() { return geti_("frames_dropped"); }
+void seti_frames_dropped(int value) { seti_("frames_dropped", value); }
+void increase_int_frames_dropped(int increase = 1) { increase_int_("frames_dropped", increase); }
+void repaint_frames_dropped() { repaint_("frames_dropped"); }
+
+
 //Checkbox Settings
 //Setting webcamera parameters.
 bool was_changed_settings() { return was_changed_("settings"); }
@@ -149,6 +201,25 @@ enum enum_image_data_type {
 bool was_changed_image_data_type() { return was_changed_("image_data_type"); }
 enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_("image_data_type")); }
 QString getraw_image_data_type() { return getraw_("image_data_type");}
+
+
+//Checkbox Ignore Error
+//Ignore error with starting.
+bool was_changed_ignore_error_on_start() { return was_changed_("ignore_error_on_start"); }
+int geti_ignore_error_on_start() { return geti_("ignore_error_on_start"); }
+void repaint_ignore_error_on_start() { repaint_("ignore_error_on_start"); }
+
+//Checkbox Auto Restart
+//Autorestart if no new frames for a long time.
+bool was_changed_auto_restart() { return was_changed_("auto_restart"); }
+int geti_auto_restart() { return geti_("auto_restart"); }
+void repaint_auto_restart() { repaint_("auto_restart"); }
+
+//Int Wait Seconds
+//How much secodsn wait to restart the camera.
+bool was_changed_auto_restart_wait_seconds() { return was_changed_("auto_restart_wait_seconds"); }
+int geti_auto_restart_wait_seconds() { return geti_("auto_restart_wait_seconds"); }
+void repaint_auto_restart_wait_seconds() { repaint_("auto_restart_wait_seconds"); }
 
 
 //Button Save Image
@@ -237,39 +308,6 @@ bool was_changed_rotate() { return was_changed_("rotate"); }
 enum_rotate gete_rotate() { return enum_rotate(geti_("rotate")); }
 QString getraw_rotate() { return getraw_("rotate");}
 
-
-//----------------------------------------------------
-//Page Debug
-//Debug information.
-
-//Out String Device Name
-//Name of the connected camera.
-bool was_changed_connected_device_name() { return was_changed_("connected_device_name"); }
-QString gets_connected_device_name() { return gets_("connected_device_name"); }
-QStringList get_strings_connected_device_name() { return get_strings_("connected_device_name"); }
-void sets_connected_device_name(QString value) { sets_("connected_device_name", value); }
-void clear_string_connected_device_name() { clear_string_("connected_device_name"); }
-void append_string_connected_device_name(QString v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
-void append_string_connected_device_name(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_device_name", v, extra_new_lines_count); }
-void repaint_connected_device_name() { repaint_("connected_device_name"); }
-
-//Out Checkbox Is Started
-//Does capture started.
-bool was_changed_is_started() { return was_changed_("is_started"); }
-int geti_is_started() { return geti_("is_started"); }
-void seti_is_started(int value) { seti_("is_started", value); }
-void repaint_is_started() { repaint_("is_started"); }
-
-//Out String Frames Captured
-//How much frames were captured and processed after last start.
-bool was_changed_frames_captured() { return was_changed_("frames_captured"); }
-QString gets_frames_captured() { return gets_("frames_captured"); }
-QStringList get_strings_frames_captured() { return get_strings_("frames_captured"); }
-void sets_frames_captured(QString value) { sets_("frames_captured", value); }
-void clear_string_frames_captured() { clear_string_("frames_captured"); }
-void append_string_frames_captured(QString v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
-void append_string_frames_captured(QStringList v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
-void repaint_frames_captured() { repaint_("frames_captured"); }
 
 //----------------------------------------------------
 //Page Device Info
