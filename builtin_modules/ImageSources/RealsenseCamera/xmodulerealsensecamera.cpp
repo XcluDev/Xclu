@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
-#include "xc_project.h"
+#include "project_props.h"
 #include <QDateTime>
 //#include <QImageWriter>
 //#include <QImageReader>
@@ -60,7 +60,7 @@ void XModuleRealsenseCamera::gui_clear() {
     clear_string_connected_device_info();
     clear_string_saved_to();
     seti_is_new_frame(0);
-    clear_string_frames_captured();
+    seti_frame(0);
 
     set_started(false); //также ставит gui-элемент is_started
 }
@@ -131,8 +131,7 @@ void XModuleRealsenseCamera::update() {
         processed_frames_++;
 
         //метка числа обработанных кадров
-        QString processed = QString("Processed %1 frame(s)").arg(processed_frames_);
-        sets_frames_captured(processed);
+        seti_frame(processed_frames_);
 
         //установка изображений и запись их на диск, если нужно
         //TODO оптимизация: устранить создание промежуточного растра raster !

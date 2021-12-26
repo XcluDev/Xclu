@@ -33,24 +33,28 @@ QString getraw_select_device() { return getraw_("select_device");}
 //Camera index in Operating System.
 bool was_changed_device_index() { return was_changed_("device_index"); }
 int geti_device_index() { return geti_("device_index"); }
+void repaint_device_index() { repaint_("device_index"); }
 
 //Const String Device Serial
 //Serial of the camera to connect (or part of the serial), go to 'Device Info' to see the list.
 bool was_changed_device_serial() { return was_changed_("device_serial"); }
 QString gets_device_serial() { return gets_("device_serial"); }
 QStringList get_strings_device_serial() { return get_strings_("device_serial"); }
+void repaint_device_serial() { repaint_("device_serial"); }
 
 //Const String Bag File
 //Choose BAG file. You can record it using Intel Realsense Viewer application.
 bool was_changed_bag_file() { return was_changed_("bag_file"); }
 QString gets_bag_file() { return gets_("bag_file"); }
 QStringList get_strings_bag_file() { return get_strings_("bag_file"); }
+void repaint_bag_file() { repaint_("bag_file"); }
 
 
 //Checkbox Runtime Details
 //Runtime variables.
 bool was_changed_runtime() { return was_changed_("runtime"); }
 int geti_runtime() { return geti_("runtime"); }
+void repaint_runtime() { repaint_("runtime"); }
 
 //Out String Device Info
 //Information about connected camera.
@@ -61,28 +65,29 @@ void sets_connected_device_info(QString value) { sets_("connected_device_info", 
 void clear_string_connected_device_info() { clear_string_("connected_device_info"); }
 void append_string_connected_device_info(QString v, int extra_new_lines_count = 0) { append_string_("connected_device_info", v, extra_new_lines_count); }
 void append_string_connected_device_info(QStringList v, int extra_new_lines_count = 0) { append_string_("connected_device_info", v, extra_new_lines_count); }
+void repaint_connected_device_info() { repaint_("connected_device_info"); }
 
 //Out Checkbox Is Started
 //Does capture started.
 bool was_changed_is_started() { return was_changed_("is_started"); }
 int geti_is_started() { return geti_("is_started"); }
 void seti_is_started(int value) { seti_("is_started", value); }
+void repaint_is_started() { repaint_("is_started"); }
 
-//Out String Frames Captured
-//How much frames were captured and processed after last start.
-bool was_changed_frames_captured() { return was_changed_("frames_captured"); }
-QString gets_frames_captured() { return gets_("frames_captured"); }
-QStringList get_strings_frames_captured() { return get_strings_("frames_captured"); }
-void sets_frames_captured(QString value) { sets_("frames_captured", value); }
-void clear_string_frames_captured() { clear_string_("frames_captured"); }
-void append_string_frames_captured(QString v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
-void append_string_frames_captured(QStringList v, int extra_new_lines_count = 0) { append_string_("frames_captured", v, extra_new_lines_count); }
+//Out Int Frame
+//How much frames were captured after last start.
+bool was_changed_frame() { return was_changed_("frame"); }
+int geti_frame() { return geti_("frame"); }
+void seti_frame(int value) { seti_("frame", value); }
+void increase_int_frame(int increase = 1) { increase_int_("frame", increase); }
+void repaint_frame() { repaint_("frame"); }
 
 
 //Checkbox Show Color
 //Generate color image preview.
 bool was_changed_show_color() { return was_changed_("show_color"); }
 int geti_show_color() { return geti_("show_color"); }
+void repaint_show_color() { repaint_("show_color"); }
 
 //Out Object Color
 //Resulted Color image.
@@ -90,11 +95,13 @@ bool was_changed_color_image() { return was_changed_("color_image"); }
 XProtectedObject *getobject_color_image() { return get_object_("color_image"); }
 void setobject_color_image(XProtectedObject *value) { set_object_("color_image", value); }
 void setobject_color_image(XProtectedObject &value) { set_object_("color_image", value); }
+void repaint_color_image() { repaint_("color_image"); }
 
 //Checkbox Show Depth
 //Generate Depth image preview.
 bool was_changed_show_depth() { return was_changed_("show_depth"); }
 int geti_show_depth() { return geti_("show_depth"); }
+void repaint_show_depth() { repaint_("show_depth"); }
 
 //Out Object Depth
 //Resulted Depth image.
@@ -102,11 +109,13 @@ bool was_changed_depth_image() { return was_changed_("depth_image"); }
 XProtectedObject *getobject_depth_image() { return get_object_("depth_image"); }
 void setobject_depth_image(XProtectedObject *value) { set_object_("depth_image", value); }
 void setobject_depth_image(XProtectedObject &value) { set_object_("depth_image", value); }
+void repaint_depth_image() { repaint_("depth_image"); }
 
 //Checkbox Show IR
 //Generate IR image preview.
 bool was_changed_show_ir() { return was_changed_("show_ir"); }
 int geti_show_ir() { return geti_("show_ir"); }
+void repaint_show_ir() { repaint_("show_ir"); }
 
 //Out Object IR
 //Resulted IR image.
@@ -114,12 +123,14 @@ bool was_changed_ir_image() { return was_changed_("ir_image"); }
 XProtectedObject *getobject_ir_image() { return get_object_("ir_image"); }
 void setobject_ir_image(XProtectedObject *value) { set_object_("ir_image", value); }
 void setobject_ir_image(XProtectedObject &value) { set_object_("ir_image", value); }
+void repaint_ir_image() { repaint_("ir_image"); }
 
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived.
 bool was_changed_is_new_frame() { return was_changed_("is_new_frame"); }
 int geti_is_new_frame() { return geti_("is_new_frame"); }
 void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
+void repaint_is_new_frame() { repaint_("is_new_frame"); }
 
 //----------------------------------------------------
 //Page Color
@@ -129,6 +140,7 @@ void seti_is_new_frame(int value) { seti_("is_new_frame", value); }
 //Capture color stream.
 bool was_changed_color_stream_enabled() { return was_changed_("color_stream_enabled"); }
 int geti_color_stream_enabled() { return geti_("color_stream_enabled"); }
+void repaint_color_stream_enabled() { repaint_("color_stream_enabled"); }
 
 //Const Enum Resolution
 //Resolution for color stream.
@@ -165,6 +177,7 @@ QString getraw_color_frame_rate() { return getraw_("color_frame_rate");}
 //Should color frames to be aligned to depth frames.
 bool was_changed_align_to_depth() { return was_changed_("align_to_depth"); }
 int geti_align_to_depth() { return geti_("align_to_depth"); }
+void repaint_align_to_depth() { repaint_("align_to_depth"); }
 
 
 //----------------------------------------------------
@@ -175,11 +188,13 @@ int geti_align_to_depth() { return geti_("align_to_depth"); }
 //Capture Depth stream.
 bool was_changed_depth_stream_enabled() { return was_changed_("depth_stream_enabled"); }
 int geti_depth_stream_enabled() { return geti_("depth_stream_enabled"); }
+void repaint_depth_stream_enabled() { repaint_("depth_stream_enabled"); }
 
 //Const Checkbox IR Stream
 //Capture IR stream.
 bool was_changed_ir_stream_enabled() { return was_changed_("ir_stream_enabled"); }
 int geti_ir_stream_enabled() { return geti_("ir_stream_enabled"); }
+void repaint_ir_stream_enabled() { repaint_("ir_stream_enabled"); }
 
 //Const Enum Preset
 //Depth preset.
@@ -233,6 +248,7 @@ QString getraw_depth_frame_rate() { return getraw_("depth_frame_rate");}
 //Enabling IR laser emitter.
 bool was_changed_emitter() { return was_changed_("emitter"); }
 int geti_emitter() { return geti_("emitter"); }
+void repaint_emitter() { repaint_("emitter"); }
 
 //----------------------------------------------------
 //Page 8 Bit
@@ -243,6 +259,7 @@ int geti_emitter() { return geti_("emitter"); }
 //Make depth image to 8 bit grayscale image.
 bool was_changed_make_depth_grayscale() { return was_changed_("make_depth_grayscale"); }
 int geti_make_depth_grayscale() { return geti_("make_depth_grayscale"); }
+void repaint_make_depth_grayscale() { repaint_("make_depth_grayscale"); }
 
 //Out Object Depth8 Image
 //Depth grayscale image.
@@ -250,46 +267,55 @@ bool was_changed_depth_grayscale_image() { return was_changed_("depth_grayscale_
 XProtectedObject *getobject_depth_grayscale_image() { return get_object_("depth_grayscale_image"); }
 void setobject_depth_grayscale_image(XProtectedObject *value) { set_object_("depth_grayscale_image", value); }
 void setobject_depth_grayscale_image(XProtectedObject &value) { set_object_("depth_grayscale_image", value); }
+void repaint_depth_grayscale_image() { repaint_("depth_grayscale_image"); }
 //Int Thresh Near
 //Near threshold.
 bool was_changed_depth_grayscale_thresh_near_mm() { return was_changed_("depth_grayscale_thresh_near_mm"); }
 int geti_depth_grayscale_thresh_near_mm() { return geti_("depth_grayscale_thresh_near_mm"); }
+void repaint_depth_grayscale_thresh_near_mm() { repaint_("depth_grayscale_thresh_near_mm"); }
 
 //Int Thresh Far
 //Far threshold.
 bool was_changed_depth_grayscale_thresh_far_mm() { return was_changed_("depth_grayscale_thresh_far_mm"); }
 int geti_depth_grayscale_thresh_far_mm() { return geti_("depth_grayscale_thresh_far_mm"); }
+void repaint_depth_grayscale_thresh_far_mm() { repaint_("depth_grayscale_thresh_far_mm"); }
 
 //Int Output0
 //Range of output.
 bool was_changed_depth_grayscale_output0() { return was_changed_("depth_grayscale_output0"); }
 int geti_depth_grayscale_output0() { return geti_("depth_grayscale_output0"); }
+void repaint_depth_grayscale_output0() { repaint_("depth_grayscale_output0"); }
 
 //Int Output1
 //Range of output.
 bool was_changed_depth_grayscale_output1() { return was_changed_("depth_grayscale_output1"); }
 int geti_depth_grayscale_output1() { return geti_("depth_grayscale_output1"); }
+void repaint_depth_grayscale_output1() { repaint_("depth_grayscale_output1"); }
 
 
 //Float X0
 //Crop X0.
 bool was_changed_depth_grayscale_x0() { return was_changed_("depth_grayscale_x0"); }
 float getf_depth_grayscale_x0() { return getf_("depth_grayscale_x0"); }
+void repaint_depth_grayscale_x0() { repaint_("depth_grayscale_x0"); }
 
 //Float X1
 //Crop X1.
 bool was_changed_depth_grayscale_x1() { return was_changed_("depth_grayscale_x1"); }
 float getf_depth_grayscale_x1() { return getf_("depth_grayscale_x1"); }
+void repaint_depth_grayscale_x1() { repaint_("depth_grayscale_x1"); }
 
 //Float Y0
 //Crop Y0.
 bool was_changed_depth_grayscale_y0() { return was_changed_("depth_grayscale_y0"); }
 float getf_depth_grayscale_y0() { return getf_("depth_grayscale_y0"); }
+void repaint_depth_grayscale_y0() { repaint_("depth_grayscale_y0"); }
 
 //Float Y1
 //Crop Y1.
 bool was_changed_depth_grayscale_y1() { return was_changed_("depth_grayscale_y1"); }
 float getf_depth_grayscale_y1() { return getf_("depth_grayscale_y1"); }
+void repaint_depth_grayscale_y1() { repaint_("depth_grayscale_y1"); }
 
 
 //----------------------------------------------------
@@ -300,6 +326,7 @@ float getf_depth_grayscale_y1() { return getf_("depth_grayscale_y1"); }
 //Print list of all connected devices
 bool was_changed_print_devices() { return was_changed_("print_devices"); }
 int geti_print_devices() { return geti_("print_devices"); }
+void repaint_print_devices() { repaint_("print_devices"); }
 QString button_print_devices() { return "print_devices"; }
 
 //Out Text Device list
@@ -311,6 +338,7 @@ void sets_device_list(QString value) { sets_("device_list", value); }
 void clear_string_device_list() { clear_string_("device_list"); }
 void append_string_device_list(QString v, int extra_new_lines_count = 0) { append_string_("device_list", v, extra_new_lines_count); }
 void append_string_device_list(QStringList v, int extra_new_lines_count = 0) { append_string_("device_list", v, extra_new_lines_count); }
+void repaint_device_list() { repaint_("device_list"); }
 
 //----------------------------------------------------
 //Page Save Images
@@ -320,34 +348,40 @@ void append_string_device_list(QStringList v, int extra_new_lines_count = 0) { a
 //Press the button to save images to a given folder with file name as timestamp.
 bool was_changed_save_frames_button() { return was_changed_("save_frames_button"); }
 int geti_save_frames_button() { return geti_("save_frames_button"); }
+void repaint_save_frames_button() { repaint_("save_frames_button"); }
 QString button_save_frames_button() { return "save_frames_button"; }
 
 //Checkbox Save Each Frame
 //Save images to a given folder with file name as color_00001.png and so on.
 bool was_changed_save_each_frame() { return was_changed_("save_each_frame"); }
 int geti_save_each_frame() { return geti_("save_each_frame"); }
+void repaint_save_each_frame() { repaint_("save_each_frame"); }
 
 
 //Checkbox Color
 //Should save depth 16 bit.
 bool was_changed_save_color() { return was_changed_("save_color"); }
 int geti_save_color() { return geti_("save_color"); }
+void repaint_save_color() { repaint_("save_color"); }
 
 //Checkbox IR
 //Should save depth 16 bit.
 bool was_changed_save_ir() { return was_changed_("save_ir"); }
 int geti_save_ir() { return geti_("save_ir"); }
+void repaint_save_ir() { repaint_("save_ir"); }
 
 //Checkbox Depth8
 //Should save depth 16 bit.
 bool was_changed_save_depth8() { return was_changed_("save_depth8"); }
 int geti_save_depth8() { return geti_("save_depth8"); }
+void repaint_save_depth8() { repaint_("save_depth8"); }
 
 //String Folder
 //Folder for saving images.
 bool was_changed_save_folder() { return was_changed_("save_folder"); }
 QString gets_save_folder() { return gets_("save_folder"); }
 QStringList get_strings_save_folder() { return get_strings_("save_folder"); }
+void repaint_save_folder() { repaint_("save_folder"); }
 
 //Out Text Saved To
 //Path to last saving.
@@ -358,5 +392,6 @@ void sets_saved_to(QString value) { sets_("saved_to", value); }
 void clear_string_saved_to() { clear_string_("saved_to"); }
 void append_string_saved_to(QString v, int extra_new_lines_count = 0) { append_string_("saved_to", v, extra_new_lines_count); }
 void append_string_saved_to(QStringList v, int extra_new_lines_count = 0) { append_string_("saved_to", v, extra_new_lines_count); }
+void repaint_saved_to() { repaint_("saved_to"); }
 
 //----------------------------------------------------

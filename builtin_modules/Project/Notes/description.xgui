@@ -1,8 +1,7 @@
 #Module Notes
 #------------------------------------------
-#module_class=Notes
-#module_category=Utils
-module_description=Text field for writing some notes.
+module_name_hint=readme
+module_description=Text for writing a "readme" note.
 module_version=1.01
 module_impl=C++
 
@@ -10,5 +9,5 @@ module_impl=C++
 page Main
 
 in text Notes text_value 30 35
-//Text area for some notes
+//Text area for a "readme" note.
     

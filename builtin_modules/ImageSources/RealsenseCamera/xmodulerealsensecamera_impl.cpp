@@ -346,7 +346,7 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, XRaster
     int w = frame.get_width();
     int h = frame.get_height();
     raster.allocate(w, h);
-    auto &data = raster.data;
+    auto data = raster.data_pointer();
     //auto stream = frame.get_profile().stream_type();
 
     unsigned char *input = (unsigned char *)frame.get_data();
@@ -359,7 +359,7 @@ bool RealsenseCamera::frame_to_pixels_rgb(const rs2::video_frame& frame, XRaster
         return true;
     }
     if (format == RS2_FORMAT_RGB8) {
-        memcpy(data.data(), input, w*h*3);
+        memcpy(data, input, w*h*3);
         //__log__("RS2_FORMAT_RGB8 ok");
         return true;
     }
@@ -413,12 +413,13 @@ bool RealsenseCamera::get_depth_pixels8(float min_dist, float max_dist, XRaster_
     bool result = get_depth16_raw(w, h, data16);
     if (result) {
         raster.allocate(w, h);
+        auto data = raster.data_pointer();
         for (int i = 0; i < w*h; i++) {
             if (data16[i] > 0) {
-                raster.data[i] = xmapi_clamped(data16[i] * device_.depth_scale_mm, min_dist, max_dist, 255, 0);
+                data[i] = xmapi_clamped(data16[i] * device_.depth_scale_mm, min_dist, max_dist, 255, 0);
             }
             else {
-                raster.data[i] = 0;
+                data[i] = 0;
             }
         }
         return true;
@@ -449,8 +450,9 @@ bool RealsenseCamera::get_depth_pixels_mm(XRaster_float &raster) {
     if (result) {
         //https://github.com/IntelRealSense/librealsense/issues/2348
         raster.allocate(w, h);
+        auto data = raster.data_pointer();
         for (int i = 0; i < w*h; i++) {
-            raster.data[i] = data16[i];// * device_.depth_scale_mm;
+            data[i] = data16[i];// * device_.depth_scale_mm;
         }
         return true;
     }
@@ -467,8 +469,9 @@ bool RealsenseCamera::get_depth_pixels_mm(XRaster_u16 &raster) {
     if (result) {
         //https://github.com/IntelRealSense/librealsense/issues/2348
         raster.allocate(w, h);
+        auto data = raster.data_pointer();
         for (int i = 0; i < w*h; i++) {
-            raster.data[i] = data16[i];// * device_.depth_scale_mm;
+            data[i] = data16[i];// * device_.depth_scale_mm;
         }
         return true;
     }
@@ -485,8 +488,9 @@ bool RealsenseCamera::get_ir_pixels8(XRaster_u8 &raster) {
         int w = settings_.depth_w;		//TODO get straight from IR frame
         int h = settings_.depth_h;
         raster.allocate(w, h);
+        auto data = raster.data_pointer();
         for (int i=0; i<w*h; i++) {
-            raster.data[i] = data8[i];
+            data[i] = data8[i];
         }
         return true;
     }

@@ -1,0 +1,153 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "0"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Notes",
+                "name": "readme1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "text_value",
+                        "avalue": "# Watchdog example\n\nThis is example of using Project's Watchdog.\nRun the project and press \"Test pause\" checkbox at Project-Watchdog page.\nThis checkbox adds 3 second pause of execution, and Watchdog will decide the program hangs on and terminate it. \n\nNote: \"Save at exit\" is disabled at Project - Main page.\n\n## The details\nWatchdog runs in a separate thread and measures frame rate (from a Project or a Camera).\nIf measured frame rate is less than given threshold, the Watchdog terminates the program.\n\nIt's useful for autorestarting your program:\nyou can create bat or sh file which do it.\n\n\nThe following sh file (re)starts Xclu five times, and then restarts computer:\n\n--------------------------------------------- \n#Xclu restart script Jetson Nano Ubuntu\ncd ~/Desktop/build-Xclu-Desktop-Release\n./Xclu\n\n./Xclu\n\n./Xclu\n\n./Xclu\n\n./Xclu\n\nshutdown -r now\n--------------------------------------------- \n"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Project",
+                "name": "project1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "autostart_wait_sec",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "dont_save_at_exit",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Watchdog",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_frame",
+                        "avalue": "0",
+                        "link": "project1->frame"
+                    },
+                    {
+                        "aname": "watchdog_wait_sec",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_tick_sec",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_threshold_rate",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "test_pause",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

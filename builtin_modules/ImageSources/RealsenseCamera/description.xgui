@@ -52,8 +52,8 @@ out string Device_Info connected_device_info=""
 out checkbox Is_Started is_started=0
     //Does capture started.
 	
-out string Frames_Captured frames_captured=""
-    //How much frames were captured and processed after last start.
+out int Frame frame=0 0:* 1,10
+    //How much frames were captured after last start.
     
 endif
 

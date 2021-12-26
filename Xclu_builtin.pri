@@ -192,10 +192,10 @@ windows {
 ##CONFIG += REALSENSE
 #--------------------------------------------------------------------------
 #REALSENSE {
-#unix {
-#    INCLUDEPATH += ~/librealsense/include
-#    LIBS += -lrealsense2
-#}
+unix {
+    INCLUDEPATH += ~/librealsense/include
+    LIBS += -lrealsense2
+}
 #
 ##windows 32 bit
 ##windows {
@@ -203,19 +203,19 @@ windows {
 ##    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
 ##}
 #
-##windows 64 bit
-#windows {
-#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
-#}
-#
-#SOURCES +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
-#
-#HEADERS +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+#windows 64 bit
+windows {
+    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
+}
+
+SOURCES +=    \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
+
+HEADERS +=    \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
+    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
 #}
 
 #--------------------------------------------------------------------------
