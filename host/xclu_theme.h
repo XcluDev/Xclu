@@ -123,7 +123,8 @@ QWidget *hwidget(int margin = -1, QWidget *widget1 = nullptr, int stretch1 = 0,
                  QWidget *widget2 = nullptr, int stretch2 = 0,
                  QWidget *widget3 = nullptr, int stretch3 = 0,
                  QWidget *widget4 = nullptr, int stretch4 = 0,
-                 QWidget *widget5 = nullptr, int stretch5 = 0);
+                 QWidget *widget5 = nullptr, int stretch5 = 0,
+                 QWidget *widget6 = nullptr, int stretch6 = 0);
 QWidget *vwidget(int margin = -1, QWidget *widget1 = nullptr, int stretch1 = 0,
                  QWidget *widget2 = nullptr, int stretch2 = 0,
                  QWidget *widget3 = nullptr, int stretch3 = 0,
@@ -133,7 +134,8 @@ QHBoxLayout *hlayout(int margin = -1, QWidget *widget1 = nullptr, int stretch1 =
                      QWidget *widget2 = nullptr, int stretch2 = 0,
                      QWidget *widget3 = nullptr, int stretch3 = 0,
                      QWidget *widget4 = nullptr, int stretch4 = 0,
-                     QWidget *widget5 = nullptr, int stretch5 = 0);
+                     QWidget *widget5 = nullptr, int stretch5 = 0,
+                     QWidget *widget6 = nullptr, int stretch6 = 0);
 QVBoxLayout *vlayout(int margin = -1, QWidget *widget1 = nullptr, int stretch1 = 0,
                      QWidget *widget2 = nullptr, int stretch2 = 0,
                      QWidget *widget3 = nullptr, int stretch3 = 0,

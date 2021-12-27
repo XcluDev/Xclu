@@ -15,6 +15,7 @@ class QTextEdit;
 class QTabWidget;
 class QTableWidget;
 class QListWidget;
+class QCheckBox;
 QT_END_NAMESPACE
 
 class DialogAddModule : public QDialog
@@ -34,7 +35,8 @@ public:
     QString selected_type;
 
 private:
-    QTableWidget *create_table_for_category(int i);
+    QTableWidget *create_table_for_category(int i, bool show_implemented);
+    int category_size(int i, bool show_implemented);
 
 
     //Список с категориями
@@ -44,6 +46,7 @@ private:
     int page_ = -1;
 
     QLineEdit *search_line_;
+    QCheckBox *show_implemented_checkbox_;
 
     QVector<QTableWidget *> tables;
     QVector<QWidget *> table_widgets;
@@ -65,6 +68,10 @@ private slots:
 
     //изменение строки текста поиска
     void text_changed(const QString &text);
+
+
+    // Changed Show implementing checkbox
+    void show_implementing_changed(int state);
 
 };
 

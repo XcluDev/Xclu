@@ -166,7 +166,8 @@ QHBoxLayout *hlayout(int margin, QWidget *widget1, int stretch1,
                      QWidget *widget2, int stretch2,
                      QWidget *widget3, int stretch3,
                      QWidget *widget4, int stretch4,
-                     QWidget *widget5, int stretch5) {
+                     QWidget *widget5, int stretch5,
+                     QWidget *widget6, int stretch6) {
     QHBoxLayout *layout = new QHBoxLayout;
     if (margin != -1) {
         layout->setMargin(margin);
@@ -176,6 +177,7 @@ QHBoxLayout *hlayout(int margin, QWidget *widget1, int stretch1,
     if (widget3) layout->addWidget(widget3, stretch3);
     if (widget4) layout->addWidget(widget4, stretch4);
     if (widget5) layout->addWidget(widget5, stretch5);
+    if (widget6) layout->addWidget(widget6, stretch6);
     return layout;
 }
 
@@ -202,7 +204,8 @@ QWidget *hwidget(int margin, QWidget *widget1, int stretch1,
                  QWidget *widget2, int stretch2,
                  QWidget *widget3, int stretch3,
                  QWidget *widget4, int stretch4,
-                 QWidget *widget5, int stretch5
+                 QWidget *widget5, int stretch5,
+                 QWidget *widget6, int stretch6
                  ) {
 
     QWidget *widget = new QWidget;
@@ -210,7 +213,8 @@ QWidget *hwidget(int margin, QWidget *widget1, int stretch1,
                               widget2, stretch2,
                               widget3, stretch3,
                               widget4, stretch4,
-                              widget5, stretch5));
+                              widget5, stretch5,
+                              widget6, stretch6));
     return widget;
 }
 

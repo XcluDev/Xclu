@@ -33,6 +33,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
     //По умолчанию - это категория "All"
     QString All = ModulesFactory::All_Category_Name();
     QString tab_name = Settings::gets(Settings::dialogaddmodule_tab(), "All");
+    int show_implemented = Settings::geti(Settings::dialogaddmodule_show_implemented(), 1);
     //qDebug() << "tab index stored" << tab_index;
 
     //список категорий
@@ -68,7 +69,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
         category_list_->addItem(item);
 
         //создаем таблицу модулей этой категории
-        QTableWidget *table = create_table_for_category(i);
+        QTableWidget *table = create_table_for_category(i, show_implemented);
         //добавляем метку
         QWidget *table_widget = xclu::vwidget(0, new QLabel(name), 0, table, 0);
 
@@ -89,6 +90,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
     QWidget *buttonBox = xclu::hwidget(0,
                                        new QLabel("Search:"), 0,
                                        search_line_ = new QLineEdit(), 0,
+                                       show_implemented_checkbox_ = new QCheckBox("Show implemented"),0,
                                        new QLabel(""),10,
                                        add_button = new QPushButton(tr("Add...")), 0,
                                        cancel_button = new QPushButton(tr("Cancel")),0
@@ -102,6 +104,9 @@ DialogAddModule::DialogAddModule(QWidget *parent)
     connect(add_button, &QPushButton::released, this, &DialogAddModule::pressed_add);
     connect(cancel_button, &QPushButton::released, this, &QDialog::reject);
 
+    // Show implemented
+    show_implemented_checkbox_->setCheckState(show_implemented?Qt::Checked:Qt::Unchecked);
+    connect(show_implemented_checkbox_, &QCheckBox::stateChanged, this, &DialogAddModule::show_implementing_changed);
 
     //Сборка layout диалога
     setLayout(xclu::vlayout(-1,
@@ -132,9 +137,27 @@ DialogAddModule::DialogAddModule(QWidget *parent)
 }
 
 //---------------------------------------------------------------------
-QTableWidget *DialogAddModule::create_table_for_category(int i) {
-    int n = FACTORY.category_size(i);
+int DialogAddModule::category_size(int i, bool show_implemented) {
+    int N = FACTORY.category_size(i);
+    int n = 0;
+    for (int j=0; j<N; j++) {
+        QString module_name = FACTORY.category_module_type(i,j);
+        auto *seed = FACTORY.get_module(module_name);
+        if (seed) {
+            bool is_implemented = seed->description.is_implemented();
+            if (!show_implemented || (show_implemented && is_implemented)) {
+                n++;
+            }
+        }
+    }
+    return n;
+}
+
+//---------------------------------------------------------------------
+QTableWidget *DialogAddModule::create_table_for_category(int i, bool show_implemented) {
+    int n = category_size(i, show_implemented);
     QTableWidget *table = new QTableWidget(n, 2);
+
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     //table->setAlternatingRowColors(true);
     table->verticalHeader()->hide();
@@ -151,26 +174,34 @@ QTableWidget *DialogAddModule::create_table_for_category(int i) {
     //растягивание второго столбца
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
-    for (int j=0; j<FACTORY.category_size(i); j++) {
-        QString module_name = FACTORY.category_module_type(i,j);
+    int N = FACTORY.category_size(i);
+    int j = 0;
+    for (int k=0; k<N; k++) {
+        QString module_name = FACTORY.category_module_type(i,k);
         auto *seed = FACTORY.get_module(module_name);
         if (seed) {
-            //Имя
-            QTableWidgetItem *name = new QTableWidgetItem(module_name);
-            //выключаем редактирование
-            name->setFlags(name->flags() ^ Qt::ItemIsEditable);
-            //если реализован, то ставим шрифт bold
-            if (seed->description.is_implemented()) {
-                QFont originalFont = name->font();
-                originalFont.setBold(true);
-                name->setFont(originalFont);
-            }
-            table->setItem(j, 0, name);
+            bool is_implemented = seed->description.is_implemented();
+            if (!show_implemented || (show_implemented && is_implemented)) {
+                //Имя
+                QTableWidgetItem *name = new QTableWidgetItem(module_name);
+                //выключаем редактирование
+                name->setFlags(name->flags() ^ Qt::ItemIsEditable);
+                //если реализован, то ставим шрифт bold
+                if (is_implemented) {
+                    QFont originalFont = name->font();
+                    originalFont.setBold(true);
+                    name->setFont(originalFont);
+                }
+                table->setItem(j, 0, name);
+                //Описание
+                QTableWidgetItem *descr = new QTableWidgetItem(seed->description.description);
+                descr->setFlags(descr->flags() ^ Qt::ItemIsEditable); // ^ Qt::ItemIsSelectable);
+                table->setItem(j, 1, descr);
 
-            //Описание
-            QTableWidgetItem *descr = new QTableWidgetItem(seed->description.description);
-            descr->setFlags(descr->flags() ^ Qt::ItemIsEditable); // ^ Qt::ItemIsSelectable);
-            table->setItem(j, 1, descr);
+                // Increase counter
+                j++;
+
+            }
         }
     }
     return table;
@@ -245,13 +276,25 @@ void DialogAddModule::text_changed(const QString &text) {
     if (page_ >= 0) {
         QString text_lower = text.toLower();
         QTableWidget *table = tables[page_];
+        xc_assert(table, "DialogAddModule::text_changed - null table");
         for (int i=0; i<table->rowCount(); i++) {
             QTableWidgetItem *item = table->item(i, 0);
+            xc_assert(item, "DialogAddModule::text_changed - null item");
             QString name = item->text();
             bool visible = name.toLower().contains(text_lower);
             table->setRowHidden(i, !visible);
         }
     }
+}
+
+//---------------------------------------------------------------------
+// Changed Show implementing checkbox
+void DialogAddModule::show_implementing_changed(int state) {
+    //qDebug() << "show_implementing_changed " << state;
+    int show_implemented = (state == Qt::Checked)?1:0;
+    Settings::seti(Settings::dialogaddmodule_show_implemented(), show_implemented);
+
+    xc_message_box("Restart Xclu to apply this change.");
 }
 
 //---------------------------------------------------------------------

@@ -22,6 +22,7 @@ public:
 
     //Диалог добавления модуля
     static QString dialogaddmodule_tab() { return "dialogaddmodule/tab"; }
+    static QString dialogaddmodule_show_implemented() { return "dialogaddmodule/show_implemented"; }
 
     //Диалог тестирования GUI новых модулей
     static QString dialogtestmodule_folder() { return "dialogtestmodule/folder"; }
