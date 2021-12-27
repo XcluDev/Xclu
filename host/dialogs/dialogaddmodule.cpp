@@ -55,31 +55,39 @@ DialogAddModule::DialogAddModule(QWidget *parent)
     //таблицам делается setVisible, чтобы показывать только одну нужную в данный момент
     table_container_ = xclu::vwidget(0);
 
-    //пробегаем по всем категориям и заполняем список и создаем таблицы
+    // Create categories list
     int N = FACTORY.categories();
-    tables.resize(N);
-    table_widgets.resize(N);
     for (int i=0; i<N; i++) {
-        QString name = FACTORY.category_name(i);
-        QListWidgetItem *item = new QListWidgetItem(name);
-        QFont originalFont = item->font();
-        //шрифт bold
-        originalFont.setBold(true);
-        item->setFont(originalFont);
-        category_list_->addItem(item);
+        int size = category_size(i, show_implemented);
+        if (size > 0) {
+            QString name = FACTORY.category_name(i);
+            QListWidgetItem *item = new QListWidgetItem(QString("%1 (%2)").arg(name).arg(size));
+            QFont originalFont = item->font();
+            //шрифт bold
+            originalFont.setBold(true);
+            item->setFont(originalFont);
+            category_list_->addItem(item);
+            category_names_.append(name);
+            category_indices_.append(i);
+        }
+    }
 
-        //создаем таблицу модулей этой категории
+    // Create table for each category
+    int n = category_names_.size();
+    tables.resize(n);
+    table_widgets.resize(n);
+    for (int k=0; k<n; k++) {
+        int i = category_indices_[k];
         QTableWidget *table = create_table_for_category(i, show_implemented);
         //добавляем метку
-        QWidget *table_widget = xclu::vwidget(0, new QLabel(name), 0, table, 0);
+        QWidget *table_widget = xclu::vwidget(0, new QLabel(category_names_[k]), 0, table, 0);
 
         table_widget->setVisible(false);
-        tables[i] = table;
-        table_widgets[i] = table_widget;
+        tables[k] = table;
+        table_widgets[k] = table_widget;
         table_container_->layout()->addWidget(table_widget);
 
         xclu::set_font_size(table_widget, xclu::main_font_size);
-
     }
 
 

@@ -41,6 +41,10 @@ private:
 
     //Список с категориями
     QListWidget *category_list_;
+    QStringList category_names_;
+    QVector<int> category_indices_;
+
+
     QWidget *table_container_;  //сюда будем помещать таблицы модулей
 
     int page_ = -1;
