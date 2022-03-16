@@ -3,6 +3,7 @@
 #---------------------------------------------------
 
 SOURCES += \
+    $$PWD/builtin_modules/Communication/BciNeuroplay/xmodulebcineuroplay.cpp \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
     $$PWD/builtin_modules/Contrib/MadRobot/xmodulemadrobot.cpp \
@@ -44,6 +45,8 @@ SOURCES += \
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
     $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
+    $$PWD/builtin_modules/Communication/BciNeuroplay/auto.h \
+    $$PWD/builtin_modules/Communication/BciNeuroplay/xmodulebcineuroplay.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
     $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
     $$PWD/builtin_modules/Contrib/MadRobot/auto.h \

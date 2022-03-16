@@ -436,5 +436,6 @@
         <file>builtin_modules/Window/RenderArea/description.xgui</file>
         <file>builtin_modules/Window/RenderElement/description.xgui</file>
         <file>builtin_modules/ComputerVision/FaceDetect/description.xgui</file>
+        <file>builtin_modules/Communication/BciNeuroplay/description.xgui</file>
     </qresource>
 </RCC>
