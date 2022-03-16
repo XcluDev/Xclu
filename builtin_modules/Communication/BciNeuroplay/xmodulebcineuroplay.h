@@ -5,12 +5,12 @@
 
 #include <QImage>
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xmodulewidget.h"
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 
-class XModuleBciNeuroplay: public XModule
+class XModuleBciNeuroplay: public XModuleWidget
 {
 public:
     XModuleBciNeuroplay(QString class_name);
@@ -22,6 +22,8 @@ protected:
     virtual void update();
     virtual void stop();
     virtual void on_button_pressed(QString button_id);
+
+    virtual void draw(QPainter &painter, int w, int h);
 
 protected:
   /*  void send_frame();
