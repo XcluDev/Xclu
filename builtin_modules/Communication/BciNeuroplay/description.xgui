@@ -5,209 +5,83 @@ module_version=1.01
 module_impl=C++
 
 #------------------------------------------
-page Main
-    //General settings.
+page Connect
+    //Connecting to device. Please start NeuroplayPro app before connecting.
     
-in checkbox Debug debug=0
-    //Debug output to console.
+in button Connect btn_connect
+    // Press to connect to NeuroplayPro app.
 
-const float Wait_At_Start wait_at_start_sec=1.5 0:* 0.1,1
-    //Wait at start in order Arduino Mega connected correctly.
-    //sec
+in button Disconnect btn_disconnect
+    // Press to disconnect from NeuroplayPro app.
 
-const enum Port select_port=Default [Default,By_Index,By_Name]
-    //Method of choosing the port.
+in checkbox Autoconnect autoconnect=0
+    //Connect to NeuroplayPro at start.
 
-#--------------------
-if select_port By_Index
-
-const int Port_ID_From port_index0=2 0:100 1,10
-    //Start of id range, will search to first successful.
-
-const int Port_ID_To port_index1=10 0:100 1,10
-    //End of id range 
-
-if select_port By_Name
-
-const string Port_Name port_name=""
-    //Name of the device (may be specified only part, will be search for the first successful match).
-endif
-#--------------------
-
-separator
-
-const enum Baud_Rate baud_rate=9600 [2400,4800,9600,19200,38400,57600,115200,230400,460800]
-    //
-    //bps
 
 separator
 
 out checkbox Connected connected=0
-    //Is port connected.
+    //Is device connected.
 
-out text Port_Info port_info 5 6
-	//Information about connected port.
-
-    #out checkbox Data_Received data_received=0
-#    //Is data received on the latest update
+out text Device_Info device_info 5 6
+	//Information about connected device.
     
 separator
-out int Total_Sent total_sent=0 0:10000000 1,10 
-    //How much bytes was sent.
-    //bytes
-#out int Total_Received_bytes total_received=0 0:10000000 1,10
-#    //How much bytes was received.
-#    //bytes
+out string Stat stat=""
+    //How much requests were sent, received, lost.
+
+   
 
 #------------------------------------------
-page Console
+page Values
+    //Read meditation and concentration.
 
-in enum Send send_type=String [String,Byte,String_Link]
-    //Choose what to send manually.
+const checkbox Values values_enabled=1
+    //Enable reading meditation and concentration.
 
-#----------------
-if send_type String
-in string String_To_Send send_string=""
-    //String for sending.    
-in button Send send_string_btn
-in checkbox Send send_string_checkbox=0
-    //Check to send each frame or link to other value.
+#if values_enabled 1
+out float Meditation value_meditation=0 0:1 0.01,0.1
+    //Meditation value.
+#    //0..1
 
-line
-in group More_Strings show_additional_strings=0
-    //You can prepare several additional strings to send for convenience.
-
-if show_additional_strings 1
-in string String_To_Send2 send_string2=""
-    //String for sending.    
-in button Send send_string2_btn
-
-in string String_To_Send3 send_string3=""
-    //String for sending.    
-in button Send send_string3_btn
-
-in string String_To_Send4 send_string4=""
-    //String for sending.    
-in button Send send_string4_btn
-
-in string String_To_Send5 send_string5=""
-    //String for sending.    
-in button Send send_string5_btn
-
-in string String_To_Send6 send_string6=""
-    //String for sending.    
-in button Send send_string6_btn
-
-in string String_To_Send7 send_string7=""
-    //String for sending.    
-in button Send send_string7_btn
-
-in string String_To_Send8 send_string8=""
-    //String for sending.    
-in button Send send_string8_btn
-
-endif
-
-#----------------
-
-if send_type String_Link
-in string String_Link string_link_send="module1->string"
-    //Link to string for sending.
-in button Send send_string_link_btn
-endif
-
-if send_type String,String_Link
-line
-in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
-endif
-
-#----------------
-    
-#----------------
-if send_type Byte
-
-in int Send_Byte send_byte=0 0:255 1,10
-    //Byte to send.
-    //0..255
-    #//Bytes list, separated by spaces, for example, '32 32 13'.    
-    
-in button Send send_bytes_btn
-endif
-#----------------
-line
-
-separator
-in checkbox Receive receive=1
-    //Enable receiving data.
-
-in enum Receive_As receive_as=Last_Line [None,Last_Line,Lines,Line_Callback,Text,Bytes]
-    //Format of working with received data.
-    
-#----------------
-if receive_as Last_Line 
-out string Line received_line=""
-    //Received data as last line, separated by '\n'. '\r' are ignored. Good for continuous sensors.
-endif
-    
-#----------------
-if receive_as Text 
-out text Received_Text received_text 10 25
-    //Received data as text.
-    //Not yet implemented :)
-
-endif
-#----------------
-if receive_as Bytes
-out text Received_Bytes received_bytes 10 25
-    //Received data as bytes
-    //Not yet implemented :)
-
-endif
-#------------------------------------------
-if receive_as Text,Bytes
-in button Clear clear
-    //Clear received data
-
-in enum Auto_Clear auto_clear=On [Off,On]
-    //Automatically clear received data before each update
-
-
-in enum Limit_Show limit_show=On [Off,On]
-endif
-#----------------
-if limit_show On
-in int Limit_Show_Count limit_show_count=100 0:10000 1,100 
-    //Limit show by prevent slow down.
-endif
-#----------------
+out float Concentration value_concentration=0 0:1 0.01,0.1
+    //Concentration value.
+#    //0..1
+#endif
 
 #------------------------------------------
-page Watchdog
-//Saying Arduino that we are live, and receiving from Arduino that it's live.
+page Rhythms
+    //Read brain rhythms.
 
-line
-in group Watchdog_Send watchdog_send=1
-    //Should we send something to Arduino with given period to show that we are live.
-
-if watchdog_send 1
-in string Watchdog_Message watchdog_message="."
-    //Sending message.
+const checkbox rhythms rhythm_enabled=1
+    //Enable reading brain rhythms.
     
-in float Send_Period watchdog_send_period=1 0.01:* 0.1,1
-    //Time period for sending watchdog ticks.
-    //sec
-endif
 
-line
+out float Alpha rhythm_alpha=0 0:1 0.01,0.1
+    //Alpha rhythm.
+    //0..1
 
-in group Watchdog_Receive watchdog_receive=0
-    //Receiving watchdog - TODO not implemented yet!
+out float Beta rhythm_beta=0 0:1 0.01,0.1
+    //Beta rhythm.
+    //0..1
+    
 
-line
+out float Delta rhythm_delta=0 0:1 0.01,0.1
+    //Delta rhythm.
+    //0..1
+
+    
+out float Gamma rhythm_gamma=0 0:1 0.01,0.1
+    //Gamma rhythm.
+    //0..1
+
+    
+out float Theta rhythm_theta=0 0:1 0.01,0.1
+    //Theta rhythm.
+    //0..1
+
+    
+out float Time rhythm_t=0 0:* 0.01,0.1
+    //Time stamp.
 
 #------------------------------------------
-page Devices
-
-in button_always Print_Devices print_devices
-
-out text Device_List device_list 7 20
