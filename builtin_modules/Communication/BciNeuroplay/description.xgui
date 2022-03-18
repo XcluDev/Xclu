@@ -49,6 +49,8 @@ out float Concentration value_concentration=0 0:1 0.01,0.1
 #    //0..1
 #endif
 
+#DRAW !!!!!!!!
+
 #------------------------------------------
 page Rhythms
     //Read brain rhythms.
@@ -83,5 +85,56 @@ out float Theta rhythm_theta=0 0:1 0.01,0.1
     
 out float Time rhythm_t=0 0:* 0.01,0.1
     //Time stamp.
+
+#------------------------------------------
+page Spectrum
+    //Read EEG spectrum.
+
+const checkbox Spectrum_Frame spectrum_frame_enabled=0
+    //Enable reading EEG spectrum frame, updated 0.1 sec by default. Note: it puts device into the grabbing mode.
+
+out object Frame spectrum_frame
+    //Moving frame of spectrum.
+
+separator
+
+const checkbox Spectrum_Record spectrum_record_enabled=0
+    //Enable recording spectrum, after disabling the object is ready. Note: it puts device into the grabbing mode.
+
+out object Recording spectrum_recording
+    //Recorded spectrum.
+
+    
+in button Save_As btn_spectrum_save
+# set max duration of grabbing
+
+in button Load btn_spectrum_load
+# set max duration of grabbing
+
+out text Frequencies spectrum_freqs 5 7
+    //Frequencies.
+
+#------------------------------------------
+page Graphs
+    //Read EEG graphs.
+
+const checkbox Graphs_Frame graphs_frame_enabled=0
+    //Enable reading EEG graphs frame.
+
+out object Frame graphs_frame
+    //Moving frame of graphs.
+
+separator
+
+const checkbox Graphs_Record graphs_record_enabled=0
+    //Enable recording graphs, after disabling the object is ready. Note: it puts device into the grabbing mode.
+
+out object Recording graphs_recording
+    //Recorded graphs.
+
+    
+in button Save_As btn_graphs_save
+
+in button Load btn_graphs_load
 
 #------------------------------------------
