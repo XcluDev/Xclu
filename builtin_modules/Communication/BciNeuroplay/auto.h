@@ -133,7 +133,7 @@ void setf_rhythm_avg_gamma(float value) { setf_("rhythm_avg_gamma", value); }
 void repaint_rhythm_avg_gamma() { repaint_("rhythm_avg_gamma"); }
 
 
-//Out String Deltas
+//Out String Delta
 //Delta rhythms for all channels.
 bool was_changed_rhythms_delta() { return was_changed_("rhythms_delta"); }
 QString gets_rhythms_delta() { return gets_("rhythms_delta"); }
@@ -144,7 +144,7 @@ void append_string_rhythms_delta(QString v, int extra_new_lines_count = 0) { app
 void append_string_rhythms_delta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_delta", v, extra_new_lines_count); }
 void repaint_rhythms_delta() { repaint_("rhythms_delta"); }
 
-//Out String Thetas
+//Out String Theta
 //Theta rhythms for all channels.
 bool was_changed_rhythms_theta() { return was_changed_("rhythms_theta"); }
 QString gets_rhythms_theta() { return gets_("rhythms_theta"); }
@@ -155,7 +155,7 @@ void append_string_rhythms_theta(QString v, int extra_new_lines_count = 0) { app
 void append_string_rhythms_theta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_theta", v, extra_new_lines_count); }
 void repaint_rhythms_theta() { repaint_("rhythms_theta"); }
 
-//Out String Alphas
+//Out String Alpha
 //Alpha rhythms for all channels.
 bool was_changed_rhythms_alpha() { return was_changed_("rhythms_alpha"); }
 QString gets_rhythms_alpha() { return gets_("rhythms_alpha"); }
@@ -166,7 +166,7 @@ void append_string_rhythms_alpha(QString v, int extra_new_lines_count = 0) { app
 void append_string_rhythms_alpha(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_alpha", v, extra_new_lines_count); }
 void repaint_rhythms_alpha() { repaint_("rhythms_alpha"); }
 
-//Out String Deltas
+//Out String Delta
 //Delta rhythms for all channels.
 bool was_changed_rhythms_beta() { return was_changed_("rhythms_beta"); }
 QString gets_rhythms_beta() { return gets_("rhythms_beta"); }
@@ -177,7 +177,7 @@ void append_string_rhythms_beta(QString v, int extra_new_lines_count = 0) { appe
 void append_string_rhythms_beta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_beta", v, extra_new_lines_count); }
 void repaint_rhythms_beta() { repaint_("rhythms_beta"); }
 
-//Out String Gammas
+//Out String Gamma
 //Gamma rhythms for all channels.
 bool was_changed_rhythms_gamma() { return was_changed_("rhythms_gamma"); }
 QString gets_rhythms_gamma() { return gets_("rhythms_gamma"); }

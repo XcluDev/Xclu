@@ -87,12 +87,8 @@ public slots:
 
     void requestFilteredData()  {request("filtereddata");}
     void requestRawData()       {request("rawdata");}
-    void requestSpectrum()      {
-        enableGrabMode();
-        request("lastSpectrum");
-    }
-
-    void requestRhythms()       {request("rhythms");}
+    void requestSpectrum()      {requestGrab("lastSpectrum");}
+    void requestRhythms()       {requestGrab("rhythms");}
     void requestMeditation()    {request("meditation");}
     void requestConcentration() {request("concentration");}
     void requestBCI()           {request("BCI");}
@@ -152,6 +148,7 @@ private:
 
     void request(QString text);
     void request(QJsonObject json);
+    void requestGrab(QString text);
 
     void switchGrabMode();
 

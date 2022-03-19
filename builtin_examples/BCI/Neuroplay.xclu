@@ -1,0 +1,196 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "Project",
+                "name": "project",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "autostart_wait_sec",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "dont_save_at_exit",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Watchdog",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_wait_sec",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "watchdog_tick_sec",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_threshold_rate",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "test_pause",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "BciNeuroplay",
+                "name": "bci_neuroplay",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "Connect",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "autoconnect",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Values",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "values_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Rhythms",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "rhythms_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "rhythms_avg_channels",
+                        "avalue": "1 2 3 4 5 6 7 8"
+                    },
+                    {
+                        "aname": "Spectrum",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "spectrum_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "spectrum_record_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Graphs",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "graphs_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "graphs_record_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -175,14 +175,14 @@ void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rh
     int channels = rhythms.size();
     int N = NeuroplayDevice::RhythmN;
 
-    //Fill lines
+    // Fill lines
     QVector<QString> Lines(N);
     for (int c=0; c<channels; c++) {
         for (int i=0; i<N; i++) {
             if (c > 0) {
                 Lines[i].append(" ");
             }
-            Lines[i].append(QString::number(rhythms[c].data[i]));
+            Lines[i].append(QString::number(rhythms[c].data[i] * 0.01));
         }
     }
     sets_rhythms_delta(Lines[NeuroplayDevice::RhythmDelta]);
@@ -191,11 +191,31 @@ void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rh
     sets_rhythms_beta(Lines[NeuroplayDevice::RhythmBeta]);
     sets_rhythms_gamma(Lines[NeuroplayDevice::RhythmGamma]);
 
-    //Average
+    // Average
     auto indices = gets_rhythms_avg_channels().split(" ");
     NeuroplayDevice::Rhythms R;
+    R.data.resize(N);
+    int count = 0;
+    for (auto &s: indices) {
+        int c = s.toInt();
+        if (c >= 0 && c < N) {
+            for (int i=0; i<N; i++) {
+                R.data[i] += rhythms[c].data[i] * 0.01;
+            }
+            count++;
+        }
+    }
+    if (count > 0) {
+        for (int i=0; i<N; i++) {
+            R.data[i] /= count;
+        }
+    }
+    setf_rhythm_avg_delta(R.data[NeuroplayDevice::RhythmDelta]);
+    setf_rhythm_avg_theta(R.data[NeuroplayDevice::RhythmTheta]);
+    setf_rhythm_avg_alpha(R.data[NeuroplayDevice::RhythmAlpha]);
+    setf_rhythm_avg_beta(R.data[NeuroplayDevice::RhythmBeta]);
+    setf_rhythm_avg_gamma(R.data[NeuroplayDevice::RhythmGamma]);
 }
-
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::update() {

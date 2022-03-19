@@ -82,20 +82,20 @@ out float Avg_Gamma rhythm_avg_gamma=0 0:1 0.01,0.1
     //0..1
 
 line
-out string Deltas rhythms_delta=""
+out string Delta rhythms_delta=""
     //Delta rhythms for all channels.
 
-out string Thetas rhythms_theta=""
+out string Theta rhythms_theta=""
     //Theta rhythms for all channels.
 
-out string Alphas rhythms_alpha=""
+out string Alpha rhythms_alpha=""
     //Alpha rhythms for all channels.
 
     
-out string Deltas rhythms_beta=""
+out string Delta rhythms_beta=""
     //Delta rhythms for all channels.
 
-out string Gammas rhythms_gamma=""
+out string Gamma rhythms_gamma=""
     //Gamma rhythms for all channels.
     
 #out float Time rhythm_t=0 0:* 0.01,0.1

@@ -166,7 +166,7 @@ void NeuroplayDevice::setStarted(bool started)
     bool need_emit = !m_isStarted && started;
     m_isStarted = started;
     //if (started)
-    //    request("spectrumfrequencies");   // TODO require spectrumfrequencies from API
+    //    request("spectrumfrequencies");   // TODO require
     if (need_emit)
         emit ready();
 }
@@ -180,6 +180,13 @@ void NeuroplayDevice::request(QJsonObject json)
 {
     request(QJsonDocument(json).toJson());
 }
+
+void NeuroplayDevice::requestGrab(QString text)
+{
+    enableGrabMode();
+    request(text);
+}
+
 
 void NeuroplayDevice::onResponse(QJsonObject resp)
 {
