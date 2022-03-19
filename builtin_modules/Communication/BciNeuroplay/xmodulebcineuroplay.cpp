@@ -17,7 +17,7 @@ XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::~XModuleBciNeuroplay()
 {
-    disconnect();
+    disconnect_();
 }
 
 //---------------------------------------------------------------------
@@ -55,20 +55,25 @@ void XModuleBciNeuroplay::connect_() {
 
     neuroplay_->open();
 
-    seti_connected(1);
 }
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::disconnect_() {
-    neuroplay_->close();
-    neuroplay_.reset();
+    if (neuroplay_.data()) {
+        neuroplay_->close();
+        neuroplay_.reset();
+    }
 
     seti_connected(0);
+    sets_device_info("Disconnected");
 }
 
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
+
+    //TODO note, this call can be from another signal
+
     clear_string_device_info();
     append_string_device_info("Connected: " + device->name());
 //    item->setData(1, 42, QVariant::fromValue<NeuroplayDevice*>(device));
@@ -78,7 +83,8 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     append_string_device_info("maxChannels: " + QString::number(device->maxChannels()));
     append_string_device_info("preferredChannelCount: " + QString::number(device->preferredChannelCount()));
 
-/*
+    /*
+   //TODO Channel Modes
     QTreeWidgetItem *modesItem = new QTreeWidgetItem(item, {"channelModes"});
     QStringList modes = device->channelModes();
     for (int i=0; i<modes.size(); i++)
@@ -87,14 +93,13 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
         QTreeWidgetItem *modeItem = new QTreeWidgetItem(modesItem, {mode, "<click here to start>"});
         modeItem->setData(1, 42, QVariant::fromValue<NeuroplayDevice*>(device));
         modeItem->setData(1, 43, device->channelModesValues()[i].first);
-    }
+    }*/
 
     connect(device, &NeuroplayDevice::ready, [=]()
     {
-        item->setBackgroundColor(0, Qt::green);
-        item->setText(1, "started");
+        seti_connected(1);
 
-        connect(btnSpectrum, &QPushButton::clicked, [=]()
+        /*connect(btnSpectrum, &QPushButton::clicked, [=]()
         {
             device->requestSpectrum();
         });
@@ -135,9 +140,9 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
             chart->clear();
             log->append(QString("meditaion %1").arg(device->meditation()));
             //qDebug() << device->meditation();
-        });
+        });*/
     });
-*/
+
 }
 
 //---------------------------------------------------------------------
@@ -162,7 +167,7 @@ void XModuleBciNeuroplay::update() {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::stop() {
-    disconnect();
+    disconnect_();
 }
 
 
