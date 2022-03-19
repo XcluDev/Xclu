@@ -28,11 +28,20 @@ protected:
 
 protected:
     QScopedPointer<NeuroplayPro> neuroplay_;
+    NeuroplayDevice *device_ = nullptr;
 
     void connect_();
     void disconnect_();
 
     void on_deviceConnected(NeuroplayDevice *device);
+
+    void reset_stat();
+    void update_stat();
+    void inc_requests();
+    void inc_received();
+    int num_requests_ = 0;
+    int num_received_ = 0;
+
 
 };
 

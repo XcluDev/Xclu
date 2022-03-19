@@ -42,18 +42,20 @@ void XModuleBciNeuroplay::start() {
 
 }
 
-
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::connect_() {
     neuroplay_.reset(new NeuroplayPro());
-
 
     connect(neuroplay_.data(), &NeuroplayPro::deviceConnected, [=](NeuroplayDevice *device)
     {
         on_deviceConnected(device);
     });
 
+    num_requests_ = 0;
+    num_received_ = 0;
+
     neuroplay_->open();
+
 
 }
 
@@ -63,10 +65,16 @@ void XModuleBciNeuroplay::disconnect_() {
         neuroplay_->close();
         neuroplay_.reset();
     }
+    device_ = 0;
 
     seti_connected(0);
     sets_device_info("Disconnected");
+
+    num_requests_ = 0;
+    num_received_ = 0;
+
 }
+
 
 
 //---------------------------------------------------------------------
@@ -83,6 +91,7 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     append_string_device_info("maxChannels: " + QString::number(device->maxChannels()));
     append_string_device_info("preferredChannelCount: " + QString::number(device->preferredChannelCount()));
 
+    device_ = device;
     /*
    //TODO Channel Modes
     QTreeWidgetItem *modesItem = new QTreeWidgetItem(item, {"channelModes"});
@@ -99,16 +108,7 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     {
         seti_connected(1);
 
-        /*connect(btnSpectrum, &QPushButton::clicked, [=]()
-        {
-            device->requestSpectrum();
-        });
-
-        connect(btnGraphs, &QPushButton::clicked, [=]()
-        {
-            device->requestFilteredData();
-            //device->requestRawData();
-        });
+        /*
 
         //---------------------
         connect(device, &NeuroplayDevice::spectrumReady, [=]()
@@ -133,14 +133,7 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
             chart->setData(data, 100000);
         });
 
-
-        connect(btnMeditation, &QPushButton::clicked, [=]()
-        {
-            device->requestMeditation();
-            chart->clear();
-            log->append(QString("meditaion %1").arg(device->meditation()));
-            //qDebug() << device->meditation();
-        });*/
+        */
     });
 
 }
@@ -153,17 +146,56 @@ void XModuleBciNeuroplay::update() {
     if (geti_btn_disconnect()) {
         disconnect_();
     }
-  /*  auto mode = gete_send_mode();
-    if (mode == send_mode_Each_Frame
-            || (mode == send_mode_On_Checkbox && geti_send_new_frame())) {
-        //Send frame
-        send_frame();
-    }
-    */
 
-    redraw();   //call to update screen
+    // Data requests
+    if (geti_connected()) {
+        if (geti_values_enabled()) {
+            inc_requests();
+            device_->requestBCI();
+        }
+        if (geti_rhythms_enabled()) {
+            inc_requests();
+            device_->requestRhythms();
+        }
+        if (geti_spectrum_enabled()) {
+            inc_requests();
+            device_->requestSpectrum();
+        }
+
+        if (geti_graphs_enabled()) {
+            inc_requests();
+            device_->requestFilteredData();
+            //device->requestRawData();
+        }
+    }
+
+    update_stat(); // Stat
+
+    redraw();   //Call to update screen
 }
 
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::inc_requests() {
+    num_requests_++;
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::inc_received() {
+    num_received_++;
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::reset_stat() {
+    num_requests_ = 0;
+    num_received_ = 0;
+    update_stat();
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::update_stat() {
+    QString s = QString("req.: %1, received: %2, lost: %3").arg(num_requests_).arg(num_received_).arg(num_requests_-num_received_);
+    sets_stat(s);
+}
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::stop() {

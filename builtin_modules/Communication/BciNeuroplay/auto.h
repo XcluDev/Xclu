@@ -84,11 +84,11 @@ void repaint_value_concentration() { repaint_("value_concentration"); }
 //Page Rhythms
 //Read brain rhythms.
 
-//Const Checkbox rhythms
+//Const Checkbox Rhythms
 //Enable reading brain rhythms.
-bool was_changed_rhythm_enabled() { return was_changed_("rhythm_enabled"); }
-int geti_rhythm_enabled() { return geti_("rhythm_enabled"); }
-void repaint_rhythm_enabled() { repaint_("rhythm_enabled"); }
+bool was_changed_rhythms_enabled() { return was_changed_("rhythms_enabled"); }
+int geti_rhythms_enabled() { return geti_("rhythms_enabled"); }
+void repaint_rhythms_enabled() { repaint_("rhythms_enabled"); }
 
 //Out Float Alpha
 //Alpha rhythm.
@@ -136,19 +136,19 @@ void repaint_rhythm_t() { repaint_("rhythm_t"); }
 //Page Spectrum
 //Read EEG spectrum.
 
-//Const Checkbox Spectrum Frame
+//Const Checkbox Spectrum
 //Enable reading EEG spectrum frame, updated 0.1 sec by default. Note: it puts device into the grabbing mode.
-bool was_changed_spectrum_frame_enabled() { return was_changed_("spectrum_frame_enabled"); }
-int geti_spectrum_frame_enabled() { return geti_("spectrum_frame_enabled"); }
-void repaint_spectrum_frame_enabled() { repaint_("spectrum_frame_enabled"); }
+bool was_changed_spectrum_enabled() { return was_changed_("spectrum_enabled"); }
+int geti_spectrum_enabled() { return geti_("spectrum_enabled"); }
+void repaint_spectrum_enabled() { repaint_("spectrum_enabled"); }
 
-//Out Object Frame
+//Out Object Spectrum Data
 //Moving frame of spectrum.
-bool was_changed_spectrum_frame() { return was_changed_("spectrum_frame"); }
-XProtectedObject *getobject_spectrum_frame() { return get_object_("spectrum_frame"); }
-void setobject_spectrum_frame(XProtectedObject *value) { set_object_("spectrum_frame", value); }
-void setobject_spectrum_frame(XProtectedObject &value) { set_object_("spectrum_frame", value); }
-void repaint_spectrum_frame() { repaint_("spectrum_frame"); }
+bool was_changed_spectrum_data() { return was_changed_("spectrum_data"); }
+XProtectedObject *getobject_spectrum_data() { return get_object_("spectrum_data"); }
+void setobject_spectrum_data(XProtectedObject *value) { set_object_("spectrum_data", value); }
+void setobject_spectrum_data(XProtectedObject &value) { set_object_("spectrum_data", value); }
+void repaint_spectrum_data() { repaint_("spectrum_data"); }
 
 //Const Checkbox Spectrum Record
 //Enable recording spectrum, after disabling the object is ready. Note: it puts device into the grabbing mode.
@@ -192,13 +192,13 @@ void repaint_spectrum_freqs() { repaint_("spectrum_freqs"); }
 //Page Graphs
 //Read EEG graphs.
 
-//Const Checkbox Graphs Frame
+//Const Checkbox Graphs
 //Enable reading EEG graphs frame.
-bool was_changed_graphs_frame_enabled() { return was_changed_("graphs_frame_enabled"); }
-int geti_graphs_frame_enabled() { return geti_("graphs_frame_enabled"); }
-void repaint_graphs_frame_enabled() { repaint_("graphs_frame_enabled"); }
+bool was_changed_graphs_enabled() { return was_changed_("graphs_enabled"); }
+int geti_graphs_enabled() { return geti_("graphs_enabled"); }
+void repaint_graphs_enabled() { repaint_("graphs_enabled"); }
 
-//Out Object Frame
+//Out Object Graphs Data
 //Moving frame of graphs.
 bool was_changed_graphs_frame() { return was_changed_("graphs_frame"); }
 XProtectedObject *getobject_graphs_frame() { return get_object_("graphs_frame"); }

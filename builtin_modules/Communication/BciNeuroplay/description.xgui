@@ -55,7 +55,7 @@ out float Concentration value_concentration=0 0:1 0.01,0.1
 page Rhythms
     //Read brain rhythms.
 
-const checkbox rhythms rhythm_enabled=1
+const checkbox Rhythms rhythms_enabled=1
     //Enable reading brain rhythms.
     
 
@@ -90,10 +90,10 @@ out float Time rhythm_t=0 0:* 0.01,0.1
 page Spectrum
     //Read EEG spectrum.
 
-const checkbox Spectrum_Frame spectrum_frame_enabled=0
+const checkbox Spectrum spectrum_enabled=0
     //Enable reading EEG spectrum frame, updated 0.1 sec by default. Note: it puts device into the grabbing mode.
 
-out object Frame spectrum_frame
+out object Spectrum_Data spectrum_data
     //Moving frame of spectrum.
 
 separator
@@ -118,10 +118,10 @@ out text Frequencies spectrum_freqs 5 7
 page Graphs
     //Read EEG graphs.
 
-const checkbox Graphs_Frame graphs_frame_enabled=0
+const checkbox Graphs graphs_enabled=0
     //Enable reading EEG graphs frame.
 
-out object Frame graphs_frame
+out object Graphs_Data graphs_frame
     //Moving frame of graphs.
 
 separator
