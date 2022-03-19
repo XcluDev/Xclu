@@ -23,7 +23,7 @@ separator
 out checkbox Connected connected=0
     //Is device connected.
 
-out text Device_Info device_info 5 6
+out text Device_Info device_info 7 9
 	//Information about connected device.
     
 separator

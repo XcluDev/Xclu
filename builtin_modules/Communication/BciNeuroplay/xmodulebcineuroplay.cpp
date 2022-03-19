@@ -17,7 +17,7 @@ XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::~XModuleBciNeuroplay()
 {
-
+    disconnect();
 }
 
 //---------------------------------------------------------------------
@@ -36,20 +36,118 @@ void XModuleBciNeuroplay::on_button_pressed(QString button_id) {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::start() {
-  /*  sets_send_status("Not started");
-    ndi_inited_ = false;
-
-    sent_frames_  = 0;
-
-    auto mode = gete_send_mode();
-    if (mode != send_mode_Off) {
-        ndi_init();
+    if (geti_autoconnect()) {
+        connect_();
     }
+
+}
+
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::connect_() {
+    neuroplay_.reset(new NeuroplayPro());
+
+
+    connect(neuroplay_.data(), &NeuroplayPro::deviceConnected, [=](NeuroplayDevice *device)
+    {
+        on_deviceConnected(device);
+    });
+
+    neuroplay_->open();
+
+    seti_connected(1);
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::disconnect_() {
+    neuroplay_->close();
+    neuroplay_.reset();
+
+    seti_connected(0);
+}
+
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
+    clear_string_device_info();
+    append_string_device_info("Connected: " + device->name());
+//    item->setData(1, 42, QVariant::fromValue<NeuroplayDevice*>(device));
+    append_string_device_info("id: " + QString::number(device->id()));
+    append_string_device_info("model: " + device->model());
+    append_string_device_info("serialNumber: " + device->serialNumber());
+    append_string_device_info("maxChannels: " + QString::number(device->maxChannels()));
+    append_string_device_info("preferredChannelCount: " + QString::number(device->preferredChannelCount()));
+
+/*
+    QTreeWidgetItem *modesItem = new QTreeWidgetItem(item, {"channelModes"});
+    QStringList modes = device->channelModes();
+    for (int i=0; i<modes.size(); i++)
+    {
+        QString mode = modes[i];
+        QTreeWidgetItem *modeItem = new QTreeWidgetItem(modesItem, {mode, "<click here to start>"});
+        modeItem->setData(1, 42, QVariant::fromValue<NeuroplayDevice*>(device));
+        modeItem->setData(1, 43, device->channelModesValues()[i].first);
+    }
+
+    connect(device, &NeuroplayDevice::ready, [=]()
+    {
+        item->setBackgroundColor(0, Qt::green);
+        item->setText(1, "started");
+
+        connect(btnSpectrum, &QPushButton::clicked, [=]()
+        {
+            device->requestSpectrum();
+        });
+
+        connect(btnGraphs, &QPushButton::clicked, [=]()
+        {
+            device->requestFilteredData();
+            //device->requestRawData();
+        });
+
+        //---------------------
+        connect(device, &NeuroplayDevice::spectrumReady, [=]()
+        {
+            //Spectrum is updated each 0.1 seconds
+            NeuroplayDevice::ChannelsData spectrum = device->spectrum();
+            chart->setData(spectrum, -20);
+            qDebug() << "Spectrum: " << spectrum.size() << "x" << (spectrum.size()? spectrum[0].size(): 0);
+            //qDebug() << spectrum;
+        });
+
+        connect(device, &NeuroplayDevice::filteredDataReceived, [=](NeuroplayDevice::ChannelsData data)
+        {
+            qDebug() << "Filtered data:" << data.size() << "x" << (data.size()? data[0].size(): 0);
+            chart->setData(data, 200);
+        });
+
+
+        connect(device, &NeuroplayDevice::rawDataReceived, [=](NeuroplayDevice::ChannelsData data)
+        {
+            qDebug() << "Raw data:" << data.size() << "x" << (data.size()? data[0].size(): 0);
+            chart->setData(data, 100000);
+        });
+
+
+        connect(btnMeditation, &QPushButton::clicked, [=]()
+        {
+            device->requestMeditation();
+            chart->clear();
+            log->append(QString("meditaion %1").arg(device->meditation()));
+            //qDebug() << device->meditation();
+        });
+    });
 */
 }
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::update() {
+    if (geti_btn_connect()) {
+        connect_();
+    }
+    if (geti_btn_disconnect()) {
+        disconnect_();
+    }
   /*  auto mode = gete_send_mode();
     if (mode == send_mode_Each_Frame
             || (mode == send_mode_On_Checkbox && geti_send_new_frame())) {
@@ -64,10 +162,7 @@ void XModuleBciNeuroplay::update() {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::stop() {
-  /*  ndi_stop();
-
-    test_raster_.clear();
-*/
+    disconnect();
 }
 
 

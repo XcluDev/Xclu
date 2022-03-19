@@ -9,6 +9,7 @@
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
+#include "neuroplaypro.h"
 
 class XModuleBciNeuroplay: public XModuleWidget
 {
@@ -26,19 +27,13 @@ protected:
     virtual void draw(QPainter &painter, int w, int h);
 
 protected:
-  /*  void send_frame();
-    void send_test_frame(int frame);
-    XRaster_u8c4 test_raster_;
-    int  sent_frames_ = 0;
+    QScopedPointer<NeuroplayPro> neuroplay_;
 
+    void connect_();
+    void disconnect_();
 
-    bool ndi_inited_ = false;
-    void ndi_init();
-    void ndi_send_image(const unsigned char *data_rgba, int w, int h);
-    void ndi_stop();
+    void on_deviceConnected(NeuroplayDevice *device);
 
-    void* pNDI_send_ = nullptr;
-*/
 };
 
 
