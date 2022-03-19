@@ -28,9 +28,18 @@ public:
 
     void makeFavorite();
 
+    enum RhythmsEnum: int {
+        RhythmDelta = 0,
+        RhythmTheta = 1,
+        RhythmAlpha = 2,
+        RhythmBeta = 3,
+        RhythmGamma = 4,
+        RhythmN = 5
+    };
+
     typedef struct
     {
-        double delta, theta, alpha, beta, gamma;
+        QVector<double> data;   // See RhythmsEnum
         int timestamp;
     } Rhythms;
     typedef struct
@@ -56,6 +65,9 @@ public:
     void grabMeditationHistory(bool enable = true);
     void grabConcentrationHistory(bool enable = true);
 
+    void enableGrabMode();
+    void disableGrabMode();
+
     ChannelsData readFilteredDataHistory();
     ChannelsData readRawDataHistory();
     QVector<ChannelsRhythms> readRhythmsHistory();
@@ -76,11 +88,7 @@ public slots:
     void requestFilteredData()  {request("filtereddata");}
     void requestRawData()       {request("rawdata");}
     void requestSpectrum()      {
-        if (!grab_mode_enabled)
-        {
-            request("enableDataGrabMode");
-            grab_mode_enabled = true;
-        }
+        enableGrabMode();
         request("lastSpectrum");
     }
 
@@ -89,7 +97,7 @@ public slots:
     void requestConcentration() {request("concentration");}
     void requestBCI()           {request("BCI");}
 
-signals:
+signals:    
     void ready();
 
     void filteredDataReceived(ChannelsData data);
@@ -101,6 +109,8 @@ signals:
     void bciReady();
 
     void recordedData(QByteArray edf, QByteArray npd);
+
+    void error(QString message);
 
 private:
     int m_id;
@@ -144,6 +154,8 @@ private:
     void request(QJsonObject json);
 
     void switchGrabMode();
+
+
 
 signals: // private
     void doRequest(QString text);

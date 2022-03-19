@@ -90,47 +90,103 @@ bool was_changed_rhythms_enabled() { return was_changed_("rhythms_enabled"); }
 int geti_rhythms_enabled() { return geti_("rhythms_enabled"); }
 void repaint_rhythms_enabled() { repaint_("rhythms_enabled"); }
 
-//Out Float Alpha
-//Alpha rhythm.
-bool was_changed_rhythm_alpha() { return was_changed_("rhythm_alpha"); }
-float getf_rhythm_alpha() { return getf_("rhythm_alpha"); }
-void setf_rhythm_alpha(float value) { setf_("rhythm_alpha", value); }
-void repaint_rhythm_alpha() { repaint_("rhythm_alpha"); }
+//String Averaging Channels
+//List of channels for averaging, such as 1 2 3 4 5 6 7 8.
+bool was_changed_rhythms_avg_channels() { return was_changed_("rhythms_avg_channels"); }
+QString gets_rhythms_avg_channels() { return gets_("rhythms_avg_channels"); }
+QStringList get_strings_rhythms_avg_channels() { return get_strings_("rhythms_avg_channels"); }
+void repaint_rhythms_avg_channels() { repaint_("rhythms_avg_channels"); }
 
-//Out Float Beta
-//Beta rhythm.
-bool was_changed_rhythm_beta() { return was_changed_("rhythm_beta"); }
-float getf_rhythm_beta() { return getf_("rhythm_beta"); }
-void setf_rhythm_beta(float value) { setf_("rhythm_beta", value); }
-void repaint_rhythm_beta() { repaint_("rhythm_beta"); }
+//Out Float Avg Delta
+//Averaged delta rhythm.
+bool was_changed_rhythm_avg_delta() { return was_changed_("rhythm_avg_delta"); }
+float getf_rhythm_avg_delta() { return getf_("rhythm_avg_delta"); }
+void setf_rhythm_avg_delta(float value) { setf_("rhythm_avg_delta", value); }
+void repaint_rhythm_avg_delta() { repaint_("rhythm_avg_delta"); }
 
-//Out Float Delta
-//Delta rhythm.
-bool was_changed_rhythm_delta() { return was_changed_("rhythm_delta"); }
-float getf_rhythm_delta() { return getf_("rhythm_delta"); }
-void setf_rhythm_delta(float value) { setf_("rhythm_delta", value); }
-void repaint_rhythm_delta() { repaint_("rhythm_delta"); }
+//Out Float Avg Theta
+//Averaged theta rhythm.
+bool was_changed_rhythm_avg_theta() { return was_changed_("rhythm_avg_theta"); }
+float getf_rhythm_avg_theta() { return getf_("rhythm_avg_theta"); }
+void setf_rhythm_avg_theta(float value) { setf_("rhythm_avg_theta", value); }
+void repaint_rhythm_avg_theta() { repaint_("rhythm_avg_theta"); }
 
-//Out Float Gamma
-//Gamma rhythm.
-bool was_changed_rhythm_gamma() { return was_changed_("rhythm_gamma"); }
-float getf_rhythm_gamma() { return getf_("rhythm_gamma"); }
-void setf_rhythm_gamma(float value) { setf_("rhythm_gamma", value); }
-void repaint_rhythm_gamma() { repaint_("rhythm_gamma"); }
+//Out Float Avg Alpha
+//Averaged alpha rhythm.
+bool was_changed_rhythm_avg_alpha() { return was_changed_("rhythm_avg_alpha"); }
+float getf_rhythm_avg_alpha() { return getf_("rhythm_avg_alpha"); }
+void setf_rhythm_avg_alpha(float value) { setf_("rhythm_avg_alpha", value); }
+void repaint_rhythm_avg_alpha() { repaint_("rhythm_avg_alpha"); }
 
-//Out Float Theta
-//Theta rhythm.
-bool was_changed_rhythm_theta() { return was_changed_("rhythm_theta"); }
-float getf_rhythm_theta() { return getf_("rhythm_theta"); }
-void setf_rhythm_theta(float value) { setf_("rhythm_theta", value); }
-void repaint_rhythm_theta() { repaint_("rhythm_theta"); }
+//Out Float Avg Beta
+//Averaged beta rhythm.
+bool was_changed_rhythm_avg_beta() { return was_changed_("rhythm_avg_beta"); }
+float getf_rhythm_avg_beta() { return getf_("rhythm_avg_beta"); }
+void setf_rhythm_avg_beta(float value) { setf_("rhythm_avg_beta", value); }
+void repaint_rhythm_avg_beta() { repaint_("rhythm_avg_beta"); }
 
-//Out Float Time
-//Time stamp.
-bool was_changed_rhythm_t() { return was_changed_("rhythm_t"); }
-float getf_rhythm_t() { return getf_("rhythm_t"); }
-void setf_rhythm_t(float value) { setf_("rhythm_t", value); }
-void repaint_rhythm_t() { repaint_("rhythm_t"); }
+//Out Float Avg Gamma
+//Averaged gamma rhythm.
+bool was_changed_rhythm_avg_gamma() { return was_changed_("rhythm_avg_gamma"); }
+float getf_rhythm_avg_gamma() { return getf_("rhythm_avg_gamma"); }
+void setf_rhythm_avg_gamma(float value) { setf_("rhythm_avg_gamma", value); }
+void repaint_rhythm_avg_gamma() { repaint_("rhythm_avg_gamma"); }
+
+
+//Out String Deltas
+//Delta rhythms for all channels.
+bool was_changed_rhythms_delta() { return was_changed_("rhythms_delta"); }
+QString gets_rhythms_delta() { return gets_("rhythms_delta"); }
+QStringList get_strings_rhythms_delta() { return get_strings_("rhythms_delta"); }
+void sets_rhythms_delta(QString value) { sets_("rhythms_delta", value); }
+void clear_string_rhythms_delta() { clear_string_("rhythms_delta"); }
+void append_string_rhythms_delta(QString v, int extra_new_lines_count = 0) { append_string_("rhythms_delta", v, extra_new_lines_count); }
+void append_string_rhythms_delta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_delta", v, extra_new_lines_count); }
+void repaint_rhythms_delta() { repaint_("rhythms_delta"); }
+
+//Out String Thetas
+//Theta rhythms for all channels.
+bool was_changed_rhythms_theta() { return was_changed_("rhythms_theta"); }
+QString gets_rhythms_theta() { return gets_("rhythms_theta"); }
+QStringList get_strings_rhythms_theta() { return get_strings_("rhythms_theta"); }
+void sets_rhythms_theta(QString value) { sets_("rhythms_theta", value); }
+void clear_string_rhythms_theta() { clear_string_("rhythms_theta"); }
+void append_string_rhythms_theta(QString v, int extra_new_lines_count = 0) { append_string_("rhythms_theta", v, extra_new_lines_count); }
+void append_string_rhythms_theta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_theta", v, extra_new_lines_count); }
+void repaint_rhythms_theta() { repaint_("rhythms_theta"); }
+
+//Out String Alphas
+//Alpha rhythms for all channels.
+bool was_changed_rhythms_alpha() { return was_changed_("rhythms_alpha"); }
+QString gets_rhythms_alpha() { return gets_("rhythms_alpha"); }
+QStringList get_strings_rhythms_alpha() { return get_strings_("rhythms_alpha"); }
+void sets_rhythms_alpha(QString value) { sets_("rhythms_alpha", value); }
+void clear_string_rhythms_alpha() { clear_string_("rhythms_alpha"); }
+void append_string_rhythms_alpha(QString v, int extra_new_lines_count = 0) { append_string_("rhythms_alpha", v, extra_new_lines_count); }
+void append_string_rhythms_alpha(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_alpha", v, extra_new_lines_count); }
+void repaint_rhythms_alpha() { repaint_("rhythms_alpha"); }
+
+//Out String Deltas
+//Delta rhythms for all channels.
+bool was_changed_rhythms_beta() { return was_changed_("rhythms_beta"); }
+QString gets_rhythms_beta() { return gets_("rhythms_beta"); }
+QStringList get_strings_rhythms_beta() { return get_strings_("rhythms_beta"); }
+void sets_rhythms_beta(QString value) { sets_("rhythms_beta", value); }
+void clear_string_rhythms_beta() { clear_string_("rhythms_beta"); }
+void append_string_rhythms_beta(QString v, int extra_new_lines_count = 0) { append_string_("rhythms_beta", v, extra_new_lines_count); }
+void append_string_rhythms_beta(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_beta", v, extra_new_lines_count); }
+void repaint_rhythms_beta() { repaint_("rhythms_beta"); }
+
+//Out String Gammas
+//Gamma rhythms for all channels.
+bool was_changed_rhythms_gamma() { return was_changed_("rhythms_gamma"); }
+QString gets_rhythms_gamma() { return gets_("rhythms_gamma"); }
+QStringList get_strings_rhythms_gamma() { return get_strings_("rhythms_gamma"); }
+void sets_rhythms_gamma(QString value) { sets_("rhythms_gamma", value); }
+void clear_string_rhythms_gamma() { clear_string_("rhythms_gamma"); }
+void append_string_rhythms_gamma(QString v, int extra_new_lines_count = 0) { append_string_("rhythms_gamma", v, extra_new_lines_count); }
+void append_string_rhythms_gamma(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_gamma", v, extra_new_lines_count); }
+void repaint_rhythms_gamma() { repaint_("rhythms_gamma"); }
 
 //----------------------------------------------------
 //Page Spectrum

@@ -42,6 +42,9 @@ protected:
     int num_requests_ = 0;
     int num_received_ = 0;
 
+    void set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms);
+
+    QString exception_; // Not empty in case of errors from BCI device
 
 };
 

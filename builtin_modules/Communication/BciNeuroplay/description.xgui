@@ -58,33 +58,48 @@ page Rhythms
 const checkbox Rhythms rhythms_enabled=1
     //Enable reading brain rhythms.
     
+in string Averaging_Channels rhythms_avg_channels="1 2 3 4 5 6 7 8"
+    //List of channels for averaging, such as 1 2 3 4 5 6 7 8.
 
-out float Alpha rhythm_alpha=0 0:1 0.01,0.1
-    //Alpha rhythm.
+out float Avg_Delta rhythm_avg_delta=0 0:1 0.01,0.1
+    //Averaged delta rhythm.
     //0..1
 
-out float Beta rhythm_beta=0 0:1 0.01,0.1
-    //Beta rhythm.
+out float Avg_Theta rhythm_avg_theta=0 0:1 0.01,0.1
+    //Averaged theta rhythm.
     //0..1
+
+out float Avg_Alpha rhythm_avg_alpha=0 0:1 0.01,0.1
+    //Averaged alpha rhythm.
+    //0..1
+
+out float Avg_Beta rhythm_avg_beta=0 0:1 0.01,0.1
+    //Averaged beta rhythm.
+    //0..1
+        
+out float Avg_Gamma rhythm_avg_gamma=0 0:1 0.01,0.1
+    //Averaged gamma rhythm.
+    //0..1
+
+line
+out string Deltas rhythms_delta=""
+    //Delta rhythms for all channels.
+
+out string Thetas rhythms_theta=""
+    //Theta rhythms for all channels.
+
+out string Alphas rhythms_alpha=""
+    //Alpha rhythms for all channels.
+
     
+out string Deltas rhythms_beta=""
+    //Delta rhythms for all channels.
 
-out float Delta rhythm_delta=0 0:1 0.01,0.1
-    //Delta rhythm.
-    //0..1
-
+out string Gammas rhythms_gamma=""
+    //Gamma rhythms for all channels.
     
-out float Gamma rhythm_gamma=0 0:1 0.01,0.1
-    //Gamma rhythm.
-    //0..1
-
-    
-out float Theta rhythm_theta=0 0:1 0.01,0.1
-    //Theta rhythm.
-    //0..1
-
-    
-out float Time rhythm_t=0 0:* 0.01,0.1
-    //Time stamp.
+#out float Time rhythm_t=0 0:* 0.01,0.1
+#    //Time stamp.
 
 #------------------------------------------
 page Spectrum

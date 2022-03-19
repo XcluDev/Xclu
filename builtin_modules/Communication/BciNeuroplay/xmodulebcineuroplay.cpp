@@ -36,6 +36,7 @@ void XModuleBciNeuroplay::on_button_pressed(QString button_id) {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::start() {
+    exception_.clear();
     if (geti_autoconnect()) {
         connect_();
     }
@@ -61,11 +62,15 @@ void XModuleBciNeuroplay::connect_() {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::disconnect_() {
+    if (device_) {
+        device_->disableGrabMode();
+    }
+    device_ = 0;    // device_ will be deleted by neuroplay_
+
     if (neuroplay_.data()) {
         neuroplay_->close();
         neuroplay_.reset();
     }
-    device_ = 0;
 
     seti_connected(0);
     sets_device_info("Disconnected");
@@ -107,12 +112,32 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     connect(device, &NeuroplayDevice::ready, [=]()
     {
         seti_connected(1);
+
+        // Responses to signals from BCI device
+        connect(device, &NeuroplayDevice::error, [=](QString message)
+        {
+            // We can't throw exception right here, because this halts whole app,
+            // so we store it and show in main thread.
+            //xc_exception(name() + " " + message);
+            if (exception_.isEmpty()) {
+                exception_ = message;
+            }
+        });
+
         connect(device_, &NeuroplayDevice::bciReady, [=]()
         {
             setf_value_meditation(device_->meditation() / 100.0f);
             setf_value_concentration(device_->concentration() / 100.0f);
             inc_received();
         });
+
+        connect(device_, &NeuroplayDevice::rhythmsReady, [=]()
+        {
+            set_rhythms(device_->rhythms());
+            //setf_rhythm_alpha( / 100.0f);
+            inc_received();
+        });
+
 
         /*
 
@@ -143,6 +168,34 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     });
 
 }
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms)
+{
+    int channels = rhythms.size();
+    int N = NeuroplayDevice::RhythmN;
+
+    //Fill lines
+    QVector<QString> Lines(N);
+    for (int c=0; c<channels; c++) {
+        for (int i=0; i<N; i++) {
+            if (c > 0) {
+                Lines[i].append(" ");
+            }
+            Lines[i].append(QString::number(rhythms[c].data[i]));
+        }
+    }
+    sets_rhythms_delta(Lines[NeuroplayDevice::RhythmDelta]);
+    sets_rhythms_theta(Lines[NeuroplayDevice::RhythmTheta]);
+    sets_rhythms_alpha(Lines[NeuroplayDevice::RhythmAlpha]);
+    sets_rhythms_beta(Lines[NeuroplayDevice::RhythmBeta]);
+    sets_rhythms_gamma(Lines[NeuroplayDevice::RhythmGamma]);
+
+    //Average
+    auto indices = gets_rhythms_avg_channels().split(" ");
+    NeuroplayDevice::Rhythms R;
+}
+
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::update() {
@@ -176,6 +229,11 @@ void XModuleBciNeuroplay::update() {
     }
 
     update_stat(); // Stat
+
+    if (!exception_.isEmpty()) {    // Process exception from BCI device
+        xc_exception(name() + " " + exception_);
+        exception_.clear();
+    }
 
     redraw();   //Call to update screen
 }

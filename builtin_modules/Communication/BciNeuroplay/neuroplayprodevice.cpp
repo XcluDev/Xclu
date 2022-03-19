@@ -165,8 +165,8 @@ void NeuroplayDevice::setStarted(bool started)
 {
     bool need_emit = !m_isStarted && started;
     m_isStarted = started;
-    if (started)
-        request("spectrumfrequencies");
+    //if (started)
+    //    request("spectrumfrequencies");   // TODO require spectrumfrequencies from API
     if (need_emit)
         emit ready();
 }
@@ -184,7 +184,12 @@ void NeuroplayDevice::request(QJsonObject json)
 void NeuroplayDevice::onResponse(QJsonObject resp)
 {
     QString cmd = resp["command"].toString();
-    qDebug() << "received " << cmd;
+    //qDebug() << "received " << cmd;
+
+    if (resp["error"].isString()) {
+        emit error(resp["error"].toString());
+        return;
+    }
 
     if (cmd == "lastspectrum")
     {
@@ -213,11 +218,12 @@ void NeuroplayDevice::onResponse(QJsonObject resp)
         {
             QJsonObject o = ch.toObject();
             Rhythms r;
-            r.delta = o["delta"].toDouble();
-            r.theta = o["theta"].toDouble();
-            r.alpha = o["alpha"].toDouble();
-            r.beta = o["beta"].toDouble();
-            r.gamma = o["gamma"].toDouble();
+            r.data.resize(RhythmN);
+            r.data[RhythmDelta] = o["delta"].toDouble();
+            r.data[RhythmTheta] = o["theta"].toDouble();
+            r.data[RhythmAlpha] = o["alpha"].toDouble();
+            r.data[RhythmBeta] = o["beta"].toDouble();
+            r.data[RhythmGamma] = o["gamma"].toDouble();
             r.timestamp = o["t"].toInt();
             m_rhythms << r;
         }
@@ -314,11 +320,12 @@ void NeuroplayDevice::onResponse(QJsonObject resp)
             {
                 QJsonObject o = ch.toObject();
                 Rhythms r;
-                r.delta = o["delta"].toDouble();
-                r.theta = o["theta"].toDouble();
-                r.alpha = o["alpha"].toDouble();
-                r.beta = o["beta"].toDouble();
-                r.gamma = o["gamma"].toDouble();
+                r.data.resize(RhythmN);
+                r.data[RhythmDelta] = o["delta"].toDouble();
+                r.data[RhythmTheta] = o["theta"].toDouble();
+                r.data[RhythmAlpha] = o["alpha"].toDouble();
+                r.data[RhythmBeta] = o["beta"].toDouble();
+                r.data[RhythmGamma] = o["gamma"].toDouble();
                 r.timestamp = o["t"].toInt();
                 chr << r;
             }
@@ -382,6 +389,25 @@ void NeuroplayDevice::switchGrabMode()
         m_grabTimer->stop();
     }
 }
+
+void NeuroplayDevice::enableGrabMode()
+{
+    if (!grab_mode_enabled)
+    {
+        grab_mode_enabled = true;
+        request("enableDataGrabMode");
+    }
+}
+
+void NeuroplayDevice::disableGrabMode()
+{
+    if (grab_mode_enabled)
+    {
+        grab_mode_enabled = false;
+        request("disabledatagrabmode");
+    }
+}
+
 
 void NeuroplayDevice::grabRequest()
 {
