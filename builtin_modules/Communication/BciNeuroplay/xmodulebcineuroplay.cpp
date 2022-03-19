@@ -107,6 +107,12 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
     connect(device, &NeuroplayDevice::ready, [=]()
     {
         seti_connected(1);
+        connect(device_, &NeuroplayDevice::bciReady, [=]()
+        {
+            setf_value_meditation(device_->meditation() / 100.0f);
+            setf_value_concentration(device_->concentration() / 100.0f);
+            inc_received();
+        });
 
         /*
 
