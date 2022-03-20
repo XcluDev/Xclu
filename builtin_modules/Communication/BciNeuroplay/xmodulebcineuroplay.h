@@ -46,6 +46,18 @@ protected:
 
     QString exception_; // Not empty in case of errors from BCI device
 
+    void rec_start();
+    void rec_stop();
+    void rec_clear();
+    void rec_update();
+    void rec_update_status(QString status);
+    void rec_data(QVector<float> values);
+    bool recording_ = false;
+    float rec_time_start_ = 0;
+    QString rec_file_;
+
+    QStringList rec_data_;
+
 };
 
 

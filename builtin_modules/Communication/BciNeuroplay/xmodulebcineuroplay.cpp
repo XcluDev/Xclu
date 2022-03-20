@@ -17,6 +17,7 @@ XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::~XModuleBciNeuroplay()
 {
+    rec_stop();
     disconnect_();
 }
 
@@ -41,6 +42,7 @@ void XModuleBciNeuroplay::start() {
         connect_();
     }
 
+    rec_clear();
 }
 
 //---------------------------------------------------------------------
@@ -56,7 +58,6 @@ void XModuleBciNeuroplay::connect_() {
     num_received_ = 0;
 
     neuroplay_->open();
-
 
 }
 
@@ -219,11 +220,18 @@ void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rh
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::update() {
+    // Buttons
     if (geti_btn_connect()) {
         connect_();
     }
     if (geti_btn_disconnect()) {
         disconnect_();
+    }
+    if (geti_btn_recording_start()) {
+        rec_start();
+    }
+    if (geti_btn_recording_stop()) {
+        rec_stop();
     }
 
     // Data requests
@@ -248,7 +256,11 @@ void XModuleBciNeuroplay::update() {
         }
     }
 
-    update_stat(); // Stat
+    // Connection status
+    update_stat();
+
+    // Record
+    rec_update();
 
     if (!exception_.isEmpty()) {    // Process exception from BCI device
         xc_exception(name() + " " + exception_);
@@ -283,9 +295,104 @@ void XModuleBciNeuroplay::update_stat() {
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::stop() {
+    rec_stop();
     disconnect_();
 }
 
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_clear() {
+    recording_ = false;
+    rec_update_status("");
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_start() {
+    if (!recording_) {
+        xc_assert(geti_connected(), "Not connected, please check Neuroplay app is running");
+        recording_ = true;
+        rec_time_start_ = xc_elapsed_time_sec();
+
+        rec_data_.clear();
+
+        QString folder = xc_absolute_path_from_project(gets_recording_folder());
+        xc_assert(!gets_recording_folder().isEmpty() && xc_folder_exists(folder),
+                  "Bad folder for records: `" + folder + "`");
+
+        QString time_format = "yyMMdd_hhmmsszzz";
+        auto time = QDateTime::currentDateTime();
+        rec_file_ = folder + "/" + time.toString(time_format) + ".txt";
+
+        rec_update_status("Started");
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_stop() {
+    if (recording_) {
+        recording_ = false;
+        if (rec_data_.size() > 0) {
+            xc_write_text_file(rec_data_, rec_file_);
+        }
+
+        rec_update_status(QString("Saved %1 sec").
+                          arg(int(xc_elapsed_time_sec() - rec_time_start_)));
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_update() {
+    if (recording_) {
+        auto source = gete_recording_source();
+        if (source == recording_source_Rhythms_Avg) {
+            if (was_changed_rhythm_avg_beta()) {
+                rec_data({getf_rhythm_avg_delta(),
+                          getf_rhythm_avg_theta(),
+                          getf_rhythm_avg_alpha(),
+                          getf_rhythm_avg_beta(),
+                          getf_rhythm_avg_gamma()});
+            }
+        }
+        if (source == recording_source_Rhytms_All_Channels) {
+            if (was_changed_rhythms_alpha()) {
+                QVector<float> V;
+                for (int i=0; i<5; i++) {
+                    QString s;
+                    if (i == 0) s = gets_rhythms_delta();
+                    if (i == 1) s = gets_rhythms_theta();
+                    if (i == 2) s = gets_rhythms_alpha();
+                    if (i == 3) s = gets_rhythms_beta();
+                    if (i == 4) s = gets_rhythms_gamma();
+                    auto list = s.split(" ");
+                    for (auto v: list) {
+                        V.append(v.toFloat());
+                    }
+                }
+                rec_data(V);
+            }
+        }
+
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_update_status(QString status) {
+    clear_string_recording_status();
+    append_string_recording_status(status);
+    append_string_recording_status(QString("Frames: %1").arg(rec_data_.size()));
+    append_string_recording_status(QString("File: %1").arg(rec_file_));
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::rec_data(QVector<float> values) {
+    rec_update_status(QString("Recording %1 sec").
+                      arg(int(xc_elapsed_time_sec() - rec_time_start_)));
+    QString s;
+    for (int i=0; i<values.size(); i++) {
+        if (i > 0) s.append("\t");
+        s.append(QString::number(values[i]));
+    }
+    rec_data_.append(s);
+}
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::draw(QPainter &painter, int outw, int outh) {

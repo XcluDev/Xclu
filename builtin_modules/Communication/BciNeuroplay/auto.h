@@ -57,6 +57,53 @@ void append_string_stat(QStringList v, int extra_new_lines_count = 0) { append_s
 void repaint_stat() { repaint_("stat"); }
 
 //----------------------------------------------------
+//Page Record
+//Recording data.
+
+//Enum Source
+//Source for recording.
+enum enum_recording_source {
+    recording_source_Rhythms_Avg = 0,
+    recording_source_Rhytms_All_Channels = 1,
+    recording_source_N__ = 2
+};
+bool was_changed_recording_source() { return was_changed_("recording_source"); }
+enum_recording_source gete_recording_source() { return enum_recording_source(geti_("recording_source")); }
+QString getraw_recording_source() { return getraw_("recording_source");}
+
+//String Folder
+//Folder for recordings.
+bool was_changed_recording_folder() { return was_changed_("recording_folder"); }
+QString gets_recording_folder() { return gets_("recording_folder"); }
+QStringList get_strings_recording_folder() { return get_strings_("recording_folder"); }
+void repaint_recording_folder() { repaint_("recording_folder"); }
+
+//Button Start
+// Press to start recording.
+bool was_changed_btn_recording_start() { return was_changed_("btn_recording_start"); }
+int geti_btn_recording_start() { return geti_("btn_recording_start"); }
+void repaint_btn_recording_start() { repaint_("btn_recording_start"); }
+QString button_btn_recording_start() { return "btn_recording_start"; }
+
+//Button Stop
+// Press to stop recording.
+bool was_changed_btn_recording_stop() { return was_changed_("btn_recording_stop"); }
+int geti_btn_recording_stop() { return geti_("btn_recording_stop"); }
+void repaint_btn_recording_stop() { repaint_("btn_recording_stop"); }
+QString button_btn_recording_stop() { return "btn_recording_stop"; }
+
+//Out Text Status
+// Recording status.
+bool was_changed_recording_status() { return was_changed_("recording_status"); }
+QString gets_recording_status() { return gets_("recording_status"); }
+QStringList get_strings_recording_status() { return get_strings_("recording_status"); }
+void sets_recording_status(QString value) { sets_("recording_status", value); }
+void clear_string_recording_status() { clear_string_("recording_status"); }
+void append_string_recording_status(QString v, int extra_new_lines_count = 0) { append_string_("recording_status", v, extra_new_lines_count); }
+void append_string_recording_status(QStringList v, int extra_new_lines_count = 0) { append_string_("recording_status", v, extra_new_lines_count); }
+void repaint_recording_status() { repaint_("recording_status"); }
+
+//----------------------------------------------------
 //Page Values
 //Read meditation and concentration.
 

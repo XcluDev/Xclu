@@ -118,6 +118,18 @@
                         "avalue": "1"
                     },
                     {
+                        "aname": "Record",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "recording_source",
+                        "avalue": "Rhytms_All_Channels"
+                    },
+                    {
+                        "aname": "recording_folder",
+                        "avalue": "../../../../../_2022/2022-EEG_Food/Neurodata/01_TestSalt6C_txt/salt"
+                    },
+                    {
                         "aname": "Values",
                         "avalue": "0"
                     },

@@ -30,8 +30,27 @@ separator
 out string Stat stat=""
     //How much requests were sent, received, lost.
 
-   
+#-----------------------
+page Record
+    //Recording data.
+    
+in enum Source recording_source=Rhythms_Avg [Rhythms_Avg,Rhytms_All_Channels]
+    //Source for recording.
+    
+in string_folder Folder recording_folder=""  
+    //Folder for recordings.
+    //Choose Floder to recordings.
+    
+in button Start btn_recording_start
+    // Press to start recording.
 
+in button Stop btn_recording_stop
+    // Press to stop recording.
+
+out text Status recording_status 7 9
+    // Recording status.
+
+    
 #------------------------------------------
 page Values
     //Read meditation and concentration.
@@ -128,6 +147,7 @@ in button Load btn_spectrum_load
 
 out text Frequencies spectrum_freqs 5 7
     //Frequencies.
+
 
 #------------------------------------------
 page Graphs
