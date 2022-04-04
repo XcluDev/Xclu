@@ -65,6 +65,7 @@ QT += core gui
 QT += multimedia multimediawidgets
 QT += serialport network websockets
 QT += 3dcore 3drender 3dinput 3dextras
+QT += core-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -137,6 +138,8 @@ windows {
 INCLUDEPATH += libs/glm libs/glm/gtx
 INCLUDEPATH += libs/of
 INCLUDEPATH += libs/tsne
+INCLUDEPATH += libs/QOsc/qosc/src libs/QOsc/qosc/include
+
 
 #--------------------------------------------------------------------------
 #Common source, headers and forms files
@@ -187,6 +190,12 @@ SOURCES += \
     host/xc_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
+    libs/QOsc/qosc/src/qosc_global.cpp \
+    libs/QOsc/qosc/src/qoscbundle.cpp \
+    libs/QOsc/qosc/src/qoscinterface.cpp \
+    libs/QOsc/qosc/src/qoscmessage.cpp \
+    libs/QOsc/qosc/src/qoscmethod.cpp \
+    libs/QOsc/qosc/src/qoscvalue.cpp \
     libs/tsne/sptree.cpp \
     libs/tsne/tsne.cpp \
     modules/registrarxmodule.cpp \
@@ -290,6 +299,16 @@ HEADERS += \
     host/xc_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
+    libs/QOsc/qosc/include/qosc.h \
+    libs/QOsc/qosc/include/qosc_global.h \
+    libs/QOsc/qosc/include/qoscbundle.h \
+    libs/QOsc/qosc/include/qoscinterface.h \
+    libs/QOsc/qosc/include/qoscmessage.h \
+    libs/QOsc/qosc/include/qoscmethod.h \
+    libs/QOsc/qosc/include/qoscvalue.h \
+    libs/QOsc/qosc/src/qoscbundle_p.h \
+    libs/QOsc/qosc/src/qoscmessage_p.h \
+    libs/QOsc/qosc/src/qoscvalue_p.h \
     libs/of/ofNoise.h \
     libs/tsne/sptree.h \
     libs/tsne/tsne.h \

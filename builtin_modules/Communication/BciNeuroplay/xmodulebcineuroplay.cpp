@@ -3,7 +3,6 @@
 #include "registrarxmodule.h"
 #include "project_props.h"
 #include <Processing.NDI.Lib.h>
- 
 
 REGISTER_XMODULE(BciNeuroplay)
 
@@ -43,6 +42,8 @@ void XModuleBciNeuroplay::start() {
     }
 
     rec_clear();
+
+    seti_values_osc_sent(0);
 }
 
 //---------------------------------------------------------------------
@@ -127,8 +128,11 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
 
         connect(device_, &NeuroplayDevice::bciReady, [=]()
         {
-            setf_value_meditation(device_->meditation() / 100.0f);
-            setf_value_concentration(device_->concentration() / 100.0f);
+            float meditation = device_->meditation() / 100.0f;
+            float concentration = device_->concentration() / 100.0f;
+
+            setf_value_meditation(meditation);
+            setf_value_concentration(concentration);
             inc_received();
         });
 
@@ -239,6 +243,16 @@ void XModuleBciNeuroplay::update() {
         if (geti_values_enabled()) {
             inc_requests();
             device_->requestBCI();
+
+            // OSC
+            if (geti_values_osc_enabled()) {
+                QString net_address = gets_values_osc_address();
+                osc_send(net_address, gets_values_osc_meditation(), getf_value_meditation());
+                osc_send(net_address, gets_values_osc_concentration(), getf_value_concentration());
+
+                increase_int_values_osc_sent();
+            }
+
         }
         if (geti_rhythms_enabled()) {
             inc_requests();
@@ -392,6 +406,23 @@ void XModuleBciNeuroplay::rec_data(QVector<float> values) {
         s.append(QString::number(values[i]));
     }
     rec_data_.append(s);
+}
+
+//---------------------------------------------------------------------
+//example of net_address: 127.0.0.1:12345
+void XModuleBciNeuroplay::osc_send(QString net_address, QString osc_address, const QOscValue &value) {
+    auto list = net_address.split(":");
+    xc_assert(list.size() == 2, "Bad OSC address format, got `" + net_address + "`, but expected kind of 127.0.0.1:12345");
+
+    QString addr = list.at(0);
+    int port = list.at(1).toInt();
+    xc_assert(!addr.isEmpty(), "Empty OSC address `" + net_address + "`");
+    xc_assert(port > 0 && port < 65536, "Bad port at OSC address `" + net_address + "`");
+
+    QOscInterface iface;
+    iface.setRemoteAddr(addr); // For some reason we can't use "localhost" - TODO need name resolving?
+    iface.setRemotePort(port);
+    iface.send(osc_address, value);
 }
 
 //---------------------------------------------------------------------

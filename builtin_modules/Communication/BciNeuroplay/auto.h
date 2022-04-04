@@ -127,6 +127,48 @@ float getf_value_concentration() { return getf_("value_concentration"); }
 void setf_value_concentration(float value) { setf_("value_concentration", value); }
 void repaint_value_concentration() { repaint_("value_concentration"); }
 
+
+//Checkbox OSC
+//Send values by OSC.
+bool was_changed_values_osc_group() { return was_changed_("values_osc_group"); }
+int geti_values_osc_group() { return geti_("values_osc_group"); }
+void repaint_values_osc_group() { repaint_("values_osc_group"); }
+
+//Checkbox Enabled
+//
+bool was_changed_values_osc_enabled() { return was_changed_("values_osc_enabled"); }
+int geti_values_osc_enabled() { return geti_("values_osc_enabled"); }
+void repaint_values_osc_enabled() { repaint_("values_osc_enabled"); }
+
+//String Address
+//Sending address and port; use "127.0.0.1:..." instead "localhost:...".
+bool was_changed_values_osc_address() { return was_changed_("values_osc_address"); }
+QString gets_values_osc_address() { return gets_("values_osc_address"); }
+QStringList get_strings_values_osc_address() { return get_strings_("values_osc_address"); }
+void repaint_values_osc_address() { repaint_("values_osc_address"); }
+
+//String Meditation Name
+//OSC address for Meditation value.
+bool was_changed_values_osc_meditation() { return was_changed_("values_osc_meditation"); }
+QString gets_values_osc_meditation() { return gets_("values_osc_meditation"); }
+QStringList get_strings_values_osc_meditation() { return get_strings_("values_osc_meditation"); }
+void repaint_values_osc_meditation() { repaint_("values_osc_meditation"); }
+
+//String Concentration Name
+//OSC address for Concentration value.
+bool was_changed_values_osc_concentration() { return was_changed_("values_osc_concentration"); }
+QString gets_values_osc_concentration() { return gets_("values_osc_concentration"); }
+QStringList get_strings_values_osc_concentration() { return get_strings_("values_osc_concentration"); }
+void repaint_values_osc_concentration() { repaint_("values_osc_concentration"); }
+
+//Out Int Send Frames
+//
+bool was_changed_values_osc_sent() { return was_changed_("values_osc_sent"); }
+int geti_values_osc_sent() { return geti_("values_osc_sent"); }
+void seti_values_osc_sent(int value) { seti_("values_osc_sent", value); }
+void increase_int_values_osc_sent(int increase = 1) { increase_int_("values_osc_sent", increase); }
+void repaint_values_osc_sent() { repaint_("values_osc_sent"); }
+
 //----------------------------------------------------
 //Page Rhythms
 //Read brain rhythms.

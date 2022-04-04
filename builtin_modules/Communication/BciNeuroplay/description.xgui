@@ -68,7 +68,27 @@ out float Concentration value_concentration=0 0:1 0.01,0.1
 #    //0..1
 #endif
 
-#DRAW !!!!!!!!
+#-----------------------------
+line
+in group OSC values_osc_group=1
+	//Send values by OSC.
+
+if values_osc_group 1
+
+in checkbox Enabled values_osc_enabled=1
+    
+in string Address values_osc_address="127.0.0.1:12345"
+	//Sending address and port; use "127.0.0.1:..." instead "localhost:...".
+	
+in string Meditation_Name values_osc_meditation="/meditation"
+    //OSC address for Meditation value.
+
+in string Concentration_Name values_osc_concentration="/concentration"
+    //OSC address for Concentration value.
+
+out int Send_Frames values_osc_sent=0 *:* 1,10
+    
+endif
 
 #------------------------------------------
 page Rhythms
