@@ -10,7 +10,6 @@
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 #include "neuroplaypro.h"
-#include "qosc.h"
 
 class XModuleBciNeuroplay: public XModuleWidget
 {
@@ -58,12 +57,6 @@ protected:
     QString rec_file_;
 
     QStringList rec_data_;
-
-//OSC TODO move to SDK
-private:
-    void osc_send(QString net_address, QString osc_address, const QOscValue &value); //example of net_address: 127.0.0.1:12345
-//public slots:
-    //void onOscMessage(const QOscMessage& msg);  // Can't use "on_osc_message" - because Qt treats two "_" specially
 
 };
 

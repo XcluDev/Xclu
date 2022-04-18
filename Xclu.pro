@@ -123,6 +123,7 @@ INCLUDEPATH += sdk \
                sdk/draw \
                sdk/math \
                sdk/ml \
+               sdk/networking \
                sdk/types \
                sdk/utility
 
@@ -210,6 +211,8 @@ SOURCES += \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
     sdk/ml/xc_tsne.cpp \
+    sdk/networking/xnetworkaddr.cpp \
+    sdk/networking/xosc.cpp \
     sdk/types.cpp \
     sdk/types/xarray.cpp \
     sdk/types/xarray_multi.cpp \
@@ -326,6 +329,8 @@ HEADERS += \
     sdk/math/xnoise.h \
     sdk/math/xslowbit.h \
     sdk/ml/xc_tsne.h \
+    sdk/networking/xnetworkaddr.h \
+    sdk/networking/xosc.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
     sdk/types.h \

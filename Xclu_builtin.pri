@@ -199,31 +199,31 @@ windows {
 ##CONFIG += REALSENSE
 #--------------------------------------------------------------------------
 #REALSENSE {
-unix {
-    INCLUDEPATH += ~/librealsense/include
-    LIBS += -lrealsense2
-}
-#
-##windows 32 bit
-##windows {
-##    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-##    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
-##}
-#
-#windows 64 bit
-windows {
-    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
-    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
-}
-
-SOURCES +=    \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
-
-HEADERS +=    \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
-    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+#unix {
+#    INCLUDEPATH += ~/librealsense/include
+#    LIBS += -lrealsense2
 #}
+##
+###windows 32 bit
+###windows {
+###    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+###    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x86\realsense2.lib"
+###}
+##
+##windows 64 bit
+#windows {
+#    INCLUDEPATH += "C:/Program Files (x86)/Intel RealSense SDK 2.0/include"
+#    LIBS += "C:\Program Files (x86)\Intel RealSense SDK 2.0\lib\x64\realsense2.lib"
+#}
+#
+#SOURCES +=    \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
+#
+#HEADERS +=    \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+
 
 #--------------------------------------------------------------------------
 #NDI
@@ -231,26 +231,18 @@ HEADERS +=    \
 #Comment this line to exclude NDI from build
 #CONFIG += NDI - not works...
 #--------------------------------------------------------------------------
-
-#NDI {
+#windows {
+#    INCLUDEPATH += $$PWD/libs/NDI/Include
+#    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
 #
-#unix {
+#SOURCES +=    \
+#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
+#
+#HEADERS +=    \
+#    $$PWD/builtin_modules/Communication/Ndi/auto.h \
+#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
+#
 #}
-#
-#
-#windows 64 bit
-windows {
-    INCLUDEPATH += $$PWD/libs/NDI/Include
-    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
-
-SOURCES +=    \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
-
-HEADERS +=    \
-    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
-
-}
 
 #--------------------------------------------------------------------------
 
