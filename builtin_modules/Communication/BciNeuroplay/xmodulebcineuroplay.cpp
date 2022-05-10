@@ -8,7 +8,7 @@ REGISTER_XMODULE(BciNeuroplay)
 
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
-    :XModuleWidget(class_name)
+    :XModule(class_name)
 {
 
 }
@@ -44,6 +44,11 @@ void XModuleBciNeuroplay::start() {
     rec_clear();
 
     seti_values_osc_sent(0);
+
+    graphs_.clear();
+    graphs_lines_.clear();
+
+    info_.clear();
 }
 
 //---------------------------------------------------------------------
@@ -75,28 +80,28 @@ void XModuleBciNeuroplay::disconnect_() {
     }
 
     seti_connected(0);
-    sets_device_info("Disconnected");
+    append_string_device_info("Disconnected");
 
     num_requests_ = 0;
     num_received_ = 0;
-
 }
-
-
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
 
     //TODO note, this call can be from another signal
 
+    info_ = device->info();
+
     clear_string_device_info();
-    append_string_device_info("Connected: " + device->name());
+
+    append_string_device_info("Connected: " + info_.name);
 //    item->setData(1, 42, QVariant::fromValue<NeuroplayDevice*>(device));
-    append_string_device_info("id: " + QString::number(device->id()));
-    append_string_device_info("model: " + device->model());
-    append_string_device_info("serialNumber: " + device->serialNumber());
-    append_string_device_info("maxChannels: " + QString::number(device->maxChannels()));
-    append_string_device_info("preferredChannelCount: " + QString::number(device->preferredChannelCount()));
+    append_string_device_info("id: " + QString::number(info_.id));
+    append_string_device_info("model: " + info_.model);
+    append_string_device_info("serialNumber: " + info_.serial_number);
+    append_string_device_info("channels " + QString::number(info_.channels_count) + ": " + info_.channels_names.join(" "));
+    append_string_device_info("frequency: " + QString::number(info_.frequency));
 
     device_ = device;
     /*
@@ -143,6 +148,12 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
             inc_received();
         });
 
+        connect(device, &NeuroplayDevice::filteredDataReceived, [=](NeuroplayDevice::ChannelsData data)
+        {
+            //qDebug() << "Filtered data:" << data.size() << "x" << (data.size()? data[0].size(): 0);
+            //chart->setData(data, 200);
+            set_graphs(data);
+        });
 
         /*
 
@@ -156,11 +167,6 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
             //qDebug() << spectrum;
         });
 
-        connect(device, &NeuroplayDevice::filteredDataReceived, [=](NeuroplayDevice::ChannelsData data)
-        {
-            qDebug() << "Filtered data:" << data.size() << "x" << (data.size()? data[0].size(): 0);
-            chart->setData(data, 200);
-        });
 
 
         connect(device, &NeuroplayDevice::rawDataReceived, [=](NeuroplayDevice::ChannelsData data)
@@ -171,6 +177,30 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
 
         */
     });
+
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::set_graphs(const NeuroplayDevice::ChannelsData &data)
+{
+    graphs_.clear();
+    graphs_lines_.clear();
+    if (data.empty()) {
+        return;
+    }
+    for (QVector<double> chdata: data)
+    {
+        int n = chdata.size();
+        QVector<float> graph(n);
+        QVector<QPointF> line(n);
+        for (int i=0; i<chdata.size(); i++) {
+            graph[i] = chdata[i];
+            line[i] = QPointF(i, chdata[i]);
+        }
+        graphs_ << graph;
+        graphs_lines_ << line;
+    }
+
 
 }
 
@@ -240,6 +270,11 @@ void XModuleBciNeuroplay::update() {
 
     // Data requests
     if (geti_connected()) {
+        if (geti_graphs_enabled()) {
+            inc_requests();
+            device_->requestFilteredData();
+        }
+
         if (geti_values_enabled()) {
             inc_requests();
             device_->requestBCI();
@@ -280,8 +315,6 @@ void XModuleBciNeuroplay::update() {
         xc_exception(name() + " " + exception_);
         exception_.clear();
     }
-
-    redraw();   //Call to update screen
 }
 
 //---------------------------------------------------------------------
@@ -415,13 +448,32 @@ void XModuleBciNeuroplay::draw(QPainter &painter, int outw, int outh) {
     painter.setRenderHint(QPainter::Antialiasing);
 
     //Draw background
-    painter.setBrush(QColor(0, 0, 0));
-    painter.setPen(Qt::PenStyle::NoPen);
-    painter.drawRect(0, 0, outw, outh);
+    //painter.setBrush(QColor(0, 0, 0));
+    //painter.setPen(Qt::PenStyle::NoPen);
+    //painter.drawRect(0, 0, outw, outh);
+    painter.fillRect(0, 0, outw, outh, Qt::white);
 
-  /*  //Image
-    XRaster::draw(&painter, image_, QRectF(0,0,outw,outh));
+    if (!graphs_lines_.isEmpty())
+        {
+            painter.setPen(Qt::black);
+            int channels = graphs_lines_.size();
+            int h1 = outh / channels;
+            for (int i=0; i<channels; i++)
+            {
+                int count = graphs_lines_[i].size();
+                float y0 = (i + 0.5f) * h1;
 
+                const float scale_y = 200;
+
+                painter.save();
+                painter.translate(0, y0);
+                painter.scale(float(outw) / count, h1 / scale_y);
+                painter.drawPolyline(graphs_lines_[i]);
+                painter.restore();
+            }
+        }
+
+  /*
     //YOLO
     for (int i=0; i<pnt_.size(); i++) {
         QPen pen(QColor(255,255,0));
@@ -459,7 +511,7 @@ void XModuleBciNeuroplay::draw(QPainter &painter, int outw, int outh) {
         painter.drawLine((cross.x)*outw, (cross.y)*outh,
                          (cross.x+target_.x)*outw, (cross.y+target_.y)*outh);
     }
-/*    //Compute translate and scale
+    //Compute translate and scale
     //Note: we use scaling to have independence of lines width from screen resolution
     int spacing = geti_spacing();
 

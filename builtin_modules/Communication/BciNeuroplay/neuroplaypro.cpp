@@ -56,7 +56,7 @@ void NeuroplayPro::close()
 
 void NeuroplayPro::send(QString cmd)
 {
-    qDebug() << "> " + cmd;
+// qDebug() << "> " + cmd;
     socket->sendTextMessage(cmd);
 //    emit response("> " + cmd);
 }
@@ -66,14 +66,15 @@ void NeuroplayPro::send(QJsonObject obj)
     send(QJsonDocument(obj).toJson());
 }
 
-NeuroplayDevice *NeuroplayPro::createDevice(const QJsonObject &o)
+NeuroplayDevice *NeuroplayPro::createDevice(const QJsonObject &o, const QJsonObject &resp)
 {
-    NeuroplayDevice *dev = new NeuroplayDevice(o);
-    qDebug() << "device created" << dev->name();
+    NeuroplayDevice *dev = new NeuroplayDevice(o, resp);
+    dev->set_id(m_deviceList.size());
+    NeuroplayDeviceInfo info = dev->info();
+    qDebug() << "device created" << info.name;
     QObject::connect(dev, SIGNAL(doRequest(QString)), this, SLOT(send(QString)));//, Qt::QueuedConnection);
     QObject::connect(this, SIGNAL(responseJson(QJsonObject)), dev, SLOT(onResponse(QJsonObject)));//, Qt::QueuedConnection);
-    dev->m_id = m_deviceList.size();
-    m_deviceMap[dev->name()] = dev;
+    m_deviceMap[info.name] = dev;
     m_deviceList << dev;
     emit deviceConnected(dev);
     return dev;
@@ -170,7 +171,7 @@ void NeuroplayPro::onSocketResponse(const QString &text)
             NeuroplayDevice *dev = nullptr;
             if (!m_deviceMap.contains(name))
             {
-                dev = createDevice(o);
+                dev = createDevice(o, resp);
             }
             else
             {
@@ -194,7 +195,7 @@ void NeuroplayPro::onSocketResponse(const QString &text)
             QString name = o["name"].toString();
             if (!m_deviceMap.contains(name))
             {
-                createDevice(o);
+                createDevice(o, resp);
             }
             m_currentDevice = m_deviceMap[name];
             m_currentDevice->setStarted();

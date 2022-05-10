@@ -13,18 +13,43 @@
 #include <QVector>
 #include <QQueue>
 
+struct NeuroplayDeviceInfo {
+    void clear() {
+        *this = NeuroplayDeviceInfo();
+    }
+    int id = -1;
+    QString name;
+    QString model;
+    QString serial_number;
+
+    int channels_count = 0;
+    QStringList channels_names;
+    int frequency = 0;
+
+    float BSF = 0;
+    float HPF = 0;
+    float LPF = 0;
+
+    int max_channels = 0;
+    int preferred_channel_count = 0;
+
+    QVector< QPair<int, int> > channel_modes_values;
+    QStringList channel_modes() {
+        QStringList list;
+        for (auto mode: channel_modes_values)
+            list << QString("%1ch@%2Hz").arg(mode.first).arg(mode.second);
+        return list;
+    }
+
+};
+
 class NeuroplayDevice : public QObject
 {
     Q_OBJECT
 public:
-    int id() const {return m_id;}
-    const QString &name() const {return m_name;}
-    const QString &model() const {return m_model;}
-    const QString &serialNumber() const {return m_serialNumber;}
-    int maxChannels() const {return m_maxChannels;}
-    int preferredChannelCount() const {return m_preferredChannelCount;}
-    const QVector< QPair<int, int> > &channelModesValues() const {return m_channelModes;}
-    QStringList channelModes() const;
+    const NeuroplayDeviceInfo& info() { return info_; }
+
+    void set_id(int id) { info_.id = id; }
 
     void makeFavorite();
 
@@ -109,15 +134,12 @@ signals:
     void error(QString message);
 
 private:
-    int m_id;
-    QString m_name;
-    QString m_model;
-    QString m_serialNumber;
-    int m_maxChannels;
-    int m_preferredChannelCount;
-    QVector< QPair<int, int> > m_channelModes;
+    NeuroplayDeviceInfo info_;
+
     friend class NeuroplayPro;
-    NeuroplayDevice(const QJsonObject &json);
+
+    // resp is all response, and json is resp["device"]
+    NeuroplayDevice(const QJsonObject &json, const QJsonObject &resp);
 
     bool m_isConnected;
     bool m_isStarted;
@@ -151,7 +173,6 @@ private:
     void requestGrab(QString text);
 
     void switchGrabMode();
-
 
 
 signals: // private

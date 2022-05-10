@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "3"
     },
     "modules": [
         {
@@ -106,7 +106,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "0"
                 },
                 "items": [
                     {
@@ -118,6 +118,34 @@
                         "avalue": "1"
                     },
                     {
+                        "aname": "graphs_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "Blinking",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "blink_detection",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "blink_channels",
+                        "avalue": "3 4"
+                    },
+                    {
+                        "aname": "blink_thresh",
+                        "avalue": "0.5"
+                    },
+                    {
+                        "aname": "blink_time_before",
+                        "avalue": "0.3"
+                    },
+                    {
+                        "aname": "blink_time_after",
+                        "avalue": "0.3"
+                    },
+                    {
                         "aname": "Record",
                         "avalue": "0"
                     },
@@ -127,7 +155,7 @@
                     },
                     {
                         "aname": "recording_folder",
-                        "avalue": "../../../../../_2022/2022-EEG_Food/Neurodata/01_TestSalt6C_txt/salt"
+                        "avalue": "02_Protocol1/TsneText/03_sugar"
                     },
                     {
                         "aname": "Values",
@@ -136,6 +164,26 @@
                     {
                         "aname": "values_enabled",
                         "avalue": "1"
+                    },
+                    {
+                        "aname": "values_osc_group",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "values_osc_enabled",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "values_osc_address",
+                        "avalue": "127.0.0.1:12345"
+                    },
+                    {
+                        "aname": "values_osc_meditation",
+                        "avalue": "/meditation"
+                    },
+                    {
+                        "aname": "values_osc_concentration",
+                        "avalue": "/concentration"
                     },
                     {
                         "aname": "Rhythms",
@@ -162,15 +210,215 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "Graphs",
+                        "aname": "Control",
                         "avalue": "0"
                     },
                     {
-                        "aname": "graphs_enabled",
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
                         "avalue": "0"
                     },
                     {
-                        "aname": "graphs_record_enabled",
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "RenderArea",
+                "name": "renderarea1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "size_mode",
+                        "avalue": "Maximize"
+                    },
+                    {
+                        "aname": "fixed_w",
+                        "avalue": "256"
+                    },
+                    {
+                        "aname": "fixed_h",
+                        "avalue": "256"
+                    },
+                    {
+                        "aname": "Rendering",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "measurement",
+                        "avalue": "Scaling"
+                    },
+                    {
+                        "aname": "scaling_x",
+                        "avalue": "1000"
+                    },
+                    {
+                        "aname": "scaling_y",
+                        "avalue": "1000"
+                    },
+                    {
+                        "aname": "back_red",
+                        "avalue": "128"
+                    },
+                    {
+                        "aname": "back_green",
+                        "avalue": "128"
+                    },
+                    {
+                        "aname": "back_blue",
+                        "avalue": "128"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Window",
+                "name": "window1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Properties",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "title",
+                        "avalue": "EEG"
+                    },
+                    {
+                        "aname": "size",
+                        "avalue": "640x480"
+                    },
+                    {
+                        "aname": "size_x",
+                        "avalue": "1280"
+                    },
+                    {
+                        "aname": "size_y",
+                        "avalue": "720"
+                    },
+                    {
+                        "aname": "position",
+                        "avalue": "Default"
+                    },
+                    {
+                        "aname": "pos_x",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "pos_y",
+                        "avalue": "50"
+                    },
+                    {
+                        "aname": "visible",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "initial_state",
+                        "avalue": "Normal_Window"
+                    },
+                    {
+                        "aname": "font_size",
+                        "avalue": "Custom"
+                    },
+                    {
+                        "aname": "font_size_pix",
+                        "avalue": "18"
+                    },
+                    {
+                        "aname": "Content",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "content_mode",
+                        "avalue": "Auto_Vertical"
+                    },
+                    {
+                        "aname": "content",
+                        "avalue": "renderarea1"
+                    },
+                    {
+                        "aname": "global_margin",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "global_spacing",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Actions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "on_close",
+                        "avalue": "Stop"
+                    },
+                    {
+                        "aname": "Grab",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "grab_cpu",
                         "avalue": "0"
                     },
                     {

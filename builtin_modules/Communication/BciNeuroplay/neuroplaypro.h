@@ -81,7 +81,7 @@ private:
     void send(QJsonObject obj);
     friend class NeuroplayDevice;
 
-    NeuroplayDevice *createDevice(const QJsonObject &o);
+    NeuroplayDevice *createDevice(const QJsonObject &o, const QJsonObject &resp);
 
 private slots:
     void onSocketResponse(const QString &text);

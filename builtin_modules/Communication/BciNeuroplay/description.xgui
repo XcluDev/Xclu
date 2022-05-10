@@ -3,7 +3,7 @@
 module_description=Serial interface with Arduino and other devices.
 module_version=1.01
 module_impl=C++
-
+module_accept_calls=draw
 #------------------------------------------
 page Connect
     //Connecting to device. Please start NeuroplayPro app before connecting.
@@ -17,7 +17,10 @@ in button Disconnect btn_disconnect
 in checkbox Autoconnect autoconnect=0
     //Connect to NeuroplayPro at start.
 
+const checkbox Graphs graphs_enabled=1
+    //Enable requesting graphs. Used for drawing and blinking detection.
 
+    
 separator
 
 out checkbox Connected connected=0
@@ -30,6 +33,38 @@ separator
 out string Stat stat=""
     //How much requests were sent, received, lost.
 
+#------------------------------------------
+page Blinking
+    //Detect eyes blinking from EEG graphs.
+
+const checkbox Blink_Detection blink_detection=1
+    //Detect eye blinking and remove it from recording.
+
+separator 
+    
+if blink_detection 1
+in string Channels blink_channels="3 4"
+    //List of blink-analysis channels, separating by space, starting from 1.
+in float Threshold blink_thresh=0.5 *:* 0.01,0.1
+    //Threshold for blink detection.
+out float Value blink_value=0 *:* 0.01,0.1
+    //Current blink value (max abs).
+out checkbox Blink blink_is=0 
+    //Is blink detected last frame.
+    
+separator
+
+const float Time_Before blink_time_before=0.3 0:5 0.01,0.1
+    //Time to cut before blinking. Note: all recordings will be delayed on this value.
+    //sec
+    
+const float Time_After blink_time_after=0.3 0:5 0.01,0.1
+    //Time to cut after blinking. 
+    //sec
+    
+endif
+    
+    
 #-----------------------
 page Record
     //Recording data.
@@ -168,28 +203,5 @@ in button Load btn_spectrum_load
 out text Frequencies spectrum_freqs 5 7
     //Frequencies.
 
-
-#------------------------------------------
-page Graphs
-    //Read EEG graphs.
-
-const checkbox Graphs graphs_enabled=0
-    //Enable reading EEG graphs frame.
-
-out object Graphs_Data graphs_frame
-    //Moving frame of graphs.
-
-separator
-
-const checkbox Graphs_Record graphs_record_enabled=0
-    //Enable recording graphs, after disabling the object is ready. Note: it puts device into the grabbing mode.
-
-out object Recording graphs_recording
-    //Recorded graphs.
-
-    
-in button Save_As btn_graphs_save
-
-in button Load btn_graphs_load
 
 #------------------------------------------

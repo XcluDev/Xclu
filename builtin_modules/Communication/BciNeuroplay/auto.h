@@ -25,6 +25,12 @@ bool was_changed_autoconnect() { return was_changed_("autoconnect"); }
 int geti_autoconnect() { return geti_("autoconnect"); }
 void repaint_autoconnect() { repaint_("autoconnect"); }
 
+//Const Checkbox Graphs
+//Enable requesting graphs. Used for drawing and blinking detection.
+bool was_changed_graphs_enabled() { return was_changed_("graphs_enabled"); }
+int geti_graphs_enabled() { return geti_("graphs_enabled"); }
+void repaint_graphs_enabled() { repaint_("graphs_enabled"); }
+
 
 //Out Checkbox Connected
 //Is device connected.
@@ -55,6 +61,57 @@ void clear_string_stat() { clear_string_("stat"); }
 void append_string_stat(QString v, int extra_new_lines_count = 0) { append_string_("stat", v, extra_new_lines_count); }
 void append_string_stat(QStringList v, int extra_new_lines_count = 0) { append_string_("stat", v, extra_new_lines_count); }
 void repaint_stat() { repaint_("stat"); }
+
+//----------------------------------------------------
+//Page Blinking
+//Detect eyes blinking from EEG graphs.
+
+//Const Checkbox Blink Detection
+//Detect eye blinking and remove it from recording.
+bool was_changed_blink_detection() { return was_changed_("blink_detection"); }
+int geti_blink_detection() { return geti_("blink_detection"); }
+void repaint_blink_detection() { repaint_("blink_detection"); }
+
+
+//String Channels
+//List of blink-analysis channels, separating by space, starting from 1.
+bool was_changed_blink_channels() { return was_changed_("blink_channels"); }
+QString gets_blink_channels() { return gets_("blink_channels"); }
+QStringList get_strings_blink_channels() { return get_strings_("blink_channels"); }
+void repaint_blink_channels() { repaint_("blink_channels"); }
+
+//Float Threshold
+//Threshold for blink detection.
+bool was_changed_blink_thresh() { return was_changed_("blink_thresh"); }
+float getf_blink_thresh() { return getf_("blink_thresh"); }
+void repaint_blink_thresh() { repaint_("blink_thresh"); }
+
+//Out Float Value
+//Current blink value (max abs).
+bool was_changed_blink_value() { return was_changed_("blink_value"); }
+float getf_blink_value() { return getf_("blink_value"); }
+void setf_blink_value(float value) { setf_("blink_value", value); }
+void repaint_blink_value() { repaint_("blink_value"); }
+
+//Out Checkbox Blink
+//Is blink detected last frame.
+bool was_changed_blink_is() { return was_changed_("blink_is"); }
+int geti_blink_is() { return geti_("blink_is"); }
+void seti_blink_is(int value) { seti_("blink_is", value); }
+void repaint_blink_is() { repaint_("blink_is"); }
+
+
+//Const Float Time Before
+//Time to cut before blinking. Note: all recordings will be delayed on this value.
+bool was_changed_blink_time_before() { return was_changed_("blink_time_before"); }
+float getf_blink_time_before() { return getf_("blink_time_before"); }
+void repaint_blink_time_before() { repaint_("blink_time_before"); }
+
+//Const Float Time After
+//Time to cut after blinking.
+bool was_changed_blink_time_after() { return was_changed_("blink_time_after"); }
+float getf_blink_time_after() { return getf_("blink_time_after"); }
+void repaint_blink_time_after() { repaint_("blink_time_after"); }
 
 //----------------------------------------------------
 //Page Record
@@ -332,50 +389,5 @@ void clear_string_spectrum_freqs() { clear_string_("spectrum_freqs"); }
 void append_string_spectrum_freqs(QString v, int extra_new_lines_count = 0) { append_string_("spectrum_freqs", v, extra_new_lines_count); }
 void append_string_spectrum_freqs(QStringList v, int extra_new_lines_count = 0) { append_string_("spectrum_freqs", v, extra_new_lines_count); }
 void repaint_spectrum_freqs() { repaint_("spectrum_freqs"); }
-
-//----------------------------------------------------
-//Page Graphs
-//Read EEG graphs.
-
-//Const Checkbox Graphs
-//Enable reading EEG graphs frame.
-bool was_changed_graphs_enabled() { return was_changed_("graphs_enabled"); }
-int geti_graphs_enabled() { return geti_("graphs_enabled"); }
-void repaint_graphs_enabled() { repaint_("graphs_enabled"); }
-
-//Out Object Graphs Data
-//Moving frame of graphs.
-bool was_changed_graphs_frame() { return was_changed_("graphs_frame"); }
-XProtectedObject *getobject_graphs_frame() { return get_object_("graphs_frame"); }
-void setobject_graphs_frame(XProtectedObject *value) { set_object_("graphs_frame", value); }
-void setobject_graphs_frame(XProtectedObject &value) { set_object_("graphs_frame", value); }
-void repaint_graphs_frame() { repaint_("graphs_frame"); }
-
-//Const Checkbox Graphs Record
-//Enable recording graphs, after disabling the object is ready. Note: it puts device into the grabbing mode.
-bool was_changed_graphs_record_enabled() { return was_changed_("graphs_record_enabled"); }
-int geti_graphs_record_enabled() { return geti_("graphs_record_enabled"); }
-void repaint_graphs_record_enabled() { repaint_("graphs_record_enabled"); }
-
-//Out Object Recording
-//Recorded graphs.
-bool was_changed_graphs_recording() { return was_changed_("graphs_recording"); }
-XProtectedObject *getobject_graphs_recording() { return get_object_("graphs_recording"); }
-void setobject_graphs_recording(XProtectedObject *value) { set_object_("graphs_recording", value); }
-void setobject_graphs_recording(XProtectedObject &value) { set_object_("graphs_recording", value); }
-void repaint_graphs_recording() { repaint_("graphs_recording"); }
-//Button Save As
-//
-bool was_changed_btn_graphs_save() { return was_changed_("btn_graphs_save"); }
-int geti_btn_graphs_save() { return geti_("btn_graphs_save"); }
-void repaint_btn_graphs_save() { repaint_("btn_graphs_save"); }
-QString button_btn_graphs_save() { return "btn_graphs_save"; }
-
-//Button Load
-//
-bool was_changed_btn_graphs_load() { return was_changed_("btn_graphs_load"); }
-int geti_btn_graphs_load() { return geti_("btn_graphs_load"); }
-void repaint_btn_graphs_load() { repaint_("btn_graphs_load"); }
-QString button_btn_graphs_load() { return "btn_graphs_load"; }
 
 //----------------------------------------------------

@@ -68,6 +68,10 @@ public:
 
 
     //-----------------------------------------------
+    // Drawing
+    // Add to description.gui:
+    //    module_accept_calls=draw
+    //-----------------------------------------------
     // Subclasses MUST reimplement this for drawing,
     // as XModuleWidget called by Window, or as rendering subclass called by RenderArea
     virtual void draw(QPainter &painter, int w, int h);

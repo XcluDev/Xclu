@@ -1,43 +1,50 @@
 #include "neuroplayprodevice.h"
 
 
-NeuroplayDevice::NeuroplayDevice(const QJsonObject &json) :
-    m_id(-1),
+NeuroplayDevice::NeuroplayDevice(const QJsonObject &json, const QJsonObject &resp) :
     m_isConnected(false),
     m_isStarted(false),
     m_grabFilteredData(false), m_grabRawData(false), m_grabRhythms(false), m_grabMeditation(false), m_grabConcentration(false),
     m_meditation(0), m_concentration(0)
 {
-    m_name = json["name"].toString();
-    m_model = json["model"].toString();
-    m_serialNumber = json["serialNumber"].toString();
-    m_maxChannels = json["maxChannels"].toInt();
-    m_preferredChannelCount = json["preferredChannelCount"].toInt();
+    info_.name = json["name"].toString();
+    info_.model = json["model"].toString();
+    info_.serial_number = json["serialNumber"].toString();
+
+    info_.channels_count = resp["currentChannels"].toInt();
+    info_.channels_names.clear();
+    for (auto a: resp["currentChannelsNames"].toArray()) {
+        info_.channels_names << a.toString();
+    }
+
+    info_.frequency = resp["currentFrequency"].toDouble();
+
+    info_.BSF = resp["BSF"].toDouble();
+    info_.HPF = resp["HPF"].toDouble();
+    info_.LPF = resp["LPF"].toDouble();
+
+    info_.max_channels = json["maxChannels"].toInt();
+    info_.preferred_channel_count = json["preferredChannelCount"].toInt();
     QJsonArray arr = json["channelModes"].toArray();
     for (QJsonValueRef value: arr)
     {
         QJsonObject o = value.toObject();
         int channels = o["channels"].toInt();
         int frequency = o["frequency"].toInt();
-        m_channelModes << QPair<int, int>(channels, frequency);
+        info_.channel_modes_values << QPair<int, int>(channels, frequency);
     }
+
+
     m_grabTimer = new QTimer(this);
     connect(m_grabTimer, &QTimer::timeout, this, &NeuroplayDevice::grabRequest);
 
     connect(this, &QObject::destroyed, this, &NeuroplayDevice::stop);
 }
 
-QStringList NeuroplayDevice::channelModes() const
-{
-    QStringList list;
-    for (auto mode: m_channelModes)
-        list << QString("%1ch@%2Hz").arg(mode.first).arg(mode.second);
-    return list;
-}
 
 void NeuroplayDevice::makeFavorite()
 {
-    request({{"command", "makefavorite"}, {"value", m_name}});
+    request({{"command", "makefavorite"}, {"value", info_.name}});
     request("getfavoritedevicename");
 }
 
@@ -140,13 +147,13 @@ void NeuroplayDevice::setGrabInterval(int value_ms)
 void NeuroplayDevice::start()
 {
     m_isStarted = false;
-    request({{"command", "startdevice"}, {"sn", m_serialNumber}});
+    request({{"command", "startdevice"}, {"sn", info_.serial_number}});
 }
 
 void NeuroplayDevice::start(int channelNumber)
 {
     m_isStarted = false;
-    request({{"command", "startdevice"}, {"sn", m_serialNumber}, {"channels", channelNumber}});
+    request({{"command", "startdevice"}, {"sn", info_.serial_number}, {"channels", channelNumber}});
 }
 
 void NeuroplayDevice::stop()

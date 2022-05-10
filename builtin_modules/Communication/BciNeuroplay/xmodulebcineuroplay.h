@@ -11,7 +11,7 @@
 #include "sdk_h.h"
 #include "neuroplaypro.h"
 
-class XModuleBciNeuroplay: public XModuleWidget
+class XModuleBciNeuroplay: public XModule
 {
 public:
     XModuleBciNeuroplay(QString class_name);
@@ -29,6 +29,7 @@ protected:
 protected:
     QScopedPointer<NeuroplayPro> neuroplay_;
     NeuroplayDevice *device_ = nullptr;
+    NeuroplayDeviceInfo info_;
 
     void connect_();
     void disconnect_();
@@ -57,6 +58,13 @@ protected:
     QString rec_file_;
 
     QStringList rec_data_;
+
+
+    void set_graphs(const NeuroplayDevice::ChannelsData &data);
+    QVector<QVector<QPointF>> graphs_lines_;    // Lines for drawing
+    QVector<QVector<float>> graphs_;     // Current frame
+
+
 
 };
 
