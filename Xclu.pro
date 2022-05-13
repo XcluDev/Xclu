@@ -210,6 +210,7 @@ SOURCES += \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
+    sdk/math/xtimebuffer.cpp \
     sdk/ml/xc_tsne.cpp \
     sdk/networking/xnetworkaddr.cpp \
     sdk/networking/xosc.cpp \
@@ -328,6 +329,7 @@ HEADERS += \
     sdk/math/xmath.h \
     sdk/math/xnoise.h \
     sdk/math/xslowbit.h \
+    sdk/math/xtimebuffer.h \
     sdk/ml/xc_tsne.h \
     sdk/networking/xnetworkaddr.h \
     sdk/networking/xosc.h \

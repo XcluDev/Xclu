@@ -10,6 +10,7 @@
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 #include "neuroplaypro.h"
+#include "xtimebuffer.h"
 
 class XModuleBciNeuroplay: public XModule
 {
@@ -43,8 +44,6 @@ protected:
     int num_requests_ = 0;
     int num_received_ = 0;
 
-    void set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms);
-
     QString exception_; // Not empty in case of errors from BCI device
 
     void rec_start();
@@ -60,13 +59,21 @@ protected:
     QStringList rec_data_;
 
 
+    // Graphs
     void set_graphs(const NeuroplayDevice::ChannelsData &data);
     QVector<QVector<QPointF>> graphs_lines_;    // Lines for drawing
     QVector<QVector<float>> graphs_;     // Current frame
 
+    // Eyes Blink
     void update_blink();
     QVector<int> blink_channels_;
     void setup_blink_channels();
+
+    // Rhythms
+    // Buffering rhythms values for blink detection
+    void set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms);
+    void process_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms);
+    XTimeBuffer<NeuroplayDevice::ChannelsRhythms> rhythms_buffer_;
 
 };
 

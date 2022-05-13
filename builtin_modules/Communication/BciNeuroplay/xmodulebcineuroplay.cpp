@@ -48,6 +48,8 @@ void XModuleBciNeuroplay::start() {
     graphs_.clear();
     graphs_lines_.clear();
 
+    rhythms_buffer_.clear();
+
     info_.clear();
 
     // If Blink detection is enabled, it's required to have graphs enabled too.
@@ -246,8 +248,34 @@ void XModuleBciNeuroplay::setup_blink_channels() {
 }
 
 //---------------------------------------------------------------------
+// Buffering rhythms values for blink detection
 void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms)
 {
+    // Buffering for remove eyes blinking
+    float time = xc_elapsed_time_sec();
+    if (!geti_blink_detection()) {
+        process_rhythms(rhythms);
+    }
+    else {
+        // Store this values
+        rhythms_buffer_.push(rhythms, time);
+        // Clear blink
+        float time_from = time - getf_blink_time_before();
+        if (geti_blink_detected()) {
+            float time_to = time + getf_blink_time_after();
+            rhythms_buffer_.clear_range(time_from, time_to);
+        }
+        // Process values before not inside blink
+        while (rhythms_buffer_.has_earlier(time_from)) {
+            auto data = rhythms_buffer_.pop();
+            process_rhythms(data);
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+void XModuleBciNeuroplay::process_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms) {
+    // Read buffer
     int channels = rhythms.size();
     int N = NeuroplayDevice::RhythmN;
 

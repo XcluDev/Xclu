@@ -1,6 +1,7 @@
 ﻿#pragma once
 
-//Working with integer-valued points (x,y), from https://github.com/perevalovds/ofxKu
+// Working with integer-valued points (x,y), original from https://github.com/perevalovds/ofxKu, which is from openFrameworks.cc
+// Note: Can use glm::vec2i, but int2 has more handy functions and constructors.
 
 class int2 {
 public:
@@ -79,10 +80,6 @@ public:
     float angleRad( const int2& vec ) const;
 	
     int dot( const int2& vec ) const;
-	
-	
-	
-
 };
 
 

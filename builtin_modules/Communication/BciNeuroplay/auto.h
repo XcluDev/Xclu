@@ -107,13 +107,13 @@ bool was_changed_blink_time_measure() { return was_changed_("blink_time_measure"
 float getf_blink_time_measure() { return getf_("blink_time_measure"); }
 void repaint_blink_time_measure() { repaint_("blink_time_measure"); }
 
-//Const Float Time Before
+//Float Time Before
 //Time to cut before blinking. Note: all recordings will be delayed on this value.
 bool was_changed_blink_time_before() { return was_changed_("blink_time_before"); }
 float getf_blink_time_before() { return getf_("blink_time_before"); }
 void repaint_blink_time_before() { repaint_("blink_time_before"); }
 
-//Const Float Time After
+//Float Time After
 //Time to cut after blinking.
 bool was_changed_blink_time_after() { return was_changed_("blink_time_after"); }
 float getf_blink_time_after() { return getf_("blink_time_after"); }
