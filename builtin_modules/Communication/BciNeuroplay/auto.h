@@ -73,8 +73,8 @@ int geti_blink_detection() { return geti_("blink_detection"); }
 void repaint_blink_detection() { repaint_("blink_detection"); }
 
 
-//String Channels
-//List of blink-analysis channels, separating by space, starting from 1.
+//Const String Channels
+//List of blink-analysis channels names, separating by space, for example, "F3 F4".
 bool was_changed_blink_channels() { return was_changed_("blink_channels"); }
 QString gets_blink_channels() { return gets_("blink_channels"); }
 QStringList get_strings_blink_channels() { return get_strings_("blink_channels"); }
@@ -94,12 +94,18 @@ void setf_blink_value(float value) { setf_("blink_value", value); }
 void repaint_blink_value() { repaint_("blink_value"); }
 
 //Out Checkbox Blink
-//Is blink detected last frame.
-bool was_changed_blink_is() { return was_changed_("blink_is"); }
-int geti_blink_is() { return geti_("blink_is"); }
-void seti_blink_is(int value) { seti_("blink_is", value); }
-void repaint_blink_is() { repaint_("blink_is"); }
+//Is blink detected at this frame.
+bool was_changed_blink_detected() { return was_changed_("blink_detected"); }
+int geti_blink_detected() { return geti_("blink_detected"); }
+void seti_blink_detected(int value) { seti_("blink_detected", value); }
+void repaint_blink_detected() { repaint_("blink_detected"); }
 
+
+//Float Time Measure
+//Time of measuring segment for blink detection.
+bool was_changed_blink_time_measure() { return was_changed_("blink_time_measure"); }
+float getf_blink_time_measure() { return getf_("blink_time_measure"); }
+void repaint_blink_time_measure() { repaint_("blink_time_measure"); }
 
 //Const Float Time Before
 //Time to cut before blinking. Note: all recordings will be delayed on this value.

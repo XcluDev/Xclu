@@ -43,16 +43,20 @@ const checkbox Blink_Detection blink_detection=1
 separator 
     
 if blink_detection 1
-in string Channels blink_channels="3 4"
-    //List of blink-analysis channels, separating by space, starting from 1.
+const string Channels blink_channels="F3 F4"
+    //List of blink-analysis channels names, separating by space, for example, "F3 F4".
 in float Threshold blink_thresh=0.5 *:* 0.01,0.1
     //Threshold for blink detection.
 out float Value blink_value=0 *:* 0.01,0.1
     //Current blink value (max abs).
-out checkbox Blink blink_is=0 
-    //Is blink detected last frame.
+out checkbox Blink blink_detected=0 
+    //Is blink detected at this frame.
     
 separator
+
+in float Time_Measure blink_time_measure=0.1 0:2 0.01,0.1
+    //Time of measuring segment for blink detection.
+    //sec
 
 const float Time_Before blink_time_before=0.3 0:5 0.01,0.1
     //Time to cut before blinking. Note: all recordings will be delayed on this value.

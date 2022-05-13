@@ -64,7 +64,9 @@ protected:
     QVector<QVector<QPointF>> graphs_lines_;    // Lines for drawing
     QVector<QVector<float>> graphs_;     // Current frame
 
-
+    void update_blink();
+    QVector<int> blink_channels_;
+    void setup_blink_channels();
 
 };
 

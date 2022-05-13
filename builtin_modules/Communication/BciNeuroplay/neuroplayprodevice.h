@@ -24,6 +24,12 @@ struct NeuroplayDeviceInfo {
 
     int channels_count = 0;
     QStringList channels_names;
+
+    // Find channel by name, returns -1 if not found
+    int find_channel_by_name(QString name) const {
+        return channels_names.indexOf(name);
+    }
+
     int frequency = 0;
 
     float BSF = 0;
@@ -34,7 +40,7 @@ struct NeuroplayDeviceInfo {
     int preferred_channel_count = 0;
 
     QVector< QPair<int, int> > channel_modes_values;
-    QStringList channel_modes() {
+    QStringList channel_modes() const {
         QStringList list;
         for (auto mode: channel_modes_values)
             list << QString("%1ch@%2Hz").arg(mode.first).arg(mode.second);
