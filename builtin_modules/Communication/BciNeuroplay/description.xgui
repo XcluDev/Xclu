@@ -170,8 +170,8 @@ out string Alpha rhythms_alpha=""
     //Alpha rhythms for all channels.
 
     
-out string Delta rhythms_beta=""
-    //Delta rhythms for all channels.
+out string Beta rhythms_beta=""
+    //Beta rhythms for all channels.
 
 out string Gamma rhythms_gamma=""
     //Gamma rhythms for all channels.

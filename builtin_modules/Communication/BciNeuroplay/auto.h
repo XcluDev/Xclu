@@ -318,8 +318,8 @@ void append_string_rhythms_alpha(QString v, int extra_new_lines_count = 0) { app
 void append_string_rhythms_alpha(QStringList v, int extra_new_lines_count = 0) { append_string_("rhythms_alpha", v, extra_new_lines_count); }
 void repaint_rhythms_alpha() { repaint_("rhythms_alpha"); }
 
-//Out String Delta
-//Delta rhythms for all channels.
+//Out String Beta
+//Beta rhythms for all channels.
 bool was_changed_rhythms_beta() { return was_changed_("rhythms_beta"); }
 QString gets_rhythms_beta() { return gets_("rhythms_beta"); }
 QStringList get_strings_rhythms_beta() { return get_strings_("rhythms_beta"); }

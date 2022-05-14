@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "3"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -106,7 +106,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "4"
                 },
                 "items": [
                     {
@@ -131,19 +131,23 @@
                     },
                     {
                         "aname": "blink_channels",
-                        "avalue": "3 4"
+                        "avalue": "F3 F4"
                     },
                     {
                         "aname": "blink_thresh",
                         "avalue": "0.5"
                     },
                     {
+                        "aname": "blink_time_measure",
+                        "avalue": "0.1"
+                    },
+                    {
                         "aname": "blink_time_before",
-                        "avalue": "0.3"
+                        "avalue": "0.5"
                     },
                     {
                         "aname": "blink_time_after",
-                        "avalue": "0.3"
+                        "avalue": "0.5"
                     },
                     {
                         "aname": "Record",
@@ -155,7 +159,7 @@
                     },
                     {
                         "aname": "recording_folder",
-                        "avalue": "02_Protocol1/TsneText/03_sugar"
+                        "avalue": "01_MentalStates/01_MentalStates_Rhytms"
                     },
                     {
                         "aname": "Values",
