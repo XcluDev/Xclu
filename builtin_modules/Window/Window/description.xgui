@@ -79,7 +79,7 @@ endif
 page Content
     //Window content can be a single rendering area, or layouts and widgets, such as WNumber.
     
-const enum Content_Mode content_mode=Auto_Vertical [Auto_Vertical,Auto_Horizontal,Manual]
+const enum Content_Mode content_mode=Manual [Auto_Vertical,Auto_Horizontal,Manual]
 	//Modes for collecting layout - automatic or manual.
 
 if content_mode Auto_Vertical,Auto_Horizontal
@@ -90,6 +90,8 @@ endif
 if content_mode Manual
 const text Content content 20 20
     //Description of layouts and widgets. 
+//renderarea1
+//
 //#Keywords:  HorizontalLayout, VerticalLayout, Tab, Stretch
 //#the number means stretching, indentation may be any, just consistent
 //#    Simple layout of single widget:

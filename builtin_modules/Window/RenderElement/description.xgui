@@ -70,4 +70,12 @@ in int Step_Y step_y=1 1:* 1,10
 const text Titles titles 20 20
 	//Titles of elements.
 endif
+
+#------------------------------------------
+page Draw
+    //Draw to RenderArea.
+    
+const string Render_Area render_area="renderarea1"
+    //Render area for drawing into.
+
 #-------------------------------------------

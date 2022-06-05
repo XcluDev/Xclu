@@ -32,18 +32,18 @@ out text Device_Info device_info 7 9
 separator
 out string Stat stat=""
     //How much requests were sent, received, lost.
-
+    
 #------------------------------------------
 page Blinking
     //Detect eyes blinking from EEG graphs.
 
-const checkbox Blink_Detection blink_detection=1
+const checkbox Blink_Detection blink_detection=0
     //Detect eye blinking and remove it from recording.
 
 separator 
     
 if blink_detection 1
-const string Channels blink_channels="F3 F4"
+const string Channels blink_channels="Fp3 Fp4"
     //List of blink-analysis channels names, separating by space, for example, "F3 F4".
 in float Threshold blink_thresh=0.5 0:2 0.01,0.1
     //Threshold for blink detection.
@@ -207,5 +207,21 @@ in button Load btn_spectrum_load
 out text Frequencies spectrum_freqs 5 7
     //Frequencies.
 
+#------------------------------------------
+page Draw
+    //Draw to RenderArea.
+    
+const string Render_Area render_area="renderarea1"
+    //Render area for drawing into.
+
+separator
+
+in checkbox Draw_Graphs draw_graphs_enabled=1
+if draw_graphs_enabled 1
+in float X draw_graphs_x=0 0:1 0.001,0.01
+in float Y draw_graphs_y=0 0:1 0.001,0.01
+in float W draw_graphs_w=1 0:1 0.001,0.01
+in float H draw_graphs_h=1 0:1 0.001,0.01
+endif
 
 #------------------------------------------

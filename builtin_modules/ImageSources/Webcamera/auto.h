@@ -237,34 +237,6 @@ QStringList get_strings_save_image_file_name() { return get_strings_("save_image
 void repaint_save_image_file_name() { repaint_("save_image_file_name"); }
 
 //----------------------------------------------------
-//Page Draw
-//Draw to RenderArea.
-
-//Checkbox Draw
-//
-bool was_changed_draw_enabled() { return was_changed_("draw_enabled"); }
-int geti_draw_enabled() { return geti_("draw_enabled"); }
-void repaint_draw_enabled() { repaint_("draw_enabled"); }
-
-//Float X
-//
-bool was_changed_draw_x() { return was_changed_("draw_x"); }
-float getf_draw_x() { return getf_("draw_x"); }
-void repaint_draw_x() { repaint_("draw_x"); }
-
-//Float Y
-//
-bool was_changed_draw_y() { return was_changed_("draw_y"); }
-float getf_draw_y() { return getf_("draw_y"); }
-void repaint_draw_y() { repaint_("draw_y"); }
-
-//Float Size
-//
-bool was_changed_draw_size() { return was_changed_("draw_size"); }
-float getf_draw_size() { return getf_("draw_size"); }
-void repaint_draw_size() { repaint_("draw_size"); }
-
-//----------------------------------------------------
 //Page Transform
 //
 
@@ -501,5 +473,41 @@ QString gets_resolver_serials4() { return gets_("resolver_serials4"); }
 QStringList get_strings_resolver_serials4() { return get_strings_("resolver_serials4"); }
 void repaint_resolver_serials4() { repaint_("resolver_serials4"); }
 
+
+//----------------------------------------------------
+//Page Draw
+//Draw to RenderArea.
+
+//Const String Render Area
+//Render area for drawing into.
+bool was_changed_render_area() { return was_changed_("render_area"); }
+QString gets_render_area() { return gets_("render_area"); }
+QStringList get_strings_render_area() { return get_strings_("render_area"); }
+void repaint_render_area() { repaint_("render_area"); }
+
+
+//Checkbox Draw
+//
+bool was_changed_draw_enabled() { return was_changed_("draw_enabled"); }
+int geti_draw_enabled() { return geti_("draw_enabled"); }
+void repaint_draw_enabled() { repaint_("draw_enabled"); }
+
+//Float X
+//
+bool was_changed_draw_x() { return was_changed_("draw_x"); }
+float getf_draw_x() { return getf_("draw_x"); }
+void repaint_draw_x() { repaint_("draw_x"); }
+
+//Float Y
+//
+bool was_changed_draw_y() { return was_changed_("draw_y"); }
+float getf_draw_y() { return getf_("draw_y"); }
+void repaint_draw_y() { repaint_("draw_y"); }
+
+//Float Size
+//
+bool was_changed_draw_size() { return was_changed_("draw_size"); }
+float getf_draw_size() { return getf_("draw_size"); }
+void repaint_draw_size() { repaint_("draw_size"); }
 
 //----------------------------------------------------

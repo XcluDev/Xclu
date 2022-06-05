@@ -29,11 +29,21 @@ void XModuleRenderArea::start() {
 //---------------------------------------------------------------------
 //Collect modules to render from
 void XModuleRenderArea::collect_modules() {
-    modules_ = XIntermodule::find_modules_by_filter(XCallTypeDraw);
+    auto modules = XIntermodule::find_modules_by_filter(XCallTypeDraw);
+    // Use only modules which sets "render_area" to this module
+    modules_.clear();
+    for (auto m: modules) {
+        if (m->gets("render_area") == name()) {
+            modules_.append(m);
+        }
+    }
+
+    // Output list to the screen
     QStringList list;
     for (auto m: modules_) {
         list.append(m->name());
     }
+    clear_string_connected_modules();
     append_string_connected_modules(list);
 }
 

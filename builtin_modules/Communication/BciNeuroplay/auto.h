@@ -397,3 +397,45 @@ void append_string_spectrum_freqs(QStringList v, int extra_new_lines_count = 0) 
 void repaint_spectrum_freqs() { repaint_("spectrum_freqs"); }
 
 //----------------------------------------------------
+//Page Draw
+//Draw to RenderArea.
+
+//Const String Render Area
+//Render area for drawing into.
+bool was_changed_render_area() { return was_changed_("render_area"); }
+QString gets_render_area() { return gets_("render_area"); }
+QStringList get_strings_render_area() { return get_strings_("render_area"); }
+void repaint_render_area() { repaint_("render_area"); }
+
+
+//Checkbox Draw Graphs
+//
+bool was_changed_draw_graphs_enabled() { return was_changed_("draw_graphs_enabled"); }
+int geti_draw_graphs_enabled() { return geti_("draw_graphs_enabled"); }
+void repaint_draw_graphs_enabled() { repaint_("draw_graphs_enabled"); }
+
+//Float X
+//
+bool was_changed_draw_graphs_x() { return was_changed_("draw_graphs_x"); }
+float getf_draw_graphs_x() { return getf_("draw_graphs_x"); }
+void repaint_draw_graphs_x() { repaint_("draw_graphs_x"); }
+
+//Float Y
+//
+bool was_changed_draw_graphs_y() { return was_changed_("draw_graphs_y"); }
+float getf_draw_graphs_y() { return getf_("draw_graphs_y"); }
+void repaint_draw_graphs_y() { repaint_("draw_graphs_y"); }
+
+//Float W
+//
+bool was_changed_draw_graphs_w() { return was_changed_("draw_graphs_w"); }
+float getf_draw_graphs_w() { return getf_("draw_graphs_w"); }
+void repaint_draw_graphs_w() { repaint_("draw_graphs_w"); }
+
+//Float H
+//
+bool was_changed_draw_graphs_h() { return was_changed_("draw_graphs_h"); }
+float getf_draw_graphs_h() { return getf_("draw_graphs_h"); }
+void repaint_draw_graphs_h() { repaint_("draw_graphs_h"); }
+
+//----------------------------------------------------

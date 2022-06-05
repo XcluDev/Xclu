@@ -144,13 +144,13 @@ bool was_changed_repeat_y() { return was_changed_("repeat_y"); }
 int geti_repeat_y() { return geti_("repeat_y"); }
 void repaint_repeat_y() { repaint_("repeat_y"); }
 
-//Const Int Step X
+//Int Step X
 //
 bool was_changed_step_x() { return was_changed_("step_x"); }
 int geti_step_x() { return geti_("step_x"); }
 void repaint_step_x() { repaint_("step_x"); }
 
-//Const Int Step Y
+//Int Step Y
 //
 bool was_changed_step_y() { return was_changed_("step_y"); }
 int geti_step_y() { return geti_("step_y"); }
@@ -162,5 +162,16 @@ bool was_changed_titles() { return was_changed_("titles"); }
 QString gets_titles() { return gets_("titles"); }
 QStringList get_strings_titles() { return get_strings_("titles"); }
 void repaint_titles() { repaint_("titles"); }
+
+//----------------------------------------------------
+//Page Draw
+//Draw to RenderArea.
+
+//Const String Render Area
+//Render area for drawing into.
+bool was_changed_render_area() { return was_changed_("render_area"); }
+QString gets_render_area() { return gets_("render_area"); }
+QStringList get_strings_render_area() { return get_strings_("render_area"); }
+void repaint_render_area() { repaint_("render_area"); }
 
 //----------------------------------------------------

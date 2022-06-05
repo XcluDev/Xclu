@@ -53,7 +53,7 @@ void XModuleBciNeuroplay::start() {
     info_.clear();
 
     // If Blink detection is enabled, it's required to have graphs enabled too.
-    xc_assert(!(!geti_graphs_enabled() && geti_blink_detection()), "Please enable Connect > Graphs to detect blinks.");
+    xc_assert(geti_graphs_enabled() || !geti_blink_detection(), "Please enable Connect > Graphs to detect blinks.");
     blink_channels_.clear();
 }
 
@@ -212,6 +212,9 @@ void XModuleBciNeuroplay::set_graphs(const NeuroplayDevice::ChannelsData &data)
 
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::update_blink() {
+    if (!geti_blink_detection()) {
+        return;
+    }
     bool detected = false;
     if (!graphs_.empty()) {
         setup_blink_channels();
@@ -513,131 +516,45 @@ void XModuleBciNeuroplay::rec_data(QVector<float> values) {
 //---------------------------------------------------------------------
 void XModuleBciNeuroplay::draw(QPainter &painter, int outw, int outh) {
 
-    //Antialiasing
-    painter.setRenderHint(QPainter::Antialiasing);
+    if (geti_draw_graphs_enabled()) {
+        float x0 = getf_draw_graphs_x() * outw;
+        float y0 = getf_draw_graphs_y() * outh;
+        float w = getf_draw_graphs_w() * outw;
+        float h = getf_draw_graphs_h() * outh;
 
-    //Draw background
-    //painter.setBrush(QColor(0, 0, 0));
-    //painter.setPen(Qt::PenStyle::NoPen);
-    //painter.drawRect(0, 0, outw, outh);
+        //Antialiasing
+        painter.setRenderHint(QPainter::Antialiasing);
 
-    // Blue background on eye blink, else white
-    QColor back_color = (geti_blink_detected()) ? QColor(200,200,255) : Qt::white;
-    painter.fillRect(0, 0, outw, outh, back_color);
+        //Draw background
+        //painter.setBrush(QColor(0, 0, 0));
+        //painter.setPen(Qt::PenStyle::NoPen);
+        //painter.drawRect(0, 0, outw, outh);
 
-    if (!graphs_lines_.isEmpty())
+        // Blue background on eye blink, else white
+        QColor back_color = (geti_blink_detected()) ? QColor(200,200,255) : Qt::white;
+        painter.fillRect(x0, y0, w, h, back_color);
+
+        if (!graphs_lines_.isEmpty())
         {
             painter.setPen(Qt::black);
             int channels = graphs_lines_.size();
-            int h1 = outh / channels;
+            float h1 = h / channels;
             for (int i=0; i<channels; i++)
             {
                 int count = graphs_lines_[i].size();
-                float y0 = (i + 0.5f) * h1;
+                float y1 = (i + 0.5f) * h1;
 
                 const float scale_y = 200;
 
                 painter.save();
-                painter.translate(0, y0);
-                painter.scale(float(outw) / count, h1 / scale_y);
+                painter.translate(x0, y0 + y1);
+                painter.scale(w / count, h1 / scale_y);
                 painter.drawPolyline(graphs_lines_[i]);
                 painter.restore();
             }
         }
-
-  /*
-    //YOLO
-    for (int i=0; i<pnt_.size(); i++) {
-        QPen pen(QColor(255,255,0));
-        pen.setWidth(2);
-        painter.setPen(pen);
-        painter.setBrush(Qt::BrushStyle::NoBrush);
-        painter.drawRect((pnt_[i].x-size_[i].x/2)*outw, (pnt_[i].y-size_[i].y/2)*outh,
-                         size_[i].x*outw, size_[i].y*outh);
     }
 
-    //Cross
-    bool pickup  = !queue_.isEmpty();
-
-    QPen pen(QColor(0,255,255));
-    if (pickup) pen.setColor(QColor(255,0,0));
-    if (walking_) pen.setColor(QColor(0,0,255));
-
-    pen.setWidth(2);
-    painter.setPen(pen);
-    painter.setBrush(Qt::BrushStyle::NoBrush);
-    glm::vec2 cross = glm::vec2(getf_cross_x(),getf_cross_y());
-    glm::vec2 size = glm::vec2(getf_cross_w(),getf_cross_h());
-    painter.drawRect((cross.x-size.x/2)*outw, (cross.y-size.y/2)*outh,
-                     size.x*outw, size.y*outh);
-    painter.drawLine((cross.x-size.x/4)*outw, (cross.y)*outh,
-                     (cross.x+size.x/4)*outw, (cross.y)*outh);
-    painter.drawLine((cross.x)*outw, (cross.y-size.y/4)*outh,
-                     (cross.x)*outw, (cross.y+size.y/4)*outh);
-
-    //Target
-    if (!pickup) {
-        QPen pen(QColor(0,0,255));
-        pen.setWidth(2);
-        painter.setPen(pen);
-        painter.drawLine((cross.x)*outw, (cross.y)*outh,
-                         (cross.x+target_.x)*outw, (cross.y+target_.y)*outh);
-    }
-    //Compute translate and scale
-    //Note: we use scaling to have independence of lines width from screen resolution
-    int spacing = geti_spacing();
-
-    float w = 300;  //base size
-    float h = 300;
-    float wsp = w + spacing;
-
-    float scrw = 3*w + 2*spacing;
-    float scrh = h;
-
-    float scl = qMin(outw/scrw, outh/scrh);
-    float outw1 = scrw*scl;
-    float outh1 = scrh*scl;
-
-    int x0 = (outw-outw1)/2;
-    int y0 = (outh-outh1)/2;
-
-    painter.save();
-    painter.translate(x0, y0);
-    painter.scale(scl, scl);
-
-    //------------------------
-    //Actual drawing
-
-    //Face
-    face_draw(painter, w, h);
-
-    //Vector field - attractors
-    painter.save();
-    painter.translate(wsp, 0);
-    //painter.setPen(QColor(255,255,255));
-    //painter.setBrush(Qt::BrushStyle::NoBrush);
-    //painter.drawRect(0,0,w,h);
-    attr_draw(painter, w, h);
-
-    painter.restore();
-
-    //Morph
-    painter.save();
-    painter.translate(2*wsp, 0);
-    morph_draw(painter, w, h);
-    painter.restore();
-
-    //border
-    painter.setPen(get_col(getf_border_color()));
-    painter.setBrush(Qt::BrushStyle::NoBrush);
-    painter.drawRect(0,0,scrw,scrh);
-    painter.drawLine(w,0,w,h);
-    painter.drawLine(scrw-w,0,scrw-w,h);
-
-
-    //------------------------
-    painter.restore();
-    */
 }
 
 //---------------------------------------------------------------------

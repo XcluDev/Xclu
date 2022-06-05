@@ -138,19 +138,7 @@ line
 in button Save_Image save_image
     //Press to save the image to a specified file.
 in string File_To_Save save_image_file_name="wabcam.png"
-    //File to save the image.
-
-
-#-----------------------------
-page Draw
-    //Draw to RenderArea.
-    
-in checkbox Draw draw_enabled=1
-
-in float X draw_x=0 0:1 0.001,0.01
-in float Y draw_y=0 0:1 0.001,0.01
-in float Size draw_size=0.5 0:1 0.001,0.01
-    
+    //File to save the image.    
     
 #-----------------------------
 page Transform
@@ -301,6 +289,22 @@ line
 
 endif
 	
+    
+#-----------------------------
+page Draw
+    //Draw to RenderArea.
+    
+const string Render_Area render_area="renderarea1"
+    //Render area for drawing into.
+
+separator
+
+in checkbox Draw draw_enabled=1
+
+in float X draw_x=0 0:1 0.001,0.01
+in float Y draw_y=0 0:1 0.001,0.01
+in float Size draw_size=0.5 0:1 0.001,0.01
+
 #--------------------
 #TODO Load frames
 #Load Frames --------------------------------------
