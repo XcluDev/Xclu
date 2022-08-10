@@ -1,1 +1,1 @@
-OpenCV static libs are taken from openFrameworks 0.10.1
+OpenCV 3.1.0 64 bit 
