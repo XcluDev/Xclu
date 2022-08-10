@@ -1,1 +1,0 @@
-Intel IPP libs are taken from openFrameworks 0.10.1

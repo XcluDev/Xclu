@@ -155,28 +155,33 @@ windows {
         libs/opencv/include/opencv2/videostab \
 		libs/ippicv/include
 
-    # TODO 32bit
-
-    CONFIG(release, debug|release) {
-        LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Release \
-        -llibwebp -lopencv_imgproc310 -lopencv_shape310 -lopencv_superres310 -lopencv_videoio310 \
-        -lopencv_stitching310 -lopencv_flann310 -lopencv_calib3d310 -lopencv_videostab310 \
-        -lopencv_features2d310 -lopencv_ml310 -lopencv_core310 -lopencv_imgcodecs310 -lopencv_objdetect310 \
-        -lopencv_photo310 -lopencv_video310 -lopencv_highgui310 \
-        -lzlib
-		
-        LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
+    CONFIG(release) {
+        LIBS += -l$$PWD/libs/opencv/lib/opencv_world310
     }
-    CONFIG(debug, debug|release) {
-        LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Debug \
-        -llibwebpd -lopencv_imgproc310d -lopencv_shape310d -lopencv_superres310d -lopencv_videoio310d \
-        -lopencv_stitching310d -lopencv_flann310d -lopencv_calib3d310d -lopencv_videostab310d \
-        -lopencv_features2d310d -lopencv_ml310d -lopencv_core310d -lopencv_imgcodecs310d -lopencv_objdetect310d \
-        -lopencv_photo310d -lopencv_video310d -lopencv_highgui310d \
-        -lzlibd
-		
-        LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
-    }
+    CONFIG(debug) {
+        LIBS += -l$$PWD/libs/opencv/lib/opencv_world310d
+    }    
+        
+    #CONFIG(release, debug|release) {
+    #    LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Release \
+    #    -llibwebp -lopencv_imgproc310 -lopencv_shape310 -lopencv_superres310 -lopencv_videoio310 \
+    #    -lopencv_stitching310 -lopencv_flann310 -lopencv_calib3d310 -lopencv_videostab310 \
+    #    -lopencv_features2d310 -lopencv_ml310 -lopencv_core310 -lopencv_imgcodecs310 -lopencv_objdetect310 \
+    #    -lopencv_photo310 -lopencv_video310 -lopencv_highgui310 \
+    #    -lzlib
+	#	
+    #    LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
+    #}
+    #CONFIG(debug, debug|release) {
+    #    LIBS += -L$$PWD/libs/opencv/lib/vs/x64/Debug \
+    #    -llibwebpd -lopencv_imgproc310d -lopencv_shape310d -lopencv_superres310d -lopencv_videoio310d \
+    #    -lopencv_stitching310d -lopencv_flann310d -lopencv_calib3d310d -lopencv_videostab310d \
+    #    -lopencv_features2d310d -lopencv_ml310d -lopencv_core310d -lopencv_imgcodecs310d -lopencv_objdetect310d \
+    #    -lopencv_photo310d -lopencv_video310d -lopencv_highgui310d \
+    #    -lzlibd
+	#	
+    #    LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
+    #}
 
 
 }
