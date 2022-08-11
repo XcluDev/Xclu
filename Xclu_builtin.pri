@@ -182,8 +182,47 @@ windows {
 	#	
     #    LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
     #}
+}
 
+# astra linux
+unix {
+    INCLUDEPATH += \
+        /usr/include/opencv \
+        /usr/include/opencv2 \
+        /usr/include/opencv2/calib3d \
+        /usr/include/opencv2/core \
+        /usr/include/opencv2/core/cuda \
+        /usr/include/opencv2/core/cuda/detail \
+        /usr/include/opencv2/core/hal \
+        /usr/include/opencv2/core/opencl \
+        /usr/include/opencv2/core/opencl/runtime \
+        /usr/include/opencv2/features2d \
+        /usr/include/opencv2/flann \
+        /usr/include/opencv2/highgui \
+        /usr/include/opencv2/imgcodecs \
+        /usr/include/opencv2/imgproc \
+        /usr/include/opencv2/imgproc/detail \
+        /usr/include/opencv2/ml \
+        /usr/include/opencv2/objdetect \
+        /usr/include/opencv2/photo \
+        /usr/include/opencv2/shape \
+        /usr/include/opencv2/stitching \
+        /usr/include/opencv2/stitching/detail \
+        /usr/include/opencv2/superres \
+        /usr/include/opencv2/ts \
+        /usr/include/opencv2/video \
+        /usr/include/opencv2/videoio \
+        /usr/include/opencv2/videostab \
 
+    LIBS += \ #-L/usr/lib/x86_64-linux-gnu/ \
+            /usr/lib/x86_64-linux-gnu/libopencv_core.so \
+            /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so \
+            /usr/lib/x86_64-linux-gnu/libopencv_video.so \
+            /usr/lib/x86_64-linux-gnu/libopencv_highgui.so
+            #-lopencv_imgcodecs310 \
+            #-lzlib
+
+    #LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
 }
 
 
