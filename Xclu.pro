@@ -90,6 +90,25 @@ unix {
 
 
 #--------------------------------------------------------------------------
+#Compiler optimizations
+#--------------------------------------------------------------------------
+#https://stackoverflow.com/questions/409300/how-to-vectorize-with-gcc
+unix {
+    QMAKE_CFLAGS += -O3 -ftree-vectorize -msse2 -mfpmath=sse -ftree-vectorizer-verbose=5
+    QMAKE_CXXFLAGS += -O3 -ftree-vectorize -msse2 -mfpmath=sse -ftree-vectorizer-verbose=5
+
+    # Please recompile for target CPU architecture:
+    QMAKE_CFLAGS += -march=native
+    QMAKE_CXXFLAGS += -march=native
+
+    # Support OpenMP - comment it if not required to use many threads
+    # QMAKE_CFLAGS += -fopenmp
+    # QMAKE_CXXFLAGS += -fopenmp
+    # LIBS += /usr/lib/x86_64-linux-gnu/libgomp.so.1
+}
+
+
+#--------------------------------------------------------------------------
 #Paths
 #--------------------------------------------------------------------------
 # Components
