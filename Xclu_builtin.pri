@@ -225,6 +225,156 @@ unix {
     #LIBS += -l$$PWD/libs/ippicv/lib/vs/x64/ippicvmt
 }
 
+#--------------------------------------------------------------------------
+# YOLOv4
+#--------------------------------------------------------------------------
+INCLUDEPATH += libs/yolo/include libs/yolo/src libs/yolo/3rdparty/stb/include
+
+DEFINES += OPENCV
+
+windows {
+    DEFINES += _TIMESPEC_DEFINED
+    INCLUDEPATH += libs/yolo/3rdparty/pthreads/include
+    LIBS += -l$$PWD/libs/yolo/3rdparty/pthreads/lib/pthreadVC2
+}
+unix {
+    QMAKE_CXXFLAGS += -std=gnu++0x -pthread
+    QMAKE_CFLAGS += -std=gnu++0x -pthread
+}
+
+SOURCES += \
+    libs/yolo/src/activation_layer.c \
+    libs/yolo/src/activations.c \
+    libs/yolo/src/art.c \
+    libs/yolo/src/avgpool_layer.c \
+    libs/yolo/src/batchnorm_layer.c \
+    libs/yolo/src/blas.c \
+    libs/yolo/src/box.c \
+    libs/yolo/src/captcha.c \
+    libs/yolo/src/cifar.c \
+    libs/yolo/src/classifier.c \
+    libs/yolo/src/coco.c \
+    libs/yolo/src/col2im.c \
+    libs/yolo/src/compare.c \
+    libs/yolo/src/connected_layer.c \
+    libs/yolo/src/conv_lstm_layer.c \
+    libs/yolo/src/convolutional_layer.c \
+    libs/yolo/src/cost_layer.c \
+    libs/yolo/src/cpu_gemm.c \
+    libs/yolo/src/crnn_layer.c \
+    libs/yolo/src/crop_layer.c \
+    libs/yolo/src/dark_cuda.c \
+    libs/yolo/src/data.c \
+    libs/yolo/src/deconvolutional_layer.c \
+    libs/yolo/src/demo.c \
+    libs/yolo/src/detection_layer.c \
+    libs/yolo/src/detector.c \
+    libs/yolo/src/dice.c \
+    libs/yolo/src/dropout_layer.c \
+    libs/yolo/src/gaussian_yolo_layer.c \
+    libs/yolo/src/gemm.c \
+    libs/yolo/src/getopt.c \
+    libs/yolo/src/gettimeofday.c \
+    libs/yolo/src/go.c \
+    libs/yolo/src/gru_layer.c \
+    libs/yolo/src/http_stream.cpp \
+    libs/yolo/src/im2col.c \
+    libs/yolo/src/image.c \
+    libs/yolo/src/image_opencv.cpp \
+    libs/yolo/src/layer.c \
+    libs/yolo/src/list.c \
+    libs/yolo/src/local_layer.c \
+    libs/yolo/src/lstm_layer.c \
+    libs/yolo/src/matrix.c \
+    libs/yolo/src/maxpool_layer.c \
+    libs/yolo/src/network.c \
+    libs/yolo/src/nightmare.c \
+    libs/yolo/src/normalization_layer.c \
+    libs/yolo/src/option_list.c \
+    libs/yolo/src/parser.c \
+    libs/yolo/src/region_layer.c \
+    libs/yolo/src/reorg_layer.c \
+    libs/yolo/src/reorg_old_layer.c \
+    libs/yolo/src/representation_layer.c \
+    libs/yolo/src/rnn.c \
+    libs/yolo/src/rnn_layer.c \
+    libs/yolo/src/rnn_vid.c \
+    libs/yolo/src/route_layer.c \
+    libs/yolo/src/sam_layer.c \
+    libs/yolo/src/scale_channels_layer.c \
+    libs/yolo/src/shortcut_layer.c \
+    libs/yolo/src/softmax_layer.c \
+    libs/yolo/src/super.c \
+    libs/yolo/src/swag.c \
+    libs/yolo/src/tag.c \
+    libs/yolo/src/tree.c \
+    libs/yolo/src/upsample_layer.c \
+    libs/yolo/src/utils.c \
+    libs/yolo/src/voxel.c \
+    libs/yolo/src/writing.c \
+    libs/yolo/src/yolo.c \
+    libs/yolo/src/yolo_layer.c \
+    libs/yolo/src/yolo_v2_class.cpp
+
+HEADERS += \
+    libs/yolo/include/yolo_v2_class.hpp \
+    libs/yolo/src/activation_layer.h \
+    libs/yolo/src/activations.h \
+    libs/yolo/src/avgpool_layer.h \
+    libs/yolo/src/batchnorm_layer.h \
+    libs/yolo/src/blas.h \
+    libs/yolo/src/box.h \
+    libs/yolo/src/classifier.h \
+    libs/yolo/src/col2im.h \
+    libs/yolo/src/connected_layer.h \
+    libs/yolo/src/conv_lstm_layer.h \
+    libs/yolo/src/convolutional_layer.h \
+    libs/yolo/src/cost_layer.h \
+    libs/yolo/src/crnn_layer.h \
+    libs/yolo/src/crop_layer.h \
+    libs/yolo/src/dark_cuda.h \
+    libs/yolo/src/darkunistd.h \
+    libs/yolo/src/data.h \
+    libs/yolo/src/deconvolutional_layer.h \
+    libs/yolo/src/demo.h \
+    libs/yolo/src/detection_layer.h \
+    libs/yolo/src/dropout_layer.h \
+    libs/yolo/src/gaussian_yolo_layer.h \
+    libs/yolo/src/gemm.h \
+    libs/yolo/src/getopt.h \
+    libs/yolo/src/gettimeofday.h \
+    libs/yolo/src/gru_layer.h \
+    libs/yolo/src/http_stream.h \
+    libs/yolo/src/httplib.h \
+    libs/yolo/src/im2col.h \
+    libs/yolo/src/image.h \
+    libs/yolo/src/image_opencv.h \
+    libs/yolo/src/layer.h \
+    libs/yolo/src/list.h \
+    libs/yolo/src/local_layer.h \
+    libs/yolo/src/lstm_layer.h \
+    libs/yolo/src/matrix.h \
+    libs/yolo/src/maxpool_layer.h \
+    libs/yolo/src/network.h \
+    libs/yolo/src/normalization_layer.h \
+    libs/yolo/src/option_list.h \
+    libs/yolo/src/parser.h \
+    libs/yolo/src/region_layer.h \
+    libs/yolo/src/reorg_layer.h \
+    libs/yolo/src/reorg_old_layer.h \
+    libs/yolo/src/representation_layer.h \
+    libs/yolo/src/rnn_layer.h \
+    libs/yolo/src/route_layer.h \
+    libs/yolo/src/sam_layer.h \
+    libs/yolo/src/scale_channels_layer.h \
+    libs/yolo/src/shortcut_layer.h \
+    libs/yolo/src/softmax_layer.h \
+    libs/yolo/src/tree.h \
+    libs/yolo/src/upsample_layer.h \
+    libs/yolo/src/utils.h \
+    libs/yolo/src/version.h \
+    libs/yolo/src/yolo_layer.h
+#--------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------
 #Windows, USB enumeration for Webcamera module
