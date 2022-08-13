@@ -7,6 +7,11 @@
 bool xc_file_exists(QString file_name);
 bool xc_folder_exists(QString folder_name);
 
+// Get files list in the folder with given extension, for example "jpg"
+QStringList xc_folder_list_files(QString folder_name, QString extension = "");
+// Variant allowing several extensions: QStringList() << "bmp" << "jpg" << "png" << "tif" << "tiff"
+QStringList xc_folder_list_files(QString folder_name, QStringList extensions);
+
 //File size
 uint64 xc_file_size(QString file_name);
 

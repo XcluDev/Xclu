@@ -1,6 +1,7 @@
 #include "xc_files.h"
 #include "incl_cpp.h"
 #include <QtGlobal>
+#include <QDirIterator>
 
 //---------------------------------------------------------------------
 bool xc_file_exists(QString file_name) {
@@ -11,6 +12,39 @@ bool xc_file_exists(QString file_name) {
 //---------------------------------------------------------------------
 bool xc_folder_exists(QString folder_name) {
     return QDir(folder_name).exists();
+}
+
+//---------------------------------------------------------------------
+QStringList xc_folder_list_files(QString folder_name, QStringList extensions)
+{
+    if (!extensions.isEmpty()) {
+        for (auto &s: extensions) {
+            s = "*." + s;
+        }
+    }
+    else {
+        extensions << "*.*";
+    }
+
+    QStringList list;
+
+    QDirIterator iter(folder_name, extensions); //, QDirIterator::Subdirectories);
+    while (iter.hasNext()) {
+        QString file = iter.next();
+        list.push_back(file);
+        //qDebug() << file;
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------
+QStringList xc_folder_list_files(QString folder_name, QString extension)
+{
+    QStringList extensions;
+    if (!extension.isEmpty()) {
+        extensions << extension;
+    }
+    return xc_folder_list_files(folder_name, extensions);
 }
 
 //---------------------------------------------------------------------

@@ -77,18 +77,7 @@ void XModuleImageLoader::load_image_file(QString image_file) {
 
 //---------------------------------------------------------------------
 void XModuleImageLoader::load_folder(QString folder_name) {
-    image_files_.clear();
-    //scan folder for images
-    QDirIterator images_iter(xc_absolute_path_from_project(folder_name),
-                             QStringList() << "*.bmp" << "*.jpg" << "*.png" << "*.tif" << "*.tiff"
-                             ); //, QDirIterator::Subdirectories);
-    image_files_.clear();
-    while (images_iter.hasNext()) {
-        QString image_path = images_iter.next();
-        image_files_.push_back(image_path);
-        //qDebug() << image_path;
-    }
-
+    image_files_ = xc_folder_list_files(folder_name, QStringList() << "bmp" << "jpg" << "png" << "tif" << "tiff");
     xc_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
 }
 
