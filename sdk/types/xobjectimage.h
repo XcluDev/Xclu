@@ -97,7 +97,9 @@ public:
     //Usage:
     //  XRaster_u8c3 raster;
     //  to_raster(getobject_image(), raster);
-    //Simple function which not generates error if object is NULL or not image
+
+    // Simple function, works with protected object;
+    // not generates error if object is NULL or not image
     template<typename color_type>
     static void to_raster(XProtectedObject *image_object, XRaster_<color_type> &raster, rect_int rect = rect_int(-1,-1,-1,-1)) {
         if (!image_object) {
@@ -107,7 +109,7 @@ public:
         auto &data = image_object->read().data();
 
         //no image
-        if (data.type() != XObjectTypeImage) {
+        if (data.type() != XObjectType::Image) {
             raster.clear();
             return;
         }
@@ -115,10 +117,10 @@ public:
         //read image
         //TODO optimize, may receive and grayscale!
         //but now converts to u8 rgb.
-        XObjectImage::to_raster(data, raster, rect);
+        to_raster(data, raster, rect);
     }
 
-    //Advanced function, used with guiobject->read().data()
+    //Function used with non-protected object, obtained for example as guiobject->read().data()
     static void to_raster(const XObject &object, XRaster_u8 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
     static void to_raster(const XObject &object, XRaster_u8c3 &raster, rect_int rect = rect_int(-1,-1,-1,-1));
 

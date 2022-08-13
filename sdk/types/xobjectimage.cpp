@@ -95,13 +95,13 @@ void XObjectImage::show_object(QLabel *label, const XObjectShowSettings &setting
 //---------------------------------------------------------------------
 // Check that object is already image
 bool XObjectImage::is_image(const XObject &object) {
-    return object.has_type(XObjectTypeImage);
+    return object.has_type(XObjectType::Image);
 }
 
 //---------------------------------------------------------------------
 //Извлечение всех полей из изображения
 /*static*/ XObjectImageData XObjectImage::get_data(const XObject &object) {
-    object.assert_type(XObjectTypeImage);
+    object.assert_type(XObjectType::Image);
 
     XObjectImageData d;
 
@@ -255,7 +255,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //---------------------------------------------------------------------
 /*static*/ void XObjectImage::allocate(XObject &object, XTypeId data_type, int channels, int w, int h) {
     object.clear();
-    object.set_type(XObjectTypeImage);
+    object.set_type(XObjectType::Image);
     object.seti("w", w);
     object.seti("h", h);
     object.seti("channels", channels);
@@ -422,7 +422,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     //заполнение полей описания изображения
     object.clear();
-    object.set_type(XObjectTypeImage);
+    object.set_type(XObjectType::Image);
     object.seti("w", w);
     object.seti("h", h);
     object.seti("channels", channels);
@@ -496,7 +496,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 /*static*/ void XObjectImage::convert_to_QImage(const XObject &object, QImage &qimage,
                                              bool mirrorx, bool mirrory) {
 
-    object.assert_type(XObjectTypeImage);
+    object.assert_type(XObjectType::Image);
 
     xc_assert(!mirrorx, "XObjectImage::convert_to_QImage doesn't supports mirrorx");
 
@@ -552,7 +552,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         return;
     }
 
-    object.assert_type(XObjectTypeImage);
+    object.assert_type(XObjectType::Image);
 
     int w = object.geti("w");
     int h = object.geti("h");

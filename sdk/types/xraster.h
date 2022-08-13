@@ -359,7 +359,7 @@ typedef XRaster_<int2> XRaster_int2;
 
 
 //class for static-defined operations:
-//converting color raster to grayscale abd back,
+//converting color raster to grayscale and back,
 //to QImage and back,
 //load and save raster to disk
 

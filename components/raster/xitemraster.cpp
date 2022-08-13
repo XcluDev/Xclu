@@ -41,7 +41,7 @@ XItemRaster_<TRaster>::XItemRaster_(ModuleInterface *interf, const XItemPreDescr
     }
 
     //создаем объект
-    object_.reset(new XObject(XObjectTypeEmpty));
+    object_.reset(new XObject(XObjectType::Empty));
 
 }
 

@@ -70,7 +70,7 @@ void XModuleSynthFromImage::update() {
     auto reader = getobject_input_image()->read();
 
     //no image yet
-    if (reader.data().type() != XObjectTypeImage) return;
+    if (reader.data().type() != XObjectType::Image) return;
 
     //read image if not frozen
     if (!input_frozen_ || input_.is_empty()) {

@@ -154,14 +154,14 @@ enum ModuleActionOnError : int {
 
 //Типы для объектов XObject
 //При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
-enum XObjectType : int {
-    XObjectTypeEmpty = 0,            //пустой объект
-    XObjectTypeCustom = 1,           //специальный объект, без определенного типа
-    XObjectTypeImage = 2,            //изображение
-    XObjectTypeSoundFormat = 3,      //формат звука
-    XObjectTypeSoundBuffer = 4,      //звуковой буфер
-    XObjectIntermoduleCallRender = 5, //"render" event
-    XObjectTypeN = 6
+enum class XObjectType : int {
+    Empty = 0,            // пустой объект
+    Array = 1,            // custom block of memory
+    Image = 2,            // изображение
+    SoundFormat = 3,      // формат звука
+    SoundBuffer = 4,      // звуковой буфер
+    IntermoduleCallRender = 5, //"render" event
+    N = 6
 };
 
 QString object_type_to_string(XObjectType type);

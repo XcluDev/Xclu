@@ -12,7 +12,7 @@ XObjectSoundFormat::XObjectSoundFormat(const XObject *object)
 //---------------------------------------------------------------------
 //создание объекта
 /*static*/ void XObjectSoundFormat::set_to_object(XObject &object, XObjectSoundFormatData &data) {
-    object.set_type(XObjectTypeSoundFormat);
+    object.set_type(XObjectType::SoundFormat);
     object.seti("sample_rate", data.sample_rate);
     object.seti("channels", data.channels);
 }
@@ -20,7 +20,7 @@ XObjectSoundFormat::XObjectSoundFormat(const XObject *object)
 //---------------------------------------------------------------------
 //получение информации из объекта
 /*static*/ XObjectSoundFormatData XObjectSoundFormat::get_data(const XObject *object) {
-    object->assert_type(XObjectTypeSoundFormat);
+    object->assert_type(XObjectType::SoundFormat);
 
     XObjectSoundFormatData data;
     data.sample_rate = object->geti("sample_rate");

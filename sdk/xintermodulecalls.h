@@ -41,7 +41,7 @@ public:
         }
         void set_to(XObject *input) const {
             input->clear();
-            input->set_type(XObjectIntermoduleCallRender);
+            input->set_type(XObjectType::IntermoduleCallRender);
             input->set_pointer("painter", painter);
             input->seti("w", w);
             input->seti("h", h);

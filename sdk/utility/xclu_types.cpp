@@ -88,10 +88,10 @@ QString GENERAL_PAGE_marker() {
 }
 
 //---------------------------------------------------------------------
-const QString ObjectTypeNames[XObjectTypeN] =
+const QString ObjectTypeNames[int(XObjectType::N)] =
 {
     "empty",
-    "custom",
+    "array",
     "image",
     "sound_format",
     "sound_buffer",
@@ -100,11 +100,11 @@ const QString ObjectTypeNames[XObjectTypeN] =
 
 //---------------------------------------------------------------------
 QString object_type_to_string(XObjectType type) {
-    return Type_to_string(int(type), XObjectTypeN, ObjectTypeNames);
+    return Type_to_string(int(type), int(XObjectType::N), ObjectTypeNames);
 }
 
 XObjectType string_to_object_type(QString type_str) {
-    return XObjectType(string_to_Type(type_str, XObjectTypeN, ObjectTypeNames));
+    return XObjectType(string_to_Type(type_str, int(XObjectType::N), ObjectTypeNames));
 
 }
 

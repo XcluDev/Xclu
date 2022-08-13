@@ -417,7 +417,7 @@ bool XModuleMLExecute::console_write_image() {
     XObjectImage::to_raster(getobject_console_write_image(), image_write_input_);
 
     //no image yet
-    if (reader.data().type() != XObjectTypeImage) return false;
+    if (reader.data().type() != XObjectType::Image) return false;
 
     //read image
     //TODO optimize, may receive and grayscale!

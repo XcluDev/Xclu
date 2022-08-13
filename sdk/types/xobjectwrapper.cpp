@@ -12,19 +12,19 @@
     //xc_assert(object, "Internal error in 'create_wrapper': object is nullptr");
     auto type = object->type();
     switch (type) {
-    case XObjectTypeEmpty:
-    case XObjectTypeCustom:
-    case XObjectTypeSoundBuffer:
+    case XObjectType::Empty:
+    case XObjectType::Custom:
+    case XObjectType::SoundBuffer:
         return new XObjectWrapper(object);
         break;
-    case XObjectTypeSoundFormat:
+    case XObjectType::SoundFormat:
         return new XObjectSoundFormat(object);
         break;
-    case XObjectTypeImage:
+    case XObjectType::Image:
         return new XObjectImage(object);
         break;
     default:
-        xc_exception(QString("Unknown object type '%1'").arg(type));
+        xc_exception(QString("Unknown object type '%1'").arg(int(type)));
     }
     return nullptr;
 }
