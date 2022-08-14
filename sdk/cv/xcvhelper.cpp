@@ -12,10 +12,11 @@
 // cv::Mat img = XCvHelper::link_to_cv(read.data());
 // Be careful: link is valid until object will be changed
 // So use it inside protected envirunment (as always, Read/Write objects in a scope)
-cv::Mat XCvHelper::link_to_cv(const XObject& object) {
-    if (!XObjectImage::is_image(object)) {
+cv::Mat XCvHelper::link_to_cv(const XObject* image_object) {
+    if (image_object.type() != XObjectType::Image) {
         return cv::Mat();
     }
+    XObjectImage *image = static_cast<XObjectImage>(image_object);
     XObjectImageData image_data = XObjectImage::get_data(object);
     if (image_data.is_empty()) {
         return cv::Mat();

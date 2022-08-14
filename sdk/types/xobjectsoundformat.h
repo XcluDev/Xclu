@@ -4,7 +4,6 @@
 //Звуковой формат - число каналов, частота дискретизации, размер буфера
 
 #include "xobject.h"
-#include "xobjectwrapper.h"
 class XGuiObject;
 
 //данные
@@ -25,12 +24,12 @@ public:
 
 
 //wrapper
-class XObjectSoundFormat: public XObjectWrapper {
+class XObjectSoundFormat: public XObject {
 public:
     XObjectSoundFormat(const XObject *object);
 
     //показ в GUI
-    virtual void show_object(XGuiObject *item);
+    virtual void draw_thumbnail(XGuiObject *item);
 
     //создание объекта
     static void set_to_object(XObject &object, XObjectSoundFormatData &data);

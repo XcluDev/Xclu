@@ -43,7 +43,6 @@ public:
 
 // Image class over XRaster
 // See also XCvHelper class for working with OpenCV images.
-template<typename T>
 class XObjectImage: public XObject {
 public:
     XObjectImage();
@@ -56,7 +55,7 @@ public:
 
     // Thumbnail draw
     virtual bool thumbnail_exists() const { return true; }
-    virtual void thumbnail_draw(class QPainter &p, int w, int h) const;
+    virtual void draw_thumbnail(class QPainter &p, int w, int h) const;
 
     /*
     //создание изображения - выделение памяти и заполнение из массива

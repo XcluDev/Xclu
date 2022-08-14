@@ -121,7 +121,7 @@ void XModuleWImage::update_value() {
             QScopedPointer<XObjectWrapper> wrapper;
             wrapper.reset(XObjectWrapper::create_wrapper(getobject_image()->read().pointer()));
 
-            wrapper->show_object(image_label_, settings);
+            wrapper->draw_thumbnail(image_label_, settings);
         }
     }
 

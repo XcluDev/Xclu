@@ -17,7 +17,7 @@ public:
     // cv::Mat img = XCvHelper::link_to_cv(read.data());
     // Be careful: link is valid until object will be changed
     // So use it inside protected envirunment (as always, Read/Write objects in a scope)
-    static cv::Mat link_to_cv(const XObject& object);
+    static cv::Mat link_to_cv(const XObject* image_object);
 
 };
 

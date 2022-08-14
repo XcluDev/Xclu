@@ -162,7 +162,8 @@ void XModuleFaceDetect::haar_search() {
     blobs_.clear();
 
     auto read = getobject_input_image()->read();
-    cv::Mat img = XCvHelper::link_to_cv(read.data());
+    const XObject *obj = read.pointer();
+    cv::Mat img = XCvHelper::link_to_cv(obj);
     if (img.empty()) {
         seti_face_count(0);
         return;

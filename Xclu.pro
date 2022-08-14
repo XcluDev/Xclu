@@ -189,8 +189,6 @@ SOURCES += \
     components/object/xitemobject.cpp \
     components/page/xguipage.cpp \
     components/page/xitempage.cpp \
-    components/raster/xguiraster.cpp \
-    components/raster/xitemraster.cpp \
     components/registrarxitem.cpp \
     components/separator/xguiseparator.cpp \
     components/separator/xitemseparator.cpp \
@@ -239,7 +237,6 @@ SOURCES += \
     sdk/types/xobject.cpp \
     sdk/types/xobjectimage.cpp \
     sdk/types/xobjectsoundformat.cpp \
-    sdk/types/xobjectwrapper.cpp \
     sdk/types/xpointer.cpp \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
@@ -300,8 +297,6 @@ HEADERS += \
     components/object/xitemobject.h \
     components/page/xguipage.h \
     components/page/xitempage.h \
-    components/raster/xguiraster.h \
-    components/raster/xitemraster.h \
     components/registrarxitem.h \
     components/separator/xguiseparator.h \
     components/separator/xitemseparator.h \
@@ -359,7 +354,6 @@ HEADERS += \
     sdk/types/xobject.h \
     sdk/types/xobjectimage.h \
     sdk/types/xobjectsoundformat.h \
-    sdk/types/xobjectwrapper.h \
     sdk/types/xpointer.h \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \

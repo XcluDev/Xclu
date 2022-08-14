@@ -155,13 +155,12 @@ enum ModuleActionOnError : int {
 //Типы для объектов XObject
 //При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
 enum class XObjectType : int {
-    Empty = 0,            // пустой объект
-    Array = 1,            // custom block of memory
-    Image = 2,            // изображение
-    SoundFormat = 3,      // формат звука
-    SoundBuffer = 4,      // звуковой буфер
-    IntermoduleCallRender = 5, //"render" event
-    N = 6
+    Empty = 0,                  // пустой объект
+    Custom = 1,                 // some custom object; use "subtype" at XObject to differenciate them
+    Image = 2,                  // изображение
+    SoundFormat = 3,            // формат звука
+    SoundBuffer = 4,             // звуковой буфер
+    N = 5
 };
 
 QString object_type_to_string(XObjectType type);
@@ -173,10 +172,9 @@ enum XCallType : int {
     XCallTypeNone           = 0,
     XCallTypeCustom         = 1,
     XCallTypeCreateWidget   = 2,
-    XCallTypeDraw          = 3,
-    XCallTypeSoundBufferAdd = 4,
-    XCallTypeSoundBufferReceived = 5,
-    XCallTypeN              = 6
+    XCallTypeSoundBufferAdd = 3,
+    XCallTypeSoundBufferReceived = 4,
+    XCallTypeN              = 5
 };
 QString xcalltype_to_string(XCallType type);
 QString xcalltype_to_string_for_user(XCallType type);   //not generates exception

@@ -12,8 +12,11 @@ class QSpacerItem;
 class XGuiObjectVisual {
 public:
     void set_text(QString text);
-    void set_image(const QImage &image);
-    void clear_image();
+
+    void set_thumbnail_size(int w, int h);
+    QPainter *thumbnail_painter();
+    int2 thumbnail_size();
+    void clear_thumbnail();
 
     //картинка
     QLabel *thumbnail_ = nullptr;   //удалять не надо
@@ -22,8 +25,6 @@ public:
     //разделитель
     //QSpacerItem *spacer_ = nullptr;
 
-    //TODO сделать рисование через виджет - и не обновлять, если невидимая картинка.
-    //это сэкономит ресурсы.
 };
 
 class XGuiObject : public XGui
@@ -44,7 +45,7 @@ public:
     //мы это делаем только по команде извне - так как не знаем,
     //вдруг с объектом проводятся операции
     //при необходимости - можно ввести mutex в объект
-    void show_object(XProtectedObject * object);
+    void show_object(XProtectedObject* object);
 
     //доступ к меткам и другим компонентам для визуализации
     XGuiObjectVisual &visual();

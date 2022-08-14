@@ -3,7 +3,6 @@
 #include "xitemobject.h"
 #include "xguiobject.h"
 #include "xobjectimage.h"
-#include "xobjectwrapper.h"
 
 //---------------------------------------------------------------------
 //XGuiObjectVisual
@@ -14,17 +13,74 @@ void XGuiObjectVisual::set_text(QString text) {
 }
 
 //---------------------------------------------------------------------
-void XGuiObjectVisual::set_image(const QImage &image) {
+/*void XGuiObjectVisual::set_image(const QImage &image) {
     QPixmap pix = QPixmap::fromImage(image);
     thumbnail_->setPixmap(pix);
     thumbnail_->setVisible(true);
+}*/
+
+//---------------------------------------------------------------------
+void XGuiObjectVisual::set_thumbnail_size(int w, int h)
+{
+    xc_exception("GuiObjectVisual::set_thumbnail_size not implemented");
 }
 
 //---------------------------------------------------------------------
-void XGuiObjectVisual::clear_image() {
-    thumbnail_->setText("");
-    thumbnail_->setVisible(false);
-    //spacer_->spacerItem()-> setVisible(false);
+QPainter* XGuiObjectVisual::thumbnail_painter() {
+    xc_exception("GuiObjectVisual::painter not implemented");
+    return nullptr;
+}
+
+//---------------------------------------------------------------------
+int2 XGuiObjectVisual::thumbnail_size() {
+    xc_exception("GuiObjectVisual::painter_size not implemented");
+    return int2(0,0);
+}
+
+/*
+    auto &visual = item->visual();
+
+    //описание изображения
+    const XObject &obj_1 = *object();
+    auto d = XObjectImage::get_data(obj_1);
+    QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj_1.type())).arg(obj_1.size_bytes());
+
+
+    info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
+    visual.set_text(info_text);
+
+    //TODO получение параметров просмотра из item
+    XObjectShowSettings settings;
+    settings.w = xclu::image_preview_small_w;
+    settings.h = xclu::image_preview_small_h;
+
+    //создаем preview для изображения
+    int w = d.w;
+    int h = d.h;
+    if (w > 0 && h > 0) {
+        float scl = qMin(float(settings.w) / w, float(settings.h) / h);
+        w = w * scl;
+        h = h * scl;
+
+        QImage img;
+        {
+            const XObject &obj = *object();
+            XObjectImage::convert_to_QImage_fast_preview(obj, img, w, h);
+        }
+
+        visual.set_image(img);
+    }
+    else {
+        //если нет картинки, то очищаем
+        visual.clear_image();
+    }
+
+    */
+//---------------------------------------------------------------------
+void XGuiObjectVisual::clear_thumbnail() {
+    xc_exception("GuiObjectVisual::clear_thumbnail not implemented");
+    //thumbnail_->setText("");
+    //thumbnail_->setVisible(false);
 }
 
 //---------------------------------------------------------------------
@@ -51,7 +107,7 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
     visual_.thumbnail_ = new QLabel("");
     visual_.description_ = new QLabel("");
     //visual_.spacer_ = new QSpacerItem(5,1);
-    visual_.clear_image();
+    visual_.clear_thumbnail();
 
     //insert to page
     insert_widgets(page_builder,
@@ -96,14 +152,20 @@ XGuiObjectVisual &XGuiObject::visual() {
 //если изображение - то картинкой, если нет - то текстовым описанием
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
-void XGuiObject::show_object(XProtectedObject *object) {
+void XGuiObject::show_object(XProtectedObject* object) {
     if (object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
-        QScopedPointer<XObjectWrapper> wrapper;
         const XObject *obj = object->read().pointer();
-        wrapper.reset(XObjectWrapper::create_wrapper(obj));
-        wrapper->show_object(this);
+        if (obj->thumbnail_exists())
+        {
+            auto *painter = visual().thumbnail_painter();
+            if (painter) {
+                int2 size = visual().thumbnail_size();
+                obj->draw_thumbnail(*painter, size.x, size.y);
+            }
+        }
+        visual().set_text(obj->short_description().join("\n"));
     }
 }
 

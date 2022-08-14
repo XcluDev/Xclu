@@ -45,6 +45,8 @@ public:
     XObjectType type() const;
     void assert_type(XObjectType expected_type) const;
 
+    QString subtype() const;        // Name of the subtype, used for differenciating objects of "Custom" type
+
     // Short text description for UI
     virtual QStringList short_description() const { return QStringList(); }
 
@@ -54,9 +56,10 @@ public:
 
     // Thumbnail draw
     virtual bool thumbnail_exists() const { return false; }
-    virtual void thumbnail_draw(class QPainter &p, int w, int h) const {}
+    virtual void draw_thumbnail(class QPainter &p, int w, int h) const {}
 protected:
     XObjectType type_ = XObjectType::Empty;
+    QString subtype_;
 };
 
 

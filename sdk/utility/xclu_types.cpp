@@ -91,11 +91,10 @@ QString GENERAL_PAGE_marker() {
 const QString ObjectTypeNames[int(XObjectType::N)] =
 {
     "empty",
-    "array",
+    "custom",
     "image",
     "sound_format",
-    "sound_buffer",
-    "intermodule_call_render_data"
+    "sound_buffer"
 };
 
 //---------------------------------------------------------------------
@@ -114,7 +113,6 @@ const QString XCallTypeNames[XCallTypeN] =
     "none",
     "custom",
     "create_widget",
-    "draw",
     "sound_buffer_add",
     "sound_buffer_received"
 };

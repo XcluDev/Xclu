@@ -95,7 +95,7 @@ bool XArray::is_empty() const {
 
 //---------------------------------------------------------------------
 inline bool XArray::is_int() const {      //это целочисленный массив
-    return is_XTypeId::integer(data_type_);
+    return is_XTypeId_integer(data_type_);
 }
 
 //---------------------------------------------------------------------

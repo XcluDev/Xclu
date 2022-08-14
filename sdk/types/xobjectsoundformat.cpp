@@ -30,7 +30,7 @@ XObjectSoundFormat::XObjectSoundFormat(const XObject *object)
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XObjectSoundFormat::show_object(XGuiObject *item) {
+void XObjectSoundFormat::draw_thumbnail(XGuiObject *item) {
     auto &visual = item->visual();
     auto data = get_data(object());
 

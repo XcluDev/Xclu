@@ -166,11 +166,6 @@ void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, 
             break;
         case XCallTypeCreateWidget: on_create_widget_internal(input, output);
             break;
-        case XCallTypeDraw: {
-            XIntermodule::RenderCallData data(input);
-            on_render(*data.painter, data.w, data.h);
-            break;
-        }
         case XCallTypeSoundBufferAdd:
             on_sound_buffer_add_internal(input, output);
             break;

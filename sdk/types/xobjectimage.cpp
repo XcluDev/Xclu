@@ -8,7 +8,6 @@
 #include <QImageWriter>
 
 //---------------------------------------------------------------------
-template<typename T>
 XObjectImage::XObjectImage()
     : XObject(XObjectType::Image)
 {
@@ -18,22 +17,7 @@ XObjectImage::XObjectImage()
 
 //---------------------------------------------------------------------
 //показ в GUI
-void XObjectImage::show_object(XGuiObject *item) {
-    auto &visual = item->visual();
-
-    //описание изображения
-    const XObject &obj_1 = *object();
-    auto d = XObjectImage::get_data(obj_1);
-    QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj_1.type())).arg(obj_1.size_bytes());
-
-
-    info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
-    visual.set_text(info_text);
-
-    //TODO получение параметров просмотра из item
-    XObjectShowSettings settings;
-    settings.w = xclu::image_preview_small_w;
-    settings.h = xclu::image_preview_small_h;
+void XObjectImage::draw_thumbnail(class QPainter &p, int w, int h) const {
 
     //создаем preview для изображения
     int w = d.w;
@@ -60,7 +44,7 @@ void XObjectImage::show_object(XGuiObject *item) {
 
 //---------------------------------------------------------------------
 //показать объект в QLabel
-void XObjectImage::show_object(QLabel *label, const XObjectShowSettings &settings) {
+void XObjectImage::draw_thumbnail(QLabel *label, const XObjectShowSettings &settings) {
     const XObject &obj_1 = *object();
     auto d = XObjectImage::get_data(obj_1);
 
