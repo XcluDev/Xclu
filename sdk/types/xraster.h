@@ -19,6 +19,7 @@
 #include <QPainter>
 #include "ximageeffect.h"
 
+
 //--------------------------------------------------
 //Color pixel type
 //--------------------------------------------------
@@ -75,38 +76,103 @@ typedef rgba_<float> rgba_float;
 
 
 //--------------------------------------------------
-//Template raster type XRaster_
-//It contains very little operations,
-//for more functions see at XRaster:: below
-//- it contains functions for convert, load, save, resize, blur
+/// XRaster - base raster class.
+/// For particular rasters see XRaster_<T>.
 //--------------------------------------------------
-template<typename T>
-class XRaster_ {
+class XRaster {
 public:
-	int w = 0;
-	int h = 0;
+    XRaster() { internal_type_initialize(); }
+    int w = 0;
+    int h = 0;
+    int bytes_per_pixel = 0;         // Sets at XRaster_<T> constructor
+    XTypeId type_id = XTypeId::none; // Sets at XRaster_<T> constructor
 
+    void set_type(XTypeId type_id);
 protected:
     bool is_external = false;   // Does raster hold its own memory, or use external source
-    T *data_pointer_ = nullptr;
-    QVector<T> internal_data_;        // Internal storage
+    quint8 *data_pointer_ = nullptr;
+    QVector<quint8> internal_data_;        // Internal storage
+
+    virtual void internal_type_initialize() {}
 
 public:
-    XTypeId type_id();
-
-    uint8 *data_pointer_u8() {
-        return (uint8 *) data_pointer_;
-    }
 
     // Useful wrapper that checks if data is empty
     // Note: it's invalidates and updates after re-allocation, so you must care of it and not use old pointer.
-	T* data_pointer() {
+    void* data_pointer() {
         if (is_empty()) return nullptr;
         return data_pointer_;
-	}
+    }
 
-    int bytesPerLine() {
-        return sizeof(T)*w;
+    int data_size() const {
+        return bytes_per_pixel*w*h;
+    }
+
+    int bytes_per_line() const {
+        return bytes_per_pixel*w;
+    }
+
+    //----------------------------------------------------------------------------
+    // Allocating - allocate own memory for raster
+    //----------------------------------------------------------------------------
+
+    // If 'reallocate is true - then old vector will be cleared.
+    // It's useful for clearing memory when image size if significantly reduced, but works slower.
+    void allocate(int w, int h, XTypeId Type_id, bool reallocate = false) {
+        if (!reallocate && !is_external && this->w == w && this->h == h && this->type_id == Type_id) {
+            return;
+        }
+        if (reallocate) {
+            clear();
+        }
+        set_type(Type_id);
+        internal_data_.resize(w*h);
+        data_pointer_ = internal_data_.data();
+        this->w = w;
+        this->h = h;
+        is_external = false;
+    }
+
+    void copy_from(void* input_img, int w, int h, XTypeId Type_id) {
+        allocate(w, h, Type_id);
+        memcpy(data_pointer_, input_img, data_size());
+    }
+
+    void clear() {
+        w = h = bytes_per_pixel = 0;
+        data_pointer_ = nullptr;
+
+        if (!is_external) {
+            //clear data (note: data.clear() does not!)
+            //https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
+            QVector<quint8>().swap(internal_data_);
+        }
+    }
+    bool is_empty() const {
+        return data_pointer_ == nullptr || w <= 0 || h <= 0 || bytes_per_pixel <= 0;
+    }
+
+    // Checks only internal images
+    bool is_valid() const {
+        if (is_empty()) return false;
+        if (is_external) return true;
+        return internal_data_.size() == data_size();
+    }
+};
+
+//--------------------------------------------------
+//Template raster type XRaster_ of particular type
+//it contains functions for convert, load, save, resize, blur
+//--------------------------------------------------
+template<typename T>
+class XRaster_: public XRaster {
+protected:
+    virtual void internal_type_initialize();
+
+public:
+    void allocate(int w, int h, bool reallocate = false)
+    {
+        allocate(w, h, type_id, reallocate);
     }
 
     // pixel value - not checking boundaries
@@ -167,58 +233,6 @@ public:
         link(w, h, data.data());
     }
 
-    //----------------------------------------------------------------------------
-    // Allocating - allocate own memory for raster
-    //----------------------------------------------------------------------------
-
-    // If 'reallocate is true - then old vector will be cleared.
-    // It's useful for clearing memory when image size if significantly reduced, but works slower.
-    void allocate(int w, int h, bool reallocate = false) {
-        if (!is_external && this->w == w && this->h == h) {
-            return;
-        }
-        if (reallocate) {
-            clear();
-        }
-        internal_data_.resize(w*h);
-        data_pointer_ = internal_data_.data();
-        this->w = w;
-        this->h = h;
-        is_external = false;
-	}
-	void copy_from(T *input_img, int w, int h) {
-		allocate(w, h);
-		for (int i = 0; i < w*h; i++) {
-            data_pointer_[i] = input_img[i];		//TODO can use memcpy
-		}
-	}
-
-	void clear() {		
-		w = h = 0;
-        data_pointer_ = nullptr;
-
-        if (!is_external) {
-            //clear data (note: data.clear() does not!)
-            //https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
-            QVector<T>().swap(internal_data_);
-        }
-	}
-    bool is_empty() const {
-        return data_pointer_ == nullptr || w <= 0 || h <= 0;
-    }
-
-    // Checks only internal images
-    bool is_valid() const {
-        if (is_empty()) return false;
-        if (is_external) return true;
-        return internal_data_.size() == w * h;
-    }
-    /*bool is_zero() const {
-        for (int i = 0; i < w*h; i++) {
-            if (data[i] != 0) return false;
-        }
-        return true;
-    }*/
 
     void set(const T &v) {
         for (int i=0; i<w*h; i++) {
@@ -350,20 +364,18 @@ typedef XRaster_<uint16> XRaster_u16;
 typedef XRaster_<uint32> XRaster_u32;
 typedef XRaster_<int32> XRaster_int32;
 typedef XRaster_<float> XRaster_float;
-typedef XRaster_<rgb_float> XRaster_float3; //see XRaster_vec3 below!
 typedef XRaster_<double> XRaster_double;
 typedef XRaster_<glm::vec2> XRaster_vec2;
 typedef XRaster_<glm::vec3> XRaster_vec3;
 typedef XRaster_<glm::vec4> XRaster_vec4;
 typedef XRaster_<int2> XRaster_int2;
 
+//--------------------------------------------------
+// XRasterUtils
+// Convert, load, save
+//--------------------------------------------------
 
-//class for static-defined operations:
-//converting color raster to grayscale and back,
-//to QImage and back,
-//load and save raster to disk
-
-class XRaster {
+class XRasterUtils {
 public:
     //Convert - copies data
     static void convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster);
@@ -375,6 +387,65 @@ public:
     static void convert_bgra(QImage qimage, XRaster_u8c4 &raster);  //Fast, expected QImage img(w,h,QImage::Format_ARGB32);
     static void convert(XRaster_u8 &raster, QImage &qimage);
     static void convert(XRaster_u8c3 &raster, QImage &qimage);
+
+    //Link - create image without copying pixels raster
+    //Much faster than `convert`, but requires care
+    static QImage link(XRaster_u8 &raster);
+    static QImage link(XRaster_u8c3 &raster);
+
+    //save and load
+    //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
+    static void load(QString file_name, XRaster_u8 &raster);
+    static void load(QString file_name, XRaster_u8c3 &raster);
+    static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
+    static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
+
+    //Draw raster on painter
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
+        painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
+    }
+
+    //draw to a given rectangle
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
+        painter->drawImage(r, link(raster));
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &targetRect, const QRectF &sourceRect) {
+        painter->drawImage(targetRect, link(raster), sourceRect);
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &targetRect, const QRect &sourceRect) {
+        painter->drawImage(targetRect, link(raster), sourceRect);
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p, const QRectF &sr) {
+        painter->drawImage(p, link(raster), sr);
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p, const QRect &sr) {
+        painter->drawImage(p, link(raster), sr);
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &r) {
+        painter->drawImage(r, link(raster));
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p) {
+        painter->drawImage(p, link(raster));
+    }
+
+    template<typename T>
+    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p) {
+        painter->drawImage(p, link(raster));
+    }
 
     //Resize
     template<typename T>
@@ -399,58 +470,6 @@ public:
         resize_nearest(input, output, new_w, new_h);
     }
 
-    //Link - create image without copying pixels raster
-    //Much faster than `convert`, but requires care
-    static QImage link(XRaster_u8 &raster);
-    static QImage link(XRaster_u8c3 &raster);
-
-    //Draw raster on painter
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, int x, int y, int sx = 0, int sy = 0, int sw = -1, int sh = -1) {
-        painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
-    }
-
-    //draw to a given rectangle
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &r) {
-        painter->drawImage(r, link(raster));
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QRectF &targetRect, const QRectF &sourceRect) {
-        painter->drawImage(targetRect, link(raster), sourceRect);
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &targetRect, const QRect &sourceRect) {
-        painter->drawImage(targetRect, link(raster), sourceRect);
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p, const QRectF &sr) {
-        painter->drawImage(p, link(raster), sr);
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p, const QRect &sr) {
-        painter->drawImage(p, link(raster), sr);
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QRect &r) {
-        painter->drawImage(r, link(raster));
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QPointF &p) {
-        painter->drawImage(p, link(raster));
-    }
-    template<typename T>
-    static void draw(QPainter *painter, XRaster_<T> &raster, const QPoint &p) {
-        painter->drawImage(p, link(raster));
-    }
-
-    //save and load
-    //TODO currently for disk operations QImage is used - but faster to use OpenCV, FreeImage or TurboJpeg
-    static void load(QString file_name, XRaster_u8 &raster);
-    static void load(QString file_name, XRaster_u8c3 &raster);
-    static void save(XRaster_u8 &raster, QString file_name, QString format, int quality = 90);
-    static void save(XRaster_u8c3 &raster, QString file_name, QString format, int quality = 90);
-
     //blur
     //Works in-place!
     //Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
@@ -463,4 +482,6 @@ public:
         img = XImageEffect::blur(img, blur_radius);
         convert(img, result);
     }
+
+
 };

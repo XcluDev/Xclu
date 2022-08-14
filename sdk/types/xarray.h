@@ -6,6 +6,7 @@
 #include "incl_h.h"
 
 //Array type
+// TODO see XRaster implementation
 class XArray {
 public:
     XArray();
@@ -71,7 +72,7 @@ public:
     double* data_double();
     double const* data_double() const;
 protected:
-    XTypeId data_type_ = XTypeId_none;
+    XTypeId data_type_ = XTypeId::none;
     QVector<quint8> data_;    //данные
     quint8 *data_ptr_ = nullptr;    //указатель на данные в data_
 

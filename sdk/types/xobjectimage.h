@@ -3,7 +3,7 @@
 
 #include "xobject.h"
 #include <QImage>
-#include "xobjectwrapper.h"
+#include "xobject.h"
 #include "xraster.h"
 class QLabel;
 class XArray;
@@ -41,34 +41,30 @@ public:
 };
 
 
-// Helper class for working with XObject-images.
+// Image class over XRaster
 // See also XCvHelper class for working with OpenCV images.
-class XObjectImage: public XObjectWrapper {
+template<typename T>
+class XObjectImage: public XObject {
 public:
-    XObjectImage(const XObject *object);
+    XObjectImage();
 
-    //показать объект в GUI
-    virtual void show_object(XGuiObject *item);
+    XRaster raster;
 
-    //показать объект в QLabel
-    virtual void show_object(QLabel *label, const XObjectShowSettings &settings);
+    virtual QStringList short_description() const;
+    virtual int detailed_description_size() const;
+    virtual QString detailed_description(int i) const;
 
-    // Check that object is already image
-    static bool is_image(const XObject &object);
+    // Thumbnail draw
+    virtual bool thumbnail_exists() const { return true; }
+    virtual void thumbnail_draw(class QPainter &p, int w, int h) const;
 
-    //Извлечение всех полей из изображения
-    static XObjectImageData get_data(const XObject &object);
-
-
-
+    /*
     //создание изображения - выделение памяти и заполнение из массива
     static void allocate(XObject &object, XTypeId data_type, int channels, int w, int h);
     static void create_from_array(XObject &object, quint8 *data, int channels, int w, int h);
 
     static XArray const *get_array(const XObject &object) {return object.get_array("data");}
     static XArray *var_array(XObject &object) {return object.var_array("data");}
-
-
 
     //число каналов по строковому описанию
     //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
@@ -159,7 +155,7 @@ public:
     //TODO выполняется через QImage, поэтому не очень быстрая
     //быстрее через OpenCV или FreeImage или TurboJpeg
     static void save(const XObject &object, QString file_name, QString format = "JPG", int quality = 90);
-
+*/
 
 };
 

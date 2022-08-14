@@ -41,7 +41,7 @@ void XModuleSoundOutGenerator::request_sound(int samples, int channels) { //со
             sound.seti("channels", channels);
             sound.seti("sample_rate", format_.sampleRate());
             XArray *arr = sound.var_array("data", true);
-            arr->allocate(samples*channels, XTypeId_float);
+            arr->allocate(samples*channels, XTypeId::float32);
         }
 
         //заполнение массива

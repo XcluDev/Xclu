@@ -12,7 +12,7 @@ void XArray::clear() {
     size_ = 0;
     size_bytes_ = 0;
     elem_size_ = 0;
-    data_type_ = XTypeId_none;
+    data_type_ = XTypeId::none;
     data_.clear();
     data_ptr_ = nullptr;
 
@@ -95,17 +95,17 @@ bool XArray::is_empty() const {
 
 //---------------------------------------------------------------------
 inline bool XArray::is_int() const {      //это целочисленный массив
-    return is_XTypeId_integer(data_type_);
+    return is_XTypeId::integer(data_type_);
 }
 
 //---------------------------------------------------------------------
 inline bool XArray::is_float() const {    //это массив float
-    return data_type_ == XTypeId_float;
+    return data_type_ == XTypeId::float32;
 }
 
 //---------------------------------------------------------------------
 inline bool XArray::is_double() const {    //это массив double
-    return data_type_ == XTypeId_double;
+    return data_type_ == XTypeId::float64;
 }
 
 //---------------------------------------------------------------------
@@ -122,17 +122,17 @@ void const *XArray::item_pointer(qint32 index) const {
 int XArray::geti(qint32 index) const {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_u8:
+    case XTypeId::u8:
         return data_u8()[index];
-    case XTypeId_s8:
+    case XTypeId::s8:
         return data_s8()[index];
-    case XTypeId_int16:
+    case XTypeId::int16:
         return data_int16()[index];
-    case XTypeId_uint16:
+    case XTypeId::uint16:
         return data_uint16()[index];
-    case XTypeId_int32:
+    case XTypeId::int32:
         return data_int32()[index];
-    case XTypeId_uint32:
+    case XTypeId::uint32:
         return data_uint32()[index];
     default:
         xc_exception("Can't get integer value for array");
@@ -146,22 +146,22 @@ int XArray::geti(qint32 index) const {
 void XArray::seti(qint32 index, int v) {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_u8:
+    case XTypeId::u8:
         data_u8()[index] = v;
         break;
-    case XTypeId_s8:
+    case XTypeId::s8:
         data_s8()[index] = v;
         break;
-    case XTypeId_int16:
+    case XTypeId::int16:
         data_int16()[index] = v;
         break;
-    case XTypeId_uint16:
+    case XTypeId::uint16:
         data_uint16()[index] = v;
         break;
-    case XTypeId_int32:
+    case XTypeId::int32:
         data_int32()[index] = v;
         break;
-    case XTypeId_uint32:
+    case XTypeId::uint32:
         data_uint32()[index] = v;
         break;
     default:
@@ -174,9 +174,9 @@ void XArray::seti(qint32 index, int v) {
 float XArray::getf(qint32 index) const {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_float:
+    case XTypeId::float32:
         return data_float()[index];
-    case XTypeId_double:
+    case XTypeId::float64:
         return data_double()[index];
     default:
         xc_exception("Can't get float value for array");
@@ -189,10 +189,10 @@ float XArray::getf(qint32 index) const {
 void XArray::setf(qint32 index, float v) {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_float:
+    case XTypeId::float32:
         data_float()[index] = v;
         break;
-    case XTypeId_double:
+    case XTypeId::float64:
         data_double()[index] = v;
         break;
     default:
@@ -205,9 +205,9 @@ void XArray::setf(qint32 index, float v) {
 double XArray::get_double(qint32 index) const {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_float:
+    case XTypeId::float32:
         return data_float()[index];
-    case XTypeId_double:
+    case XTypeId::float64:
         return data_double()[index];
     default:
         xc_exception("Can't get double value for array");
@@ -220,10 +220,10 @@ double XArray::get_double(qint32 index) const {
 void XArray::set_double(qint32 index, double v) {
     xc_assert(index >= 0 && index < size_, "Bad index for array access");
     switch (data_type_) {
-    case XTypeId_float:
+    case XTypeId::float32:
         data_float()[index] = v;
         break;
-    case XTypeId_double:
+    case XTypeId::float64:
         data_double()[index] = v;
         break;
     default:
@@ -237,7 +237,7 @@ void XArray::set_double(qint32 index, double v) {
 получение массивов данных для быстрой работы
 quint8* XArray::data_u8() {
     if (size_bytes_ == 0) return nullptr;
-    xc_assert(data_type_ == XTypeId_u8, "Array has no " "u8" " pointer");
+    xc_assert(data_type_ == XTypeId::u8, "Array has no " "u8" " pointer");
     return (quint8*)(data_.data());
 }
 
@@ -245,14 +245,14 @@ quint8* XArray::data_u8() {
 #define XArray_get_data(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE* XArray::data_##TYPE_NAME() { \
         if (size_bytes_ == 0) return nullptr; \
-        xc_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xc_assert(data_type_ == XTypeId::##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 
 #define XArray_get_data_const(TYPE_NAME,CPP_TYPE) \
     CPP_TYPE const* XArray::data_##TYPE_NAME() const { \
         if (size_bytes_ == 0) return nullptr; \
-        xc_assert(data_type_ == XTypeId_##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
+        xc_assert(data_type_ == XTypeId::##TYPE_NAME, "Array has another type, can't get " #TYPE_NAME " pointer"); \
         return (CPP_TYPE*)(data_ptr_); \
     }
 

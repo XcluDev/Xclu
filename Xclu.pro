@@ -235,7 +235,6 @@ SOURCES += \
     sdk/networking/xosc.cpp \
     sdk/types.cpp \
     sdk/types/xarray.cpp \
-    sdk/types/xarray_multi.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
     sdk/types/xobjectimage.cpp \
@@ -356,7 +355,6 @@ HEADERS += \
     sdk/sdk_h.h \
     sdk/types.h \
     sdk/types/xarray.h \
-    sdk/types/xarray_multi.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
     sdk/types/xobjectimage.h \

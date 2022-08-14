@@ -426,7 +426,7 @@ bool XModuleMLExecute::console_write_image() {
     //no transform
     if (!geti_console_write_image_transform()) {
         int ch = 3;
-        console_write_image(image_write_input_.w, image_write_input_.h, ch, image_write_input_.data_pointer_u8());
+        console_write_image(image_write_input_.w, image_write_input_.h, ch, image_write_input_.data_pointer());
     }
     else
     {
@@ -451,7 +451,7 @@ bool XModuleMLExecute::console_write_image() {
             XRaster::convert(*img, image);            
 
             //send to console
-            console_write_image(image.w, image.h, 1, image.data_pointer_u8());
+            console_write_image(image.w, image.h, 1, image.data_pointer());
 
             //set to gui image
             XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);
@@ -461,7 +461,7 @@ bool XModuleMLExecute::console_write_image() {
             XRaster_u8c3 &image = *img;
 
             //send to console
-            console_write_image(image.w, image.h, 3, image.data_pointer_u8());
+            console_write_image(image.w, image.h, 3, image.data_pointer());
 
             //set to gui image
             XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);

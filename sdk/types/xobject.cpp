@@ -1,6 +1,6 @@
 #include "xobject.h"
 #include "incl_cpp.h"
-
+#include <QPainter>
 
 //---------------------------------------------------------------------
 XObject::XObject(XObjectType type)

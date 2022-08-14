@@ -4,23 +4,23 @@
 //Basic types used in arrays and rasters
 #include <QString>
 
-enum XTypeId : int {
-    XTypeId_none = 0,
-    XTypeId_u8 = 1,
-    XTypeId_u8c3 = 2,
-    XTypeId_u8c4 = 3,
-    XTypeId_s8 = 4,
-    XTypeId_int16 = 5,
-    XTypeId_uint16 = 6,
-    XTypeId_int32 = 7,
-    XTypeId_uint32 = 8,
-    XTypeId_float = 9,
-    XTypeId_double = 10,
-    XTypeId_vec2 = 11,
-    XTypeId_vec3 = 12,
-    XTypeId_vec4 = 13,
-    XTypeId_int2 = 14,
-    XTypeId_N = 15
+enum class XTypeId : int {
+    none = 0,
+    u8 = 1,
+    u8c3 = 2,
+    u8c4 = 3,
+    s8 = 4,
+    int16 = 5,
+    uint16 = 6,
+    int32 = 7,
+    uint32 = 8,
+    float32 = 9,
+    float64 = 10,
+    vec2 = 11,
+    vec3 = 12,
+    vec4 = 13,
+    int2 = 14,
+    N = 15
 };
 
 //size of one element

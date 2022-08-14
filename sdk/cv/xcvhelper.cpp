@@ -26,7 +26,7 @@ cv::Mat XCvHelper::link_to_cv(const XObject& object) {
     const XArray *array = XObjectImage::get_array(object);
 
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8,
+    xc_assert(data_type == XTypeId::u8,
               "XObjectImage::link_to_cv() - only u8 data type is supported");
 
     quint8 const *pixels = array->data_u8();

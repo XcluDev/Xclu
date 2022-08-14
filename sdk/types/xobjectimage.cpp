@@ -8,8 +8,9 @@
 #include <QImageWriter>
 
 //---------------------------------------------------------------------
-XObjectImage::XObjectImage(const XObject *object)
-: XObjectWrapper(object)
+template<typename T>
+XObjectImage::XObjectImage()
+    : XObject(XObjectType::Image)
 {
 
 }
@@ -266,7 +267,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     object.sets("channels_description", channels_str);
 
-    object.sets("data_type", XTypeId_to_string(data_type));
+    object.sets("data_type", XTypeId::to_string(data_type));
 
     //создание массива
     XArray *array = object.var_array("data", true);
@@ -276,7 +277,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 //---------------------------------------------------------------------
 /*static*/ void XObjectImage::create_from_array(XObject &object, quint8 *data, int channels, int w, int h) {
     //заполнение полей описания изображения
-    allocate(object, XTypeId_u8, channels, w, h);
+    allocate(object, XTypeId::u8, channels, w, h);
     //заполнение массива
     XArray *array = object.var_array("data");
     quint8 *output_pixels = array->data_u8();
@@ -294,7 +295,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
 //---------------------------------------------------------------------
 /*static*/ void XObjectImage::create_from_raster(XObject &object, XRaster_u8c3 &raster) {
-    create_from_array(object, raster.data_pointer_u8(), 3, raster.w, raster.h);
+    create_from_array(object, raster.data_pointer(), 3, raster.w, raster.h);
 }
 
 //---------------------------------------------------------------------
@@ -316,7 +317,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8,
+    xc_assert(data_type == XTypeId::u8,
                 "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(rect.w, rect.h);
@@ -360,7 +361,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     XArray const *array = get_array(object);
 
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8,
+    xc_assert(data_type == XTypeId::u8,
                 "XObjectImage::to_raster - only u8 data type is supported");
 
     raster.allocate(w, h);
@@ -413,7 +414,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
               , "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 and Format_ARGB32 are supported");
 
     //TODO сейчас поддерживаем на вход только типы u8 и float
-    xc_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
+    xc_assert(data_type == XTypeId::u8 || data_type == XTypeId::float32,
                 "XObjectImage::create_from_QImage - Only u8 and float types for images are supported");
 
     int w = qimage.size().width();
@@ -427,7 +428,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     object.seti("h", h);
     object.seti("channels", channels);
     object.sets("channels_description", channels_str);
-    QString data_type_str = XTypeId_to_string(data_type);
+    QString data_type_str = XTypeId::to_string(data_type);
     object.sets("data_type", data_type_str);
 
     //заполнение массива
@@ -435,7 +436,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
     array->allocate(channels*w*h, data_type);
 
 #define XcluImage_IMPLEMENT(TYPE, CPP_TYPE) \
-    if (data_type == XTypeId_##TYPE) { \
+    if (data_type == XTypeId::##TYPE) { \
         auto pixel_fun = Get_XcluImageGetChannelsFunction_##TYPE(channels_str); \
         CPP_TYPE *output_pixels = array->data_##TYPE(); \
         for (int y=0; y<h; y++) { \
@@ -508,14 +509,14 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
+    xc_assert(data_type == XTypeId::u8 || data_type == XTypeId::float32,
                 "XObjectImage::convert_to_QImage - only u8 and float data types are supported");
 
     qimage = QImage(w, h, QImage::Format_RGB32);
 
 
     //u8
-    if (data_type == XTypeId_u8) {
+    if (data_type == XTypeId::u8) {
         quint8 const *input_pixels = array->data_u8();
         for (int y=0; y<h; y++) {
             uchar *line = XcluImage_SCANLINE(h);
@@ -526,7 +527,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         }
     }
     //float
-    if (data_type == XTypeId_float) {
+    if (data_type == XTypeId::float32) {
         float const *input_pixels = array->data_float();
         for (int y=0; y<h; y++) {
             uchar *line = XcluImage_SCANLINE(h);
@@ -562,7 +563,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 
     auto *array = object.get_array("data");
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8 || data_type == XTypeId_float,
+    xc_assert(data_type == XTypeId::u8 || data_type == XTypeId::float32,
                 "XObjectImage::convert_to_QImage_fast_preview - only u8 and float data types are supported");
 
     qimage = QImage(out_w, out_h, QImage::Format_RGB32);
@@ -571,7 +572,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
 #define XcluImage_GET_PIX(CPP_TYPE) { input_pixels = (CPP_TYPE const*) array->item_pointer(channels*(x*w/out_w + w*y1)); }
 
     //u8
-    if (data_type == XTypeId_u8) {
+    if (data_type == XTypeId::u8) {
         quint8 const*input_pixels;
         for (int y=0; y<out_h; y++) {
             uchar *line = XcluImage_SCANLINE(out_h);
@@ -583,7 +584,7 @@ XcluImageGetChannelsFunction_float Get_XcluImageGetChannelsFunction_float(QStrin
         }
     }
     //float
-    if (data_type == XTypeId_float) {
+    if (data_type == XTypeId::float32) {
         float const *input_pixels;
         for (int y=0; y<out_h; y++) {
             uchar *line = XcluImage_SCANLINE(out_h);
@@ -617,7 +618,7 @@ bool XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
     const XArray *array = get_array(object);
 
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId_u8,
+    xc_assert(data_type == XTypeId::u8,
               "XObjectImage::link_to_QImage() - only u8 data type is supported");
 
     quint8 const *pixels = array->data_u8();
@@ -634,7 +635,7 @@ bool XObjectImage::link_to_QImage(const XObject &object, QImage &qimage) {
 /*static*/ void XObjectImage::load(XObject &object, QString file_name) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "Can't load image " + file_name);
-    create_from_QImage(object, qimage, "RGB", XTypeId_u8);
+    create_from_QImage(object, qimage, "RGB", XTypeId::u8);
 }
 
 //---------------------------------------------------------------------

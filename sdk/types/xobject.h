@@ -45,16 +45,16 @@ public:
     XObjectType type() const;
     void assert_type(XObjectType expected_type) const;
 
-    // Short text description
+    // Short text description for UI
     virtual QStringList short_description() const { return QStringList(); }
 
-    // Detailed description, for example all image pixels values
+    // Detailed description for UI, for example all image pixels values
     virtual int detailed_description_size() const { return 0; }
     virtual QString detailed_description(int /*i*/) const { return ""; }
 
     // Thumbnail draw
-    virtual bool draws_thumbnail() const { return false; }
-    virtual void paint_thumbnail(int w, int h) const {}
+    virtual bool thumbnail_exists() const { return false; }
+    virtual void thumbnail_draw(class QPainter &p, int w, int h) const {}
 protected:
     XObjectType type_ = XObjectType::Empty;
 };
