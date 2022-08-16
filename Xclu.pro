@@ -241,6 +241,7 @@ SOURCES += \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
+    sdk/types/xrasterutils.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/console.cpp \
@@ -358,6 +359,7 @@ HEADERS += \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
+    sdk/types/xrasterutils.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/console.h \

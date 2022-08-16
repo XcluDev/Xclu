@@ -18,11 +18,6 @@
 
 #include "incl_h.h"
 
-#include <QImage>
-//class QPainter;
-#include <QPainter>
-#include "ximageeffect.h"
-
 //--------------------------------------------------
 //Color pixel type
 //--------------------------------------------------
@@ -102,6 +97,7 @@ public:
 
     // Useful wrapper that checks if data is empty
     // Note: it's invalidates and updates after re-allocation, so you must care of it and not use old pointer.
+    // XRaster_<T> has typed variant: typed_data_pointer()
     void* data_pointer() {
         if (is_empty()) return nullptr;
         return data_pointer_;
@@ -181,6 +177,14 @@ public:
     {
         allocate(w, h, type_id, reallocate);
     }
+
+    T* typed_data_pointer() {
+      return (T*)data_pointer();
+    }
+    const T* typed_data_pointer() const {
+      return (T*)data_pointer();
+    }
+
 
     // pixel value - not checking boundaries
     // "unsafe" in name is a remainder that you must be sure that (x,y) is inside raster matrix
