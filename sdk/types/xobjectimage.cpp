@@ -19,27 +19,7 @@ XObjectImage::XObjectImage()
 //показ в GUI
 void XObjectImage::draw_thumbnail(class QPainter &p, int w, int h) const {
 
-    //создаем preview для изображения
-    int w = d.w;
-    int h = d.h;
-    if (w > 0 && h > 0) {
-        float scl = qMin(float(settings.w) / w, float(settings.h) / h);
-        w = w * scl;
-        h = h * scl;
-
-        QImage img;
-        {
-            const XObject &obj = *object();
-            XObjectImage::convert_to_QImage_fast_preview(obj, img, w, h);
-        }
-
-        visual.set_image(img);
-    }
-    else {
-        //если нет картинки, то очищаем
-        visual.clear_image();
-    }
-
+    XRasterUtils::draw(p, raster, QRect(0, 0, w, h));
 }
 
 //---------------------------------------------------------------------
