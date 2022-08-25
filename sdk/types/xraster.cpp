@@ -64,6 +64,14 @@ void XRaster::pixel_unsafe(const int2 &p, void* &value) {
     value = &data_pointer_[sizeofpixel*(p.x+p.y*w)];
 }
 
+void XRaster::set_pixel_unsafe(int x, int y, const void *value) { // Note: value size must be sizeofpixel
+    memcpy(pixel_unsafe(x,y), value, sizeofpixel);
+}
+
+void XRaster::set_pixel_unsafe(int i, const void *value) { // Note: value size must be sizeofpixel
+    memcpy(pixel_unsafe(i), value, sizeofpixel);
+}
+
 //----------------------------------------------------------------------------
 // Allocating - allocate own memory for raster
 //----------------------------------------------------------------------------
@@ -158,45 +166,49 @@ float XRaster::distance_C(const XRaster &compare_with) const {
 //---------------------------------------------------------------------
 void XRaster::set(const void* v) {
     for (int i=0; i<w*h; i++) {
-        memcpy(pixel_unsafe(i), v, sizeofpixel);
+        set_pixel_unsafe(i, v);
     }
 }
 
 //---------------------------------------------------------------------
 void XRaster::add_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
-    for (int i=0; i<w*h; i++) {
-        data_pointer_[i] += r.pixel_unsafe(i);
-    }
+    code_for_all_XTypeId(type_id, \
+    for (int i=0; i<w*h; i++) { \
+        XVAL(T,pixel_unsafe(i)) += XVAL(const T,r.pixel_unsafe(i)); \
+    });
+                             //TODO implement rgb+= and rgba+=, *=, +, *
 }
 
 //---------------------------------------------------------------------
 void XRaster::mult_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
-    for (int i=0; i<w*h; i++) {
-        data_pointer_[i] *= r.pixel_unsafe(i);
-    }
+    code_for_all_XTypeId(type_id, \
+    for (int i=0; i<w*h; i++) { \
+        XVAL(T,pixel_unsafe(i)) *= XVAL(const T,r.pixel_unsafe(i)); \
+    });
 }
 
 //---------------------------------------------------------------------
 //mirror
 void XRaster::mirror_inplace(bool mirrorx, bool mirrory) {
-    if (mirrorx) {
-        int w2 = w/2;
-        for (int y=0; y<h; y++) {
-            for (int x=0; x<w2; x++) {
-                qSwap(pixel_unsafe(x,y), pixel_unsafe(w-1-x,y));
-            }
-        }
-    }
-    if (mirrory) {
-        int h2 = h/2;
-        for (int y=0; y<h2; y++) {
-            for (int x=0; x<w; x++) {
-                qSwap(pixel_unsafe(x,y), pixel_unsafe(x,h-1-y));
-            }
-        }
-    }
+    code_for_all_XTypeId(type_id, \
+    if (mirrorx) { \
+        int w2 = w/2; \
+        for (int y=0; y<h; y++) { \
+            for (int x=0; x<w2; x++) { \
+                qSwap(XVAL(T,pixel_unsafe(x,y)), XVAL(T,pixel_unsafe(w-1-x,y))); \
+            } \
+        } \
+    } \
+    if (mirrory) { \
+        int h2 = h/2; \
+        for (int y=0; y<h2; y++) { \
+            for (int x=0; x<w; x++) { \
+                qSwap(XVAL(T,pixel_unsafe(x,y)), XVAL(T,pixel_unsafe(x,h-1-y))); \
+            } \
+        } \
+    });
 }
 
 //---------------------------------------------------------------------
@@ -209,23 +221,18 @@ void XRaster::rotate_inplace(int angle) {
         int w0 = w;
         int h0 = h;
         XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
-        auto *temp_data = temp.data_pointer();
-        this->allocate(h0,w0);
+        this->allocate(h0, w0, type_id);
         for (int y=0; y<h0; y++) {
             for (int x=0; x<w0; x++) {
-                data_pointer_[(h0-1-y) + h0*x] = temp_data[x+w0*y];
+                set_pixel_unsafe(h0-1-y, x, temp.pixel_unsafe(x,y));
             }
         }
     }
     if (angle == 180) {
         XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
-        auto *temp_data = temp.data_pointer();
-
-        auto *data = data_pointer();
-
         for (int y=0; y<h; y++) {
             for (int x=0; x<w; x++) {
-                data[(w-1-x) + w*(h-1-y)] = temp_data[x+w*y];
+                set_pixel_unsafe(w-1-x, h-1-y, temp.pixel_unsafe(x,y));
             }
         }
     }
@@ -235,14 +242,10 @@ void XRaster::rotate_inplace(int angle) {
         int w0 = w;
         int h0 = h;
         XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
-        auto *temp_data = temp.data_pointer();
-        this->allocate(h0,w0);
-
-        auto *data = data_pointer();
-
+        this->allocate(h0, w0, type_id);
         for (int y=0; y<h0; y++) {
             for (int x=0; x<w0; x++) {
-                data[y + h0*(w0-1-x)] = temp_data[x+w0*y];
+                set_pixel_unsafe(y, w0-1-x, temp.pixel_unsafe(x,y));
             }
         }
     }
@@ -255,10 +258,10 @@ XRaster XRaster::crop(int x0, int y0, int w0, int h0) const {
     xc_assert(x0 >= 0 && y0 >= 0 && w0 >= 0 && h0 >= 0 && x0+w0 <= w && y0+h0 <= h,
               "XRaster crop - bad arguments");
     XRaster image;
-    image.allocate(w0, h0);
+    image.allocate(w0, h0, type_id);
     for (int y = 0; y < h0; y++) {
-        for (int x = 0; x < w0; x++) {
-            image.pixel_unsafe(x, y) = pixel_unsafe(x0+x, y0+y);
+        for (int x = 0; x < w0; x++) {            
+            image.set_pixel_unsafe(x, y, pixel_unsafe(x0+x, y0+y));
         }
     }
     return image;

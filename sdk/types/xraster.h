@@ -57,6 +57,8 @@ public:
     void pixel_unsafe(int x, int y, void* &value);
     void pixel_unsafe(const int2 &p, void* &value);
 
+    void set_pixel_unsafe(int x, int y, const void *value); // Note: value size must be sizeofpixel
+    void set_pixel_unsafe(int i, const void *value); // Note: value size must be sizeofpixel
 
     //----------------------------------------------------------------------------
     // Allocating - allocate own memory for raster

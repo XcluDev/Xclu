@@ -131,7 +131,13 @@ bool is_XTypeId_float(XTypeId type);
 
 
 // Produce code for each XTypeId variant with locally defined T
-#define FOR_ALL_XTypeId(type_id, CODE) \
+// Example:
+// code_for_all_XTypeId(type_id, \
+//    for (int i=0; i<w*h; i++) { \
+//      XVAL(T,pixel_unsafe(i)) += XVAL(const T,r.pixel_unsafe(i)); \
+//    });
+
+#define code_for_all_XTypeId(type_id, CODE) \
 switch(type_id) {\
 case XTypeId::uint8:    { typedef uint8 T; CODE } break;\
 case XTypeId::rgb_u8:   { typedef rgb_u8 T; CODE } break;\
@@ -148,7 +154,7 @@ case XTypeId::vec3:     { typedef vec3 T; CODE } break;\
 case XTypeId::vec4:     { typedef vec4 T; CODE } break;\
 case XTypeId::int2:     { typedef int2 T; CODE } break;\
 default: \
-    xc_exception("FOR_ALL_XTypeId - bad type_id for code " + #CODE); \
+    xc_exception(QString("code_for_all_XTypeId - bad type_id {0} for code {1}").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
 }
 
 
