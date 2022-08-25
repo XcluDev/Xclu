@@ -231,8 +231,6 @@ SOURCES += \
     sdk/ml/xc_tsne.cpp \
     sdk/networking/xnetworkaddr.cpp \
     sdk/networking/xosc.cpp \
-    sdk/types.cpp \
-    sdk/types/xarray.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
     sdk/types/xobjectimage.cpp \
@@ -349,8 +347,6 @@ HEADERS += \
     sdk/networking/xosc.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
-    sdk/types.h \
-    sdk/types/xarray.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
     sdk/types/xobjectimage.h \

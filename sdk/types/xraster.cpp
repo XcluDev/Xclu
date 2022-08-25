@@ -45,7 +45,7 @@ MACRO_XRaster_internal_initialize(XRaster_int2, XTypeId::int2)
 void XRaster::set_type(XTypeId type_id)
 {
     this->type_id = type_id;
-    bytes_per_pixel = XTypeIdSize(type_id);
+    bytes_per_pixel = XTypeId_bytes(type_id);
 }
 
 //---------------------------------------------------------------------

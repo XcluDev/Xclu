@@ -19,61 +19,6 @@
 #include "incl_h.h"
 
 //--------------------------------------------------
-//Color pixel type
-//--------------------------------------------------
-template<typename T>
-struct rgb_ {
-    T v[3] = {0,0,0};
-    rgb_() {}
-    rgb_(T val) {
-        v[0] = v[1] = v[2] = val;
-    }
-    rgb_(T r, T g, T b) {
-        v[0] = r; v[1] = g; v[2] = b;
-    }
-    void set(T r, T g, T b) {
-        v[0] = r; v[1] = g; v[2] = b;
-    }
-    void set(T val) {
-        v[0] = v[1] = v[2] = val;
-    }
-    T grayi() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
-    float grayf() { return (float(v[0])+float(v[1])+float(v[2]))/3; }
-    static T grayi(T r, T g, T b) {
-        return (int(r)+int(g)+int(b))/3;
-    }
-    static float grayf(T r, T g, T b) {
-        return (float(r)+float(g)+float(b))/3;
-    }
-};
-
-template<typename T>
-struct rgba_ {
-    T v[4] = {0,0,0,0};
-    rgba_() {}
-    rgba_(T val, T a) {
-        v[0] = v[1] = v[2] = val;
-        v[3] = a;
-    }
-    rgba_(T r, T g, T b, T a) {
-        v[0] = r; v[1] = g; v[2] = b; v[3] = a;
-    }
-    void set(T r, T g, T b, T a) {
-        v[0] = r; v[1] = g; v[2] = b; v[3] = a;
-    }
-    void set(T val, T a) {
-        v[0] = v[1] = v[2] = v[3] = val; v[4] = a;
-    }
-};
-
-typedef rgb_<uint8> rgb_u8;
-typedef rgb_<float> rgb_float;
-typedef rgba_<uint8> rgba_u8;
-//typedef rgba_<uint8> bgra_u8;   //just for convenience of speedup QImage conversion
-typedef rgba_<float> rgba_float;
-
-
-//--------------------------------------------------
 /// XRaster - base raster class.
 /// For particular rasters see XRaster_<T>.
 //--------------------------------------------------

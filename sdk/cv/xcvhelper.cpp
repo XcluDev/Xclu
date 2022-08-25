@@ -12,16 +12,11 @@
 // cv::Mat img = XCvHelper::link_to_cv(read.data());
 // Be careful: link is valid until object will be changed
 // So use it inside protected envirunment (as always, Read/Write objects in a scope)
-cv::Mat XCvHelper::link_to_cv(const XObject* image_object) {
-    if (image_object.type() != XObjectType::Image) {
+cv::Mat XCvHelper::link_to_cv(const XRaster& raster) {
+    if (raster.is_empty()) {
         return cv::Mat();
     }
-    XObjectImage *image = static_cast<XObjectImage>(image_object);
-    XObjectImageData image_data = XObjectImage::get_data(object);
-    if (image_data.is_empty()) {
-        return cv::Mat();
-    }
-    xc_assert(image_data.channels == 3, "XObjectImage::link_to_cv() - only images with 3 channels are supported");
+    xc_assert(raster.channels == 3, "XObjectImage::link_to_cv() - only images with 3 channels are supported");
     auto cv_format = CV_8UC3;   //TODO implement more formats
 
     const XArray *array = XObjectImage::get_array(object);

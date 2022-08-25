@@ -2,9 +2,29 @@
 
 #include "incl_cpp.h"
 
+//-------------------------------------------------------
+void rect_int::crop(int w0, int h0) {
+    int x0 = xclampi(x, 0, w0-1);
+    int y0 = xclampi(y, 0, h0-1);
+    int x1 = xclampi(x + w, 1, w0);
+    int y1 = xclampi(y + h, 1, h0);
+    *this = rect_int(x0,y0, x1-x0, y1-y0);
+};
+
+//-------------------------------------------------------
+//convert int -> float points
+glm::vec2 to_vec2(const int2 &p) {
+    return glm::vec2(p.x, p.y);
+}
+
+//-------------------------------------------------------
+int2 to_int2_truncate(const glm::vec2 &p) {
+    return int2(int(p.x), int(p.y));
+}
+
 //---------------------------------------------------------------------
 //size of one element
-unsigned int XTypeIdSize(XTypeId type) {
+unsigned int XTypeId_bytes(XTypeId type) {
     switch (type) {
     case XTypeId::none:
         return 0;
@@ -38,6 +58,40 @@ unsigned int XTypeIdSize(XTypeId type) {
         return sizeof(int2);
     default:
         xc_exception(QString("Unknown XTypeId %1").arg(int(type)));
+        break;
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------
+int XTypeId_channels(XTypeId type) {
+    switch (type) {
+    case XTypeId::none:
+        return 0;
+    case XTypeId::u8:
+        return 1;
+    case XTypeId::u8c3:
+        return 3;
+    case XTypeId::u8c4:
+        return 4;
+    case XTypeId::s8:
+    case XTypeId::int16:
+    case XTypeId::uint16:
+    case XTypeId::int32:
+    case XTypeId::uint32:
+    case XTypeId::float32:
+    case XTypeId::float64:
+        return 8;
+    case XTypeId::vec2:
+        return 2;
+    case XTypeId::vec3:
+        return 3;
+    case XTypeId::vec4:
+        return 4;
+    case XTypeId::int2:
+        return 2;
+    default:
+        xc_exception(QString("XTypeId_channels - Unknown XTypeId %1").arg(int(type)));
         break;
     }
     return 0;

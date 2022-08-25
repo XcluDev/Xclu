@@ -8,7 +8,6 @@
 // It applies mutexes for safe write and read operations.
 
 #include "incl_h.h"
-#include "xarray.h"
 #include "xprotecteddata.h"
 #include "xpointer.h"
 

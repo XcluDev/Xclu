@@ -3,6 +3,7 @@
 
 #include "xobject.h"
 #include <QImage>
+#include <QPainter>
 #include "xobject.h"
 #include "xraster.h"
 class QLabel;
@@ -14,32 +15,6 @@ class XGuiObject;
 
 //Функция для тестирования работы с изображениями
 void XcluImage_test();
-
-//Поддерживаемые каналы: Grayscale,RGB,BGR,RGBA,ABGR,R,G,B  [не поддерживается HSL,H,S,L]
-//Подерживаемые типы данных: u8,float
-/*Поля изображения:
-int "w"
-int "h"
-int "channels"
-string "channels_description"
-string "data_type"
-array "data"
-*/
-
-
-//поля класса, которые полностью характеризует изображение
-class XObjectImageData {
-public:
-    int w = 0;
-    int h = 0;
-    int channels = 0;
-    QString channels_description;
-    QString data_type;
-
-    bool is_empty() { return w <= 0 || h <= 0 || channels <= 0;}
-    //int bytes_per_line() { return w * channels; } - for proper implementation need to store data_type not as string, but as id, and comput lenght.
-};
-
 
 // Image class over XRaster
 // See also XCvHelper class for working with OpenCV images.
@@ -55,7 +30,7 @@ public:
 
     // Thumbnail draw
     virtual bool thumbnail_exists() const { return true; }
-    virtual void draw_thumbnail(class QPainter &p, int w, int h) const;
+    virtual void draw_thumbnail(QPainter &p, int w, int h) const;
 
     /*
     //создание изображения - выделение памяти и заполнение из массива
