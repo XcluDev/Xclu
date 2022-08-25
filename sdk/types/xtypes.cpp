@@ -188,7 +188,7 @@ bool is_XTypeId_integer(XTypeId type) {
     case XTypeId::int2:
         return false;
     default:
-        xc_exception(QString("Unknown XTypeId %1").arg(type));
+        xc_exception(QString("Unknown XTypeId %1").arg(int(type)));
         break;
     }
     return 0;

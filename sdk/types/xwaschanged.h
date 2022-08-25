@@ -2,7 +2,7 @@
 #define XWASCHANGED_H
 
 //Classes for checking that value was changed
-#include "types.h"
+#include "xtypes.h"
 
 //Type for storing frame number. I use uint32 instead uint16 just to be absolutely sure it's enough
 typedef uint32 XWasChangedFrame;

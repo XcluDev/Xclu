@@ -19,6 +19,11 @@ XObjectType XObject::type() const { //тип - image, array, strings, испол
 }
 
 //---------------------------------------------------------------------
+bool XObject::has_type(XObjectType expected_type) const {
+    return (type() == expected_type);
+}
+
+//---------------------------------------------------------------------
 //проверить, что объект имеет конкретный тип, если нет - то выдаст expeption
 void XObject::assert_type(XObjectType expected_type) const {
     xc_assert(type() == expected_type,

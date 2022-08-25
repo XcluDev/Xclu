@@ -24,41 +24,32 @@
 //--------------------------------------------------
 class XRaster {
 public:
-    XRaster() { internal_type_initialize(); }
+    XRaster() {}
     int w = 0;
     int h = 0;
-    int bytes_per_pixel = 0;         // Sets at XRaster_<T> constructor
-    XTypeId type_id = XTypeId::none; // Sets at XRaster_<T> constructor
+    int bytes_per_pixel = 0;
+    XTypeId type_id = XTypeId::none; // To change this value you must call call set_type()
 
-    void set_type(XTypeId type_id);
+    void set_type(XTypeId type_id); // Must be called instead of directly changing type_id
+    void assert_type(XTypeId type) const;
 protected:
-    bool is_external = false;   // Does raster hold its own memory, or use external source
+    bool is_owner = false;   // Does raster hold its own memory, or use external source
     quint8 *data_pointer_ = nullptr;
     QVector<quint8> internal_data_;        // Internal storage
 
-    virtual void internal_type_initialize() {}
-
 public:
+    bool is_empty() const;
+
+    // Checks only internal images
+    bool is_valid() const;
 
     // Useful wrapper that checks if data is empty
     // Note: it's invalidates and updates after re-allocation, so you must care of it and not use old pointer.
     // XRaster_<T> has typed variant: typed_data_pointer()
-    void* data_pointer() {
-        if (is_empty()) return nullptr;
-        return data_pointer_;
-    }
-    const void* data_pointer() const {
-        if (is_empty()) return nullptr;
-        return data_pointer_;
-    }
-
-    int data_size() const {
-        return bytes_per_pixel*w*h;
-    }
-
-    int bytes_per_line() const {
-        return bytes_per_pixel*w;
-    }
+    void* data_pointer();
+    const void* data_pointer() const;
+    int data_size() const;
+    int bytes_per_line() const;
 
     //----------------------------------------------------------------------------
     // Allocating - allocate own memory for raster
@@ -66,94 +57,69 @@ public:
 
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
-    void allocate(int w, int h, XTypeId Type_id, bool reallocate = false) {
-        if (!reallocate && !is_external && this->w == w && this->h == h && this->type_id == Type_id) {
-            return;
-        }
-        if (reallocate) {
-            clear();
-        }
-        set_type(Type_id);
-        internal_data_.resize(w*h);
-        data_pointer_ = internal_data_.data();
-        this->w = w;
-        this->h = h;
-        is_external = false;
-    }
+    void allocate(int w, int h, XTypeId Type_id, bool reallocate = false);
 
-    void copy_from(void* input_img, int w, int h, XTypeId Type_id) {
-        allocate(w, h, Type_id);
-        memcpy(data_pointer_, input_img, data_size());
-    }
+    void copy_from(void* input_img, int w, int h, XTypeId Type_id);
 
-    void clear() {
-        w = h = bytes_per_pixel = 0;
-        data_pointer_ = nullptr;
+    void clear();
 
-        if (!is_external) {
-            //clear data (note: data.clear() does not!)
-            //https://stackoverflow.com/questions/13944886/is-stdvector-memory-freed-upon-a-clear
-            QVector<quint8>().swap(internal_data_);
-        }
-    }
-    bool is_empty() const {
-        return data_pointer_ == nullptr || w <= 0 || h <= 0 || bytes_per_pixel <= 0;
-    }
-
-    // Checks only internal images
-    bool is_valid() const {
-        if (is_empty()) return false;
-        if (is_external) return true;
-        return internal_data_.size() == data_size();
-    }
+    //----------------------------------------------------------------------------
+    // Linking - using external source of pixels, not copying it.
+    // Use this mode carefully and control the source data exists while this XRaster is used!
+    //----------------------------------------------------------------------------
+    void link_data(int w, int h, void* data, XTypeId type);
 };
 
 //--------------------------------------------------
-//Template raster type XRaster_ of particular type
-//it contains functions for convert, load, save, resize, blur
+// Template raster type XRaster_ of particular type
+// it contains functions for convert, load, save, resize, blur
+// used as a set of static functions over XRaster
 //--------------------------------------------------
 template<typename T>
-class XRaster_: public XRaster {
+class XRaster_ {
 protected:
-    virtual void internal_type_initialize();
+    static XTypeId type();
 
 public:
-    void allocate(int w, int h, bool reallocate = false)
+    static void allocate(XRaster &raster, int w, int h, bool reallocate = false)
     {
-        allocate(w, h, type_id, reallocate);
+        raster.allocate(w, h, type(), reallocate);
     }
 
-    T* typed_data_pointer() {
-      return (T*)data_pointer();
+    static T* typed_data_pointer(XRaster &raster) {
+        raster.assert_type(type());
+        return (T*)raster.data_pointer();
     }
-    const T* typed_data_pointer() const {
-      return (T*)data_pointer();
+    static const T* typed_data_pointer(const XRaster &raster) {
+        raster.assert_type(type());
+        return (T*)raster.data_pointer();
     }
 
 
     // pixel value - not checking boundaries
     // "unsafe" in name is a remainder that you must be sure that (x,y) is inside raster matrix
-	T &pixel_unsafe(int x, int y) {
-        return data_pointer_[x + w * y];
+    static T &pixel_unsafe(XRaster &raster, int x, int y) {
+        raster.assert_type(type());
+        return data_pointer_(raster)[x + raster.w * y];
 	}
-	T pixel_unsafe(int x, int y) const {
-        return data_pointer_[x + w * y];
+    static T pixel_unsafe(const XRaster &raster, int x, int y) {
+        return data_pointer_(raster)[x + raster.w * y];
 	}
-	T &pixel_unsafe(const int2 &p) {
-        return data_pointer_[p.x + w * p.y];
+    static T &pixel_unsafe(XRaster &raster, const int2 &p) {
+        return data_pointer_(raster)[p.x + raster.w * p.y];
 	}
-	T pixel_unsafe(const int2 &p) const {
-        return data_pointer_[p.x + w * p.y];
-	}	
-	T &pixel_unsafe(int i) {
-        return data_pointer_[i];
+    static T pixel_unsafe(const XRaster &raster, const int2 &p) {
+        return data_pointer_(raster)[p.x + raster.w * p.y];
+    }
+    static T &pixel_unsafe(XRaster &raster, int i) {
+        return data_pointer_(raster)[i];
 	}
-	T pixel_unsafe(int i) const {
-        return data_pointer_[i];
+    T pixel_unsafe(const XRaster &raster, int i) const {
+        return data_pointer_(raster)[i];
 	}
 
     //maximal difference between two rasters at some point - used for checking if they are equal or different
-    float distance_C(XRaster_<T> &compare_with);
+    static float distance_C(XRaster_<T> &compare_with);
 
     /*float pixel_bilinear(float x, float y) {
 		alg_assert(x >= 0 && y >= 0 && x <= w - 1 && y <= h - 1, "pixel_bilinear error - bad coords", Alg_Error_Algorithm);
@@ -169,35 +135,17 @@ public:
 			+ pixel_unsafe(xi, yi1) * (1 - tx) * (ty);
     }*/
 
-    //----------------------------------------------------------------------------
-    // Linking - using external source of pixels, not copying it.
-    // Use this mode carefully and control the source data exists while this XRaster is used!
-    //----------------------------------------------------------------------------
-    void link(int w, int h, T* data) {
-        xc_assert(w <= 0 || h <= 0 || data != nullptr, "Error XRaster::link(), data is nullptr, but w > 0 and h > 0");
-        clear();
-        is_external = true;
-        this->w = w;
-        this->h = h;
-        data_pointer_ = data;
-    }
-    void link(int w, int h, void* data) {
-        link(w, h, (T*) data);
-    }
-    void link(int w, int h, QVector<T> &data) {
-        xc_assert(w*h == data.size(), "Error XRaster::link(), bad QVector size");
-        link(w, h, data.data());
-    }
 
 
-    void set(const T &v) {
+
+    static void set(const T &v) {
         for (int i=0; i<w*h; i++) {
             data_pointer_[i] = v;
         }
     }
 
     template<typename T1>
-    void add(const XRaster_<T1> &r) {
+    static void add(const XRaster_<T1> &r) {
         xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
             data_pointer_[i] += r.pixel_unsafe(i);
@@ -205,7 +153,7 @@ public:
     }
 
     template<typename T1>
-    void mult_by(const XRaster_<T1> &r) {
+    static void mult_by(const XRaster_<T1> &r) {
         xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
         for (int i=0; i<w*h; i++) {
             data_pointer_[i] *= r.pixel_unsafe(i);
@@ -213,7 +161,7 @@ public:
     }
 
     //mirror
-    void mirror(bool mirrorx, bool mirrory = false) {
+    static void mirror(bool mirrorx, bool mirrory = false) {
         if (mirrorx) {
             int w2 = w/2;
             for (int y=0; y<h; y++) {
@@ -235,8 +183,8 @@ public:
     //rotate on 0, 90, 180, 270 angles
     //TODO only works with 1-channel images (?)
     // works only with internal images
-    void rotate(int angle) {
-        xc_assert(!is_external, "XRaster::rotate() is implemented only for internal rasters");
+    static void rotate(int angle) {
+        xc_assert(is_owner, "XRaster::rotate() is implemented only for internal rasters");
         if (angle == 90) {
             int w0 = w;
             int h0 = h;
@@ -282,7 +230,7 @@ public:
     }
 
     //Crop
-    XRaster_<T> crop(int x0, int y0, int w0, int h0) const {
+    static XRaster_<T> crop(int x0, int y0, int w0, int h0) const {
         xc_assert(x0 >= 0 && y0 >= 0 && w0 >= 0 && h0 >= 0 && x0+w0 <= w && y0+h0 <= h,
                   "XRaster_<T> crop - bad arguments");
         XRaster_<T> image;
@@ -297,7 +245,7 @@ public:
 
 
     //Crop to square
-    XRaster_<T> crop_to_square() const {
+   static XRaster_<T> crop_to_square() const {
         int w0 = qMin(w,h);
         int h0 = w0;
         int x0 = (w-w0)/2;

@@ -176,7 +176,7 @@ void XRasterUtils::convert(XRaster* raster, QImage &qimage) {
 }
 
 //---------------------------------------------------------------------
-QImage XRasterUtils::link(const XRaster* raster) {
+QImage XRasterUtils::link_qimage(const XRaster* raster) {
     xc_assert(raster, "XRasterUtils::link - null raster");
     QImage::Format format = QImage::Format_Invalid;
     switch (raster->type_id)
@@ -211,7 +211,7 @@ void XRasterUtils::load(QString file_name, XRaster_u8c3 &raster) {
 void XRasterUtils::save(XRaster* raster, QString file_name, QString file_format, int quality) {
     xc_assert(raster, "XRasterUtils::save - empty raster");
     xc_assert(!raster->is_empty(), "Error saving image, because raster is empty: '" + file_name + "' ");
-    QImage qimage = link(raster);
+    QImage qimage = link_qimage(raster);
     xc_assert(qimage.save(file_name, file_format.toStdString().c_str(), quality),
                 "save: Can't save image '" + file_name + "'");
 }
@@ -224,31 +224,31 @@ void XRasterUtils::draw(QPainter *painter, XRaster *raster, int x, int y) {
     draw(painter, raster, QPoint(x, y));
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, int x, int y, int sx, int sy, int sw, int sh) {
-    painter->drawImage(x, y, link(raster), sx, sy, sw, sh);
+    painter->drawImage(x, y, link_qimage(raster), sx, sy, sw, sh);
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRectF &r) {
-    painter->drawImage(r, link(raster));
+    painter->drawImage(r, link_qimage(raster));
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRectF &targetRect, const QRectF &sourceRect) {
-    painter->drawImage(targetRect, link(raster), sourceRect);
+    painter->drawImage(targetRect, link_qimage(raster), sourceRect);
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRect &targetRect, const QRect &sourceRect) {
-    painter->drawImage(targetRect, link(raster), sourceRect);
+    painter->drawImage(targetRect, link_qimage(raster), sourceRect);
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPointF &p, const QRectF &sr) {
-    painter->drawImage(p, link(raster), sr);
+    painter->drawImage(p, link_qimage(raster), sr);
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPoint &p, const QRect &sr) {
-    painter->drawImage(p, link(raster), sr);
+    painter->drawImage(p, link_qimage(raster), sr);
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRect &r) {
-    painter->drawImage(r, link(raster));
+    painter->drawImage(r, link_qimage(raster));
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPointF &p) {
-    painter->drawImage(p, link(raster));
+    painter->drawImage(p, link_qimage(raster));
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPoint &p) {
-    painter->drawImage(p, link(raster));
+    painter->drawImage(p, link_qimage(raster));
 }
 
 //-----------------------------------------------------------------------------------

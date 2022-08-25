@@ -2,13 +2,9 @@
 #define XOBJECTIMAGE_H
 
 #include "xobject.h"
-#include <QImage>
 #include <QPainter>
 #include "xobject.h"
 #include "xraster.h"
-class QLabel;
-class XArray;
-class XGuiObject;
 
 //Здесь описан класс XObjectImage,
 //который позволяет конвертировать QImage в XObject и обратно

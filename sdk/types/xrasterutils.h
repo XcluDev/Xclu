@@ -32,7 +32,7 @@ public:
 
     // Link - create image without copying pixels raster
     // Much faster than `convert`, but requires care
-    static QImage link(const XRaster* raster);
+    static QImage link_qimage(const XRaster* raster);
 
     //Save and load
     static void load(QString file_name, XRaster_u8 &raster);
