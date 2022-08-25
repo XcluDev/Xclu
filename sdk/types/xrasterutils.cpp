@@ -7,7 +7,7 @@
 #include <QPainter>
 
 //---------------------------------------------------------------------
-void XRasterUtils::convert(XRaster_u8c3 &raster_rgb, XRaster_u8 &raster) {
+void XRasterUtils::convert(const XRaster& source, XRaster& destination) {
     raster.allocate(raster_rgb.w, raster_rgb.h);
     auto *raster_data = raster.typed_data_pointer();
     auto *raster_rgb_data = raster_rgb.typed_data_pointer();
