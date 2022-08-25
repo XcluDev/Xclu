@@ -16,20 +16,10 @@ cv::Mat XCvHelper::link_to_cv(const XRaster& raster) {
     if (raster.is_empty()) {
         return cv::Mat();
     }
-    xc_assert(raster.channels == 3, "XObjectImage::link_to_cv() - only images with 3 channels are supported");
+    xc_assert(raster.type_id == XTypeId::rgb_u8, "XCvHelper::link_to_cv() - only rgb_u8 raster format is supported");
     auto cv_format = CV_8UC3;   //TODO implement more formats
 
-    const XArray *array = XObjectImage::get_array(object);
-
-    auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId::uint8,
-              "XObjectImage::link_to_cv() - only uint8 data type is supported");
-
-    quint8 const *pixels = array->data_u8();
-
-    int bytes_per_line = 1 * image_data.channels * image_data.w;
-
-    return cv::Mat(image_data.h, image_data.w, cv_format, (void *)pixels, bytes_per_line);
+    return cv::Mat(raster.h, raster.w, cv_format, (void *)raster.data_pointer(), raster.bytes_per_line());
 }
 
 //---------------------------------------------------------------------
