@@ -22,8 +22,8 @@ cv::Mat XCvHelper::link_to_cv(const XRaster& raster) {
     const XArray *array = XObjectImage::get_array(object);
 
     auto data_type = array->data_type();
-    xc_assert(data_type == XTypeId::u8,
-              "XObjectImage::link_to_cv() - only u8 data type is supported");
+    xc_assert(data_type == XTypeId::uint8,
+              "XObjectImage::link_to_cv() - only uint8 data type is supported");
 
     quint8 const *pixels = array->data_u8();
 

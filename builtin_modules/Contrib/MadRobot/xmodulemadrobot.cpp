@@ -183,8 +183,8 @@ void XModuleMadRobot::mind_start() {
     xc_console_append("mind_start");
     mind_on_ = true;
 
-    target_ = glm::vec2(xrandomf(-0.3f,0.3f), xrandomf(-0.3f,0.3f));//glm::vec2(0,1000);
-    target_size_ = glm::vec2(0,0);
+    target_ = vec2(xrandomf(-0.3f,0.3f), xrandomf(-0.3f,0.3f));//vec2(0,1000);
+    target_size_ = vec2(0,0);
 
     last_pickup = 0;
 
@@ -210,10 +210,10 @@ void XModuleMadRobot::mind_update() {
 
     float dist = 100000;
     int k = -1;
-    target_ = glm::vec2(0,1000);
-    target_size_ = glm::vec2(0,0);
+    target_ = vec2(0,1000);
+    target_size_ = vec2(0,0);
 
-    glm::vec2 cross = glm::vec2(getf_cross_x(), getf_cross_y());
+    vec2 cross = vec2(getf_cross_x(), getf_cross_y());
     for (int i=0; i<pnt_.size(); i++) {
         float d = glm::distance(pnt_[i], cross);
         if (d < dist) {
@@ -313,8 +313,8 @@ void XModuleMadRobot::mind_update() {
         xc_console_append("--- Pick up ---");
         float t = xc_elapsed_time_sec();
 
-        //target_ = glm::vec2(xrandomf(-0.3,0.3), xrandomf(-0.3,0.3));
-        //target_size_ = glm::vec2(0,0);
+        //target_ = vec2(xrandomf(-0.3,0.3), xrandomf(-0.3,0.3));
+        //target_size_ = vec2(0,0);
 
         t+= 0.5;
         put_action(Action(Stop,t));
@@ -394,8 +394,8 @@ void XModuleMadRobot::draw(QPainter &painter, int outw, int outh) {
     pen.setWidth(2);
     painter.setPen(pen);
     painter.setBrush(Qt::BrushStyle::NoBrush);
-    glm::vec2 cross = glm::vec2(getf_cross_x(),getf_cross_y());
-    glm::vec2 size = glm::vec2(getf_cross_w(),getf_cross_h());
+    vec2 cross = vec2(getf_cross_x(),getf_cross_y());
+    vec2 size = vec2(getf_cross_w(),getf_cross_h());
     painter.drawRect((cross.x-size.x/2)*outw, (cross.y-size.y/2)*outh,
                      size.x*outw, size.y*outh);
     painter.drawLine((cross.x-size.x/4)*outw, (cross.y)*outh,

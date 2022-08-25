@@ -67,7 +67,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
     int is_new_frame = 0;
 
     QString channels;   //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
-    QString data_type;  //u8,float
+    QString data_type;  //uint8,float
 
     //данные об ошибке
     ErrorInfo err;

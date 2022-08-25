@@ -132,7 +132,7 @@ void XRasterUtils::convert(XRaster* raster, QImage &qimage) {
     int h = raster->h;
     switch (raster->type_id)
     {
-    case XTypeId::u8:
+    case XTypeId::uint8:
     {
         qimage = QImage(w, h, QImage::Format_RGB32);
         auto *raster_data = (uint8*)raster->data_pointer();
@@ -151,7 +151,7 @@ void XRasterUtils::convert(XRaster* raster, QImage &qimage) {
         }
         break;
     }
-    case XTypeId::u8c3:
+    case XTypeId::rgb_u8:
     {
         qimage = QImage(w, h, QImage::Format_RGB32);
         auto *raster_data = (rgb_u8*)raster->data_pointer();
@@ -181,9 +181,9 @@ QImage XRasterUtils::link_qimage(const XRaster* raster) {
     QImage::Format format = QImage::Format_Invalid;
     switch (raster->type_id)
     {
-    case XTypeId::u8: format = QImage::Format_Grayscale8;
+    case XTypeId::uint8: format = QImage::Format_Grayscale8;
         break;
-    case XTypeId::u8c3: format = QImage::Format_RGB888;
+    case XTypeId::rgb_u8: format = QImage::Format_RGB888;
         break;
     default:
         xc_exception("XRasterUtils::link - unsupported format");
@@ -249,6 +249,42 @@ void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPointF &p) {
 }
 void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPoint &p) {
     painter->drawImage(p, link_qimage(raster));
+}
+
+//-----------------------------------------------------------------------------------
+//Resize
+static void resize_nearest(XRaster &input, XRaster &output, int new_w, int new_h) {
+    int w = input.w;
+    int h = input.h;
+    xc_assert(input.data_pointer() != output.data_pointer(), "resize_nearest, input and output must be different images");
+    xc_assert(w > 0 && h > 0, "resize_nearest error, input image must have positive size");
+    xc_assert(new_w > 0 && new_h > 0, "resize_nearest error, resized image must have positive size");
+    output.allocate(new_w, new_h);
+    for (int y=0; y<new_h; y++) {
+        for (int x=0; x<new_w; x++) {
+            output.pixel_unsafe(x, y) = input.pixel_unsafe(x * w / new_w, y * h / new_h);
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------
+static void resize_nearest(XRaster &input, XRaster &output, float scale) {
+    int new_w = int(input.w * scale);
+    int new_h = int(input.h * scale);
+    resize_nearest(input, output, new_w, new_h);
+}
+
+//-----------------------------------------------------------------------------------
+// Blur
+// Works in-place!
+// Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
+static void blur(XRaster &raster, XRaster &result, float blur_radius) {
+    xc_assert(!raster.is_empty(), "XRaster::blur - input raster is empty");
+    xc_assert(blur_radius>=0, "XRaster::blur - blur radius must be non-negative");
+    QImage img;
+    convert(raster, img);
+    img = XImageEffect::blur(img, blur_radius);
+    convert(img, result);
 }
 
 //-----------------------------------------------------------------------------------

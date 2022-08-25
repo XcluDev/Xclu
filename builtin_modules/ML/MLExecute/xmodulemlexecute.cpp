@@ -421,7 +421,7 @@ bool XModuleMLExecute::console_write_image() {
 
     //read image
     //TODO optimize, may receive and grayscale!
-    //but now converts to u8 rgb.
+    //but now converts to uint8 rgb.
 
     //no transform
     if (!geti_console_write_image_transform()) {

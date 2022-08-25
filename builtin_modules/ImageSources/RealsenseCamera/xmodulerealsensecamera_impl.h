@@ -152,13 +152,13 @@ public:
 
     //TODO optimization
     //not compute texture coordinates if not required
-    bool get_point_cloud(QVector<glm::vec3> &pc,
+    bool get_point_cloud(QVector<vec3> &pc,
                          int &gridw, int &gridh,
                          int mirrorx = 0, int mirrory = 0, int mirrorz = 0);	//get point cloud for connected device
 
 
     //project 3d to screen
-    glm::vec2 project_3d_to_screen(const glm::vec3 &p);
+    vec2 project_3d_to_screen(const vec3 &p);
 
 protected:
     RealsenseSettings settings_;

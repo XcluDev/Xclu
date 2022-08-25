@@ -1,24 +1,8 @@
 #pragma once
 
 //Utility functions and includes
-
-
-//geometry
-#include <glm/glm.hpp>
-
-//vector norm glm::length, glm::length2
-#include <glm/gtx/norm.hpp>
-
-//rotation matrix mat4 glm::eulerAngleYXZ(float yaw, float pitch, float roll);
-//   and mat3x3 glm::orientate3(vec3 const &angles); - here yaw -> z, pitch -> y, roll -> x
-#include <glm/gtx/euler_angles.hpp>
-
-//int-vectors
-#include "int2.h"
-
-//Simplex noise
+#include "xmath_glm.h"
 #include "xnoise.h"
-
 
 //------ Math --------------------------------------------------
 //Pi

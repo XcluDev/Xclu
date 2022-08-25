@@ -339,6 +339,7 @@ HEADERS += \
     modules/moduledescription.h \
     modules/moduleseed.h \
     sdk/math/xmath.h \
+    sdk/math/xmath_glm.h \
     sdk/math/xnoise.h \
     sdk/math/xslowbit.h \
     sdk/math/xtimebuffer.h \

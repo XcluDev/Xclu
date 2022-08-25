@@ -70,7 +70,7 @@ void XModuleSoundSeaOfWords::draw(QPainter &painter, int outw, int outh) {
 //click mouse to play the sound
 void XModuleSoundSeaOfWords::mouse_pressed(int2 pos, XMouseButton /*button*/) {
     //xc_console_append(QString("mouse %1 %2").arg(pos.x).arg(pos.y));
-    //int id = analyze_.find_by_mouse(glm::vec2(float(pos.x)/w_, float(pos.y)/h_));
+    //int id = analyze_.find_by_mouse(vec2(float(pos.x)/w_, float(pos.y)/h_));
     //if (id >= 0) {
     //    //Play
     //    selected_ = id;

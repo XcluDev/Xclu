@@ -47,12 +47,12 @@ public:
     };
 
     //2D embedding
-    QVector<glm::vec2> run_2d(const QVector<QVector<float>> &data, const Params &params);
-    QVector<glm::vec2> result_2d();
+    QVector<vec2> run_2d(const QVector<QVector<float>> &data, const Params &params);
+    QVector<vec2> result_2d();
 
     //3D embedding
-    QVector<glm::vec3> run_3d(const QVector<QVector<float>> &data, const Params &params);
-    QVector<glm::vec3> result_3d();
+    QVector<vec3> run_3d(const QVector<QVector<float>> &data, const Params &params);
+    QVector<vec3> result_3d();
 
     //Universal callers for other dimensions
     const QVector<QVector<double>> &run(const QVector<QVector<float>> &data, const Params &params, int dims=2);

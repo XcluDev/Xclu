@@ -17,7 +17,7 @@ float xNoise(float x, float y){
 }
 
 //--------------------------------------------------
-float xNoise(const glm::vec2& p){
+float xNoise(const vec2& p){
     return xNoise( p.x, p.y );
 }
 
@@ -27,7 +27,7 @@ float xNoise(float x, float y, float z){
 }
 
 //--------------------------------------------------
-float xNoise(const glm::vec3& p){
+float xNoise(const vec3& p){
     return xNoise( p.x, p.y, p.z );
 }
 
@@ -37,7 +37,7 @@ float xNoise(float x, float y, float z, float w){
 }
 
 //--------------------------------------------------
-float xNoise(const glm::vec4& p){
+float xNoise(const vec4& p){
     return xNoise( p.x, p.y, p.z, p.w );
 }
 
@@ -52,7 +52,7 @@ float xSignedNoise(float x, float y){
 }
 
 //--------------------------------------------------
-float xSignedNoise(const glm::vec2& p){
+float xSignedNoise(const vec2& p){
     return xSignedNoise( p.x, p.y );
 }
 
@@ -62,7 +62,7 @@ float xSignedNoise(float x, float y, float z){
 }
 
 //--------------------------------------------------
-float xSignedNoise(const glm::vec3& p){
+float xSignedNoise(const vec3& p){
     return xSignedNoise( p.x, p.y, p.z );
 }
 
@@ -72,7 +72,7 @@ float xSignedNoise(float x, float y, float z, float w){
 }
 
 //--------------------------------------------------
-float xSignedNoise(const glm::vec4& p){
+float xSignedNoise(const vec4& p){
     return xSignedNoise( p.x, p.y, p.z, p.w );
 }
 

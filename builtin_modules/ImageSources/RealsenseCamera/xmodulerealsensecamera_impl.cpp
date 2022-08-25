@@ -294,7 +294,7 @@ void RealsenseCamera::update() {
 
 //--------------------------------------------------------------
 //project 3d to screen
-glm::vec2 RealsenseCamera::project_3d_to_screen(const glm::vec3 &p) {
+vec2 RealsenseCamera::project_3d_to_screen(const vec3 &p) {
     if (intrinsics_inited_) {
         float point[3];
         point[0] = p.x;
@@ -304,13 +304,13 @@ glm::vec2 RealsenseCamera::project_3d_to_screen(const glm::vec3 &p) {
         float pix[2];
 
         rs2_project_point_to_pixel(pix, &intrinsics_, point);
-        return glm::vec2(pix[0], pix[1]);
+        return vec2(pix[0], pix[1]);
     }
-    return glm::vec2(0,0);
+    return vec2(0,0);
 }
 
 //--------------------------------------------------------------
-bool RealsenseCamera::get_point_cloud(QVector<glm::vec3> &pc,
+bool RealsenseCamera::get_point_cloud(QVector<vec3> &pc,
                              int &gridw, int &gridh,
                              int mirrorx, int mirrory, int mirrorz) {				//get point cloud for connected device i
 
@@ -328,7 +328,7 @@ bool RealsenseCamera::get_point_cloud(QVector<glm::vec3> &pc,
             auto *v = points.get_vertices();
             for (int k = 0; k < size; k++) {
                 auto V = v[k];
-                pc[k] = glm::vec3(V.x * kx, V.y * ky, V.z * kz);
+                pc[k] = vec3(V.x * kx, V.y * ky, V.z * kz);
             }
             gridw = settings_.depth_w;
             gridh = settings_.depth_h;

@@ -49,7 +49,7 @@ protected:
         QRectF rect = QRectF(0,0,0,0);
         QRect recti = QRect(0,0,0,0);
         float area() const { return rect.width() * rect.height(); }
-        glm::vec2 center() const { return glm::vec2(rect.x() + rect.width()/2, rect.y() + rect.height()/2); }
+        vec2 center() const { return vec2(rect.x() + rect.width()/2, rect.y() + rect.height()/2); }
     };
     QVector<FaceBlob> blobs_;
 

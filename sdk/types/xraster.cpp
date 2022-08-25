@@ -7,55 +7,20 @@
 #include <QPainter>
 
 //---------------------------------------------------------------------
-/*XRaster_u8;
- XRaster_u8c3;
-XRaster_s8;
-XRaster_int16;
- XRaster_u16;
- XRaster_u32;
-XRaster_int32;
-XRaster_float;
- XRaster_double;
-XRaster_vec2;
-XRaster_vec3;
-XRaster_int2;
-*/
-
-//---------------------------------------------------------------------
-#define MACRO_XRaster_type(TYPE_RASTER, TYPE_ID) \
-template<> XTypeId TYPE_RASTER::type() { \
-    return TYPE_ID; \
-}
-
-MACRO_XRaster_type(XRaster_u8, XTypeId::u8)
-MACRO_XRaster_type(XRaster_u8c3, XTypeId::u8c3)
-MACRO_XRaster_type(XRaster_s8, XTypeId::s8)
-MACRO_XRaster_type(XRaster_int16, XTypeId::int16)
-MACRO_XRaster_type(XRaster_u16, XTypeId::uint16)
-MACRO_XRaster_type(XRaster_int32, XTypeId::int32)
-MACRO_XRaster_type(XRaster_u32, XTypeId::uint32)
-MACRO_XRaster_type(XRaster_float, XTypeId::float32)
-MACRO_XRaster_type(XRaster_double, XTypeId::float64)
-MACRO_XRaster_type(XRaster_vec2, XTypeId::vec2)
-MACRO_XRaster_type(XRaster_vec3, XTypeId::vec3)
-MACRO_XRaster_type(XRaster_vec4, XTypeId::vec4)
-MACRO_XRaster_type(XRaster_int2, XTypeId::int2)
-
-//---------------------------------------------------------------------
 void XRaster::set_type(XTypeId type_id) {
     this->type_id = type_id;
-    bytes_per_pixel = XTypeId_bytes(type_id);
+    sizeofpixel = XTypeId_bytes(type_id);
 }
 
 void XRaster::assert_type(XTypeId type) const {
     xc_assert(type_id == type, QString("XRaster::assert_type error, expected {0} but has {1}")
-              .arg(XTypeId_to_string(type)
-              .arg(XTypeId_to_string(type_id));
+              .arg(XTypeId_to_string(type))
+              .arg(XTypeId_to_string(type_id)));
 }
 
 // Useful wrapper that checks if data is empty
 // Note: it's invalidates and updates after re-allocation, so you must care of it and not use old pointer.
-// XRaster_<T> has typed variant: typed_data_pointer()
+// XRaster has typed variant: typed_data_pointer()
 void* XRaster::data_pointer() {
     if (is_empty()) return nullptr;
     return data_pointer_;
@@ -66,11 +31,37 @@ const void* XRaster::data_pointer() const {
 }
 
 int XRaster::data_size() const {
-    return bytes_per_pixel*w*h;
+    return sizeofpixel*w*h;
 }
 
 int XRaster::bytes_per_line() const {
-    return bytes_per_pixel*w;
+    return sizeofpixel*w;
+}
+
+//----------------------------------------------------------------------------
+// Pixel access
+void* XRaster::pixel_unsafe(int x, int y) {
+    return (void*)&data_pointer_[sizeofpixel*(x+y*w)];
+}
+
+const void* XRaster::pixel_unsafe(int x, int y) const {
+    return (const void*)&data_pointer_[sizeofpixel*(x+y*w)];
+}
+
+void* XRaster::pixel_unsafe(const int2 &p) {
+    return (void*)&data_pointer_[sizeofpixel*(p.x+p.y*w)];
+}
+
+const void* XRaster::pixel_unsafe(const int2 &p) const {
+    return (const void*)&data_pointer_[sizeofpixel*(p.x+p.y*w)];
+}
+
+void XRaster::pixel_unsafe(int x, int y, void* &value) {
+    value = &data_pointer_[sizeofpixel*(x+y*w)];
+}
+
+void XRaster::pixel_unsafe(const int2 &p, void* &value) {
+    value = &data_pointer_[sizeofpixel*(p.x+p.y*w)];
 }
 
 //----------------------------------------------------------------------------
@@ -79,7 +70,7 @@ int XRaster::bytes_per_line() const {
 
 // If 'reallocate is true - then old vector will be cleared.
 // It's useful for clearing memory when image size if significantly reduced, but works slower.
-void XRaster::allocate(int w, int h, XTypeId Type_id, bool reallocate = false) {
+void XRaster::allocate(int w, int h, XTypeId Type_id, bool reallocate) {
     if (!reallocate && is_owner && this->w == w && this->h == h && this->type_id == Type_id) {
         return;
     }
@@ -94,13 +85,15 @@ void XRaster::allocate(int w, int h, XTypeId Type_id, bool reallocate = false) {
     is_owner = true;
 }
 
+//---------------------------------------------------------------------
 void XRaster::copy_from(void* input_img, int w, int h, XTypeId Type_id) {
     allocate(w, h, Type_id);
     memcpy(data_pointer_, input_img, data_size());
 }
 
+//---------------------------------------------------------------------
 void XRaster::clear() {
-    w = h = bytes_per_pixel = 0;
+    w = h = sizeofpixel = 0;
     data_pointer_ = nullptr;
 
     if (is_owner) {
@@ -109,16 +102,20 @@ void XRaster::clear() {
         QVector<quint8>().swap(internal_data_);
     }
 }
+
+//---------------------------------------------------------------------
 bool XRaster::is_empty() const {
-    return data_pointer_ == nullptr || w <= 0 || h <= 0 || bytes_per_pixel <= 0;
+    return data_pointer_ == nullptr || w <= 0 || h <= 0 || sizeofpixel <= 0;
 }
 
+//---------------------------------------------------------------------
 bool XRaster::is_valid() const {
     if (is_empty()) return false;
     if (!is_owner) return true;
     return internal_data_.size() == data_size();
 }
 
+//---------------------------------------------------------------------
 void XRaster::link_data(int w, int h, void* data, XTypeId type) {
     xc_assert(w > 0 && h > 0, "Error XRaster::link() - bad dimensions");
     xc_assert(data, "Error XRaster::link() - data is nullptr");
@@ -132,31 +129,165 @@ void XRaster::link_data(int w, int h, void* data, XTypeId type) {
 
 //---------------------------------------------------------------------
 //maximal difference between two rasters at some point - used for checking if they are equal or different
-template<>
-float XRaster_<glm::vec2>::distance_C(XRaster_<glm::vec2> &compare_with) {
+float XRaster::distance_C(const XRaster &compare_with) const {
+    xc_assert(type_id == compare_with.type_id, "XRaster::distance_C - different types");
     float maxx = 0;
-    for (int i=0; i<w*h; i++) {
-        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+    switch (type_id) {
+    case XTypeId::vec2:
+        for (int i=0; i<w*h; i++) {
+            maxx = qMax(glm::distance2(XVAL(vec2,pixel_unsafe(i)), XVAL(vec2,compare_with.pixel_unsafe(i))), maxx);
+        }
+        break;
+    case XTypeId::vec3:
+        for (int i=0; i<w*h; i++) {
+            maxx = qMax(glm::distance2(XVAL(vec3,pixel_unsafe(i)), XVAL(vec3,compare_with.pixel_unsafe(i))), maxx);
+        }
+        break;
+    case XTypeId::vec4:
+        for (int i=0; i<w*h; i++) {
+            maxx = qMax(glm::distance2(XVAL(vec4,pixel_unsafe(i)), XVAL(vec4,compare_with.pixel_unsafe(i))), maxx);
+        }
+        break;
+   default:
+        xc_exception("XRaster::distance_C not implemented for this type of rasters");
     }
+
     return qSqrt(maxx);
 }
 
-template<>
-float XRaster_<glm::vec3>::distance_C(XRaster_<glm::vec3> &compare_with) {
-    float maxx = 0;
+//---------------------------------------------------------------------
+void XRaster::set(const void* v) {
     for (int i=0; i<w*h; i++) {
-        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+        memcpy(pixel_unsafe(i), v, sizeofpixel);
     }
-    return qSqrt(maxx);
 }
 
-template<>
-float XRaster_<glm::vec4>::distance_C(XRaster_<glm::vec4> &compare_with) {
-    float maxx = 0;
+//---------------------------------------------------------------------
+void XRaster::add_inplace(const XRaster &r) {
+    xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
     for (int i=0; i<w*h; i++) {
-        maxx = qMax(glm::distance2(pixel_unsafe(i), compare_with.pixel_unsafe(i)), maxx);
+        data_pointer_[i] += r.pixel_unsafe(i);
     }
-    return qSqrt(maxx);
 }
 
+//---------------------------------------------------------------------
+void XRaster::mult_inplace(const XRaster &r) {
+    xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
+    for (int i=0; i<w*h; i++) {
+        data_pointer_[i] *= r.pixel_unsafe(i);
+    }
+}
+
+//---------------------------------------------------------------------
+//mirror
+void XRaster::mirror_inplace(bool mirrorx, bool mirrory) {
+    if (mirrorx) {
+        int w2 = w/2;
+        for (int y=0; y<h; y++) {
+            for (int x=0; x<w2; x++) {
+                qSwap(pixel_unsafe(x,y), pixel_unsafe(w-1-x,y));
+            }
+        }
+    }
+    if (mirrory) {
+        int h2 = h/2;
+        for (int y=0; y<h2; y++) {
+            for (int x=0; x<w; x++) {
+                qSwap(pixel_unsafe(x,y), pixel_unsafe(x,h-1-y));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+//rotate on 0, 90, 180, 270 angles
+//TODO only works with 1-channel images (?)
+// works only with internal images
+void XRaster::rotate_inplace(int angle) {
+    xc_assert(is_owner, "XRaster::rotate() is implemented only for internal rasters");
+    if (angle == 90) {
+        int w0 = w;
+        int h0 = h;
+        XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
+        auto *temp_data = temp.data_pointer();
+        this->allocate(h0,w0);
+        for (int y=0; y<h0; y++) {
+            for (int x=0; x<w0; x++) {
+                data_pointer_[(h0-1-y) + h0*x] = temp_data[x+w0*y];
+            }
+        }
+    }
+    if (angle == 180) {
+        XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
+        auto *temp_data = temp.data_pointer();
+
+        auto *data = data_pointer();
+
+        for (int y=0; y<h; y++) {
+            for (int x=0; x<w; x++) {
+                data[(w-1-x) + w*(h-1-y)] = temp_data[x+w*y];
+            }
+        }
+    }
+    if (angle == 270) {
+        //rotate(90);
+        //rotate(180);
+        int w0 = w;
+        int h0 = h;
+        XRaster temp = *this; // Copy. TODO can be made with swap more effectively...
+        auto *temp_data = temp.data_pointer();
+        this->allocate(h0,w0);
+
+        auto *data = data_pointer();
+
+        for (int y=0; y<h0; y++) {
+            for (int x=0; x<w0; x++) {
+                data[y + h0*(w0-1-x)] = temp_data[x+w0*y];
+            }
+        }
+    }
+
+}
+
+//---------------------------------------------------------------------
+//Crop
+XRaster XRaster::crop(int x0, int y0, int w0, int h0) const {
+    xc_assert(x0 >= 0 && y0 >= 0 && w0 >= 0 && h0 >= 0 && x0+w0 <= w && y0+h0 <= h,
+              "XRaster crop - bad arguments");
+    XRaster image;
+    image.allocate(w0, h0);
+    for (int y = 0; y < h0; y++) {
+        for (int x = 0; x < w0; x++) {
+            image.pixel_unsafe(x, y) = pixel_unsafe(x0+x, y0+y);
+        }
+    }
+    return image;
+}
+
+
+//---------------------------------------------------------------------
+//Crop to square
+XRaster XRaster::crop_to_square() const {
+    int w0 = qMin(w,h);
+    int h0 = w0;
+    int x0 = (w-w0)/2;
+    int y0 = (h-h0)/2;
+    return crop(x0,y0,w0,h0);
+}
+
+
+//---------------------------------------------------------------------
+/*float pixel_bilinear(float x, float y) {
+   alg_assert(x >= 0 && y >= 0 && x <= w - 1 && y <= h - 1, "pixel_bilinear error - bad coords", Alg_Error_Algorithm);
+   int xi = int(x);
+   int yi = int(y);
+   float tx = x - xi;
+   float ty = y - yi;
+   int xi1 = min(xi + 1, w - 1);
+   int yi1 = min(yi + 1, h - 1);
+   return pixel_unsafe(xi, yi) * (1 - tx) * (1 - ty)
+       + pixel_unsafe(xi1, yi) * (tx) * (1 - ty)
+       + pixel_unsafe(xi1, yi1) * (tx) * (ty)
+       + pixel_unsafe(xi, yi1) * (1 - tx) * (ty);
+}*/
 //-----------------------------------------------------------------------------------

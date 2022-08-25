@@ -54,7 +54,7 @@ void SoundSamplesAnalyze::draw_sound(QPainter &painter, int w, int h, const QVec
 
 //---------------------------------------------------------------------
 //find id, -1 means no sound found, coordinates uniform (0..1)
-int SoundSamplesAnalyze::find_by_mouse(glm::vec2 pos) {
+int SoundSamplesAnalyze::find_by_mouse(vec2 pos) {
     //search nearest sound
     int k = -1;
     float dist = 100000;
@@ -95,7 +95,7 @@ void SoundSamplesAnalyze::load_from_file(QString file_name, int database_size) {
     for (int i=0; i<n; i++) {
         auto list = file[i].split(" ");
         xc_assert(list.size() == 2, QString("SoundSamplesAnalyze::load_from_file - bad line %1").arg(i+1));
-        pos_[i] = glm::vec2(list[0].toFloat(), list[1].toFloat());
+        pos_[i] = vec2(list[0].toFloat(), list[1].toFloat());
     }
 }
 
@@ -132,7 +132,7 @@ void SoundSamplesAnalyze::method_natural_order(SoundSamplesDatabase &db) {
     for (int i=0; i<n; i++) {
         int x = i % m;
         int y = i / m;
-        pos_[i] = glm::vec2(xmapf(x, 0, m-1, 0, 1), xmapf(y, 0, m-1, 0, 1));
+        pos_[i] = vec2(xmapf(x, 0, m-1, 0, 1), xmapf(y, 0, m-1, 0, 1));
     }
 }
 

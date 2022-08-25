@@ -5,57 +5,57 @@ namespace xc_ml {
 
 //---------------------------------------------------------------------
 //2D embedding
-QVector<glm::vec2> xTSNE::run_2d(const QVector<QVector<float>> &data, const Params &params) {
+QVector<vec2> xTSNE::run_2d(const QVector<QVector<float>> &data, const Params &params) {
     int dim = 2;
     auto &v = run(data, params, dim);
     int n = v.size();
     if (n > 0 && v[0].size() != dim) {
         xc_exception("xTSNE::run_2d internal error - bad resulted vectors size");
     }
-    QVector<glm::vec2> res(n);
+    QVector<vec2> res(n);
     for (int i=0; i<n; i++) {
-        res[i] = glm::vec2(v[i][0], v[i][1]);
+        res[i] = vec2(v[i][0], v[i][1]);
     }
     return res;
 }
 
 //---------------------------------------------------------------------
 //3D embedding
-QVector<glm::vec3> xTSNE::run_3d(const QVector<QVector<float>> &data, const Params &params) {
+QVector<vec3> xTSNE::run_3d(const QVector<QVector<float>> &data, const Params &params) {
     int dim = 3;
     auto &v = run(data, params, dim);
     int n = v.size();
     if (n > 0 && v[0].size() != dim) {
         xc_exception("xTSNE::run_3d internal error - bad resulted vectors size");
     }
-    QVector<glm::vec3> res(n);
+    QVector<vec3> res(n);
     for (int i=0; i<n; i++) {
-        res[i] = glm::vec3(v[i][0], v[i][1], v[i][2]);
+        res[i] = vec3(v[i][0], v[i][1], v[i][2]);
     }
     return res;
 }
 
 
 //---------------------------------------------------------------------
-QVector<glm::vec2> xTSNE::result_2d() {
+QVector<vec2> xTSNE::result_2d() {
     auto &v = result();
-    if (v.isEmpty()) return QVector<glm::vec2>();
+    if (v.isEmpty()) return QVector<vec2>();
     xc_assert(v[0].size() == 2, "xTSNE::result_2d() error");
-    QVector<glm::vec2> v2(v.size());
+    QVector<vec2> v2(v.size());
     for (int i=0; i<v.size(); i++) {
-        v2[i] = glm::vec2(v[i][0], v[i][1]);
+        v2[i] = vec2(v[i][0], v[i][1]);
     }
     return v2;
 }
 
 //---------------------------------------------------------------------
-QVector<glm::vec3> xTSNE::result_3d() {
+QVector<vec3> xTSNE::result_3d() {
     auto &v = result();
-    if (v.isEmpty()) return QVector<glm::vec3>();
+    if (v.isEmpty()) return QVector<vec3>();
     xc_assert(v[0].size() == 3, "xTSNE::result_3d() error");
-    QVector<glm::vec3> v3(v.size());
+    QVector<vec3> v3(v.size());
     for (int i=0; i<v.size(); i++) {
-        v3[i] = glm::vec3(v[i][0], v[i][1], v[i][2]);
+        v3[i] = vec3(v[i][0], v[i][1], v[i][2]);
     }
     return v3;
 }

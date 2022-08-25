@@ -89,8 +89,8 @@ protected:
     //Data from Python
     void parse_yolo();
     //found objects
-    QVector<glm::vec2> pnt_;
-    QVector<glm::vec2> size_;
+    QVector<vec2> pnt_;
+    QVector<vec2> size_;
 
     void move_pickup();
     void move_forward();
@@ -107,8 +107,8 @@ protected:
 
     int mind_on_ = false;
     void mind_update();
-    glm::vec2 target_;
-    glm::vec2 target_size_;
+    vec2 target_;
+    vec2 target_size_;
     float last_pickup = 0;
 
     const int Pickup = 1;

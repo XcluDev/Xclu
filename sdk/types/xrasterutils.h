@@ -53,8 +53,7 @@ public:
     static void draw(QPainter *painter, XRaster *raster, const QPoint &p);
 
     //Resize
-    template<typename T>
-    static void resize_nearest(XRaster_<T> &input, XRaster_<T> &output, int new_w, int new_h) {
+    static void resize_nearest(XRaster &input, XRaster &output, int new_w, int new_h) {
         int w = input.w;
         int h = input.h;
         xc_assert(input.data_pointer() != output.data_pointer(), "resize_nearest, input and output must be different images");
@@ -68,8 +67,7 @@ public:
         }
     }
 
-    template<typename T>
-    static void resize_nearest(XRaster_<T> &input, XRaster_<T> &output, float scale) {
+    static void resize_nearest(XRaster &input, XRaster &output, float scale) {
         int new_w = int(input.w * scale);
         int new_h = int(input.h * scale);
         resize_nearest(input, output, new_w, new_h);
@@ -78,8 +76,7 @@ public:
     // Blur
     // Works in-place!
     // Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
-    template<typename T>
-    static void blur(XRaster_<T> &raster, XRaster_<T> &result, float blur_radius) {
+    static void blur(XRaster &raster, XRaster &result, float blur_radius) {
         xc_assert(!raster.is_empty(), "XRaster::blur - input raster is empty");
         xc_assert(blur_radius>=0, "XRaster::blur - blur radius must be non-negative");
         QImage img;

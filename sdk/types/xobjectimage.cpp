@@ -43,7 +43,7 @@ void XObjectImage::draw_thumbnail(QPainter &p, int w, int h) const {
 void XObjectImage::load(XObject &object, QString file_name) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "Can't load image " + file_name);
-    create_from_QImage(object, qimage, "RGB", XTypeId::u8);
+    create_from_QImage(object, qimage, "RGB", XTypeId::uint8);
 }
 
 //---------------------------------------------------------------------

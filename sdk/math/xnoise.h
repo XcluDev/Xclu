@@ -14,19 +14,19 @@ float xNoise(float x);
 float xNoise(float x, float y);
 
 /// \brief Calculates a two dimensional Perlin noise value between 0.0...1.0.
-float xNoise(const glm::vec2& p);
+float xNoise(const vec2& p);
 
 /// \brief Calculates a three dimensional Perlin noise value between 0.0...1.0.
 float xNoise(float x, float y, float z);
 
 /// \brief Calculates a three dimensional Perlin noise value between 0.0...1.0.
-float xNoise(const glm::vec3& p);
+float xNoise(const vec3& p);
 
 /// \brief Calculates a four dimensional Perlin noise value between 0.0...1.0.
 float xNoise(float x, float y, float z, float w);
 
 /// \brief Calculates a four dimensional Perlin noise value between 0.0...1.0.
-float xNoise(const glm::vec4& p);
+float xNoise(const vec4& p);
 
 /// \brief Calculates a one dimensional Perlin noise value between -1.0...1.0.
 float xSignedNoise(float x);
@@ -35,18 +35,18 @@ float xSignedNoise(float x);
 float xSignedNoise(float x, float y);
 
 /// \brief Calculates a two dimensional Perlin noise value between -1.0...1.0.
-float xSignedNoise(const glm::vec2& p);
+float xSignedNoise(const vec2& p);
 
 /// \brief Calculates a three dimensional Perlin noise value between -1.0...1.0.
 float xSignedNoise(float x, float y, float z);
 
 /// \brief Calculates a three dimensional Perlin noise value between -1.0...1.0.
-float xSignedNoise(const glm::vec3& p);
+float xSignedNoise(const vec3& p);
 
 /// \brief Calculates a four dimensional Perlin noise value between -1.0...1.0.
 float xSignedNoise(float x, float y, float z, float w);
 
 /// \brief Calculates a four dimensional Perlin noise value between -1.0...1.0.
-float xSignedNoise(const glm::vec4 & p);
+float xSignedNoise(const vec4 & p);
 
 #endif // xNoise_H

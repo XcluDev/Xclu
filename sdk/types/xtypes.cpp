@@ -13,12 +13,12 @@ void rect_int::crop(int w0, int h0) {
 
 //-------------------------------------------------------
 //convert int -> float points
-glm::vec2 to_vec2(const int2 &p) {
-    return glm::vec2(p.x, p.y);
+vec2 to_vec2(const int2 &p) {
+    return vec2(p.x, p.y);
 }
 
 //-------------------------------------------------------
-int2 to_int2_truncate(const glm::vec2 &p) {
+int2 to_int2_truncate(const vec2 &p) {
     return int2(int(p.x), int(p.y));
 }
 
@@ -28,13 +28,13 @@ unsigned int XTypeId_bytes(XTypeId type) {
     switch (type) {
     case XTypeId::none:
         return 0;
-    case XTypeId::u8:
+    case XTypeId::uint8:
         return 1;
-    case XTypeId::u8c3:
+    case XTypeId::rgb_u8:
         return 3;
-    case XTypeId::u8c4:
+    case XTypeId::rgba_u8:
         return 4;
-    case XTypeId::s8:
+    case XTypeId::int8:
         return 1;
     case XTypeId::int16:
         return 2;
@@ -49,11 +49,11 @@ unsigned int XTypeId_bytes(XTypeId type) {
     case XTypeId::float64:
         return 8;
     case XTypeId::vec2:
-        return sizeof(glm::vec2);
+        return sizeof(vec2);
     case XTypeId::vec3:
-        return sizeof(glm::vec3);
+        return sizeof(vec3);
     case XTypeId::vec4:
-        return sizeof(glm::vec4);
+        return sizeof(vec4);
     case XTypeId::int2:
         return sizeof(int2);
     default:
@@ -68,13 +68,13 @@ int XTypeId_channels(XTypeId type) {
     switch (type) {
     case XTypeId::none:
         return 0;
-    case XTypeId::u8:
+    case XTypeId::uint8:
         return 1;
-    case XTypeId::u8c3:
+    case XTypeId::rgb_u8:
         return 3;
-    case XTypeId::u8c4:
+    case XTypeId::rgba_u8:
         return 4;
-    case XTypeId::s8:
+    case XTypeId::int8:
     case XTypeId::int16:
     case XTypeId::uint16:
     case XTypeId::int32:
@@ -102,14 +102,14 @@ QString XTypeId_to_string(XTypeId type) {
     switch (type) {
     case XTypeId::none:
         return "";
-    case XTypeId::u8:
-        return "u8";
-    case XTypeId::u8c3:
-        return "u8c3";
-    case XTypeId::u8c4:
-        return "u8c4";
-    case XTypeId::s8:
-        return "s8";
+    case XTypeId::uint8:
+        return "uint8";
+    case XTypeId::rgb_u8:
+        return "rgb_u8";
+    case XTypeId::rgba_u8:
+        return "rgba_u8";
+    case XTypeId::int8:
+        return "int8";
     case XTypeId::int16:
         return "int16";
     case XTypeId::uint16:
@@ -141,10 +141,10 @@ QString XTypeId_to_string(XTypeId type) {
 //TODO optimize using hashmap
 XTypeId string_to_XTypeId(QString type) {
     if (type == "none") return XTypeId::none;
-    if (type == "u8") return XTypeId::u8;
-    if (type == "u8c3") return XTypeId::u8c3;
-    if (type == "u8c4") return XTypeId::u8c4;
-    if (type == "s8") return XTypeId::s8;
+    if (type == "uint8") return XTypeId::uint8;
+    if (type == "rgb_u8") return XTypeId::rgb_u8;
+    if (type == "rgba_u8") return XTypeId::rgba_u8;
+    if (type == "int8") return XTypeId::int8;
     if (type == "int16") return XTypeId::int16;
     if (type == "uint16") return XTypeId::uint16;
     if (type == "int32") return XTypeId::int32;
@@ -164,13 +164,13 @@ bool is_XTypeId_integer(XTypeId type) {
     switch (type) {
     case XTypeId::none:
         return false;
-    case XTypeId::u8:
+    case XTypeId::uint8:
         return true;
-    case XTypeId::u8c3:
+    case XTypeId::rgb_u8:
         return false;
-    case XTypeId::u8c4:
+    case XTypeId::rgba_u8:
         return false;
-    case XTypeId::s8:
+    case XTypeId::int8:
         return true;
     case XTypeId::int16:
         return true;

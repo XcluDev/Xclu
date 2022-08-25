@@ -82,7 +82,7 @@ public:
 
         //read image
         //TODO optimize, may receive and grayscale!
-        //but now converts to u8 rgb.
+        //but now converts to uint8 rgb.
         to_raster(data, raster, rect);
     }
 

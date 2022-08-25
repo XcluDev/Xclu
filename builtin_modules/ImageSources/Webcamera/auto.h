@@ -192,7 +192,7 @@ enum_image_channels gete_image_channels() { return enum_image_channels(geti_("im
 QString getraw_image_channels() { return getraw_("image_channels");}
 
 //Enum Data Type
-//Desired data type of the output image, u8=0..255, float=[0,1].
+//Desired data type of the output image, uint8=0..255, float=[0,1].
 enum enum_image_data_type {
     image_data_type_u8 = 0,
     image_data_type_float = 1,

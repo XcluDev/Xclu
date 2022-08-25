@@ -106,8 +106,8 @@ if settings 1
 in enum Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
 #TODO не поддерживаются каналы HSL,H,S,L
     //Desired channels of the output image.
-in enum Data_Type image_data_type=u8 [u8,float]
-    //Desired data type of the output image, u8=0..255, float=[0,1].
+in enum Data_Type image_data_type=uint8 [uint8,float]
+    //Desired data type of the output image, uint8=0..255, float=[0,1].
 
     
 separator
