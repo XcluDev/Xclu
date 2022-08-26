@@ -46,7 +46,7 @@ void XClass::bang_internal() {
             start();
             status_.was_started = true;
         }
-        process_events();   //mouse/keyboard events in XModuleWidget
+        process_events();   //mouse/keyboard events in XClassWidget
         update();
     }
 }
@@ -179,8 +179,8 @@ void XClass::call(XCallData& call) {
 
     }
     catch (XException &e) {
-        err.prepend(QString("Error during executing function '%1' in module '%2':")
-                  .arg(xcalltype_to_string_for_user(function)).arg(name()), e.err());
+        call.error.prepend(QString("Error during executing function '%1' in module '%2':")
+                  .arg(xcalltype_to_string_for_user(call.type)).arg(name()), e.err());
     }
 }
 

@@ -73,7 +73,7 @@ public:
     //    module_accept_calls=draw
     //-----------------------------------------------
     // Subclasses MUST reimplement this for drawing,
-    // as XModuleWidget called by Window, or as rendering subclass called by RenderArea
+    // as XClassWidget called by Window, or as rendering subclass called by RenderArea
     virtual void draw(QPainter &painter, int w, int h);
 
     //------------------------------------------------------------------------
@@ -132,7 +132,7 @@ protected:
     virtual void on_loaded() {}
     //эти функции запускаются, только если модуль включен:
     virtual void start() {}
-    virtual void process_events() {}   //used for processing mouse/keyboard events in at XModuleWidget
+    virtual void process_events() {}   //used for processing mouse/keyboard events in at XClassWidget
     virtual void update() {}
     virtual void stop() {}
 
