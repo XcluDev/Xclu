@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmodulessoundseaofwords.h"
+#include "xclasssoundseaofwords.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QProcess>

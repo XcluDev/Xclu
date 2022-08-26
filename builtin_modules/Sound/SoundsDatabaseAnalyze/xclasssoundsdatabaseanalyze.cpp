@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmodulessoundsdatabaseanalyze.h"
+#include "xclasssoundsdatabaseanalyze.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QProcess>

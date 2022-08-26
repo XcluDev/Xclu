@@ -16,33 +16,33 @@ SOURCES += \
     $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.cpp \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp \
-    $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.cpp \
-    $$PWD/builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp \
-    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.cpp \
-    $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.cpp \
-    $$PWD/builtin_modules/Project/Project/xmoduleproject.cpp \
-    $$PWD/builtin_modules/Sound/SoundIn/xmodulesoundin.cpp \
-    $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp \
-    $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.cpp \
-    $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.cpp \
+    $$PWD/builtin_modules/ImageSources/Webcamera/xclasswebcamera.cpp \
+    $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.cpp \
+    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
+    $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
+    $$PWD/builtin_modules/Project/Project/xclassproject.cpp \
+    $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.cpp \
+    $$PWD/builtin_modules/Sound/SoundOsc/xclasssoundosc.cpp \
+    $$PWD/builtin_modules/Sound/SoundOut/xclasssoundout.cpp \
+    $$PWD/builtin_modules/Sound/SoundPlay/xclasssoundplay.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.cpp \
-    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.cpp \
-    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xmodulessoundseaofwords.cpp \
-    $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp \
-    $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.cpp \
-    $$PWD/builtin_modules/System/Timer/xmoduletimer.cpp \
-    $$PWD/builtin_modules/System/Execute/xmoduleexecute.cpp \
-    $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.cpp \
-    $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.cpp \
-    $$PWD/builtin_modules/Text/TextVariation/xmoduletextvariation.cpp \
-    $$PWD/builtin_modules/Utils/Test/xmoduletest.cpp \
-    $$PWD/builtin_modules/Utils/TestDrawing/xmoduletestdrawing.cpp \
-    $$PWD/builtin_modules/Window/WImage/xmodulewimage.cpp \
-    $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp \
-    $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.cpp \
-    $$PWD/builtin_modules/Project/Notes/xmodulenotes.cpp \
-    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclassssoundsdatabaseanalyze.cpp \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclassssoundseaofwords.cpp \
+    $$PWD/builtin_modules/Sound/SynthFromImage/xclasssynthfromimage.cpp \
+    $$PWD/builtin_modules/System/FileCreate/xclassfilecreate.cpp \
+    $$PWD/builtin_modules/System/Timer/xclasstimer.cpp \
+    $$PWD/builtin_modules/System/Execute/xclassexecute.cpp \
+    $$PWD/builtin_modules/System/PrintConsole/xclassprintconsole.cpp \
+    $$PWD/builtin_modules/System/ScanFolder/xclassscanfolder.cpp \
+    $$PWD/builtin_modules/Text/TextVariation/xclasstextvariation.cpp \
+    $$PWD/builtin_modules/Utils/Test/xclasstest.cpp \
+    $$PWD/builtin_modules/Utils/TestDrawing/xclasstestdrawing.cpp \
+    $$PWD/builtin_modules/Window/WImage/xclasswimage.cpp \
+    $$PWD/builtin_modules/Window/Window/xclasswindow.cpp \
+    $$PWD/builtin_modules/Window/RenderArea/xclassrenderarea.cpp \
+    $$PWD/builtin_modules/Project/Notes/xclassnotes.cpp \
+    $$PWD/builtin_modules/Window/RenderElement/xclassrenderelement.cpp
 
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
@@ -68,54 +68,54 @@ HEADERS += \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.h \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.h \
     $$PWD/builtin_modules/ImageSources/Webcamera/auto.h \
-    $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.h \
+    $$PWD/builtin_modules/ImageSources/Webcamera/xclasswebcamera.h \
     $$PWD/builtin_modules/Interactive/MotionDetector/auto.h \
-    $$PWD/builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.h \
+    $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.h \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/auto.h \
-    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.h \
+    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.h \
     $$PWD/builtin_modules/ML/MLExecute/auto.h \
-    $$PWD/builtin_modules/ML/MLExecute/xmodulemlexecute.h \
+    $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
-    $$PWD/builtin_modules/Project/Project/xmoduleproject.h \
+    $$PWD/builtin_modules/Project/Project/xclassproject.h \
     $$PWD/builtin_modules/Sound/SoundIn/auto.h \
-    $$PWD/builtin_modules/Sound/SoundIn/xmodulesoundin.h \
+    $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.h \
     $$PWD/builtin_modules/Sound/SoundOsc/auto.h \
-    $$PWD/builtin_modules/Sound/SoundOsc/xmodulesoundosc.h \
+    $$PWD/builtin_modules/Sound/SoundOsc/xclasssoundosc.h \
     $$PWD/builtin_modules/Sound/SoundOut/auto.h \
-    $$PWD/builtin_modules/Sound/SoundOut/xmodulesoundout.h \
+    $$PWD/builtin_modules/Sound/SoundOut/xclasssoundout.h \
     $$PWD/builtin_modules/Sound/SoundPlay/auto.h \
-    $$PWD/builtin_modules/Sound/SoundPlay/xmodulesoundplay.h \
+    $$PWD/builtin_modules/Sound/SoundPlay/xclasssoundplay.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/auto.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.h \
-    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xmodulessoundsdatabaseanalyze.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclassssoundsdatabaseanalyze.h \
     $$PWD/builtin_modules/Sound/SoundsSeaOfWords/auto.h \
-    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xmodulessoundseaofwords.h \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclassssoundseaofwords.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
-    $$PWD/builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h \
+    $$PWD/builtin_modules/Sound/SynthFromImage/xclasssynthfromimage.h \
     $$PWD/builtin_modules/System/FileCreate/auto.h \
-    $$PWD/builtin_modules/System/FileCreate/xmodulefilecreate.h \
-    $$PWD/builtin_modules/System/Timer/xmoduletimer.h \
+    $$PWD/builtin_modules/System/FileCreate/xclassfilecreate.h \
+    $$PWD/builtin_modules/System/Timer/xclasstimer.h \
     $$PWD/builtin_modules/System/Execute/auto.h \
-    $$PWD/builtin_modules/System/Execute/xmoduleexecute.h \
+    $$PWD/builtin_modules/System/Execute/xclassexecute.h \
     $$PWD/builtin_modules/System/PrintConsole/auto.h \
-    $$PWD/builtin_modules/System/PrintConsole/xmoduleprintconsole.h \
+    $$PWD/builtin_modules/System/PrintConsole/xclassprintconsole.h \
     $$PWD/builtin_modules/System/ScanFolder/auto.h \
-    $$PWD/builtin_modules/System/ScanFolder/xmodulescanfolder.h \
-    $$PWD/builtin_modules/Text/TextVariation/xmoduletextvariation.h \
+    $$PWD/builtin_modules/System/ScanFolder/xclassscanfolder.h \
+    $$PWD/builtin_modules/Text/TextVariation/xclasstextvariation.h \
     $$PWD/builtin_modules/Utils/Test/auto.h \
-    $$PWD/builtin_modules/Utils/Test/xmoduletest.h \
-    $$PWD/builtin_modules/Utils/TestDrawing/xmoduletestdrawing.h \
+    $$PWD/builtin_modules/Utils/Test/xclasstest.h \
+    $$PWD/builtin_modules/Utils/TestDrawing/xclasstestdrawing.h \
     $$PWD/builtin_modules/Window/WImage/auto.h \
-    $$PWD/builtin_modules/Window/WImage/xmodulewimage.h \
+    $$PWD/builtin_modules/Window/WImage/xclasswimage.h \
     $$PWD/builtin_modules/Window/Window/auto.h \
-    $$PWD/builtin_modules/Window/Window/xmodulewindow.h \
+    $$PWD/builtin_modules/Window/Window/xclasswindow.h \
     $$PWD/builtin_modules/Window/RenderArea/auto.h \
-    $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.h \
+    $$PWD/builtin_modules/Window/RenderArea/xclassrenderarea.h \
     $$PWD/builtin_modules/Project/Notes/auto.h \
-    $$PWD/builtin_modules/Project/Notes/xmodulenotes.h \
+    $$PWD/builtin_modules/Project/Notes/xclassnotes.h \
     $$PWD/builtin_modules/Window/RenderElement/auto.h \
-    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h \
+    $$PWD/builtin_modules/Window/RenderElement/xclassrenderelement.h \
     $$PWD/builtin_modules/ComputerVision/FaceDetect/auto.h
 
 
@@ -411,12 +411,12 @@ HEADERS += \
 #}
 #
 #SOURCES +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera.cpp \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera_impl.cpp
 #
 #HEADERS +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera.h \
+#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera_impl.h
 
 
 #--------------------------------------------------------------------------
@@ -430,11 +430,11 @@ HEADERS += \
 #    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
 #
 #SOURCES +=    \
-#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.cpp
+#    $$PWD/builtin_modules/Communication/Ndi/xclassndi.cpp
 #
 #HEADERS +=    \
 #    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-#    $$PWD/builtin_modules/Communication/Ndi/xmodulendi.h
+#    $$PWD/builtin_modules/Communication/Ndi/xclassndi.h
 #
 #}
 
