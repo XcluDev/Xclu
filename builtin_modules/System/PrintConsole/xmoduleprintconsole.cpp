@@ -5,7 +5,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(PrintConsole)
+REGISTER_XCLASS(PrintConsole)
 
 //---------------------------------------------------------------------
 XModulePrintConsole::XModulePrintConsole(QString class_name)

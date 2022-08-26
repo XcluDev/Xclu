@@ -1,5 +1,5 @@
-#ifndef MODULEDESCRIPTION_H
-#define MODULEDESCRIPTION_H
+#ifndef XMODULEDESCRIPTION_H
+#define XMODULEDESCRIPTION_H
 
 //Описание модуля - имя класса, категория,
 //а также описание, какие вызовы он принимает и какие вызовы может осуществлять
@@ -13,10 +13,10 @@
 //В случае ошибки конструктор генерирует исключение
 //После создания, класс позволяет проверить, является ли заданная функция зарегистрированной
 //Это используется для контроля call-вызовов
-class ModuleRegisteredCalls {
+class XModuleRegisteredCalls {
 public:
-    ModuleRegisteredCalls() {}
-    ModuleRegisteredCalls(QString line);
+    XModuleRegisteredCalls() {}
+    XModuleRegisteredCalls(QString line);
     bool accepts(XCallType function);     //разрешен ли вызов функции. Note: On `XCallTypeNone` returns true.
     bool accepts_by_filter(const QString &filter);  //returns true if 'filter' is empty or contained in any of list
     QString to_string_gui();        //конвертация в строку для выдачи в text
@@ -27,7 +27,7 @@ protected:
 
 
 //Описание модуля
-struct ModuleDescription {
+struct XModuleDescription {
     //Внимание, при изменении - требуется скорректировать
     //запись/считывание json в module.cpp
 
@@ -53,8 +53,8 @@ struct ModuleDescription {
 
     ModuleImplType impl=ModuleImplTypeNone;
     //ModuleRunMode default_run_mode = ModuleRunMode_Main_Loop; //режим работы, который выставлять по умолчанию
-    ModuleRegisteredCalls accept_calls;   //список через запятую названий функций, которые модуль может обработать. "*" - значит все функции.
-    ModuleRegisteredCalls send_calls;  //список через запятую названий функций, которые модуль может послать. "*" - значит все функции.
+    XModuleRegisteredCalls accept_calls;   //список через запятую названий функций, которые модуль может обработать. "*" - значит все функции.
+    XModuleRegisteredCalls send_calls;  //список через запятую названий функций, которые модуль может послать. "*" - значит все функции.
 
     //парсинг описания модуля
     //возвращает true, если строка использовалась
@@ -76,4 +76,4 @@ struct ModuleDescription {
     }
 };
 
-#endif // MODULEDESCRIPTION_H
+#endif // XMODULEDESCRIPTION_H

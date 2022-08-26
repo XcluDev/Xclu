@@ -18,7 +18,7 @@ ExportInterface::ExportInterface()
 //DATETIME - replace with date time
 //CONTENT - replace with lines we want
 
-void ExportInterface::export_to_h_file(ModuleInterface *interf, QString folder) {
+void ExportInterface::export_to_h_file(XModuleInterface *interf, QString folder) {
     //interf->description().class_name can be not set, so deduce it from folder name
     QString class_name = "XClassBase" + QFileInfo(folder).baseName();
 
@@ -52,7 +52,7 @@ void ExportInterface::export_to_h_file(ModuleInterface *interf, QString folder) 
 }
 
 //---------------------------------------------------------------------
-void ExportInterface::append_interface(ModuleInterface *interf, QStringList &file) {
+void ExportInterface::append_interface(XModuleInterface *interf, QStringList &file) {
     //So, let's put it here!
     for (auto &item: interf->items()) {
         if (!item->belongs_general_page()) {
@@ -65,14 +65,14 @@ void ExportInterface::append_interface(ModuleInterface *interf, QStringList &fil
 void ExportInterface::export_all_builtin_h_files() {
     int n = FACTORY.size();
     for (int i=0; i<n; i++) {
-        ModuleSeed *seed = FACTORY.get_module(i);
+        XModulePrototype *seed = FACTORY.get_module(i);
         if (!seed) {
             continue;
         }
         try {
             //Create interface
-            QScopedPointer<ModuleInterface> interf;
-            interf.reset(new ModuleInterface(*seed));
+            QScopedPointer<XModuleInterface> interf;
+            interf.reset(new XModuleInterface(*seed));
             if (!interf.data()) continue;
 
             //Export

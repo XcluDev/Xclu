@@ -96,7 +96,7 @@ void ProjectGui::update_module_list() {
 void ProjectGui::new_module(int i, QString class_name, QString name_hint) {
     //из редактора списка модулей пришел сигнал, что требуется создать модуль типа type
     //генерируем его в PROJECT, и там ему присваивается уникальное имя
-    Module *module = PROJECT.new_module(i, class_name, name_hint);
+    XModule *module = PROJECT.new_module(i, class_name, name_hint);
     if (module) {
         emit editor_modules->inserted_module(i, module->name());
         //Сигнал, что проект был изменен

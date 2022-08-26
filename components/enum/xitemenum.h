@@ -3,12 +3,12 @@
 
 #include "xitemscalar.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemEnum: public XItemScalarInt
 {
 public:
-    XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemEnum(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //string to write/read json (for enum is custom)
     virtual QString value_string_json() { return value_raw(); }

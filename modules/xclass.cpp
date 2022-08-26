@@ -1,6 +1,6 @@
 #include "xclass.h"
-#include "moduleinterface.h"
-#include "module.h"
+#include "xmoduleinterface.h"
+#include "xmodule.h"
 #include "incl_cpp.h"
 #include "xobject.h"
 #include "xintermodulecalls.h"
@@ -111,7 +111,7 @@ void XClass::execute(ModuleExecuteStage stage) {
 
         /*case ModuleExecuteStageCallback:
             if (enabled) {
-                xc_assert(mode == ModuleRunMode_Callback, "Module is called by callback, but it's Run Mode is not Callback!");
+                xc_assert(mode == ModuleRunMode_Callback, "XModule is called by callback, but it's Run Mode is not Callback!");
                 update_internal();
             }
             break;*/
@@ -246,14 +246,14 @@ void XClass::on_sound_buffer_received_internal(XObject *input, XObject * /*outpu
 
 //---------------------------------------------------------------------
 void XClass::on_custom_call(void* /*data*/, QString /*params*/) {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
 void *XClass::on_create_widget(QString /*parent_id*/) {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process function 'create_widget', because on_create_widget() is not implemented");
     return nullptr;
 }
@@ -261,14 +261,14 @@ void *XClass::on_create_widget(QString /*parent_id*/) {
 //---------------------------------------------------------------------
 //resetting created widget (`create_widget` called with empty parent_id)
 void XClass::on_reset_widget() {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process function 'create_widget', because on_reset_widget() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`render` call implementation
 void XClass::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process Paint call, because on_paint() is not implemented");
 }
 
@@ -276,7 +276,7 @@ void XClass::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
 //`sound_buffer_add` call implementation, fills `data` buffer
 //there are required to fill channels * samples values at data
 void XClass::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process function 'sound_buffer_add', because on_sound_buffer_add() is not implemented");
 }
 
@@ -284,7 +284,7 @@ void XClass::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*sa
 //`sound_buffer_received` call implementation, processes input `data` buffer
 //there are channels * samples values at `data`
 void XClass::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
-    xc_exception("Module '" + name()
+    xc_exception("XModule '" + name()
                    + "' can't process function 'sound_buffer_received', because on_sound_buffer_received() is not implemented");
 }
 

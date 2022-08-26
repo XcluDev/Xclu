@@ -17,7 +17,7 @@ REGISTER_XITEM(XItemText, text)
 //дополнительные строки - это текст для значения по умолчанию,
 //в виде строк, ограниченных " " - чтобы триммер строк не съел пробелы в конце.
 
-XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemText::XItemText(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalar_<QString>(interf, pre_description)
 {
 
@@ -38,7 +38,7 @@ XItemText::XItemText(ModuleInterface *interf, const XItemPreDescription &pre_des
 //Function for setting value using link
 void XItemText::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_string(mod->gets(linkres));
 }
 

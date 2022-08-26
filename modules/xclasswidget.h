@@ -7,7 +7,7 @@
 #include "xclass.h"
 
 class InterfaceItem;
-class Module;
+class XModule;
 class XObject;
 class QPainter;
 class XModuleVisualWidget;

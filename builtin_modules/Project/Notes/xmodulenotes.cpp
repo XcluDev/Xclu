@@ -4,7 +4,7 @@
 #include "project_props.h"
 
 //registering module implementation
-REGISTER_XMODULE(Notes)
+REGISTER_XCLASS(Notes)
 
 //---------------------------------------------------------------------
 XModuleNotes::XModuleNotes(QString class_name)

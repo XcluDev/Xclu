@@ -1,21 +1,21 @@
-#include "modulesfactory.h"
+#include "xmodulesfactory.h"
 #include <QDirIterator>
 #include "incl_cpp.h"
-#include "xmoduleseed.h"
+#include "xmoduleprototype.h"
 #include "xmoduleinterface.h"
 #include "registrarxclass.h"
 
-ModulesFactory FACTORY;
+XModulesFactory FACTORY;
 
 //---------------------------------------------------------------------
-ModulesFactory::ModulesFactory() {
+XModulesFactory::XModulesFactory() {
 
 }
 
 //---------------------------------------------------------------------
-ModulesFactory::~ModulesFactory() {
-    //qDebug() << "ModulesFactory destructor:";
-    QMapIterator<QString, ModuleSeed *> i(modules_);
+XModulesFactory::~XModulesFactory() {
+    //qDebug() << "XModulesFactory destructor:";
+    QMapIterator<QString, XModulePrototype *> i(modules_);
     while (i.hasNext()) {
         i.next();
         //qDebug() << "    " << i.key() << ": " << i.value();
@@ -24,7 +24,7 @@ ModulesFactory::~ModulesFactory() {
 }
 
 //---------------------------------------------------------------------
-void ModulesFactory::setup() {
+void XModulesFactory::setup() {
     //qDebug("Listing modules:");
 
     //собираем встроенные модули
@@ -75,7 +75,7 @@ void ModulesFactory::setup() {
 //module1_folder=~/Desktop/Cosmo/Cosmovibro/CosmovibroRt
 //#------------------------------------------
 
-void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folders) {
+void XModulesFactory::read_custom_modules(QStringList &names, QStringList &folders) {
     names.clear();
     folders.clear();
 
@@ -115,9 +115,9 @@ void ModulesFactory::read_custom_modules(QStringList &names, QStringList &folder
 }
 
 //---------------------------------------------------------------------
-void ModulesFactory::add_module(QString module_name, QString module_folder, QString category_name) {
+void XModulesFactory::add_module(QString module_name, QString module_folder, QString category_name) {
     //обработка исключений проводится внутри load_module
-    auto *module = ModuleSeed::load_module(module_folder, category_name, module_name);
+    auto *module = XModulePrototype::load_module(module_folder, category_name, module_name);
     if (module) {
         QString name = module->description.class_name;
         //qDebug() << "--- " << name;
@@ -133,12 +133,12 @@ void ModulesFactory::add_module(QString module_name, QString module_folder, QStr
 
 //---------------------------------------------------------------------
 //Доступ к модулям
-int ModulesFactory::size() {
+int XModulesFactory::size() {
     return names_.size();
 }
 
 //---------------------------------------------------------------------
-ModuleSeed *ModulesFactory::get_module(int i) {
+XModulePrototype *XModulesFactory::get_module(int i) {
     if (i >= 0 && i < size()) {
         return modules_.value(names_[i]);
     }
@@ -146,21 +146,21 @@ ModuleSeed *ModulesFactory::get_module(int i) {
 }
 
 //---------------------------------------------------------------------
-ModuleSeed *ModulesFactory::get_module(QString class_name) {
-    xc_assert(modules_.contains(class_name), "Internal error at ModulesFactory::get_module, unknown module class '" + class_name + "'");
+XModulePrototype *XModulesFactory::get_module(QString class_name) {
+    xc_assert(modules_.contains(class_name), "Internal error at XModulesFactory::get_module, unknown module class '" + class_name + "'");
     return modules_.value(class_name, nullptr);
 }
 
 //---------------------------------------------------------------------
 //обновить список имен и категорий
-void ModulesFactory::update_categories() {
+void XModulesFactory::update_categories() {
     names_.clear();
     categories_.clear();
     modules_in_category_.clear();
 
     //сбор имен
     {
-        QMapIterator<QString, ModuleSeed *> i(modules_);
+        QMapIterator<QString, XModulePrototype *> i(modules_);
         while (i.hasNext()) {
             i.next();
             names_.push_back(i.key());
@@ -196,12 +196,12 @@ void ModulesFactory::update_categories() {
 
 //---------------------------------------------------------------------
 //Доступ к категориям
-int ModulesFactory::categories() {
+int XModulesFactory::categories() {
     return categories_.size();
 }
 
 //---------------------------------------------------------------------
-QString ModulesFactory::category_name(int i) {
+QString XModulesFactory::category_name(int i) {
     if (i >= 0 && i < categories()) {
         return categories_[i];
     }
@@ -209,7 +209,7 @@ QString ModulesFactory::category_name(int i) {
 }
 
 //---------------------------------------------------------------------
-int ModulesFactory::category_size(int i) {
+int XModulesFactory::category_size(int i) {
     if (i >= 0 && i < categories()) {
         return modules_in_category_[categories_[i]].size();
     }
@@ -217,7 +217,7 @@ int ModulesFactory::category_size(int i) {
 }
 
 //---------------------------------------------------------------------
-QString ModulesFactory::category_module_type(int i, int j) {
+QString XModulesFactory::category_module_type(int i, int j) {
     if (i >= 0 && i < categories()) {
         if (j >= 0 && j < category_size(i)) {
             return modules_in_category_[categories_[i]][j];
@@ -229,23 +229,23 @@ QString ModulesFactory::category_module_type(int i, int j) {
 //---------------------------------------------------------------------
 //Создание модуля, но без имени
 //version - не пустая при загрузке проекта из файла, можно проверять
-Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*version*/) {
+XModule *XModulesFactory::create_unnamed_module(QString class_name, QString /*version*/) {
 
     //если возникла ошибка парсинга - то выдастся исключение
-    ModuleSeed *info = nullptr; //удалять не надо, это внешняя информация!
+    XModulePrototype *info = nullptr; //удалять не надо, это внешняя информация!
     XClass *rtmodule_new = nullptr;
-    Module *module_new = nullptr;
+    XModule *module_new = nullptr;
     try {
         //Получение информации
         info = get_module(class_name);
-        xc_assert(info, "Module class is unknown");
+        xc_assert(info, "XModule class is unknown");
 
         //Загрузка
-        rtmodule_new = RegistrarXModule::create_rt_module(info->description);
+        rtmodule_new = RegistrarXClass::create_rt_module(info->description);
         xc_assert(rtmodule_new, "Internal error: module implementation is not created");
 
         //Создание модуля
-        module_new = new Module(info, rtmodule_new);
+        module_new = new XModule(info, rtmodule_new);
         return module_new;
 
     } catch(XException& e) {

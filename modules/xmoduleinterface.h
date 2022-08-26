@@ -1,31 +1,31 @@
-#ifndef MODULEINTERFACE_H
-#define MODULEINTERFACE_H
+#ifndef XMODULEINTERFACE_H
+#define XMODULEINTERFACE_H
 
-//Невизуальное описание интерфейса, строится по ModuleSeed
+//Невизуальное описание интерфейса, строится по XModulePrototype
 #include "incl_h.h"
 
-#include "moduleseed.h"
+#include "xmoduleprototype.h"
 #include "xitem.h"
 #include "visibilitygroups.h"
 
 class XGuiEditor;
 class EditorModuleState;
 class QJsonObject;
-class Module;
+class XModule;
 
 
 //Интерфейс модуля
-class ModuleInterface
+class XModuleInterface
 {
 public:
-    ModuleInterface(const ModuleSeed &info);
-    virtual ~ModuleInterface();
+    XModuleInterface(const XModulePrototype &info);
+    virtual ~XModuleInterface();
 
-    ModuleDescription &description();
+    XModuleDescription &description();
 
     //доступ к родительскому модулю - для получения информации о запуске и name, а также интерфейсу
-    void set_module(Module *module);
-    Module *module();
+    void set_module(XModule *module);
+    XModule *module();
 
     //весь интерфейс
     QVector<XItem *> &items();
@@ -83,7 +83,7 @@ public:
 
     //дублирование данных переменных и состояние редактора, используется при дублировании модулей
     //предполагается, что оба интерфейса идентичны, то есть, принадлежат одному типу модулей
-    void copy_data_to(ModuleInterface *interf);
+    void copy_data_to(XModuleInterface *interf);
 
     //Запись и считывание json
     void write_json(QJsonObject &json);
@@ -135,9 +135,9 @@ public:
 
 private:
     //Родительский модуль
-    Module *module_ = nullptr;  //удалять не надо
+    XModule *module_ = nullptr;  //удалять не надо
 
-    ModuleDescription description_;
+    XModuleDescription description_;
     //Предполагается, что строки не содержат комментарии и не пустые, и не содержат пробелов в начале и конце
     void parse_trimmed(const QStringList &lines);
 
@@ -189,4 +189,4 @@ private:
 
 };
 
-#endif // MODULEINTERFACE_H
+#endif // XMODULEINTERFACE_H

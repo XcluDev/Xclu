@@ -9,7 +9,7 @@ REGISTER_XITEM(XItemInt, int)
 //int A a=-1 -10:10 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-XItemInt::XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
+XItemInt::XItemInt(XModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range)
     : XItemScalarInt(interf, pre_description)
 {    
     QString line = pre_description.line_to_parse;
@@ -58,7 +58,7 @@ int XItemInt::get_large_step() {
 //Function for setting value using link
 void XItemInt::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }
 

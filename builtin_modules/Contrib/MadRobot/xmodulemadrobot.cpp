@@ -8,7 +8,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(MadRobot)
+REGISTER_XCLASS(MadRobot)
 
 //---------------------------------------------------------------------
 XModuleMadRobot::XModuleMadRobot(QString class_name)

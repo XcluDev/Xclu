@@ -6,7 +6,7 @@
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(SynthFromImage)
+REGISTER_XCLASS(SynthFromImage)
 
 
 

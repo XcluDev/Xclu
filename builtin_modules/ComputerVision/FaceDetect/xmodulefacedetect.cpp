@@ -9,7 +9,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 
-REGISTER_XMODULE(FaceDetect)
+REGISTER_XCLASS(FaceDetect)
 
 //---------------------------------------------------------------------
 XModuleFaceDetect::XModuleFaceDetect(QString class_name)

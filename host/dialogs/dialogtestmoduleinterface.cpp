@@ -3,7 +3,7 @@
 #include "dialogtestmoduleinterface.h"
 #include "incl_cpp.h"
 #include "project.h"
-#include "xmoduleseed.h"
+#include "xmoduleprototype.h"
 #include "xmoduleinterface.h"
 #include "xguieditor.h"
 #include "exportinterface.h"
@@ -46,7 +46,7 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
     connect(export_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_export_h);
 
     //Выбор файла
-    QGroupBox *control_group = new QGroupBox(tr("Module folder"));
+    QGroupBox *control_group = new QGroupBox(tr("XModule folder"));
     control_group->setLayout(xclu::vlayout(-1,
                                            folder_edit_ = new QPlainTextEdit(), 0,
                                            buttonBox, 0)
@@ -157,13 +157,13 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
 
     //загрузка описания модуля
     //если там ошибка - он выдаст на экран сообщение
-    module_seed_.reset(ModuleSeed::load_module(folder_, "Category is not set", "Name is not set"));
+    module_seed_.reset(XModulePrototype::load_module(folder_, "Category is not set", "Name is not set"));
     if (!module_seed_.data()) return;
 
     //могут возникнуть исключения - поэтому, отлавливаем их
     try {
         //загрузка интерфейса модуля
-        interf_.reset(new ModuleInterface(*module_seed_.data()));
+        interf_.reset(new XModuleInterface(*module_seed_.data()));
         if (!interf_.data()) return;
 
         //загружаем GUI и устанавливаем видимость

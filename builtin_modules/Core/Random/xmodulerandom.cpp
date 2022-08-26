@@ -5,7 +5,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(Random)
+REGISTER_XCLASS(Random)
 
 //---------------------------------------------------------------------
 XModuleRandom::XModuleRandom(QString class_name)

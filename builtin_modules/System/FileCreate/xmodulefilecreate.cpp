@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(FileCreate)
+REGISTER_XCLASS(FileCreate)
 
 //---------------------------------------------------------------------
 XModuleFileCreate::XModuleFileCreate(QString class_name)

@@ -5,7 +5,7 @@
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(MotionDetectorRouter)
+REGISTER_XCLASS(MotionDetectorRouter)
 
 //---------------------------------------------------------------------
 XModuleMotionDetectorRouter::XModuleMotionDetectorRouter(QString class_name)

@@ -11,7 +11,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(Scalar)
+REGISTER_XCLASS(Scalar)
 
 
 //---------------------------------------------------------------------
@@ -161,7 +161,7 @@ void XModuleScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        Module *module = xc_find_module(link.module);
+        XModule *module = xc_find_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }

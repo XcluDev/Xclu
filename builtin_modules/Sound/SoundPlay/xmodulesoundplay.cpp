@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(SoundPlay)
+REGISTER_XCLASS(SoundPlay)
 
 //---------------------------------------------------------------------
 XModuleSoundPlay::XModuleSoundPlay(QString class_name)

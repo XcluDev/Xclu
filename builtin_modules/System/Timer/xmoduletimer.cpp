@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(Timer)
+REGISTER_XCLASS(Timer)
 
 //---------------------------------------------------------------------
 XModuleTimer::XModuleTimer(QString class_name)

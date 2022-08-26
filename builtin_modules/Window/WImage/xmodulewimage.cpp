@@ -11,7 +11,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(WImage)
+REGISTER_XCLASS(WImage)
 
 //---------------------------------------------------------------------
 XModuleWImage::XModuleWImage(QString class_name)

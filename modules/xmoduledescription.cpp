@@ -3,7 +3,7 @@
 #include "registrarxclass.h"
 
 //---------------------------------------------------------------------
-ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {
+XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
     line = line.trimmed();
     if (line == "*") {
         any_ = true;
@@ -19,14 +19,14 @@ ModuleRegisteredCalls::ModuleRegisteredCalls(QString line) {
 
 
 //---------------------------------------------------------------------
-bool ModuleRegisteredCalls::accepts(XCallType function) {
+bool XModuleRegisteredCalls::accepts(XCallType function) {
     if (any_) return true;
     if (function == XCallTypeNone) return true;
     return functions_.contains(function);
 }
 
 //---------------------------------------------------------------------
-bool ModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
+bool XModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
     if (any_) return true;
     if (filter.isEmpty()) return true;
     QMapIterator<XCallType, int> i(functions_);
@@ -41,7 +41,7 @@ bool ModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //return
 }
 
 //---------------------------------------------------------------------
-QString ModuleRegisteredCalls::to_string_gui() {        //конвертация в строку для выдачи в text
+QString XModuleRegisteredCalls::to_string_gui() {        //конвертация в строку для выдачи в text
     if (any_) return "*";
     QString s;
     if (!functions_.isEmpty()) {
@@ -56,7 +56,7 @@ QString ModuleRegisteredCalls::to_string_gui() {        //конвертация
 }
 
 //---------------------------------------------------------------------
-QString ModuleDescription::generate_name_hint(QString class_name) { //GuiWindow -> gui_window
+QString XModuleDescription::generate_name_hint(QString class_name) { //GuiWindow -> gui_window
     //поиск больших букв, при этом если две подряд - то не надо подчерк
     QString lower = class_name.toLower();
     QString name;
@@ -74,7 +74,7 @@ QString ModuleDescription::generate_name_hint(QString class_name) { //GuiWindow 
 
 //---------------------------------------------------------------------
 //парсинг описания модуля
-bool ModuleDescription::parse_module_header_line(QString line) {
+bool XModuleDescription::parse_module_header_line(QString line) {
     QStringList list = line.split("=");
     if (list.size() >= 2) {
         QString name = list[0];
@@ -85,7 +85,7 @@ bool ModuleDescription::parse_module_header_line(QString line) {
 }
 
 //---------------------------------------------------------------------
-bool ModuleDescription::parse_module_header_line(QString name, QString value) {
+bool XModuleDescription::parse_module_header_line(QString name, QString value) {
 
     if (name == field_class_name()) {
         //нельзя перезатереть имя, если оно уже было установлено
@@ -145,8 +145,8 @@ bool ModuleDescription::parse_module_header_line(QString name, QString value) {
 }
 
 //---------------------------------------------------------------------
-bool ModuleDescription::is_implemented() {  //реализован ли уже модуль
-    return RegistrarXModule::is_module_implemented(class_name);
+bool XModuleDescription::is_implemented() {  //реализован ли уже модуль
+    return RegistrarXClass::is_module_implemented(class_name);
 }
 
 //---------------------------------------------------------------------

@@ -12,7 +12,7 @@ REGISTER_XITEM(XItemEnum, enum)
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
 
-XItemEnum::XItemEnum(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemEnum::XItemEnum(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalarInt(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
@@ -116,7 +116,7 @@ QStringList XItemEnum::names() {       //все заголовки с подче
 //Function for setting value using link
 void XItemEnum::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }
 

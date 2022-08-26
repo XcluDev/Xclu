@@ -10,7 +10,7 @@
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(RealsenseCamera)
+REGISTER_XCLASS(RealsenseCamera)
 
 
 //---------------------------------------------------------------------

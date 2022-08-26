@@ -127,7 +127,7 @@ QString xc_absolute_path_from_project(QString relative_path, bool create_folder)
 
 //---------------------------------------------------------------------
 //Получение модуля
-Module *xc_find_module(QString module_name) {
+XModule *xc_find_module(QString module_name) {
     return PROJECT.find_module_by_name(module_name);
 }
 
@@ -184,14 +184,14 @@ void xc_bang(QStringList modules) {
 //---------------------------------------------------------------------
 /*XItem *xc_get_var_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    Module *module = get_module(link.module);
+    XModule *module = get_module(link.module);
     return module->interf()->var(link.var);
 }*/
 
 //---------------------------------------------------------------------
 /*XObject *xc_get_object_by_link(QString link_str) {
     XLinkParsed link(link_str);
-    Module *module = get_module(link.module);
+    XModule *module = get_module(link.module);
     return module->get_object(link.var);
 }*/
 
@@ -203,9 +203,9 @@ void xc_bang(QStringList modules) {
 //    Synth2
 //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
 //для воспроизведения
-/*static*/ QVector<Module *> xc_find_modules(QString modules_list) {
+/*static*/ QVector<XModule *> xc_find_modules(QString modules_list) {
     QStringList list = QString(modules_list).split("\n");
-    QVector<Module *> out_list;
+    QVector<XModule *> out_list;
 
     for (int i=0; i<list.size(); i++) {
         QString name = list.at(i).trimmed();
@@ -220,7 +220,7 @@ void xc_bang(QStringList modules) {
 //Выполнение Callbacks
 //список name модулей может быть разделен \n, TAB, пробелами
 //то есть идти из text или string
-/*static*/ /*void xc_execute_callbacks(QVector<Module *> modules_list) {
+/*static*/ /*void xc_execute_callbacks(QVector<XModule *> modules_list) {
     for (int i=0; i<modules_list.size(); i++) {
         modules_list[i]->execute(ModuleExecuteStageCallback);
     }

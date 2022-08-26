@@ -3,13 +3,13 @@
 
 #include "xitemscalar.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemInt: public XItemScalarInt
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemInt(ModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range = true);
+    XItemInt(XModuleInterface *interf, const XItemPreDescription &pre_description, bool parse_range = true);
 
     //increment steps
     int get_small_step();

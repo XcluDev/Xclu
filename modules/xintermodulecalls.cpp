@@ -2,7 +2,7 @@
 #include "project.h"
 
 //---------------------------------------------------------------------
-QVector<Module *> XIntermodule::find_modules_by_filter(XCallType accept_calls_filter,
+QVector<XModule *> XIntermodule::find_modules_by_filter(XCallType accept_calls_filter,
                                          XCallType send_calls_filter,
                                          QString class_filter,
                                          bool require_enabled) {
@@ -10,7 +10,7 @@ QVector<Module *> XIntermodule::find_modules_by_filter(XCallType accept_calls_fi
 }
 
 //---------------------------------------------------------------------
-// void XIntermodule::call(Module *module, XCallType function, XObject *input, XObject *output) {
+// void XIntermodule::call(XModule *module, XCallType function, XObject *input, XObject *output) {
 //    xc_assert(module, "XIntermodule::call failed, module is nullptr");
 //    module->call(function, input, output);
 // }

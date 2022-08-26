@@ -11,10 +11,10 @@
 #include "incl_h.h"
 
 class XItem;
-class ModuleInterface;
+class XModuleInterface;
 class XItemPreDescription;
 
-typedef std::function<XItem *(ModuleInterface *interf, const XItemPreDescription *pre_description)> XItemCreateFunction;
+typedef std::function<XItem *(XModuleInterface *interf, const XItemPreDescription *pre_description)> XItemCreateFunction;
 
 class RegistrarXItem
 {
@@ -28,7 +28,7 @@ public:
     static bool is_xitem_registered(QString class_name);
 
     //Create item object
-    static XItem *create_xitem(ModuleInterface *interf, const XItemPreDescription *pre_description);
+    static XItem *create_xitem(XModuleInterface *interf, const XItemPreDescription *pre_description);
 };
 
 //------------------------------------------------------------------
@@ -38,7 +38,7 @@ public:
 //  ## - конкатенация в коде   # - превратить в строку
 #define REGISTER_XITEM(CLASS_NAME, XGUI_NAME) \
     struct Registrar_XItem_##XGUI_NAME { \
-        static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {\
+        static XItem *create(XModuleInterface *interf, const XItemPreDescription *pre_description) {\
             return new CLASS_NAME(interf, *pre_description);\
         } \
         Registrar_XItem_##XGUI_NAME() { \
@@ -56,7 +56,7 @@ REGISTER_XITEM(XItemRaster<uint8>, raster_u8)
 This results in the following code:
 
 struct Registrar_XItem_button {
-    static XItem *create(ModuleInterface *interf, const XItemPreDescription *pre_description) {
+    static XItem *create(XModuleInterface *interf, const XItemPreDescription *pre_description) {
         return new XItemButton(interf, *pre_description);
     }
     Registrar_XItem_button() {

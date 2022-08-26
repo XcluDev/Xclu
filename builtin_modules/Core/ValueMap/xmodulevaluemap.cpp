@@ -5,7 +5,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(ValueMap)
+REGISTER_XCLASS(ValueMap)
 
 //---------------------------------------------------------------------
 XModuleValueMap::XModuleValueMap(QString class_name)

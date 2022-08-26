@@ -1,5 +1,5 @@
-#ifndef MODULESEED_H
-#define MODULESEED_H
+#ifndef XMODULEPROTOTYPE_H
+#define XMODULEPROTOTYPE_H
 
 //Информация о модуле:
 //Имя, тип, версия модуля и его GUI в виде строк
@@ -9,41 +9,41 @@
 //А текст описания GUI считывается как строки, но сразу не парсится
 
 #include "incl_h.h"
-#include "moduledescription.h"
+#include "xmoduledescription.h"
 
 //TODO can be optimized loading of the project.
 //No the interface is parsed each time when createing a module.
 
 
-class ModuleSeed
+class XModulePrototype
 {
 public:
     //Загрузить модуль из папки. В случае ошибки - возвращает NULL
     //Если category_name и module_name непустые - они ставятся в категорию и имя модуля
     //(это полезно при загрузке встроенных модулей прямо из папок)
-    static ModuleSeed* load_module(QString folder, QString category_name = "", QString module_name = "");
+    static XModulePrototype* load_module(QString folder, QString category_name = "", QString module_name = "");
 
     //Загрузить GUI-файл, отбросив комментарии и сделать trim строк
     //применяется при считывании описания общей страницы General.
     static QStringList read_gui_file(QString file_name);
 
-    ModuleSeed();
+    XModulePrototype();
 
     //Загрузить информацию из папки
     //Если category_name и module_name непустые - они ставятся в категорию и имя модуля
     //(это полезно при загрузке встроенных модулей прямо из папок)
     void load_module_from_folder(QString folder, QString category_name = "", QString module_name = "");
 
-    ModuleDescription description;
+    XModuleDescription description;
 
-    //Module folder
+    //XModule folder
     QString folder() { return folder_; }
 
     //строки с описанием GUI, не включающие описание модуля, пустые и комментарии
     //так же, с добавлением General Page
     QStringList gui_lines() const;
 
-    //Help-файл в разметке Markdown, возможно, с HTML-тэгами
+    //Help-файл в разметке Markdown, возможно, с HTML-тегами
     QString help();
 
 private:
@@ -62,4 +62,4 @@ private:
 
 };
 
-#endif // MODULESEED_H
+#endif // XMODULEPROTOTYPE_H

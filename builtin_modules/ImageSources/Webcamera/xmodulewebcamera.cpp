@@ -26,7 +26,7 @@
 #include "xdrawhelper.h"
 
 //registering module implementation
-REGISTER_XMODULE(Webcamera)
+REGISTER_XCLASS(Webcamera)
 
 
 //---------------------------------------------------------------------

@@ -21,7 +21,7 @@
 #include "dialogeditlink.h"
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf,
+/*static*/ XItem *XItemCreator::new_item(XModuleInterface *interf,
                                          QString title_underscored,
                                          QString type,
                                          const QStringList &description,
@@ -43,7 +43,7 @@
 
 //---------------------------------------------------------------------
 //page, group
-/*static*/ XItem *XItemCreator::new_decorate_item(ModuleInterface *interf,
+/*static*/ XItem *XItemCreator::new_decorate_item(XModuleInterface *interf,
                                                   QString name,
                                                   QString type, const QStringList &description) {
     //QString title = xc_remove_underscore(name);
@@ -52,7 +52,7 @@
 
 //---------------------------------------------------------------------
 //separator, separator_line
-/*static*/ XItem *XItemCreator::new_separator(ModuleInterface *interf, QString name, QString type_raw) {
+/*static*/ XItem *XItemCreator::new_separator(XModuleInterface *interf, QString name, QString type_raw) {
     QString descr;
 
     QStringList type_options=type_raw.split("_");
@@ -67,7 +67,7 @@
 }
 
 //---------------------------------------------------------------------
-/*static*/ XItem *XItemCreator::new_item(ModuleInterface *interf, const XItemPreDescription &pre_description) {
+/*static*/ XItem *XItemCreator::new_item(XModuleInterface *interf, const XItemPreDescription &pre_description) {
     return RegistrarXItem::create_xitem(interf, &pre_description);
 }
 
@@ -76,10 +76,10 @@
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //создание пункта интерфейса, и парсинг остатка строки line_to_parse
-XItem::XItem(ModuleInterface *interf, const XItemPreDescription &pre_description) {
+XItem::XItem(XModuleInterface *interf, const XItemPreDescription &pre_description) {
     //Проверка, что interf не нулевой - возможно, в конструкторе это не очень хорошо, но все же лучше проверить:)
     xc_assert(interf,
-              "Internal error in XItem constructor, empty 'ModuleInterface *interf' at '" + pre_description.title + "'");
+              "Internal error in XItem constructor, empty 'XModuleInterface *interf' at '" + pre_description.title + "'");
     interf_ = interf;
     title_ = pre_description.title;
     type_ = pre_description.type;
@@ -107,12 +107,12 @@ XItem::~XItem() {
 }
 
 //---------------------------------------------------------------------
-ModuleInterface *XItem::interf() {
+XModuleInterface *XItem::interf() {
     return interf_;
 }
 
 //---------------------------------------------------------------------
-Module *XItem::module() {
+XModule *XItem::module() {
     xc_assert(interf(), "XItem::module() error: empty interf()");
     return interf()->module();
 }

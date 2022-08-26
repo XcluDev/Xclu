@@ -3,14 +3,14 @@
 
 #include "xitem.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 //Button item
 //It's not regular int-valued class, so derived from XItem_, not XItemScalarInt
 class XItemButton: public XItem_<int>
 {
 public:
-    XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemButton(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //string
     bool supports_string() { return true; }

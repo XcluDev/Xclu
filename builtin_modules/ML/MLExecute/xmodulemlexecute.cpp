@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(MLExecute)
+REGISTER_XCLASS(MLExecute)
 
 //---------------------------------------------------------------------
 XModuleMLExecute::XModuleMLExecute(QString class_name)

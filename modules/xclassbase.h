@@ -2,12 +2,12 @@
 #define XCLASSBASE_H
 
 //XClassBase - a base class for XClass.
-//It provides access to Module (that is UI values) and for runtime information
+//It provides access to XModule (that is UI values) and for runtime information
 //So XClassBase is not executivemodule itself, but a helper class.
-/* Usage: you need to specify Module in constructor or later, by calling set_module(module) or set_module(this):
+/* Usage: you need to specify XModule in constructor or later, by calling set_module(module) or set_module(this):
 
   ...
-void CosmoOsc::setup(Module *module, int index) {
+void CosmoOsc::setup(XModule *module, int index) {
     set_module(module);
   ...
 
@@ -16,7 +16,7 @@ void CosmoOsc::setup(Module *module, int index) {
 #include "incl_h.h"
 #include "xobject.h"
 
-class Module;
+class XModule;
 
 class XClassBase
 {
@@ -24,13 +24,13 @@ public:
     //Constructor requires providing underlying module pointer
     //for accessing its GUI values
     XClassBase() {}
-    XClassBase(Module *module);
+    XClassBase(XModule *module);
 
     //----------------------------------------------
     //Underlying module
     //----------------------------------------------
-    void set_module(Module *module);
-    Module *module();
+    void set_module(XModule *module);
+    XModule *module();
 
 
     //General (Control) page
@@ -95,7 +95,7 @@ public:
     void set_object_(QString name, XProtectedObject &object);
 
 protected:
-    Module *module_ = nullptr;
+    XModule *module_ = nullptr;
 
 };
 

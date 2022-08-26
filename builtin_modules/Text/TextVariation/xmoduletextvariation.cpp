@@ -5,7 +5,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(TextVariation)
+REGISTER_XCLASS(TextVariation)
 
 //---------------------------------------------------------------------
 XModuleTextVariation::XModuleTextVariation(QString class_name)

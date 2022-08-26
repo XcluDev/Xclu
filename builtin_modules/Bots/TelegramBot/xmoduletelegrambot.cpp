@@ -7,7 +7,7 @@
 #include <QNetworkReply>
 
 //registering module implementation
-REGISTER_XMODULE(TelegramBot)
+REGISTER_XCLASS(TelegramBot)
 
 //---------------------------------------------------------------------
 XModuleTelegramBot::XModuleTelegramBot(QString class_name)

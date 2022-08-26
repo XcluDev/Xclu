@@ -12,7 +12,7 @@ DialogEditLinks *D_EDIT_LINKS = 0;
 //---------------------------------------------------------------------
 //Call this function for working with dialog
 //if returns not nullptr - then success and you can use dialog's value
-/*static*/ void DialogEditLinks::call_dialog(Module *module) {
+/*static*/ void DialogEditLinks::call_dialog(XModule *module) {
     auto parent = MainWindow::window();
 
     if (!D_EDIT_LINKS) {
@@ -40,7 +40,7 @@ DialogEditLinks::~DialogEditLinks()
 }
 
 //---------------------------------------------------------------------
-void DialogEditLinks::set_module(Module *module) {
+void DialogEditLinks::set_module(XModule *module) {
     xc_assert(module, "DialogEditLinks::set_module - passed module==nullptr");
     module_ = module;
     ui->module_name->setText(module_->name());

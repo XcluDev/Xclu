@@ -5,7 +5,7 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QThread>
 
-REGISTER_XMODULE(Serial)
+REGISTER_XCLASS(Serial)
 
 //---------------------------------------------------------------------
 XModuleSerial::XModuleSerial(QString class_name)

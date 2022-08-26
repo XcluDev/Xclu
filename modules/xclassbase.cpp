@@ -1,22 +1,22 @@
 #include "xclassbase.h"
 #include "incl_cpp.h"
-#include "module.h"
+#include "xmodule.h"
 #include "xobject.h"
 #include "project_props.h"
 
 //---------------------------------------------------------------------
-XClassBase::XClassBase(Module *module) {
+XClassBase::XClassBase(XModule *module) {
     set_module(module);
 }
 
 //---------------------------------------------------------------------
-void XClassBase::set_module(Module *module) {
+void XClassBase::set_module(XModule *module) {
     xc_assert(module, "Error at XClassBase::set_module(): module is nullptr");
     module_ = module;
 }
 
 //---------------------------------------------------------------------
-Module *XClassBase::module() {
+XModule *XClassBase::module() {
     return module_;
 }
 

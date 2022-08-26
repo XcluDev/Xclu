@@ -7,7 +7,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(Execute)
+REGISTER_XCLASS(Execute)
 
 //---------------------------------------------------------------------
 XModuleExecute::XModuleExecute(QString class_name)

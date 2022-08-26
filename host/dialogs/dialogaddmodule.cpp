@@ -31,7 +31,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
     //это нужно тут сделать, так как потом вызовется tab_current_changed
 
     //По умолчанию - это категория "All"
-    QString All = ModulesFactory::All_Category_Name();
+    QString All = XModulesFactory::All_Category_Name();
     QString tab_name = Settings::gets(Settings::dialogaddmodule_tab(), "All");
     int show_implemented = Settings::geti(Settings::dialogaddmodule_show_implemented(), 1);
     //qDebug() << "tab index stored" << tab_index;
@@ -125,7 +125,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
               );
 
     //Заголовок
-    setWindowTitle(tr("Choose a Module to Add"));
+    setWindowTitle(tr("Choose a XModule to Add"));
 
     //установка считанного tab
     page_ = -1;

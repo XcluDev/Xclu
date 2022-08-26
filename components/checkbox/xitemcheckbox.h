@@ -3,13 +3,13 @@
 
 #include "xitemscalar.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemCheckbox: public XItemScalarInt
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemCheckbox(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageBuilder &page_builder);

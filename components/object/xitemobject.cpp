@@ -16,7 +16,7 @@ object(strings) - массив строк (?) - его можно ставить
 */
 
 
-XItemObject::XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemObject::XItemObject(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
@@ -46,7 +46,7 @@ bool XItemObject::was_changed(XWasChangedChecker &checker) {
 //Function for setting value using link
 void XItemObject::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     XProtectedObject *object = mod->get_object(linkres->var);
 
     value_.set_pointer(object);

@@ -81,7 +81,7 @@ bool was_changed_on_click() { return was_changed_("on_click"); }
 enum_on_click gete_on_click() { return enum_on_click(geti_("on_click")); }
 QString getraw_on_click() { return getraw_("on_click");}
 
-//String Module Call Link
+//String XModule Call Link
 //Call other module on value change.
 bool was_changed_on_change_module_call_link() { return was_changed_("on_change_module_call_link"); }
 QString gets_on_change_module_call_link() { return gets_("on_change_module_call_link"); }

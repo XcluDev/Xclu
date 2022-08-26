@@ -9,7 +9,7 @@
 //module1->line(1,2) - link to part of component (word) pointed by two indices index
 
 #include "incl_h.h"
-class Module;
+class XModule;
 
 //---------------------------------------------------------------------
 //XLink - packed link stored as a string
@@ -74,11 +74,11 @@ public:
 public:
     XLinkResolved(QString link_str0);
     XLinkResolved(const XLinkParsed &link0);
-    Module *module_ptr();
+    XModule *module_ptr();
 
 protected:
     void resolve();
-    Module *module_ptr_ = nullptr;
+    XModule *module_ptr_ = nullptr;
 };
 
 

@@ -1,17 +1,17 @@
-#ifndef MODULESFACTORY_H
-#define MODULESFACTORY_H
+#ifndef XMODULESFACTORY_H
+#define XMODULESFACTORY_H
 
 //База данных модулей, позволяет создавать инстансы модулей
 #include "sdk_h.h"
-#include "moduleseed.h"
+#include "xmoduleprototype.h"
 #include "xmodule.h"
 
 
-class ModulesFactory
+class XModulesFactory
 {
 public:
-    ModulesFactory();
-    virtual ~ModulesFactory();
+    XModulesFactory();
+    virtual ~XModulesFactory();
 
     //Имя категории All - используется как Default-значение при считывании настроек
     static QString All_Category_Name() { return "All"; }
@@ -27,14 +27,14 @@ public:
 
     //Доступ к модулям
     int size();
-    ModuleSeed *get_module(int i);
-    ModuleSeed *get_module(QString class_name);
+    XModulePrototype *get_module(int i);
+    XModulePrototype *get_module(QString class_name);
 
     //Создание модуля, но без имени
     //version - не пустая при загрузке проекта из файла, можно проверять
     //в случае ошибки генерирует xclu-исключение
     //info_out - информация о модуле, чтобы еще дополнительно использовать
-    Module *create_unnamed_module(QString class_name, QString version = "");
+    XModule *create_unnamed_module(QString class_name, QString version = "");
 
     //строки описания страницы General
     QStringList general_page();
@@ -45,7 +45,7 @@ private:
 
     void add_module(QString module_name, QString module_folder, QString category_name);
 
-    QMap<QString, ModuleSeed *> modules_;
+    QMap<QString, XModulePrototype *> modules_;
 
     //имена (типы) всех модулей
     QVector<QString> names_;
@@ -62,6 +62,6 @@ private:
 
 };
 
-extern ModulesFactory FACTORY;
+extern XModulesFactory FACTORY;
 
-#endif // MODULESFACTORY_H
+#endif // XMODULESFACTORY_H

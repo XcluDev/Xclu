@@ -4,12 +4,12 @@
 #include "xrange.h"
 #include "xitemscalar.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemFloat: public XItemScalar_<float>
 {
 public:
-    XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemFloat(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //range
     const XRangeFloat &range() { return range_; }

@@ -52,7 +52,7 @@ public:
     QString generate_unique_name_by_class_name(QString class_name);
 
     //Сгенерировать модуль данного типа с заданным именем, если оно уже есть - добавить 1,2,3...
-    Module *new_module(int i, QString class_name, QString name_hint);
+    XModule *new_module(int i, QString class_name, QString name_hint);
 
 
     void duplicate_module(int i);
@@ -67,13 +67,13 @@ public:
     bool has_module_with_name(QString name);
 
     // Search module by index or name
-    Module *find_module_by_index(int i, bool can_return_null = false);
-    Module *find_module_by_name(QString name);
+    XModule *find_module_by_index(int i, bool can_return_null = false);
+    XModule *find_module_by_name(QString name);
 
     // Find modules by a filter
     // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
     // if XCallTypeNone or if empty - it means "all" for a given filter
-    QVector<Module *> find_modules_by_filter(XCallType accept_calls_filter = XCallTypeNone,
+    QVector<XModule *> find_modules_by_filter(XCallType accept_calls_filter = XCallTypeNone,
                                              XCallType send_calls_filter = XCallTypeNone,
                                              QString class_filter = "",
                                              bool require_enabled = true);
@@ -90,7 +90,7 @@ private:
     ProjectEditorProperties properties_;
 
     //Модули
-    QVector<Module *> modules_;
+    QVector<XModule *> modules_;
     void clear_modules();
 
     //Execute operation for all modules

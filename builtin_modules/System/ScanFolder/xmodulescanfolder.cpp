@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(ScanFolder)
+REGISTER_XCLASS(ScanFolder)
 
 //---------------------------------------------------------------------
 XModuleScanFolder::XModuleScanFolder(QString class_name)

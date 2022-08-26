@@ -5,18 +5,18 @@
 //Constructor loads template from `module_h_template.h`
 
 #include "sdk_h.h"
-class ModuleInterface;
+class XModuleInterface;
 
 class ExportInterface
 {
 public:
     ExportInterface();
-    void export_to_h_file(ModuleInterface *interf, QString folder);
+    void export_to_h_file(XModuleInterface *interf, QString folder);
     void export_all_builtin_h_files();
 private:
     QStringList templ_;
 
-    void append_interface(ModuleInterface *interf, QStringList &file);
+    void append_interface(XModuleInterface *interf, QStringList &file);
 };
 
 #endif // EXPORTINTERFACE_H

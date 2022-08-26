@@ -6,7 +6,7 @@
 
 
 //Register implementation class
-REGISTER_XMODULE(Project)
+REGISTER_XCLASS(Project)
 
 //---------------------------------------------------------------------
 XModuleProject::XModuleProject(QString class_name)

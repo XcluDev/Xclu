@@ -3,12 +3,12 @@
 
 #include "xitem.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemSeparator: public XItem
 {
 public:
-    XItemSeparator(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemSeparator(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     //графический интерфейс
     virtual XGui *create_gui(XGuiPageBuilder &page_builder);

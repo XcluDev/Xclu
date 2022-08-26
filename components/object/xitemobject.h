@@ -9,13 +9,13 @@
 #include <QScopedPointer>
 #include "xpointer.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemObject: public XItem
 {
 public:
     //parse_range - мы будем ставить false в checkbox
-    XItemObject(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemObject(XModuleInterface *interf, const XItemPreDescription &pre_description);
     //virtual ~XItemObject();
 
     //не поддерживаем скаляры, но будем записывать настройки в строку

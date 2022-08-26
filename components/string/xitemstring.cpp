@@ -31,7 +31,7 @@ REGISTER_XITEM(XItemString, string)
 
 
 
-XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemString::XItemString(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalar_<QString>(interf, pre_description)
 {
 
@@ -69,7 +69,7 @@ XItemString::XItemString(ModuleInterface *interf, const XItemPreDescription &pre
 //Function for setting value using link
 void XItemString::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_string(mod->gets(linkres));
 }
 

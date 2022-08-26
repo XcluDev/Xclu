@@ -26,7 +26,7 @@ DialogRenameModule *D_RENAME_MODULE;
 DialogRenameModule::DialogRenameModule(QWidget *parent)
     : QDialog(parent)
 {
-    QLabel *label = new QLabel(tr("Module Name:"));
+    QLabel *label = new QLabel(tr("XModule Name:"));
 
     lineEdit = new QLineEdit("");
     lineEdit->setMinimumWidth(250);
@@ -45,7 +45,7 @@ DialogRenameModule::DialogRenameModule(QWidget *parent)
 
     //Заголовок
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    setWindowTitle(tr("Rename Module"));
+    setWindowTitle(tr("Rename XModule"));
 
     lineEdit->setFocus();
 }

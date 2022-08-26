@@ -16,12 +16,12 @@
 #include "xobjectsoundformat.h"
 #include "xprotecteddata.h"
 
-class Module;
+class XModule;
 
 //Data exchange
 struct XModuleSoundInData {
     //list of modules for sending callbacks
-    QVector<Module *> modules_;
+    QVector<XModule *> modules_;
 
     ErrorInfo err;
 
@@ -60,7 +60,7 @@ private:
 };
 
 
-//Module
+//XModule
 class XModuleSoundIn: public XClass
 {
     Q_OBJECT

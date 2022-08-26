@@ -29,7 +29,7 @@ protected:
 protected:
     //Collect modules to render from
     void collect_modules();
-    QVector<Module *> modules_;
+    QVector<XModule *> modules_;
 
 
 };

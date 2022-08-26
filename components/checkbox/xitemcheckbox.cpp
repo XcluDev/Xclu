@@ -14,7 +14,7 @@ REGISTER_XITEM(XItemCheckbox, checkbox)
 //in checkbox_group Details show_details=0
 //- показ чекбокса слева, для обозначения группы элементов GUI, и еще справа дорисовывается горизонтальная линия
 
-XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemCheckbox::XItemCheckbox(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalarInt(interf, pre_description)
 {
     QString line = pre_description.line_to_parse;
@@ -44,7 +44,7 @@ XItemCheckbox::XItemCheckbox(ModuleInterface *interf, const XItemPreDescription 
 //Function for setting value using link
 void XItemCheckbox::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }
 

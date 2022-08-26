@@ -38,28 +38,28 @@ int geti__advanced_() { return geti_("_advanced_"); }
 void repaint__advanced_() { repaint_("_advanced_"); }
 
 //Const String Class
-//Module class name.
+//XModule class name.
 bool was_changed__module_class_() { return was_changed_("_module_class_"); }
 QString gets__module_class_() { return gets_("_module_class_"); }
 QStringList get_strings__module_class_() { return get_strings_("_module_class_"); }
 void repaint__module_class_() { repaint_("_module_class_"); }
 
 //Const String Category
-//Module category.
+//XModule category.
 bool was_changed__module_category_() { return was_changed_("_module_category_"); }
 QString gets__module_category_() { return gets_("_module_category_"); }
 QStringList get_strings__module_category_() { return get_strings_("_module_category_"); }
 void repaint__module_category_() { repaint_("_module_category_"); }
 
 //Const String Description
-//Module description.
+//XModule description.
 bool was_changed__module_description_() { return was_changed_("_module_description_"); }
 QString gets__module_description_() { return gets_("_module_description_"); }
 QStringList get_strings__module_description_() { return get_strings_("_module_description_"); }
 void repaint__module_description_() { repaint_("_module_description_"); }
 
 //Const String Version
-//Module version.
+//XModule version.
 bool was_changed__module_version_() { return was_changed_("_module_version_"); }
 QString gets__module_version_() { return gets_("_module_version_"); }
 QStringList get_strings__module_version_() { return get_strings_("_module_version_"); }

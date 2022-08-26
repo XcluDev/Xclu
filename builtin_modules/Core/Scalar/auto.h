@@ -227,7 +227,7 @@ bool was_changed_on_change() { return was_changed_("on_change"); }
 enum_on_change gete_on_change() { return enum_on_change(geti_("on_change")); }
 QString getraw_on_change() { return getraw_("on_change");}
 
-//String Module Call Link
+//String XModule Call Link
 //Call other module on value change.
 bool was_changed_on_change_module_call_link() { return was_changed_("on_change_module_call_link"); }
 QString gets_on_change_module_call_link() { return gets_("on_change_module_call_link"); }

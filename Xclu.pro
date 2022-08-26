@@ -226,7 +226,7 @@ SOURCES += \
     modules/xmodule.cpp \
     modules/xmoduledescription.cpp \
     modules/xmoduleinterface.cpp \
-    modules/xmoduleseed.cpp \
+    modules/xmoduleprototype.cpp \
     modules/xmodulesfactory.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
@@ -338,7 +338,7 @@ HEADERS += \
     modules/xmodule.h \
     modules/xmoduledescription.h \
     modules/xmoduleinterface.h \
-    modules/xmoduleseed.h \
+    modules/xmoduleprototype.h \
     modules/xmodulesfactory.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \

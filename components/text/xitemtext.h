@@ -3,12 +3,12 @@
 
 #include "xitemscalar.h"
 
-class ModuleInterface;
+class XModuleInterface;
 
 class XItemText: public XItemScalar_<QString>
 {
 public:
-    XItemText(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItemText(XModuleInterface *interf, const XItemPreDescription &pre_description);
 
     bool supports_string() { return true; }
     QString value_string() { return value_read(); }

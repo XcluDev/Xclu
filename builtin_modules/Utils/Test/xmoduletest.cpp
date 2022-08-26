@@ -4,7 +4,7 @@
 #include "project_props.h"
 
 //registering module implementation
-REGISTER_XMODULE(Test)
+REGISTER_XCLASS(Test)
 
 //---------------------------------------------------------------------
 XModuleTest::XModuleTest(QString class_name)

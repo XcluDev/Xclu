@@ -7,7 +7,7 @@
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(ImageLoader)
+REGISTER_XCLASS(ImageLoader)
 
 //---------------------------------------------------------------------
 XModuleImageLoader::XModuleImageLoader(QString class_name)

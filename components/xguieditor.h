@@ -42,16 +42,16 @@ public:
     void set_show_components_names(bool show);
 
     //used module
-    Module *module();
+    XModule *module();
 
     //загрузить GUI модуля
-    void load_module(Module *module);
+    void load_module(XModule *module);
 
     //создать GUI только для интерфейса - например, для отладки интерфейсов
     //force_propagate_visibility - нужно ли сделать обновление видимости.
-    //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
+    //для вызовов из load_module(XModule *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
     //но для кастомного применения, например, тестирования интерфейса - это нужно
-    void load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
+    void load_module(XModulePrototype *info, XModuleInterface *interf, QString module_name, bool force_propagate_visibility = false);
 
 public slots:
     //сигнал, что модуль сменился и нужно загрузить новый модуль
@@ -71,7 +71,7 @@ protected:
     //QGroupBox *paramEditor;
 
     //модуль, который в данный момент показываем в редакторе
-    Module *module_ = nullptr;
+    XModule *module_ = nullptr;
 
     QVector<XGui *> items_; //элементы GUI
     QMap<QString, XGui *> items_by_name_;   //элементы по имени, для установки связей видимости

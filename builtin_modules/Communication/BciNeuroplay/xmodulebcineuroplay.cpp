@@ -4,7 +4,7 @@
 #include "project_props.h"
 #include "xosc.h"
 
-REGISTER_XMODULE(BciNeuroplay)
+REGISTER_XCLASS(BciNeuroplay)
 
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)

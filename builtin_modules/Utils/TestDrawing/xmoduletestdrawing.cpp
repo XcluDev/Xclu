@@ -6,7 +6,7 @@
 
 
 //registering module implementation
-REGISTER_XMODULE(TestDrawing)
+REGISTER_XCLASS(TestDrawing)
 
 //---------------------------------------------------------------------
 XModuleTestDrawing::XModuleTestDrawing(QString class_name)

@@ -9,7 +9,7 @@
 #include "xc_audio.h"
 
 //registering module implementation
-REGISTER_XMODULE(SoundSeaOfWords)
+REGISTER_XCLASS(SoundSeaOfWords)
 
 //---------------------------------------------------------------------
 XModuleSoundSeaOfWords::XModuleSoundSeaOfWords(QString class_name)

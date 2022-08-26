@@ -10,7 +10,7 @@
 #include "soundsamplesdatabase.h"
 
 //registering module implementation
-REGISTER_XMODULE(SoundsDatabaseAnalyze)
+REGISTER_XCLASS(SoundsDatabaseAnalyze)
 
 //---------------------------------------------------------------------
 XModuleSoundsDatabaseAnalyze::XModuleSoundsDatabaseAnalyze(QString class_name)

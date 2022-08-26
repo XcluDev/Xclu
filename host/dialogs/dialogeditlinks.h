@@ -8,7 +8,7 @@ namespace Ui {
 class DialogEditLinks;
 }
 
-class Module;
+class XModule;
 
 class DialogEditLinks : public QDialog
 {
@@ -17,15 +17,15 @@ class DialogEditLinks : public QDialog
 public:
     //Call this function for working with dialog
     //if returns not nullptr - then success and you can use dialog's value
-    static void call_dialog(Module *module);
+    static void call_dialog(XModule *module);
 
     explicit DialogEditLinks(QWidget *parent = nullptr);
     virtual ~DialogEditLinks();
 
-    void set_module(Module *module);
+    void set_module(XModule *module);
 private:
     Ui::DialogEditLinks *ui;
-    Module *module_ = nullptr;
+    XModule *module_ = nullptr;
 
     struct Links {
         QVector<XLink> links;

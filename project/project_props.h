@@ -7,7 +7,7 @@
 #include "xobject.h"
 #include "xlink.h"
 #include <QElapsedTimer>
-class Module;
+class XModule;
 class XItem;
 
 
@@ -77,7 +77,7 @@ QString xc_absolute_path_from_project(QString relative_path, bool create_folder 
 
 //Получение модуля - можно получить к нему доступ, см. класс XLinkParsed
 //а затем взять нужную переменную по geti и прочим
-Module *xc_find_module(QString module_name);
+XModule *xc_find_module(QString module_name);
 
 //Получение переменных по link - то есть по имени модуля и названию в формате webcam1->image//
 //Если link пустой - возвращает def_val
@@ -104,12 +104,12 @@ void xc_bang(QStringList modules);
 //    Synth2
 //Это используется для callback модулей, а также сбора данных с разных модулей - например, звуковых буферов
 //для воспроизведения
-QVector<Module *> xc_find_modules(QString modules_list);
+QVector<XModule *> xc_find_modules(QString modules_list);
 
 //Выполнение Callbacks
 //список name модулей может быть разделен \n, TAB, пробелами
 //то есть идти из text или string
-//static void execute_callbacks(QVector<Module *> modules_list);
+//static void execute_callbacks(QVector<XModule *> modules_list);
 //static void execute_callbacks(QString modules_list_string);
 
 #endif // PROJECT_PROPSH

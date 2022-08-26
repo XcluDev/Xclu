@@ -56,7 +56,7 @@ XGuiEditor::XGuiEditor(QWidget *parent)
 //сигнал, что модуль сменился и нужно загрузить новый модуль
 void XGuiEditor::changed_module_selection(int i) {
     bool can_return_null = true;
-    Module *module = PROJECT.find_module_by_index(i, can_return_null);
+    XModule *module = PROJECT.find_module_by_index(i, can_return_null);
     if (module != module_) {
         //qDebug() << "Load params editor for module " << i;
         load_module(module);
@@ -70,7 +70,7 @@ void XGuiEditor::renamed_module() {
 }
 
 //---------------------------------------------------------------------
-Module *XGuiEditor::module() {
+XModule *XGuiEditor::module() {
     return module_;
 }
 
@@ -84,7 +84,7 @@ void XGuiEditor::reload_name() { //обновить имя и класс мод�
                 //.arg(ModuleRunMode_to_string(module_->xmodule()->run_mode()));
         editor_label_->setText(title);
 
-        //Module description to tip
+        //XModule description to tip
         editor_label_->setToolTip(module_->description().description);
 
         editor_label_->show();
@@ -126,7 +126,7 @@ void XGuiEditor::detach() {
 
 //---------------------------------------------------------------------
 //создать GUI модуля
-void XGuiEditor::load_module(Module *module) {
+void XGuiEditor::load_module(XModule *module) {
     //detach popup menu
     ComponentContextMenu::COMP_MENU()->clear();
 
@@ -158,13 +158,13 @@ void XGuiEditor::load_module(Module *module) {
 //---------------------------------------------------------------------
 //создать GUI только для интерфейса - например, для отладки интерфейсов
 //force_propagate_visibility - нужно ли сделать обновление видимости.
-//для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
+//для вызовов из load_module(XModule *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
 //но для кастомного применения, например, тестирования интерфейса - это нужно
 
-void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
+void XGuiEditor::load_module(XModulePrototype *info, XModuleInterface *interf, QString module_name, bool force_propagate_visibility) {
     detach();   //внимание - тут делается detach, поэтому module_ ставится в nullptr
 
-    //ModuleDescription &descr = interf->description();
+    //XModuleDescription &descr = interf->description();
     auto &items = interf->items();
 
     XGuiPageBuilder input;
@@ -219,7 +219,7 @@ void XGuiEditor::load_module(ModuleSeed *info, ModuleInterface *interf, QString 
 
 
     //Обновление видимости, если требуется.
-    //для вызовов из load_module(Module *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
+    //для вызовов из load_module(XModule *module) - это не нужно, так как там сработает module->gui_action(GuiStageAfterGuiAttached);
     //но для кастомного применения, например, тестирования интерфейса - это нужно
     if (force_propagate_visibility) {
         interf->propagate_visibility();

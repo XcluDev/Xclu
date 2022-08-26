@@ -8,7 +8,7 @@
 #include "xitembutton.h"
 
 //---------------------------------------------------------------------
-ModuleInterface::ModuleInterface(const ModuleSeed &info)
+XModuleInterface::XModuleInterface(const XModulePrototype &info)
 {
     //копирование описания модуля
     description_ = info.description;
@@ -30,7 +30,7 @@ ModuleInterface::ModuleInterface(const ModuleSeed &info)
 
 //---------------------------------------------------------------------
 //установка параметров по-умолчанию из описания модуля на страницу general
-void ModuleInterface::set_general_values() {
+void XModuleInterface::set_general_values() {
     //установка "пожеланий" из настроек
     //var("run_mode")->set_value_int(description_.default_run_mode); //режим запуска
 
@@ -41,32 +41,32 @@ void ModuleInterface::set_general_values() {
 
 
 //---------------------------------------------------------------------
-ModuleInterface::~ModuleInterface() {
+XModuleInterface::~XModuleInterface() {
     clear();
 }
 
 //---------------------------------------------------------------------
-ModuleDescription &ModuleInterface::description() {
+XModuleDescription &XModuleInterface::description() {
     return description_;
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::set_module(Module *module) {
+void XModuleInterface::set_module(XModule *module) {
     module_ = module;
 }
 
 //---------------------------------------------------------------------
-Module *ModuleInterface::module() {
+XModule *XModuleInterface::module() {
     return module_;
 }
 
 //---------------------------------------------------------------------
-QVector<XItem *> &ModuleInterface::items() {
+QVector<XItem *> &XModuleInterface::items() {
     return items_;
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::clear() {
+void XModuleInterface::clear() {
     for (int i=0; i<items_.size(); i++) {
         delete items_[i];
     }
@@ -76,13 +76,13 @@ void ModuleInterface::clear() {
 }
 
 //---------------------------------------------------------------------
-QString ModuleInterface::generate_separator_name() {
+QString XModuleInterface::generate_separator_name() {
     return "__separator" + QString::number(separator_index_++);
 }
 
 //---------------------------------------------------------------------
 //собрать описание элемента (строки, начинающиеся с "//"), и изменить счетчик i
-QStringList ModuleInterface::collect_description(const QStringList &lines, int &i) {
+QStringList XModuleInterface::collect_description(const QStringList &lines, int &i) {
     i++;
     QStringList list;
     while (i < lines.size()) {
@@ -98,14 +98,14 @@ QStringList ModuleInterface::collect_description(const QStringList &lines, int &
 
 //---------------------------------------------------------------------
 //добавить последний элемент в текущую vis_group_ если, конечно, она открыта для добавления
-void ModuleInterface::add_to_vis_group() {
+void XModuleInterface::add_to_vis_group() {
     if (vis_group_opened_) {
         vis_groups_.last().add_affected_item(items_.last()->name());
     }
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::parse_trimmed(const QStringList &lines) {
+void XModuleInterface::parse_trimmed(const QStringList &lines) {
     //При ошибке парсинга - можно генерировать исключение, которое перехватывает FACTORY:
     //например, CONS.throw_exception("Test parsing exception");
     //или xc_assert(...)
@@ -115,7 +115,7 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
     //Начинаем страницу Main - закомментировано
     //new_decorate_item("Main", XItemTypePage, QStringList(""));
 
-    //Общая страница добавляется в ModuleSeed::gui_lines().
+    //Общая страница добавляется в XModulePrototype::gui_lines().
     //general_page_start sets by "GENERAL_PAGE" at general_page.xgui
     //after parsing all such items marked as "general_page_ = true;"
     QString general_page_marker = GENERAL_PAGE_marker();
@@ -324,18 +324,18 @@ void ModuleInterface::parse_trimmed(const QStringList &lines) {
 //---------------------------------------------------------------------
 //Общая функция добавления элемента интерфейса в список
 //а также вставка в группу визуализации
-void ModuleInterface::push_item(XItem *item) {
+void XModuleInterface::push_item(XItem *item) {
     items_.push_back(item);
     add_to_vis_group();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::new_item(const XItemPreDescription &pre_description) {
+void XModuleInterface::new_item(const XItemPreDescription &pre_description) {
     push_item(XItemCreator::new_item(this, pre_description));
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::new_item(QString title_underscored, QString type,
+void XModuleInterface::new_item(QString title_underscored, QString type,
                                   const QStringList &description,
                                   XQualifier qual, QString line_to_parse, QString options,
                                   QString qual_options) {
@@ -343,7 +343,7 @@ void ModuleInterface::new_item(QString title_underscored, QString type,
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::new_decorate_item(QString name, QString type, const QStringList &description) {
+void XModuleInterface::new_decorate_item(QString name, QString type, const QStringList &description) {
     items_.push_back(XItemCreator::new_decorate_item(this, name, type, description));
     add_to_vis_group();
 }
@@ -351,7 +351,7 @@ void ModuleInterface::new_decorate_item(QString name, QString type, const QStrin
 
 //---------------------------------------------------------------------
 //проверка того, что разные элементы имеют разные имена, и заполнение map для быстрого доступа
-void ModuleInterface::update_maps() {
+void XModuleInterface::update_maps() {
     items_by_name_.clear();
 
     for (int i=0; i<items_.size(); i++) {
@@ -368,26 +368,26 @@ void ModuleInterface::update_maps() {
 
 //---------------------------------------------------------------------
 //does module contains item with given name
-bool ModuleInterface::has_item(QString name) {
+bool XModuleInterface::has_item(QString name) {
     return items_by_name_.contains(name);
 }
 
 //---------------------------------------------------------------------
 //элемент по имени - кроме сепараторов
-XItem *ModuleInterface::var(QString name) {
+XItem *XModuleInterface::var(QString name) {
     xc_assert(has_item(name), "Unknown item '" + name + "'");
     return items_by_name_[name];
 }
 
 //---------------------------------------------------------------------
 //группы видимости - для создания дерева управления видимостью на GUI
-QVector<VisibleGroupBase> &ModuleInterface::vis_groups() {
+QVector<VisibleGroupBase> &XModuleInterface::vis_groups() {
     return vis_groups_;
 }
 
 //---------------------------------------------------------------------
 //Compiling links and other things
-bool ModuleInterface::compile() {
+bool XModuleInterface::compile() {
     bool ok = true;
     for (auto item: items_) {
         try{
@@ -408,7 +408,7 @@ void on_start() {
 
 //---------------------------------------------------------------------
 //called at start, stop and attach interface - enable/disable buttons
-void ModuleInterface::update_is_running(bool running) {
+void XModuleInterface::update_is_running(bool running) {
     for (auto item: items_) {
         item->update_is_running(running);
     }
@@ -416,7 +416,7 @@ void ModuleInterface::update_is_running(bool running) {
 
 //---------------------------------------------------------------------
 //сигнал, что GUI подключен/отключен
-void ModuleInterface::gui_attached(XGuiEditor *editor) {
+void XModuleInterface::gui_attached(XGuiEditor *editor) {
     editor_ = editor;
     for (int i=0; i<items_.size(); i++) {
         items_[i]->gui_attached();
@@ -424,7 +424,7 @@ void ModuleInterface::gui_attached(XGuiEditor *editor) {
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::gui_detached() {
+void XModuleInterface::gui_detached() {
     for (int i=0; i<items_.size(); i++) {
         items_[i]->gui_detached();
     }
@@ -432,13 +432,13 @@ void ModuleInterface::gui_detached() {
 }
 
 //---------------------------------------------------------------------
-bool ModuleInterface::is_gui_attached() {
+bool XModuleInterface::is_gui_attached() {
     return (editor_ != nullptr);
 }
 
 //---------------------------------------------------------------------
 //установить видимость, используется при тестировании интерфейса
-void ModuleInterface::propagate_visibility() {
+void XModuleInterface::propagate_visibility() {
     for (auto item: items_) {
         item->propagate_visibility();
     }
@@ -446,7 +446,7 @@ void ModuleInterface::propagate_visibility() {
 
 //---------------------------------------------------------------------
 //команды для обновления внутренних значений из GUI и в GUI
-void ModuleInterface::gui_to_vars(const XQualifierMask &qual, bool evaluate_expr) {
+void XModuleInterface::gui_to_vars(const XQualifierMask &qual, bool evaluate_expr) {
     if (is_gui_attached()) {
         for (auto &item: items_) {
             item->gui_to_var(qual, evaluate_expr);
@@ -455,7 +455,7 @@ void ModuleInterface::gui_to_vars(const XQualifierMask &qual, bool evaluate_expr
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::vars_to_gui(const XQualifierMask &qual) {
+void XModuleInterface::vars_to_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
         for (auto &item: items_) {
             item->var_to_gui(qual);
@@ -465,7 +465,7 @@ void ModuleInterface::vars_to_gui(const XQualifierMask &qual) {
 
 //---------------------------------------------------------------------
 //заблокировать константы, вызывается перед запуском проекта
-void ModuleInterface::block_gui(const XQualifierMask &qual) {
+void XModuleInterface::block_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
         if (is_gui_attached()) {
             for (auto &item: items_) {
@@ -477,7 +477,7 @@ void ModuleInterface::block_gui(const XQualifierMask &qual) {
 
 //---------------------------------------------------------------------
 //разблокировать константы, вызывается после остановки проекта
-void ModuleInterface::unblock_gui(const XQualifierMask &qual) {
+void XModuleInterface::unblock_gui(const XQualifierMask &qual) {
     if (is_gui_attached()) {
         if (is_gui_attached()) {
             for (auto &item: items_) {
@@ -490,7 +490,7 @@ void ModuleInterface::unblock_gui(const XQualifierMask &qual) {
 
 //---------------------------------------------------------------------
 //пометить, что все элементы были изменены - при старте
-void ModuleInterface::reset_was_changed() {
+void XModuleInterface::reset_was_changed() {
     for (auto &item: items_) {
         item->reset_was_changed_simple();
     }
@@ -498,7 +498,7 @@ void ModuleInterface::reset_was_changed() {
 
 //---------------------------------------------------------------------
 //update before rt-module's update
-void ModuleInterface::update() {
+void XModuleInterface::update() {
     for (auto &item: items_) {
         item->update();
     }
@@ -506,24 +506,24 @@ void ModuleInterface::update() {
 
 //---------------------------------------------------------------------
 //запомнить/восстановить состояние GUI (страницу, промотку)
-void ModuleInterface::gui_to_state() {
+void XModuleInterface::gui_to_state() {
     if (is_gui_attached()) {
-        //xc_assert(editor_, "Internal error - ModuleInterface::gui_to_state is called, but editor_ == nullptr");
+        //xc_assert(editor_, "Internal error - XModuleInterface::gui_to_state is called, but editor_ == nullptr");
         editor_state_ = editor_->state();
     }
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::state_to_gui() {
+void XModuleInterface::state_to_gui() {
     if (is_gui_attached()) {
-        //xc_assert(editor_, "Internal error - ModuleInterface::state_to_gui is called, but editor_ == nullptr");
+        //xc_assert(editor_, "Internal error - XModuleInterface::state_to_gui is called, but editor_ == nullptr");
         editor_->set_state(editor_state_);
     }
 }
 
 //---------------------------------------------------------------------
 //callback из GUI
-void ModuleInterface::callback_button_pressed(QString button_id) {
+void XModuleInterface::callback_button_pressed(QString button_id) {
     xc_assert(module(), "Can't process pressing button '" + button_id + "' because module() is nullptr");
     module()->button_pressed(button_id);
 }
@@ -531,33 +531,33 @@ void ModuleInterface::callback_button_pressed(QString button_id) {
 
 //---------------------------------------------------------------------
 //internal calling - user shouldn't call this
-void ModuleInterface::_hit_button_(QString button_id) {
+void XModuleInterface::_hit_button_(QString button_id) {
     XItem *item = var(button_id);
     xc_assert(item->type() == xitem_button(), "Can't press '" + button_id + "', because it's not button");
     ((XItemButton *)(item))->hit_value();
 }
 
 //---------------------------------------------------------------------
-EditorModuleState ModuleInterface::editor_state() {
+EditorModuleState XModuleInterface::editor_state() {
     return editor_state_;
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::set_editor_state(EditorModuleState editor_state) {
+void XModuleInterface::set_editor_state(EditorModuleState editor_state) {
     editor_state_ = editor_state;
 }
 
 //---------------------------------------------------------------------
 //дублирование данных переменных и состояние редактора, используется при дублировании модулей
-void ModuleInterface::copy_data_to(ModuleInterface *interf) {
-    xc_assert(interf, "Internal error in ModuleInterface::copy_data_to: interface to copy is nullptr");
+void XModuleInterface::copy_data_to(XModuleInterface *interf) {
+    xc_assert(interf, "Internal error in XModuleInterface::copy_data_to: interface to copy is nullptr");
     interf->set_editor_state(editor_state());
     for (int i=0; i<items_.size(); i++) {
         auto *item = items_[i];
         if (item->store_data()) {
             QString name = item->name();
             auto *item1 = interf->var(name);
-            xc_assert(item1, "Internal error in ModuleInterface::copy_data_to: no item '"
+            xc_assert(item1, "Internal error in XModuleInterface::copy_data_to: no item '"
                         + name + "' in the destination interface");
             item->copy_data_to(item1);
         }
@@ -566,7 +566,7 @@ void ModuleInterface::copy_data_to(ModuleInterface *interf) {
 
 //---------------------------------------------------------------------
 //Запись и считывание json
-void ModuleInterface::write_json(QJsonObject &json) {
+void XModuleInterface::write_json(QJsonObject &json) {
     //переменные
     QJsonArray itemsArray;
     for (int i=0; i<items_.size(); i++) {
@@ -585,7 +585,7 @@ void ModuleInterface::write_json(QJsonObject &json) {
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::read_json(const QJsonObject &json) {
+void XModuleInterface::read_json(const QJsonObject &json) {
 
     QStringList errors; //сюда накопим ошибки про считывание модуля и потом их выдадим в консоль
     //переменные
@@ -628,7 +628,7 @@ void ModuleInterface::read_json(const QJsonObject &json) {
 //int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-QString ModuleInterface::gets(QString name, int index, int index2) {
+QString XModuleInterface::gets(QString name, int index, int index2) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
     QString value = var->value_string();
@@ -663,13 +663,13 @@ QString ModuleInterface::gets(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //splits text using "\n"
-QStringList ModuleInterface::get_strings(QString name) {
+QStringList XModuleInterface::get_strings(QString name) {
     return gets(name).split("\n");
 }
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index), string, text
-void ModuleInterface::sets(QString name, QString v) {
+void XModuleInterface::sets(QString name, QString v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xc_assert(var->supports_string(), "variable '" + name + "' doesn't supports string");
@@ -677,13 +677,13 @@ void ModuleInterface::sets(QString name, QString v) {
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::clear_string(QString name) {
+void XModuleInterface::clear_string(QString name) {
     sets(name, "");
 }
 
 //---------------------------------------------------------------------
 //дописать к строке, применимо где sets
-void ModuleInterface::append_string(QString name, QString v, int extra_new_lines_count) {
+void XModuleInterface::append_string(QString name, QString v, int extra_new_lines_count) {
     QString value = gets(name);
     value.append(v);
     for (int i=0; i<1 + extra_new_lines_count; i++) {
@@ -693,7 +693,7 @@ void ModuleInterface::append_string(QString name, QString v, int extra_new_lines
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
+void XModuleInterface::append_string(QString name, QStringList v, int extra_new_lines_count) { //дописать к строке, применимо где sets
     append_string(name, v.join("\n"), extra_new_lines_count);
 }
 
@@ -701,7 +701,7 @@ void ModuleInterface::append_string(QString name, QStringList v, int extra_new_l
 //int, checkbox, button, enum (index)
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-int ModuleInterface::geti(QString name, int index, int index2) {
+int XModuleInterface::geti(QString name, int index, int index2) {
     if (index == -1) {
         XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
         xc_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -714,7 +714,7 @@ int ModuleInterface::geti(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //только out: int, checkbox, enum (index)
-void ModuleInterface::seti(QString name, int v) {
+void XModuleInterface::seti(QString name, int v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xc_assert(var->supports_int(), "variable '" + name + "' doesn't supports int");
@@ -723,7 +723,7 @@ void ModuleInterface::seti(QString name, int v) {
 
 //---------------------------------------------------------------------
 //увеличение значения
-void ModuleInterface::increase_int(QString name, int increase) { //value+=increase
+void XModuleInterface::increase_int(QString name, int increase) { //value+=increase
     seti(name, geti(name) + increase);
 }
 
@@ -731,7 +731,7 @@ void ModuleInterface::increase_int(QString name, int increase) { //value+=increa
 //float
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-float ModuleInterface::getf(QString name, int index, int index2) {
+float XModuleInterface::getf(QString name, int index, int index2) {
     if (index == -1) {
         XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
         xc_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
@@ -744,7 +744,7 @@ float ModuleInterface::getf(QString name, int index, int index2) {
 
 //---------------------------------------------------------------------
 //только out: float
-void ModuleInterface::setf(QString name, float v) {
+void XModuleInterface::setf(QString name, float v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xc_assert(var->supports_float(), "variable '" + name + "' doesn't supports float");
@@ -753,14 +753,14 @@ void ModuleInterface::setf(QString name, float v) {
 
 //---------------------------------------------------------------------
 //enum
-QString ModuleInterface::getraw(QString name) {
+QString XModuleInterface::getraw(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
     return var->value_raw();
 }
 
 //---------------------------------------------------------------------
-void ModuleInterface::set_raw(QString name, QString text) {
+void XModuleInterface::set_raw(QString name, QString text) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xc_assert(var->supports_value_raw(), "variable '" + name + "' doesn't supports raw value");
@@ -769,7 +769,7 @@ void ModuleInterface::set_raw(QString name, QString text) {
 
 //---------------------------------------------------------------------
 //enum (title)
-QString ModuleInterface::get_title_value(QString name) {
+QString XModuleInterface::get_title_value(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
     return var->value_title();
@@ -778,7 +778,7 @@ QString ModuleInterface::get_title_value(QString name) {
 
 //---------------------------------------------------------------------
 //только out: enum (title)
-void ModuleInterface::set_title_value(QString name, QString v) {
+void XModuleInterface::set_title_value(QString name, QString v) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->is_out(), "Can't set value to var '" + name + "' because it's not output variable");
     xc_assert(var->supports_value_title(), "variable '" + name + "' doesn't supports title value");
@@ -787,7 +787,7 @@ void ModuleInterface::set_title_value(QString name, QString v) {
 
 //---------------------------------------------------------------------
 //Access to objects is only by pointers - because we are required not to copy data, it can be large
-XProtectedObject *ModuleInterface::get_object(QString name) {
+XProtectedObject *XModuleInterface::get_object(QString name) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     return var->get_object();
@@ -796,7 +796,7 @@ XProtectedObject *ModuleInterface::get_object(QString name) {
 //---------------------------------------------------------------------
 //Set pointer to object
 //Note: object must be live, because only pointer to it is stored
-void ModuleInterface::set_object(QString name, XProtectedObject *object) {
+void XModuleInterface::set_object(QString name, XProtectedObject *object) {
     XItem *var = this->var(name);   //проверка, что переменная есть - не требуется
     xc_assert(var->supports_object(), "variable '" + name + "' doesn't supports object");
     var->set_object(object);

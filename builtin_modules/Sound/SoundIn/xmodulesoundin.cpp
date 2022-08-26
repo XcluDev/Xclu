@@ -5,7 +5,7 @@
 #include "xmodule.h"
 
 //registering module implementation
-REGISTER_XMODULE(SoundIn)
+REGISTER_XCLASS(SoundIn)
 
 //---------------------------------------------------------------------
 XModuleSoundInGenerator::XModuleSoundInGenerator(const QAudioFormat &format,

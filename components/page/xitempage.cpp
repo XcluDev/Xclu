@@ -4,7 +4,7 @@
 
 REGISTER_XITEM(XItemPage, page)
 //---------------------------------------------------------------------
-XItemPage::XItemPage(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemPage::XItemPage(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)
 {
     //page Main_page

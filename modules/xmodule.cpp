@@ -7,13 +7,13 @@
 #include "xobject.h"
 
 //---------------------------------------------------------------------
-Module::Module(ModuleSeed *info_external, XClass *rtmodule_new)
+XModule::XModule(XModulePrototype *info_external, XClass *rtmodule_new)
 {
     info_external_ = info_external;
 
-    interf_ = new ModuleInterface(*info_external);
+    interf_ = new XModuleInterface(*info_external);
     xmodule_ = rtmodule_new;
-    xc_assert(xmodule_, "Empty run-time module in Module constructor for '" + info_external->description.class_name + "'");
+    xc_assert(xmodule_, "Empty run-time module in XModule constructor for '" + info_external->description.class_name + "'");
 
     //установка самого модуля в rt-модуль и интерфейсный модуль, чтобы они могли обмениваться данными
     xmodule_->set_module(this);
@@ -25,7 +25,7 @@ Module::Module(ModuleSeed *info_external, XClass *rtmodule_new)
 }
 
 //---------------------------------------------------------------------
-Module::~Module() {
+XModule::~XModule() {
     if (xmodule_) {
         delete xmodule_;
     }
@@ -35,22 +35,22 @@ Module::~Module() {
 }
 
 //---------------------------------------------------------------------
-ModuleDescription &Module::description() {
+XModuleDescription &XModule::description() {
     return interf_->description();
 }
 
 //---------------------------------------------------------------------
-QString Module::name() {
+QString XModule::name() {
     return name_;
 }
 
 //---------------------------------------------------------------------
-void Module::set_name(QString name) {
+void XModule::set_name(QString name) {
     name_ = name;
 }
 
 //---------------------------------------------------------------------
-/*QString Module::name() {
+/*QString XModule::name() {
     //name нужно не просто считать, а сделать gui_to_var,
     //так как это значение используется в Project::update_names(),
     //а оно вызывается до BeforeStarting,
@@ -64,19 +64,19 @@ void Module::set_name(QString name) {
 }*/
 
 //---------------------------------------------------------------------
-/*void Module::set_id(QString name) {
+/*void XModule::set_id(QString name) {
     auto *varid = interf_->var("name");
     varid->set_value_string(name);
     varid->var_to_gui();
 }*/
 
 //---------------------------------------------------------------------
-Module *Module::duplicate(QString new_nameid) {
+XModule *XModule::duplicate(QString new_nameid) {
     //сохраняем данные из GUI
     gui_action(GuiStageBeforeGuiDetached);
 
     //создаем копию модуля
-    Module *module = FACTORY.create_unnamed_module(description().class_name);
+    XModule *module = FACTORY.create_unnamed_module(description().class_name);
 
     //копируем данные и ставим имя
     if (module) {
@@ -88,30 +88,30 @@ Module *Module::duplicate(QString new_nameid) {
 
 //---------------------------------------------------------------------
 //Невизуальный интерфейс
-ModuleInterface *Module::interf() {
+XModuleInterface *XModule::interf() {
     return interf_;
 }
 
 //---------------------------------------------------------------------
 //Исполняемый модуль
-XClass *Module::xmodule() {
+XClass *XModule::xmodule() {
     return xmodule_;
 }
 
 //---------------------------------------------------------------------
-void Module::gui_attached(XGuiEditor *editor) {
+void XModule::gui_attached(XGuiEditor *editor) {
     //qDebug() << "module " << name() << ": GUI attached";
     interf()->gui_attached(editor);
 }
 
 //---------------------------------------------------------------------
-void Module::gui_detached() {
+void XModule::gui_detached() {
     //qDebug() << "module " << name() << " - GUI detached";
     interf()->gui_detached();
 }
 
 //---------------------------------------------------------------------
-bool Module::is_gui_attached() {
+bool XModule::is_gui_attached() {
     return interf()->is_gui_attached();
 }
 
@@ -119,7 +119,7 @@ bool Module::is_gui_attached() {
 //Вычисление expressions и работа с GUI, см. определение GuiStage
 //Предполагается, что извне приходят только действия с проектом: GuiStageProjectLoaded и GuiStageProjectBeforeSaving
 //Побочное действие - также ставит и выключает is_running
-void Module::gui_action(GuiStage stage, bool affect_is_running) {
+void XModule::gui_action(GuiStage stage, bool affect_is_running) {
     switch (stage) {
     case GuiStageProjectAfterLoading:   //ничего не делаем, это для уровня проекта
     break;
@@ -180,30 +180,30 @@ void Module::gui_action(GuiStage stage, bool affect_is_running) {
         break;
 
     default:
-        xc_halt("Internal error: Module::gui_action - not implemented rule for GuiStage " + QString::number(stage));
+        xc_halt("Internal error: XModule::gui_action - not implemented rule for GuiStage " + QString::number(stage));
     }
 
 }
 
 //---------------------------------------------------------------------
-void Module::set_running(bool v) {
+void XModule::set_running(bool v) {
     running_ = v;
 }
 
 //---------------------------------------------------------------------
-bool Module::is_running() {
+bool XModule::is_running() {
     return running_;
 }
 
 //---------------------------------------------------------------------
 //Compiling links and other things
-bool Module::compile() {
+bool XModule::compile() {
     return interf()->compile();
 }
 
 //---------------------------------------------------------------------
 //Выполнение
-void Module::execute(ModuleExecuteStage stage) {
+void XModule::execute(ModuleExecuteStage stage) {
     switch (stage) {
     case ModuleExecuteStageLoaded:
         //Выполнить что-то, требуемое самому модулю
@@ -252,12 +252,12 @@ void Module::execute(ModuleExecuteStage stage) {
 }
 
 //---------------------------------------------------------------------
-bool Module::is_stop_out() {
+bool XModule::is_stop_out() {
     return xmodule_->is_stop_out();
 }
 
 //---------------------------------------------------------------------
-void Module::button_pressed(QString button_id) {   //нажатие кнопки, даже при редактировании
+void XModule::button_pressed(QString button_id) {   //нажатие кнопки, даже при редактировании
     //если присоединен GUI и проект не запущен - то считать значения из GUI
     if (!is_running()) {
         gui_action(GuiStageBeforeStart, false /*not affect is_running()*/);
@@ -276,19 +276,19 @@ void Module::button_pressed(QString button_id) {   //нажатие кнопки
 }
 
 //---------------------------------------------------------------------
-void Module::bang() {        //Bang button
+void XModule::bang() {        //Bang button
     xmodule()->module_bang();
 }
 
 //---------------------------------------------------------------------
 // Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea
-void Module::draw(QPainter &painter, int w, int h) {
+void XModule::draw(QPainter &painter, int w, int h) {
     xmodule()->draw(painter, w, h);
 }
 
 //---------------------------------------------------------------------
 //исключение "записывается" в err
-void Module::call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
+void XModule::call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
     //проверка, что модуль "понимает" запрошенную функцию
     if (!description().accept_calls.accepts(function)) {
         err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
@@ -301,7 +301,7 @@ void Module::call_function_no_exception(XCallType function, ErrorInfo &err, XObj
 
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
-void Module::call(XCallType function, XObject *input, XObject *output) {
+void XModule::call(XCallType function, XObject *input, XObject *output) {
     ErrorInfo err;
     call_function_no_exception(function, err, input, output);
     err.throw_error();
@@ -313,38 +313,38 @@ void Module::call(XCallType function, XObject *input, XObject *output) {
 //int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-QString Module::gets(QString name, int index, int index2) {
+QString XModule::gets(QString name, int index, int index2) {
     return interf()->gets(name, index, index2);
 }
 
 //---------------------------------------------------------------------
-QString Module::gets(XLinkParsed *link) {
+QString XModule::gets(XLinkParsed *link) {
     return gets(link->var, link->index, link->index2);
 }
 
 //---------------------------------------------------------------------
 //splits text using "\n"
-QStringList Module::get_strings(QString name) {
+QStringList XModule::get_strings(QString name) {
     return interf()->get_strings(name);
 }
 
 //---------------------------------------------------------------------
-void Module::sets(QString name, QString v) { //только out: int, checkbox, enum (index), string, text
+void XModule::sets(QString name, QString v) { //только out: int, checkbox, enum (index), string, text
     interf()->sets(name, v);
 }
 
 //---------------------------------------------------------------------
-void Module::clear_string(QString name) {
+void XModule::clear_string(QString name) {
     interf()->clear_string(name);
 }
 
 //---------------------------------------------------------------------
-void Module::append_string(QString name, QString v, int extra_new_lines_count) {
+void XModule::append_string(QString name, QString v, int extra_new_lines_count) {
     interf()->append_string(name, v, extra_new_lines_count);
 }
 
 //---------------------------------------------------------------------
-void Module::append_string(QString name, QStringList v, int extra_new_lines_count) {
+void XModule::append_string(QString name, QStringList v, int extra_new_lines_count) {
     interf()->append_string(name, v, extra_new_lines_count);
 }
 
@@ -352,23 +352,23 @@ void Module::append_string(QString name, QStringList v, int extra_new_lines_coun
 //int, checkbox, button, enum (index)
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-int Module::geti(QString name, int index, int index2) {
+int XModule::geti(QString name, int index, int index2) {
     return interf()->geti(name, index, index2);
 }
 
 //---------------------------------------------------------------------
-int Module::geti(XLinkParsed *link) {
+int XModule::geti(XLinkParsed *link) {
     return geti(link->var, link->index, link->index2);
 }
 
 
 //---------------------------------------------------------------------
-void Module::seti(QString name, int v) { //только out: int, checkbox, enum (index)
+void XModule::seti(QString name, int v) { //только out: int, checkbox, enum (index)
     interf()->seti(name, v);
 }
 
 //---------------------------------------------------------------------
-void Module::increase_int(QString name, int increase) {
+void XModule::increase_int(QString name, int increase) {
     interf()->increase_int(name, increase);
 }
 
@@ -376,53 +376,53 @@ void Module::increase_int(QString name, int increase) {
 //float
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
-float Module::getf(QString name, int index, int index2) {
+float XModule::getf(QString name, int index, int index2) {
     return interf()->getf(name, index, index2);
 }
 
 //---------------------------------------------------------------------
-float Module::getf(XLinkParsed *link) {
+float XModule::getf(XLinkParsed *link) {
     return getf(link->var, link->index, link->index2);
 }
 
 //---------------------------------------------------------------------
-void Module::setf(QString name, float v) {  //out: float
+void XModule::setf(QString name, float v) {  //out: float
     interf()->setf(name, v);
 }
 
 //---------------------------------------------------------------------
-QString Module::getraw(QString name) {  //enum (rawtext)
+QString XModule::getraw(QString name) {  //enum (rawtext)
      return interf()->getraw(name);
 }
 
 //---------------------------------------------------------------------
-void Module::set_raw(QString name, QString v) { //только out: enum (rawtext)
+void XModule::set_raw(QString name, QString v) { //только out: enum (rawtext)
     interf()->set_raw(name, v);
 }
 
 //---------------------------------------------------------------------
-QString Module::get_title_value(QString name) {  //enum (title)
+QString XModule::get_title_value(QString name) {  //enum (title)
      return interf()->get_title_value(name);
 }
 
 //---------------------------------------------------------------------
-void Module::set_title_value(QString name, QString v) { //только out: enum (title)
+void XModule::set_title_value(QString name, QString v) { //только out: enum (title)
     interf()->set_title_value(name, v);
 }
 
 //---------------------------------------------------------------------
-XProtectedObject * Module::get_object(QString name) {
+XProtectedObject * XModule::get_object(QString name) {
     return interf()->get_object(name);
 }
 
 //---------------------------------------------------------------------
-void Module::set_object(QString name, XProtectedObject *object) {
+void XModule::set_object(QString name, XProtectedObject *object) {
     interf()->set_object(name, object);
 }
 
 //---------------------------------------------------------------------
 //Запись в json
-void Module::write_json(QJsonObject &json) {
+void XModule::write_json(QJsonObject &json) {
     QJsonObject descrObject;
     auto &descr = description();
     //для загрузки модуля достаточно указать его класс и версию
@@ -444,7 +444,7 @@ void Module::write_json(QJsonObject &json) {
 
 //---------------------------------------------------------------------
 //Считывание из json
-void Module::read_json(const QJsonObject &json) {
+void XModule::read_json(const QJsonObject &json) {
     QJsonObject descrObject = JsonUtils::json_object(json, "description");
 
     //Уникальные свойства, которые нужно считывать

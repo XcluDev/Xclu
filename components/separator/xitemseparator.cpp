@@ -6,7 +6,7 @@ REGISTER_XITEM(XItemSeparator, separator)
 //---------------------------------------------------------------------
 //separator - вертикальный отступ
 //line - горизонтальная линия
-XItemSeparator::XItemSeparator(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemSeparator::XItemSeparator(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem(interf, pre_description)
 {
     //separator

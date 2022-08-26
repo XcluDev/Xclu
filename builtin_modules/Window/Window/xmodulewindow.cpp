@@ -12,7 +12,7 @@
 #include "xobjectimage.h"
 
 //registering module implementation
-REGISTER_XMODULE(Window)
+REGISTER_XCLASS(Window)
 
 //---------------------------------------------------------------------
 XModuleWindow::XModuleWindow(QString class_name)
@@ -474,7 +474,7 @@ int XModuleWindow::xparse_int(QStringList list, int index, int default_value, QS
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
 QWidget *XModuleWindow::request_widget(QString module_name) {
-    Module *module = xc_find_module(module_name);
+    XModule *module = xc_find_module(module_name);
 
     //call create_widget
     //Window calls GUI elements to insert them into itself.
@@ -511,7 +511,7 @@ void XModuleWindow::reset_widgets() {
 //---------------------------------------------------------------------
 //remove requested widget from another module - called at stopping
 void XModuleWindow::reset_widget(QString module_name) {
-    Module *module = xc_find_module(module_name);
+    XModule *module = xc_find_module(module_name);
 
     //call create_widget
     //Window calls GUI elements to insert them into itself.

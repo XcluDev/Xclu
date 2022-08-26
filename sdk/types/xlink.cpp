@@ -178,7 +178,7 @@ void XLinkResolved::resolve() {
 }
 
 //---------------------------------------------------------------------
-Module *XLinkResolved::module_ptr() {
+XModule *XLinkResolved::module_ptr() {
     xc_assert(module_ptr_, "XLinkResolved::module_ptr - nullptr for link " + module + "->" + var);
     return module_ptr_;
 }

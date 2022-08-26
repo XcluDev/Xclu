@@ -16,8 +16,8 @@ struct XGuiPageBuilder;
 class XGui;
 class QJsonObject;
 class XItem;
-class Module;
-class ModuleInterface;
+class XModule;
+class XModuleInterface;
 
 //---------------------------------------------------------------------
 //Preliminary information for constructing interface element
@@ -37,31 +37,31 @@ public:
 //Hepler - Element creator class
 class XItemCreator {
 public:
-    static XItem *new_item(ModuleInterface *interf, const XItemPreDescription &pre_description);
-    static XItem *new_item(ModuleInterface *interf, QString title_underscored, QString type,
+    static XItem *new_item(XModuleInterface *interf, const XItemPreDescription &pre_description);
+    static XItem *new_item(XModuleInterface *interf, QString title_underscored, QString type,
                                   const QStringList &description,
                                   XQualifier qual = XQualifierIn, QString line_to_parse = "",
                                   QString options = "",
                                   QString qual_options = "");
     //page, group
-    static XItem *new_decorate_item(ModuleInterface *interf, QString name, QString type, const QStringList &description);
+    static XItem *new_decorate_item(XModuleInterface *interf, QString name, QString type, const QStringList &description);
     //separator
-    static XItem *new_separator(ModuleInterface *interf, QString name, QString type_raw = xitem_separator());
+    static XItem *new_separator(XModuleInterface *interf, QString name, QString type_raw = xitem_separator());
 };
 
 //---------------------------------------------------------------------
-//Module interface component
+//XModule interface component
 class XItem {
 public:
     //создание невизуальной переменной (или описание элемента интерфейса),
     //и парсинг остатка строки line_to_parse
-    XItem(ModuleInterface *interf, const XItemPreDescription &pre_description);
+    XItem(XModuleInterface *interf, const XItemPreDescription &pre_description);
     virtual ~XItem();
 
     //access to interface
-    ModuleInterface *interf();
+    XModuleInterface *interf();
     //access to module
-    Module *module();
+    XModule *module();
 
     //Compiling links and other things
     virtual void compile();
@@ -231,7 +231,7 @@ public:
 
 protected:
     //доступ ко всему интерфейсу
-    ModuleInterface *interf_ = nullptr;
+    XModuleInterface *interf_ = nullptr;
 
     //основные характеристики
     QString title_;
@@ -319,7 +319,7 @@ protected:
 template<typename T>
 class XItem_: public XItem {
 public:
-    XItem_<T>(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    XItem_<T>(XModuleInterface *interf, const XItemPreDescription &pre_description)
         : XItem(interf, pre_description) {
         //by default, set value_ as owner
         //value_.own(new XProtectedData_<T>(new T()));

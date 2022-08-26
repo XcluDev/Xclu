@@ -16,7 +16,7 @@
 #include "xobjectsoundformat.h"
 #include "xprotecteddata.h"
 
-class Module;
+class XModule;
 
 //Данные для обмена с generator, которые защищаются с помощью mutex
 struct XModuleSoundOutData: public XcluProtectedData
@@ -32,7 +32,7 @@ struct XModuleSoundOutData: public XcluProtectedData
     float volume_right_ = 1;
 
     //список ссылок на другие модули, которым высылать call
-    QVector<Module *> modules_;
+    QVector<XModule *> modules_;
 
     //громкости
     QVector<float> volumes_;

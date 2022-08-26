@@ -6,7 +6,7 @@
 #include "xmodule.h"
 
 //registering module implementation
-REGISTER_XMODULE(RenderArea)
+REGISTER_XCLASS(RenderArea)
 
 //---------------------------------------------------------------------
 XModuleRenderArea::XModuleRenderArea(QString class_name)

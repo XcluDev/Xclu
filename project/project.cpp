@@ -178,7 +178,7 @@ void Project::read_json(const QJsonObject &json) {
         //ошибки выводим в консоль и продолжаем загрузку проекта
         try {
             //создаем модуль
-            Module *module = FACTORY.create_unnamed_module(class_name, version);
+            XModule *module = FACTORY.create_unnamed_module(class_name, version);
             //считываем его параметры
             module->read_json(moduleObject);
             //выполняем действие после загрузки
@@ -253,7 +253,7 @@ QString Project::generate_unique_name_by_class_name(QString class_name) {
 
 //---------------------------------------------------------------------
 //Cгенерировать модуль данного типа и сгенерировать ему уникальное имя type1, type2,...
-Module *Project::new_module(int i, QString class_name, QString name_hint) {
+XModule *Project::new_module(int i, QString class_name, QString name_hint) {
     if (class_name.isEmpty()) {
         return nullptr;
     }
@@ -263,7 +263,7 @@ Module *Project::new_module(int i, QString class_name, QString name_hint) {
         return nullptr;
     }
 
-    Module *module = nullptr;
+    XModule *module = nullptr;
     try {
         module = FACTORY.create_unnamed_module(class_name);
         module->execute(ModuleExecuteStageLoaded);
@@ -293,7 +293,7 @@ bool Project::can_rename_module(QString old_name, QString new_name) {
 //---------------------------------------------------------------------
 void Project::duplicate_module(int i) {
     QString new_nameid = generate_unique_name(modules_[i]->name());
-    Module *module = modules_[i]->duplicate(new_nameid);
+    XModule *module = modules_[i]->duplicate(new_nameid);
     if (!module) {
         //не выводим сообщение - так как описание ошибки выведет module
         return;
@@ -346,7 +346,7 @@ bool Project::has_module_with_name(QString name) {
 }
 
 //---------------------------------------------------------------------
-Module *Project::find_module_by_index(int i, bool can_return_null) {
+XModule *Project::find_module_by_index(int i, bool can_return_null) {
     if (has_module_with_index(i)) {
         return modules_[i];
     }
@@ -359,7 +359,7 @@ Module *Project::find_module_by_index(int i, bool can_return_null) {
 }
 
 //---------------------------------------------------------------------
-Module *Project::find_module_by_name(QString name) {
+XModule *Project::find_module_by_name(QString name) {
     xc_assert(has_module_with_name(name), QString("Unknown module '%1'").arg(name));
     return find_module_by_index(names_.value(name));
 }
@@ -368,13 +368,13 @@ Module *Project::find_module_by_name(QString name) {
 // Find modules by a filter
 // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
 // if XCallTypeNone or if empty - it means "all" for a given filter
-QVector<Module *> Project::find_modules_by_filter(XCallType accept_calls_filter,
+QVector<XModule *> Project::find_modules_by_filter(XCallType accept_calls_filter,
                                          XCallType send_calls_filter,
                                          QString class_filter,
                                          bool require_enabled) {
-    QVector<Module *> list;
-    for (Module *module: modules_) {
-        ModuleDescription &d = module->description();
+    QVector<XModule *> list;
+    for (XModule *module: modules_) {
+        XModuleDescription &d = module->description();
         if ((d.accept_calls.accepts(accept_calls_filter))
                 && (d.send_calls.accepts(send_calls_filter))
                 && (class_filter.isEmpty() || d.class_name.contains(class_filter))

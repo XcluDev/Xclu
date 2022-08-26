@@ -6,7 +6,7 @@
 //
 
 //Text Text
-//Text such as [A|B|C[D|E]]. Module will generate randomly A,B,CD,CE.
+//Text such as [A|B|C[D|E]]. XModule will generate randomly A,B,CD,CE.
 bool was_changed_input_text() { return was_changed_("input_text"); }
 QString gets_input_text() { return gets_("input_text"); }
 QStringList get_strings_input_text() { return get_strings_("input_text"); }

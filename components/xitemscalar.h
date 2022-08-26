@@ -14,7 +14,7 @@ template<typename T>
 class XItemScalar_ : public XItem_<T>
 {
 public:
-    XItemScalar_<T>(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    XItemScalar_<T>(XModuleInterface *interf, const XItemPreDescription &pre_description)
         : XItem_<T>(interf, pre_description) {
     }
 
@@ -32,7 +32,7 @@ public:
 class XItemScalarInt : public XItemScalar_<int>
 {
 public:
-    XItemScalarInt(ModuleInterface *interf, const XItemPreDescription &pre_description)
+    XItemScalarInt(XModuleInterface *interf, const XItemPreDescription &pre_description)
         : XItemScalar_<int>(interf, pre_description) {
     }
 

@@ -9,7 +9,7 @@ REGISTER_XITEM(XItemFloat, float)
 //float Q Q qq=0 0:1 100,10
 //      //Length of the object.    описание
 //      //mm                       опционально - единица измерения, показывается справа
-XItemFloat::XItemFloat(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemFloat::XItemFloat(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItemScalar_<float>(interf, pre_description)
 {
 
@@ -55,7 +55,7 @@ float XItemFloat::get_large_step() {
 //Function for setting value using link
 void XItemFloat::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_float(mod->getf(linkres));
 }
 

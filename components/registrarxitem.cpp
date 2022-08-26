@@ -26,7 +26,7 @@ QMap<QString, XItemCreateFunction> *xitem_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Create item object
-/*static*/ XItem *RegistrarXItem::create_xitem(ModuleInterface *interf, const XItemPreDescription *pre_description) {
+/*static*/ XItem *RegistrarXItem::create_xitem(XModuleInterface *interf, const XItemPreDescription *pre_description) {
     xc_assert(xitem_registered_classes_, "No modules classes were added at startup");
 
     QString class_name = pre_description->type;

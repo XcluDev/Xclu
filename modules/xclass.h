@@ -20,7 +20,7 @@
 #include "xclassbase.h"
 
 class InterfaceItem;
-class Module;
+class XModule;
 class XObject;
 
 //Runtime module status
@@ -48,7 +48,7 @@ public:
     XClass(QString class_name);
     virtual ~XClass();
 
-    //Module access, variables access and runtime values are inherited from XClassBase.
+    //XModule access, variables access and runtime values are inherited from XClassBase.
 
 
     //подклассы должны переопределить для своего имени
@@ -80,9 +80,9 @@ public:
     //Intermodule calling, calls on_custom_call of the recepient
     //can be called from other threads, so modules must be ready to it
     //- Modules shouldn't throw exeptions here, but write them to err.
-    //- Module must specify what it can send other modules:
+    //- XModule must specify what it can send other modules:
     //  module_send_calls=sound_buffer_add,...,   * - means any
-    //- Module must specify what it can receive:
+    //- XModule must specify what it can receive:
     //  module_accept_calls=sound_buffer_add,...  * - means any
 
     void call(XCallType function, ErrorInfo &err, void* data, QString params = "");

@@ -30,7 +30,7 @@ protected:
 
 
 //группа для применения в родительском GUI-элементе
-//создается в ModuleInterface при подключении GUI
+//создается в XModuleInterface при подключении GUI
 //когда в этот объект приходят сигналы value_visibility_setup, value_changed или visibility_changed,
 //он при необходимости высылает сигналы детям.
 class VisibilityGroupGui

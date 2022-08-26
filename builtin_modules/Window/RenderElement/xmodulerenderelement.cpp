@@ -4,7 +4,7 @@
 #include "xmodule.h"
 
 //registering module implementation
-REGISTER_XMODULE(RenderElement)
+REGISTER_XCLASS(RenderElement)
 
 //---------------------------------------------------------------------
 XModuleRenderElement::XModuleRenderElement(QString class_name)

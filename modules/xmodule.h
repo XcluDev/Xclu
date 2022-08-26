@@ -1,11 +1,11 @@
 #ifndef MODULEINSTANCE_H
 #define MODULEINSTANCE_H
 
-//Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (XClass)
+//Модуль, содержащий невизуальный интерфейс (XModuleInterface) и исполнительную часть (XClass)
 
 #include "incl_h.h"
-#include "moduleseed.h"
-#include "moduleinterface.h"
+#include "xmoduleprototype.h"
+#include "xmoduleinterface.h"
 #include "xclass.h"
 #include "xintermodulecalls.h"
 
@@ -13,16 +13,16 @@ class XGuiEditor;
 class QJsonObject;
 class XObject;
 
-class Module
+class XModule
 {
 public:
-    //ModuleSeed парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
-    Module(ModuleSeed *info_external, XClass *rtmodule_new);
-    virtual ~Module();
+    //XModulePrototype парсится и преврашается в XModuleInterface, но указатель на него также запоминается для help
+    XModule(XModulePrototype *info_external, XClass *rtmodule_new);
+    virtual ~XModule();
 
     //Описание типа модуля
-    ModuleDescription &description();
-    ModuleSeed *info() { return info_external_; } //хранится не тут, а в ModulesFactory - нужен для Help
+    XModuleDescription &description();
+    XModulePrototype *info() { return info_external_; } //хранится не тут, а в XModulesFactory - нужен для Help
 
     //Имя и name
     QString name();
@@ -31,10 +31,10 @@ public:
     //void set_id(QString name);
 
     //Дублирование модуля, без имени
-    Module *duplicate(QString new_nameid);
+    XModule *duplicate(QString new_nameid);
 
     //Невизуальный интерфейс
-    ModuleInterface *interf();
+    XModuleInterface *interf();
 
     //Исполняемый модуль
     XClass *xmodule();
@@ -147,10 +147,10 @@ private:
     QString module_type_title_;   //тип
 
     //Информация
-    ModuleSeed *info_external_ = nullptr;    //хранится в ModulesFactory
+    XModulePrototype *info_external_ = nullptr;    //хранится в XModulesFactory
 
     //Невизуальный интерфейс
-    ModuleInterface *interf_ = nullptr;
+    XModuleInterface *interf_ = nullptr;
 
     //Исполняемый модуль
     XClass *xmodule_ = nullptr;

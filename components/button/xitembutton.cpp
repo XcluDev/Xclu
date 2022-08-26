@@ -18,7 +18,7 @@ REGISTER_XITEM(XItemButton, button)
 
 
 
-XItemButton::XItemButton(ModuleInterface *interf, const XItemPreDescription &pre_description)
+XItemButton::XItemButton(XModuleInterface *interf, const XItemPreDescription &pre_description)
     : XItem_<int>(interf, pre_description)
 {
     //Button не может быть out
@@ -79,7 +79,7 @@ int XItemButton::value_int() {
 //Function for setting value using link
 void XItemButton::set_value_from_link(XLinkResolved *linkres) {
     xc_assert(linkres, "set_value_from_link for `" + name() + "` - linkres is nullptr");
-    Module *mod = linkres->module_ptr();
+    XModule *mod = linkres->module_ptr();
     set_value_int(mod->geti(linkres));
 }
 
