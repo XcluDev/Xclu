@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTimer: public XModule
+class XModuleTimer: public XClass
 {
 public:
     XModuleTimer(QString class_name);

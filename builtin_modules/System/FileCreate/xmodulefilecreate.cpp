@@ -10,7 +10,7 @@ REGISTER_XMODULE(FileCreate)
 
 //---------------------------------------------------------------------
 XModuleFileCreate::XModuleFileCreate(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 

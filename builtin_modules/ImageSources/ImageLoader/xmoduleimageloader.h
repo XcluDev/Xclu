@@ -8,7 +8,7 @@
 #include "sdk_h.h"
 
 
-class XModuleImageLoader: public XModule
+class XModuleImageLoader: public XClass
 {
     Q_OBJECT
 public:

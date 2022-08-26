@@ -85,7 +85,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
 
 
 //Сам модуль для работы с вебкамерой
-class XModuleWebcamera: public XModule
+class XModuleWebcamera: public XClass
 {
 public:
     XModuleWebcamera(QString class_name);

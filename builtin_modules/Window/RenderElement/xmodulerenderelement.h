@@ -8,7 +8,7 @@
 #include "sdk_h.h"
 #include "xmodulewidget.h"
 
-class XModuleRenderElement: public XModule
+class XModuleRenderElement: public XClass
 {
     Q_OBJECT
 public:

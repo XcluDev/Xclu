@@ -27,7 +27,7 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Создание модуля по имени класса
-/*static*/ XModule *RegistrarXModule::create_rt_module(const ModuleDescription &description) {
+/*static*/ XClass *RegistrarXModule::create_rt_module(const ModuleDescription &description) {
     xc_assert(rt_registered_classes_, "No modules classes were added at startup");
 
     //получаем функцию для создания элемента класса
@@ -46,7 +46,7 @@ QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
     //xc_exception("Module class implementation is not found");
 
     //или создать пустой модуль - удобно для отладки и создания новых модулей
-    return new XModule("Empty module");
+    return new XClass("Empty module");
 
 }
 

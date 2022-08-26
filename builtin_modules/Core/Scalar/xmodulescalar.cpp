@@ -15,7 +15,7 @@ REGISTER_XMODULE(Scalar)
 
 //---------------------------------------------------------------------
 XModuleScalar::XModuleScalar(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

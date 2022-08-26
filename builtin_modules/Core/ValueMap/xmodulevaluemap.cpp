@@ -9,7 +9,7 @@ REGISTER_XMODULE(ValueMap)
 
 //---------------------------------------------------------------------
 XModuleValueMap::XModuleValueMap(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

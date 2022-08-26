@@ -15,7 +15,7 @@
 //TODO: make possibility to interrupt. (Already it's set in Control module).
 //It's great to do in wizard at adding the module.
 
-class XModuleSerial: public XModule
+class XModuleSerial: public XClass
 {
 public:
     XModuleSerial(QString class_name);

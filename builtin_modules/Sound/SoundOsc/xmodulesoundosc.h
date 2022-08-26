@@ -71,7 +71,7 @@ struct XModuleSoundOscData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleSoundOsc: public XModule
+class XModuleSoundOsc: public XClass
 {
     Q_OBJECT
 public:

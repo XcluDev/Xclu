@@ -12,7 +12,7 @@
 #include "neuroplaypro.h"
 #include "xtimebuffer.h"
 
-class XModuleBciNeuroplay: public XModule
+class XModuleBciNeuroplay: public XClass
 {
 public:
     XModuleBciNeuroplay(QString class_name);

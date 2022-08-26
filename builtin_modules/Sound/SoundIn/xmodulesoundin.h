@@ -61,7 +61,7 @@ private:
 
 
 //Module
-class XModuleSoundIn: public XModule
+class XModuleSoundIn: public XClass
 {
     Q_OBJECT
 public:

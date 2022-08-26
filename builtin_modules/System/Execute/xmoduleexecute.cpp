@@ -11,7 +11,7 @@ REGISTER_XMODULE(Execute)
 
 //---------------------------------------------------------------------
 XModuleExecute::XModuleExecute(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

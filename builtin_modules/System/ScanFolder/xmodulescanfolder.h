@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleScanFolder: public XModule
+class XModuleScanFolder: public XClass
 {
 public:
     XModuleScanFolder(QString class_name);

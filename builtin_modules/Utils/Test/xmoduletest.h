@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTest: public XModule
+class XModuleTest: public XClass
 {
 public:
     XModuleTest(QString class_name);

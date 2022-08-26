@@ -9,7 +9,7 @@ REGISTER_XMODULE(PrintConsole)
 
 //---------------------------------------------------------------------
 XModulePrintConsole::XModulePrintConsole(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

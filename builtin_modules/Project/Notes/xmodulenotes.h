@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleNotes: public XModule
+class XModuleNotes: public XClass
 {
 public:
     XModuleNotes(QString class_name);

@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleValueMap: public XModule
+class XModuleValueMap: public XClass
 {
 public:
     XModuleValueMap(QString class_name);

@@ -156,7 +156,7 @@ qint64 XModuleSoundInGenerator::bytesAvailable() const
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 XModuleSoundIn::XModuleSoundIn(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

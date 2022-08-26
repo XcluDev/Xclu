@@ -13,7 +13,7 @@
 
 
 //Модуль
-class XModuleFragmentShader: public XModule
+class XModuleFragmentShader: public XClass
 {
     Q_OBJECT
 public:

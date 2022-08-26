@@ -10,7 +10,7 @@ REGISTER_XMODULE(SoundPlay)
 
 //---------------------------------------------------------------------
 XModuleSoundPlay::XModuleSoundPlay(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

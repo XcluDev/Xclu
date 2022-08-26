@@ -10,7 +10,7 @@ REGISTER_XMODULE(Timer)
 
 //---------------------------------------------------------------------
 XModuleTimer::XModuleTimer(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

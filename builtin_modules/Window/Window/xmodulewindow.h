@@ -44,7 +44,7 @@ struct XModuleWindowStructureItem {
 
 
 //Модуль
-class XModuleWindow: public XModule
+class XModuleWindow: public XClass
 {
     Q_OBJECT
 public:

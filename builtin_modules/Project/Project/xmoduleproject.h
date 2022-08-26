@@ -38,7 +38,7 @@ protected:
 };
 
 
-class XModuleProject: public XModule
+class XModuleProject: public XClass
 {
     Q_OBJECT
 public:

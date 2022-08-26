@@ -24,7 +24,7 @@ struct XModuleSynthFromImageData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleSynthFromImage: public XModule
+class XModuleSynthFromImage: public XClass
 {
     Q_OBJECT
 public:

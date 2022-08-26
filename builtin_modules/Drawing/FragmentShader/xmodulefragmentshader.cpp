@@ -12,7 +12,7 @@ REGISTER_XMODULE(FragmentShader)
 
 //---------------------------------------------------------------------
 XModuleFragmentShader::XModuleFragmentShader(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

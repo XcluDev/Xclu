@@ -95,7 +95,7 @@ protected:
 
 //-------------------------------------------------------------------
 
-class XModuleMotionDetector: public XModule
+class XModuleMotionDetector: public XClass
 {
 public:
     XModuleMotionDetector(QString class_name);

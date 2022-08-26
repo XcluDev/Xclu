@@ -13,7 +13,7 @@
 //class RealsenseCamera;
 
 //The module for working with Realsense
-class XModuleRealsenseCamera: public XModule
+class XModuleRealsenseCamera: public XClass
 {
 public:
     XModuleRealsenseCamera(QString class_name);

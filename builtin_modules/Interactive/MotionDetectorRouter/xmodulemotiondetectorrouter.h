@@ -12,7 +12,7 @@
 
 //-------------------------------------------------------------------
 
-class XModuleMotionDetectorRouter: public XModule
+class XModuleMotionDetectorRouter: public XClass
 {
 public:
     XModuleMotionDetectorRouter(QString class_name);

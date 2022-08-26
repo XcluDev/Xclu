@@ -7,7 +7,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTextVariation: public XModule
+class XModuleTextVariation: public XClass
 {
 public:
     XModuleTextVariation(QString class_name);

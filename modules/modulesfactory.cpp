@@ -233,7 +233,7 @@ Module *ModulesFactory::create_unnamed_module(QString class_name, QString /*vers
 
     //если возникла ошибка парсинга - то выдастся исключение
     ModuleSeed *info = nullptr; //удалять не надо, это внешняя информация!
-    XModule *rtmodule_new = nullptr;
+    XClass *rtmodule_new = nullptr;
     Module *module_new = nullptr;
     try {
         //Получение информации

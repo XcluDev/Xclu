@@ -9,7 +9,7 @@ REGISTER_XMODULE(MotionDetectorRouter)
 
 //---------------------------------------------------------------------
 XModuleMotionDetectorRouter::XModuleMotionDetectorRouter(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

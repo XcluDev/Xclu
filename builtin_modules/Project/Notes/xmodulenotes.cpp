@@ -8,7 +8,7 @@ REGISTER_XMODULE(Notes)
 
 //---------------------------------------------------------------------
 XModuleNotes::XModuleNotes(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

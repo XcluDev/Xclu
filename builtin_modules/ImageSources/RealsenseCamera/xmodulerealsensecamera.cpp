@@ -15,7 +15,7 @@ REGISTER_XMODULE(RealsenseCamera)
 
 //---------------------------------------------------------------------
 XModuleRealsenseCamera::XModuleRealsenseCamera(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

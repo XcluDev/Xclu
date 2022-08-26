@@ -7,7 +7,7 @@
 #include "xobject.h"
 
 //---------------------------------------------------------------------
-Module::Module(ModuleSeed *info_external, XModule *rtmodule_new)
+Module::Module(ModuleSeed *info_external, XClass *rtmodule_new)
 {
     info_external_ = info_external;
 
@@ -94,7 +94,7 @@ ModuleInterface *Module::interf() {
 
 //---------------------------------------------------------------------
 //Исполняемый модуль
-XModule *Module::xmodule() {
+XClass *Module::xmodule() {
     return xmodule_;
 }
 

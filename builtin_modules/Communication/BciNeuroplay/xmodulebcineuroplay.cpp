@@ -8,7 +8,7 @@ REGISTER_XMODULE(BciNeuroplay)
 
 //---------------------------------------------------------------------
 XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

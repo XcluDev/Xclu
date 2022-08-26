@@ -14,7 +14,7 @@
 #include <cv.h>
 #include "opencv2/objdetect.hpp"
 
-class XModuleFaceDetect: public XModule
+class XModuleFaceDetect: public XClass
 {
 public:
     XModuleFaceDetect(QString class_name);

@@ -29,7 +29,7 @@ struct XModuleGuiNumberData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleScalar: public XModule
+class XModuleScalar: public XClass
 {
     Q_OBJECT
 public:

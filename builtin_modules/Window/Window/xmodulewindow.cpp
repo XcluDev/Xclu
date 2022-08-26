@@ -16,7 +16,7 @@ REGISTER_XMODULE(Window)
 
 //---------------------------------------------------------------------
 XModuleWindow::XModuleWindow(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

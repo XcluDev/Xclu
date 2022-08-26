@@ -109,7 +109,7 @@ void XModuleSoundOscData::update_freq(float &var, float target) {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 XModuleSoundOsc::XModuleSoundOsc(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

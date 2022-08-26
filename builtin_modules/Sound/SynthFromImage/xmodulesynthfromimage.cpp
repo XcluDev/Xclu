@@ -26,7 +26,7 @@ REGISTER_XMODULE(SynthFromImage)
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 XModuleSynthFromImage::XModuleSynthFromImage(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

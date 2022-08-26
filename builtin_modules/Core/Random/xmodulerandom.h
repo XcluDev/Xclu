@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleRandom: public XModule
+class XModuleRandom: public XClass
 {
 public:
     XModuleRandom(QString class_name);

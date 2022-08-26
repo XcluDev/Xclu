@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModulePrintConsole: public XModule
+class XModulePrintConsole: public XClass
 {
 public:
     XModulePrintConsole(QString class_name);

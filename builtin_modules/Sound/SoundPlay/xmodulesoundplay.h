@@ -8,7 +8,7 @@
 #include <QMediaPlayer>
 #include <QScopedPointer>
 
-class XModuleSoundPlay: public XModule
+class XModuleSoundPlay: public XClass
 {
 public:
     XModuleSoundPlay(QString class_name);

@@ -28,7 +28,7 @@ struct XModuleWImageData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleWImage: public XModule
+class XModuleWImage: public XClass
 {
     Q_OBJECT
 public:

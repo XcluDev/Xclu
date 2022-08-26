@@ -6,7 +6,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleFileCreate: public XModule
+class XModuleFileCreate: public XClass
 {
 public:
     XModuleFileCreate(QString class_name);

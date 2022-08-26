@@ -12,7 +12,7 @@ REGISTER_XMODULE(Fbo)
 
 //---------------------------------------------------------------------
 XModuleFbo::XModuleFbo(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

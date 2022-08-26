@@ -8,7 +8,7 @@ REGISTER_XMODULE(RenderElement)
 
 //---------------------------------------------------------------------
 XModuleRenderElement::XModuleRenderElement(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

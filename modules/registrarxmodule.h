@@ -12,8 +12,8 @@
 #include "moduledescription.h"
 
 //тип функции для регистрации модуля
-class XModule;
-typedef std::function<XModule *()> XModuleCreateFunction;
+class XClass;
+typedef std::function<XClass *()> XModuleCreateFunction;
 
 //класс для регистрации модуля
 class RegistrarXModule
@@ -28,7 +28,7 @@ public:
     static bool is_module_implemented(QString class_name);
 
     //Создание модуля по имени класса
-    static XModule *create_rt_module(const ModuleDescription &description);
+    static XClass *create_rt_module(const ModuleDescription &description);
 };
 
 //------------------------------------------------------------------
@@ -38,7 +38,7 @@ public:
 //  ## - конкатенация в коде   # - превратить в строку
 #define REGISTER_XMODULE(CLASS_NAME) \
     struct Registrar_XModule##CLASS_NAME { \
-        static XModule *create() { return new XModule##CLASS_NAME(#CLASS_NAME); } \
+        static XClass *create() { return new XClass##CLASS_NAME(#CLASS_NAME); } \
         Registrar_XModule##CLASS_NAME() { \
             RegistrarXModule::register_rt_class(#CLASS_NAME, std::bind(&Registrar_XModule##CLASS_NAME::create)); \
         } \
@@ -52,7 +52,7 @@ REGISTER_XMODULE(Execute)
 приведет к вставке такого кода:
 
     struct Registrar_XModuleExecute { \
-        static XModule *create() { return new XModule##CLASS_NAME("Execute"); } \
+        static XClass *create() { return new XClass##CLASS_NAME("Execute"); } \
         Registrar_XModuleExecute() { \
             RegistrarXModule::register_rt_class("Execute", std::bind(&Registrar_XModuleExecute::create)); \
         } \

@@ -15,7 +15,7 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class XModuleTelegramBot: public XModule
+class XModuleTelegramBot: public XClass
 {
 public:
     XModuleTelegramBot(QString class_name);

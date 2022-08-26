@@ -10,7 +10,7 @@ REGISTER_XMODULE(ScanFolder)
 
 //---------------------------------------------------------------------
 XModuleScanFolder::XModuleScanFolder(QString class_name)
-    :XModule(class_name)
+    :XClass(class_name)
 {
 
 }

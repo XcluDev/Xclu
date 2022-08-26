@@ -12,7 +12,7 @@
 
 
 //Модуль
-class XModuleFbo: public XModule
+class XModuleFbo: public XClass
 {
     Q_OBJECT
 public:
