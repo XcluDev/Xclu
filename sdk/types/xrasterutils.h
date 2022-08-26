@@ -33,7 +33,7 @@ public:
     static QImage link_qimage(const XRaster& raster);
 
     //Save and load
-    static void load(QString file_name, XRaster &raster);
+    static void load(QString file_name, XRaster& raster);
     static void save(XRaster& raster, QString file_name, QString file_format, int quality = 90);
 
     // Draw raster on painter
