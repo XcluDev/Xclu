@@ -15,10 +15,8 @@
 class QWidget;
 class XcluSpinBox;
 
-
-
 //Данные, которые защищаются с помощью mutex
-struct XModuleGuiNumberData: public XcluProtectedData
+struct XClassGuiNumberData: public XcluProtectedData
 {
     int gui_changed = 0;
 
@@ -29,12 +27,12 @@ struct XModuleGuiNumberData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleScalar: public XClass
+class XClassScalar: public XClass
 {
     Q_OBJECT
 public:
-    XModuleScalar(QString class_name);
-    virtual ~XModuleScalar();
+    XClassScalar(QString class_name);
+    virtual ~XClassScalar();
 protected:
 #include "auto.h"
 
@@ -60,7 +58,7 @@ protected:
     void set_value(int v);
 
 
-    XModuleGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
+    XClassGuiNumberData data_;  //Состояние - например, изменились ли данные, введенные пользователем.
 
     void spin_changed();    //вызывается, если значение изменилось
 

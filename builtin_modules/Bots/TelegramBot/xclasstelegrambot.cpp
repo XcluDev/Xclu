@@ -10,25 +10,25 @@
 REGISTER_XCLASS(TelegramBot)
 
 //---------------------------------------------------------------------
-XModuleTelegramBot::XModuleTelegramBot(QString class_name)
+XClassTelegramBot::XClassTelegramBot(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleTelegramBot::~XModuleTelegramBot()
+XClassTelegramBot::~XClassTelegramBot()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::start() {
+void XClassTelegramBot::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::update() {
+void XClassTelegramBot::update() {
     if (geti_button_send()) {
         send_message();
     }
@@ -36,16 +36,16 @@ void XModuleTelegramBot::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::stop() {
+void XClassTelegramBot::stop() {
     manager_.reset();
 }
 
 //---------------------------------------------------------------------
-//void XModuleTelegramBot::on_button_pressed(QString button_id) {
+//void XClassTelegramBot::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::send_message() {
+void XClassTelegramBot::send_message() {
     QString token = gets_bot_token().trimmed();
     QString chat_id = gets_chat_id().trimmed();
     QString message = gets_message_send();
@@ -78,14 +78,14 @@ void XModuleTelegramBot::send_message() {
 
     //connect(reply, &QIODevice::readyRead, this, &MyClass::slotReadyRead);
     connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            this, &XModuleTelegramBot::slotError);
+            this, &XClassTelegramBot::slotError);
     connect(reply, &QNetworkReply::sslErrors,
-            this, &XModuleTelegramBot::slotSslErrors);
+            this, &XClassTelegramBot::slotSslErrors);
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::handleNetworkData(QNetworkReply *networkReply) {
+void XClassTelegramBot::handleNetworkData(QNetworkReply *networkReply) {
     //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
     if(networkReply->error() == QNetworkReply::NoError){
@@ -114,17 +114,17 @@ void XModuleTelegramBot::handleNetworkData(QNetworkReply *networkReply) {
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::slotError() {
+void XClassTelegramBot::slotError() {
     //Can't do exception here, so just put to console
-    xc_console_append(QString("XModuleTelegramBot - network error"));
-    //xc_exception(QString("XModuleTelegramBot - network error"));
+    xc_console_append(QString("XClassTelegramBot - network error"));
+    //xc_exception(QString("XClassTelegramBot - network error"));
 }
 
 //---------------------------------------------------------------------
-void XModuleTelegramBot::slotSslErrors() {
+void XClassTelegramBot::slotSslErrors() {
     //Can't do exception here, so just put to console
-    xc_console_append(QString("XModuleTelegramBot - network SSL error"));
-    //xc_exception(QString("XModuleTelegramBot - network SSL error"));
+    xc_console_append(QString("XClassTelegramBot - network SSL error"));
+    //xc_exception(QString("XClassTelegramBot - network SSL error"));
 
 }
 

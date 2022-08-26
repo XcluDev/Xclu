@@ -1,5 +1,5 @@
-#ifndef XMODULEWIDGET_H
-#define XMODULEWIDGET_H
+#ifndef XCLASSWIDGET_H
+#define XCLASSWIDGET_H
 
 //Runtime module class with drawing to widget capability
 
@@ -81,4 +81,4 @@ protected:
 
 };
 
-#endif // XMODULEWIDGET_H
+#endif // XCLASSWIDGET_H

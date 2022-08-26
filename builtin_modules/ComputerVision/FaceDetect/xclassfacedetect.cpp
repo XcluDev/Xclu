@@ -1,4 +1,4 @@
-#include "xmodulefacedetect.h"
+#include "xclassfacedetect.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -12,41 +12,41 @@
 REGISTER_XCLASS(FaceDetect)
 
 //---------------------------------------------------------------------
-XModuleFaceDetect::XModuleFaceDetect(QString class_name)
+XClassFaceDetect::XClassFaceDetect(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleFaceDetect::~XModuleFaceDetect()
+XClassFaceDetect::~XClassFaceDetect()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::on_loaded() {
+void XClassFaceDetect::on_loaded() {
 
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleFaceDetect::on_button_pressed(QString /*button_id*/) {
+void XClassFaceDetect::on_button_pressed(QString /*button_id*/) {
     //if (button_id == "print_devices") {
     //}
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::start() {
+void XClassFaceDetect::start() {
     haar_load(xc_absolute_path_from_project(gets_cascade_file()));
     clear_results();
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::clear_results() {
+void XClassFaceDetect::clear_results() {
     seti_face_count(0);
     blobs_.clear();
     raw_blobs_.clear();
@@ -55,7 +55,7 @@ void XModuleFaceDetect::clear_results() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::update() {
+void XClassFaceDetect::update() {
     auto mode = gete_processing_mode();
     bool new_image =
             (mode == processing_mode_On_Checkbox && geti_process_new_frame())
@@ -81,12 +81,12 @@ void XModuleFaceDetect::update() {
 }
 
 //---------------------------------------------------------------------
-bool XModuleFaceDetect::input_image_was_changed() {
+bool XClassFaceDetect::input_image_was_changed() {
     return getobject_input_image()->was_changed(image_changed_checker_);
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::stop() {
+void XClassFaceDetect::stop() {
     haar_unload();
 
     clear_results();
@@ -94,7 +94,7 @@ void XModuleFaceDetect::stop() {
 
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::draw(QPainter &painter, int w, int h) {
+void XClassFaceDetect::draw(QPainter &painter, int w, int h) {
     if (!geti_draw_enabled()) {
         return;
     }
@@ -138,7 +138,7 @@ void XModuleFaceDetect::draw(QPainter &painter, int w, int h) {
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::haar_load(QString file_name) {
+void XClassFaceDetect::haar_load(QString file_name) {
     haar_unload();
 
     xc_assert(face_cascade_.load(file_name.toStdString()),
@@ -147,13 +147,13 @@ void XModuleFaceDetect::haar_load(QString file_name) {
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::haar_unload() {
+void XClassFaceDetect::haar_unload() {
     //face_cascade_.... TODO now not deleting here, for fix may use scoped pointer
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::haar_search() {
+void XClassFaceDetect::haar_search() {
     if (face_cascade_.empty()) {
         seti_face_count(0);
         return;
@@ -228,7 +228,7 @@ void XModuleFaceDetect::haar_search() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFaceDetect::update_biggest() {
+void XClassFaceDetect::update_biggest() {
     int n = blobs_.size();
     if (n == 0) {
         setf_biggest_cx(0.5);
@@ -252,7 +252,7 @@ void XModuleFaceDetect::update_biggest() {
 
 //---------------------------------------------------------------------
 // Apply threshold and create only one blob; all blobs_ are copyed to raw_blobs_ for debug drawing.
-void XModuleFaceDetect::apply_thresholding(int w0, int h0) {
+void XClassFaceDetect::apply_thresholding(int w0, int h0) {
     if (blobs_.isEmpty()) return;
     if (!(geti_haar_neighbors() == 0 && geti_haar_apply_threshold())) return;
 

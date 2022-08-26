@@ -1,5 +1,5 @@
-#ifndef XMODULEWINDOW_H
-#define XMODULEWINDOW_H
+#ifndef XCLASSWINDOW_H
+#define XCLASSWINDOW_H
 
 //Реализация модуля Window - окно на экране
 
@@ -129,4 +129,4 @@ protected:
 };
 
 
-#endif // XMODULEWINDOW_H
+#endif // XCLASSWINDOW_H

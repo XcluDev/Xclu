@@ -14,11 +14,11 @@
 #include <cv.h>
 #include "opencv2/objdetect.hpp"
 
-class XModuleFaceDetect: public XClass
+class XClassFaceDetect: public XClass
 {
 public:
-    XModuleFaceDetect(QString class_name);
-    ~XModuleFaceDetect();
+    XClassFaceDetect(QString class_name);
+    ~XClassFaceDetect();
 protected:
 #include "auto.h"
     virtual void on_loaded();

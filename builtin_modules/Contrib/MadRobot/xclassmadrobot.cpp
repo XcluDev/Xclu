@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmodulemadrobot.h"
+#include "xclassmadrobot.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"

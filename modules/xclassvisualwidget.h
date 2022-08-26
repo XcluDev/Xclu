@@ -1,5 +1,5 @@
-#ifndef XMODULEPAINTERWIDGET_H
-#define XMODULEPAINTERWIDGET_H
+#ifndef XCLASSPAINTERWIDGET_H
+#define XCLASSPAINTERWIDGET_H
 
 //Helper class for XModuleWidget, implementing custom drawing widget
 #include <QWidget>
@@ -58,4 +58,4 @@ private:
 
 
 
-#endif // XMODULEPAINTERWIDGET_H
+#endif // XCLASSPAINTERWIDGET_H

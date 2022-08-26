@@ -13,12 +13,12 @@
 
 
 //Модуль
-class XModuleFragmentShader: public XClass
+class XClassFragmentShader: public XClass
 {
     Q_OBJECT
 public:
-    XModuleFragmentShader(QString class_name);
-    virtual ~XModuleFragmentShader();
+    XClassFragmentShader(QString class_name);
+    virtual ~XClassFragmentShader();
 protected:
 #include "auto.h"
 

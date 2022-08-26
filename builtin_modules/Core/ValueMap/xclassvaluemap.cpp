@@ -1,4 +1,4 @@
-#include "xmodulevaluemap.h"
+#include "xclassvaluemap.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"

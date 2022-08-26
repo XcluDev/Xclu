@@ -1,5 +1,5 @@
-#ifndef XMODULEINTERFACE_H
-#define XMODULEINTERFACE_H
+#ifndef XCLASSINTERFACE_H
+#define XCLASSINTERFACE_H
 
 //Невизуальное описание интерфейса, строится по XModulePrototype
 #include "incl_h.h"
@@ -189,4 +189,4 @@ private:
 
 };
 
-#endif // XMODULEINTERFACE_H
+#endif // XCLASSINTERFACE_H

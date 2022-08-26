@@ -1,16 +1,16 @@
 #ifndef XCLASSRANDOM_H
 #define XCLASSRANDOM_H
 
-//ValueMap implementation
+//Random implementation
 
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleValueMap: public XClass
+class XClassRandom: public XClass
 {
 public:
-    XModuleValueMap(QString class_name);
-    virtual ~XModuleValueMap();
+    XClassRandom(QString class_name);
+    virtual ~XClassRandom();
 #include "auto.h"
 
 protected:
@@ -20,6 +20,12 @@ protected:
     virtual void stop();
     //virtual void on_button_pressed(QString button_id);
 
+
+    QString get_random_string();
+
+    float time_ = -1;
+
+    void make_new_value();
 };
 
 

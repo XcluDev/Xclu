@@ -15,11 +15,11 @@
 //TODO: make possibility to interrupt. (Already it's set in Control module).
 //It's great to do in wizard at adding the module.
 
-class XModuleSerial: public XClass
+class XClassSerial: public XClass
 {
 public:
-    XModuleSerial(QString class_name);
-    virtual ~XModuleSerial();
+    XClassSerial(QString class_name);
+    virtual ~XClassSerial();
 protected:
 #include "auto.h"
     virtual void on_loaded();

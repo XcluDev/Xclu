@@ -8,14 +8,14 @@
 REGISTER_XCLASS(Serial)
 
 //---------------------------------------------------------------------
-XModuleSerial::XModuleSerial(QString class_name)
+XClassSerial::XClassSerial(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::gui_clear() {
+void XClassSerial::gui_clear() {
     seti_total_sent(0);
     clear_string_device_list();
     clear_string_port_info();
@@ -31,32 +31,32 @@ void XModuleSerial::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::set_connected(bool connected) {
+void XClassSerial::set_connected(bool connected) {
   connected_ = connected;
   seti_connected(connected);
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::set_total_sent(int t) {
+void XClassSerial::set_total_sent(int t) {
     total_sent_ = t;
     seti_total_sent(t);
 }
 
 //---------------------------------------------------------------------
-XModuleSerial::~XModuleSerial()
+XClassSerial::~XClassSerial()
 {
     stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::on_loaded() {
+void XClassSerial::on_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleSerial::on_button_pressed(QString button_id) {
+void XClassSerial::on_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
@@ -159,7 +159,7 @@ void XModuleSerial::on_button_pressed(QString button_id) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::print_devices() {
+void XClassSerial::print_devices() {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
 
     QStringList out;
@@ -193,7 +193,7 @@ void XModuleSerial::print_devices() {
 
 
 //---------------------------------------------------------------------
-void XModuleSerial::start() {
+void XClassSerial::start() {
     //Очистка переменных
     gui_clear();
 
@@ -205,7 +205,7 @@ void XModuleSerial::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::open_port() {
+void XClassSerial::open_port() {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
     int n = serialPortInfos.count();
 
@@ -294,7 +294,7 @@ void XModuleSerial::open_port() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::update() {
+void XClassSerial::update() {
     //sending data
     if (geti_send_string_checkbox()) {
         if (connected_) {
@@ -317,7 +317,7 @@ void XModuleSerial::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::send_string(QString str) {
+void XClassSerial::send_string(QString str) {
     //добавляем завершение строки
     auto ts = gete_line_term(); //None,\n,\r,\r\n
     if (ts == line_term__n) str += "\n";
@@ -351,7 +351,7 @@ void XModuleSerial::send_string(QString str) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::send_byte(int byte) {
+void XClassSerial::send_byte(int byte) {
     if (geti_debug()) {
         xc_console_append("Send byte `" + QString::number(byte) + "`");
     }
@@ -363,7 +363,7 @@ void XModuleSerial::send_byte(int byte) {
 }
 
 //---------------------------------------------------------------------
-void XModuleSerial::stop() {
+void XClassSerial::stop() {
     if (connected_) {
         serialPort_.close();
         set_connected(false);
@@ -372,7 +372,7 @@ void XModuleSerial::stop() {
 
 
 //---------------------------------------------------------------------
-void XModuleSerial::receive() {
+void XClassSerial::receive() {
     if (connected_ && geti_receive()) {
         const int N = 50;
         char buffer[N];

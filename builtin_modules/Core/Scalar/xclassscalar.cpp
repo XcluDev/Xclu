@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmodulescalar.h"
+#include "xclassscalar.h"
 
 #include "incl_cpp.h"
 #include "registrarxclass.h"

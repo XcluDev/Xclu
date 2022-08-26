@@ -1,5 +1,5 @@
-#ifndef XMODULEDESCRIPTION_H
-#define XMODULEDESCRIPTION_H
+#ifndef XCLASSDESCRIPTION_H
+#define XCLASSDESCRIPTION_H
 
 //Описание модуля - имя класса, категория,
 //а также описание, какие вызовы он принимает и какие вызовы может осуществлять
@@ -76,4 +76,4 @@ struct XModuleDescription {
     }
 };
 
-#endif // XMODULEDESCRIPTION_H
+#endif // XCLASSDESCRIPTION_H

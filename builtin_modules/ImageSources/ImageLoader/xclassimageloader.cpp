@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmoduleimageloader.h"
+#include "xclassimageloader.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"

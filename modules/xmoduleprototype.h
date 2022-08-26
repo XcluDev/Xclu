@@ -1,5 +1,5 @@
-#ifndef XMODULEPROTOTYPE_H
-#define XMODULEPROTOTYPE_H
+#ifndef XCLASSPROTOTYPE_H
+#define XCLASSPROTOTYPE_H
 
 //Информация о модуле:
 //Имя, тип, версия модуля и его GUI в виде строк
@@ -62,4 +62,4 @@ private:
 
 };
 
-#endif // XMODULEPROTOTYPE_H
+#endif // XCLASSPROTOTYPE_H

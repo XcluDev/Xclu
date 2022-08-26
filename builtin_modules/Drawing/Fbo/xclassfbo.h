@@ -12,12 +12,12 @@
 
 
 //Модуль
-class XModuleFbo: public XClass
+class XClassFbo: public XClass
 {
     Q_OBJECT
 public:
-    XModuleFbo(QString class_name);
-    virtual ~XModuleFbo();
+    XClassFbo(QString class_name);
+    virtual ~XClassFbo();
 protected:
 #include "auto.h"
 
@@ -33,6 +33,6 @@ protected:
 };
 
 
-//XModuleFbo
+//XClassFbo
 
 #endif // XCLASSFBO_H

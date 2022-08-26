@@ -1,5 +1,5 @@
-#ifndef XMODULEBCINEUROPLAY_H
-#define XMODULEBCINEUROPLAY_H
+#ifndef XCLASSBCINEUROPLAY_H
+#define XCLASSBCINEUROPLAY_H
 
 //BCI Neuroplay, https://neuroplay.ru
 
@@ -12,11 +12,11 @@
 #include "neuroplaypro.h"
 #include "xtimebuffer.h"
 
-class XModuleBciNeuroplay: public XClass
+class XClassBciNeuroplay: public XClass
 {
 public:
-    XModuleBciNeuroplay(QString class_name);
-    ~XModuleBciNeuroplay();
+    XClassBciNeuroplay(QString class_name);
+    ~XClassBciNeuroplay();
 protected:
 #include "auto.h"
     virtual void on_loaded();
@@ -79,4 +79,4 @@ protected:
 
 
 
-#endif // XMODULEBCINEUROPLAY_H
+#endif // XCLASSBCINEUROPLAY_H

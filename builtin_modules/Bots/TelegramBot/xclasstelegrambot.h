@@ -1,5 +1,5 @@
-#ifndef XMODULETELEGRAMBOT_H
-#define XMODULETELEGRAMBOT_H
+#ifndef XCLASSTELEGRAMBOT_H
+#define XCLASSTELEGRAMBOT_H
 
 //TelegramBot implementation
 //------------------------------------------------------------------
@@ -15,11 +15,11 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class XModuleTelegramBot: public XClass
+class XClassTelegramBot: public XClass
 {
 public:
-    XModuleTelegramBot(QString class_name);
-    virtual ~XModuleTelegramBot();
+    XClassTelegramBot(QString class_name);
+    virtual ~XClassTelegramBot();
 #include "auto.h"
 
 protected:
@@ -41,4 +41,4 @@ protected slots:
 
 
 
-#endif // XMODULETELEGRAMBOT_H
+#endif // XCLASSTELEGRAMBOT_H

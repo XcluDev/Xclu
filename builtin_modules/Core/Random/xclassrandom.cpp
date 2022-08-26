@@ -1,4 +1,4 @@
-#include "xmodulerandom.h"
+#include "xclassrandom.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"

@@ -10,12 +10,12 @@ SOURCES += \
     $$PWD/builtin_modules/Communication/Serial/xclassserial.cpp \
     $$PWD/builtin_modules/ComputerVision/FaceDetect/xclassfacedetect.cpp \
     $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.cpp \
-    $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
-    $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
-    $$PWD/builtin_modules/Core/ValueMap/xmodulevaluemap.cpp \
-    $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.cpp \
-    $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.cpp \
-    $$PWD/builtin_modules/ImageSources/ImageLoader/xmoduleimageloader.cpp \
+    $$PWD/builtin_modules/Core/Random/xclassrandom.cpp \
+    $$PWD/builtin_modules/Core/Scalar/xclassscalar.cpp \
+    $$PWD/builtin_modules/Core/ValueMap/xclassvaluemap.cpp \
+    $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.cpp \
+    $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp \
+    $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp \
     $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetector/xmodulemotiondetector.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xmodulemotiondetectorrouter.cpp \
@@ -57,16 +57,16 @@ HEADERS += \
     $$PWD/builtin_modules/Contrib/MadRobot/auto.h \
     $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.h \
     $$PWD/builtin_modules/Core/Random/auto.h \
-    $$PWD/builtin_modules/Core/Random/xmodulerandom.h \
+    $$PWD/builtin_modules/Core/Random/xclassrandom.h \
     $$PWD/builtin_modules/Core/Scalar/auto.h \
-    $$PWD/builtin_modules/Core/Scalar/xmodulescalar.h \
+    $$PWD/builtin_modules/Core/Scalar/xclassscalar.h \
     $$PWD/builtin_modules/Core/ValueMap/auto.h \
-    $$PWD/builtin_modules/Core/ValueMap/xmodulevaluemap.h \
+    $$PWD/builtin_modules/Core/ValueMap/xclassvaluemap.h \
     $$PWD/builtin_modules/Drawing/Fbo/auto.h \
-    $$PWD/builtin_modules/Drawing/Fbo/xmodulefbo.h \
+    $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.h \
     $$PWD/builtin_modules/Drawing/FragmentShader/auto.h \
-    $$PWD/builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.h \
-    $$PWD/builtin_modules/ImageSources/ImageLoader/xmoduleimageloader.h \
+    $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.h \
+    $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.h \
     $$PWD/builtin_modules/ImageSources/Webcamera/auto.h \
     $$PWD/builtin_modules/ImageSources/Webcamera/xmodulewebcamera.h \
     $$PWD/builtin_modules/Interactive/MotionDetector/auto.h \

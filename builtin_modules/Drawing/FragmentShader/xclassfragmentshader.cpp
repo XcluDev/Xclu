@@ -1,4 +1,4 @@
-#include "xmodulefbo.h"
+#include "xclassfragmentshader.h"
 #include <QApplication>
 #include <QScreen>
 
@@ -8,23 +8,23 @@
 #include "xmodule.h"
 
 //registering module implementation
-REGISTER_XCLASS(Fbo)
+REGISTER_XCLASS(FragmentShader)
 
 //---------------------------------------------------------------------
-XModuleFbo::XModuleFbo(QString class_name)
+XClassFragmentShader::XClassFragmentShader(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleFbo::~XModuleFbo()
+XClassFragmentShader::~XClassFragmentShader()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::start() {
+void XClassFragmentShader::start() {
     //создание и установка начальных настроек окна
     //setup_window();
 
@@ -33,20 +33,20 @@ void XModuleFbo::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleFbo::update() {
+void XClassFragmentShader::update() {
 
     //update_window();   //обновляем данные
 }
 
 
 //---------------------------------------------------------------------
-void XModuleFbo::stop() {
+void XClassFragmentShader::stop() {
    // window_.reset();
 }
 
 //---------------------------------------------------------------------
 //Вызов
-/*void XModuleFbo::on_custom_call(QString function, XObject *input, XObject *output) {
+/*void XClassFragmentShader::on_custom_call(QString function, XObject *input, XObject *output) {
     //"sound_buffer_add"
     //if (function == functions_names::sound_buffer_add()) {
 
@@ -62,4 +62,3 @@ void XModuleFbo::stop() {
 }*/
 
 //---------------------------------------------------------------------
-
