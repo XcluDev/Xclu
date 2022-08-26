@@ -3,7 +3,7 @@
 
 //Редактор списка модулей в проекте
 #include <QWidget>
-#include "module.h"
+#include "xmodule.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;

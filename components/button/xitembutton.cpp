@@ -1,9 +1,9 @@
 #include "xitembutton.h"
 #include "xguibutton.h"
 #include "incl_cpp.h"
-#include "moduleinterface.h"
+#include "xmoduleinterface.h"
 #include "registrarxitem.h"
-#include "module.h"
+#include "xmodule.h"
 
 REGISTER_XITEM(XItemButton, button)
 

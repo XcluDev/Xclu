@@ -1,7 +1,7 @@
 #include "XModuleRenderElement.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
-#include "module.h"
+#include "registrarxclass.h"
+#include "xmodule.h"
 
 //registering module implementation
 REGISTER_XMODULE(RenderElement)

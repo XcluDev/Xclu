@@ -1,5 +1,5 @@
-#ifndef XMODULE_H
-#define XMODULE_H
+#ifndef XCLASS_H
+#define XCLASS_H
 
 //Вычислительный модуль (runtime module)
 //Базовый класс для конкретных реализаций модулей
@@ -17,14 +17,14 @@
 #include "sdk_h.h"
 #include <QObject>
 #include <QPainter>
-#include "xclass.h"
+#include "xclassbase.h"
 
 class InterfaceItem;
 class Module;
 class XObject;
 
 //Runtime module status
-class XModuleStatus {
+class XClassStatus {
 public:
     bool was_started = false;
 
@@ -38,17 +38,17 @@ public:
 };
 
 //Runtime module class, base for most modules implementations
-class XModule : public QObject, public XClass
+class XClass : public QObject, public XClassBase
 {
     Q_OBJECT
 public:
     //--------------------------------------------------------------
     //Public interface
     //--------------------------------------------------------------
-    XModule(QString class_name);
-    virtual ~XModule();
+    XClass(QString class_name);
+    virtual ~XClass();
 
-    //Module access, variables access and runtime values are inherited from XClass.
+    //Module access, variables access and runtime values are inherited from XClassBase.
 
 
     //подклассы должны переопределить для своего имени
@@ -110,7 +110,7 @@ public:
     //ModuleRunMode run_mode() { return ModuleRunMode(geti("run_mode")); }
 
     //статус - например, был ли выполнен старт
-    XModuleStatus status() const { return status_; }
+    XClassStatus status() const { return status_; }
 
     void reset_error_values();                  //сброс того, что быда ошибка при выполнении
     void set_error_values(QString message);     //установка того, что была ошибка
@@ -179,7 +179,7 @@ private:
     QString class_name_;
 
     //Переменные, описывающие состояние выполнения
-    XModuleStatus status_;
+    XClassStatus status_;
 
     //start модуля вызывается при его первом update
     //если запустили - то больше не запускаем в update
@@ -201,4 +201,4 @@ private:
 
 };
 
-#endif // XMODULE_H
+#endif // XCLASS_H

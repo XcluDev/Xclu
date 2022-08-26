@@ -6,7 +6,7 @@
 //а также в диалоге теста GUI модуля DialogTestModuleInterface
 #include <QWidget>
 #include "incl_h.h"
-#include "module.h"
+#include "xmodule.h"
 #include "xgui.h"
 
 QT_BEGIN_NAMESPACE

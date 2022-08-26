@@ -1,7 +1,7 @@
 #include "exportinterface.h"
 #include "sdk_cpp.h"
-#include "moduleinterface.h"
-#include "modulesfactory.h"
+#include "xmoduleinterface.h"
+#include "xmodulesfactory.h"
 #include <QDateTime>
 
 //---------------------------------------------------------------------

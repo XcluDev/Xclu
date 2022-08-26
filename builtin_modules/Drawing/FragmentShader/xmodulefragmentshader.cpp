@@ -3,9 +3,9 @@
 #include <QScreen>
 
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "project_props.h"
-#include "module.h"
+#include "xmodule.h"
 
 //registering module implementation
 REGISTER_XMODULE(FragmentShader)

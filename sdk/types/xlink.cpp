@@ -1,7 +1,7 @@
 #include "xlink.h"
 
 #include "incl_cpp.h"
-#include "module.h"
+#include "xmodule.h"
 #include "project_props.h"
 
 //---------------------------------------------------------------------

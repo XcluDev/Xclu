@@ -1,4 +1,4 @@
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "incl_cpp.h"
 #include "xclass.h"
 

@@ -16,7 +16,7 @@
 //-------------------------------------------------------
 
 #include "incl_h.h"
-#include "moduledescription.h"
+#include "xmoduledescription.h"
 
 #include <QWidget>
 #include <QMenu>

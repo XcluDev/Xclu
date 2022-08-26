@@ -1,9 +1,9 @@
 #include "modulesfactory.h"
 #include <QDirIterator>
 #include "incl_cpp.h"
-#include "moduleseed.h"
-#include "moduleinterface.h"
-#include "registrarxmodule.h"
+#include "xmoduleseed.h"
+#include "xmoduleinterface.h"
+#include "registrarxclass.h"
 
 ModulesFactory FACTORY;
 

@@ -16,8 +16,8 @@
 
 #include "xgui.h"
 #include "registrarxitem.h"
-#include "moduleinterface.h"
-#include "module.h"
+#include "xmoduleinterface.h"
+#include "xmodule.h"
 #include "dialogeditlink.h"
 
 //---------------------------------------------------------------------

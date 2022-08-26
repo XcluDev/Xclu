@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "modulesfactory.h"
+#include "xmodulesfactory.h"
 #include "project.h"
 #include "projectgui.h"
 #include "incl_cpp.h"

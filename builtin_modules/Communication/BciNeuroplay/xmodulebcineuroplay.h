@@ -5,7 +5,7 @@
 
 #include <QImage>
 #include "sdk_h.h"
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"

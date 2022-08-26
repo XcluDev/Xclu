@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
 #include "dialogaddmodule.h"
-#include "modulesfactory.h"
+#include "xmodulesfactory.h"
 
 DialogAddModule *D_ADD_MODULE = 0;
 

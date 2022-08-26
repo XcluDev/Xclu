@@ -1,9 +1,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include "module.h"
+#include "xmodule.h"
 #include "incl_cpp.h"
-#include "modulesfactory.h"
+#include "xmodulesfactory.h"
 #include "xobject.h"
 
 //---------------------------------------------------------------------

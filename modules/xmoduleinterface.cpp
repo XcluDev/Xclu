@@ -1,7 +1,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include "xclass.h"
-#include "moduleinterface.h"
+#include "xmoduleinterface.h"
 #include "incl_cpp.h"
 #include "xguieditor.h"
 #include "consoleview.h"

@@ -6,7 +6,7 @@ By given set of sound samples, module arranges them at 2D and plays by mouse cli
 */
 
 #include "sdk_h.h"
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 
 class XModuleSoundSeaOfWords: public XModuleWidget
 {

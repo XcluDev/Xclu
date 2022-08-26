@@ -1,12 +1,12 @@
 #ifndef MODULEINSTANCE_H
 #define MODULEINSTANCE_H
 
-//Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (XModule)
+//Модуль, содержащий невизуальный интерфейс (ModuleInterface) и исполнительную часть (XClass)
 
 #include "incl_h.h"
 #include "moduleseed.h"
 #include "moduleinterface.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xintermodulecalls.h"
 
 class XGuiEditor;
@@ -17,7 +17,7 @@ class Module
 {
 public:
     //ModuleSeed парсится и преврашается в ModuleInterface, но указатель на него также запоминается для help
-    Module(ModuleSeed *info_external, XModule *rtmodule_new);
+    Module(ModuleSeed *info_external, XClass *rtmodule_new);
     virtual ~Module();
 
     //Описание типа модуля
@@ -37,7 +37,7 @@ public:
     ModuleInterface *interf();
 
     //Исполняемый модуль
-    XModule *xmodule();
+    XClass *xmodule();
 
     //Compiling links and other things
     bool compile();
@@ -153,7 +153,7 @@ private:
     ModuleInterface *interf_ = nullptr;
 
     //Исполняемый модуль
-    XModule *xmodule_ = nullptr;
+    XClass *xmodule_ = nullptr;
 
     //Сигнал, что был запуск - вне зависимости от того, запустился ли реально xmodule_
     bool running_ = false;

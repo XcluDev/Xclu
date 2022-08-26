@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "xmodulessoundseaofwords.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include <QProcess>
 #include <QDirIterator>
 #include "project_props.h"

@@ -4,7 +4,7 @@
 //EmoAI
 #include "sdk_h.h"
 #include "xraster.h"
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 
 /*
 

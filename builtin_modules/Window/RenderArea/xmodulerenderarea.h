@@ -7,7 +7,7 @@
 #include <QWindow>
 
 #include "sdk_h.h"
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 
 
 class XModuleRenderArea: public XModuleWidget

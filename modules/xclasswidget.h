@@ -4,7 +4,7 @@
 //Runtime module class with drawing to widget capability
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class InterfaceItem;
 class Module;
@@ -12,7 +12,7 @@ class XObject;
 class QPainter;
 class XModuleVisualWidget;
 
-class XModuleWidget : public XModule
+class XModuleWidget : public XClass
 {
     Q_OBJECT
 public:
@@ -59,7 +59,7 @@ public:
 
 private:
     //Process mouse/keyboard events by calling virtual functions
-    //this function is called in XModule::bang_update, before module's update()
+    //this function is called in XClass::bang_update, before module's update()
     virtual void process_events();
 
     //It's protected data, because widget event can occur asyncronous

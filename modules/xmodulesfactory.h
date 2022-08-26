@@ -4,7 +4,7 @@
 //База данных модулей, позволяет создавать инстансы модулей
 #include "sdk_h.h"
 #include "moduleseed.h"
-#include "module.h"
+#include "xmodule.h"
 
 
 class ModulesFactory

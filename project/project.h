@@ -5,7 +5,7 @@
 
 #include <QJsonObject>
 #include "incl_h.h"
-#include "module.h"
+#include "xmodule.h"
 #include "projecteditorprops.h"
 
 

@@ -7,7 +7,7 @@
 #endif
 
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include <QProcess>
 #include "project_props.h"
 

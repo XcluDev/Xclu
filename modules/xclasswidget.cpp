@@ -1,7 +1,7 @@
 #include "qt_widgets.h"
 #include "incl_cpp.h"
-#include "xmodulewidget.h"
-#include "xmodulevisualwidget.h"
+#include "xclasswidget.h"
+#include "xclassvisualwidget.h"
 
 //---------------------------------------------------------------------
 XModuleWidget::XModuleWidget(QString class_name)

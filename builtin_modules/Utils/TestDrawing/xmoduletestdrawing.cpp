@@ -1,7 +1,7 @@
 #include <qt_widgets.h>
 #include "xmoduletestdrawing.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "project_props.h"
 
 

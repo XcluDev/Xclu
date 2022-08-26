@@ -1,7 +1,7 @@
 #ifndef XCLASSBASE_H
 #define XCLASSBASE_H
 
-//XClassBase - a base class for XModule.
+//XClassBase - a base class for XClass.
 //It provides access to Module (that is UI values) and for runtime information
 //So XClassBase is not executivemodule itself, but a helper class.
 /* Usage: you need to specify Module in constructor or later, by calling set_module(module) or set_module(this):

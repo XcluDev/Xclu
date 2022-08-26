@@ -1,9 +1,9 @@
-#include "xmodulevisualwidget.h"
+#include "xclassvisualwidget.h"
 
 #include "incl_cpp.h"
 #include <QPainter>
 #include <QTimer>
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 
 //---------------------------------------------------------------------
 XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XModuleWidget *xmodule)

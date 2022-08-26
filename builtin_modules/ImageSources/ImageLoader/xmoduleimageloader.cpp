@@ -1,9 +1,9 @@
 #include "qt_widgets.h"
 #include "xmoduleimageloader.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "project_props.h"
-#include "module.h"
+#include "xmodule.h"
 #include "xobjectimage.h"
 
 //registering module implementation

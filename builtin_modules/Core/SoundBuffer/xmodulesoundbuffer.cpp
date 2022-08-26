@@ -4,7 +4,7 @@
 #include "incl_cpp.h"
 #include "moduleregistrar.h"
 #include "xcore.h"
-#include "module.h"
+#include "xmodule.h"
 #include "xdict.h"
 
 #include "xcluspinbox.h"

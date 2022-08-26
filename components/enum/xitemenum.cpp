@@ -1,7 +1,7 @@
 #include "xitemenum.h"
 #include "incl_cpp.h"
 #include "xguienum.h"
-#include "module.h"
+#include "xmodule.h"
 
 #include "registrarxitem.h"
 

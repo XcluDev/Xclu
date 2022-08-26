@@ -2,7 +2,7 @@
 
 #include "incl_cpp.h"
 #include "xitem.h"
-#include "moduleinterface.h"
+#include "xmoduleinterface.h"
 
 //---------------------------------------------------------------------
 QMap<QString, XItemCreateFunction> *xitem_registered_classes_ = nullptr;

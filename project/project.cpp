@@ -5,8 +5,8 @@
 
 #include "project.h"
 #include "incl_cpp.h"
-#include "modulesfactory.h"
-#include "module.h"
+#include "xmodulesfactory.h"
+#include "xmodule.h"
 #include "project_props.h"
 #include "consoleview.h"
 

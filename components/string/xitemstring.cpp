@@ -1,7 +1,7 @@
 #include "xitemstring.h"
 #include "incl_cpp.h"
 #include "xguistring.h"
-#include "module.h"
+#include "xmodule.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemString, string)

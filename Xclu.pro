@@ -216,15 +216,18 @@ SOURCES += \
     libs/QOsc/qosc/src/qoscvalue.cpp \
     libs/tsne/sptree.cpp \
     libs/tsne/tsne.cpp \
-    modules/registrarxmodule.cpp \
     modules/exportinterface.cpp \
-    modules/moduledescription.cpp \
-    modules/moduleseed.cpp \
+    modules/registrarxclass.cpp \
     modules/xclass.cpp \
     modules/xclassbase.cpp \
+    modules/xclassvisualwidget.cpp \
+    modules/xclasswidget.cpp \
     modules/xintermodulecalls.cpp \
-    modules/xmodulevisualwidget.cpp \
-    modules/xmodulewidget.cpp \
+    modules/xmodule.cpp \
+    modules/xmoduledescription.cpp \
+    modules/xmoduleinterface.cpp \
+    modules/xmoduleseed.cpp \
+    modules/xmodulesfactory.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/cv/xcvhelper.cpp \
@@ -263,9 +266,6 @@ SOURCES += \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
     components/gui/xcluspinbox.cpp \
-    modules/module.cpp \
-    modules/moduleinterface.cpp \
-    modules/modulesfactory.cpp \
     main.cpp \
     host/consoleview.cpp \
     host/dialogs/dialogmodulename.cpp \
@@ -329,20 +329,23 @@ HEADERS += \
     libs/tsne/sptree.h \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
-    modules/registrarxmodule.h \
+    modules/registrarxclass.h \
     modules/xclass.h \
     modules/xclassbase.h \
+    modules/xclassvisualwidget.h \
+    modules/xclasswidget.h \
     modules/xintermodulecalls.h \
-    modules/xmodulevisualwidget.h \
-    modules/xmodulewidget.h \
+    modules/xmodule.h \
+    modules/xmoduledescription.h \
+    modules/xmoduleinterface.h \
+    modules/xmoduleseed.h \
+    modules/xmodulesfactory.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
     sdk/cv/xcvhelper.h \
     sdk/draw/xdrawhelper.h \
     sdk/math/int2.h \
     modules/exportinterface.h \
-    modules/moduledescription.h \
-    modules/moduleseed.h \
     sdk/math/xmath.h \
     sdk/math/xmath_glm.h \
     sdk/math/xnoise.h \
@@ -381,9 +384,6 @@ HEADERS += \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \
     components/gui/xcluspinbox.h \
-    modules/module.h \
-    modules/moduleinterface.h \
-    modules/modulesfactory.h \
     host/consoleview.h \
     host/dialogs/dialogmodulename.h \
     host/dialogs/dialogrenamemodule.h \

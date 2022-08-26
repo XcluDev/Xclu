@@ -1,7 +1,7 @@
 #include "xitemcheckbox.h"
 #include "xguicheckbox.h"
 #include "incl_cpp.h"
-#include "module.h"
+#include "xmodule.h"
 
 #include "registrarxitem.h"
 

@@ -1,6 +1,6 @@
 #include "xmoduletimer.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include <QThread>
 #include "project_props.h"
 

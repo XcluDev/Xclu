@@ -1,6 +1,6 @@
 #include "xmoduleserial.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "project_props.h"
 #include <QtSerialPort/QSerialPortInfo>
 #include <QThread>

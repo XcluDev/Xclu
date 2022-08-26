@@ -1,4 +1,4 @@
-#include "moduleseed.h"
+#include "xmoduleseed.h"
 #include "incl_cpp.h"
 
 //строки описания страницы General

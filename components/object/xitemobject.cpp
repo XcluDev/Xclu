@@ -1,7 +1,7 @@
 #include "xitemobject.h"
 #include "xguiobject.h"
 #include "incl_cpp.h"
-#include "module.h"
+#include "xmodule.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemObject, object)

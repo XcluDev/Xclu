@@ -6,7 +6,7 @@
 #include <QObject>
 
 #include "sdk_h.h"
-#include "xmodulewidget.h"
+#include "xclasswidget.h"
 
 class XModuleRenderElement: public XClass
 {

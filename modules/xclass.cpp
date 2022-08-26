@@ -1,4 +1,4 @@
-#include "xmodule.h"
+#include "xclass.h"
 #include "moduleinterface.h"
 #include "module.h"
 #include "incl_cpp.h"
@@ -6,33 +6,33 @@
 #include "xintermodulecalls.h"
 
 //---------------------------------------------------------------------
-XModule::XModule(QString class_name) {
+XClass::XClass(QString class_name) {
     class_name_ = class_name;
 }
 
 //---------------------------------------------------------------------
-XModule::~XModule() {
+XClass::~XClass() {
 
 }
 
 //---------------------------------------------------------------------
-QString XModule::class_name() {
+QString XClass::class_name() {
     return class_name_;
 }
 
 //---------------------------------------------------------------------
-QString XModule::name() {
+QString XClass::name() {
     return module()->name();
 }
 
 //---------------------------------------------------------------------
-void XModule::loaded_internal() {     //действия при загрузке модуля
+void XClass::loaded_internal() {     //действия при загрузке модуля
     on_loaded();
 }
 
 //---------------------------------------------------------------------
 //выполнить update, и если нужно - start
-void XModule::update_internal() {
+void XClass::update_internal() {
     if (is_auto_update()) {
         bang_internal();
     }
@@ -40,7 +40,7 @@ void XModule::update_internal() {
 
 //---------------------------------------------------------------------
 //bang: (start) and update if enabled
-void XModule::bang_internal() {
+void XClass::bang_internal() {
     if (is_enabled()) {
         if (!status_.was_started) {
             start();
@@ -53,7 +53,7 @@ void XModule::bang_internal() {
 
 //---------------------------------------------------------------------
 //выполнить stop, и если нужно - start
-void XModule::stop_internal() {
+void XClass::stop_internal() {
     if (status_.was_started) {
         status_.was_started = false;
         stop();
@@ -63,7 +63,7 @@ void XModule::stop_internal() {
 
 //---------------------------------------------------------------------
 //единая функция исполнения
-void XModule::execute(ModuleExecuteStage stage) {
+void XClass::execute(ModuleExecuteStage stage) {
     //отлов исключений путем обработки ошибок, и реакция соответственно настройках
     try {
         //обновление enabled__
@@ -129,7 +129,7 @@ void XModule::execute(ModuleExecuteStage stage) {
 //---------------------------------------------------------------------
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
-void XModule::button_pressed(QString button_id) {
+void XClass::button_pressed(QString button_id) {
     if (button_id == module_bang_button_name()) {
         if (is_running()) {
             bang_internal();
@@ -146,14 +146,14 @@ void XModule::button_pressed(QString button_id) {
 
 //---------------------------------------------------------------------
 // Subclasses must reimplement this for drawing
-void XModule::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
+void XClass::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
     xc_exception("draw() is not yet implemented for class `" + class_name() + "`");
 }
 
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call(XCallType function, ErrorInfo &err, void* data, QString params) {
+void XClass::call(XCallType function, ErrorInfo &err, void* data, QString params) {
     try {
         if (err.is_error()) return;
 
@@ -187,7 +187,7 @@ void XModule::call(XCallType function, ErrorInfo &err, void* data, QString param
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
-void XModule::on_create_widget_internal(XObject *input, XObject *output) {
+void XClass::on_create_widget_internal(XObject *input, XObject *output) {
     //call create_widget
     //Window calls GUI elements to insert them into itself.
     //string parent_id
@@ -223,7 +223,7 @@ void XModule::on_create_widget_internal(XObject *input, XObject *output) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XModule::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
+void XClass::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
     XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
@@ -235,7 +235,7 @@ void XModule::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/)
 
 //---------------------------------------------------------------------
 //"sound_buffer_received" call
-void XModule::on_sound_buffer_received_internal(XObject *input, XObject * /*output*/) {
+void XClass::on_sound_buffer_received_internal(XObject *input, XObject * /*output*/) {
     XObject &sound = *input;
     int sample_rate = sound.geti("sample_rate");
     int samples = sound.geti("samples");
@@ -245,14 +245,14 @@ void XModule::on_sound_buffer_received_internal(XObject *input, XObject * /*outp
 }
 
 //---------------------------------------------------------------------
-void XModule::on_custom_call(void* /*data*/, QString /*params*/) {
+void XClass::on_custom_call(void* /*data*/, QString /*params*/) {
     xc_exception("Module '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModule::on_create_widget(QString /*parent_id*/) {
+void *XClass::on_create_widget(QString /*parent_id*/) {
     xc_exception("Module '" + name()
                    + "' can't process function 'create_widget', because on_create_widget() is not implemented");
     return nullptr;
@@ -260,14 +260,14 @@ void *XModule::on_create_widget(QString /*parent_id*/) {
 
 //---------------------------------------------------------------------
 //resetting created widget (`create_widget` called with empty parent_id)
-void XModule::on_reset_widget() {
+void XClass::on_reset_widget() {
     xc_exception("Module '" + name()
                    + "' can't process function 'create_widget', because on_reset_widget() is not implemented");
 }
 
 //---------------------------------------------------------------------
 //`render` call implementation
-void XModule::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
+void XClass::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
     xc_exception("Module '" + name()
                    + "' can't process Paint call, because on_paint() is not implemented");
 }
@@ -275,7 +275,7 @@ void XModule::on_render(QPainter &/*painter*/, int /*w*/, int /*h*/) {
 //---------------------------------------------------------------------
 //`sound_buffer_add` call implementation, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModule::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+void XClass::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xc_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_add', because on_sound_buffer_add() is not implemented");
 }
@@ -283,39 +283,39 @@ void XModule::on_sound_buffer_add(int /*sample_rate*/, int /*channels*/, int /*s
 //---------------------------------------------------------------------
 //`sound_buffer_received` call implementation, processes input `data` buffer
 //there are channels * samples values at `data`
-void XModule::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
+void XClass::on_sound_buffer_received(int /*sample_rate*/, int /*channels*/, int /*samples*/, float * /*data*/) {
     xc_exception("Module '" + name()
                    + "' can't process function 'sound_buffer_received', because on_sound_buffer_received() is not implemented");
 }
 
 //---------------------------------------------------------------------
-bool XModule::is_running() {
+bool XClass::is_running() {
     return status_.running;
 }
 
 //---------------------------------------------------------------------
-//bool XModule::is_enabled() {
+//bool XClass::is_enabled() {
 //    return status_.enabled__;
 //}
 
 //---------------------------------------------------------------------
-void XModule::reset_stop_out() {
+void XClass::reset_stop_out() {
     status_.request_stop_out = false;
 }
 
 //---------------------------------------------------------------------
-void XModule::set_stop_out() {
+void XClass::set_stop_out() {
     status_.request_stop_out = true;
 }
 
 //---------------------------------------------------------------------
-bool XModule::is_stop_out() {
+bool XClass::is_stop_out() {
     return status_.request_stop_out;
 }
 
 //---------------------------------------------------------------------
 //обработка ошибки в соответствие с настройками модуля
-void XModule::process_error(QString message) {
+void XClass::process_error(QString message) {
     int action = geti_("action_on_error");
     bool ignore = false;
     bool print_console = false;
@@ -370,13 +370,13 @@ void XModule::process_error(QString message) {
 }
 
 //---------------------------------------------------------------------
-void XModule::reset_error_values() { //сброс того, что быда ошибка при выполнении
+void XClass::reset_error_values() { //сброс того, что быда ошибка при выполнении
     seti_("was_error", 0);
     clear_string_("error_text");
 }
 
 //---------------------------------------------------------------------
-void XModule::set_error_values(QString message) { //установка того, что была ошибка
+void XClass::set_error_values(QString message) { //установка того, что была ошибка
     seti_("was_error", 1);
     sets_("error_text", message);
 }

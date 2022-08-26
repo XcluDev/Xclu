@@ -1,6 +1,6 @@
 #include "qt_widgets.h"
 #include "editormodules.h"
-#include "modulesfactory.h"
+#include "xmodulesfactory.h"
 #include "projectgui.h"
 #include "dialogrenamemodule.h"
 #include "dialogaddmodule.h"

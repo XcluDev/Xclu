@@ -1,7 +1,7 @@
 #include "xitemtext.h"
 #include "incl_cpp.h"
 #include "xguitext.h"
-#include "module.h"
+#include "xmodule.h"
 #include "registrarxitem.h"
 
 REGISTER_XITEM(XItemText, text)
