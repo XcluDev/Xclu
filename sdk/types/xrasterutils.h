@@ -23,7 +23,9 @@ public:
     // Convert - copies data
     static void convert(const XRaster& source, XRaster& destination, XTypeId destination_type);
 
-    static void convert(QImage qimage, XRaster &raster, RGBA_Bytes_Order order = RGBA_Bytes_Order::RGBA);
+    static void convert(QImage qimage, XRaster &raster,
+                        XTypeId force_type = XTypeId::none, // if type not specified - set from qimage
+                        RGBA_Bytes_Order order = RGBA_Bytes_Order::RGBA);
     static void convert(const XRaster& raster, QImage &qimage);
 
     // Link - create image without copying pixels raster

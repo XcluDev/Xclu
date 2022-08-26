@@ -7,81 +7,35 @@
 #include <QPainter>
 
 //---------------------------------------------------------------------
+// TODO Implement converting all to all types by adding second version for code_for_all_XTypeId at types.h scanning T2
+// and using this macroses nested
 void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId destination_type) {
-    xs_assert((source.type_id == XTypeId::rgb_u8 && destination_type == XTypeId::uint8)
-              || (source.type_id == XTypeId::uint8 && destination_type == XTypeId::rgb_u8),
-              "XRasterUtils::convert - unsupported conversion types");
     destination.allocate(source.w, source.h, destination_type);
-    auto *raster_data = raster.typed_data_pointer();
-    auto *raster_rgb_data = raster_rgb.typed_data_pointer();
-    for (int i=0; i<raster.w*raster.h; i++) {
-        raster_data[i] = raster_rgb_data[i].grayi();
+    if (source.type_id == XTypeId::rgb_u8 && destination_type == XTypeId::uint8) {
+        const rgb_u8* data1 = (const rgb_u8*)source.data_pointer();
+        uint8* data2 = (uint8*)destination.data_pointer();
+        for (int i=0; i<source.n; i++) {
+            data2[i] = data1[i].grayi();
+        }
+        return;
     }
-}
-
-void XRasterUtils::convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
-    raster_rgb.allocate(raster.w, raster.h);
-    auto *raster_data = raster.typed_data_pointer();
-    auto *raster_rgb_data = raster_rgb.typed_data_pointer();
-    for (int i=0; i<raster.w*raster.h; i++) {
-        raster_rgb_data[i] = rgb_u8(raster_data[i]);
+    if (source.type_id == XTypeId::uint8 && destination_type == XTypeId::rgb_u8) {
+        const uint8* data1 = (const uint8*)source.data_pointer();
+        rgb_u8* data2 = (rgb_u8*)destination.data_pointer();
+        for (int i=0; i<source.n; i++) {
+            data2[i] = rgb_u8(data1[i]);
+        }
+        return;
     }
+    xc_exception(QString("XRasterUtils::convert - unsupported conversion types {0} -> {1}")
+                 .arg(XTypeId_to_string(source.type_id))
+                 .arg(XTypeId_to_string(destination_type)));
 }
 
 //---------------------------------------------------------------------
-void XRasterUtils::convert(QImage qimage, XRaster &raster, RGBA_Bytes_Order order) {
-    int w = qimage.size().width();
-    int h = qimage.size().height();
-
-    auto format = qimage.format();
-    xc_assert(format == QImage::Format_RGB32,
-                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
-
-    raster.allocate(w, h);
-
-    auto *raster_data = raster.typed_data_pointer();
-
-    int mirrory = 0;
-    for (int y=0; y<h; y++) {
-        const uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
-        int k = 0;
-        for (int x=0; x<w; x++) {
-            uchar b = line[k++];
-            uchar g = line[k++];
-            uchar r = line[k++];
-            k++;
-            raster_data[x+w*y] = rgb_u8::grayi(r,g,b);
-        }
-    }
-}
-
-void XRasterUtils::convert(QImage qimage, XRaster_u8c3 &raster) {
-    int w = qimage.size().width();
-    int h = qimage.size().height();
-
-    auto format = qimage.format();
-    xc_assert(format == QImage::Format_RGB32,
-                "XObjectImage::create_from_QImage - QImage format is unsupported, only Format_RGB32 is supported");
-
-    raster.allocate(w, h);
-    auto *raster_data = raster.typed_data_pointer();
-
-    int mirrory = 0;
-    for (int y=0; y<h; y++) {
-        const uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
-        int k = 0;
-        for (int x=0; x<w; x++) {
-            uchar b = line[k++];
-            uchar g = line[k++];
-            uchar r = line[k++];
-            k++;
-            raster_data[x+w*y] = rgb_u8(r,g,b);
-        }
-    }
-
-}
-
-void XRasterUtils::convert(QImage qimage, XRaster_u8c4 &raster, RGBA_Bytes_Order order) {
+void XRasterUtils::convert(QImage qimage, XRaster &raster,
+                           XTypeId type,    // if type not specified - set from qimage
+                           RGBA_Bytes_Order order) {
     int w = qimage.size().width();
     int h = qimage.size().height();
 
@@ -89,37 +43,51 @@ void XRasterUtils::convert(QImage qimage, XRaster_u8c4 &raster, RGBA_Bytes_Order
     xc_assert(format == QImage::Format_RGB32,
                 "XRasterUtils::convert - QImage format is unsupported, only Format_RGB32 is supported");
 
-    raster.allocate(w, h);
-    auto *raster_data = raster.typed_data_pointer();
+    if (type == XTypeId::none) {
+        if (format == QImage::Format_RGB32) {
+            type = XTypeId::rgba_u8;
+        }
+    }
+    xc_assert(type != XTypeId::none, "XRasterUtils::convert - internal error, invalid type");
 
-    switch (order)
-    {
-    case RGBA_Bytes_Order::RGBA:
-    {
-        int mirrory = 0;
-        for (int y=0; y<h; y++) {
-            const uchar *line = qimage.scanLine(mirrory?(h-1-y):y);
-            int k = 0;
-            for (int x=0; x<w; x++) {
-                uchar b = line[k++];
-                uchar g = line[k++];
-                uchar r = line[k++];
-                uchar a = line[k++];
-                raster_data[x+w*y] = rgba_u8(r,g,b,a);
+    raster.allocate(w, h, type);
+
+    void *data = raster.data_pointer();
+
+    for (int y=0; y<h; y++) {
+        const uchar *line = qimage.scanLine(y);
+        int k = 0;
+        for (int x=0; x<w; x++) {
+            uchar b = line[k++];
+            uchar g = line[k++];
+            uchar r = line[k++];
+            uchar a = line[k++];
+            // TODO need to implement separately to optimize (unroll etc)
+            switch (type) {
+            case XTypeId::uint8:
+                ((uint*)data)[x+w*y] = rgb_u8::grayi(r,g,b);
+                break;
+            case XTypeId::rgb_u8:
+                ((rgb_u8*)data)[x+w*y] = rgb_u8(r,g,b);
+                break;
+            case XTypeId::rgba_u8:
+                switch (order) {
+                case RGBA_Bytes_Order::RGBA:
+                    ((rgba_u8*)data)[x+w*y] = rgba_u8(r,g,b,a);
+                    break;
+                case RGBA_Bytes_Order::BGRA:
+                    ((rgba_u8*)data)[x+w*y] = rgba_u8(b,g,r,a);
+                    // TODO can use memcpy(&(raster_data[w*y]), line, w*4) to copy whole line
+                    break;
+                default:
+                    xc_exception("XRasterUtils::convert - bad RGBA_Bytes_Order value");
+                }
+                break;
+            default:
+                xc_exception(QString("XRasterUtils::convert - unsupported type {0}")
+                             .arg(XTypeId_to_string(type)));
             }
         }
-        break;
-    }
-    case RGBA_Bytes_Order::BGRA:
-    {
-        for (int y=0; y<h; y++) {
-            const uchar *line = qimage.scanLine(y);
-            memcpy(&(raster_data[w*y]), line, w*4);
-        }
-        break;
-    }
-    default:
-        xc_exception("XRasterUtils::convert - bad bytes order specified");
     }
 }
 

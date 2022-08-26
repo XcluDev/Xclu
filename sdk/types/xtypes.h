@@ -60,8 +60,8 @@ struct rgb_ {
     void set(T val) {
         v[0] = v[1] = v[2] = val;
     }
-    T grayi() { return (int(v[0])+int(v[1])+int(v[2]))/3; }
-    float grayf() { return (float(v[0])+float(v[1])+float(v[2]))/3; }
+    T grayi() const { return (int(v[0])+int(v[1])+int(v[2]))/3; }
+    float grayf() const { return (float(v[0])+float(v[1])+float(v[2]))/3; }
     static T grayi(T r, T g, T b) {
         return (int(r)+int(g)+int(b))/3;
     }

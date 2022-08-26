@@ -31,7 +31,7 @@ const void* XRaster::data_pointer() const {
 }
 
 int XRaster::data_size() const {
-    return sizeofpixel*w*h;
+    return sizeofpixel*n;
 }
 
 int XRaster::bytes_per_line() const {
@@ -86,10 +86,11 @@ void XRaster::allocate(int w, int h, XTypeId Type_id, bool reallocate) {
         clear();
     }
     set_type(Type_id);
-    internal_data_.resize(w*h);
-    data_pointer_ = internal_data_.data();
+    n = w*h;
     this->w = w;
     this->h = h;
+    internal_data_.resize(n);
+    data_pointer_ = internal_data_.data();
     is_owner = true;
 }
 
@@ -101,7 +102,7 @@ void XRaster::copy_from(void* input_img, int w, int h, XTypeId Type_id) {
 
 //---------------------------------------------------------------------
 void XRaster::clear() {
-    w = h = sizeofpixel = 0;
+    n = w = h = sizeofpixel = 0;
     data_pointer_ = nullptr;
 
     if (is_owner) {
@@ -113,7 +114,7 @@ void XRaster::clear() {
 
 //---------------------------------------------------------------------
 bool XRaster::is_empty() const {
-    return data_pointer_ == nullptr || w <= 0 || h <= 0 || sizeofpixel <= 0;
+    return data_pointer_ == nullptr || n <= 0 || w <= 0 || h <= 0 || sizeofpixel <= 0;
 }
 
 //---------------------------------------------------------------------
@@ -129,6 +130,7 @@ void XRaster::link_data(int w, int h, void* data, XTypeId type) {
     xc_assert(data, "Error XRaster::link() - data is nullptr");
     clear();
     is_owner = false;
+    this->n = w * h;
     this->w = w;
     this->h = h;
     set_type(type);
@@ -142,17 +144,17 @@ float XRaster::distance_C(const XRaster &compare_with) const {
     float maxx = 0;
     switch (type_id) {
     case XTypeId::vec2:
-        for (int i=0; i<w*h; i++) {
+        for (int i=0; i<n; i++) {
             maxx = qMax(glm::distance2(XVAL(vec2,pixel_unsafe(i)), XVAL(vec2,compare_with.pixel_unsafe(i))), maxx);
         }
         break;
     case XTypeId::vec3:
-        for (int i=0; i<w*h; i++) {
+        for (int i=0; i<n; i++) {
             maxx = qMax(glm::distance2(XVAL(vec3,pixel_unsafe(i)), XVAL(vec3,compare_with.pixel_unsafe(i))), maxx);
         }
         break;
     case XTypeId::vec4:
-        for (int i=0; i<w*h; i++) {
+        for (int i=0; i<n; i++) {
             maxx = qMax(glm::distance2(XVAL(vec4,pixel_unsafe(i)), XVAL(vec4,compare_with.pixel_unsafe(i))), maxx);
         }
         break;
@@ -165,7 +167,7 @@ float XRaster::distance_C(const XRaster &compare_with) const {
 
 //---------------------------------------------------------------------
 void XRaster::set(const void* v) {
-    for (int i=0; i<w*h; i++) {
+    for (int i=0; i<n; i++) {
         set_pixel_unsafe(i, v);
     }
 }
@@ -174,7 +176,7 @@ void XRaster::set(const void* v) {
 void XRaster::add_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
     code_for_all_XTypeId(type_id, \
-    for (int i=0; i<w*h; i++) { \
+    for (int i=0; i<n; i++) { \
         XVAL(T,pixel_unsafe(i)) += XVAL(const T,r.pixel_unsafe(i)); \
     });
                              //TODO implement rgb+= and rgba+=, *=, +, *
@@ -184,7 +186,7 @@ void XRaster::add_inplace(const XRaster &r) {
 void XRaster::mult_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
     code_for_all_XTypeId(type_id, \
-    for (int i=0; i<w*h; i++) { \
+    for (int i=0; i<n; i++) { \
         XVAL(T,pixel_unsafe(i)) *= XVAL(const T,r.pixel_unsafe(i)); \
     });
 }

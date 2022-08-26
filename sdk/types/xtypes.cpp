@@ -184,7 +184,7 @@ int XTypeId_channels(XTypeId type) {
 QString XTypeId_to_string(XTypeId type) {
     switch (type) {
     case XTypeId::none:
-        return "";
+        return "none";
     case XTypeId::uint8:
         return "uint8";
     case XTypeId::rgb_u8:

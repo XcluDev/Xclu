@@ -25,6 +25,7 @@
 class XRaster {
 public:
     XRaster() {}
+    int n = 0;
     int w = 0;
     int h = 0;
     int sizeofpixel = 0;
