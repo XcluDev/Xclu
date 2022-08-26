@@ -1,5 +1,5 @@
-#ifndef XMODULEFACEDETECT_H
-#define XMODULEFACEDETECT_H
+#ifndef XCLASSFACEDETECT_H
+#define XCLASSFACEDETECT_H
 
 // FaceDetect - search faces on the image.
 // Based on openFramework/addons/ofxOpenCV/ofxCvHaarFinder class.
@@ -70,4 +70,4 @@ protected:
 
 
 
-#endif // XMODULEFACEDETECT_H
+#endif // XCLASSFACEDETECT_H

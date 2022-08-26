@@ -1,5 +1,5 @@
-#ifndef XMODULESLEEP_H
-#define XMODULESLEEP_H
+#ifndef XCLASSSLEEP_H
+#define XCLASSSLEEP_H
 
 //Timer implementation
 
@@ -36,4 +36,4 @@ protected:
 
 
 
-#endif // XMODULESLEEP_H
+#endif // XCLASSSLEEP_H

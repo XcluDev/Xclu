@@ -1,5 +1,5 @@
-#ifndef XMODULENOTES_H
-#define XMODULETEST_H
+#ifndef XCLASSNOTES_H
+#define XCLASSTEST_H
 
 //Notes module.
 
@@ -21,4 +21,4 @@ protected:
 
 };
 
-#endif // XMODULETEST_H
+#endif // XCLASSTEST_H

@@ -1,5 +1,5 @@
-#ifndef XMODULEMLEXECUTE_H
-#define XMODULEMLEXECUTE_H
+#ifndef XCLASSMLEXECUTE_H
+#define XCLASSMLEXECUTE_H
 
 /*
 Universal ML train and running operations using bat/bash scripts, provided by user.
@@ -61,4 +61,4 @@ protected:
 
 
 
-#endif // XMODULEEXECUTE_H
+#endif // XCLASSEXECUTE_H

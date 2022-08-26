@@ -1,5 +1,5 @@
-#ifndef XMODULESOUNDPLAY_H
-#define XMODULESOUNDPLAY_H
+#ifndef XCLASSSOUNDPLAY_H
+#define XCLASSSOUNDPLAY_H
 
 //SoundPlay implementation
 
@@ -50,4 +50,4 @@ protected:
 
 
 
-#endif // XMODULESOUNDPLAY_H
+#endif // XCLASSSOUNDPLAY_H

@@ -1,4 +1,4 @@
-#include "xmodulebcineuroplay.h"
+#include "xclassbcineuroplay.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -7,26 +7,26 @@
 REGISTER_XCLASS(BciNeuroplay)
 
 //---------------------------------------------------------------------
-XModuleBciNeuroplay::XModuleBciNeuroplay(QString class_name)
+XClassBciNeuroplay::XClassBciNeuroplay(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleBciNeuroplay::~XModuleBciNeuroplay()
+XClassBciNeuroplay::~XClassBciNeuroplay()
 {
     rec_stop();
     disconnect_();
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::on_loaded() {
+void XClassBciNeuroplay::on_loaded() {
     //sets_send_status("Not started");
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::on_button_pressed(QString button_id) {
+void XClassBciNeuroplay::on_button_pressed(QString button_id) {
     //if (button_id == "print_devices") {
 
     //}
@@ -35,7 +35,7 @@ void XModuleBciNeuroplay::on_button_pressed(QString button_id) {
 
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::start() {
+void XClassBciNeuroplay::start() {
     exception_.clear();
     if (geti_autoconnect()) {
         connect_();
@@ -58,7 +58,7 @@ void XModuleBciNeuroplay::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::connect_() {
+void XClassBciNeuroplay::connect_() {
     neuroplay_.reset(new NeuroplayPro());
 
     connect(neuroplay_.data(), &NeuroplayPro::deviceConnected, [=](NeuroplayDevice *device)
@@ -74,7 +74,7 @@ void XModuleBciNeuroplay::connect_() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::disconnect_() {
+void XClassBciNeuroplay::disconnect_() {
     if (device_) {
         device_->disableGrabMode();
     }
@@ -93,7 +93,7 @@ void XModuleBciNeuroplay::disconnect_() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
+void XClassBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
 
     //TODO note, this call can be from another signal
 
@@ -187,7 +187,7 @@ void XModuleBciNeuroplay::on_deviceConnected(NeuroplayDevice *device) {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::set_graphs(const NeuroplayDevice::ChannelsData &data)
+void XClassBciNeuroplay::set_graphs(const NeuroplayDevice::ChannelsData &data)
 {
     graphs_.clear();
     graphs_lines_.clear();
@@ -211,7 +211,7 @@ void XModuleBciNeuroplay::set_graphs(const NeuroplayDevice::ChannelsData &data)
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::update_blink() {
+void XClassBciNeuroplay::update_blink() {
     if (!geti_blink_detection()) {
         return;
     }
@@ -238,7 +238,7 @@ void XModuleBciNeuroplay::update_blink() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::setup_blink_channels() {
+void XClassBciNeuroplay::setup_blink_channels() {
     if (!blink_channels_.empty())
         return;
     auto list = gets_blink_channels().split(" ");
@@ -252,7 +252,7 @@ void XModuleBciNeuroplay::setup_blink_channels() {
 
 //---------------------------------------------------------------------
 // Buffering rhythms values for blink detection
-void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms)
+void XClassBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms)
 {
     // Buffering for remove eyes blinking
     float time = xc_elapsed_time_sec();
@@ -277,7 +277,7 @@ void XModuleBciNeuroplay::set_rhythms(const NeuroplayDevice::ChannelsRhythms &rh
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::process_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms) {
+void XClassBciNeuroplay::process_rhythms(const NeuroplayDevice::ChannelsRhythms &rhythms) {
     // Read buffer
     int channels = rhythms.size();
     int N = NeuroplayDevice::RhythmN;
@@ -325,7 +325,7 @@ void XModuleBciNeuroplay::process_rhythms(const NeuroplayDevice::ChannelsRhythms
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::update() {
+void XClassBciNeuroplay::update() {
     // Buttons
     if (geti_btn_connect()) {
         connect_();
@@ -390,42 +390,42 @@ void XModuleBciNeuroplay::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::inc_requests() {
+void XClassBciNeuroplay::inc_requests() {
     num_requests_++;
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::inc_received() {
+void XClassBciNeuroplay::inc_received() {
     num_received_++;
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::reset_stat() {
+void XClassBciNeuroplay::reset_stat() {
     num_requests_ = 0;
     num_received_ = 0;
     update_stat();
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::update_stat() {
+void XClassBciNeuroplay::update_stat() {
     QString s = QString("req.: %1, received: %2, lost: %3").arg(num_requests_).arg(num_received_).arg(num_requests_-num_received_);
     sets_stat(s);
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::stop() {
+void XClassBciNeuroplay::stop() {
     rec_stop();
     disconnect_();
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_clear() {
+void XClassBciNeuroplay::rec_clear() {
     recording_ = false;
     rec_update_status("");
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_start() {
+void XClassBciNeuroplay::rec_start() {
     if (!recording_) {
         xc_assert(geti_connected(), "Not connected, please check Neuroplay app is running");
         recording_ = true;
@@ -446,7 +446,7 @@ void XModuleBciNeuroplay::rec_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_stop() {
+void XClassBciNeuroplay::rec_stop() {
     if (recording_) {
         recording_ = false;
         if (rec_data_.size() > 0) {
@@ -459,7 +459,7 @@ void XModuleBciNeuroplay::rec_stop() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_update() {
+void XClassBciNeuroplay::rec_update() {
     if (recording_) {
         auto source = gete_recording_source();
         if (source == recording_source_Rhythms_Avg) {
@@ -494,7 +494,7 @@ void XModuleBciNeuroplay::rec_update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_update_status(QString status) {
+void XClassBciNeuroplay::rec_update_status(QString status) {
     clear_string_recording_status();
     append_string_recording_status(status);
     append_string_recording_status(QString("Frames: %1").arg(rec_data_.size()));
@@ -502,7 +502,7 @@ void XModuleBciNeuroplay::rec_update_status(QString status) {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::rec_data(QVector<float> values) {
+void XClassBciNeuroplay::rec_data(QVector<float> values) {
     rec_update_status(QString("Recording %1 sec").
                       arg(int(xc_elapsed_time_sec() - rec_time_start_)));
     QString s;
@@ -514,7 +514,7 @@ void XModuleBciNeuroplay::rec_data(QVector<float> values) {
 }
 
 //---------------------------------------------------------------------
-void XModuleBciNeuroplay::draw(QPainter &painter, int outw, int outh) {
+void XClassBciNeuroplay::draw(QPainter &painter, int outw, int outh) {
 
     if (geti_draw_graphs_enabled()) {
         float x0 = getf_draw_graphs_x() * outw;

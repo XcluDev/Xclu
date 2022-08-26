@@ -5,10 +5,11 @@
 SOURCES += \
     $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplaypro.cpp \
     $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplayprodevice.cpp \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/xmodulebcineuroplay.cpp \
-    $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp \
-    $$PWD/builtin_modules/Communication/Serial/xmoduleserial.cpp \
-    $$PWD/builtin_modules/Contrib/MadRobot/xmodulemadrobot.cpp \
+    $$PWD/builtin_modules/Bots/TelegramBot/xclasstelegrambot.cpp \
+    $$PWD/builtin_modules/Communication/BciNeuroplay/xclassbcineuroplay.cpp \
+    $$PWD/builtin_modules/Communication/Serial/xclassserial.cpp \
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/xclassfacedetect.cpp \
+    $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.cpp \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.cpp \
     $$PWD/builtin_modules/Core/Scalar/xmodulescalar.cpp \
     $$PWD/builtin_modules/Core/ValueMap/xmodulevaluemap.cpp \
@@ -41,20 +42,20 @@ SOURCES += \
     $$PWD/builtin_modules/Window/Window/xmodulewindow.cpp \
     $$PWD/builtin_modules/Window/RenderArea/xmodulerenderarea.cpp \
     $$PWD/builtin_modules/Project/Notes/xmodulenotes.cpp \
-    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp \
-    $$PWD/builtin_modules/ComputerVision/FaceDetect/xmodulefacedetect.cpp
+    $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.cpp
 
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
-    $$PWD/builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h \
+    $$PWD/builtin_modules/Bots/TelegramBot/xclasstelegrambot.h \
     $$PWD/builtin_modules/Communication/BciNeuroplay/auto.h \
     $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplaypro.h \
     $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplayprodevice.h \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/xmodulebcineuroplay.h \
+    $$PWD/builtin_modules/Communication/BciNeuroplay/xclassbcineuroplay.h \
     $$PWD/builtin_modules/Communication/Serial/auto.h \
-    $$PWD/builtin_modules/Communication/Serial/xmoduleserial.h \
+    $$PWD/builtin_modules/Communication/Serial/xclassserial.h \
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/xclassfacedetect.h \
     $$PWD/builtin_modules/Contrib/MadRobot/auto.h \
-    $$PWD/builtin_modules/Contrib/MadRobot/xmodulemadrobot.h \
+    $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.h \
     $$PWD/builtin_modules/Core/Random/auto.h \
     $$PWD/builtin_modules/Core/Random/xmodulerandom.h \
     $$PWD/builtin_modules/Core/Scalar/auto.h \
@@ -115,8 +116,7 @@ HEADERS += \
     $$PWD/builtin_modules/Project/Notes/xmodulenotes.h \
     $$PWD/builtin_modules/Window/RenderElement/auto.h \
     $$PWD/builtin_modules/Window/RenderElement/xmodulerenderelement.h \
-    $$PWD/builtin_modules/ComputerVision/FaceDetect/auto.h \
-    $$PWD/builtin_modules/ComputerVision/FaceDetect/xmodulefacedetect.h
+    $$PWD/builtin_modules/ComputerVision/FaceDetect/auto.h
 
 
 #--------------------------------------------------------------------------

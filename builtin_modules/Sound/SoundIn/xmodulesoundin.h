@@ -1,5 +1,5 @@
-#ifndef XMODULESOUNDIN_H
-#define XMODULESOUNDIN_H
+#ifndef XCLASSSOUNDIN_H
+#define XCLASSSOUNDIN_H
 
 
 //Sound buffer input
@@ -114,4 +114,4 @@ protected slots:
 };
 
 
-#endif // XMODULESOUNDIN_H
+#endif // XCLASSSOUNDIN_H

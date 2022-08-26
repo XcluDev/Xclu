@@ -8,27 +8,27 @@
 REGISTER_XCLASS(Random)
 
 //---------------------------------------------------------------------
-XModuleRandom::XModuleRandom(QString class_name)
+XClassRandom::XClassRandom(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleRandom::~XModuleRandom()
+XClassRandom::~XClassRandom()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::start() {
+void XClassRandom::start() {
     time_ = -1; //implies renew value on first update with Period mode
 
     sets_result("");
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::update() {
+void XClassRandom::update() {
     switch (gete_update_mode()) {
     case update_mode_Each_Update: make_new_value();
         break;
@@ -40,12 +40,12 @@ void XModuleRandom::update() {
         }
     }
         break;
-    default: xc_exception("XModuleRandom::update - bad `update_mode` value");
+    default: xc_exception("XClassRandom::update - bad `update_mode` value");
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::make_new_value() {
+void XClassRandom::make_new_value() {
     QString value;
 
     auto type = gete_output_type();
@@ -60,7 +60,7 @@ void XModuleRandom::make_new_value() {
         value = get_random_string();
         break;
     default:
-        xc_exception("XModuleRandom::update - bad `output_type` value");
+        xc_exception("XClassRandom::update - bad `output_type` value");
     }
 
    sets_result(value);
@@ -68,7 +68,7 @@ void XModuleRandom::make_new_value() {
 }
 
 //---------------------------------------------------------------------
-QString XModuleRandom::get_random_string() {
+QString XClassRandom::get_random_string() {
     //collect list of non-empty and non-commented items
     QStringList list;
     QStringList values = get_strings_values();
@@ -82,7 +82,7 @@ QString XModuleRandom::get_random_string() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRandom::stop() {
+void XClassRandom::stop() {
 
 }
 

@@ -1,5 +1,5 @@
-#ifndef XMODULEIMAGELOADER_H
-#define XMODULEIMAGELOADER_H
+#ifndef XCLASSIMAGELOADER_H
+#define XCLASSIMAGELOADER_H
 
 //ImageLoader - load imges from a file and a folder
 
@@ -33,4 +33,4 @@ protected:
 
 };
 
-#endif // XMODULEIMAGELOADER_H
+#endif // XCLASSIMAGELOADER_H

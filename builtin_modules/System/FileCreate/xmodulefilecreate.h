@@ -1,5 +1,5 @@
-#ifndef XMODULEFILECREATE_H
-#define XMODULEFILECREATE_H
+#ifndef XCLASSFILECREATE_H
+#define XCLASSFILECREATE_H
 
 //Реализация модуля Execute - запуск программы с диска
 
@@ -22,4 +22,4 @@ protected:
 
 };
 
-#endif // XMODULEFILECREATE_H
+#endif // XCLASSFILECREATE_H

@@ -1,4 +1,4 @@
-#include "xmoduleserial.h"
+#include "xclassserial.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"

@@ -1,5 +1,5 @@
-#ifndef XMODULERENDERAREA_H
-#define XMODULERENDERAREA_H
+#ifndef XCLASSRENDERAREA_H
+#define XCLASSRENDERAREA_H
 
 //Renderer area module. It renders itself to Window, and controls RenderElements - buttons, faders, etc.
 
@@ -36,4 +36,4 @@ protected:
 
 
 
-#endif // XMODULERENDERAREA_H
+#endif // XCLASSRENDERAREA_H

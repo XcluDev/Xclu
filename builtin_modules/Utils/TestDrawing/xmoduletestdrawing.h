@@ -1,5 +1,5 @@
-#ifndef XMODULETESTDRAWING_H
-#define XMODULETESTDRAWING_H
+#ifndef XCLASSTESTDRAWING_H
+#define XCLASSTESTDRAWING_H
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
@@ -24,4 +24,4 @@ protected:
 
 };
 
-#endif // XMODULETESTDRAWING_H
+#endif // XCLASSTESTDRAWING_H

@@ -1,5 +1,5 @@
-#ifndef XMODULEMOTIONDETECTOR_H
-#define XMODULEMOTIONDETECTOR_H
+#ifndef XCLASSMOTIONDETECTOR_H
+#define XCLASSMOTIONDETECTOR_H
 
 //MotionDetectorRouter implementation
 
@@ -67,4 +67,4 @@ protected:
 
 
 
-#endif // XMODULEMOTIONDETECTOR_H
+#endif // XCLASSMOTIONDETECTOR_H

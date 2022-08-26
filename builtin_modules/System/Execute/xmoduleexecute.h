@@ -1,5 +1,5 @@
-#ifndef XMODULEEXECUTE_H
-#define XMODULEEXECUTE_H
+#ifndef XCLASSEXECUTE_H
+#define XCLASSEXECUTE_H
 
 /*
 Execute module implementation - running program from disk
@@ -91,4 +91,4 @@ protected:
 
 
 
-#endif // XMODULEEXECUTE_H
+#endif // XCLASSEXECUTE_H

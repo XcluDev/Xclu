@@ -14,20 +14,20 @@
 REGISTER_XCLASS(Scalar)
 
 //---------------------------------------------------------------------
-XModuleScalar::XModuleScalar(QString class_name)
+XClassScalar::XClassScalar(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleScalar::~XModuleScalar()
+XClassScalar::~XClassScalar()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::start() {
+void XClassScalar::start() {
     //сбрасываем родителя - это будет установлено в on_call, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -39,7 +39,7 @@ void XModuleScalar::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::update() {
+void XClassScalar::update() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -47,7 +47,7 @@ void XModuleScalar::update() {
 
 
 //---------------------------------------------------------------------
-void XModuleScalar::stop() {
+void XClassScalar::stop() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -56,7 +56,7 @@ void XModuleScalar::stop() {
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModuleScalar::on_create_widget(QString parent_id) {
+void *XClassScalar::on_create_widget(QString parent_id) {
     xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
     parent_id_ = parent_id;
@@ -105,7 +105,7 @@ void *XModuleScalar::on_create_widget(QString parent_id) {
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::spin_changed() {    //вызывается, если значение изменилось
+void XClassScalar::spin_changed() {    //вызывается, если значение изменилось
     //это может вызваться не в основном потоке
     DataAccess access(data_);
     data_.gui_changed = 1;
@@ -113,7 +113,7 @@ void XModuleScalar::spin_changed() {    //вызывается, если зна�
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::update_all(bool force) {
+void XClassScalar::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -132,7 +132,7 @@ void XModuleScalar::update_all(bool force) {
 
 
 //---------------------------------------------------------------------
-void XModuleScalar::update_value(bool force) {
+void XClassScalar::update_value(bool force) {
     //enum source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     auto source = gete_source();
     switch (source) {
@@ -176,7 +176,7 @@ void XModuleScalar::update_value(bool force) {
 }
 
 //---------------------------------------------------------------------
-void XModuleScalar::set_value(int v) {
+void XClassScalar::set_value(int v) {
     seti_value(v);
     if (gete_source() != source_GUI) {
         spin_->setValue(v);

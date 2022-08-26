@@ -1,5 +1,5 @@
-#ifndef XMODULESCALAR_H
-#define XMODULESCALAR_H
+#ifndef XCLASSSCALAR_H
+#define XCLASSSCALAR_H
 
 //Реализация модуля Scalar - скаляр (int, float, string, checkbox, enum),
 //в виде поля ввода и/или слайдера

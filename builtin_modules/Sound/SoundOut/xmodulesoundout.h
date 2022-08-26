@@ -1,5 +1,5 @@
-#ifndef XMODULESOUNDOUT_H
-#define XMODULESOUNDOUT_H
+#ifndef XCLASSSOUNDOUT_H
+#define XCLASSSOUNDOUT_H
 
 
 //Реализация модуля SoundOut - вывод звукового буфера
@@ -141,4 +141,4 @@ protected slots:
 };
 
 
-#endif // XMODULESOUNDOUT_H
+#endif // XCLASSSOUNDOUT_H

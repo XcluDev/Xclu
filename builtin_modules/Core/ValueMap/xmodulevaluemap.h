@@ -1,5 +1,5 @@
-#ifndef XMODULERANDOM_H
-#define XMODULERANDOM_H
+#ifndef XCLASSRANDOM_H
+#define XCLASSRANDOM_H
 
 //ValueMap implementation
 
@@ -24,4 +24,4 @@ protected:
 
 
 
-#endif // XMODULERANDOM_H
+#endif // XCLASSRANDOM_H

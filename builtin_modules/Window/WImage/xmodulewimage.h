@@ -1,5 +1,5 @@
-#ifndef XMODULEWIMAGE_H
-#define XMODULEWIMAGE_H
+#ifndef XCLASSWIMAGE_H
+#define XCLASSWIMAGE_H
 
 
 //Реализация модуля WImage - показ изображения в окне
@@ -68,4 +68,4 @@ protected:
 
 
 
-#endif // XMODULEWIMAGE_H
+#endif // XCLASSWIMAGE_H

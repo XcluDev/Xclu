@@ -8,25 +8,25 @@
 REGISTER_XCLASS(ValueMap)
 
 //---------------------------------------------------------------------
-XModuleValueMap::XModuleValueMap(QString class_name)
+XClassValueMap::XClassValueMap(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleValueMap::~XModuleValueMap()
+XClassValueMap::~XClassValueMap()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::start() {
+void XClassValueMap::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::update() {
+void XClassValueMap::update() {
     if (geti_use_var1()) {
         int clamp = geti_clamp1();
         int map = geti_map1();
@@ -58,7 +58,7 @@ void XModuleValueMap::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleValueMap::stop() {
+void XClassValueMap::stop() {
 
 }
 

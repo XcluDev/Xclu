@@ -116,7 +116,7 @@
         <file>builtin_modules/Bots/Rasa/description.xgui</file>
         <file>builtin_modules/Bots/TelegramBot/auto.h</file>
         <file>builtin_modules/Bots/TelegramBot/description.xgui</file>
-        <file>builtin_modules/Bots/TelegramBot/xmoduletelegrambot.cpp</file>
+        <file>builtin_modules/Bots/TelegramBot/xclasstelegrambot.cpp</file>
         <file>builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h</file>
         <file>builtin_modules/Communication/MailNotification/auto.h</file>
         <file>builtin_modules/Communication/MailNotification/description.xgui</file>
@@ -130,7 +130,7 @@
         <file>builtin_modules/Communication/Osc/description.xgui</file>
         <file>builtin_modules/Communication/Serial/auto.h</file>
         <file>builtin_modules/Communication/Serial/description.xgui</file>
-        <file>builtin_modules/Communication/Serial/xmoduleserial.cpp</file>
+        <file>builtin_modules/Communication/Serial/xclassserial.cpp</file>
         <file>builtin_modules/Communication/Serial/xmoduleserial.h</file>
         <file>builtin_modules/Communication/SharedMemory/auto.h</file>
         <file>builtin_modules/Communication/SharedMemory/description.xgui</file>

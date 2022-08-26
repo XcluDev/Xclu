@@ -1,5 +1,5 @@
-#ifndef XMODULEPROJECT_H
-#define XMODULEPROJECT_H
+#ifndef XCLASSPROJECT_H
+#define XCLASSPROJECT_H
 
 //Control project:
 //FPS
@@ -63,4 +63,4 @@ protected:
 
 };
 
-#endif // XMODULEPROJECT_H
+#endif // XCLASSPROJECT_H

@@ -1,5 +1,5 @@
-#ifndef XMODULESERIAL_H
-#define XMODULESERIAL_H
+#ifndef XCLASSSERIAL_H
+#define XCLASSSERIAL_H
 
 //Serial interface with Arduino and other devices
 
@@ -61,4 +61,4 @@ protected:
 
 
 
-#endif // XMODULESERIAL_H
+#endif // XCLASSSERIAL_H

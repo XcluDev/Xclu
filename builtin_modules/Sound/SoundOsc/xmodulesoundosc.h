@@ -1,5 +1,5 @@
-#ifndef XMODULESOUNDOSC_H
-#define XMODULESOUNDOSC_H
+#ifndef XCLASSSOUNDOSC_H
+#define XCLASSSOUNDOSC_H
 
 //Реализация модуля SoundOsc - осциллятор с FM и AM модуляциями
 
@@ -97,4 +97,4 @@ protected:
 
 };
 
-#endif // XMODULESOUNDOSC_H
+#endif // XCLASSSOUNDOSC_H

@@ -1,5 +1,5 @@
-#ifndef XMODULEMADROBOT_H
-#define XMODULEMADROBOT_H
+#ifndef XCLASSMADROBOT_H
+#define XCLASSMADROBOT_H
 
 //EmoAI
 #include "sdk_h.h"
@@ -138,4 +138,4 @@ protected:
 
 };
 
-#endif // XMODULEMADROBOT_H
+#endif // XCLASSMADROBOT_H

@@ -3,7 +3,7 @@
 
 // XTimeBuffer - buffer for storing any data and time.
 // Allows to push a data with time, and then clear data in a given interval.
-// Used in XModuleBciNeuroplay for buffering async data for eye blinking removal.
+// Used in XClassBciNeuroplay for buffering async data for eye blinking removal.
 
 #include "incl_h.h"
 

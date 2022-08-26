@@ -1,5 +1,5 @@
-#ifndef XMODULEPRINTCONSOLE_H
-#define XMODULEPRINTCONSOLE_H
+#ifndef XCLASSPRINTCONSOLE_H
+#define XCLASSPRINTCONSOLE_H
 
 //PrintConsole implementation
 
@@ -23,4 +23,4 @@ protected:
 
 
 
-#endif // XMODULEPRINTCONSOLE_H
+#endif // XCLASSPRINTCONSOLE_H

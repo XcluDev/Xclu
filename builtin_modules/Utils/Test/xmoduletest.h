@@ -1,5 +1,5 @@
-#ifndef XMODULETEST_H
-#define XMODULETEST_H
+#ifndef XCLASSTEST_H
+#define XCLASSTEST_H
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
@@ -21,4 +21,4 @@ protected:
 
 };
 
-#endif // XMODULETEST_H
+#endif // XCLASSTEST_H

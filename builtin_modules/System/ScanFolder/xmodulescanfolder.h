@@ -1,5 +1,5 @@
-#ifndef XMODULESCANFOLDER_H
-#define XMODULESCANFOLDER_H
+#ifndef XCLASSSCANFOLDER_H
+#define XCLASSSCANFOLDER_H
 
 //ScanFolder implementation
 
@@ -23,4 +23,4 @@ protected:
 
 
 
-#endif // XMODULESCANFOLDER_H
+#endif // XCLASSSCANFOLDER_H

@@ -1,5 +1,5 @@
-#ifndef XMODULERENDERELEMENT_H
-#define XMODULERENDERELEMENT_H
+#ifndef XCLASSRENDERELEMENT_H
+#define XCLASSRENDERELEMENT_H
 
 //RenderElement module - Buttons, sliders, circles, lines, etc. drawn on RenderArea.
 
@@ -26,4 +26,4 @@ protected:
 
 };
 
-#endif // XMODULERENDERELEMENT_H
+#endif // XCLASSRENDERELEMENT_H
