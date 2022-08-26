@@ -220,6 +220,11 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    modules/xclass.cpp \
+    modules/xintermodulecalls.cpp \
+    modules/xmodule.cpp \
+    modules/xmodulevisualwidget.cpp \
+    modules/xmodulewidget.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/cv/xcvhelper.cpp \
@@ -254,8 +259,6 @@ SOURCES += \
     sdk/utility/ximageeffect.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xtimemeasure.cpp \
-    sdk/xmodule.cpp \
-    sdk/xintermodulecalls.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
     components/gui/xcluscrollarea.cpp \
@@ -272,9 +275,6 @@ SOURCES += \
     host/dialogs/dialogaddmodule.cpp \
     host/projectgui.cpp \
     python/pythoncore.cpp \
-    sdk/xclass.cpp \
-    sdk/xmodulevisualwidget.cpp \
-    sdk/xmodulewidget.cpp \
     project/project_props.cpp \
     project/project.cpp \
     project/projecteditorprops.cpp
@@ -330,6 +330,11 @@ HEADERS += \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
     modules/registrarxmodule.h \
+    modules/xclass.h \
+    modules/xintermodulecalls.h \
+    modules/xmodule.h \
+    modules/xmodulevisualwidget.h \
+    modules/xmodulewidget.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
     sdk/cv/xcvhelper.h \
@@ -372,8 +377,6 @@ HEADERS += \
     sdk/utility/ximageeffect.h \
     sdk/utility/xparser.h \
     sdk/utility/xtimemeasure.h \
-    sdk/xmodule.h \
-    sdk/xintermodulecalls.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
     components/gui/xcluscrollarea.h \
@@ -389,9 +392,6 @@ HEADERS += \
     host/dialogs/dialogaddmodule.h \
     host/projectgui.h \
     python/pythoncore.h \
-    sdk/xclass.h \
-    sdk/xmodulevisualwidget.h \
-    sdk/xmodulewidget.h \
     project/project_props.h \
     project/project.h \
     project/projecteditorprops.h

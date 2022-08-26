@@ -59,7 +59,7 @@ public:
     void draw(QPainter &painter, int w, int h);
 
     //-----------------------------------------------
-    //call_function - Запуск функции из других модулей
+    //call - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
     //function - имя функции (действие, которое следует выполнить)
     //err - информация об ошибках.
@@ -74,7 +74,7 @@ public:
 
 
     //в случае исключения - оно выдастся
-    void call_function(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
+    void call(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
 
     //исключение "записывается" в err
     void call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);

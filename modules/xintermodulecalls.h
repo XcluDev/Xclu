@@ -22,5 +22,5 @@ public:
                                              bool require_enabled = true);
 
 protected:
-    static void call(Module *module, XCallType function, XObject *input, XObject *output = nullptr);
+    // static void call(Module *module, XCallType function, XObject *input, XObject *output = nullptr);
 };
