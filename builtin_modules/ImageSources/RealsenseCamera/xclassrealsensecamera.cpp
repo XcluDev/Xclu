@@ -1,4 +1,4 @@
-#include "xmodulerealsensecamera.h"
+#include "xclassrealsensecamera.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include <QProcess>
@@ -14,34 +14,34 @@ REGISTER_XCLASS(RealsenseCamera)
 
 
 //---------------------------------------------------------------------
-XModuleRealsenseCamera::XModuleRealsenseCamera(QString class_name)
+XClassRealsenseCamera::XClassRealsenseCamera(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleRealsenseCamera::~XModuleRealsenseCamera()
+XClassRealsenseCamera::~XClassRealsenseCamera()
 {
     stop();
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::on_loaded() {
+void XClassRealsenseCamera::on_loaded() {
     gui_clear();
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleRealsenseCamera::on_button_pressed(QString button_id) {
+void XClassRealsenseCamera::on_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
         print_devices();
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::print_devices() {
+void XClassRealsenseCamera::print_devices() {
     QStringList out;
     out.append(QString("Realsense SDK: %1").arg(RealsenseCamera::get_sdk_version()));
     int n = RealsenseCamera::get_number_of_connected_devices();
@@ -55,7 +55,7 @@ void XModuleRealsenseCamera::print_devices() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::gui_clear() {
+void XClassRealsenseCamera::gui_clear() {
     clear_string_device_list();
     clear_string_connected_device_info();
     clear_string_saved_to();
@@ -66,7 +66,7 @@ void XModuleRealsenseCamera::gui_clear() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::start() {
+void XClassRealsenseCamera::start() {
     //здесь мы не стартуем камеру, так как делаем это в update
     //в зависимости от capture_source
 
@@ -103,7 +103,7 @@ void XModuleRealsenseCamera::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::update() {
+void XClassRealsenseCamera::update() {
     //если нажата кнопка - поставить флажок ожидания записи кадров на диск
     if (geti_save_frames_button()) {
         wait_save_frames_ = 1;
@@ -176,8 +176,8 @@ void XModuleRealsenseCamera::update() {
 
 //---------------------------------------------------------------------
 //запись кадра на диск
-void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool use_timestamp) {
-    xc_assert(!depth, "XModuleRealsenseCamera::save_frames - saving depth is not implemented");
+void XClassRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool use_timestamp) {
+    xc_assert(!depth, "XClassRealsenseCamera::save_frames - saving depth is not implemented");
 
     //Создаем папку для записи
     QString folder = xc_absolute_path_from_project(gets_save_folder(), true /*create_folder*/);
@@ -236,7 +236,7 @@ void XModuleRealsenseCamera::save_frames(bool color, bool depth, bool ir, bool u
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::stop() {
+void XClassRealsenseCamera::stop() {
     if (camera_started_) {
         camera_.close();
         set_started(false);
@@ -245,7 +245,7 @@ void XModuleRealsenseCamera::stop() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::start_camera() {
+void XClassRealsenseCamera::start_camera() {
     //запуск камеры
 
     auto capture_source = gete_capture_source();
@@ -291,8 +291,8 @@ void XModuleRealsenseCamera::start_camera() {
         //TODO может быть нюанс, что список камер изменится пока мы ищем индекс.
 
         //TODO прикрутить реакцию на отключение камеры
-        //connect(camera_.data(), &QCamera::stateChanged, this, &XModuleRealsenseCamera::on_changed_camera_state);
-        //connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XModuleRealsenseCamera::on_camera_error);
+        //connect(camera_.data(), &QCamera::stateChanged, this, &XClassRealsenseCamera::on_changed_camera_state);
+        //connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XClassRealsenseCamera::on_camera_error);
         //TODO также, стоит запускать watchdog, чтобы он проверял, что камера не зависла
 
         //Заполнение настроек
@@ -311,7 +311,7 @@ void XModuleRealsenseCamera::start_camera() {
 
 //---------------------------------------------------------------------
 //заполнение настроек камеры из интерфейса
-RealsenseSettings XModuleRealsenseCamera::get_settings() {
+RealsenseSettings XClassRealsenseCamera::get_settings() {
     RealsenseSettings s;
 
     //RGB
@@ -341,7 +341,7 @@ RealsenseSettings XModuleRealsenseCamera::get_settings() {
 }
 
 //---------------------------------------------------------------------
-int2 XModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,240 {
+int2 XClassRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,240 {
     auto list = res_string.split("_x_");
     xc_assert(list.size() == 2, "Can't start camera, bad resolution string " + res_string);
     int2 res(list.at(0).toInt(), list.at(1).toInt());
@@ -350,21 +350,21 @@ int2 XModuleRealsenseCamera::get_res(QString res_string) {    //320_x_240-> 320,
 }
 
 //---------------------------------------------------------------------
-int XModuleRealsenseCamera::get_frame_rate(QString rate_string) {
+int XClassRealsenseCamera::get_frame_rate(QString rate_string) {
     int fps = rate_string.toInt();
     xc_assert(fps > 0, QString("Can't start camera, bad frame rate %1").arg(fps));
     return fps;
 }
 
 //---------------------------------------------------------------------
-void XModuleRealsenseCamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XClassRealsenseCamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
     seti_is_started(started);
 }
 
 //---------------------------------------------------------------------
 //compute transformed depth to grayscale 8 bit and binary image
-void XModuleRealsenseCamera::transform() {
+void XClassRealsenseCamera::transform() {
     if (geti_make_depth_grayscale()) {
         xc_assert(camera_.get_depth_pixels_mm(raster_depth16_), "get_depth_pixels_mm() returned false");
         //XObjectImage::create_from_raster(getobject_color_image(), raster_color_);

@@ -6,16 +6,16 @@
 
 #include <QImage>
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 
-class XModuleNdi: public XModule
+class XClassNdi: public XClass
 {
 public:
-    XModuleNdi(QString class_name);
-    ~XModuleNdi();
+    XClassNdi(QString class_name);
+    ~XClassNdi();
 protected:
 #include "auto.h"
     virtual void on_loaded();

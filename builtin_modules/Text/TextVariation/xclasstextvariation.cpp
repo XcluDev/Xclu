@@ -1,4 +1,4 @@
-#include "xmoduletextvariation.h"
+#include "xclasstextvariation.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -8,42 +8,42 @@
 REGISTER_XCLASS(TextVariation)
 
 //---------------------------------------------------------------------
-XModuleTextVariation::XModuleTextVariation(QString class_name)
+XClassTextVariation::XClassTextVariation(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleTextVariation::~XModuleTextVariation()
+XClassTextVariation::~XClassTextVariation()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::start() {
+void XClassTextVariation::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::update() {
+void XClassTextVariation::update() {
     sets_output_text(variate(gets_input_text(), 0));
 }
 
 //---------------------------------------------------------------------
-void XModuleTextVariation::stop() {
+void XClassTextVariation::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerariation::on_button_pressed(QString button_id) {
+//void XClassTimerariation::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
 //Recursive function for building variation
 //For [A|B|C[D|E]] input it will generate randomly A,B,CD,CE.
 //level - for debugging
-QString XModuleTextVariation::variate(QString text, int level) {
+QString XClassTextVariation::variate(QString text, int level) {
     if (!text.contains("[")) return text;
     int state = 0;  //0 - no [, 1 - collecting variants, 2 and more - we are inside [[[.
 

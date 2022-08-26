@@ -1,7 +1,7 @@
 #ifndef XCLASSPAINTERWIDGET_H
 #define XCLASSPAINTERWIDGET_H
 
-//Helper class for XModuleWidget, implementing custom drawing widget
+//Helper class for XClassWidget, implementing custom drawing widget
 #include <QWidget>
 #include <QBrush>
 #include <QFont>
@@ -9,14 +9,14 @@
 #include <QPaintEvent>
 #include "sdk_h.h"
 
-class XModuleWidget;
+class XClassWidget;
 
 class XModuleVisualWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    XModuleVisualWidget(QWidget *parent, XModuleWidget *xmodule);
+    XModuleVisualWidget(QWidget *parent, XClassWidget *xmodule);
 
     void set_fixed_size(int2 size);
 
@@ -47,7 +47,7 @@ protected:
     //void dragMoveEvent(QDragMoveEvent *event);
 
 private:
-    XModuleWidget *xmodule_ = nullptr;
+    XClassWidget *xmodule_ = nullptr;
 
     void add_mouse_event(int type, QMouseEvent *event);
 

@@ -1,4 +1,4 @@
-#include "xmodulenotes.h"
+#include "xclassnotes.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -7,14 +7,14 @@
 REGISTER_XCLASS(Notes)
 
 //---------------------------------------------------------------------
-XModuleNotes::XModuleNotes(QString class_name)
+XClassNotes::XClassNotes(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleNotes::~XModuleNotes()
+XClassNotes::~XClassNotes()
 {
 
 }

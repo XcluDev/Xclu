@@ -8,11 +8,11 @@
 #include <QMediaPlayer>
 #include <QScopedPointer>
 
-class XModuleSoundPlay: public XClass
+class XClassSoundPlay: public XClass
 {
 public:
-    XModuleSoundPlay(QString class_name);
-    virtual ~XModuleSoundPlay();
+    XClassSoundPlay(QString class_name);
+    virtual ~XClassSoundPlay();
 #include "auto.h"
 
 protected:

@@ -1,5 +1,5 @@
-#ifndef XModuleSoundSeaOfWords_H
-#define XModuleSoundSeaOfWords_H
+#ifndef XClassSoundSeaOfWords_H
+#define XClassSoundSeaOfWords_H
 
 /*
 By given set of sound samples, module arranges them at 2D and plays by mouse click.
@@ -8,11 +8,11 @@ By given set of sound samples, module arranges them at 2D and plays by mouse cli
 #include "sdk_h.h"
 #include "xclasswidget.h"
 
-class XModuleSoundSeaOfWords: public XModuleWidget
+class XClassSoundSeaOfWords: public XClassWidget
 {
 public:
-    XModuleSoundSeaOfWords(QString class_name);
-    virtual ~XModuleSoundSeaOfWords();
+    XClassSoundSeaOfWords(QString class_name);
+    virtual ~XClassSoundSeaOfWords();
 protected:
 #include "auto.h"
 
@@ -65,4 +65,4 @@ protected:
 
 
 
-#endif // XModuleSoundSeaOfWords_H
+#endif // XClassSoundSeaOfWords_H

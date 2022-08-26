@@ -168,17 +168,46 @@ XObjectType string_to_object_type(QString type_str);
 
 
 //Types of intermodules calls
-enum XCallType : int {
-    XCallTypeNone           = 0,
-    XCallTypeCustom         = 1,
-    XCallTypeCreateWidget   = 2,
-    XCallTypeSoundBufferAdd = 3,
-    XCallTypeSoundBufferReceived = 4,
-    XCallTypeN              = 5
+enum class XCallType : int {
+    None           = 0,
+    Custom         = 1,
+    CreateWidget   = 2,
+    SoundBufferAdd = 3,
+    SoundBufferReceived = 4,
+    N              = 5
 };
 QString xcalltype_to_string(XCallType type);
 QString xcalltype_to_string_for_user(XCallType type);   //not generates exception
 XCallType xstring_to_calltype(QString type_str);
+
+//Error type for intermodule calls
+struct XCallError {
+    XCallError() {}
+    XCallError(QString text);
+    //добавить к тексту ошибки предысторию с "\n" - полезно при передаче ошибок между уровнями, дописывая подробности
+    XCallError(QString prepend_text, const XCallError &err);
+
+    void clear();
+    void setup(QString text);
+    void prepend(QString prepend_text, const XCallError &err);
+
+    //извлечение информации о том, есть ли ошибка
+    bool is_error() const { return is_error_; }
+    QString error_text() const { return error_text_; }
+    void throw_error();  //если есть ошибка - сгенерировать исключение
+protected:
+    bool is_error_ = false;
+    QString error_text_;
+};
+
+
+// Data for intermodule calls
+struct XCallData {
+    XCallType type = XCallType::None;
+    QString str_data;
+    void *ptr_data = nullptr;
+    XCallError error;
+};
 
 
 //Mouse and keyboard events
@@ -203,45 +232,6 @@ struct XWidgetEvent {
     int2 pos = int2(0,0);
     XMouseButton button = XMouseButton_none;
     int key = -1;
-};
-
-
-//Error type
-struct ErrorInfo {
-    ErrorInfo() {}
-
-    //очистить
-    void clear() {
-        is_error_ = false;
-        error_text_.clear();
-    }
-
-    //создать с текстом
-    ErrorInfo(QString text) {
-        setup(text);
-    }
-    void setup(QString text) {
-        is_error_ = true;
-        error_text_ = text;
-    }
-    //добавить к тексту ошибки предысторию с "\n" - полезно при передаче ошибок между уровнями, дописывая подробности
-    ErrorInfo(QString prepend_text, const ErrorInfo &err) {
-        prepend(prepend_text, err);
-    }
-    void prepend(QString prepend_text, const ErrorInfo &err) {
-        is_error_ = true;
-        error_text_ = prepend_text + "\n" + err.error_text();
-    }
-
-    //извлечение информации о том, есть ли ошибка
-    bool is_error() const { return is_error_; }
-    QString error_text() const { return error_text_; }
-    void throw_error();  //если есть ошибка - сгенерировать исключение
-
-protected:
-    bool is_error_ = false;
-    QString error_text_;
-
 };
 
 

@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleScanFolder: public XClass
+class XClassScanFolder: public XClass
 {
 public:
-    XModuleScanFolder(QString class_name);
-    virtual ~XModuleScanFolder();
+    XClassScanFolder(QString class_name);
+    virtual ~XClassScanFolder();
 #include "auto.h"
 
 protected:

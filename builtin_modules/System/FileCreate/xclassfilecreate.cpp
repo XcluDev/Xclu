@@ -1,4 +1,4 @@
-#include "xmodulefilecreate.h"
+#include "xclassfilecreate.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QProcess>
@@ -9,7 +9,7 @@
 REGISTER_XCLASS(FileCreate)
 
 //---------------------------------------------------------------------
-XModuleFileCreate::XModuleFileCreate(QString class_name)
+XClassFileCreate::XClassFileCreate(QString class_name)
     :XClass(class_name)
 {
 
@@ -17,13 +17,13 @@ XModuleFileCreate::XModuleFileCreate(QString class_name)
 }
 
 //---------------------------------------------------------------------
-XModuleFileCreate::~XModuleFileCreate()
+XClassFileCreate::~XClassFileCreate()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::on_button_pressed(QString button_id) {
+void XClassFileCreate::on_button_pressed(QString button_id) {
     if (button_id == button_create_file_btn()) {
         //Getting file size
         uint64 size = 0;
@@ -41,7 +41,7 @@ void XModuleFileCreate::on_button_pressed(QString button_id) {
             size = uint64(getf_file_size_gb() * (1024*1024*1024));
             break;
         default:
-            xc_exception("XModuleFileCreate::on_button_pressed - bad Unit of file size measure");
+            xc_exception("XClassFileCreate::on_button_pressed - bad Unit of file size measure");
         }
 
         //Getting file name and checking it's not exists
@@ -103,19 +103,19 @@ void XModuleFileCreate::on_button_pressed(QString button_id) {
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::start() {
+void XClassFileCreate::start() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::update() {
+void XClassFileCreate::update() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleFileCreate::stop() {
+void XClassFileCreate::stop() {
 
 
 }

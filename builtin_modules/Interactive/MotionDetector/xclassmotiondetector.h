@@ -10,7 +10,7 @@
 #include "xraster.h"
 #include "xslowbit.h"
 
-struct XModuleMotionDetectorBlockParams {
+struct XClassMotionDetectorBlockParams {
     float thresh_in=0.2f; //Threshold for block detection, 0..1
 
     float thresh_out=0.1f;   //Threshold for block undetection after detection, 0..1
@@ -19,7 +19,7 @@ struct XModuleMotionDetectorBlockParams {
 };
 
 //-------------------------------------------------------------------
-class XModuleMotionDetectorBlock {
+class XClassMotionDetectorBlock {
 public:
     void setup(int x, int y, int w, int h) {
         x_ = x;
@@ -32,7 +32,7 @@ public:
     int w_ = 0;
     int h_ = 0;
 
-    void update(XRaster_u8 &input, XRaster_u8 &background, const XModuleMotionDetectorBlockParams &params,
+    void update(XRaster_u8 &input, XRaster_u8 &background, const XClassMotionDetectorBlockParams &params,
                 bool enabled, float dt) {
         enabled_ = enabled;
         if (enabled) {
@@ -95,11 +95,11 @@ protected:
 
 //-------------------------------------------------------------------
 
-class XModuleMotionDetector: public XClass
+class XClassMotionDetector: public XClass
 {
 public:
-    XModuleMotionDetector(QString class_name);
-    virtual ~XModuleMotionDetector();
+    XClassMotionDetector(QString class_name);
+    virtual ~XClassMotionDetector();
 #include "auto.h"
 
 protected:
@@ -121,7 +121,7 @@ protected:
 
 
     //detection blocks
-    QVector<XModuleMotionDetectorBlock> blocks_; //
+    QVector<XClassMotionDetectorBlock> blocks_; //
 
     //state
     int state_ = 0;

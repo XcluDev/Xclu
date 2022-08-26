@@ -1,4 +1,4 @@
-#include "xmodulemotiondetectorrouter.h"
+#include "xclassmotiondetectorrouter.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -8,20 +8,20 @@
 REGISTER_XCLASS(MotionDetectorRouter)
 
 //---------------------------------------------------------------------
-XModuleMotionDetectorRouter::XModuleMotionDetectorRouter(QString class_name)
+XClassMotionDetectorRouter::XClassMotionDetectorRouter(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleMotionDetectorRouter::~XModuleMotionDetectorRouter()
+XClassMotionDetectorRouter::~XClassMotionDetectorRouter()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::start() {
+void XClassMotionDetectorRouter::start() {
     //link images with internal objects
     setobject_output1(output_gui_[0]);
     setobject_output2(output_gui_[1]);
@@ -51,41 +51,41 @@ void XModuleMotionDetectorRouter::start() {
 }
 
 //---------------------------------------------------------------------
-XProtectedObject *XModuleMotionDetectorRouter::input_image(int i) {
-    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::input_image");
+XProtectedObject *XClassMotionDetectorRouter::input_image(int i) {
+    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XClassMotionDetectorRouter::input_image");
     if (i == 0) return getobject_input1();
     if (i == 1) return getobject_input2();
     if (i == 2) return getobject_input3();
     if (i == 3) return getobject_input4();
-    xc_exception("Internal error - bad index at XModuleMotionDetectorRouter::input_image");
+    xc_exception("Internal error - bad index at XClassMotionDetectorRouter::input_image");
     return nullptr;
 }
 
 //---------------------------------------------------------------------
-XProtectedObject *XModuleMotionDetectorRouter::output_image(int i) {
-    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::output_image");
+XProtectedObject *XClassMotionDetectorRouter::output_image(int i) {
+    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XClassMotionDetectorRouter::output_image");
     if (i == 0) return getobject_output1();
     if (i == 1) return getobject_output2();
     if (i == 2) return getobject_output3();
     if (i == 3) return getobject_output4();
-    xc_exception("Internal error - bad index at XModuleMotionDetectorRouter::output_image");
+    xc_exception("Internal error - bad index at XClassMotionDetectorRouter::output_image");
     return nullptr;
 }
 
 //---------------------------------------------------------------------
-XProtectedObject *XModuleMotionDetectorRouter::template_image(int i) {
-    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XModuleMotionDetectorRouter::template_image");
+XProtectedObject *XClassMotionDetectorRouter::template_image(int i) {
+    xc_assert(xinrangei_excl(i, 0, n_), "Internal error - bad index at XClassMotionDetectorRouter::template_image");
     if (i == 0) return getobject_template1();
     if (i == 1) return getobject_template2();
     if (i == 2) return getobject_template3();
     if (i == 3) return getobject_template4();
-    xc_exception("Internal error - bad index at XModuleMotionDetectorRouter::template_image");
+    xc_exception("Internal error - bad index at XClassMotionDetectorRouter::template_image");
     return nullptr;
 }
 
 //---------------------------------------------------------------------
 //automatic route setup if required
-void XModuleMotionDetectorRouter::make_route() {
+void XClassMotionDetectorRouter::make_route() {
     route_scheme_.resize(n_);
 
     auto route_method = gete_route_method();
@@ -126,7 +126,7 @@ void XModuleMotionDetectorRouter::make_route() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::update() {
+void XClassMotionDetectorRouter::update() {
     //check starting
     if (ignore_frames_ > 0) {
         ignore_frames_--;
@@ -147,7 +147,7 @@ void XModuleMotionDetectorRouter::update() {
 }
 
 //---------------------------------------------------------------------
-QVector<int> XModuleMotionDetectorRouter::auto_route() {
+QVector<int> XClassMotionDetectorRouter::auto_route() {
     //TODO may load at very start for smoother interface...
     load_templates();
 
@@ -199,13 +199,13 @@ QVector<int> XModuleMotionDetectorRouter::auto_route() {
 
 
 //---------------------------------------------------------------------
-XRaster_float XModuleMotionDetectorRouter::resize_to_template(XProtectedObject *image) {
+XRaster_float XClassMotionDetectorRouter::resize_to_template(XProtectedObject *image) {
     //read image
     XRaster_u8 raster;
     XObjectImage::to_raster(image, raster);
 
     //no image yet
-    xc_assert(!raster.is_empty(), "XModuleMotionDetectorRouter::resize_to_template: Input is not image");
+    xc_assert(!raster.is_empty(), "XClassMotionDetectorRouter::resize_to_template: Input is not image");
 
     int w = raster.w;
     int h = raster.h;
@@ -239,7 +239,7 @@ XRaster_float XModuleMotionDetectorRouter::resize_to_template(XProtectedObject *
 }
 
 //---------------------------------------------------------------------
-float XModuleMotionDetectorRouter::normalized_correlation(XRaster_float &A, XRaster_float &B) {
+float XClassMotionDetectorRouter::normalized_correlation(XRaster_float &A, XRaster_float &B) {
     int w = A.w;
     int h = A.h;
     xc_assert(w == B.w && h == B.h, "normalized_correlation - different sizes");
@@ -273,7 +273,7 @@ float XModuleMotionDetectorRouter::normalized_correlation(XRaster_float &A, XRas
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::save_templates() {
+void XClassMotionDetectorRouter::save_templates() {
     QStringList files = get_strings_template_files();
     xc_assert(files.size() >= n_, "Not enough file names");
 
@@ -288,7 +288,7 @@ void XModuleMotionDetectorRouter::save_templates() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::load_templates() {
+void XClassMotionDetectorRouter::load_templates() {
     QStringList files = get_strings_template_files();
     xc_assert(files.size() >= n_, "Not enough file names");
     for (int i=0; i<n_; i++) {
@@ -298,14 +298,14 @@ void XModuleMotionDetectorRouter::load_templates() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::stop() {
+void XClassMotionDetectorRouter::stop() {
     started_ = 0;
     seti_started(started_);
 
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetectorRouter::on_button_pressed(QString button_id) {
+void XClassMotionDetectorRouter::on_button_pressed(QString button_id) {
 
 }
 

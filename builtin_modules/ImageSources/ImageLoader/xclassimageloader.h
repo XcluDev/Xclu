@@ -8,12 +8,12 @@
 #include "sdk_h.h"
 
 
-class XModuleImageLoader: public XClass
+class XClassImageLoader: public XClass
 {
     Q_OBJECT
 public:
-    XModuleImageLoader(QString class_name);
-    virtual ~XModuleImageLoader();
+    XClassImageLoader(QString class_name);
+    virtual ~XClassImageLoader();
 
 protected:
 #include "auto.h"

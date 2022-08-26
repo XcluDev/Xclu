@@ -1,4 +1,4 @@
-#include "xmoduletest.h"
+#include "xclasstest.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -7,26 +7,26 @@
 REGISTER_XCLASS(Test)
 
 //---------------------------------------------------------------------
-XModuleTest::XModuleTest(QString class_name)
+XClassTest::XClassTest(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleTest::~XModuleTest()
+XClassTest::~XClassTest()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::start() {
+void XClassTest::start() {
     xc_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::update() {
+void XClassTest::update() {
     //xc_console_append(QString("%1 - update").arg(name()));
     if (geti_("callback")) {
         xc_console_append(QString("%1 - pressed Callback").arg(name()));
@@ -36,7 +36,7 @@ void XModuleTest::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTest::stop() {
+void XClassTest::stop() {
     xc_console_append(QString("%1 - stop").arg(name()));
 
 

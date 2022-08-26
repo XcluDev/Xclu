@@ -1,6 +1,6 @@
 #Module Test
 #------------------------------------------
-module_description=Test module for drawing, inherited from XModuleWidget.
+module_description=Test module for drawing, inherited from XClassWidget.
 module_version=1.01
 module_impl=C++
 

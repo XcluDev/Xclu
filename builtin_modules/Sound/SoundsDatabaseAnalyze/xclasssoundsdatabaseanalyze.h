@@ -1,5 +1,5 @@
-#ifndef XModuleSoundsDatabaseAnalyze_H
-#define XModuleSoundsDatabaseAnalyze_H
+#ifndef XClassSoundsDatabaseAnalyze_H
+#define XClassSoundsDatabaseAnalyze_H
 
 /*
 By given set of sound samples, module arranges them at 2D and plays by mouse click.
@@ -10,11 +10,11 @@ By given set of sound samples, module arranges them at 2D and plays by mouse cli
 #include "soundsamplesdatabase.h"
 #include "soundsamplesanalyze.h"
 
-class XModuleSoundsDatabaseAnalyze: public XModuleWidget
+class XClassSoundsDatabaseAnalyze: public XClassWidget
 {
 public:
-    XModuleSoundsDatabaseAnalyze(QString class_name);
-    virtual ~XModuleSoundsDatabaseAnalyze();
+    XClassSoundsDatabaseAnalyze(QString class_name);
+    virtual ~XClassSoundsDatabaseAnalyze();
 protected:
 #include "auto.h"
 
@@ -78,4 +78,4 @@ protected:
 
 
 
-#endif // XModuleSoundsDatabaseAnalyze_H
+#endif // XClassSoundsDatabaseAnalyze_H

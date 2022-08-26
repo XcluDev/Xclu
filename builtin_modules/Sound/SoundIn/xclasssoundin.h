@@ -16,14 +16,14 @@
 #include "xobjectsoundformat.h"
 #include "xprotecteddata.h"
 
-class XModule;
+class XClass;
 
 //Data exchange
-struct XModuleSoundInData {
+struct XClassSoundInData {
     //list of modules for sending callbacks
-    QVector<XModule *> modules_;
+    QVector<XClass *> modules_;
 
-    ErrorInfo err;
+    XCallError err;
 
     void clear() {
         modules_.clear();
@@ -33,12 +33,12 @@ struct XModuleSoundInData {
 };
 
 
-class XModuleSoundInGenerator : public QIODevice
+class XClassSoundInGenerator : public QIODevice
 {
     Q_OBJECT
 
 public:
-    XModuleSoundInGenerator(const QAudioFormat &format, XProtectedData_<XModuleSoundInData> *data);
+    XClassSoundInGenerator(const QAudioFormat &format, XProtectedData_<XClassSoundInData> *data);
 
     void start();
     void stop();
@@ -51,7 +51,7 @@ private:
     //QByteArray m_buffer;
     QAudioFormat format_;
 
-    XProtectedData_<XModuleSoundInData> *data_;
+    XProtectedData_<XClassSoundInData> *data_;
 
     //send sound callbacks with sound as float to other modules
     void send_sound_in();
@@ -60,13 +60,13 @@ private:
 };
 
 
-//XModule
-class XModuleSoundIn: public XClass
+//XClass
+class XClassSoundIn: public XClass
 {
     Q_OBJECT
 public:
-    XModuleSoundIn(QString class_name);
-    virtual ~XModuleSoundIn();
+    XClassSoundIn(QString class_name);
+    virtual ~XClassSoundIn();
 protected:
 #include "auto.h"
 
@@ -84,10 +84,10 @@ protected:
     void start_audio(const QAudioDeviceInfo &deviceInfo);
 
     QScopedPointer<QAudioInput> m_audioInput;
-    QScopedPointer<XModuleSoundInGenerator> m_generator;
+    QScopedPointer<XClassSoundInGenerator> m_generator;
 
     //данные для обмена с генератором
-    XProtectedData_<XModuleSoundInData> data_;
+    XProtectedData_<XClassSoundInData> data_;
 
     bool audio_started_ = false;
     void set_started(bool started); //ставит audio_started_ и gui-элемент is_started

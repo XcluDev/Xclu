@@ -1,4 +1,4 @@
-#include "xmodulewebcamera.h"
+#include "xclasswebcamera.h"
 
 #ifdef XCLU_WINDOWS
 //For show USB devices, https://www.cyberforum.ru/win-api/thread2806892.html
@@ -30,12 +30,12 @@ REGISTER_XCLASS(Webcamera)
 
 
 //---------------------------------------------------------------------
-XModuleWebcameraSurface::XModuleWebcameraSurface(XModuleWebcamera *module) {
+XClassWebcameraSurface::XClassWebcameraSurface(XClassWebcamera *module) {
     module_ = module;
 }
 
 //---------------------------------------------------------------------
-QList<QVideoFrame::PixelFormat> XModuleWebcameraSurface::supportedPixelFormats(
+QList<QVideoFrame::PixelFormat> XClassWebcameraSurface::supportedPixelFormats(
         QAbstractVideoBuffer::HandleType handleType) const
 {
     Q_UNUSED(handleType); //это просто пометка, чтобы компилятор не говорил что переменная не используется
@@ -46,7 +46,7 @@ QList<QVideoFrame::PixelFormat> XModuleWebcameraSurface::supportedPixelFormats(
 }
 
 //---------------------------------------------------------------------
-bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
+bool XClassWebcameraSurface::present(const QVideoFrame &frame)
 {
     //Q_UNUSED(frame);
     // Handle the frame and do your processing
@@ -69,7 +69,7 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
         //но внутреннее состояние изображения в модуле меняется ТОЛЬКО при update
         //поэтому мы сохраняем изображение, но не вставляем его в результа работы модуля
 
-        XModuleWebcameraSurfaceData &data = module_->surface_data();
+        XClassWebcameraSurfaceData &data = module_->surface_data();
         DataAccess access(data);
 
         //(ловим исключение, чтобы в случае ошибки мютекс не заблокировался)
@@ -97,27 +97,27 @@ bool XModuleWebcameraSurface::present(const QVideoFrame &frame)
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XModuleWebcamera::XModuleWebcamera(QString class_name)
+XClassWebcamera::XClassWebcamera(QString class_name)
     :XClass(class_name), surface_(this)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleWebcamera::~XModuleWebcamera()
+XClassWebcamera::~XClassWebcamera()
 {
     stop_camera();
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::on_loaded() {
+void XClassWebcamera::on_loaded() {
     seti_frames_captured(0);
     seti_frames_dropped(0);
     clear_string_local_console();
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::on_button_pressed(QString button) {
+void XClassWebcamera::on_button_pressed(QString button) {
     if (button == button_print_devices()) {
         print_devices();
     }
@@ -127,7 +127,7 @@ void XModuleWebcamera::on_button_pressed(QString button) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::draw(QPainter &painter, int w, int h) {
+void XClassWebcamera::draw(QPainter &painter, int w, int h) {
     if (!geti_draw_enabled()) {
         return;
     }
@@ -146,7 +146,7 @@ void XModuleWebcamera::draw(QPainter &painter, int w, int h) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::start() {
+void XClassWebcamera::start() {
     // Here we don't start the camera, and do it at the first update,
     // depending on capture_source.
     // So we perform "Resolver" computations.
@@ -186,7 +186,7 @@ void XModuleWebcamera::start() {
 //---------------------------------------------------------------------
 // Resolver working
 // Resolve cameras indices based on given parts of serial number (higher priority) and names (lower priority).
-void XModuleWebcamera::resolver_work() {
+void XClassWebcamera::resolver_work() {
     if (!geti_resolver_enabled()) return;
     const QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
     int in_n = cameras.size();
@@ -334,7 +334,7 @@ void XModuleWebcamera::resolver_work() {
 
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::update() {
+void XClassWebcamera::update() {
 
     //захват с камеры или считывание изображений
     auto source = gete_capture_source();
@@ -366,14 +366,14 @@ void XModuleWebcamera::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::stop() {
+void XClassWebcamera::stop() {
     //qDebug() << "stop";
     stop_camera();
 
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::update_camera() {
+void XClassWebcamera::update_camera() {
     //запуск камеры, если еще не запущена
     start_camera();
 
@@ -435,7 +435,7 @@ void XModuleWebcamera::update_camera() {
 
 //---------------------------------------------------------------------
 //transformation - crop, mirror
-void XModuleWebcamera::transform() {
+void XClassWebcamera::transform() {
     if (geti_transform()) {
         //read
         XObjectImage::to_raster(getobject_image(), input_image_);
@@ -464,7 +464,7 @@ void XModuleWebcamera::transform() {
 
 //---------------------------------------------------------------------
 //печать в консоль доступных камер
-void XModuleWebcamera::print_devices() {
+void XClassWebcamera::print_devices() {
     QStringList list;
     list.append("Connected Web Cameras:");
     //xc_console_append("Connected Web Cameras:");
@@ -488,7 +488,7 @@ void XModuleWebcamera::print_devices() {
 //---------------------------------------------------------------------
 //печать в консоль разрешений запускаемой камеры
 //внимание, эта функция запускает camera_->load()
-void XModuleWebcamera::print_formats() {
+void XClassWebcamera::print_formats() {
     if (geti_print_formats()) {
         QString device_name = gets_connected_device_name();
 
@@ -521,7 +521,7 @@ void XModuleWebcamera::print_formats() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::start_camera() {
+void XClassWebcamera::start_camera() {
     //запуск камеры
     if (!camera_tried_to_start_) {
         //пытаемся стартовать камеру
@@ -577,15 +577,15 @@ void XModuleWebcamera::start_camera() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
+void XClassWebcamera::start_camera(const QCameraInfo &cameraInfo) {
     //перед запуском камеры мы должны убедиться, что данные о формате считаны
     read_gui_output_data_format();
 
     camera_.reset(new QCamera(cameraInfo));
     camera_->load();    //вообще это не требуется, но пробуем устранить ошибку с зависанием при старте.
 
-    connect(camera_.data(), &QCamera::stateChanged, this, &XModuleWebcamera::on_changed_camera_state);
-    connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XModuleWebcamera::on_camera_error);
+    connect(camera_.data(), &QCamera::stateChanged, this, &XClassWebcamera::on_changed_camera_state);
+    connect(camera_.data(), QOverload<QCamera::Error>::of(&QCamera::error), this, &XClassWebcamera::on_camera_error);
 
     //считывание разрешения
     int2 res = get_gui_resolution();
@@ -627,7 +627,7 @@ void XModuleWebcamera::start_camera(const QCameraInfo &cameraInfo) {
 
 //---------------------------------------------------------------------
 //считать из GUI разрешение камеры, -1 - использовать по умолчанию
-int2 XModuleWebcamera::get_gui_resolution() {
+int2 XClassWebcamera::get_gui_resolution() {
     QString res_string = getraw_resolution();
     if (res_string == "Camera_Default") {
         return int2(-1, -1);
@@ -648,7 +648,7 @@ int2 XModuleWebcamera::get_gui_resolution() {
 
 //---------------------------------------------------------------------
 //считать из GUI частоту кадров, -1 - использовать по умолчанию
-int XModuleWebcamera::get_gui_frame_rate() {
+int XClassWebcamera::get_gui_frame_rate() {
     QString fps_string = getraw_frame_rate();
     if (fps_string == "Camera_Default") {
         return -1;
@@ -667,20 +667,20 @@ int XModuleWebcamera::get_gui_frame_rate() {
 
 //---------------------------------------------------------------------
 //получить из GUI описание данных
-void XModuleWebcamera::read_gui_output_data_format() {
+void XClassWebcamera::read_gui_output_data_format() {
     DataAccess access(data_);
     data_.channels = getraw_image_channels();
     data_.data_type = getraw_image_data_type();
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XClassWebcamera::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     camera_started_ = started;
     seti_is_started(started);
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::on_changed_camera_state(QCamera::State state) {
+void XClassWebcamera::on_changed_camera_state(QCamera::State state) {
     switch (state) {
     case QCamera::ActiveState:
         set_started(true);
@@ -693,13 +693,13 @@ void XModuleWebcamera::on_changed_camera_state(QCamera::State state) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::on_camera_error() {
+void XClassWebcamera::on_camera_error() {
     DataAccess access(data_);
     data_.err.setup(tr("Camera Error: ") + camera_->errorString());
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::stop_camera() {
+void XClassWebcamera::stop_camera() {
     set_started(false);
     if (camera_.data()) {
         //camera_->stop();  //Это не полная остановка, камера продолжает потреблять энергию
@@ -711,19 +711,19 @@ void XModuleWebcamera::stop_camera() {
 
 //---------------------------------------------------------------------
 //работа с surface_ - чтобы он мог установить обновленное изображение
-XModuleWebcameraSurfaceData &XModuleWebcamera::surface_data() {
+XClassWebcameraSurfaceData &XClassWebcamera::surface_data() {
     return data_;
 }
 
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-void XModuleWebcamera::update_load_frames() {
+void XClassWebcamera::update_load_frames() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleWebcamera::update_save_frames() {
+void XClassWebcamera::update_save_frames() {
     //проверить, что пришел новый кадр
 }
 
@@ -734,7 +734,7 @@ void XModuleWebcamera::update_save_frames() {
 // It appears that QT's cameras IDs not related to USB IDs, so commented this
 //---------------------------------------------------------------------
 // Print USB ports details (Windows only)
-/*void XModuleWebcamera::print_usb() {
+/*void XClassWebcamera::print_usb() {
     // Program
        std::cout << "USB Device Lister." << std::endl;
 

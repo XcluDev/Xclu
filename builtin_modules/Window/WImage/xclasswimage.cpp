@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
-#include "xmodulewimage.h"
+#include "xclasswimage.h"
 
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobject.h"
 #include "xobjectwrapper.h"
 
@@ -14,20 +14,20 @@
 REGISTER_XCLASS(WImage)
 
 //---------------------------------------------------------------------
-XModuleWImage::XModuleWImage(QString class_name)
+XClassWImage::XClassWImage(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleWImage::~XModuleWImage()
+XClassWImage::~XClassWImage()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::start() {
+void XClassWImage::start() {
     //сбрасываем родителя - это будет установлено в on_call, когда родитель запросит
     parent_was_set_ = false;
     parent_id_ = "";
@@ -40,7 +40,7 @@ void XModuleWImage::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::update() {
+void XClassWImage::update() {
 
     //установка всех значений, если они изменились
     update_all(false);
@@ -48,7 +48,7 @@ void XModuleWImage::update() {
 
 
 //---------------------------------------------------------------------
-void XModuleWImage::stop() {
+void XClassWImage::stop() {
     //нам не надо удалять виджет - так как он будет удален родителем
     //поэтому, просто обнуляем
     widget_ = nullptr;
@@ -57,7 +57,7 @@ void XModuleWImage::stop() {
 
 //---------------------------------------------------------------------
 //`create_widget` call implementation, creates QWidget and returns pointer on it
-void *XModuleWImage::on_create_widget(QString parent_id) {
+void *XClassWImage::on_create_widget(QString parent_id) {
     xc_assert(!parent_was_set_, "Widget can have only one parent, and it's already set to '" + parent_id_ + "'")
 
     parent_id_ = parent_id;
@@ -85,14 +85,14 @@ void *XModuleWImage::on_create_widget(QString parent_id) {
 
 //---------------------------------------------------------------------
 //reset widget at stop
-void XModuleWImage::on_reset_widget() {
+void XClassWImage::on_reset_widget() {
     widget_ = nullptr;
     parent_id_.clear();
     parent_was_set_ = false;
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::update_all(bool force) {
+void XClassWImage::update_all(bool force) {
     if (!widget_) {
         return;
     }
@@ -110,7 +110,7 @@ void XModuleWImage::update_all(bool force) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::update_value() {
+void XClassWImage::update_value() {
     if (geti_is_new_frame()) {
         if (image_label_) {
             //устанавливаем настройки показа
@@ -129,7 +129,7 @@ void XModuleWImage::update_value() {
 
 
 //---------------------------------------------------------------------
-void XModuleWImage::set_image(const QImage &image) {
+void XClassWImage::set_image(const QImage &image) {
     if (image_label_) {
         QPixmap pix = QPixmap::fromImage(image);
         image_label_->setPixmap(pix);
@@ -138,7 +138,7 @@ void XModuleWImage::set_image(const QImage &image) {
 }
 
 //---------------------------------------------------------------------
-void XModuleWImage::clear_image() {
+void XClassWImage::clear_image() {
     if (image_label_) {
         image_label_->setText("");
         image_label_->setVisible(false);

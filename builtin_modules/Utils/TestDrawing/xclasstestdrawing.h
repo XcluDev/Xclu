@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclasswidget.h"
 
-class XModuleTestDrawing: public XModuleWidget
+class XClassTestDrawing: public XClassWidget
 {
 public:
-    XModuleTestDrawing(QString class_name);
-    virtual ~XModuleTestDrawing();
+    XClassTestDrawing(QString class_name);
+    virtual ~XClassTestDrawing();
 protected:
 #include "auto.h"
 

@@ -1,8 +1,8 @@
-#include "xmodulesoundosc.h"
+#include "xclasssoundosc.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 
 //registering module implementation
@@ -11,7 +11,7 @@ REGISTER_XCLASS(SoundOsc)
 
 //---------------------------------------------------------------------
 //запускать перед стартом звука, после считывания параметров из GUI
-void XModuleSoundOscData::init() {
+void XClassSoundOscData::init() {
     //установка параметров
     vol_ = volume * vol_mod;
     freq_ = freq;
@@ -32,7 +32,7 @@ void XModuleSoundOscData::init() {
 //---------------------------------------------------------------------
 //обновить размер шагов - вызывается для одного вызова заполнения буфера
 //также, делает warping фаз
-void XModuleSoundOscData::update_steps(float sample_rate) {
+void XClassSoundOscData::update_steps(float sample_rate) {
     sample_rate_ = sample_rate;
     step_vol_ = vol_speed / (sample_rate * 0.1);
     step_freq_ = freq_speed / (sample_rate * 0.1);
@@ -45,7 +45,7 @@ void XModuleSoundOscData::update_steps(float sample_rate) {
 
 //---------------------------------------------------------------------
 //получить значение звука
-float XModuleSoundOscData::get_next_sample() {
+float XClassSoundOscData::get_next_sample() {
 
     //обновление параметров
     float target_freq = freq;
@@ -84,7 +84,7 @@ float XModuleSoundOscData::get_next_sample() {
 //---------------------------------------------------------------------
 //плавная модификация параметра громкости к целевой
 //со скоростью vol_speed за 0.1 сек
-void XModuleSoundOscData::update_vol(float &var, float target) {
+void XClassSoundOscData::update_vol(float &var, float target) {
     if (var < target) {
         var = qMin(var + step_vol_, target);
     }
@@ -96,7 +96,7 @@ void XModuleSoundOscData::update_vol(float &var, float target) {
 //---------------------------------------------------------------------
 //плавная модификация параметра громкости к целевой
 //со скоростью freq_speed за 0.1 сек
-void XModuleSoundOscData::update_freq(float &var, float target) {
+void XClassSoundOscData::update_freq(float &var, float target) {
     if (var < target) {
         var = qMin(var + step_freq_, target);
     }
@@ -108,20 +108,20 @@ void XModuleSoundOscData::update_freq(float &var, float target) {
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XModuleSoundOsc::XModuleSoundOsc(QString class_name)
+XClassSoundOsc::XClassSoundOsc(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundOsc::~XModuleSoundOsc()
+XClassSoundOsc::~XClassSoundOsc()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::start() {
+void XClassSoundOsc::start() {
     //Очистка переменных
 
     update_data();
@@ -133,18 +133,18 @@ void XModuleSoundOsc::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::update() {
+void XClassSoundOsc::update() {
     //считываем данные из GUI
     update_data();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::stop() {
+void XClassSoundOsc::stop() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundOsc::update_data() {
+void XClassSoundOsc::update_data() {
     DataAccess access(data_);
 
     data_.out_enabled = geti_out_enabled();
@@ -174,7 +174,7 @@ void XModuleSoundOsc::update_data() {
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSoundOsc::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+void XClassSoundOsc::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     //получаем доступ к данным и звуковому буферу
     DataAccess access(data_);
     if (data_.out_enabled) {

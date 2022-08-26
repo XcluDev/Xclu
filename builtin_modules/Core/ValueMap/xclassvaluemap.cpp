@@ -63,7 +63,7 @@ void XClassValueMap::stop() {
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::on_button_pressed(QString button_id) {
+//void XClassTimerm::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

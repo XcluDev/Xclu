@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleNotes: public XClass
+class XClassNotes: public XClass
 {
 public:
-    XModuleNotes(QString class_name);
-    virtual ~XModuleNotes();
+    XClassNotes(QString class_name);
+    virtual ~XClassNotes();
 protected:
     //This is just UI module, without implementation.
     virtual void on_loaded() {}

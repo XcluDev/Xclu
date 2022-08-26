@@ -8,12 +8,12 @@
 #include "sdk_h.h"
 #include "xclasswidget.h"
 
-class XModuleRenderElement: public XClass
+class XClassRenderElement: public XClass
 {
     Q_OBJECT
 public:
-    XModuleRenderElement(QString class_name);
-    virtual ~XModuleRenderElement();
+    XClassRenderElement(QString class_name);
+    virtual ~XClassRenderElement();
 protected:
 #include "auto.h"
 

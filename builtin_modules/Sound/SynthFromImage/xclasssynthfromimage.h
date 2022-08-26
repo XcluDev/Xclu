@@ -13,7 +13,7 @@
 #include "xraster.h"
 
 //Данные для генерации
-struct XModuleSynthFromImageData: public XcluProtectedData
+struct XClassSynthFromImageData: public XcluProtectedData
 {
     float sample_rate = 50; //pixels per second
     float volume=1;         //volume
@@ -24,12 +24,12 @@ struct XModuleSynthFromImageData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleSynthFromImage: public XClass
+class XClassSynthFromImage: public XClass
 {
     Q_OBJECT
 public:
-    XModuleSynthFromImage(QString class_name);
-    virtual ~XModuleSynthFromImage();
+    XClassSynthFromImage(QString class_name);
+    virtual ~XClassSynthFromImage();
 protected:
 #include "auto.h"
     virtual void on_loaded() {}
@@ -51,7 +51,7 @@ protected:
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    XModuleSynthFromImageData data_;
+    XClassSynthFromImageData data_;
 
     //internal values used for sound generation -----------------------
     double phase_ = 0;

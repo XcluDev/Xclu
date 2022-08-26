@@ -40,11 +40,11 @@ https://data2.lact.ru/f1/s/0/299/basic/1605/976/vasev-4.doc
 #include <QProcess>
 #include "xraster.h"
 
-class XModuleExecute: public XClass
+class XClassExecute: public XClass
 {
 public:
-    XModuleExecute(QString class_name);
-    virtual ~XModuleExecute();
+    XClassExecute(QString class_name);
+    virtual ~XClassExecute();
 protected:
 #include "auto.h"
 

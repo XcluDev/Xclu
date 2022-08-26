@@ -1,15 +1,15 @@
-#include "xmodulesoundin.h"
+#include "xclasssoundin.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 //registering module implementation
 REGISTER_XCLASS(SoundIn)
 
 //---------------------------------------------------------------------
-XModuleSoundInGenerator::XModuleSoundInGenerator(const QAudioFormat &format,
-                                                     XProtectedData_<XModuleSoundInData> *data)
+XClassSoundInGenerator::XClassSoundInGenerator(const QAudioFormat &format,
+                                                     XProtectedData_<XClassSoundInData> *data)
 {
     xc_assert(format.isValid(), "Not valid sound format");
     format_ = format;
@@ -17,26 +17,26 @@ XModuleSoundInGenerator::XModuleSoundInGenerator(const QAudioFormat &format,
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundInGenerator::start()
+void XClassSoundInGenerator::start()
 {
     open(QIODevice::WriteOnly);
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundInGenerator::stop()
+void XClassSoundInGenerator::stop()
 {
     close();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
+void XClassSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
     try {
         auto sound_write = sound_.write();
 
         auto data_read = data_->read();
         for (int i=0; i<data_read.data().modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-            data_read.data().modules_[i]->call(XCallTypeSoundBufferReceived, sound_write.pointer());
+            data_read.data().modules_[i]->call(XCallType::SoundBufferReceived, sound_write.pointer());
         }
 
         //applying volumes
@@ -68,13 +68,13 @@ void XModuleSoundInGenerator::send_sound_in() { //создать звук в о�
 
 
 //---------------------------------------------------------------------
-qint64 XModuleSoundInGenerator::readData(char * /*data*/, qint64 /*len*/)
+qint64 XClassSoundInGenerator::readData(char * /*data*/, qint64 /*len*/)
 {
    return 0;
 }
 
 //---------------------------------------------------------------------
-qint64 XModuleSoundInGenerator::writeData(const char *data, qint64 len)
+qint64 XClassSoundInGenerator::writeData(const char *data, qint64 len)
 {
     qint64 total = 0;
     try {
@@ -147,7 +147,7 @@ qint64 XModuleSoundInGenerator::writeData(const char *data, qint64 len)
 }
 
 //---------------------------------------------------------------------
-qint64 XModuleSoundInGenerator::bytesAvailable() const
+qint64 XClassSoundInGenerator::bytesAvailable() const
 {
     return /*m_buffer.size() + */QIODevice::bytesAvailable();
 }
@@ -155,27 +155,27 @@ qint64 XModuleSoundInGenerator::bytesAvailable() const
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XModuleSoundIn::XModuleSoundIn(QString class_name)
+XClassSoundIn::XClassSoundIn(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundIn::~XModuleSoundIn()
+XClassSoundIn::~XClassSoundIn()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::on_loaded() {
+void XClassSoundIn::on_loaded() {
     clear_string_connected_device_name();
     clear_string_local_console();
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::on_button_pressed(QString button_id) {
+void XClassSoundIn::on_button_pressed(QString button_id) {
     if (button_id == button_print_devices()) {
         //если требуется, напечатать все устройства
         print_devices();
@@ -186,7 +186,7 @@ void XModuleSoundIn::on_button_pressed(QString button_id) {
 //Sound in Qt - https://doc.qt.io/qt-5/audiooverview.html
 //See Qt's Audio Input Example
 
-void XModuleSoundIn::start() {
+void XClassSoundIn::start() {
     audio_tried_to_start_ = false;
 
     data_.write().data().clear();
@@ -208,7 +208,7 @@ void XModuleSoundIn::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::update() {
+void XClassSoundIn::update() {
     //запустить устройство, если еще это не делали
     start_audio();
 
@@ -231,7 +231,7 @@ void XModuleSoundIn::update() {
 
 #if QT_VERSION >= 0x050800
 
-void XModuleSoundIn::check_volume_change() {
+void XClassSoundIn::check_volume_change() {
     if (audio_started_) {
         if (was_changed_device_volume()) {
             float volume = getf_device_volume();
@@ -243,7 +243,7 @@ void XModuleSoundIn::check_volume_change() {
 
 #else
 
-void XModuleSoundIn::check_volume_change() {
+void XClassSoundIn::check_volume_change() {
     if (audio_started_) {
         if (was_changed_device_volume()) {
             float volume = getf_device_volume();
@@ -256,14 +256,14 @@ void XModuleSoundIn::check_volume_change() {
 #endif
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::stop() {
+void XClassSoundIn::stop() {
     stop_audio();
 
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::on_changed_audio_state(QAudio::State state) {
+void XClassSoundIn::on_changed_audio_state(QAudio::State state) {
     try {
         switch (state) {
         case QAudio::ActiveState:
@@ -309,7 +309,7 @@ void XModuleSoundIn::on_changed_audio_state(QAudio::State state) {
 
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::stop_audio() {
+void XClassSoundIn::stop_audio() {
     if (m_audioInput.data()) {
         //m_audioInput.stop - возможно, не полная остановка
         m_audioInput.reset();
@@ -317,7 +317,7 @@ void XModuleSoundIn::stop_audio() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::start_audio() {
+void XClassSoundIn::start_audio() {
     //запустить устройство, если еще это не делали
     if (!audio_tried_to_start_) {
         //пытаемся стартовать устройство
@@ -360,7 +360,7 @@ void XModuleSoundIn::start_audio() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::start_audio(const QAudioDeviceInfo &deviceInfo) {
+void XClassSoundIn::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //сбор значений параметров
     QAudioFormat format;
 
@@ -413,7 +413,7 @@ void XModuleSoundIn::start_audio(const QAudioDeviceInfo &deviceInfo) {
     //-------------------------------------------
 
     //создание объектов для генерации и вывода звука
-    m_generator.reset(new XModuleSoundInGenerator(format, &data_));
+    m_generator.reset(new XClassSoundInGenerator(format, &data_));
     m_audioInput.reset(new QAudioInput(deviceInfo, format));
 
     connect(m_audioInput.data(), SIGNAL(stateChanged(QAudio::State)), this, SLOT(on_changed_audio_state(QAudio::State)));
@@ -441,14 +441,14 @@ void XModuleSoundIn::start_audio(const QAudioDeviceInfo &deviceInfo) {
 
 
 //---------------------------------------------------------------------
-void XModuleSoundIn::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
+void XClassSoundIn::set_started(bool started) { //ставит camera_started_ и gui-элемент is_started
     audio_started_ = started;
     seti_is_started(started);
 }
 
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
-void XModuleSoundIn::set_format(const QAudioFormat &format) {
+void XClassSoundIn::set_format(const QAudioFormat &format) {
     auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
     auto write = getobject_sound_format()->write();
     XObjectSoundFormat::set_to_object(write.data(), format_);
@@ -457,7 +457,7 @@ void XModuleSoundIn::set_format(const QAudioFormat &format) {
 
 //---------------------------------------------------------------------
 //печать размера буфера при подключении устройства (запрашивается у устройства) в used_format
-void XModuleSoundIn::set_buffer_size(int buffer_size) {
+void XClassSoundIn::set_buffer_size(int buffer_size) {
     buffer_size_ = buffer_size;
     //DataAccess access(data_);
     //data_.buffer_size = buffer_size;
@@ -468,7 +468,7 @@ void XModuleSoundIn::set_buffer_size(int buffer_size) {
 
 //---------------------------------------------------------------------
 //Print to console available input audio devices
-void XModuleSoundIn::print_devices() {
+void XClassSoundIn::print_devices() {
     QStringList list;
     list.append("Connected Input Audio devices:");
 
@@ -486,7 +486,7 @@ void XModuleSoundIn::print_devices() {
 //---------------------------------------------------------------------
 //печать в консоль поддерживаемых аудиоформатов запускаемого устройства
 //внимание, эта функция запускает camera_->load()
-void XModuleSoundIn::print_formats(const QAudioDeviceInfo &deviceInfo) {
+void XClassSoundIn::print_formats(const QAudioDeviceInfo &deviceInfo) {
     if (audio_tried_to_start_ && geti_print_formats()) {
         QString device_name = deviceInfo.deviceName();
 

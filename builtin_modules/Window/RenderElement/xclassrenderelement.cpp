@@ -1,41 +1,41 @@
-#include "XModuleRenderElement.h"
+#include "XClassRenderElement.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 //registering module implementation
 REGISTER_XCLASS(RenderElement)
 
 //---------------------------------------------------------------------
-XModuleRenderElement::XModuleRenderElement(QString class_name)
+XClassRenderElement::XClassRenderElement(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleRenderElement::~XModuleRenderElement()
+XClassRenderElement::~XClassRenderElement()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderElement::start() {
+void XClassRenderElement::start() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderElement::update() {
+void XClassRenderElement::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderElement::stop() {
+void XClassRenderElement::stop() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderElement::draw(QPainter &painter, int w, int h) {
+void XClassRenderElement::draw(QPainter &painter, int w, int h) {
     int repx = (geti_repeats()) ? geti_repeat_x() : 1;
     int repy = (geti_repeats()) ? geti_repeat_y() : 1;
     int stepx = geti_step_x();

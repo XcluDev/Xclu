@@ -12,7 +12,7 @@
 
 //Exceptions
 void xc_exception(QString message);
-void xc_exception(ErrorInfo err);
+void xc_exception(XCallError err);
 
 
 //Xclu-level critical exception with stopping Xclu
@@ -48,14 +48,14 @@ QString xc_clipboard_get_text();
 //Exception class
 struct XException: public std::exception {
     XException(const QString &message) {
-        err_ = ErrorInfo(message);
+        err_ = XCallError(message);
     }
-    XException(const ErrorInfo &err) {
+    XException(const XCallError &err) {
         err_ = err;
     }
     //дописать текст
-    XException(const QString &prepend, ErrorInfo err) {
-        err_ = ErrorInfo(prepend, err);
+    XException(const QString &prepend, XCallError err) {
+        err_ = XCallError(prepend, err);
     }
 
    const char * what () const throw () {
@@ -64,10 +64,10 @@ struct XException: public std::exception {
    QString whatQt() const throw() {
        return err_.error_text();
    }
-   ErrorInfo err() { return err_; }
+   XCallError err() { return err_; }
 
 private:
-   ErrorInfo err_;
+   XCallError err_;
 };
 
 //Xclu-level critical exception class

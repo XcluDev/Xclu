@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModulePrintConsole: public XClass
+class XClassPrintConsole: public XClass
 {
 public:
-    XModulePrintConsole(QString class_name);
-    virtual ~XModulePrintConsole();
+    XClassPrintConsole(QString class_name);
+    virtual ~XClassPrintConsole();
 #include "auto.h"
 
 protected:

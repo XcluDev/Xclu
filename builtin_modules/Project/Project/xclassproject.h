@@ -38,12 +38,12 @@ protected:
 };
 
 
-class XModuleProject: public XClass
+class XClassProject: public XClass
 {
     Q_OBJECT
 public:
-    XModuleProject(QString class_name);
-    virtual ~XModuleProject();
+    XClassProject(QString class_name);
+    virtual ~XClassProject();
 protected:
 #include "auto.h"
 

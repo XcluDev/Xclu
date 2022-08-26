@@ -16,10 +16,10 @@
 #include "xobjectsoundformat.h"
 #include "xprotecteddata.h"
 
-class XModule;
+class XClass;
 
 //Данные для обмена с generator, которые защищаются с помощью mutex
-struct XModuleSoundOutData: public XcluProtectedData
+struct XClassSoundOutData: public XcluProtectedData
 {
     int play_test_sound_ = 0;   //generate test sound
     int play_left_ = 1;
@@ -32,13 +32,13 @@ struct XModuleSoundOutData: public XcluProtectedData
     float volume_right_ = 1;
 
     //список ссылок на другие модули, которым высылать call
-    QVector<XModule *> modules_;
+    QVector<XClass *> modules_;
 
     //громкости
     QVector<float> volumes_;
 
     //данные об ошибке
-    ErrorInfo err;
+    XCallError err;
 
     void clear() {
         play_test_sound_ = 0;
@@ -54,12 +54,12 @@ struct XModuleSoundOutData: public XcluProtectedData
 
 
 //Генератор звука
-class XModuleSoundOutGenerator : public QIODevice
+class XClassSoundOutGenerator : public QIODevice
 {
     Q_OBJECT
 
 public:
-    XModuleSoundOutGenerator(const QAudioFormat &format, XModuleSoundOutData *data);
+    XClassSoundOutGenerator(const QAudioFormat &format, XClassSoundOutData *data);
 
     void start();
     void stop();
@@ -72,7 +72,7 @@ private:
     //QByteArray m_buffer;
     QAudioFormat format_;
 
-    XModuleSoundOutData *data_;
+    XClassSoundOutData *data_;
 
     //функция создания звука, во float
     //вызывает нужные модули и заполняет тестовым звуком, если требуется
@@ -85,12 +85,12 @@ private:
 
 
 //Модуль
-class XModuleSoundOut: public XClass
+class XClassSoundOut: public XClass
 {
     Q_OBJECT
 public:
-    XModuleSoundOut(QString class_name);
-    virtual ~XModuleSoundOut();
+    XClassSoundOut(QString class_name);
+    virtual ~XClassSoundOut();
 protected:
 #include "auto.h"
 
@@ -111,10 +111,10 @@ protected:
     QScopedPointer<QAudioOutput> m_audioOutput;
 
     //генератор звука
-    QScopedPointer<XModuleSoundOutGenerator> m_generator;
+    QScopedPointer<XClassSoundOutGenerator> m_generator;
 
     //данные для обмена с генератором
-    XModuleSoundOutData data_;
+    XClassSoundOutData data_;
 
     bool audio_started_ = false;
     void set_started(bool started); //ставит audio_started_ и gui-элемент is_started

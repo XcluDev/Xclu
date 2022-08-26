@@ -1,4 +1,4 @@
-#include "xmodulendi.h"
+#include "xclassndi.h"
 #include "incl_cpp.h"
 #include "registrarxmodule.h"
 #include "project_props.h"
@@ -8,27 +8,27 @@
 REGISTER_XMODULE(Ndi)
 
 //---------------------------------------------------------------------
-XModuleNdi::XModuleNdi(QString class_name)
-    :XModule(class_name)
+XClassNdi::XClassNdi(QString class_name)
+    :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleNdi::~XModuleNdi()
+XClassNdi::~XClassNdi()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::on_loaded() {
+void XClassNdi::on_loaded() {
     sets_send_status("Not started");
 }
 
 //---------------------------------------------------------------------
 //нажатие кнопки, даже когда модуль остановлен - модуль также должен переопределить эту функцию
 //внимание, обычно вызывается из основного потока как callback
-void XModuleNdi::on_button_pressed(QString button_id) {
+void XClassNdi::on_button_pressed(QString button_id) {
     if (button_id == "print_devices") {
 
     }
@@ -37,7 +37,7 @@ void XModuleNdi::on_button_pressed(QString button_id) {
 
 
 //---------------------------------------------------------------------
-void XModuleNdi::start() {
+void XClassNdi::start() {
     sets_send_status("Not started");
     ndi_inited_ = false;
 
@@ -51,7 +51,7 @@ void XModuleNdi::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::update() {
+void XClassNdi::update() {
     auto mode = gete_send_mode();
     if (mode == send_mode_Each_Frame
             || (mode == send_mode_On_Checkbox && geti_send_new_frame())) {
@@ -62,7 +62,7 @@ void XModuleNdi::update() {
 
 
 //---------------------------------------------------------------------
-void XModuleNdi::stop() {
+void XClassNdi::stop() {
     ndi_stop();
 
     test_raster_.clear();
@@ -70,7 +70,7 @@ void XModuleNdi::stop() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::send_frame() {
+void XClassNdi::send_frame() {
     if (!ndi_inited_) {
         return;
     }
@@ -82,10 +82,10 @@ void XModuleNdi::send_frame() {
         if (read.data().type() == XObjectTypeImage) {
             auto info = XObjectImage::get_data(read.data());
             xc_assert(info.data_type == "u8" || info.channels == 4,
-                     "XModuleNdi::send_frame - only u8, 4 channels are supported");
+                     "XClassNdi::send_frame - only u8, 4 channels are supported");
             auto *array = XObjectImage::get_array(read.data());
             const unsigned char *u8 = array->data_u8();
-            xc_assert(u8, "XModuleNdi::send_frame - Empty image array 'u8'");
+            xc_assert(u8, "XClassNdi::send_frame - Empty image array 'u8'");
 
             ndi_send_image(u8, info.w, info.h);
         }
@@ -96,7 +96,7 @@ void XModuleNdi::send_frame() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::send_test_frame(int frame) {
+void XClassNdi::send_test_frame(int frame) {
     if (!ndi_inited_) {
         return;
     }
@@ -127,7 +127,7 @@ void XModuleNdi::send_test_frame(int frame) {
 
 
 //---------------------------------------------------------------------
-void XModuleNdi::ndi_init() {
+void XClassNdi::ndi_init() {
     if (!ndi_inited_) {
         auto result = NDIlib_initialize();
         xc_assert(result, "Can't initialize NDI: Library error");
@@ -152,11 +152,11 @@ void XModuleNdi::ndi_init() {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::ndi_send_image(const unsigned char *data_rgba, int w, int h) {
+void XClassNdi::ndi_send_image(const unsigned char *data_rgba, int w, int h) {
     if (!ndi_inited_) {
         return;
     }
-    xc_assert(data_rgba && w > 0 && h > 0, "XModuleNdi::ndi_send_image - bad input raster");
+    xc_assert(data_rgba && w > 0 && h > 0, "XClassNdi::ndi_send_image - bad input raster");
 
     NDIlib_video_frame_v2_t NDI_video_frame;
     NDI_video_frame.xres = w;
@@ -178,7 +178,7 @@ void XModuleNdi::ndi_send_image(const unsigned char *data_rgba, int w, int h) {
 }
 
 //---------------------------------------------------------------------
-void XModuleNdi::ndi_stop() {
+void XClassNdi::ndi_stop() {
     if (ndi_inited_) {
         // Destroy the NDI sender
         NDIlib_send_destroy(pNDI_send_);

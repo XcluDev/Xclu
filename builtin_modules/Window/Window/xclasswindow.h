@@ -19,14 +19,14 @@ class QSpacerItem;
 
 
 //Структура для создания layouts
-struct XModuleWindowStructureItem {
-    XModuleWindowStructureItem();
-    XModuleWindowStructureItem(QWidget* widget, int stretch = 0);
-    XModuleWindowStructureItem(QLayout *layout, int stretch = 0);
-    XModuleWindowStructureItem(QWidget* widget, QString tab_title);
-    XModuleWindowStructureItem(int stretch);
+struct XClassWindowStructureItem {
+    XClassWindowStructureItem();
+    XClassWindowStructureItem(QWidget* widget, int stretch = 0);
+    XClassWindowStructureItem(QLayout *layout, int stretch = 0);
+    XClassWindowStructureItem(QWidget* widget, QString tab_title);
+    XClassWindowStructureItem(int stretch);
 
-    virtual ~XModuleWindowStructureItem();
+    virtual ~XClassWindowStructureItem();
 
     QWidget *take_widget();         //забрать указатель и тут его выставит в nullptr - чтобы деструктор не удалил widget
 
@@ -44,12 +44,12 @@ struct XModuleWindowStructureItem {
 
 
 //Модуль
-class XModuleWindow: public XClass
+class XClassWindow: public XClass
 {
     Q_OBJECT
 public:
-    XModuleWindow(QString class_name);
-    virtual ~XModuleWindow();
+    XClassWindow(QString class_name);
+    virtual ~XClassWindow();
 protected:
     //Выполнение
     virtual void on_loaded() {}
@@ -103,7 +103,7 @@ protected:
     //Рекурсивное создание структуры окна
     //При реализации я старался сделать здесь безопасным при exceptions и исключить утечки памяти
     //для этого старался использовать QScopedPointer и забирать его указатели с помощью take в безопасные моменты
-    XModuleWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
+    XClassWindowStructureItem create_layouts_internal(const XcluParseTree &tree, int index);
 
     //парсить число, если оно есть, иначе - выдать default_value
     int xparse_int(QStringList list, int index, int default_value, QString line);

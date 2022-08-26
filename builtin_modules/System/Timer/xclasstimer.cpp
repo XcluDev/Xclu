@@ -1,4 +1,4 @@
-#include "xmoduletimer.h"
+#include "xclasstimer.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QThread>
@@ -9,27 +9,27 @@
 REGISTER_XCLASS(Timer)
 
 //---------------------------------------------------------------------
-XModuleTimer::XModuleTimer(QString class_name)
+XClassTimer::XClassTimer(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleTimer::~XModuleTimer()
+XClassTimer::~XClassTimer()
 {
 
 }
 
 
 //---------------------------------------------------------------------
-void XModuleTimer::set_working(bool v) {
+void XClassTimer::set_working(bool v) {
     working_ = v;
     seti_working(v);
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::start() {
+void XClassTimer::start() {
     set_working(false);
 
     sets_time_left_hms("");
@@ -39,7 +39,7 @@ void XModuleTimer::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::update() {
+void XClassTimer::update() {
     double delay_sec=0;
     auto period = gete_period();
     switch (period) {
@@ -52,7 +52,7 @@ void XModuleTimer::update() {
     case period_Seconds: delay_sec = getf_seconds();
         break;
     default:
-        xc_exception("XModuleTimer::update - bad `measure` value");
+        xc_exception("XClassTimer::update - bad `measure` value");
     }
 
     //xc_console_append(QString("delay %1").arg(delay_sec));
@@ -67,7 +67,7 @@ void XModuleTimer::update() {
         update_bang(delay_sec);
         break;
     default:
-        xc_exception("XModuleTimer::update - bad `working_mode` value");
+        xc_exception("XClassTimer::update - bad `working_mode` value");
 
     }
 
@@ -86,28 +86,28 @@ void XModuleTimer::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::stop() {
+void XClassTimer::stop() {
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimer::on_button_pressed(QString button_id) {
+//void XClassTimer::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------
-void XModuleTimer::one_shot() {
+void XClassTimer::one_shot() {
     register_bang_time();
     working_ = true;
     seti_working(true);
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::register_bang_time() {
+void XClassTimer::register_bang_time() {
     time_ = xc_elapsed_time_sec();
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::update_bang(float delay_sec) {
+void XClassTimer::update_bang(float delay_sec) {
     if (working_) {
         double time = xc_elapsed_time_sec();
 
@@ -131,7 +131,7 @@ void XModuleTimer::update_bang(float delay_sec) {
 }
 
 //---------------------------------------------------------------------
-void XModuleTimer::bang() {
+void XClassTimer::bang() {
     //send bangs
     xc_bang(get_strings_bang_list());
 }

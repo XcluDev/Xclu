@@ -39,27 +39,27 @@ For the more details see Xclu's example Webcamera/Webcams_resolve.
 #include "xprotecteddata.h"
 class QCameraInfo;
 
-class XModuleWebcamera;
+class XClassWebcamera;
 
 //класс для обработки полученных изображений с камеры
 //https://doc.qt.io/archives/qt-5.8/videooverview.html
 //https://www.qtcentre.org/threads/57090-How-could-I-get-the-image-buffer-of-QCamera
-class XModuleWebcameraSurface: public QAbstractVideoSurface
+class XClassWebcameraSurface: public QAbstractVideoSurface
 {
 public:
     //в конструктор передается сам модуль, чтобы в него посылать сигналы
-    XModuleWebcameraSurface(XModuleWebcamera *module);
+    XClassWebcameraSurface(XClassWebcamera *module);
 
     QList<QVideoFrame::PixelFormat> supportedPixelFormats(
             QAbstractVideoBuffer::HandleType handleType = QAbstractVideoBuffer::NoHandle) const;
     bool present(const QVideoFrame &frame);
 
 protected:
-    XModuleWebcamera *module_; //удалять не нужно
+    XClassWebcamera *module_; //удалять не нужно
 };
 
 //Данные для обмена с surface, которые защищаются с помощью mutex
-struct XModuleWebcameraSurfaceData : public XcluProtectedData
+struct XClassWebcameraSurfaceData : public XcluProtectedData
 {
 
     XObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
@@ -70,7 +70,7 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
     QString data_type;  //uint8,float
 
     //данные об ошибке
-    ErrorInfo err;
+    XCallError err;
 
     void clear() {
         image.clear();
@@ -85,13 +85,13 @@ struct XModuleWebcameraSurfaceData : public XcluProtectedData
 
 
 //Сам модуль для работы с вебкамерой
-class XModuleWebcamera: public XClass
+class XClassWebcamera: public XClass
 {
 public:
-    XModuleWebcamera(QString class_name);
-    virtual ~XModuleWebcamera();
+    XClassWebcamera(QString class_name);
+    virtual ~XClassWebcamera();
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение
-    XModuleWebcameraSurfaceData &surface_data();
+    XClassWebcameraSurfaceData &surface_data();
 
 protected:
 #include "auto.h"
@@ -130,10 +130,10 @@ protected:
     void set_started(bool started); //ставит camera_started_ и gui-элемент is_started
 
     //получение кадров с камеры
-    XModuleWebcameraSurface surface_;
+    XClassWebcameraSurface surface_;
 
     //Данные для обмена с surface, которые защищаются с помощью mutex
-    XModuleWebcameraSurfaceData data_;
+    XClassWebcameraSurfaceData data_;
 
     //количество обработанных кадров
     int processed_frames_ = 0;

@@ -3,27 +3,27 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 
 //registering module implementation
 REGISTER_XCLASS(ImageLoader)
 
 //---------------------------------------------------------------------
-XModuleImageLoader::XModuleImageLoader(QString class_name)
+XClassImageLoader::XClassImageLoader(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleImageLoader::~XModuleImageLoader()
+XClassImageLoader::~XClassImageLoader()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::start() {
+void XClassImageLoader::start() {
     setobject_image(image_);   //link xgui image with image_
     seti_is_new_frame(false);
 
@@ -32,7 +32,7 @@ void XModuleImageLoader::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::update() {
+void XClassImageLoader::update() {
     bool new_frame = false;
 
     auto input_source = gete_image_source();
@@ -69,20 +69,20 @@ void XModuleImageLoader::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::load_image_file(QString image_file) {
+void XClassImageLoader::load_image_file(QString image_file) {
     image_file_ = image_file;
     QString file_name = xc_absolute_path_from_project(image_file_);
     XObjectImage::load(image_.write().data(), file_name);
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::load_folder(QString folder_name) {
+void XClassImageLoader::load_folder(QString folder_name) {
     image_files_ = xc_folder_list_files(folder_name, QStringList() << "bmp" << "jpg" << "png" << "tif" << "tiff");
     xc_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
 }
 
 //---------------------------------------------------------------------
-void XModuleImageLoader::stop() {
+void XClassImageLoader::stop() {
 
 }
 

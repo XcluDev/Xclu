@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTest: public XClass
+class XClassTest: public XClass
 {
 public:
-    XModuleTest(QString class_name);
-    virtual ~XModuleTest();
+    XClassTest(QString class_name);
+    virtual ~XClassTest();
 protected:
     //Выполнение
     virtual void on_loaded() {}

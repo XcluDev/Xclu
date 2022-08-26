@@ -10,12 +10,12 @@
 #include "xclasswidget.h"
 
 
-class XModuleRenderArea: public XModuleWidget
+class XClassRenderArea: public XClassWidget
 {
     Q_OBJECT
 public:
-    XModuleRenderArea(QString class_name);
-    virtual ~XModuleRenderArea();
+    XClassRenderArea(QString class_name);
+    virtual ~XClassRenderArea();
 protected:
 #include "auto.h"
 
@@ -29,7 +29,7 @@ protected:
 protected:
     //Collect modules to render from
     void collect_modules();
-    QVector<XModule *> modules_;
+    QVector<XClass *> modules_;
 
 
 };

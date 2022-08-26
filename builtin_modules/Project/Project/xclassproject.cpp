@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xmoduleproject.h"
+#include "xclassproject.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -9,34 +9,34 @@
 REGISTER_XCLASS(Project)
 
 //---------------------------------------------------------------------
-XModuleProject::XModuleProject(QString class_name)
+XClassProject::XClassProject(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleProject::~XModuleProject()
+XClassProject::~XClassProject()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::on_loaded() {
+void XClassProject::on_loaded() {
     if (is_enabled()) {
         apply_control_values();
     }
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::apply_control_values() {
+void XClassProject::apply_control_values() {
     xc_working_properties().set_frame_rate(geti_frame_rate());
     xc_working_properties().set_autostart(geti_autostart(), geti_autostart_wait_sec());
     xc_working_properties().set_dont_save_at_exit(geti_dont_save_at_exit());
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::start() {
+void XClassProject::start() {
 
     apply_control_values();
 
@@ -64,7 +64,7 @@ void XModuleProject::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::update() {
+void XClassProject::update() {
     setf_elapsed_time_sec(xc_elapsed_time_sec());
 
     float dt = xc_dt();
@@ -94,7 +94,7 @@ void XModuleProject::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleProject::stop() {
+void XClassProject::stop() {
     if (watchdog_) {
         thread_->terminate();
         delete thread_;

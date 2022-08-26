@@ -1,10 +1,10 @@
 #include "qt_widgets.h"
-#include "xmodulescalar.h"
+#include "xclassscalar.h"
 
 #include "incl_cpp.h"
 #include "moduleregistrar.h"
 #include "xcore.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xdict.h"
 
 #include "xcluspinbox.h"
@@ -161,7 +161,7 @@ void XClassScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        XModule *module = xc_find_module(link.module);
+        XClass *module = xc_find_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }

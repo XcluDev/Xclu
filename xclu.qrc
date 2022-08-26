@@ -117,7 +117,6 @@
         <file>builtin_modules/Bots/TelegramBot/auto.h</file>
         <file>builtin_modules/Bots/TelegramBot/description.xgui</file>
         <file>builtin_modules/Bots/TelegramBot/xclasstelegrambot.cpp</file>
-        <file>builtin_modules/Bots/TelegramBot/xmoduletelegrambot.h</file>
         <file>builtin_modules/Communication/MailNotification/auto.h</file>
         <file>builtin_modules/Communication/MailNotification/description.xgui</file>
         <file>builtin_modules/Communication/Midi/auto.h</file>
@@ -131,7 +130,6 @@
         <file>builtin_modules/Communication/Serial/auto.h</file>
         <file>builtin_modules/Communication/Serial/description.xgui</file>
         <file>builtin_modules/Communication/Serial/xclassserial.cpp</file>
-        <file>builtin_modules/Communication/Serial/xmoduleserial.h</file>
         <file>builtin_modules/Communication/SharedMemory/auto.h</file>
         <file>builtin_modules/Communication/SharedMemory/description.xgui</file>
         <file>builtin_modules/Communication/SMSNotification/auto.h</file>
@@ -164,14 +162,10 @@
         <file>builtin_modules/Core/Random/auto.h</file>
         <file>builtin_modules/Core/Random/description.xgui</file>
         <file>builtin_modules/Core/Random/xclassrandom.cpp</file>
-        <file>builtin_modules/Core/Random/xmodulerandom.h</file>
         <file>builtin_modules/Core/Scalar/auto.h</file>
         <file>builtin_modules/Core/Scalar/description.xgui</file>
         <file>builtin_modules/Core/Scalar/xclassscalar.cpp</file>
-        <file>builtin_modules/Core/Scalar/xmodulescalar.h</file>
         <file>builtin_modules/Core/SoundBuffer/description.xgui</file>
-        <file>builtin_modules/Core/SoundBuffer/xmodulesoundbuffer.cpp</file>
-        <file>builtin_modules/Core/SoundBuffer/xmodulesoundbuffer.h</file>
         <file>builtin_modules/Databases/DB_MongoDB/auto.h</file>
         <file>builtin_modules/Databases/DB_MongoDB/description.xgui</file>
         <file>builtin_modules/Databases/DB_MySQL/auto.h</file>
@@ -191,12 +185,10 @@
         <file>builtin_modules/Drawing/Fbo/auto.h</file>
         <file>builtin_modules/Drawing/Fbo/description.xgui</file>
         <file>builtin_modules/Drawing/Fbo/xclassfbo.cpp</file>
-        <file>builtin_modules/Drawing/Fbo/xmodulefbo.h</file>
         <file>builtin_modules/Drawing/Figure/description.xgui</file>
         <file>builtin_modules/Drawing/FragmentShader/auto.h</file>
         <file>builtin_modules/Drawing/FragmentShader/description.xgui</file>
         <file>builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp</file>
-        <file>builtin_modules/Drawing/FragmentShader/xmodulefragmentshader.h</file>
         <file>builtin_modules/Drawing/PointCloudDraw/auto.h</file>
         <file>builtin_modules/Drawing/PointCloudDraw/description.xgui</file>
         <file>builtin_modules/Drawing/Shadertoy/auto.h</file>
@@ -209,21 +201,14 @@
         <file>builtin_modules/ImageSources/ImageLoader/auto.h</file>
         <file>builtin_modules/ImageSources/ImageLoader/description.xgui</file>
         <file>builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp</file>
-        <file>builtin_modules/ImageSources/ImageLoader/xmoduleimageloader.h</file>
         <file>builtin_modules/ImageSources/IpCamera/auto.h</file>
         <file>builtin_modules/ImageSources/IpCamera/description.xgui</file>
         <file>builtin_modules/ImageSources/RealsenseCamera/auto.h</file>
         <file>builtin_modules/ImageSources/RealsenseCamera/description.xgui</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.cpp</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera.h</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.cpp</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/xmodulerealsensecamera_impl.h</file>
         <file>builtin_modules/ImageSources/ScreenCapture/auto.h</file>
         <file>builtin_modules/ImageSources/ScreenCapture/description.xgui</file>
         <file>builtin_modules/ImageSources/Webcamera/auto.h</file>
         <file>builtin_modules/ImageSources/Webcamera/description.xgui</file>
-        <file>builtin_modules/ImageSources/Webcamera/xmodulewebcamera.cpp</file>
-        <file>builtin_modules/ImageSources/Webcamera/xmodulewebcamera.h</file>
         <file>builtin_modules/Interactive/ContourFromImage/auto.h</file>
         <file>builtin_modules/Interactive/ContourFromImage/description.xgui</file>
         <file>builtin_modules/Interactive/ContourPointCloud/auto.h</file>
@@ -290,34 +275,24 @@
         <file>builtin_modules/Project/Presets/description.xgui</file>
         <file>builtin_modules/Project/Project/auto.h</file>
         <file>builtin_modules/Project/Project/description.xgui</file>
-        <file>builtin_modules/Project/Project/xmoduleproject.cpp</file>
-        <file>builtin_modules/Project/Project/xmoduleproject.h</file>
         <file>builtin_modules/Sound/MidiFromData/auto.h</file>
         <file>builtin_modules/Sound/MidiFromData/description.xgui</file>
         <file>builtin_modules/Sound/SoundOsc/auto.h</file>
         <file>builtin_modules/Sound/SoundOsc/description.xgui</file>
-        <file>builtin_modules/Sound/SoundOsc/xmodulesoundosc.cpp</file>
-        <file>builtin_modules/Sound/SoundOsc/xmodulesoundosc.h</file>
         <file>builtin_modules/Sound/SoundOut/auto.h</file>
         <file>builtin_modules/Sound/SoundOut/description.xgui</file>
-        <file>builtin_modules/Sound/SoundOut/xmodulesoundout.cpp</file>
-        <file>builtin_modules/Sound/SoundOut/xmodulesoundout.h</file>
         <file>builtin_modules/Sound/SoundToText/auto.h</file>
         <file>builtin_modules/Sound/SoundToText/description.xgui</file>
         <file>builtin_modules/Sound/SynthFromData/auto.h</file>
         <file>builtin_modules/Sound/SynthFromData/description.xgui</file>
         <file>builtin_modules/Sound/SynthFromImage/auto.h</file>
         <file>builtin_modules/Sound/SynthFromImage/description.xgui</file>
-        <file>builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.cpp</file>
-        <file>builtin_modules/Sound/SynthFromImage/xmodulesynthfromimage.h</file>
         <file>builtin_modules/Sound/TextToSound/auto.h</file>
         <file>builtin_modules/Sound/TextToSound/description.xgui</file>
         <file>builtin_modules/Sound/VstSendReceiveSound/auto.h</file>
         <file>builtin_modules/Sound/VstSendReceiveSound/description.xgui</file>
         <file>builtin_modules/System/Execute/auto.h</file>
         <file>builtin_modules/System/Execute/description.xgui</file>
-        <file>builtin_modules/System/Execute/xmoduleexecute.cpp</file>
-        <file>builtin_modules/System/Execute/xmoduleexecute.h</file>
         <file>builtin_modules/System/Executor/auto.h</file>
         <file>builtin_modules/System/Executor/description.xgui</file>
         <file>builtin_modules/System/FileDownload/auto.h</file>
@@ -331,34 +306,22 @@
         <file>builtin_modules/System/MacroRecorder/description.xgui</file>
         <file>builtin_modules/System/PrintConsole/auto.h</file>
         <file>builtin_modules/System/PrintConsole/description.xgui</file>
-        <file>builtin_modules/System/PrintConsole/xmoduleprintconsole.cpp</file>
-        <file>builtin_modules/System/PrintConsole/xmoduleprintconsole.h</file>
         <file>builtin_modules/System/ScanFolder/auto.h</file>
         <file>builtin_modules/System/ScanFolder/description.xgui</file>
-        <file>builtin_modules/System/ScanFolder/xmodulescanfolder.cpp</file>
-        <file>builtin_modules/System/ScanFolder/xmodulescanfolder.h</file>
         <file>builtin_modules/System/ScreenRecorder/description.xgui</file>
         <file>builtin_modules/System/Stopper/description.xgui</file>
         <file>builtin_modules/System/Thread/description.xgui</file>
         <file>builtin_modules/System/Timer/auto.h</file>
         <file>builtin_modules/System/Timer/description.xgui</file>
-        <file>builtin_modules/System/Timer/xmoduletimer.cpp</file>
-        <file>builtin_modules/System/Timer/xmoduletimer.h</file>
         <file>builtin_modules/Text/TextVariation/auto.h</file>
         <file>builtin_modules/Text/TextVariation/description.xgui</file>
-        <file>builtin_modules/Text/TextVariation/xmoduletextvariation.cpp</file>
-        <file>builtin_modules/Text/TextVariation/xmoduletextvariation.h</file>
         <file>builtin_modules/Utils/Test/auto.h</file>
         <file>builtin_modules/Utils/Test/description.xgui</file>
-        <file>builtin_modules/Utils/Test/xmoduletest.cpp</file>
-        <file>builtin_modules/Utils/Test/xmoduletest.h</file>
         <file>builtin_modules/Utils/Test_int/auto.h</file>
         <file>builtin_modules/Utils/Test_int/description.xgui</file>
         <file>builtin_modules/Utils/TestArrays/description.xgui</file>
         <file>builtin_modules/Utils/TestDrawing/auto.h</file>
         <file>builtin_modules/Utils/TestDrawing/description.xgui</file>
-        <file>builtin_modules/Utils/TestDrawing/xmoduletestdrawing.cpp</file>
-        <file>builtin_modules/Utils/TestDrawing/xmoduletestdrawing.h</file>
         <file>builtin_modules/Web/Instagram/auto.h</file>
         <file>builtin_modules/Web/Instagram/description.xgui</file>
         <file>builtin_modules/Web/Radio/auto.h</file>
@@ -384,8 +347,6 @@
         <file>builtin_modules/Window/Window/auto.h</file>
         <file>builtin_modules/Window/Window/description.xgui</file>
         <file>builtin_modules/Window/Window/help.md</file>
-        <file>builtin_modules/Window/Window/xmodulewindow.cpp</file>
-        <file>builtin_modules/Window/Window/xmodulewindow.h</file>
         <file>builtin_modules/Window/WLayout/description.xgui</file>
         <file>builtin_modules/Window/WMenu/auto.h</file>
         <file>builtin_modules/Window/WMenu/description.xgui</file>

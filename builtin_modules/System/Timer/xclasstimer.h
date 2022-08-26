@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTimer: public XClass
+class XClassTimer: public XClass
 {
 public:
-    XModuleTimer(QString class_name);
-    virtual ~XModuleTimer();
+    XClassTimer(QString class_name);
+    virtual ~XClassTimer();
 #include "auto.h"
 
 protected:

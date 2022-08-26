@@ -65,4 +65,4 @@ protected:
 };
 
 
-#endif // XModuleScalar_H
+#endif // XClassScalar_H

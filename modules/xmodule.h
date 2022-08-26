@@ -55,7 +55,7 @@ public:
     bool is_auto_update() { return geti("general_auto_update_"); }
 
     //-----------------------------------------------
-    // Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea
+    // Drawing to painter - for XClassWidget and for module accepting 'draw' call from RenderArea
     void draw(QPainter &painter, int w, int h);
 
     //-----------------------------------------------
@@ -77,7 +77,7 @@ public:
     void call(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
 
     //исключение "записывается" в err
-    void call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input = nullptr, XObject *output = nullptr);
+    void call_function_no_exception(XCallType function, XCallError &err, XObject *input = nullptr, XObject *output = nullptr);
 
 
     //Доступ к переменным и запуску из других модулей

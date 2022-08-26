@@ -1,4 +1,4 @@
-#include "xmodulemotiondetector.h"
+#include "xclassmotiondetector.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -8,20 +8,20 @@
 REGISTER_XCLASS(MotionDetector)
 
 //---------------------------------------------------------------------
-XModuleMotionDetector::XModuleMotionDetector(QString class_name)
+XClassMotionDetector::XClassMotionDetector(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleMotionDetector::~XModuleMotionDetector()
+XClassMotionDetector::~XClassMotionDetector()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::start() {
+void XClassMotionDetector::start() {
     //link images with internal objects
     setobject_output_image(&out_image_);
     setobject_background_image(&out_background_);
@@ -55,7 +55,7 @@ void XModuleMotionDetector::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::update() {
+void XClassMotionDetector::update() {
 
     //Read image
     XObjectImage::to_raster(getobject_input_image(), input0_);
@@ -102,7 +102,7 @@ void XModuleMotionDetector::update() {
     int Y1 = getf_y1() * h;
 
     //update blocks
-    XModuleMotionDetectorBlockParams params;
+    XClassMotionDetectorBlockParams params;
     params.thresh_in = getf_thresh_in();
     params.thresh_out = getf_thresh_out_rel() * params.thresh_in;
     params.block_event_sec = getf_block_event_sec();
@@ -235,7 +235,7 @@ void XModuleMotionDetector::update() {
 
 //---------------------------------------------------------------------
 //decimate inout
-void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
+void XClassMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
     int dec = geti_decimate_input();
     if (dec <= 1) {
         result = input;
@@ -265,24 +265,24 @@ void XModuleMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::bang_on() {
+void XClassMotionDetector::bang_on() {
     xc_bang(get_strings_bang_on());
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::bang_off() {
+void XClassMotionDetector::bang_off() {
     xc_bang(get_strings_bang_off());
 }
 
 //---------------------------------------------------------------------
-void XModuleMotionDetector::stop() {
+void XClassMotionDetector::stop() {
     //send "off" at stop
     bang_off();
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::on_button_pressed(QString button_id) {
+//void XClassTimerm::on_button_pressed(QString button_id) {
 //}
 
 //---------------------------------------------------------------------

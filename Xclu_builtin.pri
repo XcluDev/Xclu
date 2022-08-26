@@ -27,8 +27,8 @@ SOURCES += \
     $$PWD/builtin_modules/Sound/SoundPlay/xclasssoundplay.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.cpp \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.cpp \
-    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclassssoundsdatabaseanalyze.cpp \
-    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclassssoundseaofwords.cpp \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclasssoundsdatabaseanalyze.cpp \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclasssoundseaofwords.cpp \
     $$PWD/builtin_modules/Sound/SynthFromImage/xclasssynthfromimage.cpp \
     $$PWD/builtin_modules/System/FileCreate/xclassfilecreate.cpp \
     $$PWD/builtin_modules/System/Timer/xclasstimer.cpp \
@@ -88,9 +88,9 @@ HEADERS += \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/auto.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesanalyze.h \
     $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/soundsamplesdatabase.h \
-    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclassssoundsdatabaseanalyze.h \
+    $$PWD/builtin_modules/Sound/SoundsDatabaseAnalyze/xclasssoundsdatabaseanalyze.h \
     $$PWD/builtin_modules/Sound/SoundsSeaOfWords/auto.h \
-    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclassssoundseaofwords.h \
+    $$PWD/builtin_modules/Sound/SoundsSeaOfWords/xclasssoundseaofwords.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/auto.h \
     $$PWD/builtin_modules/Sound/SynthFromImage/xclasssynthfromimage.h \
     $$PWD/builtin_modules/System/FileCreate/auto.h \

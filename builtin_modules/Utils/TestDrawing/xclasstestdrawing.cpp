@@ -1,5 +1,5 @@
 #include <qt_widgets.h>
-#include "xmoduletestdrawing.h"
+#include "xclasstestdrawing.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -9,37 +9,37 @@
 REGISTER_XCLASS(TestDrawing)
 
 //---------------------------------------------------------------------
-XModuleTestDrawing::XModuleTestDrawing(QString class_name)
-    :XModuleWidget(class_name)
+XClassTestDrawing::XClassTestDrawing(QString class_name)
+    :XClassWidget(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleTestDrawing::~XModuleTestDrawing()
+XClassTestDrawing::~XClassTestDrawing()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::start() {
+void XClassTestDrawing::start() {
     //xc_console_append(QString("%1 - start").arg(name()));
 
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::update() {
+void XClassTestDrawing::update() {
     set_fixed_size(int2(geti_screen_w(), geti_screen_h()));
     redraw();
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::stop() {
+void XClassTestDrawing::stop() {
     //xc_console_append(QString("%1 - stop").arg(name()));
 }
 
 //---------------------------------------------------------------------
-void XModuleTestDrawing::draw(QPainter &painter, int w, int h) {
+void XClassTestDrawing::draw(QPainter &painter, int w, int h) {
     painter.fillRect(QRect(0,0,w,h), QColor(200,200,200));
     //painter.translate(100, 100);
     //painter.save();

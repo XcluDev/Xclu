@@ -8,7 +8,7 @@
 #include <QWindow>
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xcluprotecteddata.h"
 #include "xdict.h"
 
@@ -67,4 +67,4 @@ protected:
 };
 
 
-#endif // XModuleScalar_H
+#endif // XClassScalar_H

@@ -12,7 +12,7 @@
 #include "xprotecteddata.h"
 
 //Данные для генерации
-struct XModuleSoundOscData: public XcluProtectedData
+struct XClassSoundOscData: public XcluProtectedData
 {
     void init();    //запускать перед стартом звука, после считывания параметров из GUI
 
@@ -71,12 +71,12 @@ struct XModuleSoundOscData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleSoundOsc: public XClass
+class XClassSoundOsc: public XClass
 {
     Q_OBJECT
 public:
-    XModuleSoundOsc(QString class_name);
-    virtual ~XModuleSoundOsc();
+    XClassSoundOsc(QString class_name);
+    virtual ~XClassSoundOsc();
 protected:
 #include "auto.h"
 
@@ -92,7 +92,7 @@ protected:
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    XModuleSoundOscData data_;
+    XClassSoundOscData data_;
     void update_data();
 
 };

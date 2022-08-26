@@ -7,11 +7,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleTextVariation: public XClass
+class XClassTextVariation: public XClass
 {
 public:
-    XModuleTextVariation(QString class_name);
-    virtual ~XModuleTextVariation();
+    XClassTextVariation(QString class_name);
+    virtual ~XClassTextVariation();
 #include "auto.h"
 
 protected:

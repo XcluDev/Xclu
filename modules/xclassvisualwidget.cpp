@@ -6,7 +6,7 @@
 #include "xclasswidget.h"
 
 //---------------------------------------------------------------------
-XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XModuleWidget *xmodule)
+XModuleVisualWidget::XModuleVisualWidget(QWidget *parent, XClassWidget *xmodule)
     : QWidget(parent)
 {
     //setFixedSize(1280, 720);

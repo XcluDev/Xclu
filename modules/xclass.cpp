@@ -153,25 +153,25 @@ void XClass::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XClass::call(XCallType function, ErrorInfo &err, void* data, QString params) {
+void XClass::call(XCallData& call) {
     try {
-        if (err.is_error()) return;
+        if (call.error.is_error()) return;
 
         //process predefined functions
-        switch (function) {
-        case XCallTypeNone: xc_exception("Function type is not specified");
+        switch (call.type) {
+        case XCallType::None: xc_exception("XClass::call type is XCallType::None");
             break;
         //process universal function
-        case XCallTypeCustom: on_custom_call(data, params);
+        case XCallType::Custom: on_custom_call(call);
             break;
-        case XCallTypeCreateWidget: on_create_widget_internal(input, output);
+        case XCallType::CreateWidget: on_create_widget_internal(call);
             break;
-        case XCallTypeSoundBufferAdd:
-            on_sound_buffer_add_internal(input, output);
+        case XCallType::SoundBufferAdd:
+            on_sound_buffer_add_internal(call);
             break;
 
-        case XCallTypeSoundBufferReceived:
-            on_sound_buffer_received_internal(input, output);
+        case XCallType::SoundBufferReceived:
+            on_sound_buffer_received_internal(call);
             break;
         default:
             xc_exception("Unknnown function type");
@@ -187,21 +187,12 @@ void XClass::call(XCallType function, ErrorInfo &err, void* data, QString params
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
-void XClass::on_create_widget_internal(XObject *input, XObject *output) {
-    //call create_widget
-    //Window calls GUI elements to insert them into itself.
-    //string parent_id
-    //out pointer widget_pointer
+void XClass::on_create_widget_internal(XCallData& call) {
+    XCallCreateWidget *inout = (XCallCreateWidget *)call.ptr_data;
+    xc_assert(inout, "XClass::on_create_widget_internal - bad call");
 
-    //проверка, что оба объекта переданы
-    xc_assert(input, "Internal error, input object is nullptr");
-    xc_assert(output, "Internal error, output object is nullptr");
-
-    //устанавливаем, кто использует
-    //if parent_id is empty - then
-    QString parent_id = input->gets("parent_id");
-
-    //if parent_id is empty - it means that we need to delete widget
+    QString parent_id = inout->in_parent_id;
+    // if parent_id is empty - it means that we need to delete widget
     if (parent_id.isEmpty()) {
         on_reset_widget();
     }
@@ -212,40 +203,31 @@ void XClass::on_create_widget_internal(XObject *input, XObject *output) {
                             " You need to place it before parent '%2'.")
                     .arg(module_->name())
                     .arg(parent_id));
-
-        //создаем виджет
-        void* widget = on_create_widget(parent_id);
-
-        //ставим его в выходной объект
-        output->set_pointer("widget_pointer", widget);
+        inout->out_widget = on_create_widget(parent_id);
     }
 }
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XClass::on_sound_buffer_add_internal(XObject *input, XObject * /*output*/) {
+void XClass::on_sound_buffer_add_internal(XCallData& call) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-    XObject &sound = *input;
-    int sample_rate = sound.geti("sample_rate");
-    int samples = sound.geti("samples");
-    int channels = sound.geti("channels");
-    float *data = sound.var_array("data")->data_float();
-    on_sound_buffer_add(sample_rate, channels, samples, data);
+    XCallSoundBufferAdd *inout = (XCallSoundBufferAdd *)call.ptr_data;
+    xc_assert(inout, "XClass::on_sound_buffer_add_internal - bad call");
+
+    on_sound_buffer_add(inout->sample_rate, inout->channels, inout->samples, inout->data);
 }
 
 //---------------------------------------------------------------------
 //"sound_buffer_received" call
-void XClass::on_sound_buffer_received_internal(XObject *input, XObject * /*output*/) {
-    XObject &sound = *input;
-    int sample_rate = sound.geti("sample_rate");
-    int samples = sound.geti("samples");
-    int channels = sound.geti("channels");
-    float *data = sound.var_array("data")->data_float();
-    on_sound_buffer_received(sample_rate, channels, samples, data);
+void XClass::on_sound_buffer_received_internal(XCallData& call) {
+    XCallSoundBufferReceived *inout = (XCallSoundBufferReceived *)call.ptr_data;
+    xc_assert(inout, "XClass::on_sound_buffer_received_internal - bad call");
+
+    on_sound_buffer_received(inout->sample_rate, inout->channels, inout->samples, inout->data);
 }
 
 //---------------------------------------------------------------------
-void XClass::on_custom_call(void* /*data*/, QString /*params*/) {
+void XClass::on_custom_call(XCallData& call) {
     xc_exception("XModule '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }

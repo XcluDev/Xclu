@@ -5,19 +5,19 @@
 
 #include <QImage>
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
-#include "xmodulerealsensecamera_impl.h"
+#include "xclassrealsensecamera_impl.h"
 //class RealsenseCamera;
 
 //The module for working with Realsense
-class XModuleRealsenseCamera: public XClass
+class XClassRealsenseCamera: public XClass
 {
 public:
-    XModuleRealsenseCamera(QString class_name);
-    virtual ~XModuleRealsenseCamera();
+    XClassRealsenseCamera(QString class_name);
+    virtual ~XClassRealsenseCamera();
 protected:
 #include "auto.h"
 

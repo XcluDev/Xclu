@@ -1,4 +1,4 @@
-#include "xmoduleexecute.h"
+#include "xclassexecute.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QProcess>
@@ -10,20 +10,20 @@
 REGISTER_XCLASS(Execute)
 
 //---------------------------------------------------------------------
-XModuleExecute::XModuleExecute(QString class_name)
+XClassExecute::XClassExecute(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleExecute::~XModuleExecute()
+XClassExecute::~XClassExecute()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::start() {
+void XClassExecute::start() {
     //run
     sete_status(status_Not_Started);
     seti_exit_code(0);
@@ -58,7 +58,7 @@ void XModuleExecute::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::update() {
+void XClassExecute::update() {
     bool need_run = false;
     //buttons
     if (geti_run_button()) {
@@ -102,12 +102,12 @@ void XModuleExecute::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::stop() {
+void XClassExecute::stop() {
     subprocess_.reset();
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::process_stop() {
+void XClassExecute::process_stop() {
     if (subprocess_.data()) {
         if (gete_status() == status_Running) {
             subprocess_->terminate();
@@ -117,7 +117,7 @@ void XModuleExecute::process_stop() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_clear() {
+void XClassExecute::console_clear() {
     clear_string_console_errors_text();
     clear_string_console_read_string();
     clear_string_console_read_text();
@@ -125,7 +125,7 @@ void XModuleExecute::console_clear() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::process_run() {
+void XClassExecute::process_run() {
     if (gete_status() == status_Running)  {
         return;
     }
@@ -186,7 +186,7 @@ void XModuleExecute::process_run() {
     subprocess.setProcessChannelMode(QProcess::SeparateChannels); //separate output and error to process them differently
     //subprocess.setProcessChannelMode(QProcess::MergedChannels);
 
-    connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XModuleExecute::crashed);
+    connect(&subprocess, QOverload<QProcess::ProcessError>::of(&QProcess::error), this, &XClassExecute::crashed);
 
     //start process
     sete_status(status_Running);
@@ -213,10 +213,10 @@ void XModuleExecute::process_run() {
     else {
         //async run
         //implement async events
-        //connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XModuleExecute::onReadyReadStandardOutput);
-        connect(&subprocess, &QProcess::readyReadStandardError, this, &XModuleExecute::onReadyReadStandardError);
+        //connect(&subprocess, &QProcess::readyReadStandardOutput, this, &XClassExecute::onReadyReadStandardOutput);
+        connect(&subprocess, &QProcess::readyReadStandardError, this, &XClassExecute::onReadyReadStandardError);
 
-        connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XModuleExecute::finished);
+        connect(&subprocess, QOverload<int,QProcess::ExitStatus>::of(&QProcess::finished), this, &XClassExecute::finished);
     }
 
     //double time = xc_elapsed_time_sec();
@@ -224,7 +224,7 @@ void XModuleExecute::process_run() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, bool timeout) {
+void XClassExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, bool timeout) {
     if (subprocess_.data()) {
         if (gete_status() == status_Running) {
             //read console
@@ -263,20 +263,20 @@ void XModuleExecute::on_finish(int exit_code, QProcess::ExitStatus exit_status, 
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::onReadyReadStandardError() {
+void XClassExecute::onReadyReadStandardError() {
     //Note, this is can be async callback
     console_read_error();
 }
 
 //---------------------------------------------------------------------
-//void XModuleExecute::onReadyReadStandardOutput() {
+//void XClassExecute::onReadyReadStandardOutput() {
     //Note, this is async callback
 
 //}
 
 //---------------------------------------------------------------------
 //slot
-void XModuleExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
+void XClassExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
     //Note, this is can be async callback
     finished_ = true;
     exit_code_ = exit_code;
@@ -286,7 +286,7 @@ void XModuleExecute::finished(int exit_code, QProcess::ExitStatus exit_status) {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::crashed(QProcess::ProcessError error) {
+void XClassExecute::crashed(QProcess::ProcessError error) {
     //Note, this is can be async callback
 
     //async process - inform main thread:
@@ -309,7 +309,7 @@ void XModuleExecute::crashed(QProcess::ProcessError error) {
 
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_read_error() {
+void XClassExecute::console_read_error() {
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
         auto console_errors = gete_console_errors();
@@ -329,7 +329,7 @@ void XModuleExecute::console_read_error() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_read() {
+void XClassExecute::console_read() {
     QProcess *subprocess = subprocess_.data();
     if (subprocess) {
         auto data = subprocess->readAllStandardOutput();
@@ -373,7 +373,7 @@ void XModuleExecute::console_read() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_write() {
+void XClassExecute::console_write() {
     if (gete_status() != status_Running) {
         return;
     }
@@ -411,7 +411,7 @@ void XModuleExecute::console_write() {
 }
 
 //---------------------------------------------------------------------
-bool XModuleExecute::console_write_image() {
+bool XClassExecute::console_write_image() {
     //Read image
     XObjectImage::to_raster(getobject_console_write_image(), image_write_input_);
 
@@ -468,7 +468,7 @@ bool XModuleExecute::console_write_image() {
 }
 
 //---------------------------------------------------------------------
-void XModuleExecute::console_write_image(int w, int h, int channels, uint8 *data) {
+void XClassExecute::console_write_image(int w, int h, int channels, uint8 *data) {
     QProcess *subprocess = subprocess_.data();
     int data_size = w*h*channels;
 

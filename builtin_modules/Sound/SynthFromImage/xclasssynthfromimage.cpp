@@ -1,8 +1,8 @@
-#include "xmodulesynthfromimage.h"
+#include "xclasssynthfromimage.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 
 //registering module implementation
@@ -13,7 +13,7 @@ REGISTER_XCLASS(SynthFromImage)
 
 //---------------------------------------------------------------------
 //interpolation
-/*float XModuleSynthFromImageData::get_volume(float phase) {  //x=0..1
+/*float XClassSynthFromImageData::get_volume(float phase) {  //x=0..1
     if (w_ == 0) return 0;
     float x = phase * w_;
     int x0 = int(x);
@@ -25,20 +25,20 @@ REGISTER_XCLASS(SynthFromImage)
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-XModuleSynthFromImage::XModuleSynthFromImage(QString class_name)
+XClassSynthFromImage::XClassSynthFromImage(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSynthFromImage::~XModuleSynthFromImage()
+XClassSynthFromImage::~XClassSynthFromImage()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::start() {
+void XClassSynthFromImage::start() {
     {
         DataAccess access(data_);
         data_.line_.clear();
@@ -56,7 +56,7 @@ void XModuleSynthFromImage::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::update() {
+void XClassSynthFromImage::update() {
     //Freeze/unfreeze buttons
     if (geti_freeze_btn()) {
         input_frozen_ = true;
@@ -187,7 +187,7 @@ void XModuleSynthFromImage::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSynthFromImage::stop() {
+void XClassSynthFromImage::stop() {
 
 }
 
@@ -196,7 +196,7 @@ void XModuleSynthFromImage::stop() {
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
+void XClassSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     DataAccess access(data_);
 
     float phase_add = float(data_.sample_rate) / float(sample_rate) / data_.line_speed_;

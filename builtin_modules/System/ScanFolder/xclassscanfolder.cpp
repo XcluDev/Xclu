@@ -1,4 +1,4 @@
-#include "xmodulescanfolder.h"
+#include "xclassscanfolder.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include <QProcess>
@@ -9,32 +9,32 @@
 REGISTER_XCLASS(ScanFolder)
 
 //---------------------------------------------------------------------
-XModuleScanFolder::XModuleScanFolder(QString class_name)
+XClassScanFolder::XClassScanFolder(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleScanFolder::~XModuleScanFolder()
+XClassScanFolder::~XClassScanFolder()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::start() {
+void XClassScanFolder::start() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::update() {
+void XClassScanFolder::update() {
 
 
 }
 
 //---------------------------------------------------------------------
-void XModuleScanFolder::stop() {
+void XClassScanFolder::stop() {
 
 }
 

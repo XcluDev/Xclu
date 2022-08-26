@@ -1,34 +1,34 @@
 #include "qt_widgets.h"
-#include "xmodulerenderarea.h"
+#include "xclassrenderarea.h"
 
 #include "incl_cpp.h"
 #include "registrarxclass.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 //registering module implementation
 REGISTER_XCLASS(RenderArea)
 
 //---------------------------------------------------------------------
-XModuleRenderArea::XModuleRenderArea(QString class_name)
-    :XModuleWidget(class_name)
+XClassRenderArea::XClassRenderArea(QString class_name)
+    :XClassWidget(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleRenderArea::~XModuleRenderArea()
+XClassRenderArea::~XClassRenderArea()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderArea::start() {
+void XClassRenderArea::start() {
     collect_modules();
 }
 
 //---------------------------------------------------------------------
 //Collect modules to render from
-void XModuleRenderArea::collect_modules() {
+void XClassRenderArea::collect_modules() {
     auto modules = XIntermodule::find_modules_by_filter(XCallTypeDraw);
     // Use only modules which sets "render_area" to this module
     modules_.clear();
@@ -48,19 +48,19 @@ void XModuleRenderArea::collect_modules() {
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderArea::update() {
+void XClassRenderArea::update() {
 
     redraw();   //call to update screen
 }
 
 
 //---------------------------------------------------------------------
-void XModuleRenderArea::stop() {
+void XClassRenderArea::stop() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleRenderArea::draw(QPainter &painter, int outw, int outh) {
+void XClassRenderArea::draw(QPainter &painter, int outw, int outh) {
 
     //Antialiasing
     painter.setRenderHint(QPainter::Antialiasing);

@@ -12,12 +12,12 @@ class XObject;
 class QPainter;
 class XModuleVisualWidget;
 
-class XModuleWidget : public XClass
+class XClassWidget : public XClass
 {
     Q_OBJECT
 public:
-    XModuleWidget(QString class_name);
-    virtual ~XModuleWidget();
+    XClassWidget(QString class_name);
+    virtual ~XClassWidget();
 
     //-----------------------------------------------
     //subclasses MUST reimplement this for drawing

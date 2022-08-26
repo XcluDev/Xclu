@@ -13,20 +13,20 @@
 REGISTER_XCLASS(SoundsDatabaseAnalyze)
 
 //---------------------------------------------------------------------
-XModuleSoundsDatabaseAnalyze::XModuleSoundsDatabaseAnalyze(QString class_name)
-    :XModuleWidget(class_name)
+XClassSoundsDatabaseAnalyze::XClassSoundsDatabaseAnalyze(QString class_name)
+    :XClassWidget(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundsDatabaseAnalyze::~XModuleSoundsDatabaseAnalyze()
+XClassSoundsDatabaseAnalyze::~XClassSoundsDatabaseAnalyze()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::start() {
+void XClassSoundsDatabaseAnalyze::start() {
     //Analyze
     analyze_.clear();
 
@@ -57,7 +57,7 @@ void XModuleSoundsDatabaseAnalyze::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::update() {
+void XClassSoundsDatabaseAnalyze::update() {
     //buttons
     if (geti_join_convert()) {
         join_wavs(gets_join_input_folder(), gets_join_output_folder());
@@ -85,12 +85,12 @@ void XModuleSoundsDatabaseAnalyze::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::stop() {
+void XClassSoundsDatabaseAnalyze::stop() {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString output_folder) {
+void XClassSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString output_folder) {
     xc_assert(!input_folder.isEmpty(), "Input folder is empty");
     xc_assert(!output_folder.isEmpty(), "Output folder is empty");
 
@@ -151,7 +151,7 @@ void XModuleSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString outpu
 
 //---------------------------------------------------------------------
 //returns number of used parts
-int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabase &database) {
+int XClassSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabase &database) {
     xc_audio::WavFile wav;
 
     //The code of loading WAV is based on the "Spectrum" Qt example
@@ -229,7 +229,7 @@ int XModuleSoundsDatabaseAnalyze::join_wav(QString wav_file, SoundSamplesDatabas
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::load_database() {
+void XClassSoundsDatabaseAnalyze::load_database() {
     // limiting count
     int limit_count = -1;
     if (geti_db_limit()) {
@@ -246,7 +246,7 @@ void XModuleSoundsDatabaseAnalyze::load_database() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::analyze_compute() {
+void XClassSoundsDatabaseAnalyze::analyze_compute() {
     selected_ = -1;
 
     switch (gete_an_method()) {
@@ -257,25 +257,25 @@ void XModuleSoundsDatabaseAnalyze::analyze_compute() {
         analyze_.method_tsne(db_);
         break;
     default:
-        xc_exception(QString("XModuleSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));
+        xc_exception(QString("XClassSoundsDatabaseAnalyze::analyze_reload - unknown method %1").arg(gete_an_method()));
     }
 
     redraw();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::analyze_load() {
+void XClassSoundsDatabaseAnalyze::analyze_load() {
     analyze_.load_from_file(gets_an_file(), db_.size());
     redraw();
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::analyze_save() {
+void XClassSoundsDatabaseAnalyze::analyze_save() {
     analyze_.save_to_file(xc_dialog_save_as("Save analyze results", "*.txt"));
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundsDatabaseAnalyze::draw(QPainter &painter, int outw, int outh) {
+void XClassSoundsDatabaseAnalyze::draw(QPainter &painter, int outw, int outh) {
 
     //Antialiasing
     painter.setRenderHint(QPainter::Antialiasing);
@@ -295,7 +295,7 @@ void XModuleSoundsDatabaseAnalyze::draw(QPainter &painter, int outw, int outh) {
 
 //---------------------------------------------------------------------
 //click mouse to play the sound
-void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button*/) {
+void XClassSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button*/) {
     //xc_console_append(QString("mouse %1 %2").arg(pos.x).arg(pos.y));
     int id = analyze_.find_by_mouse(vec2(float(pos.x)/w_, float(pos.y)/h_));
     if (id >= 0) {
@@ -311,7 +311,7 @@ void XModuleSoundsDatabaseAnalyze::mouse_pressed(int2 pos, XMouseButton /*button
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSoundsDatabaseAnalyze::on_sound_buffer_add(int /*sample_rate*/, int channels, int samples, float *data) {
+void XClassSoundsDatabaseAnalyze::on_sound_buffer_add(int /*sample_rate*/, int channels, int samples, float *data) {
     auto writer = player_.write(); //create locking object - will be unlocked when reader will be destroyed
     auto &player = writer.data();
     float vol = player.volume / 32768.0; //16bit->float

@@ -12,11 +12,11 @@
 
 //-------------------------------------------------------------------
 
-class XModuleMotionDetectorRouter: public XClass
+class XClassMotionDetectorRouter: public XClass
 {
 public:
-    XModuleMotionDetectorRouter(QString class_name);
-    virtual ~XModuleMotionDetectorRouter();
+    XClassMotionDetectorRouter(QString class_name);
+    virtual ~XClassMotionDetectorRouter();
 #include "auto.h"
 
 protected:

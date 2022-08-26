@@ -281,17 +281,17 @@ void XModule::bang() {        //Bang button
 }
 
 //---------------------------------------------------------------------
-// Drawing to painter - for XModuleWidget and for module accepting 'draw' call from RenderArea
+// Drawing to painter - for XClassWidget and for module accepting 'draw' call from RenderArea
 void XModule::draw(QPainter &painter, int w, int h) {
     xmodule()->draw(painter, w, h);
 }
 
 //---------------------------------------------------------------------
 //исключение "записывается" в err
-void XModule::call_function_no_exception(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
+void XModule::call_function_no_exception(XCallType function, XCallError &err, XObject *input, XObject *output) {
     //проверка, что модуль "понимает" запрошенную функцию
     if (!description().accept_calls.accepts(function)) {
-        err = ErrorInfo(QString("Function '%1' can't be processed by module '%2' "
+        err = XCallError(QString("Function '%1' can't be processed by module '%2' "
                                 "because it's unregistered in its accepted calls")
                         .arg(xcalltype_to_string_for_user(function)).arg(name()));
         return;
@@ -302,7 +302,7 @@ void XModule::call_function_no_exception(XCallType function, ErrorInfo &err, XOb
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
 void XModule::call(XCallType function, XObject *input, XObject *output) {
-    ErrorInfo err;
+    XCallError err;
     call_function_no_exception(function, err, input, output);
     err.throw_error();
 }

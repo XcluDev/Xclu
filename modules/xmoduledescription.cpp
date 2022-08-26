@@ -21,7 +21,7 @@ XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
 //---------------------------------------------------------------------
 bool XModuleRegisteredCalls::accepts(XCallType function) {
     if (any_) return true;
-    if (function == XCallTypeNone) return true;
+    if (function == XCallType::None) return true;
     return functions_.contains(function);
 }
 

@@ -1,4 +1,4 @@
-#include "xmoduleprintconsole.h"
+#include "xclassprintconsole.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -8,25 +8,25 @@
 REGISTER_XCLASS(PrintConsole)
 
 //---------------------------------------------------------------------
-XModulePrintConsole::XModulePrintConsole(QString class_name)
+XClassPrintConsole::XClassPrintConsole(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModulePrintConsole::~XModulePrintConsole()
+XClassPrintConsole::~XClassPrintConsole()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::start() {
+void XClassPrintConsole::start() {
 
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::update() {
+void XClassPrintConsole::update() {
     QString s;
     if (geti_add_title()) {
         s.append(gets_title());
@@ -44,7 +44,7 @@ void XModulePrintConsole::update() {
 }
 
 //---------------------------------------------------------------------
-void XModulePrintConsole::stop() {
+void XClassPrintConsole::stop() {
 
 }
 

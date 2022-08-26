@@ -6,13 +6,6 @@
 //лучше сделать через maps - для скорости работы
 
 //---------------------------------------------------------------------
-void ErrorInfo::throw_error() {    //если есть ошибка - сгенерировать исключение
-    if (is_error()) {
-        xc_exception(error_text());
-    }
-}
-
-//---------------------------------------------------------------------
 QString Type_to_string(int i, int N, const QString array[]) {
     xc_assert(i >= 0 && i < N, QString("Can't convert type index %1 to string %2")
                                          .arg(i).arg(array[0] + "," + array[1] + ",..."));
@@ -108,7 +101,7 @@ XObjectType string_to_object_type(QString type_str) {
 }
 
 //---------------------------------------------------------------------
-const QString XCallTypeNames[XCallTypeN] =
+const QString XCallTypeNames[XCallType::N] =
 {
     "none",
     "custom",
@@ -119,17 +112,17 @@ const QString XCallTypeNames[XCallTypeN] =
 
 
 QString xcalltype_to_string(XCallType type) {
-    return Type_to_string(int(type), XCallTypeN, XCallTypeNames);
+    return Type_to_string(int(type), XCallType::N, XCallTypeNames);
 }
 
 //not generates exception
 QString xcalltype_to_string_for_user(XCallType type) {
-    if (type < 0 || type >= XCallTypeN) return QString("unknown:%1").arg(type);
+    if (type < 0 || type >= XCallType::N) return QString("unknown:%1").arg(type);
     return xcalltype_to_string(type);
 }
 
 XCallType xstring_to_calltype(QString type_str) {
-    return XCallType(string_to_Type(type_str, XCallTypeN, XCallTypeNames));
+    return XCallType(string_to_Type(type_str, XCallType::N, XCallTypeNames));
 }
 
 
@@ -173,6 +166,34 @@ const QString ModuleExecuteStageNames[ModuleExecuteStageN] =
 
 QString ModuleExecuteStage_to_string(ModuleExecuteStage stage) {
     return Type_to_string(int(stage), ModuleExecuteStageN, ModuleExecuteStageNames);
+}
+
+//---------------------------------------------------------------------
+void XCallError::clear() {
+    is_error_ = false;
+    error_text_.clear();
+}
+
+XCallError::XCallError(QString text) {
+    setup(text);
+}
+void XCallError::setup(QString text) {
+    is_error_ = true;
+    error_text_ = text;
+}
+//добавить к тексту ошибки предысторию с "\n" - полезно при передаче ошибок между уровнями, дописывая подробности
+XCallError::XCallError(QString prepend_text, const XCallError &err) {
+    prepend(prepend_text, err);
+}
+void XCallError::prepend(QString prepend_text, const XCallError &err) {
+    is_error_ = true;
+    error_text_ = prepend_text + "\n" + err.error_text();
+}
+
+void XCallError::throw_error() {    //если есть ошибка - сгенерировать исключение
+    if (is_error()) {
+        xc_exception(error_text());
+    }
 }
 
 //---------------------------------------------------------------------

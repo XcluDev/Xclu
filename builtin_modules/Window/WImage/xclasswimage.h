@@ -17,7 +17,7 @@ class QLabel;
 
 
 //Данные, которые защищаются с помощью mutex
-struct XModuleWImageData: public XcluProtectedData
+struct XClassWImageData: public XcluProtectedData
 {
     //int gui_changed = 0;
 
@@ -28,12 +28,12 @@ struct XModuleWImageData: public XcluProtectedData
 };
 
 //Модуль
-class XModuleWImage: public XClass
+class XClassWImage: public XClass
 {
     Q_OBJECT
 public:
-    XModuleWImage(QString class_name);
-    virtual ~XModuleWImage();
+    XClassWImage(QString class_name);
+    virtual ~XClassWImage();
 protected:
 #include "auto.h"
 
@@ -56,7 +56,7 @@ protected:
     QWidget *widget_ = nullptr; //весь виджет
     QLabel *image_label_ = nullptr;   //изображение
 
-    XModuleWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем
+    XClassWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем
 
     void update_all(bool force);
     void update_value();

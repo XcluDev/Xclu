@@ -85,7 +85,7 @@ public:
     //- XModule must specify what it can receive:
     //  module_accept_calls=sound_buffer_add,...  * - means any
 
-    void call(XCallType function, ErrorInfo &err, void* data, QString params = "");
+    void call(XCallData& call);
 
     //------------------------------------------------------------------------
     //General (Control) page
@@ -152,7 +152,7 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void on_custom_call(void* data, QString params);
+    virtual void on_custom_call(XCallData& call);
 
     //Specific call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it
@@ -192,11 +192,11 @@ private:
 
     // Concrete call handlers
     // "create_widget" call, returns QWidget pointer
-    void on_create_widget_internal(XObject *input, XObject *output);
+    void on_create_widget_internal(XCallData& call);
     // "sound_buffer_add" call
-    void on_sound_buffer_add_internal(XObject *input, XObject *output);
+    void on_sound_buffer_add_internal(XCallData& call);
     // "sound_buffer_received" call
-    void on_sound_buffer_received_internal(XObject *input, XObject *output);
+    void on_sound_buffer_received_internal(XCallData& call);
 
 
 };

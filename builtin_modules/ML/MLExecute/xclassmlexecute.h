@@ -10,11 +10,11 @@ Universal ML train and running operations using bat/bash scripts, provided by us
 #include "xclass.h"
 #include <QProcess>
 
-class XModuleMLExecute: public XClass
+class XClassMLExecute: public XClass
 {
 public:
-    XModuleMLExecute(QString class_name);
-    virtual ~XModuleMLExecute();
+    XClassMLExecute(QString class_name);
+    virtual ~XClassMLExecute();
 protected:
 #include "auto.h"
 

@@ -12,11 +12,11 @@
 //Вызовы исключений:
 //Исключение при парсинге и прочих внутренних операциях
 void xc_exception(QString message) {
-    xc_exception(ErrorInfo(message));
+    xc_exception(XCallError(message));
 }
 
 //---------------------------------------------------------------------
-void xc_exception(ErrorInfo err) {
+void xc_exception(XCallError err) {
     qDebug() << "xc_exception:" << err.error_text();
     throw XException(err);
 }

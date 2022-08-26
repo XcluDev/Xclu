@@ -65,12 +65,12 @@ Also YOLO will deleting _images.txt before processing - for sync.
 
   */
 
-class XModuleMadRobot: public XModuleWidget
+class XClassMadRobot: public XClassWidget
 {
     Q_OBJECT
 public:
-    XModuleMadRobot(QString class_name);
-    virtual ~XModuleMadRobot();
+    XClassMadRobot(QString class_name);
+    virtual ~XClassMadRobot();
 
 protected:
 #include "auto.h"

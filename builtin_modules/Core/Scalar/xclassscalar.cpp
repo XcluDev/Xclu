@@ -4,7 +4,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobject.h"
 
 #include "xcluspinbox.h"
@@ -160,7 +160,7 @@ void XClassScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        XModule *module = xc_find_module(link.module);
+        XClass *module = xc_find_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }

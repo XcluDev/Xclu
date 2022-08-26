@@ -6,11 +6,11 @@
 #include "sdk_h.h"
 #include "xclass.h"
 
-class XModuleFileCreate: public XClass
+class XClassFileCreate: public XClass
 {
 public:
-    XModuleFileCreate(QString class_name);
-    virtual ~XModuleFileCreate();
+    XClassFileCreate(QString class_name);
+    virtual ~XClassFileCreate();
 protected:
 #include "auto.h"
 

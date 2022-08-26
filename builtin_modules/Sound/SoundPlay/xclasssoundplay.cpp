@@ -1,4 +1,4 @@
-#include "xmodulesoundplay.h"
+#include "xclasssoundplay.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
@@ -9,26 +9,26 @@
 REGISTER_XCLASS(SoundPlay)
 
 //---------------------------------------------------------------------
-XModuleSoundPlay::XModuleSoundPlay(QString class_name)
+XClassSoundPlay::XClassSoundPlay(QString class_name)
     :XClass(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundPlay::~XModuleSoundPlay()
+XClassSoundPlay::~XClassSoundPlay()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::start() {
+void XClassSoundPlay::start() {
     stop_fading_ = false;
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::update() {
+void XClassSoundPlay::update() {
     if (geti_play_button()) {
         play_sound();
     }
@@ -44,29 +44,29 @@ void XModuleSoundPlay::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::stop() {
+void XClassSoundPlay::stop() {
     player_.reset();
     stop_fading_ = false;
 
 }
 
 //---------------------------------------------------------------------
-//void XModuleTimerm::on_button_pressed(QString button_id) {
+//void XClassTimerm::on_button_pressed(QString button_id) {
 //}
 
 
 //---------------------------------------------------------------------
-int XModuleSoundPlay::media_volume(float v) {
+int XClassSoundPlay::media_volume(float v) {
     return int(v * 100);
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::play_sound() {
+void XClassSoundPlay::play_sound() {
     QString file_name = xc_absolute_path_from_project(gets_file_name());
 
     QFile file(file_name);
-    xc_assert(xc_file_exists(file_name), "XModuleSoundPlay - file not exists: '" + file_name +"'");
+    xc_assert(xc_file_exists(file_name), "XClassSoundPlay - file not exists: '" + file_name +"'");
     //QSound::play(file_name);
 
     player_.reset(new QMediaPlayer);
@@ -82,7 +82,7 @@ void XModuleSoundPlay::play_sound() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::update_loop() {
+void XClassSoundPlay::update_loop() {
     if (player_.data()) {
         if (playing_ && gete_loop_mode_file() == loop_mode_file_Loop) {
             if (player_->state() == QMediaPlayer::StoppedState) {
@@ -94,7 +94,7 @@ void XModuleSoundPlay::update_loop() {
 
 //---------------------------------------------------------------------
 //stop with fading
-void XModuleSoundPlay::stop_fade() {
+void XClassSoundPlay::stop_fade() {
     if (!stop_fading_) {
         float fade = getf_fade_out_sec();
         if (fade <= 0) {
@@ -108,7 +108,7 @@ void XModuleSoundPlay::stop_fade() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundPlay::update_fade() {
+void XClassSoundPlay::update_fade() {
     if (player_.data()) {
         if (stop_fading_) {
             float time = xc_elapsed_time_sec();
@@ -125,7 +125,7 @@ void XModuleSoundPlay::update_fade() {
 
 //---------------------------------------------------------------------
 //immediate stop
-void XModuleSoundPlay::stop_sound() {
+void XClassSoundPlay::stop_sound() {
     if (player_.data()) {
         player_->stop();
     }

@@ -17,7 +17,7 @@ class XModuleRegisteredCalls {
 public:
     XModuleRegisteredCalls() {}
     XModuleRegisteredCalls(QString line);
-    bool accepts(XCallType function);     //разрешен ли вызов функции. Note: On `XCallTypeNone` returns true.
+    bool accepts(XCallType function);     //разрешен ли вызов функции. Note: On `XCallType::None` returns true.
     bool accepts_by_filter(const QString &filter);  //returns true if 'filter' is empty or contained in any of list
     QString to_string_gui();        //конвертация в строку для выдачи в text
 protected:

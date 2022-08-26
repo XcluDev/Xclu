@@ -12,20 +12,20 @@
 REGISTER_XCLASS(SoundSeaOfWords)
 
 //---------------------------------------------------------------------
-XModuleSoundSeaOfWords::XModuleSoundSeaOfWords(QString class_name)
-    :XModuleWidget(class_name)
+XClassSoundSeaOfWords::XClassSoundSeaOfWords(QString class_name)
+    :XClassWidget(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleSoundSeaOfWords::~XModuleSoundSeaOfWords()
+XClassSoundSeaOfWords::~XClassSoundSeaOfWords()
 {
 
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSeaOfWords::start() {
+void XClassSoundSeaOfWords::start() {
 
     //play sound
     //player_.write().data().clear();
@@ -33,7 +33,7 @@ void XModuleSoundSeaOfWords::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSeaOfWords::update() {
+void XClassSoundSeaOfWords::update() {
     //buttons
 
     //changes
@@ -45,13 +45,13 @@ void XModuleSoundSeaOfWords::update() {
 }
 
 //---------------------------------------------------------------------
-void XModuleSoundSeaOfWords::stop() {
+void XClassSoundSeaOfWords::stop() {
 
 }
 
 
 //---------------------------------------------------------------------
-void XModuleSoundSeaOfWords::draw(QPainter &painter, int outw, int outh) {
+void XClassSoundSeaOfWords::draw(QPainter &painter, int outw, int outh) {
 
     //Antialiasing
     painter.setRenderHint(QPainter::Antialiasing);
@@ -68,7 +68,7 @@ void XModuleSoundSeaOfWords::draw(QPainter &painter, int outw, int outh) {
 
 //---------------------------------------------------------------------
 //click mouse to play the sound
-void XModuleSoundSeaOfWords::mouse_pressed(int2 pos, XMouseButton /*button*/) {
+void XClassSoundSeaOfWords::mouse_pressed(int2 pos, XMouseButton /*button*/) {
     //xc_console_append(QString("mouse %1 %2").arg(pos.x).arg(pos.y));
     //int id = analyze_.find_by_mouse(vec2(float(pos.x)/w_, float(pos.y)/h_));
     //if (id >= 0) {
@@ -84,7 +84,7 @@ void XModuleSoundSeaOfWords::mouse_pressed(int2 pos, XMouseButton /*button*/) {
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
-void XModuleSoundSeaOfWords::on_sound_buffer_add(int /*sample_rate*/, int channels, int samples, float *data) {
+void XClassSoundSeaOfWords::on_sound_buffer_add(int /*sample_rate*/, int channels, int samples, float *data) {
     auto writer = player_.write(); //create locking object - will be unlocked when reader will be destroyed
     auto &player = writer.data();
     /*float vol = player.volume / 32768.0; //16bit->float

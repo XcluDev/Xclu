@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xobjectimage.h"
 
 
@@ -11,21 +11,21 @@
 REGISTER_XCLASS(MadRobot)
 
 //---------------------------------------------------------------------
-XModuleMadRobot::XModuleMadRobot(QString class_name)
-    :XModuleWidget(class_name)
+XClassMadRobot::XClassMadRobot(QString class_name)
+    :XClassWidget(class_name)
 {
 
 }
 
 //---------------------------------------------------------------------
-XModuleMadRobot::~XModuleMadRobot()
+XClassMadRobot::~XClassMadRobot()
 {
 
 }
 
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::start() {
+void XClassMadRobot::start() {
     webcam_.clear();
 
     //link yolo image to GUI
@@ -42,13 +42,13 @@ void XModuleMadRobot::start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::set_state(QString state) {
+void XClassMadRobot::set_state(QString state) {
     state_ = state;
     xc_console_append(state_);
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::update() {
+void XClassMadRobot::update() {
     //Buttons
     if (geti_btn_mind_start()) mind_start();
     if (geti_btn_mind_stop()) mind_stop();
@@ -90,43 +90,43 @@ void XModuleMadRobot::update() {
 
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_pickup() {
+void XClassMadRobot::move_pickup() {
     set_state("pick up");
     xc_bang(gets_ard_pick_up());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_forward() {
+void XClassMadRobot::move_forward() {
     set_state("forward");
     xc_bang(gets_ard_forw());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_backward() {
+void XClassMadRobot::move_backward() {
     set_state("backward");
     xc_bang(gets_ard_back());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_left() {
+void XClassMadRobot::move_left() {
     set_state("left");
     xc_bang(gets_ard_left());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_right() {
+void XClassMadRobot::move_right() {
     set_state("right");
     xc_bang(gets_ard_right());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::move_stop() {
+void XClassMadRobot::move_stop() {
     set_state("stop");
     xc_bang(gets_ard_stop());
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::parse_yolo() {
+void XClassMadRobot::parse_yolo() {
 
     /*
     0 0.2100 0.3200 0.0895 0.0971
@@ -179,7 +179,7 @@ void XModuleMadRobot::parse_yolo() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::mind_start() {
+void XClassMadRobot::mind_start() {
     xc_console_append("mind_start");
     mind_on_ = true;
 
@@ -195,14 +195,14 @@ void XModuleMadRobot::mind_start() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::mind_stop() {
+void XClassMadRobot::mind_stop() {
     xc_console_append("mind_stop");
     mind_on_ = false;
 }
 
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::mind_update() {
+void XClassMadRobot::mind_update() {
     if (!mind_on_) return;
 
     //search target
@@ -357,11 +357,11 @@ void XModuleMadRobot::mind_update() {
 
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::stop() {
+void XClassMadRobot::stop() {
 }
 
 //---------------------------------------------------------------------
-void XModuleMadRobot::draw(QPainter &painter, int outw, int outh) {
+void XClassMadRobot::draw(QPainter &painter, int outw, int outh) {
 
     //Antialiasing
     painter.setRenderHint(QPainter::Antialiasing);
