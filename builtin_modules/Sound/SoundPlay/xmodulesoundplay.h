@@ -4,7 +4,7 @@
 //SoundPlay implementation
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include <QMediaPlayer>
 #include <QScopedPointer>
 

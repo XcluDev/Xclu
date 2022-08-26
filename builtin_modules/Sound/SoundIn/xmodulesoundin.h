@@ -11,7 +11,7 @@
 #include <QScopedPointer>
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xarray.h"
 #include "xobjectsoundformat.h"
 #include "xprotecteddata.h"

@@ -10,7 +10,7 @@
 //------------------------------------------------------------------
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;

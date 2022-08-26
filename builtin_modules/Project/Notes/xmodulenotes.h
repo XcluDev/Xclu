@@ -4,7 +4,7 @@
 //Notes module.
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class XModuleNotes: public XModule
 {

@@ -1,6 +1,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
-#include "xmodule.h"
+#include "xclass.h"
 #include "moduleinterface.h"
 #include "incl_cpp.h"
 #include "xguieditor.h"

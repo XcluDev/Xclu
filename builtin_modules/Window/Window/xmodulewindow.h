@@ -8,7 +8,7 @@
 #include <QStack>
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xprotecteddata.h"
 #include "xclu_parse_tree.h"
 

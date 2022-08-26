@@ -10,7 +10,7 @@
 #include <QThread>
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 struct WatchdogThreadParams {
     int wait_sec = 10;

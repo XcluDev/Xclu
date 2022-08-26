@@ -220,9 +220,9 @@ SOURCES += \
     modules/exportinterface.cpp \
     modules/moduledescription.cpp \
     modules/moduleseed.cpp \
+    modules/xclass.cpp \
     modules/xclassbase.cpp \
     modules/xintermodulecalls.cpp \
-    modules/xmodule.cpp \
     modules/xmodulevisualwidget.cpp \
     modules/xmodulewidget.cpp \
     sdk/audio/xc_audio.cpp \
@@ -330,9 +330,9 @@ HEADERS += \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
     modules/registrarxmodule.h \
+    modules/xclass.h \
     modules/xclassbase.h \
     modules/xintermodulecalls.h \
-    modules/xmodule.h \
     modules/xmodulevisualwidget.h \
     modules/xmodulewidget.h \
     sdk/audio/xc_audio.h \

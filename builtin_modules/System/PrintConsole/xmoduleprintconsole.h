@@ -4,7 +4,7 @@
 //PrintConsole implementation
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class XModulePrintConsole: public XModule
 {

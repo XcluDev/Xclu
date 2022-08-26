@@ -4,7 +4,7 @@
 //ScanFolder implementation
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class XModuleScanFolder: public XModule
 {

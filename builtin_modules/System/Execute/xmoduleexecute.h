@@ -36,7 +36,7 @@ https://data2.lact.ru/f1/s/0/299/basic/1605/976/vasev-4.doc
 
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include <QProcess>
 #include "xraster.h"
 

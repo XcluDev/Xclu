@@ -5,7 +5,7 @@
 //For [A|B|C[D|E]] input it will generate randomly A,B,CD,CE.
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class XModuleTextVariation: public XModule
 {

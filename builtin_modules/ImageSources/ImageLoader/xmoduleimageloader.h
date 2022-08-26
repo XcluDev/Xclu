@@ -4,7 +4,7 @@
 //ImageLoader - load imges from a file and a folder
 
 #include <QObject>
-#include "xmodule.h"
+#include "xclass.h"
 #include "sdk_h.h"
 
 

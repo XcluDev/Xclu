@@ -7,7 +7,7 @@
 #include <QWindow>
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include "xprotecteddata.h"
 
 

@@ -7,7 +7,7 @@ Universal ML train and running operations using bat/bash scripts, provided by us
 
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 #include <QProcess>
 
 class XModuleMLExecute: public XModule

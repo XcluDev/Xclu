@@ -4,7 +4,7 @@
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
 #include "sdk_h.h"
-#include "xmodule.h"
+#include "xclass.h"
 
 class XModuleTest: public XModule
 {
