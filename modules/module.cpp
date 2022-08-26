@@ -296,12 +296,12 @@ void Module::call_function_no_exception(XCallType function, ErrorInfo &err, XObj
                         .arg(xcalltype_to_string_for_user(function)).arg(name()));
         return;
     }
-    xmodule()->call_function(function, err, input, output);
+    xmodule()->call(function, err, input, output);
 }
 
 //---------------------------------------------------------------------
 //в случае исключения - оно выдастся
-void Module::call_function(XCallType function, XObject *input, XObject *output) {
+void Module::call(XCallType function, XObject *input, XObject *output) {
     ErrorInfo err;
     call_function_no_exception(function, err, input, output);
     err.throw_error();

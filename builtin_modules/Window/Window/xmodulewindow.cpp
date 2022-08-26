@@ -487,7 +487,7 @@ QWidget *XModuleWindow::request_widget(QString module_name) {
 
     XObject output;
 
-    module->call_function(XCallTypeCreateWidget, &input, &output);
+    module->call(XCallTypeCreateWidget, &input, &output);
 
     //считываем указатель на виджет
     QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
@@ -524,7 +524,7 @@ void XModuleWindow::reset_widget(QString module_name) {
 
     XObject output;
 
-    module->call_function(XCallTypeCreateWidget, &input, &output);
+    module->call(XCallTypeCreateWidget, &input, &output);
 }
 
 //---------------------------------------------------------------------

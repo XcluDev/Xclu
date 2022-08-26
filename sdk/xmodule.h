@@ -77,18 +77,15 @@ public:
     virtual void draw(QPainter &painter, int w, int h);
 
     //------------------------------------------------------------------------
-    //функция вызова между модулями, вызывает on_call
-    //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-    //function - имя функции (действие, которое следует выполнить)
-    //err - информация об ошибках.
-    //При call-вызовах модули не должны генерировать исключения, а перехватывать их и писать в err.
-    //Поэтому call перехватывает их, но реализация в on_call может генерировать исключение
-    //То, что модуль может запрашивать у других модулей, определяется свойством
-    //module_send_calls=sound_buffer_add    и через запятую остальное. * - значит без ограничений
-    //То, что модуль может отдавать другим модулям, определяется свойством
-    //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
+    //Intermodule calling, calls on_custom_call of the recepient
+    //can be called from other threads, so modules must be ready to it
+    //- Modules shouldn't throw exeptions here, but write them to err.
+    //- Module must specify what it can send other modules:
+    //  module_send_calls=sound_buffer_add,...,   * - means any
+    //- Module must specify what it can receive:
+    //  module_accept_calls=sound_buffer_add,...  * - means any
 
-    void call_function(XCallType function, ErrorInfo &err, XObject *input, XObject *output);
+    void call(XCallType function, ErrorInfo &err, void* data, QString params = "");
 
     //------------------------------------------------------------------------
     //General (Control) page
@@ -155,7 +152,7 @@ protected:
     //То, что модуль может отдавать другим модулям, определяется свойством
     //module_accept_calls=sound_buffer_add   и через запятую остальное. * - значит без ограничений
 
-    virtual void on_custom_call(XObject *input, XObject *output);
+    virtual void on_custom_call(void* data, QString params);
 
     //Specific call handlers
     //`create_widget` call implementation, creates QWidget and returns pointer on it

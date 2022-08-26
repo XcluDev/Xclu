@@ -10,9 +10,9 @@ QVector<Module *> XIntermodule::find_modules_by_filter(XCallType accept_calls_fi
 }
 
 //---------------------------------------------------------------------
-void XIntermodule::call(Module *module, XCallType function, XObject *input, XObject *output) {
-    xc_assert(module, "XIntermodule::call failed, module is nullptr");
-    module->call_function(function, input, output);
-}
+// void XIntermodule::call(Module *module, XCallType function, XObject *input, XObject *output) {
+//    xc_assert(module, "XIntermodule::call failed, module is nullptr");
+//    module->call(function, input, output);
+// }
 
 //---------------------------------------------------------------------

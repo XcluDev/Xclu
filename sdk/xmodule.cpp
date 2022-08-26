@@ -153,7 +153,7 @@ void XModule::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, XObject *output) {
+void XModule::call(XCallType function, ErrorInfo &err, void* data, QString params) {
     try {
         if (err.is_error()) return;
 
@@ -162,7 +162,7 @@ void XModule::call_function(XCallType function, ErrorInfo &err, XObject *input, 
         case XCallTypeNone: xc_exception("Function type is not specified");
             break;
         //process universal function
-        case XCallTypeCustom: on_custom_call(input, output);
+        case XCallTypeCustom: on_custom_call(data, params);
             break;
         case XCallTypeCreateWidget: on_create_widget_internal(input, output);
             break;
@@ -245,7 +245,7 @@ void XModule::on_sound_buffer_received_internal(XObject *input, XObject * /*outp
 }
 
 //---------------------------------------------------------------------
-void XModule::on_custom_call(XObject * /*input*/, XObject * /*output*/) {
+void XModule::on_custom_call(void* /*data*/, QString /*params*/) {
     xc_exception("Module '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }
