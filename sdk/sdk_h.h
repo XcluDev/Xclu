@@ -9,6 +9,6 @@
 #include "xc_files.h"
 #include "xc_sysutils.h"
 #include "xc_paths.h"
-#include "xclass.h"
+#include "xclassbase.h"
 
 #endif // SDK_H_H

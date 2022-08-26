@@ -1,9 +1,9 @@
-#ifndef XCLASS_H
-#define XCLASS_H
+#ifndef XCLASSBASE_H
+#define XCLASSBASE_H
 
-//XClass - a base class for XModule.
+//XClassBase - a base class for XModule.
 //It provides access to Module (that is UI values) and for runtime information
-//So XClass is not module itself, but a helper class.
+//So XClassBase is not executivemodule itself, but a helper class.
 /* Usage: you need to specify Module in constructor or later, by calling set_module(module) or set_module(this):
 
   ...
@@ -18,13 +18,13 @@ void CosmoOsc::setup(Module *module, int index) {
 
 class Module;
 
-class XClass
+class XClassBase
 {
 public:
     //Constructor requires providing underlying module pointer
     //for accessing its GUI values
-    XClass() {}
-    XClass(Module *module);
+    XClassBase() {}
+    XClassBase(Module *module);
 
     //----------------------------------------------
     //Underlying module
@@ -99,4 +99,4 @@ protected:
 
 };
 
-#endif // XCLASS_H
+#endif // XCLASSBASE_H

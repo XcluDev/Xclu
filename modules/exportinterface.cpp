@@ -20,7 +20,7 @@ ExportInterface::ExportInterface()
 
 void ExportInterface::export_to_h_file(ModuleInterface *interf, QString folder) {
     //interf->description().class_name can be not set, so deduce it from folder name
-    QString class_name = "XClass" + QFileInfo(folder).baseName();
+    QString class_name = "XClassBase" + QFileInfo(folder).baseName();
 
     QString file_name = folder + "/" + "auto.h"; //class_name + ".h";
 
