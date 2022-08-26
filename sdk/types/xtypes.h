@@ -68,6 +68,14 @@ struct rgb_ {
     static float grayf(T r, T g, T b) {
         return (float(r)+float(g)+float(b))/3;
     }
+
+    // TODO implement saturation for uint8, int8, uint16, int16, uint32, int32
+    rgb_<T> operator+(const rgb_<T>& vec) const;
+    rgb_<T>& operator+=(const rgb_<T>& vec);
+    rgb_<T> operator-(const rgb_<T>& vec) const;
+    rgb_<T>& operator-=(const rgb_<T>& vec);
+    rgb_<T> operator*(const rgb_<T>& vec) const;
+    rgb_<T>& operator*=(const rgb_<T>& vec);
 };
 
 template<typename T>
@@ -87,6 +95,13 @@ struct rgba_ {
     void set(T val, T a) {
         v[0] = v[1] = v[2] = v[3] = val; v[4] = a;
     }
+    // TODO implement saturation for uint8, int8, uint16, int16, uint32, int32
+    rgba_<T> operator+(const rgba_<T>& vec) const;
+    rgba_<T>& operator+=(const rgba_<T>& vec);
+    rgba_<T> operator-(const rgba_<T>& vec) const;
+    rgba_<T>& operator-=(const rgba_<T>& vec);
+    rgba_<T> operator*(const rgba_<T>& vec) const;
+    rgba_<T>& operator*=(const rgba_<T>& vec);
 };
 
 typedef rgb_<uint8> rgb_u8;

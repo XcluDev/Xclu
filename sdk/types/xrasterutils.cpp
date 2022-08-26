@@ -7,8 +7,11 @@
 #include <QPainter>
 
 //---------------------------------------------------------------------
-void XRasterUtils::convert(const XRaster& source, XRaster& destination) {
-    raster.allocate(raster_rgb.w, raster_rgb.h);
+void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId destination_type) {
+    xs_assert((source.type_id == XTypeId::rgb_u8 && destination_type == XTypeId::uint8)
+              || (source.type_id == XTypeId::uint8 && destination_type == XTypeId::rgb_u8),
+              "XRasterUtils::convert - unsupported conversion types");
+    destination.allocate(source.w, source.h, destination_type);
     auto *raster_data = raster.typed_data_pointer();
     auto *raster_rgb_data = raster_rgb.typed_data_pointer();
     for (int i=0; i<raster.w*raster.h; i++) {
@@ -16,7 +19,6 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination) {
     }
 }
 
-//---------------------------------------------------------------------
 void XRasterUtils::convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
     raster_rgb.allocate(raster.w, raster.h);
     auto *raster_data = raster.typed_data_pointer();
@@ -27,7 +29,7 @@ void XRasterUtils::convert(XRaster_u8 &raster, XRaster_u8c3 &raster_rgb) {
 }
 
 //---------------------------------------------------------------------
-void XRasterUtils::convert(QImage qimage, XRaster_u8 &raster) {
+void XRasterUtils::convert(QImage qimage, XRaster &raster, RGBA_Bytes_Order order) {
     int w = qimage.size().width();
     int h = qimage.size().height();
 
@@ -53,8 +55,6 @@ void XRasterUtils::convert(QImage qimage, XRaster_u8 &raster) {
     }
 }
 
-
-//---------------------------------------------------------------------
 void XRasterUtils::convert(QImage qimage, XRaster_u8c3 &raster) {
     int w = qimage.size().width();
     int h = qimage.size().height();
@@ -81,7 +81,6 @@ void XRasterUtils::convert(QImage qimage, XRaster_u8c3 &raster) {
 
 }
 
-//---------------------------------------------------------------------
 void XRasterUtils::convert(QImage qimage, XRaster_u8c4 &raster, RGBA_Bytes_Order order) {
     int w = qimage.size().width();
     int h = qimage.size().height();
@@ -126,7 +125,7 @@ void XRasterUtils::convert(QImage qimage, XRaster_u8c4 &raster, RGBA_Bytes_Order
 
 
 //---------------------------------------------------------------------
-void XRasterUtils::convert(XRaster* raster, QImage &qimage) {
+void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
     xc_assert(raster, "XRasterUtils::convert - empty raster");
     int w = raster->w;
     int h = raster->h;
@@ -176,7 +175,7 @@ void XRasterUtils::convert(XRaster* raster, QImage &qimage) {
 }
 
 //---------------------------------------------------------------------
-QImage XRasterUtils::link_qimage(const XRaster* raster) {
+QImage XRasterUtils::link_qimage(const XRaster& raster) {
     xc_assert(raster, "XRasterUtils::link - null raster");
     QImage::Format format = QImage::Format_Invalid;
     switch (raster->type_id)
@@ -194,7 +193,7 @@ QImage XRasterUtils::link_qimage(const XRaster* raster) {
 }
 
 //---------------------------------------------------------------------
-void XRasterUtils::load(QString file_name, XRaster_u8 &raster) {
+void XRasterUtils::load(QString file_name, XRaster &raster) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
@@ -208,7 +207,7 @@ void XRasterUtils::load(QString file_name, XRaster_u8c3 &raster) {
 }
 
 //-----------------------------------------------------------------------------------
-void XRasterUtils::save(XRaster* raster, QString file_name, QString file_format, int quality) {
+void XRasterUtils::save(XRaster& raster, QString file_name, QString file_format, int quality) {
     xc_assert(raster, "XRasterUtils::save - empty raster");
     xc_assert(!raster->is_empty(), "Error saving image, because raster is empty: '" + file_name + "' ");
     QImage qimage = link_qimage(raster);
@@ -217,43 +216,43 @@ void XRasterUtils::save(XRaster* raster, QString file_name, QString file_format,
 }
 
 //-----------------------------------------------------------------------------------
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, int x, int y, int w, int h) {
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y, int w, int h) {
     draw(painter, raster, QRect(x, y, w, h));
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, int x, int y) {
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y) {
     draw(painter, raster, QPoint(x, y));
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, int x, int y, int sx, int sy, int sw, int sh) {
-    painter->drawImage(x, y, link_qimage(raster), sx, sy, sw, sh);
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y, int sx, int sy, int sw, int sh) {
+    painter.drawImage(x, y, link_qimage(raster), sx, sy, sw, sh);
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRectF &r) {
-    painter->drawImage(r, link_qimage(raster));
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRectF &r) {
+    painter.drawImage(r, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRectF &targetRect, const QRectF &sourceRect) {
-    painter->drawImage(targetRect, link_qimage(raster), sourceRect);
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRectF &targetRect, const QRectF &sourceRect) {
+    painter.drawImage(targetRect, link_qimage(raster), sourceRect);
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRect &targetRect, const QRect &sourceRect) {
-    painter->drawImage(targetRect, link_qimage(raster), sourceRect);
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRect &targetRect, const QRect &sourceRect) {
+    painter.drawImage(targetRect, link_qimage(raster), sourceRect);
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPointF &p, const QRectF &sr) {
-    painter->drawImage(p, link_qimage(raster), sr);
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPointF &p, const QRectF &sr) {
+    painter.drawImage(p, link_qimage(raster), sr);
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPoint &p, const QRect &sr) {
-    painter->drawImage(p, link_qimage(raster), sr);
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPoint &p, const QRect &sr) {
+    painter.drawImage(p, link_qimage(raster), sr);
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QRect &r) {
-    painter->drawImage(r, link_qimage(raster));
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRect &r) {
+    painter.drawImage(r, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPointF &p) {
-    painter->drawImage(p, link_qimage(raster));
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPointF &p) {
+    painter.drawImage(p, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter *painter, XRaster *raster, const QPoint &p) {
-    painter->drawImage(p, link_qimage(raster));
+void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPoint &p) {
+    painter.drawImage(p, link_qimage(raster));
 }
 
 //-----------------------------------------------------------------------------------
 //Resize
-static void resize_nearest(XRaster &input, XRaster &output, int new_w, int new_h) {
+static void resize_nearest(XRaster& input, XRaster& output, int new_w, int new_h) {
     int w = input.w;
     int h = input.h;
     xc_assert(input.data_pointer() != output.data_pointer(), "resize_nearest, input and output must be different images");
@@ -268,7 +267,7 @@ static void resize_nearest(XRaster &input, XRaster &output, int new_w, int new_h
 }
 
 //-----------------------------------------------------------------------------------
-static void resize_nearest(XRaster &input, XRaster &output, float scale) {
+static void resize_nearest(XRaster& input, XRaster& output, float scale) {
     int new_w = int(input.w * scale);
     int new_h = int(input.h * scale);
     resize_nearest(input, output, new_w, new_h);
@@ -276,9 +275,9 @@ static void resize_nearest(XRaster &input, XRaster &output, float scale) {
 
 //-----------------------------------------------------------------------------------
 // Blur
-// Works in-place!
+// Works in-place too.
 // Note: not very optimal implementation, but made on pure Qt. For better performance, use OpenCV.
-static void blur(XRaster &raster, XRaster &result, float blur_radius) {
+static void blur(XRaster& raster, XRaster& result, float blur_radius) {
     xc_assert(!raster.is_empty(), "XRaster::blur - input raster is empty");
     xc_assert(blur_radius>=0, "XRaster::blur - blur radius must be non-negative");
     QImage img;

@@ -23,6 +23,89 @@ int2 to_int2_truncate(const vec2 &p) {
 }
 
 //---------------------------------------------------------------------
+template<typename T>
+rgb_<T> rgb_<T>::operator+(const rgb_<T>& vec) const {
+    return rgb_<T>(v[0] + vec.v[0], v[1] + vec.v[1], v[2] + vec.v[2]);
+}
+
+template<typename T>
+rgb_<T>& rgb_<T>::operator+=(const rgb_<T>& vec) {
+    v[0] += vec.v[0];
+    v[1] += vec.v[1];
+    v[2] += vec.v[2];
+    return *this;
+}
+
+template<typename T>
+rgb_<T> rgb_<T>::operator-(const rgb_<T>& vec) const {
+    return rgb_<T>(v[0] - vec.v[0], v[1] - vec.v[1], v[2] - vec.v[2]);
+}
+
+template<typename T>
+rgb_<T>& rgb_<T>::operator-=(const rgb_<T>& vec) {
+    v[0] -= vec.v[0];
+    v[1] -= vec.v[1];
+    v[2] -= vec.v[2];
+    return *this;
+}
+
+template<typename T>
+rgb_<T> rgb_<T>::operator*(const rgb_<T>& vec) const {
+    return rgb_<T>(v[0] * vec.v[0], v[1] * vec.v[1], v[2] * vec.v[2]);
+}
+
+template<typename T>
+rgb_<T>& rgb_<T>::operator*=(const rgb_<T>& vec) {
+    v[0] *= vec.v[0];
+    v[1] *= vec.v[1];
+    v[2] *= vec.v[2];
+    return *this;
+}
+
+//---------------------------------------------------------------------
+template<typename T>
+rgba_<T> rgba_<T>::operator+(const rgba_<T>& vec) const {
+    return rgba_<T>(v[0] + vec.v[0], v[1] + vec.v[1], v[2] + vec.v[2], v[3] + vec.v[3]);
+}
+
+template<typename T>
+rgba_<T>& rgba_<T>::operator+=(const rgba_<T>& vec) {
+    v[0] += vec.v[0];
+    v[1] += vec.v[1];
+    v[2] += vec.v[2];
+    v[3] += vec.v[3];
+    return *this;
+}
+
+template<typename T>
+rgba_<T> rgba_<T>::operator-(const rgba_<T>& vec) const {
+    return rgba_<T>(v[0] - vec.v[0], v[1] - vec.v[1], v[2] - vec.v[2], v[3] - vec.v[3]);
+}
+
+template<typename T>
+rgba_<T>& rgba_<T>::operator-=(const rgba_<T>& vec) {
+    v[0] -= vec.v[0];
+    v[1] -= vec.v[1];
+    v[2] -= vec.v[2];
+    v[3] -= vec.v[3];
+    return *this;
+}
+
+template<typename T>
+rgba_<T> rgba_<T>::operator*(const rgba_<T>& vec) const {
+    return rgba_<T>(v[0] * vec.v[0], v[1] * vec.v[1], v[2] * vec.v[2], v[3] * vec.v[3]);
+}
+
+template<typename T>
+rgba_<T>& rgba_<T>::operator*=(const rgba_<T>& vec) {
+    v[0] *= vec.v[0];
+    v[1] *= vec.v[1];
+    v[2] *= vec.v[2];
+    v[3] *= vec.v[3];
+    return *this;
+}
+
+//---------------------------------------------------------------------
 //size of one element
 unsigned int XTypeId_bytes(XTypeId type) {
     switch (type) {
