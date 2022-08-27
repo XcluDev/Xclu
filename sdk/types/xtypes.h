@@ -169,7 +169,7 @@ case XTypeId::vec3:     { typedef vec3 T; CODE } break;\
 case XTypeId::vec4:     { typedef vec4 T; CODE } break;\
 case XTypeId::int2:     { typedef int2 T; CODE } break;\
 default: \
-    xc_exception(QString("code_for_all_XTypeId - bad type_id {0} for code {1}").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
+    xc_exception(QString("code_for_all_XTypeId - bad type_id %1 for code %2").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
 }
 
 

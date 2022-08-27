@@ -13,7 +13,7 @@ void XRaster::set_type(XTypeId type_id) {
 }
 
 void XRaster::assert_type(XTypeId type) const {
-    xc_assert(type_id == type, QString("XRaster::assert_type error, expected {0} but has {1}")
+    xc_assert(type_id == type, QString("XRaster::assert_type error, expected %1 but has %2")
               .arg(XTypeId_to_string(type))
               .arg(XTypeId_to_string(type_id)));
 }

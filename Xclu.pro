@@ -247,6 +247,9 @@ SOURCES += \
     sdk/types/xobject.cpp \
     sdk/types/xobjectsoundformat.cpp \
     sdk/types/xobjectvis/xobjectvis.cpp \
+    sdk/types/xobjectvis/xobjectvisimage.cpp \
+    sdk/types/xobjectvis/xobjectvissoundbuffer.cpp \
+    sdk/types/xobjectvis/xobjectvissoundformat.cpp \
     sdk/types/xpointer.cpp \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
@@ -367,6 +370,9 @@ HEADERS += \
     sdk/types/xobject.h \
     sdk/types/xobjectsoundformat.h \
     sdk/types/xobjectvis/xobjectvis.h \
+    sdk/types/xobjectvis/xobjectvisimage.h \
+    sdk/types/xobjectvis/xobjectvissoundbuffer.h \
+    sdk/types/xobjectvis/xobjectvissoundformat.h \
     sdk/types/xpointer.h \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \

@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xdrawhelper.h"
 #include "xcvhelper.h"
 

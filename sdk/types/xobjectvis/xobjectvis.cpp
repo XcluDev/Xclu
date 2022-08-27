@@ -5,6 +5,27 @@
 #include "xguiobject.h"
 #include "xrasterutils.h"
 
+#include "xobjectvisimage.h"
+#include "xobjectvissoundbuffer.h"
+#include "xobjectvissoundformat.h"
+
+//---------------------------------------------------------------------
+/// Create object visualizer depending on its type. Delete after use.
+/*static*/ XObjectVis* XObjectVis::new_vis(class XObject *object) {
+    // TODO implement type registrar to add new vis automatically
+    xc_assert(object, "XObjectVis::new_vis - bad object");
+    switch (object->type()) {
+    case XObjectType::Empty: return new XObjectVis(object);
+    case XObjectType::Custom: return new XObjectVis(object);
+    case XObjectType::Image: return new XObjectVisImage(object);
+    case XObjectType::SoundFormat: return new XObjectVisSoundFormat(object);
+    case XObjectType::SoundBuffer: return new XObjectVisSoundBuffer(object);
+    default:
+        xc_exception("XObjectVis::new_vis - unknown object type");
+    }
+
+}
+
 //---------------------------------------------------------------------
 XObjectVis::XObjectVis(class XObject *object) {
     object_ = object;
@@ -39,54 +60,6 @@ bool XObjectVis::is_thumbnail_exists() const {
 
 //---------------------------------------------------------------------
 void XObjectVis::draw_thumbnail(QPainter &/*p*/, int /*w*/, int /*h*/) const {
-
 }
 
-
-//---------------------------------------------------------------------
-QStringList XObjectImage::short_description() const {
-    return QStringList() << QString("Image %1 x %2, type: ").arg(raster.w).arg(raster.h).arg(XTypeId_to_string(raster.type_id));
-    //info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
-    //visual.set_text(info_text);
-}
-
-//---------------------------------------------------------------------
-int XObjectImage::detailed_description_size() const {
-    return 0;
-}
-
-//---------------------------------------------------------------------
-QString XObjectImage::detailed_description(int i) const {
-    return "";
-}
-
-//---------------------------------------------------------------------
-void XObjectImage::draw_thumbnail(QPainter &p, int w, int h) const {
-
-    XRasterUtils::draw(&p, &raster, 0, 0, w, h);
-}
-
-//---------------------------------------------------------------------
-/*
-//Загрузка изображения с диска
-//TODO выполняется через QImage, поэтому не очень быстрая
-//быстрее через OpenCV или FreeImage или TurboJpeg
-void XObjectImage::load(XObject &object, QString file_name) {
-    QImage qimage;
-    xc_assert(qimage.load(file_name), "Can't load image " + file_name);
-    create_from_QImage(object, qimage, "RGB", XTypeId::uint8);
-}
-
-//---------------------------------------------------------------------
-//Запись на диск
-//TODO выполняется через QImage, поэтому не очень быстрая
-//быстрее через OpenCV или FreeImage или TurboJpeg
-void XObjectImage::save(const XObject &object, QString file_name, QString format, int quality) {
-    QImage qimage;
-    link_to_QImage(object, qimage);
-    xc_assert(!qimage.isNull(), "XObjectImage::save - null resulted QImage");
-    xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
-                "Can't save image " + file_name);
-}
-*/
 //---------------------------------------------------------------------

@@ -3,11 +3,14 @@
 #include "xobject.h"
 #include <QPainter>
 
-// XObjectVis provides description for a given object
-// It creates dynamically depending on the object class
+// XObjectVis provides description and visualization for a given object.
+// It creates dynamically depending on the object class.
 
 class XObjectVis {
 public:
+    /// Create object visualizer depending on its type. Delete after use.
+    static XObjectVis* new_vis(class XObject *object);
+
     XObjectVis(class XObject *object);
 
     // Text description
