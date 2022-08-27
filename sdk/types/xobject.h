@@ -10,6 +10,7 @@
 #include "incl_h.h"
 #include "xprotecteddata.h"
 #include "xpointer.h"
+#include "xraster.h"
 
 
 //Object - opaque type
@@ -62,16 +63,21 @@ public:
 
     QString subtype() const;        // Name of the subtype, used for differenciating objects of "Custom" type
 
+    // Data storing inside object
+    QString str;
+    XRaster raster;
+    void* pointer = nullptr;
+
     // Short text description for UI
-    virtual QStringList short_description() const { return QStringList(); }
+    QStringList short_description() const { return QStringList(); }
 
     // Detailed description for UI, for example all image pixels values
-    virtual int detailed_description_size() const { return 0; }
-    virtual QString detailed_description(int /*i*/) const { return ""; }
+    int detailed_description_size() const { return 0; }
+    QString detailed_description(int /*i*/) const { return ""; }
 
     // Thumbnail draw
-    virtual bool thumbnail_exists() const { return false; }
-    virtual void draw_thumbnail(class QPainter &/*p*/, int /*w*/, int /*h*/) const {}
+    bool thumbnail_exists() const { return false; }
+    void draw_thumbnail(class QPainter &/*p*/, int /*w*/, int /*h*/) const {}
 protected:
     XObjectType type_ = XObjectType::Empty;
     QString subtype_;

@@ -22,7 +22,7 @@
 #include <QImageWriter>
 #include <QImageReader>
 
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xdrawhelper.h"
 
 //registering module implementation

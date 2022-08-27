@@ -9,7 +9,7 @@
 #include "xclass.h"
 #include "xobject.h"
 #include "xraster.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 
 //registering module implementation
 REGISTER_XCLASS(Window)

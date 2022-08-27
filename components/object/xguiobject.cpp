@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "xitemobject.h"
 #include "xguiobject.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 
 //---------------------------------------------------------------------
 //XGuiObjectVisual

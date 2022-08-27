@@ -3,7 +3,7 @@
 #include "incl_cpp.h"
 #include <QImage>
 #include <QPainter>
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xrasterutils.h"
 
 

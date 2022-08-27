@@ -1,16 +1,47 @@
 #include "qt_widgets.h"
 
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "incl_cpp.h"
 #include "xguiobject.h"
 #include "xrasterutils.h"
 
 //---------------------------------------------------------------------
-XObjectImage::XObjectImage()
-    : XObject(XObjectType::Image)
-{
+XObjectVis::XObjectVis(class XObject *object) {
+    object_ = object;
+}
+
+//---------------------------------------------------------------------
+QStringList XObjectVis::short_description() const {
+    if (!object_) {
+        return QStringList();
+    }
+    return QStringList()
+            << QString("%1 %2")
+               .arg(XObjectType_to_string(object_->type()))
+               .arg(object_->subtype());
 
 }
+
+//---------------------------------------------------------------------
+int XObjectVis::detailed_description_size() const {
+    return 0;
+}
+
+//---------------------------------------------------------------------
+QString XObjectVis::detailed_description(int /*i*/) const {
+    return "";
+}
+
+//---------------------------------------------------------------------
+bool XObjectVis::is_thumbnail_exists() const {
+    return false;
+}
+
+//---------------------------------------------------------------------
+void XObjectVis::draw_thumbnail(QPainter &/*p*/, int /*w*/, int /*h*/) const {
+
+}
+
 
 //---------------------------------------------------------------------
 QStringList XObjectImage::short_description() const {

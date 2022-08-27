@@ -35,7 +35,7 @@ For the more details see Xclu's example Webcamera/Webcams_resolve.
 #include <QAbstractVideoSurface>
 #include "sdk_h.h"
 #include "xclass.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xprotecteddata.h"
 class QCameraInfo;
 

@@ -3,7 +3,7 @@
 #include "registrarxclass.h"
 #include <QProcess>
 #include "project_props.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 
 
 //registering module implementation

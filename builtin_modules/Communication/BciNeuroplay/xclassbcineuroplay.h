@@ -6,7 +6,7 @@
 #include <QImage>
 #include "sdk_h.h"
 #include "xclasswidget.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 #include "neuroplaypro.h"

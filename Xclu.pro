@@ -144,6 +144,7 @@ INCLUDEPATH += sdk \
                sdk/ml \
                sdk/networking \
                sdk/types \
+               sdk/types/xobjectvis \
                sdk/utility
 
 # Compute shaders
@@ -244,8 +245,8 @@ SOURCES += \
     sdk/types/xcallerror.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
-    sdk/types/xobjectimage.cpp \
     sdk/types/xobjectsoundformat.cpp \
+    sdk/types/xobjectvis/xobjectvis.cpp \
     sdk/types/xpointer.cpp \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
@@ -364,8 +365,8 @@ HEADERS += \
     sdk/types/xcallerror.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
-    sdk/types/xobjectimage.h \
     sdk/types/xobjectsoundformat.h \
+    sdk/types/xobjectvis/xobjectvis.h \
     sdk/types/xpointer.h \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \

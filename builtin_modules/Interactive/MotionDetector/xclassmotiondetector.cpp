@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 
 //registering module implementation
 REGISTER_XCLASS(MotionDetector)

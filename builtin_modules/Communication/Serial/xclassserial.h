@@ -7,7 +7,7 @@
 #include <QtSerialPort/QSerialPort>
 #include "sdk_h.h"
 #include "xclass.h"
-#include "xobjectimage.h"
+#include "xobjectvis.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 

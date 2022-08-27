@@ -27,7 +27,7 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId 
         }
         return;
     }
-    xc_exception(QString("XRasterUtils::convert - unsupported conversion types {0} -> {1}")
+    xc_exception(QString("XRasterUtils::convert - unsupported conversion types %1 -> %2")
                  .arg(XTypeId_to_string(source.type_id))
                  .arg(XTypeId_to_string(destination_type)));
 }
@@ -84,7 +84,7 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
                 }
                 break;
             default:
-                xc_exception(QString("XRasterUtils::convert - unsupported type {0}")
+                xc_exception(QString("XRasterUtils::convert - unsupported type %1")
                              .arg(XTypeId_to_string(type)));
             }
         }
@@ -136,7 +136,7 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
         break;
     }
     default:
-        xc_exception(QString("XRasterUtils::convert - raster type {0} not supported")
+        xc_exception(QString("XRasterUtils::convert - raster type %1 not supported")
                      .arg(XTypeId_to_string(raster.type_id)));
     }
 }
