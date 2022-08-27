@@ -35,7 +35,8 @@ public:
     /// Setup object by given data and type. Object not own the data.
     void setup(void *data, XObjectType type, QString subtype = "");
 
-    template <class T> void setup(T *data); // Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
+    /// Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
+    template <class T> void setup(T *data);
 
     XObjectType type() const;
     bool has_type(XObjectType expected_type) const;
@@ -45,6 +46,12 @@ public:
 
     void* data();
     const void* data() const;
+
+    /// Useful for getting typed values. Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
+    /// Usage: const XRaster* raster = object->data<XRaster>();
+    template <class T> T* data();
+    template <class T> const T* data() const;
+
 
 protected:
     XObjectType type_ = XObjectType::Empty;

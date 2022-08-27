@@ -37,17 +37,17 @@ public:
     static void save(XRaster& raster, QString file_name, QString file_format, int quality = 90);
 
     // Draw raster on painter
-    static void draw(QPainter& painter, XRaster& raster, int x, int y, int w, int h);
-    static void draw(QPainter& painter, XRaster& raster, int x, int y);
-    static void draw(QPainter& painter, XRaster& raster, int x, int y, int sx, int sy, int sw, int sh);
-    static void draw(QPainter& painter, XRaster& raster, const QRectF &r);
-    static void draw(QPainter& painter, XRaster& raster, const QRectF &targetRect, const QRectF &sourceRect);
-    static void draw(QPainter& painter, XRaster& raster, const QRect &targetRect, const QRect &sourceRect);
-    static void draw(QPainter& painter, XRaster& raster, const QPointF &p, const QRectF &sr);
-    static void draw(QPainter& painter, XRaster& raster, const QPoint &p, const QRect &sr);
-    static void draw(QPainter& painter, XRaster& raster, const QRect &r);
-    static void draw(QPainter& painter, XRaster& raster, const QPointF &p);
-    static void draw(QPainter& painter, XRaster& raster, const QPoint &p);
+    static void draw(QPainter& painter, const XRaster& raster, int x, int y, int w, int h);
+    static void draw(QPainter& painter, const XRaster& raster, int x, int y);
+    static void draw(QPainter& painter, const XRaster& raster, int x, int y, int sx, int sy, int sw, int sh);
+    static void draw(QPainter& painter, const XRaster& raster, const QRectF &r);
+    static void draw(QPainter& painter, const XRaster& raster, const QRectF &targetRect, const QRectF &sourceRect);
+    static void draw(QPainter& painter, const XRaster& raster, const QRect &targetRect, const QRect &sourceRect);
+    static void draw(QPainter& painter, const XRaster& raster, const QPointF &p, const QRectF &sr);
+    static void draw(QPainter& painter, const XRaster& raster, const QPoint &p, const QRect &sr);
+    static void draw(QPainter& painter, const XRaster& raster, const QRect &r);
+    static void draw(QPainter& painter, const XRaster& raster, const QPointF &p);
+    static void draw(QPainter& painter, const XRaster& raster, const QPoint &p);
 
     //Resize
     static void resize_nearest(const XRaster& input, XRaster& output, int new_w, int new_h);

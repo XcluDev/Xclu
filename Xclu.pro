@@ -246,7 +246,6 @@ SOURCES += \
     sdk/types/xcallerror.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
-    sdk/types/xobjectdata.cpp \
     sdk/types/xobjectvis/xobjectvis.cpp \
     sdk/types/xobjectvis/xobjectvisimage.cpp \
     sdk/types/xobjectvis/xobjectvissoundbuffer.cpp \

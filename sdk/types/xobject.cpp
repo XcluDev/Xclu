@@ -42,19 +42,54 @@ void XObject::setup(void *data, XObjectType type, QString subtype) {
 }
 
 //---------------------------------------------------------------------
-template<> void XObject::setup(XArray *data) {
+template<> void XObject::setup<XArray>(XArray *data) {
     setup(data, XObjectType::Array);
 }
-template<> void XObject::setup(XRaster *data) {
+template<> void XObject::setup<XRaster>(XRaster *data) {
     setup(data, XObjectType::Image);
 }
-template<> void XObject::setup(XSoundFormat *data) {
+template<> void XObject::setup<XSoundFormat>(XSoundFormat *data) {
     setup(data, XObjectType::SoundFormat);
 }
-template<> void XObject::setup(XSoundBuffer *data) {
+template<> void XObject::setup<XSoundBuffer>(XSoundBuffer *data) {
     setup(data, XObjectType::SoundBuffer);
 }
 
+//---------------------------------------------------------------------
+template<> XArray* XObject::data<XArray>() {
+    assert_type(XObjectType::Array);
+    return (XArray *)data();
+}
+template<> XRaster* XObject::data<XRaster>() {
+    assert_type(XObjectType::Image);
+    return (XRaster *)data();
+}
+template<> XSoundFormat* XObject::data<XSoundFormat>() {
+    assert_type(XObjectType::SoundFormat);
+    return (XSoundFormat *)data();
+}
+template<> XSoundBuffer* XObject::data<XSoundBuffer>() {
+    assert_type(XObjectType::SoundBuffer);
+    return (XSoundBuffer *)data();
+}
+
+//---------------------------------------------------------------------
+template<> const XArray* XObject::data<XArray>() const {
+    assert_type(XObjectType::Array);
+    return (XArray *)data();
+}
+template<> const XRaster* XObject::data<XRaster>() const {
+    assert_type(XObjectType::Image);
+    return (XRaster *)data();
+}
+template<> const XSoundFormat* XObject::data<XSoundFormat>() const {
+    assert_type(XObjectType::SoundFormat);
+    return (XSoundFormat *)data();
+}
+template<> const XSoundBuffer* XObject::data<XSoundBuffer>() const {
+    assert_type(XObjectType::SoundBuffer);
+    return (XSoundBuffer *)data();
+}
 //---------------------------------------------------------------------
 void* XObject::data() {
     return data_;

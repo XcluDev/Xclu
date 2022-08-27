@@ -174,37 +174,37 @@ void XRasterUtils::save(XRaster& raster, QString file_name, QString file_format,
 }
 
 //-----------------------------------------------------------------------------------
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y, int w, int h) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, int x, int y, int w, int h) {
     draw(painter, raster, QRect(x, y, w, h));
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, int x, int y) {
     draw(painter, raster, QPoint(x, y));
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, int x, int y, int sx, int sy, int sw, int sh) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, int x, int y, int sx, int sy, int sw, int sh) {
     painter.drawImage(x, y, link_qimage(raster), sx, sy, sw, sh);
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRectF &r) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QRectF &r) {
     painter.drawImage(r, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRectF &targetRect, const QRectF &sourceRect) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QRectF &targetRect, const QRectF &sourceRect) {
     painter.drawImage(targetRect, link_qimage(raster), sourceRect);
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRect &targetRect, const QRect &sourceRect) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QRect &targetRect, const QRect &sourceRect) {
     painter.drawImage(targetRect, link_qimage(raster), sourceRect);
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPointF &p, const QRectF &sr) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QPointF &p, const QRectF &sr) {
     painter.drawImage(p, link_qimage(raster), sr);
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPoint &p, const QRect &sr) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QPoint &p, const QRect &sr) {
     painter.drawImage(p, link_qimage(raster), sr);
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QRect &r) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QRect &r) {
     painter.drawImage(r, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPointF &p) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QPointF &p) {
     painter.drawImage(p, link_qimage(raster));
 }
-void XRasterUtils::draw(QPainter& painter, XRaster& raster, const QPoint &p) {
+void XRasterUtils::draw(QPainter& painter, const XRaster& raster, const QPoint &p) {
     painter.drawImage(p, link_qimage(raster));
 }
 

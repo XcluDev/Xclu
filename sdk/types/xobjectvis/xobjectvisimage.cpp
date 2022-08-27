@@ -9,6 +9,7 @@ XObjectVisImage::XObjectVisImage(XObject *object)
 }
 //---------------------------------------------------------------------
 QStringList XObjectVisImage::short_description() const {
+    XRaster *raster = object_->data<XRaster>();
     return QStringList() << QString("Image %1 x %2, type: ").arg(raster.w).arg(raster.h).arg(XTypeId_to_string(raster.type_id));
     //info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
     //visual.set_text(info_text);
