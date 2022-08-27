@@ -1,13 +1,14 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#ifndef XERRORHANDLING_H
+#define XERRORHANDLING_H
 
-//Выдача сообщений об ошибках
+//Errors handling
 //TODO: Сейчас сообщения об ошибках печатаются в консоль,
 //сделать их вывод в виде MessageBox,
 //но это нужно делать в основном потоке, и их накапливать в списке
 //(с mutex, так как сообщения могут идти из разных потоков).
 
 #include "incl_h.h"
+#include "xcallerror.h"
 
 
 //Exceptions
@@ -86,4 +87,4 @@ private:
 };
 
 
-#endif // CONSOLE_H
+#endif // XERRORHANDLING_H

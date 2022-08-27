@@ -252,12 +252,12 @@ SOURCES += \
     sdk/types/xraster.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
-    sdk/utility/console.cpp \
     sdk/utility/jsonutils.cpp \
     sdk/utility/xc_exec_batch.cpp \
     sdk/utility/xc_files.cpp \
     sdk/utility/xc_sysutils.cpp \
     sdk/utility/xclu_parse_tree.cpp \
+    sdk/utility/xerrorhandling.cpp \
     sdk/utility/ximageeffect.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xrasterutils.cpp \
@@ -372,13 +372,13 @@ HEADERS += \
     sdk/types/xraster.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
-    sdk/utility/console.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
     sdk/utility/xc_exec_batch.h \
     sdk/utility/xc_files.h \
     sdk/utility/xc_sysutils.h \
     sdk/utility/xclu_parse_tree.h \
+    sdk/utility/xerrorhandling.h \
     sdk/utility/ximageeffect.h \
     sdk/utility/xparser.h \
     sdk/utility/xrasterutils.h \

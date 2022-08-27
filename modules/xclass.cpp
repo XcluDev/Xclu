@@ -153,7 +153,7 @@ void XClass::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
 //---------------------------------------------------------------------
 //функция вызова между модулями, вызывает on_call
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-void XClass::call(XCallData& call) {
+void XClass::call(XCall& call) {
     try {
         if (call.error.is_error()) return;
 
@@ -187,7 +187,7 @@ void XClass::call(XCallData& call) {
 //---------------------------------------------------------------------
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
-void XClass::on_create_widget_internal(XCallData& call) {
+void XClass::on_create_widget_internal(XCall& call) {
     XCallCreateWidget *inout = (XCallCreateWidget *)call.ptr_data;
     xc_assert(inout, "XClass::on_create_widget_internal - bad call");
 
@@ -209,7 +209,7 @@ void XClass::on_create_widget_internal(XCallData& call) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_add" call
-void XClass::on_sound_buffer_add_internal(XCallData& call) {
+void XClass::on_sound_buffer_add_internal(XCall& call) {
     //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
     XCallSoundBufferAdd *inout = (XCallSoundBufferAdd *)call.ptr_data;
     xc_assert(inout, "XClass::on_sound_buffer_add_internal - bad call");
@@ -219,7 +219,7 @@ void XClass::on_sound_buffer_add_internal(XCallData& call) {
 
 //---------------------------------------------------------------------
 //"sound_buffer_received" call
-void XClass::on_sound_buffer_received_internal(XCallData& call) {
+void XClass::on_sound_buffer_received_internal(XCall& call) {
     XCallSoundBufferReceived *inout = (XCallSoundBufferReceived *)call.ptr_data;
     xc_assert(inout, "XClass::on_sound_buffer_received_internal - bad call");
 
@@ -227,7 +227,7 @@ void XClass::on_sound_buffer_received_internal(XCallData& call) {
 }
 
 //---------------------------------------------------------------------
-void XClass::on_custom_call(XCallData& call) {
+void XClass::on_custom_call(XCall& call) {
     xc_exception("XModule '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }

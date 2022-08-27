@@ -7,7 +7,7 @@
 //If no objct is set - returns default object
 
 #include "incl_h.h"
-#include "console.h"
+#include "xerrorhandling.h"
 #include "xprotecteddata.h"
 #include "xwaschanged.h"
 

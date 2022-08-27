@@ -79,7 +79,6 @@ public:
     //исключение "записывается" в err
     void call_function_no_exception(XCall& call);
 
-
     //Доступ к переменным и запуску из других модулей
 
     //int, checkbox, button, enum (rawtext), string, text
