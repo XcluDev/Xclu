@@ -8,7 +8,7 @@
 class XObjectVisImage : public XObjectVis
 {
 public:
-    XObjectVisImage(class XObject *object);
+    XObjectVisImage(const XObject *object);
     virtual QStringList short_description() const;
     virtual int detailed_description_size() const;
     virtual QString detailed_description(int i) const;

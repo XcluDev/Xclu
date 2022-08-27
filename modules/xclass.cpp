@@ -155,10 +155,10 @@ void XClass::draw(QPainter & /*painter*/, int /*w*/, int /*h*/) {
 //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
 void XClass::call(XCall& call) {
     try {
-        if (call.error.is_error()) return;
+        if (call.error().is_error()) return;
 
         //process predefined functions
-        switch (call.type) {
+        switch (call.type()) {
         case XCallType::None: xc_exception("XClass::call type is XCallType::None");
             break;
         //process universal function
@@ -166,12 +166,16 @@ void XClass::call(XCall& call) {
             break;
         case XCallType::CreateWidget: on_create_widget_internal(call);
             break;
-        case XCallType::SoundBufferAdd:
-            on_sound_buffer_add_internal(call);
+        case XCallType::SoundBufferAdd: {
+            auto *call_data = call.data<XCallSoundBufferAdd>();
+            on_sound_buffer_add(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
+        }
             break;
 
-        case XCallType::SoundBufferReceived:
-            on_sound_buffer_received_internal(call);
+        case XCallType::SoundBufferReceived: {
+            auto *call_data = call.data<XCallSoundBufferReceived>();
+            on_sound_buffer_received(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
+        }
             break;
         default:
             xc_exception("Unknnown function type");
@@ -179,8 +183,8 @@ void XClass::call(XCall& call) {
 
     }
     catch (XException &e) {
-        call.error.prepend(QString("Error during executing function '%1' in module '%2':")
-                  .arg(xcalltype_to_string_for_user(call.type)).arg(name()), e.err());
+        call.error().prepend(QString("Error during executing function '%1' in module '%2':")
+                  .arg(xcalltype_to_string_for_user(call.type())).arg(name()), e.err());
     }
 }
 
@@ -188,42 +192,22 @@ void XClass::call(XCall& call) {
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
 void XClass::on_create_widget_internal(XCall& call) {
-    XCallCreateWidget *inout = (XCallCreateWidget *)call.ptr_data;
-    xc_assert(inout, "XClass::on_create_widget_internal - bad call");
+    auto *call_data = call.data<XCallCreateWidget>();
 
-    QString parent_id = inout->in_parent_id;
+    QString parent_id = call_data->in_parent_id;
     // if parent_id is empty - it means that we need to delete widget
     if (parent_id.isEmpty()) {
         on_reset_widget();
     }
     else {
-        //проверяем, что еще не стартовали
+        // Check we are not started
         xc_assert(status().was_started,
                     QString("Can't create widget, because module '%1' was not started yet."
                             " You need to place it before parent '%2'.")
                     .arg(module_->name())
                     .arg(parent_id));
-        inout->out_widget = on_create_widget(parent_id);
+        call_data->out_widget = on_create_widget(parent_id);
     }
-}
-
-//---------------------------------------------------------------------
-//"sound_buffer_add" call
-void XClass::on_sound_buffer_add_internal(XCall& call) {
-    //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-    XCallSoundBufferAdd *inout = (XCallSoundBufferAdd *)call.ptr_data;
-    xc_assert(inout, "XClass::on_sound_buffer_add_internal - bad call");
-
-    on_sound_buffer_add(inout->sample_rate, inout->channels, inout->samples, inout->data);
-}
-
-//---------------------------------------------------------------------
-//"sound_buffer_received" call
-void XClass::on_sound_buffer_received_internal(XCall& call) {
-    XCallSoundBufferReceived *inout = (XCallSoundBufferReceived *)call.ptr_data;
-    xc_assert(inout, "XClass::on_sound_buffer_received_internal - bad call");
-
-    on_sound_buffer_received(inout->sample_rate, inout->channels, inout->samples, inout->data);
 }
 
 //---------------------------------------------------------------------

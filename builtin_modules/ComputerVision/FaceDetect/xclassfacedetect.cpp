@@ -163,7 +163,7 @@ void XClassFaceDetect::haar_search() {
 
     auto read = getobject_input_image()->read();
     const XObject *obj = read.pointer();
-    cv::Mat img = XCvHelper::link_to_cv(obj);
+    cv::Mat img = XCvHelper::link_to_cv(*obj->data<XRaster>());
     if (img.empty()) {
         seti_face_count(0);
         return;

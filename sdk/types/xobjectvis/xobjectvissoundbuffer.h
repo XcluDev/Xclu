@@ -8,7 +8,7 @@
 class XObjectVisSoundBuffer : public XObjectVis
 {
 public:
-    XObjectVisSoundBuffer(class XObject *object);
+    XObjectVisSoundBuffer(const XObject *object);
     virtual QStringList short_description() const;
     virtual int detailed_description_size() const;
     virtual QString detailed_description(int i) const;

@@ -21,10 +21,31 @@ XCallType xstring_to_calltype(QString type_str);
 
 // Data for intermodule calls
 struct XCall {
-    XCallType type = XCallType::None;
-    QString str_data;
-    void *ptr_data = nullptr;
-    XCallError error;
+    XCall() {}
+
+    void setup(XCallType type, void *data);
+    /// Typed implementations for XCallCreateWidget, XCallSoundBufferAdd and others
+    /// Example of usage:
+    /// XCallCreateWidget call_data = {...};
+    /// XCall call;
+    /// call.setup<XCallCreateWidget>(call_data);
+    template<class T> void setup(T &call_data);
+
+    void* data();
+    /// Typed implementations
+    /// Example usage: auto* call_data = call.data<XCallCreateWidget>();
+    template<class T> T* data();
+
+    XCallType type();
+    void assert_type(XCallType type);
+
+    XCallError& error();
+protected:
+    XCallType type_ = XCallType::None;
+    void* data_ = nullptr;
+    XCallError error_;
+
+
 };
 
 // Particular implementations of ptr_data at XCall Data

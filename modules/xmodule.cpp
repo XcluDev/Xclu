@@ -290,10 +290,10 @@ void XModule::draw(QPainter &painter, int w, int h) {
 //исключение "записывается" в err
 void XModule::call_function_no_exception(XCall& call) {
     //проверка, что модуль "понимает" запрошенную функцию
-    if (!description().accept_calls.accepts(call.type)) {
-        call.error = XCallError(QString("Function '%1' can't be processed by module '%2' "
+    if (!description().accept_calls.accepts(call.type())) {
+        call.error() = XCallError(QString("Function '%1' can't be processed by module '%2' "
                                 "because it's unregistered in its accepted calls")
-                        .arg(xcalltype_to_string_for_user(call.type)).arg(name()));
+                        .arg(xcalltype_to_string_for_user(call.type())).arg(name()));
         return;
     }
     xmodule()->call(call);

@@ -3,7 +3,7 @@
 #include "xrasterutils.h"
 
 //---------------------------------------------------------------------
-XObjectVisImage::XObjectVisImage(XObject *object)
+XObjectVisImage::XObjectVisImage(const XObject *object)
     : XObjectVis(object)
 {
 

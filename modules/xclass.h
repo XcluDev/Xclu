@@ -193,12 +193,6 @@ private:
     // Concrete call handlers
     // "create_widget" call, returns QWidget pointer
     void on_create_widget_internal(XCall& call);
-    // "sound_buffer_add" call
-    void on_sound_buffer_add_internal(XCall& call);
-    // "sound_buffer_received" call
-    void on_sound_buffer_received_internal(XCall& call);
-
-
 };
 
 #endif // XCLASS_H

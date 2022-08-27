@@ -2,7 +2,7 @@
 #include "xobject.h"
 
 //---------------------------------------------------------------------
-XObjectVisSoundFormat::XObjectVisSoundFormat(XObject *object)
+XObjectVisSoundFormat::XObjectVisSoundFormat(const XObject *object)
     : XObjectVis(object)
 {
 
