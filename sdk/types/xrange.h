@@ -4,7 +4,7 @@
 #include "incl_h.h"
 #include "xparser.h"
 #include "xmath.h"
-#include "console.h"
+#include "xerrorhandling.h"
 
 //---------------------------------------------------------------------
 //Classed for range control of int and float values

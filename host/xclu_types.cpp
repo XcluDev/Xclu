@@ -1,5 +1,5 @@
 #include "xclu_types.h"
-#include "console.h"
+#include "xerrorhandling.h"
 #include "incl_cpp.h"
 #include "xtypeutils.h"
 

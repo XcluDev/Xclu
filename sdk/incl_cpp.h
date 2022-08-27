@@ -12,7 +12,7 @@
 #include "incl_h.h"
 #include <QScopedPointer>
 #include "xclu_settings.h"
-#include "console.h"
+#include "xerrorhandling.h"
 #include "jsonutils.h"
 
 #include "xlink.h"

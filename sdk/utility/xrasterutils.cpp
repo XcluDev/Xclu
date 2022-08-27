@@ -1,4 +1,4 @@
-#include "./../utility/console.h"
+#include "./../utility/xerrorhandling.h"
 #include "xrasterutils.h"
 #include "incl_cpp.h"
 #include <QImage>

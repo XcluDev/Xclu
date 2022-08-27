@@ -3,7 +3,7 @@
 
 #include "incl_h.h"
 
-#include "console.h"
+#include "xerrorhandling.h"
 
 #include "xclu_theme.h"
 #include "xc_files.h"

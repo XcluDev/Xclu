@@ -1,4 +1,5 @@
 #include "xcallutils.h"
+#include "project.h"
 
 //---------------------------------------------------------------------
 QVector<XModule *> XCallUtils::find_modules_by_filter(XCallType accept_calls_filter,

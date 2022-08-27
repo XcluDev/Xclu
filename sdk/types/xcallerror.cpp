@@ -1,5 +1,5 @@
 #include "xcallerror.h"
-#include "console.h"
+#include "xerrorhandling.h"
 
 //---------------------------------------------------------------------
 XCallError::XCallError(QString text) {
