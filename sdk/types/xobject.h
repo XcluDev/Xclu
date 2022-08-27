@@ -34,6 +34,21 @@
 А значит, сделает разработку модулей более понятной и более эффективной.
 */
 
+//Типы для объектов XObject
+//При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
+enum class XObjectType : int {
+    Empty = 0,                  // пустой объект
+    Custom = 1,                 // some custom object; use "subtype" at XObject to differenciate them
+    Image = 2,                  // изображение
+    SoundFormat = 3,            // формат звука
+    SoundBuffer = 4,             // звуковой буфер
+    N = 5
+};
+
+QString XObjectType_to_string(XObjectType type);
+XObjectType string_to_XObjectType(QString type_str);
+
+
 //----------------------------------------------------------------
 class XObject
 {

@@ -1,36 +1,17 @@
 #include "xclu_types.h"
 #include "console.h"
 #include "incl_cpp.h"
-
-//TODO сейчас реализация ведется поиском,
-//лучше сделать через maps - для скорости работы
-
-//---------------------------------------------------------------------
-QString Type_to_string(int i, int N, const QString array[]) {
-    xc_assert(i >= 0 && i < N, QString("Can't convert type index %1 to string %2")
-                                         .arg(i).arg(array[0] + "," + array[1] + ",..."));
-    return array[i];
-}
-
-int string_to_Type(const QString &str, int N, const QString array[]) {
-    //TODO ускорить через Map
-    for (int i=0; i<N; i++) {
-        if (str == array[i]) return i;
-    }
-    xc_exception(QString("Can't convert string '%1' to type %2")
-                   .arg(str).arg(array[0] + "," + array[1] + ",..."));
-    return 0;
-}
+#include "xtypeutils.h"
 
 //---------------------------------------------------------------------
 const QString ModuleImplTypeNames[ModuleImplTypeN] = {"?", "C++", "JS", "dynlib", "python"};
 
 QString moduleimpltype_to_string(ModuleImplType moduleimpltype) {
-    return Type_to_string(int(moduleimpltype), ModuleImplTypeN, ModuleImplTypeNames);
+    return XTypeUtils::to_string(int(moduleimpltype), ModuleImplTypeN, ModuleImplTypeNames);
 }
 
 ModuleImplType string_to_moduleimpltype(const QString &moduletypestr) {
-    return ModuleImplType(string_to_Type(moduletypestr, ModuleImplTypeN, ModuleImplTypeNames));
+    return ModuleImplType(XTypeUtils::to_type(moduletypestr, ModuleImplTypeN, ModuleImplTypeNames));
 }
 
 
@@ -81,60 +62,14 @@ QString GENERAL_PAGE_marker() {
 }
 
 //---------------------------------------------------------------------
-const QString ObjectTypeNames[int(XObjectType::N)] =
-{
-    "empty",
-    "custom",
-    "image",
-    "sound_format",
-    "sound_buffer"
-};
-
-//---------------------------------------------------------------------
-QString object_type_to_string(XObjectType type) {
-    return Type_to_string(int(type), int(XObjectType::N), ObjectTypeNames);
-}
-
-XObjectType string_to_object_type(QString type_str) {
-    return XObjectType(string_to_Type(type_str, int(XObjectType::N), ObjectTypeNames));
-
-}
-
-//---------------------------------------------------------------------
-const QString XCallTypeNames[XCallType::N] =
-{
-    "none",
-    "custom",
-    "create_widget",
-    "sound_buffer_add",
-    "sound_buffer_received"
-};
-
-
-QString xcalltype_to_string(XCallType type) {
-    return Type_to_string(int(type), XCallType::N, XCallTypeNames);
-}
-
-//not generates exception
-QString xcalltype_to_string_for_user(XCallType type) {
-    if (type < 0 || type >= XCallType::N) return QString("unknown:%1").arg(type);
-    return xcalltype_to_string(type);
-}
-
-XCallType xstring_to_calltype(QString type_str) {
-    return XCallType(string_to_Type(type_str, XCallType::N, XCallTypeNames));
-}
-
-
-//---------------------------------------------------------------------
 const QString XQualifierNames[XQualifierN] = {"?", "in", "out", "const"};
 
 QString xqualifier_to_string(XQualifier xqualifier) {
-    return Type_to_string(int(xqualifier), XQualifierN, XQualifierNames);
+    return XTypeUtils::to_string(int(xqualifier), XQualifierN, XQualifierNames);
 }
 
 XQualifier string_to_xqualifier(const QString &xqualifierstr) {
-    return XQualifier(string_to_Type(xqualifierstr, XQualifierN, XQualifierNames));
+    return XQualifier(XTypeUtils::to_type(xqualifierstr, XQualifierN, XQualifierNames));
 }
 
 //---------------------------------------------------------------------
@@ -147,10 +82,10 @@ XQualifier string_to_xqualifier(const QString &xqualifierstr) {
     "One_Shot_Callback"
 };
 ModuleRunMode string_to_ModuleRunMode(QString mode_string) {
-    return ModuleRunMode(string_to_Type(mode_string, ModuleRunModeN, ModuleRunModeNames));
+    return ModuleRunMode(XTypeUtils::to_type(mode_string, ModuleRunModeN, ModuleRunModeNames));
 }
 QString ModuleRunMode_to_string(ModuleRunMode mode) {
-    return Type_to_string(int(mode), ModuleRunModeN, ModuleRunModeNames);
+    return XTypeUtils::to_string(int(mode), ModuleRunModeN, ModuleRunModeNames);
 }*/
 
 //---------------------------------------------------------------------
@@ -165,7 +100,7 @@ const QString ModuleExecuteStageNames[ModuleExecuteStageN] =
 };
 
 QString ModuleExecuteStage_to_string(ModuleExecuteStage stage) {
-    return Type_to_string(int(stage), ModuleExecuteStageN, ModuleExecuteStageNames);
+    return XTypeUtils::to_string(int(stage), ModuleExecuteStageN, ModuleExecuteStageNames);
 }
 
 //---------------------------------------------------------------------

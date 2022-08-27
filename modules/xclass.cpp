@@ -3,7 +3,7 @@
 #include "xmodule.h"
 #include "incl_cpp.h"
 #include "xobject.h"
-#include "xintermodulecalls.h"
+#include "xcall.h"
 
 //---------------------------------------------------------------------
 XClass::XClass(QString class_name) {

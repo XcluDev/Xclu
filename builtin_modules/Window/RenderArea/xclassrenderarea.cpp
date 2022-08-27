@@ -29,7 +29,7 @@ void XClassRenderArea::start() {
 //---------------------------------------------------------------------
 //Collect modules to render from
 void XClassRenderArea::collect_modules() {
-    auto modules = XIntermodule::find_modules_by_filter(XCallTypeDraw);
+    auto modules = XCallUtils::find_modules_by_filter(XCallTypeDraw);
     // Use only modules which sets "render_area" to this module
     modules_.clear();
     for (auto m: modules) {

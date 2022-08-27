@@ -208,6 +208,7 @@ SOURCES += \
     host/xc_paths.cpp \
     host/xclu_settings.cpp \
     host/xclu_theme.cpp \
+    host/xclu_types.cpp \
     libs/QOsc/qosc/src/qosc_global.cpp \
     libs/QOsc/qosc/src/qoscbundle.cpp \
     libs/QOsc/qosc/src/qoscinterface.cpp \
@@ -218,11 +219,11 @@ SOURCES += \
     libs/tsne/tsne.cpp \
     modules/exportinterface.cpp \
     modules/registrarxclass.cpp \
+    modules/xcall.cpp \
     modules/xclass.cpp \
     modules/xclassbase.cpp \
     modules/xclassvisualwidget.cpp \
     modules/xclasswidget.cpp \
-    modules/xintermodulecalls.cpp \
     modules/xmodule.cpp \
     modules/xmoduledescription.cpp \
     modules/xmoduleinterface.cpp \
@@ -247,7 +248,6 @@ SOURCES += \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
-    sdk/types/xrasterutils.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/console.cpp \
@@ -258,9 +258,9 @@ SOURCES += \
     sdk/utility/xc_files.cpp \
     sdk/utility/xc_sysutils.cpp \
     sdk/utility/xclu_parse_tree.cpp \
-    sdk/utility/xclu_types.cpp \
     sdk/utility/ximageeffect.cpp \
     sdk/utility/xparser.cpp \
+    sdk/utility/xrasterutils.cpp \
     sdk/utility/xtimemeasure.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
@@ -277,7 +277,8 @@ SOURCES += \
     python/pythoncore.cpp \
     project/project_props.cpp \
     project/project.cpp \
-    project/projecteditorprops.cpp
+    project/projecteditorprops.cpp \
+    sdk/utility/xtypeutils.cpp
 
 HEADERS += \
     components/button/xguibutton.h \
@@ -315,6 +316,7 @@ HEADERS += \
     host/xc_paths.h \
     host/xclu_settings.h \
     host/xclu_theme.h \
+    host/xclu_types.h \
     libs/QOsc/qosc/include/qosc.h \
     libs/QOsc/qosc/include/qosc_global.h \
     libs/QOsc/qosc/include/qoscbundle.h \
@@ -330,11 +332,11 @@ HEADERS += \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
     modules/registrarxclass.h \
+    modules/xcall.h \
     modules/xclass.h \
     modules/xclassbase.h \
     modules/xclassvisualwidget.h \
     modules/xclasswidget.h \
-    modules/xintermodulecalls.h \
     modules/xmodule.h \
     modules/xmoduledescription.h \
     modules/xmoduleinterface.h \
@@ -364,7 +366,6 @@ HEADERS += \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
-    sdk/types/xrasterutils.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/console.h \
@@ -376,9 +377,9 @@ HEADERS += \
     sdk/utility/xc_files.h \
     sdk/utility/xc_sysutils.h \
     sdk/utility/xclu_parse_tree.h \
-    sdk/utility/xclu_types.h \
     sdk/utility/ximageeffect.h \
     sdk/utility/xparser.h \
+    sdk/utility/xrasterutils.h \
     sdk/utility/xtimemeasure.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
@@ -394,7 +395,8 @@ HEADERS += \
     python/pythoncore.h \
     project/project_props.h \
     project/project.h \
-    project/projecteditorprops.h
+    project/projecteditorprops.h \
+    sdk/utility/xtypeutils.h
 
 #--------------------------------------------------------------------------
 #Python

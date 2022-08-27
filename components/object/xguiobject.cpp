@@ -43,7 +43,7 @@ int2 XGuiObjectVisual::thumbnail_size() {
     //описание изображения
     const XObject &obj_1 = *object();
     auto d = XObjectImage::get_data(obj_1);
-    QString info_text = QString("%1\n%2 byte(s)").arg(object_type_to_string(obj_1.type())).arg(obj_1.size_bytes());
+    QString info_text = QString("%1\n%2 byte(s)").arg(XObjectType_to_string(obj_1.type())).arg(obj_1.size_bytes());
 
 
     info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);

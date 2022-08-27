@@ -8,8 +8,6 @@
 #include "xmodule.h"
 #include "projecteditorprops.h"
 
-
-
 class Project
 {
 public:

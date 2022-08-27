@@ -6,11 +6,6 @@
 #include <QString>
 #include "int2.h"
 
-//универсальная конвертация
-QString Type_to_string(int i, int N, const QString array[]);
-int string_to_Type(const QString &str, int N, const QString array[]);
-
-
 //Типы реализации модулей
 enum ModuleImplType : int {
     ModuleImplTypeNone = 0,
@@ -152,64 +147,6 @@ enum ModuleActionOnError : int {
 };
 
 
-//Типы для объектов XObject
-//При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
-enum class XObjectType : int {
-    Empty = 0,                  // пустой объект
-    Custom = 1,                 // some custom object; use "subtype" at XObject to differenciate them
-    Image = 2,                  // изображение
-    SoundFormat = 3,            // формат звука
-    SoundBuffer = 4,             // звуковой буфер
-    N = 5
-};
-
-QString object_type_to_string(XObjectType type);
-XObjectType string_to_object_type(QString type_str);
-
-
-//Types of intermodules calls
-enum class XCallType : int {
-    None           = 0,
-    Custom         = 1,
-    CreateWidget   = 2,
-    SoundBufferAdd = 3,
-    SoundBufferReceived = 4,
-    N              = 5
-};
-QString xcalltype_to_string(XCallType type);
-QString xcalltype_to_string_for_user(XCallType type);   //not generates exception
-XCallType xstring_to_calltype(QString type_str);
-
-//Error type for intermodule calls
-struct XCallError {
-    XCallError() {}
-    XCallError(QString text);
-    //добавить к тексту ошибки предысторию с "\n" - полезно при передаче ошибок между уровнями, дописывая подробности
-    XCallError(QString prepend_text, const XCallError &err);
-
-    void clear();
-    void setup(QString text);
-    void prepend(QString prepend_text, const XCallError &err);
-
-    //извлечение информации о том, есть ли ошибка
-    bool is_error() const { return is_error_; }
-    QString error_text() const { return error_text_; }
-    void throw_error();  //если есть ошибка - сгенерировать исключение
-protected:
-    bool is_error_ = false;
-    QString error_text_;
-};
-
-
-// Data for intermodule calls
-struct XCallData {
-    XCallType type = XCallType::None;
-    QString str_data;
-    void *ptr_data = nullptr;
-    XCallError error;
-};
-
-
 //Mouse and keyboard events
 enum XWidgetEvent_Type : int {
     XWidgetEvent_none = 0,
@@ -233,8 +170,6 @@ struct XWidgetEvent {
     XMouseButton button = XMouseButton_none;
     int key = -1;
 };
-
-
 
 
 #endif // XCLUTYPES_H

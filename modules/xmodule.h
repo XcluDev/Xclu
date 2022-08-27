@@ -7,7 +7,7 @@
 #include "xmoduleprototype.h"
 #include "xmoduleinterface.h"
 #include "xclass.h"
-#include "xintermodulecalls.h"
+#include "xcall.h"
 
 class XGuiEditor;
 class QJsonObject;
@@ -61,7 +61,7 @@ public:
     //-----------------------------------------------
     //call - Запуск функции из других модулей
     //важно, что эта функция может вызываться из других потоков - модули должны быть к этому готовы
-    //function - имя функции (действие, которое следует выполнить)
+    //type - тип функции (действие, которое следует выполнить)
     //err - информация об ошибках.
     //При call-вызовах модули не должны генерировать исключения, а перехватывать их и писать в err.
     //
@@ -74,10 +74,10 @@ public:
 
 
     //в случае исключения - оно выдастся
-    void call(XCallType function, XObject *input = nullptr, XObject *output = nullptr);
+    void call(XCall& call);
 
     //исключение "записывается" в err
-    void call_function_no_exception(XCallType function, XCallError &err, XObject *input = nullptr, XObject *output = nullptr);
+    void call_function_no_exception(XCall& call);
 
 
     //Доступ к переменным и запуску из других модулей
