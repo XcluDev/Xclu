@@ -219,7 +219,6 @@ SOURCES += \
     libs/tsne/tsne.cpp \
     modules/exportinterface.cpp \
     modules/registrarxclass.cpp \
-    modules/xcall.cpp \
     modules/xclass.cpp \
     modules/xclassbase.cpp \
     modules/xclassvisualwidget.cpp \
@@ -229,6 +228,7 @@ SOURCES += \
     modules/xmoduleinterface.cpp \
     modules/xmoduleprototype.cpp \
     modules/xmodulesfactory.cpp \
+    project/xcallutils.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/cv/xcvhelper.cpp \
@@ -240,6 +240,8 @@ SOURCES += \
     sdk/ml/xc_tsne.cpp \
     sdk/networking/xnetworkaddr.cpp \
     sdk/networking/xosc.cpp \
+    sdk/types/xcall.cpp \
+    sdk/types/xcallerror.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
     sdk/types/xobjectimage.cpp \
@@ -251,8 +253,6 @@ SOURCES += \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/console.cpp \
-    sdk/utility/incl_cpp.cpp \
-    sdk/utility/incl_h.cpp \
     sdk/utility/jsonutils.cpp \
     sdk/utility/xc_exec_batch.cpp \
     sdk/utility/xc_files.cpp \
@@ -332,7 +332,6 @@ HEADERS += \
     libs/tsne/tsne.h \
     libs/tsne/vptree.h \
     modules/registrarxclass.h \
-    modules/xcall.h \
     modules/xclass.h \
     modules/xclassbase.h \
     modules/xclassvisualwidget.h \
@@ -342,10 +341,13 @@ HEADERS += \
     modules/xmoduleinterface.h \
     modules/xmoduleprototype.h \
     modules/xmodulesfactory.h \
+    project/xcallutils.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
     sdk/cv/xcvhelper.h \
     sdk/draw/xdrawhelper.h \
+    sdk/incl_cpp.h \
+    sdk/incl_h.h \
     sdk/math/int2.h \
     modules/exportinterface.h \
     sdk/math/xmath.h \
@@ -358,6 +360,8 @@ HEADERS += \
     sdk/networking/xosc.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
+    sdk/types/xcall.h \
+    sdk/types/xcallerror.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
     sdk/types/xobjectimage.h \
@@ -369,8 +373,6 @@ HEADERS += \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/console.h \
-    sdk/utility/incl_cpp.h \
-    sdk/utility/incl_h.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
     sdk/utility/xc_exec_batch.h \
