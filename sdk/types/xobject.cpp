@@ -6,11 +6,12 @@
 //---------------------------------------------------------------------
 const QString ObjectTypeNames[int(XObjectType::N)] =
 {
-    "empty",
-    "custom",
-    "image",
-    "sound_format",
-    "sound_buffer"
+    "Empty",
+    "Custom",
+    "Array",
+    "Image",
+    "SoundFormat",
+    "SoundBuffer"
 };
 
 //---------------------------------------------------------------------
@@ -23,14 +24,45 @@ XObjectType string_to_XObjectType(QString type_str) {
 }
 
 //---------------------------------------------------------------------
-XObject::XObject(XObjectType type)
+XObject::XObject()
 {
-    type_ = type;
 }
 
 //---------------------------------------------------------------------
 XObject::~XObject() {
 
+}
+
+//---------------------------------------------------------------------
+/// Setup object by given data and type. Object not own the data.
+void XObject::setup(void *data, XObjectType type, QString subtype) {
+    data_ = data;
+    type_ = type;
+    subtype_ = subtype;
+}
+
+//---------------------------------------------------------------------
+template<> void XObject::setup(XArray *data) {
+    setup(data, XObjectType::Array);
+}
+template<> void XObject::setup(XRaster *data) {
+    setup(data, XObjectType::Image);
+}
+template<> void XObject::setup(XSoundFormat *data) {
+    setup(data, XObjectType::SoundFormat);
+}
+template<> void XObject::setup(XSoundBuffer *data) {
+    setup(data, XObjectType::SoundBuffer);
+}
+
+//---------------------------------------------------------------------
+void* XObject::data() {
+    return data_;
+}
+
+//---------------------------------------------------------------------
+const void* XObject::data() const {
+    return data_;
 }
 
 //---------------------------------------------------------------------
