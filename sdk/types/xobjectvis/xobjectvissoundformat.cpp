@@ -13,19 +13,10 @@ QStringList XObjectVisSoundFormat::short_description() const {
     if (!object_) {
         return QStringList();
     }
+    auto *format = object_->data<XSoundFormat>();
 
-    QString line;
-    line.append(QString("Sample rate: %1\n").arg(data.sample_rate));
-    line.append(QString("Channels: %1\n").arg(data.channels));
-    visual.set_text(line);
-
-    visual.clear_image();
-
-    return QStringList()
-            << QString("%1 %2")
-               .arg(XObjectType_to_string(object_->type()))
-               .arg(object_->subtype());
-
+    return QStringList() << QString("Sample rate: %1\n").arg(format->sample_rate)
+                         << QString("Channels: %1\n").arg(format->channels);
 }
 
 //---------------------------------------------------------------------

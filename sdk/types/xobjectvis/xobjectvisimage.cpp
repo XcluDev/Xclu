@@ -1,5 +1,6 @@
 #include "xobjectvisimage.h"
 #include "xobject.h"
+#include "xrasterutils.h"
 
 //---------------------------------------------------------------------
 XObjectVisImage::XObjectVisImage(XObject *object)
@@ -9,8 +10,11 @@ XObjectVisImage::XObjectVisImage(XObject *object)
 }
 //---------------------------------------------------------------------
 QStringList XObjectVisImage::short_description() const {
-    XRaster *raster = object_->data<XRaster>();
-    return QStringList() << QString("Image %1 x %2, type: ").arg(raster.w).arg(raster.h).arg(XTypeId_to_string(raster.type_id));
+    auto *raster = object_->data<XRaster>();
+    return QStringList() << QString("Image %1 x %2, type: %3")
+                            .arg(raster->w)
+                            .arg(raster->h)
+                            .arg(XTypeId_to_string(raster->type_id));
     //info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
     //visual.set_text(info_text);
 }
@@ -27,8 +31,8 @@ QString XObjectVisImage::detailed_description(int i) const {
 
 //---------------------------------------------------------------------
 void XObjectVisImage::draw_thumbnail(QPainter &p, int w, int h) const {
-
-    XRasterUtils::draw(&p, &raster, 0, 0, w, h);
+    const XRaster *raster = object_->data<XRaster>();
+    XRasterUtils::draw(p, *raster, 0, 0, w, h);
 }
 
 //---------------------------------------------------------------------
