@@ -241,11 +241,12 @@ SOURCES += \
     sdk/ml/xc_tsne.cpp \
     sdk/networking/xnetworkaddr.cpp \
     sdk/networking/xosc.cpp \
+    sdk/types/xarray.cpp \
     sdk/types/xcall.cpp \
     sdk/types/xcallerror.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
-    sdk/types/xobjectsoundformat.cpp \
+    sdk/types/xobjectdata.cpp \
     sdk/types/xobjectvis/xobjectvis.cpp \
     sdk/types/xobjectvis/xobjectvisimage.cpp \
     sdk/types/xobjectvis/xobjectvissoundbuffer.cpp \
@@ -254,6 +255,8 @@ SOURCES += \
     sdk/types/xprotecteddata.cpp \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
+    sdk/types/xsoundtypes.cpp \
+    sdk/types/xtypeid.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/jsonutils.cpp \
@@ -364,11 +367,12 @@ HEADERS += \
     sdk/networking/xosc.h \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
+    sdk/types/xarray.h \
     sdk/types/xcall.h \
     sdk/types/xcallerror.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
-    sdk/types/xobjectsoundformat.h \
+    sdk/types/xobjectdata.h \
     sdk/types/xobjectvis/xobjectvis.h \
     sdk/types/xobjectvis/xobjectvisimage.h \
     sdk/types/xobjectvis/xobjectvissoundbuffer.h \
@@ -377,6 +381,8 @@ HEADERS += \
     sdk/types/xprotecteddata.h \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
+    sdk/types/xsoundtypes.h \
+    sdk/types/xtypeid.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/jsonutils.h \

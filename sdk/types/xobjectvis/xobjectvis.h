@@ -5,13 +5,14 @@
 
 // XObjectVis provides description and visualization for a given object.
 // It creates dynamically depending on the object class.
+// Create visualizer for object using XObjectVis* XObjectVis::new_vis(object)
 
 class XObjectVis {
 public:
     /// Create object visualizer depending on its type. Delete after use.
-    static XObjectVis* new_vis(class XObject *object);
+    static XObjectVis* new_vis(const XObject *object);
 
-    XObjectVis(class XObject *object);
+    XObjectVis(const XObject *object);
 
     // Text description
     virtual QStringList short_description() const;
@@ -23,6 +24,6 @@ public:
     virtual void draw_thumbnail(QPainter &p, int w, int h) const; 
 
 protected:
-    class XObject *object_ = nullptr;
+    const XObject *object_ = nullptr;
 };
 

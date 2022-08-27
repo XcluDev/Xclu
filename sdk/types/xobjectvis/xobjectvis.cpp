@@ -11,7 +11,7 @@
 
 //---------------------------------------------------------------------
 /// Create object visualizer depending on its type. Delete after use.
-/*static*/ XObjectVis* XObjectVis::new_vis(class XObject *object) {
+/*static*/ XObjectVis* XObjectVis::new_vis(const XObject *object) {
     // TODO implement type registrar to add new vis automatically
     xc_assert(object, "XObjectVis::new_vis - bad object");
     switch (object->type()) {
@@ -27,7 +27,7 @@
 }
 
 //---------------------------------------------------------------------
-XObjectVis::XObjectVis(class XObject *object) {
+XObjectVis::XObjectVis(const XObject *object) {
     object_ = object;
 }
 

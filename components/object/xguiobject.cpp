@@ -157,15 +157,16 @@ void XGuiObject::show_object(XProtectedObject* object) {
         //создаем wrapper для объекта, который установится в зависимости от его типа,
         //и вызываем функцию для его визуализации
         const XObject *obj = object->read().pointer();
-        if (obj->thumbnail_exists())
+        QScopedPointer<XObjectVis> vis(XObjectVis::new_vis(obj));
+        if (vis->is_thumbnail_exists())
         {
             auto *painter = visual().thumbnail_painter();
             if (painter) {
                 int2 size = visual().thumbnail_size();
-                obj->draw_thumbnail(*painter, size.x, size.y);
+                vis->draw_thumbnail(*painter, size.x, size.y);
             }
         }
-        visual().set_text(obj->short_description().join("\n"));
+        visual().set_text(vis->short_description().join("\n"));
     }
 }
 

@@ -13,7 +13,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 #include "xarray.h"
-#include "xobjectsoundformat.h"
+#include "xsoundtypes.h"
 #include "xprotecteddata.h"
 
 class XClass;
