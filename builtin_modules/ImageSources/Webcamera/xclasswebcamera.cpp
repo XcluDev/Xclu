@@ -438,25 +438,24 @@ void XClassWebcamera::update_camera() {
 void XClassWebcamera::transform() {
     if (geti_transform()) {
         //read
-        XObjectImage::to_raster(getobject_image(), input_image_);
-        if (!input_image_.is_empty())  {
+        input_image_u8c3_ = *getobject_image()->read().data().data<XRaster>();
+        if (!input_image_u8c3_.is_empty())  {
             //crop to square
-            transformed_image_ = (geti_crop_to_square()) ? input_image_.crop_to_square() : input_image_;
+            transformed_image_u8c3_ = (geti_crop_to_square()) ? input_image_u8c3_.crop_to_square() : input_image_u8c3_;
 
             //mirror
             if (geti_mirror_x()) {
-                transformed_image_.mirror(true,false);
+                transformed_image_u8c3_.mirror_inplace(true,false);
             }
 
             //rotate
             auto rotate = gete_rotate();
-            if (rotate == rotate_90) transformed_image_.rotate(90);
-            if (rotate == rotate_180) transformed_image_.rotate(180);
-            if (rotate == rotate_270) transformed_image_.rotate(270);
+            if (rotate == rotate_90) transformed_image_u8c3_.rotate_inplace(90);
+            if (rotate == rotate_180) transformed_image_u8c3_.rotate_inplace(180);
+            if (rotate == rotate_270) transformed_image_u8c3_.rotate_inplace(270);
 
             //set to gui image
-            XObjectImage::create_from_raster(transformed_image_gui_, transformed_image_);
-
+            transformed_image_gui_.write().data().link<XRaster>(transformed_image_u8c3_);
         }
 
     }

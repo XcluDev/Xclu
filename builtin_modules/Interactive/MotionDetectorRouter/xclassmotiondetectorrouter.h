@@ -28,10 +28,6 @@ protected:
 
     static const int N = 4; //max number of cameras
 
-    //XRaster_u8 input_[N];
-    XRaster_u8 template_[N];
-    XRaster_u8 output_[N];
-
     XProtectedObject output_gui_[N];
     XProtectedObject template_gui_[N];
 
@@ -60,9 +56,9 @@ protected:
     void save_templates();
     void load_templates();
 
-    XRaster_float resize_to_template(XProtectedObject *image);
+    XRaster resize_to_template_float(XProtectedObject *image);
 
-    float normalized_correlation(XRaster_float &A, XRaster_float &B);
+    float normalized_correlation_float(XRaster &A_float, XRaster &B_float);
 };
 
 

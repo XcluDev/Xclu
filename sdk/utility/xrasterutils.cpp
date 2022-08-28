@@ -10,6 +10,10 @@
 // TODO Implement converting all to all types by adding second version for code_for_all_XTypeId at types.h scanning T2
 // and using this macroses nested
 void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId destination_type) {
+    if (source.type_id == destination_type) {
+        destination = source;
+        return;
+    }
     destination.allocate(source.w, source.h, destination_type);
     if (source.type_id == XTypeId::rgb_u8 && destination_type == XTypeId::uint8) {
         const rgb_u8* data1 = (const rgb_u8*)source.data_pointer();

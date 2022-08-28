@@ -49,8 +49,8 @@ public:
 
     /// Useful for getting typed values. Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
     /// Usage: const XRaster* raster = object->data<XRaster>();
-    template <class T> T& data();
-    template <class T> const T& data() const;
+    template <class T> T* data();
+    template <class T> const T* data() const;
 
 
 protected:

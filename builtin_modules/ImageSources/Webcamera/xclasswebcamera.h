@@ -114,8 +114,8 @@ protected:
     //transformation - crop, mirror
     void transform();
     XProtectedObject transformed_image_gui_;
-    XRaster_u8c3 input_image_;  //used for reading for transformation
-    XRaster_u8c3 transformed_image_;
+    XRaster input_image_u8c3_;  //used for reading for transformation
+    XRaster transformed_image_u8c3_;
 
 
     QScopedPointer<QCamera> camera_;

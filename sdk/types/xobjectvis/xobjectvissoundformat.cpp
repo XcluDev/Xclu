@@ -13,7 +13,10 @@ QStringList XObjectVisSoundFormat::short_description() const {
     if (!object_) {
         return QStringList();
     }
-    auto *format = object_->data<XSoundFormat>();
+    auto* format = object_->data<XSoundFormat>();
+    if (!format) {
+        return QStringList();
+    }
 
     return QStringList() << QString("Sample rate: %1\n").arg(format->sample_rate)
                          << QString("Channels: %1\n").arg(format->channels);

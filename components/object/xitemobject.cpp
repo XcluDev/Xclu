@@ -90,11 +90,11 @@ void XItemObject::copy_data_to_internal(XItem * /*item*/) {
 //Generates:
 //bool was_changed_image() { return was_changed_("image"); }
 //XProtectedObject *getobject_image() { return get_object_("image"); }
-//void setobject_image(XProtectedObject *value) { set_object_("image", value); }
+//  we not set object, just changing object with getobject_...().write()
 //----
 void XItemObject::export_interface(QStringList &file) {
     export_interface_template(file, false, true, "Object ", true,
-                              "XProtectedObject *", "object", "get_object", "set_object",
+                              "XProtectedObject *", "object", "get_object", "",
                               false, false, false, true);
 }
 

@@ -35,10 +35,6 @@ void XClassMotionDetectorRouter::start() {
 
     //clear images
     for (int i=0; i<N; i++) {
-        //input_[i].clear();
-        template_[i].clear();
-        output_[i].clear();
-
         output_gui_[i].clear();
         template_gui_[i].clear();
     }
@@ -168,9 +164,9 @@ QVector<int> XClassMotionDetectorRouter::auto_route() {
 
     for (int i=0; i<n_; i++) {
         for (int j=0; j<n_; j++) {
-            XRaster_float templ = resize_to_template(template_image(i));
-            XRaster_float input = resize_to_template(input_image(j));
-            corr[i][j] = normalized_correlation(input, templ);
+            XRaster templ_float = resize_to_template_float(template_image(i));
+            XRaster input_float = resize_to_template_float(input_image(j));
+            corr[i][j] = normalized_correlation_float(input_float, templ_float);
             xc_console_append(QString("%1->%2:  %3").arg(i+1).arg(j+1).arg(corr[i][j]));
         }
     }
@@ -199,70 +195,77 @@ QVector<int> XClassMotionDetectorRouter::auto_route() {
 
 
 //---------------------------------------------------------------------
-XRaster_float XClassMotionDetectorRouter::resize_to_template(XProtectedObject *image) {
+XRaster XClassMotionDetectorRouter::resize_to_template_float(XProtectedObject *image) {
     //read image
-    XRaster_u8 raster;
-    XObjectImage::to_raster(image, raster);
+    XRaster raster_u8;
+    {
+        auto read = image->read();
+        auto *raster = read.data().data<XRaster>();
 
-    //no image yet
-    xc_assert(!raster.is_empty(), "XClassMotionDetectorRouter::resize_to_template: Input is not image");
+        //no image yet
+        xc_assert(raster && !raster->is_empty(), "XClassMotionDetectorRouter::resize_to_template_float: Input is not image");
 
-    int w = raster.w;
-    int h = raster.h;
+        XRasterUtils::convert(*raster, raster_u8, XTypeId::u8);
+    }
+
+    int w = raster_u8.w;
+    int h = raster_u8.h;
 
     int w1 = geti_templ_w();
     int h1 = geti_templ_h();
-    XRaster_float out;
-    XRaster_int32 counter;
-    out.allocate(w1, h1);
-    counter.allocate(w1, h1);
+    XRaster out_f;
+    XRaster counter_i32;
+    out_f.allocate(w1, h1, XTypeId::float32);
+    counter_i32.allocate(w1, h1, XTypeId::int32);
 
     //sum
     for (int y=0; y<h; y++) {
         for (int x=0; x<w; x++) {
             int x1 = x * w1 / w;
             int y1 = y * h1 / h;
-            out.pixel_unsafe(x1, y1) += raster.pixel_unsafe(x, y) / 256.0;
-            counter.pixel_unsafe(x1, y1)++;
+            out_f.pixel_unsafe<float>(x1, y1) += raster_u8.pixel_unsafe<u8>(x, y) / 256.0;
+            counter_i32.pixel_unsafe<int32>(x1, y1)++;
         }
     }
 
     //result
     for (int i=0; i<w1*h1; i++) {
-        int c = counter.pixel_unsafe(i);
+        int c = counter_i32.pixel_unsafe<int32>(i);
         if (c>0) {
-            out.pixel_unsafe(i) /= c;
+            out_f.pixel_unsafe<float>(i) /= c;
         }
     }
 
-    return out;
+    return out_f;
 }
 
 //---------------------------------------------------------------------
-float XClassMotionDetectorRouter::normalized_correlation(XRaster_float &A, XRaster_float &B) {
+float XClassMotionDetectorRouter::normalized_correlation_float(XRaster &A, XRaster &B) {
+    A.assert_type(XTypeId::float32);
+    B.assert_type(XTypeId::float32);
     int w = A.w;
     int h = A.h;
-    xc_assert(w == B.w && h == B.h, "normalized_correlation - different sizes");
+    xc_assert(w == B.w && h == B.h, "normalized_correlation_float - different sizes");
     double mA = 0;
     double mB = 0;
     for (int i=0; i<w*h; i++) {
-        mA += A.pixel_unsafe(i);
-        mB += B.pixel_unsafe(i);
+        mA += A.pixel_unsafe<float>(i);
+        mB += B.pixel_unsafe<float>(i);
     }
     mA /= w*h;
     mB /= w*h;
     double normA = 0;
     double normB = 0;
     for (int i=0; i<w*h; i++) {
-        normA += xsqrf(A.pixel_unsafe(i) - mA);
-        normB += xsqrf(B.pixel_unsafe(i) - mB);
+        normA += xsqrf(A.pixel_unsafe<float>(i) - mA);
+        normB += xsqrf(B.pixel_unsafe<float>(i) - mB);
     }
     normA = sqrt(normA);
     normB = sqrt(normB);
 
     double corr = 0;
     for (int i=0; i<w*h; i++) {
-        corr += (A.pixel_unsafe(i) - mA) * (B.pixel_unsafe(i) - mB);
+        corr += (A.pixel_unsafe<float>(i) - mA) * (B.pixel_unsafe<float>(i) - mB);
     }
     double mult = normA * normB;
     if (mult > 0.0001) {

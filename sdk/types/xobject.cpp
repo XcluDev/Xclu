@@ -56,39 +56,47 @@ template<> void XObject::link<XSoundBuffer>(XSoundBuffer &data) {
 }
 
 //---------------------------------------------------------------------
-template<> XArray& XObject::data<XArray>() {
+template<> XArray* XObject::data<XArray>() {
+    if (!data()) return nullptr;
     assert_type(XObjectType::Array);
-    return *(XArray *)data();
+    return (XArray *)data();
 }
-template<> XRaster& XObject::data<XRaster>() {
+template<> XRaster* XObject::data<XRaster>() {
+    if (!data()) return nullptr;
     assert_type(XObjectType::Image);
-    return *(XRaster *)data();
+    return (XRaster *)data();
 }
-template<> XSoundFormat& XObject::data<XSoundFormat>() {
+template<> XSoundFormat* XObject::data<XSoundFormat>() {
+    if (!data()) return nullptr;
     assert_type(XObjectType::SoundFormat);
-    return *(XSoundFormat *)data();
+    return (XSoundFormat *)data();
 }
-template<> XSoundBuffer& XObject::data<XSoundBuffer>() {
+template<> XSoundBuffer* XObject::data<XSoundBuffer>() {
+    if (!data()) return nullptr;
     assert_type(XObjectType::SoundBuffer);
-    return *(XSoundBuffer *)data();
+    return (XSoundBuffer *)data();
 }
 
 //---------------------------------------------------------------------
-template<> const XArray& XObject::data<XArray>() const {
+template<> const XArray* XObject::data<XArray>() const {
+    if (!data()) return nullptr;
     assert_type(XObjectType::Array);
-    return *(XArray *)data();
+    return (XArray *)data();
 }
-template<> const XRaster& XObject::data<XRaster>() const {
+template<> const XRaster* XObject::data<XRaster>() const {
+    if (!data()) return nullptr;
     assert_type(XObjectType::Image);
-    return *(XRaster *)data();
+    return (XRaster *)data();
 }
-template<> const XSoundFormat& XObject::data<XSoundFormat>() const {
+template<> const XSoundFormat* XObject::data<XSoundFormat>() const {
+    if (!data()) return nullptr;
     assert_type(XObjectType::SoundFormat);
-    return *(XSoundFormat *)data();
+    return (XSoundFormat *)data();
 }
-template<> const XSoundBuffer& XObject::data<XSoundBuffer>() const {
+template<> const XSoundBuffer* XObject::data<XSoundBuffer>() const {
+    if (!data()) return nullptr;
     assert_type(XObjectType::SoundBuffer);
-    return *(XSoundBuffer *)data();
+    return (XSoundBuffer *)data();
 }
 //---------------------------------------------------------------------
 void* XObject::data() {
