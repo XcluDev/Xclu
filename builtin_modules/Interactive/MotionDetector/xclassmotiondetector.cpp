@@ -35,9 +35,9 @@ void XClassMotionDetector::start() {
     out_background_.clear();
 
     blocks_.clear();
-    input_.clear();
-    background_.clear();
-    output_.clear();
+    input_u8_.clear();
+    background_u8_.clear();
+    output_u8c3_.clear();
 
     state_ = 0;
     time_ = -10000;
@@ -51,27 +51,28 @@ void XClassMotionDetector::start() {
 
     ignore_frames_ = geti_ignore_start_frames();
 
-
 }
 
 //---------------------------------------------------------------------
 void XClassMotionDetector::update() {
 
     //Read image
-    XObjectImage::to_raster(getobject_input_image(), input0_);
+    // TODO с копированием
+    input0_u8_ = getobject_input_image()->read().data().data<XRaster>();
     //no image yet
-    if (input0_.is_empty()) return;
+    if (input0_u8_.is_empty()) return;
+    input0_u8_.assert_type(XTypeId::u8);
 
     //ignore frames at start
     ignore_frames_--;
     if (ignore_frames_ > 0) return;
 
     //decimate input image
-    decimate_input(input0_, input_);
+    decimate_input(input0_u8_, input_u8_);
 
     //parameters
-    int w = input_.w;
-    int h = input_.h;
+    int w = input_u8_.w;
+    int h = input_u8_.h;
     int size = geti_block_size();
     int W = w / size;
     int H = h / size;
@@ -87,12 +88,12 @@ void XClassMotionDetector::update() {
         }
 
         //initial setting background
-        background_ = input_;
+        background_u8_ = input_u8_;
     }
 
     //background update
     if (geti_restore_now()) {   //reset by button
-        background_ = input_;
+        background_u8_ = input_u8_;
     }
 
     //area
@@ -117,7 +118,7 @@ void XClassMotionDetector::update() {
             auto &block = blocks_[x+W*y];
             bool enabled = (block.x_ >= X0 && block.y_ >= Y0
                             && block.x_ + block.w_ <= X1 && block.y_ + block.h_ <= Y1);
-            block.update(input_, background_, params, enabled, dt);
+            block.update(input_u8_, background_u8_, params, enabled, dt);
             N++;
             if (block.fires()) {
                 nfires++;
@@ -146,7 +147,7 @@ void XClassMotionDetector::update() {
     //restore background
     float restore_sec = getf_background_restore_sec();
     if (time >= static_time_ + restore_sec) {
-        background_ = input_;
+        background_u8_ = input_u8_;
         static_time_ = time;
     }
     if (restore_sec>0) {
@@ -155,9 +156,6 @@ void XClassMotionDetector::update() {
     else {
         setf_restore_timer(0);
     }
-
-
-
 
     //detection result
     int fire = (nfires >= geti_blocks_threshold());
@@ -184,7 +182,7 @@ void XClassMotionDetector::update() {
     seti_event(state_);
 
     //make output
-    XRaster::convert(input_, output_);
+    XRasterUtils::convert(input_u8_, output_u8c3_, XTypeId::rgb_u8);
     for (int Y=0; Y<H; Y++) {
         for (int X=0; X<W; X++) {
             auto &block = blocks_[X+W*Y];
@@ -193,7 +191,7 @@ void XClassMotionDetector::update() {
                     for (int y=block.y_; y<block.y_+block.h_; y++) {
                         for (int x=block.x_; x<block.x_+block.w_; x++) {
                             //colorize fires
-                            output_.pixel_unsafe(x,y).v[0] = 255;   //red
+                            output_u8c3_.pixel_unsafe<rgb_u8>(x,y).v[0] = 255;   //red
                         }
                     }
                 }
@@ -201,9 +199,10 @@ void XClassMotionDetector::update() {
             else {
                 for (int y=block.y_; y<block.y_+block.h_; y++) {
                     for (int x=block.x_; x<block.x_+block.w_; x++) {
-                        output_.pixel_unsafe(x,y).v[0] /= 3;    //fade brightness
-                        output_.pixel_unsafe(x,y).v[1] /= 3;
-                        output_.pixel_unsafe(x,y).v[2] /= 3;
+                        auto &pix = output_u8c3_.pixel_unsafe<rgb_u8>(x,y);
+                        pix.v[0] /= 3;    //fade brightness
+                        pix.v[1] /= 3;
+                        pix.v[2] /= 3;
                     }
                 }
             }
@@ -215,48 +214,47 @@ void XClassMotionDetector::update() {
                                    : ((fire) ? rgb_u8(0,0,255) : rgb_u8(0,0,0));
     for (int y=0; y<h; y++) {
         for (int x=0; x<border_w; x++) {
-            output_.pixel_unsafe(x,y) = border_color;
-            output_.pixel_unsafe(w-1-x,y) = border_color;
+            output_u8c3_.pixel_unsafe<rgb_u8>(x,y) = border_color;
+            output_u8c3_.pixel_unsafe<rgb_u8>(w-1-x,y) = border_color;
         }
     }
     for (int x=0; x<w; x++) {
         for (int y=0; y<border_w; y++) {
-            output_.pixel_unsafe(x,y) = border_color;
-            output_.pixel_unsafe(x,h-1-y) = border_color;
+            output_u8c3_.pixel_unsafe<rgb_u8>(x,y) = border_color;
+            output_u8c3_.pixel_unsafe<rgb_u8>(x,h-1-y) = border_color;
         }
     }
 
-
-
     //set to images
-    XObjectImage::create_from_raster(out_image_, output_);
-    XObjectImage::create_from_raster(out_background_, background_);
+    out_image_.write().data().link<XRaster>(output_u8c3_);
+    out_background_.write().data().link<XRaster>(background_u8_);
 }
 
 //---------------------------------------------------------------------
 //decimate inout
-void XClassMotionDetector::decimate_input(XRaster_u8 &input, XRaster_u8 &result) {
+void XClassMotionDetector::decimate_input(XRaster &input_u8, XRaster &result_u8) {
+    input_u8.assert_type(XTypeId::u8);
     int dec = geti_decimate_input();
     if (dec <= 1) {
-        result = input;
+        result_u8 = input_u8;
         return;
     }
     int dec2 = dec*dec;
-    int w = input.w;
-    int h = input.h;
-    result.allocate(w, h);
+    int w = input_u8.w;
+    int h = input_u8.h;
+    result_u8.allocate(w, h, XTypeId::u8);
     for (int y=0; y+dec<=h; y+=dec) {
         for (int x=0; x+dec<=w; x+=dec) {
             int sum = 0;
             for (int b=0; b<dec; b++) {
                 for (int a=0; a<dec; a++) {
-                    sum += input.pixel_unsafe(x+a, y+b);
+                    sum += input_u8.pixel_unsafe<uint8>(x+a, y+b);
                 }
             }
             int v = sum / dec2;
             for (int b=0; b<dec; b++) {
                 for (int a=0; a<dec; a++) {
-                    result.pixel_unsafe(x+a, y+b) = v;
+                    result_u8.pixel_unsafe<uint8>(x+a, y+b) = v;
                 }
             }
 

@@ -31,39 +31,43 @@ public:
     const void* data_pointer() const;
     int data_size() const;
 
-    // items access
-    void* item_unsafe(int i);
-    const void* item_unsafe(int i) const;
-    void item_unsafe(int i, void* &value);
-    void item_unsafe(int i, const void* &value) const;
+    /// Доступ к элементам
+    /// - Для безопасности - стараться проверять assert_type().
+    /// - Для универсальной работы со всеми типами - можно использовать <void *>, так как функции используют sizeofpixel
+    template<class T> T& item_unsafe(int i);
+    template<class T> const T& item_unsafe(int i) const;
 
-    void set_item_unsafe(int i, const void *value); // Note: value size must be sizeofitem
+    template<class T> void set_item_unsafe(int i, const T *value); // Note: value size must be sizeofpixel
+    template<class T> void set_item_unsafe(int i, const T &value); // Note: value size must be sizeofpixel
+
+    template<class T> void set(const T &value);
 
     //----------------------------------------------------------------------------
-    // Allocating - allocate own memory for array
+    // Allocating - allocate own memory for raster
     //----------------------------------------------------------------------------
 
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
     void allocate(int n, XTypeId Type_id, bool reallocate = false);
 
-    void copy_from(void* input_data, int n, XTypeId Type_id);
-
     void clear();
+
+    //----------------------------------------------------------------------------
+    // Copying
+    //----------------------------------------------------------------------------
+    void copy_from(void* data, int n, XTypeId Type_id);
+    template<class T> void copy_from(T* data, int n);
 
     //----------------------------------------------------------------------------
     // Linking - using external source of pixels, not copying it.
     // Use this mode carefully and control the source data exists while this XRaster is used!
     //----------------------------------------------------------------------------
-    void link_data(int n, void* data, XTypeId type);
+    void link_data(void* data, int n, XTypeId type);
+    template<class T> void link_data(T* data, int n);
 
     // Operations
-    void set(const void* value);
-
     void add_inplace(const XArray &a);
-
     void mult_inplace(const XArray &a);
-
     XArray crop(int i0, int n0) const;
 };
 

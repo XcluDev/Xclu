@@ -219,7 +219,7 @@ void XRasterUtils::resize_nearest(const XRaster& input, XRaster& output, int new
     output.allocate(new_w, new_h, input.type_id);
     for (int y=0; y<new_h; y++) {
         for (int x=0; x<new_w; x++) {
-            output.set_pixel_unsafe(x, y, input.pixel_unsafe(x * w / new_w, y * h / new_h));
+            output.set_pixel_unsafe<void*>(x, y, input.pixel_unsafe<void*>(x * w / new_w, y * h / new_h));
         }
     }
 }

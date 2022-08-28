@@ -20,4 +20,6 @@
 #include "xtimemeasure.h"
 #include "project_props.h"
 
+#include "xrasterutils.h"
+
 #endif // INCL_INCLCPP_H

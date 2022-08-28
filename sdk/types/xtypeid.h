@@ -2,10 +2,11 @@
 #define XTYPEID_H
 
 #include <QString>
+#include "xbasictypes.h"
 
 enum class XTypeId : int {
     none = 0,
-    uint8 = 1,
+    uint8 = 1, u8 = 1,  // используем и uint8 и u8, где как удобнее
     rgb_u8 = 2,
     rgba_u8 = 3,
     int8 = 4,
@@ -32,18 +33,6 @@ bool is_XTypeId_float(XTypeId type);
 
 
 // Macroses for manipulating types
-
-// Convert void* to type value, for example, XVAL(float, data) is *(float*(data))
-#define XVAL(newtype, voidptr_data) (*(newtype *)(voidptr_data))
-
-
-// Produce code for each XTypeId variant with locally defined T
-// Example:
-// code_for_all_XTypeId(type_id, \
-//    for (int i=0; i<w*h; i++) { \
-//      XVAL(T,pixel_unsafe(i)) += XVAL(const T,r.pixel_unsafe(i)); \
-//    });
-
 #define code_for_all_XTypeId(type_id, CODE) \
 switch(type_id) {\
 case XTypeId::uint8:    { typedef uint8 T; CODE } break;\
@@ -63,6 +52,14 @@ case XTypeId::int2:     { typedef int2 T; CODE } break;\
 default: \
     xc_exception(QString("code_for_all_XTypeId - bad type_id %1 for code %2").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
 }
+
+/// Template function converting C++ type to XTypeId
+/// Примеры применения:
+/// template<class T> void XRaster::copy_from(T* input_img, int w, int h) {
+///     copy_from(input_img, w, h, type_to_XTypeId<T>());
+/// }
+/// template<class T> ... { assert_type(type_to_XTypeId()); ...}
+template<class T> XTypeId type_to_XTypeId();
 
 
 #endif // XTYPEID_H

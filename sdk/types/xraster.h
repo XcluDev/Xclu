@@ -41,16 +41,20 @@ public:
     int bytes_per_line() const;
 
 
-    // Pixel access
-    void* pixel_unsafe(int x, int y);
-    const void* pixel_unsafe(int x, int y) const;
-    void* pixel_unsafe(const int2 &p);
-    const void* pixel_unsafe(const int2 &p) const;
-    void pixel_unsafe(int x, int y, void* &value);
-    void pixel_unsafe(const int2 &p, void* &value);
+    /// Доступ к пикселям
+    /// - Для безопасности - стараться проверять assert_type().
+    /// - Для универсальной работы со всеми типами - можно использовать <void *>, так как функции используют sizeofpixel
+    template<class T> T& pixel_unsafe(int x, int y);
+    template<class T> const T& pixel_unsafe(int x, int y) const;
+    template<class T> T& pixel_unsafe(const int2 &p);
+    template<class T> const T& pixel_unsafe(const int2 &p) const;
 
-    void set_pixel_unsafe(int x, int y, const void *value); // Note: value size must be sizeofpixel
-    void set_pixel_unsafe(int i, const void *value); // Note: value size must be sizeofpixel
+    template<class T> void set_pixel_unsafe(int x, int y, const T *value); // Note: value size must be sizeofpixel
+    template<class T> void set_pixel_unsafe(int i, const T *value); // Note: value size must be sizeofpixel
+    template<class T> void set_pixel_unsafe(int x, int y, const T &value); // Note: value size must be sizeofpixel
+    template<class T> void set_pixel_unsafe(int i, const T &value); // Note: value size must be sizeofpixel
+
+    template<class T> void set(const T &value);
 
     //----------------------------------------------------------------------------
     // Allocating - allocate own memory for raster
@@ -60,22 +64,23 @@ public:
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
     void allocate(int w, int h, XTypeId Type_id, bool reallocate = false);
 
-    void copy_from(void* input_img, int w, int h, XTypeId Type_id);
-
     void clear();
+
+    //----------------------------------------------------------------------------
+    // Copying
+    //----------------------------------------------------------------------------
+    void copy_from(void* data, int w, int h, XTypeId Type_id);
+    template<class T> void copy_from(T* data, int w, int h);
 
     //----------------------------------------------------------------------------
     // Linking - using external source of pixels, not copying it.
     // Use this mode carefully and control the source data exists while this XRaster is used!
     //----------------------------------------------------------------------------
-    void link_data(int w, int h, void* data, XTypeId type);
-
+    void link_data(void* data, int w, int h, XTypeId type);
+    template<class T> void link_data(T* data, int w, int h);
 
     // Operations
-    void set(const void* value);
-
     void add_inplace(const XRaster &r);
-
     void mult_inplace(const XRaster &r);
 
     //mirror

@@ -242,6 +242,7 @@ SOURCES += \
     sdk/networking/xnetworkaddr.cpp \
     sdk/networking/xosc.cpp \
     sdk/types/xarray.cpp \
+    sdk/types/xbasictypes.cpp \
     sdk/types/xcall.cpp \
     sdk/types/xcallerror.cpp \
     sdk/types/xlink.cpp \
@@ -367,6 +368,7 @@ HEADERS += \
     sdk/sdk_cpp.h \
     sdk/sdk_h.h \
     sdk/types/xarray.h \
+    sdk/types/xbasictypes.h \
     sdk/types/xcall.h \
     sdk/types/xcallerror.h \
     sdk/types/xlink.h \

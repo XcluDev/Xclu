@@ -31,27 +31,26 @@ int XArray::data_size() const {
 }
 
 //----------------------------------------------------------------------------
-// Pixel access
-void* XArray::item_unsafe(int i) {
-    return (void*)&data_pointer_[sizeofitem*(i)];
+template<class T> T& XArray::item_unsafe(int i) {
+    return *(T*)&data_pointer_[sizeofitem*(i)];
+}
+template<class T> const T& XArray::item_unsafe(int i) const {
+    return *(const T*)&data_pointer_[sizeofitem*(i)];
+}
+template<class T> void XArray::set_item_unsafe(int i, const T *value) { // Note: value size must be sizeofitem
+    memcpy(item_unsafe<void*>(i), value, sizeofitem);
+}
+template<class T> void XArray::set_item_unsafe(int i, const T &value) { // Note: value size must be sizeofitem
+    memcpy(item_unsafe<void*>(i), &value, sizeofitem);
 }
 
-const void* XArray::item_unsafe(int i) const {
-    return (const void*)&data_pointer_[sizeofitem*(i)];
+//---------------------------------------------------------------------
+template<class T> void XArray::set(const T &value) {
+    assert_type(type_to_XTypeId());
+    for (int i=0; i<n; i++) {
+        set_item_unsafe<T>(i, value);
+    }
 }
-
-void XArray::item_unsafe(int i, void* &value) {
-    value = &data_pointer_[sizeofitem*(i)];
-}
-
-void XArray::item_unsafe(int i, const void* &value) const {
-    value = &data_pointer_[sizeofitem*(i)];
-}
-
-void XArray::set_item_unsafe(int i, const void *value) { // Note: value size must be sizeofitem
-    memcpy(item_unsafe(i), value, sizeofitem);
-}
-
 
 //----------------------------------------------------------------------------
 // Allocating - allocate own memory for raster
@@ -74,9 +73,13 @@ void XArray::allocate(int n, XTypeId Type_id, bool reallocate) {
 }
 
 //---------------------------------------------------------------------
-void XArray::copy_from(void* input_img, int n, XTypeId Type_id) {
+void XArray::copy_from(void* data, int n, XTypeId Type_id) {
     allocate(n, Type_id);
-    memcpy(data_pointer_, input_img, data_size());
+    memcpy(data_pointer_, data, data_size());
+}
+
+template<class T> void XArray::copy_from(T* data, int n) {
+    copy_from(data, n, type_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------
@@ -104,7 +107,7 @@ bool XArray::is_valid() const {
 }
 
 //---------------------------------------------------------------------
-void XArray::link_data(int n, void* data, XTypeId type) {
+void XArray::link_data(void* data, int n, XTypeId type) {
     xc_assert(n > 0, "Error XArray::link() - bad dimensions");
     xc_assert(data, "Error XArray::link() - data is nullptr");
     clear();
@@ -114,11 +117,8 @@ void XArray::link_data(int n, void* data, XTypeId type) {
     data_pointer_ = (quint8*) data;
 }
 
-//---------------------------------------------------------------------
-void XArray::set(const void* v) {
-    for (int i=0; i<n; i++) {
-        set_item_unsafe(i, v);
-    }
+template<class T> void XArray::link_data(T* data, int n) {
+    link_data(data, n, type_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------
@@ -126,9 +126,8 @@ void XArray::add_inplace(const XArray &a) {
     xc_assert(a.n == n, "XArray add error, argument raster has different size");
     code_for_all_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
-        XVAL(T,item_unsafe(i)) += XVAL(const T, a.item_unsafe(i)); \
+        item_unsafe<T>(i) += a.item_unsafe<const T>(i); \
     });
-                             //TODO implement rgb+= and rgba+=, *=, +, *
 }
 
 //---------------------------------------------------------------------
@@ -136,7 +135,7 @@ void XArray::mult_inplace(const XArray &a) {
     xc_assert(a.n, "XArray mult_by error, argument raster has different size");
     code_for_all_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
-        XVAL(T,item_unsafe(i)) *= XVAL(const T, a.item_unsafe(i)); \
+        item_unsafe<T>(i) *= a.item_unsafe<T>(i); \
     });
 }
 
@@ -150,7 +149,7 @@ XArray XArray::crop(int i0, int n0) const {
     XArray array;
     array.allocate(n0, type_id);
     for (int i = 0; i < n0; i++) {
-        array.set_item_unsafe(i, item_unsafe(i0+i));
+        array.set_item_unsafe(i, item_unsafe<void*>(i0+i));
     }
     return array;
 }

@@ -32,11 +32,11 @@ public:
     XObject();
     virtual ~XObject();
 
-    /// Setup object by given data and type. Object not own the data.
-    void setup(void *data, XObjectType type, QString subtype = "");
+    /// Link object to given data and type. Object not own the data.
+    void link(void *data, XObjectType type, QString subtype = "");
 
     /// Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
-    template <class T> void setup(T *data);
+    template <class T> void link(T &data);
 
     XObjectType type() const;
     bool has_type(XObjectType expected_type) const;
@@ -49,8 +49,8 @@ public:
 
     /// Useful for getting typed values. Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
     /// Usage: const XRaster* raster = object->data<XRaster>();
-    template <class T> T* data();
-    template <class T> const T* data() const;
+    template <class T> T& data();
+    template <class T> const T& data() const;
 
 
 protected:

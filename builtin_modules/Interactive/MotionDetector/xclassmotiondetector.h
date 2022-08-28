@@ -32,8 +32,10 @@ public:
     int w_ = 0;
     int h_ = 0;
 
-    void update(XRaster_u8 &input, XRaster_u8 &background, const XClassMotionDetectorBlockParams &params,
+    void update(XRaster &input_u8, XRaster &background_u8, const XClassMotionDetectorBlockParams &params,
                 bool enabled, float dt) {
+        input_u8.assert_type(XTypeId::uint8);
+        background_u8.assert_type(XTypeId::uint8);
         enabled_ = enabled;
         if (enabled) {
             //Compute distance
@@ -54,7 +56,7 @@ public:
             int diff = 0;
             for (int y=y_; y<y_+h_; y++) {
                 for (int x=x_; x<x_+w_; x++) {
-                    diff += abs(int(input.pixel_unsafe(x, y))-mean1 - (int(background.pixel_unsafe(x, y)) - mean2));
+                    diff += abs(int(input_u8.pixel_unsafe<uint8>(x, y))-mean1 - (int(background_u8.pixel_unsafe<uint8>(x, y)) - mean2));
                 }
             }
             dist_ = float(diff)/(area*255);
@@ -112,12 +114,12 @@ protected:
     XProtectedObject out_image_;
     XProtectedObject out_background_;
 
-    XRaster_u8 input0_, input_;
-    XRaster_u8 background_;
-    XRaster_u8c3 output_;
+    XRaster input0_u8_, input_u8_;
+    XRaster background_u8_;
+    XRaster output_u8c3_;
 
     //decimate inout
-    void decimate_input(XRaster_u8 &input, XRaster_u8 &result);
+    void decimate_input(XRaster &input_u8, XRaster &result_u8);
 
 
     //detection blocks

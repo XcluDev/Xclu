@@ -3,6 +3,7 @@
 // Working with integer-valued points (x,y), original from https://github.com/perevalovds/ofxKu, which is from openFrameworks.cc
 // Note: Can use glm::vec2i, but int2 has more handy functions and constructors.
 
+
 class int2 {
 public:
     int x, y;
