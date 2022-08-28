@@ -22,6 +22,7 @@
     case XObjectType::SoundBuffer: return new XObjectVisSoundBuffer(object);
     default:
         xc_exception("XObjectVis::new_vis - unknown object type");
+        return new XObjectVis(object);
     }
 
 }

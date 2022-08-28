@@ -3,25 +3,16 @@
 //--------------------------------------------------
 // XRaster
 // Raster class definition
-// Allows to work with rasters are with the following classes:
-//     XRaster_u8    - grayscale 1-channel 8-bit image,
-//     XRaster_u8c3  - color 3-channel 8-bit image,
-//     XRaster_u16   - grayscale 1-channel 16-bit image,
-//     XRaster_float - grayscale 1-channel 8-bit image,
-//     XRaster_vec2  - 2-dimensional float vector (vec2) image,
-//     XRaster_vec3  - 3-dimensional float vector (vec3) image,
-//     XRaster_vec4  - 4-dimensional float vector (vec4) image,
-//     XRaster - class containing static functions convert, load, save for converting color
-//               rasters to grayscale and back, to QImage and back, and also save and load rasters to disk.
 // For operations on rasters see XRasterUtils
+// TODO There are huge code duplication with XArray, but nuances in "item" and "pixel"
+// still stops me from ihheriting XRaster from XArray.
 //--------------------------------------------------
 
-#include "incl_h.h"
+#include <QVector>
+#include "xtypeid.h"
+#include "int2.h"
 
-//--------------------------------------------------
-/// XRaster - base raster class.
-/// For particular rasters see XRaster.
-//--------------------------------------------------
+/// XRaster - raster class.
 class XRaster {
 public:
     XRaster() {}

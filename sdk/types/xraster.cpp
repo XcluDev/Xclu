@@ -1,10 +1,6 @@
-#include "./../utility/xerrorhandling.h"
 #include "xraster.h"
+#include "./../utility/xerrorhandling.h"
 #include "incl_cpp.h"
-#include <QImage>
-#include <QImageReader>
-#include <QImageWriter>
-#include <QPainter>
 
 //---------------------------------------------------------------------
 void XRaster::set_type(XTypeId type_id) {

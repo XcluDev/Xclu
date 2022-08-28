@@ -31,12 +31,12 @@ void XClassSoundInGenerator::stop()
 //---------------------------------------------------------------------
 void XClassSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
     try {
-        auto sound_write = sound_.write();
+        auto sound_read = sound_.read();
 
         auto data_read = data_->read();
         for (int i=0; i<data_read.data().modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-            data_read.data().modules_[i]->call(XCallType::SoundBufferReceived, sound_write.pointer());
+            data_read.data().modules_[i]->call(XCallType::SoundBufferReceived, sound_read.pointer());
         }
 
         //applying volumes
