@@ -8,6 +8,7 @@
 #include "xobject.h"
 
 #include "xcluspinbox.h"
+#include "xmodule.h"
 
 
 //registering module implementation
@@ -33,9 +34,7 @@ void XClassScalar::start() {
     parent_id_ = "";
     clear_string_parent_id();
 
-    DataAccess access(data_);
-    data_.clear();
-
+    data_.write().data().clear();
 }
 
 //---------------------------------------------------------------------
@@ -90,8 +89,7 @@ void *XClassScalar::on_create_widget(QString parent_id) {
 
     //очистка данных - важно чтобы уничтожились перед вызовом update_all()
     {
-        DataAccess access(data_);
-        data_.clear();
+        data_.write().data().clear();
     }
 
     //track changes
@@ -107,9 +105,7 @@ void *XClassScalar::on_create_widget(QString parent_id) {
 //---------------------------------------------------------------------
 void XClassScalar::spin_changed() {    //вызывается, если значение изменилось
     //это может вызваться не в основном потоке
-    DataAccess access(data_);
-    data_.gui_changed = 1;
-
+    data_.write().data().gui_changed = 1;
 }
 
 //---------------------------------------------------------------------
@@ -144,9 +140,10 @@ void XClassScalar::update_value(bool force) {
     case source_GUI: {
         bool changed = false;
         {
-            DataAccess access(data_);
-            if (force || data_.gui_changed) {
-                data_.gui_changed = 0;
+            auto write = data_.write();
+            auto &data = write.data();
+            if (force || data.gui_changed) {
+                data.gui_changed = 0;
                 changed = true;
             }
         }
@@ -160,7 +157,7 @@ void XClassScalar::update_value(bool force) {
     {
         //взятие значение из другого модуля
         XLinkParsed link(gets_int_link());
-        XClass *module = xc_find_module(link.module);
+        auto *module = xc_find_module(link.module);
         int value = module->geti(link.var);
         set_value(value);
     }
