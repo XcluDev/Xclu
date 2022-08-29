@@ -33,10 +33,12 @@ void XClassMotionDetectorRouter::start() {
     setobject_template3(template_gui_[2]);
     setobject_template4(template_gui_[3]);
 
-    //clear images
+    //clear images and set to objects
     for (int i=0; i<N; i++) {
-        output_gui_[i].clear();
-        template_gui_[i].clear();
+        output_[i].clear();
+        template_[i].clear();
+        output_gui_[i].write().data().link<XRaster>(output_[i]);
+        template_gui_[i].write().data().link<XRaster>(template_[i]);
     }
 
     ignore_frames_ = geti_ignore_start_frames();
@@ -282,7 +284,7 @@ void XClassMotionDetectorRouter::save_templates() {
 
     for (int i=0; i<n_; i++) {
         QString file_name = xc_absolute_path_from_project(files[i]);
-        XRasterUtils::save(output_image(i)->read().data(), file_name);
+        XRasterUtils::save(output_image(i)->read().data().data<XRaster>(), file_name);
     }
 
     xc_console_append("Templates are saved");
@@ -296,7 +298,7 @@ void XClassMotionDetectorRouter::load_templates() {
     xc_assert(files.size() >= n_, "Not enough file names");
     for (int i=0; i<n_; i++) {
        QString file_name = xc_absolute_path_from_project(files[i]);
-       XRasterUtils::load(template_image(i)->write().data(), file_name);
+       XRasterUtils::load(*template_image(i)->write().data().data<XRaster>(), file_name);
     }
 }
 

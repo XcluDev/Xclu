@@ -57,8 +57,10 @@ void XClassMotionDetector::start() {
 void XClassMotionDetector::update() {
 
     //Read image
-    // TODO с копированием
-    input0_u8_ = getobject_input_image()->read().data().data<XRaster>();
+    // TODO сейчас происходит копирования
+    if (!getobject_input_image()->read().data().cast_copy<XRaster>(input0_u8_)) {
+        return;
+    }
     //no image yet
     if (input0_u8_.is_empty()) return;
     input0_u8_.assert_type(XTypeId::u8);

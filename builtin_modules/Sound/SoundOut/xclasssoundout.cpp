@@ -13,7 +13,7 @@ XClassSoundOutGenerator::XClassSoundOutGenerator(const QAudioFormat &format,
 {
     xc_assert(format.isValid(), "Not valid sound format");
     format_ = format;
-    data_ = data;
+    data_.write().data() = data;
 }
 
 //---------------------------------------------------------------------

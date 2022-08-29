@@ -12,7 +12,7 @@
 #include "xprotecteddata.h"
 
 //Данные для генерации
-struct XClassSoundOscData: public XProtectedData_<...>
+struct XClassSoundOscData
 {
     void init();    //запускать перед стартом звука, после считывания параметров из GUI
 
@@ -92,7 +92,7 @@ protected:
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    XClassSoundOscData data_;
+    XProtectedData_<XClassSoundOscData> data_;
     void update_data();
 
 };

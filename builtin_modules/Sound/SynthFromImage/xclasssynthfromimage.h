@@ -13,8 +13,7 @@
 #include "xraster.h"
 
 //Данные для генерации
-struct XClassSynthFromImageData: public XProtectedData_<...>
-{
+struct XClassSynthFromImageData {
     float sample_rate = 50; //pixels per second
     float volume=1;         //volume
 
@@ -44,14 +43,14 @@ protected:
 
     XProtectedObject out_image_;
 
-    XRaster_u8 input_;
-    XRaster_u8c3 output_;
+    XRaster input_u8_;
+    XRaster output_u8c3_;
 
     bool input_frozen_ = false;
 
     //данные - они обновляются из GUI в основном потоке
     //и используются при генерации звука
-    XClassSynthFromImageData data_;
+    XProtectedData_<XClassSynthFromImageData> data_;
 
     //internal values used for sound generation -----------------------
     double phase_ = 0;

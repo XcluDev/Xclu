@@ -34,6 +34,8 @@ public:
     XObject();
     virtual ~XObject();
 
+    void clear();
+
     /// Link object to given data and type. Object not own the data.
     void link(void *data, XObjectType type, QString subtype = "");
 
@@ -53,6 +55,9 @@ public:
     template <class T> T* data();
     template <class T> const T* data() const;
 
+    /// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
+    template <class T> bool cast_copy(T &data);
+    template <class T> bool cast_copy(const T &data) const;
 
 protected:
     XObjectType type_ = XObjectType::Empty;

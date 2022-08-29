@@ -19,7 +19,7 @@
 class XClass;
 
 //Данные для обмена с generator, которые защищаются с помощью mutex
-struct XClassSoundOutData: public XProtectedData_<...>
+struct XClassSoundOutData
 {
     int play_test_sound_ = 0;   //generate test sound
     int play_left_ = 1;
@@ -72,7 +72,7 @@ private:
     //QByteArray m_buffer;
     QAudioFormat format_;
 
-    XClassSoundOutData *data_;
+    XProtectedData_<XClassSoundOutData *> data_;
 
     //функция создания звука, во float
     //вызывает нужные модули и заполняет тестовым звуком, если требуется

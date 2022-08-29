@@ -25,6 +25,7 @@ protected:
 class XWasChangedKeeper
 {
 public:
+    void was_updated() { touch(); }        // почетить, что было изменение
     void touch() { _keeper_frame_++; }    //call to mark that value was changed
     //functions for tracking second-level changes
     void touch2() { _keeper_frame2_++; }    //call to mark that value was changed

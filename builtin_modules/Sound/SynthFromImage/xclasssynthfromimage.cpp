@@ -39,17 +39,14 @@ XClassSynthFromImage::~XClassSynthFromImage()
 
 //---------------------------------------------------------------------
 void XClassSynthFromImage::start() {
-    {
-        DataAccess access(data_);
-        data_.line_.clear();
-    }
+    data_.clear();
 
     //link images with internal objects
     setobject_output_image(&out_image_);
+    out_image_.write().data().link<XRaster>(output_u8c3_);
 
-    out_image_.clear();
-    input_.clear();
-    output_.clear();
+    input_u8_.clear();
+    output_u8c3_.clear();
 
     input_frozen_ = false;
 
@@ -67,18 +64,18 @@ void XClassSynthFromImage::update() {
 
 
     //Read image
-    auto reader = getobject_input_image()->read();
-
-    //no image yet
-    if (reader.data().type() != XObjectType::Image) return;
-
-    //read image if not frozen
-    if (!input_frozen_ || input_.is_empty()) {
-        XRasterUtils::to_raster(reader.data(), input_);
+    {
+        auto read = getobject_input_image()->read();
+        auto *raster = read.data().data<XRaster>();
+        if (!raster || raster->is_empty()) return;
+        // Read image if not frozen
+        if (!input_frozen_ || input_u8_.is_empty()) {
+            XRasterUtils::convert(*raster, input_u8_, XTypeId::u8);
+        }
     }
 
-    int w = input_.w;
-    int h = input_.h;
+    int w = input_u8_.w;
+    int h = input_u8_.h;
 
     float ScanY = xclampf(getf_scan_y(), 0, 1);
     int scany = (h-1) * ScanY;
@@ -90,10 +87,10 @@ void XClassSynthFromImage::update() {
 
     //Ignore black borders - useful for Realsense depth sonification
     if (geti_tone_black()) {
-        while (input_.pixel_unsafe(x0,scany) == 0 && x0<w/2) {
+        while (input_u8_.pixel_unsafe<u8>(x0,scany) == 0 && x0<w/2) {
             x0++;
         }
-        while (input_.pixel_unsafe(x1,scany) == 0 && x1>w/2+1) {
+        while (input_u8_.pixel_unsafe<u8>(x1,scany) == 0 && x1>w/2+1) {
             x1--;
         }
         scanw = x1 - x0;
@@ -115,7 +112,7 @@ void XClassSynthFromImage::update() {
     //read line
     QVector<float> line(scanw);
     for (int i=0; i<scanw; i++) {
-        line[i] = xmapf(input_.pixel_unsafe(i+x0, scany), 0, 255, -1, 1);
+        line[i] = xmapf(input_u8_.pixel_unsafe<u8>(i+x0, scany), 0, 255, -1, 1);
     }
 
     //Normalize
@@ -154,36 +151,35 @@ void XClassSynthFromImage::update() {
     //we do it by locking access, and trying to minimize lock,
     //that's why we prepare all and set it here at a once.
     {
-        DataAccess access(data_);
-        data_.sample_rate = geti_sample_rate();
-        data_.volume = getf_volume();
-        data_.line_ = line;
-        data_.line_speed_ = line_speed;
+        auto write = data_.write();
+        auto &data = write.data();
+        data.sample_rate = geti_sample_rate();
+        data.volume = getf_volume();
+        data.line_ = line;
+        data.line_speed_ = line_speed;
     }
 
     //generate output
-    XRaster::convert(input_, output_);
+    XRasterUtils::convert(input_u8_, output_u8c3_, XTypeId::rgb_u8);
 
     //draw scan line and sound graph
     float deltay = h*0.2;
     for (int x=x0; x<x1; x++) {
-        //output_.pixel_unsafe(x, scany) = rgb_u8(255,0,0);
+        //output_u8c3_.pixel_unsafe(x, scany) = rgb_u8(255,0,0);
         int y0 = scany;
         int y1 = y0 - deltay*line[x-x0];
         if (y0 > y1) qSwap(y0, y1);
         y0 = xclampi(y0, 0, h-1);
         y1 = xclampi(y1, 0, h-1);
         for (int y=y0; y<=y1; y++) {
-            output_.pixel_unsafe(x, y) = rgb_u8(255,0,0);
+            output_u8c3_.pixel_unsafe<rgb_u8>(x, y) = rgb_u8(255,0,0);
         }
-        output_.pixel_unsafe(x, scany) = rgb_u8(255,0,0);
+        output_u8c3_.pixel_unsafe<rgb_u8>(x, scany) = rgb_u8(255,0,0);
     }
 
 
-    //set to GUI
-    XRasterUtils::create_from_raster(out_image_, output_);
-
-
+    // Дать сигнал в GUI что было изменение объекта
+    out_image_.was_updated();
 }
 
 //---------------------------------------------------------------------
@@ -191,15 +187,15 @@ void XClassSynthFromImage::stop() {
 
 }
 
-
 //---------------------------------------------------------------------
 //sound generation
 //"sound_buffer_add" call, fills `data` buffer
 //there are required to fill channels * samples values at data
 void XClassSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
-    DataAccess access(data_);
+    auto read = data_.read();
+    auto &dat = read.data();
 
-    float phase_add = float(data_.sample_rate) / float(sample_rate) / data_.line_speed_;
+    float phase_add = float(dat.sample_rate) / float(sample_rate) / dat.line_speed_;
     //double phase_ = 0;
     //QVector<float> line_;
 
@@ -210,7 +206,7 @@ void XClassSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, in
 
     //if empty - then copy immediately
     if (n == 0) {
-        line_ = data_.line_;
+        line_ = dat.line_;
         n = line_.size();
         switched = true;
     }
@@ -221,14 +217,14 @@ void XClassSynthFromImage::on_sound_buffer_add(int sample_rate, int channels, in
             phase_ = fmodf(phase_, n);
             if (!switched) {    //switch to a new line
                 switched = true;
-                line_ = data_.line_;
+                line_ = dat.line_;
                 n = line_.size();
             }
         }
 
         //read value
         int i = xclampi(int(phase_), 0, n-1);
-        float v = line_[i] * data_.volume; //qSin(data_.phase_);
+        float v = line_[i] * dat.volume; //qSin(data_.phase_);
 
         phase_ += phase_add;
 

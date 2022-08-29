@@ -125,10 +125,7 @@ void XClassSoundOsc::start() {
     //Очистка переменных
 
     update_data();
-    {
-        DataAccess access(data_);
-        data_.init();   //устанавливает первоначальные данные из GUI
-    }
+    data_.write().data().init();   //устанавливает первоначальные данные из GUI
 
 }
 
@@ -145,29 +142,30 @@ void XClassSoundOsc::stop() {
 
 //---------------------------------------------------------------------
 void XClassSoundOsc::update_data() {
-    DataAccess access(data_);
+    auto write = data_.write();
+    auto &data = write.data();
 
-    data_.out_enabled = geti_out_enabled();
+    data.out_enabled = geti_out_enabled();
 
     //volume
-    data_.volume = getf_volume();
-    data_.vol_mod = getf_volume_mod();
+    data.volume = getf_volume();
+    data.vol_mod = getf_volume_mod();
 
     //freq
-    data_.freq = getf_freq();
+    data.freq = getf_freq();
 
     //fm, am
-    data_.fm_enabled = geti_fm_enabled();
-    data_.fm_rate = getf_fm_rate();
-    data_.fm_range = getf_fm_range();
+    data.fm_enabled = geti_fm_enabled();
+    data.fm_rate = getf_fm_rate();
+    data.fm_range = getf_fm_range();
 
-    data_.am_enabled = geti_am_enabled();
-    data_.am_rate = getf_am_rate();
-    data_.am_range = getf_am_range();
+    data.am_enabled = geti_am_enabled();
+    data.am_rate = getf_am_rate();
+    data.am_range = getf_am_range();
 
     //speed
-    data_.vol_speed = getf_vol_speed();
-    data_.freq_speed = getf_freq_speed();
+    data.vol_speed = getf_vol_speed();
+    data.freq_speed = getf_freq_speed();
 }
 
 //---------------------------------------------------------------------
@@ -176,13 +174,14 @@ void XClassSoundOsc::update_data() {
 //there are required to fill channels * samples values at data
 void XClassSoundOsc::on_sound_buffer_add(int sample_rate, int channels, int samples, float *data) {
     //получаем доступ к данным и звуковому буферу
-    DataAccess access(data_);
-    if (data_.out_enabled) {
-        data_.update_steps(sample_rate);    //обновляем приращение параметров
+    auto write = data_.write();
+    auto &dat = write.data();
+    if (dat.out_enabled) {
+        dat.update_steps(sample_rate);    //обновляем приращение параметров
         int k = 0;
         for (int i=0; i<samples; i++) {
             //получить значение звука
-            float v = data_.get_next_sample();
+            float v = dat.get_next_sample();
             for (int u=0; u<channels; u++) {
                 data[k++] += v;
             }

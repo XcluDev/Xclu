@@ -448,7 +448,7 @@ bool XClassMLExecute::console_write_image() {
 
         if (geti_console_write_image_to_grayscale()) {
             XRaster_u8 image;
-            XRaster::convert(*img, image);            
+            XRasterUtils::convert(*img, image);            
 
             //send to console
             console_write_image(image.w, image.h, 1, image.data_pointer());

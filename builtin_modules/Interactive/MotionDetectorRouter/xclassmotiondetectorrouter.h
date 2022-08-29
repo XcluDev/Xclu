@@ -31,6 +31,9 @@ protected:
     XProtectedObject output_gui_[N];
     XProtectedObject template_gui_[N];
 
+    XRaster output_[N];
+    XRaster template_[N];
+
   //  resize_shrink
    // void decimate_input(XRaster_u8 &input, XRaster_u8 &result);
 

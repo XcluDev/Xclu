@@ -61,7 +61,7 @@ void XClassMadRobot::update() {
 
     //Read image
     {
-        const XRaster *raster =getobject_input_image()->read().data().data<XRaster>();
+        const XRaster *raster = getobject_input_image()->read().data().data<XRaster>();
         if (!raster || raster->is_empty()) return;
         XRasterUtils::convert(*raster, webcam_u8c3_, XTypeId::rgb_u8);
     }

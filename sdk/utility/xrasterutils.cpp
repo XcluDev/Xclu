@@ -163,7 +163,7 @@ QImage XRasterUtils::link_qimage(const XRaster& raster) {
 }
 
 //---------------------------------------------------------------------
-void XRasterUtils::load(QString file_name, XRaster& raster) {
+void XRasterUtils::load(XRaster& raster, QString file_name) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "XRasterUtils::load: Can't load image '" + file_name + "'");
     convert(qimage, raster);
@@ -175,6 +175,12 @@ void XRasterUtils::save(const XRaster& raster, QString file_name, int quality) {
     QImage qimage = link_qimage(raster);
     xc_assert(qimage.save(file_name, nullptr, quality),
                 "save: Can't save image '" + file_name + "'");
+}
+
+//-----------------------------------------------------------------------------------
+void XRasterUtils::save(const XRaster* raster, QString file_name, int quality) {
+    xc_assert(raster, "XRasterUtils::save - raster is nullptr");
+    save(*raster, file_name, quality);
 }
 
 //-----------------------------------------------------------------------------------

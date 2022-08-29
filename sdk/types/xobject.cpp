@@ -40,6 +40,13 @@ XObject::~XObject() {
 }
 
 //---------------------------------------------------------------------
+void XObject::clear() {
+    type_ = XObjectType::Empty;
+    subtype_.clear();
+    data_ = nullptr;
+}
+
+//---------------------------------------------------------------------
 /// Link object to given data and type. Object not own the data.
 void XObject::link(void *data, XObjectType type, QString subtype) {
     data_ = data;
@@ -63,6 +70,26 @@ template<class T> T* XObject::data() {
 template<class T> const T* XObject::data() const {
     if (!data_ || !has_type(cpptype_to_XObjectType<T>())) return nullptr;
     return (T *)data_;
+}
+
+//---------------------------------------------------------------------
+/// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
+template <class T> bool XObject::cast_copy(T &data) {
+    auto *d = data();
+    if (d) {
+        data = *d;
+        return true;
+    }
+    return false;
+}
+
+template <class T> bool XObject::cast_copy(const T &data) const {
+    auto *d = data();
+    if (d) {
+        data = *d;
+        return true;
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------

@@ -128,18 +128,9 @@ void XClassWebcamera::draw(QPainter &painter, int w, int h) {
     if (!geti_draw_enabled()) {
         return;
     }
-
-    if (geti_transform()) {
-        auto image_read = getobject_image_transformed()->read();
-        const XObject *object = image_read.pointer();
-        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
-    }
-    else {
-        auto image_read = getobject_image()->read();
-        const XObject *object = image_read.pointer();
-        XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
-    }
-
+    auto image_read = geti_transform() ? getobject_image_transformed()->read():getobject_image()->read();
+    const XObject *object = image_read.pointer();
+    XDrawHelper::draw_XObject_fit(object, getf_draw_x(), getf_draw_y(), getf_draw_size(), painter, w, h);
 }
 
 //---------------------------------------------------------------------
@@ -413,8 +404,7 @@ void XClassWebcamera::update_camera() {
             auto image_write = getobject_image()->write();
             XObject *object = image_write.pointer();
 
-            DataAccess access(data_);
-            data_.image.copy_to(object);
+            data_.read().data().raster.copy_to(object);
         }
 
         //if transformation is required - do it
@@ -433,8 +423,8 @@ void XClassWebcamera::update_camera() {
 void XClassWebcamera::transform() {
     if (geti_transform()) {
         //read
-        input_image_u8c3_ = *getobject_image()->read().data().data<XRaster>();
-        if (!input_image_u8c3_.is_empty())  {
+        if (getobject_image()->read().data().cast_copy<XRaster>(input_image_u8c3_)
+                && !input_image_u8c3_.is_empty())  {
             //crop to square
             transformed_image_u8c3_ = (geti_crop_to_square()) ? input_image_u8c3_.crop_to_square() : input_image_u8c3_;
 
