@@ -46,7 +46,7 @@ template<class T> void XArray::set_item_unsafe(int i, const T &value) { // Note:
 
 //---------------------------------------------------------------------
 template<class T> void XArray::set(const T &value) {
-    assert_type(type_to_XTypeId());
+    assert_type(cpptype_to_XTypeId());
     for (int i=0; i<n; i++) {
         set_item_unsafe<T>(i, value);
     }
@@ -79,7 +79,7 @@ void XArray::copy_from(void* data, int n, XTypeId Type_id) {
 }
 
 template<class T> void XArray::copy_from(T* data, int n) {
-    copy_from(data, n, type_to_XTypeId<T>());
+    copy_from(data, n, cpptype_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------
@@ -118,7 +118,7 @@ void XArray::link_data(void* data, int n, XTypeId type) {
 }
 
 template<class T> void XArray::link_data(T* data, int n) {
-    link_data(data, n, type_to_XTypeId<T>());
+    link_data(data, n, cpptype_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------

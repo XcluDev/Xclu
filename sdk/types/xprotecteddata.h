@@ -110,51 +110,5 @@ protected:
     void unlock() { value_->lock_.unlock(); }
 };
 
-//---------------------------------------
-//Тип защищенных данных с мютексом,
-//и класс DataAccess, который блокирует данные в конструкторе, и разблокирует в деструкторе
-//Применение:
-//Если есть наследник data типа XcluProtectedData *, то
-//DataAccess access(data); - создаст блокировку данных
-//Это должны делать все, кто работают с данными
-//---------------------------------------
-//---------------------------------------
-class DataAccess;
-
-//класс данных - их можно наследовать
-class XcluProtectedData //Don't use it, we planning to remove this soon,
-                         //use XProtectedData_<> instead
-{
-public:
-    XcluProtectedData() {}
-
-protected:
-    friend DataAccess;
-    QMutex mutex_;
-    void lock() { mutex_.lock(); }
-    void unlock() { mutex_.unlock(); }
-};
-
-
-//класс защиты данных
-class DataAccess {
-public:
-    DataAccess(XcluProtectedData *data) {
-        data_ = data;
-        data_->lock();
-    }
-    DataAccess(XcluProtectedData &data) {
-        data_ = &data;
-        data_->lock();
-    }
-
-    virtual ~DataAccess() {
-        data_->unlock();
-    }
-
-protected:
-    XcluProtectedData *data_;
-
-};
 
 #endif // XCLUPROTECTEDDATA_H

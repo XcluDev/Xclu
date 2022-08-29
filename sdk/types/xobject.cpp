@@ -23,6 +23,12 @@ XObjectType string_to_XObjectType(QString type_str) {
     return XObjectType(XTypeUtils::to_type(type_str, int(XObjectType::N), ObjectTypeNames));
 }
 
+template<> XObjectType cpptype_to_XObjectType<void *>() { return XObjectType::Empty; }
+template<> XObjectType cpptype_to_XObjectType<XArray>() { return XObjectType::Array; }
+template<> XObjectType cpptype_to_XObjectType<XRaster>() { return XObjectType::Image; }
+template<> XObjectType cpptype_to_XObjectType<XSoundFormat>() { return XObjectType::SoundFormat; }
+template<> XObjectType cpptype_to_XObjectType<XSoundBuffer>() { return XObjectType::SoundBuffer; }
+
 //---------------------------------------------------------------------
 XObject::XObject()
 {
@@ -42,70 +48,21 @@ void XObject::link(void *data, XObjectType type, QString subtype) {
 }
 
 //---------------------------------------------------------------------
-template<> void XObject::link<XArray>(XArray &data) {
-    link(&data, XObjectType::Array);
-}
-template<> void XObject::link<XRaster>(XRaster &data) {
-    link(&data, XObjectType::Image);
-}
-template<> void XObject::link<XSoundFormat>(XSoundFormat &data) {
-    link(&data, XObjectType::SoundFormat);
-}
-template<> void XObject::link<XSoundBuffer>(XSoundBuffer &data) {
-    link(&data, XObjectType::SoundBuffer);
+template<class T> void XObject::link(T &data) {
+    auto type = cpptype_to_XObjectType<T>();
+    xc_assert(type != XObjectType::Empty, "XObject::link - can't typed link void *")
+    link(&data, type);
 }
 
 //---------------------------------------------------------------------
-template<> XArray* XObject::data<XArray>() {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::Array);
-    return (XArray *)data();
-}
-template<> XRaster* XObject::data<XRaster>() {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::Image);
-    return (XRaster *)data();
-}
-template<> XSoundFormat* XObject::data<XSoundFormat>() {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::SoundFormat);
-    return (XSoundFormat *)data();
-}
-template<> XSoundBuffer* XObject::data<XSoundBuffer>() {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::SoundBuffer);
-    return (XSoundBuffer *)data();
+template<class T> T* XObject::data() {
+    if (!data_ || !has_type(cpptype_to_XObjectType<T>())) return nullptr;
+    return (T *)data_;
 }
 
-//---------------------------------------------------------------------
-template<> const XArray* XObject::data<XArray>() const {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::Array);
-    return (XArray *)data();
-}
-template<> const XRaster* XObject::data<XRaster>() const {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::Image);
-    return (XRaster *)data();
-}
-template<> const XSoundFormat* XObject::data<XSoundFormat>() const {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::SoundFormat);
-    return (XSoundFormat *)data();
-}
-template<> const XSoundBuffer* XObject::data<XSoundBuffer>() const {
-    if (!data()) return nullptr;
-    assert_type(XObjectType::SoundBuffer);
-    return (XSoundBuffer *)data();
-}
-//---------------------------------------------------------------------
-void* XObject::data() {
-    return data_;
-}
-
-//---------------------------------------------------------------------
-const void* XObject::data() const {
-    return data_;
+template<class T> const T* XObject::data() const {
+    if (!data_ || !has_type(cpptype_to_XObjectType<T>())) return nullptr;
+    return (T *)data_;
 }
 
 //---------------------------------------------------------------------

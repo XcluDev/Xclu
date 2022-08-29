@@ -48,15 +48,12 @@ QList<QVideoFrame::PixelFormat> XClassWebcameraSurface::supportedPixelFormats(
 //---------------------------------------------------------------------
 bool XClassWebcameraSurface::present(const QVideoFrame &frame)
 {
-    //Q_UNUSED(frame);
-    // Handle the frame and do your processing
-
-    if (frame.isValid()) { // && ...) {
+    if (frame.isValid()) {
         QVideoFrame cloneFrame(frame);
         cloneFrame.map(QAbstractVideoBuffer::ReadOnly);
 
         //создаваемое изображение не копирует память
-        const QImage img(cloneFrame.bits(),
+        const QImage qimage(cloneFrame.bits(),
                          cloneFrame.width(),
                          cloneFrame.height(),
                          QVideoFrame::imageFormatFromPixelFormat(cloneFrame.pixelFormat()));
@@ -69,8 +66,9 @@ bool XClassWebcameraSurface::present(const QVideoFrame &frame)
         //но внутреннее состояние изображения в модуле меняется ТОЛЬКО при update
         //поэтому мы сохраняем изображение, но не вставляем его в результа работы модуля
 
-        XClassWebcameraSurfaceData &data = module_->surface_data();
-        DataAccess access(data);
+        auto &data_protected = module_->surface_data();
+        auto write = data_protected.write();
+        auto &data = write.data();
 
         //(ловим исключение, чтобы в случае ошибки мютекс не заблокировался)
         try {
@@ -78,12 +76,11 @@ bool XClassWebcameraSurface::present(const QVideoFrame &frame)
             data.captured_frames++;
 
             bool mirrory = true;        //включаем переворот по Y на Windows
-            XObject &image = data.image;
-            XObjectImage::create_from_QImage(image, img, data.channels, data.data_type, false, mirrory);
+            XRaster &raster = data.raster;
+            XRasterUtils::convert(qimage, raster, data.desired_type);
         }
         catch(XException& e) {
-            //отправляем информацию об ошибке в модуль
-            DataAccess access(data);
+            //отправляем информацию об ошибке в модуль            
             data.err = e.err();
         }
 
@@ -159,8 +156,7 @@ void XClassWebcamera::start() {
 
     //данные surface
     {
-        DataAccess access(data_);
-        data_.clear();
+        data_.write().data().clear();
     }
 
     //link transformed image
@@ -343,9 +339,8 @@ void XClassWebcamera::update() {
 
     //обработка ошибки
     {
-        DataAccess access(data_);
         if (!geti_ignore_error_on_start()) {
-            data_.err.throw_error();
+            data_.read().data().err.throw_error();
         }
     }
 
@@ -353,15 +348,15 @@ void XClassWebcamera::update() {
     if (geti_save_image()) {
         QString file_name = xc_absolute_path_from_project(gets_save_image_file_name());
 
-        if (geti_transform()) {
-            auto read = getobject_image_transformed()->read();
-            XObjectImage::save(read.data(), file_name);
+        auto read = geti_transform() ? getobject_image_transformed()->read():getobject_image()->read();
+        auto *raster = read.data().data<XRaster>();
+        if (raster) {
+            XRasterUtils::save(*raster,file_name);
+            xc_console_append("Saved `" + file_name + "`");
         }
         else {
-            auto read = getobject_image()->read();
-            XObjectImage::save(read.data(), file_name);
+            xc_console_append("Not saved `" + file_name + "` - no image");
         }
-        xc_console_append("Saved `" + file_name + "`");
     }
 }
 
@@ -399,9 +394,9 @@ void XClassWebcamera::update_camera() {
     //начинаем менять данные для surface - обновлять и считывать
     bool is_new_frame;
     {
-        DataAccess access(data_);
-        is_new_frame = data_.is_new_frame;
-        data_.is_new_frame = 0;
+        auto write = data_.write();
+        is_new_frame = write.data().is_new_frame;
+        write.data().is_new_frame = 0;
     }
 
     //считываем формат данных в data_ - они могут обновляться
@@ -667,9 +662,11 @@ int XClassWebcamera::get_gui_frame_rate() {
 //---------------------------------------------------------------------
 //получить из GUI описание данных
 void XClassWebcamera::read_gui_output_data_format() {
-    DataAccess access(data_);
-    data_.channels = getraw_image_channels();
-    data_.data_type = getraw_image_data_type();
+    auto write = data_.write();
+    // TODO need implement read format
+    xc_exception("Please implement XClassWebcamera::read_gui_output_data_format()");
+    //write.data().channels = getraw_image_channels();
+    //write.data().data_type = getraw_image_data_type();
 }
 
 //---------------------------------------------------------------------
@@ -693,8 +690,7 @@ void XClassWebcamera::on_changed_camera_state(QCamera::State state) {
 
 //---------------------------------------------------------------------
 void XClassWebcamera::on_camera_error() {
-    DataAccess access(data_);
-    data_.err.setup(tr("Camera Error: ") + camera_->errorString());
+    data_.write().data().err.setup(tr("Camera Error: ") + camera_->errorString());
 }
 
 //---------------------------------------------------------------------
@@ -710,7 +706,7 @@ void XClassWebcamera::stop_camera() {
 
 //---------------------------------------------------------------------
 //работа с surface_ - чтобы он мог установить обновленное изображение
-XClassWebcameraSurfaceData &XClassWebcamera::surface_data() {
+XProtectedData_<XClassWebcameraSurfaceData> &XClassWebcamera::surface_data() {
     return data_;
 }
 

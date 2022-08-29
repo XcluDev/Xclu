@@ -59,25 +59,21 @@ protected:
 };
 
 //Данные для обмена с surface, которые защищаются с помощью mutex
-struct XClassWebcameraSurfaceData : public XcluProtectedData
-{
+struct XClassWebcameraSurfaceData {
+    XTypeId desired_type = XTypeId::none;
 
-    XObject image;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
+    XRaster raster;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
     int is_new_frame = 0;
-
-    QString channels;   //Grayscale,RGB,BGR,RGBA,BGRA,R,G,B
-    QString data_type;  //uint8,float
 
     //данные об ошибке
     XCallError err;
 
     void clear() {
-        image.clear();
+        desired_type = XTypeId::none;
+        raster.clear();
         captured_frames = 0;
         is_new_frame = 0;
-        channels = "";
-        data_type = "";
         err.clear();
     }
 
@@ -91,7 +87,7 @@ public:
     XClassWebcamera(QString class_name);
     virtual ~XClassWebcamera();
     //обмен данными с surface_ - чтобы он мог установить обновленное изображение
-    XClassWebcameraSurfaceData &surface_data();
+    XProtectedData_<XClassWebcameraSurfaceData> &surface_data();
 
 protected:
 #include "auto.h"
@@ -133,7 +129,7 @@ protected:
     XClassWebcameraSurface surface_;
 
     //Данные для обмена с surface, которые защищаются с помощью mutex
-    XClassWebcameraSurfaceData data_;
+    XProtectedData_<XClassWebcameraSurfaceData> data_;
 
     //количество обработанных кадров
     int processed_frames_ = 0;

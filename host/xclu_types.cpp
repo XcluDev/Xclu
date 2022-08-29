@@ -125,7 +125,7 @@ void XCallError::prepend(QString prepend_text, const XCallError &err) {
     error_text_ = prepend_text + "\n" + err.error_text();
 }
 
-void XCallError::throw_error() {    //если есть ошибка - сгенерировать исключение
+void XCallError::throw_error() const {    //если есть ошибка - сгенерировать исключение
     if (is_error()) {
         xc_exception(error_text());
     }

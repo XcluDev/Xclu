@@ -170,10 +170,10 @@ void XRasterUtils::load(QString file_name, XRaster& raster) {
 }
 
 //-----------------------------------------------------------------------------------
-void XRasterUtils::save(XRaster& raster, QString file_name, QString file_format, int quality) {
+void XRasterUtils::save(const XRaster& raster, QString file_name, int quality) {
     xc_assert(!raster.is_empty(), "Error saving image, because raster is empty: '" + file_name + "' ");
     QImage qimage = link_qimage(raster);
-    xc_assert(qimage.save(file_name, file_format.toStdString().c_str(), quality),
+    xc_assert(qimage.save(file_name, nullptr, quality),
                 "save: Can't save image '" + file_name + "'");
 }
 

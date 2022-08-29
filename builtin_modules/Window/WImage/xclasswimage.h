@@ -17,7 +17,7 @@ class QLabel;
 
 
 //Данные, которые защищаются с помощью mutex
-struct XClassWImageData: public XcluProtectedData
+struct XClassWImageData: public XProtectedData_<...>
 {
     //int gui_changed = 0;
 

@@ -179,19 +179,19 @@ bool is_XTypeId_float(XTypeId type) {
 }
 
 //---------------------------------------------------------------------
-template<> XTypeId type_to_XTypeId<uint8>() { return XTypeId::uint8; }
-template<> XTypeId type_to_XTypeId<rgb_u8>() { return XTypeId::rgb_u8; }
-template<> XTypeId type_to_XTypeId<rgba_u8>() { return XTypeId::rgba_u8; }
-template<> XTypeId type_to_XTypeId<int8>() { return XTypeId::int8; }
-template<> XTypeId type_to_XTypeId<int16>() { return XTypeId::int16; }
-template<> XTypeId type_to_XTypeId<uint16>() { return XTypeId::uint16; }
-template<> XTypeId type_to_XTypeId<int32>() { return XTypeId::int32; }
-template<> XTypeId type_to_XTypeId<uint32>() { return XTypeId::uint32; }
-template<> XTypeId type_to_XTypeId<float>() { return XTypeId::float32; }
-template<> XTypeId type_to_XTypeId<double>() { return XTypeId::float64; }
-template<> XTypeId type_to_XTypeId<vec2>() { return XTypeId::vec2; }
-template<> XTypeId type_to_XTypeId<vec3>() { return XTypeId::vec3; }
-template<> XTypeId type_to_XTypeId<vec4>() { return XTypeId::vec4; }
-template<> XTypeId type_to_XTypeId<int2>() { return XTypeId::int2; }
+template<> XTypeId cpptype_to_XTypeId<uint8>() { return XTypeId::uint8; }
+template<> XTypeId cpptype_to_XTypeId<rgb_u8>() { return XTypeId::rgb_u8; }
+template<> XTypeId cpptype_to_XTypeId<rgba_u8>() { return XTypeId::rgba_u8; }
+template<> XTypeId cpptype_to_XTypeId<int8>() { return XTypeId::int8; }
+template<> XTypeId cpptype_to_XTypeId<int16>() { return XTypeId::int16; }
+template<> XTypeId cpptype_to_XTypeId<uint16>() { return XTypeId::uint16; }
+template<> XTypeId cpptype_to_XTypeId<int32>() { return XTypeId::int32; }
+template<> XTypeId cpptype_to_XTypeId<uint32>() { return XTypeId::uint32; }
+template<> XTypeId cpptype_to_XTypeId<float>() { return XTypeId::float32; }
+template<> XTypeId cpptype_to_XTypeId<double>() { return XTypeId::float64; }
+template<> XTypeId cpptype_to_XTypeId<vec2>() { return XTypeId::vec2; }
+template<> XTypeId cpptype_to_XTypeId<vec3>() { return XTypeId::vec3; }
+template<> XTypeId cpptype_to_XTypeId<vec4>() { return XTypeId::vec4; }
+template<> XTypeId cpptype_to_XTypeId<int2>() { return XTypeId::int2; }
 
 //---------------------------------------------------------------------

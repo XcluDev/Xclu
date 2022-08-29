@@ -16,7 +16,7 @@ class QWidget;
 class XcluSpinBox;
 
 //Данные, которые защищаются с помощью mutex
-struct XClassGuiNumberData: public XcluProtectedData
+struct XClassGuiNumberData: public XProtectedData_<...>
 {
     int gui_changed = 0;
 

@@ -56,10 +56,10 @@ default: \
 /// Template function converting C++ type to XTypeId
 /// Примеры применения:
 /// template<class T> void XRaster::copy_from(T* input_img, int w, int h) {
-///     copy_from(input_img, w, h, type_to_XTypeId<T>());
+///     copy_from(input_img, w, h, cpptype_to_XTypeId<T>());
 /// }
-/// template<class T> ... { assert_type(type_to_XTypeId()); ...}
-template<class T> XTypeId type_to_XTypeId();
+/// template<class T> ... { assert_type(cpptype_to_XTypeId()); ...}
+template<class T> XTypeId cpptype_to_XTypeId();
 
 
 #endif // XTYPEID_H

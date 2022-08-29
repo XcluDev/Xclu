@@ -19,7 +19,7 @@
 class XClass;
 
 //Данные для обмена с generator, которые защищаются с помощью mutex
-struct XClassSoundOutData: public XcluProtectedData
+struct XClassSoundOutData: public XProtectedData_<...>
 {
     int play_test_sound_ = 0;   //generate test sound
     int play_left_ = 1;

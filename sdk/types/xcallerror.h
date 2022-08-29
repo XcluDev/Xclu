@@ -15,7 +15,7 @@ struct XCallError {
     //извлечение информации о том, есть ли ошибка
     bool is_error() const { return is_error_; }
     QString error_text() const { return error_text_; }
-    void throw_error();  //если есть ошибка - сгенерировать исключение
+    void throw_error() const;  //если есть ошибка - сгенерировать исключение
 protected:
     bool is_error_ = false;
     QString error_text_;

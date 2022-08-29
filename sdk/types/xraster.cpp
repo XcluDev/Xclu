@@ -63,7 +63,7 @@ template<class T> void XRaster::set_pixel_unsafe(int i, const T &value) { // Not
 
 //---------------------------------------------------------------------
 template<class T> void XRaster::set(const T &value) {
-    assert_type(type_to_XTypeId());
+    assert_type(cpptype_to_XTypeId());
     for (int i=0; i<n; i++) {
         set_pixel_unsafe<T>(i, value);
     }
@@ -98,7 +98,7 @@ void XRaster::copy_from(void* data, int w, int h, XTypeId Type_id) {
 }
 
 template<class T> void XRaster::copy_from(T* data, int w, int h) {
-    copy_from(data, w, h, type_to_XTypeId<T>());
+    copy_from(data, w, h, cpptype_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------
@@ -139,7 +139,7 @@ void XRaster::link_data(void* data, int w, int h, XTypeId type) {
 }
 
 template<class T> void XRaster::link_data(T* data, int w, int h) {
-    link_data(data, w, h, type_to_XTypeId<T>());
+    link_data(data, w, h, cpptype_to_XTypeId<T>());
 }
 
 //---------------------------------------------------------------------

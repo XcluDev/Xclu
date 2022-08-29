@@ -24,6 +24,8 @@ enum class XObjectType : int {
 QString XObjectType_to_string(XObjectType type);
 XObjectType string_to_XObjectType(QString type_str);
 
+/// Функция для конвертации типа C++ в XObjectType, используется в методах XObject link() и data()
+template<class T> XObjectType cpptype_to_XObjectType();
 
 //----------------------------------------------------------------
 class XObject
@@ -44,11 +46,10 @@ public:
 
     QString subtype() const;        // Name of the subtype, used for differenciating objects of "Custom" type
 
-    void* data();
-    const void* data() const;
-
-    /// Useful for getting typed values. Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
+    /// Typed return of the value. If requested type not equal to actual, returns nullptr.
+    /// Implemented for void (means any type), XArray, XRaster, XSoundFormat, XSoundBuffer
     /// Usage: const XRaster* raster = object->data<XRaster>();
+    ///        if (raster) ...
     template <class T> T* data();
     template <class T> const T* data() const;
 

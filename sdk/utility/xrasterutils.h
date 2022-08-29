@@ -34,7 +34,7 @@ public:
 
     //Save and load
     static void load(QString file_name, XRaster& raster);
-    static void save(XRaster& raster, QString file_name, QString file_format, int quality = 90);
+    static void save(const XRaster& raster, QString file_name, int quality = 90);
 
     // Draw raster on painter
     static void draw(QPainter& painter, const XRaster& raster, int x, int y, int w, int h);

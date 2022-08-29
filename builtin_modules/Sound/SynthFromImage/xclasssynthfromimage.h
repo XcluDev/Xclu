@@ -13,7 +13,7 @@
 #include "xraster.h"
 
 //Данные для генерации
-struct XClassSynthFromImageData: public XcluProtectedData
+struct XClassSynthFromImageData: public XProtectedData_<...>
 {
     float sample_rate = 50; //pixels per second
     float volume=1;         //volume
