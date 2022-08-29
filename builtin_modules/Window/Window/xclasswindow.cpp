@@ -543,7 +543,7 @@ void XClassWindow::grab_window() {
         }
         {
             auto write = getobject_image_cpu()->write();
-            XObjectImage::create_from_QImage(write.data(), img, "RGBA", "uint8");
+            XRasterUtils::create_from_QImage(write.data(), img, "RGBA", "uint8");
         }
        // XRaster_u8c4 bgra;
        // XRaster::convert_bgra(img, bgra);   //fast

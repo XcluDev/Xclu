@@ -26,7 +26,7 @@ XClassMadRobot::~XClassMadRobot()
 
 //---------------------------------------------------------------------
 void XClassMadRobot::start() {
-    webcam_.clear();
+    webcam_u8c3_.clear();
 
     //link yolo image to GUI
     image_gui_.clear();
@@ -60,23 +60,26 @@ void XClassMadRobot::update() {
     if (geti_btn_stop()) move_stop();
 
     //Read image
-    XObjectImage::to_raster(getobject_input_image(), webcam_);
-    if (webcam_.w == 0) return;
+    {
+        const XRaster *raster =getobject_input_image()->read().data().data<XRaster>();
+        if (!raster || raster->is_empty()) return;
+        XRasterUtils::convert(*raster, webcam_u8c3_, XTypeId::rgb_u8);
+    }
 
     //transform
-    int w = webcam_.w;
-    int h = webcam_.h;
+    int w = webcam_u8c3_.w;
+    int h = webcam_u8c3_.h;
     int x0 = geti_crop_x0() * w / 100;
     int y0 = geti_crop_y0() * h / 100;
     int x1 = geti_crop_x1() * w / 100;
     int y1 = geti_crop_y1() * h / 100;
 
-    auto cropped = webcam_.crop(x0, y0, x1-x0, y1-y0);
-    XRaster::resize_nearest(cropped, image_,geti_resize_x(), geti_resize_y());
-    XObjectImage::create_from_raster(image_gui_, image_);
+    auto cropped = webcam_u8c3_.crop(x0, y0, x1-x0, y1-y0);
+    XRasterUtils::resize_nearest(cropped, image_u8c3_,geti_resize_x(), geti_resize_y());
+    image_gui_.write().data().link<XRaster>(image_u8c3_);
 
     //write to yolo
-    XRaster::save(image_, gets_yolo_write_image(), "JPG");
+    XRasterUtils::save(image_u8c3_, gets_yolo_write_image());
 
     //parse yolo
     parse_yolo();
@@ -372,7 +375,7 @@ void XClassMadRobot::draw(QPainter &painter, int outw, int outh) {
     painter.drawRect(0, 0, outw, outh);
 
     //Image
-    XRaster::draw(&painter, image_, QRectF(0,0,outw,outh));
+    XRasterUtils::draw(painter, image_u8c3_, QRectF(0,0,outw,outh));
 
     //YOLO
     for (int i=0; i<pnt_.size(); i++) {

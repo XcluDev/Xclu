@@ -414,7 +414,7 @@ void XClassMLExecute::console_write() {
 //---------------------------------------------------------------------
 bool XClassMLExecute::console_write_image() {
     //Read image
-    XObjectImage::to_raster(getobject_console_write_image(), image_write_input_);
+    XRasterUtils::to_raster(getobject_console_write_image(), image_write_input_);
 
     //no image yet
     if (reader.data().type() != XObjectType::Image) return false;
@@ -454,7 +454,7 @@ bool XClassMLExecute::console_write_image() {
             console_write_image(image.w, image.h, 1, image.data_pointer());
 
             //set to gui image
-            XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);
+            XRasterUtils::create_from_raster(getobject_console_write_image_transformed(), image);
 
         }
         else {
@@ -464,7 +464,7 @@ bool XClassMLExecute::console_write_image() {
             console_write_image(image.w, image.h, 3, image.data_pointer());
 
             //set to gui image
-            XObjectImage::create_from_raster(getobject_console_write_image_transformed(), image);
+            XRasterUtils::create_from_raster(getobject_console_write_image_transformed(), image);
         }
 
     }

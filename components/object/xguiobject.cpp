@@ -42,7 +42,7 @@ int2 XGuiObjectVisual::thumbnail_size() {
 
     //описание изображения
     const XObject &obj_1 = *object();
-    auto d = XObjectImage::get_data(obj_1);
+    auto d = XRasterUtils::get_data(obj_1);
     QString info_text = QString("%1\n%2 byte(s)").arg(XObjectType_to_string(obj_1.type())).arg(obj_1.size_bytes());
 
 
@@ -65,7 +65,7 @@ int2 XGuiObjectVisual::thumbnail_size() {
         QImage img;
         {
             const XObject &obj = *object();
-            XObjectImage::convert_to_QImage_fast_preview(obj, img, w, h);
+            XRasterUtils::convert_to_QImage_fast_preview(obj, img, w, h);
         }
 
         visual.set_image(img);

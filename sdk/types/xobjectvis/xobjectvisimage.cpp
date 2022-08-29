@@ -40,7 +40,7 @@ void XObjectVisImage::draw_thumbnail(QPainter &p, int w, int h) const {
 //Загрузка изображения с диска
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-void XObjectImage::load(XObject &object, QString file_name) {
+void XRasterUtils::load(XObject &object, QString file_name) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "Can't load image " + file_name);
     create_from_QImage(object, qimage, "RGB", XTypeId::uint8);
@@ -50,10 +50,10 @@ void XObjectImage::load(XObject &object, QString file_name) {
 //Запись на диск
 //TODO выполняется через QImage, поэтому не очень быстрая
 //быстрее через OpenCV или FreeImage или TurboJpeg
-void XObjectImage::save(const XObject &object, QString file_name, QString format, int quality) {
+void XRasterUtils::save(const XObject &object, QString file_name, QString format, int quality) {
     QImage qimage;
     link_to_QImage(object, qimage);
-    xc_assert(!qimage.isNull(), "XObjectImage::save - null resulted QImage");
+    xc_assert(!qimage.isNull(), "XRasterUtils::save - null resulted QImage");
     xc_assert(qimage.save(file_name, format.toStdString().c_str(), quality),
                 "Can't save image " + file_name);
 }

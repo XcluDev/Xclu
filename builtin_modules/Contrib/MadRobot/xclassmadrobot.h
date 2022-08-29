@@ -82,8 +82,8 @@ protected:
     virtual void draw(QPainter &painter, int w, int h);
 
     //web cam image
-    XRaster_u8c3 webcam_;   //input image
-    XRaster_u8c3 image_;   //transformed image for Python
+    XRaster webcam_u8c3_;   //input image
+    XRaster image_u8c3_;   //transformed image for Python
     XProtectedObject image_gui_;
 
     //Data from Python

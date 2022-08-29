@@ -74,7 +74,7 @@ void XClassSynthFromImage::update() {
 
     //read image if not frozen
     if (!input_frozen_ || input_.is_empty()) {
-        XObjectImage::to_raster(reader.data(), input_);
+        XRasterUtils::to_raster(reader.data(), input_);
     }
 
     int w = input_.w;
@@ -181,7 +181,7 @@ void XClassSynthFromImage::update() {
 
 
     //set to GUI
-    XObjectImage::create_from_raster(out_image_, output_);
+    XRasterUtils::create_from_raster(out_image_, output_);
 
 
 }
