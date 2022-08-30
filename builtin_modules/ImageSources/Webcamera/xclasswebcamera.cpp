@@ -424,15 +424,17 @@ void XClassWebcamera::update_camera() {
 //transformation - crop, mirror
 void XClassWebcamera::transform() {
     if (geti_transform()) {
-        //read
-       ------- if (getobject_image()->read().data().cast_copy_to<XRaster>(input_image_u8c3_)
-                && !input_image_u8c3_.is_empty())  {
+        auto read = getobject_image()->read();
+        const XRaster *raster = read.data().data<XRaster>();
+        if (raster && !raster->is_empty())  {
             //crop to square
-            transformed_image_holder_u8c3_ = (geti_crop_to_square()) ? input_image_u8c3_.crop_to_square() : input_image_u8c3_;
+            auto write = getobject_image_transformed()->write();
+            XRaster &transf = *write.data().data<XRaster>();
+            transf = (geti_crop_to_square()) ? raster->crop_to_square() : *raster;
 
             //mirror
             if (geti_mirror_x()) {
-                transformed_image_holder_u8c3_.mirror_inplace(true,false);
+                transf.mirror_inplace(true,false);
             }
 
             //rotate
@@ -440,11 +442,7 @@ void XClassWebcamera::transform() {
             if (rotate == rotate_90) transformed_image_holder_u8c3_.rotate_inplace(90);
             if (rotate == rotate_180) transformed_image_holder_u8c3_.rotate_inplace(180);
             if (rotate == rotate_270) transformed_image_holder_u8c3_.rotate_inplace(270);
-
-            //set to gui image
-            transformed_image_gui_.write().data().link<XRaster>(transformed_image_holder_u8c3_);
         }
-
     }
 }
 

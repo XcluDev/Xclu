@@ -110,9 +110,9 @@ protected:
     //transformation - crop, mirror
     void transform();
 
+    // Хранилища растров для GUI-объектов
     XRaster image_holder_u8c3_;
     XRaster transformed_image_holder_u8c3_;
-
 
     QScopedPointer<QCamera> camera_;
     bool camera_tried_to_start_ = false;
