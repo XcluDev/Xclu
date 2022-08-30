@@ -1,96 +1,96 @@
-#include "xtypeid.h"
+#include "xtype.h"
 #include "xerrorhandling.h"
 #include "xtypes.h"
 
 //---------------------------------------------------------------------
 //size of one element
-unsigned int XTypeId_bytes(XTypeId type) {
+unsigned int XType_bytes(XType type) {
     switch (type) {
-    case XTypeId::none:
+    case XType::none:
         return 0;
-    case XTypeId::uint8:
+    case XType::uint8:
         return 1;
-    case XTypeId::rgb_u8:
+    case XType::rgb_u8:
         return 3;
-    case XTypeId::rgba_u8:
+    case XType::rgba_u8:
         return 4;
-    case XTypeId::int8:
+    case XType::int8:
         return 1;
-    case XTypeId::int16:
+    case XType::int16:
         return 2;
-    case XTypeId::uint16:
+    case XType::uint16:
         return 2;
-    case XTypeId::int32:
+    case XType::int32:
         return 4;
-    case XTypeId::uint32:
+    case XType::uint32:
         return 4;
-    case XTypeId::float32:
+    case XType::float32:
         return 4;
-    case XTypeId::float64:
+    case XType::float64:
         return 8;
-    case XTypeId::vec2:
+    case XType::vec2:
         return sizeof(vec2);
-    case XTypeId::vec3:
+    case XType::vec3:
         return sizeof(vec3);
-    case XTypeId::vec4:
+    case XType::vec4:
         return sizeof(vec4);
-    case XTypeId::int2:
+    case XType::int2:
         return sizeof(int2);
     default:
-        xc_exception(QString("XTypeId_bytes - not applicable for XTypeId %1 - %2")
+        xc_exception(QString("XType_bytes - not applicable for XType %1 - %2")
                      .arg(int(type))
-                     .arg(XTypeId_to_string(type)));
+                     .arg(XType_to_string(type)));
         break;
     }
     return 0;
 }
 
 //---------------------------------------------------------------------
-int XTypeId_channels(XTypeId type) {
+int XType_channels(XType type) {
     switch (type) {
-    case XTypeId::none:
+    case XType::none:
         return 0;
-    case XTypeId::uint8:
+    case XType::uint8:
         return 1;
-    case XTypeId::rgb_u8:
+    case XType::rgb_u8:
         return 3;
-    case XTypeId::rgba_u8:
+    case XType::rgba_u8:
         return 4;
-    case XTypeId::int8:
-    case XTypeId::int16:
-    case XTypeId::uint16:
-    case XTypeId::int32:
-    case XTypeId::uint32:
-    case XTypeId::float32:
-    case XTypeId::float64:
+    case XType::int8:
+    case XType::int16:
+    case XType::uint16:
+    case XType::int32:
+    case XType::uint32:
+    case XType::float32:
+    case XType::float64:
         return 8;
-    case XTypeId::vec2:
+    case XType::vec2:
         return 2;
-    case XTypeId::vec3:
+    case XType::vec3:
         return 3;
-    case XTypeId::vec4:
+    case XType::vec4:
         return 4;
-    case XTypeId::int2:
+    case XType::int2:
         return 2;
     default:
-        xc_exception(QString("XTypeId_channels not applicable for XTypeId %1 - %2")
+        xc_exception(QString("XType_channels not applicable for XType %1 - %2")
                      .arg(int(type))
-                     .arg(XTypeId_to_string(type)));
+                     .arg(XType_to_string(type)));
         break;
     }
     return 0;
 }
 
 //---------------------------------------------------------------------
-QString XTypeId_to_string(XTypeId type) {
+QString XType_to_string(XType type) {
     switch (type) {
-#define  XTYPEDEF(name, id) case XTypeId::name:     return #name;
+#define  XTYPEDEF(name, id) case XType::name:     return #name;
 XTYPESLIST
 #undef  XTYPEDEF
-    case XTypeId::none:     return "none";
-    case XTypeId::Custom:   return "Custom";
+    case XType::none:     return "none";
+    case XType::Custom:   return "Custom";
     default:
-        xc_exception(QString("XTypeId_to_string - unknown XTypeId %1")
+        xc_exception(QString("XType_to_string - unknown XType %1")
                      .arg(int(type)));
         break;
     }
@@ -99,45 +99,45 @@ XTYPESLIST
 
 //---------------------------------------------------------------------
 //TODO optimize using hashmap
-XTypeId string_to_XTypeId(QString type) {
-#define  XTYPEDEF(name, id) if (type == #name) return XTypeId::name;
+XType string_to_XType(QString type) {
+#define  XTYPEDEF(name, id) if (type == #name) return XType::name;
 XTYPESLIST
 #undef  XTYPEDEF
-    if (type == "none") return XTypeId::none;
-    if (type == "u8") return XTypeId::u8;
-    if (type == "Custom") return XTypeId::Custom;
+    if (type == "none") return XType::none;
+    if (type == "u8") return XType::u8;
+    if (type == "Custom") return XType::Custom;
 
-    xc_exception(QString("Unknown XTypeId '%1'").arg(type));
-    return XTypeId::none;
+    xc_exception(QString("Unknown XType '%1'").arg(type));
+    return XType::none;
 }
 
 //---------------------------------------------------------------------
-bool is_XTypeId_integer(XTypeId type) {
+bool is_XType_integer(XType type) {
     switch (type) {
-    case XTypeId::none:
+    case XType::none:
         return false;
-    case XTypeId::uint8:
+    case XType::uint8:
         return true;
-    case XTypeId::rgb_u8:
+    case XType::rgb_u8:
         return false;
-    case XTypeId::rgba_u8:
+    case XType::rgba_u8:
         return false;
-    case XTypeId::int8:
+    case XType::int8:
         return true;
-    case XTypeId::int16:
+    case XType::int16:
         return true;
-    case XTypeId::uint16:
+    case XType::uint16:
         return true;
-    case XTypeId::int32:
+    case XType::int32:
         return true;
-    case XTypeId::uint32:
+    case XType::uint32:
         return true;
-    case XTypeId::float32:
+    case XType::float32:
         return false;
-    case XTypeId::float64:
-    case XTypeId::vec2:
-    case XTypeId::vec3:
-    case XTypeId::int2:
+    case XType::float64:
+    case XType::vec2:
+    case XType::vec3:
+    case XType::int2:
         return false;
     default:
         return false;
@@ -145,12 +145,12 @@ bool is_XTypeId_integer(XTypeId type) {
 }
 
 //---------------------------------------------------------------------
-bool is_XTypeId_float(XTypeId type) {
-    return (type == XTypeId::float32 || type == XTypeId::float64);
+bool is_XType_float(XType type) {
+    return (type == XType::float32 || type == XType::float64);
 }
 
 //---------------------------------------------------------------------
-#define  XTYPEDEF(name, id) template<> XTypeId cpptype_to_XTypeId<name>() { return XTypeId::name; }
+#define  XTYPEDEF(name, id) template<> XType cpptype_to_XType<name>() { return XType::name; }
 XTYPESLIST
 #undef  XTYPEDEF
 

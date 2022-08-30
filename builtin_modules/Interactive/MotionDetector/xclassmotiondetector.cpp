@@ -23,16 +23,16 @@ XClassMotionDetector::~XClassMotionDetector()
 //---------------------------------------------------------------------
 void XClassMotionDetector::start() {
     //link images with internal objects
-    setobject_output_image(&out_image_);
-    setobject_background_image(&out_background_);
+    out_image_holder_.clear();
+    out_background_holder_.clear();
+    getobject_output_image()->write().data().link<XRaster>(out_image_holder_);
+    getobject_background_image()->write().data().link<XRaster>(out_background_holder_);
 
     //Human presence detection
     //Algorithm works using correlation inside smaller pixel blocks of fixed size.
     //If correlation in some block exceeds threshold, the object is detected.
     //If no changes of "block image" for a minute - then update background.
 
-    out_image_.clear();
-    out_background_.clear();
 
     blocks_.clear();
     input_u8_.clear();
@@ -58,7 +58,7 @@ void XClassMotionDetector::update() {
 
     //Read image
     // TODO сейчас происходит копирования
-    if (!getobject_input_image()->read().data().cast_copy<XRaster>(input0_u8_)) {
+    if (!getobject_input_image()->read().data().cast_copy_to<XRaster>(input0_u8_)) {
         return;
     }
     //no image yet
@@ -228,8 +228,8 @@ void XClassMotionDetector::update() {
     }
 
     //set to images
-    out_image_.write().data().link<XRaster>(output_u8c3_);
-    out_background_.write().data().link<XRaster>(background_u8_);
+    getobject_output_image()->write().data().link<XRaster>(output_u8c3_);
+    getobject_background_image()->write().data().link<XRaster>(background_u8_);
 }
 
 //---------------------------------------------------------------------

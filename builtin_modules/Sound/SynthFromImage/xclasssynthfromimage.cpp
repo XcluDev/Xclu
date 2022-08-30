@@ -42,8 +42,8 @@ void XClassSynthFromImage::start() {
     data_.clear();
 
     //link images with internal objects
-    setobject_output_image(&out_image_);
-    out_image_.write().data().link<XRaster>(output_u8c3_);
+    out_image_holder_.clear();
+    getobject_output_image()->write().data().link<XRaster>(out_image_holder_);
 
     input_u8_.clear();
     output_u8c3_.clear();
@@ -178,8 +178,8 @@ void XClassSynthFromImage::update() {
     }
 
 
-    // Дать сигнал в GUI что было изменение объекта
-    out_image_.was_updated();
+    // Запись в GUI через копирование
+    *getobject_output_image()->write().data().data<XRaster>() = output_u8c3_;
 }
 
 //---------------------------------------------------------------------

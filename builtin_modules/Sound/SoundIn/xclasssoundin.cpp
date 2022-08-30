@@ -101,7 +101,7 @@ qint64 XClassSoundInGenerator::writeData(const char *data, qint64 len)
             sound.seti("channels", channels);
             sound.seti("sample_rate", format_.sampleRate());
             XArray *arr = sound.var_array("data", true);
-            arr->allocate(samples*channels, XTypeId::float32);
+            arr->allocate(samples*channels, XType::float32);
             float *data_float = arr->data_float();
 
             const unsigned char *ptr = reinterpret_cast<const unsigned char *>(data);

@@ -111,8 +111,8 @@ protected:
     virtual void stop();
     //virtual void on_button_pressed(QString button_id);
 
-    XProtectedObject out_image_;
-    XProtectedObject out_background_;
+    XRaster out_image_holder_;
+    XRaster out_background_holder_;
 
     XRaster input0_u8_, input_u8_;
     XRaster background_u8_;

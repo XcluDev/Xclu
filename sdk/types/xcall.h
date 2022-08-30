@@ -24,7 +24,7 @@ struct XCall {
     template<class T> void setup_const(const T &call_data);
 
     void* data();
-    const void* data_const();
+    const void* data_const() const;
     /// Typed implementations
     /// Example usage: auto* call_data = call.data<XCallCreateWidget>();
     template<class T> T* data();
@@ -36,7 +36,7 @@ struct XCall {
 
     XCallError& error();
 protected:
-    XType type_ = XType::None;
+    XType type_ = XType::none;
     void* data_ = nullptr;
     const void* data_const_ = nullptr; // Const data stores separately
     XCallError error_;

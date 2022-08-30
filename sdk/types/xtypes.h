@@ -1,7 +1,7 @@
 #ifndef XTYPES_H
 #define XTYPES_H
 
-// Базовые типы, а также XTypeId
+// Базовые типы, а также XType
 
 #include <QString>
 
@@ -18,8 +18,8 @@
 // Call
 #include "xcalltypes.h"
 
-// XTypeId identifiers
-#include "xtypeid.h"
+// XType identifiers
+#include "xtype.h"
 
 
 #endif // XTYPES_H

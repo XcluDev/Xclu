@@ -83,8 +83,7 @@ protected:
 
     //web cam image
     XRaster webcam_u8c3_;   //input image
-    XRaster image_u8c3_;   //transformed image for Python
-    XProtectedObject image_gui_;
+    XRaster image_holder_u8c3_;   //transformed image for Python
 
     //Data from Python
     void parse_yolo();

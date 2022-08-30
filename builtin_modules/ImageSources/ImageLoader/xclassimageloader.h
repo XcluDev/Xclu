@@ -29,7 +29,7 @@ protected:
     QStringList image_files_;
     void load_folder(QString folder_name);
 
-    XProtectedObject image_;
+    XRaster image_holder_;
 
 };
 

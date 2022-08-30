@@ -56,8 +56,8 @@ public:
     template <class T> const T* data() const;
 
     /// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
-    template <class T> bool cast_copy(T &data);
-    template <class T> bool cast_copy(const T &data) const;
+    template <class T> bool cast_copy_to(T &data);
+    template <class T> bool cast_copy_to(const T &data) const;
 
 protected:
     XObjectType type_ = XObjectType::Empty;

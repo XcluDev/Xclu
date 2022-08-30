@@ -74,7 +74,7 @@ template<class T> const T* XObject::data() const {
 
 //---------------------------------------------------------------------
 /// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
-template <class T> bool XObject::cast_copy(T &data) {
+template <class T> bool XObject::cast_copy_to(T &data) {
     auto *d = data();
     if (d) {
         data = *d;
@@ -83,7 +83,7 @@ template <class T> bool XObject::cast_copy(T &data) {
     return false;
 }
 
-template <class T> bool XObject::cast_copy(const T &data) const {
+template <class T> bool XObject::cast_copy_to(const T &data) const {
     auto *d = data();
     if (d) {
         data = *d;

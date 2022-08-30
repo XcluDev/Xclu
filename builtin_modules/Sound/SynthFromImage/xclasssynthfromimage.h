@@ -41,7 +41,7 @@ protected:
     //there are required to fill channels * samples values at data
     virtual void on_sound_buffer_add(int sample_rate, int channels, int samples, float *data);
 
-    XProtectedObject out_image_;
+    XRaster out_image_holder_;
 
     XRaster input_u8_;
     XRaster output_u8c3_;

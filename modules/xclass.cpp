@@ -159,32 +159,31 @@ void XClass::call(XCall& call) {
 
         //process predefined functions
         switch (call.type()) {
-        case XCallType::None: xc_exception("XClass::call type is XCallType::None");
+        case XType::none: xc_exception("XClass::call type is XType::none");
             break;
-        //process universal function
-        case XCallType::Custom: on_custom_call(call);
+        case XType::XCallCreateWidget: on_create_widget_internal(call);
             break;
-        case XCallType::CreateWidget: on_create_widget_internal(call);
-            break;
-        case XCallType::SoundBufferAdd: {
+        case XType::XCallSoundBufferAdd: {
             auto *call_data = call.data<XCallSoundBufferAdd>();
             on_sound_buffer_add(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
         }
             break;
 
-        case XCallType::SoundBufferReceived: {
+        case XType::XCallSoundBufferReceived: {
             auto *call_data = call.data<XCallSoundBufferReceived>();
             on_sound_buffer_received(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
         }
             break;
+        //process universal function
+        case XType::Custom:
         default:
-            xc_exception("Unknnown function type");
+            on_custom_call(call);
         }
 
     }
     catch (XException &e) {
         call.error().prepend(QString("Error during executing function '%1' in module '%2':")
-                  .arg(xcalltype_to_string_for_user(call.type())).arg(name()), e.err());
+                  .arg(XType_to_string(call.type())).arg(name()), e.err());
     }
 }
 
@@ -211,7 +210,7 @@ void XClass::on_create_widget_internal(XCall& call) {
 }
 
 //---------------------------------------------------------------------
-void XClass::on_custom_call(XCall& call) {
+void XClass::on_custom_call(XCall& /*call*/) {
     xc_exception("XModule '" + name()
                    + "' can't process custom call, because on_custom_call() is not implemented");
 }

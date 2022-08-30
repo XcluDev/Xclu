@@ -60,7 +60,7 @@ protected:
 
 //Данные для обмена с surface, которые защищаются с помощью mutex
 struct XClassWebcameraSurfaceData {
-    XTypeId desired_type = XTypeId::none;
+    XType desired_type = XType::none;
 
     XRaster raster;           //Изображение с камеры - заполняется surface_, для доступа использовать mutex
     int captured_frames = 0;   //Количество полученных кадров - заполняется surface_, для доступа использовать mutex
@@ -70,7 +70,7 @@ struct XClassWebcameraSurfaceData {
     XCallError err;
 
     void clear() {
-        desired_type = XTypeId::none;
+        desired_type = XType::none;
         raster.clear();
         captured_frames = 0;
         is_new_frame = 0;
@@ -109,9 +109,9 @@ protected:
 
     //transformation - crop, mirror
     void transform();
-    XProtectedObject transformed_image_gui_;
-    XRaster input_image_u8c3_;  //used for reading for transformation
-    XRaster transformed_image_u8c3_;
+
+    XRaster image_holder_u8c3_;
+    XRaster transformed_image_holder_u8c3_;
 
 
     QScopedPointer<QCamera> camera_;

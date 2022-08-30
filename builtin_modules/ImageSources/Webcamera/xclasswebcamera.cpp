@@ -75,7 +75,7 @@ bool XClassWebcameraSurface::present(const QVideoFrame &frame)
             data.is_new_frame = 1;
             data.captured_frames++;
 
-            bool mirrory = true;        //включаем переворот по Y на Windows
+            // bool mirrory = true;        //включаем переворот по Y на Windows
             XRaster &raster = data.raster;
             XRasterUtils::convert(qimage, raster, data.desired_type);
         }
@@ -150,9 +150,11 @@ void XClassWebcamera::start() {
         data_.write().data().clear();
     }
 
-    //link transformed image
-    transformed_image_gui_.clear();
-    setobject_image_transformed(&transformed_image_gui_);
+    //link images
+    image_holder_u8c3_.clear();
+    transformed_image_holder_u8c3_.clear();
+    getobject_image()->write().data().link(image_holder_u8c3_);
+    getobject_image_transformed()->write().data().link(transformed_image_holder_u8c3_);
 
     processed_frames_ = 0;
 
@@ -423,24 +425,24 @@ void XClassWebcamera::update_camera() {
 void XClassWebcamera::transform() {
     if (geti_transform()) {
         //read
-        if (getobject_image()->read().data().cast_copy<XRaster>(input_image_u8c3_)
+       ------- if (getobject_image()->read().data().cast_copy_to<XRaster>(input_image_u8c3_)
                 && !input_image_u8c3_.is_empty())  {
             //crop to square
-            transformed_image_u8c3_ = (geti_crop_to_square()) ? input_image_u8c3_.crop_to_square() : input_image_u8c3_;
+            transformed_image_holder_u8c3_ = (geti_crop_to_square()) ? input_image_u8c3_.crop_to_square() : input_image_u8c3_;
 
             //mirror
             if (geti_mirror_x()) {
-                transformed_image_u8c3_.mirror_inplace(true,false);
+                transformed_image_holder_u8c3_.mirror_inplace(true,false);
             }
 
             //rotate
             auto rotate = gete_rotate();
-            if (rotate == rotate_90) transformed_image_u8c3_.rotate_inplace(90);
-            if (rotate == rotate_180) transformed_image_u8c3_.rotate_inplace(180);
-            if (rotate == rotate_270) transformed_image_u8c3_.rotate_inplace(270);
+            if (rotate == rotate_90) transformed_image_holder_u8c3_.rotate_inplace(90);
+            if (rotate == rotate_180) transformed_image_holder_u8c3_.rotate_inplace(180);
+            if (rotate == rotate_270) transformed_image_holder_u8c3_.rotate_inplace(270);
 
             //set to gui image
-            transformed_image_gui_.write().data().link<XRaster>(transformed_image_u8c3_);
+            transformed_image_gui_.write().data().link<XRaster>(transformed_image_holder_u8c3_);
         }
 
     }

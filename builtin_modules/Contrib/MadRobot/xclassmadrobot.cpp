@@ -29,8 +29,8 @@ void XClassMadRobot::start() {
     webcam_u8c3_.clear();
 
     //link yolo image to GUI
-    image_gui_.clear();
-    setobject_yolo_image(&image_gui_);
+    image_holder_u8c3_.clear();
+    getobject_yolo_image()->write().data().link<XRaster>(image_holder_u8c3_);
 
     set_state("---");
 
@@ -61,7 +61,8 @@ void XClassMadRobot::update() {
 
     //Read image
     {
-        const XRaster *raster = getobject_input_image()->read().data().data<XRaster>();
+        auto read = getobject_input_image()->read();
+        const XRaster *raster = read.data().data<XRaster>();
         if (!raster || raster->is_empty()) return;
         XRasterUtils::convert(*raster, webcam_u8c3_, XType::rgb_u8);
     }
@@ -75,11 +76,12 @@ void XClassMadRobot::update() {
     int y1 = geti_crop_y1() * h / 100;
 
     auto cropped = webcam_u8c3_.crop(x0, y0, x1-x0, y1-y0);
-    XRasterUtils::resize_nearest(cropped, image_u8c3_,geti_resize_x(), geti_resize_y());
-    image_gui_.write().data().link<XRaster>(image_u8c3_);
+    XRasterUtils::resize_nearest(cropped,
+                                 *getobject_yolo_image()->write().data().data<XRaster>(),
+                                 geti_resize_x(), geti_resize_y());
 
     //write to yolo
-    XRasterUtils::save(image_u8c3_, gets_yolo_write_image());
+    XRasterUtils::save(*getobject_yolo_image()->read().data().data<XRaster>(), gets_yolo_write_image());
 
     //parse yolo
     parse_yolo();
@@ -375,7 +377,7 @@ void XClassMadRobot::draw(QPainter &painter, int outw, int outh) {
     painter.drawRect(0, 0, outw, outh);
 
     //Image
-    XRasterUtils::draw(painter, image_u8c3_, QRectF(0,0,outw,outh));
+    XRasterUtils::draw(painter, image_holder_u8c3_, QRectF(0,0,outw,outh));
 
     //YOLO
     for (int i=0; i<pnt_.size(); i++) {

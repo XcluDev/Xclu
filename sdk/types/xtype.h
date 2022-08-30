@@ -4,7 +4,7 @@
 #include <QString>
 
 //------------------------------------------------
-// Перечисление типов для XTypeId
+// Перечисление типов для XType
 //------------------------------------------------
 #define XTYPESLIST \
     XTYPEDEF(uint8, 1) \
@@ -37,8 +37,8 @@
 // При изменении списка, следует обновить значение Custom ниже
 //------------------------------------------------
 
-// Объявление класса XTypeId
-enum class XTypeId : int {
+// Объявление класса XType
+enum class XType : int {
 #define  XTYPEDEF(name, id) name = id,
 XTYPESLIST
 #undef  XTYPEDEF
@@ -49,42 +49,42 @@ XTYPESLIST
 };
 
 // Размеры типов - применимо только к базовым
-unsigned int XTypeId_bytes(XTypeId type);
-int XTypeId_channels(XTypeId type);
-QString XTypeId_to_string(XTypeId type);
-XTypeId string_to_XTypeId(QString type);
-bool is_XTypeId_integer(XTypeId type);
-bool is_XTypeId_float(XTypeId type);
+unsigned int XType_bytes(XType type);
+int XType_channels(XType type);
+QString XType_to_string(XType type);
+XType string_to_XType(QString type);
+bool is_XType_integer(XType type);
+bool is_XType_float(XType type);
 
 
 // Macros for enrolling code for all basic types
-#define code_for_all_basic_XTypeId(type_id, CODE) \
+#define code_for_all_basic_XType(type_id, CODE) \
 switch(type_id) {\
-case XTypeId::uint8:    { typedef uint8 T; CODE } break;\
-case XTypeId::rgb_u8:   { typedef rgb_u8 T; CODE } break;\
-case XTypeId::rgba_u8:  { typedef rgba_u8 T; CODE } break;\
-case XTypeId::int8:     { typedef int8 T; CODE } break;\
-case XTypeId::int16:    { typedef int16 T; CODE } break;\
-case XTypeId::uint16:   { typedef uint16 T; CODE } break;\
-case XTypeId::int32:    { typedef int32 T; CODE } break;\
-case XTypeId::uint32:   { typedef uint32 T; CODE } break;\
-case XTypeId::float32:  { typedef float32 T; CODE } break;\
-case XTypeId::float64:  { typedef float64 T; CODE } break;\
-case XTypeId::vec2:     { typedef vec2 T; CODE } break;\
-case XTypeId::vec3:     { typedef vec3 T; CODE } break;\
-case XTypeId::vec4:     { typedef vec4 T; CODE } break;\
-case XTypeId::int2:     { typedef int2 T; CODE } break;\
+case XType::uint8:    { typedef uint8 T; CODE } break;\
+case XType::rgb_u8:   { typedef rgb_u8 T; CODE } break;\
+case XType::rgba_u8:  { typedef rgba_u8 T; CODE } break;\
+case XType::int8:     { typedef int8 T; CODE } break;\
+case XType::int16:    { typedef int16 T; CODE } break;\
+case XType::uint16:   { typedef uint16 T; CODE } break;\
+case XType::int32:    { typedef int32 T; CODE } break;\
+case XType::uint32:   { typedef uint32 T; CODE } break;\
+case XType::float32:  { typedef float32 T; CODE } break;\
+case XType::float64:  { typedef float64 T; CODE } break;\
+case XType::vec2:     { typedef vec2 T; CODE } break;\
+case XType::vec3:     { typedef vec3 T; CODE } break;\
+case XType::vec4:     { typedef vec4 T; CODE } break;\
+case XType::int2:     { typedef int2 T; CODE } break;\
 default: \
-    xc_exception(QString("code_for_all_basic_XTypeId - bad type_id %1 for code %2").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
+    xc_exception(QString("code_for_all_basic_XType - bad type_id %1 for code %2").arg(XType_to_string(type_id)).arg(#CODE)); \
 }
 
-/// Template function converting C++ type to XTypeId
+/// Template function converting C++ type to XType
 /// Примеры применения:
 /// template<class T> void XRaster::copy_from(T* input_img, int w, int h) {
-///     copy_from(input_img, w, h, cpptype_to_XTypeId<T>());
+///     copy_from(input_img, w, h, cpptype_to_XType<T>());
 /// }
-/// template<class T> ... { assert_type(cpptype_to_XTypeId()); ...}
-template<class T> XTypeId cpptype_to_XTypeId();
+/// template<class T> ... { assert_type(cpptype_to_XType()); ...}
+template<class T> XType cpptype_to_XType();
 
 
 #endif // XTYPEID_H

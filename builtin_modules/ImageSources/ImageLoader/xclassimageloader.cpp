@@ -24,7 +24,7 @@ XClassImageLoader::~XClassImageLoader()
 
 //---------------------------------------------------------------------
 void XClassImageLoader::start() {
-    setobject_image(image_);   //link xgui image with image_
+    getobject_image()->write().data().link<XRaster>(image_holder_);   //link xgui image with image_
     seti_is_new_frame(false);
 
     //load image immediately ! :)
@@ -72,7 +72,8 @@ void XClassImageLoader::update() {
 void XClassImageLoader::load_image_file(QString image_file) {
     image_file_ = image_file;
     QString file_name = xc_absolute_path_from_project(image_file_);
-    XRasterUtils::load(image_.write().data(), file_name);
+
+    XRasterUtils::load(*getobject_image()->write().data().data<XRaster>(), file_name);
 }
 
 //---------------------------------------------------------------------

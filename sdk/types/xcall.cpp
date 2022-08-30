@@ -1,35 +1,9 @@
 #include "xcall.h"
-#include "xtypeutils.h"
+
 #include "xerrorhandling.h"
 
 //---------------------------------------------------------------------
-const QString XCallTypeNames[int(XCallType::N)] =
-{
-    "none",
-    "custom",
-    "create_widget",
-    "sound_buffer_add",
-    "sound_buffer_received"
-};
-
-
-QString xcalltype_to_string(XCallType type) {
-    return XTypeUtils::to_string(int(type), int(XCallType::N), XCallTypeNames);
-}
-
-//not generates exception
-QString xcalltype_to_string_for_user(XCallType type) {
-    if (int(type) < 0 || type >= XCallType::N) return QString("unknown:%1").arg(int(type));
-    return xcalltype_to_string(type);
-}
-
-XCallType xstring_to_calltype(QString type_str) {
-    return XCallType(XTypeUtils::to_type(type_str, int(XCallType::N), XCallTypeNames));
-}
-
-
-//---------------------------------------------------------------------
-void XCall::setup(XCallType type, void *data) {
+void XCall::setup(XType type, void *data) {
     type_ = type;
     data_ = data;
     data_const_ = nullptr;
@@ -37,7 +11,7 @@ void XCall::setup(XCallType type, void *data) {
 }
 
 //---------------------------------------------------------------------
-void XCall::setup_const(XCallType type, const void *data) {
+void XCall::setup_const(XType type, const void *data) {
     type_ = type;
     data_ = nullptr;
     data_const_ = data;
@@ -45,72 +19,49 @@ void XCall::setup_const(XCallType type, const void *data) {
 }
 
 //---------------------------------------------------------------------
-XCallType XCall::type() const {
+XType XCall::type() const {
     return type_;
 }
 
 
 //---------------------------------------------------------------------
-void XCall::assert_type(XCallType type) const {
+void XCall::assert_type(XType type) const {
     xc_assert(type_ == type, QString("XCall::assert_type - expected %1, have %2")
-              .arg(xcalltype_to_string_for_user(type))
-              .arg(xcalltype_to_string_for_user(type_)));
+              .arg(XType_to_string(type))
+              .arg(XType_to_string(type_)));
 }
 
 //---------------------------------------------------------------------
-bool XCall::has_type(XCallType type) const {
+bool XCall::has_type(XType type) const {
     return (type_ == type);
 }
 
 //---------------------------------------------------------------------
-template<> void XCall::setup<XCallCreateWidget>(XCallCreateWidget &call_data) {
-    setup(XCallType::CreateWidget, &call_data);
+template<class T> void XCall::setup(T &call_data) {
+    setup(cpptype_to_XType<T>(), &call_data);
 }
-template<> void XCall::setup<XCallSoundBufferAdd>(XCallSoundBufferAdd &call_data) {
-    setup(XCallType::SoundBufferAdd, &call_data);
+template<class T> void XCall::setup_const(const T &call_data) {
+    setup_const(cpptype_to_XType<T>(), &call_data);
 }
-template<> void XCall::setup<XCallSoundBufferReceived>(XCallSoundBufferReceived &call_data) {
-    setup(XCallType::SoundBufferReceived, &call_data);
-}
-
-template<> void XCall::setup_const<XCallCreateWidget>(const XCallCreateWidget &call_data) {
-    setup_const(XCallType::CreateWidget, &call_data);
-}
-template<> void XCall::setup_const<XCallSoundBufferAdd>(const XCallSoundBufferAdd &call_data) {
-    setup_const(XCallType::SoundBufferAdd, &call_data);
-}
-template<> void XCall::setup_const<XCallSoundBufferReceived>(const XCallSoundBufferReceived &call_data) {
-    setup_const(XCallType::SoundBufferReceived, &call_data);
-}
-
 
 //---------------------------------------------------------------------
 void* XCall::data() {
     return data_;
 }
 
-//---------------------------------------------------------------------
-template<> XCallCreateWidget* XCall::data<XCallCreateWidget>() {
-    if (!has_type(XCallType::CreateWidget)) return nullptr;
-    return (XCallCreateWidget*) data();
-}
-template<> XCallSoundBufferAdd* XCall::data<XCallSoundBufferAdd>() {
-    return (XCallSoundBufferAdd*) data();
-}
-template<> XCallSoundBufferReceived* XCall::data<XCallSoundBufferReceived>() {
-    return (XCallSoundBufferReceived*) data();
+const void* XCall::data_const() const {
+    return data_const_;
 }
 
 //---------------------------------------------------------------------
-template<> const XCallCreateWidget* XCall::data_const<XCallCreateWidget>() const {
-    if (!has_type(XCallType::CreateWidget)) return nullptr;
-    return (const XCallCreateWidget*) data_const();
+template<class T> T* XCall::data() {
+    if (!has_type(cpptype_to_XType<T>())) return nullptr;
+    return (T*) data();
 }
-template<> XCallSoundBufferAdd* XCall::data<XCallSoundBufferAdd>() {
-    return (XCallSoundBufferAdd*) data_const();
-}
-template<> XCallSoundBufferReceived* XCall::data<XCallSoundBufferReceived>() {
-    return (XCallSoundBufferReceived*) data_const();
+
+template<class T> const T* XCall::data_const() const {
+    if (!has_type(cpptype_to_XType<T>())) return nullptr;
+    return (const T*) data_const();
 }
 
 //---------------------------------------------------------------------
