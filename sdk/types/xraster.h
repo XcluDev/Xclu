@@ -9,7 +9,7 @@
 //--------------------------------------------------
 
 #include <QVector>
-#include "xtypeid.h"
+#include "xtype.h"
 #include "int2.h"
 
 /// XRaster - raster class.
@@ -20,10 +20,10 @@ public:
     int w = 0;
     int h = 0;
     int sizeofpixel = 0;
-    XTypeId type_id = XTypeId::none; // To change this value you must call call set_type()
+    XType type_id = XType::none; // To change this value you must call call set_type()
 
-    void set_type(XTypeId type_id); // Must be called instead of directly changing type_id
-    void assert_type(XTypeId type) const;
+    void set_type(XType type_id); // Must be called instead of directly changing type_id
+    void assert_type(XType type) const;
 protected:
     bool is_owner = false;   // Does raster hold its own memory, or use external source
     quint8 *data_pointer_ = nullptr;
@@ -62,21 +62,21 @@ public:
 
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
-    void allocate(int w, int h, XTypeId Type_id, bool reallocate = false);
+    void allocate(int w, int h, XType Type_id, bool reallocate = false);
 
     void clear();
 
     //----------------------------------------------------------------------------
     // Copying
     //----------------------------------------------------------------------------
-    void copy_from(void* data, int w, int h, XTypeId Type_id);
+    void copy_from(void* data, int w, int h, XType Type_id);
     template<class T> void copy_from(T* data, int w, int h);
 
     //----------------------------------------------------------------------------
     // Linking - using external source of pixels, not copying it.
     // Use this mode carefully and control the source data exists while this XRaster is used!
     //----------------------------------------------------------------------------
-    void link_data(void* data, int w, int h, XTypeId type);
+    void link_data(void* data, int w, int h, XType type);
     template<class T> void link_data(T* data, int w, int h);
 
     // Operations

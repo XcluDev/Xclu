@@ -7,15 +7,15 @@
 #include <QPainter>
 
 //---------------------------------------------------------------------
-// TODO Implement converting all to all types by adding second version for code_for_all_basic_XTypeId at types.h scanning T2
+// TODO Implement converting all to all types by adding second version for code_for_all_basic_XType at types.h scanning T2
 // and using this macroses nested
-void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId destination_type) {
+void XRasterUtils::convert(const XRaster& source, XRaster& destination, XType destination_type) {
     if (source.type_id == destination_type) {
         destination = source;
         return;
     }
     destination.allocate(source.w, source.h, destination_type);
-    if (source.type_id == XTypeId::rgb_u8 && destination_type == XTypeId::uint8) {
+    if (source.type_id == XType::rgb_u8 && destination_type == XType::uint8) {
         const rgb_u8* data1 = (const rgb_u8*)source.data_pointer();
         uint8* data2 = (uint8*)destination.data_pointer();
         for (int i=0; i<source.n; i++) {
@@ -23,7 +23,7 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId 
         }
         return;
     }
-    if (source.type_id == XTypeId::uint8 && destination_type == XTypeId::rgb_u8) {
+    if (source.type_id == XType::uint8 && destination_type == XType::rgb_u8) {
         const uint8* data1 = (const uint8*)source.data_pointer();
         rgb_u8* data2 = (rgb_u8*)destination.data_pointer();
         for (int i=0; i<source.n; i++) {
@@ -32,13 +32,13 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination, XTypeId 
         return;
     }
     xc_exception(QString("XRasterUtils::convert - unsupported conversion types %1 -> %2")
-                 .arg(XTypeId_to_string(source.type_id))
-                 .arg(XTypeId_to_string(destination_type)));
+                 .arg(XType_to_string(source.type_id))
+                 .arg(XType_to_string(destination_type)));
 }
 
 //---------------------------------------------------------------------
 void XRasterUtils::convert(QImage qimage, XRaster &raster,
-                           XTypeId type,    // if type not specified - set from qimage
+                           XType type,    // if type not specified - set from qimage
                            RGBA_Bytes_Order order) {
     int w = qimage.size().width();
     int h = qimage.size().height();
@@ -47,12 +47,12 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
     xc_assert(format == QImage::Format_RGB32,
                 "XRasterUtils::convert - QImage format is unsupported, only Format_RGB32 is supported");
 
-    if (type == XTypeId::none) {
+    if (type == XType::none) {
         if (format == QImage::Format_RGB32) {
-            type = XTypeId::rgba_u8;
+            type = XType::rgba_u8;
         }
     }
-    xc_assert(type != XTypeId::none, "XRasterUtils::convert - internal error, invalid type");
+    xc_assert(type != XType::none, "XRasterUtils::convert - internal error, invalid type");
 
     raster.allocate(w, h, type);
 
@@ -68,13 +68,13 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
             uchar a = line[k++];
             // TODO need to implement separately to optimize (unroll etc)
             switch (type) {
-            case XTypeId::uint8:
+            case XType::uint8:
                 ((uint*)data)[x+w*y] = rgb_u8::grayi(r,g,b);
                 break;
-            case XTypeId::rgb_u8:
+            case XType::rgb_u8:
                 ((rgb_u8*)data)[x+w*y] = rgb_u8(r,g,b);
                 break;
-            case XTypeId::rgba_u8:
+            case XType::rgba_u8:
                 switch (order) {
                 case RGBA_Bytes_Order::RGBA:
                     ((rgba_u8*)data)[x+w*y] = rgba_u8(r,g,b,a);
@@ -89,7 +89,7 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
                 break;
             default:
                 xc_exception(QString("XRasterUtils::convert - unsupported type %1")
-                             .arg(XTypeId_to_string(type)));
+                             .arg(XType_to_string(type)));
             }
         }
     }
@@ -103,7 +103,7 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
     int h = raster.h;
     switch (raster.type_id)
     {
-    case XTypeId::uint8:
+    case XType::uint8:
     {
         qimage = QImage(w, h, QImage::Format_RGB32);
         auto *raster_data = (const uint8*)raster.data_pointer();
@@ -121,7 +121,7 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
         }
         break;
     }
-    case XTypeId::rgb_u8:
+    case XType::rgb_u8:
     {
         qimage = QImage(w, h, QImage::Format_RGB32);
         auto *raster_data = (rgb_u8*)raster.data_pointer();
@@ -141,7 +141,7 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
     }
     default:
         xc_exception(QString("XRasterUtils::convert - raster type %1 not supported")
-                     .arg(XTypeId_to_string(raster.type_id)));
+                     .arg(XType_to_string(raster.type_id)));
     }
 }
 
@@ -150,9 +150,9 @@ QImage XRasterUtils::link_qimage(const XRaster& raster) {
     QImage::Format format = QImage::Format_Invalid;
     switch (raster.type_id)
     {
-    case XTypeId::uint8: format = QImage::Format_Grayscale8;
+    case XType::uint8: format = QImage::Format_Grayscale8;
         break;
-    case XTypeId::rgb_u8: format = QImage::Format_RGB888;
+    case XType::rgb_u8: format = QImage::Format_RGB888;
         break;
     default:
         xc_exception("XRasterUtils::link_qimage - unsupported format");

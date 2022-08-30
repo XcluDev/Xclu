@@ -19,9 +19,9 @@ XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
 
 
 //---------------------------------------------------------------------
-bool XModuleRegisteredCalls::accepts(XCallType function) {
+bool XModuleRegisteredCalls::accepts(XType function) {
     if (any_) return true;
-    if (function == XCallType::None) return true;
+    if (function == XType::None) return true;
     return functions_.contains(function);
 }
 
@@ -29,7 +29,7 @@ bool XModuleRegisteredCalls::accepts(XCallType function) {
 bool XModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
     if (any_) return true;
     if (filter.isEmpty()) return true;
-    QMapIterator<XCallType, int> i(functions_);
+    QMapIterator<XType, int> i(functions_);
     while (i.hasNext()) {
         i.next();
         QString name = xcalltype_to_string(i.key());
@@ -45,7 +45,7 @@ QString XModuleRegisteredCalls::to_string_gui() {        //конвертаци�
     if (any_) return "*";
     QString s;
     if (!functions_.isEmpty()) {
-        QMapIterator<XCallType, int> i(functions_);
+        QMapIterator<XType, int> i(functions_);
         while (i.hasNext()) {
             i.next();
             s.append(xcalltype_to_string_for_user(i.key()));

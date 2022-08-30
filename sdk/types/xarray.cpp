@@ -3,15 +3,15 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
-void XArray::set_type(XTypeId type_id) {
+void XArray::set_type(XType type_id) {
     this->type_id = type_id;
-    sizeofitem = XTypeId_bytes(type_id);
+    sizeofitem = XType_bytes(type_id);
 }
 
-void XArray::assert_type(XTypeId type) const {
+void XArray::assert_type(XType type) const {
     xc_assert(type_id == type, QString("XArray::assert_type error, expected %1 but has %2")
-              .arg(XTypeId_to_string(type))
-              .arg(XTypeId_to_string(type_id)));
+              .arg(XType_to_string(type))
+              .arg(XType_to_string(type_id)));
 }
 
 // Useful wrapper that checks if data is empty
@@ -46,7 +46,7 @@ template<class T> void XArray::set_item_unsafe(int i, const T &value) { // Note:
 
 //---------------------------------------------------------------------
 template<class T> void XArray::set(const T &value) {
-    assert_type(cpptype_to_XTypeId());
+    assert_type(cpptype_to_XType());
     for (int i=0; i<n; i++) {
         set_item_unsafe<T>(i, value);
     }
@@ -58,7 +58,7 @@ template<class T> void XArray::set(const T &value) {
 
 // If 'reallocate is true - then old vector will be cleared.
 // It's useful for clearing memory when image size if significantly reduced, but works slower.
-void XArray::allocate(int n, XTypeId Type_id, bool reallocate) {
+void XArray::allocate(int n, XType Type_id, bool reallocate) {
     if (!reallocate && is_owner && this->type_id == Type_id) {
         return;
     }
@@ -73,13 +73,13 @@ void XArray::allocate(int n, XTypeId Type_id, bool reallocate) {
 }
 
 //---------------------------------------------------------------------
-void XArray::copy_from(void* data, int n, XTypeId Type_id) {
+void XArray::copy_from(void* data, int n, XType Type_id) {
     allocate(n, Type_id);
     memcpy(data_pointer_, data, data_size());
 }
 
 template<class T> void XArray::copy_from(T* data, int n) {
-    copy_from(data, n, cpptype_to_XTypeId<T>());
+    copy_from(data, n, cpptype_to_XType<T>());
 }
 
 //---------------------------------------------------------------------
@@ -107,7 +107,7 @@ bool XArray::is_valid() const {
 }
 
 //---------------------------------------------------------------------
-void XArray::link_data(void* data, int n, XTypeId type) {
+void XArray::link_data(void* data, int n, XType type) {
     xc_assert(n > 0, "Error XArray::link() - bad dimensions");
     xc_assert(data, "Error XArray::link() - data is nullptr");
     clear();
@@ -118,13 +118,13 @@ void XArray::link_data(void* data, int n, XTypeId type) {
 }
 
 template<class T> void XArray::link_data(T* data, int n) {
-    link_data(data, n, cpptype_to_XTypeId<T>());
+    link_data(data, n, cpptype_to_XType<T>());
 }
 
 //---------------------------------------------------------------------
 void XArray::add_inplace(const XArray &a) {
     xc_assert(a.n == n, "XArray add error, argument raster has different size");
-    code_for_all_basic_XTypeId(type_id, \
+    code_for_all_basic_XType(type_id, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) += a.item_unsafe<const T>(i); \
     });
@@ -133,7 +133,7 @@ void XArray::add_inplace(const XArray &a) {
 //---------------------------------------------------------------------
 void XArray::mult_inplace(const XArray &a) {
     xc_assert(a.n, "XArray mult_by error, argument raster has different size");
-    code_for_all_basic_XTypeId(type_id, \
+    code_for_all_basic_XType(type_id, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) *= a.item_unsafe<T>(i); \
     });

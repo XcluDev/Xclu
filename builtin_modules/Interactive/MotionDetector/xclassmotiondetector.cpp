@@ -63,7 +63,7 @@ void XClassMotionDetector::update() {
     }
     //no image yet
     if (input0_u8_.is_empty()) return;
-    input0_u8_.assert_type(XTypeId::u8);
+    input0_u8_.assert_type(XType::u8);
 
     //ignore frames at start
     ignore_frames_--;
@@ -184,7 +184,7 @@ void XClassMotionDetector::update() {
     seti_event(state_);
 
     //make output
-    XRasterUtils::convert(input_u8_, output_u8c3_, XTypeId::rgb_u8);
+    XRasterUtils::convert(input_u8_, output_u8c3_, XType::rgb_u8);
     for (int Y=0; Y<H; Y++) {
         for (int X=0; X<W; X++) {
             auto &block = blocks_[X+W*Y];
@@ -235,7 +235,7 @@ void XClassMotionDetector::update() {
 //---------------------------------------------------------------------
 //decimate inout
 void XClassMotionDetector::decimate_input(XRaster &input_u8, XRaster &result_u8) {
-    input_u8.assert_type(XTypeId::u8);
+    input_u8.assert_type(XType::u8);
     int dec = geti_decimate_input();
     if (dec <= 1) {
         result_u8 = input_u8;
@@ -244,7 +244,7 @@ void XClassMotionDetector::decimate_input(XRaster &input_u8, XRaster &result_u8)
     int dec2 = dec*dec;
     int w = input_u8.w;
     int h = input_u8.h;
-    result_u8.allocate(w, h, XTypeId::u8);
+    result_u8.allocate(w, h, XType::u8);
     for (int y=0; y+dec<=h; y+=dec) {
         for (int x=0; x+dec<=w; x+=dec) {
             int sum = 0;

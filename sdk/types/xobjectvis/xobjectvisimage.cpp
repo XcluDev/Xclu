@@ -14,7 +14,7 @@ QStringList XObjectVisImage::short_description() const {
     return QStringList() << QString("Image %1 x %2, type: %3")
                             .arg(raster->w)
                             .arg(raster->h)
-                            .arg(XTypeId_to_string(raster->type_id));
+                            .arg(XType_to_string(raster->type_id));
     //info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
     //visual.set_text(info_text);
 }
@@ -43,7 +43,7 @@ void XObjectVisImage::draw_thumbnail(QPainter &p, int w, int h) const {
 void XRasterUtils::load(XObject &object, QString file_name) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "Can't load image " + file_name);
-    create_from_QImage(object, qimage, "RGB", XTypeId::uint8);
+    create_from_QImage(object, qimage, "RGB", XType::uint8);
 }
 
 //---------------------------------------------------------------------

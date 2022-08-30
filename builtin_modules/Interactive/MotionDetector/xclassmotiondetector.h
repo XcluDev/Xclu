@@ -34,8 +34,8 @@ public:
 
     void update(XRaster &input_u8, XRaster &background_u8, const XClassMotionDetectorBlockParams &params,
                 bool enabled, float dt) {
-        input_u8.assert_type(XTypeId::uint8);
-        background_u8.assert_type(XTypeId::uint8);
+        input_u8.assert_type(XType::uint8);
+        background_u8.assert_type(XType::uint8);
         enabled_ = enabled;
         if (enabled) {
             //Compute distance

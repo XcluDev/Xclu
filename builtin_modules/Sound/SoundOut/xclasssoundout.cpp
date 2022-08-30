@@ -41,7 +41,7 @@ void XClassSoundOutGenerator::request_sound(int samples, int channels) { //со�
             sound.seti("channels", channels);
             sound.seti("sample_rate", format_.sampleRate());
             XArray *arr = sound.var_array("data", true);
-            arr->allocate(samples*channels, XTypeId::float32);
+            arr->allocate(samples*channels, XType::float32);
         }
 
         //заполнение массива
@@ -77,7 +77,7 @@ void XClassSoundOutGenerator::request_sound(int samples, int channels) { //со�
 
             for (int i=0; i<data_->modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
-                data_->modules_[i]->call(XCallType::SoundBufferAdd, sound_write.pointer());
+                data_->modules_[i]->call(XType::SoundBufferAdd, sound_write.pointer());
             }
         }
 

@@ -256,7 +256,7 @@ SOURCES += \
     sdk/types/xrange.cpp \
     sdk/types/xraster.cpp \
     sdk/types/xsoundtypes.cpp \
-    sdk/types/xtypeid.cpp \
+    sdk/types/xtype.cpp \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/jsonutils.cpp \
@@ -383,7 +383,7 @@ HEADERS += \
     sdk/types/xrange.h \
     sdk/types/xraster.h \
     sdk/types/xsoundtypes.h \
-    sdk/types/xtypeid.h \
+    sdk/types/xtype.h \
     sdk/types/xtypes.h \
     sdk/types/xwaschanged.h \
     sdk/utility/jsonutils.h \

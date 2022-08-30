@@ -70,7 +70,7 @@ void XClassSynthFromImage::update() {
         if (!raster || raster->is_empty()) return;
         // Read image if not frozen
         if (!input_frozen_ || input_u8_.is_empty()) {
-            XRasterUtils::convert(*raster, input_u8_, XTypeId::u8);
+            XRasterUtils::convert(*raster, input_u8_, XType::u8);
         }
     }
 
@@ -160,7 +160,7 @@ void XClassSynthFromImage::update() {
     }
 
     //generate output
-    XRasterUtils::convert(input_u8_, output_u8c3_, XTypeId::rgb_u8);
+    XRasterUtils::convert(input_u8_, output_u8c3_, XType::rgb_u8);
 
     //draw scan line and sound graph
     float deltay = h*0.2;

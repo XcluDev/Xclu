@@ -207,7 +207,7 @@ XRaster XClassMotionDetectorRouter::resize_to_template_float(XProtectedObject *i
         //no image yet
         xc_assert(raster && !raster->is_empty(), "XClassMotionDetectorRouter::resize_to_template_float: Input is not image");
 
-        XRasterUtils::convert(*raster, raster_u8, XTypeId::u8);
+        XRasterUtils::convert(*raster, raster_u8, XType::u8);
     }
 
     int w = raster_u8.w;
@@ -217,8 +217,8 @@ XRaster XClassMotionDetectorRouter::resize_to_template_float(XProtectedObject *i
     int h1 = geti_templ_h();
     XRaster out_f;
     XRaster counter_i32;
-    out_f.allocate(w1, h1, XTypeId::float32);
-    counter_i32.allocate(w1, h1, XTypeId::int32);
+    out_f.allocate(w1, h1, XType::float32);
+    counter_i32.allocate(w1, h1, XType::int32);
 
     //sum
     for (int y=0; y<h; y++) {
@@ -243,8 +243,8 @@ XRaster XClassMotionDetectorRouter::resize_to_template_float(XProtectedObject *i
 
 //---------------------------------------------------------------------
 float XClassMotionDetectorRouter::normalized_correlation_float(XRaster &A, XRaster &B) {
-    A.assert_type(XTypeId::float32);
-    B.assert_type(XTypeId::float32);
+    A.assert_type(XType::float32);
+    B.assert_type(XType::float32);
     int w = A.w;
     int h = A.h;
     xc_assert(w == B.w && h == B.h, "normalized_correlation_float - different sizes");
