@@ -11,6 +11,9 @@
 // Sound
 #include "xsoundtypes.h"
 
+// Call
+#include "xcalltypes.h"
+
 // XTypeId identifiers
 #include "xtypeid.h"
 

@@ -56,6 +56,7 @@ private:
     //send sound callbacks with sound as float to other modules
     void send_sound_in();
     XProtectedObject sound_;
+    XSoundBuffer buffer_prot_;       // linked to sound_, not use directly!
 
 };
 

@@ -371,6 +371,7 @@ HEADERS += \
     sdk/types/xbasictypes.h \
     sdk/types/xcall.h \
     sdk/types/xcallerror.h \
+    sdk/types/xcalltypes.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
     sdk/types/xobjectvis/xobjectvis.h \
