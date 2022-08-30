@@ -124,7 +124,7 @@ template<class T> void XArray::link_data(T* data, int n) {
 //---------------------------------------------------------------------
 void XArray::add_inplace(const XArray &a) {
     xc_assert(a.n == n, "XArray add error, argument raster has different size");
-    code_for_all_XTypeId(type_id, \
+    code_for_all_basic_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) += a.item_unsafe<const T>(i); \
     });
@@ -133,7 +133,7 @@ void XArray::add_inplace(const XArray &a) {
 //---------------------------------------------------------------------
 void XArray::mult_inplace(const XArray &a) {
     xc_assert(a.n, "XArray mult_by error, argument raster has different size");
-    code_for_all_XTypeId(type_id, \
+    code_for_all_basic_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) *= a.item_unsafe<T>(i); \
     });

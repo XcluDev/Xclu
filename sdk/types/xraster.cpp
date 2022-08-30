@@ -173,7 +173,7 @@ float XRaster::distance_C(const XRaster &compare_with) const {
 //---------------------------------------------------------------------
 void XRaster::add_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster add error, argument raster has different size");
-    code_for_all_XTypeId(type_id, \
+    code_for_all_basic_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
         pixel_unsafe<T>(i) +=r.pixel_unsafe<const T>(i); \
     });
@@ -182,7 +182,7 @@ void XRaster::add_inplace(const XRaster &r) {
 //---------------------------------------------------------------------
 void XRaster::mult_inplace(const XRaster &r) {
     xc_assert(r.w == w && r.h == h, "XRaster mult_by error, argument raster has different size");
-    code_for_all_XTypeId(type_id, \
+    code_for_all_basic_XTypeId(type_id, \
     for (int i=0; i<n; i++) { \
         pixel_unsafe<T>(i) *= r.pixel_unsafe<const T>(i); \
     });
@@ -192,7 +192,7 @@ void XRaster::mult_inplace(const XRaster &r) {
 // mirror
 // TODO Реализовать без qSwap, а используя размер пикселя
 void XRaster::mirror_inplace(bool mirrorx, bool mirrory) {
-    code_for_all_XTypeId(type_id, \
+    code_for_all_basic_XTypeId(type_id, \
     if (mirrorx) { \
         int w2 = w/2; \
         for (int y=0; y<h; y++) { \

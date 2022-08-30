@@ -102,9 +102,9 @@ template<> XCallSoundBufferReceived* XCall::data<XCallSoundBufferReceived>() {
 }
 
 //---------------------------------------------------------------------
-template<> XCallCreateWidget* XCall::data_const<XCallCreateWidget>() const {
+template<> const XCallCreateWidget* XCall::data_const<XCallCreateWidget>() const {
     if (!has_type(XCallType::CreateWidget)) return nullptr;
-    return (XCallCreateWidget*) data_const();
+    return (const XCallCreateWidget*) data_const();
 }
 template<> XCallSoundBufferAdd* XCall::data<XCallSoundBufferAdd>() {
     return (XCallSoundBufferAdd*) data_const();

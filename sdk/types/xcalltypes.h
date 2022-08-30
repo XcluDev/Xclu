@@ -1,7 +1,7 @@
 #pragma once
 
 // Типы для XCall
-#includ <QString>
+#include <QString>
 
 
 struct XCallCreateWidget {

@@ -11,6 +11,9 @@ typedef unsigned short uint16;
 typedef unsigned int uint32;
 typedef int int32;
 
+typedef float float32;
+typedef double float64;
+
 const int max_u16 = 65535;
 const int u16_n = 65536;
 typedef unsigned long long int uint64;

@@ -2,28 +2,53 @@
 #define XTYPEID_H
 
 #include <QString>
-#include "xbasictypes.h"
 
+//------------------------------------------------
+// Перечисление типов для XTypeId
+//------------------------------------------------
+#define XTYPESLIST \
+    XTYPEDEF(uint8, 1) \
+    XTYPEDEF(rgb_u8, 2)\
+    XTYPEDEF(rgba_u8, 3)\
+    XTYPEDEF(int8, 4)\
+    XTYPEDEF(int16, 5)\
+    XTYPEDEF(uint16, 6)\
+    XTYPEDEF(int32, 7)\
+    XTYPEDEF(uint32, 8)\
+    XTYPEDEF(float32, 9)\
+    XTYPEDEF(float64, 10)\
+    XTYPEDEF(vec2, 11)\
+    XTYPEDEF(vec3, 12)\
+    XTYPEDEF(vec4, 13)\
+    XTYPEDEF(int2, 14)\
+                           \
+    XTYPEDEF(QString, 15)\
+    XTYPEDEF(QStringList, 16)\
+                            \
+    XTYPEDEF(XArray, 17)\
+    XTYPEDEF(XRaster, 18)\
+                              \
+    XTYPEDEF(XSoundFormat, 19)\
+    XTYPEDEF(XSoundBuffer, 20)\
+                                   \
+    XTYPEDEF(XCallCreateWidget, 21)\
+    XTYPEDEF(XCallSoundBufferAdd, 22)\
+    XTYPEDEF(XCallSoundBufferReceived, 23)
+// При изменении списка, следует обновить значение Custom ниже
+//------------------------------------------------
+
+// Объявление класса XTypeId
 enum class XTypeId : int {
+#define  XTYPEDEF(name, id) name = id,
+XTYPESLIST
+#undef  XTYPEDEF
     none = 0,
-    uint8 = 1, u8 = 1,  // используем и uint8 и u8, где как удобнее
-    rgb_u8 = 2,
-    rgba_u8 = 3,
-    int8 = 4,
-    int16 = 5,
-    uint16 = 6,
-    int32 = 7,
-    uint32 = 8,
-    float32 = 9,
-    float64 = 10,
-    vec2 = 11,
-    vec3 = 12,
-    vec4 = 13,
-    int2 = 14,
-    N = 15
+    u8 = uint8,       // Используем и uint8 и u8, где как удобнее
+    Custom = 24,      // Это значение должно быть максимальному значению в списке XTYPESLIST плюс 1
+    N = Custom + 1
 };
 
-//size of one element
+// Размеры типов - применимо только к базовым
 unsigned int XTypeId_bytes(XTypeId type);
 int XTypeId_channels(XTypeId type);
 QString XTypeId_to_string(XTypeId type);
@@ -32,8 +57,8 @@ bool is_XTypeId_integer(XTypeId type);
 bool is_XTypeId_float(XTypeId type);
 
 
-// Macroses for manipulating types
-#define code_for_all_XTypeId(type_id, CODE) \
+// Macros for enrolling code for all basic types
+#define code_for_all_basic_XTypeId(type_id, CODE) \
 switch(type_id) {\
 case XTypeId::uint8:    { typedef uint8 T; CODE } break;\
 case XTypeId::rgb_u8:   { typedef rgb_u8 T; CODE } break;\
@@ -43,14 +68,14 @@ case XTypeId::int16:    { typedef int16 T; CODE } break;\
 case XTypeId::uint16:   { typedef uint16 T; CODE } break;\
 case XTypeId::int32:    { typedef int32 T; CODE } break;\
 case XTypeId::uint32:   { typedef uint32 T; CODE } break;\
-case XTypeId::float32:  { typedef float T; CODE } break;\
-case XTypeId::float64:  { typedef double T; CODE } break;\
+case XTypeId::float32:  { typedef float32 T; CODE } break;\
+case XTypeId::float64:  { typedef float64 T; CODE } break;\
 case XTypeId::vec2:     { typedef vec2 T; CODE } break;\
 case XTypeId::vec3:     { typedef vec3 T; CODE } break;\
 case XTypeId::vec4:     { typedef vec4 T; CODE } break;\
 case XTypeId::int2:     { typedef int2 T; CODE } break;\
 default: \
-    xc_exception(QString("code_for_all_XTypeId - bad type_id %1 for code %2").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
+    xc_exception(QString("code_for_all_basic_XTypeId - bad type_id %1 for code %2").arg(XTypeId_to_string(type_id)).arg(#CODE)); \
 }
 
 /// Template function converting C++ type to XTypeId

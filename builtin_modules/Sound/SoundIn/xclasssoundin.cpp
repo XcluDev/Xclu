@@ -15,7 +15,7 @@ XClassSoundInGenerator::XClassSoundInGenerator(const QAudioFormat &format,
     format_ = format;
     data_ = data;
 
-    sound_.write().data().link<XSoundBuffer>(buffer_);
+    sound_.write().data().link<XSoundBuffer>(buffer_holder_);
 }
 
 //---------------------------------------------------------------------
@@ -34,13 +34,13 @@ void XClassSoundInGenerator::stop()
 void XClassSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
     try {
         auto read = sound_.read();
-        auto &buffer = read.data();
+        auto &buffer = *read.data().data<XSoundBuffer>();
 
         auto data_read = data_->read();
         for (int i=0; i<data_read.data().modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
             XCall call;
-            call.type = XCallType::SoundBufferReceived;
+            call.setup<XSoundBuffer>(buffer);
 
             data_read.data().modules_[i]->call(, sound_read.pointer());
         }

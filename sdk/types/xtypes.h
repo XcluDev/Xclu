@@ -8,6 +8,10 @@
 // Скаляры, геометрические типы и RGB
 #include "xbasictypes.h"
 
+// Массивы и растры
+#include "xarray.h"
+#include "xraster.h"
+
 // Sound
 #include "xsoundtypes.h"
 
