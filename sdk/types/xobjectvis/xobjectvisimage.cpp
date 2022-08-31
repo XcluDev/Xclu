@@ -14,7 +14,7 @@ QStringList XObjectVisImage::short_description() const {
     return QStringList() << QString("Image %1 x %2, type: %3")
                             .arg(raster->w)
                             .arg(raster->h)
-                            .arg(XType_to_string(raster->type_id));
+                            .arg(XType_to_string(raster->type));
     //info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
     //visual.set_text(info_text);
 }

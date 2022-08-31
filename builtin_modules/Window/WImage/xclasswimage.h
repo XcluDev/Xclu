@@ -1,6 +1,4 @@
-#ifndef XCLASSWIMAGE_H
-#define XCLASSWIMAGE_H
-
+#pragma once
 
 //Реализация модуля WImage - показ изображения в окне
 
@@ -65,7 +63,3 @@ protected:
     void clear_image();
 
 };
-
-
-
-#endif // XCLASSWIMAGE_H

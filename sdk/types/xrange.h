@@ -1,5 +1,4 @@
-#ifndef XRANGE_H
-#define XRANGE_H
+#pragma once
 
 #include "incl_h.h"
 #include "xparser.h"
@@ -90,5 +89,3 @@ protected:
 typedef XRange<int, 0> XRangeInt;
 typedef XRange<float, 1> XRangeFloat;
 
-
-#endif // XRANGE_H

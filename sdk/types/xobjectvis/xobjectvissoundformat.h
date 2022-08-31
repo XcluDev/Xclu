@@ -1,5 +1,4 @@
-#ifndef XOBJECTVISSOUNDFORMAT_H
-#define XOBJECTVISSOUNDFORMAT_H
+#pragma once
 
 // Visualizer for sound format object
 
@@ -16,4 +15,3 @@ public:
     virtual void draw_thumbnail(QPainter &p, int w, int h) const;
 };
 
-#endif // XOBJECTVISSOUNDFORMAT_H

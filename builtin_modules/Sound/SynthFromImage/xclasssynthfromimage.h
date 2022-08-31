@@ -1,5 +1,4 @@
-#ifndef XCLASSSYNTHFROMIMAGE_H
-#define XCLASSSYNTHFROMIMAGE_H
+#pragma once
 
 //Реализация модуля SynthFromImage - сонификация картинки
 
@@ -58,4 +57,3 @@ protected:
 
 };
 
-#endif // XCLASSSYNTHFROMIMAGE_H

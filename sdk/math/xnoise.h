@@ -1,5 +1,4 @@
-#ifndef xNoise_H
-#define xNoise_H
+#pragma once
 
 //Simplex noise
 //Adaptation of xNoise functions from openFrameworks of_v0.10.1_vs2017_release,
@@ -48,5 +47,3 @@ float xSignedNoise(float x, float y, float z, float w);
 
 /// \brief Calculates a four dimensional Perlin noise value between -1.0...1.0.
 float xSignedNoise(const vec4 & p);
-
-#endif // xNoise_H

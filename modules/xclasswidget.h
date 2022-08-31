@@ -1,5 +1,4 @@
-#ifndef XCLASSWIDGET_H
-#define XCLASSWIDGET_H
+#pragma once
 
 //Runtime module class with drawing to widget capability
 
@@ -81,4 +80,3 @@ protected:
 
 };
 
-#endif // XCLASSWIDGET_H

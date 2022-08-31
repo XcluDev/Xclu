@@ -1,5 +1,4 @@
-#ifndef QOSCBUNDLE_P_H
-#define QOSCBUNDLE_P_H
+#pragma once
 
 #include <qoscvalue.h>
 
@@ -19,4 +18,3 @@ public:
     QOscValue time;
 };
 
-#endif // QOSCBUNDLE_P_H

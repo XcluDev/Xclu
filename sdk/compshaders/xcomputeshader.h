@@ -1,5 +1,4 @@
-#ifndef XCOMPUTESHADER_H
-#define XCOMPUTESHADER_H
+#pragma once
 
 /*
 Here are helper classes supporting using compute shaders without graphics rendering.
@@ -251,4 +250,3 @@ private:
     QOpenGLFunctions_4_3_Core *gl43 = nullptr;  //should't delete this!
 };
 
-#endif // XCOMPUTESHADER_H

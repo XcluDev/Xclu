@@ -1,5 +1,4 @@
-#ifndef DIALOGMODULENAME_H
-#define DIALOGMODULENAME_H
+#pragma once
 
 #include <QDialog>
 
@@ -25,4 +24,3 @@ private:
     Ui::DialogModuleName *ui;
 };
 
-#endif // DIALOGMODULENAME_H

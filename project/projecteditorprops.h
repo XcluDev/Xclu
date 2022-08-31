@@ -1,5 +1,4 @@
-#ifndef PROJECTEDITORPROPERTIES_H
-#define PROJECTSAVEDPROPERTIES_H
+#pragma once
 
 #include "incl_h.h"
 
@@ -16,4 +15,3 @@ public:
     void read_json(const QJsonObject &json);
 };
 
-#endif // PROJECTEDITORPROPERTIES_H

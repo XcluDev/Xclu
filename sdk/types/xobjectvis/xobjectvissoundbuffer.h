@@ -1,5 +1,4 @@
-#ifndef XOBJECTVISSOUNDBUFFER_H
-#define XOBJECTVISSOUNDBUFFER_H
+#pragma once
 
 // Visualizer for sound buffer object.
 
@@ -16,4 +15,3 @@ public:
     virtual void draw_thumbnail(QPainter &p, int w, int h) const;
 };
 
-#endif // XOBJECTVISSOUNDBUFFER_H

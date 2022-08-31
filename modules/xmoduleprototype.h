@@ -1,5 +1,4 @@
-#ifndef XCLASSPROTOTYPE_H
-#define XCLASSPROTOTYPE_H
+#pragma once
 
 //Информация о модуле:
 //Имя, тип, версия модуля и его GUI в виде строк
@@ -58,8 +57,5 @@ private:
     bool help_was_read_ = false;
     QString help_;
 
-
-
 };
 
-#endif // XCLASSPROTOTYPE_H

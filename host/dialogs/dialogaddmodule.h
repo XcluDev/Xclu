@@ -1,5 +1,4 @@
-#ifndef DIALOGADDMODULE_H
-#define DIALOGADDMODULE_H
+#pragma once
 
 //Диалог добавления модуля
 #include <QDialog>
@@ -79,4 +78,3 @@ private slots:
 
 };
 
-#endif // DIALOGADDMODULE_H

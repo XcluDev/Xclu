@@ -1,5 +1,4 @@
-#ifndef XCLASSFILECREATE_H
-#define XCLASSFILECREATE_H
+#pragma once
 
 //Реализация модуля Execute - запуск программы с диска
 
@@ -22,4 +21,3 @@ protected:
 
 };
 
-#endif // XCLASSFILECREATE_H

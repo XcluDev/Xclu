@@ -402,12 +402,7 @@ void XClassWebcamera::update_camera() {
         last_frame_time_ = 0;       // Reset timer of last frame received
 
         //копируем изображение для использования вовне и показа в GUI
-        {
-            auto image_write = getobject_image()->write();
-            XObject *object = image_write.pointer();
-
-            data_.read().data().raster.copy_to(object);
-        }
+        *getobject_image()->write().data().data<XRaster>() = data_.read().data().raster;
 
         //if transformation is required - do it
         transform();
@@ -415,7 +410,7 @@ void XClassWebcamera::update_camera() {
 
     //метка числа обработанных кадров
     seti_frames_captured(processed_frames_);
-    seti_frames_dropped(data_.captured_frames-processed_frames_);
+    seti_frames_dropped(data_.read().data().captured_frames-processed_frames_);
 
 }
 

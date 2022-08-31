@@ -1,5 +1,4 @@
-#ifndef JSONUTILS_H
-#define JSONUTILS_H
+#pragma once
 
 //Functions for JSOn parsing - checking if it's object or array, and returns it.
 //In case of error raises xclu-exception.
@@ -27,7 +26,5 @@ public:
     static int json_int(const QJsonObject &json, QString name, int def);
     static double json_double(const QJsonObject &json, QString name, double def);
 
-
 };
 
-#endif // JSONUTILS_H

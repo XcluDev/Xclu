@@ -1,5 +1,4 @@
-#ifndef XOSC_H
-#define XOSC_H
+#pragma once
 
 //Sending and receiving OSC messages.
 
@@ -19,6 +18,3 @@ public:
 
 };
 
-
-
-#endif // XOSC_H

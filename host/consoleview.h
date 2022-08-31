@@ -1,5 +1,4 @@
-#ifndef CONSOLEVIEW_H
-#define CONSOLEVIEW_H
+#pragma once
 
 //Показ консольных сообщений
 
@@ -51,4 +50,3 @@ private:
 
 extern ConsoleView *CONS_VIEW;
 
-#endif // CONSOLEVIEW_H

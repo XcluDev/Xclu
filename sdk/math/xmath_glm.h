@@ -1,5 +1,4 @@
-#ifndef XMATH_GLM_H
-#define XMATH_GLM_H
+#pragma once
 
 // Glm types and functions
 
@@ -15,5 +14,3 @@
 typedef glm::vec2 vec2;
 typedef glm::vec3 vec3;
 typedef glm::vec4 vec4;
-
-#endif // XMATH_GLM_H

@@ -1,5 +1,4 @@
-#ifndef NEUROPLAYPRO_H
-#define NEUROPLAYPRO_H
+#pragma once
 
 // Code from https://github.com/perevalovds/NeuroplayPro-QtSDK,
 // forked from example by neuroplay.ru
@@ -91,4 +90,3 @@ signals:
 
 };
 
-#endif // NEUROPLAYPRO_H

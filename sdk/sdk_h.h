@@ -1,5 +1,4 @@
-#ifndef SDK_H_H
-#define SDK_H_H
+#pragma once
 
 #include "incl_h.h"
 
@@ -11,4 +10,3 @@
 #include "xc_paths.h"
 #include "xclassbase.h"
 
-#endif // SDK_H_H

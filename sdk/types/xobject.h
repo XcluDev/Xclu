@@ -1,5 +1,4 @@
-#ifndef XSTRUCT_H
-#define XSTRUCT_H
+#pragma once
 
 // XObject - basic Xclu type for passing data between modules;
 // Create visualizer for object using XObjectVis* XObjectVis::new_vis(object)
@@ -66,9 +65,6 @@ protected:
     void* data_ = nullptr;
 };
 
-
 //protected XObject
 typedef XProtectedData_<XObject> XProtectedObject;
 
-
-#endif // XSTRUCT_H

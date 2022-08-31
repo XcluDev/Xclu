@@ -1,5 +1,4 @@
-#ifndef INCL_INCLCPP_H
-#define INCL_INCLCPP_H
+#pragma once
 
 #include <QDebug>
 #include <QRegExp>
@@ -21,5 +20,3 @@
 #include "project_props.h"
 
 #include "xrasterutils.h"
-
-#endif // INCL_INCLCPP_H

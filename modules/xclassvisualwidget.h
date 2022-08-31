@@ -1,5 +1,4 @@
-#ifndef XCLASSPAINTERWIDGET_H
-#define XCLASSPAINTERWIDGET_H
+#pragma once
 
 //Helper class for XClassWidget, implementing custom drawing widget
 #include <QWidget>
@@ -56,6 +55,3 @@ private:
     //int h_ = 100;
 };
 
-
-
-#endif // XCLASSPAINTERWIDGET_H

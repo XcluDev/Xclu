@@ -1,5 +1,4 @@
-#ifndef XCLASSSERIAL_H
-#define XCLASSSERIAL_H
+#pragma once
 
 //Serial interface with Arduino and other devices
 
@@ -60,5 +59,3 @@ protected:
 };
 
 
-
-#endif // XCLASSSERIAL_H

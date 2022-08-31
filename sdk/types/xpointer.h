@@ -1,5 +1,4 @@
-#ifndef XPOINTER_H
-#define XPOINTER_H
+#pragma once
 
 //Template class storing pointer to protected object.
 //It's used for uniform representing objects items.
@@ -47,5 +46,3 @@ protected:
     XWasChangedKeeper keeper_;
 };
 
-
-#endif // XPOINTER_H

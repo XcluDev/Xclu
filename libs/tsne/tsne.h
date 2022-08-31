@@ -30,10 +30,7 @@
  *
  */
 
-
-#ifndef TSNE_H
-#define TSNE_H
-
+#pragma once
 
 static inline double sign(double x) { return (x == .0 ? .0 : (x < .0 ? -1.0 : 1.0)); }
 
@@ -74,6 +71,4 @@ private:
     int N, D, no_dims;
     double perplexity, theta;
 };
-
-#endif
 

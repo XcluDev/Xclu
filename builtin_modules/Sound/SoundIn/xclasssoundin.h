@@ -1,6 +1,4 @@
-#ifndef XCLASSSOUNDIN_H
-#define XCLASSSOUNDIN_H
-
+#pragma once
 
 //Sound buffer input
 
@@ -114,5 +112,3 @@ protected slots:
 
 };
 
-
-#endif // XCLASSSOUNDIN_H

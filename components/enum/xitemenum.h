@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMENUM_H
-#define INTERFACEITEMENUM_H
+#pragma once
 
 #include "xitemscalar.h"
 
@@ -59,5 +58,3 @@ protected:
     virtual void var_to_gui_internal(); //установка значения в gui
 };
 
-
-#endif // INTERFACEITEMENUM_H

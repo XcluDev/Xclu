@@ -1,5 +1,4 @@
-#ifndef XCLUTYPES_H
-#define XCLUTYPES_H
+#pragma once
 
 //Xclu enums and converting to string and back.
 
@@ -171,5 +170,3 @@ struct XWidgetEvent {
     int key = -1;
 };
 
-
-#endif // XCLUTYPES_H

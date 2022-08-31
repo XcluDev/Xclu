@@ -1,3 +1,4 @@
+#pragma once
 //Original: "wavfile" from Qt "Spectrum Example"
 /****************************************************************************
 **
@@ -48,11 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-
-#ifndef XAUDIO_WAVFILE_H
-#define XAUDIO_WAVFILE_H
-
 
 #include <QObject>
 #include <QFile>
@@ -122,5 +118,3 @@ private:
 } //namespace
 //--------------------------------------------------
 
-
-#endif // XAUDIO_WAVFILE_H

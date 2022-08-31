@@ -33,6 +33,8 @@
 
 /* This code was adopted with minor modifications from Steve Hanov's great tutorial at http://stevehanov.ca/blog/index.php?id=130 */
 
+#pragma once
+
 #include <stdlib.h>
 #include <algorithm>
 #include <vector>
@@ -40,10 +42,6 @@
 #include <queue>
 #include <limits>
 #include <cmath>
-
-
-#ifndef VPTREE_H
-#define VPTREE_H
 
 class DataPoint
 {
@@ -268,5 +266,3 @@ private:
         }
     }
 };
-            
-#endif

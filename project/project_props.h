@@ -1,5 +1,4 @@
-#ifndef PROJECT_PROPSH
-#define PROJECT_PROPSH
+#pragma once
 
 //Properties of a project for access from modules
 
@@ -112,4 +111,3 @@ QVector<XModule *> xc_find_modules(QString modules_list);
 //static void execute_callbacks(QVector<XModule *> modules_list);
 //static void execute_callbacks(QString modules_list_string);
 
-#endif // PROJECT_PROPSH

@@ -1,5 +1,4 @@
-#ifndef XCLASSMOTIONDETECTOR_H
-#define XCLASSMOTIONDETECTOR_H
+#pragma once
 
 //MotionDetector implementation
 
@@ -144,5 +143,3 @@ protected:
 };
 
 
-
-#endif // XCLASSMOTIONDETECTOR_H

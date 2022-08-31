@@ -1,5 +1,4 @@
-#ifndef XCLASS_H
-#define XCLASS_H
+#pragma once
 
 //Вычислительный модуль (runtime module)
 //Базовый класс для конкретных реализаций модулей
@@ -194,5 +193,3 @@ private:
     // "create_widget" call, returns QWidget pointer
     void on_create_widget_internal(XCall& call);
 };
-
-#endif // XCLASS_H

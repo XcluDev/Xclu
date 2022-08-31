@@ -1,5 +1,4 @@
-#ifndef XTYPEUTILS_H
-#define XTYPEUTILS_H
+#pragma once
 
 #include <QString>
 
@@ -11,4 +10,3 @@ public:
     static int to_type(const QString &str, int N, const QString array[]);
 };
 
-#endif // XTYPEUTILS_H

@@ -1,5 +1,4 @@
-#ifndef PROJECTCORE_H
-#define PROJECTCORE_H
+#pragma once
 
 //Project core - set of modules and properties.
 
@@ -116,4 +115,3 @@ private:
 
 extern Project PROJECT;
 
-#endif //PROJECTCORE_H

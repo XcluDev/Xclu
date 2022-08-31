@@ -1,5 +1,4 @@
-#ifndef EDITORMODULES_H
-#define EDITORMODULES_H
+#pragma once
 
 //Редактор списка модулей в проекте
 #include <QWidget>
@@ -93,7 +92,5 @@ protected:
     bool editable_ = true;
     void update_buttons();
 
-
 };
 
-#endif // EDITORMODULES_H

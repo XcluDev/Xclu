@@ -1,5 +1,4 @@
-#ifndef QT_WIDGETS_H
-#define QT_WIDGETS_H
+#pragma once
 
 //Workaround for <QtWidgets> when building using Qt 4.X
 //On Qt 5 use this:
@@ -41,5 +40,3 @@
 #include <QTimer>
 */
 
-
-#endif // QT_WIDGETS_H

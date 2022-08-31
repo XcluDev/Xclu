@@ -1,5 +1,4 @@
-#ifndef XCLASSSFACTORY_H
-#define XCLASSSFACTORY_H
+#pragma once
 
 //База данных модулей, позволяет создавать инстансы модулей
 #include "sdk_h.h"
@@ -64,4 +63,3 @@ private:
 
 extern XModulesFactory FACTORY;
 
-#endif // XCLASSSFACTORY_H

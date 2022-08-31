@@ -3,15 +3,15 @@
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------
-void XArray::set_type(XType type_id) {
-    this->type_id = type_id;
-    sizeofitem = XType_bytes(type_id);
+void XArray::set_type(XType type) {
+    this->type = type;
+    sizeofitem = XType_bytes(type);
 }
 
 void XArray::assert_type(XType type) const {
-    xc_assert(type_id == type, QString("XArray::assert_type error, expected %1 but has %2")
+    xc_assert(type == type, QString("XArray::assert_type error, expected %1 but has %2")
               .arg(XType_to_string(type))
-              .arg(XType_to_string(type_id)));
+              .arg(XType_to_string(type)));
 }
 
 // Useful wrapper that checks if data is empty
@@ -58,14 +58,14 @@ template<class T> void XArray::set(const T &value) {
 
 // If 'reallocate is true - then old vector will be cleared.
 // It's useful for clearing memory when image size if significantly reduced, but works slower.
-void XArray::allocate(int n, XType Type_id, bool reallocate) {
-    if (!reallocate && is_owner && this->type_id == Type_id) {
+void XArray::allocate(int n, XType type, bool reallocate) {
+    if (!reallocate && is_owner && this->type == type) {
         return;
     }
     if (reallocate) {
         clear();
     }
-    set_type(Type_id);
+    set_type(type);
     this->n = n;
     internal_data_.resize(n);
     data_pointer_ = internal_data_.data();
@@ -73,8 +73,8 @@ void XArray::allocate(int n, XType Type_id, bool reallocate) {
 }
 
 //---------------------------------------------------------------------
-void XArray::copy_from(void* data, int n, XType Type_id) {
-    allocate(n, Type_id);
+void XArray::copy_from(void* data, int n, XType type) {
+    allocate(n, type);
     memcpy(data_pointer_, data, data_size());
 }
 
@@ -124,7 +124,7 @@ template<class T> void XArray::link_data(T* data, int n) {
 //---------------------------------------------------------------------
 void XArray::add_inplace(const XArray &a) {
     xc_assert(a.n == n, "XArray add error, argument raster has different size");
-    code_for_all_basic_XType(type_id, \
+    code_for_all_basic_XType(type, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) += a.item_unsafe<const T>(i); \
     });
@@ -133,7 +133,7 @@ void XArray::add_inplace(const XArray &a) {
 //---------------------------------------------------------------------
 void XArray::mult_inplace(const XArray &a) {
     xc_assert(a.n, "XArray mult_by error, argument raster has different size");
-    code_for_all_basic_XType(type_id, \
+    code_for_all_basic_XType(type, \
     for (int i=0; i<n; i++) { \
         item_unsafe<T>(i) *= a.item_unsafe<T>(i); \
     });
@@ -147,7 +147,7 @@ XArray XArray::crop(int i0, int n0) const {
     xc_assert(i0 >= 0 && n0 >= 0 && i0+n0 <= n,
               "XArray crop - bad arguments");
     XArray array;
-    array.allocate(n0, type_id);
+    array.allocate(n0, type);
     for (int i = 0; i < n0; i++) {
         array.set_item_unsafe(i, item_unsafe<void*>(i0+i));
     }

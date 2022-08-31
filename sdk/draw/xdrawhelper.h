@@ -1,5 +1,4 @@
-#ifndef XDRAWHELPER_H
-#define XDRAWHELPER_H
+#pragma once
 
 // Drawing helper functions for ourout to RenderArea
 #include "sdk_h.h"
@@ -27,5 +26,3 @@ public:
 
 };
 
-
-#endif // XDRAWHELPER_H

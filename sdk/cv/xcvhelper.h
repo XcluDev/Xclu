@@ -1,5 +1,4 @@
-#ifndef XCVHELPER_H
-#define XCVHELPER_H
+#pragma once
 
 // Helper for working with OpenCV
 #include "sdk_h.h"
@@ -18,5 +17,3 @@ public:
 
 };
 
-
-#endif // XCVHELPER_H

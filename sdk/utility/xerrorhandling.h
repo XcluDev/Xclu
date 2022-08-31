@@ -1,5 +1,4 @@
-#ifndef XERRORHANDLING_H
-#define XERRORHANDLING_H
+#pragma once
 
 //Errors handling
 //TODO: Сейчас сообщения об ошибках печатаются в консоль,
@@ -86,5 +85,3 @@ private:
    QString message_;
 };
 
-
-#endif // XERRORHANDLING_H

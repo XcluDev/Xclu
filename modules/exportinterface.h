@@ -1,5 +1,4 @@
-#ifndef EXPORTINTERFACE_H
-#define EXPORTINTERFACE_H
+#pragma once
 
 //Export interface as h file
 //Constructor loads template from `module_h_template.h`
@@ -19,4 +18,3 @@ private:
     void append_interface(XModuleInterface *interf, QStringList &file);
 };
 
-#endif // EXPORTINTERFACE_H

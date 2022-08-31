@@ -1,5 +1,4 @@
-#ifndef XCLASSSLEEP_H
-#define XCLASSSLEEP_H
+#pragma once
 
 //Timer implementation
 
@@ -34,6 +33,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSSLEEP_H

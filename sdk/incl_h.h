@@ -1,5 +1,4 @@
-#ifndef INCL_QT_H
-#define INCL_QT_H
+#pragma once
 
 //Файлы для подключения с Qt
 
@@ -30,4 +29,3 @@
 
 #include "xclu_types.h"
 
-#endif // INCL_QT_H

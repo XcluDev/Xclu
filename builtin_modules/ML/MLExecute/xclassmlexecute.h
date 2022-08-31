@@ -1,5 +1,4 @@
-#ifndef XCLASSMLEXECUTE_H
-#define XCLASSMLEXECUTE_H
+#pragma once
 
 /*
 Universal ML train and running operations using bat/bash scripts, provided by user.
@@ -59,6 +58,3 @@ protected:
 */
 };
 
-
-
-#endif // XCLASSEXECUTE_H

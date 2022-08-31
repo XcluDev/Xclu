@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIPAGE_H
-#define INTERFACEGUIPAGE_H
+#pragma once
 
 #include "xgui.h"
 
@@ -32,4 +31,3 @@ protected slots:
     void on_vscroll_changed();
 };
 
-#endif // INTERFACEGUIPAGE_H

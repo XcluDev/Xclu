@@ -1,5 +1,4 @@
-#ifndef DIALOGRENAMEMODULE_H
-#define DIALOGRENAMEMODULE_H
+#pragma once
 
 //Диалог переименования модуля
 
@@ -33,4 +32,3 @@ private slots:
 
 };
 
-#endif // DIALOGRENAMEMODULE_H

@@ -1,5 +1,4 @@
-#ifndef XTIMEBUFFER_H
-#define XTIMEBUFFER_H
+#pragma once
 
 // XTimeBuffer - buffer for storing any data and time.
 // Allows to push a data with time, and then clear data in a given interval.
@@ -53,4 +52,3 @@ protected:
     QVector<DataTime> data_;
 };
 
-#endif // XTIMEBUFFER_H

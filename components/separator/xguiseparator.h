@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUISEPARATOR_H
-#define INTERFACEGUISEPARATOR_H
+#pragma once
 
 #include "xgui.h"
 
@@ -19,4 +18,3 @@ protected:
 
 };
 
-#endif // INTERFACEGUISEPARATOR_H

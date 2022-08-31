@@ -16,7 +16,7 @@ cv::Mat XCvHelper::link_to_cv(const XRaster& raster) {
     if (raster.is_empty()) {
         return cv::Mat();
     }
-    xc_assert(raster.type_id == XType::rgb_u8, "XCvHelper::link_to_cv() - only rgb_u8 raster format is supported");
+    xc_assert(raster.type == XType::rgb_u8, "XCvHelper::link_to_cv() - only rgb_u8 raster format is supported");
     auto cv_format = CV_8UC3;   //TODO implement more formats
 
     return cv::Mat(raster.h, raster.w, cv_format, (void *)raster.data_pointer(), raster.bytes_per_line());

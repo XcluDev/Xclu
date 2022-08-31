@@ -1,5 +1,4 @@
-#ifndef DIALOGEDITLINKS_H
-#define DIALOGEDITLINKS_H
+#pragma once
 
 #include <QDialog>
 #include "xlink.h"
@@ -41,4 +40,3 @@ private slots:
     void on_button_cancel_clicked();
 };
 
-#endif // DIALOGEDITLINKS_H

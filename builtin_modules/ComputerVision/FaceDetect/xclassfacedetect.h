@@ -1,5 +1,4 @@
-#ifndef XCLASSFACEDETECT_H
-#define XCLASSFACEDETECT_H
+#pragma once
 
 // FaceDetect - search faces on the image.
 // Based on openFramework/addons/ofxOpenCV/ofxCvHaarFinder class.
@@ -69,5 +68,3 @@ protected:
 };
 
 
-
-#endif // XCLASSFACEDETECT_H

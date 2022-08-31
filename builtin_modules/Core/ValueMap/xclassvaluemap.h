@@ -1,5 +1,4 @@
-#ifndef XCLASSRANDOM_H
-#define XCLASSRANDOM_H
+#pragma once
 
 //ValueMap implementation
 
@@ -22,6 +21,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSRANDOM_H

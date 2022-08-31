@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMBUTTON_H
-#define INTERFACEITEMBUTTON_H
+#pragma once
 
 #include "xitem.h"
 
@@ -65,4 +64,3 @@ protected:
     void copy_data_to_internal(XItem * /*item*/ ) {}
 };
 
-#endif // INTERFACEITEMBUTTON_H

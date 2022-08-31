@@ -1,5 +1,4 @@
-#ifndef XCLASSPRINTCONSOLE_H
-#define XCLASSPRINTCONSOLE_H
+#pragma once
 
 //PrintConsole implementation
 
@@ -21,6 +20,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSPRINTCONSOLE_H

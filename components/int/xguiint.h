@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIINT_H
-#define INTERFACEGUIINT_H
+#pragma once
 
 #include "xgui.h"
 #include "xrange.h"
@@ -38,4 +37,3 @@ protected:
 
 };
 
-#endif // INTERFACEGUIINT_H

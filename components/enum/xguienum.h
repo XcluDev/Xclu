@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIENUM_H
-#define INTERFACEGUIENUM_H
+#pragma once
 
 #include "xgui.h"
 
@@ -28,4 +27,3 @@ protected:
 
 };
 
-#endif // INTERFACEGUIENUM_H

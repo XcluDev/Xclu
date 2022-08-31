@@ -1,5 +1,4 @@
-#ifndef XCLASSEXECUTE_H
-#define XCLASSEXECUTE_H
+#pragma once
 
 /*
 Execute module implementation - running program from disk
@@ -89,6 +88,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSEXECUTE_H

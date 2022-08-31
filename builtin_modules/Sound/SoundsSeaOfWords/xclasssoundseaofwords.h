@@ -1,5 +1,4 @@
-#ifndef XClassSoundSeaOfWords_H
-#define XClassSoundSeaOfWords_H
+#pragma once
 
 /*
 By given set of sound samples, module arranges them at 2D and plays by mouse click.
@@ -63,6 +62,3 @@ protected:
 
 };
 
-
-
-#endif // XClassSoundSeaOfWords_H

@@ -1,5 +1,4 @@
-#ifndef MODULEINSTANCE_H
-#define MODULEINSTANCE_H
+#pragma once
 
 //Модуль, содержащий невизуальный интерфейс (XModuleInterface) и исполнительную часть (XClass)
 
@@ -160,4 +159,3 @@ private:
 
 };
 
-#endif // MODULEINSTANCE_H

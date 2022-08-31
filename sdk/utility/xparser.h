@@ -1,5 +1,4 @@
-#ifndef XPARSER_H
-#define XPARSER_H
+#pragma once
 
 //Parsing utilities
 
@@ -15,4 +14,3 @@ QString xc_remove_underscore(QString title);
 //Seconds -> HMS, that is 00:00:00:0
 QString xparse_seconds_to_hms(double seconds);
 
-#endif // XPARSER_H

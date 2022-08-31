@@ -1,5 +1,4 @@
-#ifndef QOSCVALUE_H
-#define QOSCVALUE_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -136,4 +135,3 @@ protected:
     QScopedPointer<QOscValuePrivate> d_ptr;
 };
 
-#endif // QOSCVALUE_H

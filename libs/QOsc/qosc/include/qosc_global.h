@@ -1,5 +1,4 @@
-#ifndef QOSC_GLOBAL_H
-#define QOSC_GLOBAL_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -60,5 +59,3 @@ QString commit();
 QString displayVersion();
 
 }
-
-#endif // QOSC_GLOBAL_H

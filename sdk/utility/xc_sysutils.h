@@ -1,5 +1,4 @@
-#ifndef XCLU_SYSUTILS_H
-#define XCLU_SYSUTILS_H
+#pragma once
 
 #include "incl_h.h"
 
@@ -10,5 +9,3 @@ void xc_sleep_ms(int ms);
 // Shutdown computer
 void xc_system_shutdown();
 
-
-#endif // XCLU_SYSUTILS_H

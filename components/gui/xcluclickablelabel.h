@@ -1,5 +1,4 @@
-#ifndef XCLUCLICKABLELABEL_H
-#define XCLUCLICKABLELABEL_H
+#pragma once
 
 //Clickable label
 //https://wiki.qt.io/Clickable_QLabel
@@ -20,6 +19,3 @@ protected:
     void mousePressEvent(QMouseEvent* event);
 };
 
-
-
-#endif // XCLUCLICKABLELABEL_H

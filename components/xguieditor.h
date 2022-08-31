@@ -1,5 +1,4 @@
-#ifndef EDITORMODULE_H
-#define EDITORMODULE_H
+#pragma once
 
 //Редактор параметров
 //Он используется в основном окне приложения,
@@ -87,6 +86,3 @@ protected:
     //context popup menu
     QScopedPointer<QMenu> context_menu_;
 };
-
-
-#endif // EDITORMODULE_H

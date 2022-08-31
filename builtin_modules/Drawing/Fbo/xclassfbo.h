@@ -1,5 +1,4 @@
-#ifndef XCLASSFBO_H
-#define XCLASSFBO_H
+#pragma once
 
 //FBO для рисования
 
@@ -33,6 +32,3 @@ protected:
 };
 
 
-//XClassFbo
-
-#endif // XCLASSFBO_H

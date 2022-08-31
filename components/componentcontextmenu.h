@@ -1,5 +1,4 @@
-#ifndef COMPONENTCONTEXTMENU_H
-#define COMPONENTCONTEXTMENU_H
+#pragma once
 
 //Support class for managing context menu.
 //-------------------------------------------------------
@@ -105,5 +104,3 @@ protected:
     QScopedPointer<QMenu> menu_;
 };
 
-
-#endif // COMPONENTCONTEXTMENU_H

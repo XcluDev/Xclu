@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUICHECKBOX_H
-#define INTERFACEGUICHECKBOX_H
+#pragma once
 
 #include "xgui.h"
 
@@ -29,4 +28,3 @@ private:
 
 };
 
-#endif // INTERFACEGUICHECKBOX_H

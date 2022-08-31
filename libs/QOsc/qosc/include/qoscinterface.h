@@ -1,5 +1,4 @@
-#ifndef QOSCINTERFACE_H
-#define QOSCINTERFACE_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -84,4 +83,3 @@ private slots:
     void readReady();
 };
 
-#endif // QOSCINTERFACE_H

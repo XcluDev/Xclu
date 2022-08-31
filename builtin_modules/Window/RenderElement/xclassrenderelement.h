@@ -1,5 +1,4 @@
-#ifndef XCLASSRENDERELEMENT_H
-#define XCLASSRENDERELEMENT_H
+#pragma once
 
 //RenderElement module - Buttons, sliders, circles, lines, etc. drawn on RenderArea.
 
@@ -26,4 +25,3 @@ protected:
 
 };
 
-#endif // XCLASSRENDERELEMENT_H

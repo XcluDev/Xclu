@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QTimer>
 #include "incl_h.h"
@@ -119,8 +118,5 @@ private:
     //эта функция вызывается таймером
     void execute_update();
 
-
-
 };
 
-#endif // MAINWINDOW_H

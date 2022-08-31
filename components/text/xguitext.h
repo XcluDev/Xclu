@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUITEXT_H
-#define INTERFACEGUITEXT_H
+#pragma once
 
 #include "xgui.h"
 
@@ -35,7 +34,5 @@ protected:
     //Свойства для разных ситуаций
     virtual bool is_const_bold() { return false; }   //тут константы не делать bold
 
-
 };
 
-#endif // INTERFACEGUITEXT_H

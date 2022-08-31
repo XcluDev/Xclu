@@ -1,5 +1,4 @@
-#ifndef QOSC_H
-#define QOSC_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -12,4 +11,3 @@
 #include "qoscinterface.h"
 #include "qoscmethod.h"
 
-#endif // QOSC_H

@@ -1,5 +1,4 @@
-#ifndef XLINK_H
-#define XLINK_H
+#pragma once
 
 //Working with с links - creating and parsing links as following strings:
 //module1            - link to module
@@ -81,5 +80,3 @@ protected:
     XModule *module_ptr_ = nullptr;
 };
 
-
-#endif // XLINK_H

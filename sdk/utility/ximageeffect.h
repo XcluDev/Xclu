@@ -1,5 +1,4 @@
-#ifndef XIMAGEEFFECT_H
-#define XIMAGEEFFECT_H
+#pragma once
 
 //Implementing applying QGraphicsEffect  to image, for example,
 //image blur using QGraphicsBlurEffect
@@ -26,8 +25,5 @@ protected:
     //Note: effect_will_destroyed will be destroyed because binding to image in implementation
     static QImage apply_effect(QImage src, QGraphicsEffect *effect_will_destroyed, int extent=0);
 
-
-
 };
 
-#endif // XIMAGEEFFECT_H

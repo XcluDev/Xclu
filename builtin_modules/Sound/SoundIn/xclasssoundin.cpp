@@ -33,16 +33,16 @@ void XClassSoundInGenerator::stop()
 //---------------------------------------------------------------------
 void XClassSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
     try {
-        auto read = sound_.read();
-        auto &buffer = *read.data().data<XSoundBuffer>();
+        auto read_sound = sound_.read();
+        auto &buffer = *read_sound.data().data<XSoundBuffer>();
 
-        auto data_read = data_->read();
-        for (int i=0; i<data_read.data().modules_.size(); i++) {
+        auto read_data = data_->read();
+        auto &data = read_data.data();
+        for (int i=0; i<data.modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
             XCall call;
-            call.setup<XSoundBuffer>(buffer);
-
-            data_read.data().modules_[i]->call(, sound_read.pointer());
+            call.setup_const<XSoundBuffer>(buffer);
+            data.modules_[i]->call(call);
         }
 
         //applying volumes
@@ -94,10 +94,10 @@ qint64 XClassSoundInGenerator::writeData(const char *data, qint64 len)
         //fill sound buffer
         {
             auto write = sound_.write();
-            XObject &sound = write.data();
-            sound.clear();
+            XSoundBuffer &buffer = *write.data().data<XSoundBuffer>();
+            buffer.buffer.clear();
             //create array
-            sound.seti("samples", samples);
+            buffer. seti("samples", samples);
             sound.seti("channels", channels);
             sound.seti("sample_rate", format_.sampleRate());
             XArray *arr = sound.var_array("data", true);

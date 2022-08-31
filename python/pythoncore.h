@@ -1,5 +1,4 @@
-#ifndef PYTHONCORE_H
-#define PYTHONCORE_H
+#pragma once
 
 //Работа с интерпретатором Python.
 //В данный момент - приостановлено.
@@ -17,4 +16,3 @@ private:
 
 extern PythonCore PYTHON;
 
-#endif // PYTHONCORE_H

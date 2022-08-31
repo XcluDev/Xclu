@@ -1,5 +1,4 @@
-#ifndef XCLU_PARSE_TREE_H
-#define XCLU_PARSE_TREE_H
+#pragma once
 
 //Парсинг дерева - строк с отступами
 //результат хранится в виде массива узлов, и ссылки на узлы - по индексам в этом массиве.
@@ -46,5 +45,3 @@ protected:
     void parse_internal(const QStringList &lines, int &pos, int index);
 };
 
-
-#endif // XCLU_PARSE_TREE_H

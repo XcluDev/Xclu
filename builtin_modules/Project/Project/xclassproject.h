@@ -1,5 +1,4 @@
-#ifndef XCLASSPROJECT_H
-#define XCLASSPROJECT_H
+#pragma once
 
 //Control project:
 //FPS
@@ -63,4 +62,3 @@ protected:
 
 };
 
-#endif // XCLASSPROJECT_H

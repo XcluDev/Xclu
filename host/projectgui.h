@@ -1,5 +1,4 @@
-#ifndef PROJECTGUI_H
-#define PROJECTGUI_H
+#pragma once
 
 //Визуальное представление проекта, и управление списком модулей и редактором
 
@@ -86,4 +85,3 @@ public slots:
 
 extern ProjectGui *PROJ_GUI;
 
-#endif // PROJECTGUI_H

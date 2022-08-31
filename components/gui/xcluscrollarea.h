@@ -1,6 +1,4 @@
-#ifndef XCLUSCROLLAREA_H
-#define XCLUSCROLLAREA_H
-
+#pragma once
 
 //Кастомный ScrollArea
 //Реализуем установку вертикального слайдера в нужное положение после showEvent()
@@ -38,5 +36,3 @@ protected:
 
 };
 
-
-#endif // XCLUSCROLLAREA_H

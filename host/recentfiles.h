@@ -1,5 +1,4 @@
-#ifndef RECENTFILES_H
-#define RECENTFILES_H
+#pragma once
 
 #include "incl_h.h"
 #include <QObject>
@@ -34,4 +33,3 @@ protected:
     QMenu *menu_ = nullptr;
 };
 
-#endif // RECENTFILES_H

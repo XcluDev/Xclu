@@ -1,5 +1,4 @@
-#ifndef XCLASSRANDOM_H
-#define XCLASSRANDOM_H
+#pragma once
 
 //Random implementation
 
@@ -29,5 +28,3 @@ protected:
 };
 
 
-
-#endif // XCLASSRANDOM_H

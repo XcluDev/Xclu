@@ -1,5 +1,4 @@
-#ifndef XCALLERROR_H
-#define XCALLERROR_H
+#pragma once
 
 #include <QString>
 
@@ -21,4 +20,3 @@ protected:
     QString error_text_;
 };
 
-#endif // XCALLERROR_H

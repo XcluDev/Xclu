@@ -1,5 +1,4 @@
-#ifndef VISIBILITYGROUPS_H
-#define VISIBILITYGROUPS_H
+#pragma once
 
 //Структуры для динамического GUI - отслеживание, кто должен включиться/выключиться
 //причем, это работает только в GUI - а сами элементы (XItem) не меняют своего значения, пока не придет сигнал
@@ -59,4 +58,3 @@ protected:
     void propagate();
 };
 
-#endif // VISIBILITYGROUPS_H

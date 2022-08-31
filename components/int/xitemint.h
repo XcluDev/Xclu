@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMINT_H
-#define INTERFACEITEMINT_H
+#pragma once
 
 #include "xitemscalar.h"
 
@@ -43,5 +42,3 @@ protected:
     virtual void gui_to_var_internal(); //получение значения из gui
     virtual void var_to_gui_internal(); //установка значения в gui
 };
-
-#endif // INTERFACEITEMINT_H

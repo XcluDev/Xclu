@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIBUTTON_H
-#define INTERFACEGUIBUTTON_H
+#pragma once
 
 #include "xgui.h"
 
@@ -25,4 +24,3 @@ protected slots:
     void button_pressed();
 };
 
-#endif // INTERFACEGUIBUTTON_H

@@ -1,5 +1,4 @@
-#ifndef XCLUCOMBOBOX_H
-#define XCLUCOMBOBOX_H
+#pragma once
 
 //Кастомный ComboBox
 //Убираем реакцию на колесико
@@ -19,6 +18,3 @@ public:
 protected:
     virtual void wheelEvent(QWheelEvent *event);
 };
-
-
-#endif // XCLUCOMBOBOX_H

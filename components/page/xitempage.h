@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMPAGE_H
-#define INTERFACEITEMPAGE_H
+#pragma once
 
 #include "xitem.h"
 
@@ -36,5 +35,3 @@ protected:
     //специальные типы, которые не поддерживают перенос через строку (array и image) - должны переписать copy_data_to_internal
     void copy_data_to_internal(XItem * /*item*/) {}
 };
-
-#endif // INTERFACEITEMPAGE_H

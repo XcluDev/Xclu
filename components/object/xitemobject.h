@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMOBJECT_H
-#define INTERFACEITEMOBJECT_H
+#pragma once
 
 //Object
 //Note, it doesn't store object's value, but only pointer
@@ -61,5 +60,3 @@ protected:
     virtual void copy_data_to_internal(XItem *item);
 };
 
-
-#endif // INTERFACEITEMOBJECT_H

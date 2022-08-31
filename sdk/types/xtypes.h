@@ -1,5 +1,4 @@
-#ifndef XTYPES_H
-#define XTYPES_H
+#pragma once
 
 // Базовые типы, а также XType
 
@@ -21,5 +20,3 @@
 // XType identifiers
 #include "xtype.h"
 
-
-#endif // XTYPES_H

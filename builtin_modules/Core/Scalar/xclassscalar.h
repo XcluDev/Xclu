@@ -1,5 +1,4 @@
-#ifndef XCLASSSCALAR_H
-#define XCLASSSCALAR_H
+#pragma once
 
 //Реализация модуля Scalar - скаляр (int, float, string, checkbox, enum),
 //в виде поля ввода и/или слайдера
@@ -65,4 +64,3 @@ protected:
 };
 
 
-#endif // XClassScalar_H

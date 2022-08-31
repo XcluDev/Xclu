@@ -1,5 +1,4 @@
-#ifndef QOSCMESSAGE_H
-#define QOSCMESSAGE_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -105,4 +104,3 @@ private:
 
 Q_DECLARE_METATYPE(QOscMessage);
 
-#endif // QOSCMESSAGE_H

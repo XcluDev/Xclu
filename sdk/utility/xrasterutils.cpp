@@ -10,12 +10,12 @@
 // TODO Implement converting all to all types by adding second version for code_for_all_basic_XType at types.h scanning T2
 // and using this macroses nested
 void XRasterUtils::convert(const XRaster& source, XRaster& destination, XType destination_type) {
-    if (source.type_id == destination_type) {
+    if (source.type == destination_type) {
         destination = source;
         return;
     }
     destination.allocate(source.w, source.h, destination_type);
-    if (source.type_id == XType::rgb_u8 && destination_type == XType::uint8) {
+    if (source.type == XType::rgb_u8 && destination_type == XType::uint8) {
         const rgb_u8* data1 = (const rgb_u8*)source.data_pointer();
         uint8* data2 = (uint8*)destination.data_pointer();
         for (int i=0; i<source.n; i++) {
@@ -23,7 +23,7 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination, XType de
         }
         return;
     }
-    if (source.type_id == XType::uint8 && destination_type == XType::rgb_u8) {
+    if (source.type == XType::uint8 && destination_type == XType::rgb_u8) {
         const uint8* data1 = (const uint8*)source.data_pointer();
         rgb_u8* data2 = (rgb_u8*)destination.data_pointer();
         for (int i=0; i<source.n; i++) {
@@ -32,7 +32,7 @@ void XRasterUtils::convert(const XRaster& source, XRaster& destination, XType de
         return;
     }
     xc_exception(QString("XRasterUtils::convert - unsupported conversion types %1 -> %2")
-                 .arg(XType_to_string(source.type_id))
+                 .arg(XType_to_string(source.type))
                  .arg(XType_to_string(destination_type)));
 }
 
@@ -101,7 +101,7 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
     xc_assert(!raster.is_empty(), "XRasterUtils::convert - empty raster");
     int w = raster.w;
     int h = raster.h;
-    switch (raster.type_id)
+    switch (raster.type)
     {
     case XType::uint8:
     {
@@ -141,14 +141,14 @@ void XRasterUtils::convert(const XRaster& raster, QImage &qimage) {
     }
     default:
         xc_exception(QString("XRasterUtils::convert - raster type %1 not supported")
-                     .arg(XType_to_string(raster.type_id)));
+                     .arg(XType_to_string(raster.type)));
     }
 }
 
 //---------------------------------------------------------------------
 QImage XRasterUtils::link_qimage(const XRaster& raster) {
     QImage::Format format = QImage::Format_Invalid;
-    switch (raster.type_id)
+    switch (raster.type)
     {
     case XType::uint8: format = QImage::Format_Grayscale8;
         break;
@@ -226,7 +226,7 @@ void XRasterUtils::resize_nearest(const XRaster& input, XRaster& output, int new
     xc_assert(input.data_pointer() != output.data_pointer(), "resize_nearest, input and output must be different images");
     xc_assert(w > 0 && h > 0, "resize_nearest error, input image must have positive size");
     xc_assert(new_w > 0 && new_h > 0, "resize_nearest error, resized image must have positive size");
-    output.allocate(new_w, new_h, input.type_id);
+    output.allocate(new_w, new_h, input.type);
     for (int y=0; y<new_h; y++) {
         for (int x=0; x<new_w; x++) {
             output.set_pixel_unsafe<void*>(x, y, input.pixel_unsafe<void*>(x * w / new_w, y * h / new_h));

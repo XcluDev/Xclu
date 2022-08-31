@@ -1,5 +1,4 @@
-#ifndef XCLU_GUI_CONST_H
-#define XCLU_GUI_CONST_H
+#pragma once
 
 #include "incl_h.h"
 
@@ -142,9 +141,6 @@ QVBoxLayout *vlayout(int margin = -1, QWidget *widget1 = nullptr, int stretch1 =
                      QWidget *widget4 = nullptr, int stretch4 = 0,
                      QWidget *widget5 = nullptr, int stretch5 = 0);
 
-
-
 };  //namespace xclu
 
 
-#endif // XCLU_GUI_CONST_H

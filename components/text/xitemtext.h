@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMTEXT_H
-#define INTERFACEITEMTEXT_H
+#pragma once
 
 #include "xitemscalar.h"
 
@@ -50,4 +49,3 @@ protected:
 
 };
 
-#endif // INTERFACEITEMTEXT_H

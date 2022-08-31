@@ -1,5 +1,4 @@
-#ifndef XCLASSNOTES_H
-#define XCLASSTEST_H
+#pragma once
 
 //Notes module.
 
@@ -18,7 +17,5 @@ protected:
     virtual void update() {}
     virtual void stop() {}
 
-
 };
 
-#endif // XCLASSTEST_H

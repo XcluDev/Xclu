@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEM_H
-#define INTERFACEITEM_H
+#pragma once
 
 //Абстрактный элемент интерфейса (переменные и оформление GUI), невизуальная часть
 //Подклассы реализуют конкретные элементы.
@@ -348,6 +347,3 @@ protected:
 
 };
 
-
-
-#endif // INTERFACEITEM_H

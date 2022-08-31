@@ -1,5 +1,4 @@
-#ifndef XCALLUTILS_H
-#define XCALLUTILS_H
+#pragma once
 
 #include "xmodule.h"
 
@@ -20,5 +19,3 @@ protected:
     // static void call(XModule *module, XType function, XObject *input, XObject *output = nullptr);
 };
 
-
-#endif // XCALLUTILS_H

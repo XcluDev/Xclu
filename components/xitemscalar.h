@@ -1,5 +1,4 @@
-#ifndef XITEMSCALAR_H
-#define XITEMSCALAR_H
+#pragma once
 
 #include "incl_h.h"
 #include "xrange.h"
@@ -60,4 +59,3 @@ protected:
     XRangeInt range_;
 };
 
-#endif // XITEMSCALAR_H

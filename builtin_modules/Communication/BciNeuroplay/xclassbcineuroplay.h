@@ -1,5 +1,4 @@
-#ifndef XCLASSBCINEUROPLAY_H
-#define XCLASSBCINEUROPLAY_H
+#pragma once
 
 //BCI Neuroplay, https://neuroplay.ru
 
@@ -77,6 +76,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSBCINEUROPLAY_H

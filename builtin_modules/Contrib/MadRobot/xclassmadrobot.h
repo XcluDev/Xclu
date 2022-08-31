@@ -1,5 +1,4 @@
-#ifndef XCLASSMADROBOT_H
-#define XCLASSMADROBOT_H
+#pragma once
 
 //EmoAI
 #include "sdk_h.h"
@@ -136,5 +135,3 @@ protected:
     bool walking_ = false;
 
 };
-
-#endif // XCLASSMADROBOT_H

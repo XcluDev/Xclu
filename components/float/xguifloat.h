@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIFLOAT_H
-#define INTERFACEGUIFLOAT_H
+#pragma once
 
 #include "xgui.h"
 #include "xrange.h"
@@ -41,4 +40,3 @@ protected:
 
 };
 
-#endif // INTERFACEGUIFLOAT_H

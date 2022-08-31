@@ -1,5 +1,4 @@
-#ifndef XCLASSIMAGELOADER_H
-#define XCLASSIMAGELOADER_H
+#pragma once
 
 //ImageLoader - load imges from a file and a folder
 
@@ -33,4 +32,3 @@ protected:
 
 };
 
-#endif // XCLASSIMAGELOADER_H

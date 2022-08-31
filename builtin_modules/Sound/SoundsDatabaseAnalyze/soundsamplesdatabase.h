@@ -1,5 +1,4 @@
-#ifndef SOUNDSAMPLESDATABASE_H
-#define SOUNDSAMPLESDATABASE_H
+#pragma once
 
 /*
 Sound database
@@ -39,5 +38,3 @@ protected:
 
 };
 
-
-#endif // SOUNDSAMPLESDATABASE_H

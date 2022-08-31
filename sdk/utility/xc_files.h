@@ -1,5 +1,4 @@
-#ifndef XCLU_FILES_H
-#define XCLU_FILES_H
+#pragma once
 
 #include "incl_h.h"
 
@@ -26,6 +25,3 @@ void xc_write_binary_file(const void *data, int n, QString file_name, bool appen
 //Use result.data() for data access
 //read_bytes == -1 means read all file, if >=0 - read part of the file
 QByteArray xc_read_binary_file(QString file_name, int read_bytes = -1);
-
-
-#endif // XCLU_FILES_H

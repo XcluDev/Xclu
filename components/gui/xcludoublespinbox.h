@@ -1,6 +1,4 @@
-#ifndef XCLUDOUBLESPINBOX_H
-#define XCLUDOUBLESPINBOX_H
-
+#pragma once
 
 //Кастомный DoubleSpinBox
 //Убираем реакцию на колесико
@@ -21,4 +19,3 @@ protected:
     virtual void wheelEvent(QWheelEvent *event);
 };
 
-#endif // XCLUDOUBLESPINBOX_H

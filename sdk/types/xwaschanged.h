@@ -1,5 +1,4 @@
-#ifndef XWASCHANGED_H
-#define XWASCHANGED_H
+#pragma once
 
 //Classes for checking that value was changed
 #include "xtypes.h"
@@ -51,6 +50,3 @@ protected:
     XWasChangedFrame _keeper_frame2_ = 1;   //level 2 of changes
 };
 
-
-
-#endif // XWASCHANGED_H

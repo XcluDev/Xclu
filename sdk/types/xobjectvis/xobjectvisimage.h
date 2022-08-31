@@ -1,5 +1,4 @@
-#ifndef XOBJECTVISIMAGE_H
-#define XOBJECTVISIMAGE_H
+#pragma once
 
 // Visualizer for image object.
 
@@ -16,4 +15,3 @@ public:
     virtual void draw_thumbnail(QPainter &p, int w, int h) const;
 };
 
-#endif // XOBJECTVISIMAGE_H

@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMSEPARATOR_H
-#define INTERFACEITEMSEPARATOR_H
+#pragma once
 
 #include "xitem.h"
 
@@ -30,4 +29,4 @@ protected:
 
     bool is_line_ = false;  //является ли линией или просто вертикальным сепаратором
 };
-#endif // INTERFACEITEMSEPARATOR_H
+

@@ -30,9 +30,7 @@
  *
  */
 
-
-#ifndef SPTREE_H
-#define SPTREE_H
+#pragma once
 
 using namespace std;
 
@@ -112,4 +110,3 @@ private:
     bool isChild(unsigned int test_index, unsigned int start, unsigned int end);
 };
 
-#endif

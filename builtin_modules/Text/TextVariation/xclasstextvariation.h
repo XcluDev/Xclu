@@ -1,5 +1,4 @@
-#ifndef XCLASSRANDOM_H
-#define XCLASSRANDOM_H
+#pragma once
 
 //TextVariation implementation
 //For [A|B|C[D|E]] input it will generate randomly A,B,CD,CE.
@@ -27,6 +26,3 @@ protected:
     QString variate(QString text, int level);
 };
 
-
-
-#endif // XCLASSRANDOM_H

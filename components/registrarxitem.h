@@ -1,5 +1,4 @@
-#ifndef RESISTRARXITEM_H
-#define RESISTRARXITEM_H
+#pragma once
 
 //Automation of registration of XItem components is implemented here
 //Modules with specific implementations should add the line in their CPP file:
@@ -67,5 +66,3 @@ struct Registrar_XItem_button {
 Registrar_XItem_button registrar_XItem_button;
 
 */
-
-#endif // RESISTRARXITEM_H

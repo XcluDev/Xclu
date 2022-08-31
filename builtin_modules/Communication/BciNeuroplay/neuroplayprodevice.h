@@ -1,5 +1,4 @@
-#ifndef NEUROPLAYPRODEVICE_H
-#define NEUROPLAYPRODEVICE_H
+#pragma once
 
 // Code from https://github.com/perevalovds/NeuroplayPro-QtSDK,
 // forked from example by neuroplay.ru
@@ -188,5 +187,3 @@ private slots:
     void onResponse(QJsonObject resp);
     void grabRequest();
 };
-
-#endif // NEUROPLAYPRODEVICE_H

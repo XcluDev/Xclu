@@ -1,5 +1,4 @@
-#ifndef XTIMEMEASURE_H
-#define XTIMEMEASURE_H
+#pragma once
 
 //Utility class for measuring time.
 //Constructor stores current time, and then you can call elapsed()
@@ -18,4 +17,3 @@ protected:
     double time_ = 0;
 };
 
-#endif // XTIMEMEASURE_H

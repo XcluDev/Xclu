@@ -1,5 +1,4 @@
-#ifndef XCLASSRENDERAREA_H
-#define XCLASSRENDERAREA_H
+#pragma once
 
 //Renderer area module. It renders itself to Window, and controls RenderElements - buttons, faders, etc.
 
@@ -31,9 +30,6 @@ protected:
     void collect_modules();
     QVector<XClass *> modules_;
 
-
 };
 
 
-
-#endif // XCLASSRENDERAREA_H

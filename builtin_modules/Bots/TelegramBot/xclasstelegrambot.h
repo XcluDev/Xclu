@@ -1,5 +1,4 @@
-#ifndef XCLASSTELEGRAMBOT_H
-#define XCLASSTELEGRAMBOT_H
+#pragma once
 
 //TelegramBot implementation
 //------------------------------------------------------------------
@@ -40,5 +39,3 @@ protected slots:
 };
 
 
-
-#endif // XCLASSTELEGRAMBOT_H

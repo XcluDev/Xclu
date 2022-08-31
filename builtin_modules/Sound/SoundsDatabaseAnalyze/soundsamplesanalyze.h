@@ -1,5 +1,4 @@
-#ifndef SOUNDSAMPLESANALYZE_H
-#define SOUNDSAMPLESANALYZE_H
+#pragma once
 
 /*
 Analyze sounds by placing them on 2D screen,
@@ -43,5 +42,3 @@ protected:
     QVector<QVector<float>> make_float_envelopes(SoundSamplesDatabase &db);
 };
 
-
-#endif // SOUNDSAMPLESANALYZE_H

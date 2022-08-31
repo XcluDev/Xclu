@@ -1,5 +1,4 @@
-#ifndef XCLASSMOTIONDETECTOR_H
-#define XCLASSMOTIONDETECTOR_H
+#pragma once
 
 //MotionDetectorRouter implementation
 
@@ -64,6 +63,3 @@ protected:
     float normalized_correlation_float(XRaster &A_float, XRaster &B_float);
 };
 
-
-
-#endif // XCLASSMOTIONDETECTOR_H

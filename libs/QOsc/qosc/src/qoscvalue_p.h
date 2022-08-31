@@ -1,5 +1,4 @@
-#ifndef QOSCVALUE_P_H
-#define QOSCVALUE_P_H
+#pragma once
 
 #include <qosc.h>
 
@@ -457,6 +456,3 @@ public:
     quint64 t;
 };
 
-
-
-#endif // QOSCVALUE_P_H

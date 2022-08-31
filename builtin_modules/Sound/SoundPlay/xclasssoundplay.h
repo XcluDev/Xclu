@@ -1,5 +1,4 @@
-#ifndef XCLASSSOUNDPLAY_H
-#define XCLASSSOUNDPLAY_H
+#pragma once
 
 //SoundPlay implementation
 
@@ -48,6 +47,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSSOUNDPLAY_H

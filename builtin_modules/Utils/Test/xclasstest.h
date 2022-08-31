@@ -1,5 +1,4 @@
-#ifndef XCLASSTEST_H
-#define XCLASSTEST_H
+#pragma once
 
 //Реализация модуля Test - для проверки элементов GUI и исполнения - печатает в консоль, что делает
 
@@ -18,7 +17,5 @@ protected:
     virtual void update();
     virtual void stop();
 
-
 };
 
-#endif // XCLASSTEST_H

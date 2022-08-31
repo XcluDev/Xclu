@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMCHECKBOX_H
-#define INTERFACEITEMCHECKBOX_H
+#pragma once
 
 #include "xitemscalar.h"
 
@@ -35,6 +34,3 @@ protected:
 
     bool is_group_checkbox_ = false;    //"групповой" чекбокс, который нужно показывать слева, без label
 };
-
-
-#endif // INTERFACEITEMCHECKBOX_H

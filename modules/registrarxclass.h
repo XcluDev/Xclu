@@ -1,5 +1,4 @@
-#ifndef REGISTRARXCLASS_H
-#define REGISTRARXCLASS_H
+#pragma once
 
 //Здесь реализована автоматизация регистрации исполняемых модулей
 //Модули с конкретными реализациями должны добавлять в своем CPP-файле строку:
@@ -60,5 +59,4 @@ REGISTER_XCLASS(Execute)
     Registrar_XClassExecute registrar_XModuleExecute;
 */
 
-//------------------------------------------------------------------
-#endif // REGISTRARXCLASS_H
+

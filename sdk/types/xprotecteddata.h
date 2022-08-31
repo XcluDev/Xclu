@@ -1,5 +1,4 @@
-#ifndef XCLUPROTECTEDDATA_H
-#define XCLUPROTECTEDDATA_H
+#pragma once
 
 #include <QMutex>
 #include <QReadWriteLock>
@@ -110,5 +109,3 @@ protected:
     void unlock() { value_->lock_.unlock(); }
 };
 
-
-#endif // XCLUPROTECTEDDATA_H

@@ -1,5 +1,4 @@
-#ifndef XCLASSWINDOW_H
-#define XCLASSWINDOW_H
+#pragma once
 
 //Реализация модуля Window - окно на экране
 
@@ -128,5 +127,3 @@ protected:
     void grab_window();
 };
 
-
-#endif // XCLASSWINDOW_H

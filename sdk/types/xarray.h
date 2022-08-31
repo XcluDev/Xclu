@@ -1,5 +1,4 @@
-#ifndef XARRAY_H
-#define XARRAY_H
+#pragma once
 
 #include <QVector>
 #include "xtype.h"
@@ -12,9 +11,9 @@ public:
     XArray() {}
     int n = 0;
     int sizeofitem = 0;
-    XType type_id = XType::none; // To change this value you must call call set_type()
+    XType type = XType::none; // To change this value you must call call set_type()
 
-    void set_type(XType type_id); // Must be called instead of directly changing type_id
+    void set_type(XType type); // Must be called instead of directly changing type
     void assert_type(XType type) const;
 protected:
     bool is_owner = false;   // Does raster hold its own memory, or use external source
@@ -48,14 +47,15 @@ public:
 
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
-    void allocate(int n, XType Type_id, bool reallocate = false);
+    void allocate(int n, XType type, bool reallocate = false);
+
 
     void clear();
 
     //----------------------------------------------------------------------------
     // Copying
     //----------------------------------------------------------------------------
-    void copy_from(void* data, int n, XType Type_id);
+    void copy_from(void* data, int n, XType type);
     template<class T> void copy_from(T* data, int n);
 
     //----------------------------------------------------------------------------
@@ -71,4 +71,3 @@ public:
     XArray crop(int i0, int n0) const;
 };
 
-#endif // XARRAY_H

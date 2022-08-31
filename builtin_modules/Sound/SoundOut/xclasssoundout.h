@@ -1,6 +1,4 @@
-#ifndef XCLASSSOUNDOUT_H
-#define XCLASSSOUNDOUT_H
-
+#pragma once
 
 //Реализация модуля SoundOut - вывод звукового буфера
 
@@ -140,5 +138,3 @@ protected slots:
 
 };
 
-
-#endif // XCLASSSOUNDOUT_H

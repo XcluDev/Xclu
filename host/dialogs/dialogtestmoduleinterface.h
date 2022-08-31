@@ -1,5 +1,4 @@
-#ifndef DIALOGTESTMODULEINTERFACE_H
-#define DIALOGTESTMODULEINTERFACE_H
+#pragma once
 
 //Диалог тестирования XGUI создаваемых модулей
 #include <QDialog>
@@ -56,6 +55,3 @@ private:
 
 };
 
-
-
-#endif // DIALOGTESTMODULEINTERFACE_H

@@ -1,5 +1,4 @@
-#ifndef XNETWORKADDR_H
-#define XNETWORKADDR_H
+#pragma once
 
 //Class for manipulations with network address
 
@@ -18,4 +17,3 @@ public:
     QString to_str();
 };
 
-#endif // XNETWORKADDR_H

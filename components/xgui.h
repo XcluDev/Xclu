@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMGUI_H
-#define INTERFACEITEMGUI_H
+#pragma once
 
 // A graphical interface for displaying or editing a variable.
 // It creates a class that is capable of generating a GUI object on demand.
@@ -222,4 +221,3 @@ public slots:
 
 };
 
-#endif // INTERFACEITEMGUI_H

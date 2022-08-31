@@ -1,5 +1,4 @@
-#ifndef XCLASSBASE_H
-#define XCLASSBASE_H
+#pragma once
 
 //XClassBase - a base class for XClass.
 //It provides access to XModule (that is UI values) and for runtime information
@@ -99,4 +98,3 @@ protected:
 
 };
 
-#endif // XCLASSBASE_H

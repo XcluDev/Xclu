@@ -1,3 +1,5 @@
+#pragma once
+
 //Original: "utils" from Qt "Spectrum Example"
 /****************************************************************************
 **
@@ -48,9 +50,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-#ifndef XAUDIO_UTILS_H
-#define XAUDIO_UTILS_H
 
 #include <QtCore/qglobal.h>
 #include <QDebug>
@@ -128,5 +127,3 @@ QVector<float> make_float_envelope(const QVector<int16> &sound, int decimate = 6
 //--------------------------------------------------
 } //namespace
 //--------------------------------------------------
-
-#endif // XAUDIO_UTILS_H

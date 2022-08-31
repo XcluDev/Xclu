@@ -1,6 +1,4 @@
-#ifndef XTYPEID_H
-#define XTYPEID_H
-
+#pragma once
 #include <QString>
 
 //------------------------------------------------
@@ -58,8 +56,8 @@ bool is_XType_float(XType type);
 
 
 // Macros for enrolling code for all basic types
-#define code_for_all_basic_XType(type_id, CODE) \
-switch(type_id) {\
+#define code_for_all_basic_XType(type, CODE) \
+switch(type) {\
 case XType::uint8:    { typedef uint8 T; CODE } break;\
 case XType::rgb_u8:   { typedef rgb_u8 T; CODE } break;\
 case XType::rgba_u8:  { typedef rgba_u8 T; CODE } break;\
@@ -75,7 +73,7 @@ case XType::vec3:     { typedef vec3 T; CODE } break;\
 case XType::vec4:     { typedef vec4 T; CODE } break;\
 case XType::int2:     { typedef int2 T; CODE } break;\
 default: \
-    xc_exception(QString("code_for_all_basic_XType - bad type_id %1 for code %2").arg(XType_to_string(type_id)).arg(#CODE)); \
+    xc_exception(QString("code_for_all_basic_XType - bad type %1 for code %2").arg(XType_to_string(type)).arg(#CODE)); \
 }
 
 /// Template function converting C++ type to XType
@@ -87,4 +85,3 @@ default: \
 template<class T> XType cpptype_to_XType();
 
 
-#endif // XTYPEID_H

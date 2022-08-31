@@ -1,5 +1,4 @@
-#ifndef QOSCMESSAGE_P_H
-#define QOSCMESSAGE_P_H
+#pragma once
 
 #include <qoscvalue.h>
 
@@ -34,4 +33,3 @@ public:
     QRegularExpression matcher;
 };
 
-#endif // QOSCMESSAGE_P_H

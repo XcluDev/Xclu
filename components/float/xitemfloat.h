@@ -1,5 +1,4 @@
-#ifndef INTERFACEITEMFLOAT_H
-#define INTERFACEITEMFLOAT_H
+#pragma once
 
 #include "xrange.h"
 #include "xitemscalar.h"
@@ -62,4 +61,3 @@ protected:
     virtual void var_to_gui_internal(); //установка значения в gui
 };
 
-#endif // INTERFACEITEMFLOAT_H

@@ -1,5 +1,4 @@
-#ifndef SETTINGSKEYS_H
-#define SETTINGSKEYS_H
+#pragma once
 
 //Настройки приложения и ключи для записи настроек
 #include <QString>
@@ -54,5 +53,3 @@ public:
 //Использование: XCLU_SETTINGS
 #define XCLU_SETTINGS QSettings settings(xc_settings_file(), QSettings::IniFormat);
 
-
-#endif // SETTINGSKEYS_H

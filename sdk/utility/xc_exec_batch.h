@@ -1,5 +1,4 @@
-#ifndef XCEXECBATCH_H
-#define XCEXECBATCH_H
+#pragma once
 
 //Execute bat/bash scripts.
 
@@ -19,5 +18,3 @@ void xc_exec_batch(QStringList script, QString file_to_save,
                  QVector<QString> var_names = QVector<QString>(),
                  QVector<QString> var_values = QVector<QString>());
 
-
-#endif // XCEXECBATCH_H

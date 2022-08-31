@@ -1,5 +1,4 @@
-#ifndef QOSCBUNDLE_H
-#define QOSCBUNDLE_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -49,5 +48,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(QOscBundle);
-
-#endif // QOSCBUNDLE_H

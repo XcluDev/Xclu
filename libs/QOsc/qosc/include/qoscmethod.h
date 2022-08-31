@@ -1,5 +1,4 @@
-#ifndef QOSCMETHOD_H
-#define QOSCMETHOD_H
+#pragma once
 
 //----------------------------------------------------------
 // QOsc - Qt based library that implement the OSC protocol
@@ -45,4 +44,3 @@ private:
     Func _f;
 };
 
-#endif // QOSCMETHOD_H

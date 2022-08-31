@@ -1,5 +1,4 @@
-#ifndef XClassSoundsDatabaseAnalyze_H
-#define XClassSoundsDatabaseAnalyze_H
+#pragma once
 
 /*
 By given set of sound samples, module arranges them at 2D and plays by mouse click.
@@ -76,6 +75,3 @@ protected:
 
 };
 
-
-
-#endif // XClassSoundsDatabaseAnalyze_H

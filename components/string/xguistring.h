@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUISTRING_H
-#define INTERFACEGUISTRING_H
+#pragma once
 
 #include "xgui.h"
 
@@ -32,5 +31,3 @@ protected slots:
     void choose_folder();
 };
 
-
-#endif // INTERFACEGUISTRING_H

@@ -1,5 +1,4 @@
-#ifndef XCLASSSCANFOLDER_H
-#define XCLASSSCANFOLDER_H
+#pragma once
 
 //ScanFolder implementation
 
@@ -21,6 +20,3 @@ protected:
 
 };
 
-
-
-#endif // XCLASSSCANFOLDER_H

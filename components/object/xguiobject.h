@@ -1,5 +1,4 @@
-#ifndef INTERFACEGUIOBJECT_H
-#define INTERFACEGUIOBJECT_H
+#pragma once
 
 #include "xgui.h"
 #include "xprotecteddata.h"
@@ -60,6 +59,3 @@ private:
     XGuiObjectVisual visual_; //визуальные компоненты для описания объекта
 
 };
-
-
-#endif // INTERFACEGUIOBJECT_H

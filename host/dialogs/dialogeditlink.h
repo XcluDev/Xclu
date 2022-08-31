@@ -1,5 +1,4 @@
-#ifndef DIALOGEDITLINK_H
-#define DIALOGEDITLINK_H
+#pragma once
 
 #include <QDialog>
 
@@ -45,4 +44,3 @@ private:
 
 };
 
-#endif // DIALOGEDITLINK_H
