@@ -20,7 +20,8 @@ public:
     /// Link object to given data and type. Object not own the data.
     void link(void *data, XType type, QString subtype = "");
 
-    /// Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
+    /// Типизированная линковка - C++ сам определяет какой тип
+    /// Может использоваться в виде .link<TRaster>(raster), так и link(raster)
     template <class T> void link(T &data);
 
     XType type() const;

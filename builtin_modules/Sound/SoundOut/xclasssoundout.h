@@ -17,7 +17,7 @@
 class XClass;
 
 //Данные для обмена с generator
-struct XClassSoundOutData
+struct XClassSoundOutParams
 {
     int play_test_sound_ = 0;   //generate test sound
     int play_left_ = 1;
@@ -57,7 +57,7 @@ class XClassSoundOutGenerator : public QIODevice
     Q_OBJECT
 
 public:
-    XClassSoundOutGenerator(const QAudioFormat &format, XClassSoundOutData *data);
+    XClassSoundOutGenerator(const QAudioFormat &format, XProtectedData_<XClassSoundOutParams> *params);
 
     void start();
     void stop();
@@ -70,12 +70,12 @@ private:
     //QByteArray m_buffer;
     QAudioFormat format_;
 
-    XProtectedData_<XClassSoundOutData *> data_;
+    XProtectedData_<XClassSoundOutParams> *params_;
 
     //функция создания звука, во float
     //вызывает нужные модули и заполняет тестовым звуком, если требуется
     void request_sound(int samples, int channels); //создать звук в объекте sound_
-    XProtectedObject sound_;  //звук
+    XProtectedData_<XSoundBuffer> sound_;  //звук
 
     //тестовый генератор звука
     qreal test_phase_ = 0;
@@ -112,7 +112,7 @@ protected:
     QScopedPointer<XClassSoundOutGenerator> m_generator;
 
     //данные для обмена с генератором
-    XProtectedData_<XClassSoundOutData> data_;
+    XProtectedData_<XClassSoundOutParams> params_;
 
     bool audio_started_ = false;
     void set_started(bool started); //ставит audio_started_ и gui-элемент is_started

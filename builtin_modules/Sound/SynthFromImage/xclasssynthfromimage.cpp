@@ -43,7 +43,7 @@ void XClassSynthFromImage::start() {
 
     //link images with internal objects
     out_image_holder_.clear();
-    getobject_output_image()->write().data().link<XRaster>(out_image_holder_);
+    getobject_output_image()->write().data().link(out_image_holder_);
 
     input_u8_.clear();
     output_u8c3_.clear();

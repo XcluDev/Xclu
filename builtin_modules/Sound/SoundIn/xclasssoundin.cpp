@@ -15,7 +15,7 @@ XClassSoundInGenerator::XClassSoundInGenerator(const QAudioFormat &format,
     format_ = format;
     data_ = data;
 
-    sound_.write().data().link<XSoundBuffer>(buffer_holder_);
+    sound_.write().data().link(buffer_holder_);
 }
 
 //---------------------------------------------------------------------
@@ -31,7 +31,7 @@ void XClassSoundInGenerator::stop()
 }
 
 //---------------------------------------------------------------------
-void XClassSoundInGenerator::send_sound_in() { //создать звук в объекте sound_
+void XClassSoundInGenerator::send_sound_in() {
     try {
         auto read_sound = sound_.read();
         auto &buffer = *read_sound.data().data<XSoundBuffer>();
@@ -41,7 +41,7 @@ void XClassSoundInGenerator::send_sound_in() { //создать звук в об
         for (int i=0; i<data.modules_.size(); i++) {
             //если модуль выдаст ошибку - оно перехватится и запишется в data_->err - см. ниже
             XCall call;
-            call.setup_const<XSoundBuffer>(buffer);
+            call.setup_const<XSoundBuffer>(XCallType::SoundBufferReceived, buffer);
             data.modules_[i]->call(call);
         }
 
@@ -197,7 +197,9 @@ void XClassSoundIn::start() {
 
     buffer_size_= 0;
     seti_buffer_size(0);
-    getobject_sound_format()->clear();
+
+    format_holder_.clear();
+    getobject_sound_format()->write().data().link(format_holder_);
 
     set_started(false); //также ставит gui-элемент is_started
 
@@ -449,10 +451,8 @@ void XClassSoundIn::set_started(bool started) { //ставит camera_started_ �
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void XClassSoundIn::set_format(const QAudioFormat &format) {
-    auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
-    auto write = getobject_sound_format()->write();
-    XObjectSoundFormat::set_to_object(write.data(), format_);
-
+    auto format_ = XSoundFormat(format.sampleRate(), format.channelCount());
+    getobject_sound_format()->write().data().link(format_);
 }
 
 //---------------------------------------------------------------------

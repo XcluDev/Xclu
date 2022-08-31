@@ -24,7 +24,7 @@ XClassImageLoader::~XClassImageLoader()
 
 //---------------------------------------------------------------------
 void XClassImageLoader::start() {
-    getobject_image()->write().data().link<XRaster>(image_holder_);   //link xgui image with image_
+    getobject_image()->write().data().link(image_holder_);   //link xgui image with image_
     seti_is_new_frame(false);
 
     //load image immediately ! :)

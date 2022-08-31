@@ -10,6 +10,7 @@ public:
     XSoundFormat();
     XSoundFormat(int sample_rate, int channels);
     void setup(int sample_rate, int channels);
+    void clear();
 };
 
 class XSoundBuffer {
@@ -20,5 +21,6 @@ public:
     XSoundBuffer();
     XSoundBuffer(const XSoundFormat &format, int samples);
     void allocate(const XSoundFormat &format, int samples);
+    void clear();
 };
 

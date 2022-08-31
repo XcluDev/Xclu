@@ -85,6 +85,8 @@ protected:
     QScopedPointer<QAudioInput> m_audioInput;
     QScopedPointer<XClassSoundInGenerator> m_generator;
 
+    XSoundFormat format_holder_;
+
     //данные для обмена с генератором
     XProtectedData_<XClassSoundInData> data_;
 

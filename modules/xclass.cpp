@@ -158,31 +158,31 @@ void XClass::call(XCall& call) {
         if (call.error().is_error()) return;
 
         //process predefined functions
-        switch (call.type()) {
-        case XType::none: xc_exception("XClass::call type is XType::none");
+        switch (call.call_type()) {
+        case XCallType::none: xc_exception("XClass::call type is XType::none");
             break;
-        case XType::XCallCreateWidget: on_create_widget_internal(call);
+        case XCallType::CreateWidget: on_create_widget_internal(call);
             break;
-        case XType::XCallSoundBufferAdd: {
+        case XCallType::SoundBufferAdd: {
             auto *call_data = call.data<XCallSoundBufferAdd>();
             on_sound_buffer_add(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
         }
             break;
 
-        case XType::XCallSoundBufferReceived: {
+        case XCallType::SoundBufferReceived: {
             auto *call_data = call.data<XCallSoundBufferReceived>();
             on_sound_buffer_received(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
         }
             break;
         //process universal function
-        case XType::Custom:
+        case XCallType::Custom:
         default:
             on_custom_call(call);
         }
 
     }
     catch (XException &e) {
-        call.error().prepend(QString("Error during executing function '%1' in module '%2':")
+        call.error().prepend(QString("Error during executing call type  '%1' in module '%2':")
                   .arg(XType_to_string(call.type())).arg(name()), e.err());
     }
 }

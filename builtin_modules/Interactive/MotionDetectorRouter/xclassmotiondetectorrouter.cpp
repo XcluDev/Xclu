@@ -37,8 +37,8 @@ void XClassMotionDetectorRouter::start() {
     for (int i=0; i<N; i++) {
         output_[i].clear();
         template_[i].clear();
-        output_gui_[i].write().data().link<XRaster>(output_[i]);
-        template_gui_[i].write().data().link<XRaster>(template_[i]);
+        output_gui_[i].write().data().link(output_[i]);
+        template_gui_[i].write().data().link(template_[i]);
     }
 
     ignore_frames_ = geti_ignore_start_frames();

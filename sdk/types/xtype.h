@@ -19,19 +19,16 @@
     XTYPEDEF(vec3, 12)\
     XTYPEDEF(vec4, 13)\
     XTYPEDEF(int2, 14)\
+    XTYPEDEF(pointer_type, 15)\
                            \
-    XTYPEDEF(QString, 15)\
-    XTYPEDEF(QStringList, 16)\
+    XTYPEDEF(QString, 16)\
+    XTYPEDEF(QStringList, 17)\
                             \
-    XTYPEDEF(XArray, 17)\
-    XTYPEDEF(XRaster, 18)\
+    XTYPEDEF(XArray, 18)\
+    XTYPEDEF(XRaster, 19)\
                               \
-    XTYPEDEF(XSoundFormat, 19)\
-    XTYPEDEF(XSoundBuffer, 20)\
-                                   \
-    XTYPEDEF(XCallCreateWidget, 21)\
-    XTYPEDEF(XCallSoundBufferAdd, 22)\
-    XTYPEDEF(XCallSoundBufferReceived, 23)
+    XTYPEDEF(XSoundFormat, 20)\
+    XTYPEDEF(XSoundBuffer, 21)
 // При изменении списка, следует обновить значение Custom ниже
 //------------------------------------------------
 
@@ -42,7 +39,7 @@ XTYPESLIST
 #undef  XTYPEDEF
     none = 0,
     u8 = uint8,       // Используем и uint8 и u8, где как удобнее
-    Custom = 24,      // Это значение должно быть максимальному значению в списке XTYPESLIST плюс 1
+    Custom = 22,      // Это значение должно быть максимальному значению в списке XTYPESLIST плюс 1
     N = Custom + 1
 };
 

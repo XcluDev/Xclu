@@ -30,7 +30,7 @@ void XClassMadRobot::start() {
 
     //link yolo image to GUI
     image_holder_u8c3_.clear();
-    getobject_yolo_image()->write().data().link<XRaster>(image_holder_u8c3_);
+    getobject_yolo_image()->write().data().link(image_holder_u8c3_);
 
     set_state("---");
 

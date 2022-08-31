@@ -3,7 +3,8 @@
 #include "xerrorhandling.h"
 
 //---------------------------------------------------------------------
-void XCall::setup(XType type, void *data) {
+void XCall::setup(XCallType call_type, XType type, void *data) {
+    call_type_ = call_type;
     type_ = type;
     data_ = data;
     data_const_ = nullptr;
@@ -11,7 +12,8 @@ void XCall::setup(XType type, void *data) {
 }
 
 //---------------------------------------------------------------------
-void XCall::setup_const(XType type, const void *data) {
+void XCall::setup_const(XCallType call_type, XType type, const void *data) {
+    call_type_ = call_type;
     type_ = type;
     data_ = nullptr;
     data_const_ = data;
@@ -19,10 +21,22 @@ void XCall::setup_const(XType type, const void *data) {
 }
 
 //---------------------------------------------------------------------
+template<class T> void XCall::setup(XCallType call_type, T &call_data) {
+    setup(call_type, cpptype_to_XType<T>(), &call_data);
+}
+template<class T> void XCall::setup_const(XCallType call_type, const T &call_data) {
+    setup_const(call_type, cpptype_to_XType<T>(), &call_data);
+}
+
+//---------------------------------------------------------------------
+XCallType XCall::call_type() const {
+    return call_type_;
+}
+
+//---------------------------------------------------------------------
 XType XCall::type() const {
     return type_;
 }
-
 
 //---------------------------------------------------------------------
 void XCall::assert_type(XType type) const {
@@ -34,14 +48,6 @@ void XCall::assert_type(XType type) const {
 //---------------------------------------------------------------------
 bool XCall::has_type(XType type) const {
     return (type_ == type);
-}
-
-//---------------------------------------------------------------------
-template<class T> void XCall::setup(T &call_data) {
-    setup(cpptype_to_XType<T>(), &call_data);
-}
-template<class T> void XCall::setup_const(const T &call_data) {
-    setup_const(cpptype_to_XType<T>(), &call_data);
 }
 
 //---------------------------------------------------------------------
