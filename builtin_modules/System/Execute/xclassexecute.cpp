@@ -41,6 +41,9 @@ void XClassExecute::start() {
     clear_string_debug_folder_path();
     clear_string_debug_file_path();
 
+    //image
+    getobject_console_write_image_transformed()->write().data().link(image_transformed_holder_);
+    getobject_console_write_image_transformed()->write().data().data<XRaster>()->clear();
 
     //process
     subprocess_.reset();
@@ -413,54 +416,48 @@ void XClassExecute::console_write() {
 //---------------------------------------------------------------------
 bool XClassExecute::console_write_image() {
     //Read image
-    XRasterUtils::to_raster(getobject_console_write_image(), image_write_input_);
+    auto &image = image_write_input_u8c3_;
+    auto console_image_read = getobject_console_write_image()->read();
+    const XRaster *raster = console_image_read.data().data<XRaster>();
+    if (!raster) {
+        xc_console_warning("XClassExecute::console_write_image - can't sent image to console, because it's empty");
+    }
 
-    //no image yet
-    if (image_write_input_.is_empty()) return false;
+    XRasterUtils::convert(*raster, image, XType::rgb_u8);
 
     //no transform
     if (!geti_console_write_image_transform()) {
-        int ch = 3;
-        console_write_image(image_write_input_.w, image_write_input_.h, ch, image_write_input_.data_pointer());
+        console_write_image(image.w, image.h, XType_channels(image.type), image.data<u8>());
     }
     else
     {
         //transform
-        XRaster_u8c3 *img = &image_write_input_;
+        XRaster *img_use = &image;
 
-        XRaster_u8c3 image_resized;// = image_write_input_;
+        XRaster image_resized;// = image_write_input_;
         auto resize = gete_console_write_image_resize();
         if (resize == console_write_image_resize_Pixel_Size) {
-            XRaster::resize_nearest(image_write_input_, image_resized, geti_console_write_image_sizex(), geti_console_write_image_sizey());
-            img = &image_resized;
+            XRasterUtils::resize_nearest(image, image_resized, geti_console_write_image_sizex(), geti_console_write_image_sizey());
+            img_use = &image_resized;
         }
         if (resize == console_write_image_resize_Rescale) {
-            XRaster::resize_nearest(image_write_input_, image_resized, getf_console_write_image_resize_scale());
-            img = &image_resized;
+            XRasterUtils::resize_nearest(image, image_resized, getf_console_write_image_resize_scale());
+            img_use = &image_resized;
         }
         //now img contains current image, resized if necessary
         //convert to grayscale if required, or sent rgb8
 
+        XRaster image_u8;
         if (geti_console_write_image_to_grayscale()) {
-            XRaster_u8 image;
-            XRasterUtils::convert(*img, image);            
-
-            //send to console
-            console_write_image(image.w, image.h, 1, image.data_pointer());
-
-            //set to gui image
-            XRasterUtils::create_from_raster(getobject_console_write_image_transformed(), image);
-
+            XRasterUtils::convert(*img_use, image_u8, XType::u8);
+            img_use = &image_u8;
         }
-        else {
-            XRaster_u8c3 &image = *img;
 
-            //send to console
-            console_write_image(image.w, image.h, 3, image.data_pointer());
+        //send to console
+        console_write_image(img_use->w, img_use->h, XType_channels(img_use->type), img_use->data<u8>());
 
-            //set to gui image
-            XRasterUtils::create_from_raster(getobject_console_write_image_transformed(), image);
-        }
+        //set to gui image
+        *getobject_console_write_image_transformed()->write().data().data<XRaster>() = *img_use;
 
     }
     return true;
@@ -468,7 +465,7 @@ bool XClassExecute::console_write_image() {
 }
 
 //---------------------------------------------------------------------
-void XClassExecute::console_write_image(int w, int h, int channels, uint8 *data) {
+void XClassExecute::console_write_image(int w, int h, int channels, const uint8 *data) {
     QProcess *subprocess = subprocess_.data();
     int data_size = w*h*channels;
 

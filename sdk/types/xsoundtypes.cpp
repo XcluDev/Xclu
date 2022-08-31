@@ -26,7 +26,7 @@ XSoundBuffer::XSoundBuffer(const XSoundFormat &format, int samples) {
 void XSoundBuffer::allocate(const XSoundFormat &format, int samples) {
     this->format = format;
     this->samples = samples;
-    buffer.allocate<float32>(samples*format.channels);
+    buffer.resize(samples * format.channels);
 }
 
 void XSoundBuffer::clear() {

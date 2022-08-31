@@ -81,10 +81,13 @@ protected:
     bool was_written_ = false;  //was something was written to console or not
     //it's meaningful for sending images - often they are empty at start
 
-    bool console_write_image();
-    XRaster_u8c3 image_write_input_;
-    void console_write_image(int w, int h, int channels, uint8 *data);
 
+
+    bool console_write_image();
+    XRaster image_write_input_u8c3_;
+    void console_write_image(int w, int h, int channels, const uint8 *data);
+
+    XRaster image_transformed_holder_;
 
 };
 

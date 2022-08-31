@@ -1,7 +1,7 @@
 #pragma once
 
 #include "xbasictypes.h"
-#include "xarray.h"
+#include <QVector>
 
 class XSoundFormat {
 public:
@@ -17,7 +17,7 @@ class XSoundBuffer {
 public:
     XSoundFormat format;
     int samples;
-    XArray buffer;
+    QVector<float32> buffer;
     XSoundBuffer();
     XSoundBuffer(const XSoundFormat &format, int samples);
     void allocate(const XSoundFormat &format, int samples);

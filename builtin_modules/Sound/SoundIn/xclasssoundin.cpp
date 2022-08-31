@@ -96,7 +96,7 @@ qint64 XClassSoundInGenerator::writeData(const char *data, qint64 len)
             auto write = sound_.write();
             XSoundBuffer &buffer = *write.data().data<XSoundBuffer>();
             buffer.allocate(XSoundFormat(format_.sampleRate(), channels), samples);
-            float *data_float = buffer.buffer.data<float32>();
+            float *data_float = buffer.buffer.data();
 
             const unsigned char *ptr = reinterpret_cast<const unsigned char *>(data);
 

@@ -39,7 +39,7 @@ XClassSynthFromImage::~XClassSynthFromImage()
 
 //---------------------------------------------------------------------
 void XClassSynthFromImage::start() {
-    data_.clear();
+    data_.write().data().clear();
 
     //link images with internal objects
     out_image_holder_.clear();

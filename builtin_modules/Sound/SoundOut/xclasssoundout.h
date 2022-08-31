@@ -9,7 +9,7 @@
 #include <QScopedPointer>
 
 #include "sdk_h.h"
-#include "xclass.h"
+#include "xmodule.h"
 #include "xarray.h"
 #include "xsoundtypes.h"
 #include "xprotecteddata.h"
@@ -30,7 +30,7 @@ struct XClassSoundOutParams
     float volume_right_ = 1;
 
     //список ссылок на другие модули, которым высылать call
-    QVector<XClass *> modules_;
+    QVector<XModule *> modules_;
 
     //громкости
     QVector<float> volumes_;
@@ -119,6 +119,9 @@ protected:
 
     //печать текущего формата в used_format
     void set_format(const QAudioFormat &format);
+
+    XSoundFormat format_holder_;
+
     //печать размера буфера при подключении устройства (запрашивается у устройства) в used_format
     void set_buffer_size(int buffer_size);
 

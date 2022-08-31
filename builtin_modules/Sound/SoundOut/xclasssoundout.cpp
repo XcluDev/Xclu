@@ -29,14 +29,14 @@ void XClassSoundOutGenerator::stop()
 }
 
 //---------------------------------------------------------------------
-void XClassSoundOutGenerator::request_sound(int samples, int channels) { //создать звук в объекте sound_
+// создать звук в объекте sound_
+void XClassSoundOutGenerator::request_sound(int samples, int channels) {
     try {
         auto read_params = params_->read();
         auto &params = read_params.data();
         auto write_sound = sound_.write();
         auto &sound = write_sound.data();
         sound.allocate(XSoundFormat(format_.sampleRate(), channels),samples);
-
 
         // Заполнение массива
 
@@ -58,32 +58,28 @@ void XClassSoundOutGenerator::request_sound(int samples, int channels) { //со�
                 float v = qSin(test_phase_);
                 test_phase_+=phase_add;
                 for (int u=0; u<channels; u++) {
-                    data[k++] = v * channel_vol[u];
+                    sound.buffer[k++] = v * channel_vol[u];
                 }
             }
         }
         else {
             //вызов генерации звуков у остальных модулей
-            auto sound_write = sound_.write();
-
             XCall call;
-            call.setup(sound);
+            call.setup(XCallType::SoundBufferAdd, sound);
 
             for (int i=0; i<params.modules_.size(); i++) {
                 //если модуль выдаст ошибку - оно перехватится и запишется в params_->err - см. ниже
-                params.modules_[i]->call(XType::SoundBufferAdd, sound_write.pointer());
+                params.modules_[i]->call(call);
             }
         }
 
         //applying volumes
         {
-            auto sound_write = sound_.write();
-            float *data = sound_write.data().var_array("data")->params_float();
             for (int c = 0; c<channels; c++) {
-                float volume = (c==0)?params_->volume_left_:params_->volume_right_;
+                float volume = (c==0)?params.volume_left_:params.volume_right_;
                 int k = c;
                 for (int i=0; i<samples; i++) {
-                    data[k] *= volume;
+                    sound.buffer[k] *= volume;
                     k+=channels;
                 }
             }
@@ -121,18 +117,16 @@ qint64 XClassSoundOutGenerator::readData(char *data, qint64 len)
         int samples = len / sampleBytes;
         request_sound(samples, channels);
 
-        //считываем звук
-        auto sound_read = sound_.read();
-        XArray const *arr = sound_read.data().get_array("data");
-        float const *params_float = arr->params_float();
-
         //записываем его в буфер звуковой карты
+        auto sound_read = sound_.read();
+        float const *data_float = sound_read.data().buffer.data();
+
         unsigned char *ptr = reinterpret_cast<unsigned char *>(data);
 
         if (audioSampleBit == 16) {
             for (int i=0; i<samples*channels; i++) {
                 if (format_.sampleType() == QAudioFormat::UnSignedInt) {
-                    quint16 value = quint16((1.0 + params_float[i]) / 2 * 65535);
+                    quint16 value = quint16((1.0 + data_float[i]) / 2 * 65535);
                     if (format_.byteOrder() == QAudioFormat::LittleEndian) {
                         qToLittleEndian<quint16>(value, ptr);
                     }
@@ -141,7 +135,7 @@ qint64 XClassSoundOutGenerator::readData(char *data, qint64 len)
                     }
                 }
                 if (format_.sampleType() == QAudioFormat::SignedInt) {
-                    qint16 value = static_cast<qint16>(params_float[i] * 32767);
+                    qint16 value = static_cast<qint16>(data_float[i] * 32767);
                     if (format_.byteOrder() == QAudioFormat::LittleEndian) {
                         qToLittleEndian<qint16>(value, ptr);
                     }
@@ -157,9 +151,8 @@ qint64 XClassSoundOutGenerator::readData(char *data, qint64 len)
             xc_exception(QString("SoundUnsupported sound output with bits %1").arg(audioSampleBit));
         }
     }
-    catch (XException &e) {
-        DataAccess access(params_);
-        params_->err = e.err();
+    catch (XException &e) {        
+        params_->write().data().err = e.err();
     }
 
     return total;
@@ -220,19 +213,22 @@ void XClassSoundOut::start() {
     audio_tried_to_start_ = false;
 
     {
-        DataAccess access(params_);
-        params_.clear();
-        params_.modules_ = xc_find_modules(gets_modules_list());
+        auto write = params_.write();
+        auto &params = write.data();
+        params.clear();
+        params.modules_ = xc_find_modules(gets_modules_list());
     }
     buffer_size_= 0;
     seti_buffer_size(0);
-    getobject_sound_format()->clear();
+
+
+    format_holder_.clear();
+    getobject_sound_format()->write().data().link(format_holder_);
 
     set_started(false); //также ставит gui-элемент is_started
 
     clear_string_connected_device_name();
     clear_string_local_console();
-
 
 }
 
@@ -495,9 +491,8 @@ void XClassSoundOut::set_started(bool started) { //ставит camera_started_ 
 //---------------------------------------------------------------------
  //печать текущего формата в used_format
 void XClassSoundOut::set_format(const QAudioFormat &format) {
-    auto format_ = XObjectSoundFormatData(format.sampleRate(), format.channelCount());
-    auto write = getobject_sound_format()->write();
-    XObjectSoundFormat::set_to_object(write.data(), format_);
+    getobject_sound_format()->write().data().data<XSoundFormat>()
+            ->setup(format.sampleRate(), format.channelCount());
 
 }
 
