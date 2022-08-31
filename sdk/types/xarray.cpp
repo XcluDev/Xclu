@@ -26,7 +26,19 @@ const void* XArray::data_pointer() const {
     return data_pointer_;
 }
 
-int XArray::data_size() const {
+template<class T> T* XArray::data() {
+    if (is_empty()) return nullptr;
+    assert_type(cpptype_to_XType<T>());
+    return (T*)data_pointer_;
+}
+template<class T> const T* XArray::data() const {
+    if (is_empty()) return nullptr;
+    assert_type(cpptype_to_XType<T>());
+    return (T*)data_pointer_;
+}
+
+//----------------------------------------------------------------------------
+int XArray::data_size_in_bytes() const {
     return sizeofitem*n;
 }
 
@@ -73,9 +85,14 @@ void XArray::allocate(int n, XType type, bool reallocate) {
 }
 
 //---------------------------------------------------------------------
+template<class T> void XArray::allocate(int n, bool reallocate) {
+    allocate(n, cpptype_to_XType(type), reallocate);
+}
+
+//---------------------------------------------------------------------
 void XArray::copy_from(void* data, int n, XType type) {
     allocate(n, type);
-    memcpy(data_pointer_, data, data_size());
+    memcpy(data_pointer_, data, data_size_in_bytes());
 }
 
 template<class T> void XArray::copy_from(T* data, int n) {
@@ -103,7 +120,7 @@ bool XArray::is_empty() const {
 bool XArray::is_valid() const {
     if (is_empty()) return false;
     if (!is_owner) return true;
-    return internal_data_.size() == data_size();
+    return internal_data_.size() == data_size_in_bytes();
 }
 
 //---------------------------------------------------------------------

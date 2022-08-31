@@ -254,20 +254,22 @@ void XClassSoundOut::update() {
     //поставить информацию о том, воспроизводить ли тестовый звук
     //также проверить - если есть ошибка, то остановиться
     {
-        DataAccess access(data_);
-        data_.play_test_sound_ = geti_gen_test();
-        data_.play_left_ = geti_gen_left();
-        data_.play_right_ = geti_gen_right();
-        data_.play_volume_ = getf_gen_volume();
-        data_.play_freq_ = geti_gen_freq();
+        auto write = data_.write();
+        auto &data = write.data();
+
+        data.play_test_sound_ = geti_gen_test();
+        data.play_left_ = geti_gen_left();
+        data.play_right_ = geti_gen_right();
+        data.play_volume_ = getf_gen_volume();
+        data.play_freq_ = geti_gen_freq();
 
 
-        data_.volume_left_ = getf_volume() * getf_volume_ch1();
-        data_.volume_right_ = getf_volume() * getf_volume_ch2();
-        data_.modules_ = xc_find_modules(gets_modules_list());
+        data.volume_left_ = getf_volume() * getf_volume_ch1();
+        data.volume_right_ = getf_volume() * getf_volume_ch2();
+        data.modules_ = xc_find_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
-        data_.err.throw_error();
+        data.err.throw_error();
     }
     //показ размера буфера
     seti_buffer_size(buffer_size_);
@@ -354,8 +356,7 @@ void XClassSoundOut::on_changed_audio_state(QAudio::State state) {
         }
     }
     catch (XException &e) {
-        DataAccess access(data_);
-        data_.err = e.err();
+        data_.write().data().err = e.err();
     }
 }
 

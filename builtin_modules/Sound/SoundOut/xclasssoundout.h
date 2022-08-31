@@ -16,7 +16,7 @@
 
 class XClass;
 
-//Данные для обмена с generator, которые защищаются с помощью mutex
+//Данные для обмена с generator
 struct XClassSoundOutData
 {
     int play_test_sound_ = 0;   //generate test sound
@@ -112,7 +112,7 @@ protected:
     QScopedPointer<XClassSoundOutGenerator> m_generator;
 
     //данные для обмена с генератором
-    XClassSoundOutData data_;
+    XProtectedData_<XClassSoundOutData> data_;
 
     bool audio_started_ = false;
     void set_started(bool started); //ставит audio_started_ и gui-элемент is_started

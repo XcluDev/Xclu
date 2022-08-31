@@ -15,7 +15,7 @@ QStringList XObjectVisSoundBuffer::short_description() const {
     }
     return QStringList()
             << QString("%1 %2")
-               .arg(XObjectType_to_string(object_->type()))
+               .arg(XType_to_string(object_->type()))
                .arg(object_->subtype());
 
 }

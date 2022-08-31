@@ -2,7 +2,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xclass.h"
+#include "xmodule.h"
 
 //registering module implementation
 REGISTER_XCLASS(SoundIn)
@@ -95,14 +95,8 @@ qint64 XClassSoundInGenerator::writeData(const char *data, qint64 len)
         {
             auto write = sound_.write();
             XSoundBuffer &buffer = *write.data().data<XSoundBuffer>();
-            buffer.buffer.clear();
-            //create array
-            buffer. seti("samples", samples);
-            sound.seti("channels", channels);
-            sound.seti("sample_rate", format_.sampleRate());
-            XArray *arr = sound.var_array("data", true);
-            arr->allocate(samples*channels, XType::float32);
-            float *data_float = arr->data_float();
+            buffer.allocate(XSoundFormat(format_.sampleRate(), channels), samples);
+            float *data_float = buffer.buffer.data<float32>();
 
             const unsigned char *ptr = reinterpret_cast<const unsigned char *>(data);
 

@@ -26,7 +26,20 @@ const void* XRaster::data_pointer() const {
     return data_pointer_;
 }
 
-int XRaster::data_size() const {
+
+template<class T> T* XArray::data() {
+    if (is_empty()) return nullptr;
+    assert_type(cpptype_to_XType<T>());
+    return (T*)data_pointer_;
+}
+template<class T> const T* XArray::data() const {
+    if (is_empty()) return nullptr;
+    assert_type(cpptype_to_XType<T>());
+    return (T*)data_pointer_;
+}
+
+//----------------------------------------------------------------------------
+int XRaster::data_size_in_bytes() const {
     return sizeofpixel*n;
 }
 
@@ -92,14 +105,14 @@ void XRaster::allocate(int w, int h, XType type, bool reallocate) {
 }
 
 //---------------------------------------------------------------------
-template<class T> void XRaster::allocate(int w, int h, XType type, bool reallocate) {
+template<class T> void XRaster::allocate(int w, int h, bool reallocate) {
     allocate(w, h, cpptype_to_XType(type), reallocate);
 }
 
 //---------------------------------------------------------------------
 void XRaster::copy_from(void* data, int w, int h, XType type) {
     allocate(w, h, type);
-    memcpy(data_pointer_, data, data_size());
+    memcpy(data_pointer_, data, data_size_in_bytes());
 }
 
 template<class T> void XRaster::copy_from(T* data, int w, int h) {
@@ -127,7 +140,7 @@ bool XRaster::is_empty() const {
 bool XRaster::is_valid() const {
     if (is_empty()) return false;
     if (!is_owner) return true;
-    return internal_data_.size() == data_size();
+    return internal_data_.size() == data_size_in_bytes();
 }
 
 //---------------------------------------------------------------------

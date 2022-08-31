@@ -31,7 +31,7 @@ XItemObject::XItemObject(XModuleInterface *interf, const XItemPreDescription &pr
     //}
 
     //создаем объект
-    //value_write().reset(new XObject(XObjectType::Empty));
+    //value_write().reset(new XObject(XType::none));
 
     value_.set_pointer(&default_);
 }

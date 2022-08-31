@@ -34,7 +34,7 @@ QRectF XDrawHelper::draw_QImage_fit(QImage &qimage, float posx_u, float posy_u, 
 //---------------------------------------------------------------------
 QRectF XDrawHelper::draw_XObject_fit(const XObject* object, float posx_u, float posy_u, float size_u, QPainter &painter, int w, int h) {
     xc_assert(object, "XDrawHelper::draw_XObject_fit - null object");
-    object->assert_type(XObjectType::Image);
+    object->assert_type(XType::XRaster);
     const XRaster* raster = object->data<XRaster>();
     if (!raster) {
         return QRectF(0,0,0,0);

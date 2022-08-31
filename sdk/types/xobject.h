@@ -8,24 +8,6 @@
 #include "xpointer.h"
 #include "xraster.h"
 
-//Типы для объектов XObject
-//При добавлении новых типов объектов дописывать их визуализацию в систему XObjectWrapper
-enum class XObjectType : int {
-    Empty = 0,                  // пустой объект
-    Custom = 1,                 // some custom object; use "subtype" at XObject to differenciate them
-    Array = 2,                  // Array
-    Image = 3,                  // изображение
-    SoundFormat = 4,            // формат звука
-    SoundBuffer = 5,             // звуковой буфер
-    N = 6
-};
-
-QString XObjectType_to_string(XObjectType type);
-XObjectType string_to_XObjectType(QString type_str);
-
-/// Функция для конвертации типа C++ в XObjectType, используется в методах XObject link() и data()
-template<class T> XObjectType cpptype_to_XObjectType();
-
 //----------------------------------------------------------------
 class XObject
 {
@@ -36,14 +18,14 @@ public:
     void clear();
 
     /// Link object to given data and type. Object not own the data.
-    void link(void *data, XObjectType type, QString subtype = "");
+    void link(void *data, XType type, QString subtype = "");
 
     /// Implemented for XArray, XRaster, XSoundFormat, XSoundBuffer
     template <class T> void link(T &data);
 
-    XObjectType type() const;
-    bool has_type(XObjectType expected_type) const;
-    void assert_type(XObjectType expected_type) const;
+    XType type() const;
+    bool has_type(XType expected_type) const;
+    void assert_type(XType expected_type) const;
 
     QString subtype() const;        // Name of the subtype, used for differenciating objects of "Custom" type
 
@@ -59,7 +41,7 @@ public:
     template <class T> bool cast_copy_to(const T &data) const;
 
 protected:
-    XObjectType type_ = XObjectType::Empty;
+    XType type_ = XType::none;
     QString subtype_;
 
     void* data_ = nullptr;

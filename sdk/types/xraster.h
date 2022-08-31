@@ -37,9 +37,11 @@ public:
 
     void* data_pointer();
     const void* data_pointer() const;
-    int data_size() const;
+    int data_size_in_bytes() const;
     int bytes_per_line() const;
 
+    template<class T> T* data();
+    template<class T> const T* data() const;
 
     /// Доступ к пикселям
     /// - Для безопасности - стараться проверять assert_type().
@@ -63,7 +65,7 @@ public:
     // If 'reallocate is true - then old vector will be cleared.
     // It's useful for clearing memory when image size if significantly reduced, but works slower.
     void allocate(int w, int h, XType type, bool reallocate = false);
-    template<class T> void allocate(int w, int h, XType type, bool reallocate = false);
+    template<class T> void allocate(int w, int h, bool reallocate = false);
 
     void clear();
 

@@ -14,12 +14,12 @@
 #include "xsoundtypes.h"
 #include "xprotecteddata.h"
 
-class XClass;
+class XModule;
 
 //Data exchange
 struct XClassSoundInData {
     //list of modules for sending callbacks
-    QVector<XClass *> modules_;
+    QVector<XModule *> modules_;
 
     XCallError err;
 

@@ -15,11 +15,11 @@
     // TODO implement type registrar to add new vis automatically
     xc_assert(object, "XObjectVis::new_vis - bad object");
     switch (object->type()) {
-    case XObjectType::Empty: return new XObjectVis(object);
-    case XObjectType::Custom: return new XObjectVis(object);
-    case XObjectType::Image: return new XObjectVisImage(object);
-    case XObjectType::SoundFormat: return new XObjectVisSoundFormat(object);
-    case XObjectType::SoundBuffer: return new XObjectVisSoundBuffer(object);
+    case XType::none: return new XObjectVis(object);
+    case XType::Custom: return new XObjectVis(object);
+    case XType::XRaster: return new XObjectVisImage(object);
+    case XType::XSoundFormat: return new XObjectVisSoundFormat(object);
+    case XType::XSoundBuffer: return new XObjectVisSoundBuffer(object);
     default:
         xc_exception("XObjectVis::new_vis - unknown object type");
         return new XObjectVis(object);
@@ -39,7 +39,7 @@ QStringList XObjectVis::short_description() const {
     }
     return QStringList()
             << QString("%1 %2")
-               .arg(XObjectType_to_string(object_->type()))
+               .arg(XType_to_string(object_->type()))
                .arg(object_->subtype());
 
 }
