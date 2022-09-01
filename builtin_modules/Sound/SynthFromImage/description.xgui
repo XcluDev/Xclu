@@ -6,7 +6,7 @@ module_impl=C++
 #module_default_run_mode=Callback
 
 #module_accept_calls=*
-module_accept_calls=sound_buffer_add
+module_accept_calls=SoundBufferAdd
 
 #------------------------------------------
 page Main

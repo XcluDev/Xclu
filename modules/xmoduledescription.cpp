@@ -11,28 +11,27 @@ XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
     else {
         QStringList list = line.split(",");
         for (int i=0; i<list.size(); i++) {
-            auto fun = string_to_XType(list[i].trimmed());
-            functions_[fun] = 1;
+            auto call_type = string_to_XCallType(list[i].trimmed());
+            call_types_[call_type] = 1;
         }
     }
 }
 
-
 //---------------------------------------------------------------------
-bool XModuleRegisteredCalls::accepts(XType function) {
+bool XModuleRegisteredCalls::accepts(XCallType call_type) {
     if (any_) return true;
-    if (function == XType::none) return true;
-    return functions_.contains(function);
+    if (call_type == XCallType::none) return true;
+    return call_types_.contains(call_type);
 }
 
 //---------------------------------------------------------------------
 bool XModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
     if (any_) return true;
     if (filter.isEmpty()) return true;
-    QMapIterator<XType, int> i(functions_);
+    QMapIterator<XCallType, int> i(call_types_);
     while (i.hasNext()) {
         i.next();
-        QString name = XType_to_string(i.key());
+        QString name = XCallType_to_string(i.key());
         if (name.contains(filter)) {
             return true;
         }
@@ -44,11 +43,11 @@ bool XModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //retur
 QString XModuleRegisteredCalls::to_string_gui() {        //конвертация в строку для выдачи в text
     if (any_) return "*";
     QString s;
-    if (!functions_.isEmpty()) {
-        QMapIterator<XType, int> i(functions_);
+    if (!call_types_.isEmpty()) {
+        QMapIterator<XCallType, int> i(call_types_);
         while (i.hasNext()) {
             i.next();
-            s.append(XType_to_string(i.key()));
+            s.append(XCallType_to_string(i.key()));
             s.append("\n");
         }
     }

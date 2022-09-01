@@ -4,6 +4,7 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "xclass.h"
+#include "xcallutils.h"
 
 //registering module implementation
 REGISTER_XCLASS(RenderArea)
@@ -29,7 +30,7 @@ void XClassRenderArea::start() {
 //---------------------------------------------------------------------
 //Collect modules to render from
 void XClassRenderArea::collect_modules() {
-    auto modules = XCallUtils::find_modules_by_filter(XCallTypeDraw);
+    auto modules = XCallUtils::find_modules_by_filter(XCallType::Draw);
     // Use only modules which sets "render_area" to this module
     modules_.clear();
     for (auto m: modules) {

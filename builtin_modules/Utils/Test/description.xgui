@@ -5,8 +5,8 @@ module_version=1.01
 module_impl=C++
 
 #module_accept_calls=*
-#module_accept_calls=sound_buffer_add
-#module_accept_calls=create_widget
+#module_accept_calls=SoundBufferAdd
+#module_accept_calls=CreateWidget
 #------------------------------------------
 
 page Gui_Controls

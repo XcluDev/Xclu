@@ -14,17 +14,6 @@ class QWidget;
 class QLabel;
 
 
-//Данные, которые защищаются с помощью mutex
-struct XClassWImageData: public XProtectedData_<...>
-{
-    //int gui_changed = 0;
-
-    void clear() {
-        //gui_changed = 0;
-    }
-
-};
-
 //Модуль
 class XClassWImage: public XClass
 {
@@ -53,8 +42,6 @@ protected:
 
     QWidget *widget_ = nullptr; //весь виджет
     QLabel *image_label_ = nullptr;   //изображение
-
-    XClassWImageData data_;  //Состояние - например, изменились ли данные, введенные пользователем
 
     void update_all(bool force);
     void update_value();

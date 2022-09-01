@@ -4,7 +4,7 @@ module_description=Menu which draws over SweetWindow, and controlling by mouse/k
 module_version=1.01
 module_impl=C++
 
-module_accept_calls=create_widget
+module_accept_calls=CreateWidget
 
 
 #TODO slider representation

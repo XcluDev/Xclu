@@ -11,10 +11,13 @@ enum class XCallType: int {
     none = 0,
     Custom = 1,
     CreateWidget = 2,
-    SoundBufferAdd = 3,
-    SoundBufferReceived = 4,
-    N = 5
+    Draw = 3,
+    SoundBufferAdd = 4,
+    SoundBufferReceived = 5,
+    N = 6
 };
+QString XCallType_to_string(XCallType type);
+XCallType string_to_XCallType(QString type);
 
 
 // Data for intermodule calls

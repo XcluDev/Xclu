@@ -8,7 +8,7 @@ module_description=Send SMS/push notification to a mobile device using Xclu serv
 module_version=1.01
 module_impl=C++
 
-#module_accept_calls=create_widget
+#module_accept_calls=CreateWidget
 
 #отправка через пользователя или через сервера Xclu.
 #важно, что адреса не могут меняться - чтобы не было рассылки спама. 

@@ -8,7 +8,7 @@ module_description=Show web broswer with possibility to expose various web-pages
 module_version=1.01
 module_impl=C++
 
-module_accept_calls=create_widget
+module_accept_calls=CreateWidget
 
 
 #TODO slider representation

@@ -6,7 +6,7 @@ module_description=Dialog Window.
 module_version=1.01
 module_impl=C++
 
-module_send_calls=create_widget
+module_send_calls=CreateWidget
 
 #------------------------------------------
 page Main

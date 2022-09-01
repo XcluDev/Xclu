@@ -4,6 +4,7 @@
 //а также описание, какие вызовы он принимает и какие вызовы может осуществлять
 
 #include "incl_h.h"
+#include "xcall.h"
 
 
 //Класс для работы с вызовами.
@@ -16,11 +17,11 @@ class XModuleRegisteredCalls {
 public:
     XModuleRegisteredCalls() {}
     XModuleRegisteredCalls(QString line);
-    bool accepts(XType function);     //разрешен ли вызов функции. Note: On `XType::none` returns true.
+    bool accepts(XCallType call_type);     //разрешен ли вызов функции. Note: On `XType::none` returns true.
     bool accepts_by_filter(const QString &filter);  //returns true if 'filter' is empty or contained in any of list
     QString to_string_gui();        //конвертация в строку для выдачи в text
 protected:
-    QMap<XType, int> functions_;   //делаем QMap, чтобы было упорядоченно
+    QMap<XCallType, int> call_types_;   //делаем QMap, чтобы было упорядоченно
     bool any_ = false;
 };
 
