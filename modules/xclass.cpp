@@ -164,14 +164,13 @@ void XClass::call(XCall& call) {
         case XCallType::CreateWidget: on_create_widget_internal(call);
             break;
         case XCallType::SoundBufferAdd: {
-            auto *call_data = call.data<XCallSoundBufferAdd>();
-            on_sound_buffer_add(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
+            auto *call_data = call.data<XSoundBuffer>();
+            on_sound_buffer_add(call_data->format.sample_rate, call_data->format.channels, call_data->samples, call_data->buffer.data());
         }
             break;
-
         case XCallType::SoundBufferReceived: {
-            auto *call_data = call.data<XCallSoundBufferReceived>();
-            on_sound_buffer_received(call_data->sample_rate, call_data->channels, call_data->samples, call_data->data);
+            auto *call_data = call.data<XSoundBuffer>();
+            on_sound_buffer_received(call_data->format.sample_rate, call_data->format.channels, call_data->samples, call_data->buffer.data());
         }
             break;
         //process universal function
@@ -191,7 +190,7 @@ void XClass::call(XCall& call) {
 //"create_widget" call, returns QWidget pointer
 //if parent_id == "", it means need to reset widget pointer (at stop)
 void XClass::on_create_widget_internal(XCall& call) {
-    auto *call_data = call.data<XCallCreateWidget>();
+    auto *call_data = call.data<XCallDataCreateWidget>();
 
     QString parent_id = call_data->in_parent_id;
     // if parent_id is empty - it means that we need to delete widget

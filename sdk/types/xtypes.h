@@ -15,7 +15,8 @@
 #include "xsoundtypes.h"
 
 // Call
-#include "xcalltypes.h"
+#include "xcalltype.h"
+#include "xcalldatatypes.h"
 
 // XType identifiers
 #include "xtype.h"

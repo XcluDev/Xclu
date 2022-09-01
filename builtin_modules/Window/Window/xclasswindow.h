@@ -125,5 +125,6 @@ protected:
 protected:
     //Grab window
     void grab_window();
+    XRaster grab_holder_;
 };
 

@@ -3,7 +3,6 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xclass.h"
 #include "xobjectvis.h"
 
 

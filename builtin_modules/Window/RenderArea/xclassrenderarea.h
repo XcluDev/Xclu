@@ -8,6 +8,7 @@
 #include "sdk_h.h"
 #include "xclasswidget.h"
 
+class XModule;
 
 class XClassRenderArea: public XClassWidget
 {
@@ -28,7 +29,7 @@ protected:
 protected:
     //Collect modules to render from
     void collect_modules();
-    QVector<XClass *> modules_;
+    QVector<XModule *> modules_;
 
 };
 

@@ -1,10 +1,9 @@
 #include "qt_widgets.h"
 #include "xclassrenderarea.h"
-
 #include "incl_cpp.h"
 #include "registrarxclass.h"
-#include "xclass.h"
 #include "xcallutils.h"
+#include "xmodule.h"
 
 //registering module implementation
 REGISTER_XCLASS(RenderArea)

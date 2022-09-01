@@ -245,6 +245,7 @@ SOURCES += \
     sdk/types/xbasictypes.cpp \
     sdk/types/xcall.cpp \
     sdk/types/xcallerror.cpp \
+    sdk/types/xcalltype.cpp \
     sdk/types/xlink.cpp \
     sdk/types/xobject.cpp \
     sdk/types/xobjectvis/xobjectvis.cpp \
@@ -370,8 +371,9 @@ HEADERS += \
     sdk/types/xarray.h \
     sdk/types/xbasictypes.h \
     sdk/types/xcall.h \
+    sdk/types/xcalldatatypes.h \
     sdk/types/xcallerror.h \
-    sdk/types/xcalltypes.h \
+    sdk/types/xcalltype.h \
     sdk/types/xlink.h \
     sdk/types/xobject.h \
     sdk/types/xobjectvis/xobjectvis.h \

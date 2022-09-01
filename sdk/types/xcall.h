@@ -5,22 +5,13 @@
 #include <QString>
 #include <xcallerror.h>
 #include "xtype.h"
+#include "xcalltype.h"
 
 
-enum class XCallType: int {
-    none = 0,
-    Custom = 1,
-    CreateWidget = 2,
-    Draw = 3,
-    SoundBufferAdd = 4,
-    SoundBufferReceived = 5,
-    N = 6
-};
-QString XCallType_to_string(XCallType type);
-XCallType string_to_XCallType(QString type);
+// XCall - описание функции для вызова между модулями,
+// хранит тип вызова call_type и данные data (либо data_const)
+// Структура класса проектировалась с расчетом на простую передачу между DLL.
 
-
-// Data for intermodule calls
 struct XCall {
     XCall() {}
 
@@ -31,9 +22,9 @@ struct XCall {
 
     /// Typed implementations for data and const data
     /// Example of usage:
-    /// XCallCreateWidget call_data = {...};
+    /// XCallDataCreateWidget call_data = {...};
     /// XCall call;
-    /// call.setup<XCallCreateWidget>(XCallType::CreateWidget, call_data);
+    /// call.setup<XCallDataCreateWidget>(XCallType::CreateWidget, call_data);
     template<class T> void setup(XCallType call_type, T &call_data);
     template<class T> void setup_const(XCallType call_type, const T &call_data);
 
@@ -46,7 +37,7 @@ struct XCall {
     void* data();
     const void* data_const() const;
     /// Typed implementations
-    /// Example usage: auto* call_data = call.data<XCallCreateWidget>();
+    /// Example usage: auto* call_data = call.data<XCallDataCreateWidget>();
     template<class T> T* data();
     template<class T> const T* data_const() const;
 

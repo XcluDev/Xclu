@@ -1,7 +1,6 @@
 #include "XClassRenderElement.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
-#include "xclass.h"
 
 //registering module implementation
 REGISTER_XCLASS(RenderElement)

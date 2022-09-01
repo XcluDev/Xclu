@@ -6,10 +6,10 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xclass.h"
 #include "xobject.h"
 #include "xraster.h"
 #include "xobjectvis.h"
+#include "xmodule.h"
 
 //registering module implementation
 REGISTER_XCLASS(Window)
@@ -231,7 +231,8 @@ void XClassWindow::on_visibleChanged(bool /*arg*/) {
 //---------------------------------------------------------------------
 void XClassWindow::start() {
     //Clear grab image
-    getobject_image_cpu()->clear();
+    getobject_image_cpu()->write().data().link<XRaster>(grab_holder_);
+    getobject_image_cpu()->write().data().clear();
 
     //создание и установка начальных настроек окна
     setup_window();
@@ -474,23 +475,17 @@ int XClassWindow::xparse_int(QStringList list, int index, int default_value, QSt
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
 QWidget *XClassWindow::request_widget(QString module_name) {
-    XClass *module = xc_find_module(module_name);
+    XModule *module = xc_find_module(module_name);
 
-    //call create_widget
-    //Window calls GUI elements to insert them into itself.
-    //string parent_id
-    //out pointer widget_pointer
+    XCallDataCreateWidget call_data;
+    call_data.in_parent_id = this->module()->name();
+    XCall call;
+    call.setup(XCallType::CreateWidget, call_data);
 
-    //формируем запрос
-    XObject input;
-    input.sets("parent_id", this->module()->name());
-
-    XObject output;
-
-    module->call(XType::CreateWidget, &input, &output);
+    module->call(call);
 
     //считываем указатель на виджет
-    QWidget *widget = (QWidget *)output.get_pointer("widget_pointer");
+    QWidget *widget = (QWidget *)call_data.out_widget;
     xc_assert(widget, "Returned empty widget");
 
     //append to list to remove at stop
@@ -511,20 +506,14 @@ void XClassWindow::reset_widgets() {
 //---------------------------------------------------------------------
 //remove requested widget from another module - called at stopping
 void XClassWindow::reset_widget(QString module_name) {
-    XClass *module = xc_find_module(module_name);
+    XModule *module = xc_find_module(module_name);
 
-    //call create_widget
-    //Window calls GUI elements to insert them into itself.
-    //string parent_id
-    //out pointer widget_pointer
+    XCallDataCreateWidget call_data;
+    call_data.in_parent_id = "";
+    XCall call;
+    call.setup(XCallType::CreateWidget, call_data);
 
-    //формируем запрос
-    XObject input;
-    input.sets("parent_id", "");    //parent_id empty means command to reset widget
-
-    XObject output;
-
-    module->call(XType::CreateWidget, &input, &output);
+    module->call(call);
 }
 
 //---------------------------------------------------------------------
@@ -543,13 +532,11 @@ void XClassWindow::grab_window() {
         }
         {
             auto write = getobject_image_cpu()->write();
-            XRasterUtils::create_from_QImage(write.data(), img, "RGBA", "uint8");
+            auto &raster = *write.data().data<XRaster>();
+            XRasterUtils::convert(img, raster, XType::rgb_u8);
         }
        // XRaster_u8c4 bgra;
        // XRaster::convert_bgra(img, bgra);   //fast
-
-
-
     }
 }
 
