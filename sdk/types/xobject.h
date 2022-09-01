@@ -1,14 +1,23 @@
 #pragma once
 
-// XObject - basic Xclu type for passing data between modules;
-// Create visualizer for object using XObjectVis* XObjectVis::new_vis(object)
+// XObject - класс для хранения "сложных данных" в модулях,
+// например растров и звуковых буферов
+// Структура класса такова, что предполагает простую передачу
+// данных между DLL, поэтому мы не наследуем сам XObject,
+// и он сам не хранит данные, а по факту служит указателем с типом.
+// "subtype" используется для хранения дополнительной информации
+// в случае Custom-объекта.
+
+// XProtectedObject - XObject с оберткой для защиты данных
+
+// XObjectVis* XObjectVis::new_vis(object) - создание визуализатора объекта
+// для GUI
 
 #include "incl_h.h"
 #include "xprotecteddata.h"
 #include "xpointer.h"
 #include "xraster.h"
 
-//----------------------------------------------------------------
 class XObject
 {
 public:

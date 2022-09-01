@@ -15,16 +15,12 @@
     // TODO implement type registrar to add new vis automatically
     xc_assert(object, "XObjectVis::new_vis - bad object");
     switch (object->type()) {
-    case XType::none: return new XObjectVis(object);
-    case XType::Custom: return new XObjectVis(object);
     case XType::XRaster: return new XObjectVisImage(object);
     case XType::XSoundFormat: return new XObjectVisSoundFormat(object);
     case XType::XSoundBuffer: return new XObjectVisSoundBuffer(object);
     default:
-        xc_exception("XObjectVis::new_vis - unknown object type");
         return new XObjectVis(object);
     }
-
 }
 
 //---------------------------------------------------------------------
