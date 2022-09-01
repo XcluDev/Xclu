@@ -1,6 +1,7 @@
 #pragma once
 #include <QString>
 
+
 //------------------------------------------------
 // Перечисление типов для XType
 //------------------------------------------------
@@ -28,7 +29,9 @@
     XTYPEDEF(XRaster, 19)\
                               \
     XTYPEDEF(XSoundFormat, 20)\
-    XTYPEDEF(XSoundBuffer, 21)
+    XTYPEDEF(XSoundBuffer, 21) \
+    XTYPEDEF(XCallDataCreateWidget, 22)
+
 // При изменении списка, следует обновить значение Custom ниже
 //------------------------------------------------
 
@@ -39,7 +42,7 @@ XTYPESLIST
 #undef  XTYPEDEF
     none = 0,
     u8 = uint8,       // Используем и uint8 и u8, где как удобнее
-    Custom = 22,      // Это значение должно быть максимальному значению в списке XTYPESLIST плюс 1
+    Custom = 23,      // Это значение должно быть максимальному значению в списке XTYPESLIST плюс 1
     N = Custom + 1
 };
 
@@ -72,13 +75,5 @@ case XType::int2:     { typedef int2 T; CODE } break;\
 default: \
     xc_exception(QString("code_for_all_basic_XType - bad type %1 for code %2").arg(XType_to_string(type)).arg(#CODE)); \
 }
-
-/// Template function converting C++ type to XType
-/// Примеры применения:
-/// template<class T> void XRaster::copy_from(T* input_img, int w, int h) {
-///     copy_from(input_img, w, h, cpptype_to_XType<T>());
-/// }
-/// template<class T> ... { assert_type(cpptype_to_XType()); ...}
-template<class T> XType cpptype_to_XType();
 
 

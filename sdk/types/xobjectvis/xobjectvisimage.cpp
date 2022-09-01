@@ -30,6 +30,11 @@ QString XObjectVisImage::detailed_description(int i) const {
 }
 
 //---------------------------------------------------------------------
+bool XObjectVisImage::is_thumbnail_exists() const {
+    return true;
+}
+
+//---------------------------------------------------------------------
 void XObjectVisImage::draw_thumbnail(QPainter &p, int w, int h) const {
     const XRaster *raster = object_->data<XRaster>();
     XRasterUtils::draw(p, *raster, 0, 0, w, h);

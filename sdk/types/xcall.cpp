@@ -20,14 +20,6 @@ void XCall::setup_const(XCallType call_type, XType type, const void *data) {
 }
 
 //---------------------------------------------------------------------
-template<class T> void XCall::setup(XCallType call_type, T &call_data) {
-    setup(call_type, cpptype_to_XType<T>(), &call_data);
-}
-template<class T> void XCall::setup_const(XCallType call_type, const T &call_data) {
-    setup_const(call_type, cpptype_to_XType<T>(), &call_data);
-}
-
-//---------------------------------------------------------------------
 XCallType XCall::call_type() const {
     return call_type_;
 }
@@ -56,17 +48,6 @@ void* XCall::data() {
 
 const void* XCall::data_const() const {
     return data_const_;
-}
-
-//---------------------------------------------------------------------
-template<class T> T* XCall::data() {
-    if (!has_type(cpptype_to_XType<T>())) return nullptr;
-    return (T*) data();
-}
-
-template<class T> const T* XCall::data_const() const {
-    if (!has_type(cpptype_to_XType<T>())) return nullptr;
-    return (const T*) data_const();
 }
 
 //---------------------------------------------------------------------

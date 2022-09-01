@@ -150,9 +150,3 @@ bool is_XType_float(XType type) {
 }
 
 //---------------------------------------------------------------------
-#define  XTYPEDEF(name, id) template<> XType cpptype_to_XType<name>() { return XType::name; }
-XTYPESLIST
-#undef  XTYPEDEF
-
-
-//---------------------------------------------------------------------

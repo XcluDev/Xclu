@@ -26,18 +26,6 @@ const void* XRaster::data_pointer() const {
     return data_pointer_;
 }
 
-
-template<class T> T* XArray::data() {
-    if (is_empty()) return nullptr;
-    assert_type(cpptype_to_XType<T>());
-    return (T*)data_pointer_;
-}
-template<class T> const T* XArray::data() const {
-    if (is_empty()) return nullptr;
-    assert_type(cpptype_to_XType<T>());
-    return (T*)data_pointer_;
-}
-
 //----------------------------------------------------------------------------
 int XRaster::data_size_in_bytes() const {
     return sizeofpixel*n;
@@ -45,33 +33,6 @@ int XRaster::data_size_in_bytes() const {
 
 int XRaster::bytes_per_line() const {
     return sizeofpixel*w;
-}
-
-//----------------------------------------------------------------------------
-template<class T> T& XRaster::pixel_unsafe(int x, int y) {
-    return *(T*)&data_pointer_[sizeofpixel*(x+y*w)];
-}
-template<class T> const T& XRaster::pixel_unsafe(int x, int y) const {
-    return *(const T*)&data_pointer_[sizeofpixel*(x+y*w)];
-}
-template<class T> T& XRaster::pixel_unsafe(const int2 &p) {
-    return *(T*)&data_pointer_[sizeofpixel*(p.x+p.y*w)];
-}
-template<class T> const T& XRaster::pixel_unsafe(const int2 &p) const {
-    return *(const T*)&data_pointer_[sizeofpixel*(p.x+p.y*w)];
-}
-
-template<class T> void XRaster::set_pixel_unsafe(int x, int y, const T *value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(x,y), value, sizeofpixel);
-}
-template<class T> void XRaster::set_pixel_unsafe(int i, const T *value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(i), value, sizeofpixel);
-}
-template<class T> void XRaster::set_pixel_unsafe(int x, int y, const T &value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(x,y), &value, sizeofpixel);
-}
-template<class T> void XRaster::set_pixel_unsafe(int i, const T &value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(i), &value, sizeofpixel);
 }
 
 //---------------------------------------------------------------------

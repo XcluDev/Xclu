@@ -37,18 +37,17 @@ public:
     bool has_type(XType expected_type) const;
     void assert_type(XType expected_type) const;
 
-    QString subtype() const;        // Name of the subtype, used for differenciating objects of "Custom" type
+    QString subtype() const;   // Name of the subtype, used for differenciating objects of "Custom" type
 
     /// Typed return of the value. If requested type not equal to actual, returns nullptr.
     /// Implemented for void (means any type), XArray, XRaster, XSoundFormat, XSoundBuffer
     /// Usage: const XRaster* raster = object->data<XRaster>();
     ///        if (raster) ...
-    template <class T> T* data();
-    template <class T> const T* data() const;
+    template<class T> T* data();
+    template<class T> const T* data() const;
 
     /// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
-    template <class T> bool cast_copy_to(T &data);
-    template <class T> bool cast_copy_to(const T &data) const;
+    template<class T> bool cast_copy_to(T &data) const;
 
 protected:
     XType type_ = XType::none;
@@ -60,3 +59,34 @@ protected:
 //protected XObject
 typedef XProtectedData_<XObject> XProtectedObject;
 
+
+//---------------------------------------------------------------------
+template<class T> void XObject::link(T &data) {
+    auto type = cpptype_to_XType<T>();
+    xc_assert(type != XType::none, "XObject::link - can't typed link void *")
+    link(&data, type);
+}
+
+//---------------------------------------------------------------------
+template<class T> T* XObject::data() {
+    if (!data_ || !has_type(cpptype_to_XType<T>())) return nullptr;
+    return (T *)data_;
+}
+
+template<class T> const T* XObject::data() const {
+    if (!data_ || !has_type(cpptype_to_XType<T>())) return nullptr;
+    return (T *)data_;
+}
+
+//---------------------------------------------------------------------
+/// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
+template<class T> bool XObject::cast_copy_to(T &data) const {
+    auto *d = this->data<T>();
+    if (d) {
+        data = *d;
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------

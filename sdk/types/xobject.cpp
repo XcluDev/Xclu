@@ -28,46 +28,13 @@ void XObject::link(void *data, XType type, QString subtype) {
 }
 
 //---------------------------------------------------------------------
-template<class T> void XObject::link(T &data) {
-    auto type = cpptype_to_XType<T>();
-    xc_assert(type != XType::none, "XObject::link - can't typed link void *")
-    link(&data, type);
-}
-
-//---------------------------------------------------------------------
-template<class T> T* XObject::data() {
-    if (!data_ || !has_type(cpptype_to_XType<T>())) return nullptr;
-    return (T *)data_;
-}
-
-template<class T> const T* XObject::data() const {
-    if (!data_ || !has_type(cpptype_to_XType<T>())) return nullptr;
-    return (T *)data_;
-}
-
-//---------------------------------------------------------------------
-/// Cast to the type with copying - useful to copy values from XProtectedObject<XObject>
-template <class T> bool XObject::cast_copy_to(T &data) {
-    auto *d = data();
-    if (d) {
-        data = *d;
-        return true;
-    }
-    return false;
-}
-
-template <class T> bool XObject::cast_copy_to(const T &data) const {
-    auto *d = data();
-    if (d) {
-        data = *d;
-        return true;
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------
 XType XObject::type() const { //тип - image, array, strings, используется для того, чтобы можно было фильтровать и управлять визуализацией
     return type_;
+}
+
+//---------------------------------------------------------------------
+QString XObject::subtype() const {   // Name of the subtype, used for differenciating objects of "Custom" type
+    return subtype_;
 }
 
 //---------------------------------------------------------------------

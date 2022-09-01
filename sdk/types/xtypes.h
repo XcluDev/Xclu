@@ -11,6 +11,9 @@
 #include "xarray.h"
 #include "xraster.h"
 
+// XType identifiers
+#include "xtype.h"
+
 // Sound
 #include "xsoundtypes.h"
 
@@ -18,6 +21,4 @@
 #include "xcalltype.h"
 #include "xcalldatatypes.h"
 
-// XType identifiers
-#include "xtype.h"
 

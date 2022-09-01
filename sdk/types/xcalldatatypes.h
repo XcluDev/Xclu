@@ -3,7 +3,8 @@
 // Типы для передачи данных в XCall
 #include <QString>
 
-struct XCallDataCreateWidget {
+class XCallDataCreateWidget {
+public:
     QString in_parent_id;
     void* out_widget = nullptr;
 };
