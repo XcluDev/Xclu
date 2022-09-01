@@ -10,8 +10,8 @@ public:
     //----------------------------------------------------------
     // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
     // if XType::none or if empty - it means "all" for a given filter
-    static QVector<XModule *> find_modules_by_filter(XType accept_calls_filter = XType::none,
-                                             XType send_calls_filter = XType::none,
+    static QVector<XModule *> find_modules_by_filter(XCallType accept_calls_filter = XCallType::none,
+                                             XCallType send_calls_filter = XCallType::none,
                                              QString class_filter = "",
                                              bool require_enabled = true);
 

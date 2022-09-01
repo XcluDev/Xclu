@@ -368,8 +368,8 @@ XModule *Project::find_module_by_name(QString name) {
 // Find modules by a filter
 // 'accept_calls_filter', 'send_calls_filter', 'type_filter' are parts of name,
 // if XType::none or if empty - it means "all" for a given filter
-QVector<XModule *> Project::find_modules_by_filter(XType accept_calls_filter,
-                                         XType send_calls_filter,
+QVector<XModule *> Project::find_modules_by_filter(XCallType accept_calls_filter,
+                                         XCallType send_calls_filter,
                                          QString class_filter,
                                          bool require_enabled) {
     QVector<XModule *> list;
