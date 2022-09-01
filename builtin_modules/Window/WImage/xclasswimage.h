@@ -1,6 +1,7 @@
 #pragma once
 
-//Реализация модуля WImage - показ изображения в окне
+// Реализация модуля WImage - показ изображения в окне
+// TODO WImage сейчас закомментирован
 
 #include <QObject>
 #include <QWindow>
@@ -36,13 +37,13 @@ protected:
 
 
 protected:
-    //QScopedPointer<QWindow> window_;
+    /*
     QString parent_id_;
     bool parent_was_set_ = false;
 
     QWidget *widget_ = nullptr; //весь виджет
     QLabel *image_label_ = nullptr;   //изображение
-
+    */
     void update_all(bool force);
     void update_value();
 
