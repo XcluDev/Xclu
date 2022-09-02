@@ -383,7 +383,7 @@ bool MainWindow::saveProject(const QString &fileName) {
 void MainWindow::readSettings() {
     Settings::load_window(Settings::key_main_window(), this);
 
-    ui->actionShow_Component_Names->setChecked(Settings::is_show_components_names());
+    ui->actionShow_Component_Names->setChecked(Settings::get_xguicomp_show_components_names());
 }
 
 //---------------------------------------------------------------------

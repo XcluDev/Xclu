@@ -21,7 +21,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiFloat::XGuiFloat(XGuiPageBuilder &page_builder, XItemFloat *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     //Spin setup
     spin_ = new XcluDoubleSpinBox();
@@ -135,7 +135,7 @@ void XGuiFloat::on_value_changed() {
     if (slider_) {
         slider_->setValue(range_.value_to_ticks(spin_->value(), ticks_));
     }
-    XGui::on_value_changed();
+    XGuiComp::on_value_changed();
 }
 
 //---------------------------------------------------------------------

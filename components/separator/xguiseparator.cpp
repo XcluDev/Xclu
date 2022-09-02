@@ -19,7 +19,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiSeparator::XGuiSeparator(XGuiPageBuilder &page_builder, XItemSeparator *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     bool is_line = item->is_line();
     bool is_separator = item->is_separator();

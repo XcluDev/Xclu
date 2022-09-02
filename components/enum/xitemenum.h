@@ -27,7 +27,7 @@ public:
     QStringList names();       //все заголовки с подчеркиванием - для программирования
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
+    virtual XGuiComp *create_gui(XGuiPageBuilder &page_builder);
 
     //единицы измерения
     QString units() { return units_; }

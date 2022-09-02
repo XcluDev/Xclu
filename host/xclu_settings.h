@@ -1,9 +1,13 @@
 #pragma once
 
-//Настройки приложения и ключи для записи настроек
+// Настройки приложения и ключи для записи настроек
+// TODO Считывать настройки приложения в память единожды
+// - завести один settings, а не создавать каждый раз
+// А также, можно завести структуру (с макросом) для всех параметров
 #include <QString>
 #include <QSettings>
 #include "xc_paths.h"
+#include "int2.h"
 
 class QWindow;
 class QMainWindow;
@@ -17,6 +21,8 @@ public:
     static void seti(QString key, int value);
 
     //Конкретные ключи
+
+    // Размеры основного окна
     static QString key_main_window() { return "main_window"; }
 
     //Диалог добавления модуля
@@ -39,10 +45,14 @@ public:
     static void load_window(QString window_name, QMainWindow *win);
 
     //View
-    //Show Components Names
+    //XGuiComp - Show Components Names
     static QString key_show_components_names() { return "view/show_components_names"; }
-    static bool is_show_components_names();
+    static bool get_xguicomp_show_components_names();
 
+    // Размеры thumbnail в XObject
+    //static QString xobject_thumb_w() { return "xobject/thumb_w"; }
+    //static QString xobject_thumb_h() { return "xobject/thumb_h"; }
+    static int2 get_xobject_thumb_size(); // TODO сделать считывание из настроек
 };
 
 //Настройки приложения из файла xc_settings_file()

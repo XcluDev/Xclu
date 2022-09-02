@@ -198,7 +198,7 @@ SOURCES += \
     components/text/xguitext.cpp \
     components/text/xitemtext.cpp \
     components/visibilitygroups.cpp \
-    components/xgui.cpp \
+    components/xguicomp.cpp \
     components/xguieditor.cpp \
     components/xitem.cpp \
     components/xitemscalar.cpp \
@@ -314,7 +314,7 @@ HEADERS += \
     components/text/xguitext.h \
     components/text/xitemtext.h \
     components/visibilitygroups.h \
-    components/xgui.h \
+    components/xguicomp.h \
     components/xguieditor.h \
     components/xitem.h \
     components/xitemscalar.h \

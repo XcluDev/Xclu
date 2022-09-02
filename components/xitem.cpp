@@ -14,7 +14,7 @@
 #include "xitemtext.h"
 #include "xitemobject.h"
 
-#include "xgui.h"
+#include "xguicomp.h"
 #include "registrarxitem.h"
 #include "xmoduleinterface.h"
 #include "xmodule.h"
@@ -376,8 +376,8 @@ void XItem::set_expression(const QString &expr) {
 
 //---------------------------------------------------------------------
 //графический интерфейс, он тут создается, но хранится отдельно
-XGui *XItem::create_gui(XGuiPageBuilder &page_builder) {
-    gui__ = new XGui(page_builder, this);
+XGuiComp *XItem::create_gui(XGuiPageBuilder &page_builder) {
+    gui__ = new XGuiComp(page_builder, this);
     return gui__;   //не нужно его удалять
 }
 
@@ -636,10 +636,10 @@ void XItem::context_menu_on_action(ComponentContextMenuEnum id, QString action_t
         //this cases must be implemented in subclasses
     case ComponentContextMenu_reset_default_value:
     case ComponentContextMenu_set_size:
-        xc_exception(QString("XGui::on_component_popup_action - not implemented response to `%1`").arg(action_text));
+        xc_exception(QString("XGuiComp::on_component_popup_action - not implemented response to `%1`").arg(action_text));
         break;
     default:
-        xc_exception(QString("XGui::on_component_popup_action error - bad action `%1`").arg(action_text));
+        xc_exception(QString("XGuiComp::on_component_popup_action error - bad action `%1`").arg(action_text));
     }
 
 }

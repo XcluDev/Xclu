@@ -1,6 +1,6 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 #include "xprotecteddata.h"
 
 class XItemObject;
@@ -10,6 +10,8 @@ class QSpacerItem;
 //визуальные компоненты для показа содержимого объекта
 class XGuiObjectVisual {
 public:
+    XGuiObjectVisual();
+
     void set_text(QString text);
 
     void set_thumbnail_size(int w, int h);
@@ -17,6 +19,7 @@ public:
     int2 thumbnail_size();
     void clear_thumbnail();
 
+    int2 thumb_size_ = int2(100,100);   // считывается из настроек приложения
     //картинка
     QLabel *thumbnail_ = nullptr;   //удалять не надо
     //текстовое описание
@@ -26,7 +29,7 @@ public:
 
 };
 
-class XGuiObject : public XGui
+class XGuiObject : public XGuiComp
 {
     Q_OBJECT
 public:

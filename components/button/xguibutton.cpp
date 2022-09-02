@@ -20,7 +20,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiButton::XGuiButton(XGuiPageBuilder &page_builder, XItemButton *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     button_ = new QPushButton(item->title());
     button_->setMaximumWidth(xclu::BUTTON_WIDTH);

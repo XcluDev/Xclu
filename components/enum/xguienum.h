@@ -1,11 +1,11 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemEnum;
 class XcluComboBox;
 
-class XGuiEnum : public XGui
+class XGuiEnum : public XGuiComp
 {
     Q_OBJECT
 public:

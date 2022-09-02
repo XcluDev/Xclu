@@ -1,11 +1,11 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemString;
 class QLineEdit;
 
-class XGuiString : public XGui
+class XGuiString : public XGuiComp
 {
     Q_OBJECT
 public:

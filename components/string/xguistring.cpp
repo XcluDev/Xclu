@@ -21,7 +21,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiString::XGuiString(XGuiPageBuilder &page_builder, XItemString *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
 
 

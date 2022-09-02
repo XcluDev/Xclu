@@ -1,12 +1,12 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemSeparator;
 class QSpacerItem;
 class QFrame;
 
-class XGuiSeparator : public XGui
+class XGuiSeparator : public XGuiComp
 {
     Q_OBJECT
 public:

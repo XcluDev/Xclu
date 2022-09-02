@@ -20,7 +20,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiCheckbox::XGuiCheckbox(XGuiPageBuilder &page_builder, XItemCheckbox *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     checkbox_ = new QCheckBox("");
 

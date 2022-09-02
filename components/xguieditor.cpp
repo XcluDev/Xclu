@@ -171,11 +171,11 @@ void XGuiEditor::load_module(XModulePrototype *info, XModuleInterface *interf, Q
     input.parent = nullptr;
     input.tabs = tabs;     //сюда добавляются страницы
     input.grid = nullptr;    //страницы создают новый, а остальные добавляются в него
-    input.settings.show_names = Settings::is_show_components_names();
+    input.settings.show_names = Settings::get_xguicomp_show_components_names();
 
     for (int i=0; i<items.size(); i++) {
         auto *item = items.at(i);
-        XGui *itemgui = item->create_gui(input);
+        XGuiComp *itemgui = item->create_gui(input);
         xc_assert(itemgui, "Internal error loading module " + module_name + ": can't create GUI for '" + item->title() + "'");
         items_.push_back(itemgui);
         items_by_name_[item->name()] = itemgui;
@@ -201,7 +201,7 @@ void XGuiEditor::load_module(XModulePrototype *info, XModuleInterface *interf, Q
         VisibleGroupBase &group = vis_groups[i];
         QString item_name = group.item_name();
         xc_assert(items_by_name_.contains(item_name), "No GUI item '" + item_name + "' for using as a parent of visibility group");
-        XGui *parent = items_by_name_[item_name];
+        XGuiComp *parent = items_by_name_[item_name];
 
         //создаем и заполняем GUI-группу
         VisibilityGroupGui *new_gui_group = group.create_group_gui();

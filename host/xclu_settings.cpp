@@ -41,7 +41,7 @@
 //---------------------------------------------------------------------
 void Settings::load_window(QString window_name, QMainWindow *win) {
     XCLU_SETTINGS
-            settings.beginGroup(window_name);
+    settings.beginGroup(window_name);
     win->restoreGeometry(settings.value("geometry").toByteArray());
     win->restoreState(settings.value("state").toByteArray());
 
@@ -54,8 +54,14 @@ void Settings::load_window(QString window_name, QMainWindow *win) {
 }
 
 //---------------------------------------------------------------------
-bool Settings::is_show_components_names() {
+bool Settings::get_xguicomp_show_components_names() {
      return geti(key_show_components_names());
+}
+
+//---------------------------------------------------------------------
+int2 Settings::get_xobject_thumb_size() {
+    return int2(100, 100);
+    //return int2(geti(xobject_thumb_w()),geti(xobject_thumb_h()));
 }
 
 //---------------------------------------------------------------------

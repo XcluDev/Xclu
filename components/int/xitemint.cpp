@@ -64,7 +64,7 @@ void XItemInt::set_value_from_link(XLinkResolved *linkres) {
 
 //---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemInt::create_gui(XGuiPageBuilder &page_builder) {
+XGuiComp *XItemInt::create_gui(XGuiPageBuilder &page_builder) {
     gui__ = new XGuiInt(page_builder, this);
     return gui__;
 }

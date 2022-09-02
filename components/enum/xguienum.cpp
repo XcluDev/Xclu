@@ -21,7 +21,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiEnum::XGuiEnum(XGuiPageBuilder &page_builder, XItemEnum *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     combo_ = new XcluComboBox();
     combo_->addItems(item->titles());

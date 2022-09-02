@@ -1,6 +1,6 @@
 #pragma once
 
-// A graphical interface for displaying or editing a variable.
+// Базовый класс для графического интерфейса для показа компоненты.
 // It creates a class that is capable of generating a GUI object on demand.
 /*
 Constants without expression: set from the GUI at start.
@@ -55,13 +55,13 @@ struct XGuiPageBuilder {
 };
 
 //GUI component
-class XGui : public QWidget
+class XGuiComp: public QWidget
 {
     Q_OBJECT
 public:
     //item - should not be deleted
-    XGui(XGuiPageBuilder &page_builder, XItem *item);
-    virtual ~XGui();
+    XGuiComp(XGuiPageBuilder &page_builder, XItem *item);
+    virtual ~XGuiComp();
 
     //redraw - forces qApp->processEvents() if required
     //NOTE: please not force for bulk updates!
@@ -156,7 +156,8 @@ protected:
                         QWidget *widget2 = nullptr, int spanx2 = 0, int newline2 = false,
                         QWidget *widget3 = nullptr, int spanx3 = 0, int newline3 = false,
                         QWidget *widget4 = nullptr, int spanx4 = 0, int newline4 = false,
-                        QWidget *widget5 = nullptr, int spanx5 = 0, int newline5 = false
+                        QWidget *widget5 = nullptr, int spanx5 = 0, int newline5 = false,
+                        QWidget *widget6 = nullptr, int spanx6 = 0, int newline6 = false
                         );
     /*
     Widget structures for different controls:

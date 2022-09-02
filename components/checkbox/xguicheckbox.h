@@ -1,11 +1,11 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemCheckbox;
 class QCheckBox;
 
-class XGuiCheckbox : public XGui
+class XGuiCheckbox : public XGuiComp
 {
     Q_OBJECT
 public:

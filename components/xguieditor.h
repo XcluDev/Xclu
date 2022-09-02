@@ -6,7 +6,7 @@
 #include <QWidget>
 #include "incl_h.h"
 #include "xmodule.h"
-#include "xgui.h"
+#include "xguicomp.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -72,8 +72,8 @@ protected:
     //модуль, который в данный момент показываем в редакторе
     XModule *module_ = nullptr;
 
-    QVector<XGui *> items_; //элементы GUI
-    QMap<QString, XGui *> items_by_name_;   //элементы по имени, для установки связей видимости
+    QVector<XGuiComp *> items_; //элементы GUI
+    QMap<QString, XGuiComp *> items_by_name_;   //элементы по имени, для установки связей видимости
 
     void reload_name(); //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
 

@@ -32,7 +32,7 @@ public:
     virtual bool store_data() { return false; }
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
+    virtual XGuiComp *create_gui(XGuiPageBuilder &page_builder);
 
     //flag that button works always - at edit mode and runtime, not only runtime
     bool is_always_enabled() { return is_always_enabled_; }

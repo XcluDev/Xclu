@@ -1,11 +1,11 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemButton;
 class QPushButton;
 
-class XGuiButton : public XGui
+class XGuiButton : public XGuiComp
 {
     Q_OBJECT
 public:

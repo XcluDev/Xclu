@@ -21,7 +21,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiInt::XGuiInt(XGuiPageBuilder &page_builder, XItemInt *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {    
     spin_ = new XcluSpinBox();
     spin_->setMinimumWidth(xclu::SPIN_WIDTH);
@@ -123,7 +123,7 @@ void XGuiInt::on_value_changed() {
     if (slider_) {
         slider_->setValue(spin_->value());
     }
-    XGui::on_value_changed();
+    XGuiComp::on_value_changed();
 }
 
 //---------------------------------------------------------------------

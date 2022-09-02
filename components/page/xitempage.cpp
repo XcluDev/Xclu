@@ -13,7 +13,7 @@ XItemPage::XItemPage(XModuleInterface *interf, const XItemPreDescription &pre_de
 
 //---------------------------------------------------------------------
 //графический интерфейс
-XGui *XItemPage::create_gui(XGuiPageBuilder &page_builder) {
+XGuiComp *XItemPage::create_gui(XGuiPageBuilder &page_builder) {
     gui__ = new XGuiPage(page_builder, this);
     return gui__;
 }

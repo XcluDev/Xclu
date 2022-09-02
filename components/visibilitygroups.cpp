@@ -1,6 +1,6 @@
 #include "incl_cpp.h"
 #include "visibilitygroups.h"
-#include "xgui.h"
+#include "xguicomp.h"
 
 //---------------------------------------------------------------------
 //группа для сбора дерева зависимости
@@ -45,7 +45,7 @@ VisibilityGroupGui::VisibilityGroupGui(const QMap<QString, int> &variants) {
 }
 
 //---------------------------------------------------------------------
-void VisibilityGroupGui::add_affected_item(XGui *item) {
+void VisibilityGroupGui::add_affected_item(XGuiComp *item) {
     affected_items_.push_back(item);
 }
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 #include "xrange.h"
 
 class XItemFloat;
 class XcluDoubleSpinBox;
 class QSlider;
 
-class XGuiFloat : public XGui
+class XGuiFloat : public XGuiComp
 {
     Q_OBJECT
 public:

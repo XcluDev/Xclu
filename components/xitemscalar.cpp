@@ -2,6 +2,6 @@
 
 #include "incl_cpp.h"
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 //---------------------------------------------------------------------

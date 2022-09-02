@@ -15,7 +15,7 @@ public:
     int get_large_step();
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
+    virtual XGuiComp *create_gui(XGuiPageBuilder &page_builder);
 
     //единицы измерения
     QString units() { return units_; }

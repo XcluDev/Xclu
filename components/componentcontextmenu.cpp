@@ -3,7 +3,7 @@
 #include <QAction>
 #include "incl_cpp.h"
 #include "componentcontextmenu.h"
-#include "xgui.h"
+#include "xguicomp.h"
 
 ComponentContextMenu *COMPONENT_POPUP;
 
@@ -87,7 +87,7 @@ void ComponentContextMenu::clear() {
 
 //---------------------------------------------------------------------
 //Create and show popup menu asyncr. The clicked action will be sent to `responder` as "on_component_popup_action()
-void ComponentContextMenu::show_menu(XGui *responder, QWidget *parent, const QPoint &pos) {
+void ComponentContextMenu::show_menu(XGuiComp *responder, QWidget *parent, const QPoint &pos) {
     menu_.reset(new QMenu(parent));
     for (auto &item: items_) {
         if (item.separator) {
@@ -104,7 +104,7 @@ void ComponentContextMenu::show_menu(XGui *responder, QWidget *parent, const QPo
             }
         }
         menu_->addAction(a);
-        connect(a, &QAction::triggered, responder, &XGui::on_component_popup_action);
+        connect(a, &QAction::triggered, responder, &XGuiComp::on_component_popup_action);
     }
 
     menu_->popup(pos);

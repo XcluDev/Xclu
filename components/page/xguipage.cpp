@@ -20,7 +20,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiPage::XGuiPage(XGuiPageBuilder &page_builder, XItemPage *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     //end the previous page
     finalize_page(page_builder);

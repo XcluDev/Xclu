@@ -20,7 +20,7 @@
 #include <QWidget>
 #include <QMenu>
 //class QMenu;
-class XGui;
+class XGuiComp;
 
 
 //Enumeration of menu items
@@ -91,7 +91,7 @@ public:
     void setup(const ComponentContextMenuInfo &info);
 
     //Create and show popup menu asyncr. The clicked action will be sent to `responder` as "on_component_popup_action()
-    void show_menu(XGui *responder, QWidget *parent, const QPoint &pos);
+    void show_menu(XGuiComp *responder, QWidget *parent, const QPoint &pos);
 
     //Gui should call this when switching modules, so `responder` is no valid
     void clear();

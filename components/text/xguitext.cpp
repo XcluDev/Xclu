@@ -20,7 +20,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiText::XGuiText(XGuiPageBuilder &page_builder, XItemText *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     //textEdit_ = new QTextEdit;    //- позволяет вставлять картинки и HTML
     textEdit_ = new QPlainTextEdit;
@@ -68,7 +68,7 @@ XGuiText::~XGuiText() {
 //---------------------------------------------------------------------
 //Отслеживание изменений - переопределяем, чтобы скролл текста не сбрасывался при запросе toPlainText
 void XGuiText::on_value_changed() {
-    XGui::on_value_changed();
+    XGuiComp::on_value_changed();
     dirty_ = true;
 }
 

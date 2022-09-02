@@ -1,5 +1,5 @@
 #include "qt_widgets.h"
-#include "xgui.h"
+#include "xguicomp.h"
 #include "incl_cpp.h"
 #include "xitem.h"
 #include "visibilitygroups.h"
@@ -23,9 +23,9 @@ void XGuiPageBuilder::insert(QWidget *widget, int spanx, bool new_line) {
 }
 
 //---------------------------------------------------------------------
-//XGui
+//XGuiComp
 //---------------------------------------------------------------------
-XGui::XGui(XGuiPageBuilder &page_builder, XItem * item)
+XGuiComp::XGuiComp(XGuiPageBuilder &page_builder, XItem * item)
     :QWidget(page_builder.parent)
 {
     item__ = item;
@@ -33,7 +33,7 @@ XGui::XGui(XGuiPageBuilder &page_builder, XItem * item)
 }
 
 //---------------------------------------------------------------------
-XGui::~XGui() {
+XGuiComp::~XGuiComp() {
     for (int i=0; i<vis_groups_.size(); i++) {
         delete vis_groups_[i];
     }
@@ -42,7 +42,7 @@ XGui::~XGui() {
 //---------------------------------------------------------------------
 //redraw - forces qApp->processEvents() if required.
 //NOTE: please not force for bulk updates!
-void XGui::repaint_(bool force_qapp_process_events) {
+void XGuiComp::repaint_(bool force_qapp_process_events) {
     repaint();
     if (force_qapp_process_events) {
         qApp->processEvents();
@@ -51,7 +51,7 @@ void XGui::repaint_(bool force_qapp_process_events) {
 
 //---------------------------------------------------------------------
 //строка-подсказка, может быть разных типов - см. Tip_Style
-QString XGui::get_tip() {
+QString XGuiComp::get_tip() {
     QString tip;
     switch (get_tip_style()) {
     case Tip_Full: {
@@ -74,7 +74,7 @@ QString XGui::get_tip() {
 
 //---------------------------------------------------------------------
 //create label_ and return it for using in insert_widgets
-QWidget *XGui::new_label() {
+QWidget *XGuiComp::new_label() {
     label_ = new QLabel(item__->title());
     label_->setMinimumWidth(xclu::LABEL_WIDTH_MIN);
     //label_->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -111,7 +111,7 @@ QWidget *XGui::new_label() {
 
 //---------------------------------------------------------------------
 //attach context menu - automatically to label, and manually to button
-void XGui::attach_context_menu(QWidget *widget) {
+void XGuiComp::attach_context_menu(QWidget *widget) {
     //context menu
     //https://forum.qt.io/topic/31233/how-to-create-a-custom-context-menu-for-qtableview/3
     widget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -121,8 +121,8 @@ void XGui::attach_context_menu(QWidget *widget) {
 
 //---------------------------------------------------------------------
 //show popup menu
-void XGui::customMenuRequested(QPoint pos){
-    xc_assert(label_, "XGui::customMenuRequested - empty label_, can't compute menu position");
+void XGuiComp::customMenuRequested(QPoint pos){
+    xc_assert(label_, "XGuiComp::customMenuRequested - empty label_, can't compute menu position");
     //Get information about menu
     ComponentContextMenu::COMP_MENU()->setup(item__->context_menu_info());
     //Start menu async.
@@ -131,19 +131,19 @@ void XGui::customMenuRequested(QPoint pos){
 
 //---------------------------------------------------------------------
 //signal from popup menu, action->data().toInt() is ComponentContextMenuEnum
-void XGui::on_component_popup_action() {
+void XGuiComp::on_component_popup_action() {
     if (const QAction *action = qobject_cast<const QAction *>(sender())) {
         ComponentContextMenuEnum id = (ComponentContextMenuEnum)action->data().toInt();
         item__->context_menu_on_action(id, action->text());
     }
     else {
-      xc_exception("Error casting action at XGui::on_component_popup_action");
+      xc_exception("Error casting action at XGuiComp::on_component_popup_action");
     }
 }
 
 //---------------------------------------------------------------------
 //Show "Edit link" dialog when right-clicked link
-void XGui::on_label_link_right_click(QPoint /*pos*/) {
+void XGuiComp::on_label_link_right_click(QPoint /*pos*/) {
     if (!item__->link().link.isEmpty()) {
         item__->context_menu_on_action(ComponentContextMenu_edit_link, "Label link is clicked");
     }
@@ -156,13 +156,14 @@ void XGui::on_label_link_right_click(QPoint /*pos*/) {
 //widget1..5 can be nullptr - in this case it's omitted and grid just shifted,
 //for example for button widget1 == nullptr
 //Note: each control must finish inserting with newline!
-void XGui::insert_widgets(XGuiPageBuilder &page_builder,
+void XGuiComp::insert_widgets(XGuiPageBuilder &page_builder,
                           QWidget *widget_marker,
                           QWidget *widget1, int spanx1, int newline1,
                           QWidget *widget2, int spanx2, int newline2,
                           QWidget *widget3, int spanx3, int newline3,
                           QWidget *widget4, int spanx4, int newline4,
-                          QWidget *widget5, int spanx5, int newline5
+                          QWidget *widget5, int spanx5, int newline5,
+                          QWidget *widget6, int spanx6, int newline6
                           ) {
 
     //insert to page
@@ -171,6 +172,7 @@ void XGui::insert_widgets(XGuiPageBuilder &page_builder,
     page_builder.insert(widget3, spanx3, newline3);
     page_builder.insert(widget4, spanx4, newline4);
     page_builder.insert(widget5, spanx5, newline5);
+    page_builder.insert(widget6, spanx6, newline6);
 
     //register visibility
     if (widget1) widgets_visibility_.push_back(widget1);
@@ -178,6 +180,7 @@ void XGui::insert_widgets(XGuiPageBuilder &page_builder,
     if (widget3) widgets_visibility_.push_back(widget3);
     if (widget4) widgets_visibility_.push_back(widget4);
     if (widget5) widgets_visibility_.push_back(widget5);
+    if (widget6) widgets_visibility_.push_back(widget6);
 
 
     //store widget to control its background color and decorate by qualifier,
@@ -206,18 +209,18 @@ void XGui::insert_widgets(XGuiPageBuilder &page_builder,
 
 //---------------------------------------------------------------------
 //вставить с новой строки (то есть label будет сверху, а этот widget на всю строку)
-//void XGui::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &page_builder) {
+//void XGuiComp::insert_widget_next_line(QWidget *widget, QWidget *internal_widget, XGuiPageBuilder &page_builder) {
 //    insert_widget(widget, internal_widget, input, 0, 1, 4, 1);
 //}
 
 //---------------------------------------------------------------------
 //set "GuiEditorPage" for QWidget in order QSS set its background darker
-void XGui::attribute_as_GuiEditorPage(QWidget *widget) {
+void XGuiComp::attribute_as_GuiEditorPage(QWidget *widget) {
     widget->setObjectName("GuiEditorPage");
 }
 
 //---------------------------------------------------------------------
-void XGui::set_read_only(bool read_only) {
+void XGuiComp::set_read_only(bool read_only) {
     //decide if required to do something
     if (current_read_only_ == read_only) return;
     current_read_only_ = read_only;
@@ -227,7 +230,7 @@ void XGui::set_read_only(bool read_only) {
 
 //---------------------------------------------------------------------
 //Internal function, which should be reimplemented for components
-void XGui::set_read_only_(bool /*read_only*/) {
+void XGuiComp::set_read_only_(bool /*read_only*/) {
 
 }
 
@@ -235,7 +238,7 @@ void XGui::set_read_only_(bool /*read_only*/) {
 //Отслеживание изменений
 //Подклассы должны его вызывать, чтобы пометить, что проект был изменен, вот так:
 //connect(spin_, SIGNAL (valueChanged(double)), this, SLOT (on_value_changed()));
-void XGui::on_value_changed() {
+void XGuiComp::on_value_changed() {
     //mark that documant was changed if item is indented to save to disk
     if (item__->is_save_to_project()) {
         xc_document_modified();
@@ -248,7 +251,7 @@ void XGui::on_value_changed() {
 }
 
 //---------------------------------------------------------------------
-void XGui::block_editing_on_running() { //блокирование изменения констант, вызывается перед запуском проекта
+void XGuiComp::block_editing_on_running() { //блокирование изменения констант, вызывается перед запуском проекта
     if (label_) {
         default_label_color_ = xclu::set_font_color_gray(label_);
     }
@@ -257,7 +260,7 @@ void XGui::block_editing_on_running() { //блокирование измене�
 }
 
 //---------------------------------------------------------------------
-void XGui::unblock_editing_on_stopping() { //разблокирование изменения констант, вызывается после остановки проекта
+void XGuiComp::unblock_editing_on_stopping() { //разблокирование изменения констант, вызывается после остановки проекта
     if (label_) {
         xclu::reset_font_color(label_, default_label_color_);
     }
@@ -266,7 +269,7 @@ void XGui::unblock_editing_on_stopping() { //разблокирование из
 }
 
 //---------------------------------------------------------------------
-void XGui::set_visible(bool visible) {
+void XGuiComp::set_visible(bool visible) {
     for (auto *widget: widgets_visibility_) {
         widget->setVisible(visible);
     }
@@ -279,14 +282,14 @@ void XGui::set_visible(bool visible) {
 //---------------------------------------------------------------------
 //Если требуется - добавить группу видимости
 //групп может быть несколько, их нужно в деструкторе удалить
-void XGui::add_visibility_group(VisibilityGroupGui *created_group) {
+void XGuiComp::add_visibility_group(VisibilityGroupGui *created_group) {
     vis_groups_.push_back(created_group);
     //vis_group_->value_visibility_setup(true)
 }
 
 //---------------------------------------------------------------------
 //сигнал послать данные об изменении видимости - высылается после первой установки значения в переменную
-void XGui::propagate_visibility() {
+void XGuiComp::propagate_visibility() {
     for (int i=0; i<vis_groups_.size(); i++) {
         vis_groups_[i]->propagate_visibility(value_string_for_visibility());
     }
@@ -294,14 +297,14 @@ void XGui::propagate_visibility() {
 
 //---------------------------------------------------------------------
 //User change link settings - should show it in GUI
-void XGui::link_was_changed() {
+void XGuiComp::link_was_changed() {
     on_change_link_readonly();
 }
 
 //---------------------------------------------------------------------
 //Controls "read only" and link properties
 //Should be called when changed read_only and link
-void XGui::on_change_link_readonly() {
+void XGuiComp::on_change_link_readonly() {
     bool read_only = item__->is_out() || item__->is_linked() || (item__->is_const() && running_blocked());
     set_read_only(read_only);
 
@@ -320,7 +323,7 @@ void XGui::on_change_link_readonly() {
 
 //---------------------------------------------------------------------
 //create label_link_ for showing links and return it for using in insert_widgets
-QWidget *XGui::new_label_link() {
+QWidget *XGuiComp::new_label_link() {
     label_link_ = new QLabel("");
     //input.grid->addWidget(label_link_, input.y, xclu::gui_page_link_column);
     update_label_link();
@@ -337,7 +340,7 @@ QWidget *XGui::new_label_link() {
 
 //---------------------------------------------------------------------
 //update label link decoration when link is changed and also on "show names" command
-void XGui::update_label_link() {
+void XGuiComp::update_label_link() {
     if (label_link_) {
         QString name_text;
         if (settings_.show_names) {
@@ -362,7 +365,7 @@ void XGui::update_label_link() {
 
 //---------------------------------------------------------------------
 //Change show components names
-void XGui::set_show_components_names(bool show) {
+void XGuiComp::set_show_components_names(bool show) {
     if (settings_.show_names != show) {
         settings_.show_names = show;
         update_label_link();

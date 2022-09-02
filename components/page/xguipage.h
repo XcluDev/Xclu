@@ -1,11 +1,11 @@
 #pragma once
 
-#include "xgui.h"
+#include "xguicomp.h"
 
 class XItemPage;
 class XcluScroollArea;
 
-class XGuiPage : public XGui
+class XGuiPage : public XGuiComp
 {
     Q_OBJECT
 public:

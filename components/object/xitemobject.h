@@ -32,7 +32,7 @@ public:
     virtual bool was_changed(XWasChangedChecker &checker);
 
     //графический интерфейс
-    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
+    virtual XGuiComp *create_gui(XGuiPageBuilder &page_builder);
 
     //Context menu ----------------
     //Objects have size in GUI editor!

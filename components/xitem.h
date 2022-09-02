@@ -2,7 +2,7 @@
 
 //Абстрактный элемент интерфейса (переменные и оформление GUI), невизуальная часть
 //Подклассы реализуют конкретные элементы.
-//Также, они порождают визуальное представление в виде XGui
+//Также, они порождают визуальное представление в виде XGuiComp
 
 #include "incl_h.h"
 #include "xpointer.h"
@@ -12,7 +12,7 @@
 #include "xwaschanged.h"
 
 struct XGuiPageBuilder;
-class XGui;
+class XGuiComp;
 class QJsonObject;
 class XItem;
 class XModule;
@@ -182,7 +182,7 @@ public:
 
     //GUI -------------------------
     //графический интерфейс, он тут создается, но хранится отдельно
-    virtual XGui *create_gui(XGuiPageBuilder &page_builder);
+    virtual XGuiComp *create_gui(XGuiPageBuilder &page_builder);
 
     //сигнал, что GUI подключен/отключен
     void gui_attached();
@@ -289,7 +289,7 @@ protected:
     //это общее gui__ - хотя в самих представителях будут конкретные представители,
     //нам требуется общий, чтобы передавать сигналы о видимости
     //подклассы должны его устанавливать!
-    XGui *gui__ = nullptr; //не нужно его удалять
+    XGuiComp *gui__ = nullptr; //не нужно его удалять
 
     //General page marker
     bool belongs_general_page_ = false;

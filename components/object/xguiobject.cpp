@@ -7,6 +7,11 @@
 //---------------------------------------------------------------------
 //XGuiObjectVisual
 //---------------------------------------------------------------------
+XGuiObjectVisual::XGuiObjectVisual() {
+    thumb_size_ = Settings::get_xobject_thumb_size();
+}
+
+//---------------------------------------------------------------------
 void XGuiObjectVisual::set_text(QString text) {
     description_->setText(text);
 
@@ -33,8 +38,7 @@ QPainter* XGuiObjectVisual::thumbnail_painter() {
 
 //---------------------------------------------------------------------
 int2 XGuiObjectVisual::thumbnail_size() {
-    xc_exception("GuiObjectVisual::painter_size not implemented");
-    return int2(0,0);
+    return thumb_size_;
 }
 
 /*
@@ -102,7 +106,7 @@ object:         0 label                                            4 link label
 
 //---------------------------------------------------------------------
 XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
-    :XGui(page_builder, item)
+    :XGuiComp(page_builder, item)
 {
     visual_.thumbnail_ = new QLabel("");
     visual_.description_ = new QLabel("");
@@ -116,10 +120,10 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
                    nullptr, 1, false,
                    new_label_link(), 1, true,
                    visual_.thumbnail_, 3, false,
-                   visual_.description_, 2, true
+                   visual_.description_, 2, true,
                    );
 
-    //TODO ДОБАВЛЕНИЕ КНОПКИ Inspect
+    //TODO ДОБАВЛЕНИЕ КНОПКИ Details для показа детальной информации в отдельном окне
 
     //квалификаторы
     if (item->is_out()) {
