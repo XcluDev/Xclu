@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClassWebcamera
+//Interface for XClassBaseWebcamera
 //Created automatically.
 //----------------------------------------------------
 //Page Main
@@ -54,8 +54,6 @@ void repaint_device_serial() { repaint_("device_serial"); }
 //Resulted webcamera image.
 bool was_changed_image() { return was_changed_("image"); }
 XProtectedObject *getobject_image() { return get_object_("image"); }
-void setobject_image(XProtectedObject *value) { set_object_("image", value); }
-void setobject_image(XProtectedObject &value) { set_object_("image", value); }
 void repaint_image() { repaint_("image"); }
 //Out Checkbox Is New Frame
 //Flag is true when new frame is arrived.
@@ -174,33 +172,16 @@ bool was_changed_res_y() { return was_changed_("res_y"); }
 int geti_res_y() { return geti_("res_y"); }
 void repaint_res_y() { repaint_("res_y"); }
 
-//Enum Channels
-//Desired channels of the output image.
-enum enum_image_channels {
-    image_channels_Grayscale = 0,
-    image_channels_RGB = 1,
-    image_channels_BGR = 2,
-    image_channels_RGBA = 3,
-    image_channels_ABGR = 4,
-    image_channels_R = 5,
-    image_channels_G = 6,
-    image_channels_B = 7,
-    image_channels_N__ = 8
+//Enum Pixel Type
+//Pixel type of output image.
+enum enum_pixel_type {
+    pixel_type_Grayscale = 0,
+    pixel_type_RGB = 1,
+    pixel_type_N__ = 2
 };
-bool was_changed_image_channels() { return was_changed_("image_channels"); }
-enum_image_channels gete_image_channels() { return enum_image_channels(geti_("image_channels")); }
-QString getraw_image_channels() { return getraw_("image_channels");}
-
-//Enum Data Type
-//Desired data type of the output image, uint8=0..255, float=[0,1].
-enum enum_image_data_type {
-    image_data_type_u8 = 0,
-    image_data_type_float = 1,
-    image_data_type_N__ = 2
-};
-bool was_changed_image_data_type() { return was_changed_("image_data_type"); }
-enum_image_data_type gete_image_data_type() { return enum_image_data_type(geti_("image_data_type")); }
-QString getraw_image_data_type() { return getraw_("image_data_type");}
+bool was_changed_pixel_type() { return was_changed_("pixel_type"); }
+enum_pixel_type gete_pixel_type() { return enum_pixel_type(geti_("pixel_type")); }
+QString getraw_pixel_type() { return getraw_("pixel_type");}
 
 
 //Checkbox Ignore Error
@@ -251,8 +232,6 @@ void repaint_transform() { repaint_("transform"); }
 //Transformed image.
 bool was_changed_image_transformed() { return was_changed_("image_transformed"); }
 XProtectedObject *getobject_image_transformed() { return get_object_("image_transformed"); }
-void setobject_image_transformed(XProtectedObject *value) { set_object_("image_transformed", value); }
-void setobject_image_transformed(XProtectedObject &value) { set_object_("image_transformed", value); }
 void repaint_image_transformed() { repaint_("image_transformed"); }
 
 //Checkbox Crop To Square

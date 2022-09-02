@@ -648,10 +648,15 @@ int XClassWebcamera::get_gui_frame_rate() {
 //получить из GUI описание данных
 void XClassWebcamera::read_gui_output_data_format() {
     auto write = data_.write();
-    // TODO need implement read format
-    xc_exception("Please implement XClassWebcamera::read_gui_output_data_format()");
-    //write.data().channels = getraw_image_channels();
-    //write.data().data_type = getraw_image_data_type();
+    auto &data = write.data();
+    switch (gete_pixel_type()) {
+    case pixel_type_Grayscale: data.desired_type = XType::u8;
+    break;
+    case pixel_type_RGB: data.desired_type = XType::rgb_u8;
+        break;
+    default:
+        xc_exception(name() + " - bad type " + getraw_pixel_type());
+    }
 }
 
 //---------------------------------------------------------------------
