@@ -9,6 +9,8 @@
 //---------------------------------------------------------------------
 XGuiObjectVisual::XGuiObjectVisual() {
     thumb_size_ = Settings::get_xobject_thumb_size();
+
+    resize_image(thumb_size_.x, thumb_size_.y);
 }
 
 //---------------------------------------------------------------------
@@ -18,22 +20,22 @@ void XGuiObjectVisual::set_text(QString text) {
 }
 
 //---------------------------------------------------------------------
-/*void XGuiObjectVisual::set_image(const QImage &image) {
-    QPixmap pix = QPixmap::fromImage(image);
-    thumbnail_->setPixmap(pix);
-    thumbnail_->setVisible(true);
-}*/
-
-//---------------------------------------------------------------------
 void XGuiObjectVisual::set_thumbnail_size(int w, int h)
 {
-    xc_exception("GuiObjectVisual::set_thumbnail_size not implemented");
+    thumb_size_ = int2(w, h);
+    resize_image(w, h);
+    update_thumbnail();
 }
 
 //---------------------------------------------------------------------
-QPainter* XGuiObjectVisual::thumbnail_painter() {
-    xc_exception("GuiObjectVisual::painter not implemented");
-    return nullptr;
+void XGuiObjectVisual::resize_image(int w, int h) {
+    image_ = QImage(w, h, QImage::Format_ARGB32);
+    clear_image();
+}
+
+//---------------------------------------------------------------------
+void XGuiObjectVisual::clear_image() {
+    image_.fill(Qt::gray);
 }
 
 //---------------------------------------------------------------------
@@ -41,51 +43,30 @@ int2 XGuiObjectVisual::thumbnail_size() {
     return thumb_size_;
 }
 
-/*
-    auto &visual = item->visual();
-
-    //описание изображения
-    const XObject &obj_1 = *object();
-    auto d = XRasterUtils::get_data(obj_1);
-    QString info_text = QString("%1\n%2 byte(s)").arg(XType_to_string(obj_1.type())).arg(obj_1.size_bytes());
-
-
-    info_text += QString("\n%1x%2, %3, %4").arg(d.w).arg(d.h).arg(d.channels_description).arg(d.data_type);
-    visual.set_text(info_text);
-
-    //TODO получение параметров просмотра из item
-    XObjectShowSettings settings;
-    settings.w = xclu::image_preview_small_w;
-    settings.h = xclu::image_preview_small_h;
-
-    //создаем preview для изображения
-    int w = d.w;
-    int h = d.h;
-    if (w > 0 && h > 0) {
-        float scl = qMin(float(settings.w) / w, float(settings.h) / h);
-        w = w * scl;
-        h = h * scl;
-
-        QImage img;
-        {
-            const XObject &obj = *object();
-            XRasterUtils::convert_to_QImage_fast_preview(obj, img, w, h);
-        }
-
-        visual.set_image(img);
-    }
-    else {
-        //если нет картинки, то очищаем
-        visual.clear_image();
-    }
-
-    */
 //---------------------------------------------------------------------
 void XGuiObjectVisual::clear_thumbnail() {
-    xc_exception("GuiObjectVisual::clear_thumbnail not implemented");
+    clear_image();
+    update_thumbnail();
     //thumbnail_->setText("");
     //thumbnail_->setVisible(false);
 }
+
+//---------------------------------------------------------------------
+void XGuiObjectVisual::update_thumbnail() {
+    QPixmap pix = QPixmap::fromImage(image_);
+    thumbnail_->setPixmap(pix);
+}
+
+//---------------------------------------------------------------------
+void XGuiObjectVisual::show_thumbnail() {
+    thumbnail_->setVisible(true);
+}
+
+//---------------------------------------------------------------------
+void XGuiObjectVisual::hide_thumbnail() {
+    thumbnail_->setVisible(false);
+}
+
 
 //---------------------------------------------------------------------
 //XGuiObject
@@ -120,7 +101,7 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
                    nullptr, 1, false,
                    new_label_link(), 1, true,
                    visual_.thumbnail_, 3, false,
-                   visual_.description_, 2, true,
+                   visual_.description_, 2, true
                    );
 
     //TODO ДОБАВЛЕНИЕ КНОПКИ Details для показа детальной информации в отдельном окне
@@ -132,6 +113,9 @@ XGuiObject::XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item)
 
     //track changes
     //connect(checkbox_, SIGNAL (stateChanged(int)), this, SLOT (on_value_changed()));*/
+    reset_last_object();
+
+    visual_.hide_thumbnail();
 }
 
 //---------------------------------------------------------------------
@@ -152,26 +136,63 @@ XGuiObjectVisual &XGuiObject::visual() {
 }
 
 //---------------------------------------------------------------------
+void XGuiObject::reset_last_object() {
+    last_object_ = nullptr;
+    was_changed_checker_.reset();
+    visual_.clear_thumbnail();
+    visual_.set_text("No object");
+}
+
+//---------------------------------------------------------------------
 //показать объект визуально
 //если изображение - то картинкой, если нет - то текстовым описанием
 //мы это делаем только по команде извне - так как не знаем,
 //вдруг с объектом проводятся операции
 void XGuiObject::show_object(XProtectedObject* object) {
-    if (object) {
-        //создаем wrapper для объекта, который установится в зависимости от его типа,
-        //и вызываем функцию для его визуализации
-        const XObject *obj = object->read().pointer();
-        QScopedPointer<XObjectVis> vis(XObjectVis::new_vis(obj));
-        if (vis->is_thumbnail_exists())
-        {
-            auto *painter = visual().thumbnail_painter();
-            if (painter) {
-                int2 size = visual().thumbnail_size();
-                vis->draw_thumbnail(*painter, size.x, size.y);
-            }
-        }
-        visual().set_text(vis->short_description().join("\n"));
+    // Проверка, что объект действительно есть
+    if (!object) {
+        reset_last_object();
+        return;
     }
+
+    const XObject *obj = object->read().pointer();
+    if (!obj) {
+        reset_last_object();
+        return;
+    }
+
+    // Проверка, было ли изменение объекта
+    bool was_changed = false;
+    if (last_object_ != obj) {
+        was_changed = true;
+        last_object_ = obj;
+        was_changed_checker_.reset();
+    }
+    else {
+        was_changed = object->was_changed(was_changed_checker_);
+    }
+
+    if (!was_changed) {
+        return;
+    }
+
+    // Создаем wrapper для объекта, который установится в зависимости от его типа,
+    //и вызываем функцию для его визуализации
+    QScopedPointer<XObjectVis> vis(XObjectVis::new_vis(obj));
+    visual().set_text(vis->short_description().join("\n"));
+
+    if (vis->is_thumbnail_exists())
+    {
+        QPainter painter(&visual().image_);
+        int2 size = visual().thumbnail_size();
+        vis->draw_thumbnail(painter, size.x, size.y);
+        visual().update_thumbnail();
+        visual().show_thumbnail();
+    }
+    else {
+        visual_.hide_thumbnail();
+    }
+
 }
 
 //---------------------------------------------------------------------

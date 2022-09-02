@@ -15,9 +15,12 @@ public:
     void set_text(QString text);
 
     void set_thumbnail_size(int w, int h);
-    QPainter *thumbnail_painter();
+
     int2 thumbnail_size();
     void clear_thumbnail();
+    void update_thumbnail();
+    void show_thumbnail();
+    void hide_thumbnail();
 
     int2 thumb_size_ = int2(100,100);   // считывается из настроек приложения
     //картинка
@@ -26,6 +29,11 @@ public:
     QLabel *description_ = nullptr;      //удалять не надо
     //разделитель
     //QSpacerItem *spacer_ = nullptr;
+
+    // Картинка для thumb
+    QImage image_;
+    void resize_image(int w, int h);
+    void clear_image();
 
 };
 
@@ -36,17 +44,9 @@ public:
     XGuiObject(XGuiPageBuilder &page_builder, XItemObject *item);
     virtual ~XGuiObject();
 
-    //значение для проверки видимости детей
-    //QString value_string_for_visibility() { return QString::number(value()); };
-
-    //int value();
-    //void set_value(int v);
-
     //показать объект визуально
     //если изображение - то картинкой, если нет - то текстовым описанием
-    //мы это делаем только по команде извне - так как не знаем,
-    //вдруг с объектом проводятся операции
-    //при необходимости - можно ввести mutex в объект
+    //мы это делаем только по команде извне
     void show_object(XProtectedObject* object);
 
     //доступ к меткам и другим компонентам для визуализации
@@ -60,5 +60,10 @@ private:
     //виджет для всей информации об объекте
     QWidget *object_widget_ = nullptr;  //удалять не надо
     XGuiObjectVisual visual_; //визуальные компоненты для описания объекта
+
+    // Храним изменения, чтобы понять, нужно ли перерисовать объект
+    const XObject *last_object_ = nullptr;
+    XWasChangedChecker was_changed_checker_;
+    void reset_last_object();
 
 };
