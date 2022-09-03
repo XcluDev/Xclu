@@ -154,6 +154,8 @@ QImage XRasterUtils::link_qimage(const XRaster& raster) {
         break;
     case XType::rgb_u8: format = QImage::Format_RGB888;
         break;
+    case XType::rgba_u8: format = QImage::Format_RGBA8888;
+        break;
     default:
         xc_exception("XRasterUtils::link_qimage - unsupported format");
     }
@@ -163,10 +165,10 @@ QImage XRasterUtils::link_qimage(const XRaster& raster) {
 }
 
 //---------------------------------------------------------------------
-void XRasterUtils::load(XRaster& raster, QString file_name) {
+void XRasterUtils::load(XRaster& raster, QString file_name, XType desired_type) {
     QImage qimage;
     xc_assert(qimage.load(file_name), "XRasterUtils::load: Can't load image '" + file_name + "'");
-    convert(qimage, raster);
+    convert(qimage, raster, desired_type);
 }
 
 //-----------------------------------------------------------------------------------

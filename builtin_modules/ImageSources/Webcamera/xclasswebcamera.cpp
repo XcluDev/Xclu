@@ -52,11 +52,13 @@ bool XClassWebcameraSurface::present(const QVideoFrame &frame)
         QVideoFrame cloneFrame(frame);
         cloneFrame.map(QAbstractVideoBuffer::ReadOnly);
 
-        //создаваемое изображение не копирует память
-        const QImage qimage(cloneFrame.bits(),
+        // создаваемое изображение не копирует память,
+        // но мы делаем переворот по y с помощью mirrored()
+        const QImage qimage = QImage(cloneFrame.bits(),
                          cloneFrame.width(),
                          cloneFrame.height(),
-                         QVideoFrame::imageFormatFromPixelFormat(cloneFrame.pixelFormat()));
+                         QVideoFrame::imageFormatFromPixelFormat(cloneFrame.pixelFormat()))
+                .mirrored();
 
         //auto format = cloneFrame.pixelFormat();
         //qDebug() << "format " << format;
@@ -75,9 +77,13 @@ bool XClassWebcameraSurface::present(const QVideoFrame &frame)
             data.is_new_frame = 1;
             data.captured_frames++;
 
-            // bool mirrory = true;        //включаем переворот по Y на Windows
             XRaster &raster = data.raster;
+
             XRasterUtils::convert(qimage, raster, data.desired_type);
+
+            // Test
+            //XRasterUtils::save(raster, "D:\\temp.png");
+            XRasterUtils::load(raster, "D:\\temp.png");
         }
         catch(XException& e) {
             //отправляем информацию об ошибке в модуль            

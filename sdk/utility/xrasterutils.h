@@ -33,7 +33,7 @@ public:
     static QImage link_qimage(const XRaster& raster);
 
     //Save and load
-    static void load(XRaster& raster, QString file_name);
+    static void load(XRaster& raster, QString file_name, XType desired_type = XType::none);
     static void save(const XRaster& raster, QString file_name, int quality = 90);
     static void save(const XRaster* raster, QString file_name, int quality = 90);
 
