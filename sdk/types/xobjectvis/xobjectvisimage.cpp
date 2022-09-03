@@ -31,13 +31,17 @@ QString XObjectVisImage::detailed_description(int i) const {
 
 //---------------------------------------------------------------------
 bool XObjectVisImage::is_thumbnail_exists() const {
-    return true;
+    const XRaster *raster = object_->data<XRaster>();
+    return (raster && !raster->is_empty());
 }
 
 //---------------------------------------------------------------------
 void XObjectVisImage::draw_thumbnail(QPainter &p, int w, int h) const {
+    xc_assert(is_thumbnail_exists(), "XObjectVisImage::draw_thumbnail - no thumbnail exists");
     const XRaster *raster = object_->data<XRaster>();
-    XRasterUtils::draw(p, *raster, 0, 0, w, h);
+    if (raster) {
+        XRasterUtils::draw(p, *raster, 0, 0, w, h);
+    }
 }
 
 //---------------------------------------------------------------------

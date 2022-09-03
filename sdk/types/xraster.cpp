@@ -60,7 +60,7 @@ void XRaster::allocate(int w, int h, XType type, bool reallocate) {
     n = w*h;
     this->w = w;
     this->h = h;
-    internal_data_.resize(n);
+    internal_data_.resize(n*sizeofpixel);
     data_pointer_ = internal_data_.data();
     is_owner = true;
 }
