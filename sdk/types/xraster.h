@@ -25,6 +25,8 @@ public:
 
     void set_type(XType type); // Must be called instead of directly changing type
     void assert_type(XType type) const;
+
+    static void test();     // Тестирование
 protected:
     bool is_owner = false;   // Does raster hold its own memory, or use external source
     quint8 *data_pointer_ = nullptr;
@@ -44,19 +46,32 @@ public:
     template<class T> T* data();
     template<class T> const T* data() const;
 
-    /// Доступ к пикселям
-    /// - Для безопасности - стараться проверять assert_type().
-    /// - Для универсальной работы со всеми типами - можно использовать <void *>, так как функции используют sizeofpixel
+    // Типизированный доступ к пикселям
+    // - Для безопасности - стараться проверять assert_type().
     template<class T> T& pixel_unsafe(int x, int y);
     template<class T> const T& pixel_unsafe(int x, int y) const;
     template<class T> T& pixel_unsafe(const int2 &p);
     template<class T> const T& pixel_unsafe(const int2 &p) const;
+    template<class T> T& pixel_unsafe(int i);
+    template<class T> const T& pixel_unsafe(int i) const;
 
-    template<class T> void set_pixel_unsafe(int x, int y, const T *value); // Note: value size must be sizeofpixel
-    template<class T> void set_pixel_unsafe(int i, const T *value); // Note: value size must be sizeofpixel
     template<class T> void set_pixel_unsafe(int x, int y, const T &value); // Note: value size must be sizeofpixel
+    template<class T> void set_pixel_unsafe(const int2 &p, const T &value); // Note: value size must be sizeofpixel
     template<class T> void set_pixel_unsafe(int i, const T &value); // Note: value size must be sizeofpixel
 
+    // Нетипизированный доступ к пикселям, используется для универсальных операций
+    void* pixel_unsafe_ptr(int x, int y);
+    void* pixel_unsafe_ptr(const int2 &p);
+    void* pixel_unsafe_ptr(int i);
+    const void* pixel_unsafe_ptr(int x, int y) const;
+    const void* pixel_unsafe_ptr(const int2 &p) const;
+    const void* pixel_unsafe_ptr(int i) const;
+
+    void set_pixel_unsafe_ptr(int x, int y, const void *value); // Note: value size must be sizeofpixel
+    void set_pixel_unsafe_ptr(const int2 &p, const void *value); // Note: value size must be sizeofpixel
+    void set_pixel_unsafe_ptr(int i, const void *value); // Note: value size must be sizeofpixel
+
+    /// Заполнить растр значениями
     template<class T> void set(const T &value);
 
     //----------------------------------------------------------------------------
@@ -132,19 +147,30 @@ template<class T> T& XRaster::pixel_unsafe(const int2 &p) {
 template<class T> const T& XRaster::pixel_unsafe(const int2 &p) const {
     return *(const T*)&data_pointer_[sizeofpixel*(p.x+p.y*w)];
 }
+template<class T> T& XRaster::pixel_unsafe(int i) {
+    return *(T*)&data_pointer_[sizeofpixel*(i)];
+}
+template<class T> const T& XRaster::pixel_unsafe(int i) const {
+    return *(const T*)&data_pointer_[sizeofpixel*(i)];
+}
 
-template<class T> void XRaster::set_pixel_unsafe(int x, int y, const T *value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(x,y), value, sizeofpixel);
-}
-template<class T> void XRaster::set_pixel_unsafe(int i, const T *value) { // Note: value size must be sizeofpixel
-    memcpy(pixel_unsafe<void*>(i), value, sizeofpixel);
-}
 template<class T> void XRaster::set_pixel_unsafe(int x, int y, const T &value) { // Note: value size must be sizeofpixel
     memcpy(pixel_unsafe<void*>(x,y), &value, sizeofpixel);
+}
+template<class T> void XRaster::set_pixel_unsafe(const int2 &p, const T &value) { // Note: value size must be sizeofpixel
+    memcpy(pixel_unsafe<void*>(p), &value, sizeofpixel);
 }
 template<class T> void XRaster::set_pixel_unsafe(int i, const T &value) { // Note: value size must be sizeofpixel
     memcpy(pixel_unsafe<void*>(i), &value, sizeofpixel);
 }
+
+template<class T> void XRaster::set(const T &value) {
+    assert_type(cpptype_to_XType());
+    for (int i=0; i<n; i++) {
+        set_pixel_unsafe<T>(i, value);
+    }
+}
+
 //----------------------------------------------------------------------------
 
 

@@ -440,9 +440,9 @@ void XClassWebcamera::transform() {
 
             //rotate
             auto rotate = gete_rotate();
-            if (rotate == rotate_90) transformed_image_holder_u8c3_.rotate_inplace(90);
-            if (rotate == rotate_180) transformed_image_holder_u8c3_.rotate_inplace(180);
-            if (rotate == rotate_270) transformed_image_holder_u8c3_.rotate_inplace(270);
+            if (rotate == rotate_90) transf.rotate_inplace(90);
+            if (rotate == rotate_180) transf.rotate_inplace(180);
+            if (rotate == rotate_270) transf.rotate_inplace(270);
         }
     }
 }

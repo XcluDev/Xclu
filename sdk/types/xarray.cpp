@@ -43,25 +43,14 @@ int XArray::data_size_in_bytes() const {
 }
 
 //----------------------------------------------------------------------------
-template<class T> T& XArray::item_unsafe(int i) {
-    return *(T*)&data_pointer_[sizeofitem*(i)];
+void* XArray::item_unsafe_ptr(int i) {
+    return &data_pointer_[sizeofitem*(i)];
 }
-template<class T> const T& XArray::item_unsafe(int i) const {
-    return *(const T*)&data_pointer_[sizeofitem*(i)];
+const void* XArray::item_unsafe_ptr(int i) const {
+    return &data_pointer_[sizeofitem*(i)];
 }
-template<class T> void XArray::set_item_unsafe(int i, const T *value) { // Note: value size must be sizeofitem
-    memcpy(item_unsafe<void*>(i), value, sizeofitem);
-}
-template<class T> void XArray::set_item_unsafe(int i, const T &value) { // Note: value size must be sizeofitem
-    memcpy(item_unsafe<void*>(i), &value, sizeofitem);
-}
-
-//---------------------------------------------------------------------
-template<class T> void XArray::set(const T &value) {
-    assert_type(cpptype_to_XType());
-    for (int i=0; i<n; i++) {
-        set_item_unsafe<T>(i, value);
-    }
+void XArray::set_item_unsafe_ptr(int i, const void *value) { // Note: value size must be sizeofitem
+    memcpy(item_unsafe_ptr(i), value, sizeofitem);
 }
 
 //----------------------------------------------------------------------------

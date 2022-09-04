@@ -33,15 +33,21 @@ public:
     template<class T> T* data();
     template<class T> const T* data() const;
 
-    /// Доступ к элементам
-    /// - Для безопасности - стараться проверять assert_type().
-    /// - Для универсальной работы со всеми типами - можно использовать <void *>, так как функции используют sizeofpixel
+    // Типизированный доступ к элементам
+    // - Для безопасности - стараться проверять assert_type().
     template<class T> T& item_unsafe(int i);
     template<class T> const T& item_unsafe(int i) const;
 
-    template<class T> void set_item_unsafe(int i, const T *value); // Note: value size must be sizeofpixel
-    template<class T> void set_item_unsafe(int i, const T &value); // Note: value size must be sizeofpixel
+    template<class T> void set_item_unsafe(int i, const T &value); // Note: value size must be sizeofitem
 
+    // Нетипизированный доступ к элементам используется для универсальных операций
+    void* item_unsafe_ptr(int i);
+    const void* item_unsafe_ptr(int i) const;
+
+    void set_item_unsafe_ptr(int i, const void *value); // Note: value size must be sizeofitem
+
+
+    /// Заполнить растр значениями
     template<class T> void set(const T &value);
 
     //----------------------------------------------------------------------------
@@ -75,4 +81,26 @@ public:
     void mult_inplace(const XArray &a);
     XArray crop(int i0, int n0) const;
 };
+
+//----------------------------------------------------------------------------
+template<class T> T& XArray::item_unsafe(int i) {
+    return *(T*)&data_pointer_[sizeofitem*(i)];
+}
+template<class T> const T& XArray::item_unsafe(int i) const {
+    return *(const T*)&data_pointer_[sizeofitem*(i)];
+}
+template<class T> void XArray::set_item_unsafe(int i, const T &value) { // Note: value size must be sizeofitem
+    memcpy(item_unsafe<void*>(i), &value, sizeofitem);
+}
+
+//---------------------------------------------------------------------
+template<class T> void XArray::set(const T &value) {
+    assert_type(cpptype_to_XType());
+    for (int i=0; i<n; i++) {
+        set_item_unsafe<T>(i, value);
+    }
+}
+
+//---------------------------------------------------------------------
+
 
