@@ -103,6 +103,32 @@ template<class T> void XRaster::copy_from(T* data, int w, int h) {
     copy_from(data, w, h, cpptype_to_XType<T>());
 }
 
+//----------------------------------------------------------------------------
+XRaster::XRaster(const XRaster& other) {
+    *this = other;
+}
+
+//----------------------------------------------------------------------------
+XRaster& XRaster::operator=(const XRaster& other)
+{
+    // Guard self assignment
+    if (this == &other)
+        return *this;
+
+    n = other.n;
+    w = other.w;
+    h = other.h;
+    sizeofpixel = other.sizeofpixel;
+    type = other.type;
+    is_owner = other.is_owner;
+    internal_data_ = other.internal_data_;
+
+    // Основная цель определения оператора копирования - правильно поставить data_pointer_
+    data_pointer_ = (is_owner) ? internal_data_.data() : other.data_pointer_;
+
+    return *this;
+}
+
 //---------------------------------------------------------------------
 void XRaster::clear() {
     n = w = h = sizeofpixel = 0;
@@ -295,6 +321,7 @@ XRaster XRaster::crop_to_square() const {
        + pixel_unsafe(xi1, yi1) * (tx) * (ty)
        + pixel_unsafe(xi, yi1) * (1 - tx) * (ty);
 }*/
+
 //-----------------------------------------------------------------------------------
 void XRaster::test() {     // Тестирование
     qDebug() << "Raster test";
@@ -303,3 +330,5 @@ void XRaster::test() {     // Тестирование
     raster.allocate(100,100,XType::rgb_u8);
     XRaster crop = raster.crop(20,20,40,40);
 }
+
+//-----------------------------------------------------------------------------------

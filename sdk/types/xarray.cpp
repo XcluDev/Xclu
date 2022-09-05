@@ -88,6 +88,30 @@ template<class T> void XArray::copy_from(T* data, int n) {
     copy_from(data, n, cpptype_to_XType<T>());
 }
 
+//----------------------------------------------------------------------------
+XArray::XArray(const XArray& other) {
+    *this = other;
+}
+
+//----------------------------------------------------------------------------
+XArray& XArray::operator=(const XArray& other)
+{
+    // Guard self assignment
+    if (this == &other)
+        return *this;
+
+    n = other.n;
+    sizeofitem = other.sizeofitem;
+    type = other.type;
+    is_owner = other.is_owner;
+    internal_data_ = other.internal_data_;
+
+    // Основная цель определения оператора копирования - правильно поставить data_pointer_
+    data_pointer_ = (is_owner) ? internal_data_.data() : other.data_pointer_;
+
+    return *this;
+}
+
 //---------------------------------------------------------------------
 void XArray::clear() {
     n = sizeofitem = 0;

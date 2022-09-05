@@ -443,7 +443,8 @@ void XClassWebcamera::transform() {
             if (rotate == rotate_90) transf.rotate_inplace(90);
             if (rotate == rotate_180) transf.rotate_inplace(180);
             if (rotate == rotate_270) transf.rotate_inplace(270);
-        }
+
+       }
     }
 }
 

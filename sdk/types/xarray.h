@@ -12,15 +12,19 @@ public:
     int n = 0;
     int sizeofitem = 0;
     XType type = XType::none; // To change this value you must call call set_type()
-
-    void set_type(XType type); // Must be called instead of directly changing type
-    void assert_type(XType type) const;
 protected:
     bool is_owner = false;   // Does raster hold its own memory, or use external source
     quint8 *data_pointer_ = nullptr;
     QVector<quint8> internal_data_;        // Internal storage
 
+    // Внимание: При добавлении членов - корректировать operator=
 public:
+    XArray(const XArray& other);
+    XArray& operator=(const XArray& other);
+
+    void set_type(XType type); // Must be called instead of directly changing type
+    void assert_type(XType type) const;
+
     bool is_empty() const;
 
     // Checks only internal images

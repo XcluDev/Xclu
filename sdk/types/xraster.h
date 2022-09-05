@@ -22,17 +22,22 @@ public:
     int h = 0;
     int sizeofpixel = 0;
     XType type = XType::none; // To change this value you must call call set_type()
-
-    void set_type(XType type); // Must be called instead of directly changing type
-    void assert_type(XType type) const;
-
-    static void test();     // Тестирование
 protected:
     bool is_owner = false;   // Does raster hold its own memory, or use external source
     quint8 *data_pointer_ = nullptr;
     QVector<quint8> internal_data_;        // Internal storage
 
+    // Внимание: При добавлении членов - корректировать operator=
+
 public:
+    XRaster(const XRaster& other);
+    XRaster& operator=(const XRaster& other);
+
+    void set_type(XType type); // Must be called instead of directly changing type
+    void assert_type(XType type) const;
+
+    static void test();     // Тестирование
+
     bool is_empty() const;
 
     // Checks only internal images
@@ -44,7 +49,7 @@ public:
     int bytes_per_line() const;
 
     template<class T> T* data();
-    template<class T> const T* data() const;
+    template<class T> const T* data() const;    
 
     // Типизированный доступ к пикселям
     // - Для безопасности - стараться проверять assert_type().
