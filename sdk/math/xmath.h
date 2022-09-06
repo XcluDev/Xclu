@@ -8,6 +8,8 @@
 //Pi
 const float  PI_F = float(3.14159265358979323846);
 const double  PI_D = 3.14159265358979323846;
+const float  TWO_PI_F = 2*PI_F;
+const double  TWO_PI_D = 2*PI_D;
 const float RAD_TO_DEG_F = 180.0f / PI_F;
 const double RAD_TO_DEG_D = 180.0 / PI_D;
 const float DEG_TO_RAD_F = PI_F / 180.0f;

@@ -97,9 +97,9 @@ unix {
     QMAKE_CFLAGS += -O3 -ftree-vectorize -msse2 -mfpmath=sse -ftree-vectorizer-verbose=5
     QMAKE_CXXFLAGS += -O3 -ftree-vectorize -msse2 -mfpmath=sse -ftree-vectorizer-verbose=5
 
-    # Please recompile for target CPU architecture:
-    QMAKE_CFLAGS += -march=native
-    QMAKE_CXXFLAGS += -march=native
+    # Флаги для компиляции для архитектуры текущего процессора:
+    # QMAKE_CFLAGS += -march=native
+    # QMAKE_CXXFLAGS += -march=native
 
     # Support OpenMP - comment it if not required to use many threads
     # QMAKE_CFLAGS += -fopenmp
@@ -129,17 +129,19 @@ INCLUDEPATH += \
     components/string \
     components/text
 
-# SDK
+# Xclu host
 INCLUDEPATH += project \
                modules
 
 INCLUDEPATH += host \
                host/dialogs
 
+# SDK
 INCLUDEPATH += sdk \
                sdk/audio \
                sdk/cv \
                sdk/draw \
+               sdk/geom \
                sdk/math \
                sdk/ml \
                sdk/networking \
@@ -234,6 +236,10 @@ SOURCES += \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/cv/xcvhelper.cpp \
     sdk/draw/xdrawhelper.cpp \
+    sdk/geom/XGeomExportVectorField.cpp \
+    sdk/geom/XGeomMath.cpp \
+    sdk/geom/XGeomMesh.cpp \
+    sdk/geom/XGeomMeshUtils.cpp \
     sdk/math/xmath.cpp \
     sdk/math/xnoise.cpp \
     sdk/math/xslowbit.cpp \
@@ -355,6 +361,10 @@ HEADERS += \
     sdk/audio/xc_audio_wavfile.h \
     sdk/cv/xcvhelper.h \
     sdk/draw/xdrawhelper.h \
+    sdk/geom/XGeomExportVectorField.h \
+    sdk/geom/XGeomMath.h \
+    sdk/geom/XGeomMesh.h \
+    sdk/geom/XGeomMeshUtils.h \
     sdk/incl_cpp.h \
     sdk/incl_h.h \
     sdk/math/int2.h \
