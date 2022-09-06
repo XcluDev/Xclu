@@ -20,7 +20,7 @@ public:
     QVector<float32> buffer;
     XSoundBuffer();
     XSoundBuffer(const XSoundFormat &format, int samples);
-    void allocate(const XSoundFormat &format, int samples);
+    void allocate(const XSoundFormat &format, int samples, bool set_zero = true);
     void clear();
 };
 

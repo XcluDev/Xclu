@@ -23,10 +23,13 @@ XSoundBuffer::XSoundBuffer(const XSoundFormat &format, int samples) {
     allocate(format, samples);
 }
 
-void XSoundBuffer::allocate(const XSoundFormat &format, int samples) {
+void XSoundBuffer::allocate(const XSoundFormat &format, int samples, bool set_zero) {
     this->format = format;
     this->samples = samples;
     buffer.resize(samples * format.channels);
+    if (set_zero) {
+        buffer.fill(0);
+    }
 }
 
 void XSoundBuffer::clear() {
