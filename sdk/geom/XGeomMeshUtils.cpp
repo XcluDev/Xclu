@@ -1,5 +1,6 @@
 #include "XGeomMeshUtils.h"
 #include <QDebug>
+#include "xutils.h"
 
 //--------------------------------------------------------
 void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
@@ -24,28 +25,28 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
 
     qDebug() << "   parsing..." << endl;
 	for (int i = 0; i < lines.size(); i++) {
-        QVector<QString> list = ofSplitString(lines[i], " ", true, true);
+        QStringList list = lines[i].split(" ");
 		int n = list.size();
 		if (n > 0) {
 			if (list[0] == "v" && n >= 4) {
                 v.push_back(vec3(
-					ofToFloat(list[1]),
-					ofToFloat(list[2]),
-					ofToFloat(list[3])
+                    x_string_to_float(list[1]),
+                    x_string_to_float(list[2]),
+                    x_string_to_float(list[3])
 				));
 			}
 			if (useTex && list[0] == "vt" && n >= 3) {
                 tex.push_back(vec2(
-					ofToFloat(list[1]) * texW,
-					ofToFloat(list[2]) * texH
+                    x_string_to_float(list[1]) * texW,
+                    x_string_to_float(list[2]) * texH
 				));
 			}
 			if (list[0] == "f" && n >= 4) {
-				int N = min(n - 1, 4);
+                int N =qMin(n - 1, 4);
 				for (int j = 0; j < N; j++) {
-                    QVector<QString> line = ofSplitString(list[j + 1], "/", true, true);
+                    QStringList line = list[j + 1].split("/");
 					if (line.size() > 0) {
-						f[j] = ofToInt(line[0]) - 1;
+                        f[j] = x_string_to_int(line[0]) - 1;
 
 					}
 				}
@@ -158,29 +159,29 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
 
     std::qDebug() << "    v  " << n << "..." << endl;
 	for (int i = 0; i < n; i++) {
-		list[j++] = "v " + ofToString(v[i].x) + " " + ofToString(v[i].y) + " " + ofToString(v[i].z);
+		list[j++] = "v " + x_to_string(v[i].x) + " " + x_to_string(v[i].y) + " " + x_to_string(v[i].z);
 	}
 
 	if (setupNormals) {
         std::qDebug() << "    vn..." << endl;
 		for (int i = 0; i < n; i++) {
-			list[j++] = "vn " + ofToString(vn[i].x) + " " + ofToString(vn[i].y) + " " + ofToString(vn[i].z);
+			list[j++] = "vn " + x_to_string(vn[i].x) + " " + x_to_string(vn[i].y) + " " + x_to_string(vn[i].z);
 		}
 	}
 
 	if (textured) {
         std::qDebug() << "    vt..." << endl;
 		for (int i = 0; i < n; i++) {
-			list[j++] = "vt " + ofToString(vt[i].x / texW) + " " + ofToString(vt[i].y / texH);
+			list[j++] = "vt " + x_to_string(vt[i].x / texW) + " " + x_to_string(vt[i].y / texH);
 		}
 	}
 
 
     std::qDebug() << "    f..." << endl;
 	for (int i = 0; i < m; i++) {
-        QString a = ofToString(ind[i * 3] + 1);
-        QString b = ofToString(ind[i * 3 + 1] + 1);
-        QString c = ofToString(ind[i * 3 + 2] + 1);
+        QString a = x_to_string(ind[i * 3] + 1);
+        QString b = x_to_string(ind[i * 3 + 1] + 1);
+        QString c = x_to_string(ind[i * 3 + 2] + 1);
 		a = a + "/" + a + "/" + a;
 		b = b + "/" + b + "/" + b;
 		c = c + "/" + c + "/" + c;

@@ -268,14 +268,14 @@ SOURCES += \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/jsonutils.cpp \
-    sdk/utility/xc_exec_batch.cpp \
-    sdk/utility/xc_files.cpp \
-    sdk/utility/xc_sysutils.cpp \
-    sdk/utility/xclu_parse_tree.cpp \
     sdk/utility/xerrorhandling.cpp \
+    sdk/utility/xexecbatch.cpp \
+    sdk/utility/xfiles.cpp \
     sdk/utility/ximageeffect.cpp \
+    sdk/utility/xparse_tree.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xrasterutils.cpp \
+    sdk/utility/xsysutils.cpp \
     sdk/utility/xtimemeasure.cpp \
     components/gui/xclucombobox.cpp \
     components/gui/xcludoublespinbox.cpp \
@@ -293,7 +293,8 @@ SOURCES += \
     project/project_props.cpp \
     project/project.cpp \
     project/projecteditorprops.cpp \
-    sdk/utility/xtypeutils.cpp
+    sdk/utility/xtypeutils.cpp \
+    sdk/utility/xutils.cpp
 
 HEADERS += \
     components/button/xguibutton.h \
@@ -402,14 +403,14 @@ HEADERS += \
     sdk/types/xwaschanged.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
-    sdk/utility/xc_exec_batch.h \
-    sdk/utility/xc_files.h \
-    sdk/utility/xc_sysutils.h \
-    sdk/utility/xclu_parse_tree.h \
     sdk/utility/xerrorhandling.h \
+    sdk/utility/xexecbatch.h \
+    sdk/utility/xfiles.h \
     sdk/utility/ximageeffect.h \
+    sdk/utility/xparse_tree.h \
     sdk/utility/xparser.h \
     sdk/utility/xrasterutils.h \
+    sdk/utility/xsysutils.h \
     sdk/utility/xtimemeasure.h \
     components/gui/xclucombobox.h \
     components/gui/xcludoublespinbox.h \
@@ -426,7 +427,8 @@ HEADERS += \
     project/project_props.h \
     project/project.h \
     project/projecteditorprops.h \
-    sdk/utility/xtypeutils.h
+    sdk/utility/xtypeutils.h \
+    sdk/utility/xutils.h
 
 #--------------------------------------------------------------------------
 #Python

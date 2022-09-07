@@ -5,8 +5,8 @@
 #include "xerrorhandling.h"
 
 #include "xclu_theme.h"
-#include "xc_files.h"
-#include "xc_sysutils.h"
+#include "xfiles.h"
+#include "xsysutils.h"
 #include "xc_paths.h"
 #include "xclassbase.h"
 

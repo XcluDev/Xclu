@@ -3,7 +3,7 @@
 #include "project_props.h"
 #include "xc_audio_wavfile.h"
 #include "xc_audio.h"
-#include "xc_files.h"
+#include "xfiles.h"
 
 //---------------------------------------------------------------------
 void SoundSamplesDatabase::set_params(int sample_rate, int channels) {

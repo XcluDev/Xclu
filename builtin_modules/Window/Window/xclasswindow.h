@@ -9,7 +9,7 @@
 #include "sdk_h.h"
 #include "xclass.h"
 #include "xprotecteddata.h"
-#include "xclu_parse_tree.h"
+#include "xparse_tree.h"
 
 class QLayout;
 class QTabWidget;

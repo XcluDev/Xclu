@@ -1,4 +1,4 @@
-#include "xc_files.h"
+#include "xfiles.h"
 #include "incl_cpp.h"
 #include <QtGlobal>
 #include <QThread>

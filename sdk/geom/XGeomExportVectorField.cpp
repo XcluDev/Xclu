@@ -1,5 +1,6 @@
 #include "XGeomExportVectorField.h"
 #include <QDebug>
+#include "xutils.h"
 
 
 //--------------------------------------------------------------------------------
@@ -17,16 +18,16 @@ void XGeomExportFGA(QString file_name,
 	}
     QVector<QString> file(n + 3);
 	int k = 0;
-	file[k++] = ofToString(nx) + "," + ofToString(ny) + "," + ofToString(nz) + ",";
-	file[k++] = ofToString(lower_bound.x) + "," + ofToString(lower_bound.y) + "," + ofToString(lower_bound.z) + ",";
-	file[k++] = ofToString(upper_bound.x) + "," + ofToString(upper_bound.y) + "," + ofToString(upper_bound.z) + ",";
+    file[k++] = x_to_string(nx) + "," + x_to_string(ny) + "," + x_to_string(nz) + ",";
+    file[k++] = x_to_string(lower_bound.x) + "," + x_to_string(lower_bound.y) + "," + x_to_string(lower_bound.z) + ",";
+    file[k++] = x_to_string(upper_bound.x) + "," + x_to_string(upper_bound.y) + "," + x_to_string(upper_bound.z) + ",";
 	for (int z = 0; z < nz; z++) {
 		for (int y = 0; y < ny; y++) {
 			for (int x = 0; x < nx; x++) {
                 auto& v = QVector_field[x + nx * (y + ny * z)];
-				file[k++] = ofToString(v.x, float_precision) 
-					+ "," + ofToString(v.y, float_precision) 
-					+ "," + ofToString(v.z, float_precision)
+                file[k++] = x_to_string_precision(v.x, float_precision)
+                    + "," + x_to_string_precision(v.y, float_precision)
+                    + "," + x_to_string_precision(v.z, float_precision)
 					+ ",";
 			}
 		}

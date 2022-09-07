@@ -1,6 +1,6 @@
-#include "xc_exec_batch.h"
+#include "xexecbatch.h"
 #include "incl_cpp.h"
-#include "xc_files.h"
+#include "xfiles.h"
 
 //---------------------------------------------------------------------
 //Execute bat/bash scripts represented as string lists.

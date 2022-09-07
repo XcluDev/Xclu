@@ -324,7 +324,7 @@ QVector<vec3> XGeomGeomCreateCircleOnSphere(vec3 c3, float rad, int resolution) 
     
     //Make points
     //rad 0..PI/2 = angle
-    float ang = min(rad * TWO_PI, PI/2);        //TODO check for errors !!!!!!!!!!!!!!!!
+    float ang = min(rad * TWO_PI_F, PI_F/2);        //TODO check for errors !!!!!!!!!!!!!!!!
     float DX = cos(ang);
     float DY = sin(ang);
     
