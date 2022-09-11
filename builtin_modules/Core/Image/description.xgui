@@ -4,7 +4,7 @@ module_description=Core image module.
 module_version=1.01
 module_impl=C++
 
-module_accept_calls=gui_draw
+module_accept_calls=Draw
 #------------------------------------------
 int w=0 0:*
 int h=0 0:*

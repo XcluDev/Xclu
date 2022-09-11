@@ -125,7 +125,7 @@ void MainWindow::newProjectStartup() {
 void MainWindow::closeProject() {
     if (xc_is_running()) return;
 
-    xc_console_clear();//очистка списка сообщений
+    // xc_console_clear();//очистка списка сообщений
 
     PROJ_GUI->before_close_project();
     PROJECT.new_project();

@@ -436,8 +436,7 @@ void Project::execute(ModuleExecuteStage stage, bool &stop_out, bool exception_o
 //Compile links and all other needed to check errors
 //Also clears console
 bool Project::compile() {
-    //clear console
-    xc_console_clear();
+    // xc_console_clear();
     //compile
     bool ok = true;
     for (auto module: modules_) {
