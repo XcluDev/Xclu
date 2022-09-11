@@ -70,9 +70,8 @@ bool XGeomGeomLine2D::intersect_segments(const XGeomGeomLine2D &line, vec2 *pcro
     float Y = (D1 * (y3 - y4) - (y1 - y2) * D2) / D;
 
     //check that point is inside segments
-    bool inside = ofInRange(X, min(x1, x2), max(x1, x2)) && ofInRange(Y, min(y1, y2), max(y1, y2))
-        && ofInRange(X, min(x3, x4), max(x3, x4)) && ofInRange(Y, min(y3, y4), max(y3, y4));
-    
+    bool inside = xinrangef(X, qMin(x1, x2), qMax(x1, x2)) && xinrangef(Y, qMin(y1, y2), qMax(y1, y2))
+        && xinrangef(X, qMin(x3, x4), qMax(x3, x4)) && xinrangef(Y, qMin(y3, y4), qMax(y3, y4));
     if (!inside) {
         return false;
     }
@@ -245,10 +244,10 @@ XGeomGeomLine3D::CrossResult XGeomGeomTriangle3D::cross_line(const XGeomGeomLine
 //Minimal distance between two point sets
 float XGeomPointCloudsDistance(const QVector<vec3> &A, const QVector<vec3> &B) {
 	if (A.empty() || B.empty()) return 0;
-	float d = A[0].distanceSquared(B[0]);
+    float d = glm::distance2(A[0],B[0]);
 	for (int i = 0; i < A.size(); i++) {
 		for (int j = 0; j < B.size(); j++) {
-			d = min(d, A[i].distanceSquared(B[j]));
+            d = qMin(d, glm::distance2(A[i],B[j]));
 		}
 	}
 	return sqrt(fabs(d));
@@ -259,8 +258,8 @@ float XGeomPointCloudsDistance(const QVector<vec3> &A, const QVector<vec3> &B) {
 
 //Convert [0,1]x[0,1] -> Unit Sphere
 vec3 XGeomGeomSquareToSphere(const vec3 &p2) {
-    float a = p2.x*TWO_PI;
-    float b = p2.y*PI;
+    float a = p2.x*TWO_PI_F;
+    float b = p2.y*PI_F;
     vec3 p3;
     p3.x = sin(b) * cos(a);
     p3.y = sin(b) * sin(a);
@@ -270,19 +269,19 @@ vec3 XGeomGeomSquareToSphere(const vec3 &p2) {
 
 
 //--------------------------------------------------------------
-vec3 XGeomGeomSphereToSquare(const vec3 &p3) {
+vec2 XGeomGeomSphereToSquare(const vec3 &p3) {
     float b = acos(p3.z);
     float a = 0;
     if (p3.y != 0) {
         a = atan2(p3.y, p3.x);
     }
-    if (a < 0) a += TWO_PI;
-    return vec3(a / TWO_PI, b / PI);
+    if (a < 0) a += TWO_PI_F;
+    return vec2(a / TWO_PI_F, b / PI_F);
 }
 
 //--------------------------------------------------------------
 float XGeomGeomTriangleAreaSigned(const vec3 &a, const vec3 &b, const vec3 &c) {
-    return (b-a).getCrossed(c-a).z/2;
+    return glm::cross(b-a,c-a).z/2;
 }
 
 //--------------------------------------------------------------
@@ -309,33 +308,33 @@ QVector<vec3> XGeomGeomCreateCircleOnSphere(vec3 c3, float rad, int resolution) 
     //create coordinate system
     vec3 OX(1, 0, 0);
     vec3 axe1 = c3;
-    vec3 axe2 = OX - axe1 * OX.dot(axe1);
+    vec3 axe2 = OX - axe1 * glm::dot(OX,axe1);
     if (axe2.length() > 0) {
-        axe2.normalize();
+        axe2 = glm::normalize(axe2);
     }
     else {
         vec3 OY(0, 1, 0);
-        axe2 = OY - axe1 * OY.dot(axe1);
-        axe2.normalize();
+        axe2 = OY - axe1 * glm::dot(OY,axe1);
+        axe2 = glm::normalize(axe2);
     }
-    vec3 axe3 = axe1.getCrossed(axe2);
-    axe3.normalize(); //though is not required
+    vec3 axe3 = glm::cross(axe1, axe2);
+    axe3 = glm::normalize(axe3); //though is not required
     
     
     //Make points
     //rad 0..PI/2 = angle
-    float ang = min(rad * TWO_PI_F, PI_F/2);        //TODO check for errors !!!!!!!!!!!!!!!!
+    float ang = qMin(rad * TWO_PI_F, PI_F/2);        //TODO check for errors !!!!!!!!!!!!!!!!
     float DX = cos(ang);
     float DY = sin(ang);
     
     QVector<vec3> p3(Res);
     for (int i = 0; i < Res; i++) {
-        float a = i * TWO_PI / Res;
+        float a = i * TWO_PI_F / Res;
         float x = cos(a);
         float y = sin(a);
         
         p3[i] = axe1 * DX + axe2 * (x*DY) + axe3 * (y*DY);
-        p3[i].normalize();
+        p3[i] = glm::normalize(p3[i]);
     }
     
     return p3;

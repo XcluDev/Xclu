@@ -1,7 +1,9 @@
 #include "XGeomExportVectorField.h"
 #include <QDebug>
 #include "xutils.h"
-
+#include "xraster.h"
+#include "xrasterutils.h"
+#include "xfiles.h"
 
 //--------------------------------------------------------------------------------
 void XGeomExportFGA(QString file_name,
@@ -33,7 +35,7 @@ void XGeomExportFGA(QString file_name,
 		}
 	}
 
-    XGeomFileWriteStrings(file, file_name);
+    xc_write_text_file(file, file_name);
     qDebug() << "   ...done" << endl;
 }
 
@@ -50,22 +52,23 @@ void XGeomExportVectorFieldAsAtlasImage(QString tif_file_name,
 	int atlas_count = 8;
 	int w = atlas_count * n;
 	int h = w;
-	ofFloatPixels pix;
-	pix.allocate(w, h, 3);
+    XRaster pix;
+    pix.allocate(w, h, XType::vec3);
 	for (int z = 0; z < nz; z++) {
 		int atlas_x = (z % atlas_count)*nx;
 		int atlas_y = (z / atlas_count)*ny;
 		for (int y = 0; y < ny; y++) {
 			for (int x = 0; x < nx; x++) {
                 auto& v = QVector_field[x + nx * (y + ny * z)];
-				float r = ofMap(v.x, -max_field_value, max_field_value, 0, 1, true);
-				float g = ofMap(v.y, -max_field_value, max_field_value, 0, 1, true);
-				float b = ofMap(v.z, -max_field_value, max_field_value, 0, 1, true);
-				pix.setColor(x + atlas_x, y + atlas_y, ofFloatColor(r, g, b));
+                float r = xmapf_clamped(v.x, -max_field_value, max_field_value, 0, 1);
+                float g = xmapf_clamped(v.y, -max_field_value, max_field_value, 0, 1);
+                float b = xmapf_clamped(v.z, -max_field_value, max_field_value, 0, 1);
+
+                pix.set_pixel_unsafe<vec3>(x + atlas_x, y + atlas_y, vec3(r, g, b));
 			}
 		}
-	}
+    }
 
-	ofSaveImage(pix, tif_file_name);
+    XRasterUtils::save(pix, tif_file_name);
 
 }

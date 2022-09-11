@@ -17,6 +17,7 @@ uint64 xc_file_size(QString file_name);
 //Read/write text file
 QStringList xc_read_text_file(QString file_name);
 void xc_write_text_file(QStringList list, QString file_name);
+void xc_write_text_file(QVector<QString> list, QString file_name);
 
 //Write to binary file, with option to append
 void xc_write_binary_file(const void *data, int n, QString file_name, bool append = false);

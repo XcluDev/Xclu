@@ -7,7 +7,10 @@ XGeomMesh::XGeomMesh(){
 
 //--------------------------------------------------------------
 void XGeomMesh::clear() {
-    *this = XGeomMesh();
+    vertices.clear();
+    normals.clear();
+    tex_coords.clear();
+    indices.clear();
 }
 
 //--------------------------------------------------------------

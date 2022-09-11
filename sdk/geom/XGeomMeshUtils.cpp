@@ -1,6 +1,8 @@
 #include "XGeomMeshUtils.h"
 #include <QDebug>
 #include "xutils.h"
+#include "xhandlingerrors.h"
+#include "xfiles.h"
 
 //--------------------------------------------------------
 void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
@@ -14,7 +16,7 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
     //if (!caching_to_ply || XGeomFileTime::isNewerThan(fileName, fileNamePly)) {
         //if (caching_to_ply) qDebug() << "   rebuild cached version..." << endl;
 	mesh.clear();
-    QVector<QString> lines = XGeomFileReadStrings(ofToDataPath(fileName));
+    auto lines = xc_read_text_file(fileName);
 
     QVector<vec3> v;      //vertices
     QVector<int> t;  //indices for triangles
@@ -74,19 +76,19 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
 			p1 = p0;
 			for (int i = 0; i < v.size(); i++) {
                 vec3 &p = v[i];
-				p0.x = min(p0.x, p.x);
-				p0.y = min(p0.y, p.y);
-				p0.z = min(p0.z, p.z);
-				p1.x = max(p1.x, p.x);
-				p1.y = max(p1.y, p.y);
-				p1.z = max(p1.z, p.z);
+                p0.x = qMin(p0.x, p.x);
+                p0.y = qMin(p0.y, p.y);
+                p0.z = qMin(p0.z, p.z);
+                p1.x = qMax(p1.x, p.x);
+                p1.y = qMax(p1.y, p.y);
+                p1.z = qMax(p1.z, p.z);
 			}
 		}
-        vec3 c = (p0 + p1) * 0.5;
+        vec3 c = (p0 + p1) * 0.5f;
         vec3 delta = p1 - p0;
 		float scl = delta.x;
-		scl = max(scl, delta.y);
-		scl = max(scl, delta.z);
+        scl = qMax(scl, delta.y);
+        scl = qMax(scl, delta.z);
 		if (scl > 0) {
 			scl = 1.0 / scl;
 		}
@@ -102,12 +104,12 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
 	}
 
 	//vertices
-	mesh.addVertices(v);
+    mesh.vertices = v;
 
 	//texture coords
 	if (useTex) {
 		if (tex.size() >= v.size()) {
-			mesh.addTexCoords(tex);
+            mesh.tex_coords = tex;
 		}
 		else {
             qDebug() << "Error in OBJ model, not enough texture coords" << endl;
@@ -115,7 +117,7 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
 	}
 
 	//triangles
-	mesh.addIndices(t);
+    mesh.indices = t;
 
 	//normals
     if (setupNormals) { XGeomSetNormals(mesh); }
@@ -133,13 +135,13 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
 void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
     bool textured, QString mtl_file, int texW, int texH) {	//sets normals and so change mesh!
 
-	auto &v = mesh.getVertices();
+    auto &v = mesh.vertices;
 	int n = v.size();
 
-	auto &vt = mesh.getTexCoords();
-	auto &vn = mesh.getNormals();
+    auto &vt = mesh.tex_coords;
+    auto &vn = mesh.normals;
 
-    QVector<GLuint> &ind = mesh.getIndices();
+    QVector<int> &ind = mesh.indices;
 	int m = ind.size() / 3;
 
 	if (setupNormals) {
@@ -152,32 +154,32 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
     QVector<QString> list(2 + N);	//header, v, vt, vn, f
 	int j = 0;
 
-	if (textured && !mtl_file.empty()) {
+    if (textured && !mtl_file.isEmpty()) {
 		list[j++] = "mtllib " + mtl_file; // +".mtl";
 		list[j++] = "usemtl texture";
 	}
 
-    std::qDebug() << "    v  " << n << "..." << endl;
+    qDebug() << "    v  " << n << "..." << endl;
 	for (int i = 0; i < n; i++) {
 		list[j++] = "v " + x_to_string(v[i].x) + " " + x_to_string(v[i].y) + " " + x_to_string(v[i].z);
 	}
 
 	if (setupNormals) {
-        std::qDebug() << "    vn..." << endl;
+        qDebug() << "    vn..." << endl;
 		for (int i = 0; i < n; i++) {
 			list[j++] = "vn " + x_to_string(vn[i].x) + " " + x_to_string(vn[i].y) + " " + x_to_string(vn[i].z);
 		}
 	}
 
 	if (textured) {
-        std::qDebug() << "    vt..." << endl;
+        qDebug() << "    vt..." << endl;
 		for (int i = 0; i < n; i++) {
 			list[j++] = "vt " + x_to_string(vt[i].x / texW) + " " + x_to_string(vt[i].y / texH);
 		}
 	}
 
 
-    std::qDebug() << "    f..." << endl;
+    qDebug() << "    f..." << endl;
 	for (int i = 0; i < m; i++) {
         QString a = x_to_string(ind[i * 3] + 1);
         QString b = x_to_string(ind[i * 3 + 1] + 1);
@@ -188,9 +190,9 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
 		list[j++] = "f " + a + " " + b + " " + c;
 	}
 
-    std::qDebug() << "Writing " << fileName << "..." << endl;
-    XGeomFileWriteStrings(list, fileName);
-    std::qDebug() << "Ok saving " << fileName << endl;
+    qDebug() << "Writing " << fileName << "..." << endl;
+    xc_write_text_file(list, fileName);
+    qDebug() << "Ok saving " << fileName << endl;
 
 }
 
@@ -200,7 +202,8 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
 void XGeomMeshShuffle(QVector<vec3> &v, QVector<int> &t, QVector<vec2> &tex,
 	bool useTex, float shuffle_count) {
 
-	int n = v.size();
+    xc_exception("XGeomMeshShuffle not implemented");
+/*	int n = v.size();
     QVector<int> vto(n);
     QVector<int> vfrom(n);
 	for (int i = 0; i < n; i++) {
@@ -211,12 +214,12 @@ void XGeomMeshShuffle(QVector<vec3> &v, QVector<int> &t, QVector<vec2> &tex,
 	int cnt = n * shuffle_count;
 	for (int k = 0; k < cnt; k++) {
 		int i = ofRandom(0, n);
-		i = min(i, n - 1);
+        i = qMin(i, n - 1);
 		int j = ofRandom(0, n);
-		j = min(j, n - 1);
+        j = qMin(j, n - 1);
 		if (i != j) {
-			swap(vfrom[vto[i]], vfrom[vto[j]]);
-			swap(vto[i], vto[j]);
+            qSwap(vfrom[vto[i]], vfrom[vto[j]]);
+            qSwap(vto[i], vto[j]);
 		}
 	}
 	auto v1 = v;
@@ -240,17 +243,17 @@ void XGeomMeshShuffle(QVector<vec3> &v, QVector<int> &t, QVector<vec2> &tex,
 	int count = T * 2;
 	for (int k = 0; k < count; k++) {
 		int i = ofRandom(0, T);
-		i = min(i, T - 1);
+        i = qMin(i, T - 1);
 		int j = ofRandom(0, T);
-		j = min(j, T - 1);
+        j = qMin(j, T - 1);
 		if (i != j) {
 			int a = i * 3;
 			int b = j * 3;
-			swap(t[a], t[b]);
-			swap(t[a + 1], t[b + 1]);
-			swap(t[a + 2], t[b + 2]);
+            qSwap(t[a], t[b]);
+            qSwap(t[a + 1], t[b + 1]);
+            qSwap(t[a + 2], t[b + 2]);
 		}
-	}
+    }*/
 }
 
 //--------------------------------------------------------
@@ -263,11 +266,11 @@ void XGeomMeshRemoveDuplicates(XGeomMesh& mesh, float eps, bool verbose_duplicat
 // Remove duplicated vertices - it occurs for IcoPrimitive, for example
 void XGeomMeshRemoveDuplicates(XGeomMesh& mesh_in, XGeomMesh& mesh_out, float eps, bool verbose_duplicated) {
 	if (verbose_duplicated) {
-        qDebug() << "Removing duplicated vertices, input vertices " << mesh_in.getNumVertices() << endl;
+        qDebug() << "Removing duplicated vertices, input vertices " << mesh_in.vertices.size() << endl;
 	}
 	// Build vertices
 	const float eps2 = eps * eps;
-	auto& input = mesh_in.getVertices();
+    auto& input = mesh_in.vertices;
     QVector<int> remap(input.size());
     QVector<int> indices;
     QVector<vec3> pnt;
@@ -302,22 +305,22 @@ void XGeomMeshRemoveDuplicates(XGeomMesh& mesh_in, XGeomMesh& mesh_out, float ep
 	else {
 		mesh_out.clear();
 		// Vertices
-		mesh_out.addVertices(pnt);
+        mesh_out.vertices = pnt;
 		// Normals
-		if (mesh_in.getNumNormals() == pnt.size()) {
+        if (mesh_in.normals.size() == pnt.size()) {
 			for (int j = 0; j < pnt.size(); j++) {
-				mesh_out.addNormal(mesh_in.getNormal(indices[j]));
+                mesh_out.normals.push_back(mesh_in.normals[indices[j]]);
 			}
 		}
 		// Tex coords
-		if (mesh_in.getNumTexCoords() == pnt.size()) {
+        if (mesh_in.tex_coords.size() == pnt.size()) {
 			for (int j = 0; j < pnt.size(); j++) {
-				mesh_out.addTexCoord(mesh_in.getTexCoord(indices[j]));
+                mesh_out.tex_coords.push_back(mesh_in.tex_coords[indices[j]]);
 			}
 		}
 		// Triangles
-		for (int i = 0; i < mesh_in.getNumIndices(); i++) {
-			mesh_out.addIndex(remap[mesh_in.getIndex(i)]);
+        for (int i = 0; i < mesh_in.indices.size(); i++) {
+            mesh_out.indices.push_back(remap[mesh_in.indices[i]]);
 		}
 	}
 }
@@ -331,10 +334,10 @@ void XGeomSetNormals(XGeomMesh &mesh, bool invert, bool remove_duplicates, float
 	}
 
 	//The number of the vertices
-	int nV = mesh.getNumVertices();
+    int nV = mesh.vertices.size();
 
 	//The number of the triangles
-	int nT = mesh.getNumIndices() / 3;
+    int nT = mesh.indices.size() / 3;
 
     QVector<vec3> norm(nV); //Array for the normals
 
@@ -343,17 +346,17 @@ void XGeomSetNormals(XGeomMesh &mesh, bool invert, bool remove_duplicates, float
 	for (int t = 0; t < nT; t++) {
 
 		//Get indices of the triangle t
-		int i1 = mesh.getIndex(3 * t);
-		int i2 = mesh.getIndex(3 * t + 1);
-		int i3 = mesh.getIndex(3 * t + 2);
+        int i1 = mesh.indices[3 * t];
+        int i2 = mesh.indices[3 * t + 1];
+        int i3 = mesh.indices[3 * t + 2];
 
 		//Get vertices of the triangle
-        const vec3 &v1 = mesh.getVertex(i1);
-        const vec3 &v2 = mesh.getVertex(i2);
-        const vec3 &v3 = mesh.getVertex(i3);
+        const vec3 &v1 = mesh.vertices[i1];
+        const vec3 &v2 = mesh.vertices[i2];
+        const vec3 &v3 = mesh.vertices[i3];
 
 		//Compute the triangle's normal
-        vec3 dir = -((v2 - v1).crossed(v3 - v1)).normalized();
+        vec3 dir = -glm::normalize(glm::cross(v2 - v1,v3 - v1));
 
 		//Accumulate it to norm array for i1, i2, i3
 		norm[i1] += dir;
@@ -370,37 +373,34 @@ void XGeomSetNormals(XGeomMesh &mesh, bool invert, bool remove_duplicates, float
 	}
 
 	//Set the normals to mesh
-	mesh.clearNormals();
-	mesh.addNormals(norm);
+    mesh.normals = norm;
 }
 
 //--------------------------------------------------------
 void XGeomCreateWireframe(XGeomMesh &mesh, XGeomMesh &mesh_out) { //for triangle mesh
 
-	auto &v = mesh.getVertices();
+    auto &v = mesh.vertices;
 	int n = v.size();
 
-    QVector<GLuint> &ind = mesh.getIndices();
+    QVector<int> &ind = mesh.indices;
 	int m = ind.size() / 3;
 
 	mesh_out = mesh;
-	mesh_out.clearIndices();
+    mesh_out.vertices.clear();
 
 	for (int i = 0; i < m; i++) {
 		int i1 = ind[i * 3];
 		int i2 = ind[i * 3 + 1];
 		int i3 = ind[i * 3 + 2];
-		mesh_out.addIndex(i1);
-		mesh_out.addIndex(i2);
-		mesh_out.addIndex(i2);
-
-		mesh_out.addIndex(i2);
-		mesh_out.addIndex(i3);
-		mesh_out.addIndex(i3);
-
-		mesh_out.addIndex(i3);
-		mesh_out.addIndex(i1);
-		mesh_out.addIndex(i1);
+        mesh_out.indices.push_back(i1);
+        mesh_out.indices.push_back(i2);
+        mesh_out.indices.push_back(i2);
+        mesh_out.indices.push_back(i2);
+        mesh_out.indices.push_back(i3);
+        mesh_out.indices.push_back(i3);
+        mesh_out.indices.push_back(i3);
+        mesh_out.indices.push_back(i1);
+        mesh_out.indices.push_back(i1);
 	}
 
 }

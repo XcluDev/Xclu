@@ -157,7 +157,7 @@ QImage XRasterUtils::link_qimage(const XRaster& raster) {
     case XType::rgba_u8: format = QImage::Format_RGBA8888;
         break;
     default:
-        xc_exception("XRasterUtils::link_qimage - unsupported format");
+        xc_exception("XRasterUtils::link_qimage - unsupported format " + XType_to_string(raster.type));
     }
 
     return QImage((const unsigned char*)raster.data_pointer(),

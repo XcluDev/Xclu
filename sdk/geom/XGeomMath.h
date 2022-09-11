@@ -136,7 +136,7 @@ bool XGeomGeomPointInsidePolygonCcvStrictly(const vec3 &p, const QVector<vec3> &
 vec3 XGeomGeomSquareToSphere(const vec3 &p2);
 
 //Convert unit sphere to unit square [0,1]x[0,1]
-vec3 XGeomGeomSphereToSquare(const vec3 &p3);
+vec2 XGeomGeomSphereToSquare(const vec3 &p3);
 
 
 //Generate a circle on a unit sphere
