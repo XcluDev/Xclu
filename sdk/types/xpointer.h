@@ -6,7 +6,7 @@
 //If no object is set - returns default object
 
 #include "incl_h.h"
-#include "xerrorhandling.h"
+#include "xhandlingerrors.h"
 #include "xprotecteddata.h"
 #include "xwaschanged.h"
 

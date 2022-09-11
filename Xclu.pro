@@ -268,9 +268,9 @@ SOURCES += \
     sdk/types/xtypes.cpp \
     sdk/types/xwaschanged.cpp \
     sdk/utility/jsonutils.cpp \
-    sdk/utility/xerrorhandling.cpp \
     sdk/utility/xexecbatch.cpp \
     sdk/utility/xfiles.cpp \
+    sdk/utility/xhandlingerrors.cpp \
     sdk/utility/ximageeffect.cpp \
     sdk/utility/xparse_tree.cpp \
     sdk/utility/xparser.cpp \
@@ -403,9 +403,9 @@ HEADERS += \
     sdk/types/xwaschanged.h \
     sdk/utility/jsonutils.h \
     sdk/utility/qt_widgets.h \
-    sdk/utility/xerrorhandling.h \
     sdk/utility/xexecbatch.h \
     sdk/utility/xfiles.h \
+    sdk/utility/xhandlingerrors.h \
     sdk/utility/ximageeffect.h \
     sdk/utility/xparse_tree.h \
     sdk/utility/xparser.h \

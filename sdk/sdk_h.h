@@ -2,7 +2,7 @@
 
 #include "incl_h.h"
 
-#include "xerrorhandling.h"
+#include "xhandlingerrors.h"
 
 #include "xclu_theme.h"
 #include "xfiles.h"

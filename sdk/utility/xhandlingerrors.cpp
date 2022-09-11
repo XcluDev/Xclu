@@ -4,7 +4,7 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QThread>
-#include "xerrorhandling.h"
+#include "xhandlingerrors.h"
 #include "mainwindow.h"
 #include "consoleview.h"
 

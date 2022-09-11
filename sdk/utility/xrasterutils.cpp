@@ -1,4 +1,4 @@
-#include "./../utility/xerrorhandling.h"
+#include "./../utility/xhandlingerrors.h"
 #include "xrasterutils.h"
 #include "incl_cpp.h"
 #include <QImage>

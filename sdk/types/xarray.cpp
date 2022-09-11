@@ -1,5 +1,5 @@
 #include "xarray.h"
-#include "./../utility/xerrorhandling.h"
+#include "./../utility/xhandlingerrors.h"
 #include "incl_cpp.h"
 
 //---------------------------------------------------------------------

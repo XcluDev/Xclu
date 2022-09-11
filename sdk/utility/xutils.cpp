@@ -1,5 +1,5 @@
 #include "xutils.h"
-#include "xerrorhandling.h"
+#include "xhandlingerrors.h"
 
 //---------------------------------------------------------------------
 int x_string_to_int(const QString &s, bool halt_on_error) {

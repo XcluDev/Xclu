@@ -11,7 +11,7 @@
 #include "incl_h.h"
 #include <QScopedPointer>
 #include "xclu_settings.h"
-#include "xerrorhandling.h"
+#include "xhandlingerrors.h"
 #include "jsonutils.h"
 
 #include "xlink.h"
