@@ -41,7 +41,7 @@ endif
    
 #-----------------------------
 line
-in group Runtime_Details runtime=1
+group Runtime_Details runtime=1
 	//Runtime variables.
 
 if runtime 1
@@ -60,7 +60,7 @@ endif
 #-------------------------------------------
 #Output images
 line
-in group Show_Color show_color=1
+group Show_Color show_color=1
 //Generate color image preview.
 if show_color 1    
 out object_image Color color_image
@@ -68,7 +68,7 @@ out object_image Color color_image
 endif
     
 line
-in group Show_Depth show_depth=1
+group Show_Depth show_depth=1
 //Generate Depth image preview.
 if show_depth 1  
 out object_image Depth depth_image
@@ -76,7 +76,7 @@ out object_image Depth depth_image
 endif
 
 line
-in group Show_IR show_ir=0
+group Show_IR show_ir=0
 //Generate IR image preview. 
 if show_ir 1  
 out object_image IR ir_image
@@ -143,7 +143,7 @@ page 8_Bit
     //Transform depth image to grayscale 8 bit and binary image.
 
 line
-in group Depth_8_Bit make_depth_grayscale=0
+group Depth_8_Bit make_depth_grayscale=0
     //Make depth image to 8 bit grayscale image.
     
 if make_depth_grayscale 1
@@ -151,47 +151,47 @@ if make_depth_grayscale 1
 out object_image Depth8_Image depth_grayscale_image
     //Depth grayscale image.
 
-in int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
+int Thresh_Near depth_grayscale_thresh_near_mm=0 0:10000 5,100
     //Near threshold.
     //mm
     
-in int Thresh_Far depth_grayscale_thresh_far_mm=10000 0:10000 5,100
+int Thresh_Far depth_grayscale_thresh_far_mm=10000 0:10000 5,100
     //Far threshold.
     //mm
     
-in int Output0 depth_grayscale_output0=255 0:255 1,10
+int Output0 depth_grayscale_output0=255 0:255 1,10
     //Range of output.
     
-in int Output1 depth_grayscale_output1=0 0:255 1,10
+int Output1 depth_grayscale_output1=0 0:255 1,10
     //Range of output.
 
 separator
 
-in float X0 depth_grayscale_x0=0 0:1 0.01,0.1
+float X0 depth_grayscale_x0=0 0:1 0.01,0.1
     //Crop X0.
 
-in float X1 depth_grayscale_x1=1 0:1 0.01,0.1
+float X1 depth_grayscale_x1=1 0:1 0.01,0.1
     //Crop X1.
 
-in float Y0 depth_grayscale_y0=0 0:1 0.01,0.1
+float Y0 depth_grayscale_y0=0 0:1 0.01,0.1
     //Crop Y0.
 
-in float Y1 depth_grayscale_y1=1 0:1 0.01,0.1
+float Y1 depth_grayscale_y1=1 0:1 0.01,0.1
     //Crop Y1.
     
 endif
     
 line
 
-#in group Depth_Binary make_depth_binary=0
+#group Depth_Binary make_depth_binary=0
 #    //Make depth image to 8 bit grayscale image.
     
 #if make_depth_binary 1
-#in int Thresh_Near depth_binary_thresh_near_mm=0 0:10000 5,100
+#int Thresh_Near depth_binary_thresh_near_mm=0 0:10000 5,100
 #    //Near threshold.
 #    //mm
     
-#in int Thresh_Far depth_binary_thresh_far_mm=10000 0:10000 5,100
+#int Thresh_Far depth_binary_thresh_far_mm=10000 0:10000 5,100
 #    //Far threshold.
 #    //mm
 
@@ -205,10 +205,10 @@ line
 page Devices
     //Here you can get list of connected cameras.
 
-in button_always Print_Devices print_devices
+button_always Print_Devices print_devices
 	//Print list of all connected devices
 
-#in checkbox Print_Formats print_formats=1
+#checkbox Print_Formats print_formats=1
 #	//Print once list of supported formats of connected camera
 
 
@@ -220,29 +220,29 @@ out text Device_list device_list 10 15
 page Save_Images
     //Saving images to disk.
 
-in button Save_Images save_frames_button
+button Save_Images save_frames_button
     //Press the button to save images to a given folder with file name as timestamp.
 
-in checkbox Save_Each_Frame save_each_frame=0
+checkbox Save_Each_Frame save_each_frame=0
     //Save images to a given folder with file name as color_00001.png and so on.
 
 line
      
-#in checkbox Depth save_depth=1
+#checkbox Depth save_depth=1
 #    //Should save depth 16 bit.
     
-in checkbox Color save_color=1
+checkbox Color save_color=1
     //Should save depth 16 bit.
 
-in checkbox IR save_ir=1
+checkbox IR save_ir=1
     //Should save depth 16 bit.
 
 
-in checkbox Depth8 save_depth8=1
+checkbox Depth8 save_depth8=1
     //Should save depth 16 bit.
 
     
-in string_folder Folder save_folder="realsense_images"
+string_folder Folder save_folder="realsense_images"
     //Folder for saving images.
     //Choose folder to save images.
 

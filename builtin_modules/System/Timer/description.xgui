@@ -7,32 +7,32 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in enum Period period=Seconds [HMS,Hours,Minutes,Seconds]
+enum Period period=Seconds [HMS,Hours,Minutes,Seconds]
     //Delay period measure unit.
 
 if period HMS
-in int Hours hms_hours=0 0:* 1,10
+int Hours hms_hours=0 0:* 1,10
     //Delay time in hours.
     //hours
-in int Minutes hms_minutes=0 0:* 1,10
+int Minutes hms_minutes=0 0:* 1,10
     //Delay time in minutes.
     //minutes
-in float Seconds hms_seconds=0 0:* 0.1,1
+float Seconds hms_seconds=0 0:* 0.1,1
     //Delay time in seconds.
     //seconds
     
 if period Hours
-in float Hours hours=0 0:* 0.01,0.1
+float Hours hours=0 0:* 0.01,0.1
     //Delay time in hours.
     //hours
 
 if period Minutes
-in float Minutes minutes=0 0:* 0.01,0.1
+float Minutes minutes=0 0:* 0.01,0.1
     //Delay time in minutes.
     //minutes
 
 if period Seconds
-in float Seconds seconds=1 0:* 0.01,0.1
+float Seconds seconds=1 0:* 0.01,0.1
     //Delay time in hours.
     //seconds
 endif
@@ -40,18 +40,18 @@ endif
 #----------------------------------
 separator
 
-in enum Working_Mode working_mode=Bang [Pause_Execution,Bang]
+enum Working_Mode working_mode=Bang [Pause_Execution,Bang]
     //Should we wait during delay, or wait and send bang when timer is gone
 
 if working_mode Bang
 
-in checkbox Repeating repeating=0
+checkbox Repeating repeating=0
     //Repeating timer execution.
 
-in button One_Shot one_shot_button
+button One_Shot one_shot_button
     //Press to start time counter one time.
 
-in button Stop stop_button
+button Stop stop_button
     //Stop time counter.
 
 if working_mode Bang
@@ -61,7 +61,7 @@ separator
 out checkbox Working working=0
     //Is timer working.
 
-in enum Out_Time_Format out_time=Left_hms [Time_Elapsed_sec,Time_Left_sec,Time_Uniform,Time_Left_hms]
+enum Out_Time_Format out_time=Left_hms [Time_Elapsed_sec,Time_Left_sec,Time_Uniform,Time_Left_hms]
     //Output time format - only for showing, but for programming all are available.
 
 if out_time Time_Elapsed_sec
@@ -87,7 +87,7 @@ endif
 if working_mode Bang
     
 separator
-in text Bang_List bang_list 10 15
+text Bang_List bang_list 10 15
     //Modules to send bang on delay. `#` means comment, can use 'module1' or 'module1->button1'
 
 endif

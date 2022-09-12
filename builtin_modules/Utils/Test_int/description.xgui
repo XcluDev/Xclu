@@ -10,6 +10,6 @@ module_impl=C++
 
 page Main
 
-in int In_Int int1=1 0:10 1,10
+int In_Int int1=1 0:10 1,10
 //Input value
 

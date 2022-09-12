@@ -13,10 +13,10 @@ page Main
 
 #----------------------------------
 line
-in group Show_Input_Image show_input_image=1
+group Show_Input_Image show_input_image=1
 
 if show_input_image 1
-in object_image Input_Image input_image
+object_image Input_Image input_image
     //Image for processing.
 endif   
 
@@ -25,51 +25,51 @@ line
 out object_image Output_Image output_image
     //Image with visualization.
     
-in button Freeze freeze_btn
+button Freeze freeze_btn
     //Freeze input image.
  
-in button Unfreeze unfreeze_btn
+button Unfreeze unfreeze_btn
     //Unfreeze input image.
     
 #----------------------------------    
 separator
     
-#in float Scan_X scan_x=0.5 0:1 0.002,0.02
+#float Scan_X scan_x=0.5 0:1 0.002,0.02
 #    //X position of scanning area's center.
 
-in float Scan_Y scan_y=0.5 0:1 0.002,0.02
+float Scan_Y scan_y=0.5 0:1 0.002,0.02
     //Y position of scanning area's center.
 
-in float Scan_W scan_w=0.5 0:1 0.002,0.02
+float Scan_W scan_w=0.5 0:1 0.002,0.02
     //Scanning width.
 
        
 #----------------------------------   
 separator
 
-in int Sample_Rate sample_rate=1000 1:100000 10,100
+int Sample_Rate sample_rate=1000 1:100000 10,100
     //Sample rate.
     //pixels/sec
     
     
-in checkbox Tone_Black tone_black=0
+checkbox Tone_Black tone_black=0
     //Make tone by ignoring black borders (if shorter - tone is higher). For Realsense using.
     
-in float Nonlinear_Tone nonlinear_tone=0 0:5 0.01,0.1
+float Nonlinear_Tone nonlinear_tone=0 0:5 0.01,0.1
     //Affect x^pow for tone length, 0 - no change.
     
-in checkbox Normalize normalize=0
+checkbox Normalize normalize=0
     //Normalize input sound.
     
-in enum Loop_Mode loop_mode=Repeat [Repeat,Ping_Pong]
+enum Loop_Mode loop_mode=Repeat [Repeat,Ping_Pong]
     //Loop by repeat or ping-pong.
     
     
-in float Distort distort=1 0:10 0.01,0.1
+float Distort distort=1 0:10 0.01,0.1
     //Multiply and clamp to [-1,1] to distort the sound.
     //0..10
         
-in float Volume volume=1 0:1 0.01,0.1
+float Volume volume=1 0:1 0.01,0.1
     //Volume of the resulted sound.
     //0..1
    

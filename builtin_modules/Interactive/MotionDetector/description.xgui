@@ -9,9 +9,9 @@ page Main
     //General settings
 
 line
-in group Show_Input_Image show_input_image=1
+group Show_Input_Image show_input_image=1
 if show_input_image 1
-in object_image Input_Image input_image
+object_image Input_Image input_image
     //Image for processing.
 endif   
 line
@@ -22,23 +22,23 @@ out object_image Output_Image output_image
 out object_image Background_Image background_image
     //Detected background.
     
-in button Restore_Backgr restore_now
+button Restore_Backgr restore_now
     //Restore background immediately.
 
  
 line
-in group Detection_Area_Setup detection_area_setup=1    
+group Detection_Area_Setup detection_area_setup=1    
 if detection_area_setup 1
-in float X0 x0=0 0:1 0.01,0.1
+float X0 x0=0 0:1 0.01,0.1
     //Detection area left.
 
-in float X1 x1=1 0:1 0.01,0.1
+float X1 x1=1 0:1 0.01,0.1
     //Detection area right.
 
-in float Y0 y0=0 0:1 0.01,0.1
+float Y0 y0=0 0:1 0.01,0.1
     //Detection area top.
 
-in float Y1 y1=1 0:1 0.01,0.1
+float Y1 y1=1 0:1 0.01,0.1
     //Detection area bottom.
     
 endif
@@ -57,15 +57,15 @@ const int Block_Size block_size=32 1:* 1,10
     //Block size for analysis.
     //pix
 
-in float Threshold thresh_in=0.2 0:1 0.01,0.1
+float Threshold thresh_in=0.2 0:1 0.01,0.1
     //Threshold for block detection.
     //0..1
 
-in float Thresh_Out_Rel thresh_out_rel=0.75 0:1 0.01,0.1
+float Thresh_Out_Rel thresh_out_rel=0.75 0:1 0.01,0.1
     //Threshold for block undetection after detection, relative to Threshold.
     //0..1
    
-in float Block_Event block_event_sec=0.2 0:* 0.1,1
+float Block_Event block_event_sec=0.2 0:* 0.1,1
     //How much time block event must be to detect it.
     //sec
     
@@ -73,7 +73,7 @@ out int Blocks_on blocks_on=0 0:* 1,10
     //How many blocks fired now.
     //blocks
 
-in int Blocks_Threshold blocks_threshold=1 0:* 1,10
+int Blocks_Threshold blocks_threshold=1 0:* 1,10
     //How many blocks must to fire for event.
     //blocks
        
@@ -86,20 +86,20 @@ endif
 #-------------------------------------------
 page Settings
 
-in int Decimate_Input decimate_input=2 1:* 1,10
+int Decimate_Input decimate_input=2 1:* 1,10
     //Decimate input image for improving stability of detection.
     //pix
 
-in int Ignore_Start_Frames ignore_start_frames=15 1:* 1,10
+int Ignore_Start_Frames ignore_start_frames=15 1:* 1,10
     //How much ignore frames at camera start - to let camera do its brightness adjustments.
     //frames
 
 separator
-in float Keep_On keep_on_sec=5 0:* 0.1,1
+float Keep_On keep_on_sec=5 0:* 0.1,1
     //How much seconds be on.
     //sec
     
-in float Keep_Off keep_off_sec=5 0:* 0.1,1
+float Keep_Off keep_off_sec=5 0:* 0.1,1
     //How much seconds be off.
     //sec
     
@@ -107,11 +107,11 @@ in float Keep_Off keep_off_sec=5 0:* 0.1,1
     
 separator
     
-in text_bang Bang_On bang_on 7 10
+text_bang Bang_On bang_on 7 10
     //What to do on "On" event.
     //#module1->play_button
     
-in text_bang Bang_Off bang_off 7 10
+text_bang Bang_Off bang_off 7 10
     //What to do on "Off" event.
     //#module1->stop_button
 
@@ -119,11 +119,11 @@ in text_bang Bang_Off bang_off 7 10
 page Backgr_Restore
     //Settings for restore background automatically
     
-in float Restore_Time background_restore_sec=30 1:* 0.1,1
+float Restore_Time background_restore_sec=30 1:* 0.1,1
     //If block image is not changed a lot for this time, then background is restored to that image.
     //sec
 
-in int Allow_Flicker background_restore_flicker=1 0:* 1,10
+int Allow_Flicker background_restore_flicker=1 0:* 1,10
     //How much blocks is allowed to change during waiting.
     //blocks
     

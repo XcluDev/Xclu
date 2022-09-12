@@ -19,35 +19,35 @@ out int Resulted_Value value=0 -1000000:1000000 1,10
 out string Parent parent_id=""
     //Parent module name (Window or WLayout) at which this element is placed.
 
-in checkbox Visible visible=1
+checkbox Visible visible=1
     //Is visible.
 
 #const enum Font_Size font_size=Parent [Parent,Custom]
 
 separator
 
-in enum Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
+enum Value_Source source=GUI [Fixed_Value,GUI,Other_Module_Value,Expression]
     //Source of value: a fixed value, value from GUI, output value from other module, output JS expression.
     
-in enum Type type=int [int,float]
+enum Type type=int [int,float]
     //Type of value.
  
 #-------------
 if source Fixed_Value
-in int Value fixed_value=0 -1000000:1000000 1,10
+int Value fixed_value=0 -1000000:1000000 1,10
 
 #if source GUI
-#in int Default_Value default_value=0 -1000000:1000000 1,10
+#int Default_Value default_value=0 -1000000:1000000 1,10
 
 if source Other_Module_Value
-in string_link_int Int_Link int_link="module1->value"
+string_link_int Int_Link int_link="module1->value"
     //Link to other module's variable.
     
-#in checkbox Use_Value_Properties use_value_properties=0
+#checkbox Use_Value_Properties use_value_properties=0
 #    //If checked, then range, label and units will be used from module's value settings
 
 if source Expression
-in text Expression expression 15 17
+text Expression expression 15 17
     //JS expression for value.
 endif
 
@@ -62,21 +62,21 @@ page Properties
 
 separator
 #-------------
-in group Use_Min use_range_min=0
+group Use_Min use_range_min=0
     //Clamp value to specified minimal value.
 
 
 if use_range_min 1
-in int Min min_value=0 -1000000:1000000 1,10
+int Min min_value=0 -1000000:1000000 1,10
 endif
 
 #-------------
 separator
-in group Use_Max use_range_max=0
+group Use_Max use_range_max=0
     //Clamp value to specified maxinal value.
     
 if use_range_max 1
-in int Max max_value=100 -1000000:1000000 1,10
+int Max max_value=100 -1000000:1000000 1,10
 endif    
 
     
@@ -87,7 +87,7 @@ const group Title title=1
     //Title, placed at the left of the value.
     
 if title 1
-in string Title title_text="Int"
+string Title title_text="Int"
     //Text of title.
 
 const enum Placement title_placement=Default [Left,Right,Top,Bottom]
@@ -116,7 +116,7 @@ const group Units units=0
     //Units, placed at the right of the value.
 
 if units 1
-in string Units units_text="pixels"
+string Units units_text="pixels"
     //Text of units.
 
 const enum Alignment units_alignment=Default [Default,Left,Center,Right]
@@ -145,16 +145,16 @@ out checkbox Was_Changed was_changed=0
     
     
 separator
-in enum On_Change on_change=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
+enum On_Change on_change=Do_Nothing [Do_Nothing,Call_Module,Execute_Script]
     //What to do on value change. The event occured after the module's "update".
     #TODO add option to fire event right after change
     
 if on_change Call_Module
-in string Module_Call_Link on_change_module_call_link="module1->execute"
+string Module_Call_Link on_change_module_call_link="module1->execute"
     //Call other module on value change.
     
 if on_change Execute_Script on_change_script 8 10
-in text Script on_change_script 8 10
+text Script on_change_script 8 10
     //Script to execute on value change.
 endif
     
@@ -184,9 +184,9 @@ endif
 #image view
 #Все параметры внешнего видео - const, чтобы не менялись при выполнении - для оптимизации.
  
-#in checkbox Readonly readonly=1
+#checkbox Readonly readonly=1
 #    //Can user write text here
 
-    #in string Send_Channel addr="localhost:12345"
+    #string Send_Channel addr="localhost:12345"
 #    //Address with port: localhost:12345
 

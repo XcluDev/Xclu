@@ -10,7 +10,7 @@ module_impl=C++
 page Main
     //General settings
 
-in string URL url=""
+string URL url=""
 
     
 

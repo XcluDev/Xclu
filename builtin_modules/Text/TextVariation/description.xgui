@@ -7,7 +7,7 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in text Text input_text 20 25
+text Text input_text 20 25
     //Text such as [A|B|C[D|E]]. Module will generate randomly A,B,CD,CE.
 
 separator

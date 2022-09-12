@@ -11,10 +11,10 @@ module_accept_calls=CreateWidget
 page Main
     //Input image
    
-in object_image Image image
+object_image Image image
     //Input image.
 
-in checkbox Is_New_Frame is_new_frame=0
+checkbox Is_New_Frame is_new_frame=0
     //If checked, image will be redrawn each frame. To optimize, link it to the flag of an image provider module.
  
 #-------------------------------------------
@@ -24,7 +24,7 @@ page Visuals
 out string Parent parent_id=""
     //Parent module name (Window or WLayout) at which this element is placed.
 
-in checkbox Visible visible=1
+checkbox Visible visible=1
     //Is visible.
     
 separator
@@ -45,7 +45,7 @@ const group Title title=1
     //Title, placed at the left of the value.
     
 if title 1
-in string Title title_text="Image"
+string Title title_text="Image"
     //Text of title.
     
 const enum Placement title_placement=Default [Left,Right,Top,Bottom]

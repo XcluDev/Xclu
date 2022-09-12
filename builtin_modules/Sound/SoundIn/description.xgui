@@ -10,12 +10,12 @@ module_send_calls=SoundBufferReceived
 page Main
     //General settings
 
-in float_slider Volume volume=1.0 0:10 0.01,0.1
+float_slider Volume volume=1.0 0:10 0.01,0.1
     //Input sound volume.
     //0..10
 
 
-in float_slider Device_Volume device_volume=0.8 0:1 0.01,0.1
+float_slider Device_Volume device_volume=0.8 0:1 0.01,0.1
     //Input device volume.
     //0..1
     
@@ -37,7 +37,7 @@ endif
         
 #-----------------------------
 line
-in group Settings settings=0
+group Settings settings=0
 	//Setting sound output parameters
     
 if settings 1
@@ -63,7 +63,7 @@ const enum Buffer_Size buffer_size_desired=Default [Default,32,64,128,256,512,10
 #    Numberofbuffers 
  
 #TODO choose format
-#in enum Sound_Data_Type sound_data_type=int16 [int16,float]
+#enum Sound_Data_Type sound_data_type=int16 [int16,float]
 #    //Output sound format, int16=-32768..32767, float=[-1,1]
 
 #TODO: automatic restart in autorestart_sec seconds
@@ -72,7 +72,7 @@ endif
 
 #-----------------------------
 line
-in group Runtime runtime=0
+group Runtime runtime=0
 	//Runtime variables
 
 if runtime 1
@@ -95,7 +95,7 @@ line
 
 #-----------------------------------------------------------
 page Receivers
-#in text Sound_Callback_To callback_modules 5 6
+#text Sound_Callback_To callback_modules 5 6
 #    //List of modules which will be called after sound request callback event
 #    //#id of modules to execute
     
@@ -104,7 +104,7 @@ const text Receivers_Modules modules_list 5 6
     //#id's of modules to receive sound
     //#some_module1
     
-#in button Edit... edit_btn
+#button Edit... edit_btn
 #    //Press to interactively edit sound sources.
 
 separator
@@ -113,29 +113,29 @@ separator
 page Test_Sound
     //Input test sound.
     
-in checkbox Generate_Test_Sound gen_test=0
+checkbox Generate_Test_Sound gen_test=0
     //Enable generating the test sinewave sound. Note, other sounds will be muted.
     
-in checkbox Left_Channel gen_left=1
+checkbox Left_Channel gen_left=1
     //Should generate sound for left channel.
     
-in checkbox Right_Channel gen_right=1
+checkbox Right_Channel gen_right=1
     //Should generate sound for right channel.
 
-in float Volume gen_volume=0.5 0:1 0.01,0.1
+float Volume gen_volume=0.5 0:1 0.01,0.1
     //Volume of generated sound.
    
-in int Freq gen_freq=440 0:20000 1,100
+int Freq gen_freq=440 0:20000 1,100
     //Frequency of generated sinewave.
     
 #-----------------------------------------------------------
 page Devices
     //Print list of input audio devices and supported formats of the selected device.
 
-in button_always Print_Devices print_devices
+button_always Print_Devices print_devices
 	//Print list of all connected devices.
 
-in checkbox Print_Formats print_formats=0
+checkbox Print_Formats print_formats=0
 	//Print list of supported formats for connected device at start.
 
 out text Local_Console local_console 15 20

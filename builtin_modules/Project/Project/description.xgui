@@ -13,7 +13,7 @@ const int Frame_Rate frame_rate=30 1:* 1,10
     //fps
     
 line
-in checkbox Autostart autostart=0 
+checkbox Autostart autostart=0 
     //Const. Autostart project after loading.
     
 if autostart 1
@@ -61,22 +61,22 @@ if watchdog_enabled 1
 
 line
     
-in int Frame_To_Check watchdog_frame=0 0:* 1,10
+int Frame_To_Check watchdog_frame=0 0:* 1,10
     //Link here Project's frame or Camera's frame.
 
 out float Measured_FPS watchdog_measured_fps=0 0:* 0.1,1
     //Measured FPS are activated after initial pause.
 
 line
-in int Wait_Sec watchdog_wait_sec=10 0:* 1,10
+int Wait_Sec watchdog_wait_sec=10 0:* 1,10
     //Const. How much wait before start checking frames. 
     //sec
 
-in int Tick_Period watchdog_tick_sec=1 1:* 1,10
+int Tick_Period watchdog_tick_sec=1 1:* 1,10
     //Const. Period of checking.
     //sec
 
-in float Threshold_Framerate watchdog_threshold_rate=1 1:* 1000,100
+float Threshold_Framerate watchdog_threshold_rate=1 1:* 1000,100
     //Const. Minimal allowed frame rate to continue work, else kill this app.
     //frames/sec
     
@@ -84,7 +84,7 @@ endif
 
 line
 
-in checkbox Test_Pause test_pause=0
+checkbox Test_Pause test_pause=0
     //Pause execution by 3 seconds. Don't forget check it out after testing.
 
 

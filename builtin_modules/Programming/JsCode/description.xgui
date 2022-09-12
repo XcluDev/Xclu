@@ -11,7 +11,7 @@ page Main
     //General settings
 
 
-in text Code code="" 15 15
+text Code code="" 15 15
 
     
 

@@ -13,7 +13,7 @@ out checkbox Bang bang=0
 
 separator
 
-in enum Period_Mode period_mode=Period [Period,Random_Period]
+enum Period_Mode period_mode=Period [Period,Random_Period]
 
 
 

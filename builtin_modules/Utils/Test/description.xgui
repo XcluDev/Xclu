@@ -12,35 +12,35 @@ module_impl=C++
 page Gui_Controls
 #group Device_Selection
 
-in button Test button1
+button Test button1
     //Test button.
 
 line
 
 const checkbox Const_Checkbox const_check=1
     //Constant value.
-in checkbox In_Checkbox in_check=0
+checkbox In_Checkbox in_check=0
     //Input value.
 out checkbox Out_Checkbox out_check=1
     //Output value.
-in checkbox Linked check_linked=0
+checkbox Linked check_linked=0
     //Checkbox for testing linking.
 
 line
 const float Const_Float1 float1=1.1 0:10 0.1,1
     //Constant value.
     //mm
-in float In_Float2 float2=2.2 *:* 0.01,0.1
+float In_Float2 float2=2.2 *:* 0.01,0.1
     //Input value.
     //pixels
-in float In_Float3 float3=2.2 -2:2 0.01,0.1
+float In_Float3 float3=2.2 -2:2 0.01,0.1
     //Input value.
     //pixels
 out float Out_Float4 float4=3.3 0:10 0.01,0.1
     //Output value.
     //meters
     
-in float Linked float_linked=0 0:10 0.01,0.1
+float Linked float_linked=0 0:10 0.01,0.1
     //Float for testing linking.
     //meters
 
@@ -48,24 +48,24 @@ line
 const int Const_Int1 int1=1 -10:10 1,10
     //Constant value.
     //mm
-in int In_Int2 int2=2 *:* 1,10
+int In_Int2 int2=2 *:* 1,10
     //Input value.
     //pixels
-in int In_Int3 int3=2 0:10 1,10
+int In_Int3 int3=2 0:10 1,10
     //Input value.
     //pixels
 out int Out_Int4 int4=3 0:10 1,10
     //Output value.
     //meters
     
-in float Linked int_linked=0 0:10 1,10
+float Linked int_linked=0 0:10 1,10
     //Int for testing linking.
     //meters
 
 line
 const string Const_String string1="Abc"
     //Constant value.
-in string In_String string2="Abc"
+string In_String string2="Abc"
     //Input value.
 out string Out_String string3="Abc"
     //Output value.
@@ -75,11 +75,11 @@ const string Linked string_linked=""
 separator
 const enum Const_List list1=By_Id [By_Name,By_Id]
     //Constant value.
-in enum In_List list2=By_Name [By_Name,By_Id]
+enum In_List list2=By_Name [By_Name,By_Id]
     //Input value.
 out enum Out_List list3=By_Id [By_Name,By_Id]
     //Output value.
-in enum Linked list_linked=A [A,B,C]
+enum Linked list_linked=A [A,B,C]
     //Enum for testing linking.
 
 separator
@@ -88,7 +88,7 @@ const text Const_Text text1 3 3
     //"This is a text example"
     //"Continued..."
 
-in text In_Text text2 3 3
+text In_Text text2 3 3
     //Input value.
 out text Out_Text text3 3 3
     //Output value.
@@ -96,15 +96,15 @@ out text Out_Text text3 3 3
 #-------------------------------------------------
 page Objects
 
-in int Width w=100 1:1000 1,10
+int Width w=100 1:1000 1,10
 //Generated image width.
 //pix
 
-in int Height h=100 1:1000 1,10
+int Height h=100 1:1000 1,10
 //Generated image height.
 //pix
 
-in int Wave wave=1 1:10 1,1
+int Wave wave=1 1:10 1,1
 //Some parameter for contents.
 
 
@@ -113,21 +113,21 @@ out object Generated_Image object1
 
 separator
 
-in object Input_Image object2
+object Input_Image object2
 //"in" object can only receive external object via link.
     
 #-------------------------------------------------
 page Choose_Files
 
 #Строка с кнопкой для выбора файла, затем описание, диалог и фильтр 
-in string_file Choose_File choose:file="aa"
+string_file Choose_File choose:file="aa"
     //Description
     //Choose File to load
     //All files (*.*);;Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)
 
 
 #Строка с кнопкой для выбора папки 
-in string_folder Choose_Folder choose_Folder="aa"  
+string_folder Choose_Folder choose_Folder="aa"  
     //Description.
     //Choose Floder to scan
 
@@ -135,29 +135,29 @@ page Conditional_GUI
     //Here is testing GUI elements which visibility depends on other GUI elements.
 
 line
-in group Show_Details show_details=1
+group Show_Details show_details=1
     //Checkbox "group".
 
 if show_details 1
 line
-in checkbox Flag_1 flag1=0
+checkbox Flag_1 flag1=0
 separator
-in checkbox Flag_2 flag2=0
+checkbox Flag_2 flag2=0
 
 endif
 
 line
 
-in enum Type type=Int [Int,Float,String]
+enum Type type=Int [Int,Float,String]
     //Choose different types to see changed interface.
 
 separator
 
 #-------------------------------------------------
 if type Int,Float
-in string Numbered numbered="1"
+string Numbered numbered="1"
 separator
-in text Number_Text number_text 3 3
+text Number_Text number_text 3 3
     //
     //111
     //222
@@ -165,9 +165,9 @@ in text Number_Text number_text 3 3
 
 #----------------
 if type String
-in string Stringed stringed="abcde"
+string Stringed stringed="abcde"
 separator
-in text String_Text string_text 3 3
+text String_Text string_text 3 3
     //
     //aaa
     //bbb
@@ -179,9 +179,9 @@ endif
 page Callback
     //Testing Callback mechanism. Create other instance of Test, set it Run mode Callback and put its id here and press button. 
     
-in button Callback callback
+button Callback callback
     //Press button to start callback of selected modules.
 
-in text Callback_Modules callback_modules 5 10
+text Callback_Modules callback_modules 5 10
     //List of modules which will be called by callback.
     //#id of modules to execute

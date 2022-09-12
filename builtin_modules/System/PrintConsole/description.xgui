@@ -7,20 +7,20 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in checkbox Add_Title add_title=0
+checkbox Add_Title add_title=0
     //Should add title to output
     
 if add_title 1
-in string Title title=""
+string Title title=""
     //Title string.
 endif
 
 separator
-in checkbox Add_Time_Stamp add_time_stamp=1
+checkbox Add_Time_Stamp add_time_stamp=1
     //Should add timestamp to output.
 
 separator
-in string String str=""
+string String str=""
     //String to print.
 
 

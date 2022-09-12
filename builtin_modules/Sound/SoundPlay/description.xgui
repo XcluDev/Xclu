@@ -8,17 +8,17 @@ module_impl=C++
 page Main
     //General settings.
 
-in enum Mode mode=Single_File [Single_File,Playlist]
+enum Mode mode=Single_File [Single_File,Playlist]
     //Single file or playlist.
     
-in button Play play_button
+button Play play_button
     //Start playing.
 
-in button Stop stop_button
+button Stop stop_button
     //Stop playing.
 
 if mode Playlist
-in button Next_File next_file
+button Next_File next_file
     //Play next file.
 endif
     
@@ -37,20 +37,20 @@ separator
     
 if mode Single_File
 
-in enum Loop loop_mode_file=Loop [None,Loop]
+enum Loop loop_mode_file=Loop [None,Loop]
     //Looping mode.
     
-in string_file File file_name=""
+string_file File file_name=""
     //File to play.
 
 
     
 #if mode Playlist
-#in enum Loop loop_mode_playlist=Loop_One [None,Play_Selected,Loop_One_File,Loop_Playlist,Shuffle]
+#enum Loop loop_mode_playlist=Loop_One [None,Play_Selected,Loop_One_File,Loop_Playlist,Shuffle]
 #    //Looping mode.
     #ПОДУМАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-#in text Playlist_Files playlist_files 12 15
+#text Playlist_Files playlist_files 12 15
 #    //Playlist files. '#' means comment.
 
 #endif
@@ -65,22 +65,22 @@ page Volume
     //Volume and fading
     
     
-in float Volume volume=0.5 0:1 0.01,0.1
+float Volume volume=0.5 0:1 0.01,0.1
     //Volume.
     
-#in checkbox Left_Channel left_channel=1
+#checkbox Left_Channel left_channel=1
 #    //Send sound to the left channel.
     
-#in checkbox Right_Channel right_channel=1
+#checkbox Right_Channel right_channel=1
 #    //Send sound to the right channel.
     
 separator
 
-#in float Fade_In fade_in_sec=0.1 0:5 0.1,1
+#float Fade_In fade_in_sec=0.1 0:5 0.1,1
 #    //Fade in.
 #    //sec
     
-in float Fade_Out fade_out_sec=0.1 0:5 0.1,1
+float Fade_Out fade_out_sec=0.1 0:5 0.1,1
     //Fade out - only when press "Stop" button.
     //sec
     

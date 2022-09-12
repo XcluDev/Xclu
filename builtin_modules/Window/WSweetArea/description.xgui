@@ -20,7 +20,7 @@ const text Struct. structure 25 30
 #------------------------------------------
 page Properties
     
-in string Title title="Window"
+string Title title="Window"
     //Title of the window.
     
 #-------------
@@ -33,29 +33,29 @@ in string Title title="Window"
 #endif    
     
 #-------------
-in enum Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
+enum Size size=640x480 [Default,Custom,640x480,800x600,1024x768,1280x720,1920x1080,1920x1200]
     //Size of the window.
 
 if size Custom
-in int Size_X size_x=1280 1:20000 1,10
+int Size_X size_x=1280 1:20000 1,10
     //Width of window.
     //pixels
-in int Size_Y size_y=720 1:20000 1,10
+int Size_Y size_y=720 1:20000 1,10
     //Height of window.
     //pixels
     
 endif
 #-------------
 
-in enum Position position=Automatic [Default,Custom,Screen_Center]
+enum Position position=Automatic [Default,Custom,Screen_Center]
     //Position of the window.
 
 #-------------
 if position Custom
-in int Pos_X pos_x=50 -20000:20000 1,10
+int Pos_X pos_x=50 -20000:20000 1,10
     //X position of window.
     //pixels
-in int Pos_Y pos_y=50 -20000:20000 1,10
+int Pos_Y pos_y=50 -20000:20000 1,10
     //Y position of window.
     //pixels
     
@@ -63,10 +63,10 @@ endif
 #-------------
 separator
 
-in checkbox Visible visible=1
+checkbox Visible visible=1
     //Is window visible.
 
-in enum Mode mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
+enum Mode mode=Normal_Window [Minimized,Normal_Window,Maximized,Full_Screen]
     //Full screen, minimized and maximized settings.
     
     
@@ -114,7 +114,7 @@ endif
 page Actions
     //Action on closing window
 
-in enum On_Close on_close=Stop [Ignore,Stop]
+enum On_Close on_close=Stop [Ignore,Stop]
    //What to do when user closes the window.
 #,Custom_Action]
 

@@ -9,15 +9,15 @@ module_accept_calls=CreateWidget,SoundBufferAdd,SoundBufferReceived
 page Inputs
     //Conecting pedal and other controls.
     
-in checkbox Pedal_State pedal_state=0  
+checkbox Pedal_State pedal_state=0  
     //Use Arduino-based or MIDI pedal. 
     
       
-#in group Limit db_limit=0
+#group Limit db_limit=0
 #    //Limit number of loaded sounds by specified number - used for speed up during testing.
 
 #if db_limit 1
-#in int Count db_limit_count=10000 1:* 1,10
+#int Count db_limit_count=10000 1:* 1,10
 #    //Maximal number of sounds to load.
 #endif  
 #line
@@ -25,7 +25,7 @@ in checkbox Pedal_State pedal_state=0
 #------------------------------------------
 page DSP
     //Sound processing
-in float Volume output_volume=0.3 0:2 0.01,0.1
+float Volume output_volume=0.3 0:2 0.01,0.1
     //Volume.
     //0..1
     

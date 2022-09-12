@@ -14,25 +14,25 @@ const enum Image_Source send_image_source=Image [Image,Test_Image]
     //Should we use real image or test image.
     
 if send_image_source Image
-in object_image Input_Image input_image
+object_image Input_Image input_image
     //Image size must be fixed after running.
 endif    
 
 line 
 
-in enum Search_Faces processing_mode=On_Change [Off,On_Change,On_Checkbox,Each_Frame]
+enum Search_Faces processing_mode=On_Change [Off,On_Change,On_Checkbox,Each_Frame]
     //Processing mode.
 if processing_mode On_Checkbox
-in checkbox New_Frame process_new_frame=0
+checkbox New_Frame process_new_frame=0
     //Usually you should link it with the image update flag.
 endif
 if processing_mode On_Change,On_Checkbox
 separator
-in checkbox Auto_Clear auto_clear_if_no_data=1
+checkbox Auto_Clear auto_clear_if_no_data=1
     //Clear search results if no new frame was passed for several seconds.    
 endif
 if auto_clear_if_no_data 1
-in int Wait_Seconds auto_clear_sec=5 1:* 1,10
+int Wait_Seconds auto_clear_sec=5 1:* 1,10
     //How much wait before resetting results.
     //sec
 endif
@@ -54,7 +54,7 @@ line
 #-------------------------------------------
 page Settings
 
-in string_file Cascade_File cascade_file="HaarCascades/haarcascade_frontalface_default.xml"
+string_file Cascade_File cascade_file="HaarCascades/haarcascade_frontalface_default.xml"
     //Cascade XML file.
     //Choose Haar Cascade xml-file
     //XML (*.xml);; All files (*.*)
@@ -64,43 +64,43 @@ separator
 
     
 line
-in float Min_Size face_min_size=0.01 0:1 0.001,0.01
+float Min_Size face_min_size=0.01 0:1 0.001,0.01
     //Low boundary for the size of smallest detected face, 0 - not use the boundary.
     //0..1
 
 separator 
-in checkbox Canny_Pruning haar_canny_pruning=0
+checkbox Canny_Pruning haar_canny_pruning=0
    //Regions without edges are ignored. Disable to fastening computing.
    
-in checkbox Scale_Image haar_scale_image=0
+checkbox Scale_Image haar_scale_image=0
    //Scale the image rather than the detector (sometimes yields speed increases).
    
-in checkbox Only_Biggest_Face haar_only_biggest_face=0
+checkbox Only_Biggest_Face haar_only_biggest_face=0
    //Only return the largest result.
    
 if haar_only_biggest_face 1
-in checkbox Rough_Search haar_rough_search=1
+checkbox Rough_Search haar_rough_search=1
    //When Only Biggest Face is enabled, stop at the first scale for which multiple results are found.
 endif
    
 separator
-in float Haar_Scale haar_scale=1.1 1.01:2 0.001,0.01
+float Haar_Scale haar_scale=1.1 1.01:2 0.001,0.01
     //The default value is 1.1. For accuracy, bring it closer but not equal to 1.0. To make it faster, use a larger value.
 
 line
-in int Haar_Neighbors haar_neighbors=0 0:5 1,10
+int Haar_Neighbors haar_neighbors=0 0:5 1,10
     //How many neighbors can be grouped into a face, 0 means no grouping, and can use Threshold.
  
 separator
 if haar_neighbors 0
 line
-in checkbox Apply_Threshold haar_apply_threshold=0
+checkbox Apply_Threshold haar_apply_threshold=0
     //Enable thresholding - required several rectangles cover face. Used when "Haar neighbors" is 0. Returns only one biggest "face" - bounding box.
 endif
 if haar_apply_threshold 1
-in int Haar_Threshold haar_threshold=2 1:30 1,10
+int Haar_Threshold haar_threshold=2 1:30 1,10
     //How much rectangles must cover a pixel to treat it as a face. 
-in int Shrink_Res haar_shrink_res=4 1:32 1,10
+int Shrink_Res haar_shrink_res=4 1:32 1,10
     //How much shrink resolution for thresholding. Used for balancing between computing speed and face position accuracy. 
 endif
 
@@ -110,19 +110,19 @@ line
 page Draw
     //Draw results at RenderArea.
     
-in checkbox Draw draw_enabled=1
+checkbox Draw draw_enabled=1
    
 separator
-in float X draw_x=0 0:1 0.001,0.01
+float X draw_x=0 0:1 0.001,0.01
     //Drawing X position.
     //0..1
-in float Y draw_y=0 0:1 0.001,0.01
+float Y draw_y=0 0:1 0.001,0.01
     //Drawing Y position.
     //0..1
 
-in float Size draw_size=0.5 0:1 0.001,0.01
+float Size draw_size=0.5 0:1 0.001,0.01
     //Size of drawing, 1 means fit to area
     
 line
-in checkbox Draw_Raw_Blobs draw_raw_blobs=1
+checkbox Draw_Raw_Blobs draw_raw_blobs=1
     //Should we draw raw blobs for debugging purposes.

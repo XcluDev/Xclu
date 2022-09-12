@@ -11,7 +11,7 @@ page Main
     //General settings
 
 
-in string Code code=""
+string Code code=""
 
     
 

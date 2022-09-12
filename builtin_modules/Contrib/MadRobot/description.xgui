@@ -13,42 +13,42 @@ module_accept_calls=CreateWidget
 #---------------------------------------------------------------------
 page YOLO
 
-in group Input_Image show_input_image=1
+group Input_Image show_input_image=1
 if show_input_image 1
-in object_image Image input_image
+object_image Image input_image
     //Input webcamera image.
 endif 
 
 #--------------------------------------
 line
-in group Cropping_Setup show_cropping=1
+group Cropping_Setup show_cropping=1
 if show_cropping 1
 
-in int crop_x0 crop_x0=0 0:100 1,10
+int crop_x0 crop_x0=0 0:100 1,10
     //
     //%
-in int crop_y0 crop_y0=0 0:100 1,10
+int crop_y0 crop_y0=0 0:100 1,10
     //
     //%
-in int crop_x1 crop_x1=100 0:100 1,10
+int crop_x1 crop_x1=100 0:100 1,10
     //
     //%
-in int crop_y1 crop_y1=100 0:100 1,10
+int crop_y1 crop_y1=100 0:100 1,10
     //
     //%
 
 separator
-in int resize_x resize_x=100 1:* 1,10   
+int resize_x resize_x=100 1:* 1,10   
     //
     //pix
-in int resize_y resize_y=100 1:* 1,10    
+int resize_y resize_y=100 1:* 1,10    
     //
     //pix
 endif
 
 #--------------------------------------
 line    
-in group YOLO_Image show_yolo_image=1
+group YOLO_Image show_yolo_image=1
 if show_yolo_image 1
 out object_image Image yolo_image
 //Image for sending to YOLO.
@@ -56,23 +56,23 @@ endif
 
 #--------------------------------------
 line
-in group YOLO_Setup show_yolo_setup=1
+group YOLO_Setup show_yolo_setup=1
    //Setting connection with YOLO. You need to run it manually: ./_image_yolov3.sh
 
 if show_yolo_setup 1
 
-in string_file Yolo_write_image yolo_write_image="~/darknet/_image.jpg"
+string_file Yolo_write_image yolo_write_image="~/darknet/_image.jpg"
 
-in string_file Yolo_read_txt yolo_read_TXT="~/darknet/_image.txt"
+string_file Yolo_read_txt yolo_read_TXT="~/darknet/_image.txt"
 
 separator
 out text YOLO_Data yolo_data 10 10
     //Result obtained from YOLO
 
-#in string Python_String python_string=""
+#string Python_String python_string=""
 #    //Data from Python with YOLO positions.
 
-#in int Python_Received python_received=0 0:* 1,10
+#int Python_Received python_received=0 0:* 1,10
 #    //Number of data packets received from Python - used for writing "Running..." while waiting.
 #    //times
 
@@ -87,27 +87,27 @@ page Robot
 
 #--------------------------------------
 line
-in group Pick_Up show_pick_up=1
+group Pick_Up show_pick_up=1
     //Point for pick up.
 
 if show_pick_up 1
-in float Cross_X cross_x=0.5 0:1 0.01,0.1
+float Cross_X cross_x=0.5 0:1 0.01,0.1
     //
     //0..1
 
-in float Cross_Y cross_y=0.5 0:1 0.01,0.1
+float Cross_Y cross_y=0.5 0:1 0.01,0.1
     //
     //0..1
 
-in float Cross_W cross_w=0.1 0:1 0.01,0.1
+float Cross_W cross_w=0.1 0:1 0.01,0.1
     //
     //0..1
 
-in float Cross_H cross_h=0.1 0:1 0.01,0.1
+float Cross_H cross_h=0.1 0:1 0.01,0.1
     //
     //0..1
 
-in int Cover cross_cover=40 1:100 1,10
+int Cover cross_cover=40 1:100 1,10
     //How much area must be covered to enable picking up.
     //%
 
@@ -115,42 +115,42 @@ endif
 
 #--------------------------------------
 line
-in group Arduino show_arduino=1
+group Arduino show_arduino=1
     //Sending data to Arduino
 
 if show_arduino 1
-in string Pick_Up ard_pick_up=""
+string Pick_Up ard_pick_up=""
     //Arduino button.
 
-in string Forward ard_forw=""
+string Forward ard_forw=""
     //Arduino button.
 
-in string Backward ard_back=""
+string Backward ard_back=""
 
-in string Left ard_left=""
-in string Right ard_right=""
-in string Stop ard_stop=""
+string Left ard_left=""
+string Right ard_right=""
+string Stop ard_stop=""
 
 endif
 
 #---------------------------------------------------------------------
 line
-in button Start! btn_mind_start
+button Start! btn_mind_start
     //Run!
-in button Stop btn_mind_stop
+button Stop btn_mind_stop
 
-in checkbox auto_start auto_start=0
+checkbox auto_start auto_start=0
 
 separator
-in button Pick_Up btn_pick_up
+button Pick_Up btn_pick_up
 
-in button Forward btn_forw
+button Forward btn_forw
 
-#in button Backward btn_back
+#button Backward btn_back
 
-in button Left btn_left
-in button Right btn_right
-in button Stop btn_stop
+button Left btn_left
+button Right btn_right
+button Stop btn_stop
 
 line
 #---------------------------------------------------------------------

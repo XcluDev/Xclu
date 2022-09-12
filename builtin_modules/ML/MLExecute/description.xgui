@@ -9,29 +9,29 @@ module_name_hint=ml_execute
 page Folders
     //Folders setup.
     
-in string_folder Datasets datasets_folder="Datasets"  
+string_folder Datasets datasets_folder="Datasets"  
     //Folder for datasets. 
     //Choose a datasets folder.
     
-in checkbox Use_Absolute_Path datasets_folder_use_abs=1
+checkbox Use_Absolute_Path datasets_folder_use_abs=1
     //Use absolute path to this folder in scripts. 
 
 line
 
-in string_folder Train_Output train="Train"  
+string_folder Train_Output train="Train"  
     //Folder for training results. 
     //Choose a folder for training results.
 
-in checkbox Use_Absolute_Path train_folder_use_abs=1
+checkbox Use_Absolute_Path train_folder_use_abs=1
     //Use absolute path to this folder in scripts. 
 
 line 
     
-in string_folder Scripts_Folder scripts="stylegan2-colab"  
+string_folder Scripts_Folder scripts="stylegan2-colab"  
     //Temporary folder for writing bat/bash scripts - scripts are created by Xclu. Can be folder with Python code.
     //Choose a folder for writing scripts.
 
-in checkbox Use_Absolute_Path scripts_folder_use_abs=1
+checkbox Use_Absolute_Path scripts_folder_use_abs=1
     //Use absolute path to this folder in scripts. 
 
 line    
@@ -40,33 +40,33 @@ line
 page Create_Dataset
     //Create dataset from images folder - required for Tensor Flow, and can crop/resize images as well.
 
-in string_folder Input_Images images_folder="Images\MySequence1"  
+string_folder Input_Images images_folder="Images\MySequence1"  
     //Folder with input images. 
     //Choose an images folder.
 
-in checkbox Use_Absolute_Path images_folder_use_abs=1
+checkbox Use_Absolute_Path images_folder_use_abs=1
     //Use absolute path to this folder in scripts. 
     
 line    
-in string Dataset_Name dataset_name="Trees_1024"  
+string Dataset_Name dataset_name="Trees_1024"  
     //Folder with datasets. 
     //Choose an datasets folder.
         
     
-in text Create_Dataset_Script create_dataset_script 10 10
+text Create_Dataset_Script create_dataset_script 10 10
     //Bat/bash commands for creating dataset. Use {var_name} for variables.
     //@rem Bat/bash commands for creating dataset. 
     //@rem Use {datasets_folder} and so on for variables.
     //python dataset_tool.py create_from_images {datasets_folder} {images_folder}
 
-in button Run create_dataset_button
+button Run create_dataset_button
     //Start creating dataset.
     
-in text Comments create_dataset_comments 7 7
+text Comments create_dataset_comments 7 7
     //Comments for usage, for example, 'Images must be 1024x1024'.
     
 line 
-in string_file Create_Dataset_Script_File create_dataset_script_file="_prepare_dataset.bat"
+string_file Create_Dataset_Script_File create_dataset_script_file="_prepare_dataset.bat"
     //File name for creating dataset.
     //Choose a file for script for creating a dataset.
     

@@ -8,15 +8,15 @@ module_impl=C++
 page Main
     //General settings.
 
-in string_folder Folder folder=""
+string_folder Folder folder=""
     //Folder to scan.
     //Please choose a folder
 
-in enum Filter filter=All [All,Files,Folders,Images,Videos,Txt,Csv,Ini,Xml,Json,Custom]
+enum Filter filter=All [All,Files,Folders,Images,Videos,Txt,Csv,Ini,Xml,Json,Custom]
     //Type of content we are searching for.
     
 if filter Custom
-in string Custom_Filter custom_filter="*.exe;*.dll"
+string Custom_Filter custom_filter="*.exe;*.dll"
     //Custom filter specification.
 endif
 
@@ -25,18 +25,18 @@ separator
 const enum Run_Mode run_mode=By_Button [By_Button_Press,At_Project_Start]
 
 if run_mode By_Button_Press
-in button Run run_button
+button Run run_button
     //Press to start scanning.
 endif
 
 separator
     
-in enum Result_Type result_type=List_Whole [List_Whole,List_Batch,One_String_By_Update,Burst_of_Strings]
+enum Result_Type result_type=List_Whole [List_Whole,List_Batch,One_String_By_Update,Burst_of_Strings]
     //Represent results as a list of all or several found files, or one-by-one as a string.
 
-in enum On_New_Data on_data=Checkbox [Checkbox,Send_Press]
+enum On_New_Data on_data=Checkbox [Checkbox,Send_Press]
 
-in enum On_End on_end=Do_Nothing [Do_Nothing,Stop_Project]
+enum On_End on_end=Do_Nothing [Do_Nothing,Stop_Project]
 
 separator
 

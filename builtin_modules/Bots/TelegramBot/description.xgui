@@ -7,20 +7,20 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in checkbox Show_Token show_token=0
+checkbox Show_Token show_token=0
     //Disable this to hide token.
     
 if show_token 1
-in string Bot_Token bot_token=""
+string Bot_Token bot_token=""
     //Place bot token here.
 endif
 
-in string Chat_Id chat_id="@..."
+string Chat_Id chat_id="@..."
     //Chat id.
     
 separator
 
-in text Message message_send 10 15
+text Message message_send 10 15
     //Message to send.
-in button Send button_send
+button Send button_send
     //Press to send.

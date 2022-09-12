@@ -8,10 +8,10 @@ module_impl=C++
 
 page Main
 
-in string_file Image_file image_file=""
+string_file Image_file image_file=""
 
-in button Load load_button
+button Load load_button
 
-in image_uint8 Image8 image8
+image_uint8 Image8 image8
 
-in image_float ImageF imagef
+image_float ImageF imagef

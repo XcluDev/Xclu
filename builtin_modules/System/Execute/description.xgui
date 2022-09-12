@@ -9,18 +9,18 @@ module_impl=C++
 #------------------------------------------
 page Main
 
-in string_folder Working_Folder folder_name=""
+string_folder Working_Folder folder_name=""
     //Folder for running the file.
     
-in string_file Command_Or_File file_name=""
+string_file Command_Or_File file_name=""
     //Command or file to execute.
     //Choose File to execute
     //Executables (*.exe *.bat *.sh);; All files (*.*)
 
-in checkbox File_Must_Exists file_must_exists=1
+checkbox File_Must_Exists file_must_exists=1
     //This is file name and it's must exists. Uncheck for running commands such as 'python' or similar.
     
-in string Arguments args=""
+string Arguments args=""
     //Optional command line arguments
 
 
@@ -28,19 +28,19 @@ in string Arguments args=""
 page Run
     //Running controls and error output.
     
-in enum Execute execute_event=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
+enum Execute execute_event=At_First_Frame [At_First_Frame,Each_Frame,On_Button]
     //When start execution.
         
-in enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
+enum Thread_Mode thread_mode=Wait_Finishing [Wait_Finishing,Run_At_Separate_Thread]
     //Should we wait for execution finish or run in a separate thread.
         
 if thread_mode Wait_Finishing
-in checkbox Enable_Timeout enable_timeout=1
+checkbox Enable_Timeout enable_timeout=1
     //Use timeout for stopping execution or wait infinitely
 endif
 
 if enable_timeout 1
-in float Timeout timeout_sec=5 0:* 0.1,1
+float Timeout timeout_sec=5 0:* 0.1,1
     //Timeout duration
     //seconds
 endif
@@ -48,10 +48,10 @@ endif
 separator
 line
 
-in button Run run_button
+button Run run_button
 	//Run execution immediately.
 
-in button Stop stop_button
+button Stop stop_button
 	//Stop execution immediately.
 
     
@@ -82,7 +82,7 @@ separator
 line
 
 #---- errors ----    
-in enum Console_Errors console_errors=Show [Ignore,Show,Show_And_Stop]
+enum Console_Errors console_errors=Show [Ignore,Show,Show_And_Stop]
     //When read data from process console.
 #,Show_And_Stop]
     
@@ -98,64 +98,64 @@ page Write
     //Writing to the process console.
    
 #---- write ----   
-in checkbox Write_At_Least_Once write_at_least_once=0
+checkbox Write_At_Least_Once write_at_least_once=0
     //Write data to process console at process start. If no data is to send - then repeat again and again at each frame. Has meaning for images - waiting for ready.
 
-in checkbox Write_Each_Frame write_each_frame=0
+checkbox Write_Each_Frame write_each_frame=0
     //Write data to process console each frame. Normally we shouldn't do so if run the process in second thread ("Run At Separate Thread"), and should use "Write On Receive" to protect from buffer overflow.
 
-in checkbox Write_On_Receive write_on_receive=0
+checkbox Write_On_Receive write_on_receive=0
     //Write data to process console after receiving answer. Useful for interaction with the process working in the second thread ("Run At Separate Thread").
 
     
-in button Write write_button
+button Write write_button
     //Write to process console right now.
-in enum Data_Type write_type=String [String,Text,Image]
+enum Data_Type write_type=String [String,Text,Image]
     //Data type for console write.
 
 if write_type String
-in string String console_write_string=""
+string String console_write_string=""
     //String to write to process console.
-in enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
+enum Line_Terminator line_term=\r\n [None,\n,\r,\r\n]
 endif
 
 if write_type Text
-in text Text console_write_text 10 12
+text Text console_write_text 10 12
     //Text to write to process console.
 endif
     
 if write_type Image
-in object_image Image console_write_image
+object_image Image console_write_image
     //Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as header (see below) and data array.
     
-in checkbox Send_Header console_write_image_header=0
+checkbox Send_Header console_write_image_header=0
     //Send or not header: uint16 w, uint16 h, uint8 channels. 
     
-in checkbox Transform_Image console_write_image_transform=0
+checkbox Transform_Image console_write_image_transform=0
     //Convert to grayscale or resize image.
 endif
 
 #--- transform image
 if console_write_image_transform 1
 
-in checkbox To_Grayscale console_write_image_to_grayscale=0
+checkbox To_Grayscale console_write_image_to_grayscale=0
     //Convert image to grayscale.
 
-in enum Resize console_write_image_resize=No [No,Rescale,Pixel_Size]    
+enum Resize console_write_image_resize=No [No,Rescale,Pixel_Size]    
     //Resize mode.
 endif
     
 if console_write_image_resize Rescale
-in float Scale console_write_image_resize_scale=1 0:* 0.01,0.1
+float Scale console_write_image_resize_scale=1 0:* 0.01,0.1
     //Scale of output image, 1 - don't rescale.
 endif
 
 if console_write_image_resize Pixel_Size
-in int Size_X console_write_image_sizex=100 1:* 1,10
+int Size_X console_write_image_sizex=100 1:* 1,10
     //X-size of output image.
     //pix
 
-in int Size_Y console_write_image_sizey=100 1:* 1,10
+int Size_Y console_write_image_sizey=100 1:* 1,10
     //Y-size of output image.     
     //pix
 endif
@@ -171,20 +171,20 @@ page Read
     //Reading from the process console.
 
 #---- read ----    
-in enum Console_Read read=After_Finished [Disabled,Each_Frame,After_Finished,On_Button]
+enum Console_Read read=After_Finished [Disabled,Each_Frame,After_Finished,On_Button]
     //When read data from process console.
     
 if read Each_Frame,After_Finished,On_Button
-in button Read read_button
+button Read read_button
     //Read from process console right now.
     
-in enum Data_Type read_type=Text [String,Text,Image]
+enum Data_Type read_type=Text [String,Text,Image]
     //Data type for console read.
     
 out checkbox Received console_read_received=0
     //Flag that data is received. Note, for multiple data it stores only the last data
 
-in text Bang_On_Received console_bang_on_received 3 5
+text Bang_On_Received console_bang_on_received 3 5
     //List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
 
 endif
@@ -195,10 +195,10 @@ out string String console_read_string=""
 endif
 
 if read_type Text
-in checkbox Append console_read_text_append=1
+checkbox Append console_read_text_append=1
     //If enabled, append all input text. If disables - clear each frame.
 
-#in string Marker console_read_text_marker="###"
+#string Marker console_read_text_marker="###"
 #    //Marker denoting the end of text packet from the process. 
 
 out text Text console_read_text 10 12
@@ -232,7 +232,7 @@ out int Received_Times debug_received_times=0 0:* 1,10
     
 line
     
-#in group Show_Absolute_Paths show_abs_paths=0
+#group Show_Absolute_Paths show_abs_paths=0
 #    //Show full path for working folder and file used for execution    
 #if show_abs_paths 1
 out text Working_Folder_Abs_Path debug_folder_path 4 5

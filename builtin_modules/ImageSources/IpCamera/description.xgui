@@ -13,7 +13,7 @@ page Main
     //General settings
 
 #-----------------------------
-in enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
+enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
     //Source of frames - capture frames from real camera of load images from a disk.
 
 
@@ -39,7 +39,7 @@ out checkbox Is_New_Frame is_new_frame=0
     
 #-----------------------------
 separator
-in group Settings settings=0
+group Settings settings=0
 	//Setting webcamera parameters.
     
 if settings 1
@@ -74,14 +74,14 @@ endif
 
 if settings 1
 
-in enum Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
+enum Channels image_channels=RGB [Grayscale,RGB,BGR,RGBA,ABGR,R,G,B]
 #TODO не поддерживаются каналы HSL,H,S,L
     //Desired channels of the output image.
-in enum Data_Type image_data_type=uint8 [uint8,float]
+enum Data_Type image_data_type=uint8 [uint8,float]
     //Desired data type of the output image, uint8=0..255, float=[0,1].
 
 #TODO wait_frame
-#in checkbox Wait_New_Frames wait_frame=0
+#checkbox Wait_New_Frames wait_frame=0
 #    //Wait while new frame arrived
 #TODO: wait timeout
 #TODO: automatic restart in autorestart_sec seconds
@@ -94,7 +94,7 @@ endif
 
 #-----------------------------
 separator
-in group Runtime_Details runtime=0
+group Runtime_Details runtime=0
 	//Runtime variables.
 
 if runtime 1
@@ -115,22 +115,22 @@ endif
 #-----------------------------
 #TODO resize & crop
 #separator
-#in group Resize_and_Crop resize_crop=0
+#group Resize_and_Crop resize_crop=0
 #	//Resizing and cropping options
 
 #if resize_crop 1
-#in enum Resize resize=No [No,Percent,Pixels]
+#enum Resize resize=No [No,Percent,Pixels]
 #    //Resize image
 #    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
 #if resize Percent
-#in float Resize_Percent resize_percent=100 0:1000 0.1,10
+#float Resize_Percent resize_percent=100 0:1000 0.1,10
 #if resize Pixels
-#in int Resize_X resize_x=1024 0:10000 1,20
-#in int Resize_Y resize_y=768 0:10000 1,20
+#int Resize_X resize_x=1024 0:10000 1,20
+#int Resize_Y resize_y=768 0:10000 1,20
 #------------------
 #if resize_crop 1
-#in enum Crop crop=No [No,Percent,Pixels]
+#enum Crop crop=No [No,Percent,Pixels]
 #    //Crop...
 #    
 #endif
@@ -139,10 +139,10 @@ endif
 page Devices
     //Print list of cameras and supported formats
 
-in checkbox Print_Devices print_devices=1
+checkbox Print_Devices print_devices=1
 	//Print list of all connected webcams
 
-in checkbox Print_Formats print_formats=1
+checkbox Print_Formats print_formats=1
 	//Print once list of supported formats of connected camera
 
 
@@ -156,17 +156,17 @@ out text Local_Console local_console 10 15
 #page Load_Frames
 #    //Load frames from disk - simulation of camera
 #    
-#in enum Load_Source load_source=Folder [Folder,Single_Image]
+#enum Load_Source load_source=Folder [Folder,Single_Image]
 #    //Load images from a folder or use a single image
 #
 #if load_source Single_Image
-#in string_file Image_File load_image_file=""
+#string_file Image_File load_image_file=""
 #    //Image file to load.
 #    //Choose an Image
 #    //Images (*.jpg *.png *.bmp *.tif);; All files (*.*)
 #
 #if load_source Folder
-#in string_folder Folder load_folder=""
+#string_folder Folder load_folder=""
 #    //Folder for loading images.
 #endif
     
@@ -179,7 +179,7 @@ out text Local_Console local_console 10 15
 #string load_folder=data/webcam [folder_select]
 #    //Folder for loading frames
 
-#in enum frame_method=autoincrease [autoincrease,fixed]
+#enum frame_method=autoincrease [autoincrease,fixed]
 #    //Scan all images in folder or use fixed frame
 
 #int frame=0 0:100000 1,10
@@ -192,7 +192,7 @@ out text Local_Console local_console 10 15
 #    //Saving grabbed frames to disk - for working without camera by using "Load Frames" mode.
 #    
 #    
-#in checkbox Save_Frames save_frames=0
+#checkbox Save_Frames save_frames=0
 #    //Save frames
 
 #limit number of frames

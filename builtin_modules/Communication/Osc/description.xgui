@@ -11,6 +11,6 @@ page Main
     //General settings
 
 
-in string Send_Address addr="localhost:12345"
+string Send_Address addr="localhost:12345"
     //Address with port: localhost:12345
 

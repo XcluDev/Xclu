@@ -11,11 +11,11 @@ page Main
     //General settings
 
 
-in checkbox Use_Condition use_cond=0
+checkbox Use_Condition use_cond=0
 
-in string Condition_Expr condition=1
+string Condition_Expr condition=1
     
-in enum Mode mode=Stop [Stop,Exit]
+enum Mode mode=Stop [Stop,Exit]
     //Mode: Stop, Exit
 
 #enum show_message_box=No [No,Yes,Confirm_Ok_Cancel,Confirm_Yes_No]

@@ -8,13 +8,13 @@ module_accept_calls=Draw
 page Connect
     //Connecting to device. Please start NeuroplayPro app before connecting.
     
-in button Connect btn_connect
+button Connect btn_connect
     // Press to connect to NeuroplayPro app.
 
-in button Disconnect btn_disconnect
+button Disconnect btn_disconnect
     // Press to disconnect from NeuroplayPro app.
 
-in checkbox Autoconnect autoconnect=0
+checkbox Autoconnect autoconnect=0
     //Connect to NeuroplayPro at start.
 
 const checkbox Graphs graphs_enabled=1
@@ -45,7 +45,7 @@ separator
 if blink_detection 1
 const string Channels blink_channels="Fp3 Fp4"
     //List of blink-analysis channels names, separating by space, for example, "F3 F4".
-in float Threshold blink_thresh=0.5 0:2 0.01,0.1
+float Threshold blink_thresh=0.5 0:2 0.01,0.1
     //Threshold for blink detection.
 out float Value blink_value=0 0:2 0.01,0.1
     //Current blink value (max abs).
@@ -54,15 +54,15 @@ out checkbox Blink blink_detected=0
     
 separator
 
-in float Time_Measure blink_time_measure=0.1 0:2 0.01,0.1
+float Time_Measure blink_time_measure=0.1 0:2 0.01,0.1
     //Time of measuring segment for blink detection.
     //sec
 
-in float Time_Before blink_time_before=0.5 0:2 0.01,0.1
+float Time_Before blink_time_before=0.5 0:2 0.01,0.1
     //Time to cut before blinking. Note: all recordings will be delayed on this value.
     //sec
     
-in float Time_After blink_time_after=0.5 0:2 0.01,0.1
+float Time_After blink_time_after=0.5 0:2 0.01,0.1
     //Time to cut after blinking. 
     //sec
     
@@ -73,17 +73,17 @@ endif
 page Record
     //Recording data.
     
-in enum Source recording_source=Rhythms_Avg [Rhythms_Avg,Rhytms_All_Channels]
+enum Source recording_source=Rhythms_Avg [Rhythms_Avg,Rhytms_All_Channels]
     //Source for recording.
     
-in string_folder Folder recording_folder=""  
+string_folder Folder recording_folder=""  
     //Folder for recordings.
     //Choose Floder to recordings.
     
-in button Start btn_recording_start
+button Start btn_recording_start
     // Press to start recording.
 
-in button Stop btn_recording_stop
+button Stop btn_recording_stop
     // Press to stop recording.
 
 out text Status recording_status 7 9
@@ -109,20 +109,20 @@ out float Concentration value_concentration=0 0:1 0.01,0.1
 
 #-----------------------------
 line
-in group OSC values_osc_group=1
+group OSC values_osc_group=1
 	//Send values by OSC.
 
 if values_osc_group 1
 
-in checkbox Enabled values_osc_enabled=1
+checkbox Enabled values_osc_enabled=1
     
-in string Address values_osc_address="127.0.0.1:12345"
+string Address values_osc_address="127.0.0.1:12345"
 	//Sending address and port; use "127.0.0.1:..." instead "localhost:...".
 	
-in string Meditation_Name values_osc_meditation="/meditation"
+string Meditation_Name values_osc_meditation="/meditation"
     //OSC address for Meditation value.
 
-in string Concentration_Name values_osc_concentration="/concentration"
+string Concentration_Name values_osc_concentration="/concentration"
     //OSC address for Concentration value.
 
 out int Send_Frames values_osc_sent=0 *:* 1,10
@@ -131,12 +131,12 @@ endif
 
 #------------------------------------------
 page Rhythms
-    //Read brain rhythms.
+    //Read brarhythms.
 
 const checkbox Rhythms rhythms_enabled=1
-    //Enable reading brain rhythms.
+    //Enable reading brarhythms.
     
-in string Averaging_Channels rhythms_avg_channels="1 2 3 4 5 6 7 8"
+string Averaging_Channels rhythms_avg_channels="1 2 3 4 5 6 7 8"
     //List of channels for averaging, such as 1 2 3 4 5 6 7 8.
 
 out float Avg_Delta rhythm_avg_delta=0 0:1 0.01,0.1
@@ -198,10 +198,10 @@ out object Recording spectrum_recording
     //Recorded spectrum.
 
     
-in button Save_As btn_spectrum_save
+button Save_As btn_spectrum_save
 # set max duration of grabbing
 
-in button Load btn_spectrum_load
+button Load btn_spectrum_load
 # set max duration of grabbing
 
 out text Frequencies spectrum_freqs 5 7
@@ -216,12 +216,12 @@ const string Render_Area render_area="renderarea1"
 
 separator
 
-in checkbox Draw_Graphs draw_graphs_enabled=1
+checkbox Draw_Graphs draw_graphs_enabled=1
 if draw_graphs_enabled 1
-in float X draw_graphs_x=0 0:1 0.001,0.01
-in float Y draw_graphs_y=0 0:1 0.001,0.01
-in float W draw_graphs_w=1 0:1 0.001,0.01
-in float H draw_graphs_h=1 0:1 0.001,0.01
+float X draw_graphs_x=0 0:1 0.001,0.01
+float Y draw_graphs_y=0 0:1 0.001,0.01
+float W draw_graphs_w=1 0:1 0.001,0.01
+float H draw_graphs_h=1 0:1 0.001,0.01
 endif
 
 #------------------------------------------

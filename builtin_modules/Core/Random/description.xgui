@@ -7,27 +7,27 @@ module_impl=C++
 #-------------------------------------------
 page Main
 
-in enum Output_Type output_type=Int [Float,Int,String]
+enum Output_Type output_type=Int [Float,Int,String]
     //Output value type.
 
 if output_type Float
-in enum Distribution distr_float=Uniform [Uniform]
+enum Distribution distr_float=Uniform [Uniform]
     //Type of distribution
     
-in float From from_float=0 *:* 0.1,1
+float From from_float=0 *:* 0.1,1
     //Minimum value.
-in float To_Excluded to_excluded_float=1 *:* 0.1,1
+float To_Excluded to_excluded_float=1 *:* 0.1,1
     //Maximum value (excluded).
 
     
 if output_type Int
-in int From from_int=0 *:* 1,10
+int From from_int=0 *:* 1,10
     //Minimum value.
-in int To to_int=10 *:* 1,10
+int To to_int=10 *:* 1,10
     //Maximum value (included).
 
 if output_type String
-in text Values values 10 15
+text Values values 10 15
     //String values. Note: empty lines and comments are ignored.
     //A
     //B
@@ -40,11 +40,11 @@ out string Result result=""
     //Resulted value.
     
 separator
-in enum Update_Mode update_mode=Period [Each_Update,Period]
+enum Update_Mode update_mode=Period [Each_Update,Period]
     //Should we renew value on each update or by specified time.
     
 if update_mode Period
-in float Period period_sec=1 0:* 0.01,0.1
+float Period period_sec=1 0:* 0.01,0.1
     //Period in seconds.
     //sec
 

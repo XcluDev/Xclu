@@ -11,10 +11,10 @@ page Figure
     //General settings
 
 
-in checkbox Visible visible=1
+checkbox Visible visible=1
     //Is module enabled
 
-in enum Type type=Rectangle [Point,Line,Triangle,Rectangle]
+enum Type type=Rectangle [Point,Line,Triangle,Rectangle]
     //Figure type
     
 

@@ -8,31 +8,31 @@ module_impl=C++
 page Input
 //Input text to process.
 
-in enum Source source=Text [Text,Text_file,Var,URL,Script]
+enum Source source=Text [Text,Text_file,Var,URL,Script]
 //Source of input files.
 
 if source Text
-in text Text input_text 5 7
+text Text input_text 5 7
     //Input area.
     //My hope is to make it good.
 
 if source Text_file
-in string_file File input_file="text.txt"
+string_file File input_file="text.txt"
     //File name.
 endif
 
 if source Var
-in string_link_string Var input_var="module1->text"
+string_link_string Var input_var="module1->text"
     //Var name.
 endif
 
 if source URL
-in string URL input_url="https://example.com"
+string URL input_url="https://example.com"
     //URL for text to download.
 endif
 
 if source Script
-in text Script input_script 5 7
+text Script input_script 5 7
     //Script for input.
 endif
 
@@ -40,24 +40,24 @@ endif
 page Process
 //Perform html cleaning using readability-lxml.
 
-in checkbox HTML_filter html_filter=1
+checkbox HTML_filter html_filter=1
 //Filter HTML using  readability-lxml.
 
-in checkbox Extract_Paragraphs get_paragraphs=1
+checkbox Extract_Paragraphs get_paragraphs=1
 //Extract paragraphs.
 
-in checkbox Extract_Sentences get_sentences=1
+checkbox Extract_Sentences get_sentences=1
 //Extract sentences.
 
-in checkbox Tokenize tokenize=1
+checkbox Tokenize tokenize=1
 //Extract tokens.
 
-in checkbox Extract_Lexems get_lexems=1
+checkbox Extract_Lexems get_lexems=1
 //Extract lexems.
 
 separator
 
-in enum Result result=JSON [JSON_Text,JSON_Object,Python_Generator]
+enum Result result=JSON [JSON_Text,JSON_Object,Python_Generator]
 //Output type - JSON Text is good for small data, JSON Object works faster, Python Generator is useful for further processing with Python.
 
 #JSON - можно определять типы названия?

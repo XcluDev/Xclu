@@ -9,7 +9,7 @@ page Main
     //General settings
 
 
-in text Code code="" 10 12
+text Code code="" 10 12
 
     
 

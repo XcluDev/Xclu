@@ -58,11 +58,11 @@ const int ScalingY scaling_y=1000 1:* 1,10
 endif
 	
 line
-in int Back_Red back_red=128 0:255 1,10
+int Back_Red back_red=128 0:255 1,10
 	//Background red component.
-in int Back_Green back_green=128 0:255 1,10
+int Back_Green back_green=128 0:255 1,10
 	//Background green component.
-in int Back_Blue back_blue=128 0:255 1,10
+int Back_Blue back_blue=128 0:255 1,10
 	//Background blue component.
 	
 #-------------

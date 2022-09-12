@@ -8,38 +8,38 @@ page Control
     //Common settings for all modules considering execution and error handling.
     
 line
-in checkbox Enabled general_enabled_=1
+checkbox Enabled general_enabled_=1
     //Is module enabled.
     
 if general_enabled_ 1
-in checkbox Auto_Update general_auto_update_=1
+checkbox Auto_Update general_auto_update_=1
     //Is module updates on each "update" event.
 
-in button Bang general_bang_
+button Bang general_bang_
     //One-time module execution - useful for responding on events.
     
 endif
     
 #--------------------
 line
-in group Presets presets_setup=0
+group Presets presets_setup=0
     //Setup presets.
 
 if presets_setup 1    
 out string Preset current_preset=""
     //Name of current preset.
-in button Load... load_preset
-in button Save... save_preset
-in button Edit_List... edit_presets
+button Load... load_preset
+button Save... save_preset
+button Edit_List... edit_presets
 endif    
 
 #--------------------
 line
-in group Error_Handling error_handling=0
+group Error_Handling error_handling=0
     //Settings for handling errors.
 
 if error_handling 1
-in enum Action_On_Error action_on_error=Show_Message_Box_and_Stop [Ignore,Print_To_Console,Show_Message_Box,Stop,Show_Message_Box_and_Stop]
+enum Action_On_Error action_on_error=Show_Message_Box_and_Stop [Ignore,Print_To_Console,Show_Message_Box,Stop,Show_Message_Box_and_Stop]
     //What to do on error.
 
 out checkbox Was_Error was_error=1
@@ -51,7 +51,7 @@ endif
 #--------------------
 
 line
-in group Calls calls_info=0
+group Calls calls_info=0
     //Information about functions which module can call or receive from other modules.
 
 if calls_info 1

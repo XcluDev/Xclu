@@ -12,31 +12,31 @@ page Main
 
 #Channels - split, join
 #Mode
-in enum Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
+enum Output_Mode output_mode=RGB [Grayscale,RGB,BGR,RGBA,BGRA,HSL,R,G,B,H,S,L]
 #data format
-in enum Output_Format output_format=uint8 [uint8,float]
+enum Output_Format output_format=uint8 [uint8,float]
 
 
 #-----------------------------
 separator
-in group Resize_and_Crop resize_crop=0
+group Resize_and_Crop resize_crop=0
 	//Resizing and cropping options
 
 if resize_crop 1
-in enum Resize resize=No [No,Percent,Pixels]
+enum Resize resize=No [No,Percent,Pixels]
     //Resize image
     #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
 if resize Percent
-in float Resize_Percent resize_percent=100 0:1000 0.1,10
+float Resize_Percent resize_percent=100 0:1000 0.1,10
 if resize Pixels
-in int Resize_X resize_x=1024 0:10000 1,20
-in int Resize_Y resize_y=768 0:10000 1,20
+int Resize_X resize_x=1024 0:10000 1,20
+int Resize_Y resize_y=768 0:10000 1,20
 
 #------------------
 
 if resize_crop 1
-in enum Crop crop=No [No,Percent,Pixels]
+enum Crop crop=No [No,Percent,Pixels]
     //Crop...
 
     

@@ -31,17 +31,17 @@ const group Texture1 texture1=0
     //Use texture 1
     
 if texture1 1
-in enum Source tex1_source=Image_File [Image_File,Other_Module_Image]
+enum Source tex1_source=Image_File [Image_File,Other_Module_Image]
     //Image source - file or image from other module.
 
 if tex1_source Image_File
-in string_file Image_File_Name image1_file=""
+string_file Image_File_Name image1_file=""
     //Image File.
     //Choose Image File
     //Images (*.jpg *.png *.bmp *.tif *.tiff);; All files (*.*)
 
 if tex1_source Other_Module_Image
-in string Image_Link image1_link="webcam1->image"
+string Image_Link image1_link="webcam1->image"
     //Reference to image in another module.
 endif
 
@@ -54,7 +54,7 @@ out object Fbo fbo
     
 separator
     
-in text Code fragment_code 30 35
+text Code fragment_code 30 35
     //Shader's code. 
     //#Variables:....
     

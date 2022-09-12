@@ -9,26 +9,26 @@ module_accept_calls=CreateWidget,SoundBufferAdd
 page Make_Database
     //Create database from folder containing equal-length WAV files into a single binary file and text file with the details.
     
-in string_folder Input_WAVs_Folder join_input_folder=""  
+string_folder Input_WAVs_Folder join_input_folder=""  
     //Folder for input wav files. 
     //Choose a datasets folder.
     
 line
 
-in string_folder Resulted_Database_Folder join_output_folder=""  
+string_folder Resulted_Database_Folder join_output_folder=""  
     //Folder for created database - binary file and text file with description. 
     //Choose a folder for database.
 line
-in int WAV_Parts join_wav_parts=64 1:* 1,10
+int WAV_Parts join_wav_parts=64 1:* 1,10
     //Number of parts in each WAV.
-in checkbox Discard_Silence join_discard_empty=1
+checkbox Discard_Silence join_discard_empty=1
     //Discard silent sound parts.
-in int Input_Sample_Rate join_sample_rate=44100 1:* 1,10
+int Input_Sample_Rate join_sample_rate=44100 1:* 1,10
     //Expected WAVs sample rate.
     //Hz
     
 line 
-in button Convert join_convert 
+button Convert join_convert 
     //Join WAVs to a binary file.
 
 separator
@@ -39,25 +39,25 @@ out text Console join_console 10 10
 page Load_Database
     //Load database (created on the prevoius page).
     
-in string_folder Database_Folder db_folder=""  
+string_folder Database_Folder db_folder=""  
     //Folder for input database binary file and text file with description. 
     //Choose a folder for database.
 
       
-in group Limit db_limit=0
+group Limit db_limit=0
     //Limit number of loaded sounds by specified number - used for speed up during testing.
 
 if db_limit 1
-in int Count db_limit_count=10000 1:* 1,10
+int Count db_limit_count=10000 1:* 1,10
     //Maximal number of sounds to load.
 endif  
 
 line
  
-in button Load db_load
+button Load db_load
     //Load database.
     
-in checkbox Autoload db_autoload=0
+checkbox Autoload db_autoload=0
     //Autoload database at start, if exists.
    
     
@@ -80,34 +80,34 @@ out int Channels db_channels=0 0:* 1,10
 page Analyze
     //Analyze and draw sounds using various methods, and play them by mouse clicking.
 
-in enum Method an_method=File_Order [File_Order,tSNE]
+enum Method an_method=File_Order [File_Order,tSNE]
     //Drawing method.
 
 if an_method tSNE
-in int Envelope_Size an_envelope_size=100 1:* 1,10
+int Envelope_Size an_envelope_size=100 1:* 1,10
     //Size of envelope for sound analysis.
 endif
     
-in button Compute an_compute
+button Compute an_compute
     //Start analyzing.
     
-in button Save_As... an_save_as
+button Save_As... an_save_as
     //Save analyze results.
     
 
 line    
-#in group Analyze_Save an_save_group=1
+#group Analyze_Save an_save_group=1
 
 #if an_save_group 1
-in string_file File an_file="analyze.txt"  
+string_file File an_file="analyze.txt"  
     //File for loading analyze results.
     //Choose existing analyze file.
     //Text (*.txt);; All files (*.*)
     
-in button Load an_load
+button Load an_load
     //Load analyze results.
 
-in checkbox Autoload an_autoload=0
+checkbox Autoload an_autoload=0
     //Autoload analyze results.
 
 #endif
@@ -117,13 +117,13 @@ line
 page Visualize
     //Setting for visualizing and sound playing
 
-in int Thumb_Rad vis_thumb_rad=5 1:* 1,10
+int Thumb_Rad vis_thumb_rad=5 1:* 1,10
     //Radius of sound's thumbnail.
     //pix
     
 line   
 
-in float Volume play_volume=0.3 0:2 0.01,0.1
+float Volume play_volume=0.3 0:2 0.01,0.1
     //Volume to play sound.
     //0..1
     

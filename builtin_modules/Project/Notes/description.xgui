@@ -8,6 +8,6 @@ module_impl=C++
 #------------------------------------------
 page Main
 
-in text Notes text_value 30 35
+text Notes text_value 30 35
 //Text area for a "readme" note.
     

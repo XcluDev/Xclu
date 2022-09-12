@@ -23,7 +23,7 @@ const enum Mode mode=Load [Load,Save]
 #------------ Load -----------
 if mode Load
 
-in enum load_source=Single_File [Single_File,Folder]
+enum load_source=Single_File [Single_File,Folder]
     //Image source - single image or folder
 endif
 
@@ -61,7 +61,7 @@ const string Device_Name device_name=""
 endif	
 
 separator
-in button_always Print_Devices print_devices
+button_always Print_Devices print_devices
 	//Show all connected webcams to local console
 
 #-----------------------------

@@ -13,11 +13,11 @@ page Drawing
 
 //Use this module in Window module, and it will draws to widget
 
-in int Screen_Width screen_w=256 1:10000 1,10
+int Screen_Width screen_w=256 1:10000 1,10
 //Width of widget for drawing.
 //pix
 
-in int Screen_Height screen_h=256 1:10000 1,10
+int Screen_Height screen_h=256 1:10000 1,10
 //Height of widget for drawing.
 //pix
 

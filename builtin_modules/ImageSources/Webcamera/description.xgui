@@ -14,7 +14,7 @@ page Main
     //General settings
 
 #-----------------------------
-in enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
+enum Capture_Source capture_source=Camera [Disable,Camera,Load_Frames]
     //Source of frames - capture frames from real camera of load images from a disk.
 
 
@@ -23,7 +23,7 @@ const enum Device select_device=Default [Default,By_Index,By_Name,By_Serial]
 	//Choose the way for selecting webcamera.
     
 if select_device By_Index
-in int Device_Index device_index=0 0:100 1,10
+int Device_Index device_index=0 0:100 1,10
     //Camera index in Operating System. Really it functioning as "const", but because it can be set from Resolver, it's made non-const input.
 endif
 
@@ -47,7 +47,7 @@ out checkbox Is_New_Frame is_new_frame=0
     
 #-----------------------------
 line
-in group Runtime runtime_info=1
+group Runtime runtime_info=1
     //Runtime information
 
 if runtime_info 1
@@ -68,7 +68,7 @@ endif
     
 #-----------------------------
 line
-in group Settings settings=1
+group Settings settings=1
 	//Setting webcamera parameters.
     
 if settings 1
@@ -103,23 +103,23 @@ endif
 
 if settings 1
 
-in enum Pixel_Type pixel_type=RGB [Grayscale,RGB]
+enum Pixel_Type pixel_type=RGB [Grayscale,RGB]
     //Pixel type of output image.
     
 separator
-in checkbox Ignore_Error ignore_error_on_start=1
+checkbox Ignore_Error ignore_error_on_start=1
     //Ignore error with starting.
     
-in checkbox Auto_Restart auto_restart=1
+checkbox Auto_Restart auto_restart=1
     //Autorestart if no new frames for a long time.
     
-in int Wait_Seconds auto_restart_wait_seconds=5 1:* 1,10
+int Wait_Seconds auto_restart_wait_seconds=5 1:* 1,10
     //How much secodsn wait to restart the camera.
     //sec
     
     
 #TODO wait_frame
-#in checkbox Wait_New_Frames wait_frame=0
+#checkbox Wait_New_Frames wait_frame=0
 #    //Wait while new frame arrived
 #TODO: wait timeout
 #TODO: automatic restart in autorestart_sec seconds
@@ -131,16 +131,16 @@ in int Wait_Seconds auto_restart_wait_seconds=5 1:* 1,10
 endif
 
 line
-in button Save_Image save_image
+button Save_Image save_image
     //Press to save the image to a specified file.
-in string File_To_Save save_image_file_name="wabcam.png"
+string File_To_Save save_image_file_name="wabcam.png"
     //File to save the image.    
     
 #-----------------------------
 page Transform
 
 line
-in checkbox_group Transform transform=0
+checkbox_group Transform transform=0
     //Crop, mirror and rotate the image.
     
 
@@ -149,13 +149,13 @@ out object_image Transformed_Image image_transformed
     //Transformed image.
 
 line
-in checkbox Crop_To_Square crop_to_square=0
+checkbox Crop_To_Square crop_to_square=0
     //Crop to square.
 
-in checkbox Mirror_X mirror_x=0
+checkbox Mirror_X mirror_x=0
     //Mirror by horizontal.
     
-in enum Rotate rotate=0 [0,90,180,270]
+enum Rotate rotate=0 [0,90,180,270]
     //Rotation.
     //deg
     
@@ -164,18 +164,18 @@ line
 
     
 #if resize_crop 1
-#in enum Resize resize=No [No,Percent,Pixels]
+#enum Resize resize=No [No,Percent,Pixels]
 #    //Resize image
 #    #QImage scaledImage = image.scaled(imageSize, Qt::KeepAspectRatio);
 #------------------
 #if resize Percent
-#in float Resize_Percent resize_percent=100 0:1000 0.1,10
+#float Resize_Percent resize_percent=100 0:1000 0.1,10
 #if resize Pixels
-#in int Resize_X resize_x=1024 0:10000 1,20
-#in int Resize_Y resize_y=768 0:10000 1,20
+#int Resize_X resize_x=1024 0:10000 1,20
+#int Resize_Y resize_y=768 0:10000 1,20
 #------------------
 #if resize_crop 1
-#in enum Crop crop=No [No,Percent,Pixels]
+#enum Crop crop=No [No,Percent,Pixels]
 #    //Crop...
 #    
 #endif
@@ -184,17 +184,17 @@ line
 page Device_Info
     //Print list of cameras and supported formats.
 
-in button_always Print_Devices print_devices
+button_always Print_Devices print_devices
 	//Print list of all connected devices.
 
-#in button_always Print_USB print_usb
+#button_always Print_USB print_usb
 #	//Print USB ports details (Windows only).
 # Commented, because currently Qt's cameras ID's doesn't coincide with Windows USB enumeration.
 	
-in checkbox Serials print_serials=1
+checkbox Serials print_serials=1
     //Output serial ID of devices - useful if you connecting several cameras of the same model.
     
-in checkbox Formats print_formats=0
+checkbox Formats print_formats=0
 	//Print list of supported formats for connected device at start.
 
 
@@ -295,11 +295,11 @@ const string Render_Area render_area="renderarea1"
 
 separator
 
-in checkbox Draw draw_enabled=1
+checkbox Draw draw_enabled=1
 
-in float X draw_x=0 0:1 0.001,0.01
-in float Y draw_y=0 0:1 0.001,0.01
-in float Size draw_size=0.5 0:1 0.001,0.01
+float X draw_x=0 0:1 0.001,0.01
+float Y draw_y=0 0:1 0.001,0.01
+float Size draw_size=0.5 0:1 0.001,0.01
 
 #--------------------
 #TODO Load frames
@@ -307,17 +307,17 @@ in float Size draw_size=0.5 0:1 0.001,0.01
 #page Load_Frames
 #    //Load frames from disk - simulation of camera
 #    
-#in enum Load_Source load_source=Folder [Folder,Single_Image]
+#enum Load_Source load_source=Folder [Folder,Single_Image]
 #    //Load images from a folder or use a single image
 #
 #if load_source Single_Image
-#in string_file Image_File load_image_file=""
+#string_file Image_File load_image_file=""
 #    //Image file to load.
 #    //Choose an Image
 #    //Images (*.jpg *.png *.bmp *.tif);; All files (*.*)
 #
 #if load_source Folder
-#in string_folder Folder load_folder=""
+#string_folder Folder load_folder=""
 #    //Folder for loading images.
 #endif
     
@@ -330,7 +330,7 @@ in float Size draw_size=0.5 0:1 0.001,0.01
 #string load_folder=data/webcam [folder_select]
 #    //Folder for loading frames
 
-#in enum frame_method=autoincrease [autoincrease,fixed]
+#enum frame_method=autoincrease [autoincrease,fixed]
 #    //Scan all images in folder or use fixed frame
 
 #int frame=0 0:100000 1,10
@@ -343,7 +343,7 @@ in float Size draw_size=0.5 0:1 0.001,0.01
 #    //Saving grabbed frames to disk - for working without camera by using "Load Frames" mode.
 #    
 #    
-#in checkbox Save_Frames save_frames=0
+#checkbox Save_Frames save_frames=0
 #    //Save frames
 
 #limit number of frames
