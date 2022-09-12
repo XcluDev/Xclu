@@ -191,7 +191,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             if (item1 == "if") {
                 //начать новую группу
                 //if mode 3,4
-                xc_assert(n >= 3, "not enough parameters, expected 'if mode 3,4'");
+                xc_assert(n >= 3, "not enough parameters,  expected 'if mode 3,4'");
                 QString item_name = query.at(query_scan++);
                 QStringList variants = query.at(query_scan++).split(",");
 
@@ -205,7 +205,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
                         break;
                     }
                 }
-                xc_assert(found, "item '" + item_name + "' is not found - it must be declared before 'if'");
+                xc_assert(found, "item '" + item_name + "' is not found, it must be declared before 'if'");
                 vis_groups_.push_back(VisibleGroupBase(item_name, variants));
                 //помечаем, что группа для заполнения открыта
                 vis_group_opened_ = true;
@@ -239,12 +239,12 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
 
             //page
             if (item1 == xitem_page()) {
-                xc_assert(n>=2, "bad definiton at line " + line + ", no item title");
+                xc_assert(n>=2, "bad definiton - no item title");
                 QString name = query.at(query_scan++);
-                xc_assert(!name.isEmpty(), "empty page name at line " + line);
+                xc_assert(!name.isEmpty(), "empty page name");
 
                 auto type = item1;
-                //xc_assert(!type.isEmpty(), "internal error: empty type at line " + line);
+                //xc_assert(!type.isEmpty(), "internal error: empty type");
 
                 //collect_description увеличивает i
                 new_decorate_item(name, type, collect_description(lines, i));
@@ -256,11 +256,11 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             // если нет квалификатора, то используется "in"
             // (options) = (not_save) - не сохранять в проекте выходное значение.
 
-            xc_assert(n >= 4, "bad variable description at line '" + line + "', expected '[in/const/out] type title_gui name...'");
+            xc_assert(n >= 3, "Not enough arguments for variable description, expected '[in/const/out] type title_gui name...'");
 
             //парсинг квалификатора и опций out(not_save)
             QStringList qual_list=item1.split(QRegExp("(\\(|\\))"));
-            xc_assert(!qual_list.isEmpty(), "bad qualifiers string at line '" + line + "'");
+            xc_assert(!qual_list.isEmpty(), "bad qualifiers string");
 
             bool throw_exception = false;
             auto qual = string_to_xqualifier(qual_list.at(0), throw_exception);
@@ -280,6 +280,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             }
 
             // Тип
+            xc_assert(query_scan+1<n, "Can't read type");
             QString type_raw = query.at(query_scan++);
             //replace "group" with "checkbox_group"
             if (type_raw == xitem_group()) {
@@ -290,7 +291,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             //парсим type_attribute1_attribute2_... на тип и атрибуты:
             //QStringList type_options=type_raw.split(QRegExp("(\\(|\\))"));
             QStringList type_options=type_raw.split("_");
-            xc_assert(!type_options.isEmpty(), "bad type name at line '" + line + "'");
+            xc_assert(!type_options.isEmpty(), "bad type name");
 
             auto type = type_options.at(0);
             //remove first and join back
@@ -298,14 +299,15 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             QString options = type_options.join("_");
 
             //title
+            xc_assert(query_scan+1<n, "Can't read title");
             QString title = query.at(query_scan++);
             //title = xc_remove_underscore(title);
 
             //qDebug() << "var " << line << ":" << qual << "," << type << "," << title;
             //удаляем первые элементы, чтобы потом остаток соединить и допарсить в конкретных элементах
-            query.removeFirst();
-            query.removeFirst();
-            query.removeFirst();
+            for (int i=0; i<query_scan;i++) {
+                query.removeFirst();
+            }
             //соединяем
             QString line_to_parse = query.join(" ");
             //qDebug() << "var   " << line_to_parse;
