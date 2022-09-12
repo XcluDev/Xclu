@@ -271,8 +271,6 @@
         <file>builtin_modules/Programming/CppCode/description.xgui</file>
         <file>builtin_modules/Project/Notes/auto.h</file>
         <file>builtin_modules/Project/Notes/description.xgui</file>
-        <file>builtin_modules/Project/Presets/auto.h</file>
-        <file>builtin_modules/Project/Presets/description.xgui</file>
         <file>builtin_modules/Project/Project/auto.h</file>
         <file>builtin_modules/Project/Project/description.xgui</file>
         <file>builtin_modules/Sound/MidiFromData/auto.h</file>
@@ -398,5 +396,6 @@
         <file>builtin_modules/Window/RenderElement/description.xgui</file>
         <file>builtin_modules/ComputerVision/FaceDetect/description.xgui</file>
         <file>builtin_modules/Communication/BciNeuroplay/description.xgui</file>
+        <file>builtin_modules/ML/Presets/description.xgui</file>
     </qresource>
 </RCC>

@@ -20,6 +20,7 @@ SOURCES += \
     $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
+    $$PWD/builtin_modules/ML/Presets/xclasspresets.cpp \
     $$PWD/builtin_modules/Project/Project/xclassproject.cpp \
     $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.cpp \
     $$PWD/builtin_modules/Sound/SoundOsc/xclasssoundosc.cpp \
@@ -75,6 +76,8 @@ HEADERS += \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.h \
     $$PWD/builtin_modules/ML/MLExecute/auto.h \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.h \
+    $$PWD/builtin_modules/ML/Presets/auto.h \
+    $$PWD/builtin_modules/ML/Presets/xclasspresets.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xclassproject.h \
     $$PWD/builtin_modules/Sound/SoundIn/auto.h \
