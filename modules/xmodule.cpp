@@ -129,7 +129,7 @@ void XModule::gui_action(GuiStage stage, bool affect_is_running) {
         interf()->state_to_gui();
         //если дело происходит при уже запущенном проекте - то заблокировать константы
         if (is_running()) {
-            interf()->block_gui(XQualifierMask(XQualifierConst));
+            interf()->block_gui(XQualifierMask(XQualifier::Const));
         }
         //enable buttons
         interf()->update_is_running(is_running());
@@ -138,7 +138,7 @@ void XModule::gui_action(GuiStage stage, bool affect_is_running) {
     case GuiStageBeforeStart: {   //GUI -> const и in, блокировка констант
         interf()->gui_to_vars(XQualifierMask::get_const_in());
         if (affect_is_running) {
-            interf()->block_gui(XQualifierMask(XQualifierConst));
+            interf()->block_gui(XQualifierMask(XQualifier::Const));
             set_running(true);
         }
         //Пометить, что все переменные были изменены
@@ -153,7 +153,7 @@ void XModule::gui_action(GuiStage stage, bool affect_is_running) {
         break;
 
     case GuiStageBeforeUpdate:   //GUI -> in; expressions
-        interf()->gui_to_vars(XQualifierMask(XQualifierIn), true);
+        interf()->gui_to_vars(XQualifierMask(XQualifier::In), true);
         //update links and "was_changed"
         interf()->update();
         break;
@@ -168,7 +168,7 @@ void XModule::gui_action(GuiStage stage, bool affect_is_running) {
         interf()->gui_to_vars(XQualifierMask::get_const_in());
         interf()->vars_to_gui(XQualifierMask::get_out_link());
         if (affect_is_running) {
-            interf()->unblock_gui(XQualifierMask(XQualifierConst));
+            interf()->unblock_gui(XQualifierMask(XQualifier::Const));
             set_running(false);
         }
         break;

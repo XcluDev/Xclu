@@ -42,7 +42,7 @@ void repaint_presets_names() { repaint_("presets_names"); }
 //Setting parameters for each preset.
 
 //Button Send
-// Used for sending signal about using preset values from another module.
+// Sets current values to "Values" at the net page. Use for sending signal to another module.
 bool was_changed_btn_send_preset() { return was_changed_("btn_send_preset"); }
 int geti_btn_send_preset() { return geti_("btn_send_preset"); }
 void repaint_btn_send_preset() { repaint_("btn_send_preset"); }
@@ -425,7 +425,7 @@ void repaint_param50() { repaint_("param50"); }
 //Page Output
 //
 
-//Button Export
+//Button Export...
 // Export presets to text file.
 bool was_changed_btn_export_presets() { return was_changed_("btn_export_presets"); }
 int geti_btn_export_presets() { return geti_("btn_export_presets"); }

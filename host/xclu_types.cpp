@@ -62,14 +62,14 @@ QString GENERAL_PAGE_marker() {
 }
 
 //---------------------------------------------------------------------
-const QString XQualifierNames[XQualifierN] = {"?", "in", "out", "const"};
+const QString XQualifierNames[int(XQualifier::N)] = {"?", "in", "out", "const"};
 
 QString xqualifier_to_string(XQualifier xqualifier) {
-    return XTypeUtils::to_string(int(xqualifier), XQualifierN, XQualifierNames);
+    return XTypeUtils::to_string(int(xqualifier), int(XQualifier::N), XQualifierNames);
 }
 
-XQualifier string_to_xqualifier(const QString &xqualifierstr) {
-    return XQualifier(XTypeUtils::to_type(xqualifierstr, XQualifierN, XQualifierNames));
+XQualifier string_to_xqualifier(const QString &xqualifierstr, bool throw_exception) {
+    return XQualifier(XTypeUtils::to_type(xqualifierstr, int(XQualifier::N), XQualifierNames, throw_exception));
 }
 
 //---------------------------------------------------------------------

@@ -184,15 +184,16 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             query[query.size()-1] += def_value_string;
             //--------------------------------------------
             int n = query.size();
-            QString item1 = query.at(0);
+            int query_scan = 0;
+            QString item1 = query.at(query_scan++);
 
             //начало группы видимости
             if (item1 == "if") {
                 //начать новую группу
                 //if mode 3,4
                 xc_assert(n >= 3, "not enough parameters, expected 'if mode 3,4'");
-                QString item_name = query.at(1);
-                QStringList variants = query.at(2).split(",");
+                QString item_name = query.at(query_scan++);
+                QStringList variants = query.at(query_scan++).split(",");
 
                 //проверка, зарегистрирован ли уже этот элемент
                 //нужно именно просканировать список, так как maps еще не готовы
@@ -239,7 +240,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             //page
             if (item1 == xitem_page()) {
                 xc_assert(n>=2, "bad definiton at line " + line + ", no item title");
-                QString name = query.at(1);
+                QString name = query.at(query_scan++);
                 xc_assert(!name.isEmpty(), "empty page name at line " + line);
 
                 auto type = item1;
@@ -250,8 +251,10 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
                 continue;
             }
 
-            //переменная
-            //[in/const/out][(options)] type[_option1_...] title_gui name, и затем опционально '=' или ' ', var_details
+            // переменная
+            // [in/const/out][(options)] type[_option1_...] title_gui name, и затем опционально '=' или ' ', var_details
+            // если нет квалификатора, то используется "in"
+            // (options) = (not_save) - не сохранять в проекте выходное значение.
 
             xc_assert(n >= 4, "bad variable description at line '" + line + "', expected '[in/const/out] type title_gui name...'");
 
@@ -259,16 +262,25 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             QStringList qual_list=item1.split(QRegExp("(\\(|\\))"));
             xc_assert(!qual_list.isEmpty(), "bad qualifiers string at line '" + line + "'");
 
-            auto qual = string_to_xqualifier(qual_list.at(0));
-            xc_assert(qual != XQualifierNone, "unknown variable qualifier at line '" + line + "', expected: 'in', 'out', 'const'");
+            bool throw_exception = false;
+            auto qual = string_to_xqualifier(qual_list.at(0), throw_exception);
+
             QString qual_options;
-            if (qual_list.size() >= 2) {
-                qual_options = qual_list.at(1);
+
+            // Если не распознан, то это in
+            if (qual == XQualifier::None) {
+                qual = XQualifier::In;
+                query_scan--;   // сбрасываем номер в query, чтобы конвертировать уже тип
+            }
+            else {
+                // Парсинг опций типа out(not_save)
+                if (qual_list.size() >= 2) {
+                    qual_options = qual_list.at(1);
+                }
             }
 
-
-            //get type
-            QString type_raw = query.at(1);
+            // Тип
+            QString type_raw = query.at(query_scan++);
             //replace "group" with "checkbox_group"
             if (type_raw == xitem_group()) {
                 type_raw = "checkbox_group";
@@ -286,7 +298,7 @@ void XModuleInterface::parse_trimmed(const QStringList &lines) {
             QString options = type_options.join("_");
 
             //title
-            QString title = query.at(2);
+            QString title = query.at(query_scan++);
             //title = xc_remove_underscore(title);
 
             //qDebug() << "var " << line << ":" << qual << "," << type << "," << title;

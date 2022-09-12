@@ -24,7 +24,7 @@ class XItemPreDescription {
 public:
     QString title;
     QString type = "";
-    XQualifier qualifier = XQualifierIn;
+    XQualifier qualifier = XQualifier::In;
     QString qualifier_options; //опции в квалификаторе, типа out(save)
     QString options;        //дополнительные опции, типа choose:file, choose:folder для строк string(choose:file)
     QString line_to_parse;  //полная строка для парсинга: in float ...
@@ -39,7 +39,7 @@ public:
     static XItem *new_item(XModuleInterface *interf, const XItemPreDescription &pre_description);
     static XItem *new_item(XModuleInterface *interf, QString title_underscored, QString type,
                                   const QStringList &description,
-                                  XQualifier qual = XQualifierIn, QString line_to_parse = "",
+                                  XQualifier qual = XQualifier::In, QString line_to_parse = "",
                                   QString options = "",
                                   QString qual_options = "");
     //page, group

@@ -35,16 +35,16 @@ QString xitem_button();
 QString GENERAL_PAGE_marker();
 
 //Способ использования переменной
-enum XQualifier : int {
-    XQualifierNone = 0,
-    XQualifierIn = 1,
-    XQualifierOut = 2,
-    XQualifierConst = 3,
-    XQualifierN = 4
+enum class XQualifier : int {
+    None = 0,
+    In = 1,
+    Out = 2,
+    Const = 3,
+    N = 4
 };
 
 QString xqualifier_to_string(XQualifier xqualifier);
-XQualifier string_to_xqualifier(const QString &xqualifierstr);
+XQualifier string_to_xqualifier(const QString &xqualifierstr, bool throw_exception = true);
 
 //Qualifiers mask - used for GUI-module interaction
 struct XQualifierMask {
@@ -53,9 +53,9 @@ struct XQualifierMask {
     static XQualifierMask get_out_link() { return XQualifierMask(false,false,true,true); }
     XQualifierMask() {}
     XQualifierMask(XQualifier qual) {
-        qual_const = (qual == XQualifierConst);
-        qual_in = (qual == XQualifierIn);
-        qual_out = (qual == XQualifierOut);
+        qual_const = (qual == XQualifier::Const);
+        qual_in = (qual == XQualifier::In);
+        qual_out = (qual == XQualifier::Out);
         qual_link = false;
     }
     XQualifierMask(bool qual_const, bool qual_in, bool qual_out = false, bool qual_link = false) {

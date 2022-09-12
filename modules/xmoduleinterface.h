@@ -148,7 +148,7 @@ private:
     void new_item(const XItemPreDescription &pre_description);
     void new_item(QString title_underscored, QString type,
                      const QStringList &description,
-                     XQualifier qual = XQualifierIn,
+                     XQualifier qual = XQualifier::In,
                      QString line_to_parse = "", QString options = "",
                      QString qual_options = "");
     void new_decorate_item(QString name, QString type, const QStringList &description);

@@ -47,7 +47,7 @@
                                                   QString name,
                                                   QString type, const QStringList &description) {
     //QString title = xc_remove_underscore(name);
-    return new_item(interf, name, type, description, XQualifierIn, name);
+    return new_item(interf, name, type, description, XQualifier::In, name);
 }
 
 //---------------------------------------------------------------------
@@ -63,7 +63,7 @@
 
     QString options = type_options.join("_");
 
-    return new_item(interf, name, type, QStringList(), XQualifierIn, name, options);
+    return new_item(interf, name, type, QStringList(), XQualifier::In, name, options);
 }
 
 //---------------------------------------------------------------------
@@ -88,11 +88,11 @@ XItem::XItem(XModuleInterface *interf, const XItemPreDescription &pre_descriptio
 
     //опции квалификатора, может быть только out(save)
     auto &options = pre_description.qualifier_options;
-    xc_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifierOut),
+    xc_assert(options.isEmpty() || (options.contains("save") && qualifier_ == XQualifier::Out),
               "Currently only out(save) option supported, but get other for " + pre_description.line_to_parse);
 
     //ставим, нужно ли сохранять в проект
-    if (qualifier_ != XQualifierOut) {
+    if (qualifier_ != XQualifier::Out) {
         save_to_project_ = true;
     }
     else {
@@ -165,17 +165,17 @@ XQualifier XItem::qualifier() {
 
 //---------------------------------------------------------------------
 bool XItem::is_const() {
-    return (qualifier_ == XQualifierConst);
+    return (qualifier_ == XQualifier::Const);
 }
 
 //---------------------------------------------------------------------
 bool XItem::is_in() {
-    return (qualifier_ == XQualifierIn);
+    return (qualifier_ == XQualifier::In);
 }
 
 //---------------------------------------------------------------------
 bool XItem::is_out() {
-    return (qualifier_ == XQualifierOut);
+    return (qualifier_ == XQualifier::Out);
 }
 
 //---------------------------------------------------------------------
@@ -734,8 +734,8 @@ void XItem::export_interface_template(QStringList &file,
     }
     if (comment_description) {
         QString qualif;
-        if (qualifier() == XQualifierOut) qualif = "Out ";
-        if (qualifier() == XQualifierConst) qualif = "Const ";
+        if (qualifier() == XQualifier::Out) qualif = "Out ";
+        if (qualifier() == XQualifier::Const) qualif = "Const ";
         file.append("//" + qualif + custom_comment_begin + title());
         file.append("//" + description());
     }
@@ -749,7 +749,7 @@ void XItem::export_interface_template(QStringList &file,
         }
 
         //out
-        if (qualifier() == XQualifierOut
+        if (qualifier() == XQualifier::Out
                 && !cpp_setter.isEmpty()) {
             file.append(QString("void set%3_%1(%2value) { %4_(\"%1\", value); }").arg(name()).arg(cpp_type).arg(fun_prefix).arg(cpp_setter));
             //additional for object without pointers:
