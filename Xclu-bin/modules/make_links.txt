@@ -1,0 +1,4 @@
+Для создания ссылок в эту папку для кастомных модулей 
+используйте mklink: 
+
+mklink /D /J d:\Xclu\Xclu-bin\modules\FoodAi d:\perevalovds.com\_2022\2022-EEG_Food\UEFood\FoodAi
