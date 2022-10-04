@@ -181,12 +181,12 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
 
     qDebug() << "    f..." << endl;
 	for (int i = 0; i < m; i++) {
-        QString a = x_to_string(ind[i * 3] + 1);
-        QString b = x_to_string(ind[i * 3 + 1] + 1);
-        QString c = x_to_string(ind[i * 3 + 2] + 1);
-		a = a + "/" + a + "/" + a;
-		b = b + "/" + b + "/" + b;
-		c = c + "/" + c + "/" + c;
+        QString a1 = x_to_string(ind[i * 3] + 1);
+        QString b1 = x_to_string(ind[i * 3 + 1] + 1);
+        QString c1 = x_to_string(ind[i * 3 + 2] + 1);
+        QString a = a1 + "/" + ((textured) ? a1 : "") + ((setupNormals) ? "/" + a1 : "");
+        QString b = b1 + "/" + ((textured) ? b1 : "") + ((setupNormals) ? "/" + b1 : "");
+        QString c = c1 + "/" + ((textured) ? c1 : "") + ((setupNormals) ? "/" + c1 : "");
 		list[j++] = "f " + a + " " + b + " " + c;
 	}
 

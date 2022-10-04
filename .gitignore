@@ -37,3 +37,8 @@
 /.qmake*
 /Makefile
 
+/Xclu-bin/Config/Xclu_settings.ini
+/Xclu-bin/*.ilk
+/Xclu-bin/*.pdb
+/Xclu-bin/Tools/Win10SDK
+/Xclu-bin/modules/FoodAi
