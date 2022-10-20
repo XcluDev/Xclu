@@ -24,15 +24,15 @@ EditorModules::EditorModules(QWidget *parent, QMenu *modulesMenu)
     //buttons
     toolBar = new QToolBar(tr("Modules"));
 
-    new_action(addAction, tr("Add XModule"), "module_add.png", modulesMenu);
+    new_action(addAction, tr("Add Module"), "module_add.png", modulesMenu);
     toolBar->addSeparator();
-    new_action(renameAction, tr("Rename XModule"), "module_rename.png", modulesMenu);
+    new_action(renameAction, tr("Rename Module"), "module_rename.png", modulesMenu);
     toolBar->addSeparator();
     new_action(downAction, tr("Move Down"), "module_down.png", modulesMenu);
     new_action(upAction, tr("Move Up"), "module_up.png", modulesMenu);
-    new_action(duplicateAction, tr("Duplicate XModule"), "module_duplicate.png", modulesMenu);
+    new_action(duplicateAction, tr("Duplicate Module"), "module_duplicate.png", modulesMenu);
     toolBar->addSeparator();
-    new_action(deleteAction, tr("Delete XModule"), "module_delete.png", modulesMenu);
+    new_action(deleteAction, tr("Delete Module"), "module_delete.png", modulesMenu);
 
     connect(addAction, SIGNAL (triggered()), this, SLOT (add_module_click()));
     connect(renameAction, SIGNAL (triggered()), this, SLOT (rename_module_click()));

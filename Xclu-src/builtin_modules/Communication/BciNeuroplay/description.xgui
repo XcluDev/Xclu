@@ -78,7 +78,7 @@ enum Source recording_source=Rhythms_Avg [Rhythms_Avg,Rhytms_All_Channels]
     
 string_folder Folder recording_folder=""  
     //Folder for recordings.
-    //Choose Floder to recordings.
+    //Choose Folder to recordings.
     
 button Start btn_recording_start
     // Press to start recording.

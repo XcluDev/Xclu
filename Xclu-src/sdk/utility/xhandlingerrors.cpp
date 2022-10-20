@@ -12,21 +12,20 @@
 //Вызовы исключений:
 //Исключение при парсинге и прочих внутренних операциях
 void xc_exception(QString message) {
-    __debugbreak();
     xc_exception(XCallError(message));
 }
 
 //---------------------------------------------------------------------
 void xc_exception(XCallError err) {
     qDebug() << "xc_exception:" << err.error_text();
-    __debugbreak();
+    //__debugbreak();
     throw XException(err);
 }
 
 //---------------------------------------------------------------------
 //Ошибка, после которой программа завершает работу
 void xc_halt(QString message) {
-    __debugbreak();
+    //__debugbreak();
     throw XCluCriticalException(message);
 }
 
