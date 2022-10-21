@@ -52,6 +52,14 @@ void XClass::bang_internal() {
 }
 
 //---------------------------------------------------------------------
+void XClass::start() {
+    xc_exception(
+                QString("XClass::start called, it means your class %1"
+                        "has no implementation. Check class name at REGISTER_XCLASS(...)")
+                .arg(name()));
+}
+
+//---------------------------------------------------------------------
 //выполнить stop, и если нужно - start
 void XClass::stop_internal() {
     if (status_.was_started) {

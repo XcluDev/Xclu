@@ -130,7 +130,7 @@ protected:
     //внимание, эта функция запускается всегда, без контроля enabled - для проверки используйте is_enabled()
     virtual void on_loaded() {}
     //эти функции запускаются, только если модуль включен:
-    virtual void start() {}
+    virtual void start();   // данная функция выдаст, что модуль не реализован
     virtual void process_events() {}   //used for processing mouse/keyboard events in at XClassWidget
     virtual void update() {}
     virtual void stop() {}
