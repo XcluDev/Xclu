@@ -71,15 +71,19 @@ void MainWindow::setup_internal() {   //запуск всех процессов
     set_state(ProjectRunStateStopped);
 
     //ставим папку для первого открытия проекта из последней папки сохраненного проекта
-    open_projects_folder_ = Settings::gets(Settings::lastProjectFolder());
+    QString relProjectFolder = Settings::gets(Settings::lastProjectFolder());
+    QDir app_dir(xc_app_folder());
+    open_projects_folder_ = app_dir.absoluteFilePath(relProjectFolder);
 
     //открываем последний проект, если он есть
-    QString last_project = Settings::gets(Settings::lastProjectFile());
+    QString relProjectFile = Settings::gets(Settings::lastProjectFile());
     bool loaded = false;
-    if (!last_project.isEmpty()) {
-        QFileInfo file(last_project);
+    if (!relProjectFile.isEmpty()) {
+        QDir proj_dir(open_projects_folder_);
+        QString projectFile = proj_dir.absoluteFilePath(relProjectFile);
+        QFileInfo file(projectFile);
         if (file.exists() && file.isFile()) {
-            openProject(last_project);
+            openProject(projectFile);
             loaded = true;
         }
     }
@@ -422,12 +426,18 @@ void MainWindow::set_current_file(const QString &fileName) {
     }
 
     if (!isUntitled) {
-        //запомнить файл проекта, чтобы его потом открыть
-        Settings::sets(Settings::lastProjectFile(), projectFile);
+        // Запомнить файл и папку открытого проекта, чтобы его потом открыть при запуске
+        // Конвертация в относительный путь
+        QDir app_dir(xc_app_folder());
 
-        //запомнить папку проекта, чтобы от нее затем начинать Open Project
-        QString folder = QFileInfo(projectFile).canonicalPath();
-        Settings::sets(Settings::lastProjectFolder(), folder);
+        //запомнить относительную папку проекта, чтобы от нее затем начинать Open Project
+        QString projectFolder = QFileInfo(projectFile).canonicalPath();
+        QString relProjectFolder = app_dir.relativeFilePath(projectFolder);
+        Settings::sets(Settings::lastProjectFolder(), relProjectFolder);
+
+        QDir proj_dir(projectFolder);
+        QString relProjectFile = proj_dir.relativeFilePath(projectFile);
+        Settings::sets(Settings::lastProjectFile(), relProjectFile);
 
         //добавить в список недавно открытых файлов
         if (windowFilePath() != projectFile) {
