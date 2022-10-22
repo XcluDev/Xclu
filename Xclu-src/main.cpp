@@ -11,8 +11,15 @@
 #include "mainwindow.h"
 
 
+// В качестве аргумента командной строки может быть указан относительный путь до проекта
 int main(int argc, char *argv[])
 {
+    // Путь для открытия проекта
+    QString startupRelProjectPath = "";
+    if (argc >= 2) {
+        startupRelProjectPath = argv[1];
+        qDebug() << "Will open project specified by command line: " << startupRelProjectPath;
+    }
 
     //Создание приложения
     QApplication app(argc, argv);
@@ -55,7 +62,7 @@ int main(int argc, char *argv[])
         //QSurfaceFormat::setDefaultFormat(fmt);
 
         //-------------------------------------------
-        MainWindow *mainWin = new MainWindow;
+        MainWindow *mainWin = new MainWindow(nullptr, startupRelProjectPath);
         mainWin->show();
         result = app.exec();
         //-------------------------------------------

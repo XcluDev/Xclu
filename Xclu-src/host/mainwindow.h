@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent, QString startupRelProjectPath);
     virtual ~MainWindow();
 
     static MainWindow *window();   //эта функция используется для передачи изменений проекта из xc_document_modified()
@@ -39,7 +39,7 @@ private:
     Ui::MainWindow *ui;
 
     void init();
-    void setup_internal();   //запуск всех процессов - считывание списка модулей, открытие проекта
+    void setup_internal(QString startupRelProjectPath);   //запуск всех процессов - считывание списка модулей, открытие проекта
 
     //Функция, которая вызывается при закрытии окна
     void closeEvent(QCloseEvent *event) override;

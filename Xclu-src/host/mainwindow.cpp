@@ -19,7 +19,7 @@ MainWindow *MAIN_WINDOW = nullptr;
 }
 
 //---------------------------------------------------------------------
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, QString startupRelProjectPath) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     init();
     readSettings();
 
-    setup_internal();
+    setup_internal(startupRelProjectPath);
 }
 
 //---------------------------------------------------------------------
@@ -66,17 +66,30 @@ void MainWindow::init() {
 }
 
 //---------------------------------------------------------------------
-void MainWindow::setup_internal() {   //запуск всех процессов
+void MainWindow::setup_internal(QString startupRelProjectPath) {   //запуск всех процессов
     //помечаем, что готовы к запуску
     set_state(ProjectRunStateStopped);
 
-    //ставим папку для первого открытия проекта из последней папки сохраненного проекта
-    QString relProjectFolder = Settings::gets(Settings::lastProjectFolder());
+    // Анализируем, нужно ли загружать стартовый файл
     QDir app_dir(xc_app_folder());
+    QString relProjectFolder;
+    QString relProjectFile;
+
+    if (!startupRelProjectPath.isEmpty()){
+        // Берем путь к проекту из командной строки
+        QFileInfo fileInfo(startupRelProjectPath);
+        relProjectFolder = fileInfo.path();
+        relProjectFile = fileInfo.fileName();
+    }
+    else {
+        // Берем путь к проекту из настроек
+        relProjectFolder = Settings::gets(Settings::lastProjectFolder());
+        relProjectFile = Settings::gets(Settings::lastProjectFile());
+    }
+
     open_projects_folder_ = app_dir.absoluteFilePath(relProjectFolder);
 
     //открываем последний проект, если он есть
-    QString relProjectFile = Settings::gets(Settings::lastProjectFile());
     bool loaded = false;
     if (!relProjectFile.isEmpty()) {
         QDir proj_dir(open_projects_folder_);
