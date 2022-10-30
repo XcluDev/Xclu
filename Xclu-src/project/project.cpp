@@ -235,9 +235,10 @@ QString Project::generate_unique_name(QString name_hint, bool dont_change_if_ok)
     }
 
     QString result;
-    //бесконечный цикл
+    // бесконечный цикл
+    // Большими буквами, и добавляем цифры только если уже есть
     for (int i=1;; i++) {
-        QString name = name_hint + QString::number(i);
+        QString name = name_hint.toUpper() + ((i>1)?QString::number(i):"");
         if (!names_.contains(name)) {
             return name;
         }
