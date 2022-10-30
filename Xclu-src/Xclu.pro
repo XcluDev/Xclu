@@ -65,6 +65,7 @@ QT += core gui
 QT += multimedia multimediawidgets
 QT += serialport network websockets
 QT += 3dcore 3drender 3dinput 3dextras
+QT += qml
 QT += core-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

@@ -3,11 +3,11 @@
 #---------------------------------------------------
 
 SOURCES += \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplaypro.cpp \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplayprodevice.cpp \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/neuroplaypro.cpp \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/neuroplayprodevice.cpp \
     $$PWD/builtin_modules/Bots/TelegramBot/xclasstelegrambot.cpp \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/xclassbcineuroplay.cpp \
-    $$PWD/builtin_modules/Communication/Serial/xclassserial.cpp \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/xclassbcineuroplay.cpp \
+    $$PWD/builtin_modules/Devices/Serial/xclassserial.cpp \
     $$PWD/builtin_modules/ComputerVision/FaceDetect/xclassfacedetect.cpp \
     $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.cpp \
     $$PWD/builtin_modules/Core/Random/xclassrandom.cpp \
@@ -16,7 +16,7 @@ SOURCES += \
     $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.cpp \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp \
-    $$PWD/builtin_modules/ImageSources/Webcamera/xclasswebcamera.cpp \
+    $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.cpp \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
@@ -48,12 +48,12 @@ SOURCES += \
 HEADERS += \
     $$PWD/builtin_modules/Bots/TelegramBot/auto.h \
     $$PWD/builtin_modules/Bots/TelegramBot/xclasstelegrambot.h \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/auto.h \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplaypro.h \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/neuroplayprodevice.h \
-    $$PWD/builtin_modules/Communication/BciNeuroplay/xclassbcineuroplay.h \
-    $$PWD/builtin_modules/Communication/Serial/auto.h \
-    $$PWD/builtin_modules/Communication/Serial/xclassserial.h \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/auto.h \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/neuroplaypro.h \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/neuroplayprodevice.h \
+    $$PWD/builtin_modules/Devices/BciNeuroplay/xclassbcineuroplay.h \
+    $$PWD/builtin_modules/Devices/Serial/auto.h \
+    $$PWD/builtin_modules/Devices/Serial/xclassserial.h \
     $$PWD/builtin_modules/ComputerVision/FaceDetect/xclassfacedetect.h \
     $$PWD/builtin_modules/Contrib/MadRobot/auto.h \
     $$PWD/builtin_modules/Contrib/MadRobot/xclassmadrobot.h \
@@ -68,8 +68,8 @@ HEADERS += \
     $$PWD/builtin_modules/Drawing/FragmentShader/auto.h \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.h \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.h \
-    $$PWD/builtin_modules/ImageSources/Webcamera/auto.h \
-    $$PWD/builtin_modules/ImageSources/Webcamera/xclasswebcamera.h \
+    $$PWD/builtin_modules/Devices/Webcamera/auto.h \
+    $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.h \
     $$PWD/builtin_modules/Interactive/MotionDetector/auto.h \
     $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.h \
     $$PWD/builtin_modules/Interactive/MotionDetectorRouter/auto.h \
@@ -414,12 +414,12 @@ HEADERS += \
 #}
 #
 #SOURCES +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera.cpp \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera_impl.cpp
+#    $$PWD/builtin_modules/Devices/RealsenseCamera/xclassrealsensecamera.cpp \
+#    $$PWD/builtin_modules/Devices/RealsenseCamera/xclassrealsensecamera_impl.cpp
 #
 #HEADERS +=    \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera.h \
-#    $$PWD/builtin_modules/ImageSources/RealsenseCamera/xclassrealsensecamera_impl.h
+#    $$PWD/builtin_modules/Devices/RealsenseCamera/xclassrealsensecamera.h \
+#    $$PWD/builtin_modules/Devices/RealsenseCamera/xclassrealsensecamera_impl.h
 
 
 #--------------------------------------------------------------------------
@@ -433,11 +433,11 @@ HEADERS += \
 #    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
 #
 #SOURCES +=    \
-#    $$PWD/builtin_modules/Communication/Ndi/xclassndi.cpp
+#    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.cpp
 #
 #HEADERS +=    \
-#    $$PWD/builtin_modules/Communication/Ndi/auto.h \
-#    $$PWD/builtin_modules/Communication/Ndi/xclassndi.h
+#    $$PWD/builtin_modules/Protocols/Ndi/auto.h \
+#    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.h
 #
 #}
 

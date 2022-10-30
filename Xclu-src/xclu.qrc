@@ -117,27 +117,27 @@
         <file>builtin_modules/Bots/TelegramBot/auto.h</file>
         <file>builtin_modules/Bots/TelegramBot/description.xgui</file>
         <file>builtin_modules/Bots/TelegramBot/xclasstelegrambot.cpp</file>
-        <file>builtin_modules/Communication/MailNotification/auto.h</file>
-        <file>builtin_modules/Communication/MailNotification/description.xgui</file>
-        <file>builtin_modules/Communication/Midi/auto.h</file>
-        <file>builtin_modules/Communication/Midi/description.xgui</file>
-        <file>builtin_modules/Communication/MQTT/auto.h</file>
-        <file>builtin_modules/Communication/MQTT/description.xgui</file>
-        <file>builtin_modules/Communication/Ndi/auto.h</file>
-        <file>builtin_modules/Communication/Ndi/description.xgui</file>
-        <file>builtin_modules/Communication/Osc/auto.h</file>
-        <file>builtin_modules/Communication/Osc/description.xgui</file>
-        <file>builtin_modules/Communication/Serial/auto.h</file>
-        <file>builtin_modules/Communication/Serial/description.xgui</file>
-        <file>builtin_modules/Communication/Serial/xclassserial.cpp</file>
-        <file>builtin_modules/Communication/SharedMemory/auto.h</file>
-        <file>builtin_modules/Communication/SharedMemory/description.xgui</file>
-        <file>builtin_modules/Communication/SMSNotification/auto.h</file>
-        <file>builtin_modules/Communication/SMSNotification/description.xgui</file>
-        <file>builtin_modules/Communication/Spout/auto.h</file>
-        <file>builtin_modules/Communication/Spout/description.xgui</file>
-        <file>builtin_modules/Communication/Tcp/auto.h</file>
-        <file>builtin_modules/Communication/Tcp/description.xgui</file>
+        <file>builtin_modules/Protocols/MailNotification/auto.h</file>
+        <file>builtin_modules/Protocols/MailNotification/description.xgui</file>
+        <file>builtin_modules/Protocols/Midi/auto.h</file>
+        <file>builtin_modules/Protocols/Midi/description.xgui</file>
+        <file>builtin_modules/Protocols/MQTT/auto.h</file>
+        <file>builtin_modules/Protocols/MQTT/description.xgui</file>
+        <file>builtin_modules/Protocols/Ndi/auto.h</file>
+        <file>builtin_modules/Protocols/Ndi/description.xgui</file>
+        <file>builtin_modules/Protocols/Osc/auto.h</file>
+        <file>builtin_modules/Protocols/Osc/description.xgui</file>
+        <file>builtin_modules/Devices/Serial/auto.h</file>
+        <file>builtin_modules/Devices/Serial/description.xgui</file>
+        <file>builtin_modules/Devices/Serial/xclassserial.cpp</file>
+        <file>builtin_modules/Protocols/SharedMemory/auto.h</file>
+        <file>builtin_modules/Protocols/SharedMemory/description.xgui</file>
+        <file>builtin_modules/Protocols/SMSNotification/auto.h</file>
+        <file>builtin_modules/Protocols/SMSNotification/description.xgui</file>
+        <file>builtin_modules/Protocols/Spout/auto.h</file>
+        <file>builtin_modules/Protocols/Spout/description.xgui</file>
+        <file>builtin_modules/Protocols/Tcp/auto.h</file>
+        <file>builtin_modules/Protocols/Tcp/description.xgui</file>
         <file>builtin_modules/ComputerVision/BlobsTracking/auto.h</file>
         <file>builtin_modules/ComputerVision/BlobsTracking/description.xgui</file>
         <file>builtin_modules/ComputerVision/ImageToText/auto.h</file>
@@ -201,14 +201,14 @@
         <file>builtin_modules/ImageSources/ImageLoader/auto.h</file>
         <file>builtin_modules/ImageSources/ImageLoader/description.xgui</file>
         <file>builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp</file>
-        <file>builtin_modules/ImageSources/IpCamera/auto.h</file>
-        <file>builtin_modules/ImageSources/IpCamera/description.xgui</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/auto.h</file>
-        <file>builtin_modules/ImageSources/RealsenseCamera/description.xgui</file>
+        <file>builtin_modules/Devices/IpCamera/auto.h</file>
+        <file>builtin_modules/Devices/IpCamera/description.xgui</file>
+        <file>builtin_modules/Devices/RealsenseCamera/auto.h</file>
+        <file>builtin_modules/Devices/RealsenseCamera/description.xgui</file>
         <file>builtin_modules/ImageSources/ScreenCapture/auto.h</file>
         <file>builtin_modules/ImageSources/ScreenCapture/description.xgui</file>
-        <file>builtin_modules/ImageSources/Webcamera/auto.h</file>
-        <file>builtin_modules/ImageSources/Webcamera/description.xgui</file>
+        <file>builtin_modules/Devices/Webcamera/auto.h</file>
+        <file>builtin_modules/Devices/Webcamera/description.xgui</file>
         <file>builtin_modules/Interactive/ContourFromImage/auto.h</file>
         <file>builtin_modules/Interactive/ContourFromImage/description.xgui</file>
         <file>builtin_modules/Interactive/ContourPointCloud/auto.h</file>
@@ -395,7 +395,7 @@
         <file>builtin_modules/Window/RenderArea/description.xgui</file>
         <file>builtin_modules/Window/RenderElement/description.xgui</file>
         <file>builtin_modules/ComputerVision/FaceDetect/description.xgui</file>
-        <file>builtin_modules/Communication/BciNeuroplay/description.xgui</file>
+        <file>builtin_modules/Devices/BciNeuroplay/description.xgui</file>
         <file>builtin_modules/ML/Presets/description.xgui</file>
     </qresource>
 </RCC>
