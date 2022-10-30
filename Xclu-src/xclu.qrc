@@ -209,22 +209,22 @@
         <file>builtin_modules/ImageSources/ScreenCapture/description.xgui</file>
         <file>builtin_modules/Devices/Webcamera/auto.h</file>
         <file>builtin_modules/Devices/Webcamera/description.xgui</file>
-        <file>builtin_modules/Interactive/ContourFromImage/auto.h</file>
-        <file>builtin_modules/Interactive/ContourFromImage/description.xgui</file>
-        <file>builtin_modules/Interactive/ContourPointCloud/auto.h</file>
-        <file>builtin_modules/Interactive/ContourPointCloud/description.xgui</file>
-        <file>builtin_modules/Interactive/EmotionRecognize/auto.h</file>
-        <file>builtin_modules/Interactive/EmotionRecognize/description.xgui</file>
-        <file>builtin_modules/Interactive/EyesTobii/auto.h</file>
-        <file>builtin_modules/Interactive/EyesTobii/description.xgui</file>
-        <file>builtin_modules/Interactive/FingersLeapMotion/auto.h</file>
-        <file>builtin_modules/Interactive/FingersLeapMotion/description.xgui</file>
-        <file>builtin_modules/Interactive/HandControlPointCloud/auto.h</file>
-        <file>builtin_modules/Interactive/HandControlPointCloud/description.xgui</file>
-        <file>builtin_modules/Interactive/MotionDetector/auto.h</file>
-        <file>builtin_modules/Interactive/MotionDetector/description.xgui</file>
-        <file>builtin_modules/Interactive/SensorDetection/auto.h</file>
-        <file>builtin_modules/Interactive/SensorDetection/description.xgui</file>
+        <file>builtin_modules/ComputerVision/ContourFromImage/auto.h</file>
+        <file>builtin_modules/ComputerVision/ContourFromImage/description.xgui</file>
+        <file>builtin_modules/PointCloud/ContourPointCloud/auto.h</file>
+        <file>builtin_modules/PointCloud/ContourPointCloud/description.xgui</file>
+        <file>builtin_modules/ComputerVision/EmotionRecognize/auto.h</file>
+        <file>builtin_modules/ComputerVision/EmotionRecognize/description.xgui</file>
+        <file>builtin_modules/Devices/EyesTobii/auto.h</file>
+        <file>builtin_modules/Devices/EyesTobii/description.xgui</file>
+        <file>builtin_modules/Devices/FingersLeapMotion/auto.h</file>
+        <file>builtin_modules/Devices/FingersLeapMotion/description.xgui</file>
+        <file>builtin_modules/PointCloud/HandControlPointCloud/auto.h</file>
+        <file>builtin_modules/PointCloud/HandControlPointCloud/description.xgui</file>
+        <file>builtin_modules/ComputerVision/MotionDetector/auto.h</file>
+        <file>builtin_modules/ComputerVision/MotionDetector/description.xgui</file>
+        <file>builtin_modules/Sensors/SensorDetection/auto.h</file>
+        <file>builtin_modules/Sensors/SensorDetection/description.xgui</file>
         <file>builtin_modules/KnowledgeGraphs/CYC/auto.h</file>
         <file>builtin_modules/KnowledgeGraphs/CYC/description.xgui</file>
         <file>builtin_modules/KnowledgeGraphs/GoogleKnowledgeGraph/auto.h</file>
@@ -386,7 +386,7 @@
         <file>builtin_examples/Timer.xclu</file>
         <file>builtin_modules/Core/ValueMap/description.xgui</file>
         <file>builtin_modules/System/FileCreate/description.xgui</file>
-        <file>builtin_modules/Interactive/MotionDetectorRouter/description.xgui</file>
+        <file>builtin_modules/ComputerVision/MotionDetectorRouter/description.xgui</file>
         <file>builtin_modules/ML/MLExecute/description.xgui</file>
         <file>builtin_modules/Sound/SoundsDatabaseAnalyze/description.xgui</file>
         <file>builtin_modules/Contrib/MadRobot/description.xgui</file>

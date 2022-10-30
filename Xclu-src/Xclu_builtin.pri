@@ -17,8 +17,8 @@ SOURCES += \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp \
     $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.cpp \
-    $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.cpp \
-    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
+    $$PWD/builtin_modules/ComputerVision/MotionDetector/xclassmotiondetector.cpp \
+    $$PWD/builtin_modules/ComputerVision/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
     $$PWD/builtin_modules/ML/Presets/xclasspresets.cpp \
     $$PWD/builtin_modules/Project/Project/xclassproject.cpp \
@@ -70,10 +70,10 @@ HEADERS += \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.h \
     $$PWD/builtin_modules/Devices/Webcamera/auto.h \
     $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.h \
-    $$PWD/builtin_modules/Interactive/MotionDetector/auto.h \
-    $$PWD/builtin_modules/Interactive/MotionDetector/xclassmotiondetector.h \
-    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/auto.h \
-    $$PWD/builtin_modules/Interactive/MotionDetectorRouter/xclassmotiondetectorrouter.h \
+    $$PWD/builtin_modules/ComputerVision/MotionDetector/auto.h \
+    $$PWD/builtin_modules/ComputerVision/MotionDetector/xclassmotiondetector.h \
+    $$PWD/builtin_modules/ComputerVision/MotionDetectorRouter/auto.h \
+    $$PWD/builtin_modules/ComputerVision/MotionDetectorRouter/xclassmotiondetectorrouter.h \
     $$PWD/builtin_modules/ML/MLExecute/auto.h \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.h \
     $$PWD/builtin_modules/ML/Presets/auto.h \
