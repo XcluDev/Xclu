@@ -125,7 +125,7 @@ DialogAddModule::DialogAddModule(QWidget *parent)
               );
 
     //Заголовок
-    setWindowTitle(tr("Choose a XModule to Add"));
+    setWindowTitle(tr("Choose a module to Add"));
 
     //установка считанного tab
     page_ = -1;

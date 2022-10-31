@@ -27,7 +27,6 @@ class DialogTestModuleInterface : public QDialog
 
 public:
     //Call this function for working with dialog
-    //if returns not nullptr - then success and you can use dialog's value
     static void call_dialog(QWidget *parent);
 
     DialogTestModuleInterface(QWidget *parent);

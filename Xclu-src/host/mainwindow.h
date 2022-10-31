@@ -62,6 +62,8 @@ private slots:
 
     void on_actionCompile_triggered();
 
+    void on_actionEdit_Module_Interface_triggered();
+
 private:
     //обновить заголовок окна и состояние элементов управления
     void update_window_state();

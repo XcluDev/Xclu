@@ -171,6 +171,7 @@ INCLUDEPATH += libs/QOsc/qosc/src libs/QOsc/qosc/include
 FORMS += \
     host/dialogs/dialogeditlink.ui \
     host/dialogs/dialogeditlinks.ui \
+    host/dialogs/dialogeditui.ui \
     host/dialogs/dialogmodulename.ui \
     host/mainwindow.ui
 
@@ -207,6 +208,7 @@ SOURCES += \
     components/xitemscalar.cpp \
     host/dialogs/dialogeditlink.cpp \
     host/dialogs/dialogeditlinks.cpp \
+    host/dialogs/dialogeditui.cpp \
     host/mainwindow.cpp \
     host/recentfiles.cpp \
     host/xc_paths.cpp \
@@ -328,6 +330,7 @@ HEADERS += \
     components/xitemscalar.h \
     host/dialogs/dialogeditlink.h \
     host/dialogs/dialogeditlinks.h \
+    host/dialogs/dialogeditui.h \
     host/mainwindow.h \
     host/recentfiles.h \
     host/xc_paths.h \

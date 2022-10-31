@@ -8,11 +8,10 @@
 #include "xguieditor.h"
 #include "exportinterface.h"
 
-DialogTestModuleInterface *D_TEST_MODULE_INTERFACE;
+DialogTestModuleInterface *D_TEST_MODULE_INTERFACE = nullptr;
 
 //---------------------------------------------------------------------
 //Call this function for working with dialog
-//if returns not nullptr - then success and you can use dialog's value
 /*static*/ void DialogTestModuleInterface::call_dialog(QWidget *parent) {
     //Внимание, тут parent только один раз задается
     if (!D_TEST_MODULE_INTERFACE) {
@@ -46,7 +45,7 @@ DialogTestModuleInterface::DialogTestModuleInterface(QWidget *parent)
     connect(export_button, &QPushButton::released, this, &DialogTestModuleInterface::pressed_export_h);
 
     //Выбор файла
-    QGroupBox *control_group = new QGroupBox(tr("XModule folder"));
+    QGroupBox *control_group = new QGroupBox(tr("Module folder"));
     control_group->setLayout(xclu::vlayout(-1,
                                            folder_edit_ = new QPlainTextEdit(), 0,
                                            buttonBox, 0)

@@ -9,6 +9,7 @@
 #include "xobjectvis.h"
 #include "consoleview.h"
 #include "dialogtestmoduleinterface.h"
+#include "dialogeditui.h"
 #include "exportinterface.h"
 
 MainWindow *MAIN_WINDOW = nullptr;
@@ -200,6 +201,12 @@ void MainWindow::on_actionSave_Project_As_triggered() {
 void MainWindow::on_actionExit_triggered()
 {
     qApp->closeAllWindows();
+}
+
+void MainWindow::on_actionEdit_Module_Interface_triggered()
+{
+    //Редактор интерфейса XGUI
+    DialogEditUI::call_dialog(this);
 }
 
 //---------------------------------------------------------------------
@@ -589,3 +596,4 @@ void MainWindow::on_actionLinks_Editor_triggered()
 }
 
 //---------------------------------------------------------------------
+
