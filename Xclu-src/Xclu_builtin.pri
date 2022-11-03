@@ -22,6 +22,7 @@ SOURCES += \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
     $$PWD/builtin_modules/ML/Presets/xclasspresets.cpp \
     $$PWD/builtin_modules/Project/Project/xclassproject.cpp \
+    $$PWD/builtin_modules/Protocols/Udp/xclassudp.cpp \
     $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.cpp \
     $$PWD/builtin_modules/Sound/SoundOsc/xclasssoundosc.cpp \
     $$PWD/builtin_modules/Sound/SoundOut/xclasssoundout.cpp \
@@ -80,6 +81,8 @@ HEADERS += \
     $$PWD/builtin_modules/ML/Presets/xclasspresets.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xclassproject.h \
+    $$PWD/builtin_modules/Protocols/Udp/auto.h \
+    $$PWD/builtin_modules/Protocols/Udp/xclassudp.h \
     $$PWD/builtin_modules/Sound/SoundIn/auto.h \
     $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.h \
     $$PWD/builtin_modules/Sound/SoundOsc/auto.h \

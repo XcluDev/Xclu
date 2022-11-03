@@ -1,0 +1,16 @@
+#Module Osc
+#------------------------------------------
+#module_class=Osc
+#module_category=Communication
+module_description=Send and receive data via UDP protocol.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page Main
+    //General settings
+const enum Mode mode=receive [send,receive]
+
+string Send_Address addr="localhost:12345"
+    //Address with port: localhost:12345
+

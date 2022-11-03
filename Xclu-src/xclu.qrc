@@ -397,5 +397,6 @@
         <file>builtin_modules/ComputerVision/FaceDetect/description.xgui</file>
         <file>builtin_modules/Devices/BciNeuroplay/description.xgui</file>
         <file>builtin_modules/ML/Presets/description.xgui</file>
+        <file>builtin_modules/Protocols/Udp/description.xgui</file>
     </qresource>
 </RCC>
