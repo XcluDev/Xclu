@@ -12,7 +12,7 @@ XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
         QStringList list = line.split(",");
         for (int i=0; i<list.size(); i++) {
             auto call_type = string_to_XCallType(list[i].trimmed());
-            call_types_[call_type] = 1;
+            call_types_[int(call_type)] = 1;
         }
     }
 }
@@ -21,17 +21,17 @@ XModuleRegisteredCalls::XModuleRegisteredCalls(QString line) {
 bool XModuleRegisteredCalls::accepts(XCallType call_type) {
     if (any_) return true;
     if (call_type == XCallType::none) return true;
-    return call_types_.contains(call_type);
+    return call_types_.contains(int(call_type));
 }
 
 //---------------------------------------------------------------------
 bool XModuleRegisteredCalls::accepts_by_filter(const QString &filter) {  //returns true if 'filter' is empty or contained in any of list
     if (any_) return true;
     if (filter.isEmpty()) return true;
-    QMapIterator<XCallType, int> i(call_types_);
+    QHashIterator<int/*XCallType*/, int> i(call_types_);
     while (i.hasNext()) {
         i.next();
-        QString name = XCallType_to_string(i.key());
+        QString name = XCallType_to_string(XCallType(i.key()));
         if (name.contains(filter)) {
             return true;
         }
@@ -44,10 +44,10 @@ QString XModuleRegisteredCalls::to_string_gui() {        //конвертаци�
     if (any_) return "*";
     QString s;
     if (!call_types_.isEmpty()) {
-        QMapIterator<XCallType, int> i(call_types_);
+        QHashIterator<int/*XCallType*/, int> i(call_types_);
         while (i.hasNext()) {
             i.next();
-            s.append(XCallType_to_string(i.key()));
+            s.append(XCallType_to_string(XCallType(i.key())));
             s.append("\n");
         }
     }

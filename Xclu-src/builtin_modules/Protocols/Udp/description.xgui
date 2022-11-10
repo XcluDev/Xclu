@@ -1,4 +1,4 @@
-#Module Osc
+#Module Udp
 #------------------------------------------
 #module_class=Osc
 #module_category=Communication
@@ -7,10 +7,91 @@ module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
+# Page Main
+#-------------------------------------------
 page Main
     //General settings
-const enum Mode mode=receive [send,receive]
+    
+const enum Mode mode=Receive [Send,Receive]
+    // Mode of the module.
 
-string Send_Address addr="localhost:12345"
-    //Address with port: localhost:12345
+# Send -------------------------------------------
 
+if mode Send
+const string Send_Address send_address="localhost:12345"
+    //Address with port: localhost:12345.
+
+line
+
+const checkbox Send_File send_from_file=0
+    // Send data from a given text file.
+endif
+
+# Receive -------------------------------------------
+
+if mode Receive
+const int Receive_Port receive_port=12345 1:* 1,10
+    // Port for receiving.
+    
+const checkbox Emulate receive_emulate=0
+    // Emulate receiving from text file.
+endif
+
+
+# Emulation -------------------------------------------
+
+if send_from_file 1
+const string_file Read_File send_file_name=""
+    //Text file to load for emulating.
+    //Choose a text file
+    //Text (*.txt);; All files (*.*)
+int Rate send_rate=5 1:* 1,10
+    //How much lines read per second.
+    //lines/sec
+endif
+
+if receive_emulate 1
+const string_file Read_File receive_emulate_file_name=""
+    //Text file to load for emulating.
+    //Choose a text file
+    //Text (*.txt);; All files (*.*)
+int Rate receive_emulate_rate=5 1:* 1,10
+    //How much lines read per second.
+    //lines/sec
+endif
+
+# Data -------------------------------------------
+
+line
+
+if mode Send
+out int Total_Bytes send_total_bytes=0 0:* 1,10
+    // Total amount of bytes sent.
+checkbox Is_New_Data send_new_data=1
+    // Is new data to send at this frame.
+endif
+
+if send_from_file 0
+text Send_Data send_data 10 10
+    //Data to send.
+button Send btn_send
+    //Send data immediately.
+endif
+
+if send_from_file 1
+out text Send_Data send_emulated_data 10 10
+    //Data to send from a file.
+
+
+if mode Receive
+out int Total_Bytes received_total_bytes=0 0:* 1,10
+    // Total amount of bytes received.
+out checkbox Is_New_Data received_new_data=0
+    // Is new data received at this frame.
+
+out text Received_Data received_data 10 10
+    //Received data.
+
+endif
+
+#-------------------------------------------

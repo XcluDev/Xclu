@@ -100,7 +100,7 @@ private:
     void read_json(const QJsonObject &json);
 
     //обновить имена - следует делать после загрузки проекта и добавления/удаления/переименования/изменения порядка модулей
-    QMap<QString, int> names_;
+    QHash<QString, int> names_;
 
     //вычисление expressions и работа с GUI, см. определение GuiStage
     //тут можно вызывать только GuiStageProjectAfterLoading и GuiStageProjectBeforeSaving

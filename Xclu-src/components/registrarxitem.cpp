@@ -5,13 +5,13 @@
 #include "xmoduleinterface.h"
 
 //---------------------------------------------------------------------
-QMap<QString, XItemCreateFunction> *xitem_registered_classes_ = nullptr;
+QHash<QString, XItemCreateFunction> *xitem_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Registering item class by name
 /*static*/ void RegistrarXItem::register_xitem(QString class_name, XItemCreateFunction creator_function) {
     if (!xitem_registered_classes_) {
-        xitem_registered_classes_ = new QMap<QString, XItemCreateFunction>;
+        xitem_registered_classes_ = new QHash<QString, XItemCreateFunction>;
     }
     //qDebug() << "Registered module implementation " << class_name;
     (*xitem_registered_classes_)[class_name] = creator_function;

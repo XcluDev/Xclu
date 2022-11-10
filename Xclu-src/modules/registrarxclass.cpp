@@ -6,13 +6,13 @@
 //Мы должны указать переменную как указатель, так как у нас модули регистрируются с помощью
 //переменных и неизвестно, когда запустится их конструктор - раньше или позже rt_registered_classes_
 //Внимание: сейчас нет удаления этой переменной.
-QMap<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
+QHash<QString, XModuleCreateFunction> *rt_registered_classes_ = nullptr;
 
 //---------------------------------------------------------------------
 //Функция для регистрации модуля по имени класса
 /*static*/ void RegistrarXClass::register_rt_class(QString class_name, XModuleCreateFunction creator_fun) {
     if (!rt_registered_classes_) {
-        rt_registered_classes_ = new QMap<QString, XModuleCreateFunction>;
+        rt_registered_classes_ = new QHash<QString, XModuleCreateFunction>;
     }
     //qDebug() << "Registered module implementation " << class_name;
     (*rt_registered_classes_)[class_name] = creator_fun;

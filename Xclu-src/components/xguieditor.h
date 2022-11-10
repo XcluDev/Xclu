@@ -73,7 +73,7 @@ protected:
     XModule *module_ = nullptr;
 
     QVector<XGuiComp *> items_; //элементы GUI
-    QMap<QString, XGuiComp *> items_by_name_;   //элементы по имени, для установки связей видимости
+    QHash<QString, XGuiComp *> items_by_name_;   //элементы по имени, для установки связей видимости
 
     void reload_name(); //обновить имя и класс модуля, использует moddule_. Если его нет - скрывает Label
 

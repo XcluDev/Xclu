@@ -42,7 +42,7 @@ protected:
     int default_index_ = 0;
 
     QStringList rawtexts_;
-    QMap<QString, int> map_index_;
+    QHash<QString, int> map_index_;
 
     QString units_; //опционально - единицы измерения, которые показываются в виде метки справа от числа
 

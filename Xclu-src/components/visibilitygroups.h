@@ -23,7 +23,7 @@ public:
 
 protected:
     QString item_name_;
-    QMap<QString, int> variants_;
+    QHash<QString, int> variants_;
     QStringList affected_items_;
 };
 
@@ -35,7 +35,7 @@ protected:
 class VisibilityGroupGui
 {
 public:
-    VisibilityGroupGui(const QMap<QString, int> &variants);
+    VisibilityGroupGui(const QHash<QString, int> &variants);
     void add_affected_item(XGuiComp *item);
 
     //сигналы
@@ -43,7 +43,7 @@ public:
     void value_changed(QString new_value);   //изменился параметр
     void visibility_changed(bool visibility);   //видимость самого элемента
 protected:
-    QMap<QString, int> variants_;
+    QHash<QString, int> variants_;
     QVector<XGuiComp *> affected_items_;
 
     bool self_visibility_ = true;

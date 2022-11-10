@@ -178,7 +178,7 @@ private:
     //установка параметров по-умолчанию из описания модуля на страницу general
     void set_general_values();
 
-    QMap<QString, XItem *> items_by_name_;
+    QHash<QString, XItem *> items_by_name_;
 
     //Редактор модуля - используется, чтобы запомнить его tab. Удалять не следует
     XGuiEditor *editor_ = nullptr;

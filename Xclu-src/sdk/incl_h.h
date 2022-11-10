@@ -4,6 +4,7 @@
 
 #include <QVector>
 #include <QMap>
+#include <QHash>
 #include <QSet>
 #include <QString>
 #include <QStringList>

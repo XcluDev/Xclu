@@ -1,0 +1,232 @@
+{
+    "application": {
+        "name": "Xclu",
+        "version": "1.150"
+    },
+    "aproject_properties": {
+        "name": "",
+        "selected_module": "1"
+    },
+    "modules": [
+        {
+            "description": {
+                "class": "JsModule",
+                "name": "js_module1",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "UI",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_ui_",
+                        "avalue": "object_image Image image\n  //Input image\n\n"
+                    },
+                    {
+                        "aname": "_advanced_",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_module_class_",
+                        "avalue": "MyModule"
+                    },
+                    {
+                        "aname": "_module_category_",
+                        "avalue": "MyModules"
+                    },
+                    {
+                        "aname": "_module_description_",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "_module_version_",
+                        "avalue": "1.01"
+                    },
+                    {
+                        "aname": "Setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_setup_",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Update",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_update_",
+                        "avalue": "const v = module1.geti(\"value\");\n"
+                    },
+                    {
+                        "aname": "Draw",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_draw_",
+                        "avalue": "//SCR.w\n//SCR.h\nSetColor(255,0,255);\nDrawLine(0,0,100,200);\nvec2 p(2,3);"
+                    },
+                    {
+                        "aname": "Events",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_events_",
+                        "avalue": "void keyPressed(int key) {\n\n}\n\n"
+                    },
+                    {
+                        "aname": "Sound",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_sound_",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Vars",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_vars_",
+                        "avalue": "let Keys=[];"
+                    },
+                    {
+                        "aname": "Functions",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_functions_",
+                        "avalue": "export function map(x,a,b,A,B) {\n  return (x-a)/(b-a)*(A-B);\n}"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Project",
+                "name": "PROJECT",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "frame_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "autostart",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "autostart_wait_sec",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "dont_save_at_exit",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Watchdog",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_enabled",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_frame",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "watchdog_wait_sec",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "watchdog_tick_sec",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "watchdog_threshold_rate",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "test_pause",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}

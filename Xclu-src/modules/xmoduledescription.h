@@ -21,7 +21,7 @@ public:
     bool accepts_by_filter(const QString &filter);  //returns true if 'filter' is empty or contained in any of list
     QString to_string_gui();        //конвертация в строку для выдачи в text
 protected:
-    QMap<XCallType, int> call_types_;   //делаем QMap, чтобы было упорядоченно
+    QHash<int/*XCallType*/, int> call_types_;
     bool any_ = false;
 };
 

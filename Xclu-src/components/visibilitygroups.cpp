@@ -40,7 +40,7 @@ VisibilityGroupGui *VisibleGroupBase::create_group_gui() {
 //создается в XModuleInterface при подключении GUI
 //когда в этот объект приходят сигналы value_visibility_setup, value_changed или visibility_changed,
 //он при необходимости высылает сигналы детям.
-VisibilityGroupGui::VisibilityGroupGui(const QMap<QString, int> &variants) {
+VisibilityGroupGui::VisibilityGroupGui(const QHash<QString, int> &variants) {
     variants_ = variants;
 }
 
