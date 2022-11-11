@@ -3,7 +3,7 @@
 //Created automatically.
 //----------------------------------------------------
 //Page Main
-//General settings
+//Main functionality.
 
 //Const Enum Mode
 // Mode of the module.
@@ -30,19 +30,25 @@ bool was_changed_send_from_file() { return was_changed_("send_from_file"); }
 int geti_send_from_file() { return geti_("send_from_file"); }
 void repaint_send_from_file() { repaint_("send_from_file"); }
 
-//Const Int Receive Port
-// Port for receiving.
-bool was_changed_receive_port() { return was_changed_("receive_port"); }
-int geti_receive_port() { return geti_("receive_port"); }
-void repaint_receive_port() { repaint_("receive_port"); }
-
 //Const Checkbox Emulate
 // Emulate receiving from text file.
 bool was_changed_receive_emulate() { return was_changed_("receive_emulate"); }
 int geti_receive_emulate() { return geti_("receive_emulate"); }
 void repaint_receive_emulate() { repaint_("receive_emulate"); }
 
-//Const String Read File
+//Const Int Receive Port
+// Port for receiving.
+bool was_changed_receive_port() { return was_changed_("receive_port"); }
+int geti_receive_port() { return geti_("receive_port"); }
+void repaint_receive_port() { repaint_("receive_port"); }
+
+//Const Checkbox Only Last Packet
+//If several packets were received, keep only the latest one.
+bool was_changed_receive_only_last_packet() { return was_changed_("receive_only_last_packet"); }
+int geti_receive_only_last_packet() { return geti_("receive_only_last_packet"); }
+void repaint_receive_only_last_packet() { repaint_("receive_only_last_packet"); }
+
+//Const String File To Send
 //Text file to load for emulating.
 bool was_changed_send_file_name() { return was_changed_("send_file_name"); }
 QString gets_send_file_name() { return gets_("send_file_name"); }
@@ -55,7 +61,7 @@ bool was_changed_send_rate() { return was_changed_("send_rate"); }
 int geti_send_rate() { return geti_("send_rate"); }
 void repaint_send_rate() { repaint_("send_rate"); }
 
-//Const String Read File
+//Const String Read From File
 //Text file to load for emulating.
 bool was_changed_receive_emulate_file_name() { return was_changed_("receive_emulate_file_name"); }
 QString gets_receive_emulate_file_name() { return gets_("receive_emulate_file_name"); }
@@ -69,13 +75,13 @@ int geti_receive_emulate_rate() { return geti_("receive_emulate_rate"); }
 void repaint_receive_emulate_rate() { repaint_("receive_emulate_rate"); }
 
 
-//Out Int Total Bytes
-// Total amount of bytes sent.
-bool was_changed_send_total_bytes() { return was_changed_("send_total_bytes"); }
-int geti_send_total_bytes() { return geti_("send_total_bytes"); }
-void seti_send_total_bytes(int value) { seti_("send_total_bytes", value); }
-void increase_int_send_total_bytes(int increase = 1) { increase_int_("send_total_bytes", increase); }
-void repaint_send_total_bytes() { repaint_("send_total_bytes"); }
+//Out Int Sent Packets
+// Amount of data packets sent.
+bool was_changed_send_packets() { return was_changed_("send_packets"); }
+int geti_send_packets() { return geti_("send_packets"); }
+void seti_send_packets(int value) { seti_("send_packets", value); }
+void increase_int_send_packets(int increase = 1) { increase_int_("send_packets", increase); }
+void repaint_send_packets() { repaint_("send_packets"); }
 
 //Checkbox Is New Data
 // Is new data to send at this frame.
@@ -108,13 +114,13 @@ void append_string_send_emulated_data(QString v, int extra_new_lines_count = 0) 
 void append_string_send_emulated_data(QStringList v, int extra_new_lines_count = 0) { append_string_("send_emulated_data", v, extra_new_lines_count); }
 void repaint_send_emulated_data() { repaint_("send_emulated_data"); }
 
-//Out Int Total Bytes
-// Total amount of bytes received.
-bool was_changed_received_total_bytes() { return was_changed_("received_total_bytes"); }
-int geti_received_total_bytes() { return geti_("received_total_bytes"); }
-void seti_received_total_bytes(int value) { seti_("received_total_bytes", value); }
-void increase_int_received_total_bytes(int increase = 1) { increase_int_("received_total_bytes", increase); }
-void repaint_received_total_bytes() { repaint_("received_total_bytes"); }
+//Out Int Received Packets
+// Amount of data packets received.
+bool was_changed_received_packets() { return was_changed_("received_packets"); }
+int geti_received_packets() { return geti_("received_packets"); }
+void seti_received_packets(int value) { seti_("received_packets", value); }
+void increase_int_received_packets(int increase = 1) { increase_int_("received_packets", increase); }
+void repaint_received_packets() { repaint_("received_packets"); }
 
 //Out Checkbox Is New Data
 // Is new data received at this frame.

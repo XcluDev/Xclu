@@ -345,7 +345,7 @@ void XClassWebcamera::update() {
 
     // Save image button
     if (geti_save_image()) {
-        QString file_name = xc_absolute_path_from_project(gets_save_image_file_name());
+        QString file_name = xc_absolute_path(gets_save_image_file_name());
 
         auto read = geti_transform() ? getobject_image_transformed()->read():getobject_image()->read();
         auto *raster = read.data().data<XRaster>();

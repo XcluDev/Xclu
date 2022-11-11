@@ -47,7 +47,7 @@ void XClassFileCreate::on_button_pressed(QString button_id) {
         //Getting file name and checking it's not exists
         QString file_name0 = gets_file_name();
         xc_assert(!file_name0.isEmpty(), "Empty file name");
-        QString file_path = xc_absolute_path_from_project(gets_file_name());
+        QString file_path = xc_absolute_path(gets_file_name());
         QString short_name = QFileInfo(file_name0).fileName();
 
         //Check file is not exists - currently we support writing only to new files

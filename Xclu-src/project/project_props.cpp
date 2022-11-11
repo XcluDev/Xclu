@@ -115,7 +115,7 @@ QString xc_dialog_save_as(QString title, QString extensions_filter, QString fold
 //---------------------------------------------------------------------
 //возвращает абсолютный путь для папки, заданной относительно проекта
 //также, может создать эту папку, если это требуется
-QString xc_absolute_path_from_project(QString relative_path, bool create_folder) {
+QString xc_absolute_path(QString relative_path, bool create_folder) {
     QDir dir(xc_project_folder());
     QString path = dir.absoluteFilePath(relative_path);
     if (create_folder) {

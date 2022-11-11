@@ -283,7 +283,7 @@ void XClassMotionDetectorRouter::save_templates() {
     xc_assert(files.size() >= n_, "Not enough file names");
 
     for (int i=0; i<n_; i++) {
-        QString file_name = xc_absolute_path_from_project(files[i]);
+        QString file_name = xc_absolute_path(files[i]);
         XRasterUtils::save(output_image(i)->read().data().data<XRaster>(), file_name);
     }
 
@@ -297,7 +297,7 @@ void XClassMotionDetectorRouter::load_templates() {
     QStringList files = get_strings_template_files();
     xc_assert(files.size() >= n_, "Not enough file names");
     for (int i=0; i<n_; i++) {
-       QString file_name = xc_absolute_path_from_project(files[i]);
+       QString file_name = xc_absolute_path(files[i]);
        XRasterUtils::load(*template_image(i)->write().data().data<XRaster>(), file_name);
     }
 }

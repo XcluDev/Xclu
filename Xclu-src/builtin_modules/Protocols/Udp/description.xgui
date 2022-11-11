@@ -10,7 +10,7 @@ module_impl=C++
 # Page Main
 #-------------------------------------------
 page Main
-    //General settings
+    //Main functionality.
     
 const enum Mode mode=Receive [Send,Receive]
     // Mode of the module.
@@ -29,19 +29,25 @@ endif
 
 # Receive -------------------------------------------
 
-if mode Receive
-const int Receive_Port receive_port=12345 1:* 1,10
-    // Port for receiving.
-    
+if mode Receive    
 const checkbox Emulate receive_emulate=0
     // Emulate receiving from text file.
 endif
 
+if receive_emulate 0
+const int Receive_Port receive_port=12345 1:* 1,10
+    // Port for receiving.
+endif
+
+if mode Receive
+const checkbox Only_Last_Packet receive_only_last_packet=1
+    //If several packets were received, keep only the latest one.
+endif
 
 # Emulation -------------------------------------------
 
 if send_from_file 1
-const string_file Read_File send_file_name=""
+const string_file File_To_Send send_file_name=""
     //Text file to load for emulating.
     //Choose a text file
     //Text (*.txt);; All files (*.*)
@@ -51,7 +57,7 @@ int Rate send_rate=5 1:* 1,10
 endif
 
 if receive_emulate 1
-const string_file Read_File receive_emulate_file_name=""
+const string_file Read_From_File receive_emulate_file_name=""
     //Text file to load for emulating.
     //Choose a text file
     //Text (*.txt);; All files (*.*)
@@ -65,8 +71,8 @@ endif
 line
 
 if mode Send
-out int Total_Bytes send_total_bytes=0 0:* 1,10
-    // Total amount of bytes sent.
+out int Sent_Packets send_packets=0 0:* 1,10
+    // Amount of data packets sent.
 checkbox Is_New_Data send_new_data=1
     // Is new data to send at this frame.
 endif
@@ -84,8 +90,8 @@ out text Send_Data send_emulated_data 10 10
 
 
 if mode Receive
-out int Total_Bytes received_total_bytes=0 0:* 1,10
-    // Total amount of bytes received.
+out int Received_Packets received_packets=0 0:* 1,10
+    // Amount of data packets received.
 out checkbox Is_New_Data received_new_data=0
     // Is new data received at this frame.
 

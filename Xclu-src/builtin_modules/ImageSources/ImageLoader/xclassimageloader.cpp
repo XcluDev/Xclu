@@ -70,7 +70,7 @@ void XClassImageLoader::update() {
 //---------------------------------------------------------------------
 void XClassImageLoader::load_image_file(QString image_file) {
     image_file_ = image_file;
-    QString file_name = xc_absolute_path_from_project(image_file_);
+    QString file_name = xc_absolute_path(image_file_);
 
     XRasterUtils::load(*getobject_image()->write().data().data<XRaster>(), file_name);
 }

@@ -40,7 +40,7 @@ void XClassFaceDetect::on_button_pressed(QString /*button_id*/) {
 
 //---------------------------------------------------------------------
 void XClassFaceDetect::start() {
-    haar_load(xc_absolute_path_from_project(gets_cascade_file()));
+    haar_load(xc_absolute_path(gets_cascade_file()));
     clear_results();
 }
 

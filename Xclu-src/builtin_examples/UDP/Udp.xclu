@@ -36,11 +36,15 @@
                         "avalue": "0"
                     },
                     {
+                        "aname": "receive_emulate",
+                        "avalue": "1"
+                    },
+                    {
                         "aname": "receive_port",
                         "avalue": "12345"
                     },
                     {
-                        "aname": "receive_emulate",
+                        "aname": "receive_only_last_packet",
                         "avalue": "1"
                     },
                     {

@@ -72,7 +72,7 @@ QString xc_dialog_save_as(QString title, QString extensions_filter, QString fold
 
 //возвращает абсолютный путь для папки, заданной относительно проекта
 //также, может создать эту папку, если это требуется
-QString xc_absolute_path_from_project(QString relative_path, bool create_folder = false);
+QString xc_absolute_path(QString relative_path, bool create_folder = false);
 
 //Получение модуля - можно получить к нему доступ, см. класс XLinkParsed
 //а затем взять нужную переменную по geti и прочим

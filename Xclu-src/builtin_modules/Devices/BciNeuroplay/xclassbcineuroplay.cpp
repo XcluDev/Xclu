@@ -433,7 +433,7 @@ void XClassBciNeuroplay::rec_start() {
 
         rec_data_.clear();
 
-        QString folder = xc_absolute_path_from_project(gets_recording_folder());
+        QString folder = xc_absolute_path(gets_recording_folder());
         xc_assert(!gets_recording_folder().isEmpty() && xc_folder_exists(folder),
                   "Bad folder for records: `" + folder + "`");
 
