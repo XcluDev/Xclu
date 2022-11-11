@@ -63,7 +63,7 @@ void SoundSamplesDatabase::save(QString folder) {
     QString file_ini = folder + "/database.ini";
 
     //Saving binary
-    //we are not using xc_write_binary_file() here for speed up - because many chunks
+    //we are not using xc_write_binary_file_relpath() here for speed up - because many chunks
 
     QFile file(file_bin);
     xc_assert(file.open(QIODevice::WriteOnly),
@@ -84,7 +84,7 @@ void SoundSamplesDatabase::save(QString folder) {
     ini.append(QString("length=%1").arg(sounds_[0].size()));
     ini.append(QString("sample_rate=%1").arg(sample_rate_));
     ini.append(QString("channels=%1").arg(channels_));
-    xc_write_text_file(ini, file_ini);
+    xc_write_text_file_abspath(ini, file_ini);
 
 }
 
@@ -93,13 +93,13 @@ void SoundSamplesDatabase::load(QString folder, int limit_max_count) {
     QString file_bin = folder + "/database.bin";
     QString file_ini = folder + "/database.ini";
 
-    xc_assert(xc_file_exists(file_bin), QString("File '%1' doesn't exists").arg(file_bin));
-    xc_assert(xc_file_exists(file_ini), QString("File '%1' doesn't exists").arg(file_ini));
+    xc_assert(xc_file_exists_abspath(file_bin), QString("File '%1' doesn't exists").arg(file_bin));
+    xc_assert(xc_file_exists_abspath(file_ini), QString("File '%1' doesn't exists").arg(file_ini));
 
     clear();
 
     //Ini
-    auto ini = xc_read_text_file(file_ini);
+    auto ini = xc_read_text_file_abspath(file_ini);
 
     int count = 0;
     for (auto &s: ini) {
@@ -133,7 +133,7 @@ void SoundSamplesDatabase::load(QString folder, int limit_max_count) {
 
     //load
     //we load whole file into memory //TODO may work poor for small computers, double memory allocation - whole and for each sound
-    auto data = xc_read_binary_file(file_bin);
+    auto data = xc_read_binary_file_abspath(file_bin);
     xc_assert(data.size() == file_size,
               QString("Bad database binary file size, expected %1 bytes, but get %2 bytes")
               .arg(file_size).arg(data.size()));

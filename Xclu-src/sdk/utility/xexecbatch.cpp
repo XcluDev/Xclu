@@ -25,7 +25,7 @@ void xc_exec_batch(QStringList script, QString file_to_save,
         }
     }
     //Save
-    xc_write_text_file(script, file_to_save);
+    xc_write_text_file_abspath(script, file_to_save);
 
     //Execute
     //TODO not tested in Linux - need to set admin rights

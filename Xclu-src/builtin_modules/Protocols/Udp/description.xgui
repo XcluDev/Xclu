@@ -79,19 +79,21 @@ line
 if mode Send
 out int Sent_Packets send_packets=0 0:* 1,10
     // Amount of data packets sent.
-checkbox Is_New_Data send_new_data=1
-    // Is new data to send at this frame.
 endif
 
 if send_from_file 0
-text Send_Data send_data 10 10
-    //Data to send.
 button Send btn_send
     //Send data immediately.
+checkbox Is_New_Data send_new_data=1
+    // Is new data to send at this frame.
+text Data_To_Send send_data 10 10
+    //Data to send.
 endif
 
 if send_from_file 1
-out text Send_Data send_emulated_data 10 10
+out checkbox Is_New_Data send_file_new_data=1
+    // Is data sent at this frame.
+out text Data_Sent send_file_data 10 10
     //Data to send from a file.
 
 

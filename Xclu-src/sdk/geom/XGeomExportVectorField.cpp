@@ -35,7 +35,7 @@ void XGeomExportFGA(QString file_name,
 		}
 	}
 
-    xc_write_text_file(file, file_name);
+    xc_write_text_file_abspath(file, file_name);
     qDebug() << "   ...done" << endl;
 }
 

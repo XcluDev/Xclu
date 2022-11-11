@@ -151,7 +151,7 @@ void XClassMadRobot::parse_yolo() {
     while (waited < max_wait) {
         QThread::msleep(one_wait);
         waited += one_wait;
-        if (xc_file_exists(yolo_file)) {
+        if (xc_file_exists_relpath(yolo_file)) {
             //wait a while to finish writing file
             QThread::msleep(final_wait);
                 found = true;
@@ -164,7 +164,7 @@ void XClassMadRobot::parse_yolo() {
     }
 
     //reading and parsing
-    auto file = xc_read_text_file(yolo_file);
+    auto file = xc_read_text_file_relpath(yolo_file);
     sets_yolo_data(file.join("\n"));
 
     int n = file.size();

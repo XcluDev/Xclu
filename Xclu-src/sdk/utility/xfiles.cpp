@@ -4,7 +4,7 @@
 #include <QDirIterator>
 
 //---------------------------------------------------------------------
-bool xc_file_exists(QString file_name) {
+bool xc_file_exists_relpath(QString file_name) {
     return xc_file_exists_abspath(xc_absolute_path(file_name));
 }
 
@@ -14,7 +14,7 @@ bool xc_file_exists_abspath(QString file_name) {
 }
 
 //---------------------------------------------------------------------
-bool xc_folder_exists(QString folder_name) {
+bool xc_folder_exists_relpath(QString folder_name) {
     return xc_folder_exists_abspath(xc_absolute_path(folder_name));
 }
 
@@ -24,7 +24,7 @@ bool xc_folder_exists_abspath(QString folder_name) {
 }
 
 //---------------------------------------------------------------------
-QStringList xc_folder_list_files(QString folder_name, QStringList extensions) {
+QStringList xc_folder_list_files_relpath(QString folder_name, QStringList extensions) {
     return xc_folder_list_files_abspath(xc_absolute_path(folder_name), extensions);
 }
 
@@ -52,7 +52,7 @@ QStringList xc_folder_list_files_abspath(QString folder_name, QStringList extens
 }
 
 //---------------------------------------------------------------------
-QStringList xc_folder_list_files(QString folder_name, QString extension) {
+QStringList xc_folder_list_files_relpath(QString folder_name, QString extension) {
     return xc_folder_list_files_abspath(xc_absolute_path(folder_name), extension);
 }
 
@@ -67,19 +67,19 @@ QStringList xc_folder_list_files_abspath(QString folder_name, QString extension)
 }
 
 //---------------------------------------------------------------------
-uint64 xc_file_size(QString file_name) {
+uint64 xc_file_size_relpath(QString file_name) {
     return xc_file_size_abspath(xc_absolute_path(file_name));
 }
 
 //---------------------------------------------------------------------
 uint64 xc_file_size_abspath(QString file_name) {
     QFileInfo file(file_name);
-    xc_assert(file.exists(), QString("xc_file_size error - file '%1' doesn't exists").arg(file_name));
+    xc_assert(file.exists(), QString("xc_file_size_relpath error - file '%1' doesn't exists").arg(file_name));
     return file.size();
 }
 
 //---------------------------------------------------------------------
-QStringList xc_read_text_file(QString file_name) {
+QStringList xc_read_text_file_relpath(QString file_name) {
     return xc_read_text_file_abspath(xc_absolute_path(file_name));
 }
 
@@ -101,7 +101,7 @@ QStringList xc_read_text_file_abspath(QString file_name) {
 }
 
 //---------------------------------------------------------------------
-void xc_write_text_file(QStringList list, QString file_name) {
+void xc_write_text_file_relpath(QStringList list, QString file_name) {
     xc_write_text_file_abspath(list, xc_absolute_path(file_name));
 }
 
@@ -118,7 +118,7 @@ void xc_write_text_file_abspath(QStringList list, QString file_name) {
 }
 
 //---------------------------------------------------------------------
-void xc_write_text_file(QVector<QString> list, QString file_name) {
+void xc_write_text_file_relpath(QVector<QString> list, QString file_name) {
     xc_write_text_file_abspath(list, xc_absolute_path(file_name));
 }
 
@@ -135,7 +135,7 @@ void xc_write_text_file_abspath(QVector<QString> list, QString file_name) {
 }
 
 //---------------------------------------------------------------------
-void xc_write_binary_file(const void *data, int n, QString file_name, bool append) {
+void xc_write_binary_file_relpath(const void *data, int n, QString file_name, bool append) {
     xc_write_binary_file_abspath(data, n, xc_absolute_path(file_name), append);
 }
 
@@ -156,7 +156,7 @@ void xc_write_binary_file_abspath(const void *data, int n, QString file_name, bo
 //Read binary file
 //Use result.data() for data access
 //read_bytes == -1 means read all file, if >=0 - read part of the file
-QByteArray xc_read_binary_file(QString file_name, int read_bytes) {
+QByteArray xc_read_binary_file_relpath(QString file_name, int read_bytes) {
     return xc_read_binary_file_abspath(xc_absolute_path(file_name), read_bytes);
 }
 

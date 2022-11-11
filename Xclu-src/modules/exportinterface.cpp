@@ -9,7 +9,7 @@ ExportInterface::ExportInterface()
 {
     //Reading template
     QString file_name = xc_module_h_template_file();
-    templ_ = xc_read_text_file(file_name);
+    templ_ = xc_read_text_file_abspath(file_name);
 }
 
 //---------------------------------------------------------------------
@@ -48,7 +48,7 @@ void ExportInterface::export_to_h_file(XModuleInterface *interf, QString folder)
         //QStringList list = item->generate_cpp_header();
     }
 
-    xc_write_text_file(file, file_name);
+    xc_write_text_file_abspath(file, file_name);
 }
 
 //---------------------------------------------------------------------

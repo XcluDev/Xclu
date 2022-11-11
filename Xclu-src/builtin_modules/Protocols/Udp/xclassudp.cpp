@@ -45,7 +45,7 @@ void XClassUdp::receive_start() {
     setf_receive_file_position(0);
 
     if (geti_receive_emulate()) {
-        file_ = xc_read_text_file(xc_absolute_path(gets_receive_emulate_file_name()));
+        file_ = xc_read_text_file_relpath(gets_receive_emulate_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_receive_emulate_file_name());
         file_pos_ = 0;
         timer.reset(new QTimer(this));

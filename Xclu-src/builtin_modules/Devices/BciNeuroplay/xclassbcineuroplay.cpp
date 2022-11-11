@@ -434,7 +434,7 @@ void XClassBciNeuroplay::rec_start() {
         rec_data_.clear();
 
         QString folder = xc_absolute_path(gets_recording_folder());
-        xc_assert(!gets_recording_folder().isEmpty() && xc_folder_exists(folder),
+        xc_assert(!gets_recording_folder().isEmpty() && xc_folder_exists_abspath(folder),
                   "Bad folder for records: `" + folder + "`");
 
         QString time_format = "yyMMdd_hhmmsszzz";
@@ -450,7 +450,7 @@ void XClassBciNeuroplay::rec_stop() {
     if (recording_) {
         recording_ = false;
         if (rec_data_.size() > 0) {
-            xc_write_text_file(rec_data_, rec_file_);
+            xc_write_text_file_abspath(rec_data_, rec_file_);
         }
 
         rec_update_status(QString("Saved %1 sec").

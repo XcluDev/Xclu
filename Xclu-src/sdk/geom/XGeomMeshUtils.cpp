@@ -16,7 +16,7 @@ void XGeomLoadObjFile(XGeomMesh &mesh, QString fileName, bool useTex,
     //if (!caching_to_ply || XGeomFileTime::isNewerThan(fileName, fileNamePly)) {
         //if (caching_to_ply) qDebug() << "   rebuild cached version..." << endl;
 	mesh.clear();
-    auto lines = xc_read_text_file(fileName);
+    auto lines = xc_read_text_file_abspath(fileName);
 
     QVector<vec3> v;      //vertices
     QVector<int> t;  //indices for triangles
@@ -191,7 +191,7 @@ void XGeomSaveObjFile(XGeomMesh &mesh, QString fileName, bool setupNormals,
 	}
 
     qDebug() << "Writing " << fileName << "..." << endl;
-    xc_write_text_file(list, fileName);
+    xc_write_text_file_abspath(list, fileName);
     qDebug() << "Ok saving " << fileName << endl;
 
 }

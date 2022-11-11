@@ -91,19 +91,6 @@ void seti_send_packets(int value) { seti_("send_packets", value); }
 void increase_int_send_packets(int increase = 1) { increase_int_("send_packets", increase); }
 void repaint_send_packets() { repaint_("send_packets"); }
 
-//Checkbox Is New Data
-// Is new data to send at this frame.
-bool was_changed_send_new_data() { return was_changed_("send_new_data"); }
-int geti_send_new_data() { return geti_("send_new_data"); }
-void repaint_send_new_data() { repaint_("send_new_data"); }
-
-//Text Send Data
-//Data to send.
-bool was_changed_send_data() { return was_changed_("send_data"); }
-QString gets_send_data() { return gets_("send_data"); }
-QStringList get_strings_send_data() { return get_strings_("send_data"); }
-void repaint_send_data() { repaint_("send_data"); }
-
 //Button Send
 //Send data immediately.
 bool was_changed_btn_send() { return was_changed_("btn_send"); }
@@ -111,16 +98,36 @@ int geti_btn_send() { return geti_("btn_send"); }
 void repaint_btn_send() { repaint_("btn_send"); }
 QString button_btn_send() { return "btn_send"; }
 
-//Out Text Send Data
+//Checkbox Is New Data
+// Is new data to send at this frame.
+bool was_changed_send_new_data() { return was_changed_("send_new_data"); }
+int geti_send_new_data() { return geti_("send_new_data"); }
+void repaint_send_new_data() { repaint_("send_new_data"); }
+
+//Text Data To Send
+//Data to send.
+bool was_changed_send_data() { return was_changed_("send_data"); }
+QString gets_send_data() { return gets_("send_data"); }
+QStringList get_strings_send_data() { return get_strings_("send_data"); }
+void repaint_send_data() { repaint_("send_data"); }
+
+//Out Checkbox Is New Data
+// Is data sent at this frame.
+bool was_changed_send_file_new_data() { return was_changed_("send_file_new_data"); }
+int geti_send_file_new_data() { return geti_("send_file_new_data"); }
+void seti_send_file_new_data(int value) { seti_("send_file_new_data", value); }
+void repaint_send_file_new_data() { repaint_("send_file_new_data"); }
+
+//Out Text Data Sent
 //Data to send from a file.
-bool was_changed_send_emulated_data() { return was_changed_("send_emulated_data"); }
-QString gets_send_emulated_data() { return gets_("send_emulated_data"); }
-QStringList get_strings_send_emulated_data() { return get_strings_("send_emulated_data"); }
-void sets_send_emulated_data(QString value) { sets_("send_emulated_data", value); }
-void clear_string_send_emulated_data() { clear_string_("send_emulated_data"); }
-void append_string_send_emulated_data(QString v, int extra_new_lines_count = 0) { append_string_("send_emulated_data", v, extra_new_lines_count); }
-void append_string_send_emulated_data(QStringList v, int extra_new_lines_count = 0) { append_string_("send_emulated_data", v, extra_new_lines_count); }
-void repaint_send_emulated_data() { repaint_("send_emulated_data"); }
+bool was_changed_send_file_data() { return was_changed_("send_file_data"); }
+QString gets_send_file_data() { return gets_("send_file_data"); }
+QStringList get_strings_send_file_data() { return get_strings_("send_file_data"); }
+void sets_send_file_data(QString value) { sets_("send_file_data", value); }
+void clear_string_send_file_data() { clear_string_("send_file_data"); }
+void append_string_send_file_data(QString v, int extra_new_lines_count = 0) { append_string_("send_file_data", v, extra_new_lines_count); }
+void append_string_send_file_data(QStringList v, int extra_new_lines_count = 0) { append_string_("send_file_data", v, extra_new_lines_count); }
+void repaint_send_file_data() { repaint_("send_file_data"); }
 
 //Out Int Received Packets
 // Amount of data packets received.

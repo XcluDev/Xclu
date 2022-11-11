@@ -99,7 +99,7 @@ void XClassSoundsDatabaseAnalyze::join_wavs(QString input_folder, QString output
     //Create output folder
     xc_assert(QDir().mkpath(output_folder), "Can't create folder '" + output_folder + "'");
 
-    //scan folder for wavs // TODO replace by xc_folder_list_files()
+    //scan folder for wavs // TODO replace by xc_folder_list_files_relpath()
     QDirIterator input_iter(input_folder,//xc_absolute_path(folder_name),
                             QStringList() << "*.wav"// << "*.aiff"
                             ); //, QDirIterator::Subdirectories);

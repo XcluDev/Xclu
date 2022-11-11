@@ -75,17 +75,16 @@ void SoundSamplesAnalyze::save_to_file(QString file_name) {
     for (auto &p: pos_) {
         file.push_back(QString("%1 %2").arg(p.x).arg(p.y));
     }
-    xc_write_text_file(file, file_name);
+    xc_write_text_file_abspath(file, file_name);
 }
 
 //---------------------------------------------------------------------
 //load from file
 void SoundSamplesAnalyze::load_from_file(QString file_name, int database_size) {
-    file_name = xc_absolute_path(file_name);
-    if (!xc_file_exists(file_name)) {
+    if (!xc_file_exists_relpath(file_name)) {
         xc_message_box("File '" + file_name + "' doesn't exists");
     }
-    auto file = xc_read_text_file(file_name);
+    auto file = xc_read_text_file_relpath(file_name);
 
     int n = database_size;
     xc_assert(n == file.size(),

@@ -66,7 +66,7 @@ void XClassSoundPlay::play_sound() {
     QString file_name = gets_file_name();
 
     QFile file(file_name);
-    xc_assert(xc_file_exists(file_name), "XClassSoundPlay - file not exists: '" + file_name +"'");
+    xc_assert(xc_file_exists_relpath(file_name), "XClassSoundPlay - file not exists: '" + file_name +"'");
     //QSound::play(file_name);
 
     player_.reset(new QMediaPlayer);

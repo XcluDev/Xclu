@@ -77,7 +77,7 @@ void XClassImageLoader::load_image_file(QString image_file) {
 
 //---------------------------------------------------------------------
 void XClassImageLoader::load_folder(QString folder_name) {
-    image_files_ = xc_folder_list_files(folder_name, QStringList() << "bmp" << "jpg" << "png" << "tif" << "tiff");
+    image_files_ = xc_folder_list_files_relpath(folder_name, QStringList() << "bmp" << "jpg" << "png" << "tif" << "tiff");
     xc_assert(!image_files_.isEmpty(), "No images in folder '" + folder_name +"' or folder doesn't exists");
 }
 

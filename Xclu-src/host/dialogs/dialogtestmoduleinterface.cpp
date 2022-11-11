@@ -146,7 +146,7 @@ void DialogTestModuleInterface::reload(int /*tab_index*/) {
         xc_message_box("Please choose module folder");
         return;
     }
-    if (!xc_folder_exists(folder_)) {
+    if (!xc_folder_exists_abspath(folder_)) {
         xc_message_box("Folder doesn't exists: '" + folder_ + "'");
         return;
     }
