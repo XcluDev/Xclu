@@ -55,7 +55,7 @@ QString gets_send_file_name() { return gets_("send_file_name"); }
 QStringList get_strings_send_file_name() { return get_strings_("send_file_name"); }
 void repaint_send_file_name() { repaint_("send_file_name"); }
 
-//Int Rate
+//Const Int Rate
 //How much lines read per second.
 bool was_changed_send_rate() { return was_changed_("send_rate"); }
 int geti_send_rate() { return geti_("send_rate"); }
@@ -68,7 +68,7 @@ QString gets_receive_emulate_file_name() { return gets_("receive_emulate_file_na
 QStringList get_strings_receive_emulate_file_name() { return get_strings_("receive_emulate_file_name"); }
 void repaint_receive_emulate_file_name() { repaint_("receive_emulate_file_name"); }
 
-//Int Rate
+//Const Int Rate
 //How much lines read per second.
 bool was_changed_receive_emulate_rate() { return was_changed_("receive_emulate_rate"); }
 int geti_receive_emulate_rate() { return geti_("receive_emulate_rate"); }

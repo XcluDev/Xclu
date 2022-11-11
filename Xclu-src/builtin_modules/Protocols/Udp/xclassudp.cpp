@@ -127,14 +127,10 @@ void XClassUdp::slot_readPendingDatagrams() {
         // но я надеюсь, что оно вообще никогда не возникает, поэтому оставляю его так.
         xc_assert(read_size == size, "Error at XClassUdp::readPendingDatagrams, read_size != size");
 
-        //statusLabel->setText(tr("Received datagram: \"%1\"")
-        //                     .arg(datagram.constData()));
+        receive_data(QStringList() << datagram.constData());
     }
 
 }
-
-void receive_data(QStringList data);
-
 
 //---------------------------------------------------------------------
 void XClassUdp::stop() {

@@ -51,7 +51,7 @@ const string_file File_To_Send send_file_name=""
     //Text file to load for emulating.
     //Choose a text file
     //Text (*.txt);; All files (*.*)
-int Rate send_rate=5 1:* 1,10
+const int Rate send_rate=5 1:* 1,10
     //How much lines read per second.
     //lines/sec
 endif
@@ -61,7 +61,7 @@ const string_file Read_From_File receive_emulate_file_name=""
     //Text file to load for emulating.
     //Choose a text file
     //Text (*.txt);; All files (*.*)
-int Rate receive_emulate_rate=5 1:* 1,10
+const int Rate receive_emulate_rate=5 1:* 1,10
     //How much lines read per second.
     //lines/sec
     
