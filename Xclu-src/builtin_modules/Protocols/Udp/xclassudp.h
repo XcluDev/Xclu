@@ -44,5 +44,8 @@ private slots:
     void slot_readPendingDatagrams();
     void slot_timer_receive_emulate();
 
+    // async received data
+    XProtectedData_<QStringList> received_data_;
+
 };
 

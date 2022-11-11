@@ -45,7 +45,7 @@
                     },
                     {
                         "aname": "receive_only_last_packet",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "send_file_name",
@@ -61,7 +61,7 @@
                     },
                     {
                         "aname": "receive_emulate_rate",
-                        "avalue": "5"
+                        "avalue": "30"
                     },
                     {
                         "aname": "send_new_data",

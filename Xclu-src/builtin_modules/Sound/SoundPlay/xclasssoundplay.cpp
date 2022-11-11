@@ -63,7 +63,7 @@ int XClassSoundPlay::media_volume(float v) {
 
 //---------------------------------------------------------------------
 void XClassSoundPlay::play_sound() {
-    QString file_name = xc_absolute_path(gets_file_name());
+    QString file_name = gets_file_name();
 
     QFile file(file_name);
     xc_assert(xc_file_exists(file_name), "XClassSoundPlay - file not exists: '" + file_name +"'");

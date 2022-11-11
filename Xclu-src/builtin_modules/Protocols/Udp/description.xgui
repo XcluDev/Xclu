@@ -44,7 +44,7 @@ const checkbox Only_Last_Packet receive_only_last_packet=1
     //If several packets were received, keep only the latest one.
 endif
 
-# Emulation -------------------------------------------
+# File -------------------------------------------
 
 if send_from_file 1
 const string_file File_To_Send send_file_name=""
@@ -64,6 +64,12 @@ const string_file Read_From_File receive_emulate_file_name=""
 int Rate receive_emulate_rate=5 1:* 1,10
     //How much lines read per second.
     //lines/sec
+    
+separator
+
+out float File_Position receive_file_position=0 0:100 0.01,0.1
+    //File position.
+    //%
 endif
 
 # Data -------------------------------------------

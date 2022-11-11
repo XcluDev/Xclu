@@ -41,6 +41,8 @@ void XClassUdp::send_start() {
 void XClassUdp::receive_start() {
     seti_received_packets(0);
     seti_received_new_data(0);
+    received_data_.write().data().clear();
+    setf_receive_file_position(0);
 
     if (geti_receive_emulate()) {
         file_ = xc_read_text_file(xc_absolute_path(gets_receive_emulate_file_name()));
@@ -49,6 +51,7 @@ void XClassUdp::receive_start() {
         timer.reset(new QTimer(this));
         timer->setTimerType(Qt::PreciseTimer);
         connect(timer.data(), &QTimer::timeout, this, &XClassUdp::slot_timer_receive_emulate);
+        timer->start(1000 / geti_receive_emulate_rate());
     }
     else {
         udpSocket.reset(new QUdpSocket(this));
@@ -76,18 +79,39 @@ void XClassUdp::send_update() {
 
 //---------------------------------------------------------------------
 void XClassUdp::receive_update() {
-
+    bool received;
+    {
+        auto write = received_data_.write();  // write должен существовать пока работаем с list
+        auto& list = write.data();
+        received = (!list.empty());
+        if (received) {
+            if (geti_receive_only_last_packet()) {
+                sets_received_data(list.last());
+            }
+            else {
+                clear_string_received_data();
+                append_string_received_data(list);
+            }
+            list.clear();
+        }
+    }
+    seti_received_new_data(received);
 }
 
 //---------------------------------------------------------------------
 void XClassUdp::receive_data(QStringList data) {
     increase_int_received_packets();
+    received_data_.write().data().append(data);
 }
 
 //---------------------------------------------------------------------
 void XClassUdp::slot_timer_receive_emulate() {
-    receive_data(QStringList());
-    //seti_received_packets()
+    file_pos_++;
+    int n = file_.size();
+    if (file_pos_ >= n) file_pos_ = 0;
+    float perc = (n>=2) ? float(file_pos_)/(n-1)*100.f : 0.f;
+    setf_receive_file_position(perc);
+    receive_data(QStringList() << file_[file_pos_]);
 }
 
 //---------------------------------------------------------------------
@@ -130,7 +154,7 @@ void XClassUdp::send_stop() {
 //---------------------------------------------------------------------
 void XClassUdp::receive_stop() {
     if (geti_receive_emulate()) {
-
+        timer.reset();
     }
     else {
         udpSocket.reset();

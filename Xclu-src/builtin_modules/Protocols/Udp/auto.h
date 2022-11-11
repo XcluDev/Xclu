@@ -75,6 +75,14 @@ int geti_receive_emulate_rate() { return geti_("receive_emulate_rate"); }
 void repaint_receive_emulate_rate() { repaint_("receive_emulate_rate"); }
 
 
+//Out Float File Position
+//File position.
+bool was_changed_receive_file_position() { return was_changed_("receive_file_position"); }
+float getf_receive_file_position() { return getf_("receive_file_position"); }
+void setf_receive_file_position(float value) { setf_("receive_file_position", value); }
+void repaint_receive_file_position() { repaint_("receive_file_position"); }
+
+
 //Out Int Sent Packets
 // Amount of data packets sent.
 bool was_changed_send_packets() { return was_changed_("send_packets"); }
