@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClassWindow
+//Interface for XClassBaseWindow
 //Created automatically.
 //----------------------------------------------------
 //Page Properties
@@ -105,7 +105,30 @@ void repaint_font_size_pix() { repaint_("font_size_pix"); }
 
 //----------------------------------------------------
 //Page Content
-//Window content consisting of layouts and widgets, such as WNumber.
+//Window content can be a single rendering area, or layouts and widgets, such as WNumber.
+
+//Const Enum Content Mode
+//Modes for collecting layout - automatic or manual.
+enum enum_content_mode {
+    content_mode_Auto_Vertical = 0,
+    content_mode_Auto_Horizontal = 1,
+    content_mode_Manual = 2,
+    content_mode_N__ = 3
+};
+bool was_changed_content_mode() { return was_changed_("content_mode"); }
+enum_content_mode gete_content_mode() { return enum_content_mode(geti_("content_mode")); }
+QString getraw_content_mode() { return getraw_("content_mode");}
+
+//Out Text Content
+//Automatically populated layout.
+bool was_changed_content_auto() { return was_changed_("content_auto"); }
+QString gets_content_auto() { return gets_("content_auto"); }
+QStringList get_strings_content_auto() { return get_strings_("content_auto"); }
+void sets_content_auto(QString value) { sets_("content_auto", value); }
+void clear_string_content_auto() { clear_string_("content_auto"); }
+void append_string_content_auto(QString v, int extra_new_lines_count = 0) { append_string_("content_auto", v, extra_new_lines_count); }
+void append_string_content_auto(QStringList v, int extra_new_lines_count = 0) { append_string_("content_auto", v, extra_new_lines_count); }
+void repaint_content_auto() { repaint_("content_auto"); }
 
 //Const Text Content
 //Description of layouts and widgets.
@@ -113,6 +136,15 @@ bool was_changed_content() { return was_changed_("content"); }
 QString gets_content() { return gets_("content"); }
 QStringList get_strings_content() { return get_strings_("content"); }
 void repaint_content() { repaint_("content"); }
+
+
+//Button Edit...
+//Press to interactively edit window content.
+bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
+int geti_edit_btn() { return geti_("edit_btn"); }
+void repaint_edit_btn() { repaint_("edit_btn"); }
+QString button_edit_btn() { return "edit_btn"; }
+
 
 //Const Int Margin
 //Margin for layouts.
@@ -125,14 +157,6 @@ void repaint_global_margin() { repaint_("global_margin"); }
 bool was_changed_global_spacing() { return was_changed_("global_spacing"); }
 int geti_global_spacing() { return geti_("global_spacing"); }
 void repaint_global_spacing() { repaint_("global_spacing"); }
-
-
-//Button Edit...
-//Press to interactively edit window content.
-bool was_changed_edit_btn() { return was_changed_("edit_btn"); }
-int geti_edit_btn() { return geti_("edit_btn"); }
-void repaint_edit_btn() { repaint_("edit_btn"); }
-QString button_edit_btn() { return "edit_btn"; }
 
 //----------------------------------------------------
 //Page Actions
@@ -150,20 +174,18 @@ enum_on_close gete_on_close() { return enum_on_close(geti_("on_close")); }
 QString getraw_on_close() { return getraw_("on_close");}
 
 //----------------------------------------------------
-//Page Grab
-//Grab window.
+//Page Capture
+//Capture window to Image.
 
-//Checkbox Grab CPU
-//Grab window to the raster.
-bool was_changed_grab_cpu() { return was_changed_("grab_cpu"); }
-int geti_grab_cpu() { return geti_("grab_cpu"); }
-void repaint_grab_cpu() { repaint_("grab_cpu"); }
+//Checkbox Capture CPU
+//Capture window to the image.
+bool was_changed_capture_cpu() { return was_changed_("capture_cpu"); }
+int geti_capture_cpu() { return geti_("capture_cpu"); }
+void repaint_capture_cpu() { repaint_("capture_cpu"); }
 
 //Out Object Image CPU
-//Grabber image.
+//Captured image.
 bool was_changed_image_cpu() { return was_changed_("image_cpu"); }
 XProtectedObject *getobject_image_cpu() { return get_object_("image_cpu"); }
-void setobject_image_cpu(XProtectedObject *value) { set_object_("image_cpu", value); }
-void setobject_image_cpu(XProtectedObject &value) { set_object_("image_cpu", value); }
 void repaint_image_cpu() { repaint_("image_cpu"); }
 //----------------------------------------------------

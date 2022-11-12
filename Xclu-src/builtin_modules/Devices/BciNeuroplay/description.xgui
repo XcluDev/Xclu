@@ -1,6 +1,6 @@
-#Module Serial
+#BciNeuroplay
 #------------------------------------------
-module_description=Serial interface with Arduino and other devices.
+module_description=BCI Neuroplay device communication.
 module_version=1.01
 module_impl=C++
 module_accept_calls=Draw
@@ -211,7 +211,8 @@ out text Frequencies spectrum_freqs 5 7
 page Draw
     //Draw to RenderArea.
     
-const string Render_Area render_area="renderarea1"
+# This value is read by RenderAreas to decide what to draw.
+const string Render_Area render_area="RENDERAREA"
     //Render area for drawing into.
 
 separator

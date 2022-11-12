@@ -15,6 +15,7 @@ SOURCES += \
     $$PWD/builtin_modules/Core/ValueMap/xclassvaluemap.cpp \
     $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.cpp \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.cpp \
+    $$PWD/builtin_modules/Drawing/Graphs/xclassgraphs.cpp \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.cpp \
     $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.cpp \
     $$PWD/builtin_modules/ComputerVision/MotionDetector/xclassmotiondetector.cpp \
@@ -68,6 +69,8 @@ HEADERS += \
     $$PWD/builtin_modules/Drawing/Fbo/xclassfbo.h \
     $$PWD/builtin_modules/Drawing/FragmentShader/auto.h \
     $$PWD/builtin_modules/Drawing/FragmentShader/xclassfragmentshader.h \
+    $$PWD/builtin_modules/Drawing/Graphs/auto.h \
+    $$PWD/builtin_modules/Drawing/Graphs/xclassgraphs.h \
     $$PWD/builtin_modules/ImageSources/ImageLoader/xclassimageloader.h \
     $$PWD/builtin_modules/Devices/Webcamera/auto.h \
     $$PWD/builtin_modules/Devices/Webcamera/xclasswebcamera.h \

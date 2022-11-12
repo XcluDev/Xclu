@@ -519,7 +519,7 @@ void XClassWindow::reset_widget(QString module_name) {
 //---------------------------------------------------------------------
 //Grab window
 void XClassWindow::grab_window() {
-    if (geti_grab_cpu()) {
+    if (geti_capture_cpu()) {
         auto size = window_->size();
         int w = size.width();
         int h = size.height();

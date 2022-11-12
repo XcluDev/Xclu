@@ -90,7 +90,7 @@ endif
 if content_mode Manual
 const text Content content 20 20
     //Description of layouts and widgets. 
-//renderarea1
+//RENDERAREA
 //
 //#Keywords:  HorizontalLayout, VerticalLayout, Tab, Stretch
 //#the number means stretching, indentation may be any, just consistent
@@ -157,16 +157,16 @@ enum On_Close on_close=Stop [Ignore,Stop]
 #,Custom_Action]
 
 #---------------------------------------------------
-#Grab
-page Grab
-    //Grab window.
+#Capture
+page Capture
+    //Capture window to Image.
 
-checkbox Grab_CPU grab_cpu=0
-    //Grab window to the raster.
+checkbox Capture_CPU capture_cpu=0
+    //Capture window to the image.
     
 #if grab_cpu 1
 out object_image Image_CPU image_cpu
-    //Grabber image.
+    //Captured image.
 
 #endif
  

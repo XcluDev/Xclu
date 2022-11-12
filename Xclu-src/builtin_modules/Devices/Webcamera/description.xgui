@@ -290,7 +290,8 @@ endif
 page Draw
     //Draw to RenderArea.
     
-const string Render_Area render_area="renderarea1"
+# This value is read by RenderAreas to decide what to draw.
+const string Render_Area render_area="RENDERAREA"
     //Render area for drawing into.
 
 separator

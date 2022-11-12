@@ -1,0 +1,40 @@
+#Drawing graphs
+#------------------------------------------
+module_description=Drawing graphs.
+module_version=1.01
+module_impl=C++
+module_accept_calls=Draw
+    
+#------------------------------------------
+page Main
+
+# This value is read by RenderAreas to decide what to draw.
+const string Render_Area render_area="RENDERAREA"
+    //Name of render area for drawing into.
+
+line
+const checkbox Render_To_Image render_to_image=1
+    //Render to image.
+if render_to_image 1
+const int Image_Width image_width=512 2:* 1,10
+    //Width of image.
+    //pix
+const int Image_Height image_height=512 2:* 1,10
+    //Height of image.
+    //pix   
+endif
+line
+
+#separator=","
+#data
+#read file
+
+
+separator
+
+float X draw_graphs_x=0 0:1 0.001,0.01
+float Y draw_graphs_y=0 0:1 0.001,0.01
+float W draw_graphs_w=1 0:1 0.001,0.01
+float H draw_graphs_h=1 0:1 0.001,0.01
+
+#------------------------------------------
