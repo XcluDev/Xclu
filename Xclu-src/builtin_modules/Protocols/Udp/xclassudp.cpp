@@ -38,10 +38,12 @@ void XClassUdp::send_start() {
     seti_sent_file_new_data(0);
     setf_send_file_position(0);
 
+    file_pos_ = 0;
+    lines_to_send_ = 0;
+
     if (geti_send_from_file()) {
         file_ = xc_read_text_file_relpath(gets_send_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_send_file_name());
-        file_pos_ = 0;
     }
     send_addr_.setup(gets_send_address());
 
@@ -55,10 +57,11 @@ void XClassUdp::receive_start() {
     received_data_.write().data().clear();
     setf_receive_file_position(0);
 
+    file_pos_ = 0;
+
     if (geti_receive_emulate()) {
         file_ = xc_read_text_file_relpath(gets_receive_emulate_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_receive_emulate_file_name());
-        file_pos_ = 0;
         timer.reset(new QTimer(this));
         timer->setTimerType(Qt::PreciseTimer);
         connect(timer.data(), &QTimer::timeout, this, &XClassUdp::slot_timer_receive_emulate);
@@ -85,9 +88,43 @@ void XClassUdp::update() {
 
 //---------------------------------------------------------------------
 void XClassUdp::send_update() {
-    QByteArray datagram = "Broadcast message ";// + QByteArray::number(messageNo);
-    udpSocket->writeDatagram(datagram, QHostAddress(send_addr_.address), send_addr_.port); //QHostAddress::Broadcast, 45454);
+    if (geti_send_from_file()) {
+        clear_string_sent_file_data();
 
+        lines_to_send_ += xc_dt() * geti_send_rate();
+
+        bool need_send = (lines_to_send_ > 1);
+        seti_sent_file_new_data(need_send);
+        if (need_send) {
+            QStringList data;
+            int n = file_.size();
+            while (lines_to_send_ > 1) {
+                lines_to_send_ -= 1;
+                file_pos_++;
+                if (file_pos_ >= n) file_pos_ = 0;
+                data.append(file_[file_pos_]);
+            }
+            float perc = (n>=2) ? float(file_pos_)/(n-1)*100.f : 0.f;
+            setf_receive_file_position(perc);
+
+            send_data(data);
+            append_string_sent_file_data(data);
+        }
+    }
+    else {
+        if (geti_send_new_data()) {
+            send_data(get_strings_send_data());
+        }
+    }
+}
+
+//---------------------------------------------------------------------
+void XClassUdp::send_data(QStringList data)
+{
+    QByteArray datagram;
+    datagram.append(data.join("\n"));
+    udpSocket->writeDatagram(datagram, QHostAddress(send_addr_.address), send_addr_.port); //QHostAddress::Broadcast, 45454);
+    increase_int_sent_packets();
 }
 
 //---------------------------------------------------------------------

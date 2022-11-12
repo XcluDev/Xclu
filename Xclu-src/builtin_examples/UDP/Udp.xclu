@@ -5,13 +5,107 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
             "description": {
                 "class": "Udp",
-                "name": "UDP",
+                "name": "UDPSend",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "0"
+                },
+                "items": [
+                    {
+                        "aname": "Main",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "mode",
+                        "avalue": "Send"
+                    },
+                    {
+                        "aname": "send_address",
+                        "avalue": "127.0.0.1:12345"
+                    },
+                    {
+                        "aname": "send_from_file",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "receive_emulate",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "receive_port",
+                        "avalue": "12345"
+                    },
+                    {
+                        "aname": "receive_only_last_packet",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_file_name",
+                        "avalue": "test.txt"
+                    },
+                    {
+                        "aname": "send_rate",
+                        "avalue": "5"
+                    },
+                    {
+                        "aname": "receive_emulate_file_name",
+                        "avalue": "test.txt"
+                    },
+                    {
+                        "aname": "receive_emulate_rate",
+                        "avalue": "30"
+                    },
+                    {
+                        "aname": "send_new_data",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "send_data",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "Udp",
+                "name": "UDPReceive",
                 "version": "1.01"
             },
             "interface": {
@@ -37,7 +131,7 @@
                     },
                     {
                         "aname": "receive_emulate",
-                        "avalue": "1"
+                        "avalue": "0"
                     },
                     {
                         "aname": "receive_port",

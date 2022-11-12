@@ -36,6 +36,9 @@ protected:
     void send_stop();
 
     XNetworkAddr send_addr_;
+    float lines_to_send_ = 0;
+
+    void send_data(QStringList data);
 
     // Receive
     void receive_start();
