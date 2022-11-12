@@ -34,7 +34,18 @@ void XClassUdp::start() {
 
 //---------------------------------------------------------------------
 void XClassUdp::send_start() {
+    seti_sent_packets(0);
+    seti_sent_file_new_data(0);
+    setf_send_file_position(0);
 
+    if (geti_send_from_file()) {
+        file_ = xc_read_text_file_relpath(gets_send_file_name());
+        xc_assert(!file_.isEmpty(), "File is empty: " + gets_send_file_name());
+        file_pos_ = 0;
+    }
+    send_addr_.setup(gets_send_address());
+
+    udpSocket.reset(new QUdpSocket(this));
 }
 
 //---------------------------------------------------------------------
@@ -74,6 +85,8 @@ void XClassUdp::update() {
 
 //---------------------------------------------------------------------
 void XClassUdp::send_update() {
+    QByteArray datagram = "Broadcast message ";// + QByteArray::number(messageNo);
+    udpSocket->writeDatagram(datagram, QHostAddress(send_addr_.address), send_addr_.port); //QHostAddress::Broadcast, 45454);
 
 }
 

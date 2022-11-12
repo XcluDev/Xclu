@@ -18,8 +18,8 @@ const enum Mode mode=Receive [Send,Receive]
 # Send -------------------------------------------
 
 if mode Send
-const string Send_Address send_address="localhost:12345"
-    //Address with port: localhost:12345.
+const string Send_Address send_address="127.0.0.1:12345"
+    //Address with port: 127.0.0.1:12345. Note: don't use 'localhost'.
 
 line
 
@@ -54,6 +54,12 @@ const string_file File_To_Send send_file_name=""
 const int Rate send_rate=5 1:* 1,10
     //How much lines read per second.
     //lines/sec
+
+separator
+
+out float File_Position send_file_position=0 0:100 0.01,0.1
+    //File position.
+    //%
 endif
 
 if receive_emulate 1
@@ -77,7 +83,7 @@ endif
 line
 
 if mode Send
-out int Sent_Packets send_packets=0 0:* 1,10
+out int Sent_Packets sent_packets=0 0:* 1,10
     // Amount of data packets sent.
 endif
 
@@ -91,9 +97,9 @@ text Data_To_Send send_data 10 10
 endif
 
 if send_from_file 1
-out checkbox Is_New_Data send_file_new_data=1
+out checkbox Is_New_Data sent_file_new_data=1
     // Is data sent at this frame.
-out text Data_Sent send_file_data 10 10
+out text Data_Sent sent_file_data 10 10
     //Data to send from a file.
 
 

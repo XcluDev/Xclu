@@ -17,7 +17,7 @@ enum_mode gete_mode() { return enum_mode(geti_("mode")); }
 QString getraw_mode() { return getraw_("mode");}
 
 //Const String Send Address
-//Address with port: localhost:12345.
+//Address with port: 127.0.0.1:12345. Note: don't use 'localhost'.
 bool was_changed_send_address() { return was_changed_("send_address"); }
 QString gets_send_address() { return gets_("send_address"); }
 QStringList get_strings_send_address() { return get_strings_("send_address"); }
@@ -61,6 +61,14 @@ bool was_changed_send_rate() { return was_changed_("send_rate"); }
 int geti_send_rate() { return geti_("send_rate"); }
 void repaint_send_rate() { repaint_("send_rate"); }
 
+
+//Out Float File Position
+//File position.
+bool was_changed_send_file_position() { return was_changed_("send_file_position"); }
+float getf_send_file_position() { return getf_("send_file_position"); }
+void setf_send_file_position(float value) { setf_("send_file_position", value); }
+void repaint_send_file_position() { repaint_("send_file_position"); }
+
 //Const String Read From File
 //Text file to load for emulating.
 bool was_changed_receive_emulate_file_name() { return was_changed_("receive_emulate_file_name"); }
@@ -85,11 +93,11 @@ void repaint_receive_file_position() { repaint_("receive_file_position"); }
 
 //Out Int Sent Packets
 // Amount of data packets sent.
-bool was_changed_send_packets() { return was_changed_("send_packets"); }
-int geti_send_packets() { return geti_("send_packets"); }
-void seti_send_packets(int value) { seti_("send_packets", value); }
-void increase_int_send_packets(int increase = 1) { increase_int_("send_packets", increase); }
-void repaint_send_packets() { repaint_("send_packets"); }
+bool was_changed_sent_packets() { return was_changed_("sent_packets"); }
+int geti_sent_packets() { return geti_("sent_packets"); }
+void seti_sent_packets(int value) { seti_("sent_packets", value); }
+void increase_int_sent_packets(int increase = 1) { increase_int_("sent_packets", increase); }
+void repaint_sent_packets() { repaint_("sent_packets"); }
 
 //Button Send
 //Send data immediately.
@@ -113,21 +121,21 @@ void repaint_send_data() { repaint_("send_data"); }
 
 //Out Checkbox Is New Data
 // Is data sent at this frame.
-bool was_changed_send_file_new_data() { return was_changed_("send_file_new_data"); }
-int geti_send_file_new_data() { return geti_("send_file_new_data"); }
-void seti_send_file_new_data(int value) { seti_("send_file_new_data", value); }
-void repaint_send_file_new_data() { repaint_("send_file_new_data"); }
+bool was_changed_sent_file_new_data() { return was_changed_("sent_file_new_data"); }
+int geti_sent_file_new_data() { return geti_("sent_file_new_data"); }
+void seti_sent_file_new_data(int value) { seti_("sent_file_new_data", value); }
+void repaint_sent_file_new_data() { repaint_("sent_file_new_data"); }
 
 //Out Text Data Sent
 //Data to send from a file.
-bool was_changed_send_file_data() { return was_changed_("send_file_data"); }
-QString gets_send_file_data() { return gets_("send_file_data"); }
-QStringList get_strings_send_file_data() { return get_strings_("send_file_data"); }
-void sets_send_file_data(QString value) { sets_("send_file_data", value); }
-void clear_string_send_file_data() { clear_string_("send_file_data"); }
-void append_string_send_file_data(QString v, int extra_new_lines_count = 0) { append_string_("send_file_data", v, extra_new_lines_count); }
-void append_string_send_file_data(QStringList v, int extra_new_lines_count = 0) { append_string_("send_file_data", v, extra_new_lines_count); }
-void repaint_send_file_data() { repaint_("send_file_data"); }
+bool was_changed_sent_file_data() { return was_changed_("sent_file_data"); }
+QString gets_sent_file_data() { return gets_("sent_file_data"); }
+QStringList get_strings_sent_file_data() { return get_strings_("sent_file_data"); }
+void sets_sent_file_data(QString value) { sets_("sent_file_data", value); }
+void clear_string_sent_file_data() { clear_string_("sent_file_data"); }
+void append_string_sent_file_data(QString v, int extra_new_lines_count = 0) { append_string_("sent_file_data", v, extra_new_lines_count); }
+void append_string_sent_file_data(QStringList v, int extra_new_lines_count = 0) { append_string_("sent_file_data", v, extra_new_lines_count); }
+void repaint_sent_file_data() { repaint_("sent_file_data"); }
 
 //Out Int Received Packets
 // Amount of data packets received.
