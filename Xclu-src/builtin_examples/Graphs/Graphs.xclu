@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "2"
+        "selected_module": "0"
     },
     "modules": [
         {
@@ -16,11 +16,11 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
-                        "aname": "Main",
+                        "aname": "Output",
                         "avalue": "0"
                     },
                     {
@@ -42,6 +42,82 @@
                     {
                         "aname": "draw_graphs_h",
                         "avalue": "1"
+                    },
+                    {
+                        "aname": "Input",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "data_source",
+                        "avalue": "File"
+                    },
+                    {
+                        "aname": "data",
+                        "avalue": "0,0.5,0.6,1,2,5"
+                    },
+                    {
+                        "aname": "is_new_data",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "read_file_name",
+                        "avalue": "graphs_data.txt"
+                    },
+                    {
+                        "aname": "read_file_rate",
+                        "avalue": "10"
+                    },
+                    {
+                        "aname": "separator",
+                        "avalue": ","
+                    },
+                    {
+                        "aname": "Draw",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "history_size",
+                        "avalue": "300"
+                    },
+                    {
+                        "aname": "draw_all_columns",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "columns_to_draw",
+                        "avalue": "1\n2\n3\n4"
+                    },
+                    {
+                        "aname": "min_value",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "max_value",
+                        "avalue": "0.2"
+                    },
+                    {
+                        "aname": "margin_x",
+                        "avalue": "0.1"
+                    },
+                    {
+                        "aname": "margin_y",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "line_width",
+                        "avalue": "2"
+                    },
+                    {
+                        "aname": "pen_red",
+                        "avalue": "255"
+                    },
+                    {
+                        "aname": "pen_green",
+                        "avalue": "255"
+                    },
+                    {
+                        "aname": "pen_blue",
+                        "avalue": "255"
                     },
                     {
                         "aname": "Control",
@@ -82,7 +158,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "0"
+                    "tab_index": "1"
                 },
                 "items": [
                     {
@@ -107,15 +183,15 @@
                     },
                     {
                         "aname": "back_red",
-                        "avalue": "128"
+                        "avalue": "0"
                     },
                     {
                         "aname": "back_green",
-                        "avalue": "128"
+                        "avalue": "0"
                     },
                     {
                         "aname": "back_blue",
-                        "avalue": "128"
+                        "avalue": "0"
                     },
                     {
                         "aname": "measurement",

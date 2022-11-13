@@ -3,6 +3,7 @@
 //Drawing graphs
 
 #include <QImage>
+#include <QSet>
 #include "sdk_h.h"
 #include "xclasswidget.h"
 #include "xobjectvis.h"
@@ -26,7 +27,17 @@ protected:
 
 protected:
     // Graphs
-    QVector<QVector<QPointF>> graphs_lines_;    // Lines for drawing
+    QVector<QVector<float>> data_;    // Lines for drawing by a channel
 
+    QString separator_;
+    QVector<int> indices_;              // Indices of used columns. If empty - use all
+
+    void parse_lines(QStringList lines);  // Push line for processing
+
+    // File read
+    QStringList file_;  // text file used for reading or emulation
+    int file_pos_ = 0;  // line for reading
+
+    float lines_to_send_ = 0;
 };
 

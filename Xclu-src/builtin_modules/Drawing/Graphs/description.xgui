@@ -6,7 +6,7 @@ module_impl=C++
 module_accept_calls=Draw
     
 #------------------------------------------
-page Main
+page Output
 
 # This value is read by RenderAreas to decide what to draw.
 const string Render_Area render_area="RENDERAREA"
@@ -14,16 +14,101 @@ const string Render_Area render_area="RENDERAREA"
 
 line
 
-#separator=","
-#data
-#read file
-
-
 separator
 
 float X draw_graphs_x=0 0:1 0.001,0.01
 float Y draw_graphs_y=0 0:1 0.001,0.01
 float W draw_graphs_w=1 0:1 0.001,0.01
 float H draw_graphs_h=1 0:1 0.001,0.01
+
+#------------------------------------------
+page Input
+
+const enum Data_Source data_source=External_Text [Input_Value,File]
+    //Get graps values from Data value of read from file.
+
+if data_source Input_Value
+text Data data 5 5
+    //Input data - one or several lines of numeric values separated by Separator symbol.
+    //0,0.5,0.6,1,2,5
+
+checkbox Is_New_Data is_new_data=1
+    //Signal for adding data to the history.
+endif
+
+if data_source File
+const string_file Read_From_File read_file_name=""
+    //Text file to read.
+    //Choose a text file
+    //Text (*.txt);; All files (*.*)
+const int Read_Rate read_file_rate=5 1:* 1,10
+    //How much lines read per second.
+    //lines/sec
+
+separator
+out text Data file_data 5 5
+    //Data read from file - one or several lines of numeric values separated by Separator symbol.
+
+out checkbox Is_New_Data is_file_new_data=0
+    //Is new values added to graphs at this frame.
+    
+endif
+
+line
+const string Separator separator=","
+    //Separator of data columns.    
+
+line
+out int Columns_Count last_data_columns_count=0 0:* 1,10
+    //Number of colums of last received data.
+out float Max_Value last_data_max_value=0 0:* 0.01,0.1
+    //Maximal value of last used data columns.
+
+if data_source File
+separator
+out float File_Position read_file_position=0 0:100 0.01,0.1
+    //File position.
+    //%
+endif
+
+
+#------------------------------------------
+page Draw
+
+const int History_Size history_size=100 1:* 1,10
+    //Number of records to draw.
+
+const checkbox Draw_All_Columns draw_all_columns=1
+    //Draw all or only specified columns.
+    
+if draw_all_columns 0
+#TODO may add here label and color for each graph.
+const text Columns_To_Draw columns_to_draw 8 8
+    //Each line contains indices of of columns to draw, starting from 1.
+    //1
+    //2
+    //3
+    //4
+
+endif
+
+line
+float Min_Value min_value=0 *:* 0.01,0.1
+    //Minimal value for drawing on each graph area.
+float Max_Value max_value=100 *:* 0.01,0.1
+    //Maximal value for drawing on each graph area.
+separator
+float Margin_X margin_x=0.1 0:1 0.01,0.1
+float Margin_Y margin_y=0.1 0:1 0.01,0.1
+
+line
+int Line_Width line_width=1 1:* 1,10
+    //Width of drawn graphs.
+    
+separator
+int Pen_Red pen_red=0 0:255 1,10 
+int Pen_Green pen_green=0 0:255 1,10 
+int Pen_Blue pen_blue=0 0:255 1,10 
+
 
 #------------------------------------------
