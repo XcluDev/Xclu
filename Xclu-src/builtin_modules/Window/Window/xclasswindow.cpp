@@ -230,9 +230,9 @@ void XClassWindow::on_visibleChanged(bool /*arg*/) {
 
 //---------------------------------------------------------------------
 void XClassWindow::start() {
-    //Clear grab image
-    getobject_image_cpu()->write().data().link<XRaster>(grab_holder_);
-    getobject_image_cpu()->write().data().clear();
+    //Clear captured image and link to UI
+    capture_holder_.clear();
+    getobject_image_cpu()->write().data().link<XRaster>(capture_holder_);
 
     //создание и установка начальных настроек окна
     setup_window();
@@ -246,10 +246,9 @@ void XClassWindow::update() {
 
     update_window();   //обновляем данные
 
-    //grab window, if required
-    grab_window();
+    //capture window, if required
+    capture_window();
 }
-
 
 //---------------------------------------------------------------------
 void XClassWindow::stop() {
@@ -260,23 +259,6 @@ void XClassWindow::stop() {
     window_.reset();
 
 }
-
-//---------------------------------------------------------------------
-//Вызов
-/*void XClassWindow::on_custom_call(QString function, XObject *input, XObject *output) {
-    //"sound_buffer_add"
-    //if (function == functions_names::sound_buffer_add()) {
-
-        //получаем доступ к данным и звуковому буферу
-        //DataAccess access(data_);
-        //qDebug() << "PCM params: " << data_.image_background << data_.pcm_speed_hz;
-        //XObjectRead sound(input);
-
-        //float sample_rate = sound.var_int("sample_rate");
-        //return;
-    //}
-
-}*/
 
 //---------------------------------------------------------------------
 /*
@@ -517,8 +499,8 @@ void XClassWindow::reset_widget(QString module_name) {
 }
 
 //---------------------------------------------------------------------
-//Grab window
-void XClassWindow::grab_window() {
+//Capture window
+void XClassWindow::capture_window() {
     if (geti_capture_cpu()) {
         auto size = window_->size();
         int w = size.width();
@@ -532,8 +514,9 @@ void XClassWindow::grab_window() {
         }
         {
             auto write = getobject_image_cpu()->write();
-            auto &raster = *write.data().data<XRaster>();
-            XRasterUtils::convert(img, raster, XType::rgb_u8);
+            auto* raster = write.data().data<XRaster>();
+            xc_assert(raster, "Internal error XClassWindow::capture_window: raster==nullptr");
+            XRasterUtils::convert(img, *raster, XType::rgb_u8);
         }
        // XRaster_u8c4 bgra;
        // XRaster::convert_bgra(img, bgra);   //fast

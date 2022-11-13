@@ -123,8 +123,8 @@ protected:
     void reset_widget(QString module_name);
 
 protected:
-    //Grab window
-    void grab_window();
-    XRaster grab_holder_;
+    //Capture window
+    void capture_window();
+    XRaster capture_holder_;
 };
 

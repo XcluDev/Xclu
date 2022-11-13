@@ -44,8 +44,9 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
     int h = qimage.size().height();
 
     auto format = qimage.format();
-    xc_assert(format == QImage::Format_RGB32,
-                "XRasterUtils::convert - QImage format is unsupported, only Format_RGB32 is supported");
+    xc_assert(format == QImage::Format_RGB32 || format == QImage::Format_ARGB32,
+                QString("XRasterUtils::convert - QImage format %1 is unsupported,"
+                        " supported: Format_RGB32 and Format_ARGB32").arg(format));
 
     if (type == XType::none) {
         if (format == QImage::Format_RGB32) {
@@ -58,6 +59,7 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
 
     void *data = raster.data_pointer();
 
+    uchar a = 255;
     for (int y=0; y<h; y++) {
         const uchar *line = qimage.scanLine(y);
         int k = 0;
@@ -65,7 +67,9 @@ void XRasterUtils::convert(QImage qimage, XRaster &raster,
             uchar b = line[k++];
             uchar g = line[k++];
             uchar r = line[k++];
-            uchar a = line[k++];
+            if (format == QImage::Format_ARGB32) {
+               a = line[k++];
+            }
             // TODO need to implement separately to optimize (unroll etc)
             switch (type) {
             case XType::uint8:

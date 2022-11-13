@@ -28,18 +28,6 @@
                         "avalue": "RENDERAREA"
                     },
                     {
-                        "aname": "render_to_image",
-                        "avalue": "0"
-                    },
-                    {
-                        "aname": "image_width",
-                        "avalue": "512"
-                    },
-                    {
-                        "aname": "image_height",
-                        "avalue": "512"
-                    },
-                    {
                         "aname": "draw_graphs_x",
                         "avalue": "0"
                     },
@@ -103,7 +91,7 @@
                     },
                     {
                         "aname": "size_mode",
-                        "avalue": "Fixed"
+                        "avalue": "Maximize"
                     },
                     {
                         "aname": "fixed_w",
