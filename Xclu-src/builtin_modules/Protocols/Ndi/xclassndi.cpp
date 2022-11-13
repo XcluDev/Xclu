@@ -81,7 +81,7 @@ void XClassNdi::send_frame() {
         auto* raster = read.data().data<XRaster>();
         if (raster && !raster->is_empty()) {
             raster->assert_type(XType::rgba_u8);
-            ndi_send_image(raster->data<uint8>(), raster->w, raster->h);
+            ndi_send_image((uint8 *)raster->data_pointer(), raster->w, raster->h);
         }
     }
     if (source == send_image_source_Test_Image) {

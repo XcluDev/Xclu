@@ -516,7 +516,7 @@ void XClassWindow::capture_window() {
             auto write = getobject_image_cpu()->write();
             auto* raster = write.data().data<XRaster>();
             xc_assert(raster, "Internal error XClassWindow::capture_window: raster==nullptr");
-            XRasterUtils::convert(img, *raster, XType::rgb_u8);
+            XRasterUtils::convert(img, *raster, XType::rgba_u8);
         }
        // XRaster_u8c4 bgra;
        // XRaster::convert_bgra(img, bgra);   //fast
