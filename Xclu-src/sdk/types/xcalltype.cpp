@@ -6,7 +6,7 @@ const QString XCallTypeNames[int(XCallType::N)] = {
     "none",
     "Custom",
     "CreateWidget",
-    "Draw",
+    "Draw",         // Note: modules receiving Draw event must have render_area value
     "SoundBufferAdd",
     "SoundBufferReceived",
 };

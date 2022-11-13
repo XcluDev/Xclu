@@ -30,15 +30,17 @@ void XClassRenderArea::start() {
 //Collect modules to render from
 void XClassRenderArea::collect_modules() {
     auto modules = XCallUtils::find_modules_by_filter(XCallType::Draw);
-    // Use only modules which sets "render_area" to this module
+    // Use only modules which sets value "render_area" equalt to this module's name
     modules_.clear();
     QString render_area_str = "render_area";
     for (auto m: modules) {
-        if (m->has_item(render_area_str)) { // Only modules with "render_area" property are analyzed here
-            if (m->gets(render_area_str) == name()) {
-                modules_.append(m);
-            }
+        xc_assert(m->has_item(render_area_str),
+                  QString("Internal error: module %1 received Draw events but hasn't %2 value")
+                  .arg(m->name()).arg(render_area_str));
+        if (m->gets(render_area_str) == name()) {
+            modules_.append(m);
         }
+
     }
 
     // Output list to the screen
