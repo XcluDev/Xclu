@@ -78,7 +78,10 @@ public:
     //исключение "записывается" в err
     void call_function_no_exception(XCall& call);
 
+    //--------------------------------------------------------------
     //Доступ к переменным и запуску из других модулей
+    //--------------------------------------------------------------
+    bool has_item(QString name);
 
     //int, checkbox, button, enum (rawtext), string, text
     //index>=0: string, text separated by ' ' - no error if no such string!
@@ -126,7 +129,9 @@ public:
     //Note: object must be live, because only pointer to it is stored
     void set_object(QString name, XProtectedObject *object);
 
-    //сигнал, что GUI подключен/отключен
+    //--------------------------------------------------------------
+    // Cигнал, что GUI подключен/отключен
+    //--------------------------------------------------------------
     void gui_attached(XGuiEditor *editor);
     void gui_detached();
     bool is_gui_attached();
@@ -136,7 +141,9 @@ public:
     //Побочное действие - также ставит и выключает is_running
     void gui_action(GuiStage stage, bool affect_is_running = true);
 
-    //Запись и считывание json
+    //--------------------------------------------------------------
+    // Запись и считывание json
+    //--------------------------------------------------------------
     void write_json(QJsonObject &json);
     void read_json(const QJsonObject &json);
 

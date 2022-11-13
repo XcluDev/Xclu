@@ -42,6 +42,7 @@ void XClassUdp::send_start() {
     lines_to_send_ = 0;
 
     if (geti_send_from_file()) {
+        xc_assert(!gets_send_file_name().isEmpty(), "Please choose the file to send.");
         file_ = xc_read_text_file_relpath(gets_send_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_send_file_name());
     }
@@ -60,6 +61,7 @@ void XClassUdp::receive_start() {
     file_pos_ = 0;
 
     if (geti_receive_emulate()) {
+        xc_assert(!gets_receive_emulate_file_name().isEmpty(), "Please choose the file to read for emulation.");
         file_ = xc_read_text_file_relpath(gets_receive_emulate_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_receive_emulate_file_name());
         timer.reset(new QTimer(this));

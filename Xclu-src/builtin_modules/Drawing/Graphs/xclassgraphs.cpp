@@ -57,6 +57,7 @@ void XClassGraphs::start() {
     seti_is_file_new_data(0);
 
     if (gete_data_source() == data_source_File) {
+        xc_assert(!gets_read_file_name().isEmpty(), "Please choose the file to read.");
         file_ = xc_read_text_file_relpath(gets_read_file_name());
         xc_assert(!file_.isEmpty(), "File is empty: " + gets_read_file_name());
     }
@@ -101,15 +102,15 @@ void XClassGraphs::update() {
 //---------------------------------------------------------------------
 void XClassGraphs::parse_lines(QStringList lines) {  // Push line for processing
 
-    int last_dims = 0;
+    int input_dims = 0;
     float max_value = 0;
     bool use_indices = !indices_.isEmpty();
     int history = geti_history_size();
 
     for (auto line: lines) {
         auto list = line.split(separator_);
+        input_dims = list.size();
         int dims = (!use_indices)?list.size():indices_.size();
-        last_dims = dims;
 
         // Увеличиваем число графиков, если требуется
         int n = (!data_.isEmpty())?data_[0].size():0;
@@ -144,11 +145,9 @@ void XClassGraphs::parse_lines(QStringList lines) {  // Push line for processing
                 max_value = qMax(max_value, fabs(value));
             }
         }
-
-
     }
 
-    seti_last_data_columns_count(last_dims);
+    seti_last_data_columns_count(input_dims);
     setf_last_data_max_value(max_value);
 }
 

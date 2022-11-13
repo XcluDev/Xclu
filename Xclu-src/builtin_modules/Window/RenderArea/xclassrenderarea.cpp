@@ -32,9 +32,12 @@ void XClassRenderArea::collect_modules() {
     auto modules = XCallUtils::find_modules_by_filter(XCallType::Draw);
     // Use only modules which sets "render_area" to this module
     modules_.clear();
+    QString render_area_str = "render_area";
     for (auto m: modules) {
-        if (m->gets("render_area") == name()) {
-            modules_.append(m);
+        if (m->has_item(render_area_str)) { // Only modules with "render_area" property are analyzed here
+            if (m->gets(render_area_str) == name()) {
+                modules_.append(m);
+            }
         }
     }
 

@@ -310,6 +310,12 @@ void XModule::call(XCall& call) {
 //---------------------------------------------------------------------
 //Доступ к переменным и запуску из других модулей
 
+bool XModule::has_item(QString name)
+{
+    return interf()->has_item(name);
+}
+
+//---------------------------------------------------------------------
 //int, checkbox, button, enum (index), string, text
 //index>=0: string, text separated by ' ' - no error if no such string!
 //index2>=0: string, text separated by '\n' and ' ' - no error if no such string!
