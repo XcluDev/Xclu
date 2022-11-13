@@ -7,7 +7,7 @@
 #include <QImage>
 #include "sdk_h.h"
 #include "xclass.h"
-#include "xobjectimage.h"
+#include "xobject.h"
 #include "xprotecteddata.h"
 #include "sdk_h.h"
 
@@ -27,7 +27,7 @@ protected:
 protected:
     void send_frame();
     void send_test_frame(int frame);
-    XRaster_u8c4 test_raster_;
+    XRaster test_raster_;
     int  sent_frames_ = 0;
 
 

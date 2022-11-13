@@ -28,12 +28,13 @@ const enum Data_Source data_source=External_Text [Input_Value,File]
     //Get graps values from Data value of read from file.
 
 if data_source Input_Value
+checkbox Is_New_Data is_new_data=1
+    //Signal for adding data to the history.
+
 text Data data 5 5
     //Input data - one or several lines of numeric values separated by Separator symbol.
     //0,0.5,0.6,1,2,5
 
-checkbox Is_New_Data is_new_data=1
-    //Signal for adding data to the history.
 endif
 
 if data_source File
@@ -46,12 +47,11 @@ const int Read_Rate read_file_rate=5 1:* 1,10
     //lines/sec
 
 separator
-out text Data file_data 5 5
-    //Data read from file - one or several lines of numeric values separated by Separator symbol.
-
 out checkbox Is_New_Data is_file_new_data=0
     //Is new values added to graphs at this frame.
-    
+
+out text Data file_data 5 5
+    //Data read from file - one or several lines of numeric values separated by Separator symbol.    
 endif
 
 line
@@ -84,12 +84,11 @@ const checkbox Draw_All_Columns draw_all_columns=1
 if draw_all_columns 0
 #TODO may add here label and color for each graph.
 const text Columns_To_Draw columns_to_draw 8 8
-    //Each line contains indices of of columns to draw, starting from 1.
-    //1
-    //2
-    //3
-    //4
-
+    //Each line contains indices of of columns to draw, starting from 1. Also can contain description: '1 First channel'.
+    //1 First channel
+    //2 Second channel
+    //3 Third channel
+    //4 Fourth channel
 endif
 
 line

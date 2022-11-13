@@ -53,18 +53,18 @@ bool was_changed_data_source() { return was_changed_("data_source"); }
 enum_data_source gete_data_source() { return enum_data_source(geti_("data_source")); }
 QString getraw_data_source() { return getraw_("data_source");}
 
+//Checkbox Is New Data
+//Signal for adding data to the history.
+bool was_changed_is_new_data() { return was_changed_("is_new_data"); }
+int geti_is_new_data() { return geti_("is_new_data"); }
+void repaint_is_new_data() { repaint_("is_new_data"); }
+
 //Text Data
 //Input data - one or several lines of numeric values separated by Separator symbol.
 bool was_changed_data() { return was_changed_("data"); }
 QString gets_data() { return gets_("data"); }
 QStringList get_strings_data() { return get_strings_("data"); }
 void repaint_data() { repaint_("data"); }
-
-//Checkbox Is New Data
-//Signal for adding data to the history.
-bool was_changed_is_new_data() { return was_changed_("is_new_data"); }
-int geti_is_new_data() { return geti_("is_new_data"); }
-void repaint_is_new_data() { repaint_("is_new_data"); }
 
 //Const String Read From File
 //Text file to read.
@@ -80,6 +80,13 @@ int geti_read_file_rate() { return geti_("read_file_rate"); }
 void repaint_read_file_rate() { repaint_("read_file_rate"); }
 
 
+//Out Checkbox Is New Data
+//Is new values added to graphs at this frame.
+bool was_changed_is_file_new_data() { return was_changed_("is_file_new_data"); }
+int geti_is_file_new_data() { return geti_("is_file_new_data"); }
+void seti_is_file_new_data(int value) { seti_("is_file_new_data", value); }
+void repaint_is_file_new_data() { repaint_("is_file_new_data"); }
+
 //Out Text Data
 //Data read from file - one or several lines of numeric values separated by Separator symbol.
 bool was_changed_file_data() { return was_changed_("file_data"); }
@@ -90,13 +97,6 @@ void clear_string_file_data() { clear_string_("file_data"); }
 void append_string_file_data(QString v, int extra_new_lines_count = 0) { append_string_("file_data", v, extra_new_lines_count); }
 void append_string_file_data(QStringList v, int extra_new_lines_count = 0) { append_string_("file_data", v, extra_new_lines_count); }
 void repaint_file_data() { repaint_("file_data"); }
-
-//Out Checkbox Is New Data
-//Is new values added to graphs at this frame.
-bool was_changed_is_file_new_data() { return was_changed_("is_file_new_data"); }
-int geti_is_file_new_data() { return geti_("is_file_new_data"); }
-void seti_is_file_new_data(int value) { seti_("is_file_new_data", value); }
-void repaint_is_file_new_data() { repaint_("is_file_new_data"); }
 
 
 //Const String Separator

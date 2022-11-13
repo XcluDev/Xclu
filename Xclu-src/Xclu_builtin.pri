@@ -434,18 +434,18 @@ HEADERS += \
 #Comment this line to exclude NDI from build
 #CONFIG += NDI - not works...
 #--------------------------------------------------------------------------
-#windows {
-#    INCLUDEPATH += $$PWD/libs/NDI/Include
-#    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
-#
-#SOURCES +=    \
-#    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.cpp
-#
-#HEADERS +=    \
-#    $$PWD/builtin_modules/Protocols/Ndi/auto.h \
-#    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.h
-#
-#}
+windows {
+    INCLUDEPATH += $$PWD/libs/NDI/Include
+    LIBS += $$PWD/libs/NDI/Lib/x64/Processing.NDI.Lib.x64.lib
+
+SOURCES +=    \
+    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.cpp
+
+HEADERS +=    \
+    $$PWD/builtin_modules/Protocols/Ndi/auto.h \
+    $$PWD/builtin_modules/Protocols/Ndi/xclassndi.h
+
+}
 
 #--------------------------------------------------------------------------
 

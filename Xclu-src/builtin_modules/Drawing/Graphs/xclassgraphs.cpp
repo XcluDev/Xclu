@@ -36,16 +36,21 @@ void XClassGraphs::start() {
     indices_.clear();
     if (!geti_draw_all_columns()) {
         auto list = get_strings_columns_to_draw();
-        xc_assert(!list.isEmpty(), "Please specify Columns To Draw");
         for (auto line: list) {
-            xc_assert(!line.isEmpty(), "Empty line for index at Columns To Draw");
-            int index_plus1 = line.toInt();
+            if (line.isEmpty()) {
+                continue;
+            }
+            auto line_list = line.split(" ");
+
+            // Getting first number in line '1 First channel' as index
+            int index_plus1 = line_list[0].toInt();
             xc_assert(index_plus1>0, "Indices at Columns To Draw must be > 0");
             int index = index_plus1 - 1;
             xc_assert(!indices_set.contains(index), "Duplicated indices in Columns To Draw");
             indices_set.insert(index);
             indices_.push_back(index);
         }
+        xc_assert(!indices_.isEmpty(), "Please specify non-empty Columns To Draw");
     }
 
     // File
@@ -108,9 +113,15 @@ void XClassGraphs::parse_lines(QStringList lines) {  // Push line for processing
     int history = geti_history_size();
 
     for (auto line: lines) {
+        if (line.isEmpty()) {
+            continue;
+        }
         auto list = line.split(separator_);
         input_dims = list.size();
-        int dims = (!use_indices)?list.size():indices_.size();
+        int dims = input_dims;
+        if (use_indices) {
+            dims = qMin(dims, indices_.size());
+        }
 
         // Увеличиваем число графиков, если требуется
         int n = (!data_.isEmpty())?data_[0].size():0;
@@ -140,7 +151,7 @@ void XClassGraphs::parse_lines(QStringList lines) {  // Push line for processing
         else {
             for (int k = 0; k<indices_.size(); k++) {
                 int i = indices_[k];
-                float value = (i < dims) ? list[i].toFloat() : 0;
+                float value = (i < input_dims) ? list[i].toFloat() : 0;
                 data_[k].push_back(value);
                 max_value = qMax(max_value, fabs(value));
             }

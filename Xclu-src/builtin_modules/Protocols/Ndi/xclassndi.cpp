@@ -1,11 +1,11 @@
 #include "xclassndi.h"
 #include "incl_cpp.h"
-#include "registrarxmodule.h"
+#include "registrarxclass.h"
 #include "project_props.h"
 #include <Processing.NDI.Lib.h>
  
 
-REGISTER_XMODULE(Ndi)
+REGISTER_XCLASS(Ndi)
 
 //---------------------------------------------------------------------
 XClassNdi::XClassNdi(QString class_name)
@@ -75,19 +75,13 @@ void XClassNdi::send_frame() {
         return;
     }
 
-    auto source = gete_send_image_source();
+   auto source = gete_send_image_source();
     if (source == send_image_source_Image) {
-        XProtectedObject *image = getobject_send_image();
-        auto read = image->read();
-        if (read.data().type() == XObjectTypeImage) {
-            auto info = XObjectImage::get_data(read.data());
-            xc_assert(info.data_type == "u8" || info.channels == 4,
-                     "XClassNdi::send_frame - only u8, 4 channels are supported");
-            auto *array = XObjectImage::get_array(read.data());
-            const unsigned char *u8 = array->data_u8();
-            xc_assert(u8, "XClassNdi::send_frame - Empty image array 'u8'");
-
-            ndi_send_image(u8, info.w, info.h);
+        auto read = getobject_send_image()->read();
+        auto* raster = read.data().data<XRaster>();
+        if (raster && !raster->is_empty()) {
+            raster->assert_type(XType::rgba_u8);
+            ndi_send_image(raster->data<uint8>(), raster->w, raster->h);
         }
     }
     if (source == send_image_source_Test_Image) {
@@ -105,14 +99,14 @@ void XClassNdi::send_test_frame(int frame) {
 
     // allocate
     if (test_raster_.is_empty()) {
-        test_raster_.allocate(w, h);
+        test_raster_.allocate(w, h, XType::rgba_u8);
     }
 
     // fill
-    auto test_raster_data = test_raster_.data_pointer();
+    auto test_raster_data = test_raster_.data<rgba_u8>();
     for (int y=0; y<h; y++) {
         for (int x=0; x<w; x++) {
-            test_raster_data[x + w*y] = rgba_u8(
+            test_raster_data [x + w*y] = rgba_u8(
                         ((x + frame) * 256 / w) % 256,
                         x * 256 / w,
                         y * 256 / h,
@@ -121,7 +115,7 @@ void XClassNdi::send_test_frame(int frame) {
     }
 
     // send
-    ndi_send_image(test_raster_.data_pointer_u8(), w, h);
+    ndi_send_image((uint8*) test_raster_.data_pointer(), w, h);
 
 }
 
