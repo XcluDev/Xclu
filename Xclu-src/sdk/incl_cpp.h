@@ -18,5 +18,5 @@
 #include "xparser.h"
 #include "xtimemeasure.h"
 #include "project_props.h"
-
+#include "xmoduleutils.h"
 #include "xrasterutils.h"

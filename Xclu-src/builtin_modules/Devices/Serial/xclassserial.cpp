@@ -133,7 +133,7 @@ void XClassSerial::on_button_pressed(QString button_id) {
         //-----------------------
         if (button_id == button_send_string_link_btn()) {
             if (connected_) {
-                QString str = xc_get_string_by_link(gets_string_link_send());
+                QString str = XModuleUtils::get_string_by_link(gets_string_link_send());
                 send_string(str);
             }
             else {

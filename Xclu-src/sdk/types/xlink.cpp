@@ -1,5 +1,4 @@
 #include "xlink.h"
-
 #include "incl_cpp.h"
 #include "xmodule.h"
 #include "project_props.h"
@@ -168,7 +167,7 @@ XLinkResolved::XLinkResolved(const XLinkParsed &link0)
 //---------------------------------------------------------------------
 void XLinkResolved::resolve() {
     //resolve module
-    module_ptr_ = xc_find_module(module);
+    module_ptr_ = XModuleUtils::find_module(module);
     //check variable exists
 
     xc_assert(module_ptr_->interf()->has_item(var),

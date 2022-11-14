@@ -379,7 +379,7 @@ void XClassExecute::console_read() {
             increase_int_debug_received_times();
 
             //Send bang
-            xc_bang_module_button_by_link(get_strings_console_bang_on_received());
+            XModuleUtils::press_button_by_link(get_strings_console_bang_on_received());
 
             //Write if required
             if (geti_write_on_receive()) {

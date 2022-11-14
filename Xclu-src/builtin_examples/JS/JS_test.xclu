@@ -5,13 +5,13 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "1"
+        "selected_module": "0"
     },
     "modules": [
         {
             "description": {
                 "class": "JsModule",
-                "name": "js_module1",
+                "name": "JS_MODULE",
                 "version": "1.01"
             },
             "interface": {

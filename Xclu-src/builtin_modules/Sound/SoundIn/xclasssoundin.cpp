@@ -192,7 +192,7 @@ void XClassSoundIn::start() {
     data_.write().data().clear();
 
     //set modules list
-    data_.write().data().modules_ = xc_find_modules(gets_modules_list());
+    data_.write().data().modules_ = XModuleUtils::find_modules(gets_modules_list());
 
 
     buffer_size_= 0;

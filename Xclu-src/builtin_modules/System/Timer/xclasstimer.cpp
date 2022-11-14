@@ -133,7 +133,7 @@ void XClassTimer::update_bang(float delay_sec) {
 //---------------------------------------------------------------------
 void XClassTimer::bang() {
     //send bangs
-    xc_bang_module_button_by_link(get_strings_bang_list());
+    XModuleUtils::press_button_by_link(get_strings_bang_list());
 }
 
 //---------------------------------------------------------------------

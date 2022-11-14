@@ -2,7 +2,7 @@
 #include "xclassrenderarea.h"
 #include "incl_cpp.h"
 #include "registrarxclass.h"
-#include "xcallutils.h"
+#include "xmoduleutils.h"
 #include "xmodule.h"
 
 //registering module implementation
@@ -29,7 +29,7 @@ void XClassRenderArea::start() {
 //---------------------------------------------------------------------
 //Collect modules to render from
 void XClassRenderArea::collect_modules() {
-    auto modules = XCallUtils::find_modules_by_filter(XCallType::Draw);
+    auto modules = XModuleUtils::find_modules_by_filter(XCallType::Draw);
     // Use only modules which sets value "render_area" equalt to this module's name
     modules_.clear();
     QString render_area_str = "render_area";

@@ -457,7 +457,7 @@ int XClassWindow::xparse_int(QStringList list, int index, int default_value, QSt
 //важно, что модуль создает виджет и нам просто ссылку передает, и мы должны сами ее удалить
 //- например, путем установки его в наши layouts и виджеты
 QWidget *XClassWindow::request_widget(QString module_name) {
-    XModule *module = xc_find_module(module_name);
+    XModule *module = XModuleUtils::find_module(module_name);
 
     XCallDataCreateWidget call_data;
     call_data.in_parent_id = this->module()->name();
@@ -488,7 +488,7 @@ void XClassWindow::reset_widgets() {
 //---------------------------------------------------------------------
 //remove requested widget from another module - called at stopping
 void XClassWindow::reset_widget(QString module_name) {
-    XModule *module = xc_find_module(module_name);
+    XModule *module = XModuleUtils::find_module(module_name);
 
     XCallDataCreateWidget call_data;
     call_data.in_parent_id = "";

@@ -215,7 +215,7 @@ void XClassSoundOut::start() {
         auto write = params_.write();
         auto &params = write.data();
         params.clear();
-        params.modules_ = xc_find_modules(gets_modules_list());
+        params.modules_ = XModuleUtils::find_modules(gets_modules_list());
     }
     buffer_size_= 0;
     seti_buffer_size(0);
@@ -254,7 +254,7 @@ void XClassSoundOut::update() {
 
         data.volume_left_ = getf_volume() * getf_volume_ch1();
         data.volume_right_ = getf_volume() * getf_volume_ch2();
-        data.modules_ = xc_find_modules(gets_modules_list());
+        data.modules_ = XModuleUtils::find_modules(gets_modules_list());
 
         //если ошибка - обработать ошибку
         data.err.throw_error();
