@@ -234,7 +234,6 @@ SOURCES += \
     modules/xmoduleinterface.cpp \
     modules/xmoduleprototype.cpp \
     modules/xmodulesfactory.cpp \
-    project/xmoduleutils.cpp \
     sdk/audio/xc_audio.cpp \
     sdk/audio/xc_audio_wavfile.cpp \
     sdk/cv/xcvhelper.cpp \
@@ -275,6 +274,7 @@ SOURCES += \
     sdk/utility/xfiles.cpp \
     sdk/utility/xhandlingerrors.cpp \
     sdk/utility/ximageeffect.cpp \
+    sdk/utility/xmoduleutils.cpp \
     sdk/utility/xparse_tree.cpp \
     sdk/utility/xparser.cpp \
     sdk/utility/xrasterutils.cpp \
@@ -361,7 +361,6 @@ HEADERS += \
     modules/xmoduleinterface.h \
     modules/xmoduleprototype.h \
     modules/xmodulesfactory.h \
-    project/xmoduleutils.h \
     sdk/audio/xc_audio.h \
     sdk/audio/xc_audio_wavfile.h \
     sdk/cv/xcvhelper.h \
@@ -411,6 +410,7 @@ HEADERS += \
     sdk/utility/xfiles.h \
     sdk/utility/xhandlingerrors.h \
     sdk/utility/ximageeffect.h \
+    sdk/utility/xmoduleutils.h \
     sdk/utility/xparse_tree.h \
     sdk/utility/xparser.h \
     sdk/utility/xrasterutils.h \
