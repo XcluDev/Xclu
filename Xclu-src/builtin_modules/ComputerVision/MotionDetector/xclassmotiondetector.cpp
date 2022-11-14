@@ -266,12 +266,12 @@ void XClassMotionDetector::decimate_input(XRaster &input_u8, XRaster &result_u8)
 
 //---------------------------------------------------------------------
 void XClassMotionDetector::bang_on() {
-    xc_bang(get_strings_bang_on());
+    xc_bang_module_button_by_link(get_strings_bang_on());
 }
 
 //---------------------------------------------------------------------
 void XClassMotionDetector::bang_off() {
-    xc_bang(get_strings_bang_off());
+    xc_bang_module_button_by_link(get_strings_bang_off());
 }
 
 //---------------------------------------------------------------------

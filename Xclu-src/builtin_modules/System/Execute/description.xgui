@@ -58,6 +58,9 @@ button Stop stop_button
 out enum Status status=Not_Started [Not_Started,Running,Success,Error,Timeout,Crashed]
     //Status of the current execution.
 
+out string Status_Str status_str=""
+    //String representation of the status.
+
 out int Exit_Code exit_code=0 *:* 1,10
     //The code returned by program, '0' means no error.
     

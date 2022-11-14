@@ -52,6 +52,8 @@ protected:
     virtual void update();
     virtual void stop();
 
+    virtual void on_button_pressed(QString button_id);
+
     QScopedPointer<QProcess> subprocess_;
 
     void process_run();

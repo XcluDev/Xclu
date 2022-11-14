@@ -61,6 +61,17 @@ void XClassExecute::start() {
 }
 
 //---------------------------------------------------------------------
+void XClassExecute::on_button_pressed(QString button_id)
+{
+    if (button_id == button_run_button()) {
+        process_run();
+    }
+    if (button_id == button_stop_button()) {
+        process_stop();
+    }
+}
+
+//---------------------------------------------------------------------
 void XClassExecute::update() {
     bool need_run = false;
     //buttons
@@ -101,6 +112,10 @@ void XClassExecute::update() {
         console_read();
     }
 
+    // update status string
+    if (was_changed_status()) {
+        sets_status_str(getraw_status());
+    }
 
 }
 
@@ -364,7 +379,7 @@ void XClassExecute::console_read() {
             increase_int_debug_received_times();
 
             //Send bang
-            xc_bang(get_strings_console_bang_on_received());
+            xc_bang_module_button_by_link(get_strings_console_bang_on_received());
 
             //Write if required
             if (geti_write_on_receive()) {

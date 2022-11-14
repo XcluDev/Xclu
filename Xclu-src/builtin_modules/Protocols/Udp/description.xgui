@@ -66,7 +66,7 @@ if receive_emulate 1
 const string_file Read_From_File receive_emulate_file_name=""
     //Text file to load for emulating.
     //Choose a text file
-    //Text (*.txt);; All files (*.*)
+    //Text, CSV (*.txt,*.csv);; All files (*.*)
 const int Rate receive_emulate_rate=5 1:* 1,10
     //How much lines read per second.
     //lines/sec

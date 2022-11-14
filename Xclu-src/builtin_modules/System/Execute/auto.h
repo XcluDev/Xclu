@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//Interface for XClassExecute
+//Interface for XClassBaseExecute
 //Created automatically.
 //----------------------------------------------------
 //Page Main
@@ -10,23 +10,27 @@
 bool was_changed_folder_name() { return was_changed_("folder_name"); }
 QString gets_folder_name() { return gets_("folder_name"); }
 QStringList get_strings_folder_name() { return get_strings_("folder_name"); }
+void repaint_folder_name() { repaint_("folder_name"); }
 
 //String Command Or File
 //Command or file to execute.
 bool was_changed_file_name() { return was_changed_("file_name"); }
 QString gets_file_name() { return gets_("file_name"); }
 QStringList get_strings_file_name() { return get_strings_("file_name"); }
+void repaint_file_name() { repaint_("file_name"); }
 
 //Checkbox File Must Exists
 //This is file name and it's must exists. Uncheck for running commands such as 'python' or similar.
 bool was_changed_file_must_exists() { return was_changed_("file_must_exists"); }
 int geti_file_must_exists() { return geti_("file_must_exists"); }
+void repaint_file_must_exists() { repaint_("file_must_exists"); }
 
 //String Arguments
 //Optional command line arguments
 bool was_changed_args() { return was_changed_("args"); }
 QString gets_args() { return gets_("args"); }
 QStringList get_strings_args() { return get_strings_("args"); }
+void repaint_args() { repaint_("args"); }
 
 //----------------------------------------------------
 //Page Run
@@ -59,11 +63,13 @@ QString getraw_thread_mode() { return getraw_("thread_mode");}
 //Use timeout for stopping execution or wait infinitely
 bool was_changed_enable_timeout() { return was_changed_("enable_timeout"); }
 int geti_enable_timeout() { return geti_("enable_timeout"); }
+void repaint_enable_timeout() { repaint_("enable_timeout"); }
 
 //Float Timeout
 //Timeout duration
 bool was_changed_timeout_sec() { return was_changed_("timeout_sec"); }
 float getf_timeout_sec() { return getf_("timeout_sec"); }
+void repaint_timeout_sec() { repaint_("timeout_sec"); }
 
 
 
@@ -71,12 +77,14 @@ float getf_timeout_sec() { return getf_("timeout_sec"); }
 //Run execution immediately.
 bool was_changed_run_button() { return was_changed_("run_button"); }
 int geti_run_button() { return geti_("run_button"); }
+void repaint_run_button() { repaint_("run_button"); }
 QString button_run_button() { return "run_button"; }
 
 //Button Stop
 //Stop execution immediately.
 bool was_changed_stop_button() { return was_changed_("stop_button"); }
 int geti_stop_button() { return geti_("stop_button"); }
+void repaint_stop_button() { repaint_("stop_button"); }
 QString button_stop_button() { return "stop_button"; }
 
 //Out Enum Status
@@ -95,12 +103,24 @@ enum_status gete_status() { return enum_status(geti_("status")); }
 void sete_status(enum_status value) { seti_("status", value); }
 QString getraw_status() { return getraw_("status");}
 
+//Out String Status Str
+//String representation of the status.
+bool was_changed_status_str() { return was_changed_("status_str"); }
+QString gets_status_str() { return gets_("status_str"); }
+QStringList get_strings_status_str() { return get_strings_("status_str"); }
+void sets_status_str(QString value) { sets_("status_str", value); }
+void clear_string_status_str() { clear_string_("status_str"); }
+void append_string_status_str(QString v, int extra_new_lines_count = 0) { append_string_("status_str", v, extra_new_lines_count); }
+void append_string_status_str(QStringList v, int extra_new_lines_count = 0) { append_string_("status_str", v, extra_new_lines_count); }
+void repaint_status_str() { repaint_("status_str"); }
+
 //Out Int Exit Code
 //The code returned by program, '0' means no error.
 bool was_changed_exit_code() { return was_changed_("exit_code"); }
 int geti_exit_code() { return geti_("exit_code"); }
 void seti_exit_code(int value) { seti_("exit_code", value); }
 void increase_int_exit_code(int increase = 1) { increase_int_("exit_code", increase); }
+void repaint_exit_code() { repaint_("exit_code"); }
 
 //Out String Error Details
 //Details about Crash
@@ -111,6 +131,7 @@ void sets_error_details(QString value) { sets_("error_details", value); }
 void clear_string_error_details() { clear_string_("error_details"); }
 void append_string_error_details(QString v, int extra_new_lines_count = 0) { append_string_("error_details", v, extra_new_lines_count); }
 void append_string_error_details(QStringList v, int extra_new_lines_count = 0) { append_string_("error_details", v, extra_new_lines_count); }
+void repaint_error_details() { repaint_("error_details"); }
 
 
 
@@ -135,6 +156,7 @@ void sets_console_errors_text(QString value) { sets_("console_errors_text", valu
 void clear_string_console_errors_text() { clear_string_("console_errors_text"); }
 void append_string_console_errors_text(QString v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
 void append_string_console_errors_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_errors_text", v, extra_new_lines_count); }
+void repaint_console_errors_text() { repaint_("console_errors_text"); }
 
 //----------------------------------------------------
 //Page Write
@@ -144,21 +166,25 @@ void append_string_console_errors_text(QStringList v, int extra_new_lines_count 
 //Write data to process console at process start. If no data is to send - then repeat again and again at each frame. Has meaning for images - waiting for ready.
 bool was_changed_write_at_least_once() { return was_changed_("write_at_least_once"); }
 int geti_write_at_least_once() { return geti_("write_at_least_once"); }
+void repaint_write_at_least_once() { repaint_("write_at_least_once"); }
 
 //Checkbox Write Each Frame
 //Write data to process console each frame. Normally we shouldn't do so if run the process in second thread ("Run At Separate Thread"), and should use "Write On Receive" to protect from buffer overflow.
 bool was_changed_write_each_frame() { return was_changed_("write_each_frame"); }
 int geti_write_each_frame() { return geti_("write_each_frame"); }
+void repaint_write_each_frame() { repaint_("write_each_frame"); }
 
 //Checkbox Write On Receive
 //Write data to process console after receiving answer. Useful for interaction with the process working in the second thread ("Run At Separate Thread").
 bool was_changed_write_on_receive() { return was_changed_("write_on_receive"); }
 int geti_write_on_receive() { return geti_("write_on_receive"); }
+void repaint_write_on_receive() { repaint_("write_on_receive"); }
 
 //Button Write
 //Write to process console right now.
 bool was_changed_write_button() { return was_changed_("write_button"); }
 int geti_write_button() { return geti_("write_button"); }
+void repaint_write_button() { repaint_("write_button"); }
 QString button_write_button() { return "write_button"; }
 
 //Enum Data Type
@@ -178,6 +204,7 @@ QString getraw_write_type() { return getraw_("write_type");}
 bool was_changed_console_write_string() { return was_changed_("console_write_string"); }
 QString gets_console_write_string() { return gets_("console_write_string"); }
 QStringList get_strings_console_write_string() { return get_strings_("console_write_string"); }
+void repaint_console_write_string() { repaint_("console_write_string"); }
 
 //Enum Line Terminator
 //
@@ -197,25 +224,30 @@ QString getraw_line_term() { return getraw_("line_term");}
 bool was_changed_console_write_text() { return was_changed_("console_write_text"); }
 QString gets_console_write_text() { return gets_("console_write_text"); }
 QStringList get_strings_console_write_text() { return get_strings_("console_write_text"); }
+void repaint_console_write_text() { repaint_("console_write_text"); }
 
 //Object Image
 //Image to write to process console. Currently supported 8-bit RGB and Grayscale. It's sent as header (see below) and data array.
 bool was_changed_console_write_image() { return was_changed_("console_write_image"); }
 XProtectedObject *getobject_console_write_image() { return get_object_("console_write_image"); }
+void repaint_console_write_image() { repaint_("console_write_image"); }
 //Checkbox Send Header
 //Send or not header: uint16 w, uint16 h, uint8 channels.
 bool was_changed_console_write_image_header() { return was_changed_("console_write_image_header"); }
 int geti_console_write_image_header() { return geti_("console_write_image_header"); }
+void repaint_console_write_image_header() { repaint_("console_write_image_header"); }
 
 //Checkbox Transform Image
 //Convert to grayscale or resize image.
 bool was_changed_console_write_image_transform() { return was_changed_("console_write_image_transform"); }
 int geti_console_write_image_transform() { return geti_("console_write_image_transform"); }
+void repaint_console_write_image_transform() { repaint_("console_write_image_transform"); }
 
 //Checkbox To Grayscale
 //Convert image to grayscale.
 bool was_changed_console_write_image_to_grayscale() { return was_changed_("console_write_image_to_grayscale"); }
 int geti_console_write_image_to_grayscale() { return geti_("console_write_image_to_grayscale"); }
+void repaint_console_write_image_to_grayscale() { repaint_("console_write_image_to_grayscale"); }
 
 //Enum Resize
 //Resize mode.
@@ -233,23 +265,25 @@ QString getraw_console_write_image_resize() { return getraw_("console_write_imag
 //Scale of output image, 1 - don't rescale.
 bool was_changed_console_write_image_resize_scale() { return was_changed_("console_write_image_resize_scale"); }
 float getf_console_write_image_resize_scale() { return getf_("console_write_image_resize_scale"); }
+void repaint_console_write_image_resize_scale() { repaint_("console_write_image_resize_scale"); }
 
 //Int Size X
 //X-size of output image.
 bool was_changed_console_write_image_sizex() { return was_changed_("console_write_image_sizex"); }
 int geti_console_write_image_sizex() { return geti_("console_write_image_sizex"); }
+void repaint_console_write_image_sizex() { repaint_("console_write_image_sizex"); }
 
 //Int Size Y
 //Y-size of output image.
 bool was_changed_console_write_image_sizey() { return was_changed_("console_write_image_sizey"); }
 int geti_console_write_image_sizey() { return geti_("console_write_image_sizey"); }
+void repaint_console_write_image_sizey() { repaint_("console_write_image_sizey"); }
 
 //Out Object Transformed
 //Transformed image.
 bool was_changed_console_write_image_transformed() { return was_changed_("console_write_image_transformed"); }
 XProtectedObject *getobject_console_write_image_transformed() { return get_object_("console_write_image_transformed"); }
-void setobject_console_write_image_transformed(XProtectedObject *value) { set_object_("console_write_image_transformed", value); }
-void setobject_console_write_image_transformed(XProtectedObject &value) { set_object_("console_write_image_transformed", value); }
+void repaint_console_write_image_transformed() { repaint_("console_write_image_transformed"); }
 //----------------------------------------------------
 //Page Read
 //Reading from the process console.
@@ -271,6 +305,7 @@ QString getraw_read() { return getraw_("read");}
 //Read from process console right now.
 bool was_changed_read_button() { return was_changed_("read_button"); }
 int geti_read_button() { return geti_("read_button"); }
+void repaint_read_button() { repaint_("read_button"); }
 QString button_read_button() { return "read_button"; }
 
 //Enum Data Type
@@ -290,12 +325,14 @@ QString getraw_read_type() { return getraw_("read_type");}
 bool was_changed_console_read_received() { return was_changed_("console_read_received"); }
 int geti_console_read_received() { return geti_("console_read_received"); }
 void seti_console_read_received(int value) { seti_("console_read_received", value); }
+void repaint_console_read_received() { repaint_("console_read_received"); }
 
 //Text Bang On Received
 //List of actions which should be performed when data is received. Current implementation runs this only in the main thread, not as callback.
 bool was_changed_console_bang_on_received() { return was_changed_("console_bang_on_received"); }
 QString gets_console_bang_on_received() { return gets_("console_bang_on_received"); }
 QStringList get_strings_console_bang_on_received() { return get_strings_("console_bang_on_received"); }
+void repaint_console_bang_on_received() { repaint_("console_bang_on_received"); }
 
 //Out String String
 //String to write to process console.
@@ -306,11 +343,13 @@ void sets_console_read_string(QString value) { sets_("console_read_string", valu
 void clear_string_console_read_string() { clear_string_("console_read_string"); }
 void append_string_console_read_string(QString v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
 void append_string_console_read_string(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_string", v, extra_new_lines_count); }
+void repaint_console_read_string() { repaint_("console_read_string"); }
 
 //Checkbox Append
 //If enabled, append all input text. If disables - clear each frame.
 bool was_changed_console_read_text_append() { return was_changed_("console_read_text_append"); }
 int geti_console_read_text_append() { return geti_("console_read_text_append"); }
+void repaint_console_read_text_append() { repaint_("console_read_text_append"); }
 
 //Out Text Text
 //Text to write to process console.
@@ -321,13 +360,13 @@ void sets_console_read_text(QString value) { sets_("console_read_text", value); 
 void clear_string_console_read_text() { clear_string_("console_read_text"); }
 void append_string_console_read_text(QString v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
 void append_string_console_read_text(QStringList v, int extra_new_lines_count = 0) { append_string_("console_read_text", v, extra_new_lines_count); }
+void repaint_console_read_text() { repaint_("console_read_text"); }
 
 //Out Object Image
 //Image to read to process console. It's read as uint16: w,h,channels, and then data array as uint8.
 bool was_changed_console_read_image() { return was_changed_("console_read_image"); }
 XProtectedObject *getobject_console_read_image() { return get_object_("console_read_image"); }
-void setobject_console_read_image(XProtectedObject *value) { set_object_("console_read_image", value); }
-void setobject_console_read_image(XProtectedObject &value) { set_object_("console_read_image", value); }
+void repaint_console_read_image() { repaint_("console_read_image"); }
 //----------------------------------------------------
 //Page Details
 //Some statistics and full paths.
@@ -338,6 +377,7 @@ bool was_changed_debug_executed_times() { return was_changed_("debug_executed_ti
 int geti_debug_executed_times() { return geti_("debug_executed_times"); }
 void seti_debug_executed_times(int value) { seti_("debug_executed_times", value); }
 void increase_int_debug_executed_times(int increase = 1) { increase_int_("debug_executed_times", increase); }
+void repaint_debug_executed_times() { repaint_("debug_executed_times"); }
 
 //Out Int Write Times
 //How much times we write data to process.
@@ -345,6 +385,7 @@ bool was_changed_debug_write_times() { return was_changed_("debug_write_times");
 int geti_debug_write_times() { return geti_("debug_write_times"); }
 void seti_debug_write_times(int value) { seti_("debug_write_times", value); }
 void increase_int_debug_write_times(int increase = 1) { increase_int_("debug_write_times", increase); }
+void repaint_debug_write_times() { repaint_("debug_write_times"); }
 
 //Out Int Try Read Times
 //How much times we try to read data from process.
@@ -352,6 +393,7 @@ bool was_changed_debug_read_times() { return was_changed_("debug_read_times"); }
 int geti_debug_read_times() { return geti_("debug_read_times"); }
 void seti_debug_read_times(int value) { seti_("debug_read_times", value); }
 void increase_int_debug_read_times(int increase = 1) { increase_int_("debug_read_times", increase); }
+void repaint_debug_read_times() { repaint_("debug_read_times"); }
 
 //Out Int Received Times
 //How much times we read some data from process.
@@ -359,6 +401,7 @@ bool was_changed_debug_received_times() { return was_changed_("debug_received_ti
 int geti_debug_received_times() { return geti_("debug_received_times"); }
 void seti_debug_received_times(int value) { seti_("debug_received_times", value); }
 void increase_int_debug_received_times(int increase = 1) { increase_int_("debug_received_times", increase); }
+void repaint_debug_received_times() { repaint_("debug_received_times"); }
 
 
 //Out Text Working Folder Abs Path
@@ -370,6 +413,7 @@ void sets_debug_folder_path(QString value) { sets_("debug_folder_path", value); 
 void clear_string_debug_folder_path() { clear_string_("debug_folder_path"); }
 void append_string_debug_folder_path(QString v, int extra_new_lines_count = 0) { append_string_("debug_folder_path", v, extra_new_lines_count); }
 void append_string_debug_folder_path(QStringList v, int extra_new_lines_count = 0) { append_string_("debug_folder_path", v, extra_new_lines_count); }
+void repaint_debug_folder_path() { repaint_("debug_folder_path"); }
 
 //Out Text File Name Abs Path
 //Absolute path to the executable file
@@ -380,5 +424,6 @@ void sets_debug_file_path(QString value) { sets_("debug_file_path", value); }
 void clear_string_debug_file_path() { clear_string_("debug_file_path"); }
 void append_string_debug_file_path(QString v, int extra_new_lines_count = 0) { append_string_("debug_file_path", v, extra_new_lines_count); }
 void append_string_debug_file_path(QStringList v, int extra_new_lines_count = 0) { append_string_("debug_file_path", v, extra_new_lines_count); }
+void repaint_debug_file_path() { repaint_("debug_file_path"); }
 
 //----------------------------------------------------

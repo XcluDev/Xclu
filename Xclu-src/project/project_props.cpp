@@ -162,7 +162,7 @@ XProtectedObject *xc_get_object_by_link(QString link_str) {
 //---------------------------------------------------------------------
 //Send bang to module
 //General: module1 or press button: module1->button1
-void xc_bang(QString module_link) {
+void xc_bang_module_button_by_link(QString module_link) {
     XLinkParsed link(module_link);
     if (link.var.isEmpty()) xc_find_module(link.module)->bang();
     else xc_find_module(link.module)->button_pressed(link.var);
@@ -172,12 +172,12 @@ void xc_bang(QString module_link) {
 //Send bang to modules
 //General: module1 or press button: module1->button1
 //Empty lines and lines started from "#" - ignored
-void xc_bang(QStringList modules) {
+void xc_bang_module_button_by_link(QStringList modules) {
     for (auto &line: modules) {
         QString module_link = line.trimmed();
         if (module_link.isEmpty()) continue;
         if (module_link.startsWith("#")) continue;
-        xc_bang(module_link);
+        xc_bang_module_button_by_link(module_link);
     }
 }
 

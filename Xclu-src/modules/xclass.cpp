@@ -135,6 +135,13 @@ void XClass::execute(ModuleExecuteStage stage) {
 }
 
 //---------------------------------------------------------------------
+void XClass::on_button_pressed(QString button_id)
+{
+    //xc_exception("Can't press button " + button_id + ", because module " + name()
+    //             + " not implements 'on_button_pressed'");
+}
+
+//---------------------------------------------------------------------
 //нажатие кнопки - это можно делать и во время остановки всего
 //внимание, обычно вызывается из основного потока как callback
 void XClass::button_pressed(QString button_id) {

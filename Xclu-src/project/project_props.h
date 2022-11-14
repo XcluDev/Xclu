@@ -88,12 +88,12 @@ XProtectedObject *xc_get_object_by_link(QString link_str);
 
 //Send bang to module
 //General: module1 or press button: module1->button1
-void xc_bang(QString module_link);
+void xc_bang_module_button_by_link(QString module_link);
 
 //Send bang to modules
 //General: module1 or press button: module1->button1
 //Empty lines and lines started from "#" - ignored
-void xc_bang(QStringList modules);
+void xc_bang_module_button_by_link(QStringList modules);
 
 
 //Построение списка модулей по строке, в которой модули разделены \n,

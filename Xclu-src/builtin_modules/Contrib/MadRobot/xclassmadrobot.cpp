@@ -96,37 +96,37 @@ void XClassMadRobot::update() {
 //---------------------------------------------------------------------
 void XClassMadRobot::move_pickup() {
     set_state("pick up");
-    xc_bang(gets_ard_pick_up());
+    xc_bang_module_button_by_link(gets_ard_pick_up());
 }
 
 //---------------------------------------------------------------------
 void XClassMadRobot::move_forward() {
     set_state("forward");
-    xc_bang(gets_ard_forw());
+    xc_bang_module_button_by_link(gets_ard_forw());
 }
 
 //---------------------------------------------------------------------
 void XClassMadRobot::move_backward() {
     set_state("backward");
-    xc_bang(gets_ard_back());
+    xc_bang_module_button_by_link(gets_ard_back());
 }
 
 //---------------------------------------------------------------------
 void XClassMadRobot::move_left() {
     set_state("left");
-    xc_bang(gets_ard_left());
+    xc_bang_module_button_by_link(gets_ard_left());
 }
 
 //---------------------------------------------------------------------
 void XClassMadRobot::move_right() {
     set_state("right");
-    xc_bang(gets_ard_right());
+    xc_bang_module_button_by_link(gets_ard_right());
 }
 
 //---------------------------------------------------------------------
 void XClassMadRobot::move_stop() {
     set_state("stop");
-    xc_bang(gets_ard_stop());
+    xc_bang_module_button_by_link(gets_ard_stop());
 }
 
 //---------------------------------------------------------------------

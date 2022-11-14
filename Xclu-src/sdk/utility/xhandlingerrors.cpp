@@ -18,14 +18,18 @@ void xc_exception(QString message) {
 //---------------------------------------------------------------------
 void xc_exception(XCallError err) {
     qDebug() << "xc_exception:" << err.error_text();
+#ifdef _DEBUG
     __debugbreak();
+#endif
     throw XException(err);
 }
 
 //---------------------------------------------------------------------
 //Ошибка, после которой программа завершает работу
 void xc_halt(QString message) {
+#ifdef _DEBUG
     __debugbreak();
+#endif
     throw XCluCriticalException(message);
 }
 

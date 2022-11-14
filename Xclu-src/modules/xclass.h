@@ -139,7 +139,7 @@ protected:
     //it should reimplement this function.
     //Note: if module don't need to process buttons - it may not implement this,
     //and instead use geti_... function, such as geti_button_start() to check button pressing inside update().
-    virtual void on_button_pressed(QString /*button_id*/) {}
+    virtual void on_button_pressed(QString button_id);
 
     //Universal call handler
     //По договоренности, можно задавать имя или номер функции в input
