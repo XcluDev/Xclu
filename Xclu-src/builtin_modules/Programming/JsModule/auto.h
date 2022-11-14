@@ -1,12 +1,12 @@
 //----------------------------------------------------
-//Interface for XClassJsModule
+//Interface for XClassBaseJsModule
 //Created automatically.
 //----------------------------------------------------
-//Page Main
-//This page will be replaced with your custom GUI page(s).
+//Page UI
+//Page with custom UI.
 
 //----------------------------------------------------
-//Page UI
+//Page UI Script
 //Parameters GUI description. Also here is Export settings.
 
 //Const Text XGUI
@@ -38,28 +38,28 @@ int geti__advanced_() { return geti_("_advanced_"); }
 void repaint__advanced_() { repaint_("_advanced_"); }
 
 //Const String Class
-//XClass class name.
+//Module class name.
 bool was_changed__module_class_() { return was_changed_("_module_class_"); }
 QString gets__module_class_() { return gets_("_module_class_"); }
 QStringList get_strings__module_class_() { return get_strings_("_module_class_"); }
 void repaint__module_class_() { repaint_("_module_class_"); }
 
 //Const String Category
-//XClass category.
+//Module category.
 bool was_changed__module_category_() { return was_changed_("_module_category_"); }
 QString gets__module_category_() { return gets_("_module_category_"); }
 QStringList get_strings__module_category_() { return get_strings_("_module_category_"); }
 void repaint__module_category_() { repaint_("_module_category_"); }
 
 //Const String Description
-//XClass description.
+//Module description.
 bool was_changed__module_description_() { return was_changed_("_module_description_"); }
 QString gets__module_description_() { return gets_("_module_description_"); }
 QStringList get_strings__module_description_() { return get_strings_("_module_description_"); }
 void repaint__module_description_() { repaint_("_module_description_"); }
 
 //Const String Version
-//XClass version.
+//Module version.
 bool was_changed__module_version_() { return was_changed_("_module_version_"); }
 QString gets__module_version_() { return gets_("_module_version_"); }
 QStringList get_strings__module_version_() { return get_strings_("_module_version_"); }
@@ -74,80 +74,25 @@ void repaint__export_() { repaint_("_export_"); }
 QString button__export_() { return "_export_"; }
 
 //----------------------------------------------------
-//Page Setup
-//JS code for setup.
+//Page Main Code
+//Main JS code.
 
-//Text Setup
+//Const Text Code
 //
-bool was_changed__setup_() { return was_changed_("_setup_"); }
-QString gets__setup_() { return gets_("_setup_"); }
-QStringList get_strings__setup_() { return get_strings_("_setup_"); }
-void repaint__setup_() { repaint_("_setup_"); }
-
-//----------------------------------------------------
-//Page Update
-//JS code for update.
-
-//Text Update
-//
-bool was_changed__update_() { return was_changed_("_update_"); }
-QString gets__update_() { return gets_("_update_"); }
-QStringList get_strings__update_() { return get_strings_("_update_"); }
-void repaint__update_() { repaint_("_update_"); }
+bool was_changed__main_code_() { return was_changed_("_main_code_"); }
+QString gets__main_code_() { return gets_("_main_code_"); }
+QStringList get_strings__main_code_() { return get_strings_("_main_code_"); }
+void repaint__main_code_() { repaint_("_main_code_"); }
 
 //----------------------------------------------------
 //Page Draw
-//JS code for drawing to RenderArea.
+//JS code for drawing to RenderArea with mouse and keyboard events handlers.
 
-//Text Draw
+//Const Text Draw
 //
-bool was_changed__draw_() { return was_changed_("_draw_"); }
-QString gets__draw_() { return gets_("_draw_"); }
-QStringList get_strings__draw_() { return get_strings_("_draw_"); }
-void repaint__draw_() { repaint_("_draw_"); }
-
-//----------------------------------------------------
-//Page Events
-//JS code for mouse and keyboard events.
-
-//Text Events
-//
-bool was_changed__events_() { return was_changed_("_events_"); }
-QString gets__events_() { return gets_("_events_"); }
-QStringList get_strings__events_() { return get_strings_("_events_"); }
-void repaint__events_() { repaint_("_events_"); }
-
-//----------------------------------------------------
-//Page Sound
-//JS code for sound in and out.
-
-//Text Sound
-//
-bool was_changed__sound_() { return was_changed_("_sound_"); }
-QString gets__sound_() { return gets_("_sound_"); }
-QStringList get_strings__sound_() { return get_strings_("_sound_"); }
-void repaint__sound_() { repaint_("_sound_"); }
-
-//----------------------------------------------------
-//Page Vars
-//Additional variables.
-
-//Text Vars
-//
-bool was_changed__vars_() { return was_changed_("_vars_"); }
-QString gets__vars_() { return gets_("_vars_"); }
-QStringList get_strings__vars_() { return get_strings_("_vars_"); }
-void repaint__vars_() { repaint_("_vars_"); }
-
-//----------------------------------------------------
-//Page Functions
-//Additional functions.
-
-//Const Text Functions
-//
-bool was_changed__functions_() { return was_changed_("_functions_"); }
-QString gets__functions_() { return gets_("_functions_"); }
-QStringList get_strings__functions_() { return get_strings_("_functions_"); }
-void repaint__functions_() { repaint_("_functions_"); }
+bool was_changed__draw_code_() { return was_changed_("_draw_code_"); }
+QString gets__draw_code_() { return gets_("_draw_code_"); }
+QStringList get_strings__draw_code_() { return get_strings_("_draw_code_"); }
+void repaint__draw_code_() { repaint_("_draw_code_"); }
 
 //----------------------------------------------------

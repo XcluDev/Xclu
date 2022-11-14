@@ -5,12 +5,11 @@ module_version=1.01
 module_impl=C++
 
 #-------------------------------------------
-page Main
-    //This page will be replaced with your custom GUI page(s).
-
+page UI
+    //Page with custom UI.
 
 #-------------------------------------------
-page UI
+page UI_Script
     //Parameters GUI description. Also here is Export settings.
      
 const text XGUI _ui_ 30 30
@@ -52,40 +51,39 @@ button Export... _export_
 endif
 
 #-------------------------------------------
-page Setup
-    //JS code for setup.
-text Setup _setup_ 30 30
-
-#-------------------------------------------
-page Update
-    //JS code for update.
-text Update _update_ 30 30
+page Main_Code
+    //Main JS code.
+const text Code _main_code_ 30 30
+    //
+    //function setup() {
+    //  
+    //}
+    //
+    //function update(dt) {
+    //
+    //}
     
 #-------------------------------------------
 page Draw
-    //JS code for drawing to RenderArea.
-text Draw _draw_ 30 30
+    //JS code for drawing to RenderArea with mouse and keyboard events handlers.
+const text Draw _draw_code_ 30 30
+    //
+    //function draw() {
+    //  
+    //}
+    //
+    //function mousePressed(x,y,button) {
+    //
+    //}
+    //
+    //function keyPressed(key) {
+    //
+    //}
 
 #-------------------------------------------
-page Events
-    //JS code for mouse and keyboard events.
-text Events _events_ 30 30
-
-#-------------------------------------------
-page Sound
-    //JS code for sound in and out.
-text Sound _sound_ 30 30
-
-#-------------------------------------------
-page Vars
-    //Additional variables.
-text Vars _vars_ 30 30
-
-#-------------------------------------------
-page Functions
-    //Additional functions.
-     
-const text Functions _functions_ 30 30    
+#page Sound
+#    //JS code for sound in and out.
+#text Sound _sound_ 30 30
     
 #-------------------------------------------
 
