@@ -53,6 +53,7 @@ void XClassUdp::send_start() {
 
 //---------------------------------------------------------------------
 void XClassUdp::receive_start() {
+    reloading_ = false;
     seti_received_packets(0);
     seti_received_new_data(0);
     received_data_.write().data().clear();
@@ -61,9 +62,7 @@ void XClassUdp::receive_start() {
     file_pos_ = 0;
 
     if (geti_receive_emulate()) {
-        xc_assert(!gets_receive_emulate_file_name().isEmpty(), "Please choose the file to read for emulation.");
-        file_ = xc_read_text_file_relpath(gets_receive_emulate_file_name());
-        xc_assert(!file_.isEmpty(), "File is empty: " + gets_receive_emulate_file_name());
+        receiver_reload_file();
         timer.reset(new QTimer(this));
         timer->setTimerType(Qt::PreciseTimer);
         connect(timer.data(), &QTimer::timeout, this, &XClassUdp::slot_timer_receive_emulate);
@@ -75,6 +74,19 @@ void XClassUdp::receive_start() {
         //udpSocket.bind(QHostAddress::Any, geti_receive_port(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
         connect(udpSocket.data(), &QUdpSocket::readyRead, this, &XClassUdp::slot_readPendingDatagrams);
     }
+}
+
+//---------------------------------------------------------------------
+void XClassUdp::receiver_reload_file() {
+    reloading_ = true;    // mutex to disable timer events
+    xc_assert(!gets_receive_emulate_file_name().isEmpty(), "Please choose the file to read for emulation.");
+    file_ = xc_read_text_file_relpath(gets_receive_emulate_file_name());
+    xc_assert(!file_.isEmpty(), "File is empty: " + gets_receive_emulate_file_name());
+
+    setf_receive_file_position(0);
+    file_pos_ = 0;
+
+    reloading_ = false;    // mutex to disable timer events
 }
 
 //---------------------------------------------------------------------
@@ -131,6 +143,10 @@ void XClassUdp::send_data(QStringList data)
 
 //---------------------------------------------------------------------
 void XClassUdp::receive_update() {
+    if (was_changed_receive_emulate_file_name()) {
+        receiver_reload_file();
+    }
+
     bool received;
     {
         auto write = received_data_.write();  // write должен существовать пока работаем с list
@@ -158,6 +174,9 @@ void XClassUdp::receive_data(QStringList data) {
 
 //---------------------------------------------------------------------
 void XClassUdp::slot_timer_receive_emulate() {
+    if (reloading_) {
+        return;
+    }
     file_pos_++;
     int n = file_.size();
     if (file_pos_ >= n) file_pos_ = 0;

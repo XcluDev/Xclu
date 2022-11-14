@@ -52,6 +52,9 @@ private slots:
     void slot_readPendingDatagrams();
     void slot_timer_receive_emulate();
 
+    bool reloading_ = false;    // mutex to disable timer events
+    void receiver_reload_file();
+
     // async received data
     XProtectedData_<QStringList> received_data_;
 
