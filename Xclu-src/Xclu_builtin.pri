@@ -22,6 +22,7 @@ SOURCES += \
     $$PWD/builtin_modules/ComputerVision/MotionDetectorRouter/xclassmotiondetectorrouter.cpp \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.cpp \
     $$PWD/builtin_modules/ML/Presets/xclasspresets.cpp \
+    $$PWD/builtin_modules/Programming/PythonModule/xclasspythonmodule.cpp \
     $$PWD/builtin_modules/Project/Project/xclassproject.cpp \
     $$PWD/builtin_modules/Protocols/Udp/xclassudp.cpp \
     $$PWD/builtin_modules/Sound/SoundIn/xclasssoundin.cpp \
@@ -82,6 +83,8 @@ HEADERS += \
     $$PWD/builtin_modules/ML/MLExecute/xclassmlexecute.h \
     $$PWD/builtin_modules/ML/Presets/auto.h \
     $$PWD/builtin_modules/ML/Presets/xclasspresets.h \
+    $$PWD/builtin_modules/Programming/PythonModule/auto.h \
+    $$PWD/builtin_modules/Programming/PythonModule/xclasspythonmodule.h \
     $$PWD/builtin_modules/Project/Project/auto.h \
     $$PWD/builtin_modules/Project/Project/xclassproject.h \
     $$PWD/builtin_modules/Protocols/Udp/auto.h \

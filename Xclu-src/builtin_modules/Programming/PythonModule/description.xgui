@@ -1,0 +1,84 @@
+#Module PythonModule
+#------------------------------------------
+module_description=Custom Python module.
+module_version=1.01
+module_impl=C++
+
+#-------------------------------------------
+page UI
+    //Page with custom UI.
+
+#-------------------------------------------
+page UI_Script
+    //Parameters GUI description. Also here is Export settings.
+     
+const text XGUI _ui_ 30 30
+    //UI written in XGUI language.
+
+button Apply _ui_apply_
+    //Press this button to reload parameters GUI.
+
+button Edit... _ui_edit_button_
+    //Edit interface visually.
+
+separator
+
+group Advanced _advanced_=0
+    //Adding module to Modules List and export.
+if _advanced_ 1
+
+const string Class _module_class_="MyModule"
+    //Module class name.
+
+const string Category _module_category_="MyModules"
+    //Module category.
+    
+const string Description _module_description_=""
+    //Module description.
+    
+const string Version _module_version_="1.01"
+    //Module version.
+
+separator 
+
+button Export... _export_
+    //Export as a ready stand-alone module.
+endif
+
+#-------------------------------------------
+page Main_Code
+    //Main Python code.
+const text Code _main_code_ 30 30
+    //
+    //function setup() {
+    //  
+    //}
+    //
+    //function update(dt) {
+    //
+    //}
+    
+#-------------------------------------------
+page Draw
+    //Python code for drawing to RenderArea with mouse and keyboard events handlers.
+const text Draw _draw_code_ 30 30
+    //
+    //function draw() {
+    //  
+    //}
+    //
+    //function mousePressed(x,y,button) {
+    //
+    //}
+    //
+    //function keyPressed(key) {
+    //
+    //}
+
+#-------------------------------------------
+#page Sound
+#    //Python code for sound in and out.
+#text Sound _sound_ 30 30
+    
+#-------------------------------------------
+

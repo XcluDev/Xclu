@@ -399,5 +399,6 @@
         <file>builtin_modules/ML/Presets/description.xgui</file>
         <file>builtin_modules/Protocols/Udp/description.xgui</file>
         <file>builtin_modules/Drawing/Graphs/description.xgui</file>
+        <file>builtin_modules/Programming/PythonModule/description.xgui</file>
     </qresource>
 </RCC>
