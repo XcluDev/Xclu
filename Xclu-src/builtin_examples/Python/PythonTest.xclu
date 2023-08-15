@@ -5,7 +5,7 @@
     },
     "aproject_properties": {
         "name": "",
-        "selected_module": "0"
+        "selected_module": "1"
     },
     "modules": [
         {
@@ -26,6 +26,96 @@
                     {
                         "aname": "text_value",
                         "avalue": ""
+                    },
+                    {
+                        "aname": "Control",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "general_enabled_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "general_auto_update_",
+                        "avalue": "1"
+                    },
+                    {
+                        "aname": "presets_setup",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "error_handling",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "action_on_error",
+                        "avalue": "Show_Message_Box_and_Stop"
+                    },
+                    {
+                        "aname": "calls_info",
+                        "avalue": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "description": {
+                "class": "PythonModule",
+                "name": "PYTHON_MODULE",
+                "version": "1.01"
+            },
+            "interface": {
+                "editor_state": {
+                    "tab_index": "1"
+                },
+                "items": [
+                    {
+                        "aname": "UI",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "UI_Script",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_ui_",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "_export_",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_module_class_",
+                        "avalue": "MyModule"
+                    },
+                    {
+                        "aname": "_module_category_",
+                        "avalue": "MyModules"
+                    },
+                    {
+                        "aname": "_module_description_",
+                        "avalue": ""
+                    },
+                    {
+                        "aname": "_module_version_",
+                        "avalue": "1.01"
+                    },
+                    {
+                        "aname": "Main_Code",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_main_code_",
+                        "avalue": "function setup() {\n}\nfunction update(dt) {\n}"
+                    },
+                    {
+                        "aname": "Draw",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_draw_code_",
+                        "avalue": "function draw() {\n}\nfunction mousePressed(x,y,button) {\n}\nfunction keyPressed(key) {\n}"
                     },
                     {
                         "aname": "Control",

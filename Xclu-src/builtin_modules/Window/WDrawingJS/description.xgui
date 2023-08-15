@@ -1,7 +1,6 @@
 #Module WDrawingJS
 #------------------------------------------
 #module_class=WDrawingJS
-#module_name_hint=DrawingJS
 #module_name_hint=drawingjs
 #module_category=Window
 module_description=Widget for drawing using JS.

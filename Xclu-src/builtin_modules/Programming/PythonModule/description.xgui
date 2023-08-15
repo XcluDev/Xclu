@@ -1,9 +1,9 @@
 #Module PythonModule
 #------------------------------------------
-module_description=Custom Python module.
+module_description=Custom Python module with drawing capabilities.
 module_version=1.01
 module_impl=C++
-
+module_name_hint=pu
 #-------------------------------------------
 page UI
     //Page with custom UI.
@@ -15,17 +15,17 @@ page UI_Script
 const text XGUI _ui_ 30 30
     //UI written in XGUI language.
 
-button Apply _ui_apply_
+button_always Apply _ui_apply_
     //Press this button to reload parameters GUI.
 
-button Edit... _ui_edit_button_
-    //Edit interface visually.
+#button_always Edit... _ui_edit_button_
+#    //Edit interface visually.
 
 separator
 
-group Advanced _advanced_=0
+group Export _export_=0
     //Adding module to Modules List and export.
-if _advanced_ 1
+if _export_ 1
 
 const string Class _module_class_="MyModule"
     //Module class name.
@@ -41,7 +41,7 @@ const string Version _module_version_="1.01"
 
 separator 
 
-button Export... _export_
+button Export... _ui_export_button_
     //Export as a ready stand-alone module.
 endif
 

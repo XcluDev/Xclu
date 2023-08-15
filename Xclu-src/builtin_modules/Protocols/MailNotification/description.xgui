@@ -1,7 +1,6 @@
 #Module MailNotification
 #------------------------------------------
 #module_class=MailNotification
-#module_name_hint=Int
 #module_name_hint=int
 #module_category=Remote_Access
 module_description=Send notification using Mail using your own SMTP server or Xclu service.

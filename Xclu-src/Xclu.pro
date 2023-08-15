@@ -436,15 +436,16 @@ HEADERS += \
 
 #--------------------------------------------------------------------------
 #Python
-#Currently not used
+# 1. Add Python installation to Xclu-bin/Python/
+# 2. Copy python312.dll, python312.pdb, python312_d.dll, python312_d.pdb to Xclu-bin
 #--------------------------------------------------------------------------
 INCLUDEPATH += python
 
 #windows64
 windows {
-    #INCLUDEPATH += ../Xclu-bin/Python38/include
-    #release: LIBS += ../Xclu-bin/Python38/libs/python38.lib
-    #debug: LIBS += ../Xclu-bin/Python38/libs/python38_d.lib
+    INCLUDEPATH += ../Xclu-bin/Python/include
+    release: LIBS += ../Xclu-bin/Python/libs/python312.lib
+    debug: LIBS += ../Xclu-bin/Python/libs/python312_d.lib
 }
 
 unix {

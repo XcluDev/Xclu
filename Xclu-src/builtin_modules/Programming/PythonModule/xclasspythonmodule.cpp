@@ -2,9 +2,13 @@
 #include "incl_cpp.h"
 #include "registrarxclass.h"
 #include "project_props.h"
-#include "xosc.h"
+#include "pythoncore.h"
 
 REGISTER_XCLASS(PythonModule)
+
+// https://realpython.com/python-bindings-overview/
+// https://docs.python.org/3/extending/index.html
+// https://docs.python.org/3/extending/embedding.html
 
 //---------------------------------------------------------------------
 XClassPythonModule::XClassPythonModule(QString class_name)

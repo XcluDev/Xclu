@@ -23,19 +23,12 @@ int geti__ui_apply_() { return geti_("_ui_apply_"); }
 void repaint__ui_apply_() { repaint_("_ui_apply_"); }
 QString button__ui_apply_() { return "_ui_apply_"; }
 
-//Button Edit...
-//Edit interface visually.
-bool was_changed__ui_edit_button_() { return was_changed_("_ui_edit_button_"); }
-int geti__ui_edit_button_() { return geti_("_ui_edit_button_"); }
-void repaint__ui_edit_button_() { repaint_("_ui_edit_button_"); }
-QString button__ui_edit_button_() { return "_ui_edit_button_"; }
 
-
-//Checkbox Advanced
+//Checkbox Export
 //Adding module to Modules List and export.
-bool was_changed__advanced_() { return was_changed_("_advanced_"); }
-int geti__advanced_() { return geti_("_advanced_"); }
-void repaint__advanced_() { repaint_("_advanced_"); }
+bool was_changed__export_() { return was_changed_("_export_"); }
+int geti__export_() { return geti_("_export_"); }
+void repaint__export_() { repaint_("_export_"); }
 
 //Const String Class
 //Module class name.
@@ -68,10 +61,10 @@ void repaint__module_version_() { repaint_("_module_version_"); }
 
 //Button Export...
 //Export as a ready stand-alone module.
-bool was_changed__export_() { return was_changed_("_export_"); }
-int geti__export_() { return geti_("_export_"); }
-void repaint__export_() { repaint_("_export_"); }
-QString button__export_() { return "_export_"; }
+bool was_changed__ui_export_button_() { return was_changed_("_ui_export_button_"); }
+int geti__ui_export_button_() { return geti_("_ui_export_button_"); }
+void repaint__ui_export_button_() { repaint_("_ui_export_button_"); }
+QString button__ui_export_button_() { return "_ui_export_button_"; }
 
 //----------------------------------------------------
 //Page Main Code

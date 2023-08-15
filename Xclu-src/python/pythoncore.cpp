@@ -1,37 +1,16 @@
 #include "python/pythoncore.h"
 
 #define PY_SSIZE_T_CLEAN
-//#include <Python.h>
+#include <Python.h>
 #include "incl_cpp.h"
 
 PythonCore PYTHON;
 
 /*
-О выборе версии Питон:
-https://docs.python.org/3/using/windows.html
-Nuget - для встроенной версии
-Embedded - в составе приложения - то, что нам нужно. Но, он не содержал include...
 
-
-  
-про отложенный запуск DLL
-https://stackoverflow.com/questions/39112148/deploy-a-qt-c-shared-librarys-dll-in-subfolder-of-the-main-executable
-
-Проект по встраиванию питона
-https://code.qt.io/cgit/pyside/pyside-setup.git/tree/examples/scriptableapplication
-
-Добавить путь для запуска в BAT, на один раз:
-set PYTHONHOME="D:\perevalovds.com\_2020\Xclu\Xclu-bin\Python38"
-set PYTHONPATH="...Python38;...Python38\DLLs;...Python38\Lib;...Python38\site-packages"
-(вместо многоточий - полный путь)
-В PATH добавить
-...Python38
-...Python38\DLLs
-...Python38\Lib
-...Python38\site-packages
-...Python38\Scripts
-
-
+// https://realpython.com/python-bindings-overview/
+// https://docs.python.org/3/extending/index.html
+// https://docs.python.org/3/extending/embedding.html
 
 Для разработки - добавил в глобальный Path пути к питону.
 А для запуска на других компьютерах - нужно будет добавлять при запуске, сделать отложенный запуск DLL.
@@ -40,10 +19,6 @@ set PYTHONPATH="...Python38;...Python38\DLLs;...Python38\Lib;...Python38\site-pa
 
 ВНИМАНИЕ: при этом, может отключиться отладка GDB - так как DLL в питоне могут повредить Xclu.
 Поэтому, vcruntime140.dll и vcruntime140_1.dll - переименовал в vcruntime140.dll_, vcruntime140_1.dll_
-
-Примеры работы C++->Python:
-https://docs.python.org/3/extending/embedding.html
-
 
 */
 
@@ -69,7 +44,7 @@ void PythonCore::test1() {
     //QString prog_name = QString("progr");
     //Py_SetProgramName((wchar_t*)prog_name.utf16());  // optional but recommended
 
-    /*
+
     Py_Initialize();
 
     qDebug() << "   run script...";
@@ -81,7 +56,6 @@ void PythonCore::test1() {
     }
     qDebug() << "finished...";
     //PyMem_RawFree((wchar_t*)prog_name.utf16());   //Free memory!
-  */
 
 }
 

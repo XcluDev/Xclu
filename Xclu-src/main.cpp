@@ -8,6 +8,7 @@
 #include <QSurfaceFormat>
 
 #include "sdk_cpp.h"
+#include "pythoncore.h"
 #include "mainwindow.h"
 
 
@@ -60,6 +61,9 @@ int main(int argc, char *argv[])
         //QSurfaceFormat fmt;
         //fmt.setSamples(4);
         //QSurfaceFormat::setDefaultFormat(fmt);
+
+        // Starting Python
+        PYTHON.setup();
 
         //-------------------------------------------
         MainWindow *mainWin = new MainWindow(nullptr, startupRelProjectPath);
