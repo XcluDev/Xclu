@@ -15,6 +15,10 @@
 // В качестве аргумента командной строки может быть указан относительный путь до проекта
 int main(int argc, char *argv[])
 {
+    // High DPI
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    
     // Путь для открытия проекта
     QString startupRelProjectPath = "";
     if (argc >= 2) {
@@ -26,8 +30,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //Пути для запуска питона
-    app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38");
-    //app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38\\DLLs");
+    // app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38");
+    // app.addLibraryPath("D:\\perevalovds.com\\_2020\\Xclu\\Xclu-bin\\Python38\\DLLs");
 
     //Запуск приложения с отловом исключений
     //Про отлов исключений:
@@ -43,7 +47,6 @@ int main(int argc, char *argv[])
 
         //Установка темы
         XcluTheme::set_theme(&app);
-
 
         //Описание (используется для записи настроек QSettings, но мы их считываем из xclu.ini
         QCoreApplication::setApplicationName("Xclu");
@@ -62,10 +65,12 @@ int main(int argc, char *argv[])
         //fmt.setSamples(4);
         //QSurfaceFormat::setDefaultFormat(fmt);
 
+        //-------------------------------------------
         // Starting Python
         PYTHON.setup();
 
         //-------------------------------------------
+        // Starting UI
         MainWindow *mainWin = new MainWindow(nullptr, startupRelProjectPath);
         mainWin->show();
         result = app.exec();

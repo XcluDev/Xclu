@@ -1,13 +1,13 @@
 #pragma once
 
 //Работа с интерпретатором Python.
-//В данный момент - приостановлено.
 
 class PythonCore
 {
 public:
     void setup();
     void free();
+
 
 private:
     void test1();

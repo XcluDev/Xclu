@@ -9,8 +9,8 @@ page UI
     //Page with custom UI.
 
 #-------------------------------------------
-page UI_Script
-    //Parameters GUI description. Also here is Export settings.
+page UI_Def
+    //UI definition.
      
 const text XGUI _ui_ 30 30
     //UI written in XGUI language.
@@ -46,34 +46,49 @@ button Export... _ui_export_button_
 endif
 
 #-------------------------------------------
-page Main_Code
-    //Main Python code.
-const text Code _main_code_ 30 30
+page Setup
+    //Python code with "setup" function.
+        
+const text Setup _code_setup_ 30 30
     //
-    //function setup() {
-    //  
-    //}
+    //def setup():
+    //  x = 0
     //
-    //function update(dt) {
+
+#-------------------------------------------
+page Update
+    //Python code with "update" function.
+const text Update _code_update_ 30 30
     //
-    //}
+    //def update(time, dt):
+    //  x = 0
+    //
     
 #-------------------------------------------
 page Draw
-    //Python code for drawing to RenderArea with mouse and keyboard events handlers.
+    //Python code for drawing to RenderArea.
+    
+const checkbox On _draw_enabled_=0
+    // Should we draw.
+
 const text Draw _draw_code_ 30 30
     //
-    //function draw() {
-    //  
-    //}
+    //function draw(w,h):
+    //  x = 0  
     //
-    //function mousePressed(x,y,button) {
     //
-    //}
+
+#-------------------------------------------
+page Events
+    //Python code with events handlers.
+const text Events _code_events_ 30 30
     //
-    //function keyPressed(key) {
+    //def keyPressed(key):
+    //  x = 0
     //
-    //}
+    //def mousePressed(x,y,button):
+    //  x = 0
+    //
 
 #-------------------------------------------
 #page Sound

@@ -6,8 +6,8 @@
 //Page with custom UI.
 
 //----------------------------------------------------
-//Page UI Script
-//Parameters GUI description. Also here is Export settings.
+//Page UI Def
+//UI definition.
 
 //Const Text XGUI
 //UI written in XGUI language.
@@ -67,19 +67,36 @@ void repaint__ui_export_button_() { repaint_("_ui_export_button_"); }
 QString button__ui_export_button_() { return "_ui_export_button_"; }
 
 //----------------------------------------------------
-//Page Main Code
-//Main Python code.
+//Page Setup
+//Python code with "setup" function.
 
-//Const Text Code
+//Const Text Setup
 //
-bool was_changed__main_code_() { return was_changed_("_main_code_"); }
-QString gets__main_code_() { return gets_("_main_code_"); }
-QStringList get_strings__main_code_() { return get_strings_("_main_code_"); }
-void repaint__main_code_() { repaint_("_main_code_"); }
+bool was_changed__code_setup_() { return was_changed_("_code_setup_"); }
+QString gets__code_setup_() { return gets_("_code_setup_"); }
+QStringList get_strings__code_setup_() { return get_strings_("_code_setup_"); }
+void repaint__code_setup_() { repaint_("_code_setup_"); }
+
+//----------------------------------------------------
+//Page Update
+//Python code with "update" function.
+
+//Const Text Update
+//
+bool was_changed__code_update_() { return was_changed_("_code_update_"); }
+QString gets__code_update_() { return gets_("_code_update_"); }
+QStringList get_strings__code_update_() { return get_strings_("_code_update_"); }
+void repaint__code_update_() { repaint_("_code_update_"); }
 
 //----------------------------------------------------
 //Page Draw
-//Python code for drawing to RenderArea with mouse and keyboard events handlers.
+//Python code for drawing to RenderArea.
+
+//Const Checkbox On
+// Should we draw.
+bool was_changed__draw_enabled_() { return was_changed_("_draw_enabled_"); }
+int geti__draw_enabled_() { return geti_("_draw_enabled_"); }
+void repaint__draw_enabled_() { repaint_("_draw_enabled_"); }
 
 //Const Text Draw
 //
@@ -87,5 +104,16 @@ bool was_changed__draw_code_() { return was_changed_("_draw_code_"); }
 QString gets__draw_code_() { return gets_("_draw_code_"); }
 QStringList get_strings__draw_code_() { return get_strings_("_draw_code_"); }
 void repaint__draw_code_() { repaint_("_draw_code_"); }
+
+//----------------------------------------------------
+//Page Events
+//Python code with events handlers.
+
+//Const Text Events
+//
+bool was_changed__code_events_() { return was_changed_("_code_events_"); }
+QString gets__code_events_() { return gets_("_code_events_"); }
+QStringList get_strings__code_events_() { return get_strings_("_code_events_"); }
+void repaint__code_events_() { repaint_("_code_events_"); }
 
 //----------------------------------------------------

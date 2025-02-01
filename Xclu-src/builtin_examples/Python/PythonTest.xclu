@@ -66,7 +66,7 @@
             },
             "interface": {
                 "editor_state": {
-                    "tab_index": "1"
+                    "tab_index": "2"
                 },
                 "items": [
                     {
@@ -74,7 +74,7 @@
                         "avalue": "0"
                     },
                     {
-                        "aname": "UI_Script",
+                        "aname": "UI_Def",
                         "avalue": "0"
                     },
                     {
@@ -102,20 +102,40 @@
                         "avalue": "1.01"
                     },
                     {
-                        "aname": "Main_Code",
+                        "aname": "Setup",
                         "avalue": "0"
                     },
                     {
-                        "aname": "_main_code_",
-                        "avalue": "function setup() {\n}\nfunction update(dt) {\n}"
+                        "aname": "_code_setup_",
+                        "avalue": "def fun1():\n  return 7\n\ndef fun2():\n  return \"ABC\"\n\ndef setup():\n  global x\n  x = 10\n  #xprint(\"aa\")\n  #xline(10,20,30,40)\n"
+                    },
+                    {
+                        "aname": "Update",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_code_update_",
+                        "avalue": "def update():\n  global x\n  x = x + 1"
                     },
                     {
                         "aname": "Draw",
                         "avalue": "0"
                     },
                     {
+                        "aname": "_draw_enabled_",
+                        "avalue": "0"
+                    },
+                    {
                         "aname": "_draw_code_",
-                        "avalue": "function draw() {\n}\nfunction mousePressed(x,y,button) {\n}\nfunction keyPressed(key) {\n}"
+                        "avalue": "def draw():\n  x = 0"
+                    },
+                    {
+                        "aname": "Events",
+                        "avalue": "0"
+                    },
+                    {
+                        "aname": "_code_events_",
+                        "avalue": "def keyPressed(key):\n  x = 0\ndef mousePressed(x,y,button):\n  x = 0"
                     },
                     {
                         "aname": "Control",

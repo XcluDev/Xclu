@@ -471,6 +471,12 @@ bool was_changed_draw_enabled() { return was_changed_("draw_enabled"); }
 int geti_draw_enabled() { return geti_("draw_enabled"); }
 void repaint_draw_enabled() { repaint_("draw_enabled"); }
 
+//Checkbox Draw If Selected
+//Draw only if webcam module is active in editor.
+bool was_changed_draw_if_selected() { return was_changed_("draw_if_selected"); }
+int geti_draw_if_selected() { return geti_("draw_if_selected"); }
+void repaint_draw_if_selected() { repaint_("draw_if_selected"); }
+
 //Float X
 //
 bool was_changed_draw_x() { return was_changed_("draw_x"); }

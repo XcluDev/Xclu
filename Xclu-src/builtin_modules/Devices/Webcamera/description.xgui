@@ -297,6 +297,8 @@ const string Render_Area render_area="RENDERAREA"
 separator
 
 checkbox Draw draw_enabled=1
+checkbox Draw_If_Selected draw_if_selected=0
+    //Draw only if webcam module is active in editor.
 
 float X draw_x=0 0:1 0.001,0.01
 float Y draw_y=0 0:1 0.001,0.01
